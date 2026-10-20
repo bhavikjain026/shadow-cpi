@@ -1,0 +1,5 @@
+{
+  "small": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+  "mid": "nvidia/nemotron-3-super-120b-a12b",
+  "large": "nvidia/Nemotron-3-Ultra-550b-a55b"
+}
