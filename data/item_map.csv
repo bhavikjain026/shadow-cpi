@@ -1,0 +1,14 @@
+tracked_item,subgroup_code,subgroup_name,sub_class_code,item_index_code,finest_level,finest_code,finest_name,weight,monthly_index_published,note
+onion,01.1,Food,01.1.7.4,01.1.7.4.1.01,item,01.1.7.4.1.01,Onion,0.7005628269610509,True,
+tomato,01.1,Food,01.1.7.2,01.1.7.2.1.01,item,01.1.7.2.1.01,Tomato,0.4960606349435679,True,
+potato,01.1,Food,01.1.7.5,01.1.7.5.1.01,item,01.1.7.5.1.01,Potato,0.7549405247282767,True,
+tur dal,01.1,Food,01.1.7.6,01.1.7.6.1.01,item,01.1.7.6.1.01,"Arhar, tur",0.5333412978858155,True,"MoSPI item 'Arhar, tur'"
+edible oils,01.1,Food,01.1.5.1,,sub_class,01.1.5.1,Vegetable oils (ND),2.1847315109085668,True,"no single item: sub-class 'Vegetable oils' (refined, mustard, groundnut, coconut, other edible oil, edible oil PDS); each oil also has its own item index"
+rice,01.1,Food,01.1.1.1,01.1.1.1.1.01,item,01.1.1.1.1.01,Rice,2.013186374446197,True,market rice; 'Rice PDS' (01.1.1.1.1.11) is a separate item
+atta,01.1,Food,01.1.1.2,01.1.1.2.1.01,item,01.1.1.2.1.01,Wheat atta,0.7665654198469135,True,market 'Wheat atta'; 'Wheat atta PDS' (01.1.1.2.1.03) is a separate item
+milk,01.1,Food,01.1.4.1,01.1.4.1.1.01,item,01.1.4.1.1.01,Milk: liquid,5.255174458527576,True,MoSPI item 'Milk: liquid'
+eggs,01.1,Food,01.1.4.8,01.1.4.8.1.01,item,01.1.4.8.1.01,Eggs,0.4938257533090902,True,
+gold,13.2,Other personal effects,13.2.1.1,13.2.1.1.1.01,item,13.2.1.1.1.01,Gold /diamond /platinum jewellery,0.6229745483415509,True,MoSPI item is 'Gold /diamond /platinum jewellery' (not gold alone)
+silver,13.2,Other personal effects,13.2.1.1,13.2.1.1.1.02,item,13.2.1.1.1.02,Silver jewellery,0.3126529484061393,True,MoSPI item 'Silver jewellery'
+lpg,04.5,"Electricity, gas and other fuels",04.5.2.2,04.5.2.2.1.01,item,04.5.2.2.1.01,LPG cylinder and piped natural gas,1.9813658279733073,True,MoSPI item is 'LPG cylinder and piped natural gas' (LPG and PNG together)
+petrol,07.2,Operation of personal transport equipment,07.2.2.2,07.2.2.2.1.01,item,07.2.2.2.1.01,Petrol,4.488770858316457,True,petrol for vehicles
