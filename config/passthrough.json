@@ -1,0 +1,98 @@
+{
+ "_fitted_on": "2025 only (Feb-Dec 2025 MoM; official item index vs observed price)",
+ "items": {
+  "gold": {
+   "factor": 0.4943994544942063,
+   "n_months": 8,
+   "months": [
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09"
+   ],
+   "observed": "IBJA 999 PM daily rates",
+   "cpi_item": "13.2.1.1.1.01"
+  },
+  "silver": {
+   "factor": 0.6756851279982803,
+   "n_months": 8,
+   "months": [
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09"
+   ],
+   "observed": "IBJA 999 PM daily rates",
+   "cpi_item": "13.2.1.1.1.02"
+  },
+  "lpg": {
+   "factor": 0.4913378226898945,
+   "n_months": 11,
+   "months": [
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12"
+   ],
+   "cpi_item": "04.5.2.2.1.01",
+   "observed": "IOCL domestic 14.2 kg, 4-metro mean, day-weighted"
+  },
+  "petrol": {
+   "factor": 1.0,
+   "n_months": 0,
+   "cpi_item": "07.2.2.2.1.01",
+   "note": "not fitted: the official petrol index did not move in 2025; fixed at 1.0 in advance (the CPI item is the pump price)"
+  },
+  "onion": {
+   "factor": null,
+   "note": "pending: needs the government spine (data/spine.csv)"
+  },
+  "tomato": {
+   "factor": null,
+   "note": "pending: needs the government spine (data/spine.csv)"
+  },
+  "potato": {
+   "factor": null,
+   "note": "pending: needs the government spine (data/spine.csv)"
+  },
+  "tur dal": {
+   "factor": null,
+   "note": "pending: needs the government spine (data/spine.csv)"
+  },
+  "edible oils": {
+   "factor": null,
+   "note": "pending: needs the government spine (data/spine.csv)"
+  },
+  "rice": {
+   "factor": null,
+   "note": "pending: needs the government spine (data/spine.csv)"
+  },
+  "atta": {
+   "factor": null,
+   "note": "pending: needs the government spine (data/spine.csv)"
+  },
+  "milk": {
+   "factor": null,
+   "note": "pending: needs the government spine (data/spine.csv)"
+  },
+  "eggs": {
+   "factor": null,
+   "note": "pending: needs the government spine (data/spine.csv)"
+  }
+ }
+}

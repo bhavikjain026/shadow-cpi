@@ -1,0 +1,232 @@
+{
+  "_note": "Written in JSON-style YAML so it loads with the standard library (no PyYAML). Edit as normal; keep the quotes and commas. Tavily search for quotes covers what the government spine lacks; gold and silver are OBSERVED from IBJA's official daily rates (never left on trend).",
+  "quote_items": {
+    "onion": {
+      "cpi_code": "01.1.7.4.1.01",
+      "base_unit": "kg",
+      "min": 5,
+      "max": 200,
+      "names": [
+        "onion",
+        "onions",
+        "pyaz",
+        "प्याज",
+        "प्याज़"
+      ],
+      "queries": {
+        "en": "onion retail price per kg",
+        "hi": "प्याज के दाम प्रति किलो"
+      },
+      "why": "spine cross-check (the spine has onion); also gives the Hindi check enough pages"
+    },
+    "tomato": {
+      "cpi_code": "01.1.7.2.1.01",
+      "base_unit": "kg",
+      "min": 5,
+      "max": 250,
+      "names": [
+        "tomato",
+        "tomatoes",
+        "टमाटर"
+      ],
+      "queries": {
+        "en": "tomato retail price per kg",
+        "hi": "टमाटर के दाम प्रति किलो"
+      },
+      "why": "spine cross-check (the spine has tomato)"
+    },
+    "lpg": {
+      "cpi_code": "04.5.2.2.1.01",
+      "base_unit": "cylinder",
+      "min": 400,
+      "max": 1500,
+      "names": [
+        "lpg",
+        "lpg cylinder",
+        "cooking gas",
+        "domestic lpg",
+        "cylinder",
+        "एलपीजी",
+        "सिलेंडर",
+        "रसोई गैस",
+        "घरेलू गैस"
+      ],
+      "require_any": [
+        "14.2",
+        "domestic",
+        "घरेलू"
+      ],
+      "reject_any": [
+        "commercial",
+        "19 kg",
+        "19-kg",
+        "19kg",
+        "कमर्शियल",
+        "व्यावसायिक",
+        "कॉमर्शियल"
+      ],
+      "queries": {
+        "en": "domestic LPG cylinder price 14.2 kg",
+        "hi": "घरेलू एलपीजी सिलेंडर की कीमत 14.2 किलो"
+      },
+      "why": "not in the spine; MoSPI item is LPG + piped gas together"
+    },
+    "petrol": {
+      "cpi_code": "07.2.2.2.1.01",
+      "base_unit": "litre",
+      "min": 80,
+      "max": 130,
+      "names": [
+        "petrol",
+        "पेट्रोल"
+      ],
+      "queries": {
+        "en": "petrol price per litre today",
+        "hi": "पेट्रोल की कीमत प्रति लीटर"
+      },
+      "why": "not in the spine"
+    }
+  },
+  "observed_items": {
+    "gold": {
+      "cpi_code": "13.2.1.1.1.01",
+      "source": "IBJA daily bullion report (Gold 999, PM rate, Rs/10 g, excl. GST)",
+      "note": "MoSPI item is gold/diamond/platinum jewellery"
+    },
+    "silver": {
+      "cpi_code": "13.2.1.1.1.02",
+      "source": "IBJA daily bullion report (Silver 999, PM rate, Rs/kg, excl. GST)",
+      "note": "MoSPI item is silver jewellery"
+    }
+  },
+  "events": {
+    "milk": {
+      "cpi_code": "01.1.4.1.1.01",
+      "queries": {
+        "en": "milk price hike per litre effective Amul Mother Dairy",
+        "hi": "दूध के दाम बढ़े प्रति लीटर लागू"
+      },
+      "match": [
+        "milk",
+        "दूध"
+      ],
+      "reject": [
+        "milk powder"
+      ]
+    },
+    "lpg": {
+      "cpi_code": "04.5.2.2.1.01",
+      "queries": {
+        "en": "domestic LPG cylinder price revised effective",
+        "hi": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू"
+      },
+      "match": [
+        "lpg",
+        "cylinder",
+        "cooking gas",
+        "सिलेंडर",
+        "एलपीजी",
+        "रसोई गैस"
+      ],
+      "reject": [
+        "commercial",
+        "19 kg",
+        "19-kg",
+        "atf",
+        "aviation",
+        "कमर्शियल",
+        "एटीएफ"
+      ]
+    },
+    "electricity": {
+      "cpi_code": "04.5.1.0.2.01",
+      "queries": {
+        "en": "electricity tariff order regulatory commission revised rates effective",
+        "hi": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू"
+      },
+      "match": [
+        "electricity",
+        "power tariff",
+        "tariff",
+        "बिजली"
+      ],
+      "reject": [
+        "commercial",
+        "industrial"
+      ]
+    },
+    "mobile": {
+      "cpi_code": "08.3.4.0.2.01",
+      "queries": {
+        "en": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
+        "hi": "मोबाइल टैरिफ बढ़ोतरी प्रीपेड प्लान लागू"
+      },
+      "match": [
+        "mobile",
+        "prepaid",
+        "postpaid",
+        "recharge",
+        "tariff",
+        "मोबाइल",
+        "रिचार्ज"
+      ],
+      "reject": []
+    },
+    "rail": {
+      "cpi_code": "07.3.1.1.2.01",
+      "queries": {
+        "en": "railway fare revision effective Indian Railways",
+        "hi": "रेल किराया बढ़ा लागू भारतीय रेलवे"
+      },
+      "match": [
+        "rail",
+        "train",
+        "fare",
+        "रेल",
+        "किराया"
+      ],
+      "reject": [
+        "metro"
+      ]
+    },
+    "medicine": {
+      "cpi_code": "06.1.1.1.1.01",
+      "queries": {
+        "en": "NPPA medicine price revision effective",
+        "hi": "दवाओं के दाम बढ़े एनपीपीए लागू"
+      },
+      "match": [
+        "medicine",
+        "drug",
+        "nppa",
+        "दवा",
+        "दवाओं"
+      ],
+      "reject": []
+    },
+    "school_fee": {
+      "cpi_code": "10.1.0.2.2.01",
+      "queries": {
+        "en": "school fee hike academic session effective",
+        "hi": "स्कूल फीस बढ़ोतरी नया सत्र लागू"
+      },
+      "match": [
+        "fee",
+        "फीस"
+      ],
+      "reject": []
+    },
+    "gst": {
+      "cpi_code": "",
+      "queries": {
+        "en": "GST rate change effective from",
+        "hi": "जीएसटी दर में बदलाव लागू"
+      },
+      "match": [
+        "gst",
+        "जीएसटी"
+      ],
+      "reject": []
+    }
+  }
+}
