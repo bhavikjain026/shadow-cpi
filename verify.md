@@ -1,0 +1,65 @@
+# How to check a Shadow CPI seal yourself
+
+Before MoSPI publishes a month's CPI, Shadow CPI locks its experimental nowcast into one file,
+`sealed/<month>.json`, and publishes that file's fingerprint (its SHA-256) in `sealed/<month>.sha256`.
+If even one character of the file changed later, the fingerprint would no longer match.
+The git tag `seal-<month>` and GitHub's own push record show **when** it was locked.
+
+Below, October 2026 is the example. For another month, change `2026-10` everywhere.
+
+## 1. Download the sealed file exactly as it was tagged
+
+Open these two links (the `seal-2026-10` in the address means "as of the seal tag"), and save each with your
+browser's *Save page as* (or right-click → *Save link as*):
+
+- https://raw.githubusercontent.com/bhavikjain026/shadow-cpi/seal-2026-10/sealed/2026-10.json
+- https://raw.githubusercontent.com/bhavikjain026/shadow-cpi/seal-2026-10/sealed/2026-10.sha256
+
+Do not open the `.json` file in a text editor and save it again, because that can change spaces or line endings.
+
+## 2. Recompute the fingerprint
+
+Open a terminal in the folder where you saved the file, and run the command for your computer:
+
+| Computer | Command |
+| --- | --- |
+| Mac | `shasum -a 256 2026-10.json` |
+| Linux | `sha256sum 2026-10.json` |
+| Windows (PowerShell) | `Get-FileHash 2026-10.json -Algorithm SHA256` |
+| Any computer with Python | `python -c "import hashlib;print(hashlib.sha256(open('2026-10.json','rb').read()).hexdigest())"` |
+
+It prints a 64-character code. Compare it with the text inside `2026-10.sha256` (Windows prints capital
+letters; that is the same code).
+
+- **Same code → PASS:** the file is exactly what was sealed.
+- **Different code → FAIL:** the file is not the sealed one.
+
+You can also read the file: `headline_yoy` is the nowcast, `range_low`/`range_high` the range,
+`evidence_cutoff_utc` the last moment evidence was collected, and `code_commit` the exact code used.
+
+## 3. Check when it was sealed
+
+1. **The seal time written inside the file:** `sealed_at_utc`. This is written by our computer, so on its own it
+   proves nothing; the next two checks are the independent ones.
+2. **The tag on GitHub:** go to https://github.com/bhavikjain026/shadow-cpi/tags and find `seal-2026-10`.
+   Click it to see the commit and its date.
+3. **GitHub's push record (the strongest proof):** go to https://github.com/bhavikjain026/shadow-cpi/activity.
+   GitHub's own servers record when each branch and tag was pushed; dates written inside git can be set by
+   whoever makes the commit, but this push time cannot. Find the push that created the `seal-2026-10` tag and
+   check that it is **before** MoSPI's release (12 Nov 2026, 4:00 pm IST = 10:30 UTC for October data).
+
+With git installed you can also check from a copy of the repository:
+
+```
+git clone https://github.com/bhavikjain026/shadow-cpi
+cd shadow-cpi
+git for-each-ref refs/tags/seal-2026-10 --format="tag created %(taggerdate:iso-strict)"
+git show seal-2026-10:sealed/2026-10.json > check.json
+sha256sum check.json          # Mac: shasum -a 256 check.json
+```
+
+## 4. After the official release
+
+`python score.py` compares each seal with the official number in `data/official_releases.csv` and writes
+`results/archive.csv`: the miss, whether the official number fell inside the range, and the main surprise.
+It also re-checks every fingerprint and reports PASS or FAIL. It never changes the sealed files.

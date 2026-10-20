@@ -5,3 +5,6 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .DS_Store
+
+# seal_month.py --dry-run output
+sealed/dry-run/
