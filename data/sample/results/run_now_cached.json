@@ -1,0 +1,26 @@
+{
+  "sample": true,
+  "note": "SAMPLE data for the app layout only - not a real nowcast",
+  "ran_at_utc": "2026-10-19T08:15:00+00:00",
+  "window_start": "2026-10-12",
+  "window_end": "2026-10-18",
+  "daily_cap": 2,
+  "credit_cap": 20,
+  "events": [
+    {
+      "item": "milk",
+      "place": "Gujarat",
+      "pct_change": 3.6,
+      "effective_date": "2026-10-05",
+      "line": "The new price of Rs 58 per litre will be effective from 5th of this month.",
+      "url": "https://example.com/sample-news/milk-hike",
+      "verified": true
+    }
+  ],
+  "receipt": {
+    "tavily_calls": 9,
+    "credits": 14,
+    "seconds": 38.2,
+    "nemotron_calls": 11
+  }
+}
