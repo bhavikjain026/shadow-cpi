@@ -1,0 +1,31 @@
+# Honest limits
+
+Shadow CPI is an **experimental nowcast**. It is not an official statistic, and it does not rebuild MoSPI's survey. These are its limits, stated plainly.
+
+## Data we could not get the "proper" way
+- **The government price spine was downloaded by hand.** The Consumer Affairs daily retail price site sits behind a CAPTCHA, and it blocks Tavily. The spine files were downloaded by a person and saved, and that route is logged and counted as a fallback. So the strictest evidence tier does not come in through Tavily, and it is not automatic.
+- **Tavily is blocked on some sites.** Some government and publisher pages refuse Tavily or return no text, for example scanned PDFs. The Evidence page and the Tavily report card list every failed source openly. Where we fell back to a direct download, the report card counts it.
+- **MoSPI's official indices come from MoSPI's public API** by a logged direct download. They are not fetched through Tavily, because Tavily cannot call a paged JSON API.
+
+## How much the replay can prove
+- **Only 9 test months** (January to September 2026). The 2024-base series has indices only from January 2025, and 2025 is kept for calibration, so there is no longer history to test on. Nine months is too few to be sure that one method is better than another, and small differences in mean miss may be luck.
+- **The 80% range comes from those same 9 replay misses.** With so few months, the range is itself uncertain.
+- **Replays search today's web with date filters.** Tavily's published date is a best estimate. The code also checks dates written inside pages, and it drops pages that state the official figure for the month. Still, a replay can never perfectly recreate what was on the web at the time.
+- **2025 is calibration only.** The pass-through factors were fitted on 2025, and nothing was tuned on the 2026 test months. That keeps the test fair, but the factors may not hold in a new series.
+
+## Strong baselines
+- **The economists' poll is a strong baseline.** On the 6 months with a dated Reuters poll article, its mean absolute miss was 0.15 percentage points (`results/baselines.csv`). Beating it is hard, and we report honestly whether we do: [TBD: from replay].
+- The simple trend baseline (B2) is also strong, with a mean absolute miss of 0.21 percentage points over the 9 months. The "last month's rate" baseline (B1) missed by 0.47 percentage points on average.
+
+## Items are not always what they sound like
+- **"Gold" is a composite.** MoSPI's item is *Gold / diamond / platinum jewellery*, not gold alone. We observe the gold rate, but the official item also moves with diamond and platinum prices and with making charges.
+- **"LPG" is a composite.** MoSPI's item is *LPG cylinder and piped natural gas* (LPG and PNG together). An LPG cylinder price change moves only part of it.
+- **Edible oils** have no single item. We use the *Vegetable oils* sub-class.
+- **Silver** is MoSPI's *Silver jewellery*, which also includes making charges.
+
+## How much of the basket we actually see
+- Only some items are measured in a given month. The rest of the basket (most services, rents, clothing and so on) is **carried on trend**. The app shows this split every month as the coverage meter: [TBD: from replay].
+- A tracked item moves only its own weight (the carve-out). If a big price change happens in something we don't track, we will miss it.
+
+## Models
+- Nemotron only extracts facts and cites a numbered line, and code checks that the number is really in that line. A model can still miss a quote or misread a page. Missed quotes lower coverage; misread ones are caught by the check. Every quote shown in the app passed the word-for-word check.
