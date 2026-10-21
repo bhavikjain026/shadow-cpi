@@ -42,8 +42,9 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
 ## Independent audit
 - **5 correct, 3 partly, 3 wrong, 1 unclear; 9 confirmed by a second source.** Eshan audited the 12 verified
   test-month events by web search (`audit/event_audit.md`, PR #4). The audit machine could not open the original
-  article pages, so whether each quote is on its page was checked for only one row; the facts were checked through
-  other outlets.
+  article pages, so the facts were checked through other outlets. The 12 pages were then opened by hand: all 9
+  visible quotes were on the page word for word (1 paywalled, 2 sites unreachable), and 3 recorded source dates were
+  later than the real page date (`audit/event_audit.md`, PR #6).
 - The three "wrong" rows and the double-counted pair led to four general bug fixes (Amendment 3,
   `docs/after_scoring_changes.md` §4). After them, 9 events remain and (c)'s mean miss is 0.194 pp (0.185 before).
 - **Left as they are, because they are not bugs in the rules:**
@@ -55,3 +56,5 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
     are announced, and the event layer does not follow them up.
 - The audit also noted possible misses (a second fuel rise on 19 May, Sanchi milk from 15 May, Gokul from 21 May).
   They were not added: the replay months are not re-searched.
+- **Recall:** a recall check found 9 of 29 known retail price changes directly (14 of 29 counting the IOCL and PPAC
+  price lists). Biggest gaps: bus fares (never searched) and electricity tariff cuts (`audit/missed_events.md`).

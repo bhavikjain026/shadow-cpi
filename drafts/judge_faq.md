@@ -46,7 +46,7 @@ We can't prove it perfectly, and `docs/honest_limits.md` says so. What we do:
 No. Pass-through factors and rule changes were calibrated on 2025 only, and the rules were frozen before any test
 month was scored (`docs/frozen_rules.md`). Amendment 1 was made before scoring and applies general scope rules
 (domestic LPG only, retail only), not month-specific fixes. Everything changed after scoring is listed in
-`docs/after_scoring_changes.md`, with dates and commits. None of it changes a scored number. One example: the 80%
+`docs/after_scoring_changes.md`, with dates and commits. Amendments 1 and 2 change no scored number; Amendment 3 (below) re-scored once and made the result slightly worse. One example: the 80%
 range for the live months was widened because it held the official figure in only 5 of 9 replay months.
 
 An independent event audit (`audit/event_audit.md`, PR bhavikjain026/shadow-cpi#4) checked the 12 replay events:

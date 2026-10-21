@@ -5,7 +5,7 @@
 > feedback section are left as `[I fill in]`. Claim only what the replay shows.
 
 ## One-liner
-An experimental, sealed nowcast of India's next official CPI inflation number. It is made before MoSPI releases the number, has a source behind every input, is locked in public, and is scored when the real number comes out.
+An experimental, sealed nowcast of India's next official CPI inflation number. It is made before MoSPI releases the number, has a source behind every measured price, is locked in public, and is scored when the real number comes out.
 
 ## Inspiration
 India's CPI comes out once a month, about two weeks after the month ends. Until then, reporters, households and small businesses only have hunches and a handful of economists' polls. Meanwhile the web is full of real price evidence, if you can find it, date it and check it: market prices, dairy price hikes, LPG revisions and electricity tariff orders. MoSPI sends price collectors to 2,860 markets. Shadow CPI sends Tavily to the web.
