@@ -16,7 +16,8 @@
     "run-now": 120,
     "run-now-scan": 8,
     "ibja-iocl": 20,
-    "backup-check": 5
+    "backup-check": 5,
+    "recall-audit": 120
   },
   "plans": {
     "cut1_events": "milk, lpg, electricity: English + Hindi; mobile, rail, medicine, school_fee, gst: English only (config/items.yaml 'langs')",

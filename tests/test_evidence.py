@@ -207,3 +207,14 @@ def test_event_kind_filter():
     com = {"item_or_service": "Commercial LPG cylinder", "old_price": 1720.5, "new_price": 1835, "pct_change": None,
            "effective_date": "2026-03-07", "quote": "19 kg commercial LPG cylinder up from 1720.5 to 1835"}
     assert E.judge_event(com, "2026-03", lpg)[1].startswith("not the CPI variety")
+
+
+def test_cache_only_mode_sends_nothing(tmp_path):
+    calls, ledger = [], tmp_path / "ledger.jsonl"
+    tav = fake_tavily(tmp_path, calls)
+    B.Budgeted(tav, ["job"], CFG, ledger).search("onion price")                      # fills the cache
+    frozen = B.Budgeted(tav, ["job"], CFG, ledger, cache_only=True)
+    frozen.search("onion price")                                                       # cached: fine
+    with pytest.raises(B.CacheMiss):
+        frozen.search("tomato price")                                                  # not cached: never sent
+    assert len(calls) == 1

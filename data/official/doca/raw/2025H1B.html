@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1"><title>
+	Report For Monthly average Zonewise
+</title>
+    <style type="text/css">
+        .style1
+        {
+            width: 100%;
+        }
+         .style2
+        {
+            font-size: small;
+            font-weight: bold;
+            text-align:right;
+        }
+        .style3
+        {
+            text-align: center;
+        }
+        .style4
+        {
+            font-size: xx-small;
+        }
+         .pagebreak 
+        {
+        	page-break-after: always;
+        }
+        .LeftAligned 
+{ 
+        text-align: left; 
+        font-size: small;
+}
+    </style>
+
+<meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="-1"><meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+
+<script type="text/javascript">
+
+    function PrintPanel() {
+
+        var panel = document.getElementById("Panel1");
+        var printWindow = window.open('', '', '');
+
+        printWindow.document.write(panel.innerHTML);
+        printWindow.document.close();
+        setTimeout(function () {
+            //printWindow.print();
+        }, 500);
+        return false;
+    }
+    </script>
+
+</head>
+<body>
+    <form name="form1" method="post" action="./Report_For_mthly_avg_Zonewise.aspx" id="form1">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="A32E7F76">
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="kFx/v5RvTTH5F1KnQz5nBzndG5Cy9V+zfmP4rPKIiXa2hLoEOBLjiy2dn1T/Ct55tW6zQ0TmYuCOmmBYFgvW47iPNVpbT9zcwwzJO2v6x8GorqIAke8U7ZTpq+7cHFrQdap4D/u0UcO82jcCdJZxKkIoyre/4r/3rTm+K0y/OsIod4VKhZ3fHfVrzcsQtvOW">
+</div>
+    <div class="style3" align="center">
+    <input type="submit" name="btn_back" value="Back" id="btn_back" style="font-size:XX-Small;position: relative; top: 0px; left: 3px; width: 46px; height: 21px;">
+        <input type="submit" name="btn_print" value="Print" onclick="return PrintPanel();" id="btn_print" style="font-size:XX-Small;position: relative; top: 0px; left: 3px; width: 46px">
+			<input type="image" name="btnsave" id="btnsave" text="export to excel" src="../Images/Excel-xls.jpeg" style="border-width:0px;position: relative; top: 0px; left: 3px; width: 46px; height: 21px;">
+        <div id="Panel1">
+	
+        <span><div class="style3"><br class="style4/"> <span class="style4">Department of Consumer Affairs (Price Monitoring Division)</span><br class="style4/"><span class="style4"><font size="2">Zonewise Monthly Average Retail Prices of&nbsp;&nbsp;<b> Groundnut Oil (Packed) </b></font></span></div></span><span><div class="style3"><span class="style3"><b>Unit: (Rs./Kg.)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></span><div>
+		<table cellspacing="0" align="Center" rules="all" border="1" style="border-collapse:collapse;">
+			<tbody><tr>
+				<th scope="col">Zone</th><th scope="col">Dec 2024</th><th scope="col">Jan 2025</th><th scope="col">Feb 2025</th><th scope="col">Mar 2025</th><th scope="col">Apr 2025</th><th scope="col">May 2025</th><th scope="col">Jun 2025</th><th scope="col">Average</th>
+			</tr><tr align="left">
+				<td>NORTH ZONE</td><td>205.19</td><td>202.1</td><td>197.76</td><td>195.69</td><td>194.44</td><td>194.48</td><td>194.54</td><td>197.76</td>
+			</tr><tr align="left">
+				<td>WEST ZONE</td><td>193.17</td><td>192.08</td><td>190.85</td><td>189.25</td><td>188.42</td><td>187.08</td><td>186.58</td><td>189.6</td>
+			</tr><tr align="left">
+				<td>EAST ZONE</td><td>199.77</td><td>198.78</td><td>198.08</td><td>197.33</td><td>198.82</td><td>198.3</td><td>198.37</td><td>198.53</td>
+			</tr><tr align="left">
+				<td>NORTH-EAST ZONE</td><td>190.03</td><td>190.7</td><td>185.1</td><td>177.46</td><td>178.04</td><td>184.83</td><td>190.25</td><td>185.28</td>
+			</tr><tr align="left">
+				<td>SOUTH ZONE</td><td>196.81</td><td>196.32</td><td>196.64</td><td>195.92</td><td>194.97</td><td>192.54</td><td>191.68</td><td>194.94</td>
+			</tr><tr align="left">
+				<td>All India Average</td><td>198.28</td><td>196.83</td><td>195</td><td>193.39</td><td>192.62</td><td>191.69</td><td>191.44</td><td>&nbsp;</td>
+			</tr>
+		</tbody></table>
+	</div><span><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NR-&gt; Not Reported</span></div><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source : - State Civil Supplies Deptt</span></div><div class="style3"><span class="style3"><b>Developed by:-&nbsp;&nbsp;</b>National Informatics Centre(NIC)</span></div></span><span><div class="style3"><br class="style4/"> <span class="style4">Department of Consumer Affairs (Price Monitoring Division)</span><br class="style4/"><span class="style4"><font size="2">Zonewise Monthly Average Retail Prices of&nbsp;&nbsp;<b> Mustard Oil (Packed) </b></font></span></div></span><span><div class="style3"><span class="style3"><b>Unit: (Rs./Kg.)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></span><div>
+		<table cellspacing="0" align="Center" rules="all" border="1" style="border-collapse:collapse;">
+			<tbody><tr>
+				<th scope="col">Zone</th><th scope="col">Dec 2024</th><th scope="col">Jan 2025</th><th scope="col">Feb 2025</th><th scope="col">Mar 2025</th><th scope="col">Apr 2025</th><th scope="col">May 2025</th><th scope="col">Jun 2025</th><th scope="col">Average</th>
+			</tr><tr align="left">
+				<td>NORTH ZONE</td><td>167.51</td><td>167.04</td><td>166.44</td><td>166.06</td><td>166.33</td><td>166.36</td><td>168.42</td><td>166.88</td>
+			</tr><tr align="left">
+				<td>WEST ZONE</td><td>166.87</td><td>166.87</td><td>167.16</td><td>166.57</td><td>167.42</td><td>166.85</td><td>167.45</td><td>167.03</td>
+			</tr><tr align="left">
+				<td>EAST ZONE</td><td>170.32</td><td>170.06</td><td>169.95</td><td>170.37</td><td>170.98</td><td>171.84</td><td>173.79</td><td>171.03</td>
+			</tr><tr align="left">
+				<td>NORTH-EAST ZONE</td><td>170.9</td><td>172.03</td><td>173.12</td><td>173.74</td><td>174.14</td><td>175.96</td><td>179.83</td><td>174.25</td>
+			</tr><tr align="left">
+				<td>SOUTH ZONE</td><td>181.07</td><td>182.23</td><td>182.69</td><td>184.36</td><td>184.1</td><td>184.58</td><td>185.8</td><td>183.56</td>
+			</tr><tr align="left">
+				<td>All India Average</td><td>170.7</td><td>170.88</td><td>171.04</td><td>171.32</td><td>171.59</td><td>172.01</td><td>173.92</td><td>&nbsp;</td>
+			</tr>
+		</tbody></table>
+	</div><span><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NR-&gt; Not Reported</span></div><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source : - State Civil Supplies Deptt</span></div><div class="style3"><span class="style3"><b>Developed by:-&nbsp;&nbsp;</b>National Informatics Centre(NIC)</span></div></span><span><div class="style3"><br class="style4/"> <span class="style4">Department of Consumer Affairs (Price Monitoring Division)</span><br class="style4/"><span class="style4"><font size="2">Zonewise Monthly Average Retail Prices of&nbsp;&nbsp;<b> Vanaspati (Packed) </b></font></span></div></span><span><div class="style3"><span class="style3"><b>Unit: (Rs./Kg.)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></span><div>
+		<table cellspacing="0" align="Center" rules="all" border="1" style="border-collapse:collapse;">
+			<tbody><tr>
+				<th scope="col">Zone</th><th scope="col">Dec 2024</th><th scope="col">Jan 2025</th><th scope="col">Feb 2025</th><th scope="col">Mar 2025</th><th scope="col">Apr 2025</th><th scope="col">May 2025</th><th scope="col">Jun 2025</th><th scope="col">Average</th>
+			</tr><tr align="left">
+				<td>NORTH ZONE</td><td>148.97</td><td>149.63</td><td>150.49</td><td>151.26</td><td>151.81</td><td>152.71</td><td>153.21</td><td>151.15</td>
+			</tr><tr align="left">
+				<td>WEST ZONE</td><td>140.54</td><td>141.45</td><td>144.16</td><td>145.85</td><td>147.83</td><td>148.84</td><td>149.76</td><td>145.53</td>
+			</tr><tr align="left">
+				<td>EAST ZONE</td><td>145.68</td><td>147.86</td><td>149.3</td><td>150.55</td><td>152.39</td><td>154.64</td><td>155.48</td><td>150.77</td>
+			</tr><tr align="left">
+				<td>NORTH-EAST ZONE</td><td>145.98</td><td>148.28</td><td>150.91</td><td>155.97</td><td>160.21</td><td>164.6</td><td>166.64</td><td>155.97</td>
+			</tr><tr align="left">
+				<td>SOUTH ZONE</td><td>148.85</td><td>151.82</td><td>154.67</td><td>159.7</td><td>160.99</td><td>161.13</td><td>161.87</td><td>157.06</td>
+			</tr><tr align="left">
+				<td>All India Average</td><td>145.96</td><td>147.61</td><td>149.61</td><td>151.97</td><td>153.52</td><td>154.84</td><td>155.74</td><td>&nbsp;</td>
+			</tr>
+		</tbody></table>
+	</div><span><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NR-&gt; Not Reported</span></div><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source : - State Civil Supplies Deptt</span></div><div class="style3"><span class="style3"><b>Developed by:-&nbsp;&nbsp;</b>National Informatics Centre(NIC)</span></div></span><span><div class="style3"><br class="style4/"> <span class="style4">Department of Consumer Affairs (Price Monitoring Division)</span><br class="style4/"><span class="style4"><font size="2">Zonewise Monthly Average Retail Prices of&nbsp;&nbsp;<b> Soya Oil (Packed) </b></font></span></div></span><span><div class="style3"><span class="style3"><b>Unit: (Rs./Kg.)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></span><div>
+		<table cellspacing="0" align="Center" rules="all" border="1" style="border-collapse:collapse;">
+			<tbody><tr>
+				<th scope="col">Zone</th><th scope="col">Dec 2024</th><th scope="col">Jan 2025</th><th scope="col">Feb 2025</th><th scope="col">Mar 2025</th><th scope="col">Apr 2025</th><th scope="col">May 2025</th><th scope="col">Jun 2025</th><th scope="col">Average</th>
+			</tr><tr align="left">
+				<td>NORTH ZONE</td><td>145.49</td><td>145.34</td><td>145.68</td><td>146.1</td><td>145.99</td><td>145.8</td><td>145.62</td><td>145.72</td>
+			</tr><tr align="left">
+				<td>WEST ZONE</td><td>141.77</td><td>141.61</td><td>142.9</td><td>144.25</td><td>145.22</td><td>145.51</td><td>144.62</td><td>143.71</td>
+			</tr><tr align="left">
+				<td>EAST ZONE</td><td>145.87</td><td>146.34</td><td>148.24</td><td>150.1</td><td>151.15</td><td>152.37</td><td>152.98</td><td>149.44</td>
+			</tr><tr align="left">
+				<td>NORTH-EAST ZONE</td><td>151.11</td><td>151.69</td><td>152.46</td><td>152.88</td><td>153.53</td><td>155.12</td><td>155.8</td><td>153.25</td>
+			</tr><tr align="left">
+				<td>SOUTH ZONE</td><td>137.99</td><td>138.64</td><td>141.22</td><td>144.58</td><td>145.72</td><td>145.19</td><td>148.61</td><td>143.19</td>
+			</tr><tr align="left">
+				<td>All India Average</td><td>144.75</td><td>144.97</td><td>146.15</td><td>147.37</td><td>148.01</td><td>148.4</td><td>148.65</td><td>&nbsp;</td>
+			</tr>
+		</tbody></table>
+	</div><span><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NR-&gt; Not Reported</span></div><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source : - State Civil Supplies Deptt</span></div><div class="style3"><span class="style3"><b>Developed by:-&nbsp;&nbsp;</b>National Informatics Centre(NIC)</span></div></span><span><div class="style3"><br class="style4/"> <span class="style4">Department of Consumer Affairs (Price Monitoring Division)</span><br class="style4/"><span class="style4"><font size="2">Zonewise Monthly Average Retail Prices of&nbsp;&nbsp;<b> Sunflower Oil (Packed) </b></font></span></div></span><span><div class="style3"><span class="style3"><b>Unit: (Rs./Kg.)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></span><div>
+		<table cellspacing="0" align="Center" rules="all" border="1" style="border-collapse:collapse;">
+			<tbody><tr>
+				<th scope="col">Zone</th><th scope="col">Dec 2024</th><th scope="col">Jan 2025</th><th scope="col">Feb 2025</th><th scope="col">Mar 2025</th><th scope="col">Apr 2025</th><th scope="col">May 2025</th><th scope="col">Jun 2025</th><th scope="col">Average</th>
+			</tr><tr align="left">
+				<td>NORTH ZONE</td><td>151.87</td><td>152.38</td><td>152.03</td><td>153.34</td><td>154.95</td><td>155.81</td><td>156.53</td><td>153.85</td>
+			</tr><tr align="left">
+				<td>WEST ZONE</td><td>149.6</td><td>149.84</td><td>151.26</td><td>153.23</td><td>154.7</td><td>155.78</td><td>156.68</td><td>153.07</td>
+			</tr><tr align="left">
+				<td>EAST ZONE</td><td>156.18</td><td>157.35</td><td>159.2</td><td>161.05</td><td>163.77</td><td>165.03</td><td>166.53</td><td>161.21</td>
+			</tr><tr align="left">
+				<td>NORTH-EAST ZONE</td><td>160.45</td><td>163.9</td><td>166.82</td><td>168.02</td><td>170.15</td><td>172.17</td><td>174.57</td><td>168.14</td>
+			</tr><tr align="left">
+				<td>SOUTH ZONE</td><td>154.38</td><td>155.11</td><td>156.35</td><td>159.63</td><td>160.95</td><td>161.71</td><td>160.55</td><td>158.39</td>
+			</tr><tr align="left">
+				<td>All India Average</td><td>153.47</td><td>154.43</td><td>155.65</td><td>157.64</td><td>159.36</td><td>160.4</td><td>161.01</td><td>&nbsp;</td>
+			</tr>
+		</tbody></table>
+	</div><span><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NR-&gt; Not Reported</span></div><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source : - State Civil Supplies Deptt</span></div><div class="style3"><span class="style3"><b>Developed by:-&nbsp;&nbsp;</b>National Informatics Centre(NIC)</span></div></span><span><div class="style3"><br class="style4/"> <span class="style4">Department of Consumer Affairs (Price Monitoring Division)</span><br class="style4/"><span class="style4"><font size="2">Zonewise Monthly Average Retail Prices of&nbsp;&nbsp;<b> Palm Oil (Packed) </b></font></span></div></span><span><div class="style3"><span class="style3"><b>Unit: (Rs./Kg.)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></span><div>
+		<table cellspacing="0" align="Center" rules="all" border="1" style="border-collapse:collapse;">
+			<tbody><tr>
+				<th scope="col">Zone</th><th scope="col">Dec 2024</th><th scope="col">Jan 2025</th><th scope="col">Feb 2025</th><th scope="col">Mar 2025</th><th scope="col">Apr 2025</th><th scope="col">May 2025</th><th scope="col">Jun 2025</th><th scope="col">Average</th>
+			</tr><tr align="left">
+				<td>NORTH ZONE</td><td>125.41</td><td>126.07</td><td>126.92</td><td>128.01</td><td>128.44</td><td>128.2</td><td>127.47</td><td>127.22</td>
+			</tr><tr align="left">
+				<td>WEST ZONE</td><td>130.16</td><td>130.82</td><td>132.39</td><td>134.27</td><td>135.21</td><td>134.78</td><td>133.39</td><td>133.03</td>
+			</tr><tr align="left">
+				<td>EAST ZONE</td><td>130.88</td><td>131.97</td><td>132.84</td><td>133.46</td><td>134.38</td><td>133.94</td><td>132.28</td><td>132.82</td>
+			</tr><tr align="left">
+				<td>NORTH-EAST ZONE</td><td>130.32</td><td>133.83</td><td>135.56</td><td>139.21</td><td>139.93</td><td>141.56</td><td>141.76</td><td>137.51</td>
+			</tr><tr align="left">
+				<td>SOUTH ZONE</td><td>138.39</td><td>139.83</td><td>141.19</td><td>144.11</td><td>143.19</td><td>137.9</td><td>133.01</td><td>139.58</td>
+			</tr><tr align="left">
+				<td>All India Average</td><td>131.01</td><td>132.18</td><td>133.44</td><td>135.22</td><td>135.43</td><td>134.14</td><td>132.17</td><td>&nbsp;</td>
+			</tr>
+		</tbody></table>
+	</div><span><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NR-&gt; Not Reported</span></div><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source : - State Civil Supplies Deptt</span></div><div class="style3"><span class="style3"><b>Developed by:-&nbsp;&nbsp;</b>National Informatics Centre(NIC)</span></div></span><span><div class="style3"><br class="style4/"> <span class="style4">Department of Consumer Affairs (Price Monitoring Division)</span><br class="style4/"><span class="style4"><font size="2">Zonewise Monthly Average Retail Prices of&nbsp;&nbsp;<b> Potato </b></font></span></div></span><span><div class="style3"><span class="style3"><b>Unit: (Rs./Kg.)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></span><div>
+		<table cellspacing="0" align="Center" rules="all" border="1" style="border-collapse:collapse;">
+			<tbody><tr>
+				<th scope="col">Zone</th><th scope="col">Dec 2024</th><th scope="col">Jan 2025</th><th scope="col">Feb 2025</th><th scope="col">Mar 2025</th><th scope="col">Apr 2025</th><th scope="col">May 2025</th><th scope="col">Jun 2025</th><th scope="col">Average</th>
+			</tr><tr align="left">
+				<td>NORTH ZONE</td><td>31.21</td><td>24.11</td><td>19.89</td><td>18.98</td><td>19.13</td><td>19.65</td><td>20.95</td><td>22.03</td>
+			</tr><tr align="left">
+				<td>WEST ZONE</td><td>35.63</td><td>30.99</td><td>26.52</td><td>25.13</td><td>24.41</td><td>25.01</td><td>25.28</td><td>27.61</td>
+			</tr><tr align="left">
+				<td>EAST ZONE</td><td>33.71</td><td>25.93</td><td>19.11</td><td>18.22</td><td>19.11</td><td>19.81</td><td>20.1</td><td>22.4</td>
+			</tr><tr align="left">
+				<td>NORTH-EAST ZONE</td><td>39.86</td><td>34.15</td><td>27.5</td><td>25.22</td><td>25.05</td><td>25.63</td><td>26.74</td><td>29.16</td>
+			</tr><tr align="left">
+				<td>SOUTH ZONE</td><td>44.96</td><td>41.18</td><td>37.05</td><td>33.63</td><td>31.94</td><td>33.12</td><td>33.94</td><td>36.57</td>
+			</tr><tr align="left">
+				<td>All India Average</td><td>36.48</td><td>30.62</td><td>25.53</td><td>23.87</td><td>23.5</td><td>24.23</td><td>25.13</td><td>&nbsp;</td>
+			</tr>
+		</tbody></table>
+	</div><span><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NR-&gt; Not Reported</span></div><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source : - State Civil Supplies Deptt</span></div><div class="style3"><span class="style3"><b>Developed by:-&nbsp;&nbsp;</b>National Informatics Centre(NIC)</span></div></span><span><div class="style3"><br class="style4/"> <span class="style4">Department of Consumer Affairs (Price Monitoring Division)</span><br class="style4/"><span class="style4"><font size="2">Zonewise Monthly Average Retail Prices of&nbsp;&nbsp;<b> Onion </b></font></span></div></span><span><div class="style3"><span class="style3"><b>Unit: (Rs./Kg.)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></span><div>
+		<table cellspacing="0" align="Center" rules="all" border="1" style="border-collapse:collapse;">
+			<tbody><tr>
+				<th scope="col">Zone</th><th scope="col">Dec 2024</th><th scope="col">Jan 2025</th><th scope="col">Feb 2025</th><th scope="col">Mar 2025</th><th scope="col">Apr 2025</th><th scope="col">May 2025</th><th scope="col">Jun 2025</th><th scope="col">Average</th>
+			</tr><tr align="left">
+				<td>NORTH ZONE</td><td>46.66</td><td>35.36</td><td>33.65</td><td>33.71</td><td>28.48</td><td>24.78</td><td>24.33</td><td>32.44</td>
+			</tr><tr align="left">
+				<td>WEST ZONE</td><td>44.34</td><td>35.58</td><td>32.45</td><td>31</td><td>26.83</td><td>24.35</td><td>23.83</td><td>31.13</td>
+			</tr><tr align="left">
+				<td>EAST ZONE</td><td>47.75</td><td>36.18</td><td>33.79</td><td>32.43</td><td>27.79</td><td>24.28</td><td>24.04</td><td>32.44</td>
+			</tr><tr align="left">
+				<td>NORTH-EAST ZONE</td><td>62.11</td><td>50.78</td><td>46.11</td><td>42.67</td><td>38.74</td><td>37.62</td><td>37.73</td><td>45.07</td>
+			</tr><tr align="left">
+				<td>SOUTH ZONE</td><td>53.23</td><td>42.81</td><td>39.22</td><td>34.89</td><td>28.97</td><td>26.21</td><td>27.33</td><td>36.07</td>
+			</tr><tr align="left">
+				<td>All India Average</td><td>49.8</td><td>39.26</td><td>36.35</td><td>34.47</td><td>29.65</td><td>26.75</td><td>26.67</td><td>&nbsp;</td>
+			</tr>
+		</tbody></table>
+	</div><span><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NR-&gt; Not Reported</span></div><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source : - State Civil Supplies Deptt</span></div><div class="style3"><span class="style3"><b>Developed by:-&nbsp;&nbsp;</b>National Informatics Centre(NIC)</span></div></span><span><div class="style3"><br class="style4/"> <span class="style4">Department of Consumer Affairs (Price Monitoring Division)</span><br class="style4/"><span class="style4"><font size="2">Zonewise Monthly Average Retail Prices of&nbsp;&nbsp;<b> Tomato </b></font></span></div></span><span><div class="style3"><span class="style3"><b>Unit: (Rs./Kg.)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></span><div>
+		<table cellspacing="0" align="Center" rules="all" border="1" style="border-collapse:collapse;">
+			<tbody><tr>
+				<th scope="col">Zone</th><th scope="col">Dec 2024</th><th scope="col">Jan 2025</th><th scope="col">Feb 2025</th><th scope="col">Mar 2025</th><th scope="col">Apr 2025</th><th scope="col">May 2025</th><th scope="col">Jun 2025</th><th scope="col">Average</th>
+			</tr><tr align="left">
+				<td>NORTH ZONE</td><td>45.64</td><td>28.67</td><td>22.23</td><td>20.33</td><td>20.83</td><td>20.49</td><td>29.5</td><td>26.88</td>
+			</tr><tr align="left">
+				<td>WEST ZONE</td><td>40.51</td><td>25.9</td><td>17.81</td><td>17.54</td><td>17.9</td><td>21.04</td><td>29.08</td><td>24.5</td>
+			</tr><tr align="left">
+				<td>EAST ZONE</td><td>48.44</td><td>28.05</td><td>17.52</td><td>16.12</td><td>16.89</td><td>20.73</td><td>29.94</td><td>25.56</td>
+			</tr><tr align="left">
+				<td>NORTH-EAST ZONE</td><td>67.27</td><td>51.94</td><td>39.2</td><td>35.74</td><td>34.11</td><td>38.16</td><td>51</td><td>45.2</td>
+			</tr><tr align="left">
+				<td>SOUTH ZONE</td><td>37.39</td><td>24.94</td><td>22.77</td><td>19.47</td><td>19.86</td><td>20.98</td><td>25.68</td><td>24.49</td>
+			</tr><tr align="left">
+				<td>All India Average</td><td>46.58</td><td>30.73</td><td>23.02</td><td>21.11</td><td>21.31</td><td>23.38</td><td>31.85</td><td>&nbsp;</td>
+			</tr>
+		</tbody></table>
+	</div><span><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NR-&gt; Not Reported</span></div><div class="LeftAligned"><span class="LeftAligned">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source : - State Civil Supplies Deptt</span></div><div class="style3"><span class="style3"><b>Developed by:-&nbsp;&nbsp;</b>National Informatics Centre(NIC)</span></div></span>
+</div>
+
+    </div>
+    </form>
+
+
+</body></html>

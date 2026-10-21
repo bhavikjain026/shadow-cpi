@@ -253,10 +253,15 @@ def fetch_pages(tav, nem, query, lang, start, end, job, stats, drop, seen):
     """One Tavily search (dated window) + extract of the top pages + leak guard + gatekeeper.
     Yields (result, page_date, date_source, text, extract_call_id) for pages that pass. Tags follow the app:
     '<job> search', '<job> extract', '<job> gatekeeper' (job = 'item:onion', 'event:milk', ...)."""
-    resp, cid = tav.search(query, topic="news", search_depth="basic", max_results=SEARCH_N, start_date=start,
-                           end_date=end, include_domains=INDIAN_NEWS if lang == "en" else HINDI_NEWS,
-                           include_domains_mode="prefer", exclude_domains=["mospi.gov.in"],
-                           **({"language": "hi"} if lang == "hi" else {}), tag=f"{job} search")
+    from .budget import CacheMiss
+    try:
+        resp, cid = tav.search(query, topic="news", search_depth="basic", max_results=SEARCH_N, start_date=start,
+                               end_date=end, include_domains=INDIAN_NEWS if lang == "en" else HINDI_NEWS,
+                               include_domains_mode="prefer", exclude_domains=["mospi.gov.in"],
+                               **({"language": "hi"} if lang == "hi" else {}), tag=f"{job} search")
+    except CacheMiss:
+        drop("search not in cache (frozen cache-only re-run sends no calls)")
+        return
     stats.setdefault("queries", []).append({"call_id": cid, "query": query, "language": lang, "start": start,
                                             "end": end, "n_results": len(resp.get("results", []))})
     inside = []
@@ -271,8 +276,12 @@ def fetch_pages(tav, nem, query, lang, start, end, job, stats, drop, seen):
     top = inside[:EXTRACT_TOP]
     if not top:
         return
-    ext, eid = tav.extract([r["url"] for r, _, _ in top], query=query, chunks_per_source=5, parent=cid,
-                           tag=f"{job} extract")
+    try:
+        ext, eid = tav.extract([r["url"] for r, _, _ in top], query=query, chunks_per_source=5, parent=cid,
+                               tag=f"{job} extract")
+    except CacheMiss:
+        drop("extract not in cache (frozen cache-only re-run sends no calls)", len(top))
+        return
     for f in ext["failed_results"]:
         drop("extract failed")
         stats.setdefault("failed_sources", []).append({"url": f.get("url"), "via": "Tavily Extract",
@@ -373,14 +382,17 @@ def judge_event(ev, month, cfg=None):
             return None, "not the CPI variety (e.g. commercial cylinder, jet fuel)"
         if foreign(line, ev.get("region"), ev.get("_url", "")):
             return None, "outside India"
+    from .event_rules import absolute_change, base_price, normalise_date
     nums = [ev.get(k) for k in ("new_price", "old_price", "pct_change") if ev.get(k) is not None]
     if not line:
         return None, "no cited line"
-    if not nums or not any(price_in_line(abs(float(n)), line) for n in nums):
+    abs_ch = absolute_change(line) if not nums else None          # 2025 audit: 'hike by Rs 50', '2 रुपये प्रति लीटर'
+    if (not nums or not any(price_in_line(abs(float(n)), line) for n in nums)) and abs_ch is None:
         return None, "unverified (no claimed number in the cited line)"
-    eff = ev.get("effective_date") or ""
-    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", eff):
+    eff = normalise_date(ev.get("effective_date"), ev.get("_page_date"))     # 2025 audit: 'April 8', 'Tuesday'
+    if not eff:
         return None, "no effective date"
+    ev = {**ev, "effective_date": eff}
     start, end = month_window(month)
     if not start <= eff <= end:
         return None, "effective date outside the month"
@@ -388,8 +400,12 @@ def judge_event(ev, month, cfg=None):
         change = ev["new_price"] / ev["old_price"] - 1
     elif ev.get("pct_change") is not None:
         change = ev["pct_change"] / 100
+    elif abs_ch is not None and base_price(ev.get("_kind", ""), eff):
+        base, base_src = base_price(ev.get("_kind", ""), eff)
+        change = abs_ch / base
+        ev = {**ev, "abs_change": abs_ch, "base_price": base, "base_source": base_src}
     else:
-        return None, "change not computable (needs old+new price or a % change)"
+        return None, "change not computable (needs old+new price, a % change, or an amount with an official base)"
     days = calendar.monthrange(int(month[:4]), int(month[5:]))[1]
     share = (days - int(eff[8:]) + 1) / days
     return {**ev, "change": change, "days_share": share, "change_prorated": change * share}, "kept"
@@ -419,7 +435,7 @@ def collect_events(tav, nem, month, events, langs=("en", "hi"), pre_days=EVENT_P
                                                         stats, drop, seen):
                     evs, _ = nem.price_events(mid, text, tag=f"{job} events", parent=eid)
                     for ev in evs:
-                        k, why = judge_event({**ev, "_url": r["url"]}, month, cfg)
+                        k, why = judge_event({**ev, "_url": r["url"], "_page_date": d, "_kind": kind}, month, cfg)
                         trace.append({"kind": kind, "lang": lang, "url": r["url"], "page_date": d,
                                       **{x: ev.get(x) for x in ("item_or_service", "seller_or_authority", "region",
                                                                 "old_price", "new_price", "pct_change",
@@ -432,16 +448,12 @@ def collect_events(tav, nem, month, events, langs=("en", "hi"), pre_days=EVENT_P
                             kept.append(k)
                         else:
                             drop(why)
-    # the same announcement found on several pages counts once, but remembers how many sources confirmed it
-    merged = {}
-    for e in kept:
-        key = (e["kind"], norm(e.get("region") or ""), e["effective_date"], e.get("new_price"), e.get("pct_change"))
-        if key in merged:
-            if e["url"] not in merged[key]["sources"]:
-                merged[key]["sources"].append(e["url"])
-        else:
-            merged[key] = {**e, "sources": [e["url"]]}
-    return list(merged.values()), stats, trace
+    # event rules (shadow_cpi/event_rules.py): national vs regional scope, official state weights, duplicates merged
+    from .event_rules import apply_rules
+    kept, rule_drops = apply_rules([{**e, "sources": [e["url"]]} for e in kept])
+    for _, why in rule_drops:
+        drop(why)
+    return kept, stats, trace
 
 
 # ---------- B. gold and silver, OBSERVED (IBJA official daily rates) ----------
@@ -581,11 +593,17 @@ def spine_rows(month, path=SPINE_CSV):
 
 
 def spine_change(spine, item, month):
-    """verify.geometric_mean_change over centres present in both months. Returns (change, n_centres)."""
+    """verify.geometric_mean_change over centres (zones) present in both months. 'edible oils' pools the six packed
+    oils (each oil x zone is one pair). The added all-India simple-mean rows are left out (they would double-count
+    the zones). Returns (change, n_pairs)."""
+    from .spine import OILS
+    items = OILS if item == "edible oils" else (item,)
     prev = M.add_months(month, -1)
-    now = {c: p for (i, c, m), p in spine.items() if i == item and m == month}
-    before = {c: p for (i, c, m), p in spine.items() if i == item and m == prev}
-    pairs = [(now[c], before[c]) for c in now if c in before]
+    pairs = []
+    for it in items:
+        now = {c: p for (i, c, m), p in spine.items() if i == it and m == month and not c.startswith("all india")}
+        before = {c: p for (i, c, m), p in spine.items() if i == it and m == prev and not c.startswith("all india")}
+        pairs += [(now[c], before[c]) for c in now if c in before]
     return (geometric_mean_change(pairs), len(pairs)) if pairs else (None, 0)
 
 

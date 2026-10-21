@@ -9,3 +9,4 @@ __pycache__/
 
 # seal_month.py --dry-run output
 sealed/dry-run/
+data/official/doca/raw/.go/

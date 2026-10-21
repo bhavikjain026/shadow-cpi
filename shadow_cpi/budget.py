@@ -23,6 +23,10 @@ class BudgetExceeded(Exception):
     """Raised BEFORE a Tavily call that would go past a cap. The run stops and asks the owner."""
 
 
+class CacheMiss(BudgetExceeded):
+    """Cache-only mode (frozen re-runs): the call is not in the cache, so it is skipped and nothing is sent."""
+
+
 def load_budget(path=BUDGET_FILE):
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
@@ -67,8 +71,8 @@ def call_cost(endpoint, body):
 class Budgeted:
     """Wraps a Tavily client; every call charges `budgets` (list of names). Hard caps, see module docstring."""
 
-    def __init__(self, tav, budgets, cfg=None, ledger_path=LEDGER):
-        self.tav, self.budgets = tav, list(budgets)
+    def __init__(self, tav, budgets, cfg=None, ledger_path=LEDGER, cache_only=False):
+        self.tav, self.budgets, self.cache_only = tav, list(budgets), cache_only
         self.cfg = cfg or load_budget()
         self.ledger_path = Path(ledger_path)
         self.used = 0
@@ -76,8 +80,7 @@ class Budgeted:
 
     def charge(self, *budgets):
         """A copy charging these budgets instead (same ledger, same client)."""
-        b = Budgeted(self.tav, budgets, self.cfg, self.ledger_path)
-        return b
+        return Budgeted(self.tav, budgets, self.cfg, self.ledger_path, self.cache_only)
 
     def _cached(self, endpoint, body):
         body = {**body, "include_usage": True}
@@ -97,6 +100,8 @@ class Budgeted:
     def _run(self, endpoint, body, fn):
         if self._cached(endpoint, body):
             return fn()
+        if self.cache_only:
+            raise CacheMiss(f"cache-only run: {endpoint} not in the cache, skipped (no call sent)")
         self.check(call_cost(endpoint, body))
         resp, cid = fn()
         credits = (resp.get("usage") or {}).get("credits") or 0

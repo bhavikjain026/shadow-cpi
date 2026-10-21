@@ -59,40 +59,204 @@
    "note": "not fitted: the official petrol index did not move in 2025; fixed at 1.0 in advance (the CPI item is the pump price)"
   },
   "onion": {
-   "factor": null,
-   "note": "pending: needs the government spine (data/spine.csv)"
+   "factor": 1.2009684867001786,
+   "n_months": 11,
+   "r2_through_origin": 0.9600942138541285,
+   "corr": 0.9763562672201171,
+   "cpi_item": "01.1.7.4.1.01",
+   "use_spine": true,
+   "months": [
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12"
+   ],
+   "observed": "DoCA zone monthly average retail prices (spine), zones present in both months"
   },
   "tomato": {
-   "factor": null,
-   "note": "pending: needs the government spine (data/spine.csv)"
+   "factor": 1.068318246185565,
+   "n_months": 11,
+   "r2_through_origin": 0.964117052875491,
+   "corr": 0.9805102337401997,
+   "cpi_item": "01.1.7.2.1.01",
+   "use_spine": true,
+   "months": [
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12"
+   ],
+   "observed": "DoCA zone monthly average retail prices (spine), zones present in both months"
   },
   "potato": {
-   "factor": null,
-   "note": "pending: needs the government spine (data/spine.csv)"
+   "factor": 1.1361635624037958,
+   "n_months": 11,
+   "r2_through_origin": 0.9480945475845594,
+   "corr": 0.9734558837207634,
+   "cpi_item": "01.1.7.5.1.01",
+   "use_spine": true,
+   "months": [
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12"
+   ],
+   "observed": "DoCA zone monthly average retail prices (spine), zones present in both months"
   },
   "tur dal": {
-   "factor": null,
-   "note": "pending: needs the government spine (data/spine.csv)"
+   "factor": 1.018977909596932,
+   "n_months": 11,
+   "r2_through_origin": 0.9829281393653244,
+   "corr": 0.9804307751169293,
+   "cpi_item": "01.1.7.6.1.01",
+   "use_spine": true,
+   "months": [
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12"
+   ],
+   "observed": "DoCA zone monthly average retail prices (spine), zones present in both months"
   },
   "edible oils": {
-   "factor": null,
-   "note": "pending: needs the government spine (data/spine.csv)"
+   "factor": 1.8308776511233653,
+   "n_months": 11,
+   "r2_through_origin": 0.7143742381249125,
+   "corr": 0.7549017739443602,
+   "cpi_item": "01.1.5.1",
+   "use_spine": true,
+   "months": [
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12"
+   ],
+   "observed": "DoCA zone monthly average retail prices (spine), zones present in both months; edible oils = 6 packed oils pooled"
   },
   "rice": {
-   "factor": null,
-   "note": "pending: needs the government spine (data/spine.csv)"
+   "factor": -0.18752034393790137,
+   "n_months": 11,
+   "r2_through_origin": 0.026797900630763594,
+   "corr": -0.3378979765448168,
+   "cpi_item": "01.1.1.1.1.01",
+   "use_spine": false,
+   "months": [
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12"
+   ],
+   "observed": "DoCA zone monthly average retail prices (spine), zones present in both months",
+   "note": "2025 fit too weak (R2 < 0.5 or factor <= 0): carried on trend"
   },
   "atta": {
-   "factor": null,
-   "note": "pending: needs the government spine (data/spine.csv)"
+   "factor": 0.9959511107851925,
+   "n_months": 11,
+   "r2_through_origin": 0.7501451230457585,
+   "corr": 0.8724694531143348,
+   "cpi_item": "01.1.1.2.1.01",
+   "use_spine": true,
+   "months": [
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12"
+   ],
+   "observed": "DoCA zone monthly average retail prices (spine), zones present in both months"
   },
   "milk": {
-   "factor": null,
-   "note": "pending: needs the government spine (data/spine.csv)"
+   "factor": 0.7481559361229342,
+   "n_months": 11,
+   "r2_through_origin": 0.52177204472689,
+   "corr": 0.7527475813055853,
+   "cpi_item": "01.1.4.1.1.01",
+   "use_spine": true,
+   "months": [
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12"
+   ],
+   "observed": "DoCA zone monthly average retail prices (spine), zones present in both months"
   },
   "eggs": {
-   "factor": null,
-   "note": "pending: needs the government spine (data/spine.csv)"
+   "factor": 1.329309709078847,
+   "n_months": 11,
+   "r2_through_origin": 0.9155789435753926,
+   "corr": 0.9612824303685472,
+   "cpi_item": "01.1.4.8.1.01",
+   "use_spine": true,
+   "months": [
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12"
+   ],
+   "observed": "DoCA zone monthly average retail prices (spine), zones present in both months"
   }
- }
+ },
+ "_food_rule": "Calibrated on 2025 only: a food uses the spine if its 2025 factor > 0 and R2 (through origin) >= 0.5."
 }

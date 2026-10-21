@@ -254,6 +254,31 @@
       "langs": [
         "en"
       ]
+    },
+    "fuel": {
+      "cpi_code": "07.2.2.2.1.01",
+      "langs": [
+        "en"
+      ],
+      "queries": {
+        "en": "petrol diesel price revised per litre effective oil marketing companies",
+        "hi": "पेट्रोल डीजल के दाम बदले प्रति लीटर लागू"
+      },
+      "match": [
+        "petrol",
+        "diesel",
+        "पेट्रोल",
+        "डीजल"
+      ],
+      "reject": [
+        "atf",
+        "aviation",
+        "cng",
+        "png",
+        "lpg",
+        "एटीएफ"
+      ],
+      "use": "only for months the PPAC Delhi petrol series does not cover (before 15 May 2026)"
     }
   },
   "replay_quote_items": [

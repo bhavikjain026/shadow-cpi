@@ -155,6 +155,7 @@ def main():
         print("\nAdd the missing key(s) to .env and run again.")
         sys.exit(1)
     rec = Recorder()
+    log_start = len(read_log())        # only calls made by THIS run count below (cached calls are free)
     tav, nem = Tavily(recorder=rec, transport=TRANSPORT), Nemotron(recorder=rec, transport=TRANSPORT)
     chosen = check_models(nem)
     check_json_mode(nem, chosen.get("small"))
@@ -174,7 +175,7 @@ def main():
                  language="hi", include_domains=HINDI_NEWS, include_domains_mode="prefer")
     urls = [r["url"] for r in (hi[:1] + en[:2])]
     check_extraction(tav, nem, chosen.get("mid"), urls, cid)
-    spent = credits_used(read_log())
+    spent = credits_used(read_log()[log_start:])
     report("PASS", "Tavily credits used by this run (from include_usage)", str(spent))
     print("\n==== COPY EVERYTHING BELOW TO CLAUDE ====")
     print("\n".join(REPORT))
