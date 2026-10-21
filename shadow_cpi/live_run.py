@@ -1,14 +1,15 @@
 """'Run live' for the app: one live event scan of the last 7 days, capped in code.
 
-Off unless RUN_LIVE_ENABLED is set in the environment (Space settings). Caps (config/budget.json, plans.app_live): at
+Off unless RUN_LIVE_ENABLED is set (a Streamlit Cloud secret). Caps (config/budget.json, plans.app_live): at
 most `per_session` runs per visitor session, `per_day` runs per UTC day for the whole app, none when the ledger balance
 would fall below `credit_floor`, and none unless Tavily's own GET /usage reports at least `usage_floor` credits left
 (checked before every run; a failed check or a missing limit refuses the run). Each run is also held to
 the hard caps 'run-now' (total) and 'run-now-scan' (one scan) by shadow_cpi.budget. A run that is refused or fails
 never raises to the page: the app shows the saved run with the message.
 
-Keys come only from the environment (Hugging Face Space secrets SCPI_TAVILY_API_KEY, SCPI_NEBIUS_API_KEY), never
-from a file.
+Keys and the switch are read from environment variables (Streamlit Community Cloud exposes root-level secrets as
+environment variables), with a read-only fallback to Streamlit's secrets: SCPI_TAVILY_API_KEY, SCPI_NEBIUS_API_KEY,
+RUN_LIVE_ENABLED. Nothing is ever written to them.
 """
 import json
 import os
@@ -26,9 +27,25 @@ def limits(cfg=None):
     return (cfg or load_budget())["plans"]["app_live"]
 
 
+def setting(name):
+    """An environment variable, else (read-only) the root-level Streamlit secret of that name, else None.
+    Streamlit copies root-level secrets into the environment only once it has loaded them; the fallback covers the
+    time before that. Never raises."""
+    if os.environ.get(name):
+        return os.environ[name]
+    try:
+        from streamlit.runtime.secrets import secrets_singleton
+        if secrets_singleton.load_if_toml_exists():
+            v = secrets_singleton.get(name)
+            return None if v is None or isinstance(v, dict) else str(v)
+    except Exception:
+        pass
+    return None
+
+
 def keys():
-    """(tavily, nebius) from the environment only, or None."""
-    vals = tuple(os.environ.get(k) for k in KEY_VARS)
+    """(tavily, nebius) from setting(), or None."""
+    vals = tuple(setting(k) for k in KEY_VARS)
     return vals if all(vals) else None
 
 
@@ -44,8 +61,8 @@ def runs_on(day, path=STATE_FILE):
 
 
 def enabled():
-    """RUN_LIVE_ENABLED from the environment (Space settings). Default OFF; on only for 1/true/yes/on."""
-    return os.environ.get("RUN_LIVE_ENABLED", "").strip().lower() in ("1", "true", "yes", "on")
+    """RUN_LIVE_ENABLED (a Streamlit Cloud secret, via setting()). Default OFF; on only for 1/true/yes/on."""
+    return (setting("RUN_LIVE_ENABLED") or "").strip().lower() in ("1", "true", "yes", "on")
 
 
 def usage_remaining(tavily_key, fetch=None):

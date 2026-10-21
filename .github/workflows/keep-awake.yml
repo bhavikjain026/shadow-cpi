@@ -1,0 +1,77 @@
+# Keeps the Streamlit Community Cloud app awake for judges. Every 6 hours (and on demand) it opens the app address
+# from the repository variable APP_URL; if Streamlit's "get this app back up" button is showing within 60 seconds,
+# it clicks it and waits for the app to load. No secrets, no API calls, and it never presses anything in the app
+# itself (in particular never "Run live"). Without APP_URL it does nothing and succeeds.
+name: keep-awake
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"     # every 6 hours, at minute 17
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: keep-awake
+  cancel-in-progress: false
+
+jobs:
+  wake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      APP_URL: ${{ vars.APP_URL }}
+    steps:
+      - name: Nothing to do without APP_URL
+        if: env.APP_URL == ''
+        run: echo "Repository variable APP_URL is not set; nothing to do."
+
+      - name: Set up Python
+        if: env.APP_URL != ''
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Playwright (Chromium)
+        if: env.APP_URL != ''
+        run: |
+          python -m pip install --quiet "playwright==1.47.0"
+          python -m playwright install --with-deps chromium
+
+      - name: Open the app and wake it if it is asleep
+        if: env.APP_URL != ''
+        run: |
+          python - <<'PY'
+          import os
+          import re
+          import sys
+
+          from playwright.sync_api import TimeoutError as PlaywrightTimeout
+          from playwright.sync_api import sync_playwright
+
+          url = os.environ["APP_URL"]
+          wake = re.compile("get this app back up", re.I)
+          with sync_playwright() as p:
+              browser = p.chromium.launch()
+              page = browser.new_page()
+              page.goto(url, wait_until="domcontentloaded", timeout=60_000)
+              button = page.get_by_role("button", name=wake).or_(page.get_by_text(wake)).first
+              try:
+                  button.wait_for(state="visible", timeout=60_000)
+              except PlaywrightTimeout:
+                  print("No wake-up button within 60 seconds: the app is awake.")
+                  browser.close()
+                  sys.exit(0)
+              button.click()
+              print("The app was asleep: clicked 'get this app back up'. Waiting for it to load.")
+              try:
+                  button.wait_for(state="hidden", timeout=300_000)
+                  page.wait_for_load_state("networkidle", timeout=120_000)
+              except PlaywrightTimeout:
+                  print("The app did not finish loading within the time allowed.")
+                  browser.close()
+                  sys.exit(1)
+              print("The app is back up.")
+              browser.close()
+          PY

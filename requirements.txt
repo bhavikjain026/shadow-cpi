@@ -1,4 +1,5 @@
-# Runtime packages for the app on Hugging Face Spaces (Streamlit itself comes from sdk_version in README.md).
-# The pipeline (shadow_cpi/) uses only the Python standard library. Versions = the ones the tests ran with.
+# Runtime packages for the app (Streamlit Community Cloud installs this file). Versions = the ones the tests ran with.
+# The pipeline (shadow_cpi/) uses only the Python standard library.
+streamlit==1.66.0
 pandas==3.0.6
 altair==6.3.0

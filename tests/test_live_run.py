@@ -170,3 +170,49 @@ def test_tavily_usage_is_a_fresh_get_with_the_same_key(tmp_path, monkeypatch):
     assert t.usage() == USAGE and t.usage() == USAGE           # second call is sent again, not cached
     assert [s[:2] for s in sent] == [("GET", t.base + "/usage")] * 2 and all(s[2] == "the-key" for s in sent)
     assert all(s[3] is None for s in sent)
+
+
+class FakeSecrets:
+    def __init__(self, data, exists=True, boom=False):
+        self.data, self.exists, self.boom, self.writes = data, exists, boom, 0
+
+    def load_if_toml_exists(self):
+        if self.boom:
+            raise RuntimeError("bad secrets file")
+        return self.exists
+
+    def get(self, k):
+        return self.data.get(k)
+
+
+@pytest.fixture
+def fake_secrets(monkeypatch):
+    import streamlit.runtime.secrets as S
+
+    def use(**kw):
+        fake = FakeSecrets(**kw)
+        monkeypatch.setattr(S, "secrets_singleton", fake)
+        return fake
+    return use
+
+
+def test_setting_env_first_then_streamlit_secret(monkeypatch, fake_secrets):
+    pytest.importorskip("streamlit")
+    fake_secrets(data={"SCPI_TAVILY_API_KEY": "from-secrets", "RUN_LIVE_ENABLED": "1", "nested": {"a": 1}})
+    monkeypatch.setenv("SCPI_TAVILY_API_KEY", "from-env")
+    assert L.setting("SCPI_TAVILY_API_KEY") == "from-env"
+    monkeypatch.delenv("SCPI_TAVILY_API_KEY")
+    assert L.setting("SCPI_TAVILY_API_KEY") == "from-secrets"
+    monkeypatch.delenv("RUN_LIVE_ENABLED")
+    assert L.enabled()                                       # RUN_LIVE_ENABLED = "1" as a secret turns it on
+    assert L.setting("nested") is None and L.setting("missing") is None
+
+
+def test_setting_without_secrets_or_with_a_broken_store_is_none(monkeypatch, fake_secrets):
+    pytest.importorskip("streamlit")
+    for k in ("RUN_LIVE_ENABLED", *L.KEY_VARS):          # other tests may have loaded .env into the process
+        monkeypatch.delenv(k, raising=False)
+    fake_secrets(data={"RUN_LIVE_ENABLED": "1"}, exists=False)
+    assert L.setting("RUN_LIVE_ENABLED") is None and not L.enabled()
+    fake_secrets(data={}, boom=True)
+    assert L.setting("RUN_LIVE_ENABLED") is None and L.keys() is None

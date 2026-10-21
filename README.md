@@ -1,17 +1,3 @@
----
-title: Shadow CPI
-emoji: 📈
-colorFrom: indigo
-colorTo: green
-sdk: streamlit
-sdk_version: 1.66.0
-python_version: "3.12"
-app_file: app.py
-pinned: false
-license: mit
-short_description: Experimental sealed nowcast of India's next CPI inflation
----
-
 # Shadow CPI
 
 **An experimental, sealed nowcast of India's next official CPI inflation number** — made before MoSPI releases it, with a source behind every input, locked in public, and scored when the real number comes out.

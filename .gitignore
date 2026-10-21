@@ -10,3 +10,6 @@ __pycache__/
 # seal_month.py --dry-run output
 sealed/dry-run/
 data/official/doca/raw/.go/
+
+# Streamlit secrets (local only; Streamlit Cloud keeps them in its dashboard)
+.streamlit/secrets.toml
