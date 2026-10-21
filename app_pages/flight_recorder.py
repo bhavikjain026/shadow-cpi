@@ -1,7 +1,7 @@
 """Tavily Flight Recorder: every outside call from logs/flight_recorder.jsonl, one item traced, the evidence chase."""
 import streamlit as st
 
-from app_pages.common import header, read_log, read_text, tag, tavily_credits
+from app_pages.common import header, read_log, read_text, tavily_credits
 
 header("Tavily Flight Recorder", "Every outside call, in order: when, which Tavily endpoint, what was asked, "
                                  "how many results, credits and time. Repeat calls come from the cache for free.")
@@ -23,13 +23,13 @@ def what(e):
 
 tav = [e for e in log if e["service"] == "tavily"]
 c1, c2, c3 = st.columns(3)
-c1.metric(tag("Tavily calls"), len(tav))
-c2.metric(tag("Credits used"), tavily_credits(log))
-c3.metric(tag("From cache"), sum(bool(e.get("cached")) for e in tav))
+c1.metric("Tavily calls", len(tav))
+c2.metric("Credits used", tavily_credits(log))
+c3.metric("From cache", sum(bool(e.get("cached")) for e in tav))
 st.caption(f"Nemotron calls: {sum(e['service'] == 'nebius' for e in log)}. Credits count only calls that were not "
            "served from the cache.")
 
-st.subheader(tag("Log"))
+st.subheader("Log")
 st.dataframe([{"Time (UTC)": e["time"][:19].replace("T", " "), "Service": e["service"], "Endpoint": e["endpoint"],
                "What": what(e), "Results": e.get("n_results"), "Credits": e.get("credits"),
                "Seconds": round(e.get("latency_ms", 0) / 1000, 1), "Cached": "yes" if e.get("cached") else "",
@@ -58,7 +58,7 @@ def tree_text(roots):
 
 
 # ---------- one item end to end ----------
-st.subheader(tag("One item, end to end"))
+st.subheader("One item, end to end")
 roots = [e for e in log if e.get("parent") is None]
 jobs = sorted({(e.get("tag") or "").split(" ")[0] for e in roots if e.get("tag")})
 if jobs:
@@ -66,7 +66,7 @@ if jobs:
     st.code(tree_text([r for r in roots if (r.get("tag") or "").split(" ")[0] == job]), language=None)
 
 # ---------- evidence chase ----------
-st.subheader(tag("Evidence chase"))
+st.subheader("Evidence chase")
 st.caption("When an event is verified, up to 2 follow-up searches look for the same change elsewhere and for the "
            "official circular.")
 chase_roots = [e for e in roots if any((d.get("tag") or "").startswith("chase:") for _, d in subtree(e))]
@@ -77,5 +77,5 @@ else:
 
 card = read_text("results/tavily_report_card.md")
 if card:
-    with st.expander(tag("Tavily report card"), expanded=False):
+    with st.expander("Tavily report card", expanded=False):
         st.markdown(card)

@@ -1,2 +1,4 @@
-# Core uses only the Python standard library.
-pytest>=8
+# Runtime packages for the app on Hugging Face Spaces (Streamlit itself comes from sdk_version in README.md).
+# The pipeline (shadow_cpi/) uses only the Python standard library. Versions = the ones the tests ran with.
+pandas==3.0.6
+altair==6.3.0

@@ -1,8 +1,8 @@
 """Archive: sealed predictions with their JSON, SHA-256, git tag, manifest and (after release) the miss."""
 import streamlit as st
 
-from app_pages.common import NOWCAST_WORDS, header, month_name, months_with, num, path, pct, read_csv, read_json, \
-    seal_status, tag
+from app_pages.common import (NOWCAST_WORDS, header, month_name, months_with, num, path, pct, read_csv, read_json,
+                              seal_status)
 
 header("Archive", f"Every sealed {NOWCAST_WORDS}, locked before MoSPI's release. Anyone can recompute the SHA-256 "
                   "of the sealed file and check the git tag date.")
@@ -17,10 +17,10 @@ for m in months:
     s = read_json(f"sealed/{m}.json")
     stored, actual, ok = seal_status(m)
     off = num(official.get(m, {}).get("official_yoy"))
-    st.subheader(tag(month_name(m)))
+    st.subheader(month_name(m))
     c1, c2 = st.columns(2)
-    c1.metric(tag("Sealed nowcast"), pct(s["headline_yoy"]))
-    c2.metric(tag("Official"), pct(off) if off is not None else "not released yet",
+    c1.metric("Sealed nowcast", pct(s["headline_yoy"]))
+    c2.metric("Official", pct(off) if off is not None else "not released yet",
               delta=f"miss {s['headline_yoy'] - off:+.2f} pp" if off is not None else None, delta_color="off")
     st.markdown(f"Range {pct(s['range_low'])} to {pct(s['range_high'])}"
                 + (f" · official inside range: **{'yes' if s['range_low'] <= off <= s['range_high'] else 'no'}**"

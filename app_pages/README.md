@@ -4,23 +4,22 @@ Run: `pip install -r requirements-app.txt` then `streamlit run app.py`.
 
 The app only **reads files**. It makes no API calls and needs no keys.
 
-## Sample data vs real data
+## Data
 
-- By default the app reads `data/sample/` and shows a **SAMPLE DATA** warning on every page and "(SAMPLE)" on every number.
-- `data/sample/` mirrors the repository layout (`results/`, `manifests/`, `sealed/`, `logs/`, `data/`).
-  When the real pipeline has written its files, run the app on them with:
-  `SHADOW_CPI_DATA_DIR=. streamlit run app.py` (or set that variable in the hosting secrets/settings).
-  The SAMPLE labels disappear automatically.
-- Rebuild the sample files with `python data/sample/make_sample.py`.
-- `data/sample/results/baselines.csv` is a copy of the real `results/baselines.csv`; `data/sample/data/cpi_tidy.csv` is the
-  general + division rows of the real `data/cpi_tidy.csv`. Everything else in `data/sample/` is made up.
+The app reads the real results files in this repository; there is no sample data. Every number on screen and its
+file are listed in `docs/app_numbers.md`. Files that the pipeline keeps out of git (`logs/`, `cache/`) reach the app
+as committed snapshots in `results/app/`, rebuilt with `python tools/build_app_data.py` (0 credits).
+
+The only API calls are the capped "Run live" button on Home (`shadow_cpi/live_run.py`: 3 per visitor session, 15 per
+day for the app, none below a 100-credit Tavily floor; keys from the environment only).
 
 | Page | File(s) |
 | --- | --- |
-| Home | `results/nowcast_latest.json`, `results/replay.csv`, `sealed/<month>.json` + `.sha256`, `results/skeptic_<month>.json`, `results/run_now_cached.json` |
+| Home | `sealed/2026-10.json` (or `results/nowcast_2026-10.json`), `results/score_lock.json`, `results/scoreboard.md`, `results/app/audit_summary.json`, `results/app/saved_run.json` |
 | Evidence | `manifests/<month>.json`, `data/spine.csv` |
-| Replay | `results/replay.csv`, `results/baselines.csv`, `results/tavily_attribution.csv` |
-| Tavily Flight Recorder | `logs/flight_recorder.jsonl`, `results/tavily_report_card.md` |
+| Replay | `results/score_lock.json`, `results/scoreboard.md`, `results/replay.csv`, `results/baselines.csv`, `results/tavily_attribution.csv` |
+| Tavily trace (March) | `results/app/tavily_trace_2026-03.json` |
+| Tavily Flight Recorder | `results/app/flight_recorder.jsonl`, `results/tavily_report_card.md` |
 | Archive | `sealed/<month>.json` + `.sha256`, `data/official_releases.csv` |
 | Reporter brief | `results/reporter_brief_<month>.md` |
 
@@ -112,4 +111,3 @@ mention "coverage" and "range".
 ### `data/official_releases.csv` (Prompt 5.4)
 `month,official_yoy,release_date,source_url` — the Archive shows the miss and inside-range once a month appears here.
 
-Any JSON may carry `"sample": true` and a `"note"`; the app ignores them.

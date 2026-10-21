@@ -1,7 +1,7 @@
 """Reporter brief: What moved / What we observed / What's uncertain - as a download."""
 import streamlit as st
 
-from app_pages.common import NOWCAST_WORDS, header, is_sample, month_name, months_with, read_text, tag
+from app_pages.common import NOWCAST_WORDS, header, month_name, months_with, read_text
 
 header("Reporter brief", f"A one-page summary of the {NOWCAST_WORDS} for journalists. Written only from computed "
                          "numbers and verified quotes; it always states coverage and the range.")
@@ -18,8 +18,8 @@ missing = [w for w in ("coverage", "range") if w not in text.lower()]
 if missing:
     st.error("This brief does not state: " + ", ".join(missing) + ". Do not publish it.")
 
-st.download_button(tag("Download reporter brief"), text.encode("utf-8"),
-                   file_name=f"shadow-cpi-brief-{month}{'-SAMPLE' if is_sample() else ''}.md",
+st.download_button("Download reporter brief", text.encode("utf-8"),
+                   file_name=f"shadow-cpi-brief-{month}.md",
                    mime="text/markdown", width="stretch")
 with st.container(border=True):
     st.markdown(text)

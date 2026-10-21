@@ -1,0 +1,28 @@
+{
+ "events_checked": 12,
+ "verdicts": {
+  "correct": 5,
+  "partly": 3,
+  "wrong": 3,
+  "unclear": 1
+ },
+ "second_source": 9,
+ "reference_changes": 29,
+ "found_directly": 9,
+ "found_incl_official_series": 14,
+ "fixes": [
+  "a",
+  "b",
+  "c",
+  "d"
+ ],
+ "events_before_fixes": 12,
+ "events_after_fixes": 9,
+ "sources": {
+  "verdicts": "audit/event_audit.csv (cross-checked with audit/event_audit.md)",
+  "second_source": "audit/event_audit.md",
+  "recall": "audit/missed_events.md",
+  "fixes": "docs/after_scoring_changes.md §4",
+  "events_after_fixes": "manifests/2026-0*.json"
+ }
+}

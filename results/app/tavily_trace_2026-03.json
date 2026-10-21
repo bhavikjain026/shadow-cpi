@@ -1,0 +1,2862 @@
+{
+ "month": "2026-03",
+ "built_utc": "2026-10-21T16:07:47.527050+00:00",
+ "n_calls": 117,
+ "credits": 110,
+ "calls": [
+  {
+   "id": "4786471b3621",
+   "time": "2026-10-20T14:13:53.618224+00:00",
+   "endpoint": "/search",
+   "job": "check-search",
+   "what": "onion retail price per kg Delhi",
+   "settings": {
+    "topic": "news",
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "max_results": 10
+   },
+   "credits": 1,
+   "latency_ms": 2047,
+   "produced": "7 results, 7 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "b888171245f4",
+   "time": "2026-10-20T14:13:55.594448+00:00",
+   "endpoint": "/search",
+   "job": "check-search",
+   "what": "onion retail price per kg Delhi",
+   "settings": {
+    "topic": "news",
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "max_results": 10,
+    "filter_by_published_date": true
+   },
+   "credits": 1,
+   "latency_ms": 1975,
+   "produced": "7 results, 7 dated inside the window"
+  },
+  {
+   "id": "82d6f6cb4fc8",
+   "time": "2026-10-20T14:13:57.876374+00:00",
+   "endpoint": "/search",
+   "job": "check-search",
+   "what": "प्याज के दाम किलो",
+   "settings": {
+    "topic": "news",
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "max_results": 10,
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 2281,
+   "produced": "10 results, 3 dated inside the window"
+  },
+  {
+   "id": "0e613d9dd288",
+   "time": "2026-10-20T14:13:59.498497+00:00",
+   "endpoint": "/search",
+   "job": "check-search",
+   "what": "milk price hike per litre effective",
+   "settings": {
+    "topic": "news",
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "max_results": 10
+   },
+   "credits": 1,
+   "latency_ms": 1621,
+   "produced": "8 results, 8 dated inside the window"
+  },
+  {
+   "id": "2a0113456820",
+   "time": "2026-10-20T14:14:02.110048+00:00",
+   "endpoint": "/extract",
+   "job": "check-extract",
+   "what": "onion price per kg",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 2611,
+   "produced": "3 pages read, 0 failed"
+  },
+  {
+   "id": "b33f13260851",
+   "time": "2026-10-20T15:12:01.767465+00:00",
+   "endpoint": "/search",
+   "job": "check-search",
+   "what": "प्याज के दाम किलो",
+   "settings": {
+    "topic": "news",
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "max_results": 10,
+    "language": "hi",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "latency_ms": 4509,
+   "produced": "10 results, 9 dated inside the window"
+  },
+  {
+   "id": "3cf0e3027414",
+   "time": "2026-10-20T15:12:07.203749+00:00",
+   "endpoint": "/search",
+   "job": "check-search",
+   "what": "India milk price hike per litre effective Amul Mother Dairy",
+   "settings": {
+    "topic": "news",
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "max_results": 10,
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "latency_ms": 5435,
+   "produced": "1 results, 1 dated inside the window"
+  },
+  {
+   "id": "f65974e4cdb3",
+   "time": "2026-10-20T15:12:11.801185+00:00",
+   "endpoint": "/search",
+   "job": "check-search",
+   "what": "दूध के दाम बढ़े प्रति लीटर लागू",
+   "settings": {
+    "topic": "news",
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "max_results": 10,
+    "language": "hi",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "latency_ms": 4594,
+   "produced": "10 results, 1 dated inside the window"
+  },
+  {
+   "id": "52108ad6dd06",
+   "time": "2026-10-20T15:35:52.562800+00:00",
+   "endpoint": "/extract",
+   "job": "explore-gold",
+   "what": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2023-03-2026.pdf",
+   "settings": {},
+   "credits": 0,
+   "latency_ms": 1198,
+   "produced": "1 pages read, 0 failed"
+  },
+  {
+   "id": "eb939297ffc7",
+   "time": "2026-10-20T15:41:05.937988+00:00",
+   "endpoint": "/extract",
+   "job": "p2-ibja",
+   "what": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2002-03-2026.pdf, https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2009-03-2026.pdf",
+   "settings": {},
+   "credits": 1,
+   "latency_ms": 5970,
+   "produced": "4 pages read, 1 failed"
+  },
+  {
+   "id": "19528a435b26",
+   "time": "2026-10-20T15:41:07.078465+00:00",
+   "endpoint": "/extract",
+   "job": "p2-ibja",
+   "what": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2017-03-2026.pdf",
+   "settings": {},
+   "credits": 0,
+   "latency_ms": 1135,
+   "produced": "1 pages read, 0 failed"
+  },
+  {
+   "id": "0d82adbfa0ca",
+   "time": "2026-10-20T15:43:09.296608+00:00",
+   "endpoint": "/search",
+   "job": "p2-quotes-2026-03",
+   "what": "onion retail price per kg",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 5570,
+   "produced": "6 results, 6 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "a06719cd95f3",
+   "time": "2026-10-20T15:43:11.920947+00:00",
+   "endpoint": "/extract",
+   "job": "p2-quotes-2026-03",
+   "what": "onion retail price per kg",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 2618,
+   "produced": "5 pages read, 1 failed; 0 follow-up Tavily calls, 6 Nemotron reads"
+  },
+  {
+   "id": "6dade3428c38",
+   "time": "2026-10-20T15:44:08.575647+00:00",
+   "endpoint": "/search",
+   "job": "p2-quotes-2026-03",
+   "what": "प्याज के दाम प्रति किलो",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 5389,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "ca4e4d6e3bc7",
+   "time": "2026-10-20T15:44:10.495498+00:00",
+   "endpoint": "/extract",
+   "job": "p2-quotes-2026-03",
+   "what": "प्याज के दाम प्रति किलो",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 2,
+   "latency_ms": 1914,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 6 Nemotron reads"
+  },
+  {
+   "id": "897719561957",
+   "time": "2026-10-20T15:44:33.384649+00:00",
+   "endpoint": "/search",
+   "job": "p2-quotes-2026-03",
+   "what": "tomato retail price per kg",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 5481,
+   "produced": "7 results, 7 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "6a9364baccdf",
+   "time": "2026-10-20T15:44:40.978327+00:00",
+   "endpoint": "/extract",
+   "job": "p2-quotes-2026-03",
+   "what": "tomato retail price per kg",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 7588,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 7 Nemotron reads"
+  },
+  {
+   "id": "6fe2fcbe6b64",
+   "time": "2026-10-20T15:45:05.253330+00:00",
+   "endpoint": "/search",
+   "job": "p2-quotes-2026-03",
+   "what": "टमाटर के दाम प्रति किलो",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 4317,
+   "produced": "8 results, 6 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "3ccc63cde12d",
+   "time": "2026-10-20T15:45:10.657344+00:00",
+   "endpoint": "/extract",
+   "job": "p2-quotes-2026-03",
+   "what": "टमाटर के दाम प्रति किलो",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 5398,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 6 Nemotron reads"
+  },
+  {
+   "id": "c6a99687a1ab",
+   "time": "2026-10-20T15:45:30.516945+00:00",
+   "endpoint": "/search",
+   "job": "p2-quotes-2026-03",
+   "what": "domestic LPG cylinder price 14.2 kg",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 3684,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "91ddc01deb97",
+   "time": "2026-10-20T15:45:37.747347+00:00",
+   "endpoint": "/extract",
+   "job": "p2-quotes-2026-03",
+   "what": "domestic LPG cylinder price 14.2 kg",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 7227,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 6 Nemotron reads"
+  },
+  {
+   "id": "e3d968d769ec",
+   "time": "2026-10-20T15:46:05.340097+00:00",
+   "endpoint": "/search",
+   "job": "p2-quotes-2026-03",
+   "what": "घरेलू एलपीजी सिलेंडर की कीमत 14.2 किलो",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 4706,
+   "produced": "8 results, 0 dated inside the window"
+  },
+  {
+   "id": "8c8b2c18cf43",
+   "time": "2026-10-20T15:46:12.237715+00:00",
+   "endpoint": "/search",
+   "job": "p2-quotes-2026-03",
+   "what": "petrol price per litre today",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 6893,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "ea992be93f18",
+   "time": "2026-10-20T15:46:14.739382+00:00",
+   "endpoint": "/extract",
+   "job": "p2-quotes-2026-03",
+   "what": "petrol price per litre today",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 2495,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 7 Nemotron reads"
+  },
+  {
+   "id": "f1eeed151fad",
+   "time": "2026-10-20T15:46:37.355441+00:00",
+   "endpoint": "/search",
+   "job": "p2-quotes-2026-03",
+   "what": "पेट्रोल की कीमत प्रति लीटर",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 4109,
+   "produced": "8 results, 2 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "72b7ab6beb13",
+   "time": "2026-10-20T15:46:40.153235+00:00",
+   "endpoint": "/extract",
+   "job": "p2-quotes-2026-03",
+   "what": "पेट्रोल की कीमत प्रति लीटर",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 2791,
+   "produced": "1 pages read, 1 failed; 0 follow-up Tavily calls, 1 Nemotron reads"
+  },
+  {
+   "id": "0554d877f551",
+   "time": "2026-10-20T15:49:47.610770+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "milk price hike per litre effective Amul Mother Dairy",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 4451,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "a5e75d9d382e",
+   "time": "2026-10-20T15:49:52.448819+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "milk price hike per litre effective Amul Mother Dairy",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 4831,
+   "produced": "5 pages read, 1 failed; 0 follow-up Tavily calls, 5 Nemotron reads"
+  },
+  {
+   "id": "94da2b06478a",
+   "time": "2026-10-20T15:50:06.205683+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "दूध के दाम बढ़े प्रति लीटर लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 6416,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "b855b6d392e3",
+   "time": "2026-10-20T15:50:08.234628+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "दूध के दाम बढ़े प्रति लीटर लागू",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 2021,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 6 Nemotron reads"
+  },
+  {
+   "id": "a9b68df4cea9",
+   "time": "2026-10-20T15:50:29.941254+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "domestic LPG cylinder price revised effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 5306,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "1fa8c9893537",
+   "time": "2026-10-20T15:50:32.493220+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "domestic LPG cylinder price revised effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 2,
+   "latency_ms": 2544,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 6 Nemotron reads"
+  },
+  {
+   "id": "a13aa7d9578f",
+   "time": "2026-10-20T15:50:56.862143+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 5336,
+   "produced": "8 results, 5 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "67d384410636",
+   "time": "2026-10-20T15:51:00.422650+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 3553,
+   "produced": "5 pages read, 0 failed; 0 follow-up Tavily calls, 5 Nemotron reads"
+  },
+  {
+   "id": "f4730f7c3c39",
+   "time": "2026-10-20T15:51:31.437570+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "electricity tariff order regulatory commission revised rates effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 6920,
+   "produced": "5 results, 5 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "f5adaa19a019",
+   "time": "2026-10-20T15:51:38.640904+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "electricity tariff order regulatory commission revised rates effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 7196,
+   "produced": "5 pages read, 0 failed; 0 follow-up Tavily calls, 7 Nemotron reads"
+  },
+  {
+   "id": "553a314fa10d",
+   "time": "2026-10-20T15:52:02.472565+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 4214,
+   "produced": "8 results, 1 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "f937879ce749",
+   "time": "2026-10-20T15:52:04.677010+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 0,
+   "latency_ms": 2197,
+   "produced": "1 pages read, 0 failed; 0 follow-up Tavily calls, 1 Nemotron reads"
+  },
+  {
+   "id": "9519bde5c7bb",
+   "time": "2026-10-20T15:52:12.979901+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 6632,
+   "produced": "6 results, 6 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "952c0c10b9eb",
+   "time": "2026-10-20T15:52:16.704196+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 3718,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 6 Nemotron reads"
+  },
+  {
+   "id": "e903d8c6ef8c",
+   "time": "2026-10-20T15:52:32.149924+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "मोबाइल टैरिफ बढ़ोतरी प्रीपेड प्लान लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 4831,
+   "produced": "8 results, 6 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "946cf120964b",
+   "time": "2026-10-20T15:52:34.768785+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "मोबाइल टैरिफ बढ़ोतरी प्रीपेड प्लान लागू",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 2611,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 4 Nemotron reads"
+  },
+  {
+   "id": "0c3b352ff0d1",
+   "time": "2026-10-20T15:52:44.804822+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "railway fare revision effective Indian Railways",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 4316,
+   "produced": "6 results, 6 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "3787fa318d33",
+   "time": "2026-10-20T15:52:48.809993+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "railway fare revision effective Indian Railways",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 3998,
+   "produced": "5 pages read, 1 failed; 0 follow-up Tavily calls, 5 Nemotron reads"
+  },
+  {
+   "id": "84c9b029179c",
+   "time": "2026-10-20T15:53:02.069458+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "रेल किराया बढ़ा लागू भारतीय रेलवे",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 5072,
+   "produced": "8 results, 4 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "f60868229301",
+   "time": "2026-10-20T15:53:06.331233+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "रेल किराया बढ़ा लागू भारतीय रेलवे",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 4254,
+   "produced": "4 pages read, 0 failed; 0 follow-up Tavily calls, 6 Nemotron reads"
+  },
+  {
+   "id": "80d7b71b81f7",
+   "time": "2026-10-20T15:53:24.547436+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "NPPA medicine price revision effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 5985,
+   "produced": "4 results, 4 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "b86df2362fd3",
+   "time": "2026-10-20T15:53:27.710593+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "NPPA medicine price revision effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 3156,
+   "produced": "3 pages read, 1 failed; 0 follow-up Tavily calls, 3 Nemotron reads"
+  },
+  {
+   "id": "f3999bf8eda0",
+   "time": "2026-10-20T15:53:36.718850+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "दवाओं के दाम बढ़े एनपीपीए लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 4751,
+   "produced": "3 results, 1 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "5451c293f99f",
+   "time": "2026-10-20T15:53:38.789353+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "दवाओं के दाम बढ़े एनपीपीए लागू",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 0,
+   "latency_ms": 2062,
+   "produced": "1 pages read, 0 failed; 0 follow-up Tavily calls, 1 Nemotron reads"
+  },
+  {
+   "id": "0a5af849168f",
+   "time": "2026-10-20T15:53:49.209220+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "school fee hike academic session effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 4594,
+   "produced": "7 results, 7 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "bf3fc7d4a415",
+   "time": "2026-10-20T15:53:56.245669+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "school fee hike academic session effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 7030,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 7 Nemotron reads"
+  },
+  {
+   "id": "028dc3425940",
+   "time": "2026-10-20T15:54:11.541808+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "स्कूल फीस बढ़ोतरी नया सत्र लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 5116,
+   "produced": "8 results, 0 dated inside the window"
+  },
+  {
+   "id": "80e71955aa93",
+   "time": "2026-10-20T15:54:15.915947+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "GST rate change effective from",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 4366,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "bc839c27c5b5",
+   "time": "2026-10-20T15:54:19.162660+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "GST rate change effective from",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 3241,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 8 Nemotron reads"
+  },
+  {
+   "id": "25cb3fbe6984",
+   "time": "2026-10-20T15:54:44.318898+00:00",
+   "endpoint": "/search",
+   "job": "p2-events-2026-03",
+   "what": "जीएसटी दर में बदलाव लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 4754,
+   "produced": "8 results, 4 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "08eedace4b98",
+   "time": "2026-10-20T15:54:46.393138+00:00",
+   "endpoint": "/extract",
+   "job": "p2-events-2026-03",
+   "what": "जीएसटी दर में बदलाव लागू",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 2067,
+   "produced": "4 pages read, 0 failed; 0 follow-up Tavily calls, 4 Nemotron reads"
+  },
+  {
+   "id": "8fee422d3274",
+   "time": "2026-10-20T16:03:47.425601+00:00",
+   "endpoint": "/search",
+   "job": "event:milk search",
+   "what": "milk price hike per litre effective Amul Mother Dairy",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 6002,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "4cdc65cea823",
+   "time": "2026-10-20T16:03:52.792727+00:00",
+   "endpoint": "/extract",
+   "job": "event:milk extract",
+   "what": "milk price hike per litre effective Amul Mother Dairy",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 5365,
+   "produced": "4 pages read, 2 failed; 0 follow-up Tavily calls, 5 Nemotron reads"
+  },
+  {
+   "id": "9820d2841e5c",
+   "time": "2026-10-20T16:04:04.762726+00:00",
+   "endpoint": "/search",
+   "job": "event:milk search",
+   "what": "दूध के दाम बढ़े प्रति लीटर लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 5238,
+   "produced": "8 results, 0 dated inside the window"
+  },
+  {
+   "id": "a7b4e4f1caec",
+   "time": "2026-10-20T16:04:11.375278+00:00",
+   "endpoint": "/search",
+   "job": "event:lpg search",
+   "what": "domestic LPG cylinder price revised effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 6603,
+   "produced": "4 results, 4 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "ec6a5d76820e",
+   "time": "2026-10-20T16:04:12.832956+00:00",
+   "endpoint": "/extract",
+   "job": "event:lpg extract",
+   "what": "domestic LPG cylinder price revised effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 1457,
+   "produced": "4 pages read, 0 failed; 0 follow-up Tavily calls, 4 Nemotron reads"
+  },
+  {
+   "id": "5edddbaddab4",
+   "time": "2026-10-20T16:04:23.387034+00:00",
+   "endpoint": "/search",
+   "job": "event:lpg search",
+   "what": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 5377,
+   "produced": "8 results, 3 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "cc4332810c64",
+   "time": "2026-10-20T16:04:27.460440+00:00",
+   "endpoint": "/extract",
+   "job": "event:lpg extract",
+   "what": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 4070,
+   "produced": "3 pages read, 0 failed; 0 follow-up Tavily calls, 4 Nemotron reads"
+  },
+  {
+   "id": "bca506266d5e",
+   "time": "2026-10-20T16:04:49.102346+00:00",
+   "endpoint": "/search",
+   "job": "event:electricity search",
+   "what": "electricity tariff order regulatory commission revised rates effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 6714,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "46289807b5c9",
+   "time": "2026-10-20T16:04:50.832514+00:00",
+   "endpoint": "/extract",
+   "job": "event:electricity extract",
+   "what": "electricity tariff order regulatory commission revised rates effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 1729,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 8 Nemotron reads"
+  },
+  {
+   "id": "a5be0fcae001",
+   "time": "2026-10-20T16:05:11.108058+00:00",
+   "endpoint": "/search",
+   "job": "event:electricity search",
+   "what": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 4566,
+   "produced": "2 results, 0 dated inside the window"
+  },
+  {
+   "id": "effe725b8679",
+   "time": "2026-10-20T16:05:17.569114+00:00",
+   "endpoint": "/search",
+   "job": "event:mobile search",
+   "what": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 6453,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "b67427be035c",
+   "time": "2026-10-20T16:05:21.180974+00:00",
+   "endpoint": "/extract",
+   "job": "event:mobile extract",
+   "what": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 3610,
+   "produced": "4 pages read, 2 failed; 0 follow-up Tavily calls, 4 Nemotron reads"
+  },
+  {
+   "id": "79655e568227",
+   "time": "2026-10-20T16:05:31.936239+00:00",
+   "endpoint": "/search",
+   "job": "event:mobile search",
+   "what": "मोबाइल टैरिफ बढ़ोतरी प्रीपेड प्लान लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 5216,
+   "produced": "1 results, 0 dated inside the window"
+  },
+  {
+   "id": "69d6aee1d026",
+   "time": "2026-10-20T16:05:38.240095+00:00",
+   "endpoint": "/search",
+   "job": "event:rail search",
+   "what": "railway fare revision effective Indian Railways",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 6296,
+   "produced": "6 results, 6 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "60c96619b959",
+   "time": "2026-10-20T16:05:42.050635+00:00",
+   "endpoint": "/extract",
+   "job": "event:rail extract",
+   "what": "railway fare revision effective Indian Railways",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 3809,
+   "produced": "5 pages read, 1 failed; 0 follow-up Tavily calls, 5 Nemotron reads"
+  },
+  {
+   "id": "051ab3c650b5",
+   "time": "2026-10-20T16:05:57.038010+00:00",
+   "endpoint": "/search",
+   "job": "event:rail search",
+   "what": "रेल किराया बढ़ा लागू भारतीय रेलवे",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 3975,
+   "produced": "8 results, 2 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "28af86e290c7",
+   "time": "2026-10-20T16:05:58.770285+00:00",
+   "endpoint": "/extract",
+   "job": "event:rail extract",
+   "what": "रेल किराया बढ़ा लागू भारतीय रेलवे",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 0,
+   "latency_ms": 1731,
+   "produced": "2 pages read, 0 failed; 0 follow-up Tavily calls, 2 Nemotron reads"
+  },
+  {
+   "id": "fd3f0a2789d2",
+   "time": "2026-10-20T16:06:06.669991+00:00",
+   "endpoint": "/search",
+   "job": "event:medicine search",
+   "what": "NPPA medicine price revision effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 4066,
+   "produced": "6 results, 2 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "5226db0312bc",
+   "time": "2026-10-20T16:06:12.202668+00:00",
+   "endpoint": "/extract",
+   "job": "event:medicine extract",
+   "what": "NPPA medicine price revision effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 0,
+   "latency_ms": 5532,
+   "produced": "1 pages read, 1 failed; 0 follow-up Tavily calls, 1 Nemotron reads"
+  },
+  {
+   "id": "e2c4715ad7eb",
+   "time": "2026-10-20T16:06:19.106661+00:00",
+   "endpoint": "/search",
+   "job": "event:medicine search",
+   "what": "दवाओं के दाम बढ़े एनपीपीए लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 5495,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "ca7d14aedc5c",
+   "time": "2026-10-20T16:06:23.136731+00:00",
+   "endpoint": "/extract",
+   "job": "event:medicine extract",
+   "what": "दवाओं के दाम बढ़े एनपीपीए लागू",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 4027,
+   "produced": "4 pages read, 2 failed; 0 follow-up Tavily calls, 5 Nemotron reads"
+  },
+  {
+   "id": "bde6ce6f51d4",
+   "time": "2026-10-20T16:06:36.971741+00:00",
+   "endpoint": "/search",
+   "job": "event:school_fee search",
+   "what": "school fee hike academic session effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 5980,
+   "produced": "5 results, 5 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "c3164cf98553",
+   "time": "2026-10-20T16:06:43.670719+00:00",
+   "endpoint": "/extract",
+   "job": "event:school_fee extract",
+   "what": "school fee hike academic session effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 6695,
+   "produced": "5 pages read, 0 failed; 0 follow-up Tavily calls, 6 Nemotron reads"
+  },
+  {
+   "id": "25e4ad970862",
+   "time": "2026-10-20T16:06:58.869822+00:00",
+   "endpoint": "/search",
+   "job": "event:school_fee search",
+   "what": "स्कूल फीस बढ़ोतरी नया सत्र लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 5924,
+   "produced": "8 results, 1 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "05abcab17bae",
+   "time": "2026-10-20T16:07:01.397358+00:00",
+   "endpoint": "/extract",
+   "job": "event:school_fee extract",
+   "what": "स्कूल फीस बढ़ोतरी नया सत्र लागू",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 0,
+   "latency_ms": 2525,
+   "produced": "1 pages read, 0 failed; 0 follow-up Tavily calls, 1 Nemotron reads"
+  },
+  {
+   "id": "b515a410b386",
+   "time": "2026-10-20T16:07:08.981676+00:00",
+   "endpoint": "/search",
+   "job": "event:gst search",
+   "what": "GST rate change effective from",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 6079,
+   "produced": "3 results, 3 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "defcbff12303",
+   "time": "2026-10-20T16:07:10.373454+00:00",
+   "endpoint": "/extract",
+   "job": "event:gst extract",
+   "what": "GST rate change effective from",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 1390,
+   "produced": "3 pages read, 0 failed; 0 follow-up Tavily calls, 4 Nemotron reads"
+  },
+  {
+   "id": "e02817a29a1d",
+   "time": "2026-10-20T16:07:25.170345+00:00",
+   "endpoint": "/search",
+   "job": "event:gst search",
+   "what": "जीएसटी दर में बदलाव लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 6635,
+   "produced": "8 results, 2 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "9def7cef0e66",
+   "time": "2026-10-20T16:07:27.533136+00:00",
+   "endpoint": "/extract",
+   "job": "event:gst extract",
+   "what": "जीएसटी दर में बदलाव लागू",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 0,
+   "latency_ms": 2360,
+   "produced": "2 pages read, 0 failed; 0 follow-up Tavily calls, 2 Nemotron reads"
+  },
+  {
+   "id": "10b3cc01560a",
+   "time": "2026-10-20T16:41:26.591179+00:00",
+   "endpoint": "/search",
+   "job": "event:milk search",
+   "what": "milk price hike per litre effective Amul Mother Dairy",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-22",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 5900,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "7334826234a3",
+   "time": "2026-10-20T16:41:28.440771+00:00",
+   "endpoint": "/extract",
+   "job": "event:milk extract",
+   "what": "milk price hike per litre effective Amul Mother Dairy",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 1847,
+   "produced": "5 pages read, 1 failed; 0 follow-up Tavily calls, 8 Nemotron reads"
+  },
+  {
+   "id": "a9b3444d8616",
+   "time": "2026-10-20T16:41:51.337466+00:00",
+   "endpoint": "/search",
+   "job": "event:milk search",
+   "what": "दूध के दाम बढ़े प्रति लीटर लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-22",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 6472,
+   "produced": "8 results, 7 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "31db426c3002",
+   "time": "2026-10-20T16:41:52.965745+00:00",
+   "endpoint": "/extract",
+   "job": "event:milk extract",
+   "what": "दूध के दाम बढ़े प्रति लीटर लागू",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 1626,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 2 Nemotron reads"
+  },
+  {
+   "id": "7215f3a097b8",
+   "time": "2026-10-20T16:42:24.406301+00:00",
+   "endpoint": "/search",
+   "job": "event:lpg search",
+   "what": "domestic LPG cylinder price revised effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-22",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 5816,
+   "produced": "7 results, 7 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "59edb16fe882",
+   "time": "2026-10-20T16:42:27.139884+00:00",
+   "endpoint": "/extract",
+   "job": "event:lpg extract",
+   "what": "domestic LPG cylinder price revised effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 2,
+   "latency_ms": 2730,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 6 Nemotron reads"
+  },
+  {
+   "id": "fba4ff5df677",
+   "time": "2026-10-20T16:43:10.610901+00:00",
+   "endpoint": "/search",
+   "job": "event:lpg search",
+   "what": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-22",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 3993,
+   "produced": "8 results, 5 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "47d2b9add37f",
+   "time": "2026-10-20T16:43:14.824346+00:00",
+   "endpoint": "/extract",
+   "job": "event:lpg extract",
+   "what": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 4211,
+   "produced": "5 pages read, 0 failed; 0 follow-up Tavily calls, 7 Nemotron reads"
+  },
+  {
+   "id": "40f81adb967a",
+   "time": "2026-10-20T16:44:02.206712+00:00",
+   "endpoint": "/search",
+   "job": "event:electricity search",
+   "what": "electricity tariff order regulatory commission revised rates effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-22",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 5211,
+   "produced": "3 results, 3 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "b48bca4eb3e0",
+   "time": "2026-10-20T16:44:03.380350+00:00",
+   "endpoint": "/extract",
+   "job": "event:electricity extract",
+   "what": "electricity tariff order regulatory commission revised rates effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 1171,
+   "produced": "3 pages read, 0 failed; 0 follow-up Tavily calls, 1 Nemotron reads"
+  },
+  {
+   "id": "ba4825a24646",
+   "time": "2026-10-20T16:44:21.178786+00:00",
+   "endpoint": "/search",
+   "job": "event:electricity search",
+   "what": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-22",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ],
+    "language": "hi"
+   },
+   "credits": 1,
+   "latency_ms": 4437,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "3f2f0b712aac",
+   "time": "2026-10-20T16:44:23.318022+00:00",
+   "endpoint": "/extract",
+   "job": "event:electricity extract",
+   "what": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 2137,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 8 Nemotron reads"
+  },
+  {
+   "id": "66b6f6b6626e",
+   "time": "2026-10-20T16:45:06.514022+00:00",
+   "endpoint": "/search",
+   "job": "event:mobile search",
+   "what": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-22",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 4398,
+   "produced": "7 results, 7 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "f3a35b50ba92",
+   "time": "2026-10-20T16:45:08.223107+00:00",
+   "endpoint": "/extract",
+   "job": "event:mobile extract",
+   "what": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 1706,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 6 Nemotron reads"
+  },
+  {
+   "id": "59db32eb6ad7",
+   "time": "2026-10-20T16:45:47.185407+00:00",
+   "endpoint": "/search",
+   "job": "event:rail search",
+   "what": "railway fare revision effective Indian Railways",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-22",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 6710,
+   "produced": "3 results, 3 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "7a1de8777b93",
+   "time": "2026-10-20T16:45:48.593358+00:00",
+   "endpoint": "/extract",
+   "job": "event:rail extract",
+   "what": "railway fare revision effective Indian Railways",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 0,
+   "latency_ms": 1404,
+   "produced": "3 pages read, 0 failed; 0 follow-up Tavily calls, 1 Nemotron reads"
+  },
+  {
+   "id": "7fec77c068f2",
+   "time": "2026-10-20T16:46:17.168986+00:00",
+   "endpoint": "/search",
+   "job": "event:medicine search",
+   "what": "NPPA medicine price revision effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-22",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 5259,
+   "produced": "1 results, 1 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "b050119ab71c",
+   "time": "2026-10-20T16:46:18.370547+00:00",
+   "endpoint": "/extract",
+   "job": "event:medicine extract",
+   "what": "NPPA medicine price revision effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 0,
+   "latency_ms": 1198,
+   "produced": "1 pages read, 0 failed; 0 follow-up Tavily calls, 1 Nemotron reads"
+  },
+  {
+   "id": "8e5f44066131",
+   "time": "2026-10-20T16:46:45.762447+00:00",
+   "endpoint": "/search",
+   "job": "event:school_fee search",
+   "what": "school fee hike academic session effective",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-22",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 5925,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "ec4f133e80ff",
+   "time": "2026-10-20T16:46:47.361905+00:00",
+   "endpoint": "/extract",
+   "job": "event:school_fee extract",
+   "what": "school fee hike academic session effective",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 1596,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 8 Nemotron reads"
+  },
+  {
+   "id": "e49ce6eb4d34",
+   "time": "2026-10-20T16:47:26.219935+00:00",
+   "endpoint": "/search",
+   "job": "event:gst search",
+   "what": "GST rate change effective from",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-22",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 4536,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "9a612a310fd1",
+   "time": "2026-10-20T16:47:31.266418+00:00",
+   "endpoint": "/extract",
+   "job": "event:gst extract",
+   "what": "GST rate change effective from",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 5045,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 6 Nemotron reads"
+  },
+  {
+   "id": "30fee1faf7c0",
+   "time": "2026-10-21T15:06:24.408123+00:00",
+   "endpoint": "/search",
+   "job": "event:fuel search",
+   "what": "petrol diesel price revised per litre effective oil marketing companies",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 3980,
+   "produced": "5 results, 5 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "355518069692",
+   "time": "2026-10-21T15:06:27.536744+00:00",
+   "endpoint": "/extract",
+   "job": "event:fuel extract",
+   "what": "petrol diesel price revised per litre effective oil marketing companies",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 3126,
+   "produced": "5 pages read, 0 failed; 0 follow-up Tavily calls, 6 Nemotron reads"
+  },
+  {
+   "id": "82f576795399",
+   "time": "2026-10-21T15:06:46.524294+00:00",
+   "endpoint": "/search",
+   "job": "event:fuel search",
+   "what": "petrol diesel price revised per litre effective oil marketing companies",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-02-19",
+    "end_date": "2026-02-28",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 5288,
+   "produced": "8 results, 8 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "fc5e897b067a",
+   "time": "2026-10-21T15:06:50.495646+00:00",
+   "endpoint": "/extract",
+   "job": "event:fuel extract",
+   "what": "petrol diesel price revised per litre effective oil marketing companies",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 3967,
+   "produced": "6 pages read, 0 failed; 0 follow-up Tavily calls, 6 Nemotron reads"
+  },
+  {
+   "id": "50f534373966",
+   "time": "2026-10-21T15:07:29.295472+00:00",
+   "endpoint": "/search",
+   "job": "event:fuel search",
+   "what": "petrol diesel price revised per litre effective oil marketing companies",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-22",
+    "end_date": "2026-03-31",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "credits": 1,
+   "latency_ms": 4291,
+   "produced": "4 results, 4 dated inside the window; 1 follow-up Tavily calls, 0 Nemotron reads"
+  },
+  {
+   "id": "3fd433f6a723",
+   "time": "2026-10-21T15:07:31.017186+00:00",
+   "endpoint": "/extract",
+   "job": "event:fuel extract",
+   "what": "petrol diesel price revised per litre effective oil marketing companies",
+   "settings": {
+    "chunks_per_source": 5
+   },
+   "credits": 1,
+   "latency_ms": 1720,
+   "produced": "4 pages read, 0 failed; 0 follow-up Tavily calls, 3 Nemotron reads"
+  },
+  {
+   "id": "99e47704d024",
+   "time": "2026-10-21T15:12:25.198472+00:00",
+   "endpoint": "/search",
+   "job": "skeptic:01.1#residual search",
+   "what": "Food price hike rise March 2026 India",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31"
+   },
+   "credits": 1,
+   "latency_ms": 4514,
+   "produced": "8 results, 8 dated inside the window; 0 follow-up Tavily calls, 1 Nemotron reads"
+  },
+  {
+   "id": "373ab0d1c9e9",
+   "time": "2026-10-21T15:12:30.524808+00:00",
+   "endpoint": "/search",
+   "job": "skeptic:01.1.7.2.1.01 search",
+   "what": "Tomato price hike rise March 2026 India",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31"
+   },
+   "credits": 1,
+   "latency_ms": 3767,
+   "produced": "6 results, 6 dated inside the window; 0 follow-up Tavily calls, 1 Nemotron reads"
+  },
+  {
+   "id": "8933701a62e7",
+   "time": "2026-10-21T15:12:34.752328+00:00",
+   "endpoint": "/search",
+   "job": "skeptic:04.5.2.2.1.01 search",
+   "what": "LPG cylinder and piped natural gas price fall cheaper March 2026 India",
+   "settings": {
+    "topic": "news",
+    "max_results": 8,
+    "start_date": "2026-03-01",
+    "end_date": "2026-03-31"
+   },
+   "credits": 1,
+   "latency_ms": 2627,
+   "produced": "5 results, 5 dated inside the window; 0 follow-up Tavily calls, 1 Nemotron reads"
+  }
+ ],
+ "funnel": [
+  {
+   "stage": "Addresses found by Tavily search",
+   "n": 429,
+   "source": "flight recorder + cache"
+  },
+  {
+   "stage": "Dated inside the search window",
+   "n": 323,
+   "source": "page address / published date"
+  },
+  {
+   "stage": "Pages read by Tavily Extract",
+   "n": 226,
+   "source": "flight recorder"
+  },
+  {
+   "stage": "Pages checked by the gatekeeper model",
+   "n": 62,
+   "source": "flight recorder (Nemotron)"
+  },
+  {
+   "stage": "Pages read for prices or events",
+   "n": 61,
+   "source": "flight recorder (Nemotron)"
+  },
+  {
+   "stage": "Price quotes extracted / verified word-for-word",
+   "n": "93 / 91",
+   "source": "manifests/2026-03.json at f00bd45 (Prompt 2 quote run)"
+  },
+  {
+   "stage": "Price events extracted / verified",
+   "n": "47 / 0",
+   "source": "manifests/2026-03.json"
+  },
+  {
+   "stage": "Numbers used in the (c) prediction",
+   "n": 11,
+   "source": "results/replay_predictions.json",
+   "detail": {
+    "01.1.7.4.1.01": "spine",
+    "01.1.7.2.1.01": "spine",
+    "01.1.7.5.1.01": "spine",
+    "01.1.7.6.1.01": "spine",
+    "01.1.5.1": "spine",
+    "01.1.1.2.1.01": "spine",
+    "01.1.4.1.1.01": "spine",
+    "01.1.4.8.1.01": "spine",
+    "13.2.1.1.1.01": "observed",
+    "13.2.1.1.1.02": "observed",
+    "04.5.2.2.1.01": "observed"
+   }
+  }
+ ],
+ "failures": [
+  {
+   "what": "Map https://aavin.tn.gov.in",
+   "result": "0 addresses, no error",
+   "source": "results/prompt_t/dairy_map_2026-10-21.json"
+  },
+  {
+   "what": "Map https://aavinmilk.com",
+   "result": "0 addresses, no error",
+   "source": "results/prompt_t/dairy_map_2026-10-21.json"
+  },
+  {
+   "what": "Map https://www.kmfnandini.coop",
+   "result": "0 addresses, no error",
+   "source": "results/prompt_t/dairy_map_2026-10-21.json"
+  },
+  {
+   "what": "Map https://www.mpcdf.nic.in",
+   "result": "ApiError: HTTP 400: {\"detail\":{\"error\":\"[400] Invalid Start URL: https://www.mpcdf.nic.in/\"}}",
+   "source": "results/prompt_t/dairy_map_2026-10-21.json"
+  },
+  {
+   "what": "Map https://www.sanchi.co.in",
+   "result": "ApiError: HTTP 400: {\"detail\":{\"error\":\"[400] Invalid Start URL: https://www.sanchi.co.in/\"}}",
+   "source": "results/prompt_t/dairy_map_2026-10-21.json"
+  },
+  {
+   "what": "Map https://www.sanchiindore.com",
+   "result": "0 addresses, no error",
+   "source": "results/prompt_t/dairy_map_2026-10-21.json"
+  },
+  {
+   "what": "Map https://merc.gov.in",
+   "result": "0 addresses, no error",
+   "source": "results/prompt_t/official_crawl_2026-10.json"
+  },
+  {
+   "what": "Map https://www.derc.gov.in",
+   "result": "0 addresses, no error",
+   "source": "results/prompt_t/official_crawl_2026-10.json"
+  },
+  {
+   "what": "Map https://www.uperc.org",
+   "result": "0 addresses, no error",
+   "source": "results/prompt_t/official_crawl_2026-10.json"
+  },
+  {
+   "what": "Map https://iocl.com",
+   "result": "0 addresses, no error",
+   "source": "results/prompt_t/official_crawl_2026-10.json"
+  },
+  {
+   "what": "Map https://amul.com",
+   "result": "0 addresses, no error",
+   "source": "results/prompt_t/official_crawl_2026-10.json"
+  },
+  {
+   "what": "Extract (basic) https://www.gokulmilk.coop/uploads/milk_prices/milk_rates_english_wef_11_08_2026.pdf",
+   "result": "only the letterhead came back: the rate table is an image",
+   "source": "flight recorder id a8ce5681fcf2"
+  },
+  {
+   "what": "Extract (advanced) https://www.gokulmilk.coop/uploads/milk_prices/milk_rates_english_wef_11_08_2026.pdf",
+   "result": "only the letterhead came back: the rate table is an image",
+   "source": "flight recorder id 633dd10b693e"
+  },
+  {
+   "what": "12 IBJA report extracts in this month's trace",
+   "result": "15 report addresses failed (holidays: retried on the next day)",
+   "source": "flight recorder"
+  }
+ ],
+ "note": "Uncached calls only (the first time each request was sent). Settings = what differs from Tavily's defaults."
+}

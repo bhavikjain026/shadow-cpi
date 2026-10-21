@@ -1,0 +1,53 @@
+{
+ "label": "Saved run: event scan for September 2026 (latest replay month)",
+ "month": "2026-09",
+ "searched_from_utc": "2026-10-21T15:59:56.197000+00:00",
+ "searched_to_utc": "2026-10-21T15:59:56.237189+00:00",
+ "manifest_written_utc": "2026-10-21T15:59:56.281103+00:00",
+ "code_commit": "d711acd2ed345d57569888e8479ae39c4e365823",
+ "events": [
+  {
+   "item": "electricity",
+   "seller": "Joint Electricity Regulatory Commission (JERC)",
+   "place": "Jammu & Kashmir",
+   "pct_change": 6.83,
+   "effective_date": "2026-09-01",
+   "days_in_month_share": 1.0,
+   "confirmed_by_2_sources": true,
+   "line": "## जम्मू-कश्मीर में बिजली की दरों में औसतन 6.83 फीसदी बढ़ोतरी की गई है। JERC की मंजूरी के बाद नई दरें 1 सितंबर 2026 से 31 मार्च 2027 तक लागू रहेंगी।",
+   "url": "https://www.jansatta.com/national/power-tariff-hiked-by-6-83-percent-omar-abdullah-government-new-rates-to-take-effect-from-september-1/4674251",
+   "sources": [
+    "https://www.jansatta.com/national/power-tariff-hiked-by-6-83-percent-omar-abdullah-government-new-rates-to-take-effect-from-september-1/4674251",
+    "https://www.tv9hindi.com/state/jammu-and-kashmir/jammu-kashmir-power-tariff-increases-first-september-jerc-approves-6-83-percent-hike-3887168.html"
+   ],
+   "verified": true,
+   "cpi_code": "04.5.1.0.2.01",
+   "change_prorated": 0.0683,
+   "announced_date": "2026-08-24",
+   "old_price": null,
+   "new_price": null,
+   "language": "hi",
+   "scope": "regional",
+   "states": [
+    "jammu and kashmir"
+   ],
+   "weight": 0.01171238819532333,
+   "weight_source": "MoSPI CPI 2024 Expert Group report, Annex 5.3d (item weights by state, rural + urban)",
+   "applied_change": 0.0007999561137405834,
+   "abs_change": null,
+   "base_price": null,
+   "base_source": null
+  }
+ ],
+ "counts": {
+  "pages_seen": 70,
+  "pages_kept": 45,
+  "quotes_extracted": 0,
+  "quotes_verified": 0,
+  "events_extracted": 42,
+  "events_verified": 1
+ },
+ "n_searches": 18,
+ "credits": 39,
+ "source": "manifests/2026-09.json, results/replay_layers.csv (credits)"
+}

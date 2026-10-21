@@ -56,6 +56,12 @@
         "2026-12-15"
       ]
     },
+    "app_live": {
+      "per_session": 3,
+      "per_day": 15,
+      "credit_floor": 100,
+      "_note": "App 'Run live' button (owner, 2026-10-21): 3 runs per visitor session, 15 per UTC day for the whole app, disabled when the balance minus one scan's cap would fall below the floor. Each scan is also capped by 'run-now-scan' (8) and all scans by 'run-now' (120)."
+    },
     "cut6_november": {
       "interim_event_scans": 2,
       "full_run": "at sealing (10 Dec)"

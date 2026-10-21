@@ -1,7 +1,7 @@
 """Evidence: every quote and event used, the government price spine, and what was dropped or failed."""
 import streamlit as st
 
-from app_pages.common import header, month_name, months_with, read_csv, read_json, tag
+from app_pages.common import header, month_name, months_with, read_csv, read_json
 
 header("Evidence", "Every price quote and announced price change behind the experimental nowcast. "
                    "Only verified evidence is used: the exact line from the page must contain the number.")
@@ -14,7 +14,7 @@ month = st.selectbox("Month", months, format_func=month_name)
 man = read_json(f"manifests/{month}.json")
 link = {"Link": st.column_config.LinkColumn("Link"), "Exact line": st.column_config.TextColumn("Exact line", width="large")}
 
-st.subheader(tag("Price quotes"))
+st.subheader("Price quotes")
 src = st.radio("Source", ["All", "Government price spine", "Tavily (web)"], horizontal=True)
 want = {"All": None, "Government price spine": "spine", "Tavily (web)": "tavily"}[src]
 quotes = [q for q in man.get("quotes", []) if q.get("verified") and (want is None or q.get("source") == want)]
@@ -23,7 +23,7 @@ st.dataframe([{"Item": q["item"], "Price": f"{q['price']:,.2f} {q['unit']}", "Pl
                "Tier": q.get("tier", ""), "Link": q["url"]} for q in quotes],
              hide_index=True, width="stretch", column_config=link)
 
-st.subheader(tag("Announced price changes (events)"))
+st.subheader("Announced price changes (events)")
 events = [e for e in man.get("events", []) if e.get("verified")]
 st.dataframe([{"Item": e["item"], "Seller": e.get("seller", ""), "Place": e["place"],
                "Change": f"{e['pct_change']:+.1f}%", "Effective": e["effective_date"],
@@ -33,14 +33,14 @@ st.dataframe([{"Item": e["item"], "Seller": e.get("seller", ""), "Place": e["pla
              hide_index=True, width="stretch", column_config=link)
 
 spine = [r for r in read_csv("data/spine.csv") if r["month"] == month]
-st.subheader(tag("Government price spine (centre monthly averages)"))
+st.subheader("Government price spine (centre monthly averages)")
 if spine:
     st.dataframe([{"Item": r["item"], "Centre": r["centre"], "Average price": f"{float(r['avg_price']):,.2f} {r['unit']}",
                    "Days": r["n_days"]} for r in spine], hide_index=True, width="stretch")
 else:
     st.caption("No spine prices for this month.")
 
-st.subheader(tag("Kept and dropped"))
+st.subheader("Kept and dropped")
 c = man.get("counts", {})
 st.markdown(f"Pages seen **{c.get('pages_seen', '—')}**, kept **{c.get('pages_kept', '—')}** · "
             f"quotes verified **{c.get('quotes_verified', '—')} of {c.get('quotes_extracted', '—')}** · "

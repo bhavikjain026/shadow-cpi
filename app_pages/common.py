@@ -1,60 +1,39 @@
-"""Shared helpers for the app pages: where the data lives, file loaders, SAMPLE labels, release dates.
+"""Shared helpers for the app pages: file loaders, release dates, formatting.
 
-The app only READS files. It never calls Tavily or Nebius and never needs a key.
-Data folder: SHADOW_CPI_DATA_DIR (default data/sample). The sample folder mirrors the repository
-layout, so pointing SHADOW_CPI_DATA_DIR at the repository root ('.') switches to the real files.
+Every number the app shows is read from a results file in this repository (results/, manifests/, sealed/, data/,
+audit/); docs/app_numbers.md lists each one and its file. The pages make no API call except the capped "Run live"
+button on Home (shadow_cpi/live_run.py).
 """
 import csv
 import hashlib
 import json
-import os
 from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parent.parent
-SAMPLE_DIR = ROOT / "data" / "sample"
 NOWCAST_WORDS = "experimental nowcast"
 IST = timezone(timedelta(hours=5, minutes=30))
+REPO_URL = "https://github.com/bhavikjain026/shadow-cpi/blob/main"
+SEAL_DATE = date(2026, 10, 29)                        # seal_checklist.md
+LIVE_MONTH = "2026-10"
 
-# MoSPI CPI releases still to come (data month, scheduled date, likely date, note).
+# MoSPI CPI releases still to come (data month, scheduled date, likely date, note). Source: audit/dates_check.md.
 RELEASES = [
-    ("2026-10", date(2026, 11, 12), date(2026, 11, 12), "scheduled 12 Nov 2026 (Thu)"),
+    ("2026-10", date(2026, 11, 12), date(2026, 11, 12), "Thu 12 Nov 2026, 4:00 PM IST"),
     ("2026-11", date(2026, 12, 12), date(2026, 12, 14),
      "November data due 12 Dec, a Saturday, so likely Mon 14 Dec under MoSPI's next-working-day rule"),
 ]
-RELEASE_HOUR_IST = 16  # MoSPI publishes CPI at 4:00 pm IST
-
-
-def data_dir():
-    d = Path(os.environ.get("SHADOW_CPI_DATA_DIR", SAMPLE_DIR))
-    return d if d.is_absolute() else (ROOT / d).resolve()
-
-
-def is_sample():
-    return data_dir().resolve() == SAMPLE_DIR.resolve()
+RELEASE_HOUR_IST = 16  # MoSPI publishes CPI at 4:00 PM IST
 
 
 def path(rel):
-    return data_dir() / rel
-
-
-def tag(text):
-    """Append the SAMPLE marker to a label while the app runs on sample data."""
-    return f"{text} (SAMPLE)" if is_sample() else text
-
-
-def banner():
-    if is_sample():
-        st.warning("**SAMPLE DATA** - the nowcasts, evidence, logs and seals on this page are made-up samples for "
-                   "testing the screens (official CPI figures, B1 and poll numbers are copies of the real files). "
-                   "Real results are not ready yet.", icon="⚠️")
+    return ROOT / rel
 
 
 def header(title, intro=None):
     st.title(title)
-    banner()
     if intro:
         st.caption(intro)
 
@@ -78,8 +57,9 @@ def read_text(rel):
     return p.read_text(encoding="utf-8") if p.exists() else None
 
 
-def read_log(rel="logs/flight_recorder.jsonl"):
-    """Same reading rule as shadow_cpi.recorder.read_log."""
+def read_log(rel="results/app/flight_recorder.jsonl"):
+    """The committed snapshot of the flight recorder (tools/build_app_data.py). Same reading rule as
+    shadow_cpi.recorder.read_log."""
     text = read_text(rel)
     return [json.loads(l) for l in text.splitlines() if l.strip()] if text else []
 
@@ -146,3 +126,10 @@ def next_release(now=None):
 def countdown_text(left):
     days, rest = divmod(int(left.total_seconds()), 86400)
     return f"{days} days {rest // 3600} hours"
+
+
+def poll_direction(rel="results/scoreboard.md"):
+    """'6 of 6' from the scoreboard line 'poll 0.148 pp (direction 6 of 6)' (the lock file does not store it)."""
+    import re
+    m = re.search(r"poll [\d.]+ pp \(direction (\d+) of (\d+)\)", read_text(rel) or "")
+    return f"{m.group(1)} of {m.group(2)}" if m else "—"
