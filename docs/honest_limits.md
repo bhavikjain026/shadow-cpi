@@ -16,7 +16,7 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
 - **2025 is calibration only.** The pass-through factors were fitted on 2025, and nothing was tuned on the 2026 test months. That keeps the test fair, but the factors may not hold in a new series.
 
 ## Strong baselines
-- **The economists' poll is a strong baseline.** On the 6 months with a dated Reuters poll article, its mean absolute miss was 0.15 percentage points (`results/baselines.csv`). Beating it is hard, and we report honestly whether we do: [TBD: from replay].
+- **The economists' poll is a strong baseline.** On the 6 months with a dated Reuters poll article, its mean absolute miss was 0.148 percentage points (`results/baselines.csv`). On those same 6 months our nowcast (c) missed by 0.138, a small edge on a small sample. Over all 9 months, (c) missed by 0.185 (`results/scoreboard.md`).
 - The simple trend baseline (B2) is also strong, with a mean absolute miss of 0.21 percentage points over the 9 months. The "last month's rate" baseline (B1) missed by 0.47 percentage points on average.
 
 ## Items are not always what they sound like
@@ -26,7 +26,9 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
 - **Silver** is MoSPI's *Silver jewellery*, which also includes making charges.
 
 ## How much of the basket we actually see
-- Only some items are measured in a given month. The rest of the basket (most services, rents, clothing and so on) is **carried on trend**. The app shows this split every month as the coverage meter: [TBD: from replay].
+- Only some items are measured in a given month. The rest of the basket (most services, rents, clothing and so on) is **carried on trend**. The app shows this split every month as the coverage meter. In the replay, 14–21% of the basket was measured each month and the rest was carried on trend.
+- **The 80% range is too narrow.** In the replay, the official figure fell inside the leave-one-out 80% range in only 5 of 9 months. With 9 months of misses the range is itself uncertain.
+- **The government spine alone did not beat trend.** Spine-only (b) missed by 0.225 pp against 0.212 for trend-only; the gain came with the observed gold, silver, LPG and petrol series and the events (c: 0.185).
 - A tracked item moves only its own weight (the carve-out). If a big price change happens in something we don't track, we will miss it.
 
 ## Models

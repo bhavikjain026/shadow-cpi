@@ -10,9 +10,9 @@ An experimental, sealed nowcast of India's next official CPI inflation number. I
 India's CPI comes out once a month, about two weeks after the month ends. Until then, reporters, households and small businesses only have hunches and a handful of economists' polls. Meanwhile the web is full of real price evidence, if you can find it, date it and check it: market prices, dairy price hikes, LPG revisions and electricity tariff orders. MoSPI sends price collectors to 2,860 markets. Shadow CPI sends Tavily to the web.
 
 ## What it does
-- Shows an **experimental nowcast** of the coming month's CPI inflation (year-on-year), with an 80% range: [TBD: from replay].
-- Says how often the official figure landed inside that range in the replay: [TBD: from replay] of 9 months.
-- Shows **coverage**: how much of the basket was actually measured this month and how much is carried on trend: [TBD: from replay].
+- Shows an **experimental nowcast** of the coming month's CPI inflation (year-on-year), with an 80% range taken from the replay misses: about −0.14 / +0.33 percentage points around the nowcast (10th–90th percentile of the 9 replay misses).
+- Says how often the official figure landed inside that range in the replay: 5 of 9 months (out-of-sample, leave-one-out ranges). That is below the 80% target, so the range is too narrow.
+- Shows **coverage**: how much of the basket was actually measured this month and how much is carried on trend: in the replay, 14–21% of the basket was measured each month (11% from the government spine alone), and the rest was carried on trend.
 - Lists every quote and announced price change behind the number, each with the exact line from the source page and a link.
 - **Seals** the prediction before the release, as canonical JSON with a SHA-256 fingerprint and a git tag. Anyone can check that it was not changed afterwards (`verify.md`).
 - After the release, scores itself in public: the miss, whether the figure was inside the range, and the main surprise.
@@ -35,13 +35,13 @@ See `docs/pipeline.md` for the diagram.
 
 | Method | Mean absolute miss (pp) | Direction right |
 | --- | --- | --- |
-| (a) Trend only | [TBD: from replay] | [TBD: from replay] |
-| (b) Government price spine only | [TBD: from replay] | [TBD: from replay] |
-| (c) Spine + Tavily evidence | [TBD: from replay] | [TBD: from replay] |
+| (a) Trend only | 0.212 | 8 of 9 |
+| (b) Government price spine only | 0.225 | 9 of 9 |
+| (c) Spine + Tavily evidence | **0.185** | 8 of 9 |
 | B1: last month's rate | 0.47 (from `results/baselines.csv`) | n/a |
-| Economists' poll (6 dated months) | 0.15 (from `results/baselines.csv`) | [TBD: from replay] |
+| Economists' poll (6 dated months) | 0.148 (on the same 6 months, (c) 0.138) | 6 of 6 |
 
-Go / no-go: [TBD: from replay]. (c) vs (b), stated honestly: accuracy change [TBD: from replay]; coverage gain [TBD: from replay].
+Go / no-go: **GO** under the rule registered before scoring ((c) must beat B1 (0.468) and trend-only (0.212) on mean absolute miss). (c) vs (b), stated honestly: accuracy improved by 0.040 pp (0.225 → 0.185), better in 7 of 9 months; coverage rose from 11% to 14–21% of the basket. The spine on its own (b) did slightly worse than trend-only (a). Scored once; see `results/scoreboard.md` and `docs/preregistration.md`.
 
 ## Why Tavily
 - **It is the single entry point for web pages.** Every web page the nowcast uses (news, IBJA, IOCL, PPAC) comes in through Tavily and is logged in the flight recorder. Two exceptions, stated openly: MoSPI's official indices are a logged direct download from MoSPI's API, and the Consumer Affairs spine is downloaded by hand from behind a CAPTCHA.
@@ -52,14 +52,14 @@ Go / no-go: [TBD: from replay]. (c) vs (b), stated honestly: accuracy change [TB
 - **Evidence chasing:** each verified event triggers up to 2 follow-up searches. The app draws these as a tree.
 - **Event layer packaged for reuse:** `price_change_radar.py` exposes `find_price_changes(item, start_date, end_date)` and an MCP tool wrapper.
 - **Measured, not claimed.** The Tavily report card (`results/tavily_report_card.md`) gives:
-  - calls: [TBD: from replay]
-  - credits per prediction: [TBD: from replay]
-  - share of results inside the date window: [TBD: from replay]
-  - share of quotes verified: [TBD: from replay]
-  - share of events confirmed by 2 sources: [TBD: from replay]
-  - median latency: [TBD: from replay]
-  - fallback count: [TBD: from replay]
-- **Attribution:** the nowcast with vs without Tavily evidence, each month (`results/tavily_attribution.csv`): [TBD: from replay].
+  - calls: 729 Tavily calls sent (cached repeats not counted); 222 dated searches for the test months
+  - credits per prediction: about 52 (466 credits for the 9 replay months, including the skeptic)
+  - share of results inside the date window: 74% (1,067 of 1,447 search results for the test months)
+  - share of quotes verified: 91 of 93 (March 2026 test; the number must appear in the cited line)
+  - share of events confirmed by 2 sources: 3 of 12 events in the test months
+  - median latency: 4.3 s per Tavily call
+  - fallback count: 1 Tavily-to-direct fallback (the Consumer Affairs dashboard). By design and logged: MoSPI's API (148 direct calls) and the CAPTCHA-gated spine (downloaded by hand, 5 requests)
+- **Attribution:** the nowcast with vs without Tavily evidence, each month (`results/tavily_attribution.csv`): Tavily evidence lowered the mean miss from 0.225 to 0.185 pp and was closer in 7 of 9 months.
 
 ## How we built it
 - Python, standard library only for the core (no heavy frameworks). The app is built with Streamlit.
@@ -98,7 +98,7 @@ More in `docs/honest_limits.md`.
 - **What worked well:** [TBD: owner, e.g. JSON-schema output, line-citation reliability, speed of the small gatekeeper model]
 - **What was hard:** [TBD: owner, e.g. any model ID, JSON-mode or rate-limit issues met during checks.py]
 - **Model sizes:** [TBD: owner, how the small / mid / large split worked in practice, and where a bigger model did or did not help]
-- **Cost and latency:** [TBD: from the flight recorder: Nemotron calls and median latency]
+- **Cost and latency:** 1,341 Nemotron calls sent (cached repeats not counted), median 1.6 s each (flight recorder).
 - **Requests for the platform:** [TBD: owner]
 
 ## Try it
