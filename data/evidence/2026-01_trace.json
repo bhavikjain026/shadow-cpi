@@ -43,7 +43,7 @@
    "pct_change": null,
    "effective_date": "Jan 01, 2026",
    "line": "Along with the increase in commercial LPG rates, the prices of 5 kg Free Trade LPG (FTL) cylinders have also been raised. The cost of the 5 kg FTL cylinder has gone up by Rs 27, effective January 1.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "lpg",
@@ -58,7 +58,7 @@
    "pct_change": null,
    "effective_date": "April 2025",
    "line": "Prices of domestic LPG, used in household kitchens for cooking, remained unchanged at Rs 853 per 14.2-kg cylinder in Delhi, following a Rs 50 hike in April 2025. Domestic LPG prices are stable at Rs 852.50 in Mumbai, Rs 879 in Kolkata and Rs 868.50 in Chennai.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "no effective date"
   },
   {
    "kind": "lpg",
@@ -73,7 +73,7 @@
    "pct_change": null,
    "effective_date": "today",
    "line": "Apart from that, prices of 5-kg Free Trade LPG (FTL) cylinders have also been raised by Rs 27, effective from today.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "lpg",
@@ -433,7 +433,7 @@
    "pct_change": null,
    "effective_date": "2026-01-01",
    "line": "तेल कंपनियां हर महीने की पहली तारीख को एलपीजी के साथ ही सीएनजी-पीएनजी और ATF के दाम बदलती हैं. ऐसे में 1 जनवरी 2026 को LPG, कमर्शियल गैस और एविएशन फ्यूल की कीमतों में बदलाव संभव है. आपको मालूम हो कि गत 1 दिसंबर को कमर्शिलय गैस सिलेंडर के रेट में 10 रुपए की कटौती हुई थी.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "lpg",
@@ -643,7 +643,7 @@
    "pct_change": null,
    "effective_date": "January 19, 2026",
    "line": "The decision comes as a part of the central government railway ministry’s move to streamline rules related to ticketing of these special non-AC long-distance services for better passenger experience. [...] Fare for Sleeper class up to 200 Km has been set at ₹149 (Basic Fare), officials quoted by news agency PTI said. Reservation charges and superfast surcharge will be applicable where applicable.",
-   "verdict": "no effective date"
+   "verdict": "change not computable (needs old+new price, a % change, or an amount with an official base)"
   },
   {
    "kind": "rail",
@@ -658,7 +658,7 @@
    "pct_change": null,
    "effective_date": "January 19, 2026",
    "line": "Basic Fare for Second class travel up to 50 Km has been fixed at ₹36.",
-   "verdict": "no effective date"
+   "verdict": "change not computable (needs old+new price, a % change, or an amount with an official base)"
   },
   {
    "kind": "rail",
@@ -808,7 +808,7 @@
    "pct_change": 40,
    "effective_date": "Feb 1",
    "line": "# New GST rates for sin goods from Feb 1! Tobacco & pan masala to attract 40% tax - check details",
-   "verdict": "no effective date"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "gst",

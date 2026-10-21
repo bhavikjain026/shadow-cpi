@@ -13,7 +13,7 @@
    "pct_change": null,
    "effective_date": "May 14",
    "line": "### Amul hikes milk prices by ₹2 per litre across India effective from May 14; check revised rates",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "milk",
@@ -28,7 +28,7 @@
    "pct_change": null,
    "effective_date": "May 14",
    "line": "On May 14, the company increased retail milk prices by Rs 2 per litre to partly offset rising input costs.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "milk",
@@ -43,7 +43,7 @@
    "pct_change": null,
    "effective_date": "May",
    "line": "Milk prices were raised by Rs 2 per litre in May. Cooperative dairies implemented the hike first, followed by private companies. Before this, prices were increased on May 25 last year. Earlier hikes of Rs 2 per litre were also announced in June 2024 and February 2023. Overall, milk prices have risen by Rs 6 per litre over the past three to three-and-a-half years.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "no effective date"
   },
   {
    "kind": "milk",
@@ -118,7 +118,7 @@
    "pct_change": null,
    "effective_date": "7 June",
    "line": "Domestic liquefied petroleum gas (LPG) prices were increased by Rs 29 per 14.2-kg cylinder, effective 7 June.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "lpg",
@@ -133,7 +133,7 @@
    "pct_change": null,
    "effective_date": "June 7, 2026",
    "line": "The price of a 14.2-kg LPG cylinder in Delhi will rise to Rs 942 from Rs 913 with effect from June 7, according to industry sources.",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "lpg",
@@ -208,7 +208,7 @@
    "pct_change": null,
    "effective_date": "Sunday",
    "line": "## Effective Sunday, the price of domestic LPG was hiked by Rs 29 per 14.2-kg cylinder to Rs 942 in Delhi, with corresponding changes in other parts of the country. This is the second revision in LPG prices since the West Asia war began on February 28.",
-   "verdict": "no effective date"
+   "verdict": "change not computable (needs old+new price, a % change, or an amount with an official base)"
   },
   {
    "kind": "lpg",
@@ -223,7 +223,7 @@
    "pct_change": null,
    "effective_date": "June 07, 2026",
    "line": "The price of a 14.2-kg LPG cylinder in Delhi will rise to ₹942 from ₹913 with effect from June 7, according to industry sources. File",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "lpg",
@@ -388,7 +388,7 @@
    "pct_change": 3.49,
    "effective_date": "July 1, 2026",
    "line": "The Public Utilities Regulatory Commission (PURC) announced on June 22, 2026 that electricity tariffs will rise by 3.49 percent and water tariffs by 0.85 percent, effective July 1, across all consumer categories residential, commercial, industrial, and public sector.",
-   "verdict": "no effective date"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "electricity",
@@ -403,7 +403,7 @@
    "pct_change": 0.85,
    "effective_date": "July 1, 2026",
    "line": "The Public Utilities Regulatory Commission (PURC) announced on June 22, 2026 that electricity tariffs will rise by 3.49 percent and water tariffs by 0.85 percent, effective July 1, across all consumer categories residential, commercial, industrial, and public sector.",
-   "verdict": "no effective date"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "electricity",
@@ -553,7 +553,7 @@
    "pct_change": 100,
    "effective_date": "June 20, 2026",
    "line": "The Railways has increased the minimum penalty for passengers travelling without a valid ticket from Rs 250 to Rs 500. The revised penalty came into effect on June 20, 2026, under the provisions of the Jan Vishwas (Amendment of Provisions) Act, 2026. [...] ????????Passenger Advisory ????????",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "rail",
@@ -568,7 +568,7 @@
    "pct_change": null,
    "effective_date": "June 20, 2026",
    "line": "As per the provisions of the Jan Vishwas Act, 2026, the minimum penalty under Sections 137 & 138 of the Railway Act, 1989, has been increased from ₹250 to ₹500, with immediate effect.",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "rail",

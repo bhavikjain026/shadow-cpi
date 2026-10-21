@@ -13,7 +13,7 @@
    "pct_change": null,
    "effective_date": "2026-05-14",
    "line": "Amul and Mother Dairy — India’s largest dairy product retailers — on Wednesday (May 13, 2026) hiked milk prices by ₹2 per litre, intensifying inflationary pressures already fuelled by the war and squeezing household budgets.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -43,7 +43,7 @@
    "pct_change": null,
    "effective_date": "May 14",
    "line": "# Amul, Mother Dairy hike milk prices by ₹2 per litre; new rates effective May 14",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -58,7 +58,7 @@
    "pct_change": null,
    "effective_date": "May 14",
    "line": "# Amul, Mother Dairy hike milk prices by Rs 2/litre across India, effective May 14",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -73,7 +73,7 @@
    "pct_change": null,
    "effective_date": "May 14",
    "line": "Amul and Mother Dairy have increased milk prices by ₹2 per litre across several variants with the revised rates set to come into effect from May 14.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -118,7 +118,7 @@
    "pct_change": null,
    "effective_date": "14 May",
    "line": "नई दरों के अनुसार अब टोकन दूध ₹58 प्रति लीटर मिलेगा, जो पहले ₹56 था। फुल क्रीम दूध की कीमत ₹70 से बढ़कर ₹72 प्रति लीटर हो गई है। इसके अलावा:",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -133,7 +133,7 @@
    "pct_change": null,
    "effective_date": "14 May",
    "line": "नई दरों के अनुसार अब टोकन दूध ₹58 प्रति लीटर मिलेगा, जो पहले ₹56 था। फुल क्रीम दूध की कीमत ₹70 से बढ़कर ₹72 प्रति लीटर हो गई है। इसके अलावा:",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -148,7 +148,7 @@
    "pct_change": null,
    "effective_date": "May 14, 2026",
    "line": "अमूल के बाद अब मदर डेयरी ने भी दूध के दाम में इजाफा कर दिया है. मदर डेयरी ने भी पूरे भारत में दूध के दाम में 2 रुपये प्रति लीटर का इजाफा किया है. मदर डेयरी ने बढ़ती लागत की भरपाई के लिए दूध की कीमतें ₹2 प्रति लीटर बढ़ा दी हैं. नई कीमतें 14 मई यानी कल से पूरे देश में लागू होंगी.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -253,7 +253,7 @@
    "pct_change": null,
    "effective_date": "7 Mar 2026",
    "line": "Domestic LPG prices remain unchanged. The cost of a 14.2 kg household cylinder, last raised by Rs 60 on 7 March, continues to stand at Rs 913 in Delhi. Petrol and diesel prices have also been left untouched, remaining at Rs 94.77 per litre and Rs 87.67 per litre respectively in Delhi.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "lpg",
@@ -388,7 +388,7 @@
    "pct_change": null,
    "effective_date": "March 7",
    "line": "Domestic LPG rates were last revised on March 7, when prices were increased by Rs 60 per cylinder.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "lpg",
@@ -523,7 +523,7 @@
    "pct_change": null,
    "effective_date": "March 1, 2026",
    "line": "उससे भी पहले 1 मार्च 2026 को 28 रुपये से 31 रुपये की बढ़ोतरी हुई थी।",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "lpg",
@@ -538,7 +538,7 @@
    "pct_change": null,
    "effective_date": "March 7, 2026",
    "line": "इससे पहले 7 मार्च को प्रति सिलेंडर 114.5 रुपये की बढ़ोतरी हुई थी।",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "lpg",
@@ -568,7 +568,7 @@
    "pct_change": null,
    "effective_date": "2025-05-01",
    "line": "मार्च में 14.2 किलोग्राम वाले घरेलू LPG सिलिंडर की कीमत में 60 रुपए की बढ़ोतरी की गई थी। उसके बाद से कीमतों में कोई बदलाव नहीं हुआ है। 19 किलोग्राम वाले कमर्शियल सिलिंडर की कीमत में पहली बार मार्च में 144 रुपए की बढ़ोतरी की गई थी, जिसके बाद 1 अप्रैल को लगभग 200 रुपए की और बढ़ोतरी की गई।",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "lpg",

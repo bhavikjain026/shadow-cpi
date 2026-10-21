@@ -43,7 +43,7 @@
    "pct_change": null,
    "effective_date": "April 1",
    "line": "महंगाई की मार अब आम आदमी की रसोई तक पहुंच गई है। नए वित्तीय वर्ष यानी 1 अप्रैल से इंदौर सहित मध्य प्रदेश के कई बड़े शहरों में दूध के दामों में भारी बढ़ोतरी होने जा रही है। इंदौर में दूध की कीमतों में 3 रुपए प्रति लीटर तक का इजाफा किया गया है, जिससे अब दूध 63 से 65 रुपए प्रति लीटर के भाव पर मिलेगा।",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -73,7 +73,7 @@
    "pct_change": null,
    "effective_date": "April 1",
    "line": "Dhar Milk Price Hike: ₹4 Per Liter Increase From April 1",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -118,7 +118,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "LPG commercial cylinder price: The commercial LPG gas cylinder prices have been hiked significantly from April 1 amid the West Asia conflict. A 19-kg commercial LPG cylinder now costs Rs 195.50 more in Delhi. In big relief, domestic LPG prices remain unchanged. A 14.2-kg household cylinder continues to retail at Rs 913 in Delhi, following the last increase of Rs 60 on March 7.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "no effective date"
   },
   {
    "kind": "lpg",
@@ -133,7 +133,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "The price of a 14.2 kg domestic cooking gas cylinder rose by ₹60, while the price of a 19 kg commercial cylinder increased by ₹144 across major cities.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "no effective date"
   },
   {
    "kind": "lpg",
@@ -373,7 +373,7 @@
    "pct_change": null,
    "effective_date": "March 7, 2026",
    "line": "7 मार्च को किए गए बदलाव के दौरान 14 किलोग्राम वाले घरेलू गैस सिलेंडर की कीमतें भी बढ़ाई गई थीं और ये 60 रुपये महंगा हुआ था. इसके बाद 14.2kg वाले घरेलू LPG सिलेंडर दिल्ली में 853 रुपये से बढ़कर 913 रुपये, कोलकाता में कीमत 879 रुपये से बढ़कर 939 रुपये, चेन्नई में यह 868.50 रुपये से बढ़कर 928.50 रुपये का हो गया था.",
-   "verdict": "no effective date"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "lpg",
@@ -403,7 +403,7 @@
    "pct_change": null,
    "effective_date": "March 7, 2026",
    "line": "7 मार्च को किए गए बदलाव के दौरान 14 किलोग्राम वाले घरेलू गैस सिलेंडर की कीमतें भी बढ़ाई गई थीं और ये 60 रुपये महंगा हुआ था. इसके बाद 14.2kg वाले घरेलू LPG सिलेंडर दिल्ली में 853 रुपये से बढ़कर 913 रुपये, कोलकाता में कीमत 879 रुपये से बढ़कर 939 रुपये, चेन्नई में यह 868.50 रुपये से बढ़कर 928.50 रुपये का हो गया था.",
-   "verdict": "no effective date"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "lpg",
@@ -583,7 +583,7 @@
    "pct_change": null,
    "effective_date": "2026-04-01",
    "line": "हर महीने की पहली तारीख को गैस एजेंसी सिलिंडर के दामों में बदलाव करती है। हालांकि इस महीने ही गैस एजेंसी द्वारा घरेलू सिलिंडर के दामों में 60 रुपये इजाफा किया गया था। इसके साथ ही कई शहरों में इसकी कीमत 900 रुपये के पार या उसके आसपास चल रही है।",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "lpg",
@@ -673,7 +673,7 @@
    "pct_change": null,
    "effective_date": "April 1, 2025",
    "line": "The last time fuel adjustment charges were announced was in 2022-23. The KERC on March 27, 2025 had issued tariff orders for three financial years. The KERC had announced to hike the fixed charges by Rs 25 across boards. It had also included the 36 paise per unit pension and gratuity surcharge (government’s contribution) order which was issued on March 19, 2025.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "electricity",
@@ -718,7 +718,7 @@
    "pct_change": 4.8,
    "effective_date": "April 1, 2026",
    "line": "# MP में बिजली की दरें 4.80% बढ़ीं:एक अप्रैल से लागू होंगे नए रेट; दिन में ईवी चार्ज करने पर 20 प्रतिशत छूट",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "electricity",

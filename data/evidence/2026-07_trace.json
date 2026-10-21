@@ -13,7 +13,7 @@
    "pct_change": null,
    "effective_date": "Thursday",
    "line": "In a separate development, leading private dairy company Arokya has announced a price increase of Rs 3 per litre for its milk and curd products.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -28,7 +28,7 @@
    "pct_change": null,
    "effective_date": "Thursday",
    "line": "Arokya increases milk, curd prices by Rs 3 per litre",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -43,7 +43,7 @@
    "pct_change": null,
    "effective_date": "Thursday",
    "line": "Chennai: Dairy brand Arokya has increased the prices of its milk and curd products by Rs 3 per litre.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -58,7 +58,7 @@
    "pct_change": null,
    "effective_date": "Thursday",
    "line": "According to a notification, the price of a litre of toned milk has been increased to Rs 57 from Rs 54, standardised milk to Rs 69 from Rs 66, and full cream milk to Rs 76 from Rs 73.",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -73,7 +73,7 @@
    "pct_change": null,
    "effective_date": "Thursday",
    "line": "According to a notification, the price of a litre of toned milk has been increased to Rs 57 from Rs 54, standardised milk to Rs 69 from Rs 66, and full cream milk to Rs 76 from Rs 73.",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -88,7 +88,7 @@
    "pct_change": null,
    "effective_date": "Thursday",
    "line": "According to a notification, the price of a litre of toned milk has been increased to Rs 57 from Rs 54, standardised milk to Rs 69 from Rs 66, and full cream milk to Rs 76 from Rs 73.",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -133,7 +133,7 @@
    "pct_change": null,
    "effective_date": "September 1",
    "line": "The procurement price for cow milk will now rise from Rs. 38 to Rs. 44 a litre, while that for buffalo milk will increase from Rs. 47 to Rs. 53.",
-   "verdict": "no effective date"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "milk",
@@ -148,7 +148,7 @@
    "pct_change": null,
    "effective_date": "September 1",
    "line": "The procurement price for cow milk will now rise from Rs. 38 to Rs. 44 a litre, while that for buffalo milk will increase from Rs. 47 to Rs. 53.",
-   "verdict": "no effective date"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "milk",
@@ -193,7 +193,7 @@
    "pct_change": null,
    "effective_date": "25 जून",
    "line": "उदयपुर में अब सरस दूध महंगा मिलेगा। उदयपुर जिला दुग्ध उत्पादक सहकारी संघ लिमिटेड (उदयपुर डेयरी) ने सरस दूध के दामों में बढ़ोतरी कर दी है। डेयरी ने प्रति लीटर 2 रुपए रेट बढ़ाई है। नई दरें 25 जून से प्रभावी हो गई हैं।",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "milk",
@@ -328,7 +328,7 @@
    "pct_change": null,
    "effective_date": "7 March",
    "line": "India hiked domestic LPG cylinder prices by ₹29, marking the second increase in three months, after the first revision of ₹60 that came out on 7 March.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "lpg",
@@ -463,7 +463,7 @@
    "pct_change": 3.49,
    "effective_date": "July 1, 2026",
    "line": "The Public Utilities Regulatory Commission (PURC) announced on June 22, 2026 that electricity tariffs will rise by 3.49 percent and water tariffs by 0.85 percent, effective July 1, across all consumer categories residential, commercial, industrial, and public sector.",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "electricity",
@@ -478,7 +478,7 @@
    "pct_change": 0.85,
    "effective_date": "July 1, 2026",
    "line": "The Public Utilities Regulatory Commission (PURC) announced on June 22, 2026 that electricity tariffs will rise by 3.49 percent and water tariffs by 0.85 percent, effective July 1, across all consumer categories residential, commercial, industrial, and public sector.",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "electricity",
@@ -568,7 +568,7 @@
    "pct_change": 100,
    "effective_date": "June 20, 2026",
    "line": "The Railways has increased the minimum penalty for passengers travelling without a valid ticket from Rs 250 to Rs 500. The revised penalty came into effect on June 20, 2026, under the provisions of the Jan Vishwas (Amendment of Provisions) Act, 2026. [...] ????????Passenger Advisory ????????",
-   "verdict": "no effective date"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "medicine",
@@ -748,7 +748,7 @@
    "pct_change": -58.33,
    "effective_date": "September 22, 2025",
    "line": "The Uttar Pradesh Electricity Regulatory Commission (UPERC) has declared the reduction in Goods and Services Tax (GST) on renewable energy devices and components from 12% to 5% as a 'Change in Law' event for projects implemented under the PM-KUSUM Component-C2 scheme, paving the way for lower tariffs and the pass-through of benefits to power consumers.",
-   "verdict": "no effective date"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "gst",

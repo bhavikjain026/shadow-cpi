@@ -117,12 +117,14 @@ def run_month(month, tav_all, nem, ibja, lpg_rev, petrol, factors, cfg):
 
 def main():
     months = [a for a in sys.argv[1:] if re.fullmatch(r"\d{4}-\d{2}", a)]
+    if "--cache-only" in sys.argv:
+        print("CACHE-ONLY: no Tavily call will be sent; anything not cached is skipped and recorded")
     if any(m not in E.REPLAY_MONTHS for m in months):
         raise SystemExit("replay layers are for test months 2026-01..2026-09 only")
     cfg = E.load_items()
     factors = json.loads(E.PASSTHROUGH_FILE.read_text())["items"]
     rec = Recorder()
-    base = Budgeted(Tavily(recorder=rec), ["replay-layers"])
+    base = Budgeted(Tavily(recorder=rec), ["replay-layers"], cache_only="--cache-only" in sys.argv)
     nem = Nemotron(recorder=rec)
     try:
         ibja, _, ibja_failed = E.ibja_daily(base.charge("replay-layers", "ibja-iocl"),

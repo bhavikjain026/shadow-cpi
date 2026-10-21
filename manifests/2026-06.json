@@ -1,8 +1,8 @@
 {
  "sample": false,
  "month": "2026-06",
- "created_utc": "2026-10-20T17:42:07.578352+00:00",
- "code_commit": "2808761a653c70e423edf3c720efe02bbf98e376",
+ "created_utc": "2026-10-21T14:01:59.370698+00:00",
+ "code_commit": "7a24b16a6742126432dbc494106e750afa1ddd08",
  "model_ids": {
   "small": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
   "mid": "nvidia/nemotron-3-super-120b-a12b",
@@ -10,7 +10,7 @@
  },
  "queries": [
   {
-   "call_id": "0a69434a1fb2",
+   "call_id": "d92856677fc6",
    "endpoint": "search",
    "query": "milk price hike per litre effective Amul Mother Dairy",
    "language": "en",
@@ -37,11 +37,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.524623+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.306011+00:00",
    "n_results": 5
   },
   {
-   "call_id": "b137498b6d81",
+   "call_id": "1c726ad55d37",
    "endpoint": "search",
    "query": "milk price hike per litre effective Amul Mother Dairy",
    "language": "en",
@@ -68,11 +68,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.527052+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.308920+00:00",
    "n_results": 1
   },
   {
-   "call_id": "f5595eec95f7",
+   "call_id": "2be2ad50c6ab",
    "endpoint": "search",
    "query": "दूध के दाम बढ़े प्रति लीटर लागू",
    "language": "hi",
@@ -99,11 +99,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.528066+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.309991+00:00",
    "n_results": 8
   },
   {
-   "call_id": "25ab36159561",
+   "call_id": "d5b06c850b13",
    "endpoint": "search",
    "query": "दूध के दाम बढ़े प्रति लीटर लागू",
    "language": "hi",
@@ -130,11 +130,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.528734+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.310632+00:00",
    "n_results": 8
   },
   {
-   "call_id": "f7308502c76e",
+   "call_id": "b0de8c24f391",
    "endpoint": "search",
    "query": "domestic LPG cylinder price revised effective",
    "language": "en",
@@ -161,11 +161,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.529725+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.311678+00:00",
    "n_results": 8
   },
   {
-   "call_id": "17dd608cad3a",
+   "call_id": "be369b912520",
    "endpoint": "search",
    "query": "domestic LPG cylinder price revised effective",
    "language": "en",
@@ -192,11 +192,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.532511+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.314738+00:00",
    "n_results": 5
   },
   {
-   "call_id": "bbe5e6978aff",
+   "call_id": "bd70d917b4bd",
    "endpoint": "search",
    "query": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
    "language": "hi",
@@ -223,11 +223,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.534306+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.316503+00:00",
    "n_results": 8
   },
   {
-   "call_id": "1fdd43ceea3b",
+   "call_id": "35669ec744aa",
    "endpoint": "search",
    "query": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
    "language": "hi",
@@ -254,11 +254,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.535089+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.317276+00:00",
    "n_results": 8
   },
   {
-   "call_id": "ad514ad7f8ca",
+   "call_id": "4a751e1a0a95",
    "endpoint": "search",
    "query": "electricity tariff order regulatory commission revised rates effective",
    "language": "en",
@@ -285,11 +285,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.536757+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.318942+00:00",
    "n_results": 8
   },
   {
-   "call_id": "01f3ff91a7c4",
+   "call_id": "77f5827f75cd",
    "endpoint": "search",
    "query": "electricity tariff order regulatory commission revised rates effective",
    "language": "en",
@@ -316,11 +316,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.539655+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.322202+00:00",
    "n_results": 8
   },
   {
-   "call_id": "2a7a7bcd8095",
+   "call_id": "371048dcb603",
    "endpoint": "search",
    "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
    "language": "hi",
@@ -347,11 +347,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.542612+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.325191+00:00",
    "n_results": 8
   },
   {
-   "call_id": "60b194dc1601",
+   "call_id": "a6a8128f81da",
    "endpoint": "search",
    "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
    "language": "hi",
@@ -378,11 +378,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.544682+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.327110+00:00",
    "n_results": 8
   },
   {
-   "call_id": "57e2ad40120f",
+   "call_id": "f3f78673661c",
    "endpoint": "search",
    "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
    "language": "en",
@@ -409,11 +409,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.547755+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.330213+00:00",
    "n_results": 7
   },
   {
-   "call_id": "8a35e45a9262",
+   "call_id": "75b2f8b2b78a",
    "endpoint": "search",
    "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
    "language": "en",
@@ -440,11 +440,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.549878+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.332407+00:00",
    "n_results": 1
   },
   {
-   "call_id": "bb0d336ea0c2",
+   "call_id": "ac661a213d5e",
    "endpoint": "search",
    "query": "railway fare revision effective Indian Railways",
    "language": "en",
@@ -471,11 +471,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.550438+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.332897+00:00",
    "n_results": 5
   },
   {
-   "call_id": "467a8d58860d",
+   "call_id": "77bbe53e7e37",
    "endpoint": "search",
    "query": "railway fare revision effective Indian Railways",
    "language": "en",
@@ -502,11 +502,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.553136+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.335434+00:00",
    "n_results": 1
   },
   {
-   "call_id": "f19d50db3f45",
+   "call_id": "1bf47a7111dc",
    "endpoint": "search",
    "query": "NPPA medicine price revision effective",
    "language": "en",
@@ -533,11 +533,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.553885+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.336198+00:00",
    "n_results": 8
   },
   {
-   "call_id": "a68163eca6c5",
+   "call_id": "95402a7f4db6",
    "endpoint": "search",
    "query": "NPPA medicine price revision effective",
    "language": "en",
@@ -564,11 +564,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.557006+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.339471+00:00",
    "n_results": 1
   },
   {
-   "call_id": "cc6ffa7a57c3",
+   "call_id": "5eedca73dace",
    "endpoint": "search",
    "query": "school fee hike academic session effective",
    "language": "en",
@@ -595,11 +595,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.559312+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.341779+00:00",
    "n_results": 6
   },
   {
-   "call_id": "dbdefe372afc",
+   "call_id": "f728ea0ae26d",
    "endpoint": "search",
    "query": "school fee hike academic session effective",
    "language": "en",
@@ -626,11 +626,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.563632+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.345431+00:00",
    "n_results": 3
   },
   {
-   "call_id": "bcd2b886bdf5",
+   "call_id": "ca54d9c7b1ee",
    "endpoint": "search",
    "query": "GST rate change effective from",
    "language": "en",
@@ -657,11 +657,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.565162+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.346885+00:00",
    "n_results": 7
   },
   {
-   "call_id": "7337c1261a70",
+   "call_id": "14988ad0a72c",
    "endpoint": "search",
    "query": "GST rate change effective from",
    "language": "en",
@@ -688,7 +688,7 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.568358+00:00",
+   "retrieved_at": "2026-10-21T14:01:59.350169+00:00",
    "n_results": 2
   }
  ],
@@ -1260,6 +1260,37 @@
  ],
  "events": [
   {
+   "item": "lpg",
+   "seller": "Oil Marketing Companies",
+   "place": "India",
+   "pct_change": 3.14107771459518,
+   "effective_date": "2026-06-07",
+   "days_in_month_share": 0.8,
+   "confirmed_by_2_sources": true,
+   "line": "Domestic liquefied petroleum gas (LPG) prices were increased by Rs 29 per 14.2-kg cylinder, effective 7 June.",
+   "url": "https://www.thequint.com/news/breaking-news/domestic-lpg-cylinder-price-hike-june-2026-india",
+   "sources": [
+    "https://www.ndtv.com/india-news/domestic-lpg-prices-raised-by-rs-29-second-hike-since-us-iran-war-started-cylinders-to-now-cost-rs-942-11601794",
+    "https://www.thehindu.com/news/national/lpg-price-hiked-by-29-per-142-kg-cylinder/article71071053.ece",
+    "https://www.thequint.com/news/breaking-news/domestic-lpg-cylinder-price-hike-june-2026-india"
+   ],
+   "verified": true,
+   "cpi_code": "04.5.2.2.1.01",
+   "change_prorated": 0.025128621716761442,
+   "announced_date": null,
+   "old_price": null,
+   "new_price": null,
+   "language": "en",
+   "scope": "national",
+   "states": [],
+   "weight": 1.0,
+   "weight_source": "national (weight 1)",
+   "applied_change": 0.025128621716761442,
+   "abs_change": 29.0,
+   "base_price": 923.25,
+   "base_source": "IOCL domestic 14.2 kg, 4-metro mean"
+  },
+  {
    "item": "electricity",
    "seller": "Uttar Pradesh Power Corporation Limited (UPPCL)",
    "place": "India",
@@ -1278,7 +1309,47 @@
    "announced_date": "2026-05-30",
    "old_price": null,
    "new_price": null,
-   "language": "en"
+   "language": "en",
+   "scope": "regional",
+   "states": [
+    "uttar pradesh"
+   ],
+   "weight": 0.1347863702305196,
+   "weight_source": "MoSPI CPI 2024 Expert Group report, Annex 5.3d (item weights by state, rural + urban)",
+   "applied_change": 0.01347863702305196,
+   "abs_change": null,
+   "base_price": null,
+   "base_source": null
+  },
+  {
+   "item": "rail",
+   "seller": "Indian Railways",
+   "place": "India",
+   "pct_change": 100.0,
+   "effective_date": "2026-06-20",
+   "days_in_month_share": 0.36666666666666664,
+   "confirmed_by_2_sources": true,
+   "line": "The Railways has increased the minimum penalty for passengers travelling without a valid ticket from Rs 250 to Rs 500. The revised penalty came into effect on June 20, 2026, under the provisions of the Jan Vishwas (Amendment of Provisions) Act, 2026. [...] ????????Passenger Advisory ????????",
+   "url": "https://www.ndtv.com/travel/indian-railways-doubles-ticketless-travel-penalty-sets-minimum-fine-at-500-along-with-additional-charges-11666189",
+   "sources": [
+    "https://indianexpress.com/article/india/indian-railways-doubles-fine-for-ticketless-travel-from-today-heres-what-train-passengers-must-know-10748696",
+    "https://www.ndtv.com/travel/indian-railways-doubles-ticketless-travel-penalty-sets-minimum-fine-at-500-along-with-additional-charges-11666189"
+   ],
+   "verified": true,
+   "cpi_code": "07.3.1.1.2.01",
+   "change_prorated": 0.36666666666666664,
+   "announced_date": null,
+   "old_price": 250,
+   "new_price": 500,
+   "language": "en",
+   "scope": "national",
+   "states": [],
+   "weight": 1.0,
+   "weight_source": "national (weight 1)",
+   "applied_change": 0.36666666666666664,
+   "abs_change": null,
+   "base_price": null,
+   "base_source": null
   }
  ],
  "counts": {
@@ -1287,28 +1358,44 @@
   "quotes_extracted": 0,
   "quotes_verified": 0,
   "events_extracted": 72,
-  "events_verified": 1
+  "events_verified": 3
  },
  "dropped": [
   {
    "reason": "event: unverified (no claimed number in the cited line)",
-   "count": 38
+   "count": 34
   },
   {
    "reason": "event: page undated",
    "count": 31
   },
   {
-   "reason": "event: no effective date",
-   "count": 21
-  },
-  {
    "reason": "event: gatekeeper: no Indian price on page",
    "count": 20
   },
   {
+   "reason": "event: no effective date",
+   "count": 15
+  },
+  {
    "reason": "event: different kind of price (not what this search is for)",
    "count": 11
+  },
+  {
+   "reason": "event: effective date outside the month",
+   "count": 4
+  },
+  {
+   "reason": "event: duplicate of an event already kept (same kind, date, scope, % within 0.5 pp)",
+   "count": 3
+  },
+  {
+   "reason": "event: search not in cache (frozen cache-only re-run sends no calls)",
+   "count": 2
+  },
+  {
+   "reason": "event: change not computable (needs old+new price, a % change, or an amount with an official base)",
+   "count": 1
   },
   {
    "reason": "event: not the CPI variety (e.g. commercial cylinder, jet fuel)",
@@ -1358,12 +1445,16 @@
   "event_stats": {
    "_month": "2026-06",
    "drops": {
-    "unverified (no claimed number in the cited line)": 38,
+    "effective date outside the month": 4,
     "gatekeeper: no Indian price on page": 20,
-    "no effective date": 21,
+    "no effective date": 15,
     "page undated": 31,
     "different kind of price (not what this search is for)": 11,
-    "not the CPI variety (e.g. commercial cylinder, jet fuel)": 1
+    "unverified (no claimed number in the cited line)": 34,
+    "change not computable (needs old+new price, a % change, or an amount with an official base)": 1,
+    "not the CPI variety (e.g. commercial cylinder, jet fuel)": 1,
+    "search not in cache (frozen cache-only re-run sends no calls)": 2,
+    "duplicate of an event already kept (same kind, date, scope, % within 0.5 pp)": 3
    },
    "leak_drops": 0,
    "leak_examples": [],

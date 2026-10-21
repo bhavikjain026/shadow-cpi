@@ -668,7 +668,10 @@ def build_manifest(month, quotes, qstats, events, estats, observed, spine_rows, 
               "line": e["quote"], "url": e["url"], "sources": e["sources"], "verified": True,
               "cpi_code": e.get("cpi_code", ""), "change_prorated": e["change_prorated"],
               "announced_date": e.get("announced_date"), "old_price": e.get("old_price"),
-              "new_price": e.get("new_price"), "language": e.get("lang")} for e in events]
+              "new_price": e.get("new_price"), "language": e.get("lang"), "scope": e.get("scope"),
+              "states": e.get("states", []), "weight": e.get("weight"), "weight_source": e.get("weight_source"),
+              "applied_change": e.get("applied_change"), "abs_change": e.get("abs_change"),
+              "base_price": e.get("base_price"), "base_source": e.get("base_source")} for e in events]
     dropped = {}
     for label, st in (("quote", qstats), ("event", estats)):
         for reason, n in st["drops"].items():

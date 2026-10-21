@@ -1,8 +1,8 @@
 {
  "sample": false,
  "month": "2026-04",
- "created_utc": "2026-10-20T17:42:07.448783+00:00",
- "code_commit": "2808761a653c70e423edf3c720efe02bbf98e376",
+ "created_utc": "2026-10-21T14:01:59.198152+00:00",
+ "code_commit": "7a24b16a6742126432dbc494106e750afa1ddd08",
  "model_ids": {
   "small": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
   "mid": "nvidia/nemotron-3-super-120b-a12b",
@@ -10,7 +10,7 @@
  },
  "queries": [
   {
-   "call_id": "5dde7d89a3e3",
+   "call_id": "954736953da2",
    "endpoint": "search",
    "query": "milk price hike per litre effective Amul Mother Dairy",
    "language": "en",
@@ -37,11 +37,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.390666+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.536514+00:00",
    "n_results": 8
   },
   {
-   "call_id": "00e690c65ae6",
+   "call_id": "0adfc8bc2f44",
    "endpoint": "search",
    "query": "milk price hike per litre effective Amul Mother Dairy",
    "language": "en",
@@ -68,11 +68,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.391911+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.537158+00:00",
    "n_results": 8
   },
   {
-   "call_id": "c8c479c46783",
+   "call_id": "cc91f0f2fc3b",
    "endpoint": "search",
    "query": "दूध के दाम बढ़े प्रति लीटर लागू",
    "language": "hi",
@@ -99,11 +99,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.394971+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.538954+00:00",
    "n_results": 8
   },
   {
-   "call_id": "d0167da2ad88",
+   "call_id": "889c703765c2",
    "endpoint": "search",
    "query": "दूध के दाम बढ़े प्रति लीटर लागू",
    "language": "hi",
@@ -130,11 +130,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.395257+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.539119+00:00",
    "n_results": 8
   },
   {
-   "call_id": "d34e2b909fe9",
+   "call_id": "5b63e951f338",
    "endpoint": "search",
    "query": "domestic LPG cylinder price revised effective",
    "language": "en",
@@ -161,11 +161,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.398737+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.545108+00:00",
    "n_results": 7
   },
   {
-   "call_id": "e432c1434216",
+   "call_id": "97eb969561e2",
    "endpoint": "search",
    "query": "domestic LPG cylinder price revised effective",
    "language": "en",
@@ -192,11 +192,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.401399+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.546904+00:00",
    "n_results": 7
   },
   {
-   "call_id": "9bae81372e57",
+   "call_id": "382c81abe37b",
    "endpoint": "search",
    "query": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
    "language": "hi",
@@ -223,11 +223,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.403959+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.548665+00:00",
    "n_results": 8
   },
   {
-   "call_id": "66cf0aa4fdb6",
+   "call_id": "98757cddcf09",
    "endpoint": "search",
    "query": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
    "language": "hi",
@@ -254,11 +254,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.406596+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.550520+00:00",
    "n_results": 8
   },
   {
-   "call_id": "fe07a9e3cead",
+   "call_id": "3e3e41638550",
    "endpoint": "search",
    "query": "electricity tariff order regulatory commission revised rates effective",
    "language": "en",
@@ -285,11 +285,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.409552+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.552746+00:00",
    "n_results": 7
   },
   {
-   "call_id": "a97a7588831a",
+   "call_id": "6ab5052cb135",
    "endpoint": "search",
    "query": "electricity tariff order regulatory commission revised rates effective",
    "language": "en",
@@ -316,11 +316,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.411985+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.554437+00:00",
    "n_results": 3
   },
   {
-   "call_id": "e44cdf17cad9",
+   "call_id": "d43dd5996e83",
    "endpoint": "search",
    "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
    "language": "hi",
@@ -347,11 +347,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.413651+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.555480+00:00",
    "n_results": 8
   },
   {
-   "call_id": "b03f65cf3123",
+   "call_id": "34129f5c5357",
    "endpoint": "search",
    "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
    "language": "hi",
@@ -378,11 +378,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.414853+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.556259+00:00",
    "n_results": 8
   },
   {
-   "call_id": "fe52ec3f82e6",
+   "call_id": "125ee8b80db2",
    "endpoint": "search",
    "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
    "language": "en",
@@ -409,11 +409,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.418344+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.558859+00:00",
    "n_results": 8
   },
   {
-   "call_id": "051f01254555",
+   "call_id": "cdcbcd17efd4",
    "endpoint": "search",
    "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
    "language": "en",
@@ -440,11 +440,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.420888+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.560550+00:00",
    "n_results": 7
   },
   {
-   "call_id": "2728cc10c9da",
+   "call_id": "dfcdebc92acd",
    "endpoint": "search",
    "query": "railway fare revision effective Indian Railways",
    "language": "en",
@@ -471,11 +471,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.423483+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.562209+00:00",
    "n_results": 4
   },
   {
-   "call_id": "09e06584bec2",
+   "call_id": "71de7ee20059",
    "endpoint": "search",
    "query": "railway fare revision effective Indian Railways",
    "language": "en",
@@ -502,11 +502,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.424837+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.563055+00:00",
    "n_results": 3
   },
   {
-   "call_id": "ecf810f06dfa",
+   "call_id": "0c9bd2ba2d0e",
    "endpoint": "search",
    "query": "NPPA medicine price revision effective",
    "language": "en",
@@ -533,11 +533,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.426034+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.563858+00:00",
    "n_results": 5
   },
   {
-   "call_id": "816c497c5a95",
+   "call_id": "6e759145bee1",
    "endpoint": "search",
    "query": "NPPA medicine price revision effective",
    "language": "en",
@@ -564,11 +564,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.427939+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.565210+00:00",
    "n_results": 1
   },
   {
-   "call_id": "5c086ef1c329",
+   "call_id": "4dc08da67f29",
    "endpoint": "search",
    "query": "school fee hike academic session effective",
    "language": "en",
@@ -595,11 +595,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.428593+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.565591+00:00",
    "n_results": 5
   },
   {
-   "call_id": "c0ff5df94bd8",
+   "call_id": "83f42ed2fcfa",
    "endpoint": "search",
    "query": "school fee hike academic session effective",
    "language": "en",
@@ -626,11 +626,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.430408+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.566884+00:00",
    "n_results": 8
   },
   {
-   "call_id": "1694f8dcc284",
+   "call_id": "37721822e5d7",
    "endpoint": "search",
    "query": "GST rate change effective from",
    "language": "en",
@@ -657,11 +657,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.433778+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.568886+00:00",
    "n_results": 8
   },
   {
-   "call_id": "dd9521cde130",
+   "call_id": "a2d9ad25fbe2",
    "endpoint": "search",
    "query": "GST rate change effective from",
    "language": "en",
@@ -688,7 +688,7 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T17:42:07.436577+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.570603+00:00",
    "n_results": 8
   }
  ],
@@ -1174,14 +1174,137 @@
    "url": "https://iocl.com/indane-14Kg-nonsubsid-previous-price"
   }
  ],
- "events": [],
+ "events": [
+  {
+   "item": "milk",
+   "seller": "Dairy sellers / Madhya Pradesh Dugdh Vyapar Mahasangh",
+   "place": "Indore",
+   "pct_change": 4.971496751955455,
+   "effective_date": "2026-04-01",
+   "days_in_month_share": 1.0,
+   "confirmed_by_2_sources": false,
+   "line": "महंगाई की मार अब आम आदमी की रसोई तक पहुंच गई है। नए वित्तीय वर्ष यानी 1 अप्रैल से इंदौर सहित मध्य प्रदेश के कई बड़े शहरों में दूध के दामों में भारी बढ़ोतरी होने जा रही है। इंदौर में दूध की कीमतों में 3 रुपए प्रति लीटर तक का इजाफा किया गया है, जिससे अब दूध 63 से 65 रुपए प्रति लीटर के भाव पर मिलेगा।",
+   "url": "https://www.bhaskar.com/g/local/mp/indore/news/milk-price-hike-mp-dhar-indore-63-65-rs-litre-137578040.html",
+   "sources": [
+    "https://www.bhaskar.com/g/local/mp/indore/news/milk-price-hike-mp-dhar-indore-63-65-rs-litre-137578040.html"
+   ],
+   "verified": true,
+   "cpi_code": "01.1.4.1.1.01",
+   "change_prorated": 0.04971496751955456,
+   "announced_date": "Tue, Oct 20, 2026",
+   "old_price": null,
+   "new_price": null,
+   "language": "hi",
+   "scope": "regional",
+   "states": [
+    "madhya pradesh"
+   ],
+   "weight": 0.05955994842417581,
+   "weight_source": "MoSPI CPI 2024 Expert Group report, Annex 5.3d (item weights by state, rural + urban)",
+   "applied_change": 0.0029610209013742447,
+   "abs_change": 3.0,
+   "base_price": 60.343999999999994,
+   "base_source": "DoCA milk, all-India simple mean of zones, previous month"
+  },
+  {
+   "item": "milk",
+   "seller": "Dairy Producers Association",
+   "place": "Dhar district",
+   "pct_change": 6.628662335940608,
+   "effective_date": "2026-04-01",
+   "days_in_month_share": 1.0,
+   "confirmed_by_2_sources": false,
+   "line": "Dhar Milk Price Hike: ₹4 Per Liter Increase From April 1",
+   "url": "https://www.bhaskar.com/local/mp/dhar/news/dhar-milk-price-hike-rs-4-liter-april-1-137568275.html",
+   "sources": [
+    "https://www.bhaskar.com/local/mp/dhar/news/dhar-milk-price-hike-rs-4-liter-april-1-137568275.html"
+   ],
+   "verified": true,
+   "cpi_code": "01.1.4.1.1.01",
+   "change_prorated": 0.06628662335940608,
+   "announced_date": null,
+   "old_price": null,
+   "new_price": null,
+   "language": "hi",
+   "scope": "regional",
+   "states": [
+    "madhya pradesh"
+   ],
+   "weight": 0.05955994842417581,
+   "weight_source": "MoSPI CPI 2024 Expert Group report, Annex 5.3d (item weights by state, rural + urban)",
+   "applied_change": 0.003948027868498993,
+   "abs_change": 4.0,
+   "base_price": 60.343999999999994,
+   "base_source": "DoCA milk, all-India simple mean of zones, previous month"
+  },
+  {
+   "item": "lpg",
+   "seller": "gas agency",
+   "place": "India",
+   "pct_change": 6.498781478472786,
+   "effective_date": "2026-04-01",
+   "days_in_month_share": 1.0,
+   "confirmed_by_2_sources": false,
+   "line": "हर महीने की पहली तारीख को गैस एजेंसी सिलिंडर के दामों में बदलाव करती है। हालांकि इस महीने ही गैस एजेंसी द्वारा घरेलू सिलिंडर के दामों में 60 रुपये इजाफा किया गया था। इसके साथ ही कई शहरों में इसकी कीमत 900 रुपये के पार या उसके आसपास चल रही है।",
+   "url": "https://www.jagran.com/business/biz-new-rules-april-2026-lpg-tax-train-ticket-changes-impact-40185701.html",
+   "sources": [
+    "https://www.jagran.com/business/biz-new-rules-april-2026-lpg-tax-train-ticket-changes-impact-40185701.html"
+   ],
+   "verified": true,
+   "cpi_code": "04.5.2.2.1.01",
+   "change_prorated": 0.06498781478472786,
+   "announced_date": null,
+   "old_price": null,
+   "new_price": null,
+   "language": "hi",
+   "scope": "national",
+   "states": [],
+   "weight": 1.0,
+   "weight_source": "national (weight 1)",
+   "applied_change": 0.06498781478472786,
+   "abs_change": 60.0,
+   "base_price": 923.25,
+   "base_source": "IOCL domestic 14.2 kg, 4-metro mean"
+  },
+  {
+   "item": "electricity",
+   "seller": "Madhya Pradesh State Electricity Regulatory Commission (MPERC)",
+   "place": "Madhya Pradesh",
+   "pct_change": 4.8,
+   "effective_date": "2026-04-01",
+   "days_in_month_share": 1.0,
+   "confirmed_by_2_sources": false,
+   "line": "# MP में बिजली की दरें 4.80% बढ़ीं:एक अप्रैल से लागू होंगे नए रेट; दिन में ईवी चार्ज करने पर 20 प्रतिशत छूट",
+   "url": "https://www.bhaskar.com/local/mp/jabalpur/news/mp-new-electricity-tariff-rates-lt-consumers-minimum-charges-removed-ev-charging-discount-137539609.html",
+   "sources": [
+    "https://www.bhaskar.com/local/mp/jabalpur/news/mp-new-electricity-tariff-rates-lt-consumers-minimum-charges-removed-ev-charging-discount-137539609.html"
+   ],
+   "verified": true,
+   "cpi_code": "04.5.1.0.2.01",
+   "change_prorated": 0.048,
+   "announced_date": null,
+   "old_price": null,
+   "new_price": null,
+   "language": "hi",
+   "scope": "regional",
+   "states": [
+    "madhya pradesh"
+   ],
+   "weight": 0.03399131752550116,
+   "weight_source": "MoSPI CPI 2024 Expert Group report, Annex 5.3d (item weights by state, rural + urban)",
+   "applied_change": 0.0016315832412240555,
+   "abs_change": null,
+   "base_price": null,
+   "base_source": null
+  }
+ ],
  "counts": {
   "pages_seen": 95,
   "pages_kept": 61,
   "quotes_extracted": 0,
   "quotes_verified": 0,
   "events_extracted": 86,
-  "events_verified": 0
+  "events_verified": 4
  },
  "dropped": [
   {
@@ -1198,7 +1321,7 @@
   },
   {
    "reason": "event: unverified (no claimed number in the cited line)",
-   "count": 28
+   "count": 22
   },
   {
    "reason": "event: not the CPI variety (e.g. commercial cylinder, jet fuel)",
@@ -1206,10 +1329,18 @@
   },
   {
    "reason": "event: no effective date",
-   "count": 9
+   "count": 8
+  },
+  {
+   "reason": "event: effective date outside the month",
+   "count": 3
   },
   {
    "reason": "event: extract failed",
+   "count": 2
+  },
+  {
+   "reason": "event: search not in cache (frozen cache-only re-run sends no calls)",
    "count": 2
   }
  ],
@@ -1270,10 +1401,12 @@
     "page undated": 31,
     "extract failed": 2,
     "gatekeeper: no Indian price on page": 34,
-    "unverified (no claimed number in the cited line)": 28,
+    "unverified (no claimed number in the cited line)": 22,
     "not the CPI variety (e.g. commercial cylinder, jet fuel)": 19,
+    "no effective date": 8,
     "different kind of price (not what this search is for)": 30,
-    "no effective date": 9
+    "effective date outside the month": 3,
+    "search not in cache (frozen cache-only re-run sends no calls)": 2
    },
    "leak_drops": 0,
    "leak_examples": [],
@@ -1302,6 +1435,6 @@
    "replay-layers",
    "replay-layers-month/2026-04"
   ],
-  "seconds": 0
+  "seconds": 1
  }
 }

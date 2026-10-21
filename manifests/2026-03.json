@@ -1,8 +1,8 @@
 {
  "sample": false,
  "month": "2026-03",
- "created_utc": "2026-10-20T16:08:00.845376+00:00",
- "code_commit": "f66b532fb45374f1a035aa707b4c8765e31f89e1",
+ "created_utc": "2026-10-21T14:01:58.522965+00:00",
+ "code_commit": "7a24b16a6742126432dbc494106e750afa1ddd08",
  "model_ids": {
   "small": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
   "mid": "nvidia/nemotron-3-super-120b-a12b",
@@ -10,255 +10,7 @@
  },
  "queries": [
   {
-   "call_id": "0f67af4ef7f8",
-   "endpoint": "search",
-   "query": "onion retail price per kg",
-   "language": "en",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-03-01",
-    "end_date": "2026-03-31",
-    "search_depth": "basic",
-    "include_domains": [
-     "economictimes.indiatimes.com",
-     "m.economictimes.com",
-     "thehindu.com",
-     "indianexpress.com",
-     "hindustantimes.com",
-     "livemint.com",
-     "business-standard.com",
-     "timesofindia.indiatimes.com",
-     "moneycontrol.com",
-     "financialexpress.com",
-     "ndtv.com",
-     "pib.gov.in"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.732016+00:00",
-   "n_results": 6
-  },
-  {
-   "call_id": "0ddee3b189d8",
-   "endpoint": "search",
-   "query": "प्याज के दाम प्रति किलो",
-   "language": "hi",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-03-01",
-    "end_date": "2026-03-31",
-    "language": "hi",
-    "search_depth": "basic",
-    "include_domains": [
-     "aajtak.in",
-     "navbharattimes.indiatimes.com",
-     "bhaskar.com",
-     "amarujala.com",
-     "jagran.com",
-     "livehindustan.com",
-     "abplive.com",
-     "hindi.news18.com",
-     "zeenews.india.com",
-     "ndtv.in",
-     "tv9hindi.com"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.735991+00:00",
-   "n_results": 8
-  },
-  {
-   "call_id": "4b7aad069e29",
-   "endpoint": "search",
-   "query": "tomato retail price per kg",
-   "language": "en",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-03-01",
-    "end_date": "2026-03-31",
-    "search_depth": "basic",
-    "include_domains": [
-     "economictimes.indiatimes.com",
-     "m.economictimes.com",
-     "thehindu.com",
-     "indianexpress.com",
-     "hindustantimes.com",
-     "livemint.com",
-     "business-standard.com",
-     "timesofindia.indiatimes.com",
-     "moneycontrol.com",
-     "financialexpress.com",
-     "ndtv.com",
-     "pib.gov.in"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.741094+00:00",
-   "n_results": 7
-  },
-  {
-   "call_id": "b146f6521bd6",
-   "endpoint": "search",
-   "query": "टमाटर के दाम प्रति किलो",
-   "language": "hi",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-03-01",
-    "end_date": "2026-03-31",
-    "language": "hi",
-    "search_depth": "basic",
-    "include_domains": [
-     "aajtak.in",
-     "navbharattimes.indiatimes.com",
-     "bhaskar.com",
-     "amarujala.com",
-     "jagran.com",
-     "livehindustan.com",
-     "abplive.com",
-     "hindi.news18.com",
-     "zeenews.india.com",
-     "ndtv.in",
-     "tv9hindi.com"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.745034+00:00",
-   "n_results": 8
-  },
-  {
-   "call_id": "82735154ffc7",
-   "endpoint": "search",
-   "query": "domestic LPG cylinder price 14.2 kg",
-   "language": "en",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-03-01",
-    "end_date": "2026-03-31",
-    "search_depth": "basic",
-    "include_domains": [
-     "economictimes.indiatimes.com",
-     "m.economictimes.com",
-     "thehindu.com",
-     "indianexpress.com",
-     "hindustantimes.com",
-     "livemint.com",
-     "business-standard.com",
-     "timesofindia.indiatimes.com",
-     "moneycontrol.com",
-     "financialexpress.com",
-     "ndtv.com",
-     "pib.gov.in"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.749875+00:00",
-   "n_results": 8
-  },
-  {
-   "call_id": "89ae8057044e",
-   "endpoint": "search",
-   "query": "घरेलू एलपीजी सिलेंडर की कीमत 14.2 किलो",
-   "language": "hi",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-03-01",
-    "end_date": "2026-03-31",
-    "language": "hi",
-    "search_depth": "basic",
-    "include_domains": [
-     "aajtak.in",
-     "navbharattimes.indiatimes.com",
-     "bhaskar.com",
-     "amarujala.com",
-     "jagran.com",
-     "livehindustan.com",
-     "abplive.com",
-     "hindi.news18.com",
-     "zeenews.india.com",
-     "ndtv.in",
-     "tv9hindi.com"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.756019+00:00",
-   "n_results": 8
-  },
-  {
-   "call_id": "04ea94fb8113",
-   "endpoint": "search",
-   "query": "petrol price per litre today",
-   "language": "en",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-03-01",
-    "end_date": "2026-03-31",
-    "search_depth": "basic",
-    "include_domains": [
-     "economictimes.indiatimes.com",
-     "m.economictimes.com",
-     "thehindu.com",
-     "indianexpress.com",
-     "hindustantimes.com",
-     "livemint.com",
-     "business-standard.com",
-     "timesofindia.indiatimes.com",
-     "moneycontrol.com",
-     "financialexpress.com",
-     "ndtv.com",
-     "pib.gov.in"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.756329+00:00",
-   "n_results": 8
-  },
-  {
-   "call_id": "cb1dde1e356c",
-   "endpoint": "search",
-   "query": "पेट्रोल की कीमत प्रति लीटर",
-   "language": "hi",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-03-01",
-    "end_date": "2026-03-31",
-    "language": "hi",
-    "search_depth": "basic",
-    "include_domains": [
-     "aajtak.in",
-     "navbharattimes.indiatimes.com",
-     "bhaskar.com",
-     "amarujala.com",
-     "jagran.com",
-     "livehindustan.com",
-     "abplive.com",
-     "hindi.news18.com",
-     "zeenews.india.com",
-     "ndtv.in",
-     "tv9hindi.com"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.759395+00:00",
-   "n_results": 8
-  },
-  {
-   "call_id": "8f20f8957f21",
+   "call_id": "7d96c485f2f1",
    "endpoint": "search",
    "query": "milk price hike per litre effective Amul Mother Dairy",
    "language": "en",
@@ -285,11 +37,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.782215+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.474358+00:00",
    "n_results": 8
   },
   {
-   "call_id": "0b4a45b30fda",
+   "call_id": "82b1fadc13d0",
    "endpoint": "search",
    "query": "milk price hike per litre effective Amul Mother Dairy",
    "language": "en",
@@ -316,11 +68,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.784277+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.475878+00:00",
    "n_results": 8
   },
   {
-   "call_id": "c5df9b2457f3",
+   "call_id": "abcdd3d0458e",
    "endpoint": "search",
    "query": "दूध के दाम बढ़े प्रति लीटर लागू",
    "language": "hi",
@@ -347,11 +99,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.786416+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.477290+00:00",
    "n_results": 8
   },
   {
-   "call_id": "d12d9f17e801",
+   "call_id": "bb256c8c564d",
    "endpoint": "search",
    "query": "दूध के दाम बढ़े प्रति लीटर लागू",
    "language": "hi",
@@ -378,11 +130,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.789821+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.479759+00:00",
    "n_results": 8
   },
   {
-   "call_id": "3c64b7e7024e",
+   "call_id": "98e70434c5b5",
    "endpoint": "search",
    "query": "domestic LPG cylinder price revised effective",
    "language": "en",
@@ -409,11 +161,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.790126+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.479898+00:00",
    "n_results": 8
   },
   {
-   "call_id": "d7bd55fba59c",
+   "call_id": "b8dc411f64a2",
    "endpoint": "search",
    "query": "domestic LPG cylinder price revised effective",
    "language": "en",
@@ -440,11 +192,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.792870+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.482053+00:00",
    "n_results": 4
   },
   {
-   "call_id": "d312a0ee563d",
+   "call_id": "e4ba7890ccdf",
    "endpoint": "search",
    "query": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
    "language": "hi",
@@ -471,11 +223,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.794722+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.483108+00:00",
    "n_results": 8
   },
   {
-   "call_id": "c291fa5477a6",
+   "call_id": "b7eb62a2c7dc",
    "endpoint": "search",
    "query": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
    "language": "hi",
@@ -502,11 +254,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.797509+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.485074+00:00",
    "n_results": 8
   },
   {
-   "call_id": "7ce8308861da",
+   "call_id": "2b435b515220",
    "endpoint": "search",
    "query": "electricity tariff order regulatory commission revised rates effective",
    "language": "en",
@@ -533,11 +285,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.799876+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.486654+00:00",
    "n_results": 5
   },
   {
-   "call_id": "22024067279f",
+   "call_id": "d8af80e15148",
    "endpoint": "search",
    "query": "electricity tariff order regulatory commission revised rates effective",
    "language": "en",
@@ -564,11 +316,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.802574+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.488415+00:00",
    "n_results": 8
   },
   {
-   "call_id": "089f80d3503d",
+   "call_id": "05501e24a8b0",
    "endpoint": "search",
    "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
    "language": "hi",
@@ -595,11 +347,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.805743+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.490463+00:00",
    "n_results": 8
   },
   {
-   "call_id": "01f746c33457",
+   "call_id": "73cd574032de",
    "endpoint": "search",
    "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
    "language": "hi",
@@ -626,11 +378,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.806542+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.490936+00:00",
    "n_results": 2
   },
   {
-   "call_id": "021bda34ed09",
+   "call_id": "6b024dd35d4e",
    "endpoint": "search",
    "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
    "language": "en",
@@ -657,11 +409,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.806737+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.491048+00:00",
    "n_results": 6
   },
   {
-   "call_id": "0d76dfb0128a",
+   "call_id": "056193e082ca",
    "endpoint": "search",
    "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
    "language": "en",
@@ -688,73 +440,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.809188+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.492692+00:00",
    "n_results": 8
   },
   {
-   "call_id": "d9698963e5d1",
-   "endpoint": "search",
-   "query": "मोबाइल टैरिफ बढ़ोतरी प्रीपेड प्लान लागू",
-   "language": "hi",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-03-01",
-    "end_date": "2026-03-31",
-    "language": "hi",
-    "search_depth": "basic",
-    "include_domains": [
-     "aajtak.in",
-     "navbharattimes.indiatimes.com",
-     "bhaskar.com",
-     "amarujala.com",
-     "jagran.com",
-     "livehindustan.com",
-     "abplive.com",
-     "hindi.news18.com",
-     "zeenews.india.com",
-     "ndtv.in",
-     "tv9hindi.com"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.810683+00:00",
-   "n_results": 8
-  },
-  {
-   "call_id": "27eaded70173",
-   "endpoint": "search",
-   "query": "मोबाइल टैरिफ बढ़ोतरी प्रीपेड प्लान लागू",
-   "language": "hi",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-02-19",
-    "end_date": "2026-02-28",
-    "language": "hi",
-    "search_depth": "basic",
-    "include_domains": [
-     "aajtak.in",
-     "navbharattimes.indiatimes.com",
-     "bhaskar.com",
-     "amarujala.com",
-     "jagran.com",
-     "livehindustan.com",
-     "abplive.com",
-     "hindi.news18.com",
-     "zeenews.india.com",
-     "ndtv.in",
-     "tv9hindi.com"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.814035+00:00",
-   "n_results": 1
-  },
-  {
-   "call_id": "d5236d112078",
+   "call_id": "bfbffe863ff7",
    "endpoint": "search",
    "query": "railway fare revision effective Indian Railways",
    "language": "en",
@@ -781,11 +471,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.814215+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.493702+00:00",
    "n_results": 6
   },
   {
-   "call_id": "3849c948f43b",
+   "call_id": "de39a8a316f8",
    "endpoint": "search",
    "query": "railway fare revision effective Indian Railways",
    "language": "en",
@@ -812,73 +502,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.816380+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.495059+00:00",
    "n_results": 6
   },
   {
-   "call_id": "f4f97ece28e3",
-   "endpoint": "search",
-   "query": "रेल किराया बढ़ा लागू भारतीय रेलवे",
-   "language": "hi",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-03-01",
-    "end_date": "2026-03-31",
-    "language": "hi",
-    "search_depth": "basic",
-    "include_domains": [
-     "aajtak.in",
-     "navbharattimes.indiatimes.com",
-     "bhaskar.com",
-     "amarujala.com",
-     "jagran.com",
-     "livehindustan.com",
-     "abplive.com",
-     "hindi.news18.com",
-     "zeenews.india.com",
-     "ndtv.in",
-     "tv9hindi.com"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.818626+00:00",
-   "n_results": 8
-  },
-  {
-   "call_id": "1303db7ce667",
-   "endpoint": "search",
-   "query": "रेल किराया बढ़ा लागू भारतीय रेलवे",
-   "language": "hi",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-02-19",
-    "end_date": "2026-02-28",
-    "language": "hi",
-    "search_depth": "basic",
-    "include_domains": [
-     "aajtak.in",
-     "navbharattimes.indiatimes.com",
-     "bhaskar.com",
-     "amarujala.com",
-     "jagran.com",
-     "livehindustan.com",
-     "abplive.com",
-     "hindi.news18.com",
-     "zeenews.india.com",
-     "ndtv.in",
-     "tv9hindi.com"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.821290+00:00",
-   "n_results": 8
-  },
-  {
-   "call_id": "a6daaf905a3a",
+   "call_id": "f23cadf76676",
    "endpoint": "search",
    "query": "NPPA medicine price revision effective",
    "language": "en",
@@ -905,11 +533,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.822396+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.496589+00:00",
    "n_results": 4
   },
   {
-   "call_id": "fc7138a6362c",
+   "call_id": "f03634cfe1db",
    "endpoint": "search",
    "query": "NPPA medicine price revision effective",
    "language": "en",
@@ -936,73 +564,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.823712+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.497447+00:00",
    "n_results": 6
   },
   {
-   "call_id": "0b02569c35a2",
-   "endpoint": "search",
-   "query": "दवाओं के दाम बढ़े एनपीपीए लागू",
-   "language": "hi",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-03-01",
-    "end_date": "2026-03-31",
-    "language": "hi",
-    "search_depth": "basic",
-    "include_domains": [
-     "aajtak.in",
-     "navbharattimes.indiatimes.com",
-     "bhaskar.com",
-     "amarujala.com",
-     "jagran.com",
-     "livehindustan.com",
-     "abplive.com",
-     "hindi.news18.com",
-     "zeenews.india.com",
-     "ndtv.in",
-     "tv9hindi.com"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.824318+00:00",
-   "n_results": 3
-  },
-  {
-   "call_id": "905727383b2b",
-   "endpoint": "search",
-   "query": "दवाओं के दाम बढ़े एनपीपीए लागू",
-   "language": "hi",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-02-19",
-    "end_date": "2026-02-28",
-    "language": "hi",
-    "search_depth": "basic",
-    "include_domains": [
-     "aajtak.in",
-     "navbharattimes.indiatimes.com",
-     "bhaskar.com",
-     "amarujala.com",
-     "jagran.com",
-     "livehindustan.com",
-     "abplive.com",
-     "hindi.news18.com",
-     "zeenews.india.com",
-     "ndtv.in",
-     "tv9hindi.com"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.825200+00:00",
-   "n_results": 8
-  },
-  {
-   "call_id": "1a18af72ed94",
+   "call_id": "f00294449f2e",
    "endpoint": "search",
    "query": "school fee hike academic session effective",
    "language": "en",
@@ -1029,11 +595,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.827018+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.497857+00:00",
    "n_results": 7
   },
   {
-   "call_id": "9186665be499",
+   "call_id": "35921f920d01",
    "endpoint": "search",
    "query": "school fee hike academic session effective",
    "language": "en",
@@ -1060,73 +626,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.829256+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.499317+00:00",
    "n_results": 5
   },
   {
-   "call_id": "34528329b1c4",
-   "endpoint": "search",
-   "query": "स्कूल फीस बढ़ोतरी नया सत्र लागू",
-   "language": "hi",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-03-01",
-    "end_date": "2026-03-31",
-    "language": "hi",
-    "search_depth": "basic",
-    "include_domains": [
-     "aajtak.in",
-     "navbharattimes.indiatimes.com",
-     "bhaskar.com",
-     "amarujala.com",
-     "jagran.com",
-     "livehindustan.com",
-     "abplive.com",
-     "hindi.news18.com",
-     "zeenews.india.com",
-     "ndtv.in",
-     "tv9hindi.com"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.831543+00:00",
-   "n_results": 8
-  },
-  {
-   "call_id": "a4b5d16c80f9",
-   "endpoint": "search",
-   "query": "स्कूल फीस बढ़ोतरी नया सत्र लागू",
-   "language": "hi",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-02-19",
-    "end_date": "2026-02-28",
-    "language": "hi",
-    "search_depth": "basic",
-    "include_domains": [
-     "aajtak.in",
-     "navbharattimes.indiatimes.com",
-     "bhaskar.com",
-     "amarujala.com",
-     "jagran.com",
-     "livehindustan.com",
-     "abplive.com",
-     "hindi.news18.com",
-     "zeenews.india.com",
-     "ndtv.in",
-     "tv9hindi.com"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.831767+00:00",
-   "n_results": 8
-  },
-  {
-   "call_id": "32dc83992d1c",
+   "call_id": "b4f406d60be1",
    "endpoint": "search",
    "query": "GST rate change effective from",
    "language": "en",
@@ -1153,11 +657,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.832451+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.500794+00:00",
    "n_results": 8
   },
   {
-   "call_id": "49d233c3d467",
+   "call_id": "310a2b412603",
    "endpoint": "search",
    "query": "GST rate change effective from",
    "language": "en",
@@ -1184,229 +688,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-20T16:08:00.835818+00:00",
+   "retrieved_at": "2026-10-21T14:01:58.502824+00:00",
    "n_results": 3
-  },
-  {
-   "call_id": "39bc1634c4be",
-   "endpoint": "search",
-   "query": "जीएसटी दर में बदलाव लागू",
-   "language": "hi",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-03-01",
-    "end_date": "2026-03-31",
-    "language": "hi",
-    "search_depth": "basic",
-    "include_domains": [
-     "aajtak.in",
-     "navbharattimes.indiatimes.com",
-     "bhaskar.com",
-     "amarujala.com",
-     "jagran.com",
-     "livehindustan.com",
-     "abplive.com",
-     "hindi.news18.com",
-     "zeenews.india.com",
-     "ndtv.in",
-     "tv9hindi.com"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.837591+00:00",
-   "n_results": 8
-  },
-  {
-   "call_id": "13361d64a53b",
-   "endpoint": "search",
-   "query": "जीएसटी दर में बदलाव लागू",
-   "language": "hi",
-   "params": {
-    "topic": "news",
-    "start_date": "2026-02-19",
-    "end_date": "2026-02-28",
-    "language": "hi",
-    "search_depth": "basic",
-    "include_domains": [
-     "aajtak.in",
-     "navbharattimes.indiatimes.com",
-     "bhaskar.com",
-     "amarujala.com",
-     "jagran.com",
-     "livehindustan.com",
-     "abplive.com",
-     "hindi.news18.com",
-     "zeenews.india.com",
-     "ndtv.in",
-     "tv9hindi.com"
-    ],
-    "exclude_domains": [
-     "mospi.gov.in"
-    ]
-   },
-   "retrieved_at": "2026-10-20T16:08:00.839373+00:00",
-   "n_results": 8
   }
  ],
  "quotes": [
-  {
-   "item": "onion",
-   "price": 33.0,
-   "unit": "kg",
-   "place": "Delhi",
-   "date": "2026-03-13",
-   "line": "Big Onions are currently trading at a wholesale base of ₹22, with retail prices capping at ₹33 per kg.",
-   "source": "tavily",
-   "tier": "exploratory",
-   "verified": true,
-   "url": "https://m.economictimes.com/news/new-updates/delhi-vegetable-price-today-13/03/2026-check-onion-tomato-and-potato-latest-rates-amid-fuel-crisis/articleshow/129537870.cms",
-   "language": "en"
-  },
-  {
-   "item": "onion",
-   "price": 27.5,
-   "unit": "kg",
-   "place": "Delhi",
-   "date": "2026-03-28",
-   "line": "राजधानी में प्याज खुदरा बाजार में 25 से 30 रुपये प्रति किलो के भाव से बिक रही है, जबकि थोक बाजार यानी आजादपुर मंडी में इसकी कीमत 8 से 18 रुपये प्रति किलो तक बनी हुई है।",
-   "source": "tavily",
-   "tier": "exploratory",
-   "verified": true,
-   "url": "https://navbharattimes.indiatimes.com/metro/delhi/other-news/oil-lpg-cylinder-crisis-onion-tomato-price-drop-delhi-farmers-loss-azadpur-mandi-rates/articleshow/129858799.cms",
-   "language": "hi"
-  },
-  {
-   "item": "onion",
-   "price": 27.5,
-   "unit": "kg",
-   "place": "Delhi",
-   "date": "2026-03-29",
-   "line": "दिल्ली के खुदरा बाजारों में पिछले करीब तीन महीनों से प्याज की कीमतें नियंत्रण में बनी हुई हैं. मौजूदा समय में प्याज 25 से 30 रुपये प्रति किलो के दायरे में बिक रही है. वहीं, थोक बाजार यानी आजादपुर मंडी में इसकी कीमत और भी कम होकर 8 से 18 रुपये प्रति किलो तक पहुंच गई है. कीमतों में इस गिरावट ने ग्राहकों को राहत जरूर दी है, लेकिन यह स्थिति लंबे समय तक बनी रहती है तो इसके असर दूरगामी हो सकते हैं.",
-   "source": "tavily",
-   "tier": "exploratory",
-   "verified": true,
-   "url": "https://www.abplive.com/states/delhi-ncr/delhi-onion-tomato-price-drop-farmers-loss-azadpur-mandi-vegetable-rate-ann-3107910",
-   "language": "hi"
-  },
-  {
-   "item": "tomato",
-   "price": 21.5,
-   "unit": "kg",
-   "place": "Delhi",
-   "date": "2026-03-13",
-   "line": "| Tomato | ₹16 | ₹19 - ₹24 |",
-   "source": "tavily",
-   "tier": "exploratory",
-   "verified": true,
-   "url": "https://m.economictimes.com/news/new-updates/delhi-vegetable-price-today-13/03/2026-check-onion-tomato-and-potato-latest-rates-amid-fuel-crisis/articleshow/129537870.cms",
-   "language": "en"
-  },
-  {
-   "item": "tomato",
-   "price": 13.5,
-   "unit": "kg",
-   "place": "Chennai Koyambedu",
-   "date": "2026-03-13",
-   "line": "| 1 | Tomato | 10 | 13.5 | 1 Kg |",
-   "source": "tavily",
-   "tier": "exploratory",
-   "verified": true,
-   "url": "https://m.economictimes.com/news/new-updates/chennai-vegetable-price-today-13/03/2026-latest-onion-tomato-and-potato-rates-amid-fuel-crisis/articleshow/129539160.cms",
-   "language": "en"
-  },
-  {
-   "item": "tomato",
-   "price": 26.0,
-   "unit": "kg",
-   "place": "Chennai Koyambedu",
-   "date": "2026-03-13",
-   "line": "| 2 | Bangalore Tomato | 21 | 26 | 1 Kg |",
-   "source": "tavily",
-   "tier": "exploratory",
-   "verified": true,
-   "url": "https://m.economictimes.com/news/new-updates/chennai-vegetable-price-today-13/03/2026-latest-onion-tomato-and-potato-rates-amid-fuel-crisis/articleshow/129539160.cms",
-   "language": "en"
-  },
-  {
-   "item": "tomato",
-   "price": 45.0,
-   "unit": "kg",
-   "place": "",
-   "date": "2026-03-07",
-   "line": "सब्जियों की कीमतों में भी तेजी देखने को मिल रही है। टमाटर 40 से 50 रुपये प्रति किलो, आलू 25 से 30 रुपये, प्याज 30 से 35 रुपये, खीरा 40 से 60 रुपये, हरी मिर्च 80 से 100 रुपये और धनिया 120 से 150 रुपये प्रति किलो तक पहुंच गया है। व्यापारियों का कहना है कि सामान्य दिनों की तुलना में सब्जियों के दाम में 15 से 25 प्रतिशत तक की बढ़ोतरी हुई है।",
-   "source": "tavily",
-   "tier": "exploratory",
-   "verified": true,
-   "url": "https://www.bhaskar.com/g/local/uttar-pradesh/meerut/news/fruits-apple-pomegranate-rates-ramzan-inflation-india-137373140.html",
-   "language": "hi"
-  },
-  {
-   "item": "tomato",
-   "price": 27.5,
-   "unit": "kg",
-   "place": "Delhi",
-   "date": "2026-03-29",
-   "line": "प्याज की तरह टमाटर के दाम भी इन दिनों नियंत्रण में हैं. दिल्ली में टमाटर 25 से 30 रुपये प्रति किलो के आसपास बिक रहा है. अच्छी पैदावार और पर्याप्त आपूर्ति के चलते कीमतों में नरमी बनी हुई है. हालांकि, यह स्थिति किसानों के लिए चुनौतीपूर्ण बनी हुई है, क्योंकि अधिक उत्पादन के बावजूद उन्हें बेहतर दाम नहीं मिल पा रहे हैं.",
-   "source": "tavily",
-   "tier": "exploratory",
-   "verified": true,
-   "url": "https://www.abplive.com/states/delhi-ncr/delhi-onion-tomato-price-drop-farmers-loss-azadpur-mandi-vegetable-rate-ann-3107910",
-   "language": "hi"
-  },
-  {
-   "item": "tomato",
-   "price": 27.5,
-   "unit": "kg",
-   "place": "Delhi",
-   "date": "2026-03-28",
-   "line": "अच्छी पैदावार के चलते दिल्ली में टमाटर भी 25 से 30 रुपये प्रति किलो के आसपास बिक रहा है।",
-   "source": "tavily",
-   "tier": "exploratory",
-   "verified": true,
-   "url": "https://navbharattimes.indiatimes.com/metro/delhi/other-news/oil-lpg-cylinder-crisis-onion-tomato-price-drop-delhi-farmers-loss-azadpur-mandi-rates/articleshow/129858799.cms",
-   "language": "hi"
-  },
-  {
-   "item": "lpg",
-   "price": 913.0,
-   "unit": "cylinder",
-   "place": "New Delhi",
-   "date": "2026-03-24",
-   "line": "LPG Price Today: Domestic LPG Cylinder Costs Rs 913 in New Delhi",
-   "source": "tavily",
-   "tier": "exploratory",
-   "verified": true,
-   "url": "https://m.economictimes.com/news/new-updates/lpg-price-today-march-15-has-the-cost-of-cooking-gas-changed-check-the-latest-cylinder-rates-in-your-city/articleshow/129584260.cms",
-   "language": "en"
-  },
-  {
-   "item": "lpg",
-   "price": 913.0,
-   "unit": "cylinder",
-   "place": "Delhi",
-   "date": "2026-03-07",
-   "line": "The price of a 14.2 kg domestic LPG cylinder in Delhi has increased from Rs 853 to Rs 913. [...] Domestic LPG cylinder prices increased by Rs 60 from March 7 nationwide",
-   "source": "tavily",
-   "tier": "exploratory",
-   "verified": true,
-   "url": "https://www.ndtv.com/india-news/iran-israel-war-domestic-lpg-price-hiked-by-rs-60-commercial-cylinder-up-rs-115-from-today-11180069",
-   "language": "en"
-  },
-  {
-   "item": "lpg",
-   "price": 987.0,
-   "unit": "cylinder",
-   "place": "Delhi",
-   "date": "2026-03-08",
-   "line": "LPG Cylinder Price Rise Heats Up Inflation Debate As Opposition Targets Modi Government [...] price of Rs 987 for a 14.2-kg cylinder in Delhi in March 2026, they said.Officials said the three state-owned OMCs — Indian Oil, Bharat Petroleum and Hindustan Petroleum — absorbed losses of around Rs 39,000 crore in 2024-25 to protect domestic LPG consumers.",
-   "source": "tavily",
-   "tier": "exploratory",
-   "verified": true,
-   "url": "https://timesofindia.indiatimes.com/india/cooking-gas-price-up-by-rs-60-a-cylinder/articleshow/129237027.cms",
-   "language": "en"
-  },
   {
    "item": "gold",
    "price": 167471.0,
@@ -1867,127 +1153,92 @@
  "events": [
   {
    "item": "lpg",
-   "seller": "",
-   "place": "Delhi",
-   "pct_change": 7.033997655334123,
+   "seller": "government sources / oil companies",
+   "place": "across the country",
+   "pct_change": 6.950477845351869,
    "effective_date": "2026-03-07",
    "days_in_month_share": 0.8064516129032258,
-   "confirmed_by_2_sources": false,
-   "line": "> The price of a 14.2-kg domestic LPG cylinder has been increased by Rs 60. In Delhi, 14.2-Kg Domestic LPG Cylinder prices increased from Rs 853 to Rs 913. New rate will be effective from March 7: Sources pic.twitter.com/Mxh7QeIyfl",
-   "url": "https://www.etvbharat.com/hi/business/domestic-lpg-price-hiked-by-rs-60-commercial-cylinder-up-rs-115-from-march-7-hin26030700389",
+   "confirmed_by_2_sources": true,
+   "line": "## The price of domestic LPG cylinders has been increased with effect from Saturday, March 7, with the cost of a 14.2-kg household cooking gas cylinder rising by Rs 60 across the country, according to sources.",
+   "url": "https://www.ndtv.com/india-news/iran-israel-war-domestic-lpg-price-hiked-by-rs-60-commercial-cylinder-up-rs-115-from-today-11180069",
    "sources": [
-    "https://www.etvbharat.com/hi/business/domestic-lpg-price-hiked-by-rs-60-commercial-cylinder-up-rs-115-from-march-7-hin26030700389"
+    "https://timesofindia.indiatimes.com/business/india-business/lpg-price-hike-domestic-cylinders-may-rise-by-rs-60-commercial-cylinders-by-rs-115-report/articleshow/129179249.cms",
+    "https://www.etvbharat.com/hi/business/domestic-lpg-price-hiked-by-rs-60-commercial-cylinder-up-rs-115-from-march-7-hin26030700389",
+    "https://www.ndtv.com/india-news/iran-israel-war-domestic-lpg-price-hiked-by-rs-60-commercial-cylinder-up-rs-115-from-today-11180069",
+    "https://www.thequint.com/news/breaking-news/domestic-lpg-cylinder-price-hike-west-asia-conflict-india-latest-news"
    ],
    "verified": true,
    "cpi_code": "04.5.2.2.1.01",
-   "change_prorated": 0.05672578754301712,
-   "announced_date": "2026-03-06",
-   "old_price": 853,
-   "new_price": 913,
-   "language": "hi"
+   "change_prorated": 0.056052240688321514,
+   "announced_date": null,
+   "old_price": null,
+   "new_price": null,
+   "language": "en",
+   "scope": "national",
+   "states": [],
+   "weight": 1.0,
+   "weight_source": "national (weight 1)",
+   "applied_change": 0.056052240688321514,
+   "abs_change": 60.0,
+   "base_price": 863.25,
+   "base_source": "IOCL domestic 14.2 kg, 4-metro mean"
   }
  ],
  "counts": {
-  "pages_seen": 149,
-  "pages_kept": 83,
-  "quotes_extracted": 93,
-  "quotes_verified": 91,
-  "events_extracted": 81,
+  "pages_seen": 89,
+  "pages_kept": 45,
+  "quotes_extracted": 0,
+  "quotes_verified": 0,
+  "events_extracted": 72,
   "events_verified": 1
  },
  "dropped": [
   {
-   "reason": "event: page undated",
-   "count": 69
+   "reason": "event: gatekeeper: no Indian price on page",
+   "count": 44
   },
   {
-   "reason": "event: gatekeeper: no Indian price on page",
-   "count": 58
+   "reason": "event: page undated",
+   "count": 29
   },
   {
    "reason": "event: different kind of price (not what this search is for)",
-   "count": 34
+   "count": 29
   },
   {
    "reason": "event: unverified (no claimed number in the cited line)",
-   "count": 28
-  },
-  {
-   "reason": "quote: wholesale price",
-   "count": 24
-  },
-  {
-   "reason": "quote: different item (item not named in the cited line)",
-   "count": 19
-  },
-  {
-   "reason": "quote: page undated",
-   "count": 16
-  },
-  {
-   "reason": "event: extract failed",
-   "count": 11
+   "count": 14
   },
   {
    "reason": "event: not the CPI variety (e.g. commercial cylinder, jet fuel)",
    "count": 10
   },
   {
-   "reason": "quote: line refers to another month",
+   "reason": "event: extract failed",
    "count": 9
-  },
-  {
-   "reason": "quote: gatekeeper: no Indian price on page",
-   "count": 8
-  },
-  {
-   "reason": "quote: not the CPI variety (e.g. not domestic 14.2 kg)",
-   "count": 8
   },
   {
    "reason": "event: no effective date",
    "count": 8
   },
   {
-   "reason": "quote: syndicated duplicate",
+   "reason": "event: effective date outside the month",
    "count": 6
   },
   {
-   "reason": "quote: not the CPI variety (e.g. commercial cylinder)",
-   "count": 5
+   "reason": "event: duplicate of an event already kept (same kind, date, scope, % within 0.5 pp)",
+   "count": 3
   },
   {
-   "reason": "quote: unit not convertible",
-   "count": 4
-  },
-  {
-   "reason": "quote: extract failed",
+   "reason": "event: search not in cache (frozen cache-only re-run sends no calls)",
    "count": 2
   },
   {
-   "reason": "quote: unverified (number not in the cited line)",
-   "count": 2
-  },
-  {
-   "reason": "quote: outside India",
-   "count": 2
-  },
-  {
-   "reason": "quote: price outside sanity range",
-   "count": 2
+   "reason": "event: change not computable (needs old+new price, a % change, or an amount with an official base)",
+   "count": 1
   }
  ],
  "failed_sources": [
-  {
-   "url": "https://www.bssnews.net/district/365879",
-   "via": "Tavily Extract",
-   "reason": "Failed to fetch url"
-  },
-  {
-   "url": "https://www.indiatv.in/viral/news/how-much-does-one-liter-petrol-price-in-iran-fuel-price-today-know-amazing-facts-2026-03-07-1202535",
-   "via": "Tavily Extract",
-   "reason": "Failed to fetch url"
-  },
   {
    "url": "https://www.theguardian.com/australia-news/2026/mar/07/oat-soy-plant-based-milk-sustainability-environmental-comparison",
    "via": "Tavily Extract",
@@ -2032,164 +1283,61 @@
    "url": "https://nppa.gov.in/storage/uploads/pdf/144th-Minutes_compressed.pdf",
    "via": "Tavily Extract",
    "reason": "Failed to fetch url"
-  },
-  {
-   "url": "https://www.fiercepharma.com/marketing/lilly-adds-multidose-zepbound-pens-self-pay-menu-after-fda-nod",
-   "via": "Tavily Extract",
-   "reason": "Failed to fetch url"
-  },
-  {
-   "url": "https://www.indexjournal.com/news/national/novo-nordisk-to-slash-prices-of-weightloss-drugs-in-us/article_818b7f8f-7816-55ca-94be-6d1a228969c3.html",
-   "via": "Tavily Extract",
-   "reason": "Failed to fetch url"
   }
  ],
  "detail": {
+  "test_month": true,
+  "scored": false,
+  "layers": "events + observed (no spine, no quotes)",
   "observed": {
    "gold": {
     "avg_now": 153266.17647058822,
     "days_now": 17,
     "avg_prev": 156655.46153846153,
     "days_prev": 13,
-    "change": -0.021635281876471235,
-    "source": "IBJA daily bullion report PDFs"
+    "change": -0.021635281876471235
    },
    "silver": {
     "avg_now": 248501.4705882353,
     "days_now": 17,
     "avg_prev": 260242.84615384616,
     "days_prev": 13,
-    "change": -0.045116996448270386,
-    "source": "IBJA daily bullion report PDFs"
+    "change": -0.045116996448270386
    },
    "lpg": {
     "avg_now": 911.6370967741935,
     "avg_prev": 863.25,
-    "source": "https://iocl.com/indane-14Kg-nonsubsid-previous-price",
     "change": 0.056052240688321486
-   }
-  },
-  "passthrough_file": "config/passthrough.json",
-  "spine": {
-   "onion": {
-    "change": null,
-    "note": "spine not loaded yet (data/spine.csv)"
-   },
-   "tomato": {
-    "change": null,
-    "note": "spine not loaded yet (data/spine.csv)"
-   },
-   "potato": {
-    "change": null,
-    "note": "spine not loaded yet (data/spine.csv)"
-   },
-   "tur dal": {
-    "change": null,
-    "note": "spine not loaded yet (data/spine.csv)"
-   },
-   "edible oils": {
-    "change": null,
-    "note": "spine not loaded yet (data/spine.csv)"
-   },
-   "rice": {
-    "change": null,
-    "note": "spine not loaded yet (data/spine.csv)"
-   },
-   "atta": {
-    "change": null,
-    "note": "spine not loaded yet (data/spine.csv)"
-   },
-   "milk": {
-    "change": null,
-    "note": "spine not loaded yet (data/spine.csv)"
-   },
-   "eggs": {
-    "change": null,
-    "note": "spine not loaded yet (data/spine.csv)"
-   }
-  },
-  "matched": {
-   "onion": {
-    "change": null,
-    "matched_cities": [],
-    "n_quotes": 3
-   },
-   "tomato": {
-    "change": null,
-    "matched_cities": [],
-    "n_quotes": 6
-   },
-   "lpg": {
-    "change": null,
-    "matched_cities": [],
-    "n_quotes": 3
    },
    "petrol": {
+    "avg_now": null,
+    "days_now": 0,
+    "avg_prev": null,
+    "days_prev": 0,
     "change": null,
-    "matched_cities": [],
-    "n_quotes": 0
+    "note": "PPAC daily Delhi rows exist only from 15 May 2026"
    }
   },
-  "quote_stats": {
-   "_month": "2026-03",
-   "drops": {
-    "extract failed": 2,
-    "unit not convertible": 4,
-    "wholesale price": 24,
-    "gatekeeper: no Indian price on page": 8,
-    "unverified (number not in the cited line)": 2,
-    "outside India": 2,
-    "page undated": 16,
-    "line refers to another month": 9,
-    "not the CPI variety (e.g. commercial cylinder)": 5,
-    "not the CPI variety (e.g. not domestic 14.2 kg)": 8,
-    "different item (item not named in the cited line)": 19,
-    "price outside sanity range": 2,
-    "syndicated duplicate": 6
-   },
-   "leak_drops": 0,
-   "leak_examples": [],
-   "by_lang": {
-    "en": {
-     "pages": 23,
-     "pages_passed_gate": 15,
-     "quotes": 59,
-     "verified": 59,
-     "kept": 9
-    },
-    "hi": {
-     "pages": 13,
-     "pages_passed_gate": 13,
-     "quotes": 34,
-     "verified": 32,
-     "kept": 9
-    }
-   },
-   "failed_sources": [
-    {
-     "url": "https://www.bssnews.net/district/365879",
-     "via": "Tavily Extract",
-     "reason": "Failed to fetch url"
-    },
-    {
-     "url": "https://www.indiatv.in/viral/news/how-much-does-one-liter-petrol-price-in-iran-fuel-price-today-know-amazing-facts-2026-03-07-1202535",
-     "via": "Tavily Extract",
-     "reason": "Failed to fetch url"
-    }
-   ],
-   "pages_seen": 36,
-   "pages_kept": 28
+  "passthrough": {
+   "gold": 0.4943994544942063,
+   "silver": 0.6756851279982803,
+   "lpg": 0.4913378226898945,
+   "petrol": 1.0
   },
   "event_stats": {
    "_month": "2026-03",
    "drops": {
-    "extract failed": 11,
-    "gatekeeper: no Indian price on page": 58,
-    "unverified (no claimed number in the cited line)": 28,
+    "extract failed": 9,
+    "gatekeeper: no Indian price on page": 44,
+    "unverified (no claimed number in the cited line)": 14,
+    "effective date outside the month": 6,
     "no effective date": 8,
-    "page undated": 69,
+    "page undated": 29,
     "not the CPI variety (e.g. commercial cylinder, jet fuel)": 10,
-    "different kind of price (not what this search is for)": 34
+    "change not computable (needs old+new price, a % change, or an amount with an official base)": 1,
+    "different kind of price (not what this search is for)": 29,
+    "search not in cache (frozen cache-only re-run sends no calls)": 2,
+    "duplicate of an event already kept (same kind, date, scope, % within 0.5 pp)": 3
    },
    "leak_drops": 0,
    "leak_examples": [],
@@ -2238,196 +1386,21 @@
      "url": "https://nppa.gov.in/storage/uploads/pdf/144th-Minutes_compressed.pdf",
      "via": "Tavily Extract",
      "reason": "Failed to fetch url"
-    },
-    {
-     "url": "https://www.fiercepharma.com/marketing/lilly-adds-multidose-zepbound-pens-self-pay-menu-after-fda-nod",
-     "via": "Tavily Extract",
-     "reason": "Failed to fetch url"
-    },
-    {
-     "url": "https://www.indexjournal.com/news/national/novo-nordisk-to-slash-prices-of-weightloss-drugs-in-us/article_818b7f8f-7816-55ca-94be-6d1a228969c3.html",
-     "via": "Tavily Extract",
-     "reason": "Failed to fetch url"
     }
    ],
-   "pages_seen": 113,
-   "pages_kept": 55,
-   "events_extracted": 81
-  },
-  "prev_month_quotes": [
-   {
-    "item": "tomato",
-    "price": 9.0,
-    "unit": "kg",
-    "city": "hyderabad",
-    "place": "Hyderabad",
-    "date": "2026-02-22",
-    "quote": "According to Venkateshwarlu, tomato prices in Hyderabad have hovered between ₹8 and ₹10 per kg over the past month. “Last year during the same period, tomatoes were selling at ₹46 per kg. This season, prices are not crossing ₹20 due to heavy arrivals,” he said.",
-    "retail_or_wholesale": "retail",
-    "lang": "en",
-    "url": "https://www.deccanchronicle.com/southern-states/andhra-pradesh/tomato-prices-crash-in-manyam-district-1939113",
-    "date_source": "tavily"
-   },
-   {
-    "item": "tomato",
-    "price": 15.0,
-    "unit": "kg",
-    "city": "",
-    "place": "e-commerce",
-    "date": "2026-02-22",
-    "quote": "Consumers have mixed feelings. Some are buying in bulk to prepare chutneys for upcoming journeys, while others note that tomatoes cannot be stored for long. [...] E-commerce websites are quoting local tomatoes at ₹15 per kg and hybrid varieties at up to ₹50 per kg. Farmers from Medchal and other districts said excess supply had led to the crash.",
-    "retail_or_wholesale": "retail",
-    "lang": "en",
-    "url": "https://www.deccanchronicle.com/southern-states/andhra-pradesh/tomato-prices-crash-in-manyam-district-1939113",
-    "date_source": "tavily"
-   },
-   {
-    "item": "tomato",
-    "price": 20.0,
-    "unit": "kg",
-    "city": "",
-    "place": "India",
-    "date": "2026-02-13",
-    "quote": "Presently, the growers are selling their produce at ₹6 to ₹7 per kg to the wholesale dealers, who are selling it to the retailers for ₹10 to ₹15 per kg. The retailers are selling tomatoes at ₹20 per kg in the open market.",
-    "retail_or_wholesale": "retail",
-    "lang": "en",
-    "url": "https://www.thehindu.com/news/national/karnataka/sharp-decline-in-tomato-prices-in-open-market-worry-farmers/article70628437.ece",
-    "date_source": "tavily"
-   }
-  ],
-  "prev_month_quote_stats": {
-   "_month": "2026-02",
-   "drops": {
-    "extract failed": 1,
-    "gatekeeper: no Indian price on page": 6,
-    "different item (item not named in the cited line)": 36,
-    "page undated": 22,
-    "outside India": 3,
-    "wholesale price": 14,
-    "line refers to another month": 10,
-    "price outside sanity range": 2,
-    "unverified (number not in the cited line)": 1,
-    "not the CPI variety (e.g. commercial cylinder)": 9,
-    "not the CPI variety (e.g. not domestic 14.2 kg)": 6,
-    "unit not convertible": 1,
-    "syndicated duplicate": 2
-   },
-   "leak_drops": 0,
-   "leak_examples": [],
-   "by_lang": {
-    "en": {
-     "pages": 23,
-     "pages_passed_gate": 17,
-     "quotes": 58,
-     "verified": 58,
-     "kept": 5
-    },
-    "hi": {
-     "pages": 9,
-     "pages_passed_gate": 9,
-     "quotes": 29,
-     "verified": 28,
-     "kept": 0
-    }
-   },
-   "failed_sources": [
-    {
-     "url": "https://www.facebook.com/pnagovph/posts/local-red-onions-sell-for-php-90-per-kg-in-divisoria-manila-on-monday-feb-2-2026/1306786954831089",
-     "via": "Tavily Extract",
-     "reason": "Failed to fetch url"
-    }
-   ],
-   "pages_seen": 32,
-   "pages_kept": 26
+   "pages_seen": 89,
+   "pages_kept": 45,
+   "events_extracted": 72
   },
   "event_search_window": {
    "pre_days": 10,
    "applied_by": "effective date inside the month"
   },
-  "ibja_reports_used": [
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2006-01-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2013-01-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2027-01-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2003-02-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2021-01-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2010-02-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2024-02-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2003-03-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2010-03-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2024-03-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2007-04-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2001-04-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2015-04-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2012-05-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2019-05-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2026-05-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2016-06-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2023-06-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2003-06-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2030-06-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2007-07-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2014-07-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2028-07-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2011-08-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2018-08-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2025-08-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2008-09-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2015-09-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2022-09-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2029-09-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2002-12-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2022-12-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2029-12-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2005-01-2026.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2012-01-2026.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2019-01-2026.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2002-02-2026.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2016-02-2026.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2023-02-2026.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2002-03-2026.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2009-03-2026.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2023-03-2026.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2030-03-2026.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2017-03-2026.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2006-04-2026.pdf"
+  "credits_this_month": 0,
+  "budgets": [
+   "replay-layers",
+   "replay-layers-month/2026-03"
   ],
-  "ibja_reports_failed": [
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2018-02-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2018-03-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2022-04-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2029-04-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2006-05-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2010-06-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2022-07-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2005-08-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2002-09-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2007-10-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2014-10-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2021-10-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2028-10-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2004-11-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2011-11-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2018-11-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2025-11-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2009-12-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2016-12-2025.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2027-01-2026.pdf",
-   "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2010-02-2026.pdf"
-  ],
-  "tavily_params": {
-   "topic": "news",
-   "search_depth": "basic",
-   "max_results": 8,
-   "include_domains_mode": "prefer",
-   "exclude_domains": [
-    "mospi.gov.in"
-   ],
-   "extract_top": 6,
-   "chunks_per_source": 5
-  },
-  "credits_this_run": 0,
-  "credits_toward_cap": 103,
-  "cap": 150,
   "seconds": 0
  }
 }

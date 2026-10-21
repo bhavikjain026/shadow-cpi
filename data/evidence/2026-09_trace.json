@@ -28,7 +28,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "Milk Price Hike: Producers demand Rs 8 per litre, Nandini Milk to get costlier in Karnataka ahead of festivals",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "no effective date"
   },
   {
    "kind": "milk",
@@ -88,7 +88,7 @@
    "pct_change": null,
    "effective_date": "September 1, 2026",
    "line": "New Delhi: What can be termed as bad news for Mumbaikars, the milk prices in the city have increased by Rs 9 per litre.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -118,7 +118,7 @@
    "pct_change": null,
    "effective_date": "today",
    "line": "## The wholesale milk rate in Mumbai will move from Rs 93 to Rs 102 per litre. The Bombay Milk Producers Association has announced the hike in the wholesale price of buffalo milk, effective from today.",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -133,7 +133,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "ALSO READ: Amul Hikes Milk Prices By Up To Rs 4 Per Litre: Check Revised Rates",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "no effective date"
   },
   {
    "kind": "milk",
@@ -148,7 +148,7 @@
    "pct_change": null,
    "effective_date": "September 1",
    "line": "Bad news for Mumbaikars! Milk prices rise by Rs 9 per litre from September 1; wholesale rates jump from Rs 93 to Rs 102 per litre [...] mumbai milk price",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -163,7 +163,7 @@
    "pct_change": null,
    "effective_date": "September 1",
    "line": "The Bombay Milk Producers Association has announced a ₹9-per-litre increase in the wholesale price of buffalo milk, effective September 1. The wholesale rate will move from ₹93 to ₹102 per litre. The revised structure is expected to remain in place for six months.",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "milk",
@@ -193,7 +193,7 @@
    "pct_change": null,
    "effective_date": "October 1",
    "line": "इंदौर में अब दूध उपभोक्ताओं को 65 रुपये प्रति लीटर मिलेगा।",
-   "verdict": "no effective date"
+   "verdict": "effective date outside the month"
   },
   {
    "kind": "milk",
@@ -643,7 +643,7 @@
    "pct_change": 6.83,
    "effective_date": "September 1, 2026",
    "line": "संयुक्त विद्युत नियामक आयोग (JERC) ने वित्त वर्ष 2026-27 के लिए बिजली की खुदरा दरों में औसतन 6.83 प्रतिशत की बढ़ोतरी को मंजूरी दी है.",
-   "verdict": "no effective date"
+   "verdict": "kept"
   },
   {
    "kind": "mobile",
@@ -688,7 +688,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "Earlier this month, Bharti Airtel removed select entry-level prepaid plans with 28- to 60-day validity, effectively raising the price of some of its lower-end offerings. In the following days, Reliance Jio took a different approach. It retained its Rs299 entry-level daily “unlimited” data plan and reintroduced Jio Prime at a one-time fee of Rs 300.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "no effective date"
   },
   {
    "kind": "mobile",
@@ -703,7 +703,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "Earlier this month, Bharti Airtel removed select entry-level prepaid plans with 28- to 60-day validity, effectively raising the price of some of its lower-end offerings. In the following days, Reliance Jio took a different approach. It retained its Rs299 entry-level daily “unlimited” data plan and reintroduced Jio Prime at a one-time fee of Rs 300.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "no effective date"
   },
   {
    "kind": "school_fee",
