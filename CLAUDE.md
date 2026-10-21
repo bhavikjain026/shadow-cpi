@@ -19,7 +19,7 @@ All build prompts are in **PROMPTS.md** in this folder (no sign-in needed). Prom
 
 ## Scope (must / should / could)
 - Must: checks, official data + baselines, government price spine, event layer, gold/silver observed, carve-out aggregation, 3-way replay, all web data via Tavily, Tavily attribution + report card, October seal, app (Home, Evidence, Scoreboard, Flight Recorder), README + video.
-- Should: coverage meter, contributions, "Try to prove this wrong", reporter brief, pass-through ratio, Map/Crawl of official sites, evidence chasing, "Run now" with a daily cap, price-change-radar package.
+- Should: coverage meter, contributions, "Try to prove this wrong", reporter brief, pass-through ratio, Map/Crawl of official sites, evidence chasing, "Run now" with a daily cap.
 - Could: map view, Hindi price quotes, online retail prices, mandi early warning, weekly automation.
 
 Key dates: feature freeze 27 Oct; seal + submit 29 Oct (deadline 30 Oct 10:00 PT); October CPI release 12 Nov; judging 1–15 Dec (app must stay free and live); November CPI release scheduled 12 Dec (a Saturday, so likely Mon 14 Dec, still inside judging).
