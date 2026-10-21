@@ -159,3 +159,5 @@ parameter change, nothing tuned on a 2026 result. **No test month has been score
 - R1, the LPG hike of 8 Apr 2025, is now found through IOCL's official revision dated 2025-04-08.
 - **Lost:** one event, the news-layer LPG hike of 8 Apr 2025, by rule (a). It is replaced by the IOCL series.
 - **Gained:** none. All other 2025 events are unchanged. Files: `results/recall_audit/amend1_*`.
+
+**Commit:** `6faa66b` (Amendment 1 code, config, tests and this section).
