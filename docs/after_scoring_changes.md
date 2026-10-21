@@ -19,7 +19,7 @@ is listed here with its date, reason and commit. None of them changes a scored r
   Amendment 2. Code: `shadow_cpi/live_range.py`; tests: `tests/test_build_nowcast.py`.
 - **Effect on October (dry run, 2026-10-21):** width 0.568 pp (± 0.284) instead of 0.470 pp. The new range is
   centred on the prediction; the pre-registered one sat above it, because (c) under-predicted in 7 of 9 months.
-- **Commit:** `COMMIT_PENDING`
+- **Commit:** `afc2241`
 
 ## 2. October builder (`build_nowcast.py`) and a reusable observed-series step
 
@@ -35,4 +35,4 @@ is listed here with its date, reason and commit. None of them changes a scored r
   evidence cutoff instead (min(month end, cutoff)), because a list saved on 29 Oct can never be dated after 31 Oct
   before the seal. For the 9 scored months this gives the same answer (checked). If the owner prefers the month-end
   reading, October LPG is always a gap and follows trend.
-- **Commit:** `COMMIT_PENDING`
+- **Commit:** `afc2241`

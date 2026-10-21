@@ -196,4 +196,4 @@ rule, window or model changes. The prediction itself is unchanged: `predict_mont
 With the 9 scored misses: *h* = 0.284 pp, so the range is 0.568 pp wide (the pre-registered October range would
 have been 0.470 pp, from −0.14 to +0.33 pp around the prediction). The floor does not bind.
 
-**Commit:** see `docs/after_scoring_changes.md`.
+**Commit:** `afc2241` (Amendment 2 code, docs and tests).
