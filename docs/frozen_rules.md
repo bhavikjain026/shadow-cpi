@@ -167,3 +167,4 @@ whose same-line group was averaged afterwards was never compared with its twins 
 three milk types next to another report of the same hike). The two steps now run in order: same-line merge first,
 then rule (e). This is how the written rules read, so no rule changed. 2025 re-check: recall 3 of 4, no event
 gained or lost (`results/recall_audit/amend1b_*`).
+Bug fix commit: `64f2334`.
