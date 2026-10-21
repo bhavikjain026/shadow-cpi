@@ -23,13 +23,15 @@ changes a rule, factor or filter.
       with the 10-day pre-window, and the new fuel kind only if PPAC lacks October. Hard caps apply.
 - [ ] **Build `results/nowcast_2026-10.json`** with model (c) (`shadow_cpi.predict`). It needs:
       - `headline_yoy`;
-      - the 80% range from **all 9** replay misses (prediction −0.14 / +0.33 pp, per `docs/preregistration.md`);
+      - the 80% range by **Amendment 2** (prediction ± 80th percentile of |miss| of (c) over the 9 scored months,
+        floor = the pre-registered width; ± 0.284 pp) and P(headline ≥ 6.0%) (`shadow_cpi/live_range.py`);
       - the skeptic (live month: search + extract; ≥ 2 verified contrary quotes → widen by 50%);
       - coverage, top 3 contributors (pp), with/without-Tavily attribution, `evidence_cutoff_utc`, manifest path,
         code commit, model IDs.
 
-      ⚠️ The builder script for this file is **not written yet** (the replay used `tools/score_replay.py`). It
-      must call the same `predict_month(..., "c", ...)`, so the code that was scored is the code that is sealed.
+      Builder: `python build_nowcast.py 2026-10 --cutoff 2026-10-28 --skeptic` (dry run first with `--dry-run`, 0
+      credits). It calls the scored `predict_month(..., "c", ...)`. ⚠️ Its skeptic is the replay one (search
+      snippets); the live-month extract step (cut 4) is not written yet.
 - [ ] Commit everything (the real seal refuses with uncommitted changes).
 
 ## 3. Seal (29 Oct)

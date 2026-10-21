@@ -168,3 +168,32 @@ three milk types next to another report of the same hike). The two steps now run
 then rule (e). This is how the written rules read, so no rule changed. 2025 re-check: recall 3 of 4, no event
 gained or lost (`results/recall_audit/amend1b_*`).
 Bug fix commit: `64f2334`.
+
+## Amendment 2 (after scoring; live months only)
+
+**Date:** 2026-10-21. **Commit:** see the line at the end of this section. Also logged in
+`docs/after_scoring_changes.md`.
+
+**Why:** the scored replay put the official figure inside the pre-registered leave-one-out 80% range in only
+**5 of 9** months, so that range is too narrow to carry into the seal. The owner decided on 2026-10-21 to widen the
+range for the live months only.
+
+**What stays exactly as it is:** the scored Jan–Sep results (`results/replay.csv`, `results/scoreboard.md`,
+`results/score_lock.json`), their leave-one-out ranges, and the reported **5-of-9** coverage. No factor, filter,
+rule, window or model changes. The prediction itself is unchanged: `predict_month(month, "c", ...)`.
+
+**What changes, for October and November 2026 only** (`shadow_cpi/live_range.py`):
+- **80% range** = prediction ± *h*, where *h* = the 80th percentile (linear interpolation) of |miss| over the 9
+  scored out-of-sample misses of (c) (prediction − published YoY, unrounded, from
+  `results/replay_predictions.json`).
+- **Floor:** the range is never narrower than the pre-registered one (q10–q90 of the 9 signed misses). If
+  2*h* is smaller, *h* = that width ÷ 2.
+- The pre-registered skeptic rule still applies after this: 2 or more verified contrary quotes → *h* × 1.5.
+- **New output:** P(headline ≥ 6.0%), from the same range: a normal distribution centred on the prediction whose
+  central 80% is the range (σ = *h* ÷ 1.2816). 6.0% is the RBI's Q3 projection (given by the owner on 2026-10-21;
+  check the live RBI statement before quoting it).
+
+With the 9 scored misses: *h* = 0.284 pp, so the range is 0.568 pp wide (the pre-registered October range would
+have been 0.470 pp, from −0.14 to +0.33 pp around the prediction). The floor does not bind.
+
+**Commit:** see `docs/after_scoring_changes.md`.

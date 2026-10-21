@@ -56,16 +56,28 @@ def month_avg(daily, month):
     return (sum(v) / len(v), len(v)) if v else (None, 0)
 
 
+def cached_lpg_petrol():
+    """(IOCL LPG revisions, PPAC Delhi petrol {date: (price, line)}, IOCL list retrieved_at) from the Tavily cache.
+    Also used by build_nowcast.py."""
+    lpg_rev = E.parse_iocl_lpg(cached_page("iocl.com/indane-14Kg", "p2-history")
+                               or cached_page("iocl.com/indane-14Kg", "observed:lpg extract"))
+    petrol = ppac_petrol(cached_page("ppac.gov.in", "observed:petrol extract"))
+    iocl_at = ""
+    for e in read_log():
+        if e["endpoint"] == "/extract" and "iocl.com/indane-14Kg" in json.dumps(e.get("params")) and not e["cached"]:
+            iocl_at = json.loads((O.ROOT / "cache" / "tavily" / f"{e['cache_key']}.json").read_text())["retrieved_at"]
+            break
+    return lpg_rev, petrol, iocl_at
+
+
 IOCL_RETRIEVED = ""
 
 
-def run_month(month, tav_all, nem, ibja, lpg_rev, petrol, factors, cfg):
+def observed_layers(month, row, ibja, lpg_rev, petrol, factors, iocl_retrieved, window_end=None):
+    """IBJA gold/silver, IOCL LPG and PPAC petrol changes for `month` (fills `row`, returns `observed`). Also used by
+    build_nowcast.py. window_end: last day the evidence may cover (default: month end); Amendment 1 (a) records an
+    LPG gap when IOCL's list was retrieved before it."""
     prev = M.add_months(month, -1)
-    extra = [a.split("=", 1)[1] for a in sys.argv if a.startswith("--budget=")]
-    tav = tav_all.charge("replay-layers", f"replay-layers-month/{month}", *extra)
-    t0 = time.time()
-    events, estats, etrace = E.collect_events(tav, nem, month, cfg["events"])
-    row = {"month": month, "events_verified": len(events)}
     observed = {}
     for item in ("gold", "silver"):
         a, na = E.monthly_average(ibja, item, month)
@@ -75,10 +87,10 @@ def run_month(month, tav_all, nem, ibja, lpg_rev, petrol, factors, cfg):
         observed[item] = {"avg_now": a, "days_now": na, "avg_prev": b, "days_prev": nb, "change": ch}
         row.update({f"{item}_obs_change": ch, f"{item}_days": f"{na}/{nb}", f"{item}_factor": factors[item]["factor"],
                     f"{item}_item_change": None if ch is None else ch * factors[item]["factor"]})
-    gap = E.month_window(month)[1] > IOCL_RETRIEVED[:10]      # Amendment 1 (a): months IOCL's list cannot cover
+    gap = (window_end or E.month_window(month)[1]) > iocl_retrieved[:10]      # Amendment 1 (a): months IOCL's list cannot cover
     lpg_ch = None if gap else E.lpg_monthly(lpg_rev, month) / E.lpg_monthly(lpg_rev, prev) - 1
     observed["lpg"] = {"avg_now": E.lpg_monthly(lpg_rev, month), "avg_prev": E.lpg_monthly(lpg_rev, prev),
-                       "change": lpg_ch, "gap": gap, "iocl_list_retrieved_at": IOCL_RETRIEVED}
+                       "change": lpg_ch, "gap": gap, "iocl_list_retrieved_at": iocl_retrieved}
     row.update({"lpg_obs_change": lpg_ch, "lpg_factor": factors["lpg"]["factor"], "lpg_gap": gap,
                 "lpg_item_change": None if lpg_ch is None else lpg_ch * factors["lpg"]["factor"]})
     a, na = month_avg(petrol, month)
@@ -88,6 +100,16 @@ def run_month(month, tav_all, nem, ibja, lpg_rev, petrol, factors, cfg):
                           "note": "PPAC daily Delhi rows exist only from 15 May 2026"}
     row.update({"petrol_obs_change": p_ch, "petrol_days": f"{na}/{nb}", "petrol_factor": factors["petrol"]["factor"],
                 "petrol_item_change": None if p_ch is None else p_ch * factors["petrol"]["factor"]})
+    return observed
+
+
+def run_month(month, tav_all, nem, ibja, lpg_rev, petrol, factors, cfg):
+    extra = [a.split("=", 1)[1] for a in sys.argv if a.startswith("--budget=")]
+    tav = tav_all.charge("replay-layers", f"replay-layers-month/{month}", *extra)
+    t0 = time.time()
+    events, estats, etrace = E.collect_events(tav, nem, month, cfg["events"])
+    row = {"month": month, "events_verified": len(events)}
+    observed = observed_layers(month, row, ibja, lpg_rev, petrol, factors, IOCL_RETRIEVED)
     row["events"] = "; ".join(f"{e['kind']} {e.get('region') or ''} {e['change'] * 100:+.2f}% from {e['effective_date']} "
                               f"(prorated {e['change_prorated'] * 100:+.2f}%)" for e in events)
     row["credits"] = spent(f"replay-layers-month/{month}")
@@ -136,14 +158,9 @@ def main():
                                             O.month_range("2025-01", max(months)))
     except BudgetExceeded as e:
         raise SystemExit(f"STOPPED: {e}")
-    lpg_rev = E.parse_iocl_lpg(cached_page("iocl.com/indane-14Kg", "p2-history")
-                               or cached_page("iocl.com/indane-14Kg", "observed:lpg extract"))
-    petrol = ppac_petrol(cached_page("ppac.gov.in", "observed:petrol extract"))
+    lpg_rev, petrol, iocl_at = cached_lpg_petrol()
     global IOCL_RETRIEVED
-    for e in read_log():
-        if e["endpoint"] == "/extract" and "iocl.com/indane-14Kg" in json.dumps(e.get("params")) and not e["cached"]:
-            IOCL_RETRIEVED = json.loads((O.ROOT / "cache" / "tavily" / f"{e['cache_key']}.json").read_text())["retrieved_at"]
-            break
+    IOCL_RETRIEVED = iocl_at
     existing = {}
     if OUT_CSV.exists():
         with OUT_CSV.open(encoding="utf-8") as f:
