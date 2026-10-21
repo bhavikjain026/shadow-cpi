@@ -23,3 +23,17 @@ All build prompts are in **PROMPTS.md** in this folder (no sign-in needed). Prom
 - Could: map view, Hindi price quotes, online retail prices, mandi early warning, weekly automation.
 
 Key dates: feature freeze 27 Oct; seal + submit 29 Oct (deadline 30 Oct 10:00 PT); October CPI release 12 Nov; judging 1–15 Dec (app must stay free and live); November CPI release scheduled 12 Dec (a Saturday, so likely Mon 14 Dec, still inside judging).
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues on bhavikjain026/shadow-cpi, managed with the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Uses the five default labels: needs-triage, needs-info, ready-for-agent, ready-for-human, wontfix. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: one `GLOSSARY.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
