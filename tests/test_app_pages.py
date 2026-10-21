@@ -59,8 +59,17 @@ def test_home_call_slot_scoreboard_and_audit():
     assert "P(headline ≥ 6.0%)" in text
     assert "Official October 2026 CPI in" in text and "Thu 12 Nov 2026, 4:00 PM IST" in text
     board = at.dataframe[0].value
-    assert list(board["Mean miss (pp)"])[:5] == [f"{LOCK['mae'][k]:.3f}" for k in ("a", "b", "c", "c_strict", "B1")]
+    assert list(board["Average miss (percentage points)"])[:5] == [f"{LOCK['mae'][k]:.3f}"
+                                                                   for k in ("c", "a", "b", "c_strict", "B1")]
+    assert list(board["Method"])[:5] == ["Shadow CPI", "Trend only", "Government prices only",
+                                         "Shadow CPI, official series only", "Repeat last month"]
     assert "Economists' poll (its 6 dated months)" in list(board["Method"])
+    assert ("Pass/fail rule (set before scoring): beat 'repeat last month' and 'trend only' → passed" in text)
+    assert "Tavily searches the web, with dates locked, for price evidence → Nemotron on Nebius Token Factory" in text
+    assert (f"Over Jan–Sep 2026: Shadow CPI missed by {LOCK['mae']['c']:.3f} percentage points on average. On the 6 "
+            f"months with a published economists' poll: Shadow CPI {LOCK['mae_poll_months']['c']:.3f} vs poll "
+            f"{LOCK['mae_poll_months']['poll']:.3f} (about a tie).") in text
+    assert "GO" not in [w for line in text.splitlines() if not line.startswith("Codes") for w in line.split()]
     assert "after_scoring_changes.md" in text
     assert f"{AUDIT['events_checked']} events checked" in text
     assert "9 of 29" in text and "14 of 29" in text
@@ -155,9 +164,44 @@ def test_tavily_trace_page_shows_calls_funnel_failures():
 
 
 def test_replay_scoreboard_matches_score_lock():
-    board = load("replay").dataframe[0].value
-    assert list(board["Mean absolute miss"])[:5] == [f"{LOCK['mae'][k]:.3f} pp"
-                                                     for k in ("a", "b", "c", "c_strict", "B1")]
+    at = load("replay")
+    board = at.dataframe[0].value
+    assert list(board["Average miss (percentage points)"])[:5] == [f"{LOCK['mae'][k]:.3f}"
+                                                                   for k in ("c", "a", "b", "c_strict", "B1")]
+    text = all_text(at)
+    assert "never used to tune anything" not in text
+    assert ("Rules were frozen before scoring. After scoring we made only logged bug fixes, found by an independent "
+            "audit, and we show the scores before and after.") in text
+
+
+def test_saved_run_shows_window_replay_date_searches_credits():
+    s = json.loads((ROOT / "results" / "app" / "saved_run.json").read_text())
+    text = all_text(load("home"))
+    assert f"Evidence window {s['evidence_window'][0]} to {s['evidence_window'][1]}" in text
+    assert f"replayed from saved results on {s['replayed_on']}" in text
+    assert f"{s['n_searches']} searches" in text and f"{s['credits']} credits when first run" in text
+    assert "Searches run" not in text
+
+
+def test_evidence_defaults_to_march_and_explains_cut_2():
+    at = load("evidence")
+    assert at.selectbox[0].value == "2026-03"
+    assert "cut 2" not in all_text(at)                         # March has the web quotes
+    at.selectbox[0].set_value("2026-09").run()
+    assert "replay months other than March skipped web price quotes" in all_text(at)
+
+
+def test_trace_names_the_numbers_used():
+    text = all_text(load("tavily_trace"))
+    assert "Onion (01.1.7.4.1.01)" in text and "Silver jewellery (13.2.1.1.1.02)" in text
+
+
+def test_example_brief_for_september_is_labelled():
+    at = load("brief")
+    assert at.selectbox[0].value == "2026-09"
+    text = all_text(at)
+    assert "Example from replay month — not a forecast" in text
+    assert not at.error                                        # it states coverage and the range
 
 
 def test_evidence_month_switch():

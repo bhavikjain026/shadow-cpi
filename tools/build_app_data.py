@@ -9,6 +9,7 @@ Writes:
   results/app/audit_summary.json      counts from audit/event_audit.{md,csv} and audit/missed_events.md (cross-checked)
   results/app/saved_run.json          the saved run the app opens on: the latest month's event layer
   results/app/tavily_trace_2026-03.json  every Tavily call for March 2026, the funnel, and the failures
+  results/reporter_brief_2026-09.md   an example reporter brief from the September replay (labelled, not a forecast)
 """
 import csv
 import json
@@ -96,8 +97,10 @@ def saved_run():
     man = json.loads((ROOT / "manifests" / f"{month}.json").read_text())
     layer = {r["month"]: r for r in csv.DictReader((ROOT / "results" / "replay_layers.csv").open())}[month]
     times = sorted(q["retrieved_at"] for q in man["queries"] if q.get("retrieved_at"))
+    pre = (man.get("detail", {}).get("event_search_window") or {}).get("pre_days", E.EVENT_PRE_DAYS)
     out = {"label": f"Saved run: event scan for {E.MONTHS_EN[int(month[5:]) - 1]} {month[:4]} (latest replay month)",
-           "month": month, "searched_from_utc": times[0] if times else None,
+           "month": month, "evidence_window": list(E.search_window(month, pre)), "pre_days": pre,
+           "replayed_on": man["created_utc"][:10], "searched_from_utc": times[0] if times else None,
            "searched_to_utc": times[-1] if times else None, "manifest_written_utc": man["created_utc"],
            "code_commit": man["code_commit"], "events": man["events"], "counts": man["counts"],
            "n_searches": len(man["queries"]), "credits": int(layer["credits"]),
@@ -110,6 +113,19 @@ def non_default(endpoint, request):
     d = DEFAULTS.get(endpoint, {})
     skip = {"query", "urls", "url", "include_usage"}
     return {k: v for k, v in request.items() if k not in skip and d.get(k, object()) != v}
+
+
+def item_names():
+    """{code: official name} from the 2024-series weights file (Annex 5.3d: item and sub-class names)."""
+    from shadow_cpi.official import WEIGHTS_XLSX, read_xlsx
+    names = {}
+    for r in read_xlsx(WEIGHTS_XLSX)["5.3d"][1:]:
+        if len(r) > 6:
+            if r[4].strip() and r[3].strip():
+                names.setdefault(r[4].strip(), r[3].strip())
+            if r[5].strip() and r[6].strip():
+                names.setdefault(r[5].strip(), re.sub(r"\s*\(.*?\)", "", r[6]).strip())
+    return names
 
 
 def trace(month="2026-03"):
@@ -173,6 +189,7 @@ def trace(month="2026-03"):
                                    text=True).stdout)["counts"]
     pred = json.loads((ROOT / "results" / "replay_predictions.json").read_text())[month]["c"]["evidence"]
     used = {c: v for c, v in pred.items() if v["change"] is not None}
+    names = item_names()
     funnel = [
         {"stage": "Addresses found by Tavily search", "n": urls_found, "source": "flight recorder + cache"},
         {"stage": "Dated inside the search window", "n": dated_in, "source": "page address / published date"},
@@ -186,7 +203,8 @@ def trace(month="2026-03"):
                                                             f"{man['counts']['events_verified']}",
          "source": "manifests/2026-03.json"},
         {"stage": "Numbers used in the (c) prediction", "n": len(used),
-         "source": "results/replay_predictions.json", "detail": {c: v["source"] for c, v in used.items()}},
+         "source": "results/replay_predictions.json; names from the weights file (Annex 5.3d)",
+         "detail": {c: {"source": v["source"], "name": names.get(c, c)} for c, v in used.items()}},
     ]
     failures = []
     for f in sorted((ROOT / "results" / "prompt_t").glob("*.json")):
@@ -221,12 +239,76 @@ def trace(month="2026-03"):
     return out
 
 
+def brief(month="2026-09"):
+    """An example reporter brief for a replay month, written by code from the replay results only: computed numbers
+    and verified quotes (no model writes any text). results/reporter_brief_<month>.md."""
+    from shadow_cpi import official as O
+    row = {r["month"]: r for r in csv.DictReader((ROOT / "results" / "replay.csv").open())}[month]
+    lay = {r["month"]: r for r in csv.DictReader((ROOT / "results" / "replay_layers.csv").open())}[month]
+    pred = json.loads((ROOT / "results" / "replay_predictions.json").read_text())[month]["c"]
+    man = json.loads((ROOT / "manifests" / f"{month}.json").read_text())
+    sk = json.loads((ROOT / "results" / "skeptic_replay.json").read_text())[month]["n_contrary"]
+    inside = json.loads((ROOT / "results" / "score_lock.json").read_text())["inside_range"]
+    meta = O.load_tidy()[3]
+    names = item_names()
+    mname = f"{E.MONTHS_EN[int(month[5:]) - 1]} {month[:4]}"
+    c, lo, hi, act = (float(row[k]) for k in ("c_tavily_pred", "c_range_low", "c_range_high", "actual_yoy"))
+    cov = float(row["c_coverage_observed"])
+    top = sorted(pred["contrib_division_pp"].items(), key=lambda kv: -abs(kv[1]))[:3]
+    moved = sorted(((code, v) for code, v in pred["evidence"].items() if v["change"]),
+                   key=lambda kv: -abs(kv[1]["change"]))[:5]
+    src = {"spine": "government price spine (DoCA)", "observed": "official series", "event+trend": "announced change"}
+    gold = [q for q in man["quotes"] if q["item"] == "gold" and q.get("verified")]
+    lines = [f"# Reporter brief: {mname}", "",
+             "> **Example from replay month — not a forecast.** Built after the fact from the replay results "
+             "(`results/replay.csv`, `results/replay_predictions.json`, `manifests/2026-09.json`) to show what a brief "
+             "looks like. Every number is computed; every quote is a line verified word for word on its page.", "",
+             f"**Shadow CPI for {mname}: {c:.2f}% year-on-year**, 80% range {lo:.2f}% to {hi:.2f}%. Coverage: "
+             f"{cov:.0%} of the CPI basket was measured from evidence this month; the other {1 - cov:.0%} was "
+             "carried on its recent trend.", "",
+             "## What moved", "",
+             "Largest contributions to the year-on-year rate, in percentage points:", ""]
+    lines += [f"- {meta.get(code, {}).get('name', code)}: {pp:+.2f}" for code, pp in top]
+    lines += ["", "Largest measured month-on-month changes used in the estimate (after each item's 2025 pass-through "
+                  "factor, so they can differ from the raw price change):", ""]
+    lines += [f"- {names.get(code, code)}: {v['change'] * 100:+.1f}% ({src.get(v['source'], v['source'])})"
+              for code, v in moved]
+    lines += ["", "## What we observed", ""]
+    for e in man["events"]:
+        lines.append(f"- {e['item'].capitalize()}, {e.get('place') or 'India'}: {e['pct_change']:+.2f}% from "
+                     f"{e['effective_date']}, applied to {e.get('weight', 0):.1%} of that item's national weight. "
+                     f"Source line: \"{e['line'].lstrip('# ').strip()}\" ([link]({e['url']}))")
+    g_ch, s_ch = float(lay["gold_obs_change"]), float(lay["silver_obs_change"])
+    lines.append(f"- Gold and silver (IBJA daily rates, {lay['gold_days'].split('/')[0]} trading days): monthly "
+                 f"average gold {g_ch * 100:+.2f}%, silver {s_ch * 100:+.2f}% on the month.")
+    if gold:
+        lines.append(f"  First IBJA line of the month: \"{gold[0]['line']}\" ([report]({gold[0]['url']}))")
+    if lay["lpg_obs_change"] not in ("", "None"):
+        lines.append(f"- Domestic LPG (IOCL list): {float(lay['lpg_obs_change']) * 100:+.2f}% on the month.")
+    if lay["petrol_obs_change"] not in ("", "None"):
+        lines.append(f"- Petrol, Delhi (PPAC, {lay['petrol_days'].split('/')[0]} days): "
+                     f"{float(lay['petrol_obs_change']) * 100:+.2f}% on the month.")
+    lines += ["", "## What's uncertain", "",
+              f"- The 80% range comes from past misses. In the replay the official figure fell inside it in only "
+              f"{inside} of 9 months, so treat it as narrower than its label.",
+              f"- {1 - cov:.0%} of the basket (most services, rent, clothing) is carried on trend, not measured.",
+              f"- The counter-search for evidence pointing the other way found {sk} verified contrary quotes.",
+              "- Milk price announcements are recorded but not applied (milk is measured through the government "
+              "spine); an audit removed a Mumbai wholesale milk rate from this month (docs/after_scoring_changes.md).",
+              "", "## How it turned out (hindsight, replay only)", "",
+              f"MoSPI published {act:.2f}%. Shadow CPI missed by {c - act:+.2f} percentage points, "
+              f"{'inside' if lo <= act <= hi else 'outside'} its 80% range.", ""]
+    (ROOT / "results" / f"reporter_brief_{month}.md").write_text("\n".join(lines))
+    return lines
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     n = flight_snapshot(read_log())
     a = audit_summary()
     s = saved_run()
     t = trace()
+    brief()
     (OUT / "built.json").write_text(json.dumps({"built_utc": datetime.now(timezone.utc).isoformat(),
                                                 "from_commit": git_head()}, indent=1))
     print(f"flight recorder rows {n}; audit {a['events_checked']} events, recall {a['found_directly']}/"

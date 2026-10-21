@@ -6,11 +6,18 @@ import streamlit as st
 
 from shadow_cpi.live_range import THRESHOLD
 
-from app_pages.common import (LIVE_MONTH, NOWCAST_WORDS, REPO_URL, SEAL_DATE, countdown_text, header, month_name,
-                              next_release, pct, poll_direction, pp, read_json, seal_status)
+from app_pages.common import (CODES, LABELS, LIVE_MONTH, NOWCAST_WORDS, REPO_URL, SEAL_DATE, countdown_text, header,
+                              headline_result, month_name, next_release, pass_fail, pct, poll_direction, poll_months, read_json,
+                              seal_status)
 
 header("Experimental nowcast", f"Shadow CPI: an {NOWCAST_WORDS} of India's next official CPI inflation number "
                                "(year-on-year, 2024-series All-India Combined). Not an official statistic.")
+st.markdown("**How it works:** Tavily searches the web, with dates locked, for price evidence → Nemotron on Nebius "
+            "Token Factory pulls out only quoted, dated prices → plain code turns them into a CPI estimate with a "
+            "range, sealed before release.")
+lock = read_json("results/score_lock.json")
+if lock:
+    st.markdown(f"**{headline_result(lock)}**")
 
 # ---------- the October call ----------
 sealed = read_json(f"sealed/{LIVE_MONTH}.json")
@@ -27,7 +34,8 @@ with st.container(border=True):
             st.progress(min(max(cov["observed"], 0.0), 1.0),
                         text=f"{cov['observed']:.0%} of the basket measured, {cov['carried']:.0%} carried on trend")
         if call.get("contributors"):
-            st.dataframe([{"Group": c["name"], "Contribution": pp(c["pp"])} for c in call["contributors"][:3]],
+            st.dataframe([{"Group": c["name"], "Contribution (percentage points)": f"{c['pp']:+.2f}"}
+                          for c in call["contributors"][:3]],
                          hide_index=True, width="stretch")
         if sealed:
             stored, _, ok = seal_status(LIVE_MONTH)
@@ -49,24 +57,20 @@ with st.container(border=True):
 
 # ---------- replay scoreboard ----------
 st.subheader("Replay scoreboard, January–September 2026")
-lock = read_json("results/score_lock.json")
 if lock:
     before = (lock.get("history") or [None])[-1]
-    rows = []
-    for key, name in [("a", "(a) Trend only"), ("b", "(b) Government price spine only"),
-                      ("c", "(c) Spine + Tavily evidence"), ("c_strict", "(c-strict) Spine + official series"),
-                      ("B1", "B1: last month's rate")]:
-        rows.append({"Method": name, "Mean miss (pp)": f"{lock['mae'][key]:.3f}",
-                     "Before fixes": f"{before['mae'][key]:.3f}" if before else "—",
-                     "Direction right": f"{lock['direction_hits'][key]} of 9"})
-    rows.append({"Method": "Economists' poll (its 6 dated months)", "Mean miss (pp)":
+    rows = [{"Method": LABELS[k], "Average miss (percentage points)": f"{lock['mae'][k]:.3f}",
+             "Before fixes": f"{before['mae'][k]:.3f}" if before else "—",
+             "Direction right": f"{lock['direction_hits'][k]} of 9 months"} for k in ("c", "a", "b", "c_strict", "B1")]
+    rows.append({"Method": f"Economists' poll (its {poll_months()} dated months)", "Average miss (percentage points)":
                  f"{lock['mae_poll_months']['poll']:.3f}",
                  "Before fixes": f"{before['mae_poll_months']['poll']:.3f}" if before else "—",
                  "Direction right": poll_direction()})
     st.dataframe(rows, hide_index=True, width="stretch")
-    st.caption(f"On the poll's 6 months, (c) missed by {lock['mae_poll_months']['c']:.3f} pp. "
-               f"{'GO' if lock['go'] else 'NO-GO'}: (c) must beat B1 and trend on mean miss. Actual inside the 80% "
-               f"range in {lock['inside_range']} of 9 months. Scored once, then re-scored once after bug fixes.")
+    st.markdown(f"**{pass_fail(lock)}.** Actual inside the 80% range in {lock['inside_range']} of 9 months.")
+    st.caption("Codes: " + ", ".join(f"{LABELS[k]} = {CODES[k]}" for k in ("c", "a", "b", "c_strict", "B1"))
+               + f". On the poll's months, Shadow CPI missed by {lock['mae_poll_months']['c']:.3f} pp. Scored once, "
+               "then re-scored once after logged bug fixes.")
     st.markdown(f"[Before/after table and every fix]({REPO_URL}/docs/after_scoring_changes.md"
                 "#4-amendment-3-bug-fixes-found-by-the-independent-audit-re-scored-once)")
 else:
@@ -98,9 +102,11 @@ def show_run(r, note=""):
     if note:
         st.info(note)
     st.markdown(f"**{r['label']}**")
-    if r.get("searched_from_utc"):
-        st.caption(f"Searches run {r['searched_from_utc'][:16]} to {r['searched_to_utc'][:16]} UTC · "
-                   f"{r['n_searches']} searches · {r['credits']} credits then · 0 credits now (saved).")
+    if r.get("evidence_window"):
+        w0, w1 = r["evidence_window"]
+        st.caption(f"Evidence window {w0} to {w1} ({month_name(r['month'])}, plus the last {r['pre_days']} days "
+                   f"before it for announcements) · replayed from saved results on {r['replayed_on']} · "
+                   f"{r['n_searches']} searches · {r['credits']} credits when first run (0 now).")
     if r.get("events"):
         st.dataframe([{"Item": e["item"], "Place": e.get("place", ""), "Change": f"{e['pct_change']:+.2f}%",
                        "Effective": e["effective_date"], "Exact line": e["line"], "Link": e["url"]}

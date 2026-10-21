@@ -14,6 +14,8 @@ if not months:
 
 month = st.selectbox("Month", months, format_func=month_name)
 text = read_text(f"results/reporter_brief_{month}.md")
+if "Example from replay month" in text:
+    st.info("Example from replay month — not a forecast. Built from the replay results to show the format.")
 missing = [w for w in ("coverage", "range") if w not in text.lower()]
 if missing:
     st.error("This brief does not state: " + ", ".join(missing) + ". Do not publish it.")

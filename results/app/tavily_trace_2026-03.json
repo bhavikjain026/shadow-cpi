@@ -1,6 +1,6 @@
 {
  "month": "2026-03",
- "built_utc": "2026-10-21T16:07:47.527050+00:00",
+ "built_utc": "2026-10-21T16:41:14.462611+00:00",
  "n_calls": 117,
  "credits": 110,
  "calls": [
@@ -2770,19 +2770,52 @@
   {
    "stage": "Numbers used in the (c) prediction",
    "n": 11,
-   "source": "results/replay_predictions.json",
+   "source": "results/replay_predictions.json; names from the weights file (Annex 5.3d)",
    "detail": {
-    "01.1.7.4.1.01": "spine",
-    "01.1.7.2.1.01": "spine",
-    "01.1.7.5.1.01": "spine",
-    "01.1.7.6.1.01": "spine",
-    "01.1.5.1": "spine",
-    "01.1.1.2.1.01": "spine",
-    "01.1.4.1.1.01": "spine",
-    "01.1.4.8.1.01": "spine",
-    "13.2.1.1.1.01": "observed",
-    "13.2.1.1.1.02": "observed",
-    "04.5.2.2.1.01": "observed"
+    "01.1.7.4.1.01": {
+     "source": "spine",
+     "name": "Onion"
+    },
+    "01.1.7.2.1.01": {
+     "source": "spine",
+     "name": "Tomato"
+    },
+    "01.1.7.5.1.01": {
+     "source": "spine",
+     "name": "Potato"
+    },
+    "01.1.7.6.1.01": {
+     "source": "spine",
+     "name": "Arhar, tur"
+    },
+    "01.1.5.1": {
+     "source": "spine",
+     "name": "Vegetable oils"
+    },
+    "01.1.1.2.1.01": {
+     "source": "spine",
+     "name": "Wheat atta"
+    },
+    "01.1.4.1.1.01": {
+     "source": "spine",
+     "name": "Milk: liquid"
+    },
+    "01.1.4.8.1.01": {
+     "source": "spine",
+     "name": "Eggs"
+    },
+    "13.2.1.1.1.01": {
+     "source": "observed",
+     "name": "Gold /diamond /platinum jewellery"
+    },
+    "13.2.1.1.1.02": {
+     "source": "observed",
+     "name": "Silver jewellery"
+    },
+    "04.5.2.2.1.01": {
+     "source": "observed",
+     "name": "LPG cylinder and piped natural gas"
+    }
    }
   }
  ],

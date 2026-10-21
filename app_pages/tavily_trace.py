@@ -23,7 +23,12 @@ st.dataframe([{"Stage": f["stage"], "Count": str(f["n"]), "From": f["source"]} f
              hide_index=True, width="stretch")
 used = t["funnel"][-1].get("detail", {})
 if used:
-    st.caption("Numbers used: " + ", ".join(f"{code} ({src})" for code, src in used.items()) + ".")
+    kinds = {"spine": "government price spine", "observed": "official observed series (IBJA, IOCL, PPAC)",
+             "event+trend": "announced price changes"}
+    groups = {}
+    for code, d in used.items():
+        groups.setdefault(kinds.get(d["source"], d["source"]), []).append(f"{d['name']} ({code})")
+    st.markdown("**Numbers used:** " + "; ".join(f"from the {k}: " + ", ".join(v) for k, v in groups.items()) + ".")
 
 st.subheader("Calls")
 endpoints = sorted({c["endpoint"] for c in t["calls"]})

@@ -133,3 +133,28 @@ def poll_direction(rel="results/scoreboard.md"):
     import re
     m = re.search(r"poll [\d.]+ pp \(direction (\d+) of (\d+)\)", read_text(rel) or "")
     return f"{m.group(1)} of {m.group(2)}" if m else "—"
+
+
+# ---------- plain labels (short codes only in small text) ----------
+LABELS = {"c": "Shadow CPI", "a": "Trend only", "b": "Government prices only",
+          "c_strict": "Shadow CPI, official series only", "B1": "Repeat last month"}
+CODES = {"c": "(c)", "a": "(a)", "b": "(b)", "c_strict": "(c-strict)", "B1": "B1"}
+
+
+def pass_fail(lock):
+    return ("Pass/fail rule (set before scoring): beat 'repeat last month' and 'trend only' → "
+            + ("passed" if lock["go"] else "failed"))
+
+
+def poll_months():
+    """Number of months with a dated economists' poll (results/baselines.csv)."""
+    return sum(bool((r.get("poll_pred") or "").strip()) for r in read_csv("results/baselines.csv"))
+
+
+def headline_result(lock):
+    """The one-line result, worded from results/score_lock.json."""
+    c, pc, poll = lock["mae"]["c"], lock["mae_poll_months"]["c"], lock["mae_poll_months"]["poll"]
+    verdict = ("about a tie" if abs(pc - poll) < 0.005 else
+               "Shadow CPI closer" if pc < poll else "poll closer")
+    return (f"Over Jan–Sep 2026: Shadow CPI missed by {c:.3f} percentage points on average. On the {poll_months()} "
+            f"months with a published economists' poll: Shadow CPI {pc:.3f} vs poll {poll:.3f} ({verdict}).")

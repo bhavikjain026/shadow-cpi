@@ -10,7 +10,12 @@ months = months_with("manifests")
 if not months:
     st.info("No evidence manifests yet (manifests/<month>.json).")
     st.stop()
-month = st.selectbox("Month", months, format_func=month_name)
+month = st.selectbox("Month", months, format_func=month_name,
+                     index=months.index("2026-03") if "2026-03" in months else 0)
+if "2026-01" <= month <= "2026-09" and month != "2026-03":
+    st.caption("To save credits (cut 2), replay months other than March skipped web price quotes, so they show only the "
+               "government price spine, the official observed series (IBJA, IOCL, PPAC) and announced price "
+               "changes. March has the full set of web price quotes.")
 man = read_json(f"manifests/{month}.json")
 link = {"Link": st.column_config.LinkColumn("Link"), "Exact line": st.column_config.TextColumn("Exact line", width="large")}
 

@@ -1,6 +1,12 @@
 {
  "label": "Saved run: event scan for September 2026 (latest replay month)",
  "month": "2026-09",
+ "evidence_window": [
+  "2026-08-22",
+  "2026-09-30"
+ ],
+ "pre_days": 10,
+ "replayed_on": "2026-10-21",
  "searched_from_utc": "2026-10-21T15:59:56.197000+00:00",
  "searched_to_utc": "2026-10-21T15:59:56.237189+00:00",
  "manifest_written_utc": "2026-10-21T15:59:56.281103+00:00",

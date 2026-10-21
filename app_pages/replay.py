@@ -1,12 +1,15 @@
-"""Replay: Jan-Sep 2026 three-way scoreboard vs B1 and the economists' poll; chart; one miss explained."""
+"""Replay: Jan-Sep 2026 scoreboard against 'repeat last month', 'trend only' and the economists' poll; chart; one miss
+explained. Plain labels on screen; the short codes (a)/(b)/(c)/B1 only in small text."""
 import altair as alt
 import pandas as pd
 import streamlit as st
 
-from app_pages.common import NOWCAST_WORDS, header, month_name, num, pct, poll_direction, read_csv, read_json
+from app_pages.common import (CODES, LABELS, NOWCAST_WORDS, header, month_name, num, pass_fail, pct, poll_direction,
+                              read_csv, read_json)
 
 header("Replay", f"How the {NOWCAST_WORDS} would have done in January-September 2026, using only evidence "
-                 "available before each month's cutoff. These test months were never used to tune anything.")
+                 "available before each month's cutoff. Rules were frozen before scoring. After scoring we made only "
+                 "logged bug fixes, found by an independent audit, and we show the scores before and after.")
 
 replay = read_csv("results/replay.csv")
 base = {r["month"]: r for r in read_csv("results/baselines.csv")}
@@ -14,32 +17,37 @@ if not replay:
     st.info("No replay results yet (results/replay.csv).")
     st.stop()
 
-MODELS = [("(a) Trend only", "a_trend_pred"), ("(b) Government price spine only", "b_spine_pred"),
-          ("(c) Spine + Tavily evidence", "c_tavily_pred")]
+MODELS = [(LABELS["c"], "c_tavily_pred"), (LABELS["a"], "a_trend_pred"), (LABELS["b"], "b_spine_pred")]
 
 
 def row_preds(r):
     b = base.get(r["month"], {})
     out = {name: num(r[col]) for name, col in MODELS}
-    out["B1 (last month's rate)"] = num(b.get("b1_pred"))
+    out[LABELS["B1"]] = num(b.get("b1_pred"))
     out["Economists' poll"] = num(b.get("poll_pred"))
     return out
 
 
 lock = read_json("results/score_lock.json")
-names = {"a": "(a) Trend only", "b": "(b) Government price spine only", "c": "(c) Spine + Tavily evidence",
-         "c_strict": "(c-strict) Spine + official series", "B1": "B1 (last month's rate)"}
 st.subheader("Scoreboard")
 if lock:
-    st.dataframe([{"Method": names[k], "Mean absolute miss": f"{lock['mae'][k]:.3f} pp",
-                   "Direction right": f"{lock['direction_hits'][k]} of 9"} for k in names]
-                 + [{"Method": "Economists' poll", "Mean absolute miss": f"{lock['mae_poll_months']['poll']:.3f} pp "
-                     f"(its 6 months; (c) {lock['mae_poll_months']['c']:.3f})", "Direction right": poll_direction()}],
+    before = (lock.get("history") or [None])[-1]
+    st.dataframe([{"Method": LABELS[k], "Average miss (percentage points)": f"{lock['mae'][k]:.3f}",
+                   "Before fixes": f"{before['mae'][k]:.3f}" if before else "—",
+                   "Direction right": f"{lock['direction_hits'][k]} of 9 months"}
+                  for k in ("c", "a", "b", "c_strict", "B1")]
+                 + [{"Method": "Economists' poll (its dated months only)",
+                     "Average miss (percentage points)": f"{lock['mae_poll_months']['poll']:.3f}",
+                     "Before fixes": f"{before['mae_poll_months']['poll']:.3f}" if before else "—",
+                     "Direction right": poll_direction()}],
                  hide_index=True, width="stretch")
+    st.markdown(f"**{pass_fail(lock)}.**")
     st.caption("From results/score_lock.json (the scoring run). Direction = up or down versus the previous month's "
-               "official rate, as pre-registered.")
+               f"official rate, as pre-registered. On the poll's months Shadow CPI missed by "
+               f"{lock['mae_poll_months']['c']:.3f} pp. Codes: "
+               + ", ".join(f"{LABELS[k]} = {CODES[k]}" for k in ("c", "a", "b", "c_strict", "B1")) + ".")
 inside = sum(r.get("c_inside_range") in ("True", "true", "1") for r in replay)
-st.markdown(f"80% range for (c): actual inside in **{inside} of {len(replay)}** months")
+st.markdown(f"80% range for Shadow CPI: actual inside in **{inside} of {len(replay)}** months")
 
 # ---------- chart ----------
 st.subheader("Predicted vs actual")
@@ -56,14 +64,14 @@ chart = (alt.Chart(band).mark_area(opacity=0.2).encode(x=alt.X("Month:T", title=
              x="Month:T", y=alt.Y("YoY %:Q", scale=alt.Scale(zero=False)),
              color=alt.Color("Series:N", legend=alt.Legend(orient="bottom", columns=2)))).properties(height=340)
 st.altair_chart(chart, width="stretch")
-st.caption("Shaded band = 80% range for (c).")
+st.caption("Shaded band = 80% range for Shadow CPI.")
 
 # ---------- per-month ----------
 with st.expander("Per-month table"):
     st.dataframe([{"Month": r["month"], "Actual": pct(num(r["actual_yoy"])),
                    **{k: pct(v) for k, v in row_preds(r).items()},
-                   "Range (c)": f"{pct(num(r['c_range_low']))} to {pct(num(r['c_range_high']))}",
-                   "Coverage (c)": f"{num(r['c_coverage_observed']):.0%}"} for r in replay],
+                   "Range (Shadow CPI)": f"{pct(num(r['c_range_low']))} to {pct(num(r['c_range_high']))}",
+                   "Measured share (Shadow CPI)": f"{num(r['c_coverage_observed']):.0%}"} for r in replay],
                  hide_index=True, width="stretch")
 
 # ---------- one miss explained ----------
@@ -71,8 +79,8 @@ noted = [r for r in replay if r.get("note")]
 worst = max(noted or replay, key=lambda r: abs(num(r["c_tavily_pred"]) - num(r["actual_yoy"])))
 st.subheader(f"One miss explained: {month_name(worst['month'])}")
 miss = num(worst["c_tavily_pred"]) - num(worst["actual_yoy"])
-st.markdown(f"Nowcast (c) {pct(num(worst['c_tavily_pred']))} vs official {pct(num(worst['actual_yoy']))} "
-            f"- missed by {miss:+.2f} pp.")
+st.markdown(f"Shadow CPI {pct(num(worst['c_tavily_pred']))} vs official {pct(num(worst['actual_yoy']))} "
+            f"- missed by {miss:+.2f} percentage points.")
 st.markdown(worst.get("note") or "No explanation written yet.")
 
 # ---------- (c) vs (b) honestly ----------
