@@ -133,3 +133,29 @@ re-run after this freeze uses **cache-only** mode: a call that is not cached is 
 - **Recall after:** 3 of 4.
 - **Remaining miss:** the GST rate cuts of 22 Sep 2025. They have no single price change, so this miss is structural.
 - **Files:** `results/recall_audit/`.
+
+## Amendment 1 (before any scoring)
+
+**Date:** 2026-10-21. **Commit:** see the line at the end of this section.
+
+**Why:** the frozen re-run (cache-only) showed events that break scope rules already written down before any test
+data was seen:
+- CLAUDE.md / PROMPTS.md track **domestic** LPG (14.2 kg) and **retail** consumer prices;
+- §3.1 of this file rejects commercial cylinders;
+- §5 makes quotes retail only.
+
+These fixes enforce those rules as **general rules for every kind and month**: no month-specific patch, no factor or
+parameter change, nothing tuned on a 2026 result. **No test month has been scored.**
+
+| # | Rule (general) | Reason (scope rule already written down) |
+|---|---|---|
+| a | The event layer no longer produces **LPG** events (`config/items.yaml`: lpg `disabled`). LPG comes only from IOCL's official domestic 14.2 kg price list (observed series). A month IOCL's list does not cover is recorded as a **gap**, with no fallback to events. | The CPI item is domestic LPG; the official list is exact. News LPG events mixed in commercial and 5 kg cylinders and would double-count the IOCL series. |
+| b | **Non-domestic variants are rejected for every kind**, in English and Hindi: commercial, 19 kg, 5 kg / FTL / free trade, bulk, industrial, non-domestic, वाणिज्यिक, व्यावसायिक, कमर्शियल, कॉमर्शियल, औद्योगिक. Applied to the event's subject, and to its line unless the line also names the domestic/household variant. | §3.1 already rejected commercial cylinders, but only in English and only in the event's subject (`event_rules.non_consumer_reason`). |
+| c | **Penalties, fines and charges for violations are not prices** (penalty, fine, ticketless, without a ticket, violation, जुर्माना, दंड, पेनल्टी). Only fares and tariffs paid by ordinary consumers count. A tariff surcharge on all bills, such as a fuel-cost surcharge, is still a tariff. | The CPI prices what ordinary households pay. |
+| d | **Events are retail only:** a line saying wholesale, mandi, dealer or bulk rate (also थोक, मंडी, डीलर) is dropped. (Quotes keep §5's rule: wholesale words without retail words, so a line giving both a wholesale and a retail price keeps the retail one.) | §5 and PROMPTS.md: retail prices only. |
+| e | **Duplicates:** the same kind and scope (cities mapped to states), % changes within 0.5 pp, and effective dates **within 15 days** are one event, using the **earliest** effective date. Two items more than 15 days apart stay separate. | §4 already merged duplicates, but only with identical effective dates. |
+
+**Re-check on 2025 (cache-only, 0 credits):** recall stays **3 of 4**.
+- R1, the LPG hike of 8 Apr 2025, is now found through IOCL's official revision dated 2025-04-08.
+- **Lost:** one event, the news-layer LPG hike of 8 Apr 2025, by rule (a). It is replaced by the IOCL series.
+- **Gained:** none. All other 2025 events are unchanged. Files: `results/recall_audit/amend1_*`.

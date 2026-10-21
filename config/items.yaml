@@ -144,7 +144,9 @@
       "langs": [
         "en",
         "hi"
-      ]
+      ],
+      "disabled": true,
+      "disabled_reason": "Amendment 1 (a), 2026-10-21: LPG comes only from IOCL's official domestic price list (observed series); a month IOCL does not cover is a recorded gap."
     },
     "electricity": {
       "cpi_code": "04.5.1.0.2.01",

@@ -83,6 +83,13 @@ def score(label):
             rows.append({**ref, "found": False, "why": "month not run"})
             continue
         d = json.loads(f.read_text(encoding="utf-8"))
+        if ref["kind"] == "lpg":                    # Amendment 1 (a): LPG comes only from IOCL's observed series
+            iocl = json.loads((ROOT / "data" / "evidence" / "iocl_lpg.json").read_text())
+            rev = [r for r in iocl if abs((__import__("datetime").date.fromisoformat(r[0]) -
+                                           __import__("datetime").date.fromisoformat(ref["effective"])).days) <= 2]
+            rows.append({**ref, "found": bool(rev), "why": "IOCL observed series revision " + rev[0][0] if rev
+                         else "no IOCL revision near that date"})
+            continue
         hit = [e for e in d["kept"] if e["kind"] == ref["kind"] and abs(int(e["effective_date"][8:]) -
                int(ref["effective"][8:])) <= 2 and e["effective_date"][:7] == ref["effective"][:7]]
         if hit:

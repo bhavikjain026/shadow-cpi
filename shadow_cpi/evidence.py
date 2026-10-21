@@ -382,6 +382,10 @@ def judge_event(ev, month, cfg=None):
             return None, "not the CPI variety (e.g. commercial cylinder, jet fuel)"
         if foreign(line, ev.get("region"), ev.get("_url", "")):
             return None, "outside India"
+    from .event_rules import non_consumer_reason
+    why = non_consumer_reason(ev.get("item_or_service"), line)            # Amendment 1 (b), (c), (d)
+    if why:
+        return None, why
     from .event_rules import absolute_change, base_price, normalise_date
     nums = [ev.get(k) for k in ("new_price", "old_price", "pct_change") if ev.get(k) is not None]
     if not line:
@@ -428,6 +432,8 @@ def collect_events(tav, nem, month, events, langs=("en", "hi"), pre_days=EVENT_P
         stats["drops"][reason] = stats["drops"].get(reason, 0) + n
 
     for kind, cfg in events.items():
+        if cfg.get("disabled"):                       # Amendment 1 (a): e.g. LPG comes only from IOCL's price list
+            continue
         job, seen = f"event:{kind}", set()
         for lang in [l for l in cfg.get("langs", langs) if l in langs]:     # cut 1: languages per kind
             for start, end in windows:

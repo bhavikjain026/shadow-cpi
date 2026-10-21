@@ -18,6 +18,7 @@ from .verify import norm
 NATIONAL_KINDS = {"lpg", "fuel", "rail", "mobile", "medicine", "gst"}
 REGIONAL_KINDS = {"milk", "electricity", "school_fee"}
 DUP_PP = 0.5
+DUP_DAYS = 15          # Amendment 1 (e)
 SOURCE = "MoSPI CPI 2024 Expert Group report, Annex 5.3d (item weights by state, rural + urban)"
 
 STATE_ALIASES = {
@@ -126,12 +127,19 @@ def apply_rules(events):
             same_line["_n"] = n + 1
             dropped.append((e, "same cited line as an event already kept (merged, mean change)"))
             continue
-        twin = next((m for m in merged if m["kind"] == e["kind"] and m["effective_date"] == e["effective_date"]
-                     and m["scope"] == e["scope"] and m["states"] == e["states"]
-                     and abs(m["change"] - e["change"]) * 100 <= DUP_PP), None)
+        twin = next((m for m in merged if m["kind"] == e["kind"] and m["scope"] == e["scope"]
+                     and m["states"] == e["states"] and abs(m["change"] - e["change"]) * 100 <= DUP_PP
+                     and abs((date.fromisoformat(m["effective_date"]) -
+                              date.fromisoformat(e["effective_date"])).days) <= DUP_DAYS), None)
         if twin:
-            twin["sources"] = sorted(set(twin["sources"]) | set(e.get("sources", [e.get("url")])))
-            dropped.append((e, "duplicate of an event already kept (same kind, date, scope, % within 0.5 pp)"))
+            pooled = sorted(set(twin["sources"]) | set(e.get("sources", [e.get("url")])))
+            if e["effective_date"] < twin["effective_date"]:          # keep the earliest dated effective date
+                twin.clear()
+                twin.update({**e, "sources": pooled})
+            else:
+                twin["sources"] = pooled
+            dropped.append((e, "duplicate of an event already kept (same kind and scope, % within 0.5 pp, "
+                               "effective dates within 15 days)"))
         else:
             merged.append({**e, "sources": list(e.get("sources", [e.get("url")]))})
     return merged, dropped
@@ -214,3 +222,25 @@ def base_price(kind, effective_date):
                 if r["item"] == "milk" and r["month"] == prev and r["centre"].startswith("All India"):
                     return float(r["avg_price"]), "DoCA milk, all-India simple mean of zones, previous month"
     return None
+
+
+# ---------- Amendment 1 (2026-10-21): consumer retail prices only, every kind, English + Hindi ----------
+NON_DOMESTIC = ["commercial", "19 kg", "19-kg", "19kg", "5 kg", "5-kg", "5kg", "ftl", "free trade", "industrial",
+                "bulk", "non-domestic", "वाणिज्यिक", "व्यावसायिक", "कमर्शियल", "कॉमर्शियल", "औद्योगिक"]
+DOMESTIC = ["domestic", "household", "residential", "घरेलू"]
+PENALTY = [r"\bpenalt(y|ies)\b", r"\bfines?\b", r"\bfined\b", r"\bticketless\b", r"without (a )?(valid )?ticket",
+           r"\bviolation", r"जुर्माना", r"जुर्माने", r"दंड", r"पेनल्टी"]
+NOT_RETAIL = [r"\bwholesale\b", r"\bmandi\b", r"\bdealers?\b", r"bulk rate", r"थोक", r"मंडी", r"डीलर"]
+
+
+def non_consumer_reason(item_or_service, line):
+    """Amendment 1 (b) non-domestic variants, (c) penalties and fines, (d) retail only. Returns a drop reason or ''."""
+    item, text = norm(item_or_service or ""), norm(line or "")
+    if any(norm(w) in item for w in NON_DOMESTIC) or (
+            any(norm(w) in text for w in NON_DOMESTIC) and not any(norm(w) in text for w in DOMESTIC)):
+        return "not a household/domestic variant (commercial, bulk, 19 kg, 5 kg/FTL, industrial)"
+    if any(re.search(p, item) or re.search(p, text) for p in PENALTY):
+        return "penalty or fine, not a price paid by ordinary consumers"
+    if any(re.search(p, item) or re.search(p, text) for p in NOT_RETAIL):
+        return "not a retail price (wholesale, mandi, dealer or bulk rate)"
+    return ""

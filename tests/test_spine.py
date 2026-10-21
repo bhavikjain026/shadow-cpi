@@ -84,3 +84,36 @@ def test_same_line_range_is_one_event_and_national_needs_the_line():
     assert not R.apply_rules([brand_only])[0]                              # 'India' in region alone: not national
     nationwide = {**brand_only, "quote": "Amul raised milk prices by Rs 2 per litre across the country"}
     assert R.apply_rules([nationwide])[0][0]["scope"] == "national"
+
+
+# ---------- Amendment 1 (before any scoring) ----------
+def test_amendment1_consumer_prices_only():
+    f = R.non_consumer_reason
+    assert f("Commercial LPG cylinders (19 kg)", "cut by Rs 41").startswith("not a household")
+    assert f("LPG", "19 किलो वाले वाणिज्यिक एलपीजी सिलेंडर 202 रुपये सस्ता").startswith("not a household")
+    assert f("milk", "bulk supply rate up Rs 3").startswith("not a household")
+    assert f("domestic LPG", "domestic up Rs 60; commercial up Rs 115") == ""          # domestic named: kept
+    assert f("rail", "minimum penalty for passengers travelling without a valid ticket").startswith("penalty")
+    assert f("मेट्रो", "बिना टिकट यात्रा पर जुर्माना बढ़ा").startswith("penalty")
+    assert f("milk", "The wholesale milk rate in Mumbai will move from Rs 93 to Rs 102").startswith("not a retail")
+    assert f("onion", "मंडी में प्याज 20 रुपये").startswith("not a retail")
+    assert f("electricity", "UPPCL announced a 10% surcharge in electricity bills") == ""    # tariff surcharge
+    assert f("finance", "fees refined for consumers") == ""                                 # no false 'fine'
+
+
+def test_amendment1_duplicates_within_15_days_keep_earliest():
+    a = ev(kind="milk", region="Mumbai", seller_or_authority="", change=0.0968, change_prorated=0.0968,
+           cpi_code="01.1.4.1.1.01", effective_date="2026-09-12", url="u1", quote="line a")
+    b = {**a, "effective_date": "2026-09-01", "url": "u2", "quote": "line b"}
+    c = {**a, "effective_date": "2026-09-30", "url": "u3", "quote": "line c", "change": 0.20, "change_prorated": 0.2}
+    kept, dropped = R.apply_rules([a, b, c])
+    assert len(kept) == 2                                  # c: % differs by > 0.5 pp
+    m = next(k for k in kept if k["change"] == pytest.approx(0.0968))
+    assert m["effective_date"] == "2026-09-01" and m["sources"] == ["u1", "u2"]
+
+
+def test_amendment1_duplicates_more_than_15_days_apart_stay_separate():
+    a = ev(kind="milk", region="Mumbai", seller_or_authority="", change=0.0968, change_prorated=0.0968,
+           cpi_code="01.1.4.1.1.01", effective_date="2026-09-20", url="u1", quote="line a")
+    b = {**a, "effective_date": "2026-09-01", "url": "u2", "quote": "line b"}         # 19 days apart
+    assert len(R.apply_rules([a, b])[0]) == 2
