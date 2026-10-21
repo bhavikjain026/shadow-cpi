@@ -113,4 +113,4 @@ files are kept as `results/*_before_bugfix_2026-10-21T151419.*` and in `results/
 - Amendment 2 October range: unchanged at ± 0.284 pp (the 80th percentile of |miss| still falls between the same
   two months).
 - Not tuned further.
-- **Commit:** `COMMIT_PENDING`
+- **Commit:** `b88a6fd`

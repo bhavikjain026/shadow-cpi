@@ -80,4 +80,4 @@ predicted inflation get one counter-search each:
   context, premium fuel grades, national scope, one event per kind × state × month). Re-scored once from cache.
   (c) mean absolute miss **0.185 → 0.194 pp**; (a) 0.212, (b) 0.225, B1 0.468 unchanged; GO still met; 5 of 9
   inside the range before and after. Old and new scores: `docs/after_scoring_changes.md` §4,
-  `results/*_before_bugfix_2026-10-21T151419.*`, `results/score_lock.json` (`history`).
+  `results/*_before_bugfix_2026-10-21T151419.*`, `results/score_lock.json` (`history`). Commit `b88a6fd`.
