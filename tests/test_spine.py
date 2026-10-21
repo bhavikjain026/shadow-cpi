@@ -117,3 +117,13 @@ def test_amendment1_duplicates_more_than_15_days_apart_stay_separate():
            cpi_code="01.1.4.1.1.01", effective_date="2026-09-20", url="u1", quote="line a")
     b = {**a, "effective_date": "2026-09-01", "url": "u2", "quote": "line b"}         # 19 days apart
     assert len(R.apply_rules([a, b])[0]) == 2
+
+
+def test_same_line_average_is_then_checked_for_duplicates():
+    tn = dict(kind="milk", region="Chennai", seller_or_authority="", cpi_code="01.1.4.1.1.01",
+              effective_date="2026-07-23")
+    arokya = ev(**tn, change=0.0488, change_prorated=0.0488, quote="Arokya raised milk by Rs 3", url="u1")
+    notice = [ev(**tn, change=c, change_prorated=c, quote="toned Rs 57 from 54, standardised 69 from 66", url="u2")
+              for c in (0.0556, 0.0455, 0.0411)]                 # same line, mean 4.74% -> within 0.5 pp of 4.88%
+    kept, _ = R.apply_rules([arokya] + notice)
+    assert len(kept) == 1 and kept[0]["sources"] == ["u1", "u2"]

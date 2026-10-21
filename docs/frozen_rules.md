@@ -161,3 +161,9 @@ parameter change, nothing tuned on a 2026 result. **No test month has been score
 - **Gained:** none. All other 2025 events are unchanged. Files: `results/recall_audit/amend1_*`.
 
 **Commit:** `6faa66b` (Amendment 1 code, config, tests and this section).
+
+**Amendment 1 bug fix (2026-10-21, before any scoring):** rule (e) ran before the same-line merge (§4 (i)). An event
+whose same-line group was averaged afterwards was never compared with its twins (e.g. one notification listing
+three milk types next to another report of the same hike). The two steps now run in order: same-line merge first,
+then rule (e). This is how the written rules read, so no rule changed. 2025 re-check: recall 3 of 4, no event
+gained or lost (`results/recall_audit/amend1b_*`).

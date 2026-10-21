@@ -115,10 +115,10 @@ def apply_rules(events):
         kept.append({**e, "scope": kind_scope, "states": sorted(states) if states else [],
                      "weight": weight, "weight_source": "national (weight 1)" if kind_scope == "national" else SOURCE,
                      "applied_change": e["change_prorated"] * weight})
-    merged = []
+    # pass 1 (2025 audit): events from the same cited line are one event, at the mean change
+    lines = []
     for e in kept:
-        # 2025 audit: one sentence with a range ('दो से तीन रुपये') gave two events. Same cited line -> one event.
-        same_line = next((m for m in merged if e.get("quote") and norm(m.get("quote") or "") == norm(e["quote"])
+        same_line = next((m for m in lines if e.get("quote") and norm(m.get("quote") or "") == norm(e["quote"])
                           and m["kind"] == e["kind"]), None)
         if same_line:
             n = same_line.get("_n", 1)
@@ -126,7 +126,12 @@ def apply_rules(events):
                 same_line[k] = (same_line[k] * n + e[k]) / (n + 1)
             same_line["_n"] = n + 1
             dropped.append((e, "same cited line as an event already kept (merged, mean change)"))
-            continue
+        else:
+            lines.append(dict(e))
+    # pass 2 (Amendment 1 e): same kind and scope, % within 0.5 pp, effective dates within 15 days -> one event,
+    # using the earliest effective date. Runs AFTER pass 1 so averaged same-line events are compared too.
+    merged = []
+    for e in lines:
         twin = next((m for m in merged if m["kind"] == e["kind"] and m["scope"] == e["scope"]
                      and m["states"] == e["states"] and abs(m["change"] - e["change"]) * 100 <= DUP_PP
                      and abs((date.fromisoformat(m["effective_date"]) -

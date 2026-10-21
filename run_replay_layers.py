@@ -56,6 +56,9 @@ def month_avg(daily, month):
     return (sum(v) / len(v), len(v)) if v else (None, 0)
 
 
+IOCL_RETRIEVED = ""
+
+
 def run_month(month, tav_all, nem, ibja, lpg_rev, petrol, factors, cfg):
     prev = M.add_months(month, -1)
     tav = tav_all.charge("replay-layers", f"replay-layers-month/{month}")
@@ -71,11 +74,12 @@ def run_month(month, tav_all, nem, ibja, lpg_rev, petrol, factors, cfg):
         observed[item] = {"avg_now": a, "days_now": na, "avg_prev": b, "days_prev": nb, "change": ch}
         row.update({f"{item}_obs_change": ch, f"{item}_days": f"{na}/{nb}", f"{item}_factor": factors[item]["factor"],
                     f"{item}_item_change": None if ch is None else ch * factors[item]["factor"]})
-    lpg_ch = E.lpg_monthly(lpg_rev, month) / E.lpg_monthly(lpg_rev, prev) - 1
+    gap = E.month_window(month)[1] > IOCL_RETRIEVED[:10]      # Amendment 1 (a): months IOCL's list cannot cover
+    lpg_ch = None if gap else E.lpg_monthly(lpg_rev, month) / E.lpg_monthly(lpg_rev, prev) - 1
     observed["lpg"] = {"avg_now": E.lpg_monthly(lpg_rev, month), "avg_prev": E.lpg_monthly(lpg_rev, prev),
-                       "change": lpg_ch}
-    row.update({"lpg_obs_change": lpg_ch, "lpg_factor": factors["lpg"]["factor"],
-                "lpg_item_change": lpg_ch * factors["lpg"]["factor"]})
+                       "change": lpg_ch, "gap": gap, "iocl_list_retrieved_at": IOCL_RETRIEVED}
+    row.update({"lpg_obs_change": lpg_ch, "lpg_factor": factors["lpg"]["factor"], "lpg_gap": gap,
+                "lpg_item_change": None if lpg_ch is None else lpg_ch * factors["lpg"]["factor"]})
     a, na = month_avg(petrol, month)
     b, nb = month_avg(petrol, prev)
     p_ch = a / b - 1 if a and b else None
@@ -134,13 +138,18 @@ def main():
     lpg_rev = E.parse_iocl_lpg(cached_page("iocl.com/indane-14Kg", "p2-history")
                                or cached_page("iocl.com/indane-14Kg", "observed:lpg extract"))
     petrol = ppac_petrol(cached_page("ppac.gov.in", "observed:petrol extract"))
+    global IOCL_RETRIEVED
+    for e in read_log():
+        if e["endpoint"] == "/extract" and "iocl.com/indane-14Kg" in json.dumps(e.get("params")) and not e["cached"]:
+            IOCL_RETRIEVED = json.loads((O.ROOT / "cache" / "tavily" / f"{e['cache_key']}.json").read_text())["retrieved_at"]
+            break
     existing = {}
     if OUT_CSV.exists():
         with OUT_CSV.open(encoding="utf-8") as f:
             existing = {r["month"]: r for r in csv.DictReader(f)}
     cols = ["month", "events_verified", "events", "gold_obs_change", "gold_days", "gold_factor", "gold_item_change",
             "silver_obs_change", "silver_days", "silver_factor", "silver_item_change", "lpg_obs_change", "lpg_factor",
-            "lpg_item_change", "petrol_obs_change", "petrol_days", "petrol_factor", "petrol_item_change", "credits"]
+            "lpg_item_change", "lpg_gap", "petrol_obs_change", "petrol_days", "petrol_factor", "petrol_item_change", "credits"]
     OUT_CSV.parent.mkdir(parents=True, exist_ok=True)
     for m in months:
         try:
