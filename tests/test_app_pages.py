@@ -204,8 +204,57 @@ def test_example_brief_for_september_is_labelled():
     assert not at.error                                        # it states coverage and the range
 
 
-def test_evidence_month_switch():
+def test_evidence_month_switch_and_filters():
     at = load("evidence")
-    at.selectbox[0].set_value("2026-03").run()
-    at.radio[0].set_value("Tavily (web)").run()
+    for opt in ("News pages", "Official series (IBJA, IOCL, PPAC)", "All"):
+        at.radio[0].set_value(opt).run()
+        assert not at.exception
+
+
+@pytest.mark.parametrize("month", ["2026-03", "2026-04", "2026-09"])
+def test_evidence_quote_count_matches_the_table(month):
+    at = load("evidence")
+    at.selectbox[0].set_value(month).run()
+    table = at.dataframe[0].value
+    text = all_text(at)
+    assert f"Price quotes listed above: **{len(table)}**" in text or f"Price quotes listed above: {len(table)}" in text
+    assert "quotes verified" not in text
+
+
+def test_evidence_links_lines_items_and_spine():
+    at = load("evidence")
+    at.selectbox[0].set_value("2026-09").run()
+    quotes, events = at.dataframe[0].value, at.dataframe[2].value
+    assert list(quotes.columns[:2]) == ["Item", "Source"] and list(events.columns[:2]) == ["Item", "Source"]
+    assert all(i[:1].isupper() for i in quotes["Item"]) and all(i[:1].isupper() for i in events["Item"])
+    assert any(l.startswith("Gold 999, ₹") and l.endswith("per 10 g (IBJA daily rate)") for l in quotes["Line"])
+    assert not any(str(l).lstrip().startswith("#") for df in at.dataframe for col in ("Line", "Exact line")
+                   if col in df.value for l in df.value[col])
+    spine = next(d.value for d in at.dataframe if "Centre" in d.value)
+    assert "Days" not in spine.columns
+    assert "Units as printed by DoCA; eggs and milk are labelled Rs./Kg. by the source." in all_text(at)
+
+
+def test_replay_chart_toggle_and_miss_wording():
+    at = load("replay")
+    assert at.checkbox[0].label == "Show other methods" and at.checkbox[0].value is False
+    text = all_text(at)
+    assert "percentage points too low" in text or "percentage points too high" in text
+    assert "missed by -" not in text
+    at.checkbox[0].check().run()
     assert not at.exception
+
+
+def test_flight_recorder_defaults_to_a_verified_event_chain():
+    at = load("flight_recorder")
+    chains = json.loads((ROOT / "results" / "app" / "event_chains.json").read_text())
+    picked = chains[at.selectbox[0].value]
+    assert (picked["month"], picked["item"]) == ("2026-09", "electricity")
+    assert "read the page with this event" in at.code[0].value
+
+
+def test_home_scan_table_has_source_column():
+    at = load("home")
+    scan = at.dataframe[-1].value
+    assert list(scan.columns[:2]) == ["Item", "Source"]
+    assert not any(str(l).startswith("#") for l in scan["Exact line"])

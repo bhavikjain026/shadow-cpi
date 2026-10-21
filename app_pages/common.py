@@ -158,3 +158,44 @@ def headline_result(lock):
                "Shadow CPI closer" if pc < poll else "poll closer")
     return (f"Over Jan–Sep 2026: Shadow CPI missed by {c:.3f} percentage points on average. On the {poll_months()} "
             f"months with a published economists' poll: Shadow CPI {pc:.3f} vs poll {poll:.3f} ({verdict}).")
+
+
+# ---------- display helpers (text only; numbers are not changed) ----------
+def clean_line(line):
+    """An exact line without markdown heading marks ('#', '##') at the start."""
+    import re
+    return re.sub(r"^\s*#+\s*", "", line or "").strip()
+
+
+def item_label(item):
+    return (item or "").replace("_", " ").capitalize()
+
+
+def source_column(label="Source"):
+    """A link column that shows the short domain (e.g. 'bhaskar.com') and opens the page."""
+    return st.column_config.LinkColumn(label, display_text=r"https?://(?:www\.|m\.|amp\.)?([^/]+)")
+
+
+def indian_number(x):
+    """153183 -> '1,53,183' (Indian digit grouping)."""
+    s = f"{int(round(x))}"
+    if len(s) <= 3:
+        return s
+    head, tail = s[:-3], s[-3:]
+    groups = []
+    while len(head) > 2:
+        groups.insert(0, head[-2:])
+        head = head[:-2]
+    return ",".join(([head] if head else []) + groups) + "," + tail
+
+
+def readable_quote(q):
+    """A readable line for official table rows (IBJA, IOCL); other quotes keep their exact line."""
+    url, unit = q.get("url") or "", q.get("unit") or ""
+    if "ibja" in url and q["item"] in ("gold", "silver"):
+        per = "per 10 g" if "10 g" in unit else "per kg"
+        return f"{q['item'].capitalize()} 999, ₹{indian_number(q['price'])} {per} (IBJA daily rate)"
+    if "iocl.com" in url and q["item"] == "lpg":
+        return (f"Domestic LPG 14.2 kg, ₹{indian_number(q['price'])} per cylinder in {q.get('place', '')} "
+                f"(IOCL price list, from {q['date']})")
+    return clean_line(q.get("line"))

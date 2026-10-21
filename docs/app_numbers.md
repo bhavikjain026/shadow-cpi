@@ -30,6 +30,9 @@ rebuild `results/app/` with `python tools/build_app_data.py`.
 | Home | Live-run receipt (only after a live run) | computed during the run | `shadow_cpi/live_run.py` (flight recorder lines tagged `live:`, Budgeted credits) |
 | Evidence | Quotes, events, counts, dropped reasons, failed sources, searches, code commit, model IDs | per month | `manifests/<month>.json` |
 | Evidence | Spine prices | per month | `data/spine.csv` |
+| Evidence | “Price quotes listed above: N” (official-series rows, news quotes) | March 50 (38, 12) | counted from the same verified quote rows the table shows (`manifests/<month>.json` `quotes`) |
+| Evidence | Latest event search: pages seen, kept, events verified of extracted | per month | `manifests/<month>.json` `counts` (that run's event layer only) |
+| Flight Recorder | Default “one verified event, end to end” chain | September 2026 J&K electricity | `results/app/event_chains.json` ← full `logs/flight_recorder.jsonl` |
 | Replay | Per-month actual, (a), (b), (c), range, inside, coverage; chart | 9 months | `results/replay.csv` |
 | Replay | B1 and poll per month | 9 months | `results/baselines.csv` |
 | Replay | Inside the range (count) | 5 of 9 | `results/replay.csv` `c_inside_range` |

@@ -6,7 +6,7 @@ import streamlit as st
 
 from shadow_cpi.live_range import THRESHOLD
 
-from app_pages.common import (CODES, LABELS, LIVE_MONTH, NOWCAST_WORDS, REPO_URL, SEAL_DATE, countdown_text, header,
+from app_pages.common import (CODES, LABELS, clean_line, item_label, source_column, LIVE_MONTH, NOWCAST_WORDS, REPO_URL, SEAL_DATE, countdown_text, header,
                               headline_result, month_name, next_release, pass_fail, pct, poll_direction, poll_months, read_json,
                               seal_status)
 
@@ -108,10 +108,10 @@ def show_run(r, note=""):
                    f"before it for announcements) · replayed from saved results on {r['replayed_on']} · "
                    f"{r['n_searches']} searches · {r['credits']} credits when first run (0 now).")
     if r.get("events"):
-        st.dataframe([{"Item": e["item"], "Place": e.get("place", ""), "Change": f"{e['pct_change']:+.2f}%",
-                       "Effective": e["effective_date"], "Exact line": e["line"], "Link": e["url"]}
-                      for e in r["events"]], hide_index=True, width="stretch",
-                     column_config={"Link": st.column_config.LinkColumn("Link")})
+        st.dataframe([{"Item": item_label(e["item"]), "Source": e["url"], "Place": e.get("place", ""),
+                       "Change": f"{e['pct_change']:+.2f}%", "Effective": e["effective_date"],
+                       "Exact line": clean_line(e["line"])} for e in r["events"]],
+                     hide_index=True, width="stretch", column_config={"Source": source_column()})
     else:
         st.caption("No verified price events in this scan.")
     if r.get("receipt"):

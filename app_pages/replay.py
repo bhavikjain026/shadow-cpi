@@ -51,18 +51,31 @@ st.markdown(f"80% range for Shadow CPI: actual inside in **{inside} of {len(repl
 
 # ---------- chart ----------
 st.subheader("Predicted vs actual")
+others = st.checkbox("Show other methods", value=False)
+MON = [month_name(r["month"])[:3] for r in replay]
 long = []
 for r in replay:
     for name, val in [("Actual (official)", num(r["actual_yoy"]))] + list(row_preds(r).items()):
-        if val is not None and name != "Economists' poll":
-            long.append({"Month": r["month"] + "-01", "Series": name, "YoY %": val})
+        if val is None or name == "Economists' poll":
+            continue
+        if others or name in ("Actual (official)", LABELS["c"]):
+            long.append({"Month": month_name(r["month"])[:3], "Series": name, "YoY": val})
 df = pd.DataFrame(long)
-band = pd.DataFrame([{"Month": r["month"] + "-01", "low": num(r["c_range_low"]), "high": num(r["c_range_high"])}
-                     for r in replay])
-chart = (alt.Chart(band).mark_area(opacity=0.2).encode(x=alt.X("Month:T", title=None), y="low:Q", y2="high:Q")
+band = pd.DataFrame([{"Month": month_name(r["month"])[:3], "low": num(r["c_range_low"]),
+                      "high": num(r["c_range_high"])} for r in replay])
+x = alt.X("Month:O", sort=MON, title=None, axis=alt.Axis(labelAngle=0))
+y_title = "CPI inflation, year-on-year (%)"
+series = list(dict.fromkeys(df["Series"]))
+palette = {"Actual (official)": "#111111", LABELS["c"]: "#1f6fd1", LABELS["a"]: "#9a9a9a", LABELS["b"]: "#c08a2b",
+           LABELS["B1"]: "#b65c8f"}
+color = alt.Color("Series:N", scale=alt.Scale(domain=series, range=[palette.get(n, "#777777") for n in series]),
+                  legend=alt.Legend(orient="bottom", columns=2, title=None))
+chart = (alt.Chart(band).mark_area(opacity=0.18, color=palette[LABELS["c"]]).encode(
+             x=x, y=alt.Y("low:Q", title=y_title, scale=alt.Scale(zero=False)), y2="high:Q")
          + alt.Chart(df).mark_line(point=True).encode(
-             x="Month:T", y=alt.Y("YoY %:Q", scale=alt.Scale(zero=False)),
-             color=alt.Color("Series:N", legend=alt.Legend(orient="bottom", columns=2)))).properties(height=340)
+             x=x, y=alt.Y("YoY:Q", title=y_title, scale=alt.Scale(zero=False)), color=color,
+             strokeWidth=alt.condition(alt.datum.Series == "Actual (official)", alt.value(4), alt.value(2)),
+             tooltip=["Month", "Series", alt.Tooltip("YoY:Q", format=".2f")])).properties(height=340)
 st.altair_chart(chart, width="stretch")
 st.caption("Shaded band = 80% range for Shadow CPI.")
 
@@ -79,8 +92,9 @@ noted = [r for r in replay if r.get("note")]
 worst = max(noted or replay, key=lambda r: abs(num(r["c_tavily_pred"]) - num(r["actual_yoy"])))
 st.subheader(f"One miss explained: {month_name(worst['month'])}")
 miss = num(worst["c_tavily_pred"]) - num(worst["actual_yoy"])
-st.markdown(f"Shadow CPI {pct(num(worst['c_tavily_pred']))} vs official {pct(num(worst['actual_yoy']))} "
-            f"- missed by {miss:+.2f} percentage points.")
+st.markdown(f"Shadow CPI said {pct(num(worst['c_tavily_pred']))}; the official figure was "
+            f"{pct(num(worst['actual_yoy']))}. Shadow CPI came in {abs(miss):.2f} percentage points too "
+            f"{'low' if miss < 0 else 'high'}.")
 st.markdown(worst.get("note") or "No explanation written yet.")
 
 # ---------- (c) vs (b) honestly ----------

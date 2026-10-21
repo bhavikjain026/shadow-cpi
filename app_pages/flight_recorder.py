@@ -1,7 +1,7 @@
 """Tavily Flight Recorder: every outside call from logs/flight_recorder.jsonl, one item traced, the evidence chase."""
 import streamlit as st
 
-from app_pages.common import header, read_log, read_text, tavily_credits
+from app_pages.common import header, read_json, read_log, read_text, tavily_credits
 
 header("Tavily Flight Recorder", "Every outside call, in order: when, which Tavily endpoint, what was asked, "
                                  "how many results, credits and time. Repeat calls come from the cache for free.")
@@ -47,23 +47,36 @@ def subtree(e, depth=0):
         yield from subtree(ch, depth + 1)
 
 
-def tree_text(roots):
+def tree_text(roots, mark_id=None):
     lines = []
     for r in roots:
         for d, e in subtree(r):
             mark = "└─ " if d else ""
             extra = f" · {e['n_results']} results" if e.get("n_results") is not None else ""
-            lines.append(f"{'   ' * d}{mark}{e['service']} {e['endpoint']}: {what(e)}{extra}  [{e.get('tag') or ''}]")
+            here = "   ◀ read the page with this event" if e["id"] == mark_id else ""
+            lines.append(f"{'   ' * d}{mark}{e['service']} {e['endpoint']}: {what(e)}{extra}  "
+                         f"[{e.get('tag') or ''}]{here}")
     return "\n".join(lines)
 
 
 # ---------- one item end to end ----------
-st.subheader("One item, end to end")
+st.subheader("One verified event, end to end")
+by_id = {e["id"]: e for e in log}
+chains = [c for c in (read_json("results/app/event_chains.json") or []) if c["root_id"] in by_id]
+if chains:
+    default = next((i for i, c in enumerate(chains) if c["month"] == "2026-09" and c["item"] == "electricity"),
+                   len(chains) - 1)
+    pick = st.selectbox("Verified event", range(len(chains)), index=default, format_func=lambda i: chains[i]["label"])
+    ch = chains[pick]
+    st.caption("The dated news search, the Tavily Extract call that read the event's page, and the Nemotron reads "
+               "(gatekeeper, then price events) on each page.")
+    st.code(tree_text([by_id[ch["root_id"]]], ch["extract_id"]), language=None)
 roots = [e for e in log if e.get("parent") is None]
 jobs = sorted({(e.get("tag") or "").split(" ")[0] for e in roots if e.get("tag")})
 if jobs:
-    job = st.selectbox("Item or job", jobs)
-    st.code(tree_text([r for r in roots if (r.get("tag") or "").split(" ")[0] == job]), language=None)
+    with st.expander("Browse any job"):
+        job = st.selectbox("Item or job", jobs)
+        st.code(tree_text([r for r in roots if (r.get("tag") or "").split(" ")[0] == job]), language=None)
 
 # ---------- evidence chase ----------
 st.subheader("Evidence chase")

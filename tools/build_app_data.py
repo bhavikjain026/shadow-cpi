@@ -9,6 +9,7 @@ Writes:
   results/app/audit_summary.json      counts from audit/event_audit.{md,csv} and audit/missed_events.md (cross-checked)
   results/app/saved_run.json          the saved run the app opens on: the latest month's event layer
   results/app/tavily_trace_2026-03.json  every Tavily call for March 2026, the funnel, and the failures
+  results/app/event_chains.json       the search -> extract chain behind each verified replay event
   results/reporter_brief_2026-09.md   an example reporter brief from the September replay (labelled, not a forecast)
 """
 import csv
@@ -302,9 +303,34 @@ def brief(month="2026-09"):
     return lines
 
 
+def event_chains(log):
+    """For each verified event in the replay manifests: the Tavily call chain that found it (root search → the
+    extract that read its page), from the full flight recorder. results/app/event_chains.json."""
+    by_id = {e["id"]: e for e in log}
+    out = []
+    for p in sorted((ROOT / "manifests").glob("2026-0*.json")):
+        for ev in json.loads(p.read_text())["events"]:
+            ext = next((e for e in log if e["service"] == "tavily" and e["endpoint"] == "/extract" and not e["cached"]
+                        and ev["url"] in ((e.get("params") or {}).get("urls") or [])), None)
+            if not ext:
+                continue
+            root = ext
+            while root.get("parent") and root["parent"] in by_id:
+                root = by_id[root["parent"]]
+            where = ", ".join(st.title() for st in ev.get("states") or []) or "India"
+            out.append({"month": p.stem, "item": ev["item"], "where": where, "url": ev["url"],
+                        "root_id": root["id"], "extract_id": ext["id"],
+                        "label": f"{E.MONTHS_EN[int(p.stem[5:]) - 1]} {p.stem[:4]}: {ev['item'].capitalize()}, "
+                                 f"{where.replace('And', 'and')} ({ev['pct_change']:+.2f}%)"})
+    (OUT / "event_chains.json").write_text(json.dumps(out, indent=1, ensure_ascii=False))
+    return out
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    n = flight_snapshot(read_log())
+    log = read_log()
+    n = flight_snapshot(log)
+    chains = event_chains(log)
     a = audit_summary()
     s = saved_run()
     t = trace()
