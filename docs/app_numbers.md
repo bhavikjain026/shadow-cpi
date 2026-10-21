@@ -24,7 +24,7 @@ rebuild `results/app/` with `python tools/build_app_data.py`.
 | Home | Fixes made; events before → after | 4; 12 → 9 | `results/app/audit_summary.json` ← `docs/after_scoring_changes.md` §4, `audit/event_audit.csv`, `manifests/2026-0*.json` |
 | Home | Recall: found directly; including official series | 9 of 29; 14 of 29 | `results/app/audit_summary.json` ← `audit/missed_events.md` (table rows counted, checked against its stated totals) |
 | Home | Saved run: label, search times, searches, credits, events | 2026-09: 18 searches, 39 credits, 1 event(s) | `results/app/saved_run.json` ← `manifests/2026-09.json`, `results/replay_layers.csv` (credits) |
-| Home | Live-run limits in messages | 3 per visit, 15 per day, floor 100 credits | `config/budget.json` `plans.app_live`; per-scan caps `caps.run-now-scan` (8), `caps.run-now` (120) |
+| Home | Live-run limits in messages | off until RUN_LIVE_ENABLED is set (“Live runs open on 1 Dec”); 3 per visit, 8 per day, ledger floor 100 credits, Tavily /usage floor 150 credits | `RUN_LIVE_ENABLED` (Space setting); `config/budget.json` `plans.app_live`; Tavily GET /usage `account.plan_limit − account.plan_usage` (checked before each run, not stored); per-scan caps `caps.run-now-scan` (8), `caps.run-now` (120) |
 | Home | Live-run receipt (only after a live run) | computed during the run | `shadow_cpi/live_run.py` (flight recorder lines tagged `live:`, Budgeted credits) |
 | Evidence | Quotes, events, counts, dropped reasons, failed sources, searches, code commit, model IDs | per month | `manifests/<month>.json` |
 | Evidence | Spine prices | per month | `data/spine.csv` |

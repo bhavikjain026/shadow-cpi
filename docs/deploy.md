@@ -33,6 +33,9 @@ them before each push (step 1).
    - `SCPI_TAVILY_API_KEY` = your Tavily key
    - `SCPI_NEBIUS_API_KEY` = your Nebius Token Factory key
 
+   Do **not** add `RUN_LIVE_ENABLED` yet. Without it, "Run live" shows "Live runs open on 1 Dec (judging period)"
+   and makes no call.
+
 4. **Push a one-commit snapshot** (no history). Hugging Face refuses binary files (the PDF and the weights
    spreadsheet) unless they are stored with LFS, and the old commits contain them, so push a fresh branch:
    ```bash
@@ -62,21 +65,26 @@ them before each push (step 1).
 5. **Check the Space** once the build log says "Running":
    - Home shows "sealing on 29 Oct", the countdown to Thu 12 Nov 4:00 PM IST, the scoreboard, the audit box and
      the saved run.
-   - Press "Run live" once (up to 8 credits). A receipt appears (Tavily calls, credits, seconds). Optional cap
-     check, up to 16 more credits: press it 3 more times; the fourth press shows the saved run with "You have used
-     this visit's 3 live runs".
+   - Press "Run live": it shows the saved run with "Live runs open on 1 Dec (judging period)" and spends nothing.
    - No page shows an error box.
 
 6. **After the seal (29 Oct):** repeat steps 1 and 4 so the Space has `sealed/2026-10.json` and the new
    `results/nowcast_2026-10.json`.
 
+7. **On 30 Nov, turn live runs on.** Space → Settings → *Variables and secrets* → **New variable**:
+   `RUN_LIVE_ENABLED` = `1`. The Space restarts; no code changes. Press "Run live" once (up to 8 credits): a receipt
+   appears. To turn it off again, delete the variable or set it to `0`.
+
 ## Things to know
 
 - **Free Spaces sleep** after a period without visitors and take a short while to wake on the next visit. Judging
   runs to 15 Dec 12:00 PT (16 Dec 01:30 IST); visit the Space before a demo to wake it.
-- **The live-run caps live inside the running Space** (`logs/live_runs.jsonl`, `results/credit_ledger.jsonl` in the
-  container). A restart or rebuild resets the per-day count and forgets live credits spent since the last push. The
-  hard caps still apply to each run (8 credits per scan, 120 for all scans), and the floor uses the committed ledger
-  plus the container's runs. Check the Tavily dashboard during judging.
+- **Live-run guards.** Before every live run the app asks Tavily for the real balance (GET /usage, same key) and
+  refuses the run if fewer than 150 credits are left, or if that check fails or returns no limit. It also keeps the
+  ledger check (100-credit floor), at most 8 runs per day for the whole app and 3 per visitor, and the per-run caps
+  (8 credits per scan, 120 for all scans). The per-day count and the ledger live inside the running Space and reset
+  on a restart; the /usage check does not, so it is the one that holds the balance. /usage can lag: on 20 Oct it
+  showed 6 credits used against 226 spent; on 21 Oct it showed 596 against the ledger's 694 (which includes a
+  160-credit estimate for calls made before the ledger existed). The 150 floor leaves room for that.
 - **Untested on Python 3.12 at run time.** The code was tested on Python 3.14 here; a 3.12 grammar check of every
   file passed. If the build fails on 3.12, change `python_version` in the README header to `"3.13"`.

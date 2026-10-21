@@ -4,6 +4,7 @@ Every call asks Tavily for its credit usage (include_usage=true), is cached, and
 to the Flight Recorder. Extract always reports failed_results (Tavily returns them even on HTTP 200).
 """
 import re
+import time
 import urllib.request
 from email.utils import parsedate_to_datetime
 
@@ -65,6 +66,13 @@ class Tavily:
         except OSError:  # covers network, HTTP and timeout errors from urllib
             return "", None
         return resp.get("raw_content") or "", "direct"
+
+    def usage(self, tag="usage"):
+        """GET /usage: the account's credit balance (free). Never served from the cache: a balance must be fresh."""
+        rec = Recorder(self.rec.cache_dir, self.rec.log_file, use_cache=False)
+        resp, _ = rec.call("tavily", "/usage", {"at": time.time()},
+                           lambda: self.transport("GET", self.base + "/usage", self.api_key, None, 30), tag=tag)
+        return resp
 
     def map(self, url, *, parent=None, tag=None, **params):
         """params: instructions, max_depth, max_breadth, limit, select_paths, select_domains,

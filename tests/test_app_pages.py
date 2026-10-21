@@ -17,7 +17,7 @@ AUDIT = json.loads((ROOT / "results" / "app" / "audit_summary.json").read_text()
 @pytest.fixture(autouse=True)
 def no_keys(monkeypatch):
     monkeypatch.chdir(ROOT)
-    for k in ("SCPI_TAVILY_API_KEY", "SCPI_NEBIUS_API_KEY", "SHADOW_CPI_DATA_DIR"):
+    for k in ("SCPI_TAVILY_API_KEY", "SCPI_NEBIUS_API_KEY", "SHADOW_CPI_DATA_DIR", "RUN_LIVE_ENABLED"):
         monkeypatch.delenv(k, raising=False)
 
 
@@ -79,15 +79,42 @@ def _click_run(at):
     return all_text(at)
 
 
+def test_run_live_off_by_default_shows_saved_run_and_makes_no_calls(monkeypatch):
+    from shadow_cpi import live_run as L
+    monkeypatch.setenv("SCPI_TAVILY_API_KEY", "test-not-a-key")
+    monkeypatch.setenv("SCPI_NEBIUS_API_KEY", "test-not-a-key")
+    monkeypatch.setattr(L, "run_live", lambda *a, **k: pytest.fail("switch is off: no run"))
+    monkeypatch.setattr(L, "usage_remaining", lambda *a, **k: pytest.fail("switch is off: no /usage call"))
+    text = _click_run(load("home"))
+    assert "Live runs open on 1 Dec (judging period). Showing the saved run." in text and "Saved run" in text
+
+
 def test_run_live_without_keys_shows_saved_run_and_message(monkeypatch):
     from shadow_cpi import live_run as L
+    monkeypatch.setenv("RUN_LIVE_ENABLED", "1")
     monkeypatch.setattr(L, "run_live", lambda *a, **k: pytest.fail("must not run without keys"))
     text = _click_run(load("home"))
     assert "switched off" in text and "Saved run" in text
 
 
+def test_run_live_usage_failure_or_low_balance_shows_saved_run(monkeypatch):
+    from shadow_cpi import live_run as L
+    monkeypatch.setenv("RUN_LIVE_ENABLED", "1")
+    monkeypatch.setenv("SCPI_TAVILY_API_KEY", "test-not-a-key")
+    monkeypatch.setenv("SCPI_NEBIUS_API_KEY", "test-not-a-key")
+    monkeypatch.setattr(L, "credits_left", lambda *a, **k: 1000)
+    monkeypatch.setattr(L, "run_live", lambda *a, **k: pytest.fail("refused run must not start"))
+    monkeypatch.setattr(L, "usage_remaining", lambda *a, **k: (None, "Tavily's usage check failed (URLError)"))
+    text = _click_run(load("home"))
+    assert "usage check failed" in text and "Saved run" in text
+    monkeypatch.setattr(L, "usage_remaining", lambda *a, **k: (120, ""))
+    text = _click_run(load("home"))
+    assert "fewer than 150 credits" in text and "Saved run" in text
+
+
 def test_run_live_session_cap_shows_saved_run(monkeypatch):
     from shadow_cpi import live_run as L
+    monkeypatch.setenv("RUN_LIVE_ENABLED", "1")
     monkeypatch.setenv("SCPI_TAVILY_API_KEY", "test-not-a-key")
     monkeypatch.setenv("SCPI_NEBIUS_API_KEY", "test-not-a-key")
     monkeypatch.setattr(L, "run_live", lambda *a, **k: pytest.fail("cap must stop the run"))

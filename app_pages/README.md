@@ -10,8 +10,9 @@ The app reads the real results files in this repository; there is no sample data
 file are listed in `docs/app_numbers.md`. Files that the pipeline keeps out of git (`logs/`, `cache/`) reach the app
 as committed snapshots in `results/app/`, rebuilt with `python tools/build_app_data.py` (0 credits).
 
-The only API calls are the capped "Run live" button on Home (`shadow_cpi/live_run.py`: 3 per visitor session, 15 per
-day for the app, none below a 100-credit Tavily floor; keys from the environment only).
+The only API calls are the capped "Run live" button on Home (`shadow_cpi/live_run.py`): off unless `RUN_LIVE_ENABLED`
+is set; then 3 per visitor session, 8 per day for the app, none below a 100-credit ledger floor, and none unless
+Tavily's GET /usage (checked before every run) reports at least 150 credits left. Keys from the environment only.
 
 | Page | File(s) |
 | --- | --- |

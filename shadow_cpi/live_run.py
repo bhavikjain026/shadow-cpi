@@ -1,7 +1,9 @@
 """'Run live' for the app: one live event scan of the last 7 days, capped in code.
 
-Caps (config/budget.json, plans.app_live): at most `per_session` runs per visitor session, `per_day` runs per UTC day
-for the whole app, and none at all when the Tavily balance would fall below `credit_floor`. Each run is also held to
+Off unless RUN_LIVE_ENABLED is set in the environment (Space settings). Caps (config/budget.json, plans.app_live): at
+most `per_session` runs per visitor session, `per_day` runs per UTC day for the whole app, none when the ledger balance
+would fall below `credit_floor`, and none unless Tavily's own GET /usage reports at least `usage_floor` credits left
+(checked before every run; a failed check or a missing limit refuses the run). Each run is also held to
 the hard caps 'run-now' (total) and 'run-now-scan' (one scan) by shadow_cpi.budget. A run that is refused or fails
 never raises to the page: the app shows the saved run with the message.
 
@@ -41,13 +43,40 @@ def runs_on(day, path=STATE_FILE):
     return sum(json.loads(l)["day"] == day for l in path.read_text().splitlines() if l.strip())
 
 
-def gate(session_runs, now=None, path=STATE_FILE, cfg=None, ledger=None, have_keys=None):
-    """(allowed, message). The message is shown with the saved run when a run is not allowed."""
+def enabled():
+    """RUN_LIVE_ENABLED from the environment (Space settings). Default OFF; on only for 1/true/yes/on."""
+    return os.environ.get("RUN_LIVE_ENABLED", "").strip().lower() in ("1", "true", "yes", "on")
+
+
+def usage_remaining(tavily_key, fetch=None):
+    """(remaining credits, '') from Tavily's GET /usage (account.plan_limit - account.plan_usage), or (None, reason)
+    when the call fails or returns no limit. fetch: for tests (returns the parsed response)."""
+    try:
+        if fetch:
+            resp = fetch()
+        else:
+            from .tavily import Tavily
+            resp = Tavily(api_key=tavily_key).usage(tag="live:usage check")
+        acc = (resp or {}).get("account") or {}
+        limit, used = acc.get("plan_limit"), acc.get("plan_usage")
+        if not isinstance(limit, (int, float)) or not isinstance(used, (int, float)):
+            return None, "Tavily's usage check returned no credit limit"
+        return limit - used, ""
+    except Exception as e:                                      # fail closed
+        return None, f"Tavily's usage check failed ({type(e).__name__})"
+
+
+def gate(session_runs, now=None, path=STATE_FILE, cfg=None, ledger=None, have_keys=None, usage_fetch=None):
+    """(allowed, message). The message is shown with the saved run when a run is not allowed. Checks run cheapest
+    first; the Tavily /usage check (a free call) runs last and fails closed."""
     cfg = cfg or load_budget()
     lim = limits(cfg)
     now = now or datetime.now(timezone.utc)
     day = now.date().isoformat()
-    if not (keys() if have_keys is None else have_keys):
+    if not enabled():
+        return False, "Live runs open on 1 Dec (judging period). Showing the saved run."
+    k = keys() if have_keys is None else (("test", "test") if have_keys else None)
+    if not k:
         return False, "Live runs are switched off on this copy of the app (no API keys). Showing the saved run."
     if session_runs >= lim["per_session"]:
         return False, (f"You have used this visit's {lim['per_session']} live runs. Showing the saved run.")
@@ -61,6 +90,12 @@ def gate(session_runs, now=None, path=STATE_FILE, cfg=None, ledger=None, have_ke
     spent_live = sum(e["credits"] for e in (read_ledger() if ledger is None else ledger) if "run-now" in e["budgets"])
     if spent_live + cap_of("run-now-scan", cfg) > cap_of("run-now", cfg):
         return False, f"The app's live-run credit budget is used up ({spent_live} credits). Showing the saved run."
+    remaining, why = usage_remaining(k[0], usage_fetch)
+    if remaining is None:
+        return False, f"Live runs are paused: {why}. Showing the saved run."
+    if remaining < lim["usage_floor"]:
+        return False, (f"Live runs are paused: Tavily reports fewer than {lim['usage_floor']} credits left. "
+                       "Showing the saved run.")
     return True, ""
 
 

@@ -8,7 +8,16 @@ from shadow_cpi import live_run as L
 from shadow_cpi.budget import load_budget
 
 NOW = datetime(2026, 10, 22, 10, 0, tzinfo=timezone.utc)
+REAL_USAGE = L.usage_remaining                 # kept before the fixture swaps in a fake
 CFG = load_budget()
+
+
+@pytest.fixture(autouse=True)
+def switched_on_no_network(monkeypatch):
+    """Gate tests run with the switch ON and a fake /usage (plenty left); no test may reach Tavily."""
+    monkeypatch.setenv("RUN_LIVE_ENABLED", "1")
+    monkeypatch.setattr(L, "usage_remaining", lambda key, fetch=None: (1000, ""))
+    monkeypatch.setattr("shadow_cpi.tavily.Tavily.usage", lambda self, tag=None: pytest.fail("network call"))
 
 
 def ledger(spent_total=0, live=0):
@@ -17,7 +26,8 @@ def ledger(spent_total=0, live=0):
 
 
 def test_limits_are_the_owner_caps():
-    assert (L.limits(CFG)["per_session"], L.limits(CFG)["per_day"], L.limits(CFG)["credit_floor"]) == (3, 15, 100)
+    lim = L.limits(CFG)
+    assert (lim["per_session"], lim["per_day"], lim["credit_floor"], lim["usage_floor"]) == (3, 8, 100, 150)
 
 
 def test_allowed_with_keys_and_room(tmp_path):
@@ -35,12 +45,14 @@ def test_session_cap_3(tmp_path):
     assert L.gate(2, NOW, tmp_path / "runs.jsonl", CFG, ledger(0), have_keys=True)[0]
 
 
-def test_day_cap_15_for_the_whole_app(tmp_path):
+def test_day_cap_8_for_the_whole_app(tmp_path):
     p = tmp_path / "runs.jsonl"
-    p.write_text("".join(json.dumps({"day": "2026-10-22", "n": i}) + "\n" for i in range(15))
+    p.write_text("".join(json.dumps({"day": "2026-10-22", "n": i}) + "\n" for i in range(7)))
+    assert L.gate(0, NOW, p, CFG, ledger(0), have_keys=True)[0]                 # 7 used: the 8th may run
+    p.write_text(p.read_text() + json.dumps({"day": "2026-10-22", "n": 8}) + "\n"
                  + json.dumps({"day": "2026-10-21", "n": 1}) + "\n")
     ok, msg = L.gate(0, NOW, p, CFG, ledger(0), have_keys=True)
-    assert not ok and "15 live runs" in msg
+    assert not ok and "8 live runs" in msg
     assert L.gate(0, datetime(2026, 10, 23, tzinfo=timezone.utc), p, CFG, ledger(0), have_keys=True)[0]
 
 
@@ -83,3 +95,78 @@ def test_run_live_with_mocked_calls_records_run_and_stays_in_window(tmp_path, mo
     assert seen and all(s == ("2026-10-15", "2026-10-22") for s, *_ in [(x[:2], x) for x in seen])
     assert all(lang == "en" for *_, lang in seen)
     assert out["live"] and out["events"] == [] and out["receipt"]["credits"] == 0
+
+
+def test_switch_off_by_default_makes_no_calls(tmp_path, monkeypatch):
+    monkeypatch.delenv("RUN_LIVE_ENABLED")
+    monkeypatch.setattr(L, "usage_remaining", lambda *a, **k: pytest.fail("no /usage call when off"))
+    ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, ledger(0), have_keys=True)
+    assert not ok and msg == "Live runs open on 1 Dec (judging period). Showing the saved run."
+    for v in ("0", "false", "off", ""):
+        monkeypatch.setenv("RUN_LIVE_ENABLED", v)
+        assert not L.enabled()
+    for v in ("1", "true", "YES", "on"):
+        monkeypatch.setenv("RUN_LIVE_ENABLED", v)
+        assert L.enabled()
+
+
+USAGE = {"key": {"usage": 596, "limit": None}, "account": {"current_plan": "x", "plan_usage": 596, "plan_limit": 1500,
+                                                          "paygo_usage": 0, "paygo_limit": None}}
+
+
+def test_usage_remaining_reads_account_limit_minus_usage():
+    assert REAL_USAGE("k", fetch=lambda: USAGE) == (904, "")
+
+
+@pytest.mark.parametrize("resp, why", [({"key": {"usage": 5, "limit": None}}, "no credit limit"),
+                                       ({"account": {"plan_usage": 5, "plan_limit": None}}, "no credit limit"),
+                                       ({}, "no credit limit"), (None, "no credit limit")])
+def test_usage_without_a_limit_fails_closed(resp, why):
+    remaining, msg = REAL_USAGE("k", fetch=lambda: resp)
+    assert remaining is None and why in msg
+
+
+def test_usage_call_failure_fails_closed():
+    from shadow_cpi.http import ApiError
+
+    def fail():
+        raise ApiError(401, "unauthorised")
+    remaining, msg = REAL_USAGE("k", fetch=fail)
+    assert remaining is None and "failed (ApiError)" in msg
+
+
+def test_gate_refuses_when_usage_fails_or_balance_low(tmp_path, monkeypatch):
+    monkeypatch.setattr(L, "usage_remaining", REAL_USAGE)              # real parsing; fetch is mocked below
+
+    def timeout():
+        raise TimeoutError()
+    ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, ledger(0), have_keys=True,
+                     usage_fetch=timeout)
+    assert not ok and "usage check failed (TimeoutError)" in msg
+    ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, ledger(0), have_keys=True, usage_fetch=lambda: {"key": {}})
+    assert not ok and "no credit limit" in msg
+    low = {"account": {"plan_limit": 1500, "plan_usage": 1351}}                # 149 left
+    ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, ledger(0), have_keys=True, usage_fetch=lambda: low)
+    assert not ok and "fewer than 150 credits" in msg
+    edge = {"account": {"plan_limit": 1500, "plan_usage": 1350}}               # exactly 150 left
+    assert L.gate(0, NOW, tmp_path / "r", CFG, ledger(0), have_keys=True, usage_fetch=lambda: edge) == (True, "")
+
+
+def test_ledger_check_still_applies_when_usage_is_fine(tmp_path):
+    ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, ledger(CFG["plan_limit"]), have_keys=True)
+    assert not ok and "floor of 100" in msg
+
+
+def test_tavily_usage_is_a_fresh_get_with_the_same_key(tmp_path, monkeypatch):
+    monkeypatch.undo()                                       # the real Tavily.usage, with a fake transport
+    from shadow_cpi.recorder import Recorder
+    from shadow_cpi.tavily import Tavily
+    sent = []
+
+    def transport(method, url, token, body, timeout):
+        sent.append((method, url, token, body))
+        return USAGE
+    t = Tavily(api_key="the-key", recorder=Recorder(tmp_path / "c", tmp_path / "log.jsonl"), transport=transport)
+    assert t.usage() == USAGE and t.usage() == USAGE           # second call is sent again, not cached
+    assert [s[:2] for s in sent] == [("GET", t.base + "/usage")] * 2 and all(s[2] == "the-key" for s in sent)
+    assert all(s[3] is None for s in sent)
