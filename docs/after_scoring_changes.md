@@ -50,3 +50,67 @@ is listed here with its date, reason and commit. None of them changes a scored r
   unchanged); `detail.quotes_restored_from` says so. No logic changed. The predictor reads only the manifest's
   `events`, which are unchanged, so no scored number moves (the builder check above confirms it).
 - **Commit:** `620a8e8`
+
+## 4. Amendment 3: bug fixes found by the independent audit (re-scored once)
+
+- **Date:** 2026-10-21
+- **Decided by:** the owner, after Eshan's independent audit (PR #4, `audit/event_audit.md`: 5 correct, 3 partly,
+  3 wrong, 1 unclear; 9 confirmed by a second source).
+- **Rule followed:** the pre-registered "change nothing except genuine bugs; log each one; report scores before and
+  after". Every fix is a **general** rule that enforces scope already written in `docs/frozen_rules.md` (retail only,
+  the CPI variety, correct geography, no double counting). No month- or event-specific patch, no hand-edited event.
+  Code: `shadow_cpi/event_rules.py`, `shadow_cpi/evidence.py` (`judge_event`, `line_context`); tests:
+  `tests/test_amend3.py`, `tests/test_spine.py`.
+
+| Fix | General rule | Scope rule it enforces | Audit row |
+|---|---|---|---|
+| a | Retail only: wholesale, tabela, loose and dairy-farmer-rate wording (procurement/purchase price, paid to farmers) in English, Hindi and Marathi. In the cited line it always drops the event; in the line's context (the sentences just before and after it, and the page title) it drops the event when the line itself names no retail price. | frozen_rules §5, Amendment 1 (d): retail only | 2026-09-E1 (Mumbai wholesale buffalo milk) |
+| b | Fuel variety: premium or branded grades (XP95, XP100, Xtra Green/Premium, Speed, Power, premium, branded, all languages) are not the CPI's regular petrol/diesel. | §3.1: the CPI variety | 2026-04-E4 (XP100, Xtra Green) |
+| c | Geography: an event is national only if its cited line says nationwide, or a national body/operator sets an all-India price (oil companies, Railway Board, TRAI and telcos, NPPA, GST Council). A single line, route, zone, metro or district is regional, weighted by its state's share. | §4: national vs regional scope | 2026-02-E1 (Nilgiri Mountain Railway) |
+| d | Double counting: at most one event per kind × state(s) × month. Several are merged into one: median % change, earliest effective date (day share recomputed). | §4: duplicates are one event | 2026-04-E1/E2 (MP milk, Indore + Dhar) |
+
+**2025 re-check (cache only, 0 credits):** recall stays **3 of 4**. Nothing gained, nothing lost: all 7 kept 2025
+events are identical (kind, scope, states, change, date, source). Files: `results/recall_audit/amend3_*`.
+
+**Control run first:** re-running Jan–Sep from cache with the code *before* the fixes reproduced all 12 events
+exactly (`logs/replay_amend3_control.txt`, kept locally), so every difference below comes from the fixes.
+
+**Events per month, before → after** (cache only, 0 credits; `logs/replay_amend3.txt`, kept locally):
+
+| Month | Before | After |
+|---|---|---|
+| 2026-01 | 0 | 0 |
+| 2026-02 | rail, national, +5.96% | rail, **Tamil Nadu** (weight 0.097), +5.96% (c) |
+| 2026-03 | 0 | 0 |
+| 2026-04 | MP milk +4.97%, MP milk +6.63%, MP electricity +4.80%, fuel (premium) +1.64% | MP milk **+5.80%** (one event, median, d), MP electricity +4.80% (b drops the premium fuel row) |
+| 2026-05 | milk national +3.30%, fuel +3.29% | unchanged |
+| 2026-06 | UP electricity +10% | unchanged |
+| 2026-07 | TN milk +4.88% | unchanged |
+| 2026-08 | Maharashtra milk +3.24% | unchanged |
+| 2026-09 | milk MH+Delhi +14.57%, J&K electricity +6.83% | J&K electricity +6.83% (a drops the wholesale milk row) |
+| **Total** | **12** | **9** |
+
+Milk events are recorded but never applied by the predictor (milk is observed through the spine), so fixes (a) and
+(d) change the record, not the numbers. Only February (rail) and April (fuel) predictions moved.
+
+**Scores before → after** (re-scored once, `tools/score_replay.py --bugfix ... --cache-only`, 0 credits; the earlier
+files are kept as `results/*_before_bugfix_2026-10-21T151419.*` and in `results/score_lock.json` → `history`):
+
+| Method | Mean absolute miss (pp) before | after | Direction right (of 9) before | after |
+|---|---|---|---|---|
+| (a) Trend only | 0.212 | 0.212 | 8 | 8 |
+| (b) Spine only | 0.225 | 0.225 | 9 | 9 |
+| **(c) Spine + Tavily** | **0.185** | **0.194** | 8 | 7 |
+| (c-strict) | 0.204 | 0.204 | 8 | 8 |
+| B1 last month | 0.468 | 0.468 | 0 | 0 |
+| Poll months: poll / (c) | 0.148 / 0.138 | 0.148 / 0.150 | | |
+
+- GO rule still met: (c) 0.194 < trend 0.212 and < B1 0.468. On the 6 poll months, (c) no longer beats the poll.
+- 80% range: inside in **5 of 9** months, before and after.
+- Skeptic: April's new top-3 counter-search was not in the cache, so it was **not run** in the re-score (recorded
+  in `results/skeptic_replay.json`). Its count before was 0, so no range changed. Every other month's skeptic
+  matched the scored run.
+- Amendment 2 October range: unchanged at ± 0.284 pp (the 80th percentile of |miss| still falls between the same
+  two months).
+- Not tuned further.
+- **Commit:** `COMMIT_PENDING`

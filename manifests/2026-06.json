@@ -1,8 +1,8 @@
 {
  "sample": false,
  "month": "2026-06",
- "created_utc": "2026-10-21T15:05:01.091363+00:00",
- "code_commit": "3ba5e59c5f771976b095da119a20eb0cf665c42b",
+ "created_utc": "2026-10-21T15:59:55.983346+00:00",
+ "code_commit": "d711acd2ed345d57569888e8479ae39c4e365823",
  "model_ids": {
   "small": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
   "mid": "nvidia/nemotron-3-super-120b-a12b",
@@ -10,7 +10,7 @@
  },
  "queries": [
   {
-   "call_id": "32ca4916dcda",
+   "call_id": "943b076be120",
    "endpoint": "search",
    "query": "milk price hike per litre effective Amul Mother Dairy",
    "language": "en",
@@ -37,11 +37,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.023406+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.903555+00:00",
    "n_results": 5
   },
   {
-   "call_id": "0565b25a8dc7",
+   "call_id": "6aa173764a97",
    "endpoint": "search",
    "query": "milk price hike per litre effective Amul Mother Dairy",
    "language": "en",
@@ -68,11 +68,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.026043+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.906364+00:00",
    "n_results": 1
   },
   {
-   "call_id": "a0820ad9348b",
+   "call_id": "d631986a2f22",
    "endpoint": "search",
    "query": "दूध के दाम बढ़े प्रति लीटर लागू",
    "language": "hi",
@@ -99,11 +99,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.027244+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.907747+00:00",
    "n_results": 8
   },
   {
-   "call_id": "40d0b3b46f12",
+   "call_id": "c8f2fe66bf1e",
    "endpoint": "search",
    "query": "दूध के दाम बढ़े प्रति लीटर लागू",
    "language": "hi",
@@ -130,11 +130,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.027915+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.908486+00:00",
    "n_results": 8
   },
   {
-   "call_id": "c882abadeaa4",
+   "call_id": "5a91080757d0",
    "endpoint": "search",
    "query": "electricity tariff order regulatory commission revised rates effective",
    "language": "en",
@@ -161,11 +161,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.028968+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.909633+00:00",
    "n_results": 8
   },
   {
-   "call_id": "4bee4b082f47",
+   "call_id": "de85a63523b6",
    "endpoint": "search",
    "query": "electricity tariff order regulatory commission revised rates effective",
    "language": "en",
@@ -192,11 +192,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.032270+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.913018+00:00",
    "n_results": 8
   },
   {
-   "call_id": "2bc22c455f5e",
+   "call_id": "0c1464d3ad35",
    "endpoint": "search",
    "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
    "language": "hi",
@@ -223,11 +223,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.035540+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.916355+00:00",
    "n_results": 8
   },
   {
-   "call_id": "157bb54b8e3e",
+   "call_id": "d1dc379d4f22",
    "endpoint": "search",
    "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
    "language": "hi",
@@ -254,11 +254,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.037728+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.918481+00:00",
    "n_results": 8
   },
   {
-   "call_id": "f0e5b839472d",
+   "call_id": "0cd27fb84fa2",
    "endpoint": "search",
    "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
    "language": "en",
@@ -285,11 +285,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.041618+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.922631+00:00",
    "n_results": 7
   },
   {
-   "call_id": "6ecd6053c32f",
+   "call_id": "23512d055c58",
    "endpoint": "search",
    "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
    "language": "en",
@@ -316,11 +316,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.043899+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.925022+00:00",
    "n_results": 1
   },
   {
-   "call_id": "691b87704504",
+   "call_id": "4d84214a9cd5",
    "endpoint": "search",
    "query": "railway fare revision effective Indian Railways",
    "language": "en",
@@ -347,11 +347,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.044388+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.925495+00:00",
    "n_results": 5
   },
   {
-   "call_id": "ed7c00b2a0a6",
+   "call_id": "fee896050780",
    "endpoint": "search",
    "query": "railway fare revision effective Indian Railways",
    "language": "en",
@@ -378,11 +378,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.047106+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.928027+00:00",
    "n_results": 1
   },
   {
-   "call_id": "d13a1a72a143",
+   "call_id": "e27bc8004f61",
    "endpoint": "search",
    "query": "NPPA medicine price revision effective",
    "language": "en",
@@ -409,11 +409,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.047760+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.928682+00:00",
    "n_results": 8
   },
   {
-   "call_id": "4393ab47a513",
+   "call_id": "8bc3cb571562",
    "endpoint": "search",
    "query": "NPPA medicine price revision effective",
    "language": "en",
@@ -440,11 +440,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.051304+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.932480+00:00",
    "n_results": 1
   },
   {
-   "call_id": "b18860e2fb9d",
+   "call_id": "c1c7502fef6c",
    "endpoint": "search",
    "query": "school fee hike academic session effective",
    "language": "en",
@@ -471,11 +471,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.054296+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.936168+00:00",
    "n_results": 6
   },
   {
-   "call_id": "6003787268db",
+   "call_id": "2c59bbb5872e",
    "endpoint": "search",
    "query": "school fee hike academic session effective",
    "language": "en",
@@ -502,11 +502,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.057959+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.939758+00:00",
    "n_results": 3
   },
   {
-   "call_id": "8ffa5ef17893",
+   "call_id": "749304b9adc6",
    "endpoint": "search",
    "query": "GST rate change effective from",
    "language": "en",
@@ -533,11 +533,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.059440+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.941224+00:00",
    "n_results": 7
   },
   {
-   "call_id": "81339d36f384",
+   "call_id": "42adf18186af",
    "endpoint": "search",
    "query": "GST rate change effective from",
    "language": "en",
@@ -564,7 +564,7 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:01.062790+00:00",
+   "retrieved_at": "2026-10-21T15:59:55.944748+00:00",
    "n_results": 2
   }
  ],

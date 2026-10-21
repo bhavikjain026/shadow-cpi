@@ -178,7 +178,7 @@
    "pct_change": null,
    "effective_date": "1 May",
    "line": "# 1 मई से बढ़ जाएंगे दूध के दाम, वेरका ने की ₹20 प्रति किलोग्राम फैट की बढ़ोतरी; हर महीने होगा ₹100 करोड़ फायदा",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "not a retail price (the cited line's context is a wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "mobile",

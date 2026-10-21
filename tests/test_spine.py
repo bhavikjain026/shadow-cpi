@@ -52,7 +52,10 @@ def test_duplicates_merge_after_city_to_state():
     b = {**a, "region": "Maharashtra", "change": 0.1000, "url": "u2"}       # within 0.5 pp
     c = {**a, "region": "Maharashtra", "change": 0.1100, "url": "u3"}       # 1.3 pp away: separate
     kept, dropped = R.apply_rules([a, b, c])
-    assert len(kept) == 2 and kept[0]["sources"] == ["u1", "u2"] and len(dropped) == 1
+    # a + b merge as duplicates (Amendment 1 e); c then joins them under Amendment 3 (d): one event per kind x state
+    assert sum(why.startswith("duplicate of an event") for _, why in dropped) == 1
+    assert len(kept) == 1 and kept[0]["sources"] == ["u1", "u2", "u3"]
+    assert kept[0]["change"] == pytest.approx((0.0968 + 0.1100) / 2)        # median of the two left after pass 2
 
 
 def test_unknown_region_is_not_applied():
@@ -110,16 +113,18 @@ def test_amendment1_duplicates_within_15_days_keep_earliest():
     b = {**a, "effective_date": "2026-09-01", "url": "u2", "quote": "line b"}
     c = {**a, "effective_date": "2026-09-30", "url": "u3", "quote": "line c", "change": 0.20, "change_prorated": 0.2}
     kept, dropped = R.apply_rules([a, b, c])
-    assert len(kept) == 2                                  # c: % differs by > 0.5 pp
-    m = next(k for k in kept if k["change"] == pytest.approx(0.0968))
-    assert m["effective_date"] == "2026-09-01" and m["sources"] == ["u1", "u2"]
+    assert sum(why.startswith("duplicate of an event") for _, why in dropped) == 1   # a + b only (c > 0.5 pp)
+    assert len(kept) == 1                                  # Amendment 3 (d): then one event per kind x state x month
+    assert kept[0]["effective_date"] == "2026-09-01" and kept[0]["change"] == pytest.approx((0.0968 + 0.20) / 2)
 
 
 def test_amendment1_duplicates_more_than_15_days_apart_stay_separate():
     a = ev(kind="milk", region="Mumbai", seller_or_authority="", change=0.0968, change_prorated=0.0968,
            cpi_code="01.1.4.1.1.01", effective_date="2026-09-20", url="u1", quote="line a")
     b = {**a, "effective_date": "2026-09-01", "url": "u2", "quote": "line b"}         # 19 days apart
-    assert len(R.apply_rules([a, b])[0]) == 2
+    kept, dropped = R.apply_rules([a, b])
+    assert not any(why.startswith("duplicate of an event") for _, why in dropped)   # not Amendment 1 (e) twins
+    assert len(kept) == 1 and kept[0]["effective_date"] == "2026-09-01"            # Amendment 3 (d) merges them
 
 
 def test_same_line_average_is_then_checked_for_duplicates():

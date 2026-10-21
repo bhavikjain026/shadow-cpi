@@ -8,8 +8,13 @@
    whose state cannot be found is NOT applied (reason recorded).
 3. Duplicates: events of the same kind, the same effective date, the same scope (cities mapped to their state, e.g.
    Mumbai -> Maharashtra), and % changes within 0.5 percentage points are one event; sources are pooled.
+Amendment 3 (after scoring, bug fixes enforcing scope already written down): (a) wholesale/tabela/loose/farmer-rate
+wording in the line or its context, (b) premium fuel grades, (c) national only by a nationwide line or a national
+body, (d) one event per kind x state x month. See docs/after_scoring_changes.md.
 """
+import calendar
 import re
+import statistics
 from collections import defaultdict
 from functools import lru_cache
 
@@ -80,16 +85,41 @@ def _states_in(text):
     return found
 
 
+# Amendment 3 (c): national bodies or operators that set one all-India price, per kind.
+NATIONAL_BODIES = {
+    "fuel": ["indian oil", "iocl", r"\bioc\b", "hpcl", "hindustan petroleum", "bpcl", "bharat petroleum",
+             "oil marketing compan", "oil compan", r"\bomcs?\b", "ministry of petroleum", "petroleum ministry",
+             "तेल कंपनि", "तेल विपणन", "तेल कंपन्या"],
+    "rail": ["railway board", "indian railways", "ministry of railways", "railways ministry", "रेल मंत्रालय",
+             "भारतीय रेल", "रेलवे बोर्ड"],
+    "mobile": [r"\btrai\b", r"\bjio\b", "airtel", "vodafone", r"\bvi\b", "bsnl"],
+    "medicine": [r"\bnppa\b", "national pharmaceutical pricing"],
+    "gst": ["gst council", "जीएसटी काउंसिल", "जीएसटी परिषद", r"\bcbic\b", "finance ministry", "वित्त मंत्रालय"],
+}
+NATIONAL_BODIES["lpg"] = NATIONAL_BODIES["fuel"]
+# A single line, route, zone, metro, city district: never national, whoever sets it.
+LOCAL_MARKERS = [r"\broute\b", r"mountain railway", r"toy train", r"\bmetro\b", r"suburban", r"local trains?\b",
+                 r"\bheritage\b", r"\bzonal\b", r"\bdistrict\b",
+                 r"\b(southern|northern|eastern|western|central|south central|south eastern|south western|"
+                 r"north eastern|north western|east central|west central|north central|east coast|"
+                 r"northeast frontier|konkan) railway\b", r"रूट", r"मेट्रो", r"जिले", r"ज़िले", r"जिल्ह"]
+
+
 def scope(event):
-    """('national', None) or ('regional', frozenset(states)) or ('unknown', None). Region field first, then the
-    seller/authority (e.g. UPPCL), for regional kinds only."""
-    if event["kind"] in NATIONAL_KINDS:
-        return "national", None
+    """('national', None) or ('regional', frozenset(states)) or ('unknown', None).
+    Amendment 3 (c): national only if the cited line says nationwide, or (national kinds) a national body or operator
+    sets an all-India price and the event is not about a single line, route, zone or district. Everything else is
+    regional, weighted by its state(s): region field first, then the seller/authority, then the line."""
     line = norm(event.get("quote") or "")
+    seller = norm(event.get("seller_or_authority") or "")
     # 2025 audit: 'India' in the model's region field made brand-only changes national (Mother Dairy UHT, Sanchi).
-    # National now needs the cited LINE to say nationwide; states are looked for in region, seller and the line.
     if any(norm(w) in line for w in NATIONWIDE_LINE):
         return "national", None
+    if event["kind"] in NATIONAL_KINDS:
+        local = any(re.search(p, t) for p in LOCAL_MARKERS for t in (line, seller, norm(event.get("region") or "")))
+        body = any(re.search(p, t) for p in NATIONAL_BODIES.get(event["kind"], []) for t in (line, seller))
+        if body and not local:
+            return "national", None
     states = _states_in(event.get("region")) or _states_in(event.get("seller_or_authority")) or _states_in(line)
     if states:
         return "regional", frozenset(states)
@@ -147,7 +177,32 @@ def apply_rules(events):
                                "effective dates within 15 days)"))
         else:
             merged.append({**e, "sources": list(e.get("sources", [e.get("url")]))})
-    return merged, dropped
+    # pass 3 (Amendment 3 d): at most one event per kind x scope/state(s) x month. Several -> one, at the median %
+    # change and the earliest effective date (day share recomputed from it).
+    groups = defaultdict(list)
+    for e in merged:
+        groups[(e["kind"], e["scope"], tuple(e["states"]))].append(e)
+    final = []
+    for evs in groups.values():
+        if len(evs) == 1:
+            final.append(evs[0])
+            continue
+        first = min(evs, key=lambda x: x["effective_date"])
+        change = statistics.median(x["change"] for x in evs)
+        d = date.fromisoformat(first["effective_date"])
+        days = calendar.monthrange(d.year, d.month)[1]
+        share = (days - d.day + 1) / days
+        one = {**first, "change": change, "days_share": share, "change_prorated": change * share,
+               "applied_change": change * share * first["weight"],
+               "sources": sorted({s for x in evs for s in x["sources"]}), "merged_from": len(evs),
+               "merged_changes": [x["change"] for x in evs]}
+        if one.get("pct_change") is not None:
+            one["pct_change"] = change * 100
+        for x in evs:
+            if x is not first:
+                dropped.append((x, "one event per kind and state per month (merged: median change, earliest date)"))
+        final.append(one)
+    return final, dropped
 
 
 # ---------- calibrated on the 2025 recall audit (results/recall_audit/) ----------
@@ -256,4 +311,45 @@ def non_consumer_reason(item_or_service, line):
         return "penalty or fine, not a price paid by ordinary consumers"
     if any(re.search(p, item) or re.search(p, text) for p in NOT_RETAIL):
         return "not a retail price (wholesale, mandi, dealer or bulk rate)"
+    return ""
+
+
+# ---------- Amendment 3 (2026-10-21, after scoring; bug fixes that enforce scope already in frozen_rules.md) ----------
+# (a) retail only: wholesale, tabela, loose and dairy-farmer-rate wording, in English, Hindi and Marathi. Checked in
+#     the cited line (always drops) and in its context (the sentences before and after it and the page title: drops
+#     only when the cited line itself names no retail price).
+NOT_RETAIL_CONTEXT = [r"\bwholesale\b", r"\btabela\b", r"\bloose\b", r"procurement (price|rate)",
+                      r"purchase (price|rate)", r"farm.?gate", r"(paid|pay|payment) to (the )?(dairy )?farmers",
+                      r"farmers?'? (price|rate)", r"(price|rate)s? (paid )?to (dairy )?farmers",
+                      r"थोक", r"तबेला", r"तबेले", r"खुला दूध", r"खुले दूध", r"खरीद (मूल्य|दर|भाव)",
+                      r"(किसानों|पशुपालकों|दुग्ध उत्पादकों) को", r"घाऊक", r"सुटे दूध", r"सुट्या दुधा",
+                      r"खरेदी दर", r"(शेतकऱ्यांना|उत्पादकांना)"]
+RETAIL_WORDS = [r"\bretail\b", r"\bconsumers?\b", r"\bcustomers?\b", r"\bmrp\b", r"\bhouseholds?\b",
+                r"खुदरा", r"ग्राहक", r"उपभोक्ता", r"किरकोळ", r"ग्राहकांना"]
+
+# (b) the CPI variety: petrol and diesel are regular grades. Premium or branded grades are not (all languages).
+PREMIUM_FUEL = [r"\bxp ?\d{2,3}\b", r"\bxtra (green|premium)\b", r"\bspeed( ?97)?\b", r"\bpower( ?99| ?100)?\b",
+                r"\bpremium\b", r"\bbranded\b", r"\bturbojet\b", r"प्रीमियम", r"ब्रांडेड", r"ब्रँडेड"]
+REGULAR_FUEL = [r"\bregular\b", r"\bnormal\b", r"\bordinary\b", r"सामान्य", r"साधारण", r"नियमित"]
+
+
+def not_retail_context_reason(line, context):
+    """(a): '' or a drop reason. context = neighbouring sentences + page title (not the line itself)."""
+    text, ctx = norm(line or ""), norm(context or "")
+    hit = lambda pats, t: any(re.search(p, t) for p in pats)          # noqa: E731
+    if hit(NOT_RETAIL_CONTEXT, text):
+        return "not a retail price (wholesale, tabela, loose or dairy-farmer rate)"
+    if hit(NOT_RETAIL_CONTEXT, ctx) and not hit(RETAIL_WORDS, text):
+        return "not a retail price (the cited line's context is a wholesale, tabela, loose or dairy-farmer rate)"
+    return ""
+
+
+def premium_fuel_reason(kind, item_or_service, line):
+    """(b): '' or a drop reason, fuel only."""
+    if kind != "fuel":
+        return ""
+    item, text = norm(item_or_service or ""), norm(line or "")
+    if any(re.search(p, item) for p in PREMIUM_FUEL) or (
+            any(re.search(p, text) for p in PREMIUM_FUEL) and not any(re.search(p, text) for p in REGULAR_FUEL)):
+        return "not the CPI variety (premium or branded fuel grade, not regular petrol/diesel)"
     return ""

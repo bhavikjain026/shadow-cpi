@@ -98,28 +98,7 @@
   "n_contrary": 0,
   "checks": [
    {
-    "code": "01.1.5.1",
-    "name": "Vegetable oils",
-    "contribution_mom_pp": 0.08735567446630996,
-    "query": "Vegetable oils price fall cheaper April 2026 India",
-    "n_results": 8,
-    "contrary_verified": []
-   },
-   {
-    "code": "07.2.2.2.1.01",
-    "name": "Petrol",
-    "contribution_mom_pp": 0.06979316809454968,
-    "query": "Petrol price fall cheaper April 2026 India",
-    "n_results": 8,
-    "contrary_verified": []
-   },
-   {
-    "code": "01.1#residual",
-    "name": "Food",
-    "contribution_mom_pp": -0.03066048279705177,
-    "query": "Food price hike rise April 2026 India",
-    "n_results": 8,
-    "contrary_verified": []
+    "note": "not run: cache-only run: /search not in the cache, skipped (no call sent)"
    }
   ]
  },

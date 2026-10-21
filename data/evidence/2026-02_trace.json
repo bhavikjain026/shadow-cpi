@@ -43,7 +43,7 @@
    "pct_change": null,
    "effective_date": "March 1, 2026",
    "line": "पशुओं के चारे में वृद्धि को देखते हुए यह दर 1 मार्च से 31 अगस्त 2026 तक लागू रहेगी।",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "not a retail price (the cited line's context is a wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "electricity",

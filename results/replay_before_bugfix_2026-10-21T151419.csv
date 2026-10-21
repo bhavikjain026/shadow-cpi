@@ -1,0 +1,10 @@
+month,actual_yoy,a_trend_pred,b_spine_pred,c_tavily_pred,c_strict_pred,c_range_low,c_range_high,c_inside_range,b_coverage_observed,c_coverage_observed,tier,note,b1_pred,poll_pred
+2026-01,2.74,2.5199,2.4733,2.5681,2.5681,2.3302,3.0671,True,0.1119,0.141,strict+exploratory,"skeptic: 3 verified contrary quotes, range widened 50%",1.33,2.4
+2026-02,3.21,3.0656,2.9615,2.8312,2.8274,2.6726,3.0642,False,0.1119,0.1429,strict+exploratory,,2.7343,
+2026-03,3.4,3.276,3.2186,3.0871,3.0871,2.9285,3.3399,False,0.1119,0.141,strict+exploratory,,3.2077,3.48
+2026-04,3.48,3.4548,3.5351,3.4684,3.4057,3.3097,3.801,True,0.1119,0.2092,strict+exploratory,,3.4027,3.8
+2026-05,3.93,3.4242,3.5892,3.7346,3.6551,3.576,4.0672,True,0.1119,0.1859,strict+exploratory,,3.4849,4.0
+2026-06,4.38,3.9533,4.1044,4.1812,4.1672,4.0226,4.5139,True,0.1119,0.2092,strict+exploratory,,3.9352,
+2026-07,4.45,4.5553,4.601,4.4293,4.4293,4.2707,4.762,True,0.1119,0.1859,strict+exploratory,,4.3801,4.5
+2026-08,4.83,5.0755,4.9969,4.9433,4.9433,4.8721,5.2759,False,0.1119,0.1859,strict+exploratory,,4.4509,4.8
+2026-09,5.54,5.6527,5.8778,5.8044,5.8106,5.7786,6.1371,False,0.1119,0.2092,strict+exploratory,,4.8197,

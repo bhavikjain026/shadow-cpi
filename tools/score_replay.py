@@ -3,6 +3,7 @@
 
     python tools/score_replay.py                     # the one scoring run (refuses if results/score_lock.json exists)
     python tools/score_replay.py --bugfix "reason"   # only after a logged bug fix; keeps the earlier score files
+    python tools/score_replay.py --bugfix "reason" --cache-only   # same, skeptic from the cache only (0 credits)
 
 Order: (1) predictions for all models (no official figure for the target month is read); (2) skeptic counter-searches
 (hard cap 'skeptic'); (3) scoring against MoSPI's published YoY, leave-one-out 80% ranges, GO rule.
@@ -104,7 +105,7 @@ def main():
 
     # (2) skeptic (hard cap 'skeptic'; snippets only for replay months)
     rec = Recorder()
-    base = Budgeted(Tavily(recorder=rec), ["skeptic"])
+    base = Budgeted(Tavily(recorder=rec), ["skeptic"], cache_only="--cache-only" in sys.argv)   # re-scores: 0 credits
     nem = Nemotron(recorder=rec)
     sk = {}
     for m in O.TEST_MONTHS:

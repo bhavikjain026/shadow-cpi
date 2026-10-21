@@ -1,0 +1,109 @@
+[
+ {
+  "id": "R1",
+  "month": "2025-04",
+  "kind": "lpg",
+  "effective": "2025-04-08",
+  "what": "Domestic LPG +Rs 50 (803 -> 853)",
+  "keys": [
+   "lpg",
+   "cylinder",
+   "एलपीजी",
+   "सिलेंडर"
+  ],
+  "evidence": "https://iocl.com/indane-14Kg-nonsubsid-previous-price",
+  "found": true,
+  "why": "IOCL observed series revision 2025-04-08"
+ },
+ {
+  "id": "R2",
+  "month": "2025-04",
+  "kind": "milk",
+  "effective": "2025-04-30",
+  "what": "Mother Dairy milk +Rs 2/litre",
+  "keys": [
+   "mother dairy",
+   "मदर डेयरी"
+  ],
+  "evidence": "https://www.instagram.com/p/DJFCkYGoK05",
+  "found": true,
+  "why": "kept",
+  "url": "https://www.aajtak.in/business/news/story/mother-dairy-hikes-milk-price-by-two-rupees-per-litre-ntc-rpti-2228737-2025-04-29"
+ },
+ {
+  "id": "R3",
+  "month": "2025-05",
+  "kind": "milk",
+  "effective": "2025-05-01",
+  "what": "Amul milk +Rs 2/litre",
+  "keys": [
+   "amul",
+   "अमूल"
+  ],
+  "evidence": "https://agrimoon.com/why-amuls-%E2%82%B92-hike-reflects-more-than-just-market-forces",
+  "found": true,
+  "why": "kept",
+  "url": "https://m.economictimes.com/industry/cons-products/food/amul-hikes-milk-prices-by-rs-2-per-litre-effective-may-1/articleshow/120769792.cms"
+ },
+ {
+  "id": "R4",
+  "month": "2025-09",
+  "kind": "gst",
+  "effective": "2025-09-22",
+  "what": "GST two-slab rate cuts",
+  "keys": [
+   "gst",
+   "जीएसटी"
+  ],
+  "evidence": "https://www.thehindu.com/news/national/gst-20-implementation-a-festival-of-savings-first-step-towards-economic-self-reliance-pm/article70074409.ece",
+  "found": false,
+  "why": "extracted but dropped: different kind of price (not what this search is for); unverified (no claimed number in the cited line)",
+  "examples": [
+   {
+    "kind": "gst",
+    "lang": "en",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2164586",
+    "page_date": "2025-09-08",
+    "item_or_service": "GST tax rates",
+    "seller_or_authority": "GST Council",
+    "region": "India",
+    "old_price": null,
+    "new_price": null,
+    "pct_change": null,
+    "effective_date": "2025-09-22",
+    "line": "The GST Council in its 56th meeting on 3rd September, 2025 made the recommendations relating to changes in GST tax rates; provide relief to individuals, common man, aspirational middle class and measures for facilitation of trade in GST. The reduced GST rates will be effective from 22nd September, 2025.",
+    "verdict": "unverified (no claimed number in the cited line)"
+   },
+   {
+    "kind": "gst",
+    "lang": "en",
+    "url": "https://www.india-briefing.com/news/gst-rate-changes-in-india-effective-september-2025-tax-advisory-for-foreign-investors-39697.html",
+    "page_date": "2025-09-09",
+    "item_or_service": "revised GST rates",
+    "seller_or_authority": "Ministry of Finance / GST Council",
+    "region": "India",
+    "old_price": null,
+    "new_price": null,
+    "pct_change": null,
+    "effective_date": "September 22, 2025",
+    "line": "The Ministry of Finance has released official FAQs following the 56th GST Council meeting, confirming revised GST rates and compliance clarifications. The changes come into effect from September 22, 2025 (except for tobacco-related products, which will be notified separately).",
+    "verdict": "unverified (no claimed number in the cited line)"
+   },
+   {
+    "kind": "gst",
+    "lang": "en",
+    "url": "https://www.india-briefing.com/news/gst-rate-changes-in-india-effective-september-2025-tax-advisory-for-foreign-investors-39697.html",
+    "page_date": "2025-09-09",
+    "item_or_service": "IGST on imports",
+    "seller_or_authority": "GST Council",
+    "region": "India",
+    "old_price": null,
+    "new_price": null,
+    "pct_change": null,
+    "effective_date": "September 22, 2025",
+    "line": "GST compliance services in India) [...] ## GST on imports and stock",
+    "verdict": "unverified (no claimed number in the cited line)"
+   }
+  ]
+ }
+]

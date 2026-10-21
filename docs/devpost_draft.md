@@ -37,11 +37,11 @@ See `docs/pipeline.md` for the diagram.
 | --- | --- | --- |
 | (a) Trend only | 0.212 | 8 of 9 |
 | (b) Government price spine only | 0.225 | 9 of 9 |
-| (c) Spine + Tavily evidence | **0.185** | 8 of 9 |
+| (c) Spine + Tavily evidence | **0.194** (0.185 before the Amendment 3 bug fixes) | 7 of 9 (8 before) |
 | B1: last month's rate | 0.47 (from `results/baselines.csv`) | n/a |
-| Economists' poll (6 dated months) | 0.148 (on the same 6 months, (c) 0.138) | 6 of 6 |
+| Economists' poll (6 dated months) | 0.148 (on the same 6 months, (c) 0.150; 0.138 before the fixes) | 6 of 6 |
 
-Go / no-go: **GO** under the rule registered before scoring ((c) must beat B1 (0.468) and trend-only (0.212) on mean absolute miss). (c) vs (b), stated honestly: accuracy improved by 0.040 pp (0.225 → 0.185), better in 7 of 9 months; coverage rose from 11% to 14–21% of the basket. The spine on its own (b) did slightly worse than trend-only (a). Scored once; see `results/scoreboard.md` and `docs/preregistration.md`.
+Go / no-go: **GO** under the rule registered before scoring ((c) must beat B1 (0.468) and trend-only (0.212) on mean absolute miss). (c) vs (b), stated honestly: accuracy improved by 0.031 pp (0.225 → 0.194), better in 6 of 9 months; coverage rose from 11% to 14–21% of the basket. The spine on its own (b) did slightly worse than trend-only (a). Scored once, then re-scored once after logged bug fixes found by an independent audit (Amendment 3, `docs/after_scoring_changes.md`); see `results/scoreboard.md` and `docs/preregistration.md`.
 
 ## Why Tavily
 - **It is the single entry point for web pages.** Every web page the nowcast uses (news, IBJA, IOCL, PPAC) comes in through Tavily and is logged in the flight recorder. Two exceptions, stated openly: MoSPI's official indices are a logged direct download from MoSPI's API, and the Consumer Affairs spine is downloaded by hand from behind a CAPTCHA.
@@ -59,7 +59,7 @@ Go / no-go: **GO** under the rule registered before scoring ((c) must beat B1 (0
   - share of events confirmed by 2 sources: 3 of 12 events in the test months
   - median latency: 4.3 s per Tavily call
   - fallback count: 1 Tavily-to-direct fallback (the Consumer Affairs dashboard). By design and logged: MoSPI's API (148 direct calls) and the CAPTCHA-gated spine (downloaded by hand, 5 requests)
-- **Attribution:** the nowcast with vs without Tavily evidence, each month (`results/tavily_attribution.csv`): Tavily evidence lowered the mean miss from 0.225 to 0.185 pp and was closer in 7 of 9 months.
+- **Attribution:** the nowcast with vs without Tavily evidence, each month (`results/tavily_attribution.csv`): Tavily evidence lowered the mean miss from 0.225 to 0.194 pp and was closer in 6 of 9 months (after the Amendment 3 bug fixes).
 
 ## How we built it
 - Python, standard library only for the core (no heavy frameworks). The app is built with Streamlit.

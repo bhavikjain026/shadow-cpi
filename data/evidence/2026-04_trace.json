@@ -208,7 +208,7 @@
    "pct_change": null,
    "effective_date": "1 अप्रैल",
    "line": "नई दर 1 अप्रैल से लागू होगी।",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "not a retail price (the cited line's context is a wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "electricity",
@@ -223,7 +223,7 @@
    "pct_change": null,
    "effective_date": "2026-04-01",
    "line": "हरियाणा में किसानों को बड़ी राहत देते हुए सरकार ने 2026-27 के लिए बिजली दरों को लेकर अहम फैसला लिया है. हरियाणा विद्युत नियामक आयोग (HERC) के आदेश के मुताबिक, किसानों को ट्यूबवेल कनेक्शन पर 10 पैसे प्रति यूनिट की रियायती दर पर बिजली मिलती रहेगी. यह फैसला राज्यभर के लाखों किसानों को सीधे फायदा पहुंचाएगा.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "not a retail price (wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "electricity",
@@ -748,7 +748,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "XP100 petrol is now priced at Rs 160 per litre, up from Rs 149 earlier.",
-   "verdict": "no effective date"
+   "verdict": "not the CPI variety (premium or branded fuel grade, not regular petrol/diesel)"
   },
   {
    "kind": "fuel",
@@ -763,7 +763,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "Similarly, the company has raised the price of Xtra Green diesel (premium diesel), which now costs Rs 92.99 per litre in Delhi, compared to Rs 91.49 previously.",
-   "verdict": "no effective date"
+   "verdict": "not the CPI variety (premium or branded fuel grade, not regular petrol/diesel)"
   },
   {
    "kind": "fuel",
@@ -823,7 +823,7 @@
    "pct_change": null,
    "effective_date": "Wednesday",
    "line": "The price of Indian Oil Corporation’s (IOC) XP100 petrol was hiked by Rs 11 per litre on Wednesday to Rs 160 per litre in Delhi, while that of its Xtra Green premium diesel was increased to Rs 92.99 per litre from Rs 91.49 earlier.",
-   "verdict": "change not computable (needs old+new price, a % change, or an amount with an official base)"
+   "verdict": "not the CPI variety (premium or branded fuel grade, not regular petrol/diesel)"
   },
   {
    "kind": "fuel",
@@ -838,7 +838,7 @@
    "pct_change": null,
    "effective_date": "Wednesday",
    "line": "The price of Indian Oil Corporation’s (IOC) XP100 petrol was hiked by Rs 11 per litre on Wednesday to Rs 160 per litre in Delhi, while that of its Xtra Green premium diesel was increased to Rs 92.99 per litre from Rs 91.49 earlier.",
-   "verdict": "kept"
+   "verdict": "not the CPI variety (premium or branded fuel grade, not regular petrol/diesel)"
   },
   {
    "kind": "fuel",
@@ -853,7 +853,7 @@
    "pct_change": null,
    "effective_date": "March 20, 2026",
    "line": "## Public sector oil marketing companies (OMCs) such as Indian Oil and Hindustan Petroleum have raised premium petrol prices by 2.09 to 2.35 per litre since March 20.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "not the CPI variety (premium or branded fuel grade, not regular petrol/diesel)"
   },
   {
    "kind": "fuel",

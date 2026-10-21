@@ -136,7 +136,16 @@ def run_month(month, tav_all, nem, ibja, lpg_rev, petrol, factors, cfg):
               "event_stats": {k: v for k, v in estats.items() if k != "queries"},
               "event_search_window": {"pre_days": E.EVENT_PRE_DAYS, "applied_by": "effective date inside the month"},
               "credits_this_month": row["credits"], "budgets": tav.budgets, "seconds": round(time.time() - t0)}
-    E.write_manifest(month, E.build_manifest(month, [], empty_q, events, estats, observed, [], detail))
+    man = E.build_manifest(month, [], empty_q, events, estats, observed, [], detail)
+    old = E.MANIFEST_DIR / f"{month}.json"
+    if old.exists():                      # this step rewrites events only: keep quotes already in the manifest
+        prev = json.loads(old.read_text())
+        key = lambda q: (q.get("item"), q.get("url"), q.get("line"), q.get("date"))     # noqa: E731
+        new = {key(q) for q in man["quotes"]}
+        man["quotes"] = [q for q in prev.get("quotes", []) if key(q) not in new] + man["quotes"]
+        if "quotes_restored_from" in prev.get("detail", {}):
+            man["detail"]["quotes_restored_from"] = prev["detail"]["quotes_restored_from"]
+    E.write_manifest(month, man)
     (E.EVIDENCE_DIR / f"{month}_trace.json").write_text(json.dumps({"events": etrace}, ensure_ascii=False, indent=1),
                                                          encoding="utf-8")
     return row

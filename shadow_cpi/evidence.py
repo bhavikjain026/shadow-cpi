@@ -382,8 +382,10 @@ def judge_event(ev, month, cfg=None):
             return None, "not the CPI variety (e.g. commercial cylinder, jet fuel)"
         if foreign(line, ev.get("region"), ev.get("_url", "")):
             return None, "outside India"
-    from .event_rules import non_consumer_reason
-    why = non_consumer_reason(ev.get("item_or_service"), line)            # Amendment 1 (b), (c), (d)
+    from .event_rules import non_consumer_reason, not_retail_context_reason, premium_fuel_reason
+    why = (non_consumer_reason(ev.get("item_or_service"), line)              # Amendment 1 (b), (c), (d)
+           or not_retail_context_reason(line, ev.get("_context"))           # Amendment 3 (a)
+           or premium_fuel_reason(ev.get("_kind"), ev.get("item_or_service"), line))   # Amendment 3 (b)
     if why:
         return None, why
     from .event_rules import absolute_change, announced_date, base_price, normalise_date
@@ -418,6 +420,15 @@ def judge_event(ev, month, cfg=None):
 EVENT_PRE_DAYS = 10     # also search pages from the last 10 days of the previous month (announcements)
 
 
+def line_context(text, n):
+    """Amendment 3 (a): the sentences just before and after the cited line (numbered as the model saw them) and the
+    page title (first heading, else first line). Used only to reject wholesale/farmer-rate events."""
+    lines = split_lines(text)
+    title = next((l for l in lines if l.lstrip().startswith("#")), lines[0] if lines else "")
+    near = [lines[i - 1] for i in ((n - 1, n + 1) if isinstance(n, int) else ()) if 1 <= i <= len(lines)]
+    return " \n ".join([title] + near)
+
+
 def collect_events(tav, nem, month, events, langs=("en", "hi"), pre_days=EVENT_PRE_DAYS):
     """Searches the target month AND the last `pre_days` days of the previous month (announcement date), but an
     event is applied only if its EFFECTIVE date is inside the target month (judge_event)."""
@@ -441,7 +452,10 @@ def collect_events(tav, nem, month, events, langs=("en", "hi"), pre_days=EVENT_P
                                                         stats, drop, seen):
                     evs, _ = nem.price_events(mid, text, tag=f"{job} events", parent=eid)
                     for ev in evs:
-                        k, why = judge_event({**ev, "_url": r["url"], "_page_date": d, "_kind": kind}, month, cfg)
+                        k, why = judge_event({**ev, "_url": r["url"], "_page_date": d, "_kind": kind,
+                                              "_context": line_context(text, ev.get("line"))}, month, cfg)
+                        if k:
+                            k.pop("_context", None)
                         trace.append({"kind": kind, "lang": lang, "url": r["url"], "page_date": d,
                                       **{x: ev.get(x) for x in ("item_or_service", "seller_or_authority", "region",
                                                                 "old_price", "new_price", "pct_change",

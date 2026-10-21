@@ -88,7 +88,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "राज्य सरकार ने किसानों को फायदा पहुँचाने के उद्देश्य से लिए गए एक अहम फैसले में, गाय के दूध की खरीद कीमत 10 रुपये प्रति लीटर बढ़ाकर 51 रुपये से 61 रुपये प्रति लीटर कर दी है।",
-   "verdict": "no effective date"
+   "verdict": "not a retail price (wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "milk",
@@ -103,7 +103,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "इसी तरह, भैंस के दूध की कीमतें भी 9 रुपये प्रति लीटर बढ़ाकर 61 रुपये से 70 रुपये प्रति लीटर कर दी गई हैं।",
-   "verdict": "no effective date"
+   "verdict": "not a retail price (the cited line's context is a wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "milk",
@@ -118,7 +118,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "पहले दूध का मूल्य करीब 30 रुपये प्रति किलो मिलता था, लेकिन अब यह बढ़कर 50 से 51 रुपये प्रति किलो हो गया है।",
-   "verdict": "no effective date"
+   "verdict": "not a retail price (the cited line's context is a wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "milk",
@@ -133,7 +133,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "हिमाचल प्रदेश में दूध खरीद मूल्य में 21 रुपये की बढ़ोतरी से दुग्ध उत्पादन एक वर्ष में दोगुना हो गया ...और पढ़ें",
-   "verdict": "no effective date"
+   "verdict": "not a retail price (wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "milk",
@@ -148,7 +148,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "दूध खरीद मूल्य में 21 रुपये प्रति किलो की वृद्धि।",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "not a retail price (wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "milk",
@@ -643,7 +643,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "Oil companies also raised the retail price of premium petrol by about ₹ 2 per litre, while leaving those of regular petrol and diesel unchanged.",
-   "verdict": "no effective date"
+   "verdict": "not the CPI variety (premium or branded fuel grade, not regular petrol/diesel)"
   },
   {
    "kind": "fuel",

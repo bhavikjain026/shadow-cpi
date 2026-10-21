@@ -133,7 +133,7 @@
    "pct_change": null,
    "effective_date": "September 1",
    "line": "The procurement price for cow milk will now rise from Rs. 38 to Rs. 44 a litre, while that for buffalo milk will increase from Rs. 47 to Rs. 53.",
-   "verdict": "effective date outside the month"
+   "verdict": "not a retail price (wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "milk",
@@ -148,7 +148,7 @@
    "pct_change": null,
    "effective_date": "September 1",
    "line": "The procurement price for cow milk will now rise from Rs. 38 to Rs. 44 a litre, while that for buffalo milk will increase from Rs. 47 to Rs. 53.",
-   "verdict": "effective date outside the month"
+   "verdict": "not a retail price (wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "milk",

@@ -16,7 +16,7 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
 - **2025 is calibration only.** The pass-through factors were fitted on 2025, and nothing was tuned on the 2026 test months. That keeps the test fair, but the factors may not hold in a new series.
 
 ## Strong baselines
-- **The economists' poll is a strong baseline.** On the 6 months with a dated Reuters poll article, its mean absolute miss was 0.148 percentage points (`results/baselines.csv`). On those same 6 months our nowcast (c) missed by 0.138, a small edge on a small sample. Over all 9 months, (c) missed by 0.185 (`results/scoreboard.md`).
+- **The economists' poll is a strong baseline.** On the 6 months with a dated Reuters poll article, its mean absolute miss was 0.148 percentage points (`results/baselines.csv`). On those same 6 months our nowcast (c) missed by 0.150 after the Amendment 3 bug fixes (0.138 before them), so (c) no longer beats the poll on those months; it is level with it at best. Over all 9 months, (c) missed by 0.194 (0.185 before the fixes; `results/scoreboard.md`).
 - The simple trend baseline (B2) is also strong, with a mean absolute miss of 0.21 percentage points over the 9 months. The "last month's rate" baseline (B1) missed by 0.47 percentage points on average.
 
 ## Items are not always what they sound like
@@ -29,7 +29,7 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
 - Only some items are measured in a given month. The rest of the basket (most services, rents, clothing and so on) is **carried on trend**. The app shows this split every month as the coverage meter. In the replay, 14–21% of the basket was measured each month and the rest was carried on trend.
 - **The 80% range is too narrow.** In the replay, the official figure fell inside the leave-one-out 80% range in only 5 of 9 months. With 9 months of misses the range is itself uncertain.
 - **How the October and November range is built (Amendment 2, decided after scoring).** Because 5 of 9 is too few, the live-month range is wider and is not the pre-registered one: it is the prediction plus or minus the 80th percentile of the 9 scored misses of (c), ignoring their sign (0.28 pp), and never narrower than the pre-registered range. It is symmetric, so it no longer leans upward the way (c)'s misses did (it under-predicted in 7 of 9 months). The change was made after seeing the scores, so the 80% label is a judgement, not a tested property; the scored months keep their original ranges and the 5-of-9 figure. The chance that the headline is 6.0% or more (the RBI's Q3 projection) is read from the same range, assuming the miss is normally distributed. Nine misses cannot check that assumption. Details: `docs/frozen_rules.md` (Amendment 2), `docs/after_scoring_changes.md`.
-- **The government spine alone did not beat trend.** Spine-only (b) missed by 0.225 pp against 0.212 for trend-only; the gain came with the observed gold, silver, LPG and petrol series and the events (c: 0.185).
+- **The government spine alone did not beat trend.** Spine-only (b) missed by 0.225 pp against 0.212 for trend-only; the gain came with the observed gold, silver, LPG and petrol series and the events (c: 0.194 after the Amendment 3 bug fixes; 0.185 before).
 - A tracked item moves only its own weight (the carve-out). If a big price change happens in something we don't track, we will miss it.
 
 ## Models
@@ -38,3 +38,20 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
 ## Known gaps in the event layer (2025 recall audit)
 - **National brand hikes may be under-weighted.** In the 2025 audit, Amul's ₹2 nationwide milk hike was caught only through a line about the Gujarat cooperative (GCMMF), so it was weighted as a Gujarat-only change (about 7% of milk spending) instead of an all-India one. A regional event counts as national only when the cited line itself says it is nationwide.
 - **GST rate cuts are a structural miss.** The 22 Sep 2025 GST cuts changed many items by different amounts, with no single price change to apply, so the event layer does not apply them.
+
+## Independent audit
+- **5 correct, 3 partly, 3 wrong, 1 unclear; 9 confirmed by a second source.** Eshan audited the 12 verified
+  test-month events by web search (`audit/event_audit.md`, PR #4). The audit machine could not open the original
+  article pages, so whether each quote is on its page was checked for only one row; the facts were checked through
+  other outlets.
+- The three "wrong" rows and the double-counted pair led to four general bug fixes (Amendment 3,
+  `docs/after_scoring_changes.md` §4). After them, 9 events remain and (c)'s mean miss is 0.194 pp (0.185 before).
+- **Left as they are, because they are not bugs in the rules:**
+  - **2026-07-E1 (Arokya milk, Tamil Nadu):** sources disagree on the amount (Rs 3 or Rs 4 per litre) and the date
+    (9 Jul in other outlets; the event uses 23 Jul). A single news source can carry details that other reports
+    contradict.
+  - **2026-06-E1 (UP 10% electricity surcharge):** announced by UPPCL, but later reports say the regulator put it on
+    hold before collection; no official order was found either way. News-based events can be reversed after they
+    are announced, and the event layer does not follow them up.
+- The audit also noted possible misses (a second fuel rise on 19 May, Sanchi milk from 15 May, Gokul from 21 May).
+  They were not added: the replay months are not re-searched.

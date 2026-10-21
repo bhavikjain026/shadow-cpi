@@ -58,7 +58,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "On Monday, CM Vijay announced Rs 3/litre hike in Aavin’s milk procurement price.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "not a retail price (wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "milk",
@@ -88,7 +88,7 @@
    "pct_change": null,
    "effective_date": "September 1, 2026",
    "line": "New Delhi: What can be termed as bad news for Mumbaikars, the milk prices in the city have increased by Rs 9 per litre.",
-   "verdict": "kept"
+   "verdict": "not a retail price (the cited line's context is a wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "milk",
@@ -103,7 +103,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "Chief Minister Vijay-led Tamil Nadu government has increased the milk procurement price paid to dairy farmers. However, this does not imply that every retail milk packet will see an equivalent surge. A Rs 3 per litre rise has been announced for Aavin’s milk procurement price, taking it from Rs 41 to Rs 44 per litre.",
-   "verdict": "no effective date"
+   "verdict": "not a retail price (wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "milk",
@@ -238,7 +238,7 @@
    "pct_change": null,
    "effective_date": null,
    "line": "**डिजिटल डेस्क, चेन्नई।** तमिलनाडु के मुख्यमंत्री सी. जोसेफ विजय ने राज्य के पशुपालकों को बड़ी राहत देते हुए दूध की खरीद कीमत में एक बार फिर 6 रुपये की बढ़ोतरी कर इसे ₹44 प्रति लीटर करने की घोषणा की है।",
-   "verdict": "no effective date"
+   "verdict": "not a retail price (wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "milk",
@@ -283,7 +283,7 @@
    "pct_change": null,
    "effective_date": "1 September 2026",
    "line": "तबेला दूध उत्‍पादकों ने कहा कि है संशोधित दरें 1 सितंबर 2026 से प्रभावी होंगी और 28 फरवरी, 2027 तक लागू रहेंगी. उत्‍पादकों ने कहा कि कीमतों में वृद्धि का फैसला पशुओं की लागत में लगातार बढ़ोतरी और पशु आहार, चारे पर होने वाले खर्च में तेज बढ़ोतरी के कारण लिया गया है.",
-   "verdict": "unverified (no claimed number in the cited line)"
+   "verdict": "not a retail price (wholesale, tabela, loose or dairy-farmer rate)"
   },
   {
    "kind": "milk",

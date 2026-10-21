@@ -197,3 +197,12 @@ With the 9 scored misses: *h* = 0.284 pp, so the range is 0.568 pp wide (the pre
 have been 0.470 pp, from −0.14 to +0.33 pp around the prediction). The floor does not bind.
 
 **Commit:** `afc2241` (Amendment 2 code, docs and tests).
+
+## Amendment 3 (after scoring; bug fixes from the independent audit)
+
+**Date:** 2026-10-21. Four general rules that enforce scope already written above: (a) retail only, also from the
+cited line's context (wholesale, tabela, loose, dairy-farmer rate; English, Hindi, Marathi); (b) premium or branded
+fuel grades are not the CPI variety; (c) national only by a nationwide line or a national body/operator, a single
+line/route/zone/district is regional; (d) one event per kind × state × month (median %, earliest date). 2025 recall
+stays 3 of 4 with nothing gained or lost. Full log, events and scores before and after:
+`docs/after_scoring_changes.md` §4.
