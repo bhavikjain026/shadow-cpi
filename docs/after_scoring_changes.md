@@ -45,4 +45,4 @@ is listed here with its date, reason and commit. None of them changes a scored r
 - **Change:** the `quotes` list was copied back from commit `f00bd45` (50 quotes; the 38 already there are
   unchanged); `detail.quotes_restored_from` says so. No logic changed. The predictor reads only the manifest's
   `events`, which are unchanged, so no scored number moves (the builder check above confirms it).
-- **Commit:** `COMMIT_PENDING`
+- **Commit:** `620a8e8`
