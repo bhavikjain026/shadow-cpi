@@ -632,6 +632,162 @@
  ],
  "quotes": [
   {
+   "item": "onion",
+   "price": 33.0,
+   "unit": "kg",
+   "place": "Delhi",
+   "date": "2026-03-13",
+   "line": "Big Onions are currently trading at a wholesale base of ₹22, with retail prices capping at ₹33 per kg.",
+   "source": "tavily",
+   "tier": "exploratory",
+   "verified": true,
+   "url": "https://m.economictimes.com/news/new-updates/delhi-vegetable-price-today-13/03/2026-check-onion-tomato-and-potato-latest-rates-amid-fuel-crisis/articleshow/129537870.cms",
+   "language": "en"
+  },
+  {
+   "item": "onion",
+   "price": 27.5,
+   "unit": "kg",
+   "place": "Delhi",
+   "date": "2026-03-28",
+   "line": "राजधानी में प्याज खुदरा बाजार में 25 से 30 रुपये प्रति किलो के भाव से बिक रही है, जबकि थोक बाजार यानी आजादपुर मंडी में इसकी कीमत 8 से 18 रुपये प्रति किलो तक बनी हुई है।",
+   "source": "tavily",
+   "tier": "exploratory",
+   "verified": true,
+   "url": "https://navbharattimes.indiatimes.com/metro/delhi/other-news/oil-lpg-cylinder-crisis-onion-tomato-price-drop-delhi-farmers-loss-azadpur-mandi-rates/articleshow/129858799.cms",
+   "language": "hi"
+  },
+  {
+   "item": "onion",
+   "price": 27.5,
+   "unit": "kg",
+   "place": "Delhi",
+   "date": "2026-03-29",
+   "line": "दिल्ली के खुदरा बाजारों में पिछले करीब तीन महीनों से प्याज की कीमतें नियंत्रण में बनी हुई हैं. मौजूदा समय में प्याज 25 से 30 रुपये प्रति किलो के दायरे में बिक रही है. वहीं, थोक बाजार यानी आजादपुर मंडी में इसकी कीमत और भी कम होकर 8 से 18 रुपये प्रति किलो तक पहुंच गई है. कीमतों में इस गिरावट ने ग्राहकों को राहत जरूर दी है, लेकिन यह स्थिति लंबे समय तक बनी रहती है तो इसके असर दूरगामी हो सकते हैं.",
+   "source": "tavily",
+   "tier": "exploratory",
+   "verified": true,
+   "url": "https://www.abplive.com/states/delhi-ncr/delhi-onion-tomato-price-drop-farmers-loss-azadpur-mandi-vegetable-rate-ann-3107910",
+   "language": "hi"
+  },
+  {
+   "item": "tomato",
+   "price": 21.5,
+   "unit": "kg",
+   "place": "Delhi",
+   "date": "2026-03-13",
+   "line": "| Tomato | ₹16 | ₹19 - ₹24 |",
+   "source": "tavily",
+   "tier": "exploratory",
+   "verified": true,
+   "url": "https://m.economictimes.com/news/new-updates/delhi-vegetable-price-today-13/03/2026-check-onion-tomato-and-potato-latest-rates-amid-fuel-crisis/articleshow/129537870.cms",
+   "language": "en"
+  },
+  {
+   "item": "tomato",
+   "price": 13.5,
+   "unit": "kg",
+   "place": "Chennai Koyambedu",
+   "date": "2026-03-13",
+   "line": "| 1 | Tomato | 10 | 13.5 | 1 Kg |",
+   "source": "tavily",
+   "tier": "exploratory",
+   "verified": true,
+   "url": "https://m.economictimes.com/news/new-updates/chennai-vegetable-price-today-13/03/2026-latest-onion-tomato-and-potato-rates-amid-fuel-crisis/articleshow/129539160.cms",
+   "language": "en"
+  },
+  {
+   "item": "tomato",
+   "price": 26.0,
+   "unit": "kg",
+   "place": "Chennai Koyambedu",
+   "date": "2026-03-13",
+   "line": "| 2 | Bangalore Tomato | 21 | 26 | 1 Kg |",
+   "source": "tavily",
+   "tier": "exploratory",
+   "verified": true,
+   "url": "https://m.economictimes.com/news/new-updates/chennai-vegetable-price-today-13/03/2026-latest-onion-tomato-and-potato-rates-amid-fuel-crisis/articleshow/129539160.cms",
+   "language": "en"
+  },
+  {
+   "item": "tomato",
+   "price": 45.0,
+   "unit": "kg",
+   "place": "",
+   "date": "2026-03-07",
+   "line": "सब्जियों की कीमतों में भी तेजी देखने को मिल रही है। टमाटर 40 से 50 रुपये प्रति किलो, आलू 25 से 30 रुपये, प्याज 30 से 35 रुपये, खीरा 40 से 60 रुपये, हरी मिर्च 80 से 100 रुपये और धनिया 120 से 150 रुपये प्रति किलो तक पहुंच गया है। व्यापारियों का कहना है कि सामान्य दिनों की तुलना में सब्जियों के दाम में 15 से 25 प्रतिशत तक की बढ़ोतरी हुई है।",
+   "source": "tavily",
+   "tier": "exploratory",
+   "verified": true,
+   "url": "https://www.bhaskar.com/g/local/uttar-pradesh/meerut/news/fruits-apple-pomegranate-rates-ramzan-inflation-india-137373140.html",
+   "language": "hi"
+  },
+  {
+   "item": "tomato",
+   "price": 27.5,
+   "unit": "kg",
+   "place": "Delhi",
+   "date": "2026-03-29",
+   "line": "प्याज की तरह टमाटर के दाम भी इन दिनों नियंत्रण में हैं. दिल्ली में टमाटर 25 से 30 रुपये प्रति किलो के आसपास बिक रहा है. अच्छी पैदावार और पर्याप्त आपूर्ति के चलते कीमतों में नरमी बनी हुई है. हालांकि, यह स्थिति किसानों के लिए चुनौतीपूर्ण बनी हुई है, क्योंकि अधिक उत्पादन के बावजूद उन्हें बेहतर दाम नहीं मिल पा रहे हैं.",
+   "source": "tavily",
+   "tier": "exploratory",
+   "verified": true,
+   "url": "https://www.abplive.com/states/delhi-ncr/delhi-onion-tomato-price-drop-farmers-loss-azadpur-mandi-vegetable-rate-ann-3107910",
+   "language": "hi"
+  },
+  {
+   "item": "tomato",
+   "price": 27.5,
+   "unit": "kg",
+   "place": "Delhi",
+   "date": "2026-03-28",
+   "line": "अच्छी पैदावार के चलते दिल्ली में टमाटर भी 25 से 30 रुपये प्रति किलो के आसपास बिक रहा है।",
+   "source": "tavily",
+   "tier": "exploratory",
+   "verified": true,
+   "url": "https://navbharattimes.indiatimes.com/metro/delhi/other-news/oil-lpg-cylinder-crisis-onion-tomato-price-drop-delhi-farmers-loss-azadpur-mandi-rates/articleshow/129858799.cms",
+   "language": "hi"
+  },
+  {
+   "item": "lpg",
+   "price": 913.0,
+   "unit": "cylinder",
+   "place": "New Delhi",
+   "date": "2026-03-24",
+   "line": "LPG Price Today: Domestic LPG Cylinder Costs Rs 913 in New Delhi",
+   "source": "tavily",
+   "tier": "exploratory",
+   "verified": true,
+   "url": "https://m.economictimes.com/news/new-updates/lpg-price-today-march-15-has-the-cost-of-cooking-gas-changed-check-the-latest-cylinder-rates-in-your-city/articleshow/129584260.cms",
+   "language": "en"
+  },
+  {
+   "item": "lpg",
+   "price": 913.0,
+   "unit": "cylinder",
+   "place": "Delhi",
+   "date": "2026-03-07",
+   "line": "The price of a 14.2 kg domestic LPG cylinder in Delhi has increased from Rs 853 to Rs 913. [...] Domestic LPG cylinder prices increased by Rs 60 from March 7 nationwide",
+   "source": "tavily",
+   "tier": "exploratory",
+   "verified": true,
+   "url": "https://www.ndtv.com/india-news/iran-israel-war-domestic-lpg-price-hiked-by-rs-60-commercial-cylinder-up-rs-115-from-today-11180069",
+   "language": "en"
+  },
+  {
+   "item": "lpg",
+   "price": 987.0,
+   "unit": "cylinder",
+   "place": "Delhi",
+   "date": "2026-03-08",
+   "line": "LPG Cylinder Price Rise Heats Up Inflation Debate As Opposition Targets Modi Government [...] price of Rs 987 for a 14.2-kg cylinder in Delhi in March 2026, they said.Officials said the three state-owned OMCs — Indian Oil, Bharat Petroleum and Hindustan Petroleum — absorbed losses of around Rs 39,000 crore in 2024-25 to protect domestic LPG consumers.",
+   "source": "tavily",
+   "tier": "exploratory",
+   "verified": true,
+   "url": "https://timesofindia.indiatimes.com/india/cooking-gas-price-up-by-rs-60-a-cylinder/articleshow/129237027.cms",
+   "language": "en"
+  },
+  {
    "item": "gold",
    "price": 167471.0,
    "unit": "Rs/10 g (999, PM)",
@@ -1299,6 +1455,10 @@
    "replay-layers-month/2026-03",
    "fuel-gap"
   ],
-  "seconds": 35
+  "seconds": 35,
+  "quotes_restored_from": {
+   "commit": "f00bd45",
+   "note": "quotes list restored as data only (2026-10-21); the predictor reads only 'events', so scored results are unaffected; counts above describe the later events-only re-run"
+  }
  }
 }

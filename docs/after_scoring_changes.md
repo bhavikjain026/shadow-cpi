@@ -36,3 +36,13 @@ is listed here with its date, reason and commit. None of them changes a scored r
   before the seal. For the 9 scored months this gives the same answer (checked). If the owner prefers the month-end
   reading, October LPG is always a gap and follows trend.
 - **Commit:** `afc2241`
+
+## 3. March manifest quotes restored (data only)
+
+- **Date:** 2026-10-21
+- **Reason:** the events-only test-month re-runs (`d44aead` onwards) rewrote `manifests/2026-03.json` with 38 of the
+  50 verified quotes from Prompt 2, so the Evidence page lost 12 of them (6 tomato, 3 onion, 3 LPG).
+- **Change:** the `quotes` list was copied back from commit `f00bd45` (50 quotes; the 38 already there are
+  unchanged); `detail.quotes_restored_from` says so. No logic changed. The predictor reads only the manifest's
+  `events`, which are unchanged, so no scored number moves (the builder check above confirms it).
+- **Commit:** `COMMIT_PENDING`
