@@ -386,7 +386,7 @@ def judge_event(ev, month, cfg=None):
     why = non_consumer_reason(ev.get("item_or_service"), line)            # Amendment 1 (b), (c), (d)
     if why:
         return None, why
-    from .event_rules import absolute_change, base_price, normalise_date
+    from .event_rules import absolute_change, announced_date, base_price, normalise_date
     nums = [ev.get(k) for k in ("new_price", "old_price", "pct_change") if ev.get(k) is not None]
     if not line:
         return None, "no cited line"
@@ -396,7 +396,7 @@ def judge_event(ev, month, cfg=None):
     eff = normalise_date(ev.get("effective_date"), ev.get("_page_date"))     # 2025 audit: 'April 8', 'Tuesday'
     if not eff:
         return None, "no effective date"
-    ev = {**ev, "effective_date": eff}
+    ev = {**ev, "effective_date": eff, "announced_date": announced_date(ev.get("announced_date"), ev.get("_page_date"))}
     start, end = month_window(month)
     if not start <= eff <= end:
         return None, "effective date outside the month"

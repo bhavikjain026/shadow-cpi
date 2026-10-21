@@ -186,6 +186,14 @@ def normalise_date(text, page_date):
     return ""
 
 
+def announced_date(text, page_date):
+    """The announcement date as YYYY-MM-DD: the date written in the page if it reads and is not after the page's own
+    date, else the page's date. Record only; no rule reads it. (Audit: the model copied a site header's 'today',
+    'Tue, Oct 20, 2026', from a page dated 2026-03-31.)"""
+    d = normalise_date(text, page_date)
+    return d if d and (not page_date or d <= page_date) else (page_date or None)
+
+
 ABS = re.compile(r"(?:by|of|hike of|cut of)\s*(?:rs\.?|₹|inr)\s*(\d+(?:\.\d+)?)|(?:₹|rs\.?)\s*(\d+(?:\.\d+)?)\s*(?:per|a)\s"
                  r"|(\d+(?:\.\d+)?)\s*(?:रुपये|रुपए)", re.I)
 UP_WORDS = re.compile(r"hike|increase|raise|costlier|बढ़|इजाफा|महंगा", re.I)

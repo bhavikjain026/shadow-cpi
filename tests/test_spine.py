@@ -66,6 +66,9 @@ def test_2025_audit_rules():
     assert R.normalise_date("आज (बुधवार)", "2025-04-30") == "2025-04-30"
     assert R.normalise_date("Tuesday", "2025-04-07") == "2025-04-08"
     assert R.normalise_date("soon", "2025-04-07") == ""
+    assert R.announced_date("Tue, Oct 20, 2026", "2026-03-31") == "2026-03-31"     # site header 'today', not the news
+    assert R.announced_date("2026-05-30", "2026-05-31") == "2026-05-30"
+    assert R.announced_date(None, "2026-03-30") == "2026-03-30"
     assert R.absolute_change("a hike in the price of domestic LPG cylinders by Rs 50, effective from April 8") == 50
     assert R.absolute_change("दूध की कीमत में इजाफा: अब 2 रुपये प्रति लीटर ज्यादा") == 2
     assert R.absolute_change("prices of 19 kg cylinders cut by Rs 41") == -41
