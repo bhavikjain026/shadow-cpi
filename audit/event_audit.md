@@ -4,12 +4,17 @@ Audited 21 Oct 2026 using web search only. Nothing was run and no existing file 
 
 **5 of 12 fully correct, 3 partly, 3 wrong, 1 unclear; 9 confirmed by an independent second source.**
 
+**Quote check (done by hand in Chrome, 21 Oct 2026): quotes verified on page: 9 of 12 (1 paywalled, 2 pages unavailable). Page dates match: 7 of 10 checkable; 3 recorded source dates are later than the real page date (05-E1, 07-E1, 09-E1).**
+
 > **Important limit.** The audit machine's network blocked **every** original article page: bhaskar.com, indianexpress.com,
 > newindianexpress.com, deccanherald.com, timesofindia, thehindu.com, ibtimes.co.in, india.com and jansatta.com.
 > So step (a), "is the quote really on the page", could not be checked directly for any row. Facts were checked
 > through search results and other outlets' copies of the same story. `quote_found` is therefore "unclear" for 11 rows. For one row
 > (2026-07-E1) a copy of the same article shows the quoted sentence. Someone with normal internet access should open the 12
 > URLs and tick the quote check. That takes about 10 minutes.
+>
+> **Update (21 Oct 2026):** the 12 URLs were then opened by hand in Chrome. The `quote found` and `page date matches`
+> columns now show that result; the rest of this audit is unchanged.
 
 What the verdicts mean:
 - **correct**: real retail event, right size, date and place.
@@ -19,20 +24,20 @@ What the verdicts mean:
 
 ## Table
 
-| id | quote found | % right | date right | retail / in scope | place & month right | 2nd source | verdict |
-|---|---|---|---|---|---|---|---|
-| 2026-02-E1 rail | unclear | no (5% / +5.26%, row +5.96%) | yes | one heritage line only | **no** (TN toy train applied all-India) | [Curly Tales](https://curlytales.com/travel/the-historic-nilgiri-mountain-railway-fare-increased-from-february-fare-starts-from/) (copy of the Indian Express story, not independent) | **wrong** |
-| 2026-04-E1 milk MP | unclear | yes (60→63) | yes | yes (loose milk) | partly (Indore only) | [IBC24](https://www.ibc24.in/business/indore-milk-price-hike-october-2026-new-price-3777237.html) | **partly** |
-| 2026-04-E2 milk MP | unclear | yes (60→64) | yes | yes (loose milk) | partly (Dhar only) | [ETV Bharat](https://www.etvbharat.com/hi/state/dhar-milk-prices-hike-by-4-rs-milk-rate-64-rupees-per-liter-madhya-pradesh-news-mps26033002737) | **partly** |
-| 2026-04-E3 electricity MP | unclear | yes (4.80% avg) | yes | yes | yes | [MPERC order (official)](https://mperc.in/uploads/petition_order_document/MPERC_Pno_140_2025_State_DISCOMs_ARR_RST__ORDER_FY_2026_27_FINAL_ORDER.pdf) | correct |
-| 2026-04-E4 fuel | unclear | yes for premium diesel | yes | **no** (premium Xtra Green only) | **no** (applied all-India) | [India.com](https://www.india.com/business/premium-petrol-price-xp100-petrol-rate-in-delhi-aviation-turbine-fuel-jet-fuel-lpg-cylinder-noida-gurugram-faridabad-ghaziabad-kolkata-mumbai-8363951/) | **wrong** |
-| 2026-05-E1 milk national | unclear | yes (Rs 2) | yes | yes | yes | [Business Today](https://www.businesstoday.in/personal-finance/news/story/amul-mother-dairy-raise-milk-prices-by-rs-2-per-litre-from-may-14-check-new-rates-here-531378-2026-05-14) | correct |
-| 2026-05-E2 fuel | unclear | yes (avg of petrol and diesel) | yes | yes | yes | [NewKerala](https://www.newkerala.com/news/a/petrol-rs-9777-delhi-after-fuel-hike-check-543.htm) | correct |
-| 2026-06-E1 electricity UP | unclear | yes as announced | yes as announced | yes | yes | [Business Today](https://www.businesstoday.in/india/story/uttar-pradesh-electricity-bills-to-rise-10-in-june-as-uppcl-imposes-fuel-surcharge-534090-2026-05-30) | **unclear** |
-| 2026-07-E1 milk TN | yes (via a copy) | unclear (Rs 3 vs Rs 4) | **no** (9 Jul, not 23 Jul) | yes | yes | [DT Next](https://www.dtnext.in/news/tamilnadu/private-brands-hike-milk-curd-prices-2nd-in-7-months) | **partly** |
-| 2026-08-E1 milk Maharashtra | unclear | yes (Rs 2) | yes | yes | yes | [India.com](https://www.india.com/news/india/maharashtra-milk-price-hike-cow-buffalo-milk-prices-to-rise-by-rs-2-per-litre-from-august-11-check-updates-on-diary-products-8496805/) | correct |
-| 2026-09-E1 milk MH+Delhi | unclear | **no** (+9.7% wholesale, row +14.57%) | yes | **no** (wholesale buffalo milk) | **no** (Mumbai only, not Delhi) | [Business Today](https://www.businesstoday.in/amp/india/story/mumbai-milk-prices-to-rise-by-rs-9-from-september-1-check-new-rates-551994-2026-08-28) | **wrong** |
-| 2026-09-E2 electricity J&K | unclear | yes (6.83% avg) | yes | yes | yes | [Kashmir Reader](https://kashmirreader.com/2026/08/22/jk-power-tariff-hiked-by-6-83-from-september-01/) | correct |
+| id | quote found | page date matches | % right | date right | retail / in scope | place & month right | 2nd source | verdict |
+|---|---|---|---|---|---|---|---|---|
+| 2026-02-E1 rail | Y | Y | no (5% / +5.26%, row +5.96%) | yes | one heritage line only | **no** (TN toy train applied all-India) | [Curly Tales](https://curlytales.com/travel/the-historic-nilgiri-mountain-railway-fare-increased-from-february-fare-starts-from/) (copy of the Indian Express story, not independent) | **wrong** |
+| 2026-04-E1 milk MP | Y | Y | yes (60→63) | yes | yes (loose milk) | partly (Indore only) | [IBC24](https://www.ibc24.in/business/indore-milk-price-hike-october-2026-new-price-3777237.html) | **partly** |
+| 2026-04-E2 milk MP | Y | Y | yes (60→64) | yes | yes (loose milk) | partly (Dhar only) | [ETV Bharat](https://www.etvbharat.com/hi/state/dhar-milk-prices-hike-by-4-rs-milk-rate-64-rupees-per-liter-madhya-pradesh-news-mps26033002737) | **partly** |
+| 2026-04-E3 electricity MP | Y | Y | yes (4.80% avg) | yes | yes | yes | [MPERC order (official)](https://mperc.in/uploads/petition_order_document/MPERC_Pno_140_2025_State_DISCOMs_ARR_RST__ORDER_FY_2026_27_FINAL_ORDER.pdf) | correct |
+| 2026-04-E4 fuel | unverified (paywalled) | Y | yes for premium diesel | yes | **no** (premium Xtra Green only) | **no** (applied all-India) | [India.com](https://www.india.com/business/premium-petrol-price-xp100-petrol-rate-in-delhi-aviation-turbine-fuel-jet-fuel-lpg-cylinder-noida-gurugram-faridabad-ghaziabad-kolkata-mumbai-8363951/) | **wrong** |
+| 2026-05-E1 milk national | Y | **N** (13 May, not 23 May) | yes (Rs 2) | yes | yes | yes | [Business Today](https://www.businesstoday.in/personal-finance/news/story/amul-mother-dairy-raise-milk-prices-by-rs-2-per-litre-from-may-14-check-new-rates-here-531378-2026-05-14) | correct |
+| 2026-05-E2 fuel | page unavailable | unavailable | yes (avg of petrol and diesel) | yes | yes | yes | [NewKerala](https://www.newkerala.com/news/a/petrol-rs-9777-delhi-after-fuel-hike-check-543.htm) | correct |
+| 2026-06-E1 electricity UP | Y | Y | yes as announced | yes as announced | yes | yes | [Business Today](https://www.businesstoday.in/india/story/uttar-pradesh-electricity-bills-to-rise-10-in-june-as-uppcl-imposes-fuel-surcharge-534090-2026-05-30) | **unclear** |
+| 2026-07-E1 milk TN | Y | **N** (9 Jul, not 22 Jul) | unclear (Rs 3 vs Rs 4) | **no** (9 Jul, not 23 Jul) | yes | yes | [DT Next](https://www.dtnext.in/news/tamilnadu/private-brands-hike-milk-curd-prices-2nd-in-7-months) | **partly** |
+| 2026-08-E1 milk Maharashtra | page unavailable | unavailable | yes (Rs 2) | yes | yes | yes | [India.com](https://www.india.com/news/india/maharashtra-milk-price-hike-cow-buffalo-milk-prices-to-rise-by-rs-2-per-litre-from-august-11-check-updates-on-diary-products-8496805/) | correct |
+| 2026-09-E1 milk MH+Delhi | Y | **N** (1 Sep, not 20 Sep) | **no** (+9.7% wholesale, row +14.57%) | yes | **no** (wholesale buffalo milk) | **no** (Mumbai only, not Delhi) | [Business Today](https://www.businesstoday.in/amp/india/story/mumbai-milk-prices-to-rise-by-rs-9-from-september-1-check-new-rates-551994-2026-08-28) | **wrong** |
+| 2026-09-E2 electricity J&K | Y | Y | yes (6.83% avg) | yes | yes | yes | [Kashmir Reader](https://kashmirreader.com/2026/08/22/jk-power-tariff-hiked-by-6-83-from-september-01/) | correct |
 
 "Confirmed by an independent second source" (9) counts rows whose amount, date and place are backed by a separate outlet:
 04-E1, 04-E2, 04-E3, 04-E4, 05-E1, 05-E2, 06-E1 (the announcement only), 08-E1 and 09-E2. It leaves out 02-E1 (the only copy repeats the
