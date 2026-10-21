@@ -82,7 +82,10 @@ def gather(month, cutoff, tav):
     if fetched[:10] < cutoff and month > REPLAY_IBJA[1]:
         missing.append(f"DoCA spine: fetched {fetched[:10]}, before the cutoff {cutoff} (re-fetch by hand, then "
                        "rebuild data/spine.csv)")
+    in_force = [r for r in lpg_rev if r[0] <= window_end]
     notes = {"observed": {k: {x: y for x, y in v.items()} for k, v in observed.items()},
+             "iocl_row_in_force": {"effective": in_force[-1][0], "line": in_force[-1][2], "list_retrieved": iocl_at}
+             if in_force else None,
              "events_used": len(inp["events"][month]), "spine_fetched_utc": fetched,
              "spine_foods_with_month": sorted(f for f in E.SPINE_FOODS
                                               if E.spine_change(inp["spine"], f, month)[0] is not None)}

@@ -35,6 +35,10 @@ is listed here with its date, reason and commit. None of them changes a scored r
   evidence cutoff instead (min(month end, cutoff)), because a list saved on 29 Oct can never be dated after 31 Oct
   before the seal. For the 9 scored months this gives the same answer (checked). If the owner prefers the month-end
   reading, October LPG is always a gap and follows trend.
+- **Approved by the owner on 2026-10-21**, on the condition that the IOCL list used shows the price in effect during
+  the target month. How it is met: the list counts only if retrieved on or after min(month end, cutoff), so it holds
+  every revision in force up to the cutoff; otherwise the month is an LPG gap. The builder writes the row in force and
+  the list's retrieval time to `inputs.iocl_row_in_force` in the nowcast file, so the condition can be checked.
 - **Commit:** `afc2241`
 
 ## 3. March manifest quotes restored (data only)

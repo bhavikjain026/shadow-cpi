@@ -25,13 +25,17 @@ changes a rule, factor or filter.
       - `headline_yoy`;
       - the 80% range by **Amendment 2** (prediction ± 80th percentile of |miss| of (c) over the 9 scored months,
         floor = the pre-registered width; ± 0.284 pp) and P(headline ≥ 6.0%) (`shadow_cpi/live_range.py`);
-      - the skeptic (live month: search + extract; ≥ 2 verified contrary quotes → widen by 50%);
+      - the skeptic (≥ 2 verified contrary quotes → widen by 50%);
       - coverage, top 3 contributors (pp), with/without-Tavily attribution, `evidence_cutoff_utc`, manifest path,
         code commit, model IDs.
 
       Builder: `python build_nowcast.py 2026-10 --cutoff 2026-10-28 --skeptic` (dry run first with `--dry-run`, 0
-      credits). It calls the scored `predict_month(..., "c", ...)`. ⚠️ Its skeptic is the replay one (search
-      snippets); the live-month extract step (cut 4) is not written yet.
+      credits). It calls the scored `predict_month(..., "c", ...)` and the scored `tools/score_replay.skeptic`.
+      **Skeptic check (2026-10-21): the scored (c) runs for Jan–Sep used NO skeptic extract step.** They ran 27
+      Tavily news searches (snippets only) and 27 Nemotron reads, and no Extract call (flight recorder, tag
+      `skeptic:`), as `docs/preregistration.md` says ("snippets only (no extract)"). The live builder already calls
+      that same function, so nothing changes. `config/budget.json` `cut4_skeptic` ("live months: search +
+      extract") is therefore not used for the seal.
 - [ ] Commit everything (the real seal refuses with uncommitted changes).
 
 ## 3. Seal (29 Oct)
