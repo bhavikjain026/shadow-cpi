@@ -10,28 +10,54 @@ LPG = {"base_unit": "cylinder", "min": 400, "max": 1500, "names": ["lpg", "cylin
        "require_any": ["14.2", "domestic", "घरेलू"], "reject_any": ["commercial", "19 kg"]}
 
 
-# ---------- credit cap ----------
+# ---------- credit caps (shadow_cpi.budget) ----------
+from shadow_cpi import budget as B  # noqa: E402
+
+
 def test_call_cost():
-    assert E.call_cost("/search", {"search_depth": "basic"}) == 1
-    assert E.call_cost("/search", {"search_depth": "advanced"}) == 2
-    assert E.call_cost("/extract", {"urls": list("abcdef")}) == 2
-    assert E.call_cost("/extract", {"urls": ["a"], "extract_depth": "advanced"}) == 2
+    assert B.call_cost("/search", {"search_depth": "basic"}) == 1
+    assert B.call_cost("/search", {"search_depth": "advanced"}) == 2
+    assert B.call_cost("/extract", {"urls": list("abcdef")}) == 2
+    assert B.call_cost("/extract", {"urls": ["a"], "extract_depth": "advanced"}) == 2
+    assert B.call_cost("/crawl", {"limit": 15, "extract_depth": "basic", "instructions": "x"}) == 4 + 3
 
 
-def test_cap_stops_before_spending_and_cache_is_free(tmp_path):
-    calls = []
+CFG = {"plan_limit": 100, "reserve": 10, "spent_before_ledger": 0, "caps": {"job": 2, "month": 1},
+       "plans": {"cut5_run_now": {"scans_per_day": 2}}}
 
+
+def fake_tavily(tmp_path, calls):
     def fake(method, url, token, body, timeout):
         calls.append(url)
         return {"results": [], "usage": {"credits": 1}}
+    return Tavily(api_key="t", recorder=Recorder(tmp_path / "c", tmp_path / "l.jsonl"), transport=fake)
 
-    rec = Recorder(tmp_path / "c", tmp_path / "l.jsonl")
-    cap = E.CreditCap(Tavily(api_key="t", recorder=rec, transport=fake), cap=1)
-    cap.search("onion price", tag="p2-x")                        # spends 1 of 1
-    cap.search("onion price", tag="p2-x")                        # cached: free, allowed
-    with pytest.raises(E.BudgetExceeded):
-        cap.search("tomato price", tag="p2-x")                   # would go past the cap
-    assert len(calls) == 1
+
+def test_hard_caps_stop_before_spending_and_cache_is_free(tmp_path):
+    calls, ledger = [], tmp_path / "ledger.jsonl"
+    tav = B.Budgeted(fake_tavily(tmp_path, calls), ["job", "month/2026-01"], CFG, ledger)
+    tav.search("onion price", tag="item:onion search")             # 1 credit: month/2026-01 now full
+    tav.search("onion price", tag="item:onion search")             # cached: free, allowed
+    with pytest.raises(B.BudgetExceeded):
+        tav.search("tomato price", tag="item:tomato search")       # month cap 1 would be passed
+    feb = B.Budgeted(tav.tav, ["job", "month/2026-02"], CFG, ledger)
+    feb.search("tomato price")                                     # job now at 2 = cap
+    with pytest.raises(B.BudgetExceeded):
+        B.Budgeted(tav.tav, ["job", "month/2026-03"], CFG, ledger).search("potato price")
+    assert len(calls) == 2 and B.spent("job", path=ledger) == 2
+
+
+def test_account_cap(tmp_path):
+    cfg = {**CFG, "spent_before_ledger": 90, "caps": {"job": 50}}
+    with pytest.raises(B.BudgetExceeded):
+        B.Budgeted(fake_tavily(tmp_path, []), ["job"], cfg, tmp_path / "l2.jsonl").search("x")   # 90+1 > 100-10
+
+
+def test_run_now_daily_cap():
+    led = [{"budgets": ["run-now", "run-now-scan/2026-12-01#1"], "credits": 6},
+           {"budgets": ["run-now", "run-now-scan/2026-12-01#2"], "credits": 7}]
+    assert B.run_now_allowed("2026-12-01", led, CFG) is None
+    assert B.run_now_allowed("2026-12-02", led, CFG) == "run-now-scan/2026-12-02#1"
 
 
 # ---------- guards ----------

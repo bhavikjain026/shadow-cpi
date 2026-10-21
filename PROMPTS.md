@@ -5,6 +5,11 @@ Track: **Best Apps and Agents** (not Personal AI). Bonus target: Best Use of Tav
 Already done: Prompt 0 = `checks.py` (+ fixes: page-address dates, line-referenced quotes, India-focused searches, logged direct-download fallback).
 The "fix quote extraction" follow-up is DONE: Nemotron now cites a numbered line and code takes that exact line (`verify.split_lines`, `nemotron._attach_lines`).
 
+Data sources as built (2026-10-20):
+- DoCA retail price spine: downloaded BY HAND from behind a CAPTCHA (fcainfoweb.nic.in report menu), saved in data/official/doca/.
+- MoSPI indices: logged direct download from MoSPI's public API (flight recorder service `direct`).
+- IBJA bullion-report PDFs, IOCL LPG price list, PPAC petrol prices: Tavily Extract (cached, in the flight recorder).
+
 ---------------------------------------------------------------------------------------------------
 
 ## Prompt 1 — official data and baselines (21 Oct)
@@ -31,7 +36,7 @@ Add tests. No paid API calls except Tavily lookups for the poll articles (estima
 ## Prompt 2 — evidence engine (21–22 Oct)
 
 Build `shadow_cpi/evidence.py`. Nemotron extracts (line-referenced), code decides.
-A) Spine — government daily retail prices (Consumer Affairs, 38 foods). Route: `Tavily.extract_or_download` (Tavily is blocked by the site, so the logged direct download from this computer is expected; if a form/date query is needed, find the report URL that takes a date range). Fallback mirror if needed: dataful.in dataset 19920 (Delhi, daily). Store centre-level monthly averages Jan 2025 – Oct 2026 in data/spine.csv. Item change = `verify.geometric_mean_change` over centres present in both months. Tag tier="strict".
+A) Spine — government daily retail prices (Consumer Affairs, 38 foods). Route as built: the report menu is behind a CAPTCHA and the site blocks Tavily, so the owner downloads the "Average/Month End Report" by hand into data/official/doca/ (originally planned: `Tavily.extract_or_download`). Fallback mirror if needed: dataful.in dataset 19920 (Delhi, daily). Store centre-level monthly averages Jan 2025 – Oct 2026 in data/spine.csv. Item change = `verify.geometric_mean_change` over centres present in both months. Tag tier="strict".
 A2) Pass-through factor per item/subgroup: fit on 2025 ONLY (official MoM vs spine MoM; a simple ratio is fine). Save to config/passthrough.json.
 B) Tavily evidence layer, per month (date window = that month):
  1. items.yaml for what the spine lacks: gold, silver (OBSERVED daily from a published rate page found + extracted with Tavily, e.g. IBJA — never left on trend), LPG, petrol, plus any missing foods. English + Hindi (Devanagari) query templates.

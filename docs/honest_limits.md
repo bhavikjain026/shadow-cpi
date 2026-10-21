@@ -3,9 +3,10 @@
 Shadow CPI is an **experimental nowcast**. It is not an official statistic, and it does not rebuild MoSPI's survey. These are its limits, stated plainly.
 
 ## Data we could not get the "proper" way
-- **The government price spine was downloaded by hand.** The Consumer Affairs daily retail price site sits behind a CAPTCHA, and it blocks Tavily. The spine files were downloaded by a person and saved, and that route is logged and counted as a fallback. So the strictest evidence tier does not come in through Tavily, and it is not automatic.
+- **The government price spine is downloaded by hand from behind a CAPTCHA.** The Department of Consumer Affairs retail price reports (fcainfoweb.nic.in) sit behind a CAPTCHA, which software must not solve, and the site blocks Tavily. A person downloads the report and saves it in `data/official/doca/`; the code then reads that file. It is not in the flight recorder (no web call is made), and it is not automatic. So the strictest evidence tier does not come in through Tavily.
 - **Tavily is blocked on some sites.** Some government and publisher pages refuse Tavily or return no text, for example scanned PDFs. The Evidence page and the Tavily report card list every failed source openly. Where we fell back to a direct download, the report card counts it.
-- **MoSPI's official indices come from MoSPI's public API** by a logged direct download. They are not fetched through Tavily, because Tavily cannot call a paged JSON API.
+- **MoSPI's official indices come from MoSPI's public API** by a logged direct download (flight recorder service `direct`, raw files in `data/official/mospi_api/`). They are not fetched through Tavily, because Tavily cannot call a paged JSON API.
+- **IBJA, IOCL and PPAC come in through Tavily Extract**, not direct downloads: IBJA's daily bullion-report PDFs (gold and silver), IOCL's domestic LPG price list and PPAC's Delhi petrol prices. Each call is cached and logged in the flight recorder.
 
 ## How much the replay can prove
 - **Only 9 test months** (January to September 2026). The 2024-base series has indices only from January 2025, and 2025 is kept for calibration, so there is no longer history to test on. Nine months is too few to be sure that one method is better than another, and small differences in mean miss may be luck.

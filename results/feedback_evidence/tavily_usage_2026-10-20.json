@@ -1,0 +1,28 @@
+{
+ "captured_at_utc": "2026-10-20T16:36:49.785324+00:00",
+ "tavily_usage_endpoint_response": {
+  "key": {
+   "usage": 6,
+   "limit": null,
+   "search_usage": 5,
+   "crawl_usage": 0,
+   "extract_usage": 1,
+   "map_usage": 0,
+   "research_usage": 0
+  },
+  "account": {
+   "current_plan": "Researcher",
+   "plan_usage": 6,
+   "plan_limit": 1500,
+   "search_usage": 5,
+   "crawl_usage": 0,
+   "extract_usage": 1,
+   "map_usage": 0,
+   "research_usage": 0,
+   "paygo_usage": 0,
+   "paygo_limit": null
+  }
+ },
+ "flight_recorder_credits_include_usage": 226,
+ "ledger_account_total": 226
+}

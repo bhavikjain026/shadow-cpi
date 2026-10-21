@@ -240,7 +240,7 @@ def main():
     (HERE / "results" / "tavily_report_card.md").write_text(REPORT_CARD, encoding="utf-8")
     (HERE / "results" / "reporter_brief_2026-10.md").write_text(BRIEF, encoding="utf-8")
     write_csv("data/spine.csv", spine())
-    write_csv("data/official_releases.csv", [{"month": "2026-09", "official_yoy": 5.54, "released_on": "2026-10-12",
+    write_csv("data/official_releases.csv", [{"month": "2026-09", "official_yoy": 5.54, "release_date": "2026-10-12",
                                               "source_url": "https://www.mospi.gov.in/"}])
     oct_nc = nowcast("2026-10", 5.31, 4.86, 5.82, 8, 0.31)
     write_json("results/nowcast_latest.json", oct_nc)

@@ -1,0 +1,1227 @@
+{
+ "sample": false,
+ "month": "2026-01",
+ "created_utc": "2026-10-20T16:34:05.378414+00:00",
+ "code_commit": "2808761a653c70e423edf3c720efe02bbf98e376",
+ "model_ids": {
+  "small": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+  "mid": "nvidia/nemotron-3-super-120b-a12b",
+  "large": "nvidia/Nemotron-3-Ultra-550b-a55b"
+ },
+ "queries": [
+  {
+   "call_id": "6a5bbf347236",
+   "endpoint": "search",
+   "query": "milk price hike per litre effective Amul Mother Dairy",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:26:48.978877+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "261bbea95a7c",
+   "endpoint": "search",
+   "query": "milk price hike per litre effective Amul Mother Dairy",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2025-12-22",
+    "end_date": "2025-12-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:27:00.534616+00:00",
+   "n_results": 7
+  },
+  {
+   "call_id": "51724a152cbb",
+   "endpoint": "search",
+   "query": "दूध के दाम बढ़े प्रति लीटर लागू",
+   "language": "hi",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-31",
+    "language": "hi",
+    "search_depth": "basic",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:27:08.572154+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "78afade087cf",
+   "endpoint": "search",
+   "query": "दूध के दाम बढ़े प्रति लीटर लागू",
+   "language": "hi",
+   "params": {
+    "topic": "news",
+    "start_date": "2025-12-22",
+    "end_date": "2025-12-31",
+    "language": "hi",
+    "search_depth": "basic",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:27:20.270517+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "9bfbab0b7413",
+   "endpoint": "search",
+   "query": "domestic LPG cylinder price revised effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:27:34.447460+00:00",
+   "n_results": 7
+  },
+  {
+   "call_id": "6ca4de6b561a",
+   "endpoint": "search",
+   "query": "domestic LPG cylinder price revised effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2025-12-22",
+    "end_date": "2025-12-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:28:00.159560+00:00",
+   "n_results": 7
+  },
+  {
+   "call_id": "576aa648b594",
+   "endpoint": "search",
+   "query": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
+   "language": "hi",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-31",
+    "language": "hi",
+    "search_depth": "basic",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:28:28.515167+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "d34cc4cc0f69",
+   "endpoint": "search",
+   "query": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
+   "language": "hi",
+   "params": {
+    "topic": "news",
+    "start_date": "2025-12-22",
+    "end_date": "2025-12-31",
+    "language": "hi",
+    "search_depth": "basic",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:28:46.638075+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "f7ae0d5ce6cf",
+   "endpoint": "search",
+   "query": "electricity tariff order regulatory commission revised rates effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:29:06.751890+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "fe8f3c49661f",
+   "endpoint": "search",
+   "query": "electricity tariff order regulatory commission revised rates effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2025-12-22",
+    "end_date": "2025-12-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:29:24.949903+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "1042509d00f8",
+   "endpoint": "search",
+   "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
+   "language": "hi",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-31",
+    "language": "hi",
+    "search_depth": "basic",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:29:52.952188+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "07a71bd9856b",
+   "endpoint": "search",
+   "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
+   "language": "hi",
+   "params": {
+    "topic": "news",
+    "start_date": "2025-12-22",
+    "end_date": "2025-12-31",
+    "language": "hi",
+    "search_depth": "basic",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:29:57.672737+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "edbdff23ba42",
+   "endpoint": "search",
+   "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:30:13.868434+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "123d8f7d0e09",
+   "endpoint": "search",
+   "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2025-12-22",
+    "end_date": "2025-12-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:31:00.211973+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "e678be95e0a4",
+   "endpoint": "search",
+   "query": "railway fare revision effective Indian Railways",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:31:13.192230+00:00",
+   "n_results": 5
+  },
+  {
+   "call_id": "f6a2017e7c36",
+   "endpoint": "search",
+   "query": "railway fare revision effective Indian Railways",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2025-12-22",
+    "end_date": "2025-12-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:31:38.068272+00:00",
+   "n_results": 2
+  },
+  {
+   "call_id": "3ec980755b36",
+   "endpoint": "search",
+   "query": "NPPA medicine price revision effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:31:53.412354+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "b9d8da575d1c",
+   "endpoint": "search",
+   "query": "NPPA medicine price revision effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2025-12-22",
+    "end_date": "2025-12-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:32:17.526444+00:00",
+   "n_results": 6
+  },
+  {
+   "call_id": "9502a40fd74a",
+   "endpoint": "search",
+   "query": "school fee hike academic session effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:32:31.232928+00:00",
+   "n_results": 7
+  },
+  {
+   "call_id": "fe3990117cdf",
+   "endpoint": "search",
+   "query": "school fee hike academic session effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2025-12-22",
+    "end_date": "2025-12-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:32:57.616931+00:00",
+   "n_results": 7
+  },
+  {
+   "call_id": "4f9dc29a8e61",
+   "endpoint": "search",
+   "query": "GST rate change effective from",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:33:13.880553+00:00",
+   "n_results": 6
+  },
+  {
+   "call_id": "0ee2e7992505",
+   "endpoint": "search",
+   "query": "GST rate change effective from",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2025-12-22",
+    "end_date": "2025-12-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T16:33:47.101951+00:00",
+   "n_results": 7
+  }
+ ],
+ "quotes": [
+  {
+   "item": "gold",
+   "price": 133461.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-01",
+   "line": "01st January 2026 133461 229250",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2005-01-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 134782.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-02",
+   "line": "02nd January 2026 134782 234550",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2005-01-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 136660.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-06",
+   "line": "06th January 2026 136660 243150",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2012-01-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 136675.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-07",
+   "line": "07th January 2026 136675 248000",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2012-01-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 135773.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-08",
+   "line": "08th January 2026 135773 235826",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2012-01-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 137122.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-09",
+   "line": "09th January 2026 137122 242808",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2012-01-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 140449.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-12",
+   "line": "12th January 2026 140449 256776",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2019-01-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 140284.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-13",
+   "line": "13th January 2026 140284 263032",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2019-01-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 142015.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-14",
+   "line": "14th January 2026 142015 277512",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2019-01-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 141593.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-16",
+   "line": "16th January 2026 141593 281890",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2019-01-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 164635.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-28",
+   "line": "28th January 2026 164635 358267",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2002-02-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 175340.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-29",
+   "line": "29th January 2026 175340 379988",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2002-02-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 165795.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-30",
+   "line": "30th January 2026 165795 339350",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2002-02-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 229250.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-01",
+   "line": "01st January 2026 133461 229250",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2005-01-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 234550.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-02",
+   "line": "02nd January 2026 134782 234550",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2005-01-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 243150.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-06",
+   "line": "06th January 2026 136660 243150",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2012-01-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 248000.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-07",
+   "line": "07th January 2026 136675 248000",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2012-01-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 235826.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-08",
+   "line": "08th January 2026 135773 235826",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2012-01-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 242808.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-09",
+   "line": "09th January 2026 137122 242808",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2012-01-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 256776.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-12",
+   "line": "12th January 2026 140449 256776",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2019-01-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 263032.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-13",
+   "line": "13th January 2026 140284 263032",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2019-01-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 277512.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-14",
+   "line": "14th January 2026 142015 277512",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2019-01-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 281890.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-16",
+   "line": "16th January 2026 141593 281890",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2019-01-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 358267.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-28",
+   "line": "28th January 2026 164635 358267",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2002-02-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 379988.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-29",
+   "line": "29th January 2026 175340 379988",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2002-02-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 339350.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-01-30",
+   "line": "30th January 2026 165795 339350",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2002-02-2026.pdf"
+  },
+  {
+   "item": "lpg",
+   "price": 853.0,
+   "unit": "Rs/cylinder (14.2 kg)",
+   "place": "Delhi",
+   "date": "2025-04-08",
+   "line": "| April 8, 2025 | 853.00 | 879.00 | 852.50 | 868.50 |",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://iocl.com/indane-14Kg-nonsubsid-previous-price"
+  },
+  {
+   "item": "lpg",
+   "price": 879.0,
+   "unit": "Rs/cylinder (14.2 kg)",
+   "place": "Kolkata",
+   "date": "2025-04-08",
+   "line": "| April 8, 2025 | 853.00 | 879.00 | 852.50 | 868.50 |",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://iocl.com/indane-14Kg-nonsubsid-previous-price"
+  },
+  {
+   "item": "lpg",
+   "price": 852.5,
+   "unit": "Rs/cylinder (14.2 kg)",
+   "place": "Mumbai",
+   "date": "2025-04-08",
+   "line": "| April 8, 2025 | 853.00 | 879.00 | 852.50 | 868.50 |",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://iocl.com/indane-14Kg-nonsubsid-previous-price"
+  },
+  {
+   "item": "lpg",
+   "price": 868.5,
+   "unit": "Rs/cylinder (14.2 kg)",
+   "place": "Chennai",
+   "date": "2025-04-08",
+   "line": "| April 8, 2025 | 853.00 | 879.00 | 852.50 | 868.50 |",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://iocl.com/indane-14Kg-nonsubsid-previous-price"
+  }
+ ],
+ "events": [],
+ "counts": {
+  "pages_seen": 85,
+  "pages_kept": 52,
+  "quotes_extracted": 0,
+  "quotes_verified": 0,
+  "events_extracted": 68,
+  "events_verified": 0
+ },
+ "dropped": [
+  {
+   "reason": "event: page undated",
+   "count": 51
+  },
+  {
+   "reason": "event: gatekeeper: no Indian price on page",
+   "count": 33
+  },
+  {
+   "reason": "event: different kind of price (not what this search is for)",
+   "count": 30
+  },
+  {
+   "reason": "event: unverified (no claimed number in the cited line)",
+   "count": 26
+  },
+  {
+   "reason": "event: not the CPI variety (e.g. commercial cylinder, jet fuel)",
+   "count": 7
+  },
+  {
+   "reason": "event: extract failed",
+   "count": 6
+  },
+  {
+   "reason": "event: no effective date",
+   "count": 5
+  }
+ ],
+ "failed_sources": [
+  {
+   "url": "https://www.houstonchronicle.com/business/article/consumer-confidence-slides-in-december-to-lowest-21258948.php",
+   "via": "Tavily Extract",
+   "reason": "Failed to fetch url"
+  },
+  {
+   "url": "https://www.wthitv.com/news/trump-administration-orders-2-indiana-power-plants-to-keep-burning-coal/article_40a31306-12b7-480c-a66b-85e2b4903fa0.html",
+   "via": "Tavily Extract",
+   "reason": "404 page not found"
+  },
+  {
+   "url": "https://www.cureus.com/articles/442040-cost-variation-and-affordability-of-oral-targeted-cancer-therapy-in-india-comparison-of-branded-and-janaushadhi-products",
+   "via": "Tavily Extract",
+   "reason": "Failed to fetch url"
+  },
+  {
+   "url": "https://nppa.gov.in/550e",
+   "via": "Tavily Extract",
+   "reason": "Failed to fetch url"
+  },
+  {
+   "url": "https://nppa.gov.in/878e",
+   "via": "Tavily Extract",
+   "reason": "Failed to fetch url"
+  },
+  {
+   "url": "https://indianexpress.com/article/education/iit-delhi-abu-dhabi-capus-students-intake-admissions-jeemain-2026-advanced-10433122",
+   "via": "Tavily Extract",
+   "reason": "Failed to fetch url"
+  }
+ ],
+ "detail": {
+  "test_month": true,
+  "scored": false,
+  "layers": "events + observed (no spine, no quotes)",
+  "observed": {
+   "gold": {
+    "avg_now": 144968.0,
+    "days_now": 13,
+    "avg_prev": 133616.0909090909,
+    "days_prev": 11,
+    "change": 0.08495914686377581
+   },
+   "silver": {
+    "avg_now": 276184.53846153844,
+    "days_now": 13,
+    "avg_prev": 208777.18181818182,
+    "days_prev": 11,
+    "change": 0.32286745158797947
+   },
+   "lpg": {
+    "avg_now": 863.25,
+    "avg_prev": 863.25,
+    "change": 0.0
+   },
+   "petrol": {
+    "avg_now": null,
+    "days_now": 0,
+    "avg_prev": null,
+    "days_prev": 0,
+    "change": null,
+    "note": "PPAC daily Delhi rows exist only from 15 May 2026"
+   }
+  },
+  "passthrough": {
+   "gold": 0.4943994544942063,
+   "silver": 0.6756851279982803,
+   "lpg": 0.4913378226898945,
+   "petrol": 1.0
+  },
+  "event_stats": {
+   "_month": "2026-01",
+   "drops": {
+    "page undated": 51,
+    "gatekeeper: no Indian price on page": 33,
+    "different kind of price (not what this search is for)": 30,
+    "not the CPI variety (e.g. commercial cylinder, jet fuel)": 7,
+    "unverified (no claimed number in the cited line)": 26,
+    "extract failed": 6,
+    "no effective date": 5
+   },
+   "leak_drops": 0,
+   "leak_examples": [],
+   "pages_seen": 85,
+   "pages_kept": 52,
+   "events_extracted": 68,
+   "failed_sources": [
+    {
+     "url": "https://www.houstonchronicle.com/business/article/consumer-confidence-slides-in-december-to-lowest-21258948.php",
+     "via": "Tavily Extract",
+     "reason": "Failed to fetch url"
+    },
+    {
+     "url": "https://www.wthitv.com/news/trump-administration-orders-2-indiana-power-plants-to-keep-burning-coal/article_40a31306-12b7-480c-a66b-85e2b4903fa0.html",
+     "via": "Tavily Extract",
+     "reason": "404 page not found"
+    },
+    {
+     "url": "https://www.cureus.com/articles/442040-cost-variation-and-affordability-of-oral-targeted-cancer-therapy-in-india-comparison-of-branded-and-janaushadhi-products",
+     "via": "Tavily Extract",
+     "reason": "Failed to fetch url"
+    },
+    {
+     "url": "https://nppa.gov.in/550e",
+     "via": "Tavily Extract",
+     "reason": "Failed to fetch url"
+    },
+    {
+     "url": "https://nppa.gov.in/878e",
+     "via": "Tavily Extract",
+     "reason": "Failed to fetch url"
+    },
+    {
+     "url": "https://indianexpress.com/article/education/iit-delhi-abu-dhabi-capus-students-intake-admissions-jeemain-2026-advanced-10433122",
+     "via": "Tavily Extract",
+     "reason": "Failed to fetch url"
+    }
+   ]
+  },
+  "event_search_window": {
+   "pre_days": 10,
+   "applied_by": "effective date inside the month"
+  },
+  "credits_this_month": 39,
+  "budgets": [
+   "replay-layers",
+   "replay-layers-month/2026-01"
+  ],
+  "seconds": 442
+ }
+}

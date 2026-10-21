@@ -1,0 +1,61 @@
+{
+  "_note": "Hard Tavily credit caps, enforced in code by shadow_cpi.budget before every uncached call. A call that would take ANY of its budgets (or the account) past its cap is refused and the run stops. Edit caps here only with the owner's agreement.",
+  "plan_limit": 1500,
+  "reserve": 50,
+  "spent_before_ledger": 160,
+  "_spent_before_ledger_note": "Tavily credits spent before the ledger started on 2026-10-20 (flight recorder, include_usage): checks 10, polls 47, Prompt 2 March test 103.",
+  "caps": {
+    "replay-layers": 400,
+    "replay-layers-month": 66,
+    "replay-quotes-month": 9,
+    "live-month": 120,
+    "nov-interim-scan": 30,
+    "prompt-t": 90,
+    "skeptic": 48,
+    "chase": 90,
+    "run-now": 120,
+    "run-now-scan": 8,
+    "ibja-iocl": 20,
+    "backup-check": 5
+  },
+  "plans": {
+    "cut1_events": "milk, lpg, electricity: English + Hindi; mobile, rail, medicine, school_fee, gst: English only (config/items.yaml 'langs')",
+    "cut2_replay_quotes": "replay months (2026-01..2026-09) quote only lpg and petrol; live months (2026-10, 2026-11) quote all items (config/items.yaml 'replay_quote_items')",
+    "cut3_prompt_t": {
+      "months": [
+        "2026-03",
+        "2026-10",
+        "2026-11"
+      ],
+      "limit": 15,
+      "extract_depth": "basic"
+    },
+    "cut4_skeptic": {
+      "replay_months": "search snippets only, no extract",
+      "live_months": "search + extract"
+    },
+    "cut5_run_now": {
+      "languages": [
+        "en"
+      ],
+      "event_kinds": [
+        "milk",
+        "lpg",
+        "electricity",
+        "mobile",
+        "rail",
+        "medicine"
+      ],
+      "extract_top": 4,
+      "scans_per_day": 2,
+      "days": [
+        "2026-12-01",
+        "2026-12-15"
+      ]
+    },
+    "cut6_november": {
+      "interim_event_scans": 2,
+      "full_run": "at sealing (10 Dec)"
+    }
+  }
+}

@@ -112,6 +112,10 @@
       ],
       "reject": [
         "milk powder"
+      ],
+      "langs": [
+        "en",
+        "hi"
       ]
     },
     "lpg": {
@@ -136,6 +140,10 @@
         "aviation",
         "कमर्शियल",
         "एटीएफ"
+      ],
+      "langs": [
+        "en",
+        "hi"
       ]
     },
     "electricity": {
@@ -153,6 +161,10 @@
       "reject": [
         "commercial",
         "industrial"
+      ],
+      "langs": [
+        "en",
+        "hi"
       ]
     },
     "mobile": {
@@ -170,7 +182,10 @@
         "मोबाइल",
         "रिचार्ज"
       ],
-      "reject": []
+      "reject": [],
+      "langs": [
+        "en"
+      ]
     },
     "rail": {
       "cpi_code": "07.3.1.1.2.01",
@@ -187,6 +202,9 @@
       ],
       "reject": [
         "metro"
+      ],
+      "langs": [
+        "en"
       ]
     },
     "medicine": {
@@ -202,7 +220,10 @@
         "दवा",
         "दवाओं"
       ],
-      "reject": []
+      "reject": [],
+      "langs": [
+        "en"
+      ]
     },
     "school_fee": {
       "cpi_code": "10.1.0.2.2.01",
@@ -214,7 +235,10 @@
         "fee",
         "फीस"
       ],
-      "reject": []
+      "reject": [],
+      "langs": [
+        "en"
+      ]
     },
     "gst": {
       "cpi_code": "",
@@ -226,7 +250,15 @@
         "gst",
         "जीएसटी"
       ],
-      "reject": []
+      "reject": [],
+      "langs": [
+        "en"
+      ]
     }
-  }
+  },
+  "replay_quote_items": [
+    "lpg",
+    "petrol"
+  ],
+  "_note_cuts": "Credit cuts (owner, 2026-10-20): events 'langs' per kind (cut 1); replay months quote only 'replay_quote_items' (cut 2). See config/budget.json."
 }

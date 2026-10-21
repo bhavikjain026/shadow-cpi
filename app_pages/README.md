@@ -110,6 +110,6 @@ Markdown with the sections What moved / What we observed / What's uncertain. The
 mention "coverage" and "range".
 
 ### `data/official_releases.csv` (Prompt 5.4)
-`month,official_yoy,released_on,source_url` — the Archive shows the miss and inside-range once a month appears here.
+`month,official_yoy,release_date,source_url` — the Archive shows the miss and inside-range once a month appears here.
 
 Any JSON may carry `"sample": true` and a `"note"`; the app ignores them.

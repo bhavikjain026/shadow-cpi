@@ -1,0 +1,1515 @@
+{
+ "sample": false,
+ "month": "2026-09",
+ "created_utc": "2026-10-20T17:51:58.574337+00:00",
+ "code_commit": "2808761a653c70e423edf3c720efe02bbf98e376",
+ "model_ids": {
+  "small": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+  "mid": "nvidia/nemotron-3-super-120b-a12b",
+  "large": "nvidia/Nemotron-3-Ultra-550b-a55b"
+ },
+ "queries": [
+  {
+   "call_id": "37cda1523425",
+   "endpoint": "search",
+   "query": "milk price hike per litre effective Amul Mother Dairy",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:45:51.040381+00:00",
+   "n_results": 6
+  },
+  {
+   "call_id": "8657dd25c026",
+   "endpoint": "search",
+   "query": "milk price hike per litre effective Amul Mother Dairy",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:46:21.097939+00:00",
+   "n_results": 2
+  },
+  {
+   "call_id": "bac3ea174e5f",
+   "endpoint": "search",
+   "query": "दूध के दाम बढ़े प्रति लीटर लागू",
+   "language": "hi",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "language": "hi",
+    "search_depth": "basic",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:46:30.702449+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "55d673782983",
+   "endpoint": "search",
+   "query": "दूध के दाम बढ़े प्रति लीटर लागू",
+   "language": "hi",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-31",
+    "language": "hi",
+    "search_depth": "basic",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:46:44.145436+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "f3df12bf0a6e",
+   "endpoint": "search",
+   "query": "domestic LPG cylinder price revised effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:47:06.668292+00:00",
+   "n_results": 6
+  },
+  {
+   "call_id": "ded5d386bd21",
+   "endpoint": "search",
+   "query": "domestic LPG cylinder price revised effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:47:29.043037+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "c1d1b0c079ed",
+   "endpoint": "search",
+   "query": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
+   "language": "hi",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "language": "hi",
+    "search_depth": "basic",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:47:47.433833+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "da5e9fe70855",
+   "endpoint": "search",
+   "query": "घरेलू एलपीजी सिलेंडर के दाम बदले लागू",
+   "language": "hi",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-31",
+    "language": "hi",
+    "search_depth": "basic",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:47:58.100301+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "9010b698e659",
+   "endpoint": "search",
+   "query": "electricity tariff order regulatory commission revised rates effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:48:22.031917+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "e53d3665bbbf",
+   "endpoint": "search",
+   "query": "electricity tariff order regulatory commission revised rates effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:48:39.724327+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "f8c71f6c1360",
+   "endpoint": "search",
+   "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
+   "language": "hi",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "language": "hi",
+    "search_depth": "basic",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:48:57.522012+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "f89ac6a1739a",
+   "endpoint": "search",
+   "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
+   "language": "hi",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-31",
+    "language": "hi",
+    "search_depth": "basic",
+    "include_domains": [
+     "aajtak.in",
+     "navbharattimes.indiatimes.com",
+     "bhaskar.com",
+     "amarujala.com",
+     "jagran.com",
+     "livehindustan.com",
+     "abplive.com",
+     "hindi.news18.com",
+     "zeenews.india.com",
+     "ndtv.in",
+     "tv9hindi.com"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:49:11.499141+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "62b127ee6e5f",
+   "endpoint": "search",
+   "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:49:28.084062+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "9f431060327e",
+   "endpoint": "search",
+   "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:49:52.297758+00:00",
+   "n_results": 1
+  },
+  {
+   "call_id": "d07eda33d2d6",
+   "endpoint": "search",
+   "query": "railway fare revision effective Indian Railways",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:50:00.397121+00:00",
+   "n_results": 2
+  },
+  {
+   "call_id": "47f837edfba7",
+   "endpoint": "search",
+   "query": "railway fare revision effective Indian Railways",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:50:16.455048+00:00",
+   "n_results": 2
+  },
+  {
+   "call_id": "f9d08fe3585a",
+   "endpoint": "search",
+   "query": "NPPA medicine price revision effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:50:24.792387+00:00",
+   "n_results": 2
+  },
+  {
+   "call_id": "0b90731ff9e2",
+   "endpoint": "search",
+   "query": "NPPA medicine price revision effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:50:33.842167+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "789baac8c59c",
+   "endpoint": "search",
+   "query": "school fee hike academic session effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:50:52.708383+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "b346528c595f",
+   "endpoint": "search",
+   "query": "school fee hike academic session effective",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:51:16.942888+00:00",
+   "n_results": 1
+  },
+  {
+   "call_id": "b570b6221a54",
+   "endpoint": "search",
+   "query": "GST rate change effective from",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:51:27.678839+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "bd1dd522af57",
+   "endpoint": "search",
+   "query": "GST rate change effective from",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-20T17:51:45.489571+00:00",
+   "n_results": 7
+  }
+ ],
+ "quotes": [
+  {
+   "item": "gold",
+   "price": 153183.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-01",
+   "line": "01st September 2026 153183 230419",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2007-09-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 151184.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-02",
+   "line": "02nd September 2026 151184 228396",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2007-09-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 153941.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-03",
+   "line": "03rd September 2026 153941 232533",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2007-09-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 154884.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-04",
+   "line": "04th September 2026 154884 235456",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2007-09-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 153077.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-08",
+   "line": "08th September 2026 153077 233826",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2015-09-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 153486.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-09",
+   "line": "09th September 2026 153486 235249",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2015-09-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 153287.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-10",
+   "line": "10th September 2026 153287 233642",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2015-09-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 151938.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-11",
+   "line": "11th September 2026 151938 228920",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2015-09-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 152136.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-22",
+   "line": "22nd September 2026 152136 232922",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2028-09-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 152016.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-23",
+   "line": "23rd September 2026 152016 232766",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2028-09-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 150785.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-24",
+   "line": "24th September 2026 150785 228248",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2028-09-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 152113.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-25",
+   "line": "25th September 2026 152113 232350",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2028-09-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 147980.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-28",
+   "line": "28th September 2026 147980 223053",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2005-10-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 147667.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-29",
+   "line": "29th September 2026 147667 221600",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2005-10-2026.pdf"
+  },
+  {
+   "item": "gold",
+   "price": 147888.0,
+   "unit": "Rs/10 g (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-30",
+   "line": "30th September 2026 147888 220435",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2005-10-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 230419.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-01",
+   "line": "01st September 2026 153183 230419",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2007-09-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 228396.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-02",
+   "line": "02nd September 2026 151184 228396",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2007-09-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 232533.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-03",
+   "line": "03rd September 2026 153941 232533",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2007-09-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 235456.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-04",
+   "line": "04th September 2026 154884 235456",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2007-09-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 233826.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-08",
+   "line": "08th September 2026 153077 233826",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2015-09-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 235249.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-09",
+   "line": "09th September 2026 153486 235249",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2015-09-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 233642.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-10",
+   "line": "10th September 2026 153287 233642",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2015-09-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 228920.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-11",
+   "line": "11th September 2026 151938 228920",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2015-09-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 232922.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-22",
+   "line": "22nd September 2026 152136 232922",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2028-09-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 232766.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-23",
+   "line": "23rd September 2026 152016 232766",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2028-09-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 228248.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-24",
+   "line": "24th September 2026 150785 228248",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2028-09-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 232350.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-25",
+   "line": "25th September 2026 152113 232350",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2028-09-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 223053.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-28",
+   "line": "28th September 2026 147980 223053",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2005-10-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 221600.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-29",
+   "line": "29th September 2026 147667 221600",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2005-10-2026.pdf"
+  },
+  {
+   "item": "silver",
+   "price": 220435.0,
+   "unit": "Rs/kg (999, PM)",
+   "place": "India (IBJA)",
+   "date": "2026-09-30",
+   "line": "30th September 2026 147888 220435",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ibja.co/Upload/IBJA_Bullion%20Daily%20Report%20-%2005-10-2026.pdf"
+  },
+  {
+   "item": "lpg",
+   "price": 913.0,
+   "unit": "Rs/cylinder (14.2 kg)",
+   "place": "Delhi",
+   "date": "2026-03-07",
+   "line": "| March 7, 2026 | 913.00 | 939.00 | 912.50 | 928.50 |",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://iocl.com/indane-14Kg-nonsubsid-previous-price"
+  },
+  {
+   "item": "lpg",
+   "price": 939.0,
+   "unit": "Rs/cylinder (14.2 kg)",
+   "place": "Kolkata",
+   "date": "2026-03-07",
+   "line": "| March 7, 2026 | 913.00 | 939.00 | 912.50 | 928.50 |",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://iocl.com/indane-14Kg-nonsubsid-previous-price"
+  },
+  {
+   "item": "lpg",
+   "price": 912.5,
+   "unit": "Rs/cylinder (14.2 kg)",
+   "place": "Mumbai",
+   "date": "2026-03-07",
+   "line": "| March 7, 2026 | 913.00 | 939.00 | 912.50 | 928.50 |",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://iocl.com/indane-14Kg-nonsubsid-previous-price"
+  },
+  {
+   "item": "lpg",
+   "price": 928.5,
+   "unit": "Rs/cylinder (14.2 kg)",
+   "place": "Chennai",
+   "date": "2026-03-07",
+   "line": "| March 7, 2026 | 913.00 | 939.00 | 912.50 | 928.50 |",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://iocl.com/indane-14Kg-nonsubsid-previous-price"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-01",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 01-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-02",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 02-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-03",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 03-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-07",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 07-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-08",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 08-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-09",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 09-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-10",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 10-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-14",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 14-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-15",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 15-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-16",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 16-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-17",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 17-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-21",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 21-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-22",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 22-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-23",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 23-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-24",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 24-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-25",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 25-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-28",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 28-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  },
+  {
+   "item": "petrol",
+   "price": 102.12,
+   "unit": "Rs/litre",
+   "place": "Delhi (IOCL outlet)",
+   "date": "2026-09-29",
+   "line": "RSP of Petrol in Delhi as per IOCL outlet as on 29-September-2026, Rs. 102.12/ltr",
+   "source": "tavily",
+   "tier": "observed",
+   "verified": true,
+   "url": "https://ppac.gov.in/archives/impnews"
+  }
+ ],
+ "events": [
+  {
+   "item": "milk",
+   "seller": "Bombay Milk Producers Association",
+   "place": "Mumbai and surrounding metropolitan supply network",
+   "pct_change": 9.677419354838701,
+   "effective_date": "2026-09-01",
+   "days_in_month_share": 1.0,
+   "confirmed_by_2_sources": false,
+   "line": "दूसरी ओर, आगामी त्योहारी सीजन से ठीक पहले मुंबई में आम जनता के बजट पर बड़ा असर पड़ने वाला है। बॉम्बे मिल्क प्रोड्यूसर्स एसोसिएशन ने थोक दूध की कीमतों में ₹9 प्रति लीटर की भारी बढ़ोतरी की घोषणा की है। 1 सितंबर 2026 से मुंबई और इसके आसपास के महानगरीय सप्लाई नेटवर्क में थोक दूध के दाम ₹93 प्रति लीटर से बढ़कर ₹102 प्रति लीटर हो जाएंगे।",
+   "url": "https://www.jagran.com/news/national-milk-price-hike-tamil-nadu-farmers-benefit-mumbai-consumers-face-rise-40357780.html",
+   "sources": [
+    "https://www.jagran.com/news/national-milk-price-hike-tamil-nadu-farmers-benefit-mumbai-consumers-face-rise-40357780.html"
+   ],
+   "verified": true,
+   "cpi_code": "01.1.4.1.1.01",
+   "change_prorated": 0.09677419354838701,
+   "announced_date": null,
+   "old_price": 93,
+   "new_price": 102,
+   "language": "hi"
+  },
+  {
+   "item": "milk",
+   "seller": "",
+   "place": "Mumbai and surrounding areas",
+   "pct_change": 9.677419354838701,
+   "effective_date": "2026-09-01",
+   "days_in_month_share": 1.0,
+   "confirmed_by_2_sources": false,
+   "line": "## मुंबईकरों की जेब पर महंगाई का एक और बड़ा झटका लगने वाला है। 1 सितंबर 2026 से मुंबई और आसपास के इलाकों में होलसेल दूध की कीमत में सीधे 9 रुपये प्रति लीटर की बढ़ोतरी होने जा रही है। 93 रुपये प्रति लीटर बिकने वाला दूध अब बढ़कर 102 रुपये प्रति लीटर हो जाएगा। नई कीमत 28 फरवरी 2027 तक लागू रहेंगी",
+   "url": "https://www.livehindustan.com/videos/national/milk-price-hike-mumbai-201788107325901.html",
+   "sources": [
+    "https://www.livehindustan.com/videos/national/milk-price-hike-mumbai-201788107325901.html"
+   ],
+   "verified": true,
+   "cpi_code": "01.1.4.1.1.01",
+   "change_prorated": 0.09677419354838701,
+   "announced_date": null,
+   "old_price": 93,
+   "new_price": 102,
+   "language": "hi"
+  },
+  {
+   "item": "electricity",
+   "seller": "Joint Electricity Regulatory Commission (JERC)",
+   "place": "Jammu & Kashmir",
+   "pct_change": 6.83,
+   "effective_date": "2026-09-01",
+   "days_in_month_share": 1.0,
+   "confirmed_by_2_sources": false,
+   "line": "## जम्मू-कश्मीर में बिजली की दरों में औसतन 6.83 फीसदी बढ़ोतरी की गई है। JERC की मंजूरी के बाद नई दरें 1 सितंबर 2026 से 31 मार्च 2027 तक लागू रहेंगी।",
+   "url": "https://www.jansatta.com/national/power-tariff-hiked-by-6-83-percent-omar-abdullah-government-new-rates-to-take-effect-from-september-1/4674251",
+   "sources": [
+    "https://www.jansatta.com/national/power-tariff-hiked-by-6-83-percent-omar-abdullah-government-new-rates-to-take-effect-from-september-1/4674251"
+   ],
+   "verified": true,
+   "cpi_code": "04.5.1.0.2.01",
+   "change_prorated": 0.0683,
+   "announced_date": null,
+   "old_price": null,
+   "new_price": null,
+   "language": "hi"
+  }
+ ],
+ "counts": {
+  "pages_seen": 87,
+  "pages_kept": 52,
+  "quotes_extracted": 0,
+  "quotes_verified": 0,
+  "events_extracted": 60,
+  "events_verified": 3
+ },
+ "dropped": [
+  {
+   "reason": "event: gatekeeper: no Indian price on page",
+   "count": 35
+  },
+  {
+   "reason": "event: unverified (no claimed number in the cited line)",
+   "count": 33
+  },
+  {
+   "reason": "event: page undated",
+   "count": 30
+  },
+  {
+   "reason": "event: different kind of price (not what this search is for)",
+   "count": 9
+  },
+  {
+   "reason": "event: no effective date",
+   "count": 7
+  },
+  {
+   "reason": "event: not the CPI variety (e.g. commercial cylinder, jet fuel)",
+   "count": 5
+  },
+  {
+   "reason": "event: effective date outside the month",
+   "count": 2
+  },
+  {
+   "reason": "event: outside India",
+   "count": 1
+  },
+  {
+   "reason": "event: extract failed",
+   "count": 1
+  }
+ ],
+ "failed_sources": [
+  {
+   "url": "https://www.pharmabiz.com/NewsDetails.aspx?aid=188330",
+   "via": "Tavily Extract",
+   "reason": "Failed to fetch url"
+  }
+ ],
+ "detail": {
+  "test_month": true,
+  "scored": false,
+  "layers": "events + observed (no spine, no quotes)",
+  "observed": {
+   "gold": {
+    "avg_now": 151704.33333333334,
+    "days_now": 15,
+    "avg_prev": 153397.41176470587,
+    "days_prev": 17,
+    "change": -0.011037203378434612
+   },
+   "silver": {
+    "avg_now": 229987.66666666666,
+    "days_now": 15,
+    "avg_prev": 223793.23529411765,
+    "days_prev": 17,
+    "change": 0.02767926101255047
+   },
+   "lpg": {
+    "avg_now": 923.25,
+    "avg_prev": 923.25,
+    "change": 0.0
+   },
+   "petrol": {
+    "avg_now": 102.12,
+    "days_now": 18,
+    "avg_prev": 102.12,
+    "days_prev": 19,
+    "change": 0.0,
+    "note": "PPAC daily Delhi rows exist only from 15 May 2026"
+   }
+  },
+  "passthrough": {
+   "gold": 0.4943994544942063,
+   "silver": 0.6756851279982803,
+   "lpg": 0.4913378226898945,
+   "petrol": 1.0
+  },
+  "event_stats": {
+   "_month": "2026-09",
+   "drops": {
+    "unverified (no claimed number in the cited line)": 33,
+    "no effective date": 7,
+    "page undated": 30,
+    "outside India": 1,
+    "gatekeeper: no Indian price on page": 35,
+    "not the CPI variety (e.g. commercial cylinder, jet fuel)": 5,
+    "different kind of price (not what this search is for)": 9,
+    "extract failed": 1,
+    "effective date outside the month": 2
+   },
+   "leak_drops": 0,
+   "leak_examples": [],
+   "pages_seen": 87,
+   "pages_kept": 52,
+   "events_extracted": 60,
+   "failed_sources": [
+    {
+     "url": "https://www.pharmabiz.com/NewsDetails.aspx?aid=188330",
+     "via": "Tavily Extract",
+     "reason": "Failed to fetch url"
+    }
+   ]
+  },
+  "event_search_window": {
+   "pre_days": 10,
+   "applied_by": "effective date inside the month"
+  },
+  "credits_this_month": 39,
+  "budgets": [
+   "replay-layers",
+   "replay-layers-month/2026-09"
+  ],
+  "seconds": 373
+ }
+}

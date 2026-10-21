@@ -59,61 +59,24 @@ def load_items(path=ITEMS_FILE):
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
+REPLAY_MONTHS = [f"2026-{m:02d}" for m in range(1, 10)]
+
+
+def quote_items_for(month, cfg):
+    """Cut 2: replay months quote only the items in 'replay_quote_items'; live months quote everything."""
+    items = cfg["quote_items"]
+    if month in REPLAY_MONTHS:
+        return {k: v for k, v in items.items() if k in cfg["replay_quote_items"]}
+    return items
+
+
 def month_window(month):
     y, m = map(int, month.split("-"))
     return f"{month}-01", f"{month}-{calendar.monthrange(y, m)[1]:02d}"
 
 
-# ---------- credit cap ----------
-class BudgetExceeded(Exception):
-    """Raised BEFORE a Tavily call that would take spending past the cap. The run stops and asks the owner."""
-
-
-def call_cost(endpoint, body):
-    """Tavily credits for one call (upper bound). Search: basic 1, advanced 2. Extract: 1 (basic) or 2 (advanced)
-    per 5 URLs. Map/crawl are not used in Prompt 2."""
-    if endpoint == "/search":
-        return 2 if body.get("search_depth") == "advanced" else 1
-    if endpoint == "/extract":
-        per = 2 if body.get("extract_depth") == "advanced" else 1
-        return per * math.ceil(len(body.get("urls", [])) / 5)
-    return 5
-
-
-class CreditCap:
-    """Wraps a Tavily client for one run. Before each call: a cached request is free; otherwise its cost (call_cost)
-    must fit under the cap, counting `spent_before` (credits already spent toward the same cap) plus what this run
-    has spent (from Tavily's own include_usage)."""
-
-    def __init__(self, tav, cap, spent_before=0):
-        self.tav, self.cap, self.spent_before, self.used = tav, cap, spent_before, 0
-
-    def spent(self):
-        return self.spent_before + self.used
-
-    def _cached(self, endpoint, body):
-        body = {**body, "include_usage": True}
-        return (self.tav.rec.cache_dir / "tavily" / f"{request_hash('tavily', endpoint, body)}.json").exists()
-
-    def _run(self, endpoint, body, fn):
-        if self._cached(endpoint, body):
-            return fn()
-        cost = call_cost(endpoint, body)
-        if self.spent() + cost > self.cap:
-            raise BudgetExceeded(f"next Tavily call ({endpoint}, {cost} credits) would take spending from "
-                                 f"{self.spent()} past the cap of {self.cap}")
-        resp, cid = fn()
-        self.used += (resp.get("usage") or {}).get("credits") or 0
-        return resp, cid
-
-    def search(self, query, **params):
-        p = {k: v for k, v in params.items() if k not in ("parent", "tag")}
-        p.setdefault("search_depth", "basic")
-        return self._run("/search", {"query": query, **p}, lambda: self.tav.search(query, **params))
-
-    def extract(self, urls, **params):
-        p = {k: v for k, v in params.items() if k not in ("parent", "tag")}
-        return self._run("/extract", {"urls": list(urls)[:20], **p}, lambda: self.tav.extract(urls, **params))
+# ---------- credit caps: see shadow_cpi/budget.py (hard limits, ledger) ----------
+from .budget import BudgetExceeded, Budgeted, call_cost  # noqa: E402,F401  (re-exported for callers)
 
 
 # ---------- page-level guards ----------
@@ -450,7 +413,7 @@ def collect_events(tav, nem, month, events, langs=("en", "hi"), pre_days=EVENT_P
 
     for kind, cfg in events.items():
         job, seen = f"event:{kind}", set()
-        for lang in langs:
+        for lang in [l for l in cfg.get("langs", langs) if l in langs]:     # cut 1: languages per kind
             for start, end in windows:
                 for r, d, src, text, eid in fetch_pages(tav, nem, cfg["queries"][lang], lang, start, end, job,
                                                         stats, drop, seen):

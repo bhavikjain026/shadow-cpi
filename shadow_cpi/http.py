@@ -39,3 +39,8 @@ def request_json(method, url, token=None, body=None, timeout=120, retries=3):
                 time.sleep(2 ** attempt)
                 continue
             raise ApiError(0, f"network error: {e.reason}") from None
+        except TimeoutError:  # a read timeout is not a URLError; seen on Nebius on 2026-10-20 (FEEDBACK_NOTES.md)
+            if attempt < retries:
+                time.sleep(2 ** attempt)
+                continue
+            raise ApiError(0, f"timed out after {timeout}s ({retries + 1} tries)") from None

@@ -211,3 +211,34 @@ def test_evidence_by_reference_and_url_dates():
     from shadow_cpi.tavily import best_date
     assert best_date({"url": "https://x.com/2026/03/31/a", "published_date": "Tue, 24 Mar 2026 14:00:00 GMT"}) == ("2026-03-31", "url")
     assert best_date({"url": "https://x.com/a", "published_date": "Tue, 24 Mar 2026 14:00:00 GMT"}) == ("2026-03-24", "tavily")
+
+
+def test_http_retries_read_timeouts(monkeypatch):
+    import urllib.request
+    from shadow_cpi import http as H
+    calls = []
+
+    class Resp:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def read(self, *a):
+            return b'{"ok": true}'
+
+    def fake_urlopen(req, timeout):
+        calls.append(1)
+        if len(calls) < 3:
+            raise TimeoutError("The read operation timed out")
+        return Resp()
+
+    monkeypatch.setattr(urllib.request, "urlopen", fake_urlopen)
+    monkeypatch.setattr(H.time, "sleep", lambda s: None)
+    assert H.request_json("POST", "https://x", "k", {}) == {"ok": True}
+    assert len(calls) == 3
+    calls.clear()
+    monkeypatch.setattr(urllib.request, "urlopen", lambda req, timeout: (_ for _ in ()).throw(TimeoutError("t")))
+    with pytest.raises(H.ApiError):
+        H.request_json("POST", "https://x", "k", {}, retries=1)

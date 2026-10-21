@@ -73,11 +73,12 @@ flowchart TD
 | Job | Tavily endpoint | Notes |
 | --- | --- | --- |
 | Price quotes for items the spine lacks | **Search** (`topic="news"`, `search_depth="basic"`, `max_results=8`, start/end = the month, Indian/Hindi news domains with `include_domains_mode="prefer"`, `mospi.gov.in` excluded) then **Extract** (top 6, `query=…`, `chunks_per_source=5`) | English + Hindi (Devanagari) queries |
-| Event layer: announced price changes with effective dates | **Search** + **Extract** | Applied only if the effective date is inside the month, pro-rated by days |
-| Gold and silver, observed daily | **Search** finds a published rate page (e.g. IBJA), **Extract** reads it | Never left on trend |
-| Official circulars and tariff orders | **Map** then **Crawl** (`instructions=…`, `select_paths`, `extract_depth="advanced"`, `limit` ≤ 30, `allow_external=False`) | Up to 5 official sites |
+| Event layer: announced price changes with effective dates | **Search** + **Extract**; page dates from the last 10 days of the previous month through the month | Applied only if the effective date is inside the month, pro-rated by days. Milk, LPG, electricity in English + Hindi; other kinds English only |
+| Gold and silver, observed daily | **Extract** reads IBJA's daily bullion-report PDFs (each lists 4 trading days) | Never left on trend |
+| LPG and petrol, observed | **Extract** reads IOCL's domestic LPG price list and PPAC's Delhi petrol prices | Petrol history found only from mid-May 2026 |
+| Official circulars and tariff orders | **Map** then **Crawl** (`instructions=…`, `select_paths`, `extract_depth="basic"`, `limit` ≤ 15, `allow_external=False`) | Up to 5 official sites; October, November and one demo month (March) only, to fit the credit budget |
 | Evidence chasing | **Search** (≤ 2 follow-ups per verified event) | Parent/child call ids drawn as a tree in the app |
-| Government daily retail prices (spine) | **Extract** tried first; then the logged direct download | The site blocks Tavily (see honest_limits.md) |
+| Government daily retail prices (spine) | none: downloaded by hand from behind a CAPTCHA | The site blocks Tavily and its report menu has a CAPTCHA (see honest_limits.md) |
 | Economists' poll articles | **Search** | Dated original article only |
 | MoSPI official indices | none: logged direct download from MoSPI's public API | A paged JSON API Tavily cannot call |
 

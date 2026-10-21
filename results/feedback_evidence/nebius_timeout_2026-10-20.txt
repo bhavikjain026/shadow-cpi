@@ -1,0 +1,68 @@
+2026-02: 0 verified events; credits 41; no events
+2026-04: 0 verified events; credits 41; no events
+2026-05: 0 verified events; credits 40; no events
+2026-06: 1 verified events; credits 38; electricity India +10.00% from 2026-06-01 (prorated +10.00%)
+2026-07: 0 verified events; credits 39; no events
+Traceback (most recent call last):
+  File "/Users/bhavikjain/NVIDIA HACKATHON/shadow-cpi/run_replay_layers.py", line 160, in <module>
+    main()
+    ~~~~^^
+  File "/Users/bhavikjain/NVIDIA HACKATHON/shadow-cpi/run_replay_layers.py", line 141, in main
+    row = run_month(m, base, nem, ibja, lpg_rev, petrol, factors, cfg)
+  File "/Users/bhavikjain/NVIDIA HACKATHON/shadow-cpi/run_replay_layers.py", line 63, in run_month
+    events, estats, etrace = E.collect_events(tav, nem, month, cfg["events"])
+                             ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bhavikjain/NVIDIA HACKATHON/shadow-cpi/shadow_cpi/evidence.py", line 420, in collect_events
+    evs, _ = nem.price_events(mid, text, tag=f"{job} events", parent=eid)
+             ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bhavikjain/NVIDIA HACKATHON/shadow-cpi/shadow_cpi/nemotron.py", line 96, in price_events
+    out, cid = self.chat_json(model, EXTRACT_SYSTEM, user, PRICE_EVENT_SCHEMA, **kw)
+               ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bhavikjain/NVIDIA HACKATHON/shadow-cpi/shadow_cpi/nemotron.py", line 80, in chat_json
+    resp, cid = self.rec.call("nebius", "/chat/completions", body, do, parent=parent, tag=tag)
+                ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bhavikjain/NVIDIA HACKATHON/shadow-cpi/shadow_cpi/recorder.py", line 78, in call
+    response = fn()
+  File "/Users/bhavikjain/NVIDIA HACKATHON/shadow-cpi/shadow_cpi/nemotron.py", line 69, in do
+    return self.transport("POST", self.base + "/chat/completions", self.api_key, body, 180)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bhavikjain/NVIDIA HACKATHON/shadow-cpi/shadow_cpi/http.py", line 22, in request_json
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/urllib/request.py", line 187, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/urllib/request.py", line 487, in open
+    response = self._open(req, data)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/urllib/request.py", line 504, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/urllib/request.py", line 464, in _call_chain
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/urllib/request.py", line 1368, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        context=self._context)
+                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/urllib/request.py", line 1324, in do_open
+    r = h.getresponse()
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/client.py", line 1478, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/client.py", line 343, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/client.py", line 304, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socket.py", line 729, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+exit 1

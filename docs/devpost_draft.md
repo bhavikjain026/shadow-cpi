@@ -21,10 +21,10 @@ India's CPI comes out once a month, about two weeks after the month ends. Until 
 
 ## How it works (8 steps)
 1. **Official data:** MoSPI's 2024-series All-India indices and weights. The code refuses to run with 2012-series weights.
-2. **Government price spine:** daily retail prices for 38 foods, as centre-level monthly averages.
+2. **Government price spine:** Department of Consumer Affairs retail prices for the tracked foods, as monthly averages. The report sits behind a CAPTCHA, so it is downloaded by hand and saved in the repository.
 3. **Tavily Search + Extract** find dated price quotes in English and Hindi news for items the spine lacks.
 4. **Event layer:** Tavily searches for announced price changes with effective dates (milk, LPG, electricity, mobile tariffs, rail fares, medicines, school fees, GST). Tavily Map + Crawl read official circulars, and evidence chasing confirms each change with a second source.
-5. **Gold and silver** are observed daily from a published rate page that Tavily finds and extracts.
+5. **Gold and silver** are observed daily from IBJA's daily bullion-report PDFs, and LPG from IOCL's official price list, both read with Tavily Extract.
 6. **Nemotron extracts only:** it cites a numbered line, and code takes that exact line and checks the number is in it. A model never writes a quote, never picks a number and never picks a weight.
 7. **Code decides:** tracked items move only their own weight. Index levels are combined with the official weights, and year-on-year is computed last, at full precision. The range comes from replay misses.
 8. **Seal, publish, score:** seal before the release, show everything in the app, and score after the release.
@@ -44,7 +44,7 @@ See `docs/pipeline.md` for the diagram.
 Go / no-go: [TBD: from replay]. (c) vs (b), stated honestly: accuracy change [TBD: from replay]; coverage gain [TBD: from replay].
 
 ## Why Tavily
-- **It is the single entry point for web data.** Every web page the nowcast uses comes in through Tavily and is logged in the flight recorder. Direct downloads happen only as a counted fallback.
+- **It is the single entry point for web pages.** Every web page the nowcast uses (news, IBJA, IOCL, PPAC) comes in through Tavily and is logged in the flight recorder. Two exceptions, stated openly: MoSPI's official indices are a logged direct download from MoSPI's API, and the Consumer Affairs spine is downloaded by hand from behind a CAPTCHA.
 - **Date windows make a nowcast possible.** Search with `start_date`/`end_date` = the target month, plus our own date check, lets us replay past months and drop anything outside the window.
 - **Indian and Hindi news.** `include_domains` with `include_domains_mode="prefer"` steers searches to Indian English and Hindi publishers without excluding everything else.
 - **Extract with query-focused chunks** returns just the passages that hold prices. That keeps the model's job small, and the line-by-line check strict.
@@ -72,7 +72,7 @@ Go / no-go: [TBD: from replay]. (c) vs (b), stated honestly: accuracy change [TB
 - Sealing: canonical JSON + SHA-256 + a `seal-<month>` git tag.
 
 ## Challenges we ran into
-- The government daily price site blocks Tavily and sits behind a CAPTCHA, so the spine was downloaded by hand and logged as a fallback.
+- The government daily price site blocks Tavily and sits behind a CAPTCHA, so the spine is downloaded by hand and saved in the repository (no automated web call is made for it).
 - Some official pages are scanned PDFs with no text.
 - Dates: a page's published date is not always its real date, so we check the page address and the text too.
 - Leak guard: when replaying past months, pages that state the official figure for that month must be dropped.

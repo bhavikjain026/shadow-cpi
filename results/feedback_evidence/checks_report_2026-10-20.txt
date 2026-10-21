@@ -1,0 +1,35 @@
+Shadow CPI - Day-1 checks
+
+[PASS] Tavily key - found (value hidden)
+[PASS] Nebius key - found (value hidden)
+[PASS] .env is git-ignored
+[PASS] Nemotron models on Token Factory - nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B, nvidia/Nemotron-3-Ultra-550b-a55b, nvidia/Nemotron-3.5-Super-VL, nvidia/Nemotron-3_5-Lightning, nvidia/nemotron-3-super-120b-a12b
+[PASS] Model roles saved to config/models.json - {"small": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B", "mid": "nvidia/nemotron-3-super-120b-a12b", "large": "nvidia/Nemotron-3-Ultra-550b-a55b"}
+[PASS] Nemotron JSON output - {"ok": true, "n": 3}
+[WARN] Govt daily retail prices (Tavily Extract, logged direct-download fallback) - route=direct, chars=14947, mentions onion=True (may need a form/date query)
+[PASS] Tavily Extract on a MoSPI PDF - chars=14032, contains 5.54=True, failed=0
+[PASS] Tavily news search, March 2026 window (English) - results=7, inside March=7, outside=0, undated=0, credits=1
+[PASS] Same, strict date filter (filter_by_published_date) - results=7, inside March=7, outside=0, undated=0, credits=1
+[PASS] Tavily news search, March 2026 window (Hindi, Indian Hindi news sites) - results=10, inside March=9, outside=0, undated=1, credits=1
+[PASS] Event search: milk price hike in India (English) - results=1, inside March=1, outside=0, undated=0, credits=1
+[PASS] Event search: milk price hike (Hindi) - results=10, inside March=1, outside=0, undated=9, credits=1
+[PASS] Nemotron price extraction (cites a numbered line; code checks the number is in it) - pages=3, failed=0, quotes=13, verified=12
+[PASS] Tavily credits used by this run (from include_usage) - 228
+
+==== COPY EVERYTHING BELOW TO CLAUDE ====
+[PASS] Tavily key - found (value hidden)
+[PASS] Nebius key - found (value hidden)
+[PASS] .env is git-ignored
+[PASS] Nemotron models on Token Factory - nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B, nvidia/Nemotron-3-Ultra-550b-a55b, nvidia/Nemotron-3.5-Super-VL, nvidia/Nemotron-3_5-Lightning, nvidia/nemotron-3-super-120b-a12b
+[PASS] Model roles saved to config/models.json - {"small": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B", "mid": "nvidia/nemotron-3-super-120b-a12b", "large": "nvidia/Nemotron-3-Ultra-550b-a55b"}
+[PASS] Nemotron JSON output - {"ok": true, "n": 3}
+[WARN] Govt daily retail prices (Tavily Extract, logged direct-download fallback) - route=direct, chars=14947, mentions onion=True (may need a form/date query)
+[PASS] Tavily Extract on a MoSPI PDF - chars=14032, contains 5.54=True, failed=0
+[PASS] Tavily news search, March 2026 window (English) - results=7, inside March=7, outside=0, undated=0, credits=1
+[PASS] Same, strict date filter (filter_by_published_date) - results=7, inside March=7, outside=0, undated=0, credits=1
+[PASS] Tavily news search, March 2026 window (Hindi, Indian Hindi news sites) - results=10, inside March=9, outside=0, undated=1, credits=1
+[PASS] Event search: milk price hike in India (English) - results=1, inside March=1, outside=0, undated=0, credits=1
+[PASS] Event search: milk price hike (Hindi) - results=10, inside March=1, outside=0, undated=9, credits=1
+[PASS] Nemotron price extraction (cites a numbered line; code checks the number is in it) - pages=3, failed=0, quotes=13, verified=12
+[PASS] Tavily credits used by this run (from include_usage) - 228
+(took 1s)

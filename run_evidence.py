@@ -17,17 +17,17 @@ from shadow_cpi.nemotron import Nemotron
 from shadow_cpi.recorder import Recorder, read_log
 from shadow_cpi.tavily import Tavily
 
-CAP = 150                                    # hard cap for the March 2026 test (owner's instruction)
 PT_MONTHS = [f"2025-{m:02d}" for m in range(2, 13)]   # 2025 only (Jan 2025 has no official MoM)
 MIN_DAYS = 5                                 # an IBJA monthly average needs at least 5 trading days
 
 
 def estimate(items, events):
-    per_search = 1 + 2                       # basic search + extract of 6 URLs (2 credits)
+    """Upper bound: each search 1 credit + extract of the top 6 pages (2 credits)."""
+    per_search = 1 + 2
     quotes = len(items) * 2 * per_search
+    ev = sum(len(c.get("langs", ["en", "hi"])) for c in events.values()) * per_search
     return {"quotes, target month": quotes, "quotes, previous month (for matching)": quotes,
-            "events, target month": len(events) * 2 * per_search,
-            "events, last 10 days of previous month": len(events) * 2 * per_search}
+            "events, target month": ev, "events, last 10 days of previous month": ev}
 
 
 def food_passthrough(series):
@@ -98,13 +98,12 @@ def main():
     prev = M.add_months(month, -1)
     cfg = E.load_items()
     est = estimate(cfg["quote_items"], cfg["events"])
-    spent_before = E.credits_spent()
     print(f"Credit estimate for {month} (upper bound, cached calls are free): {est} = {sum(est.values())}; "
-          f"cap {CAP}, already spent toward it {spent_before}")
+          f"hard caps in config/budget.json")
     if "--estimate" in sys.argv:
         return
     rec = Recorder()
-    tav = E.CreditCap(Tavily(recorder=rec), CAP, spent_before)
+    tav = E.Budgeted(Tavily(recorder=rec), [f"live-month/{month}"])
     nem = Nemotron(recorder=rec)
     t0 = time.time()
     series, _, _, _ = O.load_tidy()
@@ -136,8 +135,8 @@ def main():
             spine_out[food] = {"change": ch, "n_centres": n, "tier": "strict"} if ch is not None else \
                 {"change": None, "note": "spine not loaded yet (data/spine.csv)"}
 
-        quotes, qstats, qtrace = E.collect_quotes(tav, nem, month, cfg["quote_items"])
-        prev_quotes, pstats, ptrace = E.collect_quotes(tav, nem, prev, cfg["quote_items"])
+        quotes, qstats, qtrace = E.collect_quotes(tav, nem, month, E.quote_items_for(month, cfg))
+        prev_quotes, pstats, ptrace = E.collect_quotes(tav, nem, prev, E.quote_items_for(month, cfg))
         events, estats, etrace = E.collect_events(tav, nem, month, cfg["events"])
     except E.BudgetExceeded as e:
         print(f"\nSTOPPED before spending more: {e}. Ask the owner before continuing.")
@@ -159,7 +158,7 @@ def main():
               "tavily_params": {"topic": "news", "search_depth": "basic", "max_results": E.SEARCH_N,
                                 "include_domains_mode": "prefer", "exclude_domains": ["mospi.gov.in"],
                                 "extract_top": E.EXTRACT_TOP, "chunks_per_source": 5},
-              "credits_this_run": tav.used, "credits_toward_cap": tav.spent(), "cap": CAP,
+              "credits_this_run": tav.used, "budgets": tav.budgets,
               "seconds": round(time.time() - t0)}
     manifest = E.build_manifest(month, quotes, qstats, events, estats, observed, spine_rows, detail)
     E.write_manifest(month, manifest)
@@ -169,8 +168,7 @@ def main():
     old = E.EVIDENCE_DIR / f"{month}.json"
     if old.exists():
         old.unlink()          # superseded by manifests/<month>.json (one file per month, in the app's schema)
-    print(f"done in {time.time() - t0:.0f}s; Tavily credits this run {tav.used}, toward the cap {tav.spent()} "
-          f"of {CAP}")
+    print(f"done in {time.time() - t0:.0f}s; Tavily credits this run {tav.used} (budgets {tav.budgets})")
 
 
 if __name__ == "__main__":
