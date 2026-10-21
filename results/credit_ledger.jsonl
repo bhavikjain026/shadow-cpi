@@ -515,3 +515,30 @@
 {"time": "2026-10-21T15:08:01.739177+00:00", "call_id": "c7c6db059d26", "endpoint": "/extract", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-05", "fuel-gap"]}
 {"time": "2026-10-21T15:08:28.770088+00:00", "call_id": "d1d36cb32b9c", "endpoint": "/search", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-05", "fuel-gap"]}
 {"time": "2026-10-21T15:08:29.890996+00:00", "call_id": "de790b8def38", "endpoint": "/extract", "credits": 0, "budgets": ["replay-layers", "replay-layers-month/2026-05", "fuel-gap"]}
+{"time": "2026-10-21T15:11:36.226298+00:00", "call_id": "a7514471f7df", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-01"]}
+{"time": "2026-10-21T15:11:57.351507+00:00", "call_id": "999b35224a17", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-01"]}
+{"time": "2026-10-21T15:12:01.885310+00:00", "call_id": "155a292cbd01", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-01"]}
+{"time": "2026-10-21T15:12:07.108759+00:00", "call_id": "0ea9a21a7e72", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-02"]}
+{"time": "2026-10-21T15:12:11.931974+00:00", "call_id": "5f38bac6a8e4", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-02"]}
+{"time": "2026-10-21T15:12:17.754204+00:00", "call_id": "7cf1cf944de9", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-02"]}
+{"time": "2026-10-21T15:12:25.198935+00:00", "call_id": "99e47704d024", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-03"]}
+{"time": "2026-10-21T15:12:30.525176+00:00", "call_id": "373ab0d1c9e9", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-03"]}
+{"time": "2026-10-21T15:12:34.752793+00:00", "call_id": "8933701a62e7", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-03"]}
+{"time": "2026-10-21T15:12:39.621324+00:00", "call_id": "f1c6dc2523b7", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-04"]}
+{"time": "2026-10-21T15:12:45.363492+00:00", "call_id": "a0daf64dac1c", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-04"]}
+{"time": "2026-10-21T15:12:52.632869+00:00", "call_id": "a8f834d9a081", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-04"]}
+{"time": "2026-10-21T15:12:57.975729+00:00", "call_id": "7183d01a5ec3", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-05"]}
+{"time": "2026-10-21T15:13:03.086552+00:00", "call_id": "8224135a91f6", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-05"]}
+{"time": "2026-10-21T15:13:09.303219+00:00", "call_id": "964d8d66c06b", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-05"]}
+{"time": "2026-10-21T15:13:14.412132+00:00", "call_id": "046d8aaca81d", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-06"]}
+{"time": "2026-10-21T15:13:22.631107+00:00", "call_id": "a4b5848005b3", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-06"]}
+{"time": "2026-10-21T15:13:27.482496+00:00", "call_id": "9b4a0f74347f", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-06"]}
+{"time": "2026-10-21T15:13:32.744863+00:00", "call_id": "d3dfb256f182", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-07"]}
+{"time": "2026-10-21T15:13:40.064746+00:00", "call_id": "ab510a93e7c6", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-07"]}
+{"time": "2026-10-21T15:13:45.899956+00:00", "call_id": "b8bd8a5d02a8", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-07"]}
+{"time": "2026-10-21T15:13:49.623314+00:00", "call_id": "745f54d752b9", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-08"]}
+{"time": "2026-10-21T15:13:57.192064+00:00", "call_id": "83ce4de96c3a", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-08"]}
+{"time": "2026-10-21T15:14:02.516861+00:00", "call_id": "64a55542a1d2", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-08"]}
+{"time": "2026-10-21T15:14:05.604383+00:00", "call_id": "ef1205133c22", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-09"]}
+{"time": "2026-10-21T15:14:11.044065+00:00", "call_id": "0bfd9f82c9e5", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-09"]}
+{"time": "2026-10-21T15:14:17.945399+00:00", "call_id": "c9729d877e9a", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-09"]}

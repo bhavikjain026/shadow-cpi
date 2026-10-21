@@ -1,0 +1,271 @@
+{
+ "2026-01": {
+  "n_contrary": 3,
+  "checks": [
+   {
+    "code": "13.2.1.1.1.02",
+    "name": "Silver jewellery",
+    "contribution_mom_pp": 0.13822207882583845,
+    "query": "Silver jewellery price fall cheaper January 2026 India",
+    "n_results": 7,
+    "contrary_verified": [
+     "In the Indian market too, silver prices fell from ₹2.35 lakh on 29 December to ₹2.29 lakh per kg on 1 January, a drop of ₹5,000.",
+     "In the Indian market too, silver prices fell from ₹2.35 lakh on 29 December to ₹2.29 lakh per kg on 1 January, a drop of ₹5,000.",
+     "However, on 2 January, prices rose by ₹5,000 to ₹2.34 lakh. But if profit booking continues, silver prices could fall to $65 per ounce."
+    ]
+   },
+   {
+    "code": "01.1.7.5.1.01",
+    "name": "Potato",
+    "contribution_mom_pp": -0.0539676137741811,
+    "query": "Potato price hike rise January 2026 India",
+    "n_results": 5,
+    "contrary_verified": []
+   },
+   {
+    "code": "01.1.7.2.1.01",
+    "name": "Tomato",
+    "contribution_mom_pp": -0.04546943995415134,
+    "query": "Tomato price hike rise January 2026 India",
+    "n_results": 8,
+    "contrary_verified": []
+   }
+  ]
+ },
+ "2026-02": {
+  "n_contrary": 1,
+  "checks": [
+   {
+    "code": "01.1#residual",
+    "name": "Food",
+    "contribution_mom_pp": -0.18606698287498472,
+    "query": "Food price hike rise February 2026 India",
+    "n_results": 8,
+    "contrary_verified": []
+   },
+   {
+    "code": "01.1.7.2.1.01",
+    "name": "Tomato",
+    "contribution_mom_pp": -0.16942800382417034,
+    "query": "Tomato price hike rise February 2026 India",
+    "n_results": 7,
+    "contrary_verified": [
+     "\"Cucumbers for the price of avocados,\" the Moscow tabloid Moskovsky Komsomolets said, highlighting official data showing cucumber prices had jumped by 43 percent since January 1. Tomato prices have increased 21 percent."
+    ]
+   },
+   {
+    "code": "01.1.5.1",
+    "name": "Vegetable oils",
+    "contribution_mom_pp": 0.04292879094290695,
+    "query": "Vegetable oils price fall cheaper February 2026 India",
+    "n_results": 8,
+    "contrary_verified": []
+   }
+  ]
+ },
+ "2026-03": {
+  "n_contrary": 1,
+  "checks": [
+   {
+    "code": "01.1#residual",
+    "name": "Food",
+    "contribution_mom_pp": -0.08223562486802025,
+    "query": "Food price hike rise March 2026 India",
+    "n_results": 8,
+    "contrary_verified": [
+     "Food inflation rose 3.47% year-on-year in February, also up from a 2.13% rise in January, India’s Ministry of Statistics and Programme Implementation said in a release Thursday."
+    ]
+   },
+   {
+    "code": "01.1.7.2.1.01",
+    "name": "Tomato",
+    "contribution_mom_pp": -0.05873288395698714,
+    "query": "Tomato price hike rise March 2026 India",
+    "n_results": 6,
+    "contrary_verified": []
+   },
+   {
+    "code": "04.5.2.2.1.01",
+    "name": "LPG cylinder and piped natural gas",
+    "contribution_mom_pp": 0.05234970734473292,
+    "query": "LPG cylinder and piped natural gas price fall cheaper March 2026 India",
+    "n_results": 5,
+    "contrary_verified": []
+   }
+  ]
+ },
+ "2026-04": {
+  "n_contrary": 0,
+  "checks": [
+   {
+    "code": "01.1.5.1",
+    "name": "Vegetable oils",
+    "contribution_mom_pp": 0.08735567446630996,
+    "query": "Vegetable oils price fall cheaper April 2026 India",
+    "n_results": 8,
+    "contrary_verified": []
+   },
+   {
+    "code": "07.2.2.2.1.01",
+    "name": "Petrol",
+    "contribution_mom_pp": 0.06979316809454968,
+    "query": "Petrol price fall cheaper April 2026 India",
+    "n_results": 8,
+    "contrary_verified": []
+   },
+   {
+    "code": "01.1#residual",
+    "name": "Food",
+    "contribution_mom_pp": -0.03066048279705177,
+    "query": "Food price hike rise April 2026 India",
+    "n_results": 8,
+    "contrary_verified": []
+   }
+  ]
+ },
+ "2026-05": {
+  "n_contrary": 0,
+  "checks": [
+   {
+    "code": "01.1.7.2.1.01",
+    "name": "Tomato",
+    "contribution_mom_pp": 0.08434545769010358,
+    "query": "Tomato price fall cheaper May 2026 India",
+    "n_results": 6,
+    "contrary_verified": []
+   },
+   {
+    "code": "07.2.2.2.1.01",
+    "name": "Petrol",
+    "contribution_mom_pp": 0.07744089363761908,
+    "query": "Petrol price fall cheaper May 2026 India",
+    "n_results": 8,
+    "contrary_verified": []
+   },
+   {
+    "code": "13.2.1.1.1.02",
+    "name": "Silver jewellery",
+    "contribution_mom_pp": 0.055722486320165084,
+    "query": "Silver jewellery price fall cheaper May 2026 India",
+    "n_results": 7,
+    "contrary_verified": []
+   }
+  ]
+ },
+ "2026-06": {
+  "n_contrary": 0,
+  "checks": [
+   {
+    "code": "01.1#residual",
+    "name": "Food",
+    "contribution_mom_pp": 0.2298866205279628,
+    "query": "Food price fall cheaper June 2026 India",
+    "n_results": 7,
+    "contrary_verified": []
+   },
+   {
+    "code": "07.2.2.2.1.01",
+    "name": "Petrol",
+    "contribution_mom_pp": 0.19406095335813978,
+    "query": "Petrol price fall cheaper June 2026 India",
+    "n_results": 7,
+    "contrary_verified": []
+   },
+   {
+    "code": "01.1.7.2.1.01",
+    "name": "Tomato",
+    "contribution_mom_pp": 0.07621763487679437,
+    "query": "Tomato price fall cheaper June 2026 India",
+    "n_results": 7,
+    "contrary_verified": []
+   }
+  ]
+ },
+ "2026-07": {
+  "n_contrary": 0,
+  "checks": [
+   {
+    "code": "01.1#residual",
+    "name": "Food",
+    "contribution_mom_pp": 0.4302196411852202,
+    "query": "Food price fall cheaper July 2026 India",
+    "n_results": 6,
+    "contrary_verified": []
+   },
+   {
+    "code": "01.1.7.4.1.01",
+    "name": "Onion",
+    "contribution_mom_pp": 0.12580075775384464,
+    "query": "Onion price fall cheaper July 2026 India",
+    "n_results": 8,
+    "contrary_verified": []
+   },
+   {
+    "code": "11.1",
+    "name": "Food and beverage serving services",
+    "contribution_mom_pp": 0.056507831630425935,
+    "query": "Food and beverage serving services price fall cheaper July 2026 India",
+    "n_results": 7,
+    "contrary_verified": []
+   }
+  ]
+ },
+ "2026-08": {
+  "n_contrary": 0,
+  "checks": [
+   {
+    "code": "01.1#residual",
+    "name": "Food",
+    "contribution_mom_pp": 0.45103357295386776,
+    "query": "Food price fall cheaper August 2026 India",
+    "n_results": 6,
+    "contrary_verified": []
+   },
+   {
+    "code": "01.1.7.4.1.01",
+    "name": "Onion",
+    "contribution_mom_pp": 0.1161211596323504,
+    "query": "Onion price fall cheaper August 2026 India",
+    "n_results": 1,
+    "contrary_verified": []
+   },
+   {
+    "code": "11.1",
+    "name": "Food and beverage serving services",
+    "contribution_mom_pp": 0.0493702610039559,
+    "query": "Food and beverage serving services price fall cheaper August 2026 India",
+    "n_results": 8,
+    "contrary_verified": []
+   }
+  ]
+ },
+ "2026-09": {
+  "n_contrary": 0,
+  "checks": [
+   {
+    "code": "01.1#residual",
+    "name": "Food",
+    "contribution_mom_pp": 0.33888686034433707,
+    "query": "Food price fall cheaper September 2026 India",
+    "n_results": 7,
+    "contrary_verified": []
+   },
+   {
+    "code": "01.1.7.4.1.01",
+    "name": "Onion",
+    "contribution_mom_pp": 0.27596914930407657,
+    "query": "Onion price fall cheaper September 2026 India",
+    "n_results": 8,
+    "contrary_verified": []
+   },
+   {
+    "code": "01.1.5.1",
+    "name": "Vegetable oils",
+    "contribution_mom_pp": 0.06244123975546182,
+    "query": "Vegetable oils price fall cheaper September 2026 India",
+    "n_results": 8,
+    "contrary_verified": []
+   }
+  ]
+ }
+}
