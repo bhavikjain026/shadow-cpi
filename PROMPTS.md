@@ -55,7 +55,6 @@ Everything via Recorder (cache + flight recorder). Estimate credits for 10 month
 3. Evidence chasing: when an event is verified, ≤2 follow-up searches (same change by other sellers/states; the official circular). Store parent/child call ids so the app can draw the chase as a tree.
 4. Attribution per month: prediction and coverage with vs without Tavily evidence → results/tavily_attribution.csv.
 5. Tavily report card → results/tavily_report_card.md: calls, credits per prediction (include_usage), share of results inside the date window, share of quotes verified, share of events confirmed by 2 sources, median latency, fallback count, honest notes on what failed.
-6. Package the event layer as `price_change_radar.py` with `find_price_changes(item, start_date, end_date)` + an MCP tool wrapper + short README.
 
 ## Prompt 3 — predictor and replay (22 Oct) → GO / NO-GO
 

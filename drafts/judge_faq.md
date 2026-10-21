@@ -1,7 +1,7 @@
 # Judge FAQ (draft)
 
-Short, plain answers for the Q&A. Each answer points to a file in the repo a judge can check. Placeholders in
-[brackets] must be filled in from the results files before use. No number here is invented.
+Short, plain answers for the Q&A. Each answer points to a file in the repo a judge can check. Every number comes
+from a results file named next to it.
 
 ## 1. Why use AI agents and live web search instead of a regression on official data?
 
@@ -29,7 +29,15 @@ We can't prove it perfectly, and `docs/honest_limits.md` says so. What we do:
   only if its effective date is inside the month.
 - A "leak guard" drops any page that states the official CPI figure for that month.
 - The model's own memory cannot set the number, because Nemotron only extracts quoted lines and code does the
-  arithmetic. [TBD: Nemotron training-data cutoff, from the model card.]
+  arithmetic. Training-data cutoffs, from NVIDIA's model cards (checked 21 Oct 2026, the BF16 releases of the models
+  we call on Token Factory):
+  - `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` (gatekeeper): pre-training data to 25 June 2025, post-training data to
+    28 November 2025 (huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16, "Data Freshness").
+  - `nvidia/nemotron-3-super-120b-a12b` (extraction): pre-training data to June 2025, post-training data to
+    February 2026 (huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16, "Data Freshness"). That
+    post-training cutoff overlaps our first two test months (January and February 2026). It does not reach the
+    numbers: the model can only point to a line on the page, and code checks the number is in that line.
+  - The large model in `config/models.json` was never called.
 - All rules were frozen and committed before scoring (`docs/frozen_rules.md`, `docs/preregistration.md`), and
   scoring ran once (`results/score_lock.json`).
 
@@ -41,9 +49,14 @@ month was scored (`docs/frozen_rules.md`). Amendment 1 was made before scoring a
 `docs/after_scoring_changes.md`, with dates and commits. None of it changes a scored number. One example: the 80%
 range for the live months was widened because it held the official figure in only 5 of 9 replay months.
 
-An independent event audit (`audit/event_audit.md`, PR bhavikjain026/shadow-cpi#4) found some events in the replay
-data that are wrong or out of scope. A recall check (`audit/missed_events.md`) found changes that were missed. We
-did **not** go back and fix those events, because that would mean tuning on the test months. We report them as they are.
+An independent event audit (`audit/event_audit.md`, PR bhavikjain026/shadow-cpi#4) checked the 12 replay events:
+5 correct, 3 partly, 3 wrong, 1 unclear. We did not edit any event by hand. Under the pre-registered bug-fix rule we
+made four **general** fixes, each enforcing a scope rule already written down (retail only, the CPI fuel grade,
+national vs regional scope, no double counting), checked them on 2025 (recall unchanged, 3 of 4), and re-scored
+Jan–Sep once. Shadow CPI's average miss went from 0.185 to 0.194 percentage points; both scores are published
+(`docs/after_scoring_changes.md` §4). A recall check (`audit/missed_events.md`) found 9 of 29 known changes directly
+(14 of 29 including the official series); we did not add the missed ones, because the test months are not
+re-searched.
 
 ## 5. What if the sealed October number is wrong?
 
@@ -55,9 +68,10 @@ example a big change in a part of the basket we carry on trend.
 
 ## 6. How accurate is it vs the economists' poll?
 
-[TBD: from replay. Mean absolute miss of (c) vs the Reuters poll on the months with a dated poll article, and over
-all 9 months. Take the numbers from `results/scoreboard.md` and `results/baselines.csv`, and state the sample size.]
-Whatever the numbers, say plainly that the poll is a strong baseline and the sample is small.
+About a tie. On the 6 months with a dated Reuters poll article, Shadow CPI missed by 0.150 percentage points on
+average and the poll by 0.148; the poll got the direction right in 6 of 6. Over all 9 months Shadow CPI missed by
+0.194 (the poll has no figure for the other 3). Sources: `results/score_lock.json`, `results/scoreboard.md`,
+`results/baselines.csv`. The poll is a strong baseline and 6 months is a small sample, so we claim no edge over it.
 
 ## 7. What exactly does Tavily do, and what does Nemotron do?
 
@@ -65,15 +79,16 @@ Tavily is how all web data enters the system (`docs/pipeline.md`):
 - **Search** (news, date-limited to the month, English and Hindi) finds price quotes and announced price changes.
 - **Extract** reads those pages, plus IBJA's gold and silver rate sheets, IOCL's domestic LPG price list and PPAC's
   petrol prices.
-- **Map + Crawl** looks for circulars and tariff orders on official sites.
+- **Map + Crawl** was tried on 5 official and 6 dairy sites to find circulars and tariff orders. Map returned
+  nothing on the government and PSU sites, so this is reported, not used (`results/tavily_report_card.md`).
 
 Two exceptions are logged direct downloads, not Tavily: MoSPI's official indices (a JSON API) and the
 government's daily food prices (behind a CAPTCHA).
 
 Nemotron on Nebius Token Factory only extracts:
-- a small model decides whether a page states an Indian price;
-- a mid model lists prices and price changes, each citing a numbered line;
-- a large model writes the reporter brief from numbers code has already computed.
+- `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` decides whether a page states an Indian price (622 calls);
+- `nvidia/nemotron-3-super-120b-a12b` lists prices and price changes, each citing a numbered line (719 calls);
+- the reporter brief is written by code from computed numbers and verified quotes; no model writes it.
 
 Code checks every cited line word for word and does all the maths.
 
