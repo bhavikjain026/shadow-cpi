@@ -494,3 +494,24 @@
 {"time": "2026-10-21T13:56:27.671916+00:00", "call_id": "9bf2b1e4ceeb", "endpoint": "/search", "credits": 1, "budgets": ["recall-audit"]}
 {"time": "2026-10-21T13:56:34.687904+00:00", "call_id": "e9ea528107e9", "endpoint": "/extract", "credits": 1, "budgets": ["recall-audit"]}
 {"time": "2026-10-21T13:56:52.254083+00:00", "call_id": "0dd78352cf91", "endpoint": "/search", "credits": 1, "budgets": ["recall-audit"]}
+{"time": "2026-10-21T15:05:19.374078+00:00", "call_id": "dd7765244581", "endpoint": "/extract", "credits": 0, "budgets": ["replay-layers", "ibja-iocl"]}
+{"time": "2026-10-21T15:05:23.428554+00:00", "call_id": "194aea435253", "endpoint": "/search", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-01", "fuel-gap"]}
+{"time": "2026-10-21T15:05:32.177912+00:00", "call_id": "99876682fab4", "endpoint": "/extract", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-01", "fuel-gap"]}
+{"time": "2026-10-21T15:05:46.980799+00:00", "call_id": "23df07237d7c", "endpoint": "/search", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-01", "fuel-gap"]}
+{"time": "2026-10-21T15:05:50.806555+00:00", "call_id": "a934ed3abc77", "endpoint": "/extract", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-01", "fuel-gap"]}
+{"time": "2026-10-21T15:05:59.957569+00:00", "call_id": "bcc6a4176b2e", "endpoint": "/search", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-02", "fuel-gap"]}
+{"time": "2026-10-21T15:06:02.160202+00:00", "call_id": "36f29f1afaa6", "endpoint": "/extract", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-02", "fuel-gap"]}
+{"time": "2026-10-21T15:06:11.326057+00:00", "call_id": "a7473f3657a1", "endpoint": "/search", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-02", "fuel-gap"]}
+{"time": "2026-10-21T15:06:16.921562+00:00", "call_id": "17632b464ad8", "endpoint": "/extract", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-02", "fuel-gap"]}
+{"time": "2026-10-21T15:06:24.408392+00:00", "call_id": "30fee1faf7c0", "endpoint": "/search", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-03", "fuel-gap"]}
+{"time": "2026-10-21T15:06:27.537270+00:00", "call_id": "355518069692", "endpoint": "/extract", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-03", "fuel-gap"]}
+{"time": "2026-10-21T15:06:46.524894+00:00", "call_id": "82f576795399", "endpoint": "/search", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-03", "fuel-gap"]}
+{"time": "2026-10-21T15:06:50.496068+00:00", "call_id": "fc5e897b067a", "endpoint": "/extract", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-03", "fuel-gap"]}
+{"time": "2026-10-21T15:06:59.490136+00:00", "call_id": "cd9a2e132ed1", "endpoint": "/search", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-04", "fuel-gap"]}
+{"time": "2026-10-21T15:07:06.629054+00:00", "call_id": "c47d76cf6735", "endpoint": "/extract", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-04", "fuel-gap"]}
+{"time": "2026-10-21T15:07:29.295833+00:00", "call_id": "50f534373966", "endpoint": "/search", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-04", "fuel-gap"]}
+{"time": "2026-10-21T15:07:31.019488+00:00", "call_id": "3fd433f6a723", "endpoint": "/extract", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-04", "fuel-gap"]}
+{"time": "2026-10-21T15:07:59.691246+00:00", "call_id": "3d8165a3f9f4", "endpoint": "/search", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-05", "fuel-gap"]}
+{"time": "2026-10-21T15:08:01.739177+00:00", "call_id": "c7c6db059d26", "endpoint": "/extract", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-05", "fuel-gap"]}
+{"time": "2026-10-21T15:08:28.770088+00:00", "call_id": "d1d36cb32b9c", "endpoint": "/search", "credits": 1, "budgets": ["replay-layers", "replay-layers-month/2026-05", "fuel-gap"]}
+{"time": "2026-10-21T15:08:29.890996+00:00", "call_id": "de790b8def38", "endpoint": "/extract", "credits": 0, "budgets": ["replay-layers", "replay-layers-month/2026-05", "fuel-gap"]}

@@ -1,8 +1,8 @@
 {
  "sample": false,
  "month": "2026-05",
- "created_utc": "2026-10-21T15:05:01.008510+00:00",
- "code_commit": "3ba5e59c5f771976b095da119a20eb0cf665c42b",
+ "created_utc": "2026-10-21T15:08:32.050136+00:00",
+ "code_commit": "b0fa3b30218128c02fcfa09073c346cc2c3e4db5",
  "model_ids": {
   "small": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
   "mid": "nvidia/nemotron-3-super-120b-a12b",
@@ -10,7 +10,7 @@
  },
  "queries": [
   {
-   "call_id": "965af4a886c3",
+   "call_id": "01658a3ffcb1",
    "endpoint": "search",
    "query": "milk price hike per litre effective Amul Mother Dairy",
    "language": "en",
@@ -37,11 +37,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.927190+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.026426+00:00",
    "n_results": 8
   },
   {
-   "call_id": "3bb788658cf4",
+   "call_id": "ba9885f54b19",
    "endpoint": "search",
    "query": "milk price hike per litre effective Amul Mother Dairy",
    "language": "en",
@@ -68,11 +68,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.938740+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.038244+00:00",
    "n_results": 7
   },
   {
-   "call_id": "3c33bea53533",
+   "call_id": "714bddb2e983",
    "endpoint": "search",
    "query": "दूध के दाम बढ़े प्रति लीटर लागू",
    "language": "hi",
@@ -99,11 +99,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.940232+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.039890+00:00",
    "n_results": 8
   },
   {
-   "call_id": "ae9a94ba3354",
+   "call_id": "1dbe55ebb687",
    "endpoint": "search",
    "query": "दूध के दाम बढ़े प्रति लीटर लागू",
    "language": "hi",
@@ -130,11 +130,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.944340+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.044129+00:00",
    "n_results": 8
   },
   {
-   "call_id": "96a289555fe3",
+   "call_id": "64e883a8a539",
    "endpoint": "search",
    "query": "electricity tariff order regulatory commission revised rates effective",
    "language": "en",
@@ -161,11 +161,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.945890+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.045682+00:00",
    "n_results": 7
   },
   {
-   "call_id": "8dd200d9e447",
+   "call_id": "de0eb8c2c6ab",
    "endpoint": "search",
    "query": "electricity tariff order regulatory commission revised rates effective",
    "language": "en",
@@ -192,11 +192,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.948893+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.048851+00:00",
    "n_results": 5
   },
   {
-   "call_id": "0fcbedd5768b",
+   "call_id": "284e7f0d648b",
    "endpoint": "search",
    "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
    "language": "hi",
@@ -223,11 +223,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.950801+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.051079+00:00",
    "n_results": 8
   },
   {
-   "call_id": "760d537c202f",
+   "call_id": "00b3b2c1f887",
    "endpoint": "search",
    "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
    "language": "hi",
@@ -254,11 +254,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.951518+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.051819+00:00",
    "n_results": 8
   },
   {
-   "call_id": "ebc3d4c6b014",
+   "call_id": "972daa25c4e1",
    "endpoint": "search",
    "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
    "language": "en",
@@ -285,11 +285,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.951759+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.052073+00:00",
    "n_results": 8
   },
   {
-   "call_id": "7575060aabdd",
+   "call_id": "d6eacbd07249",
    "endpoint": "search",
    "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
    "language": "en",
@@ -316,11 +316,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.954271+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.054531+00:00",
    "n_results": 7
   },
   {
-   "call_id": "4165b03906b6",
+   "call_id": "87c52d20ec47",
    "endpoint": "search",
    "query": "railway fare revision effective Indian Railways",
    "language": "en",
@@ -347,11 +347,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.957148+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.057554+00:00",
    "n_results": 4
   },
   {
-   "call_id": "29c7badd8008",
+   "call_id": "586458a70a15",
    "endpoint": "search",
    "query": "railway fare revision effective Indian Railways",
    "language": "en",
@@ -378,11 +378,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.959395+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.059819+00:00",
    "n_results": 7
   },
   {
-   "call_id": "d168ad46fcac",
+   "call_id": "ba5f74f93c1c",
    "endpoint": "search",
    "query": "NPPA medicine price revision effective",
    "language": "en",
@@ -409,11 +409,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.961620+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.062224+00:00",
    "n_results": 2
   },
   {
-   "call_id": "f05a1b3fbe3a",
+   "call_id": "cf503181f796",
    "endpoint": "search",
    "query": "NPPA medicine price revision effective",
    "language": "en",
@@ -440,11 +440,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.962970+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.063395+00:00",
    "n_results": 8
   },
   {
-   "call_id": "f4184ad5effb",
+   "call_id": "8f644fbf0329",
    "endpoint": "search",
    "query": "school fee hike academic session effective",
    "language": "en",
@@ -471,11 +471,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.964457+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.064946+00:00",
    "n_results": 4
   },
   {
-   "call_id": "5118f68a558b",
+   "call_id": "14f049f9bbb5",
    "endpoint": "search",
    "query": "school fee hike academic session effective",
    "language": "en",
@@ -502,11 +502,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.966479+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.066961+00:00",
    "n_results": 5
   },
   {
-   "call_id": "7a743dbd32a4",
+   "call_id": "23ae9e11ada9",
    "endpoint": "search",
    "query": "GST rate change effective from",
    "language": "en",
@@ -533,11 +533,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.968342+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.068876+00:00",
    "n_results": 8
   },
   {
-   "call_id": "c9855e375914",
+   "call_id": "6fbc2cdb480f",
    "endpoint": "search",
    "query": "GST rate change effective from",
    "language": "en",
@@ -564,8 +564,70 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.971280+00:00",
+   "retrieved_at": "2026-10-21T15:07:54.071778+00:00",
    "n_results": 7
+  },
+  {
+   "call_id": "3d8165a3f9f4",
+   "endpoint": "search",
+   "query": "petrol diesel price revised per litre effective oil marketing companies",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-05-01",
+    "end_date": "2026-05-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-21T15:07:59.690574+00:00",
+   "n_results": 8
+  },
+  {
+   "call_id": "d1d36cb32b9c",
+   "endpoint": "search",
+   "query": "petrol diesel price revised per litre effective oil marketing companies",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-04-21",
+    "end_date": "2026-04-30",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-21T15:08:28.769790+00:00",
+   "n_results": 1
   }
  ],
  "quotes": [
@@ -948,15 +1010,45 @@
    "abs_change": 2.0,
    "base_price": 60.536,
    "base_source": "DoCA milk, all-India simple mean of zones, previous month"
+  },
+  {
+   "item": "fuel",
+   "seller": "Oil companies",
+   "place": "National Capital (Delhi)",
+   "pct_change": 3.29374092095408,
+   "effective_date": "2026-05-15",
+   "days_in_month_share": 0.5483870967741935,
+   "confirmed_by_2_sources": true,
+   "line": "According to news agency ANI, petrol in the national capital will now cost Rs 97.77 per litre, up from Rs 94.77, while diesel prices have risen to Rs 90.67 per litre from Rs 87.67.The revised rates came into effect on Friday.",
+   "url": "https://timesofindia.indiatimes.com/business/india-business/fuel-rates-hiked-petrol-price-increased-from-rs-94-77-to-rs-97-77-diesel-from-rs-87-67-to-rs-90-67-check-new-list-of-rates/articleshow/131105881.cms",
+   "sources": [
+    "https://timesofindia.indiatimes.com/business/india-business/fuel-rates-hiked-petrol-price-increased-from-rs-94-77-to-rs-97-77-diesel-from-rs-87-67-to-rs-90-67-check-new-list-of-rates/articleshow/131105881.cms",
+    "https://www.thehindu.com/news/national/israel-us-iran-war-live-updates-petrol-diesel-price-hike-india-rates-may-15-2026/article70981418.ece"
+   ],
+   "verified": true,
+   "cpi_code": "07.2.2.2.1.01",
+   "change_prorated": 0.018062450211683664,
+   "announced_date": "May 15, 2026",
+   "old_price": 94.77,
+   "new_price": 97.77,
+   "language": "en",
+   "scope": "national",
+   "states": [],
+   "weight": 1.0,
+   "weight_source": "national (weight 1)",
+   "applied_change": 0.018062450211683664,
+   "abs_change": null,
+   "base_price": null,
+   "base_source": null
   }
  ],
  "counts": {
-  "pages_seen": 72,
-  "pages_kept": 45,
+  "pages_seen": 78,
+  "pages_kept": 51,
   "quotes_extracted": 0,
   "quotes_verified": 0,
-  "events_extracted": 30,
-  "events_verified": 1
+  "events_extracted": 43,
+  "events_verified": 2
  },
  "dropped": [
   {
@@ -973,32 +1065,41 @@
   },
   {
    "reason": "event: different kind of price (not what this search is for)",
-   "count": 7
+   "count": 8
+  },
+  {
+   "reason": "event: no effective date",
+   "count": 8
   },
   {
    "reason": "event: regional event: state not identified",
    "count": 5
   },
   {
-   "reason": "event: no effective date",
+   "reason": "event: change not computable (needs old+new price, a % change, or an amount with an official base)",
    "count": 4
   },
   {
-   "reason": "event: search not in cache (frozen cache-only re-run sends no calls)",
+   "reason": "event: extract failed",
    "count": 2
   },
   {
-   "reason": "event: extract failed",
-   "count": 1
+   "reason": "event: same cited line as an event already kept (merged, mean change)",
+   "count": 2
   },
   {
    "reason": "event: duplicate of an event already kept (same kind and scope, % within 0.5 pp, effective dates within 15 days)",
-   "count": 1
+   "count": 2
   }
  ],
  "failed_sources": [
   {
    "url": "https://indianexpress.com/article/business/amul-milk-price-hike-rs-2-per-litre-may-14-new-rates-10687832",
+   "via": "Tavily Extract",
+   "reason": "Failed to fetch url"
+  },
+  {
+   "url": "https://indianexpress.com/article/explained/explained-economics/petrol-diesel-price-hike-india-omc-west-asia-crisis-10690586",
    "via": "Tavily Extract",
    "reason": "Failed to fetch url"
   }
@@ -1047,15 +1148,16 @@
   "event_stats": {
    "_month": "2026-05",
    "drops": {
-    "extract failed": 1,
+    "extract failed": 2,
     "unverified (no claimed number in the cited line)": 12,
     "page undated": 36,
     "gatekeeper: no Indian price on page": 27,
-    "different kind of price (not what this search is for)": 7,
-    "no effective date": 4,
-    "search not in cache (frozen cache-only re-run sends no calls)": 2,
+    "different kind of price (not what this search is for)": 8,
+    "no effective date": 8,
+    "change not computable (needs old+new price, a % change, or an amount with an official base)": 4,
     "regional event: state not identified": 5,
-    "duplicate of an event already kept (same kind and scope, % within 0.5 pp, effective dates within 15 days)": 1
+    "same cited line as an event already kept (merged, mean change)": 2,
+    "duplicate of an event already kept (same kind and scope, % within 0.5 pp, effective dates within 15 days)": 2
    },
    "leak_drops": 0,
    "leak_examples": [],
@@ -1064,21 +1166,27 @@
      "url": "https://indianexpress.com/article/business/amul-milk-price-hike-rs-2-per-litre-may-14-new-rates-10687832",
      "via": "Tavily Extract",
      "reason": "Failed to fetch url"
+    },
+    {
+     "url": "https://indianexpress.com/article/explained/explained-economics/petrol-diesel-price-hike-india-omc-west-asia-crisis-10690586",
+     "via": "Tavily Extract",
+     "reason": "Failed to fetch url"
     }
    ],
-   "pages_seen": 72,
-   "pages_kept": 45,
-   "events_extracted": 30
+   "pages_seen": 78,
+   "pages_kept": 51,
+   "events_extracted": 43
   },
   "event_search_window": {
    "pre_days": 10,
    "applied_by": "effective date inside the month"
   },
-  "credits_this_month": 40,
+  "credits_this_month": 43,
   "budgets": [
    "replay-layers",
-   "replay-layers-month/2026-05"
+   "replay-layers-month/2026-05",
+   "fuel-gap"
   ],
-  "seconds": 0
+  "seconds": 38
  }
 }

@@ -61,7 +61,8 @@ IOCL_RETRIEVED = ""
 
 def run_month(month, tav_all, nem, ibja, lpg_rev, petrol, factors, cfg):
     prev = M.add_months(month, -1)
-    tav = tav_all.charge("replay-layers", f"replay-layers-month/{month}")
+    extra = [a.split("=", 1)[1] for a in sys.argv if a.startswith("--budget=")]
+    tav = tav_all.charge("replay-layers", f"replay-layers-month/{month}", *extra)
     t0 = time.time()
     events, estats, etrace = E.collect_events(tav, nem, month, cfg["events"])
     row = {"month": month, "events_verified": len(events)}

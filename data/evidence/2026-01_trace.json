@@ -539,6 +539,36 @@
    "effective_date": "January 1, 2026",
    "line": "Renault will raise prices by up to 2 percent from January 1, 2026, with the increase varying across the Kwid, Triber and Kiger. After the revision, the Kwid is expected to range from around Rs 4.38 lakh to 6 lakh, the Triber from Rs 5.88 lakh to 8.55 lakh and the Kiger from Rs 5.88 lakh to 10.54 lakh (all ex-showroom). Renault will also add Duster and a 7-seater SUV.",
    "verdict": "different kind of price (not what this search is for)"
+  },
+  {
+   "kind": "fuel",
+   "lang": "en",
+   "url": "https://www.thehindu.com/business/Industry/atf-price-cut-by-steep-7-commercial-lpg-rate-up-111-per-cylinder/article70459801.ece",
+   "page_date": "2026-01-24",
+   "item_or_service": "aviation turbine fuel (ATF)",
+   "seller_or_authority": "state-owned oil marketing companies",
+   "region": "India-wide",
+   "old_price": null,
+   "new_price": null,
+   "pct_change": -7.3,
+   "effective_date": "2026-01-01",
+   "line": "Price of aviation turbine fuel (ATF), or jet fuel, was reduced by 7.3% on Thursday (January 1, 2026), while commercial LPG rate was raised by ₹111 per cylinder, as state-owned oil marketing companies implemented their monthly price revisions aligned with global fuel benchmarks.",
+   "verdict": "different kind of price (not what this search is for)"
+  },
+  {
+   "kind": "fuel",
+   "lang": "en",
+   "url": "https://www.thehindu.com/business/Industry/atf-price-cut-by-steep-7-commercial-lpg-rate-up-111-per-cylinder/article70459801.ece",
+   "page_date": "2026-01-24",
+   "item_or_service": "commercial LPG",
+   "seller_or_authority": "state-owned oil marketing companies",
+   "region": "India-wide",
+   "old_price": null,
+   "new_price": null,
+   "pct_change": null,
+   "effective_date": "2026-01-01",
+   "line": "Price of aviation turbine fuel (ATF), or jet fuel, was reduced by 7.3% on Thursday (January 1, 2026), while commercial LPG rate was raised by ₹111 per cylinder, as state-owned oil marketing companies implemented their monthly price revisions aligned with global fuel benchmarks.",
+   "verdict": "different kind of price (not what this search is for)"
   }
  ]
 }

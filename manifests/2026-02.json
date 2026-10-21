@@ -1,8 +1,8 @@
 {
  "sample": false,
  "month": "2026-02",
- "created_utc": "2026-10-21T15:05:00.219461+00:00",
- "code_commit": "3ba5e59c5f771976b095da119a20eb0cf665c42b",
+ "created_utc": "2026-10-21T15:06:20.372660+00:00",
+ "code_commit": "b0fa3b30218128c02fcfa09073c346cc2c3e4db5",
  "model_ids": {
   "small": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
   "mid": "nvidia/nemotron-3-super-120b-a12b",
@@ -10,7 +10,7 @@
  },
  "queries": [
   {
-   "call_id": "bc7751080dfa",
+   "call_id": "2d02e720d697",
    "endpoint": "search",
    "query": "milk price hike per litre effective Amul Mother Dairy",
    "language": "en",
@@ -37,11 +37,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.159685+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.964795+00:00",
    "n_results": 8
   },
   {
-   "call_id": "0be6af962859",
+   "call_id": "75283fe08ba9",
    "endpoint": "search",
    "query": "milk price hike per litre effective Amul Mother Dairy",
    "language": "en",
@@ -68,11 +68,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.162290+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.966778+00:00",
    "n_results": 8
   },
   {
-   "call_id": "6c2d78c2ac2e",
+   "call_id": "67abf2ef7706",
    "endpoint": "search",
    "query": "दूध के दाम बढ़े प्रति लीटर लागू",
    "language": "hi",
@@ -99,11 +99,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.164455+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.968324+00:00",
    "n_results": 8
   },
   {
-   "call_id": "fc2b0cf74379",
+   "call_id": "2152ac7308fb",
    "endpoint": "search",
    "query": "दूध के दाम बढ़े प्रति लीटर लागू",
    "language": "hi",
@@ -130,11 +130,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.167229+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.970522+00:00",
    "n_results": 8
   },
   {
-   "call_id": "7ce58b2bd2f3",
+   "call_id": "75feb5c49247",
    "endpoint": "search",
    "query": "electricity tariff order regulatory commission revised rates effective",
    "language": "en",
@@ -161,11 +161,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.168686+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.971471+00:00",
    "n_results": 4
   },
   {
-   "call_id": "2f1edc85ad44",
+   "call_id": "abd1cba354a3",
    "endpoint": "search",
    "query": "electricity tariff order regulatory commission revised rates effective",
    "language": "en",
@@ -192,11 +192,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.170697+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.972787+00:00",
    "n_results": 3
   },
   {
-   "call_id": "a562f01596b2",
+   "call_id": "f7749809482f",
    "endpoint": "search",
    "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
    "language": "hi",
@@ -223,11 +223,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.172076+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.973801+00:00",
    "n_results": 8
   },
   {
-   "call_id": "89daaa4e3a1b",
+   "call_id": "51c08bbb24e9",
    "endpoint": "search",
    "query": "बिजली की दरें बढ़ीं टैरिफ आदेश लागू",
    "language": "hi",
@@ -254,11 +254,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.172750+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.974236+00:00",
    "n_results": 8
   },
   {
-   "call_id": "3b1439e6f3c4",
+   "call_id": "af6e0b06bb71",
    "endpoint": "search",
    "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
    "language": "en",
@@ -285,11 +285,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.174958+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.976265+00:00",
    "n_results": 8
   },
   {
-   "call_id": "78e133258f04",
+   "call_id": "47c59d7164ba",
    "endpoint": "search",
    "query": "mobile tariff hike prepaid plans Jio Airtel Vi effective",
    "language": "en",
@@ -316,11 +316,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.177080+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.977908+00:00",
    "n_results": 8
   },
   {
-   "call_id": "e8ab4a58a2ba",
+   "call_id": "4d41d5d05715",
    "endpoint": "search",
    "query": "railway fare revision effective Indian Railways",
    "language": "en",
@@ -347,11 +347,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.179304+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.979673+00:00",
    "n_results": 8
   },
   {
-   "call_id": "dc30e0da8a79",
+   "call_id": "8b7e0af65156",
    "endpoint": "search",
    "query": "railway fare revision effective Indian Railways",
    "language": "en",
@@ -378,11 +378,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.182664+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.982358+00:00",
    "n_results": 3
   },
   {
-   "call_id": "4c1448b499bd",
+   "call_id": "f1392db3db75",
    "endpoint": "search",
    "query": "NPPA medicine price revision effective",
    "language": "en",
@@ -409,11 +409,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.184418+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.983668+00:00",
    "n_results": 1
   },
   {
-   "call_id": "06992ce50705",
+   "call_id": "1da56f84ab35",
    "endpoint": "search",
    "query": "NPPA medicine price revision effective",
    "language": "en",
@@ -440,11 +440,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.185377+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.984410+00:00",
    "n_results": 6
   },
   {
-   "call_id": "1204c2edd5e7",
+   "call_id": "2ffba6194638",
    "endpoint": "search",
    "query": "school fee hike academic session effective",
    "language": "en",
@@ -471,11 +471,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.185999+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.984860+00:00",
    "n_results": 7
   },
   {
-   "call_id": "3b7e05e10d3f",
+   "call_id": "ed2b3ee1d70c",
    "endpoint": "search",
    "query": "school fee hike academic session effective",
    "language": "en",
@@ -502,11 +502,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.188504+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.986729+00:00",
    "n_results": 1
   },
   {
-   "call_id": "f002ea6315da",
+   "call_id": "3e52ff63e0c9",
    "endpoint": "search",
    "query": "GST rate change effective from",
    "language": "en",
@@ -533,11 +533,11 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.189001+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.987167+00:00",
    "n_results": 6
   },
   {
-   "call_id": "76cb5aaff67f",
+   "call_id": "a121b5d3da45",
    "endpoint": "search",
    "query": "GST rate change effective from",
    "language": "en",
@@ -564,8 +564,70 @@
      "mospi.gov.in"
     ]
    },
-   "retrieved_at": "2026-10-21T15:05:00.191515+00:00",
+   "retrieved_at": "2026-10-21T15:05:55.988992+00:00",
    "n_results": 6
+  },
+  {
+   "call_id": "bcc6a4176b2e",
+   "endpoint": "search",
+   "query": "petrol diesel price revised per litre effective oil marketing companies",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-02-01",
+    "end_date": "2026-02-28",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-21T15:05:59.957260+00:00",
+   "n_results": 3
+  },
+  {
+   "call_id": "a7473f3657a1",
+   "endpoint": "search",
+   "query": "petrol diesel price revised per litre effective oil marketing companies",
+   "language": "en",
+   "params": {
+    "topic": "news",
+    "start_date": "2026-01-22",
+    "end_date": "2026-01-31",
+    "search_depth": "basic",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "exclude_domains": [
+     "mospi.gov.in"
+    ]
+   },
+   "retrieved_at": "2026-10-21T15:06:11.325517+00:00",
+   "n_results": 8
   }
  ],
  "quotes": [
@@ -962,8 +1024,8 @@
   }
  ],
  "counts": {
-  "pages_seen": 71,
-  "pages_kept": 38,
+  "pages_seen": 78,
+  "pages_kept": 39,
   "quotes_extracted": 0,
   "quotes_verified": 0,
   "events_extracted": 17,
@@ -972,7 +1034,7 @@
  "dropped": [
   {
    "reason": "event: gatekeeper: no Indian price on page",
-   "count": 33
+   "count": 39
   },
   {
    "reason": "event: page undated",
@@ -988,11 +1050,7 @@
   },
   {
    "reason": "event: extract failed",
-   "count": 2
-  },
-  {
-   "reason": "event: search not in cache (frozen cache-only re-run sends no calls)",
-   "count": 2
+   "count": 4
   },
   {
    "reason": "event: no effective date",
@@ -1015,6 +1073,16 @@
   },
   {
    "url": "https://www.marketwatch.com/story/wholesale-prices-rise-sharply-and-show-new-fed-chief-could-confront-stubborn-inflation-597b071b",
+   "via": "Tavily Extract",
+   "reason": "Failed to fetch url"
+  },
+  {
+   "url": "https://businesstech.co.za/news/energy/849533/here-is-the-official-petrol-price-for-february-7",
+   "via": "Tavily Extract",
+   "reason": "Failed to fetch url"
+  },
+  {
+   "url": "https://www.wsj.com/business/earnings/exxon-chevron-post-slimmest-annual-profits-since-2021-b9b2e7aa?gaa_at=eafs&gaa_n=AWEtsqejCwy7v7ZS1kLV5hsyilppDxL9pFomwo4s4cLxlf1XEptNKrnpHg_H&gaa_ts=697c9c12&gaa_sig=xbiSb-BMMyLfa3o0WC3cq9CFrEL26iciCnw-26SrsGiWFA-TxL5zRWbgiYp85tMhilE74rGu7O2FN_dSmkGXxg%3D%3D",
    "via": "Tavily Extract",
    "reason": "Failed to fetch url"
   }
@@ -1063,14 +1131,13 @@
   "event_stats": {
    "_month": "2026-02",
    "drops": {
-    "extract failed": 2,
-    "gatekeeper: no Indian price on page": 33,
+    "extract failed": 4,
+    "gatekeeper: no Indian price on page": 39,
     "page undated": 25,
     "unverified (no claimed number in the cited line)": 8,
     "different kind of price (not what this search is for)": 5,
     "no effective date": 1,
     "not the CPI variety (e.g. commercial cylinder, jet fuel)": 1,
-    "search not in cache (frozen cache-only re-run sends no calls)": 2,
     "same cited line as an event already kept (merged, mean change)": 1
    },
    "leak_drops": 0,
@@ -1085,21 +1152,32 @@
      "url": "https://www.marketwatch.com/story/wholesale-prices-rise-sharply-and-show-new-fed-chief-could-confront-stubborn-inflation-597b071b",
      "via": "Tavily Extract",
      "reason": "Failed to fetch url"
+    },
+    {
+     "url": "https://businesstech.co.za/news/energy/849533/here-is-the-official-petrol-price-for-february-7",
+     "via": "Tavily Extract",
+     "reason": "Failed to fetch url"
+    },
+    {
+     "url": "https://www.wsj.com/business/earnings/exxon-chevron-post-slimmest-annual-profits-since-2021-b9b2e7aa?gaa_at=eafs&gaa_n=AWEtsqejCwy7v7ZS1kLV5hsyilppDxL9pFomwo4s4cLxlf1XEptNKrnpHg_H&gaa_ts=697c9c12&gaa_sig=xbiSb-BMMyLfa3o0WC3cq9CFrEL26iciCnw-26SrsGiWFA-TxL5zRWbgiYp85tMhilE74rGu7O2FN_dSmkGXxg%3D%3D",
+     "via": "Tavily Extract",
+     "reason": "Failed to fetch url"
     }
    ],
-   "pages_seen": 71,
-   "pages_kept": 38,
+   "pages_seen": 78,
+   "pages_kept": 39,
    "events_extracted": 17
   },
   "event_search_window": {
    "pre_days": 10,
    "applied_by": "effective date inside the month"
   },
-  "credits_this_month": 41,
+  "credits_this_month": 45,
   "budgets": [
    "replay-layers",
-   "replay-layers-month/2026-02"
+   "replay-layers-month/2026-02",
+   "fuel-gap"
   ],
-  "seconds": 0
+  "seconds": 24
  }
 }
