@@ -1,0 +1,261 @@
+{
+ "day": "2026-10-21",
+ "sites": [
+  {
+   "dairy": "amul",
+   "tried": [
+    {
+     "url": "https://amul.com",
+     "n_urls": 2,
+     "call_id": "f654295a4337",
+     "credits": 1
+    }
+   ],
+   "site": "https://amul.com",
+   "map_call": "f654295a4337",
+   "relevant": [
+    "https://amul.com/media-and-news"
+   ],
+   "pages": [
+    {
+     "url": "https://amul.com/media-and-news",
+     "chars": 1981,
+     "price_lines": [],
+     "years": []
+    }
+   ],
+   "extract_failed": [],
+   "n_map_urls": 2
+  },
+  {
+   "dairy": "mother-dairy",
+   "tried": [
+    {
+     "url": "https://www.motherdairy.com",
+     "n_urls": 30,
+     "call_id": "f30499cefcd7",
+     "credits": 6
+    }
+   ],
+   "site": "https://www.motherdairy.com",
+   "map_call": "f30499cefcd7",
+   "relevant": [
+    "https://www.motherdairy.com/NewsandPress/News",
+    "https://www.motherdairy.com/NewsandPress/Press"
+   ],
+   "pages": [
+    {
+     "url": "https://www.motherdairy.com/NewsandPress/News",
+     "chars": 68015,
+     "price_lines": [
+      "Mother Dairy cuts MRP of Dhara oil by ₹10 per litre](#inline-1471)",
+      "Dhara reduces edible oil prices by Rs. 10 per litre](#inline-1472)",
+      "Mother Dairy cuts MRP of edible oil by ₹15-20 per litre](#inline-1462)",
+      "Mother Dairy cuts MRP of Dhara cooking oils by ₹15-20 per litre](#inline-1463)",
+      "Mother Dairy slashes Dhara cooking oil prices by Rs. 15-20 per litre](#inline-1464)",
+      "Mother Dairy reduces edible oil prices by Rs. 14 per litre](#inline-1432)",
+      "Mother Dairy to lower rates of edible oils up to Rs. 15 per litre](#inline-1423)",
+      "Mother Dairy raises price of milk by Rs. 2 per litre](#inline-1406)",
+      "Mother Dairy to hike prices by Rs. 2 per litre from Sunday](#inline-1407)",
+      "From today, Mother Dairy milk goes up by Rs 2 per litre](#inline-1388)",
+      "Now, Mother Dairy hikes milk prices by Rs 2 per litre from today](#inline-1389)",
+      "Not just bag, carry container too and get milk cheaper by Rs 4/litre](#inline-284)",
+      "Mother Dairy hikes milk prices by up to Rs. 2/litre](#inline-264)"
+     ],
+     "years": [
+      "2024",
+      "2025"
+     ]
+    },
+    {
+     "url": "https://www.motherdairy.com/NewsandPress/Press",
+     "chars": 86045,
+     "price_lines": [
+      "New Delhi, 03rd June 2024; Mother Dairy is increasing its liquid milk prices by Rs. 2/litre across all operating markets of the country from June 03, 2024 onwards. The increase in consumer price is mainly to compensate the producers for increased production costs, which have been on the rise for ove",
+      "New Delhi, 16th August 2022: Mother Dairy is compelled to raise its liquid milk prices by Rs. 2/litre with effect from August 17, 2022. The new prices will be applicable for all milk variants. The Company has been experiencing a surge in varied input costs which have increased multifold during the l",
+      "New Delhi, 05th March 2022: In view of the rising farmer prices, fuel costs and costs of packaging material, Mother Dairy is compelled to raise its liquid milk prices by Rs. 2/litre in Delhi NCR with effect from March 06, 2022. The new prices will be applicable for all milk variants.",
+      "New Delhi, 10th July 2021: Mother Dairy is compelled to raise its liquid milk prices by Rs. 2/litre in Delhi NCR with effect from July 11, 2021. The new prices will be applicable for all milk variants. The milk prices were last revised about 1.5 years ago in December 2019.",
+      "Kolkata; February 12, 2019: Buoyed by the success of its range of regional-cum-traditional food products – Mishti Doi, Aam Doi and Nolen Gur flavoured ice cream, Mother Dairy Fruit & Vegetable Pvt. Ltd., today announced the launch of ‘Khaanti Ghee’, a traditional East Indian Delicacy, for consumers ",
+      "Mumbai; 05 October, 2016: Milk and milk products major Mother Dairy, established under the ‘Operation Flood’ program and a wholly owned subsidiary of National Dairy Development Board (NDDB), today announced the launch of ‘Premium’ – high cream milk for consumers across the Greater Mumbai region. The",
+      "Hyderabad, July 21, 2016: Milk and milk products major Mother Dairy, established under the ‘Operation Flood’ program and a wholly owned subsidiary of National Dairy Development Board (NDDB), today announced the launch of Cow Milk variant for consumers across Hyderabad region. The newly launched vari",
+      "New Delhi, June 21, 2016: Milk and milk products major Mother Dairy, established under the ‘Operation Flood’ program and a wholly owned subsidiary of National Dairy Development Board (NDDB), has launched a Cow Milk variant for consumers across Delhi NCR region. The newly introduced variant will be a",
+      "Mother Dairy reduces the prices of Toned and Double Toned Milk by Rs. 2 per liter across Mumbai Metropolitan Region](#inline-135)",
+      "29th May 2015, Mumbai: Mother Dairy Fruit & Vegetable Pvt. Ltd., a leading national dairy player, today announced a reduction in its Toned & Double Toned Milk price by Rs. 2 per liter. Even with this announcement of reducing the consumer prices, the Company continues to ensure that the farmers get r"
+     ],
+     "years": [
+      "2024",
+      "2025"
+     ]
+    }
+   ],
+   "extract_failed": [],
+   "n_map_urls": 30
+  },
+  {
+   "dairy": "aavin",
+   "tried": [
+    {
+     "url": "https://aavin.tn.gov.in",
+     "n_urls": 0,
+     "call_id": "021473fbad42",
+     "credits": 0
+    },
+    {
+     "url": "https://aavinmilk.com",
+     "n_urls": 0,
+     "call_id": "7d3f5f4b3951",
+     "credits": 0
+    }
+   ],
+   "relevant": [],
+   "pages": [],
+   "n_map_urls": 0
+  },
+  {
+   "dairy": "nandini-kmf",
+   "tried": [
+    {
+     "url": "https://www.kmfnandini.coop",
+     "n_urls": 0,
+     "call_id": "4a34a5dafb35",
+     "credits": 0
+    }
+   ],
+   "relevant": [],
+   "pages": [],
+   "n_map_urls": 0
+  },
+  {
+   "dairy": "sanchi-mpcdf",
+   "tried": [
+    {
+     "url": "https://www.mpcdf.nic.in",
+     "error": "ApiError: HTTP 400: {\"detail\":{\"error\":\"[400] Invalid Start URL: https://www.mpcdf.nic.in/\"}}"
+    },
+    {
+     "url": "https://www.sanchi.co.in",
+     "error": "ApiError: HTTP 400: {\"detail\":{\"error\":\"[400] Invalid Start URL: https://www.sanchi.co.in/\"}}"
+    }
+   ],
+   "relevant": [],
+   "pages": [],
+   "n_map_urls": 0,
+   "note": "mpcdf.nic.in and sanchi.co.in: Map said 'Invalid Start URL'; a site search (1 credit) found per-union sites; sanchiindore.com mapped instead"
+  },
+  {
+   "dairy": "gokul",
+   "tried": [
+    {
+     "url": "https://www.gokulmilk.coop",
+     "n_urls": 3,
+     "call_id": "339fb8e7a9a9",
+     "credits": 0
+    }
+   ],
+   "site": "https://www.gokulmilk.coop",
+   "map_call": "339fb8e7a9a9",
+   "relevant": [
+    "https://www.gokulmilk.coop/media/press-media/6",
+    "https://www.gokulmilk.coop/uploads/milk_prices/milk_rates_english_wef_11_08_2026.pdf",
+    "https://www.gokulmilk.coop/uploads/product_prices/milk_product_rates_wef_220320261.pdf"
+   ],
+   "pages": [
+    {
+     "url": "https://www.gokulmilk.coop/uploads/milk_prices/milk_rates_english_wef_11_08_2026.pdf",
+     "chars": 607,
+     "price_lines": [],
+     "years": []
+    },
+    {
+     "url": "https://www.gokulmilk.coop/uploads/product_prices/milk_product_rates_wef_220320261.pdf",
+     "chars": 1579,
+     "price_lines": [],
+     "years": []
+    },
+    {
+     "url": "https://www.gokulmilk.coop/media/press-media/6",
+     "chars": 576,
+     "price_lines": [],
+     "years": [
+      "2026"
+     ]
+    }
+   ],
+   "extract_failed": [],
+   "n_map_urls": 3
+  },
+  {
+   "dairy": "sanchi-indore (MPCDF union)",
+   "tried": [
+    {
+     "url": "https://www.sanchiindore.com",
+     "n_urls": 0,
+     "call_id": "6405e58bd72f",
+     "credits": 0
+    }
+   ],
+   "site": "https://www.sanchiindore.com",
+   "relevant": [],
+   "pages": [],
+   "n_map_urls": 0
+  }
+ ],
+ "stopped": null,
+ "milk_events": [
+  {
+   "month": "2026-04",
+   "seller": "Dairy sellers / Madhya Pradesh Dugdh Vyapar Mahasangh",
+   "place": "Indore",
+   "abs_change": 3.0,
+   "line": "महंगाई की मार अब आम आदमी की रसोई तक पहुंच गई है। नए वित्तीय वर्ष यानी 1 अप्रैल से इंदौर सहित मध्य प्रदेश के कई बड़े शहरों में दूध के दामों में भारी बढ़ोतरी होने",
+   "on_dairy_site": []
+  },
+  {
+   "month": "2026-04",
+   "seller": "Dairy Producers Association",
+   "place": "Dhar district",
+   "abs_change": 4.0,
+   "line": "Dhar Milk Price Hike: ₹4 Per Liter Increase From April 1",
+   "on_dairy_site": []
+  },
+  {
+   "month": "2026-05",
+   "seller": "Amul, Mother Dairy",
+   "place": "India",
+   "abs_change": 2.0,
+   "line": "# Amul, Mother Dairy hike milk prices by Rs 2/litre across India, effective May 14",
+   "on_dairy_site": []
+  },
+  {
+   "month": "2026-07",
+   "seller": "Arokya",
+   "place": "India",
+   "abs_change": 3.0,
+   "line": "Chennai: Dairy brand Arokya has increased the prices of its milk and curd products by Rs 3 per litre.",
+   "on_dairy_site": []
+  },
+  {
+   "month": "2026-08",
+   "seller": "major cooperative and private dairies",
+   "place": "Maharashtra",
+   "abs_change": 2.0,
+   "line": "Milk consumers across Maharashtra will have to pay more from Tuesday, August 11, as major cooperative and private dairies have decided to increase cow and buffa",
+   "on_dairy_site": []
+  },
+  {
+   "month": "2026-09",
+   "seller": "Dairies and local farms supplying buffalo milk",
+   "place": "New Delhi (contextual reference to Mumbai situation)",
+   "abs_change": 9.0,
+   "line": "New Delhi: What can be termed as bad news for Mumbaikars, the milk prices in the city have increased by Rs 9 per litre.",
+   "on_dairy_site": []
+  }
+ ],
+ "notes": [
+  "Mother Dairy: the press page lists milk price rises up to 3 June 2024 (+₹2/litre) and press PDFs to 10.09.2025; no 2026 release was among the 30 mapped addresses (the map limit), so the May 2026 Amul/Mother Dairy ₹2 rise was not found on its own site.",
+  "Gokul: the map found milk_rates_english_wef_11_08_2026.pdf, a rate list effective 11 Aug 2026, the same date as the August 2026 Maharashtra ₹2 rise. The PDF's rates are not readable as text (basic and advanced Extract both returned only the letterhead), so the amount cannot be checked; the date match comes from the file name only.",
+  "Amul mapped 2 addresses (media pages); the media page loads its news by script and returned no items.",
+  "Aavin (aavin.tn.gov.in, aavinmilk.com), Nandini (kmfnandini.coop) and Sanchi Indore (sanchiindore.com) mapped 0 addresses, no error, 0 credits. mpcdf.nic.in and sanchi.co.in were rejected as 'Invalid Start URL'.",
+  "Credits for this step: 10 of its 30 cap (Mother Dairy map 6, Amul map 1, extracts 1, Gokul advanced extract 1, Sanchi site search 1)."
+ ]
+}

@@ -588,3 +588,15 @@
 {"time": "2026-10-21T15:42:39.847821+00:00", "call_id": "10bb0f40fc4c", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
 {"time": "2026-10-21T15:42:42.537858+00:00", "call_id": "85343496ff81", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
 {"time": "2026-10-21T15:42:47.517934+00:00", "call_id": "01af8b668e3d", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:49:06.579984+00:00", "call_id": "f654295a4337", "endpoint": "/map", "credits": 1, "budgets": ["prompt-t", "prompt-t-dairy"]}
+{"time": "2026-10-21T15:49:08.045949+00:00", "call_id": "f303c58f2243", "endpoint": "/extract", "credits": 0, "budgets": ["prompt-t", "prompt-t-dairy"]}
+{"time": "2026-10-21T15:49:27.738211+00:00", "call_id": "f30499cefcd7", "endpoint": "/map", "credits": 6, "budgets": ["prompt-t", "prompt-t-dairy"]}
+{"time": "2026-10-21T15:49:29.368351+00:00", "call_id": "2768e6b72ec9", "endpoint": "/extract", "credits": 1, "budgets": ["prompt-t", "prompt-t-dairy"]}
+{"time": "2026-10-21T15:49:46.097514+00:00", "call_id": "021473fbad42", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t", "prompt-t-dairy"]}
+{"time": "2026-10-21T15:49:57.577878+00:00", "call_id": "7d3f5f4b3951", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t", "prompt-t-dairy"]}
+{"time": "2026-10-21T15:50:00.664683+00:00", "call_id": "4a34a5dafb35", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t", "prompt-t-dairy"]}
+{"time": "2026-10-21T15:50:35.193834+00:00", "call_id": "339fb8e7a9a9", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t", "prompt-t-dairy"]}
+{"time": "2026-10-21T15:50:37.299196+00:00", "call_id": "a8ce5681fcf2", "endpoint": "/extract", "credits": 0, "budgets": ["prompt-t", "prompt-t-dairy"]}
+{"time": "2026-10-21T15:51:04.545861+00:00", "call_id": "633dd10b693e", "endpoint": "/extract", "credits": 1, "budgets": ["prompt-t", "prompt-t-dairy"]}
+{"time": "2026-10-21T15:51:07.202996+00:00", "call_id": "ffa240ae4a54", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "prompt-t-dairy"]}
+{"time": "2026-10-21T15:51:36.306602+00:00", "call_id": "6405e58bd72f", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t", "prompt-t-dairy"]}

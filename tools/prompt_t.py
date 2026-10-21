@@ -3,6 +3,7 @@
 
     python tools/prompt_t.py crawl 2026-10     # Map then Crawl 5 official sites for price circulars of the month
     python tools/prompt_t.py fallback 2026-10 merc uperc   # sites where Map found nothing: section search + Crawl
+    python tools/prompt_t.py dairy 2026-10-21  # map 6 dairies' own sites, extract price-looking pages (cap 30)
     python tools/prompt_t.py chase             # <= 2 follow-up searches per verified event in the test months
     python tools/prompt_t.py card              # results/tavily_report_card.md (0 credits)
 
@@ -157,6 +158,102 @@ def crawl_fallback(month, names):
               f"prompt-t spent {spent('prompt-t')}")
     p.write_text(json.dumps(report, ensure_ascii=False, indent=1, default=str))
     return report
+
+
+DAIRIES = [("amul", ["https://amul.com"]),
+           ("mother-dairy", ["https://www.motherdairy.com"]),
+           ("aavin", ["https://aavin.tn.gov.in", "https://aavinmilk.com"]),
+           ("nandini-kmf", ["https://www.kmfnandini.coop"]),
+           ("sanchi-mpcdf", ["https://www.mpcdf.nic.in", "https://www.sanchi.co.in"]),
+           ("gokul", ["https://www.gokulmilk.coop"])]
+DAIRY_INSTR = ("find pages about milk prices, rate lists, MRP, price revision circulars, notices and press releases")
+RELEVANT = re.compile(r"(?i)(price|rate|mrp|circular|press|news|media|notice|revision|tariff|announce|release)")
+
+
+def dairy(day):
+    """Map each dairy's own site (instructions aimed at price/rate/circular/press pages), save the URL lists as a
+    dated snapshot in cache/, then Extract only URLs that look relevant (<= 10 per site). Report only."""
+    rec = Recorder()
+    tav = Budgeted(Tavily(recorder=rec), ["prompt-t", "prompt-t-dairy"])
+    snap, report = {"day": day, "instructions": DAIRY_INSTR, "sites": {}}, {"day": day, "sites": []}
+    stopped = None
+    for name, urls in DAIRIES:
+        site = {"dairy": name, "tried": []}
+        for url in urls:
+            try:
+                r, cid = tav.map(url, instructions=DAIRY_INSTR, limit=30, max_depth=2, tag=f"prompt-t:dairy-map {name}")
+            except BudgetExceeded as e:
+                stopped = str(e)
+                break
+            except Exception as e:
+                site["tried"].append({"url": url, "error": f"{type(e).__name__}: {e}"[:200]})
+                continue
+            got = r.get("results", [])
+            site["tried"].append({"url": url, "n_urls": len(got), "call_id": cid,
+                                  "credits": (r.get("usage") or {}).get("credits")})
+            if got:
+                site.update({"site": url, "map_urls": got, "map_call": cid})
+                break
+        snap["sites"][name] = site
+        if stopped:
+            break
+        site["relevant"] = [u for u in site.get("map_urls", []) if RELEVANT.search(urlparse(u).path)][:10]
+        site["pages"] = []
+        for k in range(0, len(site["relevant"]), 5):
+            batch = site["relevant"][k:k + 5]
+            try:
+                r, eid = tav.extract(batch, extract_depth="basic", tag=f"prompt-t:dairy-extract {name}",
+                                     parent=site.get("map_call"))
+            except BudgetExceeded as e:
+                stopped = str(e)
+                break
+            except Exception as e:
+                site.setdefault("extract_errors", []).append(f"{type(e).__name__}: {e}"[:200])
+                continue
+            site.setdefault("extract_failed", []).extend(f.get("url") for f in r.get("failed_results") or [])
+            for pg in r.get("results", []):
+                text = pg.get("raw_content") or ""
+                price_lines = [ln.strip()[:300] for ln in text.splitlines()
+                               if re.search(r"(₹|rs\.?|inr|रु)\s?\d", ln, re.I)
+                               and re.search(r"(?i)(litre|liter|ltr|\blt\b|ml\b|लीटर|kg)", ln)][:15]
+                site["pages"].append({"url": pg["url"], "chars": len(text), "price_lines": price_lines,
+                                      "years": sorted(set(re.findall(r"\b(202[4-7])\b", text))), "_text": text})
+        report["sites"].append({k: v for k, v in site.items() if k != "map_urls"} |
+                               {"n_map_urls": len(site.get("map_urls", []))})
+        print(f"{name}: {site.get('site') or 'no map results'} -> {len(site.get('map_urls', []))} urls, "
+              f"{len(site['relevant'])} relevant, {len(site['pages'])} extracted; dairy spent {spent('prompt-t-dairy')}")
+        if stopped:
+            break
+    report["stopped"] = stopped
+    report["milk_events"] = milk_event_matches(report)
+    for s in report["sites"]:
+        for pg in s.get("pages", []):
+            pg.pop("_text", None)
+    (ROOT / "cache" / f"dairy_map_{day}.json").write_text(json.dumps(snap, ensure_ascii=False, indent=1))
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / f"dairy_map_{day}.json").write_text(json.dumps(report, ensure_ascii=False, indent=1))
+    return report
+
+
+def milk_event_matches(report):
+    """For each test-month milk event: dairy pages that state the same change with its unit (or the new price) AND
+    name the event's month and year. Code text match; report only."""
+    out = []
+    for m in E.REPLAY_MONTHS:
+        for ev in json.loads((ROOT / "manifests" / f"{m}.json").read_text())["events"]:
+            if ev["item"] != "milk":
+                continue
+            pat = month_patterns(m)
+            hits = []
+            for s in report["sites"]:
+                for pg in s.get("pages", []):
+                    text = pg["_text"]
+                    if confirms(ev, {"url": pg["url"], "title": "", "content": text + " milk india"}, ["milk"]) \
+                            and pat.search(text):
+                        hits.append({"dairy": s["dairy"], "url": pg["url"]})
+            out.append({"month": m, "seller": ev.get("seller"), "place": ev.get("place"),
+                        "abs_change": ev.get("abs_change"), "line": ev["line"][:160], "on_dairy_site": hits})
+    return out
 
 
 def _num(x):
@@ -324,6 +421,21 @@ def card():
                              f"{fb['pages']} pages, {len(fb['month_pages'])} mention the month, "
                              f"{len(fb['events'])} verified events" + (f"; {fb['error']}" if fb.get('error') else ""))
         lines.append("")
+    for p in sorted(OUT.glob("dairy_map_*.json")):
+        rep = json.loads(p.read_text())
+        lines += [f"## Dairy sites (Map + Extract, {rep['day']}, report only)", "",
+                  "| Dairy | Site | Map addresses | Price-looking pages extracted | Years on those pages |",
+                  "| --- | --- | --- | --- | --- |"]
+        for s in rep["sites"]:
+            tried = "; ".join(t["url"] + (f" ({t['error'][:40]}…)" if t.get("error") else f" ({t['n_urls']})")
+                              for t in s["tried"])
+            yrs = sorted({y for pg in s.get("pages", []) for y in pg["years"]})
+            lines.append(f"| {s['dairy']} | {tried} | {s.get('n_map_urls', 0)} | {len(s.get('pages', []))} | "
+                         f"{', '.join(yrs) or '–'} |")
+        found = sum(bool(e["on_dairy_site"]) for e in rep["milk_events"])
+        lines += ["", f"Test-month milk events stated (same amount and month) on the dairy's own extracted pages: "
+                      f"**{found} of {len(rep['milk_events'])}**.", ""]
+        lines += [f"- {n}" for n in rep.get("notes", [])] + [""]
     lines += ["## Honest notes", "",
               "- Map + Crawl results are reported, not used in the nowcast: the frozen event layer searches news only.",
               "- Evidence chasing ran on the 9 scored months after scoring; it does not change any scored number.",
@@ -347,6 +459,8 @@ if __name__ == "__main__":
         crawl(sys.argv[2])
     elif cmd == "fallback":
         crawl_fallback(sys.argv[2], sys.argv[3:])
+    elif cmd == "dairy":
+        dairy(sys.argv[2])
     elif cmd == "chase":
         chase()
     elif cmd == "card":

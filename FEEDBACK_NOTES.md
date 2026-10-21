@@ -121,3 +121,24 @@ bare number ("2", "5") plus the item word "confirmed" all 12 events, mostly with
 Railway, a New Zealand dairy result). Requiring the unit (₹/Rs/रुपये, %/फीसदी), an India marker and a different site
 left 5 of 12, with 13 of 14 confirming results being the same change on a spot check. Evidence:
 `results/prompt_t/chase.json` (strict rule, re-run from cache at 0 credits); `tools/prompt_t.py` (`confirms`).
+
+**2026-10-21 · Friction: Map found nothing on 3 of 6 dairy sites, again with no error.** With instructions aimed at
+price, rate, circular and press pages, Map returned `results: []` and 0 credits for Aavin (aavin.tn.gov.in and
+aavinmilk.com), Nandini (kmfnandini.coop) and Sanchi Indore (sanchiindore.com). Amul gave 2 addresses, Gokul 3, and
+Mother Dairy 30 (the limit). Evidence: flight-recorder ids `021473fbad42`, `7d3f5f4b3951`, `4a34a5dafb35`,
+`6405e58bd72f` (empty), `f654295a4337`, `339fb8e7a9a9`, `f30499cefcd7`; `results/prompt_t/dairy_map_2026-10-21.json`.
+
+**2026-10-21 · Good: a bad start address gets a clear error.** Map on mpcdf.nic.in and sanchi.co.in returned HTTP 400
+"Invalid Start URL" at once, unlike the silent empty results above. (Our recorder logs only completed calls, so
+these two are in `results/prompt_t/dairy_map_2026-10-21.json`, `tried[].error`, not in the flight recorder.) A
+1-credit site search then found Sanchi's per-union sites (id `ffa240ae4a54`).
+
+**2026-10-21 · Friction: Map's `limit` cut off the newest pages.** Mother Dairy's 30 addresses (6 credits, the most
+expensive call of the step) were mostly 2023–2025 press-release PDFs, apparently in no date order; no 2026 release was
+in the list, so the May 2026 milk rise could not be checked on the dairy's own site. Evidence: flight-recorder id
+`f30499cefcd7`; `cache/dairy_map_2026-10-21.json` (the dated URL snapshot, kept locally).
+
+**2026-10-21 · Friction: Extract returned only the letterhead of a dairy rate-list PDF.** Gokul's
+`milk_rates_english_wef_11_08_2026.pdf` (effective 11 Aug 2026, the date of a scored Maharashtra milk event) came
+back as 607 characters of letterhead with basic and with advanced Extract; the rates themselves are not readable as
+text. The advanced call cost 1 credit. Evidence: flight-recorder ids `a8ce5681fcf2` (basic), `633dd10b693e` (advanced).
