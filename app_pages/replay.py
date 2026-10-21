@@ -1,5 +1,7 @@
 """Replay: Jan-Sep 2026 scoreboard against 'repeat last month', 'trend only' and the economists' poll; chart; one miss
 explained. Plain labels on screen; the short codes (a)/(b)/(c)/B1 only in small text."""
+import math
+
 import altair as alt
 import pandas as pd
 import streamlit as st
@@ -65,17 +67,25 @@ band = pd.DataFrame([{"Month": month_name(r["month"])[:3], "low": num(r["c_range
                       "high": num(r["c_range_high"])} for r in replay])
 x = alt.X("Month:O", sort=MON, title=None, axis=alt.Axis(labelAngle=0))
 y_title = "CPI inflation, year-on-year (%)"
+# y-axis padded so the top of the band is not clipped: data and band ± 0.25, rounded out to half points
+vals = list(df["YoY"]) + list(band["low"]) + list(band["high"])
+y_scale = alt.Scale(domain=[math.floor((min(vals) - 0.25) * 2) / 2, math.ceil((max(vals) + 0.25) * 2) / 2], nice=False)
+ACTUAL = "Actual (official)"
+# colours that read on light and dark backgrounds: Actual orange and thick, Shadow CPI blue with its band
+palette = {ACTUAL: "#F28E2B", LABELS["c"]: "#4C8DF6", LABELS["a"]: "#9A9A9A", LABELS["b"]: "#2CA58D",
+           LABELS["B1"]: "#C774B0"}
 series = list(dict.fromkeys(df["Series"]))
-palette = {"Actual (official)": "#111111", LABELS["c"]: "#1f6fd1", LABELS["a"]: "#9a9a9a", LABELS["b"]: "#c08a2b",
-           LABELS["B1"]: "#b65c8f"}
-color = alt.Color("Series:N", scale=alt.Scale(domain=series, range=[palette.get(n, "#777777") for n in series]),
-                  legend=alt.Legend(orient="bottom", columns=2, title=None))
-chart = (alt.Chart(band).mark_area(opacity=0.18, color=palette[LABELS["c"]]).encode(
-             x=x, y=alt.Y("low:Q", title=y_title, scale=alt.Scale(zero=False)), y2="high:Q")
-         + alt.Chart(df).mark_line(point=True).encode(
-             x=x, y=alt.Y("YoY:Q", title=y_title, scale=alt.Scale(zero=False)), color=color,
-             strokeWidth=alt.condition(alt.datum.Series == "Actual (official)", alt.value(4), alt.value(2)),
-             tooltip=["Month", "Series", alt.Tooltip("YoY:Q", format=".2f")])).properties(height=340)
+color = alt.Color("Series:N", scale=alt.Scale(domain=series, range=[palette.get(n, "#9A9A9A") for n in series]),
+                  legend=alt.Legend(orient="bottom", columns=2, title=None, symbolStrokeWidth=4, symbolSize=120))
+y = alt.Y("YoY:Q", title=y_title, scale=y_scale)
+tip = ["Month", "Series", alt.Tooltip("YoY:Q", format=".2f")]
+band_layer = alt.Chart(band).mark_area(opacity=0.22, color=palette[LABELS["c"]]).encode(
+    x=x, y=alt.Y("low:Q", title=y_title, scale=y_scale), y2="high:Q")
+methods = alt.Chart(df[df["Series"] != ACTUAL]).mark_line(
+    strokeWidth=2.5, point=alt.OverlayMarkDef(filled=True, size=45)).encode(x=x, y=y, color=color, tooltip=tip)
+actual = alt.Chart(df[df["Series"] == ACTUAL]).mark_line(
+    strokeWidth=4.5, point=alt.OverlayMarkDef(filled=True, size=110)).encode(x=x, y=y, color=color, tooltip=tip)
+chart = (band_layer + methods + actual).properties(height=340)
 st.altair_chart(chart, width="stretch")
 st.caption("Shaded band = 80% range for Shadow CPI.")
 
