@@ -1,0 +1,447 @@
+[
+ {
+  "month": "2026-02",
+  "event": {
+   "item": "rail",
+   "seller": "Southern Railway",
+   "place": "India",
+   "pct_change": 5.964912280701751,
+   "abs_change": null,
+   "effective_date": "2026-02-21",
+   "line": "COIMBATORE: Passengers travelling on the historic Nilgiri Mountain Railway (NMR) will have to pay slightly higher fares as the Southern Railway has revised them by 5% from Saturday (February 21).",
+   "url": "https://www.newindianexpress.com/states/tamil-nadu/2026/Feb/22/ticket-fare-for-nilgiri-mountain-railway-trains-goes-up-by-5-per-cent",
+   "confirmed_by_2_sources": false
+  },
+  "parent_call_id": null,
+  "children": [
+   {
+    "why": "same change, other sellers or states",
+    "query": "rail price hike February 2026 India",
+    "call_id": "81af84acc181",
+    "n_results": 7,
+    "confirming": []
+   },
+   {
+    "why": "the official circular",
+    "query": "Southern Railway rail price revision 6.0% notification order February 2026",
+    "call_id": "652eaea34532",
+    "n_results": 8,
+    "confirming": []
+   }
+  ],
+  "confirmed_by_chase": false
+ },
+ {
+  "month": "2026-04",
+  "event": {
+   "item": "milk",
+   "seller": "Dairy sellers / Madhya Pradesh Dugdh Vyapar Mahasangh",
+   "place": "Indore",
+   "pct_change": 4.971496751955455,
+   "abs_change": 3.0,
+   "effective_date": "2026-04-01",
+   "line": "महंगाई की मार अब आम आदमी की रसोई तक पहुंच गई है। नए वित्तीय वर्ष यानी 1 अप्रैल से इंदौर सहित मध्य प्रदेश के कई बड़े शहरों में दूध के दामों में भारी बढ़ोतरी होने जा रही है। इंदौर में दूध की कीमतों में 3 रुपए प्रति लीटर तक का इजाफा किया गया है, जिससे अब दूध 63 से 65 रुपए प्रति लीटर के भाव पर मिलेगा।",
+   "url": "https://www.bhaskar.com/g/local/mp/indore/news/milk-price-hike-mp-dhar-indore-63-65-rs-litre-137578040.html",
+   "confirmed_by_2_sources": false
+  },
+  "parent_call_id": null,
+  "children": [
+   {
+    "why": "same change, other sellers or states",
+    "query": "milk price hike April 2026 India",
+    "call_id": "3dd897b89602",
+    "n_results": 7,
+    "confirming": [
+     {
+      "url": "https://dairynews.today/news/milk-price-increase-in-india-poses-challenges-for-dairy-industry.html",
+      "date": "2026-04-24"
+     }
+    ]
+   },
+   {
+    "why": "the official circular",
+    "query": "Dairy sellers / Madhya Pradesh Dugdh Vyapar Mahasangh milk price revision 5.0% notification order April 2026",
+    "call_id": "5ee960f7f6dc",
+    "n_results": 0,
+    "confirming": []
+   }
+  ],
+  "confirmed_by_chase": true
+ },
+ {
+  "month": "2026-04",
+  "event": {
+   "item": "milk",
+   "seller": "Dairy Producers Association",
+   "place": "Dhar district",
+   "pct_change": 6.628662335940608,
+   "abs_change": 4.0,
+   "effective_date": "2026-04-01",
+   "line": "Dhar Milk Price Hike: ₹4 Per Liter Increase From April 1",
+   "url": "https://www.bhaskar.com/local/mp/dhar/news/dhar-milk-price-hike-rs-4-liter-april-1-137568275.html",
+   "confirmed_by_2_sources": false
+  },
+  "parent_call_id": null,
+  "children": [
+   {
+    "why": "same change, other sellers or states",
+    "query": "milk price hike April 2026 India",
+    "call_id": "2df6a3b29ab5",
+    "n_results": 7,
+    "confirming": []
+   },
+   {
+    "why": "the official circular",
+    "query": "Dairy Producers Association milk price revision 6.6% notification order April 2026",
+    "call_id": "1e24e793c402",
+    "n_results": 8,
+    "confirming": []
+   }
+  ],
+  "confirmed_by_chase": false
+ },
+ {
+  "month": "2026-04",
+  "event": {
+   "item": "electricity",
+   "seller": "Madhya Pradesh State Electricity Regulatory Commission (MPERC)",
+   "place": "Madhya Pradesh",
+   "pct_change": 4.8,
+   "abs_change": null,
+   "effective_date": "2026-04-01",
+   "line": "# MP में बिजली की दरें 4.80% बढ़ीं:एक अप्रैल से लागू होंगे नए रेट; दिन में ईवी चार्ज करने पर 20 प्रतिशत छूट",
+   "url": "https://www.bhaskar.com/local/mp/jabalpur/news/mp-new-electricity-tariff-rates-lt-consumers-minimum-charges-removed-ev-charging-discount-137539609.html",
+   "confirmed_by_2_sources": false
+  },
+  "parent_call_id": null,
+  "children": [
+   {
+    "why": "same change, other sellers or states",
+    "query": "electricity price hike April 2026 India",
+    "call_id": "d253324c08ad",
+    "n_results": 7,
+    "confirming": []
+   },
+   {
+    "why": "the official circular",
+    "query": "Madhya Pradesh State Electricity Regulatory Commission (MPERC) electricity price revision 4.8% notification order April 2026",
+    "call_id": "3a52bc758921",
+    "n_results": 1,
+    "confirming": [
+     {
+      "url": "https://www.facebook.com/solarquarter/posts/mperc-approves-48-tariff-hike-for-fy-2026-27-balancing-discom-finances-and-consu/1579747620826102",
+      "date": ""
+     }
+    ]
+   }
+  ],
+  "confirmed_by_chase": true
+ },
+ {
+  "month": "2026-04",
+  "event": {
+   "item": "fuel",
+   "seller": "Indian Oil Corporation (IOC)",
+   "place": "Delhi",
+   "pct_change": 1.6395234451852758,
+   "abs_change": null,
+   "effective_date": "2026-04-01",
+   "line": "The price of Indian Oil Corporation’s (IOC) XP100 petrol was hiked by Rs 11 per litre on Wednesday to Rs 160 per litre in Delhi, while that of its Xtra Green premium diesel was increased to Rs 92.99 per litre from Rs 91.49 earlier.",
+   "url": "https://indianexpress.com/article/india/commercial-lpg-premium-fuel-prices-hiked-no-change-for-domestic-lpg-regular-petrol-diesel-even-as-omcs-losses-mount-10613218",
+   "confirmed_by_2_sources": false
+  },
+  "parent_call_id": null,
+  "children": [
+   {
+    "why": "same change, other sellers or states",
+    "query": "fuel price hike April 2026 India",
+    "call_id": "22f942c5ac47",
+    "n_results": 4,
+    "confirming": []
+   },
+   {
+    "why": "the official circular",
+    "query": "Indian Oil Corporation (IOC) fuel price revision 1.6% notification order April 2026",
+    "call_id": "6f89b925b1e2",
+    "n_results": 8,
+    "confirming": []
+   }
+  ],
+  "confirmed_by_chase": false
+ },
+ {
+  "month": "2026-05",
+  "event": {
+   "item": "milk",
+   "seller": "Amul, Mother Dairy",
+   "place": "India",
+   "pct_change": 3.3038192150125543,
+   "abs_change": 2.0,
+   "effective_date": "2026-05-14",
+   "line": "# Amul, Mother Dairy hike milk prices by Rs 2/litre across India, effective May 14",
+   "url": "https://www.deccanherald.com/india/amul-mother-dairy-hikes-milk-prices-by-rs-2litre-across-india-effective-may-14-4001607",
+   "confirmed_by_2_sources": true
+  },
+  "parent_call_id": null,
+  "children": [
+   {
+    "why": "same change, other sellers or states",
+    "query": "milk price hike May 2026 India",
+    "call_id": "0fa9ecd9f788",
+    "n_results": 8,
+    "confirming": [
+     {
+      "url": "https://www.thehindu.com/news/national/amul-hikes-milk-prices-by-2-per-litre-across-india-effective-may-14/article70974685.ece",
+      "date": "2026-05-13"
+     },
+     {
+      "url": "https://indianexpress.com/article/business/amul-milk-price-hike-rs-2-per-litre-may-14-new-rates-10687832",
+      "date": "2026-05-18"
+     },
+     {
+      "url": "https://www.rediff.com/business/report/amul-mother-dairy-milk-price-hike-what-it-means-for-consumers-and-inflation/20260513.htm",
+      "date": "2026-05-24"
+     },
+     {
+      "url": "https://www.ndtv.com/india-news/amul-hikes-milk-prices-by-rs-2-per-litre-across-major-variants-in-india-11490223",
+      "date": "2026-05-13"
+     },
+     {
+      "url": "https://timesofindia.indiatimes.com/business/india-business/amul-raises-milk-prices-by-rs-2-per-litre-across-india-from-may-14/articleshow/131067497.cms",
+      "date": "2026-05-24"
+     },
+     {
+      "url": "https://www.newindianexpress.com/business/2026/May/15/fuel-milk-price-hikes-to-fire-inflation-up-to-40-50-bps-analysts",
+      "date": "2026-05-24"
+     }
+    ]
+   },
+   {
+    "why": "the official circular",
+    "query": "Amul milk price revision 3.3% notification order May 2026",
+    "call_id": "070817ca94bf",
+    "n_results": 3,
+    "confirming": []
+   }
+  ],
+  "confirmed_by_chase": true
+ },
+ {
+  "month": "2026-05",
+  "event": {
+   "item": "fuel",
+   "seller": "Oil companies",
+   "place": "National Capital (Delhi)",
+   "pct_change": 3.29374092095408,
+   "abs_change": null,
+   "effective_date": "2026-05-15",
+   "line": "According to news agency ANI, petrol in the national capital will now cost Rs 97.77 per litre, up from Rs 94.77, while diesel prices have risen to Rs 90.67 per litre from Rs 87.67.The revised rates came into effect on Friday.",
+   "url": "https://timesofindia.indiatimes.com/business/india-business/fuel-rates-hiked-petrol-price-increased-from-rs-94-77-to-rs-97-77-diesel-from-rs-87-67-to-rs-90-67-check-new-list-of-rates/articleshow/131105881.cms",
+   "confirmed_by_2_sources": true
+  },
+  "parent_call_id": null,
+  "children": [
+   {
+    "why": "same change, other sellers or states",
+    "query": "fuel price hike May 2026 India",
+    "call_id": "5c6abfc9b47b",
+    "n_results": 3,
+    "confirming": []
+   },
+   {
+    "why": "the official circular",
+    "query": "Oil companies fuel price revision 3.3% notification order May 2026",
+    "call_id": "4c0d6d076481",
+    "n_results": 8,
+    "confirming": []
+   }
+  ],
+  "confirmed_by_chase": false
+ },
+ {
+  "month": "2026-06",
+  "event": {
+   "item": "electricity",
+   "seller": "Uttar Pradesh Power Corporation Limited (UPPCL)",
+   "place": "India",
+   "pct_change": 10.0,
+   "abs_change": null,
+   "effective_date": "2026-06-01",
+   "line": "The Uttar Pradesh Power Corporation Limited (UPPCL) on Saturday (May 30, 2026) announced a 10% surcharge in electricity bills, triggering an uproar in the State. The “fuel and power purchase adjustment surcharge”, linked to the transmission charges, will be effective in the June billing cycle, requiring consumers to pay an additional 10% based on their electricity consumption.",
+   "url": "https://www.thehindu.com/news/national/uttar-pradesh/uproar-in-up-over-10-fuel-surcharge-on-electricity-bills/article71041820.ece",
+   "confirmed_by_2_sources": false
+  },
+  "parent_call_id": null,
+  "children": [
+   {
+    "why": "same change, other sellers or states",
+    "query": "electricity price hike June 2026 India",
+    "call_id": "fcd2e7e1e955",
+    "n_results": 8,
+    "confirming": [
+     {
+      "url": "https://openthemagazine.com/india/uttar-pradesh-announces-10-power-bill-hike-from-june-amid-rising-fuel-costs",
+      "date": "2026-06-23"
+     },
+     {
+      "url": "https://www.hindustantimes.com/india-news/up-set-to-see-10-hike-in-electricity-bills-as-govt-announces-fuel-surcharge-101780129048892.html",
+      "date": "2026-05-30"
+     },
+     {
+      "url": "https://m.economictimes.com/industry/energy/power/up-consumers-to-pay-10-fuel-surcharge-on-june-power-bills/articleshow/131405735.cms",
+      "date": "2026-05-30"
+     }
+    ]
+   },
+   {
+    "why": "the official circular",
+    "query": "Uttar Pradesh Power Corporation Limited (UPPCL) electricity price revision 10.0% notification order June 2026",
+    "call_id": "cfe8c712eedb",
+    "n_results": 2,
+    "confirming": []
+   }
+  ],
+  "confirmed_by_chase": true
+ },
+ {
+  "month": "2026-07",
+  "event": {
+   "item": "milk",
+   "seller": "Arokya",
+   "place": "India",
+   "pct_change": 4.881859011911736,
+   "abs_change": 3.0,
+   "effective_date": "2026-07-23",
+   "line": "Chennai: Dairy brand Arokya has increased the prices of its milk and curd products by Rs 3 per litre.",
+   "url": "https://www.newindianexpress.com/states/tamil-nadu/2026/Jul/09/aavin-to-cut-down-sugar-content-to-10-plain-lassi-to-turn-healthier-in-tn",
+   "confirmed_by_2_sources": false
+  },
+  "parent_call_id": null,
+  "children": [
+   {
+    "why": "same change, other sellers or states",
+    "query": "milk price hike July 2026 India",
+    "call_id": "16389db1bd99",
+    "n_results": 5,
+    "confirming": []
+   },
+   {
+    "why": "the official circular",
+    "query": "Arokya milk price revision 4.9% notification order July 2026",
+    "call_id": "4de007a57cca",
+    "n_results": 1,
+    "confirming": []
+   }
+  ],
+  "confirmed_by_chase": false
+ },
+ {
+  "month": "2026-08",
+  "event": {
+   "item": "milk",
+   "seller": "major cooperative and private dairies",
+   "place": "Maharashtra",
+   "pct_change": 3.242121644404098,
+   "abs_change": 2.0,
+   "effective_date": "2026-08-11",
+   "line": "Milk consumers across Maharashtra will have to pay more from Tuesday, August 11, as major cooperative and private dairies have decided to increase cow and buffalo milk prices by Rs 2 per litre.",
+   "url": "https://www.ibtimes.co.in/maharashtra-milk-prices-rise-by-2-dairy-products-cost-more-august-11-904573",
+   "confirmed_by_2_sources": false
+  },
+  "parent_call_id": null,
+  "children": [
+   {
+    "why": "same change, other sellers or states",
+    "query": "milk price hike August 2026 India",
+    "call_id": "9615473417c5",
+    "n_results": 6,
+    "confirming": [
+     {
+      "url": "https://m.economictimes.com/news/india/milk-prices-to-rise-by-rs-2/litre-in-maharashtra-from-august-11/articleshow/133061816.cms",
+      "date": "2026-08-22"
+     },
+     {
+      "url": "https://www.hindustantimes.com/india-news/milk-prices-in-maharashtra-set-to-increase-by-2-per-litre-from-august-11-association-cites-rising-cost-pressure-101786256601799.html",
+      "date": "2026-08-22"
+     },
+     {
+      "url": "https://openthemagazine.com/india/maharashtra-milk-prices-to-rise-by-rs-2-per-litre-from-august-11-heres-why",
+      "date": "2026-08-22"
+     }
+    ]
+   },
+   {
+    "why": "the official circular",
+    "query": "major cooperative and private dairies milk price revision 3.2% notification order August 2026",
+    "call_id": "4d1e0e35a0e3",
+    "n_results": 8,
+    "confirming": []
+   }
+  ],
+  "confirmed_by_chase": true
+ },
+ {
+  "month": "2026-09",
+  "event": {
+   "item": "milk",
+   "seller": "Dairies and local farms supplying buffalo milk",
+   "place": "New Delhi (contextual reference to Mumbai situation)",
+   "pct_change": 14.570651470016838,
+   "abs_change": 9.0,
+   "effective_date": "2026-09-01",
+   "line": "New Delhi: What can be termed as bad news for Mumbaikars, the milk prices in the city have increased by Rs 9 per litre.",
+   "url": "https://www.india.com/business/milk-price-mumbai-rate-buffalo-cow-goat-amul-mother-dairy-nandini-aavin-milma-verka-saras-sudha-vita-gokul-heritage-parag-paras-hatsun-arokya-dodla-dairy-8514086",
+   "confirmed_by_2_sources": false
+  },
+  "parent_call_id": null,
+  "children": [
+   {
+    "why": "same change, other sellers or states",
+    "query": "milk price hike September 2026 India",
+    "call_id": "fd2a94d189c5",
+    "n_results": 8,
+    "confirming": []
+   },
+   {
+    "why": "the official circular",
+    "query": "Dairies and local farms supplying buffalo milk milk price revision 14.6% notification order September 2026",
+    "call_id": "89b7354f5138",
+    "n_results": 4,
+    "confirming": []
+   }
+  ],
+  "confirmed_by_chase": false
+ },
+ {
+  "month": "2026-09",
+  "event": {
+   "item": "electricity",
+   "seller": "Joint Electricity Regulatory Commission (JERC)",
+   "place": "Jammu & Kashmir",
+   "pct_change": 6.83,
+   "abs_change": null,
+   "effective_date": "2026-09-01",
+   "line": "## जम्मू-कश्मीर में बिजली की दरों में औसतन 6.83 फीसदी बढ़ोतरी की गई है। JERC की मंजूरी के बाद नई दरें 1 सितंबर 2026 से 31 मार्च 2027 तक लागू रहेंगी।",
+   "url": "https://www.jansatta.com/national/power-tariff-hiked-by-6-83-percent-omar-abdullah-government-new-rates-to-take-effect-from-september-1/4674251",
+   "confirmed_by_2_sources": true
+  },
+  "parent_call_id": null,
+  "children": [
+   {
+    "why": "same change, other sellers or states",
+    "query": "electricity price hike September 2026 India",
+    "call_id": "16d936bd1d05",
+    "n_results": 7,
+    "confirming": []
+   },
+   {
+    "why": "the official circular",
+    "query": "Joint Electricity Regulatory Commission (JERC) electricity price revision 6.8% notification order September 2026",
+    "call_id": "64496a4deb9a",
+    "n_results": 8,
+    "confirming": []
+   }
+  ],
+  "confirmed_by_chase": false
+ }
+]

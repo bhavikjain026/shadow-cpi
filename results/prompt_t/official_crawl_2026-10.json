@@ -1,0 +1,134 @@
+{
+ "month": "2026-10",
+ "instructions": "find price circulars or tariff orders published in October 2026",
+ "sites": [
+  {
+   "site": "merc",
+   "url": "https://merc.gov.in",
+   "kind": "electricity",
+   "map_urls": [],
+   "map_credits": 0,
+   "crawl_credits": 0,
+   "pages": 0,
+   "failed": 0,
+   "month_pages": [],
+   "events": [],
+   "event_verdicts": [],
+   "fallback": {
+    "query": "tariff order 2026",
+    "pages": 0,
+    "month_pages": [],
+    "events": [],
+    "event_verdicts": [],
+    "search_urls": [
+     "https://merc.gov.in/wp-content/uploads/2026/03/Order-in-Case-No.1-SM-2026.pdf",
+     "https://new.merc.gov.in/electric/distribution",
+     "https://new.merc.gov.in/wp-content/uploads/2022/07/Draft-Regulation-3.pdf",
+     "https://new.merc.gov.in/regulation_type/current-regulations-renewable-energy"
+    ],
+    "start": "https://merc.gov.in/wp-content/uploads/2026/03/Order-in-Case-No.1-SM-2026.pdf",
+    "failed": 0
+   }
+  },
+  {
+   "site": "derc",
+   "url": "https://www.derc.gov.in",
+   "kind": "electricity",
+   "map_urls": [],
+   "map_credits": 0,
+   "crawl_credits": 0,
+   "pages": 1,
+   "failed": 0,
+   "month_pages": [],
+   "events": [],
+   "event_verdicts": []
+  },
+  {
+   "site": "uperc",
+   "url": "https://www.uperc.org",
+   "kind": "electricity",
+   "map_urls": [],
+   "map_credits": 0,
+   "crawl_credits": 0,
+   "pages": 0,
+   "failed": 0,
+   "month_pages": [],
+   "events": [],
+   "event_verdicts": [],
+   "fallback": {
+    "query": "tariff order 2026",
+    "pages": 0,
+    "month_pages": [],
+    "events": [],
+    "event_verdicts": [],
+    "search_urls": [
+     "https://www.uperc.org/App_File/UPPTCL_TariffOrder_26_27_DigitallySigned-pdf415202652122PM.pdf",
+     "https://www.uperc.org/Order_Users.aspx",
+     "https://www.uperc.org/Tariff_Order_Users.aspx",
+     "https://www.uperc.org/App_File/UPPCLTariffOrderFY2025-26-pdf1122202564623PM.pdf",
+     "https://www.uperc.org/notified_user.aspx"
+    ],
+    "start": "https://www.uperc.org/App_File/UPPTCL_TariffOrder_26_27_DigitallySigned-pdf415202652122PM.pdf",
+    "failed": 0
+   }
+  },
+  {
+   "site": "iocl",
+   "url": "https://iocl.com",
+   "kind": "fuel",
+   "map_urls": [],
+   "map_credits": 0,
+   "crawl_credits": 0,
+   "pages": 0,
+   "failed": 0,
+   "month_pages": [],
+   "events": [],
+   "event_verdicts": [],
+   "fallback": {
+    "query": "petrol diesel LPG price",
+    "pages": 0,
+    "month_pages": [],
+    "events": [],
+    "event_verdicts": [],
+    "search_urls": [
+     "https://iocl.com/petrol-diesel-price",
+     "https://locator.iocl.com/indianoil-lila-service-station-petrol-pump-buroibtalla-kolkata-183583/Home",
+     "https://locator.iocl.com/indianoil-chhepal-barcha-filling-station-petrol-pump-nimmu-leh-237882/Photos-Videos",
+     "https://locator.iocl.com/indianoil-shriram-petrol-pump-petrol-pump-khatav-satara-278253/Home",
+     "https://locator.iocl.com/indianoil-marthang-filling-station-petrol-pump-karsha-kargil-238281/Photos-Videos"
+    ],
+    "start": "https://iocl.com/petrol-diesel-price",
+    "failed": 0
+   }
+  },
+  {
+   "site": "amul",
+   "url": "https://amul.com",
+   "kind": "milk",
+   "map_urls": [],
+   "map_credits": 0,
+   "crawl_credits": 0,
+   "pages": 0,
+   "failed": 0,
+   "month_pages": [],
+   "events": [],
+   "event_verdicts": [],
+   "fallback": {
+    "query": "milk price",
+    "pages": 10,
+    "month_pages": [],
+    "events": [],
+    "event_verdicts": [],
+    "search_urls": [
+     "https://shop.amul.com/en/browse/milk",
+     "https://shop.amul.com/en/product/amul-high-protein-milk-250-ml-or-pack-of-32",
+     "https://shop.amul.com/en/browse/camel-milk",
+     "https://shop.amul.com",
+     "https://shop.amul.com/en/product/amul-whole-milk-powder-pouch-500-g"
+    ],
+    "start": "https://shop.amul.com/en/browse/milk",
+    "failed": 0
+   }
+  }
+ ]
+}

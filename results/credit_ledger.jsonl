@@ -542,3 +542,49 @@
 {"time": "2026-10-21T15:14:05.604383+00:00", "call_id": "ef1205133c22", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-09"]}
 {"time": "2026-10-21T15:14:11.044065+00:00", "call_id": "0bfd9f82c9e5", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-09"]}
 {"time": "2026-10-21T15:14:17.945399+00:00", "call_id": "c9729d877e9a", "endpoint": "/search", "credits": 1, "budgets": ["skeptic", "skeptic/2026-09"]}
+{"time": "2026-10-21T15:35:43.821497+00:00", "call_id": "cca735af4fc0", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:36:00.675334+00:00", "call_id": "a474a85624c1", "endpoint": "/crawl", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:36:17.675684+00:00", "call_id": "00b30f479f20", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:36:40.669579+00:00", "call_id": "c5be0cd02839", "endpoint": "/crawl", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:36:47.778644+00:00", "call_id": "80e04e793423", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:36:59.653145+00:00", "call_id": "4360cca7554c", "endpoint": "/crawl", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:37:10.929381+00:00", "call_id": "7a91ecaea5f5", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:37:22.089284+00:00", "call_id": "cae740a6df00", "endpoint": "/crawl", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:37:28.675080+00:00", "call_id": "e1acf87a899e", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:37:32.948739+00:00", "call_id": "23527bb10664", "endpoint": "/crawl", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:37:59.165806+00:00", "call_id": "269aae09a91d", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:38:16.123104+00:00", "call_id": "e14078eda563", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:38:28.150876+00:00", "call_id": "5d2cde687d1e", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:38:39.535304+00:00", "call_id": "1094935388de", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:38:53.333889+00:00", "call_id": "46e0db39081f", "endpoint": "/map", "credits": 1, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:39:21.811337+00:00", "call_id": "90f32ff81c93", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:39:22.965106+00:00", "call_id": "5d37b3f5b49a", "endpoint": "/crawl", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:39:26.590015+00:00", "call_id": "6c295bdf72cb", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:39:30.080012+00:00", "call_id": "41b77603f9f5", "endpoint": "/crawl", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:39:34.176283+00:00", "call_id": "549d017c4150", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:39:45.362000+00:00", "call_id": "43cec8d2e014", "endpoint": "/crawl", "credits": 0, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:39:48.981490+00:00", "call_id": "d03b46e9e258", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:40:04.392631+00:00", "call_id": "e42867ea615c", "endpoint": "/crawl", "credits": 1, "budgets": ["prompt-t"]}
+{"time": "2026-10-21T15:41:33.067116+00:00", "call_id": "dfc93745a891", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:41:36.614680+00:00", "call_id": "bbc77ae3d79c", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:41:39.779430+00:00", "call_id": "74aec53b3910", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:41:42.362615+00:00", "call_id": "0ae4baed4a5f", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:41:46.727977+00:00", "call_id": "76ff729ecfad", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:41:49.949575+00:00", "call_id": "b14c977e50b8", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:41:53.095784+00:00", "call_id": "eadf1d83c9bd", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:41:56.237648+00:00", "call_id": "6f14137f312c", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:41:59.691705+00:00", "call_id": "9e2ac179d117", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:42:02.858189+00:00", "call_id": "043fe1384986", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:42:05.979608+00:00", "call_id": "3ed96a50de9a", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:42:08.716047+00:00", "call_id": "70e9a5c8c257", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:42:11.058246+00:00", "call_id": "ad84b6a6d343", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:42:15.009755+00:00", "call_id": "09086ad3610e", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:42:18.792097+00:00", "call_id": "75398845a106", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:42:22.221698+00:00", "call_id": "0f95684b9332", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:42:25.129036+00:00", "call_id": "c8a32aefc899", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:42:27.813794+00:00", "call_id": "d08afc5c9ddd", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:42:32.838134+00:00", "call_id": "d08ca7f71717", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:42:37.331809+00:00", "call_id": "395e479568be", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:42:39.847821+00:00", "call_id": "10bb0f40fc4c", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:42:42.537858+00:00", "call_id": "85343496ff81", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}
+{"time": "2026-10-21T15:42:47.517934+00:00", "call_id": "01af8b668e3d", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "chase"]}

@@ -92,3 +92,32 @@ and a `restrict` query were needed. Evidence: cached search responses for tags `
 HTTP helper retried HTTP errors but not socket read timeouts, so the run stopped; it now retries those too
 (`shadow_cpi/http.py`). Evidence: `results/feedback_evidence/nebius_timeout_2026-10-20.txt` (the run log with the
 traceback).
+
+**2026-10-21 · Friction: Map returned nothing on four Indian government/PSU sites, with no error.** `map` on
+merc.gov.in, derc.gov.in, uperc.org and iocl.com came back with `results: []`, no `failed_results` and no error, both
+with `instructions` ("find price circulars or tariff orders published in October 2026") and without them. amul.com
+mapped only without instructions (17 addresses, all marketing pages). An empty answer cannot be told apart from
+"blocked" or "nothing matches". Evidence: flight-recorder ids `cca735af4fc0`, `00b30f479f20`, `80e04e793423`,
+`7a91ecaea5f5`, `e1acf87a899e` (with instructions), `269aae09a91d`, `e14078eda563`, `5d2cde687d1e`, `1094935388de`
+(without), `46e0db39081f` (amul, 17); `results/prompt_t/official_crawl_2026-10.json`, `results/prompt_t/map_noinstr.json`.
+
+**2026-10-21 · Friction: Crawl read 0 pages when started from a PDF or from IOCL's price page.** Crawls started at a
+regulator's tariff-order PDF (MERC, UPERC) and at `iocl.com/petrol-diesel-price` returned `results: []`, although
+Extract reads IOCL's LPG price page and PDFs elsewhere. Evidence: flight-recorder ids `5d37b3f5b49a`, `41b77603f9f5`,
+`43cec8d2e014`.
+
+**2026-10-21 · Good: Crawl read DERC's tariff-order table.** The one page Crawl returned from derc.gov.in was its
+tariff-order index, with dates and PDF links readable as a table (newest order 31/12/2025). It did not follow the
+pager links (limit 15, depth 2), so only page 1 of 14 came back. Evidence: flight-recorder id `c5be0cd02839`.
+
+**2026-10-21 · Good: empty Map/Crawl calls were not charged.** All 16 Map/Crawl calls that returned nothing reported
+`usage.credits: 0`; the one Map with results (17 addresses) cost 1 credit, the 10-page Amul crawl 1, and the 1-page
+DERC crawl 0. Compare the Extract entry
+above, where an all-failed call was still charged 1 credit. Evidence: `results/credit_ledger.jsonl` (budget
+`prompt-t`, 2026-10-21) and the ids above.
+
+**2026-10-21 · Friction (ours, noted for honesty): a loose text match over-counts evidence chasing.** Matching a
+bare number ("2", "5") plus the item word "confirmed" all 12 events, mostly with unrelated pages (Staten Island
+Railway, a New Zealand dairy result). Requiring the unit (₹/Rs/रुपये, %/फीसदी), an India marker and a different site
+left 5 of 12, with 13 of 14 confirming results being the same change on a spot check. Evidence:
+`results/prompt_t/chase.json` (strict rule, re-run from cache at 0 credits); `tools/prompt_t.py` (`confirms`).
