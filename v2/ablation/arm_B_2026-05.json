@@ -1,0 +1,2037 @@
+{
+ "arm": "B",
+ "month": "2026-05",
+ "window": [
+  "2026-04-21",
+  "2026-05-29"
+ ],
+ "writer": "Nemotron",
+ "plan": [
+  {
+   "query": "electricity price hike news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-04-21",
+   "end_date": "2026-05-29",
+   "include_domains": [
+    "timesofindia.indiatimes.com",
+    "zeenews.india.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "1de822e90300",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "19da93fdf7ed",
+   "n_results": 5
+  },
+  {
+   "query": "mobile tariff changes news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-04-21",
+   "end_date": "2026-05-29",
+   "include_domains": [
+    "dainikbhaskar.com",
+    "navbharatindia.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "1de822e90300",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "dainikbhaskar.com",
+     "navbharatindia.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "712821085e2e",
+   "n_results": 5
+  },
+  {
+   "query": "petrol price increase news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-04-21",
+   "end_date": "2026-05-29",
+   "include_domains": [
+    "indiatimes.com",
+    "moneycontrol.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "1de822e90300",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "indiatimes.com",
+     "moneycontrol.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "a02a321d387b",
+   "n_results": 5
+  },
+  {
+   "query": "बिजली दर वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-04-21",
+   "end_date": "2026-05-29",
+   "include_domains": [
+    "timesofindia.indiatimes.com",
+    "zeenews.india.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "1de822e90300",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "f93a6ce1d762",
+   "n_results": 5
+  },
+  {
+   "query": "मोबाइल टैरिफ बदलाव समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-04-21",
+   "end_date": "2026-05-29",
+   "include_domains": [
+    "dainikbhaskar.com",
+    "navbharatindia.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "1de822e90300",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "dainikbhaskar.com",
+     "navbharatindia.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "22fea0b0c217",
+   "n_results": 5
+  },
+  {
+   "query": "पेट्रोल मूल्य वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-04-21",
+   "end_date": "2026-05-29",
+   "include_domains": [
+    "indiatimes.com",
+    "moneycontrol.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "1de822e90300",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "indiatimes.com",
+     "moneycontrol.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "a2fb1d9ef694",
+   "n_results": 5
+  },
+  {
+   "query": "बस किराया वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-04-21",
+   "end_date": "2026-05-29",
+   "include_domains": [
+    "timesofindia.indiatimes.com",
+    "zeenews.india.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "1de822e90300",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "ef6e008dd576",
+   "n_results": 5
+  },
+  {
+   "query": "rail fare revision news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-04-21",
+   "end_date": "2026-05-29",
+   "include_domains": [
+    "dainikbhaskar.com",
+    "navbharatindia.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "1de822e90300",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "dainikbhaskar.com",
+     "navbharatindia.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "700864fa4a00",
+   "n_results": 5
+  }
+ ],
+ "plan_complete": true,
+ "plan_tries": [
+  {
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "call": "1de822e90300",
+   "error": "",
+   "written": [
+    {
+     "query": "बिजली दर वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "मोबाइल टैरिफ बदलाव समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "dainikbhaskar.com",
+      "navbharatindia.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "पेट्रोल मूल्य वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "indiatimes.com",
+      "moneycontrol.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "electricity price hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "mobile tariff changes news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "dainikbhaskar.com",
+      "navbharatindia.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "petrol price increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "indiatimes.com",
+      "moneycontrol.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "बस किराया वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "rail fare revision news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "dainikbhaskar.com",
+      "navbharatindia.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    }
+   ],
+   "picked": [
+    {
+     "query": "electricity price hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "1de822e90300",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "zeenews.india.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "19da93fdf7ed",
+     "n_results": 5
+    },
+    {
+     "query": "mobile tariff changes news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "dainikbhaskar.com",
+      "navbharatindia.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "1de822e90300",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "dainikbhaskar.com",
+       "navbharatindia.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "712821085e2e",
+     "n_results": 5
+    },
+    {
+     "query": "petrol price increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "indiatimes.com",
+      "moneycontrol.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "1de822e90300",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "indiatimes.com",
+       "moneycontrol.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "a02a321d387b",
+     "n_results": 5
+    },
+    {
+     "query": "बिजली दर वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "1de822e90300",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "zeenews.india.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "f93a6ce1d762",
+     "n_results": 5
+    },
+    {
+     "query": "मोबाइल टैरिफ बदलाव समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "dainikbhaskar.com",
+      "navbharatindia.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "1de822e90300",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "dainikbhaskar.com",
+       "navbharatindia.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "22fea0b0c217",
+     "n_results": 5
+    },
+    {
+     "query": "पेट्रोल मूल्य वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "indiatimes.com",
+      "moneycontrol.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "1de822e90300",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "indiatimes.com",
+       "moneycontrol.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "a2fb1d9ef694",
+     "n_results": 5
+    },
+    {
+     "query": "बस किराया वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "1de822e90300",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "zeenews.india.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "ef6e008dd576",
+     "n_results": 5
+    },
+    {
+     "query": "rail fare revision news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-04-21",
+     "end_date": "2026-05-29",
+     "include_domains": [
+      "dainikbhaskar.com",
+      "navbharatindia.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "1de822e90300",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "dainikbhaskar.com",
+       "navbharatindia.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "700864fa4a00",
+     "n_results": 5
+    }
+   ],
+   "dropped": [],
+   "complete": true
+  }
+ ],
+ "cards": [
+  {
+   "url": "https://oilcity.news/general/2026/05/15/another-electric-rate-hike-in-wyoming-rocky-mountain-power-asks-for-71m-increase",
+   "domain": "oilcity.news",
+   "title": "Another electric rate hike in Wyoming: Rocky Mountain Power asks for $71M increase - Casper, WY Oil City News",
+   "lang": "en",
+   "published": "2026-05-15",
+   "search_call": "19da93fdf7ed",
+   "tavily_published": "2026-05-15",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "eecf303d450c",
+   "page_sha256": "f51c6be27112f4a7ff331a1060c9cf38772e89cdacba15a6141a498a41678828",
+   "page_file": "pages/f51c6be27112f4a7ff331a1060c9cf38772e89cdacba15a6141a498a41678828.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.utilitydive.com/news/dte-to-propose-474m-electric-rate-hike-followed-by-2-year-freeze/818403",
+   "domain": "utilitydive.com",
+   "title": "DTE proposes $474M Michigan electric rate hike",
+   "lang": "en",
+   "published": "2026-04-24",
+   "search_call": "19da93fdf7ed",
+   "tavily_published": "2026-04-24",
+   "status": "rejected",
+   "reason": "the page shows 2026-07-28, after the cutoff 2026-05-29",
+   "claims": [
+    {
+     "line": "Published April 24, 2026",
+     "price": null,
+     "unit": null,
+     "region": "Michigan",
+     "seller": "DTE Energy",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the page shows 2026-07-28, after the cutoff 2026-05-29",
+     "price_type": "retail",
+     "change": null,
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    }
+   ],
+   "extract_call": "eecf303d450c",
+   "page_sha256": "4e69de275e731900396a9e353f7d3affea8c37c48dfd9077b8c52c5bd19a83d2",
+   "page_file": "pages/4e69de275e731900396a9e353f7d3affea8c37c48dfd9077b8c52c5bd19a83d2.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-07-28",
+   "date_flag": "after cutoff"
+  },
+  {
+   "url": "https://www.fox10phoenix.com/news/aps-rate-hike-customers-protest-14-electricity-cost-increase-proposal",
+   "domain": "fox10phoenix.com",
+   "title": "APS rate hike: Customers protest 14% electricity cost increase proposal | FOX 10 Phoenix",
+   "lang": "en",
+   "published": "2026-05-18",
+   "search_call": "19da93fdf7ed",
+   "tavily_published": "2026-05-18",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "eecf303d450c",
+   "page_sha256": "4cf23e0efa996261fe4b74fa322952216db41449647863ee6372d48bea54c509",
+   "page_file": "pages/4cf23e0efa996261fe4b74fa322952216db41449647863ee6372d48bea54c509.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-05-18",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.eenews.net/articles/data-centers-drive-76-surge-in-pjm-power-prices",
+   "domain": "eenews.net",
+   "title": "Data centers drive 76% surge in PJM power prices - E&E News by POLITICO",
+   "lang": "en",
+   "published": "2026-05-15",
+   "search_call": "19da93fdf7ed",
+   "tavily_published": "2026-05-15",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.wesanews.org/environment-energy/2026-05-28/pittsburgh-electric-rate-increase-summer-demand",
+   "domain": "wesanews.org",
+   "title": "Pittsburgh-area electric rates to rise June 1 | 90.5 WESA",
+   "lang": "en",
+   "published": "2026-05-28",
+   "search_call": "19da93fdf7ed",
+   "tavily_published": "2026-05-28",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "eecf303d450c",
+   "page_sha256": "cdf725f92475d2bf223c97a56b6830c9b75ba8cb1b53eba484ecc2d1bad6c976",
+   "page_file": "pages/cdf725f92475d2bf223c97a56b6830c9b75ba8cb1b53eba484ecc2d1bad6c976.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-05-28",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.phonearena.com/news/t-mobile-forced-plan-upgrades_id180592",
+   "domain": "phonearena.com",
+   "title": "Loyal T-Mobile customers suddenly paying 60% more due to stealth changes - PhoneArena",
+   "lang": "en",
+   "published": "2026-05-23",
+   "search_call": "712821085e2e",
+   "tavily_published": "2026-05-23",
+   "status": "rejected",
+   "reason": "Tavily Extract could not fetch the page",
+   "claims": [
+    {
+     "line": "# Loyal T-Mobile customers suddenly paying 60% more due to stealth changes.",
+     "price": null,
+     "unit": null,
+     "region": "India",
+     "seller": "T-Mobile",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "null"
+    }
+   ],
+   "extract_call": "eecf303d450c"
+  },
+  {
+   "url": "https://www.cnbc.com/video/2026/05/01/market-open-may-1-2026.html",
+   "domain": "cnbc.com",
+   "title": "Market Open: May 1, 2026 - CNBC",
+   "lang": "en",
+   "published": "2026-05-01",
+   "search_call": "712821085e2e",
+   "tavily_published": "2026-05-01",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.cnbc.com/video/2026/05/01/exxon-mobil-ceo-darren-woods-recent-changes-have-made-us-more-resilient-to-operational-disruptions.html",
+   "domain": "cnbc.com",
+   "title": "Exxon Mobil CEO Darren Woods: Recent changes have made us more resilient to operational disruptions - CNBC",
+   "lang": "en",
+   "published": "2026-05-01",
+   "search_call": "712821085e2e",
+   "tavily_published": "2026-05-01",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.autonews.com/video/how-dealership-service-departments-independent-repair-shops-pay-the-price-of-tariffs/",
+   "domain": "autonews.com",
+   "title": "How dealership service departments, independent repair shops pay the price of tariffs - Automotive News",
+   "lang": "en",
+   "published": "2026-05-21",
+   "search_call": "712821085e2e",
+   "tavily_published": "2026-05-21",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.cnbc.com/video/2026/05/01/cramers-mad-dash-blue-owl-capital.html",
+   "domain": "cnbc.com",
+   "title": "Cramer's Mad Dash: Blue Owl Capital - CNBC",
+   "lang": "en",
+   "published": "2026-05-01",
+   "search_call": "712821085e2e",
+   "tavily_published": "2026-05-01",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260421-1",
+   "domain": "ec.europa.eu",
+   "title": "Significant increase in fuel prices in March 2026 - News articles - Eurostat",
+   "lang": "en",
+   "published": "2026-04-21",
+   "search_call": "a02a321d387b",
+   "tavily_published": "2026-04-21",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "ffb4a65923b5",
+   "page_sha256": "84e985c4bbf4157d23d2d3cc08b9972ad06c0803af7f9fa46c1d696014555ebf",
+   "page_file": "pages/84e985c4bbf4157d23d2d3cc08b9972ad06c0803af7f9fa46c1d696014555ebf.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://timesofindia.indiatimes.com/business/india-business/mischievous-and-misleading-government-dismisses-fake-news-on-petrol-diesel-price-hike/articleshow/130459004.cms",
+   "domain": "timesofindia.indiatimes.com",
+   "title": "Petrol Price Hike: ‘Mischievous and misleading’: Government dismisses ‘fake news’ on petrol, diesel price hike - The Times of India",
+   "lang": "en",
+   "published": "2026-04-23",
+   "search_call": "a02a321d387b",
+   "tavily_published": "2026-04-23",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "ffb4a65923b5",
+   "page_sha256": "6ac6ee6ff7d409d660d89cc736dc6aaa69f9c1b86be121db99c7f4a1b37a5de2",
+   "page_file": "pages/6ac6ee6ff7d409d660d89cc736dc6aaa69f9c1b86be121db99c7f4a1b37a5de2.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-04-23",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.bbc.com/news/articles/cdep64555wzo",
+   "domain": "bbc.com",
+   "title": "Petrol hits highest price since start of Iran war",
+   "lang": "en",
+   "published": "2026-05-19",
+   "search_call": "a02a321d387b",
+   "tavily_published": "2026-05-19",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "ffb4a65923b5",
+   "page_sha256": "908bcabe94723a0b94b9cfa41dc8ba5604b3ea5322653cb94c35a9862eaa1a12",
+   "page_file": "pages/908bcabe94723a0b94b9cfa41dc8ba5604b3ea5322653cb94c35a9862eaa1a12.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://timesofindia.indiatimes.com/india/fleecing-its-own-citizens-congress-slams-modi-govt-for-petrol-diesel-price-increase-by-rs-5-in-9-days/articleshow/131271409.cms",
+   "domain": "timesofindia.indiatimes.com",
+   "title": "'Fleecing its own citizens': Congress slams Modi govt for petrol, diesel price increase by Rs 5 in 9 days | India News - The Times of India",
+   "lang": "en",
+   "published": "2026-05-23",
+   "search_call": "a02a321d387b",
+   "tavily_published": "2026-05-23",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "For once, think about the welfare of the people—how long will you keep benefiting the capitalists?\"Meanwhile, state-run fuel retailers on Saturday raised petrol and diesel prices by under Rs 1 per litre, marking the third revision this month as the government looks to cushion losses triggered by high global crude prices amid the Iran conflict, according to Reuters.In New Delhi, petrol prices rose ",
+     "price": 99.51,
+     "unit": "per litre",
+     "region": "New Delhi",
+     "seller": "state-run fuel retailers",
+     "old_price": null,
+     "new_price": 99.51,
+     "pct_change": null,
+     "effective_date": "2026-05-23",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# 'Fleecing its own citizens': Congress slams Modi govt for petrol, diesel price increase by Rs 5 in 9 days \n While governments around the world are giving relief to their people, the Modi government is busy fleecing its own citizens. \n by Rs 0.87 per litre to Rs 99.51, while diesel prices climbed by Rs 0.91 to Rs 92.49 per litre, dealer data showed.",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "For once, think about the welfare of the people—how long will you keep benefiting the capitalists?\"Meanwhile, state-run fuel retailers on Saturday raised petrol and diesel prices by under Rs 1 per litre, marking the third revision this month as the government looks to cushion losses triggered by high global crude prices amid the Iran conflict, according to Reuters.In New Delhi, petrol prices rose ",
+     "price": 92.49,
+     "unit": "per litre",
+     "region": "New Delhi",
+     "seller": "state-run fuel retailers",
+     "old_price": null,
+     "new_price": 92.49,
+     "pct_change": null,
+     "effective_date": "2026-05-23",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# 'Fleecing its own citizens': Congress slams Modi govt for petrol, diesel price increase by Rs 5 in 9 days \n While governments around the world are giving relief to their people, the Modi government is busy fleecing its own citizens. \n by Rs 0.87 per litre to Rs 99.51, while diesel prices climbed by Rs 0.91 to Rs 92.49 per litre, dealer data showed.",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "CNG prices, too, went up by Rs 1 per kg with effect from May 23.",
+     "price": null,
+     "unit": "per kg",
+     "region": "New Delhi",
+     "seller": "state-run fuel retailers",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-05-23",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# 'Fleecing its own citizens': Congress slams Modi govt for petrol, diesel price increase by Rs 5 in 9 days \n by Rs 0.87 per litre to Rs 99.51, while diesel prices climbed by Rs 0.91 to Rs 92.49 per litre, dealer data showed. \n Poll",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": [
+      "nct of delhi"
+     ]
+    }
+   ],
+   "extract_call": "ffb4a65923b5",
+   "page_sha256": "c5f86e0fd5f9df5fa1fd9442b80c763a4d09ff6268b6a84b42d4bcbf129f3b23",
+   "page_file": "pages/c5f86e0fd5f9df5fa1fd9442b80c763a4d09ff6268b6a84b42d4bcbf129f3b23.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-05-23",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.aljazeera.com/economy/2026/5/12/us-faces-rising-costs-with-iran-war-driving-energy-prices-inflation-higher",
+   "domain": "aljazeera.com",
+   "title": "US faces rising costs with Iran war driving energy prices, inflation higher | Inflation News | Al Jazeera",
+   "lang": "en",
+   "published": "2026-05-12",
+   "search_call": "a02a321d387b",
+   "tavily_published": "2026-05-12",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "ffb4a65923b5",
+   "page_sha256": "36e42d86a9c5db84b612f3ab0644da7bdae464c3ab6876b0f4d0c1968ead338d",
+   "page_file": "pages/36e42d86a9c5db84b612f3ab0644da7bdae464c3ab6876b0f4d0c1968ead338d.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-05-12",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.indiasnews.net/news/279012931/india-iip-growth-likely-slowed-to-2-in-march-as-energy-sector-weakens-and-exports-slip-ubi",
+   "domain": "indiasnews.net",
+   "title": "India's IIP growth likely slowed to 2% in March as energy sector weakens and exports slip: UBI - India's News.Net",
+   "lang": "hi",
+   "published": "2026-04-26",
+   "search_call": "f93a6ce1d762",
+   "tavily_published": "2026-04-26",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://solarquarter.com/2026/05/26/pace-digitek-reports-fy26-revenue-growth-expands-bess-manufacturing-and-telecom-infrastructure-operations/",
+   "domain": "solarquarter.com",
+   "title": "Pace Digitek Reports FY26 Revenue Growth; Expands BESS Manufacturing and Telecom Infrastructure Operations - SolarQuarter",
+   "lang": "hi",
+   "published": "2026-05-26",
+   "search_call": "f93a6ce1d762",
+   "tavily_published": "2026-05-26",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://solarquarter.com/2026/05/22/ganesh-green-bharat-limited-reports-%E2%82%B91000-crore-fy26-revenue-with-149-growth-in-profit-driven-by-solar-manufacturing-and-epc-expansion/",
+   "domain": "solarquarter.com",
+   "title": "Ganesh Green Bharat Limited Reports ₹1,000 Crore FY26 Revenue with 149% Growth in Profit Driven by Solar Manufacturing and EPC Expansion - SolarQuarter",
+   "lang": "hi",
+   "published": "2026-05-22",
+   "search_call": "f93a6ce1d762",
+   "tavily_published": "2026-05-22",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "943c53c5e99b",
+   "page_sha256": "fe9ad50216f0f1a4efbfdebbb1f11d88997a886319226a3b1bdcceac82c1d3f1",
+   "page_file": "pages/fe9ad50216f0f1a4efbfdebbb1f11d88997a886319226a3b1bdcceac82c1d3f1.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.devdiscourse.com/article/business/3895572-bhels-remarkable-profit-leap-a-testament-to-robust-revenue-growth?amp",
+   "domain": "devdiscourse.com",
+   "title": "BHEL's Remarkable Profit Leap: A Testament to Robust Revenue Growth - Devdiscourse",
+   "lang": "hi",
+   "published": "2026-05-04",
+   "search_call": "f93a6ce1d762",
+   "tavily_published": "2026-05-04",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://tradebrains.in/17107-cr-order-book-semiconductor-stock-jumps-5-after-announcing-strong-q4-results/",
+   "domain": "tradebrains.in",
+   "title": "₹17,107 Cr Order Book: Semiconductor Stock Jumps 5% After Announcing Strong Q4 Results - Trade Brains",
+   "lang": "hi",
+   "published": "2026-05-07",
+   "search_call": "f93a6ce1d762",
+   "tavily_published": "2026-05-07",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "943c53c5e99b",
+   "page_sha256": "31475201b869284df3afa0f61ae455c7743112dce3fa8fab2d998b11134855e3",
+   "page_file": "pages/31475201b869284df3afa0f61ae455c7743112dce3fa8fab2d998b11134855e3.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.amarujala.com/photo-gallery/technology/tech-diary/telecom-tariff-hike-india-airtel-jio-vi-prepaid-plan-changes-hindi-2026-04-21",
+   "domain": "amarujala.com",
+   "title": "Telecom: शुरू हो गया टेलीकॉम कंपनियों का खेल! महंगे हो रहे हैं रीचार्ज प्लान, लगने वाला है बड़ा झटका? - Telecom Tariff Hike India Airtel Jio Vi Prepaid Plan Changes Hindi - Amar Ujala Hindi News Live",
+   "lang": "hi",
+   "published": "2026-04-21",
+   "search_call": "22fea0b0c217",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "the line is not about this item",
+   "claims": [
+    {
+     "line": "कंपनी ने अपना लोकप्रिय 799 रुपये वाला प्लान बंद कर दिया है, जिसे यूजर्स के बीच काफी वैल्यू-फॉर-मनी माना जाता था।",
+     "price": 799,
+     "unit": "rupees",
+     "region": "India",
+     "seller": "Bharti Airtel",
+     "old_price": 799,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-04-21",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the line is not about this item",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# Telecom: शुरू हो गया टेलीकॉम कंपनियों का खेल! महंगे हो रहे हैं रीचार्ज प्लान, लगने वाला है बड़ा झटका? \n ## **एयरटेल ने वैल्यू प्लान किए बंद** \n ![Vodafone Idea ने भी बदला गेम](https://staticimg.amarujala.com/assets/images/2024/07/24/vi-logo_c1fcbafc53762486b86da9cd01691ad7.jpeg?w=2048&q=80&dpr=1&format=auto)",
+     "gloss": "The company has discontinued its popular Rs 799 plan, which was considered to be a great value for money by users.",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    },
+    {
+     "line": "इसके साथ ही 859 रुपये वाले प्लान की कीमत बढ़ाकर 899 रुपये कर दी गई है।",
+     "price": 899,
+     "unit": "rupees",
+     "region": "India",
+     "seller": "Bharti Airtel",
+     "old_price": 859,
+     "new_price": 899,
+     "pct_change": 4.71,
+     "effective_date": "2026-04-21",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the line is not about this item",
+     "price_type": "retail",
+     "change": 0.046565774155995276,
+     "base_price": null,
+     "context": "# Telecom: शुरू हो गया टेलीकॉम कंपनियों का खेल! महंगे हो रहे हैं रीचार्ज प्लान, लगने वाला है बड़ा झटका? \n ## **एयरटेल ने वैल्यू प्लान किए बंद** \n ![Vodafone Idea ने भी बदला गेम](https://staticimg.amarujala.com/assets/images/2024/07/24/vi-logo_c1fcbafc53762486b86da9cd01691ad7.jpeg?w=2048&q=80&dpr=1&format=auto)",
+     "gloss": "The price of the plan that costs 859 rupees has been increased to 899 rupees.",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    }
+   ],
+   "extract_call": "943c53c5e99b",
+   "page_sha256": "5fed74f0f0c09a7f603eeeaa042763e66e8d2d4ee456dca4f41c9f218e51ffcb",
+   "page_file": "pages/5fed74f0f0c09a7f603eeeaa042763e66e8d2d4ee456dca4f41c9f218e51ffcb.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-04-21",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.amarujala.com/business/business-diary/trai-extends-deadline-for-comments-on-mobile-plan-without-data-at-lower-price-to-may-5-2026-04-28",
+   "domain": "amarujala.com",
+   "title": "डेटा के बिना मोबाइल प्लान होंगे सस्ते?:सिर्फ कॉलिंग-sms वाला रिचार्ज लाने की तैयारी, Trai ने बढ़ाई डेडलाइन - Trai Extends Deadline For Comments On Mobile Plan Without Data At Lower Price To May 5 - Amar Ujala Hindi News Live",
+   "lang": "hi",
+   "published": "2026-04-28",
+   "search_call": "22fea0b0c217",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "943c53c5e99b",
+   "page_sha256": "ed089b07d121ebf22ac6955e5f591f025b6eb2b8f3277dc48deb2d239d37f90d",
+   "page_file": "pages/ed089b07d121ebf22ac6955e5f591f025b6eb2b8f3277dc48deb2d239d37f90d.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-04-28",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://navbharattimes.indiatimes.com/tech/gadgets-news/diesel-petrol-price-possible-impact-could-increase-mobile-recharge-tariff-hike/articleshow/131115711.cms",
+   "domain": "navbharattimes.indiatimes.com",
+   "title": "Tariff Hike: पेट्रोल-डीजल के बाद महंगे होंगे मोबाइल रिचार्ज? जल्द बढ़ सकती हैं कीमतें, जानें वजह?",
+   "lang": "hi",
+   "published": null,
+   "search_call": "22fea0b0c217",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.prabhatkhabar.com/technology/telecom-price-hike-plans-benefits-changed",
+   "domain": "prabhatkhabar.com",
+   "title": "मोबाइल रिचार्ज हुआ महंगा! सभी कंपनियों ने बदले प्लान",
+   "lang": "hi",
+   "published": null,
+   "search_call": "22fea0b0c217",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.bhaskar.com/g/international/news/donald-trump-pm-narendra-modi-friendship-big-fan-india-trust-us-trade-deal-138021693.html",
+   "domain": "bhaskar.com",
+   "title": "ट्रम्प ने मोदी को महान बताया, कहा- PM मेरे दोस्त: मैं उनका बहुत बड़ा फैन, भारत मुझ पर 100% भरोसा कर सकता है",
+   "lang": "hi",
+   "published": null,
+   "search_call": "22fea0b0c217",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260522-1",
+   "domain": "ec.europa.eu",
+   "title": "Strong increase in fuel prices continued in April 2026 - News articles - Eurostat",
+   "lang": "hi",
+   "published": "2026-05-22",
+   "search_call": "a2fb1d9ef694",
+   "tavily_published": "2026-05-22",
+   "status": "rejected",
+   "reason": "effective date 2026-04-01 is not in 2026-05",
+   "claims": [
+    {
+     "line": "Looking at diesel and petrol prices in the EU, in April 2026, they increased by 33.7% for diesel and 13.6% for petrol compared with April 2025.",
+     "price": 33.7,
+     "unit": "%",
+     "region": "EU",
+     "seller": "EU",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": 33.7,
+     "effective_date": "2026-04-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2026-04-01 is not in 2026-05",
+     "price_type": "retail",
+     "change": 0.337,
+     "base_price": null,
+     "context": "## Search by keyword \n ## Both diesel and petrol on the rise \n On a monthly basis, EU consumers saw diesel prices go up by 7.9% and petrol prices by 2.4% compared with March 2026. In March 2026, diesel rose by 19.1% and petrol by 10.6% relative to February 2025.",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "Looking at diesel and petrol prices in the EU, in April 2026, they increased by 33.7% for diesel and 13.6% for petrol compared with April 2025.",
+     "price": 13.6,
+     "unit": "%",
+     "region": "EU",
+     "seller": "EU",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": 13.6,
+     "effective_date": "2026-04-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2026-04-01 is not in 2026-05",
+     "price_type": "retail",
+     "change": 0.136,
+     "base_price": null,
+     "context": "## Search by keyword \n ## Both diesel and petrol on the rise \n On a monthly basis, EU consumers saw diesel prices go up by 7.9% and petrol prices by 2.4% compared with March 2026. In March 2026, diesel rose by 19.1% and petrol by 10.6% relative to February 2025.",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "943c53c5e99b",
+   "page_sha256": "2df7223fe3c626a2876de1f6900a4b58617c7c0aa397fbfbb94f9a5d2f983fb8",
+   "page_file": "pages/2df7223fe3c626a2876de1f6900a4b58617c7c0aa397fbfbb94f9a5d2f983fb8.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.aajtak.in/business/news/story/petrol-diesel-price-hike-third-time-in-10-days-amid-middle-east-tension-know-price-ntc-drmt-dskc-2559405-2026-05-23",
+   "domain": "aajtak.in",
+   "title": "10 दिनों में तीसरी बार बढ़े पेट्रोल-डीजल के दाम, CNG भी हो गई महंगी",
+   "lang": "hi",
+   "published": "2026-05-23",
+   "search_call": "a2fb1d9ef694",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "17d592409429",
+   "page_sha256": "7f13a3d0ffee602a27adeb3afa6452a28b655729f3b424d505a040e53e04b1db",
+   "page_file": "pages/7f13a3d0ffee602a27adeb3afa6452a28b655729f3b424d505a040e53e04b1db.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-05-23",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.amarujala.com/india-news/petrol-diesel-price-rise-in-india-fuel-costs-increase-in-10-days-cities-states-vat-excise-duty-hormuz-crisis-u-2026-05-25",
+   "domain": "amarujala.com",
+   "title": "अभी कितनी बार बढ़ेंगे पेट्रोल-डीजल के दाम: क्यों 10 दिन में चार बार हो चुकी बढ़ोतरी, कब तक चलेगा यह सिलसिला?",
+   "lang": "hi",
+   "published": "2026-05-25",
+   "search_call": "a2fb1d9ef694",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "Super gave no price for this line",
+   "claims": [
+    {
+     "line": "भारत में पांच राज्यों (असम, पश्चिम बंगाल, तमिलनाडु, केरल और पुदुचेरी) के चुनाव के समापन के बाद पहली बार तेल की कीमतों में बढ़ोतरी की गई। चार साल से ज्यादा समय (49 महीने) के बाद पहली बार तेल की कीमतों को बढ़ाया गया। इससे पहले लोकसभा चुनाव से ठीक पहले पेट्रोल-डीजल की कीमतों को दो रुपये तक कम किया गया था। आखिरी बार तेल की कीमतें भारत में 2022 में बढ़ाई गई थीं।",
+     "price": null,
+     "unit": "per litre",
+     "region": "Nationwide",
+     "seller": "Oil companies",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-05-15",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# अभी कितनी बार बढ़ेंगे पेट्रोल-डीजल के दाम: क्यों 10 दिन में चार बार हो चुकी बढ़ोतरी, कब तक चलेगा यह सिलसिला? \n ## **भारत में कबसे जारी है ईंधन की कीमतों में बढ़ोतरी?** \n ![](https://spiderimg.amarujala.com/assets/images/2026/05/25/whatsapp-image-2026-05-25-at-185826_6a144e9eaf085.jpeg)",
+     "gloss": "After the elections in five states (Assam, West Bengal, Tamil Nadu, Kerala and Puducherry) in India concluded, fuel prices were raised for the first time. This was the first increase in fuel prices after more than four years (49 months). Prior to that, petrol and diesel prices were cut by up to two rupees just before the general election. The last time fuel prices were raised in India was in 2022.",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "assam",
+      "kerala",
+      "tamil nadu",
+      "west bengal"
+     ]
+    },
+    {
+     "line": "भारत में पांच राज्यों (असम, पश्चिम बंगाल, तमिलनाडु, केरल और पुदुचेरी) के चुनाव के समापन के बाद पहली बार तेल की कीमतों में बढ़ोतरी की गई। चार साल से ज्यादा समय (49 महीने) के बाद पहली बार तेल की कीमतों को बढ़ाया गया। इससे पहले लोकसभा चुनाव से ठीक पहले पेट्रोल-डीजल की कीमतों को दो रुपये तक कम किया गया था। आखिरी बार तेल की कीमतें भारत में 2022 में बढ़ाई गई थीं।",
+     "price": null,
+     "unit": "per litre",
+     "region": "Nationwide",
+     "seller": "Oil companies",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-05-15",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# अभी कितनी बार बढ़ेंगे पेट्रोल-डीजल के दाम: क्यों 10 दिन में चार बार हो चुकी बढ़ोतरी, कब तक चलेगा यह सिलसिला? \n ## **भारत में कबसे जारी है ईंधन की कीमतों में बढ़ोतरी?** \n ![](https://spiderimg.amarujala.com/assets/images/2026/05/25/whatsapp-image-2026-05-25-at-185826_6a144e9eaf085.jpeg)",
+     "gloss": "After the elections in five states (Assam, West Bengal, Tamil Nadu, Kerala and Puducherry) in India concluded, fuel prices were raised for the first time. This was the first increase in fuel prices after more than four years (49 months). Prior to that, petrol and diesel prices were cut by up to two rupees just before the general election. The last time fuel prices were raised in India was in 2022.",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "assam",
+      "kerala",
+      "tamil nadu",
+      "west bengal"
+     ]
+    },
+    {
+     "line": "भारत में पांच राज्यों (असम, पश्चिम बंगाल, तमिलनाडु, केरल और पुदुचेरी) के चुनाव के समापन के बाद पहली बार तेल की कीमतों में बढ़ोतरी की गई। चार साल से ज्यादा समय (49 महीने) के बाद पहली बार तेल की कीमतों को बढ़ाया गया। इससे पहले लोकसभा चुनाव से ठीक पहले पेट्रोल-डीजल की कीमतों को दो रुपये तक कम किया गया था। आखिरी बार तेल की कीमतें भारत में 2022 में बढ़ाई गई थीं।",
+     "price": null,
+     "unit": "per litre",
+     "region": "Nationwide",
+     "seller": "Oil companies",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-05-18",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# अभी कितनी बार बढ़ेंगे पेट्रोल-डीजल के दाम: क्यों 10 दिन में चार बार हो चुकी बढ़ोतरी, कब तक चलेगा यह सिलसिला? \n ## **भारत में कबसे जारी है ईंधन की कीमतों में बढ़ोतरी?** \n ![](https://spiderimg.amarujala.com/assets/images/2026/05/25/whatsapp-image-2026-05-25-at-185826_6a144e9eaf085.jpeg)",
+     "gloss": "After the elections in five states (Assam, West Bengal, Tamil Nadu, Kerala and Puducherry) in India concluded, fuel prices were raised for the first time. This was the first increase in fuel prices after more than four years (49 months). Prior to that, petrol and diesel prices were cut by up to two rupees just before the general election. The last time fuel prices were raised in India was in 2022.",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "assam",
+      "kerala",
+      "tamil nadu",
+      "west bengal"
+     ]
+    },
+    {
+     "line": "भारत में पांच राज्यों (असम, पश्चिम बंगाल, तमिलनाडु, केरल और पुदुचेरी) के चुनाव के समापन के बाद पहली बार तेल की कीमतों में बढ़ोतरी की गई। चार साल से ज्यादा समय (49 महीने) के बाद पहली बार तेल की कीमतों को बढ़ाया गया। इससे पहले लोकसभा चुनाव से ठीक पहले पेट्रोल-डीजल की कीमतों को दो रुपये तक कम किया गया था। आखिरी बार तेल की कीमतें भारत में 2022 में बढ़ाई गई थीं।",
+     "price": null,
+     "unit": "per litre",
+     "region": "Nationwide",
+     "seller": "Oil companies",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-05-18",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# अभी कितनी बार बढ़ेंगे पेट्रोल-डीजल के दाम: क्यों 10 दिन में चार बार हो चुकी बढ़ोतरी, कब तक चलेगा यह सिलसिला? \n ## **भारत में कबसे जारी है ईंधन की कीमतों में बढ़ोतरी?** \n ![](https://spiderimg.amarujala.com/assets/images/2026/05/25/whatsapp-image-2026-05-25-at-185826_6a144e9eaf085.jpeg)",
+     "gloss": "After the elections in five states (Assam, West Bengal, Tamil Nadu, Kerala and Puducherry) in India concluded, fuel prices were raised for the first time. This was the first increase in fuel prices after more than four years (49 months). Prior to that, petrol and diesel prices were cut by up to two rupees just before the general election. The last time fuel prices were raised in India was in 2022.",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "assam",
+      "kerala",
+      "tamil nadu",
+      "west bengal"
+     ]
+    },
+    {
+     "line": "भारत में पांच राज्यों (असम, पश्चिम बंगाल, तमिलनाडु, केरल और पुदुचेरी) के चुनाव के समापन के बाद पहली बार तेल की कीमतों में बढ़ोतरी की गई। चार साल से ज्यादा समय (49 महीने) के बाद पहली बार तेल की कीमतों को बढ़ाया गया। इससे पहले लोकसभा चुनाव से ठीक पहले पेट्रोल-डीजल की कीमतों को दो रुपये तक कम किया गया था। आखिरी बार तेल की कीमतें भारत में 2022 में बढ़ाई गई थीं।",
+     "price": null,
+     "unit": "per litre",
+     "region": "Nationwide",
+     "seller": "Oil companies",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-05-22",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# अभी कितनी बार बढ़ेंगे पेट्रोल-डीजल के दाम: क्यों 10 दिन में चार बार हो चुकी बढ़ोतरी, कब तक चलेगा यह सिलसिला? \n ## **भारत में कबसे जारी है ईंधन की कीमतों में बढ़ोतरी?** \n ![](https://spiderimg.amarujala.com/assets/images/2026/05/25/whatsapp-image-2026-05-25-at-185826_6a144e9eaf085.jpeg)",
+     "gloss": "After the elections in five states (Assam, West Bengal, Tamil Nadu, Kerala and Puducherry) in India concluded, fuel prices were raised for the first time. This was the first increase in fuel prices after more than four years (49 months). Prior to that, petrol and diesel prices were cut by up to two rupees just before the general election. The last time fuel prices were raised in India was in 2022.",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "assam",
+      "kerala",
+      "tamil nadu",
+      "west bengal"
+     ]
+    },
+    {
+     "line": "भारत में पांच राज्यों (असम, पश्चिम बंगाल, तमिलनाडु, केरल और पुदुचेरी) के चुनाव के समापन के बाद पहली बार तेल की कीमतों में बढ़ोतरी की गई। चार साल से ज्यादा समय (49 महीने) के बाद पहली बार तेल की कीमतों को बढ़ाया गया। इससे पहले लोकसभा चुनाव से ठीक पहले पेट्रोल-डीजल की कीमतों को दो रुपये तक कम किया गया था। आखिरी बार तेल की कीमतें भारत में 2022 में बढ़ाई गई थीं।",
+     "price": null,
+     "unit": "per litre",
+     "region": "Nationwide",
+     "seller": "Oil companies",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-05-22",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# अभी कितनी बार बढ़ेंगे पेट्रोल-डीजल के दाम: क्यों 10 दिन में चार बार हो चुकी बढ़ोतरी, कब तक चलेगा यह सिलसिला? \n ## **भारत में कबसे जारी है ईंधन की कीमतों में बढ़ोतरी?** \n ![](https://spiderimg.amarujala.com/assets/images/2026/05/25/whatsapp-image-2026-05-25-at-185826_6a144e9eaf085.jpeg)",
+     "gloss": "After the elections in five states (Assam, West Bengal, Tamil Nadu, Kerala and Puducherry) in India concluded, fuel prices were raised for the first time. This was the first increase in fuel prices after more than four years (49 months). Prior to that, petrol and diesel prices were cut by up to two rupees just before the general election. The last time fuel prices were raised in India was in 2022.",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "assam",
+      "kerala",
+      "tamil nadu",
+      "west bengal"
+     ]
+    },
+    {
+     "line": "देशभर में पेट्रोल और डीजल की कीमतों में 25 मई 2026 (सोमवार) को फिर बढ़ोतरी कर दी गई।",
+     "price": null,
+     "unit": "per litre",
+     "region": "Nationwide",
+     "seller": "Oil companies",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-05-25",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# अभी कितनी बार बढ़ेंगे पेट्रोल-डीजल के दाम: क्यों 10 दिन में चार बार हो चुकी बढ़ोतरी, कब तक चलेगा यह सिलसिला? \n ### विस्तार [Follow Amar Ujala on Google News Add as a preferred source on google](https://www.google.com/preferences/source?q=amarujala.com \"Follow Amar Ujala on Google News\") \n इस बार तेल कंपनियों ने पेट्रोल की कीमत में 2.61 रुपये प्रति लीटर और डीजल में 2.71 रुपये प्रति लीटर तक की बढ़ोतरी की।",
+     "gloss": "Petrol and diesel prices across the country were hiked again on 25 May 2026 (Monday).",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "देशभर में पेट्रोल और डीजल की कीमतों में 25 मई 2026 (सोमवार) को फिर बढ़ोतरी कर दी गई।",
+     "price": null,
+     "unit": "per litre",
+     "region": "Nationwide",
+     "seller": "Oil companies",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-05-25",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# अभी कितनी बार बढ़ेंगे पेट्रोल-डीजल के दाम: क्यों 10 दिन में चार बार हो चुकी बढ़ोतरी, कब तक चलेगा यह सिलसिला? \n ### विस्तार [Follow Amar Ujala on Google News Add as a preferred source on google](https://www.google.com/preferences/source?q=amarujala.com \"Follow Amar Ujala on Google News\") \n इस बार तेल कंपनियों ने पेट्रोल की कीमत में 2.61 रुपये प्रति लीटर और डीजल में 2.71 रुपये प्रति लीटर तक की बढ़ोतरी की।",
+     "gloss": "Petrol and diesel prices across the country were hiked again on 25 May 2026 (Monday).",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "17d592409429",
+   "page_sha256": "6c63524320987707b68f14903f05d2dc97f45d2e06187bd249e6009501c48b75",
+   "page_file": "pages/6c63524320987707b68f14903f05d2dc97f45d2e06187bd249e6009501c48b75.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-05-25",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.bbc.com/hindi/articles/c8r88jzey11o",
+   "domain": "bbc.com",
+   "title": "फिर बढ़े पेट्रोल-डीज़ल के दाम, विपक्ष ने पूछे सरकार से ये सवाल",
+   "lang": "hi",
+   "published": null,
+   "search_call": "a2fb1d9ef694",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.jagran.com/bihar/bhojpur-bus-fare-hike-10-to-15-percent-increase-from-june-1-in-bihar-40256198.html",
+   "domain": "jagran.com",
+   "title": "बिहार में बस का सफर हुआ महंगा, 1 जून से 10 से 15% तक बढ़ेगा किराया; विभाग ने जारी किया नोटिफिकेशन",
+   "lang": "hi",
+   "published": null,
+   "search_call": "ef6e008dd576",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.etvbharat.com/hi/state/petrol-diesel-crisis-bus-operators-to-increase-bus-fare-crude-oil-prices-iran-america-war-effect-mps26051503719",
+   "domain": "etvbharat.com",
+   "title": "पेट्रोल डीजल का असर, महंगा होगा सफर, बस किराया 40% बढ़ाने की तैयारी",
+   "lang": "hi",
+   "published": null,
+   "search_call": "ef6e008dd576",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.hbrc.govt.nz/our-council/news/article/1981/gobay-bus-fare-to-increase-from-may-3",
+   "domain": "hbrc.govt.nz",
+   "title": "Gobay bus fare to increase from May 3 | News & Media | Hawke's Bay Regional Council",
+   "lang": "hi",
+   "published": null,
+   "search_call": "ef6e008dd576",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://newssourcegy.com/news/route-32-mini-bus-operators-protest-for-increase-in-fares",
+   "domain": "newssourcegy.com",
+   "title": "Route 32 mini-bus operators protest for increase in fares",
+   "lang": "hi",
+   "published": null,
+   "search_call": "ef6e008dd576",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://marioncountynow.com/news/277772-marion-transit-to-host-public-hearing-on-proposed-bus-fare-increase",
+   "domain": "marioncountynow.com",
+   "title": "Marion Transit to host public hearing on proposed bus fare increase",
+   "lang": "hi",
+   "published": null,
+   "search_call": "ef6e008dd576",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.fox5ny.com/news/what-know-about-path-fare-increase",
+   "domain": "fox5ny.com",
+   "title": "What to know about the PATH fare increase | FOX 5 New York",
+   "lang": "en",
+   "published": "2026-05-04",
+   "search_call": "700864fa4a00",
+   "tavily_published": "2026-05-04",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "NEW YORK - PATH riders will see higher fares starting Monday as the Port Authority of New York and New Jersey rolls out its latest price increases across the rail system linking Manhattan and New Jersey.",
+     "price": 3.25,
+     "unit": "USD",
+     "region": "India",
+     "seller": "Port Authority of New York and New Jersey",
+     "old_price": 3.25,
+     "new_price": 3.25,
+     "pct_change": null,
+     "effective_date": "2025-06-14",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": 0.0,
+     "base_price": null,
+     "context": "[![FOX 5 New York](//static.foxtv.com/static/orion/img/core/s/logos/fts-new-york-a.svg) ![FOX 5 New York](//static.foxtv.com/static/orion/img/core/s/logos/fts-new-york-b.svg)](/ \"FOX 5 New York — Local News & Weather\")",
+     "gloss": "",
+     "kind": "rail",
+     "cpi": "07.3.1.1.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "The Port Authority is proposing gradual PATH fare hikes through 2029, raising the single ride from $3 to $4 — to help fund major upgrades, including faster trains and restored seven-day service for the first time in 25 years. FOX 5’s Stephanie Bertini reports from Hoboken with what riders can expect and when the changes will take effect.",
+     "price": 4,
+     "unit": "USD",
+     "region": "India",
+     "seller": "Port Authority of New York and New Jersey",
+     "old_price": 3,
+     "new_price": 4,
+     "pct_change": null,
+     "effective_date": "2029-01-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2029-01-01 is not in 2026-05",
+     "price_type": "retail",
+     "change": 0.33333333333333326,
+     "base_price": null,
+     "context": "# What to know about the PATH fare increase \n #### [PATH fare hike coming by 2029 as Port Authority promises faster, better service](/video/1741265) \n #### The Brief",
+     "gloss": "",
+     "kind": "rail",
+     "cpi": "07.3.1.1.2.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "17d592409429",
+   "page_sha256": "2fd00798b77dd757c4c055a71692af0dda70457fdbb078e41b7d74385f1f8301",
+   "page_file": "pages/2fd00798b77dd757c4c055a71692af0dda70457fdbb078e41b7d74385f1f8301.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-05-04",
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.6sqft.com/nj-transit-cuts-world-cup-train-fare-to-metlife-by-30",
+   "domain": "6sqft.com",
+   "title": "NJ Transit cuts World Cup train fare to MetLife by 30%",
+   "lang": "en",
+   "published": "2026-05-08",
+   "search_call": "700864fa4a00",
+   "tavily_published": "2026-05-08",
+   "status": "rejected",
+   "reason": "the line is not about this item",
+   "claims": [
+    {
+     "line": "Reduced fare for riders ages 65 and older, as well as those with disabilities, also increased by 10 cents, from $1.50 to $1.60.",
+     "price": 1.6,
+     "unit": "dollars",
+     "region": "India",
+     "seller": "NJ Transit",
+     "old_price": 1.5,
+     "new_price": 1.6,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the line is not about this item",
+     "price_type": "retail",
+     "change": 0.06666666666666665,
+     "base_price": null,
+     "context": "### Get the best of **six sq ft** in your *inbox* every day. \n Fares are expected to rise in 25-cent increments, reaching $4 in 2029. \n [learn more](https://www.6sqft.com/path-fare-hike-takes-effect-ahead-of-return-of-7-day-service/)",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    },
+    {
+     "line": "[...] The cost to ride PATH trains officially increased from $3 to $3.25 on Monday as part of the system's transformative service upgrades.",
+     "price": 3.25,
+     "unit": "dollars",
+     "region": "India",
+     "seller": "Port Authority of New York and New Jersey",
+     "old_price": 3.0,
+     "new_price": 3.25,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": 0.08333333333333326,
+     "base_price": null,
+     "context": "[![6sqft](https://www.6sqft.com/wp-content/uploads/2023/02/logo_6sqft.svg)](https://www.6sqft.com/)",
+     "gloss": "",
+     "kind": "rail",
+     "cpi": "07.3.1.1.2.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "17d592409429",
+   "page_sha256": "4e1426a40b37b28a6a47ac89dd99ff5477fa8b528ce71b14edc2f5b6b1e5cec3",
+   "page_file": "pages/4e1426a40b37b28a6a47ac89dd99ff5477fa8b528ce71b14edc2f5b6b1e5cec3.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.nytimes.com/2026/05/04/nyregion/path-fare-increase.html",
+   "domain": "nytimes.com",
+   "title": "Fare on PATH Trains Increases to $3.25 as Part of Revitalization Plan",
+   "lang": "en",
+   "published": "2026-05-04",
+   "search_call": "700864fa4a00",
+   "tavily_published": "2026-05-25",
+   "status": "rejected",
+   "reason": "Tavily Extract could not fetch the page",
+   "claims": [
+    {
+     "line": "Fare on PATH Trains Increases to $3.25 as Part of Revitalization Plan",
+     "price": null,
+     "unit": null,
+     "region": "India",
+     "seller": "PATH",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "null"
+    }
+   ],
+   "extract_call": "17d592409429"
+  },
+  {
+   "url": "https://pix11.com/news/politics/pixonpolitics/mta-leaders-warn-of-fare-hikes-amid-lirr-strike",
+   "domain": "pix11.com",
+   "title": "MTA leaders warn of fare hikes amid LIRR strike | PIX11",
+   "lang": "en",
+   "published": "2026-05-18",
+   "search_call": "700864fa4a00",
+   "tavily_published": "2026-05-18",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "45363a20b7bb",
+   "page_sha256": "f072a4aa179eef3065624e6a4ddfde5dd2abf5c83015f5fb89284dcecef63b38",
+   "page_file": "pages/f072a4aa179eef3065624e6a4ddfde5dd2abf5c83015f5fb89284dcecef63b38.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-05-18",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.timeout.com/newyork/news/the-path-fare-hike-just-took-effect-itll-now-cost-you-3-25-to-take-the-train-to-new-jersey-050426",
+   "domain": "timeout.com",
+   "title": "How Much Does it Cost to Take the PATH From NYC to New Jersey? Fare Hike Explainer",
+   "lang": "en",
+   "published": "2026-05-04",
+   "search_call": "700864fa4a00",
+   "tavily_published": "2026-05-04",
+   "status": "rejected",
+   "reason": "the cited line is not on the fetched page",
+   "claims": [
+    {
+     "line": "[...] As of today, the base fare for a single ride on the PATH has increased by 25 cents, jumping from $3.00 to $3.25.",
+     "price": 3.25,
+     "unit": "USD",
+     "region": "India",
+     "seller": "Port Authority of New York and New Jersey",
+     "old_price": 3.0,
+     "new_price": 3.25,
+     "pct_change": 8.33,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": 0.08333333333333326,
+     "base_price": null,
+     "context": "[Go to the content](#main-container)[Go to the footer](#site-footer)",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    }
+   ],
+   "extract_call": "45363a20b7bb",
+   "page_sha256": "04a491811a49698460d2bcb67a25b23ec3b23dd6bd3d894151979943f0728167",
+   "page_file": "pages/04a491811a49698460d2bcb67a25b23ec3b23dd6bd3d894151979943f0728167.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  }
+ ],
+ "skipped": [],
+ "complete": true,
+ "calls": [
+  {
+   "endpoint": "/search",
+   "call_id": "19da93fdf7ed",
+   "sent": {
+    "query": "electricity price hike news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 4.12,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "712821085e2e",
+   "sent": {
+    "query": "mobile tariff changes news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "dainikbhaskar.com",
+     "navbharatindia.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 4.59,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "a02a321d387b",
+   "sent": {
+    "query": "petrol price increase news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "indiatimes.com",
+     "moneycontrol.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 4.01,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "f93a6ce1d762",
+   "sent": {
+    "query": "बिजली दर वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.58,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "22fea0b0c217",
+   "sent": {
+    "query": "मोबाइल टैरिफ बदलाव समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "dainikbhaskar.com",
+     "navbharatindia.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.13,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "a2fb1d9ef694",
+   "sent": {
+    "query": "पेट्रोल मूल्य वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "indiatimes.com",
+     "moneycontrol.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.12,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "ef6e008dd576",
+   "sent": {
+    "query": "बस किराया वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.11,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "700864fa4a00",
+   "sent": {
+    "query": "rail fare revision news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "dainikbhaskar.com",
+     "navbharatindia.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.15,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "eecf303d450c",
+   "sent": {
+    "urls": [
+     "https://oilcity.news/general/2026/05/15/another-electric-rate-hike-in-wyoming-rocky-mountain-power-asks-for-71m-increase",
+     "https://www.utilitydive.com/news/dte-to-propose-474m-electric-rate-hike-followed-by-2-year-freeze/818403",
+     "https://www.fox10phoenix.com/news/aps-rate-hike-customers-protest-14-electricity-cost-increase-proposal",
+     "https://www.wesanews.org/environment-energy/2026-05-28/pittsburgh-electric-rate-increase-summer-demand",
+     "https://www.phonearena.com/news/t-mobile-forced-plan-upgrades_id180592"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.21,
+   "n_results": 4
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "ffb4a65923b5",
+   "sent": {
+    "urls": [
+     "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260421-1",
+     "https://timesofindia.indiatimes.com/business/india-business/mischievous-and-misleading-government-dismisses-fake-news-on-petrol-diesel-price-hike/articleshow/130459004.cms",
+     "https://www.bbc.com/news/articles/cdep64555wzo",
+     "https://timesofindia.indiatimes.com/india/fleecing-its-own-citizens-congress-slams-modi-govt-for-petrol-diesel-price-increase-by-rs-5-in-9-days/articleshow/131271409.cms",
+     "https://www.aljazeera.com/economy/2026/5/12/us-faces-rising-costs-with-iran-war-driving-energy-prices-inflation-higher"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "943c53c5e99b",
+   "sent": {
+    "urls": [
+     "https://solarquarter.com/2026/05/22/ganesh-green-bharat-limited-reports-%E2%82%B91000-crore-fy26-revenue-with-149-growth-in-profit-driven-by-solar-manufacturing-and-epc-expansion/",
+     "https://tradebrains.in/17107-cr-order-book-semiconductor-stock-jumps-5-after-announcing-strong-q4-results/",
+     "https://www.amarujala.com/photo-gallery/technology/tech-diary/telecom-tariff-hike-india-airtel-jio-vi-prepaid-plan-changes-hindi-2026-04-21",
+     "https://www.amarujala.com/business/business-diary/trai-extends-deadline-for-comments-on-mobile-plan-without-data-at-lower-price-to-may-5-2026-04-28",
+     "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260522-1"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "17d592409429",
+   "sent": {
+    "urls": [
+     "https://www.aajtak.in/business/news/story/petrol-diesel-price-hike-third-time-in-10-days-amid-middle-east-tension-know-price-ntc-drmt-dskc-2559405-2026-05-23",
+     "https://www.amarujala.com/india-news/petrol-diesel-price-rise-in-india-fuel-costs-increase-in-10-days-cities-states-vat-excise-duty-hormuz-crisis-u-2026-05-25",
+     "https://www.fox5ny.com/news/what-know-about-path-fare-increase",
+     "https://www.6sqft.com/nj-transit-cuts-world-cup-train-fare-to-metlife-by-30",
+     "https://www.nytimes.com/2026/05/04/nyregion/path-fare-increase.html"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.22,
+   "n_results": 4
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "45363a20b7bb",
+   "sent": {
+    "urls": [
+     "https://pix11.com/news/politics/pixonpolitics/mta-leaders-warn-of-fare-hikes-amid-lirr-strike",
+     "https://www.timeout.com/newyork/news/the-path-fare-hike-just-took-effect-itll-now-cost-you-3-25-to-take-the-train-to-new-jersey-050426"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 0,
+   "new_credits": 0,
+   "response_time": 0.02,
+   "n_results": 2
+  }
+ ],
+ "finished_utc": "2026-10-22T09:33:05.451283+00:00"
+}

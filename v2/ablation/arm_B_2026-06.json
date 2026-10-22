@@ -1,0 +1,1876 @@
+{
+ "arm": "B",
+ "month": "2026-06",
+ "window": [
+  "2026-05-22",
+  "2026-06-29"
+ ],
+ "writer": "Nemotron",
+ "plan": [
+  {
+   "query": "diesel price hike news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-05-22",
+   "end_date": "2026-06-29",
+   "include_domains": [
+    "reuters.com",
+    "bloomberg.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "8528b87b49a3",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "reuters.com",
+     "bloomberg.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "ccfd0e103109",
+   "n_results": 5
+  },
+  {
+   "query": "petrol price increase news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-05-22",
+   "end_date": "2026-06-29",
+   "include_domains": [
+    "reuters.com",
+    "bloomberg.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "8528b87b49a3",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "reuters.com",
+     "bloomberg.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "8b937d1e52e1",
+   "n_results": 5
+  },
+  {
+   "query": "metro fare revision news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-05-22",
+   "end_date": "2026-06-29",
+   "include_domains": [
+    "timesofindia.indiatimes.com",
+    "zeenews.india.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "8528b87b49a3",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "8181f22ac966",
+   "n_results": 5
+  },
+  {
+   "query": "बिजली दर वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-05-22",
+   "end_date": "2026-06-29",
+   "include_domains": [
+    "economictimes.indiatimes.com",
+    "zeenews.india.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "8528b87b49a3",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "34bc78dad060",
+   "n_results": 5
+  },
+  {
+   "query": "दूध की कीमत बढ़ोतरी समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-05-22",
+   "end_date": "2026-06-29",
+   "include_domains": [
+    "timesofindia.indiatimes.com",
+    "dainikjagran.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "8528b87b49a3",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "dainikjagran.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "3f1c48d5274d",
+   "n_results": 4
+  },
+  {
+   "query": "एलपीजी सिलेंडर मूल्य वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-05-22",
+   "end_date": "2026-06-29",
+   "include_domains": [
+    "business-standard.com",
+    "livemint.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "8528b87b49a3",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "business-standard.com",
+     "livemint.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "5674596ecdeb",
+   "n_results": 5
+  },
+  {
+   "query": "bus fare hike news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-05-22",
+   "end_date": "2026-06-29",
+   "include_domains": [
+    "timesofindia.indiatimes.com",
+    "zeenews.india.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "8528b87b49a3",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "e3d61ca098d9",
+   "n_results": 3
+  },
+  {
+   "query": "rail fare increase news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-05-22",
+   "end_date": "2026-06-29",
+   "include_domains": [
+    "timesofindia.indiatimes.com",
+    "zeenews.india.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "8528b87b49a3",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "4b3ecf16156c",
+   "n_results": 5
+  }
+ ],
+ "plan_complete": true,
+ "plan_tries": [
+  {
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "call": "8528b87b49a3",
+   "error": "",
+   "written": [
+    {
+     "query": "बिजली दर वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "economictimes.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "दूध की कीमत बढ़ोतरी समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "dainikjagran.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "एलपीजी सिलेंडर मूल्य वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "business-standard.com",
+      "livemint.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "diesel price hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "reuters.com",
+      "bloomberg.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "petrol price increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "reuters.com",
+      "bloomberg.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "metro fare revision news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "bus fare hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "rail fare increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    }
+   ],
+   "picked": [
+    {
+     "query": "diesel price hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "reuters.com",
+      "bloomberg.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "8528b87b49a3",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-05-22",
+      "end_date": "2026-06-29",
+      "include_domains": [
+       "reuters.com",
+       "bloomberg.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "ccfd0e103109",
+     "n_results": 5
+    },
+    {
+     "query": "petrol price increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "reuters.com",
+      "bloomberg.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "8528b87b49a3",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-05-22",
+      "end_date": "2026-06-29",
+      "include_domains": [
+       "reuters.com",
+       "bloomberg.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "8b937d1e52e1",
+     "n_results": 5
+    },
+    {
+     "query": "metro fare revision news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "8528b87b49a3",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-05-22",
+      "end_date": "2026-06-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "zeenews.india.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "8181f22ac966",
+     "n_results": 5
+    },
+    {
+     "query": "बिजली दर वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "economictimes.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "8528b87b49a3",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-05-22",
+      "end_date": "2026-06-29",
+      "include_domains": [
+       "economictimes.indiatimes.com",
+       "zeenews.india.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "34bc78dad060",
+     "n_results": 5
+    },
+    {
+     "query": "दूध की कीमत बढ़ोतरी समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "dainikjagran.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "8528b87b49a3",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-05-22",
+      "end_date": "2026-06-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "dainikjagran.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "3f1c48d5274d",
+     "n_results": 4
+    },
+    {
+     "query": "एलपीजी सिलेंडर मूल्य वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "business-standard.com",
+      "livemint.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "8528b87b49a3",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-05-22",
+      "end_date": "2026-06-29",
+      "include_domains": [
+       "business-standard.com",
+       "livemint.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "5674596ecdeb",
+     "n_results": 5
+    },
+    {
+     "query": "bus fare hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "8528b87b49a3",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-05-22",
+      "end_date": "2026-06-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "zeenews.india.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "e3d61ca098d9",
+     "n_results": 3
+    },
+    {
+     "query": "rail fare increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-05-22",
+     "end_date": "2026-06-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "8528b87b49a3",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-05-22",
+      "end_date": "2026-06-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "zeenews.india.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "4b3ecf16156c",
+     "n_results": 5
+    }
+   ],
+   "dropped": [],
+   "complete": true
+  }
+ ],
+ "cards": [
+  {
+   "url": "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260522-1",
+   "domain": "ec.europa.eu",
+   "title": "Strong increase in fuel prices continued in April 2026 - News articles - Eurostat",
+   "lang": "en",
+   "published": "2026-05-22",
+   "search_call": "ccfd0e103109",
+   "tavily_published": "2026-05-22",
+   "status": "rejected",
+   "reason": "effective date 2026-04-01 is not in 2026-06",
+   "claims": [
+    {
+     "line": "Looking at diesel and petrol prices in the EU, in April 2026, they increased by 33.7% for diesel and 13.6% for petrol compared with April 2025.",
+     "price": 33.7,
+     "unit": "%",
+     "region": "EU",
+     "seller": "EU",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": 33.7,
+     "effective_date": "2026-04-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2026-04-01 is not in 2026-06",
+     "price_type": "retail",
+     "change": 0.337,
+     "base_price": null,
+     "context": "## Search by keyword \n ## Both diesel and petrol on the rise \n On a monthly basis, EU consumers saw diesel prices go up by 7.9% and petrol prices by 2.4% compared with March 2026. In March 2026, diesel rose by 19.1% and petrol by 10.6% relative to February 2025.",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "Looking at diesel and petrol prices in the EU, in April 2026, they increased by 33.7% for diesel and 13.6% for petrol compared with April 2025.",
+     "price": 13.6,
+     "unit": "%",
+     "region": "EU",
+     "seller": "EU",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": 13.6,
+     "effective_date": "2026-04-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2026-04-01 is not in 2026-06",
+     "price_type": "retail",
+     "change": 0.136,
+     "base_price": null,
+     "context": "## Search by keyword \n ## Both diesel and petrol on the rise \n On a monthly basis, EU consumers saw diesel prices go up by 7.9% and petrol prices by 2.4% compared with March 2026. In March 2026, diesel rose by 19.1% and petrol by 10.6% relative to February 2025.",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "5a01ede0ad5a",
+   "page_sha256": "2df7223fe3c626a2876de1f6900a4b58617c7c0aa397fbfbb94f9a5d2f983fb8",
+   "page_file": "pages/2df7223fe3c626a2876de1f6900a4b58617c7c0aa397fbfbb94f9a5d2f983fb8.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.ndtv.com/india-news/indias-fuel-price-hike-still-the-lowest-across-the-world-11536528",
+   "domain": "ndtv.com",
+   "title": "India's Fuel Price Hike Still The Lowest Across The World",
+   "lang": "en",
+   "published": "2026-05-23",
+   "search_call": "ccfd0e103109",
+   "tavily_published": "2026-05-23",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "5a01ede0ad5a",
+   "page_sha256": "d0d85a43e37407e23a21de6b0847092c313a87ec959289096c601130caa2b2c7",
+   "page_file": "pages/d0d85a43e37407e23a21de6b0847092c313a87ec959289096c601130caa2b2c7.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://timesofindia.indiatimes.com/business/india-business/petrol-diesel-price-hikes-could-push-up-inflation-and-transport-costs-says-crisil/articleshow/131461278.cms",
+   "domain": "timesofindia.indiatimes.com",
+   "title": "Petrol, diesel price hikes could push up inflation and transport costs, says Crisil - The Times of India",
+   "lang": "en",
+   "published": "2026-06-02",
+   "search_call": "ccfd0e103109",
+   "tavily_published": "2026-06-02",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "5a01ede0ad5a",
+   "page_sha256": "2e11a2464412c60c658945e70d77e030693394e6e6bfd22ec211d8562a1ead72",
+   "page_file": "pages/2e11a2464412c60c658945e70d77e030693394e6e6bfd22ec211d8562a1ead72.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-06-02",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.rigzone.com/news/wire/india_raises_diesel_gasoline_prices_for_4th_time_in_may-25-may-2026-183771-article",
+   "domain": "rigzone.com",
+   "title": "India Raises Diesel, Gasoline Prices for 4th Time in May | Rigzone",
+   "lang": "en",
+   "published": "2026-05-25",
+   "search_call": "ccfd0e103109",
+   "tavily_published": "2026-05-25",
+   "status": "rejected",
+   "reason": "effective date not stated is not in 2026-06",
+   "claims": [
+    {
+     "line": "— which together control about 90% of India’s fuel retail market — increased gasoline prices in New Delhi by 2.6% to 102.12 rupees ($1.07) a liter and for diesel by 2.9% to 95.20 rupees, according to company statements and website data.",
+     "price": 102.12,
+     "unit": "rupees per liter",
+     "region": "New Delhi",
+     "seller": "Indian Oil Corp., Bharat Petroleum Corp., Hindustan Petroleum Corp.",
+     "old_price": 100.12,
+     "new_price": 102.12,
+     "pct_change": 2.6,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date not stated is not in 2026-06",
+     "price_type": "retail",
+     "change": 0.019976028765481324,
+     "base_price": null,
+     "context": "# India Raises Diesel, Gasoline Prices for 4th Time in May \n India’s state-run fuel retailers raised gasoline and diesel prices for the fourth time in 10 days in response to disruptions in global energy markets, a move that risks exacerbating inflationary risks in the economy. \n The latest hike brings cumulative increases over the last 10 days to 7.8% for gasoline and 8.6% for diesel. The prices for the fuels are at the highest level since May 2022.",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "— which together control about 90% of India’s fuel retail market — increased gasoline prices in New Delhi by 2.6% to 102.12 rupees ($1.07) a liter and for diesel by 2.9% to 95.20 rupees, according to company statements and website data.",
+     "price": 95.2,
+     "unit": "rupees per liter",
+     "region": "New Delhi",
+     "seller": "Indian Oil Corp., Bharat Petroleum Corp., Hindustan Petroleum Corp.",
+     "old_price": 95.2,
+     "new_price": 95.2,
+     "pct_change": 2.9,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date not stated is not in 2026-06",
+     "price_type": "retail",
+     "change": 0.0,
+     "base_price": null,
+     "context": "# India Raises Diesel, Gasoline Prices for 4th Time in May \n India’s state-run fuel retailers raised gasoline and diesel prices for the fourth time in 10 days in response to disruptions in global energy markets, a move that risks exacerbating inflationary risks in the economy. \n The latest hike brings cumulative increases over the last 10 days to 7.8% for gasoline and 8.6% for diesel. The prices for the fuels are at the highest level since May 2022.",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "nct of delhi"
+     ]
+    }
+   ],
+   "extract_call": "5a01ede0ad5a",
+   "page_sha256": "ead98ab815dc2a35dba473c2b312ec2422824d9e6e46fee4ef1d816e81d80216",
+   "page_file": "pages/ead98ab815dc2a35dba473c2b312ec2422824d9e6e46fee4ef1d816e81d80216.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.scmp.com/news/asia/south-asia/article/3354640/india-raises-diesel-petrol-prices-3rd-time-8-days-amid-tense-us-iran-ceasefire",
+   "domain": "scmp.com",
+   "title": "India raises diesel, petrol prices for third time in 8 days, amid tense US-Iran ceasefire | South China Morning Post",
+   "lang": "en",
+   "published": "2026-05-23",
+   "search_call": "ccfd0e103109",
+   "tavily_published": "2026-05-23",
+   "status": "rejected",
+   "reason": "the cited line is not on the fetched page",
+   "claims": [
+    {
+     "line": "Prices of both fuels rose by nearly one per cent, or less than 1 rupee, with petrol now sold at 99.51 rupees (US$1.0399) and diesel at 92.49 rupees per litre in New Delhi, according to the website of Indian Oil Corporation, the country’s largest fuel retailer. Prices vary across India due to local taxes. [...] Advertisement",
+     "price": 92.49,
+     "unit": "rupees per litre",
+     "region": "New Delhi",
+     "seller": "Indian Oil Corporation",
+     "old_price": null,
+     "new_price": 92.49,
+     "pct_change": null,
+     "effective_date": "2024-06-15",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "Advertisement",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "Prices of both fuels rose by nearly one per cent, or less than 1 rupee, with petrol now sold at 99.51 rupees (US$1.0399) and diesel at 92.49 rupees per litre in New Delhi, according to the website of Indian Oil Corporation, the country’s largest fuel retailer. Prices vary across India due to local taxes. [...] Advertisement",
+     "price": 99.51,
+     "unit": "rupees per litre",
+     "region": "New Delhi",
+     "seller": "Indian Oil Corporation",
+     "old_price": null,
+     "new_price": 99.51,
+     "pct_change": null,
+     "effective_date": "2024-06-15",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "Advertisement",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "nct of delhi"
+     ]
+    }
+   ],
+   "extract_call": "5a01ede0ad5a",
+   "page_sha256": "65034066f8d7ae03f7c8895b453c051a8de7d59735936e371f558242b1596b51",
+   "page_file": "pages/65034066f8d7ae03f7c8895b453c051a8de7d59735936e371f558242b1596b51.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260622-2",
+   "domain": "ec.europa.eu",
+   "title": "Evolution of fuel prices in May 2026 - News articles - Eurostat",
+   "lang": "en",
+   "published": "2026-06-22",
+   "search_call": "8b937d1e52e1",
+   "tavily_published": "2026-06-22",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "6b710f119ea4",
+   "page_sha256": "d5e5f5bbabe359afd2b5bac496982a199379edc1a7680310a6ebf79d4b6792a2",
+   "page_file": "pages/d5e5f5bbabe359afd2b5bac496982a199379edc1a7680310a6ebf79d4b6792a2.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://asianews.network/from-us-to-pakistan-fuel-prices-surged-globally-while-india-held-the-line",
+   "domain": "asianews.network",
+   "title": "From US to Pakistan, fuel prices surged globally while India held the line – Asia News Network",
+   "lang": "en",
+   "published": "2026-05-25",
+   "search_call": "8b937d1e52e1",
+   "tavily_published": "2026-05-25",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "6b710f119ea4",
+   "page_sha256": "3d326c605e7fd5f2adb72e617d69082d0e598289a2ee509e9e605eb3673e0815",
+   "page_file": "pages/3d326c605e7fd5f2adb72e617d69082d0e598289a2ee509e9e605eb3673e0815.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://nypost.com/2026/06/23/us-news/some-metro-north-riders-will-get-slapped-with-another-5-rate-hike-just-as-station-closures-hit/",
+   "domain": "nypost.com",
+   "title": "Some Metro-North riders will get slapped with another 5% rate hike -- just as station closures hit - nypost.com",
+   "lang": "en",
+   "published": "2026-06-23",
+   "search_call": "8181f22ac966",
+   "tavily_published": "2026-06-23",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "6b710f119ea4",
+   "page_sha256": "9d02a1da5ad4259d897fa5c403b880649fd2746a752d156c6c6995510f7d9cb6",
+   "page_file": "pages/9d02a1da5ad4259d897fa5c403b880649fd2746a752d156c6c6995510f7d9cb6.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-06-23",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.govtech.com/transportation/in-l-a-metro-introduces-a-new-fare-payment-system-and-app",
+   "domain": "govtech.com",
+   "title": "In L.A., Metro Introduces a New Fare Payment System and App - govtech.com",
+   "lang": "en",
+   "published": "2026-06-01",
+   "search_call": "8181f22ac966",
+   "tavily_published": "2026-06-01",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.chicagotribune.com/2026/06/01/transit-funding-legislation/",
+   "domain": "chicagotribune.com",
+   "title": "Landmark transit funding legislation takes effect today. Here’s what commuters can expect. - Chicago Tribune",
+   "lang": "en",
+   "published": "2026-06-01",
+   "search_call": "8181f22ac966",
+   "tavily_published": "2026-06-01",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "6b710f119ea4",
+   "page_sha256": "0067e682ac1fafaa4fbbfa8876750e2b0cb4df1277840a33ba2884a687c6b3a9",
+   "page_file": "pages/0067e682ac1fafaa4fbbfa8876750e2b0cb4df1277840a33ba2884a687c6b3a9.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-06-01",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.reuters.com/business/southwest-sees-no-demand-hit-fare-hikes-despite-higher-fuel-costs-2026-05-28/",
+   "domain": "reuters.com",
+   "title": "Southwest sees no demand hit from fare hikes, eyes broader premium push - Reuters",
+   "lang": "en",
+   "published": "2026-05-28",
+   "search_call": "8181f22ac966",
+   "tavily_published": "2026-05-28",
+   "status": "rejected",
+   "reason": "Tavily Extract could not fetch the page",
+   "claims": [
+    {
+     "line": "CHICAGO, May 28 (Reuters) - Southwest Airlines (LUV.N), opens new tab CEO Bob Jordan ​said on Wednesday the carrier has seen no drop-off in demand after joining seven industry fare increases since February, making ‌him increasingly confident the airline can offset higher fuel costs with stronger revenue.",
+     "price": null,
+     "unit": null,
+     "region": "India",
+     "seller": "Southwest Airlines",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": null
+    }
+   ],
+   "extract_call": "6b710f119ea4"
+  },
+  {
+   "url": "https://www.bbc.com/news/articles/clye8n77ln4o",
+   "domain": "bbc.com",
+   "title": "Taxi fares set to increase in Worcester as fuel and costs rise - BBC",
+   "lang": "en",
+   "published": "2026-06-17",
+   "search_call": "8181f22ac966",
+   "tavily_published": "2026-06-17",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "f0fc85bfe439",
+   "page_sha256": "e07af08613cf29401226aa33e28a561dc4f019720a17e4e1b4e4683cc340f08e",
+   "page_file": "pages/e07af08613cf29401226aa33e28a561dc4f019720a17e4e1b4e4683cc340f08e.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.mlive.com/news/2026/06/consumers-energy-asks-for-largest-electric-rate-increase-in-more-than-20-years-again.html",
+   "domain": "mlive.com",
+   "title": "Consumers Energy asks for largest electric rate increase in more than 20 years — again - mlive.com",
+   "lang": "hi",
+   "published": "2026-06-02",
+   "search_call": "34bc78dad060",
+   "tavily_published": "2026-06-02",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "f0fc85bfe439",
+   "page_sha256": "4fd67d036211688c9b84877eb0dba921feab295daf3f2339d2f63d58eb610766",
+   "page_file": "pages/4fd67d036211688c9b84877eb0dba921feab295daf3f2339d2f63d58eb610766.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://fox59.com/news/iurc-approves-70-million-increase-electric-rate-hike-for-aes",
+   "domain": "fox59.com",
+   "title": "IURC approves $70 million increase, electric rate hike for AES",
+   "lang": "hi",
+   "published": null,
+   "search_call": "34bc78dad060",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.newscentermaine.com/article/money/consumer/cmp-state-regulators-rate-increase-cost-ratepayers-central-maine-power-electricity-utility/97-0030c06e-9548-464c-a753-d5724613b875",
+   "domain": "newscentermaine.com",
+   "title": "CMP asks state regulators for rate increase again, drawing mixed remarks about cost to ratepayers",
+   "lang": "hi",
+   "published": null,
+   "search_call": "34bc78dad060",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.redrocknews.com/2026/06/02/arizona-regulators-weighing-electric-utilitys-request-for-a-14-increase",
+   "domain": "redrocknews.com",
+   "title": "Arizona regulators weighing electric utility's request for a 14% increase - Sedona Red Rock News",
+   "lang": "hi",
+   "published": "2026-06-02",
+   "search_call": "34bc78dad060",
+   "tavily_published": "2026-06-02",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "f0fc85bfe439",
+   "page_sha256": "8066399ef5ee83da4b15b1830b4ef6971f0e80dc1530a4e9ed495065d10b706d",
+   "page_file": "pages/8066399ef5ee83da4b15b1830b4ef6971f0e80dc1530a4e9ed495065d10b706d.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://cardinalnews.org/2026/05/29/appalachian-power-seeks-rate-increase",
+   "domain": "cardinalnews.org",
+   "title": "Appalachian Power seeks rate increase",
+   "lang": "hi",
+   "published": "2026-05-29",
+   "search_call": "34bc78dad060",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://navbharattimes.indiatimes.com/business/business-news/milk-to-become-more-expensive-prices-may-increase-till-august-due-to-fodder-shortage-caused-by-el-nino/articleshow/131878204.cms",
+   "domain": "navbharattimes.indiatimes.com",
+   "title": "Milk Price Rise: दूध और होगा महंगा, अगस्‍त तक कीमत बढ़ने के संकेत, यह है सबसे बड़ा फैक्टर - milk to become more expensive prices may increase till august due to fodder shortage caused by el nino - Navbharat Times",
+   "lang": "hi",
+   "published": "2026-06-20",
+   "search_call": "3f1c48d5274d",
+   "tavily_published": "2026-06-20",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "f0fc85bfe439",
+   "page_sha256": "0c4cbe1a1eb57fb461ecb5412e8a856d01338436fe38cc31b6d4d4d244d43774",
+   "page_file": "pages/0c4cbe1a1eb57fb461ecb5412e8a856d01338436fe38cc31b6d4d4d244d43774.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.abplive.com/business/iran-us-war-milk-prices-will-mother-dairy-hike-milk-prices-again-chairman-minesh-shah-3140082",
+   "domain": "abplive.com",
+   "title": "Milk Price: मदर डेयरी फिर बढ़ाएगी दूध के दाम? चेयरमैन ने दिया बयान, महंगाई से राहत मिलेगी या नहीं? | Iran US War Milk Prices Will Mother Dairy Hike Milk Prices Again Chairman Minesh Shah",
+   "lang": "hi",
+   "published": "2026-06-04",
+   "search_call": "3f1c48d5274d",
+   "tavily_published": "2026-06-04",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "f0fc85bfe439",
+   "page_sha256": "99b1f953c2bf59bc9131d9f5bb4e8686ebe5f7ff8af392577e952159db61db6b",
+   "page_file": "pages/99b1f953c2bf59bc9131d9f5bb4e8686ebe5f7ff8af392577e952159db61db6b.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-06-04",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.abplive.com/states/jammu-and-kashmir/jammu-kashmir-milk-price-hike-5-rupees-per-litre-new-rates-from-june-1-ann-3138687",
+   "domain": "abplive.com",
+   "title": "जम्मू-कश्मीर में महंगाई का झटका, 5 रुपये बढ़े दूध के दाम, नई दरें आज से लागू | Jammu Kashmir Milk Price Hike 5 Rupees Per Litre New Rates from June 1 Ann",
+   "lang": "hi",
+   "published": "2026-06-01",
+   "search_call": "3f1c48d5274d",
+   "tavily_published": "2026-06-01",
+   "status": "rejected",
+   "reason": "Nano could not read this result (model returned no JSON object)",
+   "claims": []
+  },
+  {
+   "url": "https://www.jagran.com/bihar/samastipur-sudha-milk-price-hike-farmers-benefit-from-new-procurement-rates-40251372.html",
+   "domain": "jagran.com",
+   "title": "सुधा दूध के खरीद रेट में इजाफा, अब फैट के हिसाब से पशुपालकों को मिलेंगे ज्यादा दाम; देखें नया रेट चार्ट",
+   "lang": "hi",
+   "published": null,
+   "search_call": "3f1c48d5274d",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.ndtv.com/india-news/domestic-lpg-prices-raised-by-rs-29-second-hike-since-us-iran-war-started-cylinders-to-now-cost-rs-942-11601794",
+   "domain": "ndtv.com",
+   "title": "Domestic LPG cylinder Prices Raised By Rs 29, Second Hike Since US-Iran War Started, cylinders to now cost Rs 942",
+   "lang": "hi",
+   "published": "2026-06-07",
+   "search_call": "5674596ecdeb",
+   "tavily_published": "2026-06-07",
+   "status": "verified",
+   "reason": "verified",
+   "claims": [
+    {
+     "line": "## The price of a 14.2-kg LPG cylinder in Delhi will rise to Rs 942 from Rs 913 with effect from today",
+     "price": 942,
+     "unit": "Rs per cylinder",
+     "region": "India",
+     "seller": "state-owned oil marketing companies",
+     "old_price": 913,
+     "new_price": 942,
+     "pct_change": null,
+     "effective_date": "2026-06-07",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "verified",
+     "reason": "verified",
+     "price_type": "retail",
+     "change": 0.03176341730558607,
+     "base_price": null,
+     "context": "# Domestic LPG Prices Raised By Rs 29, Second Hike Since US-Iran War Started \n # Domestic LPG Prices Raised By Rs 29, Second Hike Since US-Iran War Started \n ![trusted source](https://www.ndtv.com/estatic/static/images/AddNDTV-DM.gif)",
+     "gloss": "",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "nct of delhi"
+     ]
+    }
+   ],
+   "extract_call": "1d60847e4004",
+   "page_sha256": "5dc7a304ba7ef153b97ff83781dda2f50e60292e7e731f183492d7c0b5644f29",
+   "page_file": "pages/5dc7a304ba7ef153b97ff83781dda2f50e60292e7e731f183492d7c0b5644f29.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.facebook.com/DNHindi/videos/%E0%A4%98%E0%A4%B0%E0%A5%87%E0%A4%B2%E0%A5%82-lpg-%E0%A4%B8%E0%A4%BF%E0%A4%B2%E0%A5%87%E0%A4%82%E0%A4%A1%E0%A4%B0-%E0%A4%AB%E0%A4%BF%E0%A4%B0-%E0%A4%AE%E0%A4%B9%E0%A4%82%E0%A4%97%E0%A4%BE-%E0%A4%AF%E0%A5%82%E0%A4%AA%E0%A5%80-%E0%A4%AE%E0%A5%87%E0%A4%82-29-%E0%A4%B0%E0%A5%81%E0%A4%AA%E0%A4%AF%E0%A5%87-%E0%A4%95%E0%A5%80-%E0%A4%AC%E0%A4%A2%E0%A4%BC%E0%A5%8B%E0%A4%A4%E0%A4%B0%E0%A5%80-%E0%A4%B8%E0%A5%87-%E0%A4%B0%E0%A4%B8%E0%A5%8B%E0%A4%88-%E0%A4%95%E0%A4%BE-%E0%A4%AC%E0%A4%9C%E0%A4%9F-%E0%A4%AC%E0%A4%BF%E0%A4%97%E0%A4%A1%E0%A4%BC%E0%A4%BElp/1761903125178910",
+   "domain": "facebook.com",
+   "title": "Dynamite News Hindi. . घरेलू LPG सिलेंडर फिर महंगा, यूपी में 29 रुपये की बढ़ोतरी से रसोई का बजट बिगड़ा #LPGPriceHike #GasCylinder #Inflation #UPNews #LucknowNews",
+   "lang": "hi",
+   "published": null,
+   "search_call": "5674596ecdeb",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.aajtak.in/india/news/story/lpg-cylinder-price-hike-commercial-delhi-kolkata-ntc-ntyv-rpti-2567104-2026-06-01",
+   "domain": "aajtak.in",
+   "title": "नया महीना, नई महंगाई... कमर्शियल LPG सिलेंडर 42 रुपये तो 5 KG वाला 11 रुपये महंगा",
+   "lang": "hi",
+   "published": "2026-06-01",
+   "search_call": "5674596ecdeb",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "the change cannot be computed (no old and new price, % or official base)",
+   "claims": [
+    {
+     "line": "नई दरों के अनुसार, दिल्ली में कमर्शियल सिलेंडर 42 रुपये महंगा होकर अब 3113.50 रुपये का हो गया है.",
+     "price": 3113.5,
+     "unit": "Rs per cylinder",
+     "region": "Delhi",
+     "seller": "Oil marketing companies",
+     "old_price": null,
+     "new_price": 3113.5,
+     "pct_change": null,
+     "effective_date": "2026-06-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the change cannot be computed (no old and new price, % or official base)",
+     "price_type": "commercial",
+     "change": null,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n तेल कंपनियों ने 19 किलोग्राम वाले कमर्शियल एलपीजी सिलेंडर की कीमतों में भारी बढ़ोतरी की है. \n वहीं कोलकाता में इसकी कीमत 53.50 रुपये बढ़कर 3255.50 रुपये पहुंच गई है.",
+     "gloss": "According to the new rates, the commercial cylinder in Delhi has become 42 rupees more expensive, now costing 3113.50 rupees.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "वहीं कोलकाता में इसकी कीमत 53.50 रुपये बढ़कर 3255.50 रुपये पहुंच गई है.",
+     "price": 3255.5,
+     "unit": "Rs per cylinder",
+     "region": "Kolkata",
+     "seller": "Oil marketing companies",
+     "old_price": null,
+     "new_price": 3255.5,
+     "pct_change": null,
+     "effective_date": "2026-06-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the line is not about this item",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n नई दरों के अनुसार, दिल्ली में कमर्शियल सिलेंडर 42 रुपये महंगा होकर अब 3113.50 रुपये का हो गया है. \n ये बदलाव 1 जून से प्रभावी होगा, जिससे होटल, रेस्तरां, ढाबा और अन्य व्यावसायिक उपभोक्ताओं पर अतिरिक्त बोझ बढ़ सकता है.",
+     "gloss": "In Kolkata, its price rose to 3255.50 rupees, an increase of 53.50 rupees.",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": [
+      "nct of delhi",
+      "west bengal"
+     ]
+    },
+    {
+     "line": "इसके अलावा तेल विपणन कंपनियों ने छोटे व्यापारियों और नागरिकों द्वारा इस्तेमाल किए जाने वाले 5 किलोग्राम के एफटीएल सिलेंडर की कीमत में भी 11 रुपये का इजाफा किया है, जिसके बाद दिल्ली में ये छोटा सिलेंडर अब 821.50 रुपये की नई दर पर मिलेगा. राहत की एकमात्र बात ये है कि घरों में इस्तेमाल होने वाले चौदह दशमलव दो किलोग्राम के घरेलू गैस सिलेंडर की कीमतों में इस बार कोई भी बदलाव नहीं किया गया है.",
+     "price": 821.5,
+     "unit": "Rs per cylinder",
+     "region": "Delhi",
+     "seller": "Oil marketing companies",
+     "old_price": null,
+     "new_price": 821.5,
+     "pct_change": null,
+     "effective_date": "2026-06-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the change cannot be computed (no old and new price, % or official base)",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n कमर्शियल सिलेंडर के दामों में बढ़ोतरी ऐसे वक्त में हुई है, जब कारोबार पहले से ही ईंधन और परिवहन की बढ़ती लागत से जूझ रहे हैं. \n ## सम्बंधित ख़बरें",
+     "gloss": "In addition, oil marketing companies have also increased the price of 5 kg LPG cylinders used by small traders and citizens by ₹11, after which this small cylinder will now be available in Delhi at the new rate of ₹821.50. The only relief is that there has been no change in the price of 14 decimal 2 kg domestic LPG cylinders used in households this time.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "nct of delhi"
+     ]
+    }
+   ],
+   "extract_call": "1d60847e4004",
+   "page_sha256": "cf4de18e1b8716e00424ae7e83fefa749902473398825d9c5c9bac655449d19c",
+   "page_file": "pages/cf4de18e1b8716e00424ae7e83fefa749902473398825d9c5c9bac655449d19c.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-06-01",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.livehindustan.com/business/lpg-price-today-no-change-in-gas-cylinder-rates-check-lates-updates-here-201780717791073.html",
+   "domain": "livehindustan.com",
+   "title": "LPG Price Today: घरेलू एलपीजी सिलेंडर का नया रेट जारी, क्या कीमतों में हुई कोई बढ़ोतरी या घट गए दाम? करें चेक",
+   "lang": "hi",
+   "published": null,
+   "search_call": "5674596ecdeb",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.bbc.com/hindi/articles/ce8j06k116eo",
+   "domain": "bbc.com",
+   "title": "घरेलू गैस के दाम में 29 रुपये की बढ़ोतरी, अब कितने का हुआ सिलेंडर",
+   "lang": "hi",
+   "published": null,
+   "search_call": "5674596ecdeb",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://indianexpress.com/article/cities/bangalore/karnataka-bus-fare-hike-dk-shivakumar-ksrtc-diesel-prices-shakti-scheme-10751456",
+   "domain": "indianexpress.com",
+   "title": "Karnataka may hike bus fares as Shivakumar says ‘KSRTC should also survive’ | Bangalore News - The Indian Express",
+   "lang": "en",
+   "published": "2026-06-22",
+   "search_call": "e3d61ca098d9",
+   "tavily_published": "2026-06-22",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "1d60847e4004",
+   "page_sha256": "595b030ce83763ff31ed6a563e4603b699b7b165048f8291219c55fc4196d494",
+   "page_file": "pages/595b030ce83763ff31ed6a563e4603b699b7b165048f8291219c55fc4196d494.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.hawaiifreepress.com/Articles-Main/ID/49318/Bus-Rail-Fares-Go-Up-July-1",
+   "domain": "hawaiifreepress.com",
+   "title": "Bus, Rail Fares Go Up July 1",
+   "lang": "en",
+   "published": "2026-06-24",
+   "search_call": "e3d61ca098d9",
+   "tavily_published": "2026-06-24",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "1d60847e4004",
+   "page_sha256": "241e0be63a0003e25667908f2a4ec23dde6bab5e24ec819601f7955d8e0b29cd",
+   "page_file": "pages/241e0be63a0003e25667908f2a4ec23dde6bab5e24ec819601f7955d8e0b29cd.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://nypost.com/2026/06/23/us-news/some-metro-north-riders-will-get-slapped-with-another-5-rate-hike-just-as-station-closures-hit",
+   "domain": "nypost.com",
+   "title": "Some Metro-North riders will get slapped with another 5% rate hike -- just as station closures hit",
+   "lang": "en",
+   "published": "2026-06-23",
+   "search_call": "e3d61ca098d9",
+   "tavily_published": "2026-06-23",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "1d60847e4004",
+   "page_sha256": "9d02a1da5ad4259d897fa5c403b880649fd2746a752d156c6c6995510f7d9cb6",
+   "page_file": "pages/9d02a1da5ad4259d897fa5c403b880649fd2746a752d156c6c6995510f7d9cb6.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-06-23",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.nj.com/news/2026/06/nj-transit-faces-petition-for-hearings-on-annual-fare-hike.html",
+   "domain": "nj.com",
+   "title": "NJ Transit's annual fare hike: petition demands public hearings - nj.com",
+   "lang": "en",
+   "published": "2026-06-25",
+   "search_call": "4b3ecf16156c",
+   "tavily_published": "2026-06-25",
+   "status": "rejected",
+   "reason": "effective date not stated is not in 2026-06",
+   "claims": [
+    {
+     "line": "One way rail fare between New York and Middletown, or Dover or Somerville would increase from $18 to $18.50. A trip between New York and Trenton increases from $19.80 to $20.35 one way.",
+     "price": 18.5,
+     "unit": "USD",
+     "region": "India",
+     "seller": "NJ Transit",
+     "old_price": 18,
+     "new_price": 18.5,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date not stated is not in 2026-06",
+     "price_type": "retail",
+     "change": 0.02777777777777768,
+     "base_price": null,
+     "context": "With a 3% annual fare increase set to take effect on July 1, a NJ Transit commuter has started a petition demanding public hearings on the second automatic fare hike since 2024. \n July’s 3% increase will increase the cost of a one-way train trip from New York to Princeton Junction from $18.95 to $19.50. \n Light rail fare increases vary by line. Hudson-Bergen fares would increase from $2.60 to $2.65, Newark and River lines light rail one way fare would rise from $1.85 to $1.90.",
+     "gloss": "",
+     "kind": "rail",
+     "cpi": "07.3.1.1.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "One way rail fare between New York and Middletown, or Dover or Somerville would increase from $18 to $18.50. A trip between New York and Trenton increases from $19.80 to $20.35 one way.",
+     "price": 20.35,
+     "unit": "USD",
+     "region": "India",
+     "seller": "NJ Transit",
+     "old_price": 19.8,
+     "new_price": 20.35,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date not stated is not in 2026-06",
+     "price_type": "retail",
+     "change": 0.0277777777777779,
+     "base_price": null,
+     "context": "With a 3% annual fare increase set to take effect on July 1, a NJ Transit commuter has started a petition demanding public hearings on the second automatic fare hike since 2024. \n July’s 3% increase will increase the cost of a one-way train trip from New York to Princeton Junction from $18.95 to $19.50. \n Light rail fare increases vary by line. Hudson-Bergen fares would increase from $2.60 to $2.65, Newark and River lines light rail one way fare would rise from $1.85 to $1.90.",
+     "gloss": "",
+     "kind": "rail",
+     "cpi": "07.3.1.1.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "Light rail fare increases vary by line. Hudson-Bergen fares would increase from $2.60 to $2.65, Newark and River lines light rail one way fare would rise from $1.85 to $1.90. [...] On July 1, bus fares will increase from $1.85 to $1.90 for a one zone trip for an adult, and remains the same for children, seniors and disabled passengers at 85 cents.",
+     "price": 2.65,
+     "unit": "USD",
+     "region": "India",
+     "seller": "NJ Transit",
+     "old_price": 2.6,
+     "new_price": 2.65,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": 0.019230769230769162,
+     "base_price": null,
+     "context": "With a 3% annual fare increase set to take effect on July 1, a NJ Transit commuter has started a petition demanding public hearings on the second automatic fare hike since 2024.",
+     "gloss": "",
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "Light rail fare increases vary by line. Hudson-Bergen fares would increase from $2.60 to $2.65, Newark and River lines light rail one way fare would rise from $1.85 to $1.90. [...] On July 1, bus fares will increase from $1.85 to $1.90 for a one zone trip for an adult, and remains the same for children, seniors and disabled passengers at 85 cents.",
+     "price": 1.9,
+     "unit": "USD",
+     "region": "India",
+     "seller": "NJ Transit",
+     "old_price": 1.85,
+     "new_price": 1.9,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": 0.027027027027026973,
+     "base_price": null,
+     "context": "With a 3% annual fare increase set to take effect on July 1, a NJ Transit commuter has started a petition demanding public hearings on the second automatic fare hike since 2024.",
+     "gloss": "",
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "Light rail fare increases vary by line. Hudson-Bergen fares would increase from $2.60 to $2.65, Newark and River lines light rail one way fare would rise from $1.85 to $1.90. [...] On July 1, bus fares will increase from $1.85 to $1.90 for a one zone trip for an adult, and remains the same for children, seniors and disabled passengers at 85 cents.",
+     "price": 1.9,
+     "unit": "USD",
+     "region": "India",
+     "seller": "NJ Transit",
+     "old_price": 1.85,
+     "new_price": 1.9,
+     "pct_change": null,
+     "effective_date": "2026-07-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": 0.027027027027026973,
+     "base_price": null,
+     "context": "With a 3% annual fare increase set to take effect on July 1, a NJ Transit commuter has started a petition demanding public hearings on the second automatic fare hike since 2024.",
+     "gloss": "",
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "Interstate bus commuters will see fare increase from $8.25 to $9.70 for a 6-zone trip. One way bus fare from New York to Toms River would rise from $25.10 to $25.85.",
+     "price": 9.7,
+     "unit": "USD",
+     "region": "India",
+     "seller": "NJ Transit",
+     "old_price": 8.25,
+     "new_price": 9.7,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date not stated is not in 2026-06",
+     "price_type": "retail",
+     "change": 0.17575757575757578,
+     "base_price": null,
+     "context": "With a 3% annual fare increase set to take effect on July 1, a NJ Transit commuter has started a petition demanding public hearings on the second automatic fare hike since 2024. \n On July 1, bus fares will increase from $1.85 to $1.90 for a one zone trip for an adult, and remains the same for children, seniors and disabled passengers at 85 cents. \n July’s 3% increase will increase the cost of a one-way train trip from New York to Princeton Junction from $18.95 to $19.50.",
+     "gloss": "",
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "Interstate bus commuters will see fare increase from $8.25 to $9.70 for a 6-zone trip. One way bus fare from New York to Toms River would rise from $25.10 to $25.85.",
+     "price": 25.85,
+     "unit": "USD",
+     "region": "India",
+     "seller": "NJ Transit",
+     "old_price": 25.1,
+     "new_price": 25.85,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date not stated is not in 2026-06",
+     "price_type": "retail",
+     "change": 0.029880478087649376,
+     "base_price": null,
+     "context": "With a 3% annual fare increase set to take effect on July 1, a NJ Transit commuter has started a petition demanding public hearings on the second automatic fare hike since 2024. \n On July 1, bus fares will increase from $1.85 to $1.90 for a one zone trip for an adult, and remains the same for children, seniors and disabled passengers at 85 cents. \n July’s 3% increase will increase the cost of a one-way train trip from New York to Princeton Junction from $18.95 to $19.50.",
+     "gloss": "",
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "July’s 3% increase will increase the cost of a one-way train trip from New York to Princeton Junction from $18.95 to $19.50. [...] With a 3% annual fare increase set to take effect on July 1, a NJ Transit commuter has started a petition demanding public hearings on the second automatic fare hike since 2024.",
+     "price": 19.5,
+     "unit": "USD",
+     "region": "India",
+     "seller": "NJ Transit",
+     "old_price": 18.95,
+     "new_price": 19.5,
+     "pct_change": 3,
+     "effective_date": "2026-07-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": 0.029023746701847042,
+     "base_price": null,
+     "context": "With a 3% annual fare increase set to take effect on July 1, a NJ Transit commuter has started a petition demanding public hearings on the second automatic fare hike since 2024.",
+     "gloss": "",
+     "kind": "rail",
+     "cpi": "07.3.1.1.2.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "72bc910f2758",
+   "page_sha256": "4cbe1747c2c92c108e53d39fd09951629040c48d8af0f7c7b07b944bfe2ac5cd",
+   "page_file": "pages/4cbe1747c2c92c108e53d39fd09951629040c48d8af0f7c7b07b944bfe2ac5cd.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://cbs12.com/news/local/tri-rail-board-approves-10-percent-fare-hike-effective-october-first-increase-since-2019-150-million-budget-assuming-minimal-subsidy-from-state-florida-commuter-train-transit-cost-expense",
+   "domain": "cbs12.com",
+   "title": "Tri-Rail board approves 10% fare hike, $150.2M budget assuming minimal subsidy from state",
+   "lang": "en",
+   "published": "2026-06-26",
+   "search_call": "4b3ecf16156c",
+   "tavily_published": "2026-06-26",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "72bc910f2758",
+   "page_sha256": "01e81955d3f6f0deb6145a91ab5bb895083608d2ea7210f8fd3b39466760ff1d",
+   "page_file": "pages/01e81955d3f6f0deb6145a91ab5bb895083608d2ea7210f8fd3b39466760ff1d.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://connecticut.news12.com/2026/06/03/metro-north-train-fares-go-up-5-in-july/oZU4hI89yFX1kB4Zgr0Mw",
+   "domain": "connecticut.news12.com",
+   "title": "CT DOT raising Metro-North fares 5% in July",
+   "lang": "en",
+   "published": "2026-06-03",
+   "search_call": "4b3ecf16156c",
+   "tavily_published": "2026-06-24",
+   "status": "rejected",
+   "reason": "Nano could not read this result (model returned no JSON object)",
+   "claims": []
+  },
+  {
+   "url": "https://www.honolulu.gov/dts/changes-to-thebus-and-skyline-fares-starting-july-1-2026",
+   "domain": "honolulu.gov",
+   "title": "Changes to TheBus and Skyline fares starting July 1, 2026 | Department of Transportation Services",
+   "lang": "en",
+   "published": "2026-06-17",
+   "search_call": "4b3ecf16156c",
+   "tavily_published": "2026-06-17",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "72bc910f2758",
+   "page_sha256": "98b796b95a73823f33cd681d150f1bcc6afb38548232b5a2dbb9b7ec57d0ae92",
+   "page_file": "pages/98b796b95a73823f33cd681d150f1bcc6afb38548232b5a2dbb9b7ec57d0ae92.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  }
+ ],
+ "skipped": [],
+ "complete": true,
+ "calls": [
+  {
+   "endpoint": "/search",
+   "call_id": "ccfd0e103109",
+   "sent": {
+    "query": "diesel price hike news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "reuters.com",
+     "bloomberg.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.16,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "8b937d1e52e1",
+   "sent": {
+    "query": "petrol price increase news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "reuters.com",
+     "bloomberg.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.12,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "8181f22ac966",
+   "sent": {
+    "query": "metro fare revision news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 4.75,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "34bc78dad060",
+   "sent": {
+    "query": "बिजली दर वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.11,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "3f1c48d5274d",
+   "sent": {
+    "query": "दूध की कीमत बढ़ोतरी समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "dainikjagran.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.21,
+   "n_results": 4
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "5674596ecdeb",
+   "sent": {
+    "query": "एलपीजी सिलेंडर मूल्य वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "business-standard.com",
+     "livemint.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.12,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "e3d61ca098d9",
+   "sent": {
+    "query": "bus fare hike news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.11,
+   "n_results": 3
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "4b3ecf16156c",
+   "sent": {
+    "query": "rail fare increase news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-05-22",
+    "end_date": "2026-06-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.12,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "5a01ede0ad5a",
+   "sent": {
+    "urls": [
+     "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260522-1",
+     "https://www.ndtv.com/india-news/indias-fuel-price-hike-still-the-lowest-across-the-world-11536528",
+     "https://timesofindia.indiatimes.com/business/india-business/petrol-diesel-price-hikes-could-push-up-inflation-and-transport-costs-says-crisil/articleshow/131461278.cms",
+     "https://www.rigzone.com/news/wire/india_raises_diesel_gasoline_prices_for_4th_time_in_may-25-may-2026-183771-article",
+     "https://www.scmp.com/news/asia/south-asia/article/3354640/india-raises-diesel-petrol-prices-3rd-time-8-days-amid-tense-us-iran-ceasefire"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "6b710f119ea4",
+   "sent": {
+    "urls": [
+     "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260622-2",
+     "https://asianews.network/from-us-to-pakistan-fuel-prices-surged-globally-while-india-held-the-line",
+     "https://nypost.com/2026/06/23/us-news/some-metro-north-riders-will-get-slapped-with-another-5-rate-hike-just-as-station-closures-hit/",
+     "https://www.chicagotribune.com/2026/06/01/transit-funding-legislation/",
+     "https://www.reuters.com/business/southwest-sees-no-demand-hit-fare-hikes-despite-higher-fuel-costs-2026-05-28/"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.24,
+   "n_results": 4
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "f0fc85bfe439",
+   "sent": {
+    "urls": [
+     "https://www.bbc.com/news/articles/clye8n77ln4o",
+     "https://www.mlive.com/news/2026/06/consumers-energy-asks-for-largest-electric-rate-increase-in-more-than-20-years-again.html",
+     "https://www.redrocknews.com/2026/06/02/arizona-regulators-weighing-electric-utilitys-request-for-a-14-increase",
+     "https://navbharattimes.indiatimes.com/business/business-news/milk-to-become-more-expensive-prices-may-increase-till-august-due-to-fodder-shortage-caused-by-el-nino/articleshow/131878204.cms",
+     "https://www.abplive.com/business/iran-us-war-milk-prices-will-mother-dairy-hike-milk-prices-again-chairman-minesh-shah-3140082"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.03,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "1d60847e4004",
+   "sent": {
+    "urls": [
+     "https://www.ndtv.com/india-news/domestic-lpg-prices-raised-by-rs-29-second-hike-since-us-iran-war-started-cylinders-to-now-cost-rs-942-11601794",
+     "https://www.aajtak.in/india/news/story/lpg-cylinder-price-hike-commercial-delhi-kolkata-ntc-ntyv-rpti-2567104-2026-06-01",
+     "https://indianexpress.com/article/cities/bangalore/karnataka-bus-fare-hike-dk-shivakumar-ksrtc-diesel-prices-shakti-scheme-10751456",
+     "https://www.hawaiifreepress.com/Articles-Main/ID/49318/Bus-Rail-Fares-Go-Up-July-1",
+     "https://nypost.com/2026/06/23/us-news/some-metro-north-riders-will-get-slapped-with-another-5-rate-hike-just-as-station-closures-hit"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "72bc910f2758",
+   "sent": {
+    "urls": [
+     "https://www.nj.com/news/2026/06/nj-transit-faces-petition-for-hearings-on-annual-fare-hike.html",
+     "https://cbs12.com/news/local/tri-rail-board-approves-10-percent-fare-hike-effective-october-first-increase-since-2019-150-million-budget-assuming-minimal-subsidy-from-state-florida-commuter-train-transit-cost-expense",
+     "https://www.honolulu.gov/dts/changes-to-thebus-and-skyline-fares-starting-july-1-2026"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.01,
+   "n_results": 3
+  }
+ ],
+ "finished_utc": "2026-10-22T09:35:38.288784+00:00"
+}

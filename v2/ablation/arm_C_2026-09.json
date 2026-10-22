@@ -1,0 +1,3287 @@
+{
+ "arm": "C",
+ "month": "2026-09",
+ "window": [
+  "2026-08-22",
+  "2026-09-29"
+ ],
+ "writer": "Nemotron",
+ "plan": [
+  {
+   "query": "electricity tariff hike news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-08-22",
+   "end_date": "2026-09-29",
+   "include_domains": [
+    "reuters.com",
+    "bbc.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "d8a136cbb412",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "reuters.com",
+     "bbc.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "fde4e0b0a6a1",
+   "n_results": 5
+  },
+  {
+   "query": "milk price increase news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-08-22",
+   "end_date": "2026-09-29",
+   "include_domains": [
+    "reuters.com",
+    "bbc.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "d8a136cbb412",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "reuters.com",
+     "bbc.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "76cd60766a73",
+   "n_results": 5
+  },
+  {
+   "query": "LPG cylinder price revision news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-08-22",
+   "end_date": "2026-09-29",
+   "include_domains": [
+    "reuters.com",
+    "bbc.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "d8a136cbb412",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "reuters.com",
+     "bbc.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "b3a6d197620e",
+   "n_results": 5
+  },
+  {
+   "query": "बिजली दर वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-08-22",
+   "end_date": "2026-09-29",
+   "include_domains": [
+    "zeenews.com",
+    "timesofindia.indiatimes.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "d8a136cbb412",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "zeenews.com",
+     "timesofindia.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "b1bf91f9dc42",
+   "n_results": 5
+  },
+  {
+   "query": "दूध की कीमत में वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-08-22",
+   "end_date": "2026-09-29",
+   "include_domains": [
+    "zeenews.com",
+    "timesofindia.indiatimes.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "d8a136cbb412",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "zeenews.com",
+     "timesofindia.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "3de142eed52d",
+   "n_results": 5
+  },
+  {
+   "query": "एलपीजी सिलेंडर कीमत वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-08-22",
+   "end_date": "2026-09-29",
+   "include_domains": [
+    "zeenews.com",
+    "timesofindia.indiatimes.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "d8a136cbb412",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "zeenews.com",
+     "timesofindia.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "30eb7bf8d603",
+   "n_results": 5
+  },
+  {
+   "query": "बस किराया वृद्धि समाचार",
+   "language": "mr",
+   "topic": "news",
+   "start_date": "2026-08-22",
+   "end_date": "2026-09-29",
+   "include_domains": [
+    "maharashtratimes.com"
+   ],
+   "include_domains_mode": "restrict",
+   "max_results": 3,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "d8a136cbb412",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 3,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "maharashtratimes.com"
+    ],
+    "include_domains_mode": "restrict"
+   },
+   "search_call": "4689cd2640ba",
+   "n_results": 2
+  },
+  {
+   "query": "டெலி விலை அதிகரிப்பு செய்தல்",
+   "language": "ta",
+   "topic": "news",
+   "start_date": "2026-08-22",
+   "end_date": "2026-09-29",
+   "include_domains": [
+    "dinamalar.com"
+   ],
+   "include_domains_mode": "restrict",
+   "max_results": 3,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "d8a136cbb412",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 3,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "dinamalar.com"
+    ],
+    "include_domains_mode": "restrict"
+   },
+   "search_call": "3ea777ca1d1c",
+   "n_results": 0
+  },
+  {
+   "query": "టెక్సీ టికెట్ ధర సవరణ",
+   "language": "te",
+   "topic": "news",
+   "start_date": "2026-08-22",
+   "end_date": "2026-09-29",
+   "include_domains": [
+    "telanganatoday.com"
+   ],
+   "include_domains_mode": "restrict",
+   "max_results": 3,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "d8a136cbb412",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 3,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "telanganatoday.com"
+    ],
+    "include_domains_mode": "restrict"
+   },
+   "search_call": "0369d7844982",
+   "n_results": 3
+  },
+  {
+   "query": "ಬಸ್ ತೆರಿಗೆ ಬೆಲೆ ಹೆಚ್ಚಿಕೆ ಸಮाचार",
+   "language": "kn",
+   "topic": "news",
+   "start_date": "2026-08-22",
+   "end_date": "2026-09-29",
+   "include_domains": [
+    "karnatakafirst.com"
+   ],
+   "include_domains_mode": "restrict",
+   "max_results": 3,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "d8a136cbb412",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 3,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "karnatakafirst.com"
+    ],
+    "include_domains_mode": "restrict"
+   },
+   "search_call": "3bbaf25d4dde",
+   "n_results": 0
+  },
+  {
+   "query": "মোবাইল ডেটা রেট পরিবর্তন খবর",
+   "language": "bn",
+   "topic": "news",
+   "start_date": "2026-08-22",
+   "end_date": "2026-09-29",
+   "include_domains": [
+    "thebusinessstandard.com"
+   ],
+   "include_domains_mode": "restrict",
+   "max_results": 3,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "d8a136cbb412",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 3,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "thebusinessstandard.com"
+    ],
+    "include_domains_mode": "restrict"
+   },
+   "search_call": "54d40e116b01",
+   "n_results": 0
+  },
+  {
+   "query": "दिसंबर 2026 में पेट्रोल कीमत वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-08-22",
+   "end_date": "2026-09-29",
+   "include_domains": [
+    "zeenews.com",
+    "timesofindia.indiatimes.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "d8a136cbb412",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "zeenews.com",
+     "timesofindia.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "85313256fc74",
+   "n_results": 4
+  },
+  {
+   "query": "metro fare hike news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-08-22",
+   "end_date": "2026-09-29",
+   "include_domains": [
+    "reuters.com",
+    "bbc.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "d8a136cbb412",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "reuters.com",
+     "bbc.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "000e9ac0887f",
+   "n_results": 5
+  }
+ ],
+ "plan_complete": true,
+ "plan_tries": [
+  {
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "call": "d8a136cbb412",
+   "error": "",
+   "written": [
+    {
+     "query": "बिजली दर वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "zeenews.com",
+      "timesofindia.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "दूध की कीमत में वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "zeenews.com",
+      "timesofindia.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "एलपीजी सिलेंडर कीमत वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "zeenews.com",
+      "timesofindia.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "दिसंबर 2026 में पेट्रोल कीमत वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "zeenews.com",
+      "timesofindia.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "बस किराया वृद्धि समाचार",
+     "language": "mr",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "MaharashtraTimes.com"
+     ],
+     "include_domains_mode": "restrict",
+     "max_results": 3
+    },
+    {
+     "query": "டெலி விலை அதிகரிப்பு செய்தல்",
+     "language": "ta",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "dinamalar.com"
+     ],
+     "include_domains_mode": "restrict",
+     "max_results": 3
+    },
+    {
+     "query": "టెక్సీ టికెట్ ధర సవరణ",
+     "language": "te",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "telanganatoday.com"
+     ],
+     "include_domains_mode": "restrict",
+     "max_results": 3
+    },
+    {
+     "query": "ಬಸ್ ತೆರಿಗೆ ಬೆಲೆ ಹೆಚ್ಚಿಕೆ ಸಮाचार",
+     "language": "kn",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "karnatakafirst.com"
+     ],
+     "include_domains_mode": "restrict",
+     "max_results": 3
+    },
+    {
+     "query": "মোবাইল ডেটা রেট পরিবর্তন খবর",
+     "language": "bn",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "thebusinessstandard.com"
+     ],
+     "include_domains_mode": "restrict",
+     "max_results": 3
+    },
+    {
+     "query": "electricity tariff hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "reuters.com",
+      "bbc.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "milk price increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "reuters.com",
+      "bbc.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "LPG cylinder price revision news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "reuters.com",
+      "bbc.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "metro fare hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "reuters.com",
+      "bbc.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "bus fare increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "reuters.com",
+      "bbc.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    }
+   ],
+   "picked": [
+    {
+     "query": "electricity tariff hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "reuters.com",
+      "bbc.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "d8a136cbb412",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-08-22",
+      "end_date": "2026-09-29",
+      "include_domains": [
+       "reuters.com",
+       "bbc.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "fde4e0b0a6a1",
+     "n_results": 5
+    },
+    {
+     "query": "milk price increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "reuters.com",
+      "bbc.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "d8a136cbb412",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-08-22",
+      "end_date": "2026-09-29",
+      "include_domains": [
+       "reuters.com",
+       "bbc.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "76cd60766a73",
+     "n_results": 5
+    },
+    {
+     "query": "LPG cylinder price revision news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "reuters.com",
+      "bbc.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "d8a136cbb412",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-08-22",
+      "end_date": "2026-09-29",
+      "include_domains": [
+       "reuters.com",
+       "bbc.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "b3a6d197620e",
+     "n_results": 5
+    },
+    {
+     "query": "बिजली दर वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "zeenews.com",
+      "timesofindia.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "d8a136cbb412",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-08-22",
+      "end_date": "2026-09-29",
+      "include_domains": [
+       "zeenews.com",
+       "timesofindia.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "b1bf91f9dc42",
+     "n_results": 5
+    },
+    {
+     "query": "दूध की कीमत में वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "zeenews.com",
+      "timesofindia.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "d8a136cbb412",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-08-22",
+      "end_date": "2026-09-29",
+      "include_domains": [
+       "zeenews.com",
+       "timesofindia.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "3de142eed52d",
+     "n_results": 5
+    },
+    {
+     "query": "एलपीजी सिलेंडर कीमत वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "zeenews.com",
+      "timesofindia.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "d8a136cbb412",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-08-22",
+      "end_date": "2026-09-29",
+      "include_domains": [
+       "zeenews.com",
+       "timesofindia.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "30eb7bf8d603",
+     "n_results": 5
+    },
+    {
+     "query": "बस किराया वृद्धि समाचार",
+     "language": "mr",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "maharashtratimes.com"
+     ],
+     "include_domains_mode": "restrict",
+     "max_results": 3,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "d8a136cbb412",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 3,
+      "start_date": "2026-08-22",
+      "end_date": "2026-09-29",
+      "include_domains": [
+       "maharashtratimes.com"
+      ],
+      "include_domains_mode": "restrict"
+     },
+     "search_call": "4689cd2640ba",
+     "n_results": 2
+    },
+    {
+     "query": "டெலி விலை அதிகரிப்பு செய்தல்",
+     "language": "ta",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "dinamalar.com"
+     ],
+     "include_domains_mode": "restrict",
+     "max_results": 3,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "d8a136cbb412",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 3,
+      "start_date": "2026-08-22",
+      "end_date": "2026-09-29",
+      "include_domains": [
+       "dinamalar.com"
+      ],
+      "include_domains_mode": "restrict"
+     },
+     "search_call": "3ea777ca1d1c",
+     "n_results": 0
+    },
+    {
+     "query": "టెక్సీ టికెట్ ధర సవరణ",
+     "language": "te",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "telanganatoday.com"
+     ],
+     "include_domains_mode": "restrict",
+     "max_results": 3,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "d8a136cbb412",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 3,
+      "start_date": "2026-08-22",
+      "end_date": "2026-09-29",
+      "include_domains": [
+       "telanganatoday.com"
+      ],
+      "include_domains_mode": "restrict"
+     },
+     "search_call": "0369d7844982",
+     "n_results": 3
+    },
+    {
+     "query": "ಬಸ್ ತೆರಿಗೆ ಬೆಲೆ ಹೆಚ್ಚಿಕೆ ಸಮाचार",
+     "language": "kn",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "karnatakafirst.com"
+     ],
+     "include_domains_mode": "restrict",
+     "max_results": 3,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "d8a136cbb412",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 3,
+      "start_date": "2026-08-22",
+      "end_date": "2026-09-29",
+      "include_domains": [
+       "karnatakafirst.com"
+      ],
+      "include_domains_mode": "restrict"
+     },
+     "search_call": "3bbaf25d4dde",
+     "n_results": 0
+    },
+    {
+     "query": "মোবাইল ডেটা রেট পরিবর্তন খবর",
+     "language": "bn",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "thebusinessstandard.com"
+     ],
+     "include_domains_mode": "restrict",
+     "max_results": 3,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "d8a136cbb412",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 3,
+      "start_date": "2026-08-22",
+      "end_date": "2026-09-29",
+      "include_domains": [
+       "thebusinessstandard.com"
+      ],
+      "include_domains_mode": "restrict"
+     },
+     "search_call": "54d40e116b01",
+     "n_results": 0
+    },
+    {
+     "query": "दिसंबर 2026 में पेट्रोल कीमत वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "zeenews.com",
+      "timesofindia.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "d8a136cbb412",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-08-22",
+      "end_date": "2026-09-29",
+      "include_domains": [
+       "zeenews.com",
+       "timesofindia.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "85313256fc74",
+     "n_results": 4
+    },
+    {
+     "query": "metro fare hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-08-22",
+     "end_date": "2026-09-29",
+     "include_domains": [
+      "reuters.com",
+      "bbc.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "d8a136cbb412",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-08-22",
+      "end_date": "2026-09-29",
+      "include_domains": [
+       "reuters.com",
+       "bbc.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "000e9ac0887f",
+     "n_results": 5
+    }
+   ],
+   "dropped": [],
+   "complete": true
+  }
+ ],
+ "cards": [
+  {
+   "url": "https://www.axios.com/local/seattle/2026/08/26/seattle-electric-bills-city-light-pse-rate-hikes",
+   "domain": "axios.com",
+   "title": "Seattle-area electricity rates are set to soar",
+   "lang": "en",
+   "published": "2026-08-26",
+   "search_call": "fde4e0b0a6a1",
+   "tavily_published": "2026-08-26",
+   "search_request_id": "ce097aae-c68a-4c6f-8ac5-f307f5b8e204",
+   "search_response_sha256": "0d9ef15f765331c3c7ceb0f6d110846023e4b756a2da902be737fc984e2ccc76",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "518f1edc97b7",
+   "extract_request_id": "ab54f2ce-5e44-40d0-afe0-f19f42375c10",
+   "extract_response_sha256": "9faa95d8d65b692bad224159ebdb8cd2258e643621cd86b9116360d0011d3d89",
+   "page_sha256": "7cf5dc18a4931846d0ef39d9534e8a2135d8ce69ee554db166f48d5bfdc13e89",
+   "page_file": "pages/7cf5dc18a4931846d0ef39d9534e8a2135d8ce69ee554db166f48d5bfdc13e89.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://vnews.com/2026/09/09/vermont-green-mountain-power-rate-hike",
+   "domain": "vnews.com",
+   "title": "Vermont regulators approve 5.5% Green Mountain Power rate hike - Valley News",
+   "lang": "en",
+   "published": "2026-09-09",
+   "search_call": "fde4e0b0a6a1",
+   "tavily_published": "2026-09-09",
+   "search_request_id": "ce097aae-c68a-4c6f-8ac5-f307f5b8e204",
+   "search_response_sha256": "0d9ef15f765331c3c7ceb0f6d110846023e4b756a2da902be737fc984e2ccc76",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "518f1edc97b7",
+   "extract_request_id": "ab54f2ce-5e44-40d0-afe0-f19f42375c10",
+   "extract_response_sha256": "9faa95d8d65b692bad224159ebdb8cd2258e643621cd86b9116360d0011d3d89",
+   "page_sha256": "fe9ecfa89c1533a1867f72b2fb394b5cf3d9f815899d50307d2e396b9100c8a2",
+   "page_file": "pages/fe9ecfa89c1533a1867f72b2fb394b5cf3d9f815899d50307d2e396b9100c8a2.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.vermontpublic.org/local-news/2026-09-08/public-utility-commission-approves-green-mountain-power-rate-increase",
+   "domain": "vermontpublic.org",
+   "title": "Public Utility Commission approves 5.5% rate increase for Green Mountain Power | Vermont Public",
+   "lang": "en",
+   "published": "2026-09-08",
+   "search_call": "fde4e0b0a6a1",
+   "tavily_published": "2026-09-08",
+   "search_request_id": "ce097aae-c68a-4c6f-8ac5-f307f5b8e204",
+   "search_response_sha256": "0d9ef15f765331c3c7ceb0f6d110846023e4b756a2da902be737fc984e2ccc76",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "518f1edc97b7",
+   "extract_request_id": "ab54f2ce-5e44-40d0-afe0-f19f42375c10",
+   "extract_response_sha256": "9faa95d8d65b692bad224159ebdb8cd2258e643621cd86b9116360d0011d3d89",
+   "page_sha256": "df1ae5a56ad23ec17ad153f42b991d2f9f006f802cddab292547e4ece4a95584",
+   "page_file": "pages/df1ae5a56ad23ec17ad153f42b991d2f9f006f802cddab292547e4ece4a95584.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-09-08",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.mprnews.org/story/2026/09/02/why-are-minnesota-electricity-bills-going-up-this-summer",
+   "domain": "mprnews.org",
+   "title": "Why are Minnesota electricity bills spiking this summer?  | MPR News",
+   "lang": "en",
+   "published": "2026-09-02",
+   "search_call": "fde4e0b0a6a1",
+   "tavily_published": "2026-09-02",
+   "search_request_id": "ce097aae-c68a-4c6f-8ac5-f307f5b8e204",
+   "search_response_sha256": "0d9ef15f765331c3c7ceb0f6d110846023e4b756a2da902be737fc984e2ccc76",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.seattletimes.com/seattle-news/climate-lab/after-failed-columbia-dam-deal-bpa-seeks-electricity-rate-hike",
+   "domain": "seattletimes.com",
+   "title": "After failed Columbia dam deal, BPA seeks electricity rate hike | The Seattle Times",
+   "lang": "en",
+   "published": "2026-09-25",
+   "search_call": "fde4e0b0a6a1",
+   "tavily_published": "2026-09-25",
+   "search_request_id": "ce097aae-c68a-4c6f-8ac5-f307f5b8e204",
+   "search_response_sha256": "0d9ef15f765331c3c7ceb0f6d110846023e4b756a2da902be737fc984e2ccc76",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "518f1edc97b7",
+   "extract_request_id": "ab54f2ce-5e44-40d0-afe0-f19f42375c10",
+   "extract_response_sha256": "9faa95d8d65b692bad224159ebdb8cd2258e643621cd86b9116360d0011d3d89",
+   "page_sha256": "07c6a3d874a1df6e86811ca9edab85701dcfe3901c84a2eeb368bde5385fff8b",
+   "page_file": "pages/07c6a3d874a1df6e86811ca9edab85701dcfe3901c84a2eeb368bde5385fff8b.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://indianexpress.com/article/cities/bangalore/karnataka-milk-price-hike-nandini-dk-shivakumar-10890063",
+   "domain": "indianexpress.com",
+   "title": "Nandini milk prices to increase? Karnataka CM seeks data from other states | Bangalore News - The Indian Express",
+   "lang": "en",
+   "published": "2026-09-23",
+   "search_call": "76cd60766a73",
+   "tavily_published": "2026-09-23",
+   "search_request_id": "5c5344ff-aba2-4b4e-8d8c-c55790084334",
+   "search_response_sha256": "74d1939ac06117c313e2bb0571f28ed6818a5b214a7656b6395fd94fcccfbf51",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "The Congress government in Karnataka had previously increased milk prices on April 1, 2025, by Rs 4 per litre following sustained pressure from milk producers. The government had said the entire hiked amount would be transferred to milk producers.",
+     "price": 46,
+     "unit": "Rs per litre",
+     "region": "Karnataka",
+     "seller": "Karnataka government",
+     "old_price": 42,
+     "new_price": 46,
+     "pct_change": 9.52,
+     "effective_date": "2025-04-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": 0.09523809523809534,
+     "base_price": null,
+     "context": "# Nandini milk prices to increase? Karnataka CM seeks data from other states \n ## Last price increase in 2025 \n After the hike, toned milk (blue packets) costs Rs 46 per litre and homogenised toned milk Rs 47. Similarly, cow milk (green packet) costs Rs 50 per litre, special milk (orange packet) Rs 50 per litre, and curd Rs 54 per litre.",
+     "gloss": "",
+     "kind": "milk",
+     "cpi": "01.1.4.1.1.01",
+     "role": "context",
+     "states": [
+      "karnataka"
+     ]
+    }
+   ],
+   "extract_call": "518f1edc97b7",
+   "extract_request_id": "ab54f2ce-5e44-40d0-afe0-f19f42375c10",
+   "extract_response_sha256": "9faa95d8d65b692bad224159ebdb8cd2258e643621cd86b9116360d0011d3d89",
+   "page_sha256": "c38607e4352822418177b1727543b2954f4d1bc5e71a90c2fe0a6a50c51f6fd0",
+   "page_file": "pages/c38607e4352822418177b1727543b2954f4d1bc5e71a90c2fe0a6a50c51f6fd0.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://timesofindia.indiatimes.com/etimes/trending/ab-ghar-wali-chai-bhi-taj-hotel-ke-rate-wali-mumbai-milk-price-jumps-9-leaving-social-media-users-angry-amused-and-sarcastic/articleshow/133604968.cms",
+   "domain": "timesofindia.indiatimes.com",
+   "title": "Mumbai Milk Price Increase: ‘Ab ghar wali chai bhi Taj Hotel ke rate wali’: Mumbai milk price jumps ₹9, leaving social media users angry, amused and sarcastic - The Times of India",
+   "lang": "en",
+   "published": "2026-08-29",
+   "search_call": "76cd60766a73",
+   "tavily_published": "2026-08-29",
+   "search_request_id": "5c5344ff-aba2-4b4e-8d8c-c55790084334",
+   "search_response_sha256": "74d1939ac06117c313e2bb0571f28ed6818a5b214a7656b6395fd94fcccfbf51",
+   "status": "context",
+   "reason": "wholesale price: shown as context, never in the number",
+   "claims": [
+    {
+     "line": "The Bombay Milk Producers’ Association has raised the wholesale price of buffalo milk from ₹93 to ₹102 per litre, effective September 1.",
+     "price": 102,
+     "unit": "per litre",
+     "region": "Mumbai",
+     "seller": "Bombay Milk Producers’ Association",
+     "old_price": 93,
+     "new_price": 102,
+     "pct_change": 9.68,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "context",
+     "reason": "wholesale price: shown as context, never in the number",
+     "price_type": "wholesale",
+     "change": 0.09677419354838701,
+     "base_price": null,
+     "context": "# ‘Ab ghar wali chai bhi Taj Hotel ke rate wali’: Mumbai milk price jumps ₹9, leaving social media users angry, amused and sarcastic \n A cup of morning tea may soon cost a little more to make in Mumbai. \n The revised rate will remain in place until February 28, 2027.",
+     "gloss": "",
+     "kind": "milk",
+     "cpi": "01.1.4.1.1.01",
+     "role": "context",
+     "states": [
+      "maharashtra"
+     ]
+    }
+   ],
+   "extract_call": "370ea4e5d296",
+   "extract_request_id": "0007cf87-adb7-49b0-95cc-acb5f88f2910",
+   "extract_response_sha256": "85514291108c850340efc9f03a782f8475cfa96f0306231ac7689b55c6af2365",
+   "page_sha256": "df10de0c6052641941929e366c2d4f273504ea7f2f45707e6f4666a2f24d3743",
+   "page_file": "pages/df10de0c6052641941929e366c2d4f273504ea7f2f45707e6f4666a2f24d3743.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-08-29",
+   "date_flag": ""
+  },
+  {
+   "url": "https://m.economictimes.com/industry/cons-products/food/wholesale-milk-prices-in-mumbai-to-rise-9-per-litre-to-cross-100-from-sept-1/articleshow/133604831.cms",
+   "domain": "m.economictimes.com",
+   "title": "Wholesale milk prices in Mumbai to rise ₹9 per litre to cross ₹100 from Sept 1 - The Economic Times",
+   "lang": "en",
+   "published": "2026-08-29",
+   "search_call": "76cd60766a73",
+   "tavily_published": "2026-08-29",
+   "search_request_id": "5c5344ff-aba2-4b4e-8d8c-c55790084334",
+   "search_response_sha256": "74d1939ac06117c313e2bb0571f28ed6818a5b214a7656b6395fd94fcccfbf51",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "Wholesale milk prices in Mumbai to rise ₹9 per litre to cross ₹100 from Sept 1 - The Economic Times",
+     "price": 102,
+     "unit": "per litre",
+     "region": "Mumbai",
+     "seller": "Bombay Milk Producers Association (BMPA)",
+     "old_price": 93,
+     "new_price": 102,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "wholesale",
+     "change": 0.09677419354838701,
+     "base_price": null,
+     "context": "[Nifty](https://economictimes.indiatimes.com/markets/indices/nifty-50)22,888.95-257.21",
+     "gloss": "",
+     "kind": "milk",
+     "cpi": "01.1.4.1.1.01",
+     "role": "context",
+     "states": [
+      "maharashtra"
+     ]
+    }
+   ],
+   "extract_call": "370ea4e5d296",
+   "extract_request_id": "0007cf87-adb7-49b0-95cc-acb5f88f2910",
+   "extract_response_sha256": "85514291108c850340efc9f03a782f8475cfa96f0306231ac7689b55c6af2365",
+   "page_sha256": "2b97502da67d9bd76c76d7152535ec5ac802c81d28d7f54759ff32590f08db47",
+   "page_file": "pages/2b97502da67d9bd76c76d7152535ec5ac802c81d28d7f54759ff32590f08db47.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.ndtv.com/food/mumbai-milk-prices-to-rise-from-september-1-rates-may-hit-rs-110-per-litre-11973899",
+   "domain": "ndtv.com",
+   "title": "Mumbai Milk Prices To Rise From September 1, Rates May Hit Rs 110 Per Litre",
+   "lang": "en",
+   "published": "2026-08-29",
+   "search_call": "76cd60766a73",
+   "tavily_published": "2026-08-29",
+   "search_request_id": "5c5344ff-aba2-4b4e-8d8c-c55790084334",
+   "search_response_sha256": "74d1939ac06117c313e2bb0571f28ed6818a5b214a7656b6395fd94fcccfbf51",
+   "status": "rejected",
+   "reason": "effective date not stated is not in 2026-09",
+   "claims": [
+    {
+     "line": "According to reports, the Mumbai Milk Producers Association has increased the wholesale price to Rs 102 per litre from Rs 93 per litre.",
+     "price": 102,
+     "unit": "Rs per litre",
+     "region": "Mumbai",
+     "seller": "Mumbai Milk Producers Association",
+     "old_price": 93,
+     "new_price": 102,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date not stated is not in 2026-09",
+     "price_type": "wholesale",
+     "change": 0.09677419354838701,
+     "base_price": null,
+     "context": "# Mumbai Milk Prices To Rise From September 1, Rates May Hit Rs 110 Per Litre \n Milk supplied from Mumbai's cattle sheds, commonly known as tabela milk, is set to become more expensive from September 1. \n As a result, retail prices could rise to around Rs 110 per litre, compared to the current rate of about Rs 100 per litre.",
+     "gloss": "",
+     "kind": "milk",
+     "cpi": "01.1.4.1.1.01",
+     "role": "context",
+     "states": [
+      "maharashtra"
+     ]
+    }
+   ],
+   "extract_call": "370ea4e5d296",
+   "extract_request_id": "0007cf87-adb7-49b0-95cc-acb5f88f2910",
+   "extract_response_sha256": "85514291108c850340efc9f03a782f8475cfa96f0306231ac7689b55c6af2365",
+   "page_sha256": "4b95e5982e90efb3beb01bec85451173e219195ea80a489d6f139d4b54522896",
+   "page_file": "pages/4b95e5982e90efb3beb01bec85451173e219195ea80a489d6f139d4b54522896.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.deccanherald.com/india/karnataka/bengaluru/hoteliers-in-bengaluru-threaten-to-increase-the-prices-of-food-items-if-nandini-milk-price-is-revised-4160912",
+   "domain": "deccanherald.com",
+   "title": "Bengaluru hotel prices: Nandini milk price hike may trigger food rate jump",
+   "lang": "en",
+   "published": "2026-09-24",
+   "search_call": "76cd60766a73",
+   "tavily_published": "2026-09-24",
+   "search_request_id": "5c5344ff-aba2-4b4e-8d8c-c55790084334",
+   "search_response_sha256": "74d1939ac06117c313e2bb0571f28ed6818a5b214a7656b6395fd94fcccfbf51",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "370ea4e5d296",
+   "extract_request_id": "0007cf87-adb7-49b0-95cc-acb5f88f2910",
+   "extract_response_sha256": "85514291108c850340efc9f03a782f8475cfa96f0306231ac7689b55c6af2365",
+   "page_sha256": "8163026575758c1dc3c02f8e01728cc9d342ea01c1978b6245572b4a8220eaab",
+   "page_file": "pages/8163026575758c1dc3c02f8e01728cc9d342ea01c1978b6245572b4a8220eaab.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-09-26",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.bbc.com/news/articles/cvgyxky1m4wo",
+   "domain": "bbc.com",
+   "title": "Energy prices: SSE gas price to increase by 19% from October",
+   "lang": "en",
+   "published": "2026-08-28",
+   "search_call": "b3a6d197620e",
+   "tavily_published": "2026-08-28",
+   "search_request_id": "712279cb-3e3d-4ed7-935a-6a20f0aca46c",
+   "search_response_sha256": "f78851a8a50f122eae488dede0a46b419443f0621036efa35564e220dfa8fd63",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "370ea4e5d296",
+   "extract_request_id": "0007cf87-adb7-49b0-95cc-acb5f88f2910",
+   "extract_response_sha256": "85514291108c850340efc9f03a782f8475cfa96f0306231ac7689b55c6af2365",
+   "page_sha256": "94001b10cd9832be614bd446029524428ea9a74ad1dedd1bfc785e2d5b08620f",
+   "page_file": "pages/94001b10cd9832be614bd446029524428ea9a74ad1dedd1bfc785e2d5b08620f.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.clickondetroit.com/news/local/2026/09/11/dte-seeks-additional-increase-for-natural-gas-customers-on-heels-of-74m-rate-hike-approval",
+   "domain": "clickondetroit.com",
+   "title": "DTE seeks additional increase for natural gas customers on heels of $74M rate hike approval",
+   "lang": "en",
+   "published": "2026-09-11",
+   "search_call": "b3a6d197620e",
+   "tavily_published": "2026-09-11",
+   "search_request_id": "712279cb-3e3d-4ed7-935a-6a20f0aca46c",
+   "search_response_sha256": "f78851a8a50f122eae488dede0a46b419443f0621036efa35564e220dfa8fd63",
+   "status": "rejected",
+   "reason": "Nano could not read this result (model returned no JSON object)",
+   "claims": []
+  },
+  {
+   "url": "https://news.wttw.com/2026/09/09/nicor-gas-rate-increase-cut-140m-after-settlement-illinois-attorney-general",
+   "domain": "news.wttw.com",
+   "title": "Nicor Gas Rate Increase Cut by $140M After Settlement With Illinois Attorney General | Chicago News | WTTW",
+   "lang": "en",
+   "published": "2026-09-09",
+   "search_call": "b3a6d197620e",
+   "tavily_published": "2026-09-09",
+   "search_request_id": "712279cb-3e3d-4ed7-935a-6a20f0aca46c",
+   "search_response_sha256": "f78851a8a50f122eae488dede0a46b419443f0621036efa35564e220dfa8fd63",
+   "status": "rejected",
+   "reason": "the line is not about this item",
+   "claims": [
+    {
+     "line": "According to Raoul’s office, the settlement will ensure most customers see a decrease in their monthly bill during non-heat months by reducing a fixed charge — which customers pay each month regardless of the amount of natural gas they use — down from $21.30 to $15 beginning Nov. 16.",
+     "price": 15,
+     "unit": "monthly",
+     "region": "Illinois",
+     "seller": "Nicor Gas",
+     "old_price": 21.3,
+     "new_price": 15,
+     "pct_change": 2.49,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the line is not about this item",
+     "price_type": "retail",
+     "change": -0.295774647887324,
+     "base_price": null,
+     "context": "#### [Business](/Business) \n The settlement still requires the approval of the Illinois Commerce Commission. \n Nicor must also accept a reduction in the profit it can make on its infrastructure investments, according to Raoul’s office, and has pledged to protect union jobs through next year.",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    }
+   ],
+   "extract_call": "8f984d1556cb",
+   "extract_request_id": "0afbfc1e-c6e7-4341-9aea-dde3c7efefc6",
+   "extract_response_sha256": "14072de75f57bda6e5c57a159eca247ad3470750b60e11d7162c364125b54767",
+   "page_sha256": "e3d595666d5c2529d630519355c0693638a72f76e452cb2141d6a048458e6a8a",
+   "page_file": "pages/e3d595666d5c2529d630519355c0693638a72f76e452cb2141d6a048458e6a8a.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-09-09",
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.bbc.com/news/articles/cm274mwxy1vo",
+   "domain": "bbc.com",
+   "title": "Households warned gas price spike could pile fresh pressure on energy bills",
+   "lang": "en",
+   "published": "2026-09-03",
+   "search_call": "b3a6d197620e",
+   "tavily_published": "2026-09-03",
+   "search_request_id": "712279cb-3e3d-4ed7-935a-6a20f0aca46c",
+   "search_response_sha256": "f78851a8a50f122eae488dede0a46b419443f0621036efa35564e220dfa8fd63",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "8f984d1556cb",
+   "extract_request_id": "0afbfc1e-c6e7-4341-9aea-dde3c7efefc6",
+   "extract_response_sha256": "14072de75f57bda6e5c57a159eca247ad3470750b60e11d7162c364125b54767",
+   "page_sha256": "f47c490dda995aa6a68c9d120e4b3b08f8b90d46bb569ced70ba608c2acd2ca4",
+   "page_file": "pages/f47c490dda995aa6a68c9d120e4b3b08f8b90d46bb569ced70ba608c2acd2ca4.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.wbaltv.com/article/iran-announces-plan-strait-of-hormuz-exclusion-zone/73628966",
+   "domain": "wbaltv.com",
+   "title": "Iran's plan to create 'exclusion zone' near Strait of Hormuz - WBAL",
+   "lang": "en",
+   "published": "2026-09-07",
+   "search_call": "b3a6d197620e",
+   "tavily_published": "2026-09-07",
+   "search_request_id": "712279cb-3e3d-4ed7-935a-6a20f0aca46c",
+   "search_response_sha256": "f78851a8a50f122eae488dede0a46b419443f0621036efa35564e220dfa8fd63",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.reuters.com/business/energy/india-orders-captive-coal-plants-maximise-power-output-surging-demand-2026-09-26/",
+   "domain": "reuters.com",
+   "title": "India orders captive coal plants to maximise power output on surging demand - Reuters",
+   "lang": "hi",
+   "published": "2026-09-26",
+   "search_call": "b1bf91f9dc42",
+   "tavily_published": "2026-09-26",
+   "search_request_id": "dabe3dc3-9c3f-480e-a8c1-10e07a9f5ca3",
+   "search_response_sha256": "e1d7bb64e5d2c8172953981f62f91741147842ea0139d662c73f70b226cc2256",
+   "status": "rejected",
+   "reason": "Tavily Extract could not fetch the page",
+   "claims": [
+    {
+     "line": "* The aim is to meet an \"expected rise in ⁠electricity demand in the coming months,\" showed the order dated ​September 25 and seen by Reuters.",
+     "price": null,
+     "unit": null,
+     "region": "India",
+     "seller": "Federal power ministry",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "October 1"
+    },
+    {
+     "line": "* Separately, the ministry has extended an earlier emergency ​order requiring ⁠Tata Power's (TTPW.NS) imported coal-fired plant in Mundra, Gujarat, to operate at full capacity until December 31, citing the demand situation.",
+     "price": null,
+     "unit": null,
+     "region": "India",
+     "seller": "Federal power ministry",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "December 31"
+    }
+   ],
+   "extract_call": "8f984d1556cb",
+   "extract_request_id": "0afbfc1e-c6e7-4341-9aea-dde3c7efefc6",
+   "extract_response_sha256": "14072de75f57bda6e5c57a159eca247ad3470750b60e11d7162c364125b54767"
+  },
+  {
+   "url": "https://www.reuters.com/world/india/indias-august-industrial-output-grows-8-yy-2026-09-28/",
+   "domain": "reuters.com",
+   "title": "India's Aug industrial output jumps 8% as manufacturing output surges - Reuters",
+   "lang": "hi",
+   "published": "2026-09-28",
+   "search_call": "b1bf91f9dc42",
+   "tavily_published": "2026-09-28",
+   "search_request_id": "dabe3dc3-9c3f-480e-a8c1-10e07a9f5ca3",
+   "search_response_sha256": "e1d7bb64e5d2c8172953981f62f91741147842ea0139d662c73f70b226cc2256",
+   "status": "rejected",
+   "reason": "Tavily Extract could not fetch the page",
+   "claims": [
+    {
+     "line": "India's Aug industrial output jumps 8% as manufacturing output surges - Reuters",
+     "price": null,
+     "unit": null,
+     "region": "India",
+     "seller": "Reuters",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": null
+    }
+   ],
+   "extract_call": "8f984d1556cb",
+   "extract_request_id": "0afbfc1e-c6e7-4341-9aea-dde3c7efefc6",
+   "extract_response_sha256": "14072de75f57bda6e5c57a159eca247ad3470750b60e11d7162c364125b54767"
+  },
+  {
+   "url": "https://scanx.trade/stock-market-news/companies/cg-power-q1fy27-consolidated-net-profit-surges-27-on-strong-margins/46429446",
+   "domain": "scanx.trade",
+   "title": "CG Power Q1FY27 profit surges 27% to ₹364 crore; auditor resigns - scanx.trade",
+   "lang": "hi",
+   "published": "2026-08-30",
+   "search_call": "b1bf91f9dc42",
+   "tavily_published": "2026-08-30",
+   "search_request_id": "dabe3dc3-9c3f-480e-a8c1-10e07a9f5ca3",
+   "search_response_sha256": "e1d7bb64e5d2c8172953981f62f91741147842ea0139d662c73f70b226cc2256",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "8f984d1556cb",
+   "extract_request_id": "0afbfc1e-c6e7-4341-9aea-dde3c7efefc6",
+   "extract_response_sha256": "14072de75f57bda6e5c57a159eca247ad3470750b60e11d7162c364125b54767",
+   "page_sha256": "d80d1acdedd79b3537343eac71394003ed58f12f5313b41a980795b6b26311aa",
+   "page_file": "pages/d80d1acdedd79b3537343eac71394003ed58f12f5313b41a980795b6b26311aa.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-07-30",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://m.economictimes.com/industry/energy/power/india-urged-to-review-green-finance-rules-build-workforce-for-nuclear-expansion/articleshow/133705191.cms",
+   "domain": "m.economictimes.com",
+   "title": "India urged to review green finance rules, build workforce for nuclear expansion - The Economic Times",
+   "lang": "hi",
+   "published": "2026-09-02",
+   "search_call": "b1bf91f9dc42",
+   "tavily_published": "2026-09-02",
+   "search_request_id": "dabe3dc3-9c3f-480e-a8c1-10e07a9f5ca3",
+   "search_response_sha256": "e1d7bb64e5d2c8172953981f62f91741147842ea0139d662c73f70b226cc2256",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.whalesbook.com/news/Hindi/technology/TCS-Plans-indian-rupee70000-Crore-AI-Data-Center-in-Hyderabad/6a9cb6f640007e01b83b86ab",
+   "domain": "whalesbook.com",
+   "title": "TCS: हैदराबाद में बनेगा ₹70,000 करोड़ का मेगा AI डेटा सेंटर, TCS का बड़ा दांव - Whalesbook",
+   "lang": "hi",
+   "published": "2026-09-06",
+   "search_call": "b1bf91f9dc42",
+   "tavily_published": "2026-09-06",
+   "search_request_id": "dabe3dc3-9c3f-480e-a8c1-10e07a9f5ca3",
+   "search_response_sha256": "e1d7bb64e5d2c8172953981f62f91741147842ea0139d662c73f70b226cc2256",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "3c7584122594",
+   "extract_request_id": "6e290330-c84a-4283-8d2e-069a51340fde",
+   "extract_response_sha256": "d753b82df21d2ba02eaa043f3f66d7892ca348465f369e3c30c8373452b3e2ae",
+   "page_sha256": "dc942c1c46476f066cb05309e04e8774e045ae5cdb9c7d0dbe38789beffb9257",
+   "page_file": "pages/dc942c1c46476f066cb05309e04e8774e045ae5cdb9c7d0dbe38789beffb9257.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.farmprogress.com/marketing/what-do-canada-s-tariffs-mean-for-your-milk-check-",
+   "domain": "farmprogress.com",
+   "title": "What do Canada’s tariffs mean for your milk check? - Farm Progress",
+   "lang": "hi",
+   "published": "2026-09-01",
+   "search_call": "3de142eed52d",
+   "tavily_published": "2026-09-01",
+   "search_request_id": "29f8f43b-a3a1-455f-b41a-87f23acd1291",
+   "search_response_sha256": "ec0736e259982f77c9f47d7ef27634ed3943d646f0048ed8d03eaadbda87f5ef",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.newsweek.com/what-the-great-american-hamburger-tells-you-about-the-economy-12381700",
+   "domain": "newsweek.com",
+   "title": "What the Great American Hamburger Tells You About the Economy - Newsweek",
+   "lang": "hi",
+   "published": "2026-08-31",
+   "search_call": "3de142eed52d",
+   "tavily_published": "2026-08-31",
+   "search_request_id": "29f8f43b-a3a1-455f-b41a-87f23acd1291",
+   "search_response_sha256": "ec0736e259982f77c9f47d7ef27634ed3943d646f0048ed8d03eaadbda87f5ef",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.babushahi.com/full-news.php?id=225695",
+   "domain": "babushahi.com",
+   "title": "\"What kind of self-reliant India is this?\": Mallikarjun Kharge slams Centre over sugar price hike, low stocks - Babushahi.com",
+   "lang": "hi",
+   "published": "2026-08-22",
+   "search_call": "3de142eed52d",
+   "tavily_published": "2026-08-22",
+   "search_request_id": "29f8f43b-a3a1-455f-b41a-87f23acd1291",
+   "search_response_sha256": "ec0736e259982f77c9f47d7ef27634ed3943d646f0048ed8d03eaadbda87f5ef",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "3c7584122594",
+   "extract_request_id": "6e290330-c84a-4283-8d2e-069a51340fde",
+   "extract_response_sha256": "d753b82df21d2ba02eaa043f3f66d7892ca348465f369e3c30c8373452b3e2ae",
+   "page_sha256": "f515bcdff1c13270b92eabeaf3cf8464077c3eb260eedab3ed90b88203aaf4fd",
+   "page_file": "pages/f515bcdff1c13270b92eabeaf3cf8464077c3eb260eedab3ed90b88203aaf4fd.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.global-agriculture.com/global-agriculture/fao-food-price-index-rises-1-9-in-august-on-supply-concerns/",
+   "domain": "global-agriculture.com",
+   "title": "FAO Food Price Index Rises 1.9% in August on Supply Concerns - Global Agriculture",
+   "lang": "hi",
+   "published": "2026-09-05",
+   "search_call": "3de142eed52d",
+   "tavily_published": "2026-09-05",
+   "search_request_id": "29f8f43b-a3a1-455f-b41a-87f23acd1291",
+   "search_response_sha256": "ec0736e259982f77c9f47d7ef27634ed3943d646f0048ed8d03eaadbda87f5ef",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "3c7584122594",
+   "extract_request_id": "6e290330-c84a-4283-8d2e-069a51340fde",
+   "extract_response_sha256": "d753b82df21d2ba02eaa043f3f66d7892ca348465f369e3c30c8373452b3e2ae",
+   "page_sha256": "e7b888a1104b473f4e8f86825c962e9e46f25ee4cc355a3dd2d351d025449c9c",
+   "page_file": "pages/e7b888a1104b473f4e8f86825c962e9e46f25ee4cc355a3dd2d351d025449c9c.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.cnbc.com/2026/09/11/cpi-inflation-report-august-2026.html",
+   "domain": "cnbc.com",
+   "title": "Consumer prices rose 0.4% in August, as expected; core inflation was higher than estimated - CNBC",
+   "lang": "hi",
+   "published": "2026-09-11",
+   "search_call": "3de142eed52d",
+   "tavily_published": "2026-09-11",
+   "search_request_id": "29f8f43b-a3a1-455f-b41a-87f23acd1291",
+   "search_response_sha256": "ec0736e259982f77c9f47d7ef27634ed3943d646f0048ed8d03eaadbda87f5ef",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://hindi.news18.com/news/business/latest-lpg-price-hike-commercial-lpg-cylinder-gets-rs-9-50-costlier-from-september-1-check-new-rates-10797231.html",
+   "domain": "hindi.news18.com",
+   "title": "LPG Price Hike: महीने के पहले ही दिन झटका, महंगा हो गया LPG सिलेंडर, चेक करें नए रेट - News18 हिंदी",
+   "lang": "hi",
+   "published": "2026-08-31",
+   "search_call": "30eb7bf8d603",
+   "tavily_published": "2026-08-31",
+   "search_request_id": "b6675a10-c996-4e3d-af89-d0b22849b4a3",
+   "search_response_sha256": "a5f89fcb6d6a48f422f1b8adefc08d575e2eacbe0b8a3e20a526f266959152fb",
+   "status": "rejected",
+   "reason": "the page shows 2026-10-22, after the cutoff 2026-09-29",
+   "claims": [
+    {
+     "line": "राहत की बात यह है कि [...] इंडियन ऑयल द्वारा जारी ताजा नए रेट के अनुसार, दिल्ली में कमर्शियल सिलेंडर की कीमत में ₹9.50 का इजाफा हुआ है, जिसके बाद इसका भाव ₹2,738.00 से बढ़कर ₹2,747.50 हो गया है.",
+     "price": 2747.5,
+     "unit": "₹ per cylinder",
+     "region": "Delhi",
+     "seller": "तेल विपणन कंपनियाँ",
+     "old_price": 2738.0,
+     "new_price": 2747.5,
+     "pct_change": 0.22,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the page shows 2026-10-22, after the cutoff 2026-09-29",
+     "price_type": "commercial",
+     "change": 0.00346968590211838,
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "चेन्नई में अब यह सिलेंडर ₹2,906.00 के मुकाबले ₹2,916.50 का मिलेगा.",
+     "price": 2916.5,
+     "unit": "₹ per cylinder",
+     "region": "Chennai",
+     "seller": "तेल विपणन कंपनियाँ",
+     "old_price": 2906.0,
+     "new_price": 2916.5,
+     "pct_change": 0.36,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the page shows 2026-10-22, after the cutoff 2026-09-29",
+     "price_type": "retail",
+     "change": 0.003613214039917434,
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "tamil nadu"
+     ]
+    },
+    {
+     "line": "मुंबई में पहले कमर्शियल सिलेंडर की कीमत 2691.50 रुपये का था जो अब बढकर 2701 रुपये का हो गया है.",
+     "price": 2701.0,
+     "unit": "₹ per cylinder",
+     "region": "Mumbai",
+     "seller": "तेल विपणन कंपनियाँ",
+     "old_price": 2691.5,
+     "new_price": 2701.0,
+     "pct_change": 0.37,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the page shows 2026-10-22, after the cutoff 2026-09-29",
+     "price_type": "commercial",
+     "change": 0.003529630317666621,
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "maharashtra"
+     ]
+    },
+    {
+     "line": "गुरुग्राम में 19 किलो वाला कमर्शियल सिलेंडर अब ₹2,764 में मिलेगा.",
+     "price": 2764.0,
+     "unit": "₹ per cylinder",
+     "region": "Gurugram",
+     "seller": "तेल विपणन कंपनियाँ",
+     "old_price": null,
+     "new_price": 2764.0,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the page shows 2026-10-22, after the cutoff 2026-09-29",
+     "price_type": "commercial",
+     "change": null,
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "haryana"
+     ]
+    },
+    {
+     "line": "लखनऊ में 19 किलो के LPG सिलेंडर की कीमत अब ₹2,870 रुपये हो गई है.",
+     "price": 2870.0,
+     "unit": "₹ per cylinder",
+     "region": "Lucknow",
+     "seller": "तेल विपणन कंपनियाँ",
+     "old_price": null,
+     "new_price": 2870.0,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the page shows 2026-10-22, after the cutoff 2026-09-29",
+     "price_type": "retail",
+     "change": null,
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "uttar pradesh"
+     ]
+    },
+    {
+     "line": "पटना में कमर्शियल LPG  सिलेंडर का रेट अब बढकरर ₹3,044 है हो गया है.",
+     "price": 3044.0,
+     "unit": "₹ per cylinder",
+     "region": "Patna",
+     "seller": "तेल विपणन कंपनियाँ",
+     "old_price": null,
+     "new_price": 3044.0,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the page shows 2026-10-22, after the cutoff 2026-09-29",
+     "price_type": "commercial",
+     "change": null,
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "bihar"
+     ]
+    }
+   ],
+   "extract_call": "3c7584122594",
+   "extract_request_id": "6e290330-c84a-4283-8d2e-069a51340fde",
+   "extract_response_sha256": "d753b82df21d2ba02eaa043f3f66d7892ca348465f369e3c30c8373452b3e2ae",
+   "page_sha256": "42dd4ff01c843c659f44ee0350fb7d89194318e091dd466a77f69145102b42dd",
+   "page_file": "pages/42dd4ff01c843c659f44ee0350fb7d89194318e091dd466a77f69145102b42dd.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-10-22",
+   "date_flag": "after cutoff"
+  },
+  {
+   "url": "https://navbharattimes.indiatimes.com/business/commodity/prices-of-19-kg-commercial-lpg-cylinders-have-been-increased/articleshow/133665517.cms",
+   "domain": "navbharattimes.indiatimes.com",
+   "title": "LPG Gas Price hike : LPG का कमर्शियल सिलेंडर हुआ ₹9.50 तक महंगा, जानिए आपके शहर का दाम - prices of 19 kg commercial lpg cylinders have been increased - Navbharat Times",
+   "lang": "hi",
+   "published": "2026-09-01",
+   "search_call": "30eb7bf8d603",
+   "tavily_published": "2026-09-01",
+   "search_request_id": "b6675a10-c996-4e3d-af89-d0b22849b4a3",
+   "search_response_sha256": "a5f89fcb6d6a48f422f1b8adefc08d575e2eacbe0b8a3e20a526f266959152fb",
+   "status": "rejected",
+   "reason": "the cited line is not on the fetched page",
+   "claims": [
+    {
+     "line": "मई में इसमें फिर इसकी कीमत में 993 रुपये की भारी [...] सूत्रों से मिली सूचना के मुताबिक आज से दिल्ली में 19 किलो वाले कमर्शियल सिलेंडर का दाम 2747.50 रुपये हो गया है।",
+     "price": 2747.5,
+     "unit": "rupees",
+     "region": "India",
+     "seller": "Petroleum sector government companies",
+     "old_price": 2738,
+     "new_price": 2747.5,
+     "pct_change": 0.34,
+     "effective_date": "2026-05-12",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "commercial",
+     "change": 0.00346968590211838,
+     "base_price": null,
+     "context": "*EDITION IND*",
+     "gloss": "In May, there was a heavy increase of 993 rupees in its price, according to sources, and as of today, the price of a 19‑kilogram commercial cylinder in Delhi has become 2747.50 rupees.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "मुंबई में इस सिलेंडर की कीमत अब 2701 रुपये हो गई है जबकि पहले यह 2691 रुपये थी।",
+     "price": 2711,
+     "unit": "rupees",
+     "region": "India",
+     "seller": "Petroleum sector government companies",
+     "old_price": 2701,
+     "new_price": 2711,
+     "pct_change": 0.37,
+     "effective_date": "2026-05-12",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2026-05-12 is not in 2026-09",
+     "price_type": "retail",
+     "change": 0.003702332469455838,
+     "base_price": null,
+     "context": "# LPG Gas Price hike : LPG का कमर्शियल सिलेंडर हुआ ₹9.50 तक महंगा, जानिए आपके शहर का दाम \n इससे पहले इसका दाम 2738 रुपये था। \n मतलब कि प्रति सिलेंडर कीमत में 10 रुपये की बढ़ोतरी की गई है।",
+     "gloss": "The price of this cylinder in Mumbai has now become 2701 rupees, while it was 2691 rupees earlier.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "maharashtra"
+     ]
+    },
+    {
+     "line": "इससे पहले वहां इसकी कीमत 2906 रुपये थी।",
+     "price": 2916.5,
+     "unit": "rupees",
+     "region": "India",
+     "seller": "Petroleum sector government companies",
+     "old_price": 2906,
+     "new_price": 2916.5,
+     "pct_change": 0.36,
+     "effective_date": "2026-05-12",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the line is not about this item",
+     "price_type": "retail",
+     "change": 0.003613214039917434,
+     "base_price": null,
+     "context": "# LPG Gas Price hike : LPG का कमर्शियल सिलेंडर हुआ ₹9.50 तक महंगा, जानिए आपके शहर का दाम \n चेन्नई में इसका दाम 2916.50 रुपये हो गया है। \n मतलब वहां कीमतों में 10.50 रुपये की बढ़ोतरी हुई है।",
+     "gloss": "Before that, its price there was 2906 rupees.",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    }
+   ],
+   "extract_call": "3c7584122594",
+   "extract_request_id": "6e290330-c84a-4283-8d2e-069a51340fde",
+   "extract_response_sha256": "d753b82df21d2ba02eaa043f3f66d7892ca348465f369e3c30c8373452b3e2ae",
+   "page_sha256": "39289ef7db575b4a18ea0653ba35dbbf227c900f0777aa224c6320a13cfdb6c0",
+   "page_file": "pages/39289ef7db575b4a18ea0653ba35dbbf227c900f0777aa224c6320a13cfdb6c0.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01",
+   "domain": "aajtak.in",
+   "title": "दिल्‍ली से पटना तक महंगा हुआ LPG सिलेंडर, जानिए कितने बढ़ गए दाम - LPG Cylinder Price Hike Delhi to Patan Check New Rates tutd - AajTak",
+   "lang": "hi",
+   "published": "2026-09-01",
+   "search_call": "30eb7bf8d603",
+   "tavily_published": "2026-09-01",
+   "search_request_id": "b6675a10-c996-4e3d-af89-d0b22849b4a3",
+   "search_response_sha256": "a5f89fcb6d6a48f422f1b8adefc08d575e2eacbe0b8a3e20a526f266959152fb",
+   "status": "verified",
+   "reason": "verified",
+   "claims": [
+    {
+     "line": "1 सितंबर से एलपीजी की कीमतों के अलावा, एविएशन टर्बाइन फ्यूल (ATF) डोमेस्टिक एयरलाइन के लिए के दाम में भी बढ़ोतरी की गई है. यह 6.28 रुपये बढ़कर ₹121.28 प्रति लीटर हो चुका है.",
+     "price": 121.28,
+     "unit": "Rs",
+     "region": "India",
+     "seller": "Indian Oil Corporation (IOC)",
+     "old_price": 115.0,
+     "new_price": 121.28,
+     "pct_change": 6.28,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the line is not about this item",
+     "price_type": "retail",
+     "change": 0.054608695652173855,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n > — ANI (@ANI) [September 1, 2026](https://x.com/ANI/status/2094626320294842570?ref_src=twsrc%5Etfw) \n **वेस्‍ट एशिया में जंग जारी**",
+     "gloss": "From September 1, in addition to LPG prices, the rates of aviation turbine fuel (ATF) for domestic airlines have also been increased. It has gone up by ₹6.28 to ₹121.28 per litre.",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": [
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": ">  5 kg FTL Non-Domestic LPG refill: Rs 2.00/cylinder (0.26% increase), from Rs 762.00 to Rs 764.00",
+     "price": 764.0,
+     "unit": "Rs",
+     "region": "India",
+     "seller": "Indian Oil Corporation (IOC)",
+     "old_price": 762.0,
+     "new_price": 764.0,
+     "pct_change": 2.0,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "verified",
+     "reason": "verified",
+     "price_type": "retail",
+     "change": 0.002624671916010568,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n > ATF (Aviation Turbine Fuel) prices for domestic airlines increased by Rs 6.28/litre to Rs 121.28/litre from Rs 115.00, say IOCL sources. \n > — ANI (@ANI) [September 1, 2026](https://x.com/ANI/status/2094626320294842570?ref_src=twsrc%5Etfw)",
+     "gloss": "",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "इंडियन ऑयल कॉर्पोरेशन (IOC) ने मंगलवार को एलपीजी की कीमतों में बढ़ोतरी की है. तेल कंपनी ने 19 किलो वाले कमर्शियल सिलेंडर के दाम में बढ़ोतरी की है. यह बढ़ोतरी 9.50 रुपये की हुई है, जो आज यानी 1 सितंबर से पूरे देश में लागू होंगे.",
+     "price": 2747.5,
+     "unit": "₹ per 19 kg commercial cylinder",
+     "region": "Delhi",
+     "seller": "Indian Oil Corporation (IOC)",
+     "old_price": null,
+     "new_price": 2747.5,
+     "pct_change": null,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "commercial",
+     "change": null,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n + कैंसिल \n 5 किलो वाले नॉन-डोमेस्टिक LPG सिलेंडर के दाम में भी 2 रुपये प्रति किलो का इजाफा किया गया है. अब 5 किलो वाला [एलपीजी](https://www.aajtak.in/topic/lpg) सिलेंडर ₹764 में मिलेगा. हालांकि, तेल कंपनियों ने रसोई गैस सिलेंडर यानी  14.2 किलो वाले सिलेंडर के दाम में कोई बदलाव नहीं किया है, जो आम लोगों के लिए बड़ी राहत है.",
+     "gloss": "Indian Oil Corporation (IOC) has raised LPG prices on Tuesday. The oil company has increased the price of the 19 kg commercial cylinder by 9.50 rupees, which will be applicable across the country from today, i.e., September 1.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "कमर्शियल एलपीजी के दाम में बढ़ोतरी के बाद 19 किलो वाला एलपीजी सिलेंडर दिल्‍ली में ₹2,747.50 में मिलेगा. इसी तरह, मुंबई में कमर्शियल सिलेंडर का दाम ₹2,701 होगा. चेन्‍नई में यह सिलेंडर ₹2,916.50  में मिलेगा. इस सिलेंडर के दाम में सबसे ज्‍यादा बढ़ोतरी कोलकाता में हुई है, जहां ₹11.50 बढ़कर 19 किलो वाले सिलेंडर का दाम ₹2,884 हो गया है.",
+     "price": 2701,
+     "unit": "₹ per 19 kg commercial cylinder",
+     "region": "Mumbai",
+     "seller": "Indian Oil Corporation (IOC)",
+     "old_price": null,
+     "new_price": 2701,
+     "pct_change": null,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the change cannot be computed (no old and new price, % or official base)",
+     "price_type": "commercial",
+     "change": null,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n 5 किलो वाले नॉन-डोमेस्टिक LPG सिलेंडर के दाम में भी 2 रुपये प्रति किलो का इजाफा किया गया है. अब 5 किलो वाला [एलपीजी](https://www.aajtak.in/topic/lpg) सिलेंडर ₹764 में मिलेगा. हालांकि, तेल कंपनियों ने रसोई गैस सिलेंडर यानी  14.2 किलो वाले सिलेंडर के दाम में कोई बदलाव नहीं किया है, जो आम लोगों के लिए बड़ी राहत है. \n ## सम्बंधित ख़बरें",
+     "gloss": "After the increase in the price of commercial LPG, the 19 kg cylinder will be available in Delhi for ₹2,747.50. Similarly, the commercial cylinder will cost ₹2,701 in Mumbai. In Chennai, this cylinder will be available for ₹2,916.50. The highest increase in the price of this cylinder has taken place in Kolkata, where the price of the 19 kg cylinder has risen by ₹11.50 to ₹2,884.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "maharashtra",
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "कमर्शियल एलपीजी के दाम में बढ़ोतरी के बाद 19 किलो वाला एलपीजी सिलेंडर दिल्‍ली में ₹2,747.50 में मिलेगा. इसी तरह, मुंबई में कमर्शियल सिलेंडर का दाम ₹2,701 होगा. चेन्‍नई में यह सिलेंडर ₹2,916.50  में मिलेगा. इस सिलेंडर के दाम में सबसे ज्‍यादा बढ़ोतरी कोलकाता में हुई है, जहां ₹11.50 बढ़कर 19 किलो वाले सिलेंडर का दाम ₹2,884 हो गया है.",
+     "price": 2916.5,
+     "unit": "₹ per 19 kg commercial cylinder",
+     "region": "Chennai",
+     "seller": "Indian Oil Corporation (IOC)",
+     "old_price": null,
+     "new_price": 2916.5,
+     "pct_change": null,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the change cannot be computed (no old and new price, % or official base)",
+     "price_type": "commercial",
+     "change": null,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n 5 किलो वाले नॉन-डोमेस्टिक LPG सिलेंडर के दाम में भी 2 रुपये प्रति किलो का इजाफा किया गया है. अब 5 किलो वाला [एलपीजी](https://www.aajtak.in/topic/lpg) सिलेंडर ₹764 में मिलेगा. हालांकि, तेल कंपनियों ने रसोई गैस सिलेंडर यानी  14.2 किलो वाले सिलेंडर के दाम में कोई बदलाव नहीं किया है, जो आम लोगों के लिए बड़ी राहत है. \n ## सम्बंधित ख़बरें",
+     "gloss": "After the increase in the price of commercial LPG, the 19 kg cylinder will be available in Delhi for ₹2,747.50. Similarly, the commercial cylinder will cost ₹2,701 in Mumbai. In Chennai, this cylinder will be available for ₹2,916.50. The highest increase in the price of this cylinder has taken place in Kolkata, where the price of the 19 kg cylinder has risen by ₹11.50 to ₹2,884.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "maharashtra",
+      "nct of delhi",
+      "tamil nadu"
+     ]
+    },
+    {
+     "line": "कमर्शियल एलपीजी के दाम में बढ़ोतरी के बाद 19 किलो वाला एलपीजी सिलेंडर दिल्‍ली में ₹2,747.50 में मिलेगा. इसी तरह, मुंबई में कमर्शियल सिलेंडर का दाम ₹2,701 होगा. चेन्‍नई में यह सिलेंडर ₹2,916.50  में मिलेगा. इस सिलेंडर के दाम में सबसे ज्‍यादा बढ़ोतरी कोलकाता में हुई है, जहां ₹11.50 बढ़कर 19 किलो वाले सिलेंडर का दाम ₹2,884 हो गया है.",
+     "price": 2884,
+     "unit": "₹ per 19 kg commercial cylinder",
+     "region": "Kolkata",
+     "seller": "Indian Oil Corporation (IOC)",
+     "old_price": null,
+     "new_price": 2884,
+     "pct_change": null,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the change cannot be computed (no old and new price, % or official base)",
+     "price_type": "commercial",
+     "change": null,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n 5 किलो वाले नॉन-डोमेस्टिक LPG सिलेंडर के दाम में भी 2 रुपये प्रति किलो का इजाफा किया गया है. अब 5 किलो वाला [एलपीजी](https://www.aajtak.in/topic/lpg) सिलेंडर ₹764 में मिलेगा. हालांकि, तेल कंपनियों ने रसोई गैस सिलेंडर यानी  14.2 किलो वाले सिलेंडर के दाम में कोई बदलाव नहीं किया है, जो आम लोगों के लिए बड़ी राहत है. \n ## सम्बंधित ख़बरें",
+     "gloss": "After the increase in the price of commercial LPG, the 19 kg cylinder will be available in Delhi for ₹2,747.50. Similarly, the commercial cylinder will cost ₹2,701 in Mumbai. In Chennai, this cylinder will be available for ₹2,916.50. The highest increase in the price of this cylinder has taken place in Kolkata, where the price of the 19 kg cylinder has risen by ₹11.50 to ₹2,884.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "maharashtra",
+      "nct of delhi",
+      "west bengal"
+     ]
+    },
+    {
+     "line": "पटना में एलपीजी कमर्शियल सिलेंडर की कीमत 3000 रुपये पार हो चुकी है. नए बढ़ोतरी के बाद बिहार में एलपीजी का यह सिलेंडर 3,029 रुपये में दिया जा रहा है. देश के सभी शहरों में एलपीजी के दाम में यह बढ़ोतरी आज से ही लागू होगी.",
+     "price": 3029,
+     "unit": "₹ per 19 kg commercial cylinder",
+     "region": "Patna",
+     "seller": "Indian Oil Corporation (IOC)",
+     "old_price": null,
+     "new_price": 3029,
+     "pct_change": null,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the change cannot be computed (no old and new price, % or official base)",
+     "price_type": "commercial",
+     "change": null,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n **पटना में कितनी है कीमत?** \n > ATF (Aviation Turbine Fuel) prices for domestic airlines increased by Rs 6.28/litre to Rs 121.28/litre from Rs 115.00, say IOCL sources.",
+     "gloss": "The price of LPG commercial cylinders in Patna has crossed Rs 3,000. After the new increase, this cylinder of LPG in Bihar is being provided at Rs 3,029. This increase in LPG prices across all cities of the country will take effect from today.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "bihar",
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "बेंगलुरु और तिरुवनंतपुरम में 19 किलो वाले सिलेंडर के दाम में 10 रुपये प्रति सिलेंडर की बढ़ोतरी हुई है और यह क्रमश: ₹2,784 और ₹2,831 में मिलेगा. भुवनेश्‍वर में 11 रुपये बढ़कर अब इसकी कीमत ₹2,919 और हैदराबाद में 11 रुपये बढ़कर इस सिलेंडर की कीमत ₹2,996 रुपये हो चुकी है.",
+     "price": 2784,
+     "unit": "₹ per 19 kg commercial cylinder",
+     "region": "Bangalore/Bengaluru",
+     "seller": "Indian Oil Corporation (IOC)",
+     "old_price": null,
+     "new_price": 2784,
+     "pct_change": null,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the change cannot be computed (no old and new price, % or official base)",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n ##### 1 अक्टूबर से LPG पर नया नियम, तुरंत करें ये काम!](https://www.aajtak.in/short-videos/video/lpg-subsidy-biometric-aadhaar-authentication-mandatory-from-october-new-rule-cylinder-booking-government-update-mmta-2652572-2026-09-25?utm_source=Internal_AT&utm_medium=Article&utm_name=Read_More_1 \"1 अक्टूबर से LPG पर नया नियम, तुरंत करें ये काम!\") \n Advertisement",
+     "gloss": "In Bengaluru and Thiruvananthapuram, the price of a 19‑kg cylinder has been increased by ₹10 per cylinder, and it will now be available at ₹2,784 and ₹2,831 respectively. In Bhubaneswar, the price has risen by ₹11, bringing it to ₹2,919, and in Hyderabad it has increased by ₹11, making the cylinder cost ₹2,996.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "karnataka",
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "बेंगलुरु और तिरुवनंतपुरम में 19 किलो वाले सिलेंडर के दाम में 10 रुपये प्रति सिलेंडर की बढ़ोतरी हुई है और यह क्रमश: ₹2,784 और ₹2,831 में मिलेगा. भुवनेश्‍वर में 11 रुपये बढ़कर अब इसकी कीमत ₹2,919 और हैदराबाद में 11 रुपये बढ़कर इस सिलेंडर की कीमत ₹2,996 रुपये हो चुकी है.",
+     "price": 2831,
+     "unit": "₹ per 19 kg commercial cylinder",
+     "region": "Thiruvananthapuram",
+     "seller": "Indian Oil Corporation (IOC)",
+     "old_price": null,
+     "new_price": 2831,
+     "pct_change": null,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the change cannot be computed (no old and new price, % or official base)",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n ##### 1 अक्टूबर से LPG पर नया नियम, तुरंत करें ये काम!](https://www.aajtak.in/short-videos/video/lpg-subsidy-biometric-aadhaar-authentication-mandatory-from-october-new-rule-cylinder-booking-government-update-mmta-2652572-2026-09-25?utm_source=Internal_AT&utm_medium=Article&utm_name=Read_More_1 \"1 अक्टूबर से LPG पर नया नियम, तुरंत करें ये काम!\") \n Advertisement",
+     "gloss": "In Bengaluru and Thiruvananthapuram, the price of a 19‑kg cylinder has been increased by ₹10 per cylinder, and it will now be available at ₹2,784 and ₹2,831 respectively. In Bhubaneswar, the price has risen by ₹11, bringing it to ₹2,919, and in Hyderabad it has increased by ₹11, making the cylinder cost ₹2,996.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "kerala",
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "बेंगलुरु और तिरुवनंतपुरम में 19 किलो वाले सिलेंडर के दाम में 10 रुपये प्रति सिलेंडर की बढ़ोतरी हुई है और यह क्रमश: ₹2,784 और ₹2,831 में मिलेगा. भुवनेश्‍वर में 11 रुपये बढ़कर अब इसकी कीमत ₹2,919 और हैदराबाद में 11 रुपये बढ़कर इस सिलेंडर की कीमत ₹2,996 रुपये हो चुकी है.",
+     "price": 2919,
+     "unit": "₹ per 19 kg commercial cylinder",
+     "region": "Bhubaneswar",
+     "seller": "Indian Oil Corporation (IOC)",
+     "old_price": null,
+     "new_price": 2919,
+     "pct_change": null,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the change cannot be computed (no old and new price, % or official base)",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n ##### 1 अक्टूबर से LPG पर नया नियम, तुरंत करें ये काम!](https://www.aajtak.in/short-videos/video/lpg-subsidy-biometric-aadhaar-authentication-mandatory-from-october-new-rule-cylinder-booking-government-update-mmta-2652572-2026-09-25?utm_source=Internal_AT&utm_medium=Article&utm_name=Read_More_1 \"1 अक्टूबर से LPG पर नया नियम, तुरंत करें ये काम!\") \n Advertisement",
+     "gloss": "In Bengaluru and Thiruvananthapuram, the price of a 19‑kg cylinder has been increased by ₹10 per cylinder, and it will now be available at ₹2,784 and ₹2,831 respectively. In Bhubaneswar, the price has risen by ₹11, bringing it to ₹2,919, and in Hyderabad it has increased by ₹11, making the cylinder cost ₹2,996.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "nct of delhi",
+      "odisha"
+     ]
+    },
+    {
+     "line": "बेंगलुरु और तिरुवनंतपुरम में 19 किलो वाले सिलेंडर के दाम में 10 रुपये प्रति सिलेंडर की बढ़ोतरी हुई है और यह क्रमश: ₹2,784 और ₹2,831 में मिलेगा. भुवनेश्‍वर में 11 रुपये बढ़कर अब इसकी कीमत ₹2,919 और हैदराबाद में 11 रुपये बढ़कर इस सिलेंडर की कीमत ₹2,996 रुपये हो चुकी है.",
+     "price": 2996,
+     "unit": "₹ per 19 kg commercial cylinder",
+     "region": "Hyderabad",
+     "seller": "Indian Oil Corporation (IOC)",
+     "old_price": null,
+     "new_price": 2996,
+     "pct_change": null,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the change cannot be computed (no old and new price, % or official base)",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n ##### 1 अक्टूबर से LPG पर नया नियम, तुरंत करें ये काम!](https://www.aajtak.in/short-videos/video/lpg-subsidy-biometric-aadhaar-authentication-mandatory-from-october-new-rule-cylinder-booking-government-update-mmta-2652572-2026-09-25?utm_source=Internal_AT&utm_medium=Article&utm_name=Read_More_1 \"1 अक्टूबर से LPG पर नया नियम, तुरंत करें ये काम!\") \n Advertisement",
+     "gloss": "In Bengaluru and Thiruvananthapuram, the price of a 19‑kg cylinder has been increased by ₹10 per cylinder, and it will now be available at ₹2,784 and ₹2,831 respectively. In Bhubaneswar, the price has risen by ₹11, bringing it to ₹2,919, and in Hyderabad it has increased by ₹11, making the cylinder cost ₹2,996.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "nct of delhi",
+      "telangana"
+     ]
+    },
+    {
+     "line": ">  5 kg FTL Non-Domestic LPG refill: Rs 2.00/cylinder (0.26% increase), from Rs 762.00 to Rs 764.00",
+     "price": 764.0,
+     "unit": "₹ per cylinder",
+     "region": "All India",
+     "seller": "Indian Oil Corporation (IOC)",
+     "old_price": 762.0,
+     "new_price": 764.0,
+     "pct_change": 0.26,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "verified",
+     "reason": "verified",
+     "price_type": "retail",
+     "change": 0.002624671916010568,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n > ATF (Aviation Turbine Fuel) prices for domestic airlines increased by Rs 6.28/litre to Rs 121.28/litre from Rs 115.00, say IOCL sources. \n > — ANI (@ANI) [September 1, 2026](https://x.com/ANI/status/2094626320294842570?ref_src=twsrc%5Etfw)",
+     "gloss": "",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "> ATF (Aviation Turbine Fuel) prices for domestic airlines increased by Rs 6.28/litre to Rs 121.28/litre from Rs 115.00, say IOCL sources.",
+     "price": 121.28,
+     "unit": "₹ per litre",
+     "region": "All India",
+     "seller": "Government oil companies (IOCL sources implied)",
+     "old_price": 115.0,
+     "new_price": 121.28,
+     "pct_change": null,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the line is not about this item",
+     "price_type": "retail",
+     "change": 0.054608695652173855,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n पटना में एलपीजी कमर्शियल सिलेंडर की कीमत 3000 रुपये पार हो चुकी है. नए बढ़ोतरी के बाद बिहार में एलपीजी का यह सिलेंडर 3,029 रुपये में दिया जा रहा है. देश के सभी शहरों में एलपीजी के दाम में यह बढ़ोतरी आज से ही लागू होगी. \n >  5 kg FTL Non-Domestic LPG refill: Rs 2.00/cylinder (0.26% increase), from Rs 762.00 to Rs 764.00",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": [
+      "bihar",
+      "nct of delhi"
+     ]
+    }
+   ],
+   "extract_call": "c1d34fddb2d6",
+   "extract_request_id": "a41c6d1e-1d06-4622-9dd0-3ae97f1ec500",
+   "extract_response_sha256": "bca6770bc303564ef6b5aa7e48d11f036ae146285d255a8b3f53803a8b715966",
+   "page_sha256": "6cf3e6427d84c717b7cef6b9afbf926938cfcf06b59fd40a4199808836eb03a9",
+   "page_file": "pages/6cf3e6427d84c717b7cef6b9afbf926938cfcf06b59fd40a4199808836eb03a9.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-09-01",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://ndtv.in/business-news/lpg-price-hike-9-rupees-50-paise-1-september-2026-lpg-gas-cylinder-price-check-rates-in-delhi-mumbai-chennai-kolkata-and-other-cities-11984381",
+   "domain": "ndtv.in",
+   "title": "LPG Price Hike: महंगा हो गया LPG सिलेंडर, इतने रुपये बढ़ गए दाम, सितंबर के पहले दिन लगा झटका  | LPG Price Hike 9 Rupees 50 Paise 1 September 2026 lpg-gas-cylinder-price-check-rates-in-delhi-mumbai-chennai-kolkata-and-other-cities - NDTV India",
+   "lang": "hi",
+   "published": "2026-09-01",
+   "search_call": "30eb7bf8d603",
+   "tavily_published": "2026-09-01",
+   "search_request_id": "b6675a10-c996-4e3d-af89-d0b22849b4a3",
+   "search_response_sha256": "a5f89fcb6d6a48f422f1b8adefc08d575e2eacbe0b8a3e20a526f266959152fb",
+   "status": "verified",
+   "reason": "verified",
+   "claims": [
+    {
+     "line": "कल तक इसकी कीमत 2,738 रुपये थी.",
+     "price": 2747.5,
+     "unit": "rupees",
+     "region": "Delhi",
+     "seller": "IOCL",
+     "old_price": 2738,
+     "new_price": 2747.5,
+     "pct_change": 0.348,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the line is not about this item",
+     "price_type": "retail",
+     "change": 0.00346968590211838,
+     "base_price": null,
+     "context": "# LPG Price Hike: महंगा हो गया LPG सिलेंडर, इतने रुपये बढ़ गए दाम, सितंबर के पहले दिन लगा झटका \n ### दिल्‍ली, मुंबई और अन्‍य शहरों में LPG सिलेंडर के दाम \n * नोएडा में 19 किलो वाले गैस सिलेंडर के दाम  2,738 रुपये से बढ़कर 2,747.50 रुपये हो गए हैं. यहां भी 9.50 रुपये की बढ़ोतरी हुई है.",
+     "gloss": "As of yesterday, its price was 2,738 rupees.",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": [
+      "maharashtra",
+      "nct of delhi",
+      "tamil nadu",
+      "west bengal"
+     ]
+    },
+    {
+     "line": "नोएडा में 19 किलो वाले गैस सिलेंडर के दाम  2,738 रुपये से बढ़कर 2,747.50 रुपये हो गए हैं. यहां भी 9.50 रुपये की बढ़ोतरी हुई है.",
+     "price": 2747.5,
+     "unit": "rupees",
+     "region": "Noida",
+     "seller": "IOCL",
+     "old_price": 2738,
+     "new_price": 2747.5,
+     "pct_change": 0.348,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "verified",
+     "reason": "verified",
+     "price_type": "retail",
+     "change": 0.00346968590211838,
+     "base_price": null,
+     "context": "# LPG Price Hike: महंगा हो गया LPG सिलेंडर, इतने रुपये बढ़ गए दाम, सितंबर के पहले दिन लगा झटका \n * आज से 19 किलो वाला सिलेंडर दिल्ली में 9.50 रुपये महंगा होकर 2747.50 रुपये का हो गया है. कल तक इसकी कीमत 2,738 रुपये थी. \n * मुंबई में 19 किलो वाला कमर्शियल गैस सिलेंडर 2,701 रुपये में मिल रहा है. 31 अगस्‍त तक यहां इसके दाम 2691.50 रुपये थे.",
+     "gloss": "The price of the 19 kg gas cylinder in Noida has increased from 2,738 rupees to 2,747.50 rupees. Here, there has also been an increase of 9.50 rupees.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "maharashtra",
+      "nct of delhi",
+      "tamil nadu",
+      "uttar pradesh",
+      "west bengal"
+     ]
+    },
+    {
+     "line": "मुंबई में 19 किलो वाला कमर्शियल गैस सिलेंडर 2,701 रुपये में मिल रहा है. 31 अगस्‍त तक यहां इसके दाम 2691.50 रुपये थे.",
+     "price": 2701,
+     "unit": "rupees",
+     "region": "Mumbai",
+     "seller": "IOCL",
+     "old_price": 2691.5,
+     "new_price": 2701,
+     "pct_change": 0.353,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "context",
+     "reason": "commercial price: shown as context, never in the number",
+     "price_type": "commercial",
+     "change": 0.003529630317666621,
+     "base_price": null,
+     "context": "# LPG Price Hike: महंगा हो गया LPG सिलेंडर, इतने रुपये बढ़ गए दाम, सितंबर के पहले दिन लगा झटका \n * नोएडा में 19 किलो वाले गैस सिलेंडर के दाम  2,738 रुपये से बढ़कर 2,747.50 रुपये हो गए हैं. यहां भी 9.50 रुपये की बढ़ोतरी हुई है. \n * कोलकाता में 19 किलो वाले गैस सिलेंडर के दाम  2872.50 रुपये से बढ़कर 2,982 रुपये हो गए हैं. यहां भी 9.50 रुपये की बढ़ोतरी हुई है.",
+     "gloss": "A commercial gas cylinder weighing 19 kilograms in Mumbai is being sold for 2,701 rupees. Its price was 2,691.50 rupees until August 31.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "maharashtra",
+      "nct of delhi",
+      "tamil nadu",
+      "west bengal"
+     ]
+    },
+    {
+     "line": "कोलकाता में 19 किलो वाले गैस सिलेंडर के दाम  2872.50 रुपये से बढ़कर 2,982 रुपये हो गए हैं. यहां भी 9.50 रुपये की बढ़ोतरी हुई है.",
+     "price": 2982,
+     "unit": "rupees",
+     "region": "Kolkata",
+     "seller": "IOCL",
+     "old_price": 2872.5,
+     "new_price": 2982,
+     "pct_change": 0.362,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "verified",
+     "reason": "verified",
+     "price_type": "retail",
+     "change": 0.03812010443864233,
+     "base_price": null,
+     "context": "# LPG Price Hike: महंगा हो गया LPG सिलेंडर, इतने रुपये बढ़ गए दाम, सितंबर के पहले दिन लगा झटका \n * मुंबई में 19 किलो वाला कमर्शियल गैस सिलेंडर 2,701 रुपये में मिल रहा है. 31 अगस्‍त तक यहां इसके दाम 2691.50 रुपये थे. \n * वहीं चेन्नई में 19 किलो वाला कमर्शियल सिलेंडर 2916.50 रुपये का हो गया है. अभी कल तक ये सिलेंडर,  2,906 रुपये में मिल रहा था.",
+     "gloss": "The price of a 19 kg gas cylinder in Kolkata has increased from 2872.50 rupees to 2,982 rupees. There has also been an increase of 9.50 rupees here.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "maharashtra",
+      "nct of delhi",
+      "tamil nadu",
+      "west bengal"
+     ]
+    }
+   ],
+   "extract_call": "c1d34fddb2d6",
+   "extract_request_id": "a41c6d1e-1d06-4622-9dd0-3ae97f1ec500",
+   "extract_response_sha256": "bca6770bc303564ef6b5aa7e48d11f036ae146285d255a8b3f53803a8b715966",
+   "page_sha256": "fac6af09abb7991e9683453e9fd4804cfdf84e174dcfa4dde2569f5e448425d8",
+   "page_file": "pages/fac6af09abb7991e9683453e9fd4804cfdf84e174dcfa4dde2569f5e448425d8.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-09-01",
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.abplive.com/business/commercial-gas-cylinder-price-hike-by-rs-9-50-on-1st-september-2026-3182588",
+   "domain": "abplive.com",
+   "title": "1 सितंबर से बदले LPG के दाम, जानें अब कितने रुपए में मिलेगा गैस सिलेंडर | Commercial Gas Cylinder Price Hike by rs 9.50 on 1st September 2026",
+   "lang": "hi",
+   "published": "2026-09-01",
+   "search_call": "30eb7bf8d603",
+   "tavily_published": "2026-09-01",
+   "search_request_id": "b6675a10-c996-4e3d-af89-d0b22849b4a3",
+   "search_response_sha256": "a5f89fcb6d6a48f422f1b8adefc08d575e2eacbe0b8a3e20a526f266959152fb",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "1 सितंबर से बदले LPG के दाम, जानें अब कितने रुपए में मिलेगा गैस सिलेंडर | Commercial Gas Cylinder Price Hike by rs 9.50 on 1st September 2026",
+     "price": 2939.5,
+     "unit": "rupees",
+     "region": "India",
+     "seller": "Government oil companies",
+     "old_price": 2930,
+     "new_price": 2939.5,
+     "pct_change": 0.5,
+     "effective_date": "2026-09-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "commercial",
+     "change": 0.0032423208191125763,
+     "base_price": null,
+     "context": "[हिंदी](https://www.abplive.com \"हिंदी\")[English](https://news.abplive.com \"English\")[मराठी](https://marathi.abplive.com \"मराठी\")[ਪੰਜਾਬੀ](https://punjabi.abplive.com \"ਪੰਜਾਬੀ\")[বাংলা](https://bengali.abplive.com \"বাংলা\")[ગુજરાતી](https://gujarati.abplive.com \"ગુજરાતી\")[நாடு](https://tamil.abplive.com \"நாடு\")[దేశం](https://telugu.abplive.com \"దేశం\")",
+     "gloss": "From September 1, LPG prices have changed; find out the new price per cylinder. | Commercial Gas Cylinder Price Hike by rs 9.50 on 1st September 2026",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": []
+    },
+    {
+     "line": "[...] इससे पहले 1 जुलाई 2026 को दिल्ली में कमर्शियल LPG सिलेंडर 183.50 रुपये सस्ता हुआ था और इसकी कीमत 2,930 रुपये हो गई थी.",
+     "price": 2930,
+     "unit": "rupees",
+     "region": "India",
+     "seller": "Government oil companies",
+     "old_price": 2738,
+     "new_price": 2930,
+     "pct_change": 6.67,
+     "effective_date": "2026-07-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "commercial",
+     "change": 0.07012417823228634,
+     "base_price": null,
+     "context": "[हिंदी](https://www.abplive.com \"हिंदी\")[English](https://news.abplive.com \"English\")[मराठी](https://marathi.abplive.com \"मराठी\")[ਪੰਜਾਬੀ](https://punjabi.abplive.com \"ਪੰਜਾਬੀ\")[বাংলা](https://bengali.abplive.com \"বাংলা\")[ગુજરાતી](https://gujarati.abplive.com \"ગુજરાતી\")[நாடு](https://tamil.abplive.com \"நாடு\")[దేశం](https://telugu.abplive.com \"దేశం\")",
+     "gloss": "Earlier, on July 1, 2026, the commercial LPG cylinder in Delhi was reduced by 183.50 rupees, bringing its price down to 2,930 rupees.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "nct of delhi"
+     ]
+    }
+   ],
+   "extract_call": "c1d34fddb2d6",
+   "extract_request_id": "a41c6d1e-1d06-4622-9dd0-3ae97f1ec500",
+   "extract_response_sha256": "bca6770bc303564ef6b5aa7e48d11f036ae146285d255a8b3f53803a8b715966",
+   "page_sha256": "dd0f45b6504c2874832e613755dcecfc8529420e740e0a3d7586637221675097",
+   "page_file": "pages/dd0f45b6504c2874832e613755dcecfc8529420e740e0a3d7586637221675097.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-09-01",
+   "date_flag": ""
+  },
+  {
+   "url": "https://maharashtratimes.com/maharashtra/thane/auto-rickshaw-unions-claim-that-1rupees-fare-hike-is-insufficient-and-demand-higher-fare-increase/articleshow/133501472.cms",
+   "domain": "maharashtratimes.com",
+   "title": "Auto-Rickshaw Fare Hike:१ रुपयांऐवजी ३० रुपयांची भाडेवाढ ...",
+   "lang": "mr",
+   "published": null,
+   "search_call": "4689cd2640ba",
+   "tavily_published": null,
+   "search_request_id": "7ba4d580-c13e-4da3-bffd-386c1f36728c",
+   "search_response_sha256": "a9adbba6e8b527bc36541aa16c000e3a488061239f51df5c4b5235efde00f037",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://maharashtratimes.com/maharashtra/thane/thane-citizens-march-against-cluster-development-company/articleshow/133573945.cms",
+   "domain": "maharashtratimes.com",
+   "title": "ठाण्यात क्लस्टरविरोधात धडक मोर्चा, हजारो नागरिक क्लस्टर ...",
+   "lang": "mr",
+   "published": null,
+   "search_call": "4689cd2640ba",
+   "tavily_published": null,
+   "search_request_id": "7ba4d580-c13e-4da3-bffd-386c1f36728c",
+   "search_response_sha256": "a9adbba6e8b527bc36541aa16c000e3a488061239f51df5c4b5235efde00f037",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://telanganatoday.com/zomato-lays-off-around-250-employees-in-latest-workforce-restructuring",
+   "domain": "telanganatoday.com",
+   "title": "Zomato lays off around 250 employees in latest workforce restructuring - Telangana Today",
+   "lang": "te",
+   "published": "2026-08-31",
+   "search_call": "0369d7844982",
+   "tavily_published": "2026-08-31",
+   "search_request_id": "6e155c0e-c917-4dad-9b8e-3a95ed94d7d5",
+   "search_response_sha256": "c02b5e171f35b5278ef36645bc4c6e57973339f253ba02677a12e27c687acded",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://telanganatoday.com/tamil-nadu-police-arrest-self-styled-godman-over-alleged-abuse-secret-filming",
+   "domain": "telanganatoday.com",
+   "title": "Tamil Nadu police arrest self-styled godman over alleged abuse, secret filming - Telangana Today",
+   "lang": "te",
+   "published": "2026-09-20",
+   "search_call": "0369d7844982",
+   "tavily_published": "2026-09-20",
+   "search_request_id": "6e155c0e-c917-4dad-9b8e-3a95ed94d7d5",
+   "search_response_sha256": "c02b5e171f35b5278ef36645bc4c6e57973339f253ba02677a12e27c687acded",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://telanganatoday.com/affordable-hostels-make-anjaiah-nagar-a-boon-for-migrant-workforce-in-hyderabad",
+   "domain": "telanganatoday.com",
+   "title": "Affordable hostels make Anjaiah Nagar a boon for migrant workforce in Hyderabad - Telangana Today",
+   "lang": "te",
+   "published": "2026-08-23",
+   "search_call": "0369d7844982",
+   "tavily_published": "2026-08-23",
+   "search_request_id": "6e155c0e-c917-4dad-9b8e-3a95ed94d7d5",
+   "search_response_sha256": "c02b5e171f35b5278ef36645bc4c6e57973339f253ba02677a12e27c687acded",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.axios.com/2026/09/09/energy-department-hikes-2027-diesel-price-outlook",
+   "domain": "axios.com",
+   "title": "Energy Department hikes 2027 diesel price outlook",
+   "lang": "hi",
+   "published": "2026-09-09",
+   "search_call": "85313256fc74",
+   "tavily_published": "2026-09-09",
+   "search_request_id": "a25b73f6-0464-4fa2-951e-66453eb1d1bf",
+   "search_response_sha256": "77f92c51fe3876d756e35d6a50f65bd8a60552c1104f7e06e138c8e4154bddfd",
+   "status": "rejected",
+   "reason": "Nano could not read this result (model returned no JSON object)",
+   "claims": []
+  },
+  {
+   "url": "https://www.saltwire.com/cape-breton/big-jump-up-in-fuel-price-after-nova-scotia-invokes-interrupter-clause",
+   "domain": "saltwire.com",
+   "title": "Big jump up in fuel price in Cape Breton, Nova Scotia | PNI Atlantic News",
+   "lang": "hi",
+   "published": null,
+   "search_call": "85313256fc74",
+   "tavily_published": null,
+   "search_request_id": "a25b73f6-0464-4fa2-951e-66453eb1d1bf",
+   "search_response_sha256": "77f92c51fe3876d756e35d6a50f65bd8a60552c1104f7e06e138c8e4154bddfd",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.aljazeera.com/economy/2026/9/11/rising-petrol-costs-drive-sharp-inflation-increase-in-us-in-august",
+   "domain": "aljazeera.com",
+   "title": "Rising petrol costs drive sharp inflation increase in US in August | Inflation News | Al Jazeera",
+   "lang": "hi",
+   "published": "2026-09-11",
+   "search_call": "85313256fc74",
+   "tavily_published": "2026-09-11",
+   "search_request_id": "a25b73f6-0464-4fa2-951e-66453eb1d1bf",
+   "search_response_sha256": "77f92c51fe3876d756e35d6a50f65bd8a60552c1104f7e06e138c8e4154bddfd",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "c1d34fddb2d6",
+   "extract_request_id": "a41c6d1e-1d06-4622-9dd0-3ae97f1ec500",
+   "extract_response_sha256": "bca6770bc303564ef6b5aa7e48d11f036ae146285d255a8b3f53803a8b715966",
+   "page_sha256": "ddccdf68ca43614fa734a842418541213b713a4f8a10ca8b253e675e699b564b",
+   "page_file": "pages/ddccdf68ca43614fa734a842418541213b713a4f8a10ca8b253e675e699b564b.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-09-11",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.aljazeera.com/news/2026/9/14/protests-break-out-across-syria-over-fuel-price-increases",
+   "domain": "aljazeera.com",
+   "title": "Protests break out across Syria over fuel price increases | Energy News | Al Jazeera",
+   "lang": "hi",
+   "published": "2026-09-14",
+   "search_call": "85313256fc74",
+   "tavily_published": "2026-09-14",
+   "search_request_id": "a25b73f6-0464-4fa2-951e-66453eb1d1bf",
+   "search_response_sha256": "77f92c51fe3876d756e35d6a50f65bd8a60552c1104f7e06e138c8e4154bddfd",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "c1d34fddb2d6",
+   "extract_request_id": "a41c6d1e-1d06-4622-9dd0-3ae97f1ec500",
+   "extract_response_sha256": "bca6770bc303564ef6b5aa7e48d11f036ae146285d255a8b3f53803a8b715966",
+   "page_sha256": "1ef0947aa828a1e81800cb0d40b4210bbb133fd235fd3af5e3a4bcaec8004bce",
+   "page_file": "pages/1ef0947aa828a1e81800cb0d40b4210bbb133fd235fd3af5e3a4bcaec8004bce.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-09-14",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://cbsaustin.com/news/local/capmetro-approves-fare-increases-riders-say-the-change-could-strain-budgets",
+   "domain": "cbsaustin.com",
+   "title": "CapMetro approves fare increases; riders say the change could strain budgets",
+   "lang": "en",
+   "published": "2026-09-29",
+   "search_call": "000e9ac0887f",
+   "tavily_published": "2026-09-29",
+   "search_request_id": "018b3ea5-6126-45ee-b5fc-e21437c014ba",
+   "search_response_sha256": "a6285157eb0e1bb4d2792c17b50f80706b6db0caed3a0468cb3a7f4f0969117d",
+   "status": "rejected",
+   "reason": "effective date not stated is not in 2026-09",
+   "claims": [
+    {
+     "line": "Right now, a local bus ride costs $1.25. That will go up to $1.50 in 2027, and then to $2 in 2029.",
+     "price": 1.5,
+     "unit": "USD",
+     "region": "India",
+     "seller": "CapMetro",
+     "old_price": 1.25,
+     "new_price": 1.5,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date not stated is not in 2026-09",
+     "price_type": "retail",
+     "change": 0.19999999999999996,
+     "base_price": null,
+     "context": "# CapMetro approves fare increases; riders say the change could strain budgets \n The first increase takes effect in January 2027. \n [**RELATED | CapMetro workers reach tentative contract agreement, averting potential strike**](https://cbsaustin.com/news/local/capmetro-workers-reach-tentative-contract-agreement-averting-potential-strike)",
+     "gloss": "",
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "For commuter service, including rail and express, a ride currently costs $3.50. That will increase to $4 in 2027, and $5 in 2029.",
+     "price": 4.0,
+     "unit": "USD",
+     "region": "India",
+     "seller": "CapMetro",
+     "old_price": 3.5,
+     "new_price": 4.0,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date not stated is not in 2026-09",
+     "price_type": "retail",
+     "change": 0.1428571428571428,
+     "base_price": null,
+     "context": "# CapMetro approves fare increases; riders say the change could strain budgets \n [**RELATED | CapMetro workers reach tentative contract agreement, averting potential strike**](https://cbsaustin.com/news/local/capmetro-workers-reach-tentative-contract-agreement-averting-potential-strike) \n ![CapMetro said the fare increase will help cover rising costs and maintain service, but riders will soon be paying more each time they board. (CBS Austin/Brenna Gibbons)](/resources/media2/16x9/1920/800/center/80/d8d6e651-2ec8-403f-949e-4e6fb22904bf-capmetro3.jpg)",
+     "gloss": "",
+     "kind": "rail",
+     "cpi": "07.3.1.1.2.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "401fe1923937",
+   "extract_request_id": "5c562d9c-6fb9-484f-aace-f2c91fd085ef",
+   "extract_response_sha256": "34e495670656fb496cce48b505c8da79c3743a0d192e294e760b994267ee864d",
+   "page_sha256": "a967f08d4bea9c42f01bcd4a1b50ed49f745325df9d002d733ab845475b1b1a6",
+   "page_file": "pages/a967f08d4bea9c42f01bcd4a1b50ed49f745325df9d002d733ab845475b1b1a6.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.miamiherald.com/news/local/community/miami-dade/article317124798.html",
+   "domain": "miamiherald.com",
+   "title": "Bus cuts advance in Miami-Dade as mayor backs a fare hike | Miami Herald",
+   "lang": "en",
+   "published": "2026-09-04",
+   "search_call": "000e9ac0887f",
+   "tavily_published": "2026-09-04",
+   "search_request_id": "018b3ea5-6126-45ee-b5fc-e21437c014ba",
+   "search_response_sha256": "a6285157eb0e1bb4d2792c17b50f80706b6db0caed3a0468cb3a7f4f0969117d",
+   "status": "rejected",
+   "reason": "effective date 2025-10-01 is not in 2026-09",
+   "claims": [
+    {
+     "line": "Those included eliminating the MetroConnect shuttle program, increasing the county gas tax from 3 cents to 5 cents per gallon and increasing transit fares to $2.75 from $2.25.",
+     "price": 2.75,
+     "unit": "USD",
+     "region": "Miami-Dade County",
+     "seller": "Miami-Dade County",
+     "old_price": 2.25,
+     "new_price": 2.75,
+     "pct_change": 22.22,
+     "effective_date": "2025-10-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2025-10-01 is not in 2026-09",
+     "price_type": "retail",
+     "change": 0.22222222222222232,
+     "base_price": null,
+     "context": "# Will early morning bus service end in Miami-Dade? Mayor pushes a fare increase \n “Limited resources do not mean limited responsibilities,” said Commissioner Marleine Bastien, whose district in the northern Miami area includes neighborhoods with some of the highest poverty rates in Miami-Dade. “We need to find a way to keep these routes open and our workers moving.” \n Commissioner Roberto Gonzalez, who represents a suburban area in western Miami-Dade, urged Levine Cava to find savings by reducing multiple layers of senior directors standing between the mayor and front-line managers and county workers. He said that money, and far more, should be diverted to the Sheriff’s Office to close the $52 million gap between Levine Cava’s proposal and Cordero-Stutz’s.",
+     "gloss": "",
+     "kind": "metro",
+     "cpi": "",
+     "role": "context",
+     "states": []
+    }
+   ],
+   "extract_call": "401fe1923937",
+   "extract_request_id": "5c562d9c-6fb9-484f-aace-f2c91fd085ef",
+   "extract_response_sha256": "34e495670656fb496cce48b505c8da79c3743a0d192e294e760b994267ee864d",
+   "page_sha256": "3df4abef4c36f2678c9629adc40c706635753fafd616e48ef3e50217fb30ac11",
+   "page_file": "pages/3df4abef4c36f2678c9629adc40c706635753fafd616e48ef3e50217fb30ac11.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.statesman.com/business/transportation/article/capmetro-fare-increase-austin-22452681.php",
+   "domain": "statesman.com",
+   "title": "CapMetro board approves fare increase for Austin buses, Red Line",
+   "lang": "en",
+   "published": "2026-09-29",
+   "search_call": "000e9ac0887f",
+   "tavily_published": "2026-09-29",
+   "search_request_id": "018b3ea5-6126-45ee-b5fc-e21437c014ba",
+   "search_response_sha256": "a6285157eb0e1bb4d2792c17b50f80706b6db0caed3a0468cb3a7f4f0969117d",
+   "status": "rejected",
+   "reason": "effective date 2025-01-10 is not in 2026-09",
+   "claims": [
+    {
+     "line": "10, a single local bus ride or pickup ride will increase from $1.25 to $1.50, and the daily cap will jump from $2.50 to $3 — a 20% increase.",
+     "price": 1.5,
+     "unit": "USD",
+     "region": "India",
+     "seller": "Capital Metro",
+     "old_price": 1.25,
+     "new_price": 1.5,
+     "pct_change": 20,
+     "effective_date": "2025-01-10",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2025-01-10 is not in 2026-09",
+     "price_type": "retail",
+     "change": 0.19999999999999996,
+     "base_price": null,
+     "context": "# Capital Metro board approves first fare increase in more than a decade \n Starting Jan. \n Single rides on a commuter bus or [the Red Line train](https://www.statesman.com/news/local/article/capmetro-start-construction-new-train-station-21086899.php) will jump from $3.50 to $4 in January, with an $8 daily cap.",
+     "gloss": "",
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "Single rides on a commuter bus or the Red Line train will jump from $3.50 to $4 in January, with an $8 daily cap.",
+     "price": 4.0,
+     "unit": "USD",
+     "region": "India",
+     "seller": "Capital Metro",
+     "old_price": 3.5,
+     "new_price": 4.0,
+     "pct_change": null,
+     "effective_date": "2025-01-10",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": 0.1428571428571428,
+     "base_price": null,
+     "context": "[Subscribe](/hamburgerbutton)",
+     "gloss": "",
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "Paratransit rides on CapMetro’s Access service will increase from $1.75 to $2.25.",
+     "price": 2.25,
+     "unit": "USD",
+     "region": "India",
+     "seller": "Capital Metro",
+     "old_price": 1.75,
+     "new_price": 2.25,
+     "pct_change": null,
+     "effective_date": "2025-01-10",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2025-01-10 is not in 2026-09",
+     "price_type": "retail",
+     "change": 0.2857142857142858,
+     "base_price": null,
+     "context": "# Capital Metro board approves first fare increase in more than a decade \n Single rides on a commuter bus or [the Red Line train](https://www.statesman.com/news/local/article/capmetro-start-construction-new-train-station-21086899.php) will jump from $3.50 to $4 in January, with an $8 daily cap. \n Advertisement",
+     "gloss": "",
+     "kind": "metro",
+     "cpi": "",
+     "role": "context",
+     "states": []
+    }
+   ],
+   "extract_call": "401fe1923937",
+   "extract_request_id": "5c562d9c-6fb9-484f-aace-f2c91fd085ef",
+   "extract_response_sha256": "34e495670656fb496cce48b505c8da79c3743a0d192e294e760b994267ee864d",
+   "page_sha256": "fcd56245cfc5d7e8f74005c49e37de894c700d34608f8a4a57ff08ca2a8e55e7",
+   "page_file": "pages/fcd56245cfc5d7e8f74005c49e37de894c700d34608f8a4a57ff08ca2a8e55e7.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.cbc.ca/news/canada/toronto/metrolinx-fare-evasion-fine-increase-sept-8-9.7322605",
+   "domain": "cbc.ca",
+   "title": "GO Transit, UP Express first-time fare evasion fines to increase by over 450% | CBC News",
+   "lang": "en",
+   "published": "2026-08-27",
+   "search_call": "000e9ac0887f",
+   "tavily_published": "2026-08-27",
+   "search_request_id": "018b3ea5-6126-45ee-b5fc-e21437c014ba",
+   "search_response_sha256": "a6285157eb0e1bb4d2792c17b50f80706b6db0caed3a0468cb3a7f4f0969117d",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "401fe1923937",
+   "extract_request_id": "5c562d9c-6fb9-484f-aace-f2c91fd085ef",
+   "extract_response_sha256": "34e495670656fb496cce48b505c8da79c3743a0d192e294e760b994267ee864d",
+   "page_sha256": "e1038d41a45ccbb550d8d43db3c3c338593d2c259aa03de9a3dd0491150d687e",
+   "page_file": "pages/e1038d41a45ccbb550d8d43db3c3c338593d2c259aa03de9a3dd0491150d687e.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.thehindu.com/news/cities/bangalore/minimum-salary-to-live-in-bengaluru-is-most-expensive-for-metro-commuter-travel-as-compared-to-chennai-delhi-kolkata-mumbai-to-afford-daily-commute-by-namma-metro-is-70000/article71455283.ece",
+   "domain": "thehindu.com",
+   "title": "Minimum salary needed in Bengaluru to afford daily commute by Namma Metro is ₹70,000 - The Hindu",
+   "lang": "en",
+   "published": "2026-09-21",
+   "search_call": "000e9ac0887f",
+   "tavily_published": "2026-09-21",
+   "search_request_id": "018b3ea5-6126-45ee-b5fc-e21437c014ba",
+   "search_response_sha256": "a6285157eb0e1bb4d2792c17b50f80706b6db0caed3a0468cb3a7f4f0969117d",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "401fe1923937",
+   "extract_request_id": "5c562d9c-6fb9-484f-aace-f2c91fd085ef",
+   "extract_response_sha256": "34e495670656fb496cce48b505c8da79c3743a0d192e294e760b994267ee864d",
+   "page_sha256": "065f6998d615cf65bf444c0f5f52a6e6fa4a4a95df91c3afa4122084bf1a21c1",
+   "page_file": "pages/065f6998d615cf65bf444c0f5f52a6e6fa4a4a95df91c3afa4122084bf1a21c1.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-09-21",
+   "date_flag": "",
+   "super_reread": true
+  }
+ ],
+ "skipped": [],
+ "complete": true,
+ "calls": [
+  {
+   "endpoint": "/search",
+   "call_id": "fde4e0b0a6a1",
+   "sent": {
+    "query": "electricity tariff hike news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "reuters.com",
+     "bbc.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 2.57,
+   "n_results": 5,
+   "request_id": "ce097aae-c68a-4c6f-8ac5-f307f5b8e204",
+   "response_sha256": "0d9ef15f765331c3c7ceb0f6d110846023e4b756a2da902be737fc984e2ccc76",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "76cd60766a73",
+   "sent": {
+    "query": "milk price increase news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "reuters.com",
+     "bbc.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 4.08,
+   "n_results": 5,
+   "request_id": "5c5344ff-aba2-4b4e-8d8c-c55790084334",
+   "response_sha256": "74d1939ac06117c313e2bb0571f28ed6818a5b214a7656b6395fd94fcccfbf51",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "b3a6d197620e",
+   "sent": {
+    "query": "LPG cylinder price revision news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "reuters.com",
+     "bbc.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 5.52,
+   "n_results": 5,
+   "request_id": "712279cb-3e3d-4ed7-935a-6a20f0aca46c",
+   "response_sha256": "f78851a8a50f122eae488dede0a46b419443f0621036efa35564e220dfa8fd63",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "b1bf91f9dc42",
+   "sent": {
+    "query": "बिजली दर वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "zeenews.com",
+     "timesofindia.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.57,
+   "n_results": 5,
+   "request_id": "dabe3dc3-9c3f-480e-a8c1-10e07a9f5ca3",
+   "response_sha256": "e1d7bb64e5d2c8172953981f62f91741147842ea0139d662c73f70b226cc2256",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "3de142eed52d",
+   "sent": {
+    "query": "दूध की कीमत में वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "zeenews.com",
+     "timesofindia.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 6.38,
+   "n_results": 5,
+   "request_id": "29f8f43b-a3a1-455f-b41a-87f23acd1291",
+   "response_sha256": "ec0736e259982f77c9f47d7ef27634ed3943d646f0048ed8d03eaadbda87f5ef",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "30eb7bf8d603",
+   "sent": {
+    "query": "एलपीजी सिलेंडर कीमत वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "zeenews.com",
+     "timesofindia.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 4.28,
+   "n_results": 5,
+   "request_id": "b6675a10-c996-4e3d-af89-d0b22849b4a3",
+   "response_sha256": "a5f89fcb6d6a48f422f1b8adefc08d575e2eacbe0b8a3e20a526f266959152fb",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "4689cd2640ba",
+   "sent": {
+    "query": "बस किराया वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 3,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "maharashtratimes.com"
+    ],
+    "include_domains_mode": "restrict"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 6.65,
+   "n_results": 2,
+   "request_id": "7ba4d580-c13e-4da3-bffd-386c1f36728c",
+   "response_sha256": "a9adbba6e8b527bc36541aa16c000e3a488061239f51df5c4b5235efde00f037",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "3ea777ca1d1c",
+   "sent": {
+    "query": "டெலி விலை அதிகரிப்பு செய்தல்",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 3,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "dinamalar.com"
+    ],
+    "include_domains_mode": "restrict"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 7.29,
+   "n_results": 0,
+   "request_id": "b1b88d7c-1190-4f73-a5eb-2f9b92fab3d9",
+   "response_sha256": "747c97a09ceb510657bdb99f31d71b276919a7f55bf8418a7846928f47847344",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "0369d7844982",
+   "sent": {
+    "query": "టెక్సీ టికెట్ ధర సవరణ",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 3,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "telanganatoday.com"
+    ],
+    "include_domains_mode": "restrict"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 4.1,
+   "n_results": 3,
+   "request_id": "6e155c0e-c917-4dad-9b8e-3a95ed94d7d5",
+   "response_sha256": "c02b5e171f35b5278ef36645bc4c6e57973339f253ba02677a12e27c687acded",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "3bbaf25d4dde",
+   "sent": {
+    "query": "ಬಸ್ ತೆರಿಗೆ ಬೆಲೆ ಹೆಚ್ಚಿಕೆ ಸಮाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 3,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "karnatakafirst.com"
+    ],
+    "include_domains_mode": "restrict"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 8.24,
+   "n_results": 0,
+   "request_id": "83c7aee1-d540-4249-81ec-74d9c3c267bf",
+   "response_sha256": "5fdc076660ab42a71b85d8b03ef0c9fa61df23a371ea5895d3d105086e2e0832",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "54d40e116b01",
+   "sent": {
+    "query": "মোবাইল ডেটা রেট পরিবর্তন খবর",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 3,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "thebusinessstandard.com"
+    ],
+    "include_domains_mode": "restrict"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 7.25,
+   "n_results": 0,
+   "request_id": "cfcf98ea-17b7-4d3e-be10-58a82a5769ae",
+   "response_sha256": "296a27bc9991671f016314a8a52dc8c1ad16df092f2d9004f8b24f4dfdfef952",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "85313256fc74",
+   "sent": {
+    "query": "दिसंबर 2026 में पेट्रोल कीमत वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "zeenews.com",
+     "timesofindia.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.14,
+   "n_results": 4,
+   "request_id": "a25b73f6-0464-4fa2-951e-66453eb1d1bf",
+   "response_sha256": "77f92c51fe3876d756e35d6a50f65bd8a60552c1104f7e06e138c8e4154bddfd",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "000e9ac0887f",
+   "sent": {
+    "query": "metro fare hike news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29",
+    "include_domains": [
+     "reuters.com",
+     "bbc.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.92,
+   "n_results": 5,
+   "request_id": "018b3ea5-6126-45ee-b5fc-e21437c014ba",
+   "response_sha256": "a6285157eb0e1bb4d2792c17b50f80706b6db0caed3a0468cb3a7f4f0969117d",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "518f1edc97b7",
+   "sent": {
+    "urls": [
+     "https://www.axios.com/local/seattle/2026/08/26/seattle-electric-bills-city-light-pse-rate-hikes",
+     "https://vnews.com/2026/09/09/vermont-green-mountain-power-rate-hike",
+     "https://www.vermontpublic.org/local-news/2026-09-08/public-utility-commission-approves-green-mountain-power-rate-increase",
+     "https://www.seattletimes.com/seattle-news/climate-lab/after-failed-columbia-dam-deal-bpa-seeks-electricity-rate-hike",
+     "https://indianexpress.com/article/cities/bangalore/karnataka-milk-price-hike-nandini-dk-shivakumar-10890063"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5,
+   "request_id": "ab54f2ce-5e44-40d0-afe0-f19f42375c10",
+   "response_sha256": "9faa95d8d65b692bad224159ebdb8cd2258e643621cd86b9116360d0011d3d89",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "370ea4e5d296",
+   "sent": {
+    "urls": [
+     "https://timesofindia.indiatimes.com/etimes/trending/ab-ghar-wali-chai-bhi-taj-hotel-ke-rate-wali-mumbai-milk-price-jumps-9-leaving-social-media-users-angry-amused-and-sarcastic/articleshow/133604968.cms",
+     "https://m.economictimes.com/industry/cons-products/food/wholesale-milk-prices-in-mumbai-to-rise-9-per-litre-to-cross-100-from-sept-1/articleshow/133604831.cms",
+     "https://www.ndtv.com/food/mumbai-milk-prices-to-rise-from-september-1-rates-may-hit-rs-110-per-litre-11973899",
+     "https://www.deccanherald.com/india/karnataka/bengaluru/hoteliers-in-bengaluru-threaten-to-increase-the-prices-of-food-items-if-nandini-milk-price-is-revised-4160912",
+     "https://www.bbc.com/news/articles/cvgyxky1m4wo"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5,
+   "request_id": "0007cf87-adb7-49b0-95cc-acb5f88f2910",
+   "response_sha256": "85514291108c850340efc9f03a782f8475cfa96f0306231ac7689b55c6af2365",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "8f984d1556cb",
+   "sent": {
+    "urls": [
+     "https://news.wttw.com/2026/09/09/nicor-gas-rate-increase-cut-140m-after-settlement-illinois-attorney-general",
+     "https://www.bbc.com/news/articles/cm274mwxy1vo",
+     "https://www.reuters.com/business/energy/india-orders-captive-coal-plants-maximise-power-output-surging-demand-2026-09-26/",
+     "https://www.reuters.com/world/india/indias-august-industrial-output-grows-8-yy-2026-09-28/",
+     "https://scanx.trade/stock-market-news/companies/cg-power-q1fy27-consolidated-net-profit-surges-27-on-strong-margins/46429446"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 0,
+   "new_credits": 0,
+   "response_time": 0.28,
+   "n_results": 3,
+   "request_id": "0afbfc1e-c6e7-4341-9aea-dde3c7efefc6",
+   "response_sha256": "14072de75f57bda6e5c57a159eca247ad3470750b60e11d7162c364125b54767",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "3c7584122594",
+   "sent": {
+    "urls": [
+     "https://www.whalesbook.com/news/Hindi/technology/TCS-Plans-indian-rupee70000-Crore-AI-Data-Center-in-Hyderabad/6a9cb6f640007e01b83b86ab",
+     "https://www.babushahi.com/full-news.php?id=225695",
+     "https://www.global-agriculture.com/global-agriculture/fao-food-price-index-rises-1-9-in-august-on-supply-concerns/",
+     "https://hindi.news18.com/news/business/latest-lpg-price-hike-commercial-lpg-cylinder-gets-rs-9-50-costlier-from-september-1-check-new-rates-10797231.html",
+     "https://navbharattimes.indiatimes.com/business/commodity/prices-of-19-kg-commercial-lpg-cylinders-have-been-increased/articleshow/133665517.cms"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.74,
+   "n_results": 5,
+   "request_id": "6e290330-c84a-4283-8d2e-069a51340fde",
+   "response_sha256": "d753b82df21d2ba02eaa043f3f66d7892ca348465f369e3c30c8373452b3e2ae",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "c1d34fddb2d6",
+   "sent": {
+    "urls": [
+     "https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01",
+     "https://ndtv.in/business-news/lpg-price-hike-9-rupees-50-paise-1-september-2026-lpg-gas-cylinder-price-check-rates-in-delhi-mumbai-chennai-kolkata-and-other-cities-11984381",
+     "https://www.abplive.com/business/commercial-gas-cylinder-price-hike-by-rs-9-50-on-1st-september-2026-3182588",
+     "https://www.aljazeera.com/economy/2026/9/11/rising-petrol-costs-drive-sharp-inflation-increase-in-us-in-august",
+     "https://www.aljazeera.com/news/2026/9/14/protests-break-out-across-syria-over-fuel-price-increases"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5,
+   "request_id": "a41c6d1e-1d06-4622-9dd0-3ae97f1ec500",
+   "response_sha256": "bca6770bc303564ef6b5aa7e48d11f036ae146285d255a8b3f53803a8b715966",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "401fe1923937",
+   "sent": {
+    "urls": [
+     "https://cbsaustin.com/news/local/capmetro-approves-fare-increases-riders-say-the-change-could-strain-budgets",
+     "https://www.miamiherald.com/news/local/community/miami-dade/article317124798.html",
+     "https://www.statesman.com/business/transportation/article/capmetro-fare-increase-austin-22452681.php",
+     "https://www.cbc.ca/news/canada/toronto/metrolinx-fare-evasion-fine-increase-sept-8-9.7322605",
+     "https://www.thehindu.com/news/cities/bangalore/minimum-salary-to-live-in-bengaluru-is-most-expensive-for-metro-commuter-travel-as-compared-to-chennai-delhi-kolkata-mumbai-to-afford-daily-commute-by-namma-metro-is-70000/article71455283.ece"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5,
+   "request_id": "5c562d9c-6fb9-484f-aace-f2c91fd085ef",
+   "response_sha256": "34e495670656fb496cce48b505c8da79c3743a0d192e294e760b994267ee864d",
+   "auto_parameters": null
+  }
+ ],
+ "finished_utc": "2026-10-22T11:22:33.530697+00:00"
+}

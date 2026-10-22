@@ -1,0 +1,1925 @@
+{
+ "arm": "B",
+ "month": "2026-03",
+ "window": [
+  "2026-02-19",
+  "2026-03-29"
+ ],
+ "writer": "Nemotron",
+ "plan": [
+  {
+   "query": "electricity price hike news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-02-19",
+   "end_date": "2026-03-29",
+   "include_domains": [
+    "timesofindia.indiatimes.com",
+    "zeenews.india.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "c24d0cac9d65",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "319a766ce7c9",
+   "n_results": 5
+  },
+  {
+   "query": "mobile tariff increase news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-02-19",
+   "end_date": "2026-03-29",
+   "include_domains": [
+    "economictimes.indiatimes.com",
+    "dainikbhaskar.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "c24d0cac9d65",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "dainikbhaskar.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "5d5cc68940b9",
+   "n_results": 5
+  },
+  {
+   "query": "petrol price increase news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-02-19",
+   "end_date": "2026-03-29",
+   "include_domains": [
+    "hindustantimes.com",
+    "navbharatindia.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "c24d0cac9d65",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "hindustantimes.com",
+     "navbharatindia.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "5bd11ce262d6",
+   "n_results": 5
+  },
+  {
+   "query": "बिजली दर वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-02-19",
+   "end_date": "2026-03-29",
+   "include_domains": [
+    "timesofindia.indiatimes.com",
+    "zeenews.india.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "c24d0cac9d65",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "c35b10d0bfbe",
+   "n_results": 5
+  },
+  {
+   "query": "मोबाइल टैरिफ वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-02-19",
+   "end_date": "2026-03-29",
+   "include_domains": [
+    "economictimes.indiatimes.com",
+    "dainikbhaskar.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "c24d0cac9d65",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "dainikbhaskar.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "6b509587d398",
+   "n_results": 5
+  },
+  {
+   "query": "पेट्रोल मूल्य वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-02-19",
+   "end_date": "2026-03-29",
+   "include_domains": [
+    "hindustantimes.com",
+    "navbharatindia.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "c24d0cac9d65",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "hindustantimes.com",
+     "navbharatindia.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "cd9f5bf792b2",
+   "n_results": 5
+  },
+  {
+   "query": "बस किराया वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-02-19",
+   "end_date": "2026-03-29",
+   "include_domains": [
+    "timesofindia.indiatimes.com",
+    "zeenews.india.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "c24d0cac9d65",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "5f0e68fd329e",
+   "n_results": 5
+  },
+  {
+   "query": "rail fare hike news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-02-19",
+   "end_date": "2026-03-29",
+   "include_domains": [
+    "economictimes.indiatimes.com",
+    "dainikbhaskar.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "c24d0cac9d65",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "dainikbhaskar.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "297aaf4cbc68",
+   "n_results": 5
+  }
+ ],
+ "plan_complete": true,
+ "plan_tries": [
+  {
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "call": "c24d0cac9d65",
+   "error": "",
+   "written": [
+    {
+     "query": "बिजली दर वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "मोबाइल टैरिफ वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "economictimes.indiatimes.com",
+      "dainikbhaskar.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "पेट्रोल मूल्य वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "hindustantimes.com",
+      "navbharatindia.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "electricity price hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "mobile tariff increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "economictimes.indiatimes.com",
+      "dainikbhaskar.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "petrol price increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "hindustantimes.com",
+      "navbharatindia.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "बस किराया वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "rail fare hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "economictimes.indiatimes.com",
+      "dainikbhaskar.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    }
+   ],
+   "picked": [
+    {
+     "query": "electricity price hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "c24d0cac9d65",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-02-19",
+      "end_date": "2026-03-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "zeenews.india.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "319a766ce7c9",
+     "n_results": 5
+    },
+    {
+     "query": "mobile tariff increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "economictimes.indiatimes.com",
+      "dainikbhaskar.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "c24d0cac9d65",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-02-19",
+      "end_date": "2026-03-29",
+      "include_domains": [
+       "economictimes.indiatimes.com",
+       "dainikbhaskar.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "5d5cc68940b9",
+     "n_results": 5
+    },
+    {
+     "query": "petrol price increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "hindustantimes.com",
+      "navbharatindia.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "c24d0cac9d65",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-02-19",
+      "end_date": "2026-03-29",
+      "include_domains": [
+       "hindustantimes.com",
+       "navbharatindia.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "5bd11ce262d6",
+     "n_results": 5
+    },
+    {
+     "query": "बिजली दर वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "c24d0cac9d65",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-02-19",
+      "end_date": "2026-03-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "zeenews.india.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "c35b10d0bfbe",
+     "n_results": 5
+    },
+    {
+     "query": "मोबाइल टैरिफ वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "economictimes.indiatimes.com",
+      "dainikbhaskar.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "c24d0cac9d65",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-02-19",
+      "end_date": "2026-03-29",
+      "include_domains": [
+       "economictimes.indiatimes.com",
+       "dainikbhaskar.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "6b509587d398",
+     "n_results": 5
+    },
+    {
+     "query": "पेट्रोल मूल्य वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "hindustantimes.com",
+      "navbharatindia.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "c24d0cac9d65",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-02-19",
+      "end_date": "2026-03-29",
+      "include_domains": [
+       "hindustantimes.com",
+       "navbharatindia.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "cd9f5bf792b2",
+     "n_results": 5
+    },
+    {
+     "query": "बस किराया वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "zeenews.india.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "c24d0cac9d65",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-02-19",
+      "end_date": "2026-03-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "zeenews.india.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "5f0e68fd329e",
+     "n_results": 5
+    },
+    {
+     "query": "rail fare hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-02-19",
+     "end_date": "2026-03-29",
+     "include_domains": [
+      "economictimes.indiatimes.com",
+      "dainikbhaskar.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "c24d0cac9d65",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-02-19",
+      "end_date": "2026-03-29",
+      "include_domains": [
+       "economictimes.indiatimes.com",
+       "dainikbhaskar.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "297aaf4cbc68",
+     "n_results": 5
+    }
+   ],
+   "dropped": [],
+   "complete": true
+  }
+ ],
+ "cards": [
+  {
+   "url": "https://www.enerdata.net/publications/daily-energy-news/south-africas-energy-regulator-approves-9-municipal-electricity-price-hike.html",
+   "domain": "enerdata.net",
+   "title": "South Africa's energy regulator approves 9% municipal electricity price hike | Enerdata",
+   "lang": "en",
+   "published": "2026-03-16",
+   "search_call": "319a766ce7c9",
+   "tavily_published": "2026-03-16",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "bfbae4fe88d7",
+   "page_sha256": "698d93fc055ee0092046d5bf3b46115b333831d04db75f221aade27483112e9e",
+   "page_file": "pages/698d93fc055ee0092046d5bf3b46115b333831d04db75f221aade27483112e9e.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://capitolnewsillinois.com/news/midamerican-energy-proposes-rate-hike-for-85k-customers-in-northwest-illinois",
+   "domain": "capitolnewsillinois.com",
+   "title": "MidAmerican Energy proposes rate hike for 85K customers in northwest Illinois | Capitol News Illinois",
+   "lang": "en",
+   "published": "2026-03-27",
+   "search_call": "319a766ce7c9",
+   "tavily_published": "2026-03-27",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "bfbae4fe88d7",
+   "page_sha256": "6e07a1bf0401cc04d08e706cb5c9602c4bdb50b441431f25f74e0e1382993a51",
+   "page_file": "pages/6e07a1bf0401cc04d08e706cb5c9602c4bdb50b441431f25f74e0e1382993a51.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.9and10news.com/2026/03/27/michigan-regulators-approve-2766m-consumers-energy-electric-rate-hike",
+   "domain": "9and10news.com",
+   "title": "Michigan regulators approve biggest electric rate hike since 2004 – 9and10News.com",
+   "lang": "en",
+   "published": "2026-03-27",
+   "search_call": "319a766ce7c9",
+   "tavily_published": "2026-03-27",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "bfbae4fe88d7",
+   "page_sha256": "5a5c7b831879e4e7b6bfdcf7b91f90bc381b6da1e58ab1bce8c4452dcf757696",
+   "page_file": "pages/5a5c7b831879e4e7b6bfdcf7b91f90bc381b6da1e58ab1bce8c4452dcf757696.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.thenewstribune.com/news/local/article314990195.html",
+   "domain": "thenewstribune.com",
+   "title": "PSE proposes nearly 30% electric rate rise by 2029 | Tacoma News Tribune",
+   "lang": "en",
+   "published": "2026-03-11",
+   "search_call": "319a766ce7c9",
+   "tavily_published": "2026-03-11",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "bfbae4fe88d7",
+   "page_sha256": "30e85fe3b9b6474dc5741bcab1e27e1035c7a4e15a51ba6388bb909db746fe44",
+   "page_file": "pages/30e85fe3b9b6474dc5741bcab1e27e1035c7a4e15a51ba6388bb909db746fe44.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-03-11",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.statenews.org/section/the-ohio-newsroom/2026-03-16/why-ohio-electricity-bills-are-so-high-and-their-political-impact",
+   "domain": "statenews.org",
+   "title": "Why Ohio electricity bills are so high—and their political impact | The Statehouse News Bureau",
+   "lang": "en",
+   "published": "2026-03-16",
+   "search_call": "319a766ce7c9",
+   "tavily_published": "2026-03-16",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://au.finance.yahoo.com/news/mobile-customers-slugged-as-telstra-raises-prices-for-second-time-in-10-months-and-ends-cheapest-deal-212014691.html",
+   "domain": "au.finance.yahoo.com",
+   "title": "Mobile customers slugged as Telstra raises prices for second time in 10 months and ends cheapest deal",
+   "lang": "en",
+   "published": "2026-03-24",
+   "search_call": "5d5cc68940b9",
+   "tavily_published": "2026-03-24",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "For the second time in 10 months, the telco has announced it is raising prices across its mobile plans, increasing prices meaningfully above inflation. The hikes will come into effect from May 5 and in most cases will add an extra $4 a month on post-paid plans and $5 to pre-paid plans.",
+     "price": 61,
+     "unit": "month",
+     "region": "India",
+     "seller": "Telstra",
+     "old_price": 52,
+     "new_price": 61,
+     "pct_change": 17,
+     "effective_date": "2026-05-05",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": 0.17307692307692313,
+     "base_price": null,
+     "context": "# Yahoo Finance \n Telstra customers will [again be paying more for their mobile plan](https://au.finance.yahoo.com/news/telstra-customers-threaten-to-boycott-after-third-price-hike-since-august-just-lost-me-as-a-customer-222248168.html). Millions of customers around the country, particularly in regional areas, rely on the telco for mobile service – and it keeps getting more expensive. \n Similar price increases will also be rolled out for the telco's lower-cost subsidiaries Belong and Boost Mobile.",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    }
+   ],
+   "extract_call": "bfbae4fe88d7",
+   "page_sha256": "3b79c5ba8a4fa5b3a992854c53dc0886f71e8b6e07e2dc8ecd110142a4dca4be",
+   "page_file": "pages/3b79c5ba8a4fa5b3a992854c53dc0886f71e8b6e07e2dc8ecd110142a4dca4be.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.techradar.com/phones/network-providers/telstra-mobile-customers-set-for-a-second-price-hike-in-12-months-is-it-enough-to-finally-convince-you-to-switch",
+   "domain": "techradar.com",
+   "title": "Telstra mobile customers set for a second price hike in 12 months — is it enough to finally convince you to switch? | TechRadar",
+   "lang": "en",
+   "published": "2026-03-27",
+   "search_call": "5d5cc68940b9",
+   "tavily_published": "2026-03-27",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "ecc17acb7bf4",
+   "page_sha256": "e88f6166292f83b9d3e7f6d1d63f007b33e7e2a1e8e0e4ecd9807e6271c2c2c1",
+   "page_file": "pages/e88f6166292f83b9d3e7f6d1d63f007b33e7e2a1e8e0e4ecd9807e6271c2c2c1.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.notebookcheck.net/Oppo-OnePlus-and-Vivo-officially-announce-smartphone-price-increase-in-China.1251229.0.html",
+   "domain": "notebookcheck.net",
+   "title": "Oppo, OnePlus, and Vivo officially announce smartphone price increase in China - Notebookcheck News",
+   "lang": "en",
+   "published": "2026-03-16",
+   "search_call": "5d5cc68940b9",
+   "tavily_published": "2026-03-16",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "Meanwhile, the OnePlus 15 and Ace 6 saw a 500 yuan (~$72.50) increase, with new starting prices of 4,499 yuan (~$652) and 3,099 yuan (~$449), respectively.",
+     "price": 5000,
+     "unit": "yuan",
+     "region": "China",
+     "seller": "OnePlus",
+     "old_price": 4499,
+     "new_price": 5000,
+     "pct_change": 11.11,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": 0.11135807957323851,
+     "base_price": null,
+     "context": "![Notebookcheck Logo](fileadmin/templates/nbc_v5/images/logo_alone_header.svg)",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    },
+    {
+     "line": "Meanwhile, the OnePlus 15 and Ace 6 saw a 500 yuan (~$72.50) increase, with new starting prices of 4,499 yuan (~$652) and 3,099 yuan (~$449), respectively.",
+     "price": 3599,
+     "unit": "yuan",
+     "region": "China",
+     "seller": "OnePlus",
+     "old_price": 3099,
+     "new_price": 3599,
+     "pct_change": 16.13,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": 0.1613423685059696,
+     "base_price": null,
+     "context": "![Notebookcheck Logo](fileadmin/templates/nbc_v5/images/logo_alone_header.svg)",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    },
+    {
+     "line": "The Ace 6T now costs 2,799 yuan (~$405), up from its launch price of 2,599 yuan (~$376).",
+     "price": 2799,
+     "unit": "yuan",
+     "region": "China",
+     "seller": "OnePlus",
+     "old_price": 2599,
+     "new_price": 2799,
+     "pct_change": 7.69,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": 0.07695267410542517,
+     "base_price": null,
+     "context": "![Notebookcheck Logo](fileadmin/templates/nbc_v5/images/logo_alone_header.svg)",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    }
+   ],
+   "extract_call": "ecc17acb7bf4",
+   "page_sha256": "7a5b8f31dbef8cf39bba77c24015d7936644a8c85ae7672cfbe527f8bebcfc84",
+   "page_file": "pages/7a5b8f31dbef8cf39bba77c24015d7936644a8c85ae7672cfbe527f8bebcfc84.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.tomsguide.com/phones/samsung-phones/samsung-on-galaxy-s26-and-galaxy-s26-plus-usd100-price-hike-weve-packed-in-so-much-innovation",
+   "domain": "tomsguide.com",
+   "title": "Samsung on Galaxy S26 and Galaxy S26 Plus $100 price hike — 'we've packed [in] so much innovation' | Tom's Guide",
+   "lang": "en",
+   "published": "2026-03-02",
+   "search_call": "5d5cc68940b9",
+   "tavily_published": "2026-03-02",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "ecc17acb7bf4",
+   "page_sha256": "2e642bda67b27920ef816f002b3b91b13bd066aa7d27ef6ae3f7c337d8d39330",
+   "page_file": "pages/2e642bda67b27920ef816f002b3b91b13bd066aa7d27ef6ae3f7c337d8d39330.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.androidcentral.com/phones/oneplus/oneplus-and-oppo-increasing-phone-prices-china",
+   "domain": "androidcentral.com",
+   "title": "If you're planning to buy a OnePlus or Oppo phone, don't wait too long | Android Central",
+   "lang": "en",
+   "published": "2026-03-11",
+   "search_call": "5d5cc68940b9",
+   "tavily_published": "2026-03-11",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "ecc17acb7bf4",
+   "page_sha256": "606837eb0bc452718ad10c3cfb4be894934e6e756ac335228c369da570e7f7e1",
+   "page_file": "pages/606837eb0bc452718ad10c3cfb4be894934e6e756ac335228c369da570e7f7e1.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.euronews.com/2026/03/19/war-in-iran-where-in-europe-have-petrol-prices-spiked",
+   "domain": "euronews.com",
+   "title": "War in Iran: Where in Europe have petrol prices spiked?  | Euronews",
+   "lang": "en",
+   "published": "2026-03-19",
+   "search_call": "5bd11ce262d6",
+   "tavily_published": "2026-03-19",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "Petrol prices in Finland, among the most expensive in Europe due to high taxation, started rising before joint US-Israeli strikes on Iran on 28 February.",
+     "price": 2.07,
+     "unit": "per litre",
+     "region": "Germany",
+     "seller": "European Commission",
+     "old_price": 1.82,
+     "new_price": 2.07,
+     "pct_change": 14,
+     "effective_date": "2026-02-28",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": 0.13736263736263732,
+     "base_price": null,
+     "context": "# War in Iran: Where in Europe have petrol prices spiked? \n In Germany, petrol prices shot up from around €1.82 per litre to €2.07 per litre, an increase of nearly 14% within these weeks. Neighbouring Austria saw a similarly sharp rise, with the price of petrol increasing from €1.51 to €1.71 per litre, a rise of around 13%. \n More modest increases were seen in Estonia, Poland and Spain.",
+     "gloss": "",
+     "kind": "petrol",
+     "cpi": "07.2.2.2.1.01",
+     "role": "context",
+     "states": []
+    },
+    {
+     "line": "Petrol prices in Finland, among the most expensive in Europe due to high taxation, started rising before joint US-Israeli strikes on Iran on 28 February.",
+     "price": 1.71,
+     "unit": "per litre",
+     "region": "Austria",
+     "seller": "European Commission",
+     "old_price": 1.51,
+     "new_price": 1.71,
+     "pct_change": 13,
+     "effective_date": "2026-02-28",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": 0.13245033112582782,
+     "base_price": null,
+     "context": "# War in Iran: Where in Europe have petrol prices spiked? \n In Germany, petrol prices shot up from around €1.82 per litre to €2.07 per litre, an increase of nearly 14% within these weeks. Neighbouring Austria saw a similarly sharp rise, with the price of petrol increasing from €1.51 to €1.71 per litre, a rise of around 13%. \n More modest increases were seen in Estonia, Poland and Spain.",
+     "gloss": "",
+     "kind": "petrol",
+     "cpi": "07.2.2.2.1.01",
+     "role": "context",
+     "states": []
+    }
+   ],
+   "extract_call": "ecc17acb7bf4",
+   "page_sha256": "353d05306fc6da107783debad5a4263c500570c31a3dbe95553edb3ee34449f7",
+   "page_file": "pages/353d05306fc6da107783debad5a4263c500570c31a3dbe95553edb3ee34449f7.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.bbc.com/news/articles/cwyvxejqyx4o",
+   "domain": "bbc.com",
+   "title": "China eases planned fuel price hikes as Asia reels from energy crisis",
+   "lang": "en",
+   "published": "2026-03-24",
+   "search_call": "5bd11ce262d6",
+   "tavily_published": "2026-03-24",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "0d269656f03b",
+   "page_sha256": "6930ced5e42eafc21b17dd0e9401744431bfaca87726675e44e686ef8828975a",
+   "page_file": "pages/6930ced5e42eafc21b17dd0e9401744431bfaca87726675e44e686ef8828975a.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.dw.com/en/germany-news-bundestag-approves-fuel-station-price-brake-amid-iran-war-and-rising-oil-costs/live-76539515",
+   "domain": "dw.com",
+   "title": "Germany news: Bundestag approves fuel station price brake",
+   "lang": "en",
+   "published": "2026-03-26",
+   "search_call": "5bd11ce262d6",
+   "tavily_published": "2026-03-26",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.pbs.org/newshour/economy/soaring-gas-prices-and-supply-chain-disruptions-drive-up-costs-across-the-economy",
+   "domain": "pbs.org",
+   "title": "Soaring gas prices and supply chain disruptions drive up costs across the economy | PBS News",
+   "lang": "en",
+   "published": "2026-03-28",
+   "search_call": "5bd11ce262d6",
+   "tavily_published": "2026-03-28",
+   "status": "rejected",
+   "reason": "the cited line is not on the fetched page",
+   "claims": [
+    {
+     "line": "regular gasoline rose from US$3.01 to $3.96 per gallon, while diesel fuel rose from $3.89 to $5.37.",
+     "price": 5.37,
+     "unit": "per gallon",
+     "region": "U.S.",
+     "seller": "U.S. Energy Information Administration",
+     "old_price": 3.89,
+     "new_price": 5.37,
+     "pct_change": 38.3,
+     "effective_date": "2026-03-02",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": 0.38046272493573263,
+     "base_price": null,
+     "context": "![](https://d3i6fh83elv35t.cloudfront.net/static/assets/images/placeholder.jpg)",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "0d269656f03b",
+   "page_sha256": "0dbd2f9b7df841cd11df80ab1eb3dbe91d4a41f8daecfce157e3828087d29737",
+   "page_file": "pages/0dbd2f9b7df841cd11df80ab1eb3dbe91d4a41f8daecfce157e3828087d29737.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.cbsnews.com/news/oil-prices-record-high-middle-east-conflict-inflation",
+   "domain": "cbsnews.com",
+   "title": "Oil prices could reach record highs, analysts warn. Here's what it could mean for the U.S. economy. - CBS News",
+   "lang": "en",
+   "published": "2026-03-19",
+   "search_call": "5bd11ce262d6",
+   "tavily_published": "2026-03-19",
+   "status": "rejected",
+   "reason": "the cited line is not on the fetched page",
+   "claims": [
+    {
+     "line": "Earlier this week, diesel surpassed $5 a gallon for the first time since 2022.",
+     "price": 5.0,
+     "unit": "per gallon",
+     "region": "United States",
+     "seller": "U.S. Energy Information Administration",
+     "old_price": null,
+     "new_price": 5.0,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "Watch CBS News",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "0d269656f03b",
+   "page_sha256": "b75b955731b973a9dfb52524c7528d21618983a735269c58246d04ad75ee046d",
+   "page_file": "pages/b75b955731b973a9dfb52524c7528d21618983a735269c58246d04ad75ee046d.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-03-19",
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.jagran.com/bihar/patna-city-bihar-electricity-rates-unchanged-no-hike-new-rules-from-april-2026-40176099.html",
+   "domain": "jagran.com",
+   "title": "बिहार में नहीं बढ़ेगी बिजली दर; 27 लाख उपभोक्ताओं को बड़ी राहत, 1 अप्रैल से नए नियम होंगे लागू\n - bihar electricity rates unchanged no hike new rules from april 2026",
+   "lang": "hi",
+   "published": "2026-03-18",
+   "search_call": "c35b10d0bfbe",
+   "tavily_published": "2026-03-18",
+   "status": "rejected",
+   "reason": "Super gave no price for this line",
+   "claims": [
+    {
+     "line": "इस बदलाव के तहत न्यूनतम दर को ही लागू किया गया है, जिससे 100 यूनिट से अधिक खपत करने वाले उपभोक्ताओं को अब सस्ती बिजली मिलेगी। नई दरें 1 अप्रैल 2026 से प्रभावी होंगी।",
+     "price": null,
+     "unit": null,
+     "region": "Bihar",
+     "seller": "Bihar Electricity Regulatory Commission",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-04-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# बिहार में नहीं बढ़ेगी बिजली दर; 27 लाख उपभोक्ताओं को बड़ी राहत, 1 अप्रैल से नए नियम होंगे लागू \n ## अब एक ही स्‍लैब से होगा सीधा लाभ \n बुधवार को आयोग के अध्यक्ष आमिर सुबहानी तथा सदस्य अरुण कुमार सिन्हा और परशुराम सिंह यादव ने इस मामले में फैसला सुनाया।",
+     "gloss": "Under this change, only the minimum rate has been applied, so consumers who use more than 100 units will now receive cheaper electricity. The new rates will come into effect on April 1, 2026.",
+     "kind": "electricity",
+     "cpi": "04.5.1.0.2.01",
+     "role": "moves",
+     "states": [
+      "bihar"
+     ]
+    }
+   ],
+   "extract_call": "0d269656f03b",
+   "page_sha256": "0d0b140567c4f0a824bbaa360c305646a5f2f7d35cb684d0b0df3bbe6bfa2cad",
+   "page_file": "pages/0d0b140567c4f0a824bbaa360c305646a5f2f7d35cb684d0b0df3bbe6bfa2cad.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.mlive.com/news/2026/03/consumers-energy-gets-permission-for-largest-electric-rate-increase-in-decades.html",
+   "domain": "mlive.com",
+   "title": "Consumers Energy gets permission for largest electric rate increase in decades - mlive.com",
+   "lang": "hi",
+   "published": "2026-03-27",
+   "search_call": "c35b10d0bfbe",
+   "tavily_published": "2026-03-27",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "0d269656f03b",
+   "page_sha256": "58366d51f2848c17b1d19afe6903043b33734243cf352f5c54cbb588cb13f99a",
+   "page_file": "pages/58366d51f2848c17b1d19afe6903043b33734243cf352f5c54cbb588cb13f99a.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.cbsnews.com/detroit/news/consumers-energy-residential-electric-bills-increase-may-2026",
+   "domain": "cbsnews.com",
+   "title": "Consumers Energy residential electric bills to increase by 6.1 percent in May - CBS Detroit",
+   "lang": "hi",
+   "published": "2026-03-27",
+   "search_call": "c35b10d0bfbe",
+   "tavily_published": "2026-03-27",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "3bf585c8af0d",
+   "page_sha256": "13a58e9d3baeef590554fc31e5267684ecbf6dd4cfa3c82bdc7f60692dadd909",
+   "page_file": "pages/13a58e9d3baeef590554fc31e5267684ecbf6dd4cfa3c82bdc7f60692dadd909.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-03-27",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.cbc.ca/news/canada/nova-scotia/energy-board-ok-s-slightly-lower-nova-scotia-power-rate-increase-9.7141260",
+   "domain": "cbc.ca",
+   "title": "Energy board OK's 'slightly lower' Nova Scotia Power rate increase | CBC News",
+   "lang": "hi",
+   "published": "2026-03-25",
+   "search_call": "c35b10d0bfbe",
+   "tavily_published": "2026-03-25",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "3bf585c8af0d",
+   "page_sha256": "44147783f21911477508145803072abc0f4a74f22f9fd00d5c967954ad788af4",
+   "page_file": "pages/44147783f21911477508145803072abc0f4a74f22f9fd00d5c967954ad788af4.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.detroitnews.com/story/business/2026/02/27/dte-energy-to-seek-another-electric-rate-increase-after-242-million-hike/88898312007",
+   "domain": "detroitnews.com",
+   "title": "DTE Energy to seek another electric rate increase after $242M hike",
+   "lang": "hi",
+   "published": "2026-02-27",
+   "search_call": "c35b10d0bfbe",
+   "tavily_published": "2026-02-27",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "3bf585c8af0d",
+   "page_sha256": "ea2dedc27ea0185330d8726f83dd3e36ef0eed440abbd501263b3beadd12b8cc",
+   "page_file": "pages/ea2dedc27ea0185330d8726f83dd3e36ef0eed440abbd501263b3beadd12b8cc.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-02-27",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://htxt.co.za/2026/03/telkom-confirms-mobile-and-fixed-price-increases-from-1st-april",
+   "domain": "htxt.co.za",
+   "title": "Telkom confirms mobile and fixed price increases from 1st April",
+   "lang": "hi",
+   "published": null,
+   "search_call": "6b509587d398",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.cnbctv18.com/technology/telecom/will-mobile-bills-rise-again-heres-what-indias-telecom-minister-said-19859251.htm",
+   "domain": "cnbctv18.com",
+   "title": "Will mobile bills rise again? Here's what India's Telecom Minister said",
+   "lang": "hi",
+   "published": null,
+   "search_call": "6b509587d398",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.facebook.com/zeebusinessonline/videos/%E0%A4%AE%E0%A5%8B%E0%A4%AC%E0%A4%BE%E0%A4%87%E0%A4%B2-%E0%A4%B0%E0%A4%BF%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%9C-%E0%A4%AA%E0%A5%8D%E0%A4%B2%E0%A4%BE%E0%A4%A8-%E0%A4%95%E0%A5%8B-%E0%A4%B2%E0%A5%87%E0%A4%95%E0%A4%B0-%E0%A4%B8%E0%A4%B0%E0%A4%95%E0%A4%BE%E0%A4%B0-%E0%A4%A8%E0%A5%87-%E0%A4%AC%E0%A4%A1%E0%A4%BC%E0%A4%BE-%E0%A4%95%E0%A4%A6%E0%A4%AE-%E0%A4%89%E0%A4%A0%E0%A4%BE%E0%A4%AF%E0%A4%BE-%E0%A4%B9%E0%A5%88-%E0%A4%85%E0%A4%AC-%E0%A4%9F%E0%A5%87%E0%A4%B2%E0%A4%BF%E0%A4%95%E0%A5%89%E0%A4%AE-%E0%A4%95%E0%A4%82%E0%A4%AA%E0%A4%A8%E0%A4%BF%E0%A4%AF%E0%A5%8B%E0%A4%82-%E0%A4%95%E0%A5%8B-2/1616381102935249",
+   "domain": "facebook.com",
+   "title": "मोबाइल रिचार्ज प्लान को लेकर सरकार ने बड़ा कदम उठाया है। अब टेलिकॉम कंपनियों को 28 दिन की जगह 30 दिन की वैलिडिटी वाले प्लान को बढ़ावा देने के निर्देश दिए गए हैं। इससे यूजर्स को साल में 13 बा",
+   "lang": "hi",
+   "published": null,
+   "search_call": "6b509587d398",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.amarujala.com/business/business-diary/gold-price-aaj-sona-chandi-ka-bhav-gold-and-silver-price-mcx-rates-news-gold-today-sarafa-bazar-2026-02-23",
+   "domain": "amarujala.com",
+   "title": "Gold Silver Price: ट्रंप के टैरिफ विवाद से सर्राफा बाजार में उछाल; चांदी ₹2.72 लाख, सोना 1.62 लाख रुपये के पार",
+   "lang": "hi",
+   "published": "2026-02-23",
+   "search_call": "6b509587d398",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "3bf585c8af0d",
+   "page_sha256": "55ff43c7a31e0b7f95531940b23f48549a9054d53f775b2c11890f971208bc8a",
+   "page_file": "pages/55ff43c7a31e0b7f95531940b23f48549a9054d53f775b2c11890f971208bc8a.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-02-23",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://navbharattimes.indiatimes.com/tech/gadgets-news/apple-assembled-5-5-crore-iphone-in-india-2025-due-to-high-tariff-on-china-increase-production-country/articleshow/129378885.cms",
+   "domain": "navbharattimes.indiatimes.com",
+   "title": "iPhone India Production: चीन से भारत चली ऐपल, 2025 में 5.5 करोड़ आईफोन तैयार करके बनाया रिकॉर्ड",
+   "lang": "hi",
+   "published": null,
+   "search_call": "6b509587d398",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://vietnamnews.vn/economy/1777744/retail-fuel-prices-increase-sharply-ron95-up-more-than-vnd5-000-per-litre.html",
+   "domain": "vietnamnews.vn",
+   "title": "Retail fuel prices increase sharply, RON95 up more than VNĐ5,000 per litre",
+   "lang": "hi",
+   "published": "2026-03-20",
+   "search_call": "cd9f5bf792b2",
+   "tavily_published": "2026-03-20",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "3bf585c8af0d",
+   "page_sha256": "33a255a4cb905218d290a014cd52912297caceba5947021a793716be05be3168",
+   "page_file": "pages/33a255a4cb905218d290a014cd52912297caceba5947021a793716be05be3168.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-03-20",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.facebook.com/zeebusinessonline/videos/premium-petrol-price-hike-what-it-means-for-consumers-and-markets/874629538940126",
+   "domain": "facebook.com",
+   "title": "Zee Business. . प्रीमियम पेट्रोल हुआ महंगा प्रीमियम पेट्रोल के दाम ₹2.35/L तक बढ़े इंडस्ट्रियल डीजल भी हुआ महंगा साधारण पेट्रोल की कीमतों में कोई बदलाव नहीं #FuelPrice #PetrolPrice #DieselPrice #Premiu",
+   "lang": "hi",
+   "published": null,
+   "search_call": "cd9f5bf792b2",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.upi.com/Top_News/World-News/2026/03/26/latam-chile-fuel-price-increase/3681774533517",
+   "domain": "upi.com",
+   "title": "Chile implements historic fuel price hike, raising inflation concerns",
+   "lang": "hi",
+   "published": "2026-03-26",
+   "search_call": "cd9f5bf792b2",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.dw.com/en/india-news-fuel-prices-tuesday-updates-delhi/live-76285014",
+   "domain": "dw.com",
+   "title": "India news: 'No plans to increase fuel prices'",
+   "lang": "hi",
+   "published": null,
+   "search_call": "cd9f5bf792b2",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.livehindustan.com/rajasthan/jaipur/rajasthan-private-bus-fare-increase-201774428091008.html",
+   "domain": "livehindustan.com",
+   "title": "1 अप्रैल से राजस्थान में प्राइवेट बसों का किराया बढ़ेगा",
+   "lang": "hi",
+   "published": null,
+   "search_call": "5f0e68fd329e",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.bhaskar.com/g/local/mp/bhopal/news/mp-bus-strike-holidays-expensive-137296474.html",
+   "domain": "bhaskar.com",
+   "title": "MP Bus Strike Protest Date; New Transport Policy | Holi 2026",
+   "lang": "hi",
+   "published": "2026-02-26",
+   "search_call": "5f0e68fd329e",
+   "tavily_published": "2026-02-26",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "0531c5498254",
+   "page_sha256": "ad9450713989aebc8eaa0157b6e75b837b059c5ec5c6fe02d51e04e58768d026",
+   "page_file": "pages/ad9450713989aebc8eaa0157b6e75b837b059c5ec5c6fe02d51e04e58768d026.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.lpm.org/news/2026-02-25/tarc-bus-rides-will-get-more-expensive-starting-march-2",
+   "domain": "lpm.org",
+   "title": "Louisville bus rides will get more expensive with TARC fare increase",
+   "lang": "hi",
+   "published": "2026-02-25",
+   "search_call": "5f0e68fd329e",
+   "tavily_published": "2026-02-25",
+   "status": "verified",
+   "reason": "verified",
+   "claims": [
+    {
+     "line": "Starting March 2, an adult bus fare will cost $2.25, a 50-cent increase. Fares for students and senior citizens, as well as multi-day passes, will also increase. The price of a ride via the TARC3 paratransit service, which serves Louisvillians with disabilities, will increase from $3 to $4.50.",
+     "price": 2.25,
+     "unit": "$ per ride",
+     "region": "Louisville",
+     "seller": "Transit Authority of River City (TARC)",
+     "old_price": null,
+     "new_price": 2.25,
+     "pct_change": null,
+     "effective_date": "2026-03-02",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the change cannot be computed (no old and new price, % or official base)",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# TARC bus rides will get more expensive starting March 2 \n The price to ride the public bus in Louisville is set to increase for the first time in more than a decade. \n The board of directors of the Transit Authority of River City approved the fare changes at its meeting on Tuesday.",
+     "gloss": "",
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "Starting March 2, an adult bus fare will cost $2.25, a 50-cent increase. Fares for students and senior citizens, as well as multi-day passes, will also increase. The price of a ride via the TARC3 paratransit service, which serves Louisvillians with disabilities, will increase from $3 to $4.50.",
+     "price": null,
+     "unit": "$ per ride",
+     "region": "Louisville",
+     "seller": "Transit Authority of River City (TARC)",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-03-02",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# TARC bus rides will get more expensive starting March 2 \n The price to ride the public bus in Louisville is set to increase for the first time in more than a decade. \n The board of directors of the Transit Authority of River City approved the fare changes at its meeting on Tuesday.",
+     "gloss": "",
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "Starting March 2, an adult bus fare will cost $2.25, a 50-cent increase. Fares for students and senior citizens, as well as multi-day passes, will also increase. The price of a ride via the TARC3 paratransit service, which serves Louisvillians with disabilities, will increase from $3 to $4.50.",
+     "price": null,
+     "unit": "$ per ride",
+     "region": "Louisville",
+     "seller": "Transit Authority of River City (TARC)",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-03-02",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# TARC bus rides will get more expensive starting March 2 \n The price to ride the public bus in Louisville is set to increase for the first time in more than a decade. \n The board of directors of the Transit Authority of River City approved the fare changes at its meeting on Tuesday.",
+     "gloss": "",
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "Starting March 2, an adult bus fare will cost $2.25, a 50-cent increase. Fares for students and senior citizens, as well as multi-day passes, will also increase. The price of a ride via the TARC3 paratransit service, which serves Louisvillians with disabilities, will increase from $3 to $4.50.",
+     "price": null,
+     "unit": null,
+     "region": "Louisville",
+     "seller": "Transit Authority of River City (TARC)",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-03-02",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# TARC bus rides will get more expensive starting March 2 \n The price to ride the public bus in Louisville is set to increase for the first time in more than a decade. \n The board of directors of the Transit Authority of River City approved the fare changes at its meeting on Tuesday.",
+     "gloss": "",
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "Starting March 2, an adult bus fare will cost $2.25, a 50-cent increase. Fares for students and senior citizens, as well as multi-day passes, will also increase. The price of a ride via the TARC3 paratransit service, which serves Louisvillians with disabilities, will increase from $3 to $4.50.",
+     "price": 4.5,
+     "unit": "$ per ride",
+     "region": "Louisville",
+     "seller": "Transit Authority of River City (TARC)",
+     "old_price": 3,
+     "new_price": 4.5,
+     "pct_change": null,
+     "effective_date": "2026-03-02",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "verified",
+     "reason": "verified",
+     "price_type": "retail",
+     "change": 0.5,
+     "base_price": null,
+     "context": "# TARC bus rides will get more expensive starting March 2 \n The price to ride the public bus in Louisville is set to increase for the first time in more than a decade. \n The board of directors of the Transit Authority of River City approved the fare changes at its meeting on Tuesday.",
+     "gloss": "",
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "0531c5498254",
+   "page_sha256": "7c1d1adf9231457e1416e2d1e27936842a615112e4ffab683a812ae55e42a9ab",
+   "page_file": "pages/7c1d1adf9231457e1416e2d1e27936842a615112e4ffab683a812ae55e42a9ab.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-02-25",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://hellowoodlands.com/the-woodlands-express-fare-to-increase-april-1-new-bus-wrap-design-approved-in-the-woodlands-township-board-meeting",
+   "domain": "hellowoodlands.com",
+   "title": "The Woodlands Express Fare to increase April 1, New Bus Wrap Design approved in The Woodlands Township Board Meeting",
+   "lang": "hi",
+   "published": null,
+   "search_call": "5f0e68fd329e",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.theknightnews.com/2026/03/02/mta-raises-fares-to-3-students-are-not-happy",
+   "domain": "theknightnews.com",
+   "title": "MTA Raises Fares To $3 – Students Are Not Happy",
+   "lang": "hi",
+   "published": "2026-03-02",
+   "search_call": "5f0e68fd329e",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://railway-news.com/tfl-reminds-customers-of-rising-tube-and-rail-fares-from-1-march-2026",
+   "domain": "railway-news.com",
+   "title": "TfL Reminds Customers of Rising Tube and Rail Fares from 1 March 2026 | Railway-News",
+   "lang": "en",
+   "published": "2026-02-23",
+   "search_call": "297aaf4cbc68",
+   "tavily_published": "2026-02-23",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "0531c5498254",
+   "page_sha256": "468d274a2a6f5cb11b6d2210ddf1f745820bb7df140bcf30cd589170fda79499",
+   "page_file": "pages/468d274a2a6f5cb11b6d2210ddf1f745820bb7df140bcf30cd589170fda79499.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-02-23",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.japantimes.co.jp/business/2026/03/11/companies/jr-east-price-hike",
+   "domain": "japantimes.co.jp",
+   "title": "JR East to raise train fares on Saturday for the first time in 39 years",
+   "lang": "en",
+   "published": "2026-03-11",
+   "search_call": "297aaf4cbc68",
+   "tavily_published": "2026-03-11",
+   "status": "rejected",
+   "reason": "Super gave no price for this line",
+   "claims": [
+    {
+     "line": "East Japan Railway will raise train fares across its network starting Saturday, marking the company’s first across-the-board fare revision since its privatization in 1987.",
+     "price": null,
+     "unit": null,
+     "region": "Japan",
+     "seller": "East Japan Railway Company (JR East)",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-03-14",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# JR East to raise train fares on Saturday for the first time in 39 years \n [](https://beyondwords.io/?utm_source=https%3A%2F%2Fwww.japantimes.co.jp&utm_medium=player&utm_campaign=7551) \n The company said fares would rise by an average of about 7.1%, with the minimum base fare increasing from ¥150 (95 cents) to ¥160.",
+     "gloss": "",
+     "kind": "rail",
+     "cpi": "07.3.1.1.2.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "0531c5498254",
+   "page_sha256": "d3180d90da8ed5a8aa296bd51f8e4980e3a7e6a9a393aa714cef3dd3648e8e56",
+   "page_file": "pages/d3180d90da8ed5a8aa296bd51f8e4980e3a7e6a9a393aa714cef3dd3648e8e56.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.asahi.com/ajw/articles/16419770",
+   "domain": "asahi.com",
+   "title": "JR East ends 39-year fare freeze, hitting Tokyo riders hardest | The Asahi Shimbun: Breaking News, Japan News and Analysis",
+   "lang": "en",
+   "published": "2026-03-13",
+   "search_call": "297aaf4cbc68",
+   "tavily_published": "2026-03-13",
+   "status": "rejected",
+   "reason": "the cited line is not on the fetched page",
+   "claims": [
+    {
+     "line": "Standard fares will rise by 7.8 percent, commuter passes by 12 percent and student passes by 4.9 percent. The base fare for local trains will increase to 160 yen ($1) from the current 150 yen. [...] END OF A FARE ERA",
+     "price": 160,
+     "unit": "yen",
+     "region": "India",
+     "seller": "JR East",
+     "old_price": 150,
+     "new_price": 160,
+     "pct_change": 7.8,
+     "effective_date": "2026-03-14",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": 0.06666666666666665,
+     "base_price": null,
+     "context": "[Skip to content](#MainInner)",
+     "gloss": "",
+     "kind": "rail",
+     "cpi": "07.3.1.1.2.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "0531c5498254",
+   "page_sha256": "b00bd7ccd4d8249fa1f1053a89c9d067a091733c44fef10fbed4a6b8116f0986",
+   "page_file": "pages/b00bd7ccd4d8249fa1f1053a89c9d067a091733c44fef10fbed4a6b8116f0986.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-03-13",
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.scmp.com/news/hong-kong/transport/article/3348194/hong-kongs-mtr-corp-keep-fares-unchanged-second-year-row",
+   "domain": "scmp.com",
+   "title": "Hong Kong’s MTR Corp to keep fares unchanged for second year in row | South China Morning Post",
+   "lang": "en",
+   "published": "2026-03-27",
+   "search_call": "297aaf4cbc68",
+   "tavily_published": "2026-03-27",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "cf0a16f1a268",
+   "page_sha256": "e782f0dc32b754e5f486ecc5d71ff5d94b4aa21ff3329840e1d48b87656ddf74",
+   "page_file": "pages/e782f0dc32b754e5f486ecc5d71ff5d94b4aa21ff3329840e1d48b87656ddf74.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.gov.uk/government/news/passengers-save-millions-as-rail-fare-freeze-starts",
+   "domain": "gov.uk",
+   "title": "Passengers save millions as rail fare freeze starts - GOV.UK",
+   "lang": "en",
+   "published": "2026-03-02",
+   "search_call": "297aaf4cbc68",
+   "tavily_published": "2026-03-02",
+   "status": "rejected",
+   "reason": "Nano could not read this result (model returned no JSON object)",
+   "claims": []
+  }
+ ],
+ "skipped": [],
+ "complete": true,
+ "calls": [
+  {
+   "endpoint": "/search",
+   "call_id": "319a766ce7c9",
+   "sent": {
+    "query": "electricity price hike news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 4.64,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "5d5cc68940b9",
+   "sent": {
+    "query": "mobile tariff increase news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "dainikbhaskar.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.17,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "5bd11ce262d6",
+   "sent": {
+    "query": "petrol price increase news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "hindustantimes.com",
+     "navbharatindia.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.21,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "c35b10d0bfbe",
+   "sent": {
+    "query": "बिजली दर वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.15,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "6b509587d398",
+   "sent": {
+    "query": "मोबाइल टैरिफ वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "dainikbhaskar.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.1,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "cd9f5bf792b2",
+   "sent": {
+    "query": "पेट्रोल मूल्य वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "hindustantimes.com",
+     "navbharatindia.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.14,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "5f0e68fd329e",
+   "sent": {
+    "query": "बस किराया वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "zeenews.india.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.12,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "297aaf4cbc68",
+   "sent": {
+    "query": "rail fare hike news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-02-19",
+    "end_date": "2026-03-29",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "dainikbhaskar.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 4.7,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "bfbae4fe88d7",
+   "sent": {
+    "urls": [
+     "https://www.enerdata.net/publications/daily-energy-news/south-africas-energy-regulator-approves-9-municipal-electricity-price-hike.html",
+     "https://capitolnewsillinois.com/news/midamerican-energy-proposes-rate-hike-for-85k-customers-in-northwest-illinois",
+     "https://www.9and10news.com/2026/03/27/michigan-regulators-approve-2766m-consumers-energy-electric-rate-hike",
+     "https://www.thenewstribune.com/news/local/article314990195.html",
+     "https://au.finance.yahoo.com/news/mobile-customers-slugged-as-telstra-raises-prices-for-second-time-in-10-months-and-ends-cheapest-deal-212014691.html"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "ecc17acb7bf4",
+   "sent": {
+    "urls": [
+     "https://www.techradar.com/phones/network-providers/telstra-mobile-customers-set-for-a-second-price-hike-in-12-months-is-it-enough-to-finally-convince-you-to-switch",
+     "https://www.notebookcheck.net/Oppo-OnePlus-and-Vivo-officially-announce-smartphone-price-increase-in-China.1251229.0.html",
+     "https://www.tomsguide.com/phones/samsung-phones/samsung-on-galaxy-s26-and-galaxy-s26-plus-usd100-price-hike-weve-packed-in-so-much-innovation",
+     "https://www.androidcentral.com/phones/oneplus/oneplus-and-oppo-increasing-phone-prices-china",
+     "https://www.euronews.com/2026/03/19/war-in-iran-where-in-europe-have-petrol-prices-spiked"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.03,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "0d269656f03b",
+   "sent": {
+    "urls": [
+     "https://www.bbc.com/news/articles/cwyvxejqyx4o",
+     "https://www.pbs.org/newshour/economy/soaring-gas-prices-and-supply-chain-disruptions-drive-up-costs-across-the-economy",
+     "https://www.cbsnews.com/news/oil-prices-record-high-middle-east-conflict-inflation",
+     "https://www.jagran.com/bihar/patna-city-bihar-electricity-rates-unchanged-no-hike-new-rules-from-april-2026-40176099.html",
+     "https://www.mlive.com/news/2026/03/consumers-energy-gets-permission-for-largest-electric-rate-increase-in-decades.html"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "3bf585c8af0d",
+   "sent": {
+    "urls": [
+     "https://www.cbsnews.com/detroit/news/consumers-energy-residential-electric-bills-increase-may-2026",
+     "https://www.cbc.ca/news/canada/nova-scotia/energy-board-ok-s-slightly-lower-nova-scotia-power-rate-increase-9.7141260",
+     "https://www.detroitnews.com/story/business/2026/02/27/dte-energy-to-seek-another-electric-rate-increase-after-242-million-hike/88898312007",
+     "https://www.amarujala.com/business/business-diary/gold-price-aaj-sona-chandi-ka-bhav-gold-and-silver-price-mcx-rates-news-gold-today-sarafa-bazar-2026-02-23",
+     "https://vietnamnews.vn/economy/1777744/retail-fuel-prices-increase-sharply-ron95-up-more-than-vnd5-000-per-litre.html"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.03,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "0531c5498254",
+   "sent": {
+    "urls": [
+     "https://www.bhaskar.com/g/local/mp/bhopal/news/mp-bus-strike-holidays-expensive-137296474.html",
+     "https://www.lpm.org/news/2026-02-25/tarc-bus-rides-will-get-more-expensive-starting-march-2",
+     "https://railway-news.com/tfl-reminds-customers-of-rising-tube-and-rail-fares-from-1-march-2026",
+     "https://www.japantimes.co.jp/business/2026/03/11/companies/jr-east-price-hike",
+     "https://www.asahi.com/ajw/articles/16419770"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "cf0a16f1a268",
+   "sent": {
+    "urls": [
+     "https://www.scmp.com/news/hong-kong/transport/article/3348194/hong-kongs-mtr-corp-keep-fares-unchanged-second-year-row"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 0,
+   "new_credits": 0,
+   "response_time": 0.01,
+   "n_results": 1
+  }
+ ],
+ "finished_utc": "2026-10-22T09:28:21.628975+00:00"
+}

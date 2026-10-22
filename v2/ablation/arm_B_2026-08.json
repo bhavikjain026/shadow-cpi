@@ -1,0 +1,1710 @@
+{
+ "arm": "B",
+ "month": "2026-08",
+ "window": [
+  "2026-07-22",
+  "2026-08-29"
+ ],
+ "writer": "Nemotron",
+ "plan": [
+  {
+   "query": "electricity price hike news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-07-22",
+   "end_date": "2026-08-29",
+   "include_domains": [
+    "reuters.com",
+    "timesofindia.indiatimes.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "249f7cd58f17",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "reuters.com",
+     "timesofindia.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "588c4fbc59c8",
+   "n_results": 5
+  },
+  {
+   "query": "mobile tariff increase news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-07-22",
+   "end_date": "2026-08-29",
+   "include_domains": [
+    "bbc.com",
+    "economictimes.indiatimes.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "249f7cd58f17",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "bbc.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "530ee24864d3",
+   "n_results": 5
+  },
+  {
+   "query": "petrol price hike news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-07-22",
+   "end_date": "2026-08-29",
+   "include_domains": [
+    "bloomberg.com",
+    "hindustantimes.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "249f7cd58f17",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "bloomberg.com",
+     "hindustantimes.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "5eb3edea0101",
+   "n_results": 5
+  },
+  {
+   "query": "बिजली दर वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-07-22",
+   "end_date": "2026-08-29",
+   "include_domains": [
+    "zeenews.com",
+    "timesofindia.indiatimes.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "249f7cd58f17",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "zeenews.com",
+     "timesofindia.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "4ef05e223da1",
+   "n_results": 5
+  },
+  {
+   "query": "मोबाइल टैरिफ वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-07-22",
+   "end_date": "2026-08-29",
+   "include_domains": [
+    "economictimes.indiatimes.com",
+    "outlookindia.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "249f7cd58f17",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "outlookindia.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "25852fede659",
+   "n_results": 5
+  },
+  {
+   "query": "पेट्रोल मूल्य वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-07-22",
+   "end_date": "2026-08-29",
+   "include_domains": [
+    "hindustantimes.com",
+    "dainikbhaskar.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "249f7cd58f17",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "hindustantimes.com",
+     "dainikbhaskar.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "3795e9653169",
+   "n_results": 5
+  },
+  {
+   "query": "बस किराया वृद्धि समाचार",
+   "language": "hi",
+   "topic": "news",
+   "start_date": "2026-07-22",
+   "end_date": "2026-08-29",
+   "include_domains": [
+    "zeenews.com",
+    "outlookindia.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "249f7cd58f17",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "zeenews.com",
+     "outlookindia.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "494acbc3d4ac",
+   "n_results": 5
+  },
+  {
+   "query": "rail fare revision news",
+   "language": "en",
+   "topic": "news",
+   "start_date": "2026-07-22",
+   "end_date": "2026-08-29",
+   "include_domains": [
+    "reuters.com",
+    "bbc.com"
+   ],
+   "include_domains_mode": "prefer",
+   "max_results": 5,
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "249f7cd58f17",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "reuters.com",
+     "bbc.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "search_call": "cae201c3c39b",
+   "n_results": 5
+  }
+ ],
+ "plan_complete": true,
+ "plan_tries": [
+  {
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "call": "249f7cd58f17",
+   "error": "",
+   "written": [
+    {
+     "query": "बिजली दर वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "zeenews.com",
+      "timesofindia.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "मोबाइल टैरिफ वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "economictimes.indiatimes.com",
+      "outlookindia.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "पेट्रोल मूल्य वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "hindustantimes.com",
+      "dainikbhaskar.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "electricity price hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "reuters.com",
+      "timesofindia.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "mobile tariff increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "bbc.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "petrol price hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "bloomberg.com",
+      "hindustantimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "बस किराया वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "zeenews.com",
+      "outlookindia.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    },
+    {
+     "query": "rail fare revision news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "reuters.com",
+      "bbc.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5
+    }
+   ],
+   "picked": [
+    {
+     "query": "electricity price hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "reuters.com",
+      "timesofindia.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "249f7cd58f17",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-07-22",
+      "end_date": "2026-08-29",
+      "include_domains": [
+       "reuters.com",
+       "timesofindia.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "588c4fbc59c8",
+     "n_results": 5
+    },
+    {
+     "query": "mobile tariff increase news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "bbc.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "249f7cd58f17",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-07-22",
+      "end_date": "2026-08-29",
+      "include_domains": [
+       "bbc.com",
+       "economictimes.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "530ee24864d3",
+     "n_results": 5
+    },
+    {
+     "query": "petrol price hike news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "bloomberg.com",
+      "hindustantimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "249f7cd58f17",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-07-22",
+      "end_date": "2026-08-29",
+      "include_domains": [
+       "bloomberg.com",
+       "hindustantimes.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "5eb3edea0101",
+     "n_results": 5
+    },
+    {
+     "query": "बिजली दर वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "zeenews.com",
+      "timesofindia.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "249f7cd58f17",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-07-22",
+      "end_date": "2026-08-29",
+      "include_domains": [
+       "zeenews.com",
+       "timesofindia.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "4ef05e223da1",
+     "n_results": 5
+    },
+    {
+     "query": "मोबाइल टैरिफ वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "economictimes.indiatimes.com",
+      "outlookindia.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "249f7cd58f17",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-07-22",
+      "end_date": "2026-08-29",
+      "include_domains": [
+       "economictimes.indiatimes.com",
+       "outlookindia.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "25852fede659",
+     "n_results": 5
+    },
+    {
+     "query": "पेट्रोल मूल्य वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "hindustantimes.com",
+      "dainikbhaskar.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "249f7cd58f17",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-07-22",
+      "end_date": "2026-08-29",
+      "include_domains": [
+       "hindustantimes.com",
+       "dainikbhaskar.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "3795e9653169",
+     "n_results": 5
+    },
+    {
+     "query": "बस किराया वृद्धि समाचार",
+     "language": "hi",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "zeenews.com",
+      "outlookindia.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "249f7cd58f17",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-07-22",
+      "end_date": "2026-08-29",
+      "include_domains": [
+       "zeenews.com",
+       "outlookindia.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "494acbc3d4ac",
+     "n_results": 5
+    },
+    {
+     "query": "rail fare revision news",
+     "language": "en",
+     "topic": "news",
+     "start_date": "2026-07-22",
+     "end_date": "2026-08-29",
+     "include_domains": [
+      "reuters.com",
+      "bbc.com"
+     ],
+     "include_domains_mode": "prefer",
+     "max_results": 5,
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "249f7cd58f17",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 5,
+      "start_date": "2026-07-22",
+      "end_date": "2026-08-29",
+      "include_domains": [
+       "reuters.com",
+       "bbc.com"
+      ],
+      "include_domains_mode": "prefer"
+     },
+     "search_call": "cae201c3c39b",
+     "n_results": 5
+    }
+   ],
+   "dropped": [],
+   "complete": true
+  }
+ ],
+ "cards": [
+  {
+   "url": "https://www.nhpr.org/nh-news/2026-07-24/nh-news-electricity-price-hike-explainer-boston-womens-baseball-newhampshire",
+   "domain": "nhpr.org",
+   "title": "NH News Recap: Electricity price hike explainer; a new baseball league of their own | New Hampshire Public Radio",
+   "lang": "en",
+   "published": "2026-07-24",
+   "search_call": "588c4fbc59c8",
+   "tavily_published": "2026-07-24",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "d896554634a1",
+   "page_sha256": "8c3d8aa4f4c91651485318a0965d0cf8d54549e131719ad378f2dc2485ded344",
+   "page_file": "pages/8c3d8aa4f4c91651485318a0965d0cf8d54549e131719ad378f2dc2485ded344.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-07-24",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.axios.com/local/seattle/2026/08/26/seattle-electric-bills-city-light-pse-rate-hikes",
+   "domain": "axios.com",
+   "title": "Seattle-area electricity rates are set to soar",
+   "lang": "en",
+   "published": "2026-08-26",
+   "search_call": "588c4fbc59c8",
+   "tavily_published": "2026-08-26",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "d896554634a1",
+   "page_sha256": "7cf5dc18a4931846d0ef39d9534e8a2135d8ce69ee554db166f48d5bfdc13e89",
+   "page_file": "pages/7cf5dc18a4931846d0ef39d9534e8a2135d8ce69ee554db166f48d5bfdc13e89.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://kstp.com/kstp-news/top-news/xcel-energy-customers-push-back-on-possible-rate-hike",
+   "domain": "kstp.com",
+   "title": "Xcel Energy customers push back on possible rate hike - KSTP.com 5 Eyewitness News",
+   "lang": "en",
+   "published": "2026-07-29",
+   "search_call": "588c4fbc59c8",
+   "tavily_published": "2026-07-29",
+   "status": "rejected",
+   "reason": "Nano could not read this result (model returned no JSON object)",
+   "claims": []
+  },
+  {
+   "url": "https://www.wpri.com/money/rhode-island-energy-announces-winter-rate-hike-state-leaders-share-resources",
+   "domain": "wpri.com",
+   "title": "Rhode Islanders may get $61 credit before energy rate hike | WPRI.com",
+   "lang": "en",
+   "published": "2026-07-24",
+   "search_call": "588c4fbc59c8",
+   "tavily_published": "2026-07-24",
+   "status": "rejected",
+   "reason": "Nano could not read this result (model returned no JSON object)",
+   "claims": []
+  },
+  {
+   "url": "https://www.cpr.org/2026/08/20/xcel-energy-electric-bill-increase-august",
+   "domain": "cpr.org",
+   "title": "Xcel Energy bills will rise by $5 a month, effective Aug. 29",
+   "lang": "en",
+   "published": "2026-08-20",
+   "search_call": "588c4fbc59c8",
+   "tavily_published": "2026-08-20",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "d896554634a1",
+   "page_sha256": "4b1faaaf091c5d9efa89a599330c078314bbf815bd61cb9dabdf93923051fd81",
+   "page_file": "pages/4b1faaaf091c5d9efa89a599330c078314bbf815bd61cb9dabdf93923051fd81.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.bhaskarenglish.in/originals/news/mobile-recharge-price-hike-airtel-jio-plans-costly-2026-138774629.html",
+   "domain": "bhaskarenglish.in",
+   "title": "Mobile Recharge Price Hike 2026 | Airtel Jio Tariff Plans Costly",
+   "lang": "en",
+   "published": "2026-08-19",
+   "search_call": "530ee24864d3",
+   "tavily_published": "2026-08-19",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "Airtel and Vodafone Idea increased tariffs by up to 41% from 3 December 2019. Jio followed with increases of up to 40% from 6 December.",
+     "price": 199,
+     "unit": "₹",
+     "region": "India",
+     "seller": "Jio",
+     "old_price": 149,
+     "new_price": 199,
+     "pct_change": 33.56,
+     "effective_date": "2026-12-06",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": 0.3355704697986577,
+     "base_price": null,
+     "context": "# Explained Mobile recharge costs up 16%:Will prices rise again in 3 months & why are tariffs rising so often? \n **December 2019: Up to 40% increase** \n * Jio’s 1.5GB-a-day plan rose from ₹149 to ₹199.",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    },
+    {
+     "line": "Airtel and Vodafone Idea increased tariffs by up to 41% from 3 December 2019. Jio followed with increases of up to 40% from 6 December.",
+     "price": 248,
+     "unit": "₹",
+     "region": "India",
+     "seller": "Airtel",
+     "old_price": 199,
+     "new_price": 248,
+     "pct_change": 24.62,
+     "effective_date": "2026-12-03",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": 0.24623115577889454,
+     "base_price": null,
+     "context": "# Explained Mobile recharge costs up 16%:Will prices rise again in 3 months & why are tariffs rising so often? \n **December 2019: Up to 40% increase** \n * Jio’s 1.5GB-a-day plan rose from ₹149 to ₹199.",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    },
+    {
+     "line": "Airtel and Vodafone Idea increased tariffs by up to 41% from 3 December 2019. Jio followed with increases of up to 40% from 6 December.",
+     "price": 249,
+     "unit": "₹",
+     "region": "India",
+     "seller": "Vodafone Idea",
+     "old_price": 229,
+     "new_price": 249,
+     "pct_change": 8.73,
+     "effective_date": "2026-12-03",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": 0.0873362445414847,
+     "base_price": null,
+     "context": "# Explained Mobile recharge costs up 16%:Will prices rise again in 3 months & why are tariffs rising so often? \n **December 2019: Up to 40% increase** \n * Jio’s 1.5GB-a-day plan rose from ₹149 to ₹199.",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    }
+   ],
+   "extract_call": "d896554634a1",
+   "page_sha256": "4f976b2d3ff8fcaa943a0accf2bc185f34a1bfc6d37cab23587a525e3f5b72f4",
+   "page_file": "pages/4f976b2d3ff8fcaa943a0accf2bc185f34a1bfc6d37cab23587a525e3f5b72f4.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.yahoo.com/news/politics/articles/price-lock-price-shock-t-110500006.html",
+   "domain": "yahoo.com",
+   "title": "'Price lock' or price shock? T-Mobile price increases spark customer fury",
+   "lang": "en",
+   "published": "2026-07-31",
+   "search_call": "530ee24864d3",
+   "tavily_published": "2026-07-31",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "d896554634a1",
+   "page_sha256": "16cdd1705b2bfb5fdeac475740d040040137b20e6d0b2487179203e6166d45b7",
+   "page_file": "pages/16cdd1705b2bfb5fdeac475740d040040137b20e6d0b2487179203e6166d45b7.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://economictimes.indiatimes.com/industry/telecom/telecom-news/airtel-sees-room-to-raise-tariffs-on-low-priced-unlimited-data-plans/articleshow/132938168.cms",
+   "domain": "economictimes.indiatimes.com",
+   "title": "Airtel sees room to raise tariffs on low-priced unlimited data plans - The Economic Times",
+   "lang": "en",
+   "published": "2026-08-05",
+   "search_call": "530ee24864d3",
+   "tavily_published": "2026-08-05",
+   "status": "rejected",
+   "reason": "Nano could not read this result (model returned no JSON object)",
+   "claims": []
+  },
+  {
+   "url": "https://economictimes.indiatimes.com/industry/telecom/telecom-news/airtels-prepaid-plan-restructuring-subscribers-face-16-price-hike-on-rs-299-plan-as-operator-withdraws-four-options/articleshow/133184309.cms",
+   "domain": "economictimes.indiatimes.com",
+   "title": "Airtel withdraws four prepaid plans, Rs 299 users face 16% price hike - The Economic Times",
+   "lang": "en",
+   "published": "2026-08-12",
+   "search_call": "530ee24864d3",
+   "tavily_published": "2026-08-12",
+   "status": "rejected",
+   "reason": "the cited line is not on the fetched page",
+   "claims": [
+    {
+     "line": "Airtel withdraws four prepaid plans, Rs 299 users face 16% price hike - The Economic Times",
+     "price": 299,
+     "unit": "Rs",
+     "region": "India",
+     "seller": "Bharti Airtel",
+     "old_price": 299,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2024-06-15",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "[Nifty](https://economictimes.indiatimes.com/markets/indices/nifty-50)22,622.70-99.25",
+     "gloss": "",
+     "kind": "mobile",
+     "cpi": "08.3.4.0.2.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "f5e8b8621076",
+   "page_sha256": "244274393a24614a1a26ccb2abce413337016fbde25b955a9bf1450bcfac8597",
+   "page_file": "pages/244274393a24614a1a26ccb2abce413337016fbde25b955a9bf1450bcfac8597.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://economictimes.indiatimes.com/industry/telecom/telecom-news/jio-to-relaunch-prime-membership-with-1-year-price-guarantee-after-airtel-plan-changes/articleshow/133301796.cms",
+   "domain": "economictimes.indiatimes.com",
+   "title": "Jio to relaunch Prime membership with 1-year price guarantee after Airtel plan changes - The Economic Times",
+   "lang": "en",
+   "published": "2026-08-17",
+   "search_call": "530ee24864d3",
+   "tavily_published": "2026-08-17",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "The move comes after Airtel last week discontinued its Rs 299, Rs 319, Rs 579, Rs 619 and Rs 649 prepaid plans, which offered 1.5 GB of data per day along with unlimited calling.",
+     "price": 349,
+     "unit": "Rs",
+     "region": "India",
+     "seller": "Airtel",
+     "old_price": 299,
+     "new_price": 349,
+     "pct_change": 16,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": 0.16722408026755864,
+     "base_price": null,
+     "context": "##### The Economic Times daily newspaper is available online now. \n **Also Read:** [Airtel Payments Bank names Shabnam Sinha as chairperson, succeeding Sunil Mittal](https://economictimes.indiatimes.com/industry/telecom/telecom-news/airtel-payments-bank-names-shabnam-sinha-as-chairperson-succeeding-sunil-mittal/articleshow/133295074.cms) \n Subscribers to the discontinued Rs 299 plan will now have to opt for Airtel’s Rs 349 pack to get a higher data usage limit, resulting in a price increase of about 16%.",
+     "gloss": "",
+     "kind": "mobile",
+     "cpi": "08.3.4.0.2.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "f5e8b8621076",
+   "page_sha256": "ab034be192acf2bf70b0386668c3dfb010136810c7fe6813d4883efa38c50c66",
+   "page_file": "pages/ab034be192acf2bf70b0386668c3dfb010136810c7fe6813d4883efa38c50c66.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.abc.net.au/news/2026-08-02/fuel-excise-cut-ending/106987482",
+   "domain": "abc.net.au",
+   "title": "Drivers brace for petrol price hikes as fuel excise cut comes to end - ABC News",
+   "lang": "en",
+   "published": "2026-08-02",
+   "search_call": "5eb3edea0101",
+   "tavily_published": "2026-08-02",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "f5e8b8621076",
+   "page_sha256": "50be3a791989e640a55951f0a71beba1cadd614fe84c38c55cf27ab3cb5d5bd9",
+   "page_file": "pages/50be3a791989e640a55951f0a71beba1cadd614fe84c38c55cf27ab3cb5d5bd9.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.ndtv.com/world-news/pakistan-hikes-petrol-high-speed-diesel-prices-amid-rising-us-iran-tensions-11907859",
+   "domain": "ndtv.com",
+   "title": "Pakistan Hikes Petrol, High-Speed Diesel Prices Amid Rising US-Iran Tensions",
+   "lang": "en",
+   "published": "2026-08-14",
+   "search_call": "5eb3edea0101",
+   "tavily_published": "2026-08-14",
+   "status": "rejected",
+   "reason": "effective date 2024-05-17 is not in 2026-08",
+   "claims": [
+    {
+     "line": "## Pakistan has hiked petrol prices by Rs 0.45 to Rs 325.43/litre and diesel by Rs 1.16 to Rs 383.95/litre, effective Friday.",
+     "price": 325.43,
+     "unit": "Rs per litre",
+     "region": "Pakistan",
+     "seller": "Pakistan government",
+     "old_price": 325.43,
+     "new_price": 325.43,
+     "pct_change": null,
+     "effective_date": "2024-05-17",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2024-05-17 is not in 2026-08",
+     "price_type": "retail",
+     "change": 0.0,
+     "base_price": null,
+     "context": "# Pakistan Hikes Petrol, High-Speed Diesel Prices Amid Rising US-Iran Tensions \n # Pakistan Hikes Petrol, High-Speed Diesel Prices Amid Rising US-Iran Tensions \n ![Pakistan Hikes Petrol, High-Speed Diesel Prices Amid Rising US-Iran Tensions](https://c.ndtvimg.com/2023-02/glne16o8_petrol-fuel-generic_625x300_16_February_23.jpg?im=FeatureCrop,algorithm=dnn,width=773,height=435 \"Pakistan Hikes Petrol, High-Speed Diesel Prices Amid Rising US-Iran Tensions\")",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "## Pakistan has hiked petrol prices by Rs 0.45 to Rs 325.43/litre and diesel by Rs 1.16 to Rs 383.95/litre, effective Friday.",
+     "price": 383.95,
+     "unit": "Rs per litre",
+     "region": "Pakistan",
+     "seller": "Pakistan government",
+     "old_price": 383.95,
+     "new_price": 383.95,
+     "pct_change": null,
+     "effective_date": "2024-05-17",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2024-05-17 is not in 2026-08",
+     "price_type": "retail",
+     "change": 0.0,
+     "base_price": null,
+     "context": "# Pakistan Hikes Petrol, High-Speed Diesel Prices Amid Rising US-Iran Tensions \n # Pakistan Hikes Petrol, High-Speed Diesel Prices Amid Rising US-Iran Tensions \n ![Pakistan Hikes Petrol, High-Speed Diesel Prices Amid Rising US-Iran Tensions](https://c.ndtvimg.com/2023-02/glne16o8_petrol-fuel-generic_625x300_16_February_23.jpg?im=FeatureCrop,algorithm=dnn,width=773,height=435 \"Pakistan Hikes Petrol, High-Speed Diesel Prices Amid Rising US-Iran Tensions\")",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "f5e8b8621076",
+   "page_sha256": "5e41e8d8a18602adcccc0587504420b2a38fa9d40be2d89e0b10ee76cca78371",
+   "page_file": "pages/5e41e8d8a18602adcccc0587504420b2a38fa9d40be2d89e0b10ee76cca78371.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.hindustantimes.com/india-news/petrol-diesel-prices-to-fall-heres-what-the-government-said-in-parliament-govt-response-101786370500631.html",
+   "domain": "hindustantimes.com",
+   "title": "Petrol, diesel prices to fall? Here's what government said | India News",
+   "lang": "en",
+   "published": "2026-08-10",
+   "search_call": "5eb3edea0101",
+   "tavily_published": "2026-08-10",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "f5e8b8621076",
+   "page_sha256": "4dfde0ab71640bb235ac56d35263e09431a933ae9f3772d0d3eadc9afc764aeb",
+   "page_file": "pages/4dfde0ab71640bb235ac56d35263e09431a933ae9f3772d0d3eadc9afc764aeb.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-08-10",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.aljazeera.com/economy/2026/8/23/iran-government-signals-fuel-price-hike-on-eve-of-new-us-sanctions",
+   "domain": "aljazeera.com",
+   "title": "Iran’s government signals fuel price hike on eve of new US sanctions | US-Israel war on Iran | Al Jazeera",
+   "lang": "en",
+   "published": "2026-08-23",
+   "search_call": "5eb3edea0101",
+   "tavily_published": "2026-08-23",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "ac4689fe3910",
+   "page_sha256": "2456b36fafa14b1c03bcaaf8d895bcf4ba508686b8fc6da30495f7db67fe14ef",
+   "page_file": "pages/2456b36fafa14b1c03bcaaf8d895bcf4ba508686b8fc6da30495f7db67fe14ef.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-08-23",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.usnews.com/news/best-states/articles/states-with-the-highest-gas-prices",
+   "domain": "usnews.com",
+   "title": "States With the Highest Gas Prices",
+   "lang": "en",
+   "published": "2026-07-22",
+   "search_call": "5eb3edea0101",
+   "tavily_published": "2026-07-22",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "ac4689fe3910",
+   "page_sha256": "6a32acb120d5dd3e3c81aa48dc4feeaf9959869fd061b4f39b08879a17d746c8",
+   "page_file": "pages/6a32acb120d5dd3e3c81aa48dc4feeaf9959869fd061b4f39b08879a17d746c8.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://newjersey.news12.com/2026/08/12/jcpl-seeks-electric-rate-hike-that-could-raise-bills-by-nearly-9/735KRZ9urJtLgT9BYTo6iP",
+   "domain": "newjersey.news12.com",
+   "title": "News 12 | New Jersey | Jcpl Seeks Electric Rate Hike That Could Raise Bills By Nearly 9",
+   "lang": "hi",
+   "published": "2026-08-12",
+   "search_call": "4ef05e223da1",
+   "tavily_published": "2026-08-12",
+   "status": "rejected",
+   "reason": "the page shows 2026-10-22, after the cutoff 2026-08-29",
+   "claims": [
+    {
+     "line": "Aug 12, 2026, 12:16 PM",
+     "price": null,
+     "unit": null,
+     "region": "India",
+     "seller": "JCP&L",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the page shows 2026-10-22, after the cutoff 2026-08-29",
+     "price_type": "retail",
+     "change": null,
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    }
+   ],
+   "extract_call": "ac4689fe3910",
+   "page_sha256": "19c4f8def56578e3a22e7a7620c410c7cbe106708fcbe987c0921a647f0a525e",
+   "page_file": "pages/19c4f8def56578e3a22e7a7620c410c7cbe106708fcbe987c0921a647f0a525e.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-10-22",
+   "date_flag": "after cutoff"
+  },
+  {
+   "url": "https://abc11.com/post/advocates-bring-heat-hearings-duke-energys-electricity-rate-increase-request-point-companys-5b-profit-2025/19662692",
+   "domain": "abc11.com",
+   "title": "Advocates bring heat to hearings on Duke Energy's electricity rate increase request, point to company's $5B profit in 2025 - ABC11 Raleigh-Durham",
+   "lang": "hi",
+   "published": "2026-08-11",
+   "search_call": "4ef05e223da1",
+   "tavily_published": "2026-08-11",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "ac4689fe3910",
+   "page_sha256": "f3a60c53a59834e06f1173fea0f48948ba72fe56e0d4376fc5d16502df1a97e2",
+   "page_file": "pages/f3a60c53a59834e06f1173fea0f48948ba72fe56e0d4376fc5d16502df1a97e2.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.cbsnews.com/colorado/news/colorado-regulators-xcel-energy-rate-increase-electric-bills",
+   "domain": "cbsnews.com",
+   "title": "Colorado regulators approve Xcel Energy rate increase, raising monthly electric bills - CBS Colorado",
+   "lang": "hi",
+   "published": "2026-08-20",
+   "search_call": "4ef05e223da1",
+   "tavily_published": "2026-08-20",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "ac4689fe3910",
+   "page_sha256": "74dd8c656d58e63474a519d38bf3f166b145d6b3699fd878ea116d643aa8964c",
+   "page_file": "pages/74dd8c656d58e63474a519d38bf3f166b145d6b3699fd878ea116d643aa8964c.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-08-20",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.opb.org/article/2026/07/25/pacific-power-seeking-rate-increase",
+   "domain": "opb.org",
+   "title": "Oregonians can comment on a proposed Pacific Power rate increase - OPB",
+   "lang": "hi",
+   "published": "2026-07-25",
+   "search_call": "4ef05e223da1",
+   "tavily_published": "2026-07-25",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "abdd5eddd2e6",
+   "page_sha256": "122d004b90c5156343b78399d8a3bbc5c152c2f4c5c2b08f8384017bc3ac938e",
+   "page_file": "pages/122d004b90c5156343b78399d8a3bbc5c152c2f4c5c2b08f8384017bc3ac938e.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-07-25",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.sctimes.com/story/news/local/minnesota/2026/08/24/mn-leaders-fight-xcel-rate-hike-after-increase-in-return-on-equity/91438220007",
+   "domain": "sctimes.com",
+   "title": "MN leaders fight Xcel rate hike after increase in return on equity",
+   "lang": "hi",
+   "published": "2026-08-24",
+   "search_call": "4ef05e223da1",
+   "tavily_published": "2026-08-24",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.amarujala.com/technology/tech-diary/mobile-recharge-silent-price-hike-airtel-jio-new-tariff-plans-october-december-2026-08-20",
+   "domain": "amarujala.com",
+   "title": "Recharge Plans: गुपचुप तरीके से 16% तक महंगे हुए मोबाइल रिचार्ज, अक्टूबर-दिसंबर में फिर बढ़ेंगे दाम?",
+   "lang": "hi",
+   "published": "2026-08-20",
+   "search_call": "25852fede659",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "Nano could not read this result (model returned no JSON object)",
+   "claims": []
+  },
+  {
+   "url": "https://www.jagran.com/business/biz-vi-chairman-hints-at-tariff-hike-jio-airtel-may-follow-in-next-3-4-month-40331405.html",
+   "domain": "jagran.com",
+   "title": "Jio, Airtel और Vi बढ़ा सकती हैं रिचार्ज प्लान्स के दाम, 12-15% तक होगा इजाफा! कब से चुकाना होगा ज्यादा पैसा?",
+   "lang": "hi",
+   "published": null,
+   "search_call": "25852fede659",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.facebook.com/zeebusinessonline/videos/mobile-recharge-price-hike-%E0%A4%AE%E0%A4%B9%E0%A4%82%E0%A4%97%E0%A4%BE-%E0%A4%B9%E0%A5%8B%E0%A4%A8%E0%A5%87-%E0%A4%B5%E0%A4%BE%E0%A4%B2%E0%A4%BE-%E0%A4%B9%E0%A5%88-%E0%A4%AE%E0%A5%8B%E0%A4%AC%E0%A4%BE%E0%A4%87%E0%A4%B2-%E0%A4%B0%E0%A4%BF%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%9C%E0%A4%85%E0%A4%97%E0%A4%B0-%E0%A4%86%E0%A4%AA-%E0%A4%B9%E0%A4%B0-%E0%A4%AE%E0%A4%B9%E0%A5%80%E0%A4%A8%E0%A5%87-%E0%A4%AE%E0%A5%8B%E0%A4%AC%E0%A4%BE/1539590757908550",
+   "domain": "facebook.com",
+   "title": "Mobile Recharge Price Hike: महंगा होने वाला है मोबाइल रिचार्ज! अगर आप हर महीने मोबाइल रिचार्ज कराते हैं, तो आपके लिए एक बड़ी खबर है. एयरटेल और वोडाफोन-आइडिया और जियो के रिचार्ज फिर महंगे हो सकते",
+   "lang": "hi",
+   "published": null,
+   "search_call": "25852fede659",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://navbharattimes.indiatimes.com/video/tech/mobile-recharge-price-hike-ahead-why-telecom-companies-could-increase-tariff-rates-soon/videoshow/133456482.cms",
+   "domain": "navbharattimes.indiatimes.com",
+   "title": "Mobile Recharge Price Hike: फिर बढ़ सकते हैं मोबाइल रीचार्ज के दाम! जानें जेब पर कितना पड़ेगा असर",
+   "lang": "hi",
+   "published": null,
+   "search_call": "25852fede659",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://hindi.news18.com/news/tech/telecom-airtel-recharge-price-hike-rs-299-plan-discontinued-cti-makes-major-demands-to-government-10744623.html",
+   "domain": "hindi.news18.com",
+   "title": "Airtel Recharge Hike: एयरटेल ने यूजर्स पर बढ़ाया बोझ, बंद किए सस्ते प्लान, CTI ने सरकार से की कार्रवाई की म...",
+   "lang": "hi",
+   "published": null,
+   "search_call": "25852fede659",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://ndtv.in/business-news/petrol-diesel-prices-hike-by-14-rupees-fuel-price-inflation-in-pakistan-24-july-2026-11811152",
+   "domain": "ndtv.in",
+   "title": "पेट्रोल-डीजल के दाम फिर बढ़ गए, 14 रुपये तक महंगा हो गया तेल, यहां जान लीजिए पाकिस्‍तान का हाल | Petrol Diesel Prices Hike by 14 Rupees Fuel Price Inflation in Pakistan 24 July 2026 - NDTV India",
+   "lang": "hi",
+   "published": "2026-07-23",
+   "search_call": "3795e9653169",
+   "tavily_published": "2026-07-23",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "abdd5eddd2e6",
+   "page_sha256": "6bff05eb257062194c3802285b04e2f9fb2a0e9bffd662e930677822b2cdfd7f",
+   "page_file": "pages/6bff05eb257062194c3802285b04e2f9fb2a0e9bffd662e930677822b2cdfd7f.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-07-24",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://qazinform.com/news/china-announces-fuel-price-increase-13b674",
+   "domain": "qazinform.com",
+   "title": "China announces fuel price increase",
+   "lang": "hi",
+   "published": "2026-08-01",
+   "search_call": "3795e9653169",
+   "tavily_published": "2026-08-01",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "abdd5eddd2e6",
+   "page_sha256": "e718a732f9fe0854b9125fe3d727646480d8a65cb38cfb694357828926858304",
+   "page_file": "pages/e718a732f9fe0854b9125fe3d727646480d8a65cb38cfb694357828926858304.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://auto.hindustantimes.com/auto/news/premium-petrol-to-remain-ethanol-free-no-plans-to-restore-e0-or-e10-petrol-govt-41784867470860.html",
+   "domain": "auto.hindustantimes.com",
+   "title": "Premium petrol to remain ethanol-free; no plans to restore E0 or E10 petrol: Govt | HT Auto",
+   "lang": "hi",
+   "published": "2026-07-24",
+   "search_call": "3795e9653169",
+   "tavily_published": "2026-07-24",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "abdd5eddd2e6",
+   "page_sha256": "32446679b4198fb063973e5e4063d61ec242d9988d1a1adc3c0ca53a492f56a6",
+   "page_file": "pages/32446679b4198fb063973e5e4063d61ec242d9988d1a1adc3c0ca53a492f56a6.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-07-24",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.hindustantimes.com/india-news/sugar-surprise-how-india-went-from-surplus-to-shortage-101787620332890.html",
+   "domain": "hindustantimes.com",
+   "title": "A not-so-sweet surprise: How India went from a year of possible sugar glut to shortage & high prices ahead of festivals | HT Explainers",
+   "lang": "hi",
+   "published": "2026-08-25",
+   "search_call": "3795e9653169",
+   "tavily_published": "2026-08-25",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "abdd5eddd2e6",
+   "page_sha256": "7b191f2f4742977903f24082136044fb014f6ecc66526dd0ec96583cbe1035a0",
+   "page_file": "pages/7b191f2f4742977903f24082136044fb014f6ecc66526dd0ec96583cbe1035a0.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-08-25",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.bhaskar.com/g/local/mp/bhopal/news/madhya-pradesh-bus-fare-hike-notification-travel-cost-update-138639632.html",
+   "domain": "bhaskar.com",
+   "title": "MP सरकार ने बढ़ाया बस किराया, 55-60% तक महंगा: एसोसिएशन बोला- ₹400 की जगह 600-700 तक देना पड़ेगा; 2 रुपए/कि...",
+   "lang": "hi",
+   "published": null,
+   "search_call": "494acbc3d4ac",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.expressnews.com/news/article/via-board-fare-increase-22394295.php",
+   "domain": "expressnews.com",
+   "title": "VIA board mulls fare increase as costs escalate for rapid lines",
+   "lang": "hi",
+   "published": "2026-08-19",
+   "search_call": "494acbc3d4ac",
+   "tavily_published": "2026-08-19",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "28926d17da24",
+   "page_sha256": "52f2440c5cd7bc828eeb41e52e5e81006c3eb3ed81e85485d5b75567c04762e2",
+   "page_file": "pages/52f2440c5cd7bc828eeb41e52e5e81006c3eb3ed81e85485d5b75567c04762e2.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.jagran.com/madhya-pradesh/bhopal-mp-bus-fare-hike-2025-increase-expected-soon-40328567.html",
+   "domain": "jagran.com",
+   "title": "MP में बस सफर होगा महंगा! 25% तक बढ़ सकता है किराया, डेढ़ से पौने दो रुपये प्रति किमी तक हो सकती हैं दरें",
+   "lang": "hi",
+   "published": null,
+   "search_call": "494acbc3d4ac",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.cascadiadaily.com/2026/aug/14/whatcom-bus-fares-increase-sept-1-what-to-know",
+   "domain": "cascadiadaily.com",
+   "title": "Whatcom bus fares increase Sept. 1. What to know",
+   "lang": "hi",
+   "published": null,
+   "search_call": "494acbc3d4ac",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.nydailynews.com/2026/08/03/mayor-mamdani-pushes-back-on-mta-chief-claim-free-bus-rhetoric-tied-to-increase-in-fare-evasion",
+   "domain": "nydailynews.com",
+   "title": "Mayor Mamdani pushes back on MTA chief claim 'free bus' rhetoric tied to increase in fare evasion",
+   "lang": "hi",
+   "published": "2026-08-03",
+   "search_call": "494acbc3d4ac",
+   "tavily_published": null,
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.sltrib.com/news/2026/08/19/utah-transit-authority-proposes",
+   "domain": "sltrib.com",
+   "title": "Utah Transit Authority proposes fare hike for buses, trains",
+   "lang": "en",
+   "published": "2026-08-19",
+   "search_call": "cae201c3c39b",
+   "tavily_published": "2026-08-19",
+   "status": "rejected",
+   "reason": "page edited after its date: it shows 2026-08-27, 8 days after Tavily's published date 2026-08-19",
+   "claims": [
+    {
+     "line": "Utah Transit Authority proposes fare hike for buses, trains",
+     "price": 3.0,
+     "unit": "USD",
+     "region": "India",
+     "seller": "Utah Transit Authority",
+     "old_price": 2.5,
+     "new_price": 3.0,
+     "pct_change": 20.0,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "page edited after its date: it shows 2026-08-27, 8 days after Tavily's published date 2026-08-19",
+     "price_type": "retail",
+     "change": 0.19999999999999996,
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "28926d17da24",
+   "page_sha256": "6a9ab1b3179c7590fc43277a46d28969373dff17cb755892546dd4e18f8019f4",
+   "page_file": "pages/6a9ab1b3179c7590fc43277a46d28969373dff17cb755892546dd4e18f8019f4.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-08-27",
+   "date_flag": "edited after its date"
+  },
+  {
+   "url": "https://www.denverpost.com/2026/07/29/rtd-service-cuts-fare-increase-denver",
+   "domain": "denverpost.com",
+   "title": "RTD moves ahead with $20 million in service cuts, rejects fare hikes",
+   "lang": "en",
+   "published": "2026-07-29",
+   "search_call": "cae201c3c39b",
+   "tavily_published": "2026-07-29",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "28926d17da24",
+   "page_sha256": "5794f7ef5e3fb9f424bbb00f5286b0acbff17cca963cddc5d5967b091678d709",
+   "page_file": "pages/5794f7ef5e3fb9f424bbb00f5286b0acbff17cca963cddc5d5967b091678d709.txt",
+   "found": "2026-10-22",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.cbsnews.com/newyork/news/mta-2027-subway-fare-toll-hike",
+   "domain": "cbsnews.com",
+   "title": "NYC subway fares, tolls could go up again in 2027 under MTA's new preliminary financial plan - CBS New York",
+   "lang": "en",
+   "published": "2026-07-29",
+   "search_call": "cae201c3c39b",
+   "tavily_published": "2026-07-29",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "28926d17da24",
+   "page_sha256": "8b7e31ce4228556c064e5af38f3466c9e4eab909f159cb3f0a5f55df3d65e91b",
+   "page_file": "pages/8b7e31ce4228556c064e5af38f3466c9e4eab909f159cb3f0a5f55df3d65e91b.txt",
+   "found": "2026-10-22",
+   "printed_date": "2026-07-29",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.njspotlightnews.org/2026/07/nj-transit-approves-biggest-budget-ever-with-3-higher-fares",
+   "domain": "njspotlightnews.org",
+   "title": "NJ Transit approves biggest budget ever, with 3% higher fares",
+   "lang": "en",
+   "published": "2026-07-24",
+   "search_call": "cae201c3c39b",
+   "tavily_published": "2026-07-24",
+   "status": "rejected",
+   "reason": "Nano could not read this result (model returned no JSON object)",
+   "claims": []
+  }
+ ],
+ "skipped": [],
+ "complete": true,
+ "calls": [
+  {
+   "endpoint": "/search",
+   "call_id": "588c4fbc59c8",
+   "sent": {
+    "query": "electricity price hike news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "reuters.com",
+     "timesofindia.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.09,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "530ee24864d3",
+   "sent": {
+    "query": "mobile tariff increase news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "bbc.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.49,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "5eb3edea0101",
+   "sent": {
+    "query": "petrol price hike news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "bloomberg.com",
+     "hindustantimes.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.73,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "4ef05e223da1",
+   "sent": {
+    "query": "बिजली दर वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "zeenews.com",
+     "timesofindia.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.15,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "25852fede659",
+   "sent": {
+    "query": "मोबाइल टैरिफ वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "outlookindia.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.12,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "3795e9653169",
+   "sent": {
+    "query": "पेट्रोल मूल्य वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "hindustantimes.com",
+     "dainikbhaskar.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 4.23,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "494acbc3d4ac",
+   "sent": {
+    "query": "बस किराया वृद्धि समाचार",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "zeenews.com",
+     "outlookindia.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.78,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "cae201c3c39b",
+   "sent": {
+    "query": "rail fare revision news",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 5,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29",
+    "include_domains": [
+     "reuters.com",
+     "bbc.com"
+    ],
+    "include_domains_mode": "prefer"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 4.02,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "d896554634a1",
+   "sent": {
+    "urls": [
+     "https://www.nhpr.org/nh-news/2026-07-24/nh-news-electricity-price-hike-explainer-boston-womens-baseball-newhampshire",
+     "https://www.axios.com/local/seattle/2026/08/26/seattle-electric-bills-city-light-pse-rate-hikes",
+     "https://www.cpr.org/2026/08/20/xcel-energy-electric-bill-increase-august",
+     "https://www.bhaskarenglish.in/originals/news/mobile-recharge-price-hike-airtel-jio-plans-costly-2026-138774629.html",
+     "https://www.yahoo.com/news/politics/articles/price-lock-price-shock-t-110500006.html"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "f5e8b8621076",
+   "sent": {
+    "urls": [
+     "https://economictimes.indiatimes.com/industry/telecom/telecom-news/airtels-prepaid-plan-restructuring-subscribers-face-16-price-hike-on-rs-299-plan-as-operator-withdraws-four-options/articleshow/133184309.cms",
+     "https://economictimes.indiatimes.com/industry/telecom/telecom-news/jio-to-relaunch-prime-membership-with-1-year-price-guarantee-after-airtel-plan-changes/articleshow/133301796.cms",
+     "https://www.abc.net.au/news/2026-08-02/fuel-excise-cut-ending/106987482",
+     "https://www.ndtv.com/world-news/pakistan-hikes-petrol-high-speed-diesel-prices-amid-rising-us-iran-tensions-11907859",
+     "https://www.hindustantimes.com/india-news/petrol-diesel-prices-to-fall-heres-what-the-government-said-in-parliament-govt-response-101786370500631.html"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.04,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "ac4689fe3910",
+   "sent": {
+    "urls": [
+     "https://www.aljazeera.com/economy/2026/8/23/iran-government-signals-fuel-price-hike-on-eve-of-new-us-sanctions",
+     "https://www.usnews.com/news/best-states/articles/states-with-the-highest-gas-prices",
+     "https://newjersey.news12.com/2026/08/12/jcpl-seeks-electric-rate-hike-that-could-raise-bills-by-nearly-9/735KRZ9urJtLgT9BYTo6iP",
+     "https://abc11.com/post/advocates-bring-heat-hearings-duke-energys-electricity-rate-increase-request-point-companys-5b-profit-2025/19662692",
+     "https://www.cbsnews.com/colorado/news/colorado-regulators-xcel-energy-rate-increase-electric-bills"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "abdd5eddd2e6",
+   "sent": {
+    "urls": [
+     "https://www.opb.org/article/2026/07/25/pacific-power-seeking-rate-increase",
+     "https://ndtv.in/business-news/petrol-diesel-prices-hike-by-14-rupees-fuel-price-inflation-in-pakistan-24-july-2026-11811152",
+     "https://qazinform.com/news/china-announces-fuel-price-increase-13b674",
+     "https://auto.hindustantimes.com/auto/news/premium-petrol-to-remain-ethanol-free-no-plans-to-restore-e0-or-e10-petrol-govt-41784867470860.html",
+     "https://www.hindustantimes.com/india-news/sugar-surprise-how-india-went-from-surplus-to-shortage-101787620332890.html"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "28926d17da24",
+   "sent": {
+    "urls": [
+     "https://www.expressnews.com/news/article/via-board-fare-increase-22394295.php",
+     "https://www.sltrib.com/news/2026/08/19/utah-transit-authority-proposes",
+     "https://www.denverpost.com/2026/07/29/rtd-service-cuts-fare-increase-denver",
+     "https://www.cbsnews.com/newyork/news/mta-2027-subway-fare-toll-hike"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 4
+  }
+ ],
+ "finished_utc": "2026-10-22T09:46:53.066575+00:00"
+}

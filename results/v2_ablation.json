@@ -1,0 +1,271 @@
+{
+ "computed_utc": "2026-10-22T11:26:36.823399+00:00",
+ "label": "DEVELOPMENT data (Amendment E)",
+ "matcher": "v2/recall.py at db2984c, unchanged",
+ "arms": {
+  "A": {
+   "writer": "code (fixed templates)",
+   "languages": [
+    "en",
+    "hi",
+    "mr",
+    "ta",
+    "te",
+    "kn",
+    "bn"
+   ],
+   "recall": 6,
+   "total": 29,
+   "found": [
+    "M2",
+    "M3",
+    "M10",
+    "L1",
+    "E1",
+    "E4"
+   ],
+   "verified_events": 16,
+   "moving_events": 8,
+   "false_events_upper_bound": 6,
+   "false_events": [
+    [
+     "bus",
+     "2026-01-04",
+     []
+    ],
+    [
+     "diesel",
+     "2026-01-01",
+     []
+    ],
+    [
+     "diesel",
+     "2026-05-29",
+     [
+      "maharashtra",
+      "nct of delhi"
+     ]
+    ],
+    [
+     "bus",
+     "2026-07-17",
+     [
+      "maharashtra"
+     ]
+    ],
+    [
+     "bus",
+     "2026-07-18",
+     [
+      "maharashtra"
+     ]
+    ],
+    [
+     "diesel",
+     "2026-08-14",
+     []
+    ]
+   ],
+   "credits": 205,
+   "new_credits": 0,
+   "credits_per_verified_event": 12.8125,
+   "median_latency_s": 3.12,
+   "searches": 117,
+   "extracts": 96,
+   "corrections": 0,
+   "written_by": {},
+   "incomplete_months": [],
+   "diagnostics": {
+    "duplicate_results": 2,
+    "duplicate_verified_claims": 11,
+    "params_corrected_by_code": 0,
+    "searches_dropped_by_code": 0,
+    "plan_retries_super": 0,
+    "super_rereads": 282,
+    "plan_abstentions": 0,
+    "reader_abstentions": 173,
+    "pages_read": 674,
+    "auto_parameters_returned": 0
+   }
+  },
+  "B": {
+   "writer": "Nemotron",
+   "languages": [
+    "en",
+    "hi"
+   ],
+   "recall": 2,
+   "total": 29,
+   "found": [
+    "L2",
+    "T2"
+   ],
+   "verified_events": 9,
+   "moving_events": 3,
+   "false_events_upper_bound": 2,
+   "false_events": [
+    [
+     "bus",
+     "2026-03-02",
+     []
+    ],
+    [
+     "rail",
+     "2026-09-01",
+     [
+      "maharashtra"
+     ]
+    ]
+   ],
+   "credits": 117,
+   "new_credits": 117,
+   "credits_per_verified_event": 13.0,
+   "median_latency_s": 3.12,
+   "searches": 72,
+   "extracts": 50,
+   "corrections": 0,
+   "written_by": {
+    "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": 72
+   },
+   "incomplete_months": [],
+   "diagnostics": {
+    "duplicate_results": 15,
+    "duplicate_verified_claims": 1,
+    "params_corrected_by_code": 0,
+    "searches_dropped_by_code": 0,
+    "plan_retries_super": 0,
+    "super_rereads": 180,
+    "plan_abstentions": 0,
+    "reader_abstentions": 33,
+    "pages_read": 281,
+    "auto_parameters_returned": 0,
+    "structured_fields": {
+     "searches_checked": 72,
+     "with_dates_as_fields": 72,
+     "with_topic_field": 72,
+     "with_domains_as_fields": 72,
+     "hindi_with_language_field": 38,
+     "parameter_names_inside_query_text": 0
+    }
+   }
+  },
+  "C": {
+   "writer": "Nemotron",
+   "languages": [
+    "en",
+    "hi",
+    "mr",
+    "ta",
+    "te",
+    "kn",
+    "bn"
+   ],
+   "recall": 2,
+   "total": 29,
+   "found": [
+    "M3",
+    "L2"
+   ],
+   "verified_events": 8,
+   "moving_events": 1,
+   "false_events_upper_bound": 1,
+   "false_events": [
+    [
+     "rail",
+     "2026-01-04",
+     []
+    ]
+   ],
+   "credits": 184,
+   "new_credits": 169,
+   "credits_per_verified_event": 23.0,
+   "median_latency_s": 3.15,
+   "searches": 117,
+   "extracts": 73,
+   "corrections": 0,
+   "written_by": {
+    "nvidia/nemotron-3-super-120b-a12b": 78,
+    "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": 39
+   },
+   "incomplete_months": [],
+   "diagnostics": {
+    "duplicate_results": 31,
+    "duplicate_verified_claims": 3,
+    "params_corrected_by_code": 0,
+    "searches_dropped_by_code": 0,
+    "plan_retries_super": 6,
+    "super_rereads": 267,
+    "plan_abstentions": 1,
+    "reader_abstentions": 200,
+    "pages_read": 582,
+    "auto_parameters_returned": 0,
+    "structured_fields": {
+     "searches_checked": 117,
+     "with_dates_as_fields": 117,
+     "with_topic_field": 117,
+     "with_domains_as_fields": 117,
+     "hindi_with_language_field": 29,
+     "parameter_names_inside_query_text": 0
+    }
+   }
+  },
+  "T": {
+   "writer": "Tavily auto_parameters (B's query texts)",
+   "languages": [
+    "en",
+    "hi"
+   ],
+   "recall": 0,
+   "total": 29,
+   "found": [],
+   "verified_events": 0,
+   "moving_events": 0,
+   "false_events_upper_bound": 0,
+   "false_events": [],
+   "credits": 121,
+   "new_credits": 121,
+   "credits_per_verified_event": null,
+   "median_latency_s": 6.305,
+   "searches": 72,
+   "extracts": 0,
+   "corrections": 0,
+   "written_by": {},
+   "incomplete_months": [],
+   "diagnostics": {
+    "duplicate_results": 25,
+    "duplicate_verified_claims": 0,
+    "params_corrected_by_code": 0,
+    "searches_dropped_by_code": 0,
+    "plan_retries_super": 0,
+    "super_rereads": 0,
+    "plan_abstentions": 0,
+    "reader_abstentions": 0,
+    "pages_read": 0,
+    "auto_parameters_returned": 72,
+    "structured_fields": {
+     "searches_checked": 72,
+     "with_dates_as_fields": 0,
+     "with_topic_field": 0,
+     "with_domains_as_fields": 0,
+     "hindi_with_language_field": 0,
+     "parameter_names_inside_query_text": 0
+    }
+   }
+  }
+ },
+ "equivalence": {
+  "margin": 1,
+  "best_recall": 6,
+  "top_group": [
+   "A"
+  ],
+  "ranking": [
+   "A"
+  ],
+  "lower_recall": [
+   "B",
+   "C",
+   "T"
+  ]
+ }
+}
