@@ -132,3 +132,48 @@ The matcher is `v2/recall.py` (`matches`, `score`), tested in `tests/test_v2_rec
 
 Each reference change counts once; one claim may match more than one reference change. Recall is computed once.
 A matcher bug found afterwards is fixed only as a logged bug fix, with recall reported before and after.
+
+## Amendment D, before scoring (issue 14)
+
+**Written 2026-10-22T08:12:03Z (UTC), before any v2 score.** Decided by the owner. The issue 4 recall run (Amendment C
+queries, cap 150) was still running; no v2 prediction had been compared with an official figure.
+
+1. **Range.** v2's 80% range is the prediction ± **0.284** percentage points: v1's live-month half-width from
+   Amendment 2 (`docs/after_scoring_changes.md`). No range is fitted on v2's own Jan–Sep misses.
+2. **Poll.** The economists' poll is compared on v1's 6 poll months, **unfiltered**. The PRD's rule "the poll
+   baseline uses only polls published before the same cutoff" is removed: polls are published about 10 days after
+   our 29th cutoff, so the poll uses more information than v2 and is the tougher benchmark. Keeping it unfiltered
+   cannot flatter v2.
+3. **Targets.**
+   - **Pass rule** (unchanged): v2 passes if its mean absolute miss over Jan–Sep 2026 is below both "repeat last
+     month" (B1) and "trend only" (B2 = v1 model (a)).
+   - **"v2 better than v1"** only if v2's mean absolute miss is lower than v1's (0.194 pp, after Amendment 3)
+     **and** v2 finds more than 9 of the 29 known changes directly (Amendment C matcher).
+   - **Reported only, no target:** actual inside the 80% range, basket share measured, lift from web evidence (the
+     needle with the government spine only vs with all evidence), and quotes rejected for a page date after the
+     cutoff.
+4. **Basket measured.** v2's definition: a spine or official-series item counts with its full CPI weight; an
+   announced change counts with its item's weight times the share it moves (its state's share, or 1 if national).
+   v1 is recomputed under the same definition for the comparison: a recalculation of a reported measure, not a
+   re-score.
+5. **Page date from the page itself.** Besides the date from the page address or Tavily's published date, the
+   verifier reads the date **printed on the fetched page**: dates next to words such as published, updated, posted,
+   प्रकाशित, अपडेट, or followed by a clock time; the latest such date is the printed date. A quote is rejected if the
+   printed date is **after the cutoff**, or if it is **more than 2 days later than Tavily's published date** (flagged
+   as "page edited after its date"). A page with no printed date is not rejected for that reason. Both rejections are
+   counted for the audit view, and a verifier test covers a page edited after its date.
+6. **Price type (display only).** Each ledger record stores `price_type`: household **retail**, **wholesale** or
+   **commercial**. Wholesale and commercial prices that pass every other check are kept as visible **context**
+   cards; they never enter the number.
+
+**Issue 14 procedure.** For each month Jan–Sep 2026, cutoff the 29th (February: the 28th):
+- the government spine items (Amendment A rule 1), and the official series cut at the cutoff (v1's code);
+- announced price changes from the Amendment C query set, verified under Amendments A–D (reusing the cache from the
+  issue 4 run, completing any month it did not reach), one event per item × place × month;
+- the needle (`v2.needle`), range ± 0.284, direction scored with v1's pre-registered rule against B1.
+Scored once; `results/v2_score_lock.json` refuses a second run; credit cap 250 (`v2-issue14`).
+
+**Deviations from the PRD (logged).** Amendment B uses Nemotron Super, which the PRD does not list (it lists Nano for
+reading and Ultra for refereeing). The verifier fetches the **full page** with Tavily Extract instead of the PRD's
+"focused query per item, a few chunks", because checking the exact cited line needs the whole page. Board issues
+5 (official-site Map and Crawl), 6 (Research sweep) and 7 (Ultra referee) are cut before scoring.
