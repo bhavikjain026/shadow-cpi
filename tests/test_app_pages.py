@@ -9,7 +9,7 @@ pytest.importorskip("streamlit")
 from streamlit.testing.v1 import AppTest  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ["home", "evidence", "replay", "tavily_trace", "flight_recorder", "archive", "brief"]
+PAGES = ["home", "evidence", "replay", "live_build", "tavily_trace", "flight_recorder", "archive", "brief"]
 LOCK = json.loads((ROOT / "results" / "score_lock.json").read_text())
 AUDIT = json.loads((ROOT / "results" / "app" / "audit_summary.json").read_text())
 
@@ -17,6 +17,7 @@ AUDIT = json.loads((ROOT / "results" / "app" / "audit_summary.json").read_text()
 @pytest.fixture(autouse=True)
 def no_keys(monkeypatch):
     monkeypatch.chdir(ROOT)
+    monkeypatch.setenv("SHADOW_CPI_NO_ANIMATION", "1")
     for k in ("SCPI_TAVILY_API_KEY", "SCPI_NEBIUS_API_KEY", "SHADOW_CPI_DATA_DIR", "RUN_LIVE_ENABLED"):
         monkeypatch.delenv(k, raising=False)
 
@@ -265,3 +266,14 @@ def test_flight_recorder_labels_credits_against_billing():
     at = load("flight_recorder")
     billed = account_spent(load_budget(), read_ledger())
     assert any(f"by Tavily's per-call counts (billing shows {billed:,})" in c.value for c in at.caption)
+
+
+def test_live_build_streams_cards_and_moves_the_needle():
+    run = json.loads(sorted((ROOT / "v2" / "evidence").glob("run_*.json"))[-1].read_text(encoding="utf-8"))
+    at = load("live_build")
+    nd = run["needle"]
+    assert [m.value for m in at.metric] == [f"{nd['after']:.3f}%"]
+    text = all_text(at)
+    assert f"{nd['n_verified']} verified** of {len(run['cards'])} proposed pages" in text
+    assert f"from {nd['before']:.3f}% to {nd['after']:.3f}%" in text
+    assert "not a forecast" in text

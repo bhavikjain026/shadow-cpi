@@ -1,0 +1,457 @@
+{
+ "month": "2026-04",
+ "item": "milk",
+ "cpi_item": "01.1.4.1.1.01",
+ "cpi_name": "Milk: liquid",
+ "state": "madhya pradesh",
+ "cutoff": "2026-04-29",
+ "window": [
+  "2026-03-22",
+  "2026-04-29"
+ ],
+ "queries": [
+  [
+   "en",
+   "milk price hike per litre Madhya Pradesh"
+  ],
+  [
+   "hi",
+   "मध्य प्रदेश दूध के दाम बढ़े प्रति लीटर"
+  ]
+ ],
+ "model_read": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+ "built_utc": "2026-10-22T03:26:19.609643+00:00",
+ "cards": [
+  {
+   "url": "https://m.economictimes.com/news/india/not-just-lpg-petrol-diesel-mp-hikes-milk-prices-by-rs-24-per-litre/articleshow/129949645.cms",
+   "domain": "m.economictimes.com",
+   "title": "Not just LPG, petrol, diesel: MP hikes milk prices by Rs 2–4 per litre - The Economic Times",
+   "lang": "en",
+   "published": "2026-04-25",
+   "search_call": "a76b5ba8c0fb",
+   "status": "rejected",
+   "reason": "Nano gave no price for this line",
+   "claims": [
+    {
+     "line": "Milk prices have increased by Rs 2 to Rs 4 per litre in several Madhya Pradesh cities, including Indore, Ujjain, Bhopal, and Jabalpur, starting April 1. This hike is attributed to summer fodder shortages, rising animal feed costs amid hike in premium fuel and commercial LPG prices. Despite these price adjustments, the government assures stable fuel supplies across the nation.",
+     "price": null,
+     "unit": "Rs per litre",
+     "region": "Madhya Pradesh",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-04-01",
+     "status": "rejected",
+     "reason": "Nano gave no price for this line",
+     "change": null,
+     "base_price": null
+    }
+   ],
+   "extract_call": "02914455c72a",
+   "page_sha256": "f0234a8cd0966b6afeba2f00de0dac90b6a8d4a299eb7f32749d526f257241ca",
+   "page_file": "pages/f0234a8cd0966b6afeba2f00de0dac90b6a8d4a299eb7f32749d526f257241ca.txt"
+  },
+  {
+   "url": "https://dairynews.today/news/vijaya-dairy-and-sangam-dairy-raise-milk-prices-amid-cost-pressures.html",
+   "domain": "dairynews.today",
+   "title": "Vijaya Dairy and Sangam Dairy Raise Milk Prices Amid Cost Pressures",
+   "lang": "en",
+   "published": "2026-04-03",
+   "search_call": "a76b5ba8c0fb",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "[...] Vijaya Dairy, based in Vijayawada, and Sangam Dairy, headquartered in Guntur, have implemented a ₹2 per litre increase in their retail milk prices, effective fr om April 2026.",
+     "price": 58,
+     "unit": "per litre",
+     "region": "India",
+     "old_price": 56,
+     "new_price": 58,
+     "pct_change": 3.57,
+     "effective_date": null,
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "change": 0.03571428571428581,
+     "base_price": null
+    },
+    {
+     "line": "[...] Vijaya Dairy, based in Vijayawada, and Sangam Dairy, headquartered in Guntur, have implemented a ₹2 per litre increase in their retail milk prices, effective fr om April 2026.",
+     "price": 58,
+     "unit": "per litre",
+     "region": "India",
+     "old_price": 56,
+     "new_price": 58,
+     "pct_change": 3.57,
+     "effective_date": null,
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "change": 0.03571428571428581,
+     "base_price": null
+    }
+   ],
+   "extract_call": "02914455c72a",
+   "page_sha256": "6ac4f83a452e5d20a557d80f7f819f8ab239dead492a6d767be0f07b2718a520",
+   "page_file": "pages/6ac4f83a452e5d20a557d80f7f819f8ab239dead492a6d767be0f07b2718a520.txt"
+  },
+  {
+   "url": "https://www.bhaskarenglish.in/local/mp/news/milk-price-hike-mp-from-april-1-indore-dhar-137578341.html",
+   "domain": "bhaskarenglish.in",
+   "title": "Milk prices to rise in MP from tomorrow: Rate increases from ₹60 to ₹65 per litre; Sanchi has not increased...",
+   "lang": "en",
+   "published": "2026-04-25",
+   "search_call": "a76b5ba8c0fb",
+   "status": "rejected",
+   "reason": "the cited line is not on the fetched page",
+   "claims": [
+    {
+     "line": "Milk prices to rise in MP from tomorrow: Rate increases from ₹60 to ₹65 per litre; Sanchi has not increased...",
+     "price": 65,
+     "unit": "per litre",
+     "region": "MP",
+     "old_price": 60,
+     "new_price": 65,
+     "pct_change": null,
+     "effective_date": null,
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "change": 0.08333333333333326,
+     "base_price": null
+    }
+   ],
+   "extract_call": "02914455c72a",
+   "page_sha256": "fcacea8e9791afd3fc27a1a30085ee69ea19342704a633e031f106bfc48f5d9c",
+   "page_file": "pages/fcacea8e9791afd3fc27a1a30085ee69ea19342704a633e031f106bfc48f5d9c.txt"
+  },
+  {
+   "url": "https://www.hindustantimes.com/cities/bhopal-news/11k-litres-of-milk-poured-into-narmada-river-after-religious-event-environmentalists-see-red-101775753066724.html",
+   "domain": "hindustantimes.com",
+   "title": "11k litres of milk poured into Narmada river after religious event; environmentalists see red | Hindustan Times",
+   "lang": "en",
+   "published": "2026-04-25",
+   "search_call": "a76b5ba8c0fb",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.ndtv.com/india-news/11-000-litres-of-milk-poured-in-narmada-river-sparks-faith-vs-logic-debate-11334229",
+   "domain": "ndtv.com",
+   "title": "11,000 Litres Of Milk Poured In Narmada River, Sparks Faith vs Logic Debate",
+   "lang": "en",
+   "published": "2026-04-25",
+   "search_call": "a76b5ba8c0fb",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://eng.ruralvoice.in/national/nova-to-invest-rs-300-million-to-expand-malanpur-plant-capacity.html",
+   "domain": "eng.ruralvoice.in",
+   "title": "Nova to invest Rs 300 million to expand Malanpur plant capacity",
+   "lang": "en",
+   "published": "2026-04-25",
+   "search_call": "a76b5ba8c0fb",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://indianexpress.com/article/cities/kolkata/in-his-first-campaign-speech-abhishek-exhorts-tmc-cadre-to-limit-bjp-to-50-seats-10599569",
+   "domain": "indianexpress.com",
+   "title": "In his first campaign speech, Abhishek exhorts TMC cadre to limit BJP to 50 seats",
+   "lang": "en",
+   "published": "2026-04-25",
+   "search_call": "a76b5ba8c0fb",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.livehindustan.com/madhya-pradesh/mp-news-milk-prices-soar-in-madhya-pradesh-rates-rise-by-2-to-4-rupees-per-liter-201775045450170.html",
+   "domain": "livehindustan.com",
+   "title": "मध्य प्रदेश में दूध की कीमतों में उबाल; 2 से 4 रुपये प्रति लीटर तक बढ़े दाम, Madhya-pradesh  Hindi News - Hindustan",
+   "lang": "hi",
+   "published": "2026-04-01",
+   "search_call": "07029d3faecd",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "## 2 से 4 रुपये प्रति लीटर बढ़ गए दाम [...] मध्य प्रदेश दूध विक्रेता संघ के अध्यक्ष भारत मथुरावाला ने बताया कि इंदौर, उज्जैन, धार, देवास, भोपाल और जबलपुर समेत कई जगहों पर खुले दूध के दाम 2 से 4 रुपये प्रति लीटर बढ़ा दिए गए हैं।",
+     "price": 63,
+     "unit": "रुपये प्रति लीटर",
+     "region": "इंदौर, भोपाल, जबलपुर और उज्जैन",
+     "old_price": 60,
+     "new_price": 63,
+     "pct_change": null,
+     "effective_date": null,
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "change": 0.050000000000000044,
+     "base_price": null
+    }
+   ],
+   "extract_call": "02914455c72a",
+   "page_sha256": "08c7cd67cc3ff13b90facb2b22149632ffb69a8ea6b1bf8dd26870d5170716fa",
+   "page_file": "pages/08c7cd67cc3ff13b90facb2b22149632ffb69a8ea6b1bf8dd26870d5170716fa.txt"
+  },
+  {
+   "url": "https://www.jagran.com/business/biz-milk-price-hike-by-rs-4-per-liter-in-madhya-pradesh-due-to-rise-in-animal-feed-40191196.html",
+   "domain": "jagran.com",
+   "title": "पेट्रोल-डीजल और LPG के बाद अब दूध हुआ महंगा, ₹4 प्रति लीटर तक बढ़े दाम; आपके शहर में कितनी हुई कीमत? - milk price hike by rs 4 per liter in madhya pradesh due to rise in animal feed",
+   "lang": "hi",
+   "published": "2026-04-01",
+   "search_call": "07029d3faecd",
+   "status": "rejected",
+   "reason": "Nano gave no price for this line",
+   "claims": [
+    {
+     "line": "मध्य प्रदेश दूध विक्रेता महासंघ के अध्यक्ष भारत मथुरावाला ने बताया कि इंदौर, उज्जैन, धार, देवास, भोपाल, जबलपुर और अन्य स्थानों में खुले दूध के खुदरा दाम में दो से चार रुपये प्रति लीटर तक का इजाफा किया [...] # पेट्रोल-डीजल और LPG के बाद अब दूध हुआ महंगा, ₹4 प्रति लीटर तक बढ़े दाम; आपके शहर में कितनी हुई कीमत?",
+     "price": null,
+     "unit": "rupees per liter",
+     "region": "Madhya Pradesh",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2024-06-12",
+     "status": "rejected",
+     "reason": "Nano gave no price for this line",
+     "change": null,
+     "base_price": null
+    }
+   ],
+   "extract_call": "02914455c72a",
+   "page_sha256": "f915c6586a4846dac537dd357ecdd2d67d903d2973f654fd1352b6a914f87368",
+   "page_file": "pages/f915c6586a4846dac537dd357ecdd2d67d903d2973f654fd1352b6a914f87368.txt"
+  },
+  {
+   "url": "https://www.abplive.com/states/madhya-pradesh/milk-price-increase-two-to-four-rupees-per-liter-in-madhya-pradesh-3109393",
+   "domain": "abplive.com",
+   "title": "इस राज्य में महंगा हुआ दूध, कीमतों में दो से चार रुपये प्रति लीटर का इजाफा | Milk Price increase two to four rupees per liter in Madhya Pradesh",
+   "lang": "hi",
+   "published": "2026-04-01",
+   "search_call": "07029d3faecd",
+   "status": "rejected",
+   "reason": "Nano gave no price for this line",
+   "claims": [
+    {
+     "line": "गर्मियों के मौसम में पशु आहार की बढ़ती कीमतों के कारण मध्यप्रदेश के कई स्थानों में विक्रेताओं ने बुधवार (1 अप्रैल) से दूध के खुदरा दामों में दो से चार रुपये प्रति लीटर का इजाफा कर दिया.",
+     "price": null,
+     "unit": "rupees per liter",
+     "region": "Madhya Pradesh",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-04-01",
+     "status": "rejected",
+     "reason": "Nano gave no price for this line",
+     "change": null,
+     "base_price": null
+    }
+   ],
+   "extract_call": "321ee254a1d1",
+   "page_sha256": "25401d207d0d3f33c777fb757452e29a26aa62df2351461dff072d91f3cd502b",
+   "page_file": "pages/25401d207d0d3f33c777fb757452e29a26aa62df2351461dff072d91f3cd502b.txt"
+  },
+  {
+   "url": "https://navbharattimes.indiatimes.com/state/madhya-pradesh/bhopal/mp-new-financial-year-price-hike-electricity-milk-property-registration-toll/articleshow/129946071.cms",
+   "domain": "navbharattimes.indiatimes.com",
+   "title": "MP News: आम आदमी की जेब पर डबल अटैक, दूध-बिजली और रजिस्ट्री सब महंगा, जानिए 1 अप्रैल से क्या-क्या बदल गया? - mp new financial year price hike electricity milk property registration toll - Navbharat Times",
+   "lang": "hi",
+   "published": "2026-04-01",
+   "search_call": "07029d3faecd",
+   "status": "rejected",
+   "reason": "the cited line is not on the fetched page",
+   "claims": [
+    {
+     "line": "इंदौर में दूध के दाम ₹3 प्रति लीटर बढ़ गए हैं, जिससे अब दूध ₹63 से ₹65 प्रति लीटर मिलेगा। मध्य प्रदेश दुग्ध विक्रेता महासंघ के अनुसार, भोपाल, जबलपुर और उज्जैन में भी ₹2 से ₹4 तक की बढ़ोतरी की जा रही है। वहीं, बिजली की दरों में 4.80% का इजाफा किया गया है, जो तपती गर्मी में उपभोक्ताओं के बिल पर अतिरिक्त भार डालेगा। [...] Subscribe",
+     "price": 65,
+     "unit": "per litre",
+     "region": "Indore, Bhopal, Jabalpur, Ujjain",
+     "old_price": 63,
+     "new_price": 65,
+     "pct_change": 3.17,
+     "effective_date": "2026-04-01",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "change": 0.031746031746031855,
+     "base_price": null
+    },
+    {
+     "line": "इंदौर में दूध के दाम ₹3 प्रति लीटर बढ़ गए हैं, जिससे अब दूध ₹63 से ₹65 प्रति लीटर मिलेगा। मध्य प्रदेश दुग्ध विक्रेता महासंघ के अनुसार, भोपाल, जबलपुर और उज्जैन में भी ₹2 से ₹4 तक की बढ़ोतरी की जा रही है। वहीं, बिजली की दरों में 4.80% का इजाफा किया गया है, जो तपती गर्मी में उपभोक्ताओं के बिल पर अतिरिक्त भार डालेगा। [...] Subscribe",
+     "price": 4.8,
+     "unit": "percentage increase",
+     "region": "Madhya Pradesh",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": 4.8,
+     "effective_date": "2026-04-01",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "change": 0.048,
+     "base_price": null
+    },
+    {
+     "line": "## MP News: 1 अप्रैल 2026 से मध्य प्रदेश और छत्तीसगढ़ में महंगाई का नया दौर शुरू हो गया है। प्रॉपर्टी रजिस्ट्री की दरों में 181% तक की बढ़ोतरी, बिजली के दाम और दूध की कीमतों में इजाफे ने आम आदमी के घर का बजट बिगाड़ दिया है।",
+     "price": 181,
+     "unit": "percentage increase",
+     "region": "Madhya Pradesh",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": 181,
+     "effective_date": "2026-04-01",
+     "status": "rejected",
+     "reason": "not a price per litre",
+     "change": 1.81,
+     "base_price": null
+    }
+   ],
+   "extract_call": "321ee254a1d1",
+   "page_sha256": "8bda90b3cc0344039ab15263224cbc023fdc9c4697f71fd15595c8eea30a2818",
+   "page_file": "pages/8bda90b3cc0344039ab15263224cbc023fdc9c4697f71fd15595c8eea30a2818.txt"
+  },
+  {
+   "url": "https://www.bhaskar.com/g/local/mp/indore/news/milk-price-hike-mp-dhar-indore-63-65-rs-litre-137578040.html",
+   "domain": "bhaskar.com",
+   "title": "Milk Price Hike MP: Dairy to cost Rs 63-65litre in Dhar, Indore",
+   "lang": "hi",
+   "published": "2026-03-31",
+   "search_call": "07029d3faecd",
+   "status": "rejected",
+   "reason": "Nano gave no price for this line",
+   "claims": [
+    {
+     "line": "# प्रदेश में कल से दूध भी महंगा:₹5 लीटर तक बढ़ेंगे दाम, इंदौर में 3, धार में 4 रुपए का इजाफा; सांची ने अभी नहीं बढ़ाए रेट",
+     "price": null,
+     "unit": null,
+     "region": "Indore",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": null,
+     "status": "rejected",
+     "reason": "Nano gave no price for this line",
+     "change": null,
+     "base_price": null
+    }
+   ],
+   "extract_call": "321ee254a1d1",
+   "page_sha256": "8e62fb0c29a2a3a4eee07d46830159be5c0d273187e6740cc57c3a985adb6176",
+   "page_file": "pages/8e62fb0c29a2a3a4eee07d46830159be5c0d273187e6740cc57c3a985adb6176.txt"
+  },
+  {
+   "url": "https://www.amarujala.com/madhya-pradesh/indore/indore-milk-prices-will-increase-by-rs-3-per-litre-in-indore-from-april-1-along-with-a-home-delivery-service-2026-03-31",
+   "domain": "amarujala.com",
+   "title": "Indore:इंदौर में एक अप्रैल से दूध के दाम तीन रुपये प्रति लीटर बढ़ेंगे, घर पहुंचा सेवा शुल्क भी लगेगा - Indore: Milk Prices Will Increase By Rs 3 Per Litre In Indore From April 1, Along With A Home Delivery Service - Amar Ujala Hindi News Live",
+   "lang": "hi",
+   "published": "2026-03-31",
+   "search_call": "07029d3faecd",
+   "status": "verified",
+   "reason": "verified",
+   "claims": [
+    {
+     "line": "## इंदौर में एक अप्रैल से आम जनता की जेब पर दूध की महंगाई का बोझ बढ़ने वाला है। पशु आहार में वृद्धि के कारण दूध विक्रेता संघ ने कीमतों में तीन रुपये प्रति लीटर की बढ़ोतरी का निर्णय लिया है। अब शहर में दूध 60 के बजाय 63 रुपये प्रति लीटर मिलेगा।",
+     "price": 63,
+     "unit": "rupees per litre",
+     "region": "Indore",
+     "old_price": 60,
+     "new_price": 63,
+     "pct_change": 5,
+     "effective_date": "2026-04-01",
+     "status": "verified",
+     "reason": "verified",
+     "change": 0.050000000000000044,
+     "base_price": null
+    }
+   ],
+   "extract_call": "321ee254a1d1",
+   "page_sha256": "1980bc50d41ee74b18ef944f2450058dbbad49d6a0fc90ce5653d22df258b605",
+   "page_file": "pages/1980bc50d41ee74b18ef944f2450058dbbad49d6a0fc90ce5653d22df258b605.txt"
+  },
+  {
+   "url": "https://www.etvbharat.com/hi/state/dhar-milk-prices-hike-by-4-rs-milk-rate-64-rupees-per-liter-madhya-pradesh-news-mps26033002737",
+   "domain": "etvbharat.com",
+   "title": "1 अप्रैल से 4 रुपए महंगा मिलेगा दूध, पेट्रोल-डीजल की किल्लत के बाद महंगाई की मार",
+   "lang": "hi",
+   "published": "2026-03-30",
+   "search_call": "07029d3faecd",
+   "status": "verified",
+   "reason": "verified",
+   "claims": [
+    {
+     "line": "जिसके बाद धार में वर्तमान में ₹60 प्रति लीटर बिक रहा दूध अब ₹64 प्रति लीटर हो जाएगा.",
+     "price": 64,
+     "unit": "rupees per litre",
+     "region": "Dhar",
+     "old_price": 60,
+     "new_price": 64,
+     "pct_change": 6.666666666666667,
+     "effective_date": "2026-04-01",
+     "status": "verified",
+     "reason": "verified",
+     "change": 0.06666666666666665,
+     "base_price": null
+    }
+   ],
+   "extract_call": "321ee254a1d1",
+   "page_sha256": "ce462bda344d1e93ae08043f8d204145ec24f65f20903a7e81e31fdad207849d",
+   "page_file": "pages/ce462bda344d1e93ae08043f8d204145ec24f65f20903a7e81e31fdad207849d.txt"
+  },
+  {
+   "url": "https://hindi.news18.com/news/madhya-pradesh/indore-mp-milk-price-hike-1-april-2026-milk-cost-increased-by-3-rupees-local18-10329420.html",
+   "domain": "hindi.news18.com",
+   "title": "इंदौर में दूध ₹3 महंगा, ग्राहक बोले- ‘महंगा हो या सस्ता, जरूरी है’, दूध के दाम बढ़ने पर मिला ऐसा रिएक्शन",
+   "lang": "hi",
+   "published": "2026-04-01",
+   "search_call": "07029d3faecd",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "1 अप्रैल 2026 से अब प्रति लीटर दूध के लिए 3 रुपए ज्यादा देने होंगे‌.",
+     "price": 63,
+     "unit": "₹ per litre",
+     "region": "इंदौर",
+     "old_price": 60,
+     "new_price": 63,
+     "pct_change": 5,
+     "effective_date": "2026-04-01",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "change": 0.050000000000000044,
+     "base_price": null
+    },
+    {
+     "line": "वह 3 रुपए बढ़ाने के बाद अब 63 रुपए में मिलेगा जबकि डेरी पर जो दूध 63 रुपए में मिलता था.",
+     "price": 65,
+     "unit": "₹ per litre",
+     "region": "इंदौर",
+     "old_price": 63,
+     "new_price": 65,
+     "pct_change": 3.17,
+     "effective_date": "2026-04-01",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "change": 0.031746031746031855,
+     "base_price": null
+    }
+   ],
+   "extract_call": "9da9cf8eb152",
+   "page_sha256": "7d3ff1793f5532f7e7fb2e5a610677d87d4417082308003fe5c287f58eb49627",
+   "page_file": "pages/7d3ff1793f5532f7e7fb2e5a610677d87d4417082308003fe5c287f58eb49627.txt"
+  }
+ ],
+ "needle": {
+  "before": 3.470915789574902,
+  "after": 3.489731364117543,
+  "applied_item_change": 0.0034743303247435895,
+  "change": 0.05833333333333335,
+  "effective_date": "2026-04-01",
+  "share_of_month": 1.0,
+  "n_verified": 2
+ },
+ "trend_only": 3.4547918887046114,
+ "credits_budget": "v2-issue1",
+ "credits_spent": 4
+}

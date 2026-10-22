@@ -601,3 +601,8 @@
 {"time": "2026-10-21T15:51:07.202996+00:00", "call_id": "ffa240ae4a54", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "prompt-t-dairy"]}
 {"time": "2026-10-21T15:51:36.306602+00:00", "call_id": "6405e58bd72f", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t", "prompt-t-dairy"]}
 {"time": "2026-10-22T03:12:16.683770+00:00", "call_id": "reconcile-2026-10-22", "endpoint": "reconcile", "credits": -13, "budgets": ["reconcile"], "note": "Tavily billing page 2026-10-22: 681 plan credits used; ledger + pre-ledger estimate said 694"}
+{"time": "2026-10-22T03:24:58.630135+00:00", "call_id": "607093b4c64f", "endpoint": "/search", "credits": 1, "budgets": ["v2-issue1"]}
+{"time": "2026-10-22T03:25:23.013804+00:00", "call_id": "7632b85bf19b", "endpoint": "/search", "credits": 1, "budgets": ["v2-issue1"]}
+{"time": "2026-10-22T03:25:57.106583+00:00", "call_id": "bcad3876fad3", "endpoint": "/extract", "credits": 1, "budgets": ["v2-issue1"]}
+{"time": "2026-10-22T03:25:58.467085+00:00", "call_id": "2e3573db8b59", "endpoint": "/extract", "credits": 1, "budgets": ["v2-issue1"]}
+{"time": "2026-10-22T03:26:00.074805+00:00", "call_id": "03cf3b0616e7", "endpoint": "/extract", "credits": 0, "budgets": ["v2-issue1"]}

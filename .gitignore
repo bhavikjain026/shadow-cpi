@@ -13,3 +13,6 @@ data/official/doca/raw/.go/
 
 # Streamlit secrets (local only; Streamlit Cloud keeps them in its dashboard)
 .streamlit/secrets.toml
+
+# v2 page texts saved at fetch time (news articles: kept local; the ledger keeps each page's SHA-256)
+v2/evidence/pages/
