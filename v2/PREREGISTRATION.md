@@ -58,3 +58,17 @@ the Flight Recorder, under hard credit caps in `config/budget.json`.
    it gets weight = the city's share of the state's urban population, from a documented source listed in
    `v2/city_shares.json` with its citation; if no such entry exists, the event is shown as context only and moves
    nothing. The same rule applies to the needle on the Live build page.
+
+## Amendment B, before scoring
+
+**Dated 2026-10-22, before any v2 score.** The April tracer and one September basket build had been run; nothing
+had been scored. In September, Nemotron Nano cited a line but returned no number for most announced price changes
+(for example a J&K tariff line stating "6.83%" came back with no % change), so no announced change could be verified.
+
+- **When Nano cites a line but gives no number, the Nemotron Super model (`nvidia/nemotron-3-super-120b-a12b`, the
+  v1 extraction model) re-reads that page:** the page text fetched by Tavily Extract. Its claims replace Nano's
+  number-less claims for that page; Nano's claims that do carry a number are kept as they are.
+- **Code still verifies every claim the same way** (`v2.rules.check`): the page date inside the window, the number
+  in the cited line, the line on the fetched page, the item, retail not wholesale, and Amendment A's source and
+  geography rules. Super, like Nano, only points to a line; it never writes a quote or chooses a number.
+- Each claim records which model read it.
