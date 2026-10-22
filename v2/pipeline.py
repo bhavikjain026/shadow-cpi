@@ -80,30 +80,38 @@ def propose(tav, nem, nano, queries, month, tag, seen, domains=None, max_results
                 raise
             skipped.append({"call": "search", "lang": lang, "query": q, "why": str(e)})
             continue
-        for r in resp.get("results", []):
-            if r["url"] in seen:
-                continue
-            seen.add(r["url"])
-            d, _ = best_date(r)
-            card = {"url": r["url"], "domain": urlparse(r["url"]).netloc.removeprefix("www."),
-                    "title": r.get("title") or "", "lang": lang, "published": d or None, "search_call": sid,
-                    "tavily_published": iso_date(r.get("published_date")) or None,
-                    "status": "rejected", "reason": "", "claims": []}
-            cards.append(card)
-            if not d or d > end or d < start:
-                card["reason"] = ("no publication date" if not d else
-                                  f"published {d}, after the cutoff {end}" if d > end else
-                                  f"published {d}, before the window ({start})")
-                continue
-            try:
-                evs, _ = nem.price_events(nano, f"{r.get('title') or ''}\n{r.get('content') or ''}",
-                                          tag=f"{tag} nano read", parent=sid)
-            except ValueError as e:                        # the model's reply had no usable JSON: reject, go on
-                card["reason"] = f"Nano could not read this result ({e})"
-                continue
-            card["claims"] = [claim_of(e) for e in evs if e.get("quote")]
-            if not card["claims"]:
-                card["reason"] = "Nano found no price in the search text"
+        cards += read_results(resp, sid, lang, month, nem, nano, tag, seen)
+    return cards
+
+
+def read_results(resp, sid, lang, month, nem, nano, tag, seen):
+    """One card per new page in a search response; Nano reads the search text of pages inside the window."""
+    start, end = R.window(month)
+    cards = []
+    for r in resp.get("results", []):
+        if r["url"] in seen:
+            continue
+        seen.add(r["url"])
+        d, _ = best_date(r)
+        card = {"url": r["url"], "domain": urlparse(r["url"]).netloc.removeprefix("www."),
+                "title": r.get("title") or "", "lang": lang, "published": d or None, "search_call": sid,
+                "tavily_published": iso_date(r.get("published_date")) or None,
+                "status": "rejected", "reason": "", "claims": []}
+        cards.append(card)
+        if not d or d > end or d < start:
+            card["reason"] = ("no publication date" if not d else
+                              f"published {d}, after the cutoff {end}" if d > end else
+                              f"published {d}, before the window ({start})")
+            continue
+        try:
+            evs, _ = nem.price_events(nano, f"{r.get('title') or ''}\n{r.get('content') or ''}",
+                                      tag=f"{tag} nano read", parent=sid)
+        except ValueError as e:                        # the model's reply had no usable JSON: reject, go on
+            card["reason"] = f"Nano could not read this result ({e})"
+            continue
+        card["claims"] = [claim_of(e) for e in evs if e.get("quote")]
+        if not card["claims"]:
+            card["reason"] = "Nano found no price in the search text"
     return cards
 
 
