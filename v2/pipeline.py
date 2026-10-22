@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from urllib.parse import urlparse
 
 from shadow_cpi import evidence as E
+from shadow_cpi.budget import BudgetExceeded
 from shadow_cpi.event_rules import absolute_change, base_price, normalise_date
 from shadow_cpi.tavily import best_date, iso_date
 from shadow_cpi.verify import norm, split_lines
@@ -60,17 +61,25 @@ def gloss(nem, model, line, tag):
         return ""
 
 
-def propose(tav, nem, nano, queries, month, tag, seen, domains=None, max_results=8):
+def propose(tav, nem, nano, queries, month, tag, seen, domains=None, max_results=8, skipped=None):
     """Date-locked searches; Nano reads each in-window result's search text. Returns cards (one per new page).
-    domains: {language: preferred news domains} (default: English and Hindi lists, as v1)."""
+    domains: {language: preferred news domains} (default: English and Hindi lists, as v1). skipped: if a list is
+    given, a search refused by a credit cap (or missing from the cache) is recorded there and the run goes on;
+    otherwise the refusal is raised."""
     start, end = R.window(month)
     cards = []
     for lang, q in queries:
         doms = (domains or {}).get(lang) or (E.INDIAN_NEWS if lang == "en" else E.HINDI_NEWS)
-        resp, sid = tav.search(q, topic="news", search_depth="basic", max_results=max_results, start_date=start,
-                               end_date=end, include_domains=doms,
-                               include_domains_mode="prefer", **({"language": "hi"} if lang == "hi" else {}),
-                               tag=f"{tag} search")
+        try:
+            resp, sid = tav.search(q, topic="news", search_depth="basic", max_results=max_results, start_date=start,
+                                   end_date=end, include_domains=doms,
+                                   include_domains_mode="prefer", **({"language": "hi"} if lang == "hi" else {}),
+                                   tag=f"{tag} search")
+        except BudgetExceeded as e:
+            if skipped is None:
+                raise
+            skipped.append({"call": "search", "lang": lang, "query": q, "why": str(e)})
+            continue
         for r in resp.get("results", []):
             if r["url"] in seen:
                 continue
@@ -114,14 +123,22 @@ def super_reread(nem, super_model, card, text, tag):
     card["claims"] = keep + [{**claim_of(e), "read_by": super_model} for e in evs if e.get("quote")]
 
 
-def fetch_and_verify(tav, nem, nano, cards, month, words, units, state, kind, tag, super_model=None):
+def fetch_and_verify(tav, nem, nano, cards, month, words, units, state, kind, tag, super_model=None, skipped=None):
     """Extract the pages that carry claims, save + hash them, (Amendment B) let Super re-read pages where Nano gave
     no number, and check each claim. Fills each claim's status, reason, effective date, change, English gloss and
     the model that read it; returns nothing (cards are updated in place)."""
     todo = [c for c in cards if c["claims"]]
     for k in range(0, len(todo), 5):
         batch = todo[k:k + 5]
-        resp, eid = tav.extract([c["url"] for c in batch], extract_depth="basic", tag=f"{tag} extract")
+        try:
+            resp, eid = tav.extract([c["url"] for c in batch], extract_depth="basic", tag=f"{tag} extract")
+        except BudgetExceeded as e:
+            if skipped is None:
+                raise
+            skipped.append({"call": "extract", "urls": [c["url"] for c in batch], "why": str(e)})
+            for c in batch:
+                c["reason"] = "not fetched: credit cap reached"
+            continue
         pages = {p["url"]: p.get("raw_content") or "" for p in resp.get("results", [])}
         for c in batch:
             c["extract_call"] = eid

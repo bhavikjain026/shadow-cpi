@@ -81,7 +81,45 @@ def run(cache_only=False):
     return out
 
 
-if __name__ == "__main__":
+RECALL_LOCK = ROOT / "results" / "v2_recall_lock.json"
+SCORE_LOCK = ROOT / "results" / "v2_score_lock.json"
+
+
+def ledger_claims(rows, months=MONTHS):
+    """Ledger rows -> {month: claims} in the shape `matches` takes (states from the ledger's comma-joined field)."""
+    out = {m: [] for m in months}
+    for r in rows:
+        if r["month"] in out:
+            out[r["month"]].append({"status": r["status"], "kind": r.get("kind"), "line": r["line"], "url": r["url"],
+                                    "effective_date": r.get("effective_date"), "read_by": r.get("model"),
+                                    "states": [x for x in (r.get("state") or "").split(", ") if x]})
+    return out
+
+
+def from_ledger():
+    """Issue 14: recall computed ONCE over Jan-Sep from the evidence ledger, with the matcher committed in db2984c,
+    after v2 was scored. Also gives the pre-registered 'v2 better than v1' verdict (Amendment D)."""
+    if RECALL_LOCK.exists():
+        raise SystemExit(f"v2 recall is already computed ({RECALL_LOCK}); it is computed once.")
+    if not SCORE_LOCK.exists():
+        raise SystemExit("score v2 first (python -m v2.score)")
+    sc = json.loads(SCORE_LOCK.read_text())
+    rows = score(ledger_claims(LG.read()))
+    v1, v2 = sum(r["v1"] == "FOUND" for r in rows), sum(r["v2"] == "FOUND" for r in rows)
+    out = {"computed_utc": datetime.now(timezone.utc).isoformat(), "matcher": "v2/recall.py at db2984c, unchanged",
+           "source": "v2/evidence/ledger.jsonl (issue 14 run)", "v1_found": v1, "v2_found": v2, "total": len(rows),
+           "incomplete_months": sc.get("incomplete_months", []), "changes": rows,
+           "v2_mae": sc["v2"]["mae"], "v1_mae": sc["v1"]["mae"],
+           "v2_better_than_v1": sc["v2"]["mae"] < sc["v1"]["mae"] and v2 > 9}
+    RECALL_LOCK.write_text(json.dumps(out, ensure_ascii=False, indent=1))
+    return out
+
+
+if __name__ == "__main__" and "--from-ledger" in sys.argv:
+    o = from_ledger()
+    print(f"recall (direct): v1 {o['v1_found']} of {o['total']}, v2 {o['v2_found']} of {o['total']}; "
+          f"incomplete months: {o['incomplete_months'] or 'none'}; v2 better than v1: {o['v2_better_than_v1']}")
+elif __name__ == "__main__":
     o = run(cache_only="--cache-only" in sys.argv)
     print(f"recall: v1 {o['v1_found']} of {o['total']}, v2 {o['v2_found']} of {o['total']}; verified by model "
           f"{o['verified_by_model']}; credits {o['credits_spent']}; {o['stopped'] or 'all months run'}")

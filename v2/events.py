@@ -10,9 +10,12 @@ from v2 import pipeline as PL
 from v2 import rules as R
 
 
-def run_month(month, tav, nem, nano, super_model, tag="v2:events"):
-    cards = PL.propose(tav, nem, nano, K.QUERIES, month, tag, set(), domains=K.DOMAINS, max_results=10)
-    PL.fetch_and_verify(tav, nem, nano, cards, month, K.ALL_WORDS, None, None, "", tag, super_model=super_model)
+def run_month(month, tav, nem, nano, super_model, tag="v2:events", skipped=None):
+    """skipped: a list to record calls refused by a credit cap (the month is then incomplete); None raises."""
+    cards = PL.propose(tav, nem, nano, K.QUERIES, month, tag, set(), domains=K.DOMAINS, max_results=10,
+                       skipped=skipped)
+    PL.fetch_and_verify(tav, nem, nano, cards, month, K.ALL_WORDS, None, None, "", tag, super_model=super_model,
+                        skipped=skipped)
     for c in cards:
         for cl in c["claims"]:
             if "status" not in cl:
@@ -34,6 +37,6 @@ def run_month(month, tav, nem, nano, super_model, tag="v2:events"):
                        "search_call": c["search_call"], "extract_call": c["extract_call"],
                        "model": cl.get("read_by") or nano})
     out = {"month": month, "cutoff": R.cutoff(month), "window": list(R.window(month)), "queries": K.QUERIES,
-           "cards": cards}
+           "cards": cards, "skipped": skipped or [], "complete": not skipped}
     (LG.ROOT / f"events_{month}.json").write_text(json.dumps(out, ensure_ascii=False, indent=1, default=float))
     return cards

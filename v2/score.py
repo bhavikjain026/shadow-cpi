@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """v2 issue 14: build Jan-Sep 2026 under the cutoff rule and Amendments A-D, then score ONCE against the
-pre-registered rule (v2/PREREGISTRATION.md) and show v2 beside v1.
+pre-registered rule (v2/PREREGISTRATION.md) and show v2 beside v1. Recall is not computed here: it is computed
+once afterwards from the evidence ledger (python -m v2.recall --from-ledger), which also gives the
+'v2 better than v1' verdict (lower mean miss AND recall above 9 of 29).
 
     python -m v2.score            # scores once; refuses if results/v2_score_lock.json exists (cap 'v2-issue14', 250)
 
@@ -27,7 +29,6 @@ from shadow_cpi.settings import models  # noqa: E402
 from shadow_cpi.tavily import Tavily  # noqa: E402
 from tools.score_replay import direction_hit  # noqa: E402
 from v2 import kinds as K  # noqa: E402
-from v2 import recall as RC  # noqa: E402
 from v2 import rules as R  # noqa: E402
 from v2.basket import merge, observed_cards, spine_cards  # noqa: E402
 from v2.events import run_month  # noqa: E402
@@ -95,7 +96,8 @@ def build_month(month, tav, nem, nano, sup, rec):
     meta = inp["meta"]
     items = [c for c in spine_cards(inp, month, meta) + observed_cards(inp["observed"][month], notes, month, meta,
                                                                        inp["factors"]) if c["status"] == "verified"]
-    cards = run_month(month, tav, nem, nano, sup)
+    skipped = []
+    cards = run_month(month, tav, nem, nano, sup, skipped=skipped)
     moving = moving_events(cards, month)
     spine = [(c["cpi_code"], "level", c["change"]) for c in items if c["kind"] == "spine"]
     seq = [(c["cpi_code"], "level", c["change"]) for c in items] + [(m["cpi_code"], "add", m["applied"])
@@ -113,7 +115,7 @@ def build_month(month, tav, nem, nano, sup, rec):
                                   for m in (nano, sup)},
             "date_rejections": {f: sum(c.get("date_flag") == f for c in cards for _ in c["claims"])
                                 for f in ("after cutoff", "edited after its date")},
-            "recall_claims": [{**cl, "url": c["url"]} for c in cards for cl in c["claims"] if "status" in cl]}
+            "complete": not skipped, "skipped_calls": skipped}
 
 
 def main():
@@ -143,15 +145,13 @@ def main():
                      "poll": float(base[m]["poll_pred"]) if base[m]["poll_pred"] else None})
     mae = sum(abs(r["miss"]) for r in rows) / n
     poll_rows = [r for r in rows if r["poll"] is not None]
-    recall = RC.score({b["month"]: b["recall_claims"] for b in months})
-    v2_found = sum(r["v2"] == "FOUND" for r in recall)
     out = {
         "scored_at_utc": datetime.now(timezone.utc).isoformat(),
         "rules": "v2/PREREGISTRATION.md with Amendments A-D",
         "v2": {"mae": mae, "direction_hits": sum(r["direction_hit"] for r in rows), "inside_range": sum(r["inside"]
                                                                                                         for r in rows),
                "mae_poll_months": sum(abs(r["miss"]) for r in poll_rows) / len(poll_rows),
-               "recall_found": v2_found, "measured_sep": rows[-1]["measured"],
+               "measured_sep": rows[-1]["measured"],
                "lift_sep": {"spine_only": rows[-1]["spine_only"], "with_all_evidence": rows[-1]["v2"]},
                "verified_by_model": {k: sum(b["verified_by_model"][k] for b in months) for k in (nano, sup)},
                "claims": {s: sum(b["claims"][s] for b in months) for s in ("verified", "context", "rejected")},
@@ -159,16 +159,16 @@ def main():
                                    for f in ("after cutoff", "edited after its date")}},
         "v1": {"mae": v1lock["mae"]["c"], "direction_hits": v1lock["direction_hits"]["c"],
                "inside_range": v1lock["inside_range"], "mae_poll_months": v1lock["mae_poll_months"]["c"],
-               "recall_found": sum(r["v1"] == "FOUND" for r in recall), "measured_sep": rows[-1]["v1_measured"]},
+               "measured_sep": rows[-1]["v1_measured"]},
         "baselines": {"B1": v1lock["mae"]["B1"], "trend_only": v1lock["mae"]["a"],
                       "poll": v1lock["mae_poll_months"]["poll"]},
-        "months": rows, "recall": recall, "month_builds": [{k: v for k, v in b.items() if k != "recall_claims"}
-                                                           for b in months],
+        "months": rows, "month_builds": months,
+        "incomplete_months": [b["month"] for b in months if not b["complete"]],
+        "recall": "computed once from the ledger afterwards: python -m v2.recall --from-ledger",
         "credits_budget": BUDGET, "credits_spent": spent(BUDGET)}
     out["pass_rule"] = mae < out["baselines"]["B1"] and mae < out["baselines"]["trend_only"]
-    out["v2_better_than_v1"] = mae < out["v1"]["mae"] and v2_found > 9
     LOCK.write_text(json.dumps(out, ensure_ascii=False, indent=1, default=float))
-    print(json.dumps({k: out[k] for k in ("v2", "v1", "baselines", "pass_rule", "v2_better_than_v1",
+    print(json.dumps({k: out[k] for k in ("v2", "v1", "baselines", "pass_rule", "incomplete_months",
                                            "credits_spent")}, indent=1, default=float))
 
 

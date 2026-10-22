@@ -63,3 +63,35 @@ def test_matching_rule():
     assert RC.matches(e5, claim(effective_date="2026-06-20", states=["uttar pradesh"]))         # month only
     rows = RC.score({"2026-04": [claim()]}, [e2, nat])
     assert [r["v2"] for r in rows] == ["FOUND", "MISSED"] and rows[0]["v2_match"]["month"] == "2026-04"
+
+
+def test_ledger_rows_become_matcher_claims():
+    rows = [{"month": "2026-04", "status": "verified", "kind": "electricity", "line": "l", "url": "u",
+             "effective_date": "2026-04-01", "model": "nvidia/x", "state": "maharashtra, punjab"},
+            {"month": "2025-12", "status": "verified", "kind": "milk", "line": "l", "url": "u",
+             "effective_date": "2025-12-01", "model": "m", "state": ""}]
+    got = RC.ledger_claims(rows)
+    assert set(got) == set(RC.MONTHS) and got["2026-04"][0]["states"] == ["maharashtra", "punjab"]
+    e2 = {"id": "E2", "kind": "electricity", "month": "2026-04", "date": "2026-04-01", "states": ["maharashtra"]}
+    assert RC.matches(e2, got["2026-04"][0])
+
+
+def test_recall_from_ledger_runs_once(tmp_path, monkeypatch):
+    import pytest
+    lock = tmp_path / "v2_recall_lock.json"
+    lock.write_text("{}")
+    monkeypatch.setattr(RC, "RECALL_LOCK", lock)
+    with pytest.raises(SystemExit, match="computed once"):
+        RC.from_ledger()
+
+
+def test_cap_refusal_is_recorded_not_raised():
+    from shadow_cpi.budget import BudgetExceeded
+    from v2 import pipeline as PL
+
+    class CappedTav:
+        def search(self, *a, **k):
+            raise BudgetExceeded("budget 'v2-issue14': 250 spent + 1 > cap 250")
+    skipped = []
+    assert PL.propose(CappedTav(), None, "nano", [("en", "q")], "2026-07", "t", set(), skipped=skipped) == []
+    assert skipped[0]["call"] == "search" and "cap" in skipped[0]["why"]
