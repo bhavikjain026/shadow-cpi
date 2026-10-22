@@ -17,18 +17,18 @@
 
 ## Result
 
-| Arm | Searches written by | Recall | False events (upper bound): unmatched of CPI-moving events | Credits per verified event | Median Tavily latency (descriptive; no target) | Incomplete months |
-|---|---|---|---|---|---|---|
-| A | code (fixed templates) (en, hi, mr, ta, te, kn, bn) | 6 of 29 | 6 of 8 | 12.8 (205 ÷ 16) | 3.12 s | none |
-| B | Nemotron (en, hi) | 2 of 29 | 2 of 3 | 13.0 (117 ÷ 9) | 3.12 s | none |
-| C | Nemotron (en, hi, mr, ta, te, kn, bn) | 2 of 29 | 1 of 1 | 23.0 (184 ÷ 8) | 3.15 s | none |
-| T | Tavily auto_parameters (B's query texts) (en, hi) | 0 of 29 | 0 of 0 | — (121 ÷ 0) | 6.30 s | none |
+| Arm | Searches written by | Recall | False events (upper bound): unmatched of CPI-moving events | Credits per verified event | Credits per known change found (added after scoring; descriptive) | Median Tavily latency (descriptive; pre-registered with no target, not used in the verdict) | Incomplete months |
+|---|---|---|---|---|---|---|---|
+| A | code (fixed templates) (en, hi, mr, ta, te, kn, bn) | 6 of 29 | 6 of 8 | 12.8 (205 ÷ 16) | 34.2 (205 ÷ 6) | 3.12 s | none |
+| B | Nemotron (en, hi) | 2 of 29 | 2 of 3 | 13.0 (117 ÷ 9) | 58.5 (117 ÷ 2) | 3.12 s | none |
+| C | Nemotron (en, hi, mr, ta, te, kn, bn) | 2 of 29 | 1 of 1 | 23.0 (184 ÷ 8) | 92.0 (184 ÷ 2) | 3.15 s | none |
+| T | Tavily auto_parameters (B's query texts) (en, hi) | 0 of 29 | 0 of 0 | — (121 ÷ 0) | — (121 ÷ 0) | 6.30 s | none |
 
 **Verdict (Amendment F, margin ±1 known change), unchanged:** top group A; ranking A; lower recall B, C, T.
 
 Arm A's credits are those of its calls when first made, in the issue 4 and issue 14 runs: the flight recorder has 213 uncached Tavily calls tagged `v2:events`, 205 credits, equal to the credit ledger's `v2-issue4` (150) + `v2-issue14` (55). Arm A itself re-ran them from the cache at 0 new credits.
 
-**Provenance (Amendment F):** added mid-test; C and T: 262 of 262 calls carry a request_id and a response hash; A and B ran earlier (their responses are still in the recorder's cache).
+**Provenance (Amendment F):** request IDs + response hashes on every call of arms C and T (262 of 262); A and B ran before this logging existed (their responses are still in the recorder's cache).
 
 **Label fix (logged; no number changed).** Before: "False events (upper bound) | 6 of 8" next to "Recall 6 of 29" for arm A, which read as 6 false of 8 found. After: the column says it counts unmatched events among CPI-moving items only (8 for arm A, 2 of them matched: E1 and E4), and the reconciliation table shows all events. The formula is the pre-registered one; the code was right.
 
@@ -46,5 +46,6 @@ Arm A's credits are those of its calls when first made, in the issue 4 and issue
 - Super wrote 78 of C's 117 searches (Nano's plan failed in 6 of 9 months).
 - Model-written queries were sometimes poor, e.g. arm C, June: "ವಿದ್ಯುತ್ ತರiffe ಜೂನ್ 2026 Karnataka Wisconsin growth"; arm B, January: "बस कि Fahrpreiserhöhung news".
 - Arm T: Tavily's auto_parameters chose `time_range: "w"` (the past week), topic news and advanced depth for every search. Amendment F sends no dates, so every result was from October 2026, after every cutoff, and the verifier rejected all of them: 0 of 29 is the pre-registered result.
-- Median latency was pre-registered as Amendment E metric 4, with no target; it is descriptive only.
+- Median latency was pre-registered as Amendment E metric 4, with no target; it is descriptive only and plays no part in the verdict.
+- Credits per known change found (credits ÷ recall) was added after scoring, as a second credit column; it is descriptive and cannot change the verdict.
 - Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a hand check.

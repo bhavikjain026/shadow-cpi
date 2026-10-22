@@ -12,20 +12,20 @@ India's CPI comes out once a month, about two weeks after the month ends. Until 
 
 ## What it does
 - Shows an **experimental nowcast** of the coming month's CPI inflation (year-on-year), with an 80% range and the chance that the headline is 6.0% or more (the RBI's projection for Oct–Dec 2026).
-- Says how often the official figure landed inside the range in the replay: 5 of 9 months (out-of-sample, leave-one-out ranges; `results/score_lock.json`). That is below the 80% target, so for the live months the range was widened after scoring (Amendment 2): the prediction ± 0.28 percentage points, the 80th percentile of the 9 replay misses ignoring their sign (`docs/after_scoring_changes.md`).
-- Shows **coverage**: how much of the basket was actually measured this month and how much is carried on trend: in the replay, 14–21% of the basket was measured each month (11% from the government spine alone), and the rest was carried on trend (`results/replay.csv`).
+- Says how often the official figure landed inside the range in the replay: 5 of 9 months (out-of-sample, leave-one-out ranges; `results/score_lock.json`). That is below the 80% target, so for the live months the range was widened after scoring: the prediction ± 0.284 percentage points, the 80th percentile of the 9 replay misses ignoring their sign (`docs/after_scoring_changes.md`).
+- Shows **coverage**: how much of the basket was actually measured this month and how much is assumed to follow its recent trend: in the replay, 14–21% of the basket was measured each month (11% from government food prices alone), and the rest followed its trend (`results/replay.csv`).
 - Lists every quote and announced price change behind the number, each with the exact line from the source page and a link.
 - **Seals** the prediction before the release, as canonical JSON with a SHA-256 fingerprint and a git tag. Anyone can check that it was not changed afterwards (`verify.md`).
-- After the release, scores itself in public: the miss, whether the figure was inside the range, and the main surprise.
+- After the release, the scoring script is run and the result is published: the miss, whether the figure was inside the range, and the main surprise.
 - A skeptic counter-search looks for evidence against the top contributors each month, and widens the range by half if it finds 2 or more verified contrary quotes (it did in 1 of 9 replay months, January).
 - A downloadable reporter brief with three parts: what moved, what we observed, and what's uncertain. It is written by code from computed numbers and verified quotes; the app shows an example from the September replay, labelled as such.
 
 ## How it works (8 steps)
-1. **Official data:** MoSPI's 2024-series All-India indices and weights. The code refuses to run with 2012-series weights.
-2. **Government price spine:** Department of Consumer Affairs retail prices for the tracked foods, as monthly averages. The report sits behind a CAPTCHA, so it is downloaded by hand and saved in the repository.
-3. **Tavily Search + Extract** find dated price quotes in English and Hindi news (in full for the March 2026 test; other replay months skipped web quotes to save credits).
-4. **Event layer:** Tavily searches for announced price changes with effective dates (milk, electricity, mobile tariffs, rail fares, medicines, school fees, GST, fuel). We also tried Tavily Map + Crawl on official and dairy sites, and an evidence chase of each verified change; both are reported, not used in the number.
-5. **Gold and silver** are observed daily from IBJA's daily bullion-report PDFs, and LPG from IOCL's official price list, both read with Tavily Extract.
+1. **Official data:** the Ministry of Statistics and Programme Implementation (MoSPI) 2024-series All-India indices and weights, from MoSPI's API (a logged direct download). The code refuses to run with 2012-series weights.
+2. **Government food prices:** Department of Consumer Affairs (DoCA) retail prices for the tracked foods, as monthly averages. The report sits behind a CAPTCHA, so it is downloaded by hand and saved in the repository.
+3. **Tavily Search + Extract** find dated price quotes in English and Hindi news. Web news quotes ran in full only for March 2026; the other replay months used IBJA/IOCL/PPAC prices via Tavily Extract, DoCA food prices (manual CAPTCHA download) and announced-change events.
+4. **Event layer:** Tavily searches for announced price changes with effective dates (milk, electricity, mobile tariffs, rail fares, medicines, school fees, GST, fuel), with a 10-day pre-window (the last 10 days of the previous month) to catch announcements. Map + Crawl was trialled on 11 official/dairy sites and returned nothing usable; the evidence chase of each verified change is reported, not used in the number.
+5. **Gold and silver** are observed daily from the India Bullion and Jewellers Association (IBJA) daily report PDFs, LPG from Indian Oil Corporation's (IOCL) official price list, and petrol from the Petroleum Planning & Analysis Cell (PPAC), all read with Tavily Extract.
 6. **Nemotron extracts only:** it cites a numbered line, and code takes that exact line and checks the number is in it. A model never writes a quote, never picks a number and never picks a weight.
 7. **Code decides:** tracked items move only their own weight. Index levels are combined with the official weights, and year-on-year is computed last, at full precision. The range comes from replay misses.
 8. **Seal, publish, score:** seal before the release, show everything in the app, and score after the release.
@@ -37,48 +37,47 @@ See `docs/pipeline.md` for the diagram.
 | Method | Mean absolute miss (pp) | Direction right |
 | --- | --- | --- |
 | (a) Trend only | 0.212 | 8 of 9 |
-| (b) Government price spine only | 0.225 | 9 of 9 |
-| (c) Spine + Tavily evidence | **0.194** (0.185 before the Amendment 3 bug fixes) | 7 of 9 (8 before) |
+| (b) Government food prices only | 0.225 | 9 of 9 |
+| (c) Government food prices + Tavily evidence | **0.194** (0.185 before the audit's bug fixes) | 7 of 9 (8 before) |
 | B1: last month's rate | 0.468 | 0 of 9 (it always predicts no change) |
 | Economists' poll (6 dated months) | 0.148 (on the same 6 months, (c) 0.150; 0.138 before the fixes) | 6 of 6 |
 
-Go / no-go: **GO** under the rule registered before scoring ((c) must beat B1 (0.468) and trend-only (0.212) on mean absolute miss). (c) vs (b), stated honestly: accuracy improved by 0.031 pp (0.225 → 0.194), better in 6 of 9 months; coverage rose from 11% to 14–21% of the basket. The spine on its own (b) did slightly worse than trend-only (a). Scored once, then re-scored once after logged bug fixes found by an independent audit (Amendment 3, `docs/after_scoring_changes.md`); see `results/scoreboard.md` and `docs/preregistration.md`. All numbers in this table: `results/score_lock.json`.
+Go / no-go: **GO** under the rule registered before scoring ((c) must beat B1 (0.468) and trend-only (0.212) on mean absolute miss). (c) vs (b), stated honestly: accuracy improved by 0.031 pp (0.225 → 0.194), better in 6 of 9 months; coverage rose from 11% to 14–21% of the basket. Government food prices on their own (b) did slightly worse than trend-only (a). Scored once, then re-scored once after logged bug fixes found by an independent audit (`docs/after_scoring_changes.md` §4); the June event, a 10% Uttar Pradesh electricity surcharge that was later put on hold, is inside the score; see `results/scoreboard.md` and `docs/preregistration.md`. All numbers in this table: `results/score_lock.json`.
 
-**Independent audit:** 12 events checked by hand: 5 correct, 3 partly, 3 wrong, 1 unclear; 9 confirmed by a second source (`audit/event_audit.md`). The four general bug fixes that followed (retail only, the CPI fuel grade, national vs regional scope, no double counting) took the replay from 12 events to 9.
+**Independent audit:** 12 events independently audited (AI-assisted search); every source page then opened in a browser: 9 quotes verbatim, 1 paywalled, 2 unreachable (`audit/quote_check.md`). Verdicts: 5 correct, 3 partly, 3 wrong, 1 unclear; confirmed by another outlet: 9 of 12 (audit, other outlets; `audit/event_audit.md`). The four general bug fixes that followed (retail only, the CPI fuel grade, national vs regional scope, no double counting) dropped 2 events and merged 2 into 1, taking the replay from 12 events to 9.
 
 **Recall:** of 29 known retail price changes in Jan–Sep 2026, the pipeline found 9 directly, and 14 including the official price series it reads (IOCL LPG, PPAC petrol) (`audit/missed_events.md`).
 
-**Sealed calls:** The October call is sealed at tag seal-2026-10 before submission and scores itself when MoSPI publishes on 12 Nov. The November call will be sealed with the same frozen code at tag seal-2026-11 by 3 Dec, and scores itself when November CPI is released (expected 14 Dec, inside judging).
+**Sealed calls:** The October call is sealed at tag seal-2026-10 before submission; the scoring script is run when MoSPI publishes on 12 Nov. The November call will be sealed with the same frozen code at tag seal-2026-11 by 3 Dec, and scored the same way when November CPI is released (expected 14 Dec, inside judging).
 
 ## Why Tavily
-- **It is the single entry point for web pages.** Every web page the nowcast uses (news, IBJA, IOCL, PPAC) comes in through Tavily and is logged in the flight recorder. Two exceptions, stated openly: MoSPI's official indices are a logged direct download from MoSPI's API, and the Consumer Affairs spine is downloaded by hand from behind a CAPTCHA.
+- **It brings in the web pages.** News pages and the IBJA, IOCL and PPAC price pages come in through Tavily and are logged in the flight recorder. Three direct sources, each logged: the MoSPI API (official indices), the Consumer Affairs CAPTCHA download (food prices, by hand), and Wayback Machine CDX lookups (date test only).
 - **Date windows make a nowcast possible.** Search with `start_date`/`end_date` = the target month, plus our own date check, lets us replay past months and drop anything outside the window.
 - **Indian and Hindi news.** `include_domains` with `include_domains_mode="prefer"` steers searches to Indian English and Hindi publishers without excluding everything else.
 - **Extract with query-focused chunks** returns just the passages that hold prices. That keeps the model's job small, and the line-by-line check strict.
-- **Map + Crawl, tried honestly:** we pointed Map + Crawl at 5 official sites and 6 dairy sites to find price circulars and tariff orders. Map returned nothing on the government and PSU sites, and some rate lists are image-only PDFs; the app's Tavily trace page lists each failure.
-- **Evidence chasing:** each verified event gets up to 2 follow-up searches; 5 of 12 replay events found a confirming result on another site (report only).
+- **Map + Crawl, tried honestly:** trialled on 11 official/dairy sites to find price circulars and tariff orders; returned nothing usable. The app's Tavily trace page lists each failure.
+- **Evidence chasing:** each verified event gets up to 2 follow-up searches; 5 of 12 replay events (Tavily chase, before the audit's fixes) found a confirming result on another site (report only).
 - **Measured, not claimed.** The Tavily report card (`results/tavily_report_card.md`) gives:
   - calls: 930 Tavily calls sent (cached repeats and free balance checks not counted); 817 credits used, of a 1,000-credit monthly plan plus 3,125 add-on credits from the Nebius builder program (report card, 22 Oct)
   - credits per replay prediction: 40.3 on average (event searches and the skeptic, 9 months)
   - share of dated search results inside the requested window: 76% (2,415 of 3,194)
   - share of quotes verified: 91 of 93 (March 2026 test; the number must appear in the cited line)
-  - share of events confirmed by 2 sources: 4 of 9 replay events
+  - share of events confirmed by 2 sources: 4 of 9 replay events (after the audit's fixes)
   - median latency: 4.2 s per Tavily call
-  - direct downloads, logged: 154 calls (MoSPI's API, the CAPTCHA-gated spine downloaded by hand, and failed Extracts)
-- **Attribution:** the nowcast with vs without Tavily evidence, each month (`results/tavily_attribution.csv`): Tavily evidence lowered the mean miss from 0.225 to 0.194 pp and was closer in 6 of 9 months (after the Amendment 3 bug fixes).
+  - direct downloads, logged: 154 calls (MoSPI's API, the CAPTCHA-gated DoCA food prices downloaded by hand, and failed Extracts)
+- **Attribution:** the nowcast with vs without Tavily evidence, each month (`results/tavily_attribution.csv`): Tavily evidence lowered the mean miss from 0.225 to 0.194 pp and was closer in 6 of 9 months (after the audit's bug fixes).
 
 ## How we built it
 - Python, standard library only for the core (no heavy frameworks). The app is built with Streamlit.
-- Tavily (Search, Extract, Map, Crawl) for all web data.
+- Tavily (Search and Extract; Map and Crawl trialled) for news and official price pages; MoSPI's API, the DoCA CAPTCHA download and Wayback CDX lookups are the logged direct sources.
 - NVIDIA Nemotron on Nebius Token Factory, used for extraction only:
   - `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` as a cheap yes/no gatekeeper (622 calls sent; 4,829 including cache hits)
   - `nvidia/nemotron-3-super-120b-a12b` for price quotes, price events and the skeptic's reads (719 calls sent; 5,177 including cache hits)
-  - a large model (`nvidia/Nemotron-3-Ultra-550b-a55b`) is configured but was not needed: the reporter brief is written by code.
 - One Recorder for every outside call: it caches each response (re-runs cost nothing) and keeps a flight-recorder log.
 - Sealing: canonical JSON + SHA-256 + a `seal-<month>` git tag.
 
 ## Challenges we ran into
-- The government daily price site blocks Tavily and sits behind a CAPTCHA, so the spine is downloaded by hand and saved in the repository (no automated web call is made for it).
+- The government daily price site blocks Tavily and sits behind a CAPTCHA, so DoCA food prices are downloaded by hand and saved in the repository (no automated web call is made for them).
 - Some official pages are scanned PDFs with no text.
 - Dates: a page's published date is not always its real date, so we check the page address and the text too.
 - Leak guard: when replaying past months, pages that state the official figure for that month must be dropped.

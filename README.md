@@ -8,12 +8,19 @@ number cited, and seals each call in public before release.**
 **Result.** Jan–Sep 2026 replay: Shadow CPI missed by 0.194 percentage points on average; on the 6 months with an
 economists' poll, 0.150 vs the poll's 0.148 (about a tie). ([`results/score_lock.json`](results/score_lock.json))
 
-**Independent audit.** 12 events checked by hand: 5 correct, 3 partly, 3 wrong, 1 unclear; 9 confirmed by a second
-source. Four general bug fixes followed, logged with scores before and after.
-([`audit/event_audit.md`](audit/event_audit.md), [`docs/after_scoring_changes.md`](docs/after_scoring_changes.md))
+**Independent audit.** 12 events independently audited (AI-assisted search); every source page then opened in a
+browser: 9 quotes verbatim, 1 paywalled, 2 unreachable ([`audit/quote_check.md`](audit/quote_check.md)). Verdicts:
+5 correct, 3 partly, 3 wrong, 1 unclear. Confirmed by another outlet: **9 of 12** (audit, other outlets). Confirmed
+by Tavily's own evidence chase: **5 of 12** (before the fixes) and **4 of 9** (after them). The audit led to four
+general bug fixes, logged with scores before and after: retail prices only (dropped a wholesale milk event), the
+CPI's regular fuel grade (dropped a premium-fuel event), national vs regional scope (re-weighted a one-line rail fare
+rise to its state) and no double counting (merged two Madhya Pradesh milk events into one). That took the replay
+from 12 events to 9. ([`audit/event_audit.md`](audit/event_audit.md),
+[`docs/after_scoring_changes.md`](docs/after_scoring_changes.md))
 
 **Recall.** Of 29 known retail price changes in Jan–Sep 2026, the pipeline found 9 directly, and 14 including the
-official price series it reads (IOCL LPG, PPAC petrol). ([`audit/missed_events.md`](audit/missed_events.md))
+official price series it reads (Indian Oil Corporation (IOCL) LPG prices, the Petroleum Planning & Analysis Cell
+(PPAC) petrol prices). ([`audit/missed_events.md`](audit/missed_events.md))
 
 ## How NVIDIA Nemotron and Nebius Token Factory are used
 
@@ -24,7 +31,6 @@ is in it. A model never writes a quote, never picks a number and never picks a w
 |---|---|---|
 | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` | Gatekeeper: "does this page state an Indian price or an announced price change?" (yes/no) | 622 (4,829) |
 | `nvidia/nemotron-3-super-120b-a12b` | Reads a page and lists price quotes and price changes, each citing a numbered line; reads the skeptic's counter-search snippets | 719 (5,177) |
-| `nvidia/Nemotron-3-Ultra-550b-a55b` | Configured in `config/models.json`, not used: the reporter brief is written by code | 0 (0) |
 
 Calls sent = calls that reached Token Factory; in brackets, the total including cache hits (re-runs served free from the cache), from the flight recorder ([`results/app/flight_recorder.jsonl`](results/app/flight_recorder.jsonl)).
 Token Factory is called at
@@ -34,23 +40,28 @@ Token Factory is called at
 
 ## How Tavily is used
 
-Every web page the nowcast uses comes in through Tavily, and every call is cached and logged in the flight recorder.
-All requests go through one function,
+Tavily brings in the web news pages and the official price pages (IBJA, IOCL, PPAC); every call is cached and
+logged in the flight recorder. All Tavily requests go through one function,
 [`shadow_cpi/tavily.py` line 26](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/tavily.py#L26).
 
 | Endpoint | Job | Where |
 |---|---|---|
-| **Search**, dates locked | News search with `start_date`/`end_date` = the target month (plus 10 days before, for announcements), English and Hindi news preferred; code re-checks each page's date and drops pages that state the official figure | [`evidence.py` L258](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/evidence.py#L258) |
-| **Extract** | Reads the top dated pages with query-focused chunks; reads IBJA's daily gold/silver report PDFs, IOCL's LPG price list and PPAC's petrol prices | [`evidence.py` L280](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/evidence.py#L280), [L522](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/evidence.py#L522) |
-| **Map + Crawl** (attempts) | Looked for price circulars and tariff orders on 5 official sites and 6 dairy sites. Map returned nothing on the government and PSU sites; reported, not used | [`tools/prompt_t.py` L65](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/tools/prompt_t.py#L65) |
+| **Search**, dates locked | News search with `start_date`/`end_date` = the target month plus a 10-day pre-window (the last 10 days of the previous month, for announcements), English and Hindi news preferred; code re-checks each page's date and drops pages that state the official figure | [`evidence.py` L258](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/evidence.py#L258) |
+| **Extract** | Reads the top dated pages with query-focused chunks; reads the India Bullion and Jewellers Association (IBJA) daily gold/silver report PDFs, IOCL's LPG price list and PPAC's petrol prices | [`evidence.py` L280](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/evidence.py#L280), [L522](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/evidence.py#L522) |
+| **Map + Crawl** (trial) | Trialled on 11 official/dairy sites to find price circulars and tariff orders; returned nothing usable. Reported, not used | [`tools/prompt_t.py` L65](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/tools/prompt_t.py#L65) |
 | **Search** (evidence chase) | Up to 2 follow-up searches per verified event: the same change elsewhere, and the official notice | [`tools/prompt_t.py` L316](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/tools/prompt_t.py#L316) |
 | **GET /usage** (guard) | Before every live run in the app: refuse below 150 credits left, or if the check fails | [`tavily.py` L70](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/tavily.py#L70), [`live_run.py` L68](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/live_run.py#L68) |
 
 Measured in [`results/tavily_report_card.md`](results/tavily_report_card.md) (22 Oct): 930 Tavily calls sent, 817
 credits used (of a 1,000-credit monthly plan plus 3,125 add-on credits), 76% of dated search results inside the
 requested window.
-Two sources do not come through Tavily, by design: MoSPI's official indices (a JSON API) and the government's daily food prices (behind a CAPTCHA, downloaded by
-hand). Both are logged.
+Three sources do not come through Tavily, and each is logged as a direct download: the Ministry of Statistics and
+Programme Implementation (MoSPI) API for the official indices and weights; the Department of Consumer Affairs (DoCA)
+daily food prices, downloaded by hand from behind a CAPTCHA; and Wayback Machine CDX lookups, used only by the date
+test to date pages independently.
+
+Web news quotes ran in full only for March 2026 (the test month). The other replay months used IBJA, IOCL and PPAC
+prices read with Tavily Extract, DoCA food prices, and announced price-change events found with Tavily Search.
 
 ---
 
@@ -65,7 +76,7 @@ flowchart TD
     G -- yes --> M["Nemotron Super: quotes + price changes,<br/>each citing a numbered line"]
     M --> V["Code: copy the exact line,<br/>check the number is in it; dates + leak guard"]
     V --> R["Code: event rules (retail only, CPI variety,<br/>national vs regional, no double counting)"]
-    SPINE["Government retail prices (DoCA, by hand)"] --> C
+    FOOD["Government retail food prices (DoCA, by hand)"] --> C
     MOSPI["MoSPI indices + 2024 weights (API)"] --> C
     X2 --> C
     R --> C["Code: carve-out by item weight, combine index LEVELS,<br/>year-on-year last, 80% range from replay misses"]
@@ -105,8 +116,9 @@ inside the range.
 ## Honest limits
 
 Nine test months is a small sample; the 80% range held the official figure in only 5 of 9 replay months; about
-14–21% of the basket is measured each month and the rest is carried on trend; replays search today's web with date
-filters. All of it, plainly: [`docs/honest_limits.md`](docs/honest_limits.md). Rules and every change after
+14–21% of the basket is measured each month and the rest is assumed to follow its recent trend; web news quotes ran
+in full only for March; the June event (a 10% Uttar Pradesh electricity surcharge, later put on hold) is inside the
+score; replays search today's web with date filters. All of it, plainly: [`docs/honest_limits.md`](docs/honest_limits.md). Rules and every change after
 scoring: [`docs/frozen_rules.md`](docs/frozen_rules.md), [`docs/after_scoring_changes.md`](docs/after_scoring_changes.md).
 
 ## Licence

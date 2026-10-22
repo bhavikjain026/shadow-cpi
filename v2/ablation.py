@@ -528,13 +528,16 @@ def write_report():
           "metric 3).", "",
           "## Result", "",
           "| Arm | Searches written by | Recall | False events (upper bound): unmatched of CPI-moving events | "
-          "Credits per verified event | Median Tavily latency (descriptive; no target) | Incomplete months |",
-          "|---|---|---|---|---|---|---|"]
+          "Credits per verified event | Credits per known change found (added after scoring; descriptive) | "
+          "Median Tavily latency (descriptive; pre-registered with no target, not used in the verdict) | "
+          "Incomplete months |",
+          "|---|---|---|---|---|---|---|---|"]
     for arm, a in out["arms"].items():
         r = rec[arm]
         L.append(f"| {arm} | {a['writer']} ({', '.join(a['languages'])}) | {r['recall']} of 29 | "
                  f"{r['moving_unmatched']} of {r['moving_events']} | "
                  f"{f(r['credits'] / r['events']) if r['events'] else '—'} ({r['credits']} ÷ {r['events']}) | "
+                 f"{f(r['credits'] / r['recall']) if r['recall'] else '—'} ({r['credits']} ÷ {r['recall']}) | "
                  f"{f(a['median_latency_s'], 2)} s | {', '.join(a['incomplete_months']) or 'none'} |")
     eq = out["equivalence"]
     wb = out["arms"]["C"]["written_by"]
@@ -544,10 +547,9 @@ def write_report():
           "Arm A's credits are those of its calls when first made, in the issue 4 and issue 14 runs: the flight "
           "recorder has 213 uncached Tavily calls tagged `v2:events`, 205 credits, equal to the credit ledger's "
           "`v2-issue4` (150) + `v2-issue14` (55). Arm A itself re-ran them from the cache at 0 new credits.", "",
-          "**Provenance (Amendment F):** added mid-test; C and T: "
-          f"{rec['C']['with_provenance'] + rec['T']['with_provenance']} of {rec['C']['calls'] + rec['T']['calls']} "
-          "calls carry a request_id and a response hash; A and B ran earlier (their responses are still in the "
-          "recorder's cache).", "",
+          "**Provenance (Amendment F):** request IDs + response hashes on every call of arms C and T "
+          f"({rec['C']['with_provenance'] + rec['T']['with_provenance']} of {rec['C']['calls'] + rec['T']['calls']}); "
+          "A and B ran before this logging existed (their responses are still in the recorder's cache).", "",
           "**Label fix (logged; no number changed).** Before: \"False events (upper bound) | 6 of 8\" next to "
           "\"Recall 6 of 29\" for arm A, which read as 6 false of 8 found. After: the column says it counts "
           "unmatched events among CPI-moving items only (8 for arm A, 2 of them matched: E1 and E4), and the "
@@ -569,7 +571,10 @@ def write_report():
           "- Arm T: Tavily's auto_parameters chose `time_range: \"w\"` (the past week), topic news and advanced depth for "
           "every search. Amendment F sends no dates, so every result was from October 2026, after every cutoff, and "
           "the verifier rejected all of them: 0 of 29 is the pre-registered result.",
-          "- Median latency was pre-registered as Amendment E metric 4, with no target; it is descriptive only.",
+          "- Median latency was pre-registered as Amendment E metric 4, with no target; it is descriptive only and "
+          "plays no part in the verdict.",
+          "- Credits per known change found (credits ÷ recall) was added after scoring, as a second credit column; "
+          "it is descriptive and cannot change the verdict.",
           "- Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a hand check."]
     L += t_dates_section(ref)
     RESULTS.with_suffix(".md").write_text("\n".join(L) + "\n")
