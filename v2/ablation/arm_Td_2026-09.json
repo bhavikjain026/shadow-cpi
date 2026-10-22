@@ -1,0 +1,155 @@
+{
+ "arm": "Td",
+ "month": "2026-09",
+ "window": [
+  "2026-08-22",
+  "2026-09-29"
+ ],
+ "writer": "Tavily auto_parameters + our date window (exploratory, after scoring)",
+ "plan": [
+  {
+   "query": "बस कि Fahrpreiserhöhung news",
+   "language": "en",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29"
+   }
+  },
+  {
+   "query": "rail fare hike news India",
+   "language": "en",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29"
+   }
+  },
+  {
+   "query": "mobile tariff change news India",
+   "language": "en",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29"
+   }
+  },
+  {
+   "query": "बिजली दर वृद्धि समाचार",
+   "language": "hi",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29"
+   }
+  },
+  {
+   "query": "दूध कीमत वृद्धि समाचार",
+   "language": "hi",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29"
+   }
+  },
+  {
+   "query": "एलपीजी सिलेंडर मूल्य वृद्धि समाचार",
+   "language": "hi",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29"
+   }
+  },
+  {
+   "query": "दिल्ली मेट्रो किराया वृद्धि समाचार",
+   "language": "hi",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29"
+   }
+  },
+  {
+   "query": "पेट्रोल कीमत वृद्धि समाचार",
+   "language": "hi",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-29"
+   }
+  }
+ ],
+ "plan_complete": true,
+ "plan_tries": [],
+ "cards": [],
+ "skipped": [
+  {
+   "call": "search",
+   "lang": "en",
+   "query": "बस कि Fahrpreiserhöhung news",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  },
+  {
+   "call": "search",
+   "lang": "en",
+   "query": "rail fare hike news India",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  },
+  {
+   "call": "search",
+   "lang": "en",
+   "query": "mobile tariff change news India",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  },
+  {
+   "call": "search",
+   "lang": "hi",
+   "query": "बिजली दर वृद्धि समाचार",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  },
+  {
+   "call": "search",
+   "lang": "hi",
+   "query": "दूध कीमत वृद्धि समाचार",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  },
+  {
+   "call": "search",
+   "lang": "hi",
+   "query": "एलपीजी सिलेंडर मूल्य वृद्धि समाचार",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  },
+  {
+   "call": "search",
+   "lang": "hi",
+   "query": "दिल्ली मेट्रो किराया वृद्धि समाचार",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  },
+  {
+   "call": "search",
+   "lang": "hi",
+   "query": "पेट्रोल कीमत वृद्धि समाचार",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  }
+ ],
+ "complete": false,
+ "calls": [],
+ "finished_utc": "2026-10-22T17:37:35.691148+00:00"
+}

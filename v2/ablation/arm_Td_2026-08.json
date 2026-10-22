@@ -1,0 +1,155 @@
+{
+ "arm": "Td",
+ "month": "2026-08",
+ "window": [
+  "2026-07-22",
+  "2026-08-29"
+ ],
+ "writer": "Tavily auto_parameters + our date window (exploratory, after scoring)",
+ "plan": [
+  {
+   "query": "electricity price hike news",
+   "language": "en",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29"
+   }
+  },
+  {
+   "query": "mobile tariff increase news",
+   "language": "en",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29"
+   }
+  },
+  {
+   "query": "petrol price hike news",
+   "language": "en",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29"
+   }
+  },
+  {
+   "query": "बिजली दर वृद्धि समाचार",
+   "language": "hi",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29"
+   }
+  },
+  {
+   "query": "मोबाइल टैरिफ वृद्धि समाचार",
+   "language": "hi",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29"
+   }
+  },
+  {
+   "query": "पेट्रोल मूल्य वृद्धि समाचार",
+   "language": "hi",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29"
+   }
+  },
+  {
+   "query": "बस किराया वृद्धि समाचार",
+   "language": "hi",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29"
+   }
+  },
+  {
+   "query": "rail fare revision news",
+   "language": "en",
+   "from_arm_b": true,
+   "sent": {
+    "auto_parameters": true,
+    "max_results": 10,
+    "start_date": "2026-07-22",
+    "end_date": "2026-08-29"
+   }
+  }
+ ],
+ "plan_complete": true,
+ "plan_tries": [],
+ "cards": [],
+ "skipped": [
+  {
+   "call": "search",
+   "lang": "en",
+   "query": "electricity price hike news",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  },
+  {
+   "call": "search",
+   "lang": "en",
+   "query": "mobile tariff increase news",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  },
+  {
+   "call": "search",
+   "lang": "en",
+   "query": "petrol price hike news",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  },
+  {
+   "call": "search",
+   "lang": "hi",
+   "query": "बिजली दर वृद्धि समाचार",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  },
+  {
+   "call": "search",
+   "lang": "hi",
+   "query": "मोबाइल टैरिफ वृद्धि समाचार",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  },
+  {
+   "call": "search",
+   "lang": "hi",
+   "query": "पेट्रोल मूल्य वृद्धि समाचार",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  },
+  {
+   "call": "search",
+   "lang": "hi",
+   "query": "बस किराया वृद्धि समाचार",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  },
+  {
+   "call": "search",
+   "lang": "en",
+   "query": "rail fare revision news",
+   "why": "budget 'v2-ablation-Td': 190 spent + 2 for the next call > cap 190"
+  }
+ ],
+ "complete": false,
+ "calls": [],
+ "finished_utc": "2026-10-22T17:37:35.666125+00:00"
+}
