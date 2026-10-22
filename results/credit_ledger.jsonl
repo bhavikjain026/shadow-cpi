@@ -600,3 +600,4 @@
 {"time": "2026-10-21T15:51:04.545861+00:00", "call_id": "633dd10b693e", "endpoint": "/extract", "credits": 1, "budgets": ["prompt-t", "prompt-t-dairy"]}
 {"time": "2026-10-21T15:51:07.202996+00:00", "call_id": "ffa240ae4a54", "endpoint": "/search", "credits": 1, "budgets": ["prompt-t", "prompt-t-dairy"]}
 {"time": "2026-10-21T15:51:36.306602+00:00", "call_id": "6405e58bd72f", "endpoint": "/map", "credits": 0, "budgets": ["prompt-t", "prompt-t-dairy"]}
+{"time": "2026-10-22T03:12:16.683770+00:00", "call_id": "reconcile-2026-10-22", "endpoint": "reconcile", "credits": -13, "budgets": ["reconcile"], "note": "Tavily billing page 2026-10-22: 681 plan credits used; ledger + pre-ledger estimate said 694"}

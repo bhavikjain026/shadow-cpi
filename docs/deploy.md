@@ -79,5 +79,13 @@ before each push that should change what the app shows (step 1).
   on a reboot or redeploy; the /usage check does not, so it is the one that holds the balance. /usage can lag: on
   20 Oct it showed 6 credits used against 226 spent; on 21 Oct it showed 596 against the ledger's 694 (which
   includes a 160-credit estimate for calls made before the ledger existed). The 150 floor leaves room for that.
+- **/usage does not count add-on credits (checked 22 Oct).** The account has the monthly plan (681 of 1,500 used on
+  the billing page) plus 3,125 add-on credits from the Nebius builder program, with pay-as-you-go off. GET /usage
+  returns only `account.plan_limit` (1000, not the 1,500 on the billing page), `plan_usage` (681), `paygo_limit`
+  (null) and `paygo_usage` (0): no add-on field. So the live-run guard sees about 319 credits left, not 3,944, and
+  will pause live runs once the plan alone is within 150 credits of its /usage limit. That is the safe direction, so
+  the guard is unchanged; when the plan resets each month, /usage drops back and live runs resume. The ledger check
+  in the app counts the plan and the add-on (`config/budget.json`), and keeps 150 credits for the October and
+  November seals.
 - **Untested on Python 3.12 at run time.** The code was tested on Python 3.14 here; a 3.12 grammar check of every
   file passed. If the build fails, delete the app and redeploy with Python 3.13 (the version is set at deploy time).

@@ -26,8 +26,9 @@ c1, c2, c3 = st.columns(3)
 c1.metric("Tavily calls", len(tav))
 c2.metric("Credits used", tavily_credits(log))
 c3.metric("From cache", sum(bool(e.get("cached")) for e in tav))
-st.caption(f"Nemotron calls: {sum(e['service'] == 'nebius' for e in log)}. Credits count only calls that were not "
-           "served from the cache.")
+neb = [e for e in log if e["service"] == "nebius"]
+st.caption(f"Nemotron calls: {sum(not e.get('cached') for e in neb):,} sent ({len(neb):,} including cache hits). "
+           "Credits count only calls that were not served from the cache.")
 
 st.subheader("Log")
 st.dataframe([{"Time (UTC)": e["time"][:19].replace("T", " "), "Service": e["service"], "Endpoint": e["endpoint"],

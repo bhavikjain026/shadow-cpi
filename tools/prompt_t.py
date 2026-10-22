@@ -341,7 +341,7 @@ def _save_chase(tree):
 def card():
     log = read_log()
     tav = [e for e in log if e["service"] == "tavily"]
-    live = [e for e in tav if not e["cached"]]
+    live = [e for e in tav if not e["cached"] and e["endpoint"] != "/usage"]      # /usage balance checks are free
     led = read_ledger()
     cfg = load_budget()
     lat = [e["latency_ms"] for e in live]
@@ -390,8 +390,9 @@ def card():
              "counts (the `/usage` endpoint did not update; see FEEDBACK_NOTES.md).", "",
              "| Measure | Value |", "| --- | --- |",
              f"| Tavily calls sent (uncached) | {len(live)} (plus {len(tav) - len(live)} served from the cache) |",
-             f"| Credits used (ledger + {cfg['spent_before_ledger']} before it) | {account_spent(cfg, led)} of "
-             f"{cfg['plan_limit']} |",
+             f"| Credits used (ledger + {cfg['spent_before_ledger']} before it, reconciled to the billing page) | "
+             f"{account_spent(cfg, led)} of the {cfg['plan_limit']:,}-credit plan, plus "
+             f"{cfg.get('addon_credits', 0):,} add-on credits |",
              f"| Credits per replay prediction (events + skeptic, mean of 9 months) | {per_pred:.1f} |",
              f"| Search results inside the requested date window | {inside} of {total} "
              f"({inside / total:.0%}); {undated} undated |" if total else "| Search results inside the window | n/a |",

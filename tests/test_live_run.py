@@ -57,7 +57,8 @@ def test_day_cap_8_for_the_whole_app(tmp_path):
 
 
 def test_credit_floor_100(tmp_path):
-    room = CFG["plan_limit"] - CFG["spent_before_ledger"] - 100 - 8   # balance minus one scan cap = exactly 100
+    from shadow_cpi.budget import account_limit
+    room = account_limit(CFG) - CFG["spent_before_ledger"] - 100 - 8   # balance minus one scan cap = exactly 100
     assert L.gate(0, NOW, tmp_path / "r", CFG, ledger(room), have_keys=True)[0]
     ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, ledger(room + 1), have_keys=True)
     assert not ok and "floor of 100" in msg
@@ -153,7 +154,8 @@ def test_gate_refuses_when_usage_fails_or_balance_low(tmp_path, monkeypatch):
 
 
 def test_ledger_check_still_applies_when_usage_is_fine(tmp_path):
-    ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, ledger(CFG["plan_limit"]), have_keys=True)
+    from shadow_cpi.budget import account_limit
+    ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, ledger(account_limit(CFG)), have_keys=True)
     assert not ok and "floor of 100" in msg
 
 

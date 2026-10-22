@@ -58,7 +58,7 @@ Go / no-go: **GO** under the rule registered before scoring ((c) must beat B1 (0
 - **Map + Crawl, tried honestly:** we pointed Map + Crawl at 5 official sites and 6 dairy sites to find price circulars and tariff orders. Map returned nothing on the government and PSU sites, and some rate lists are image-only PDFs; the app's Tavily trace page lists each failure.
 - **Evidence chasing:** each verified event gets up to 2 follow-up searches; 5 of 12 replay events found a confirming result on another site (report only).
 - **Measured, not claimed.** The Tavily report card (`results/tavily_report_card.md`) gives:
-  - calls: 788 Tavily calls sent (cached repeats not counted); 694 of 1,500 credits used in all
+  - calls: 787 Tavily calls sent (cached repeats and free balance checks not counted); 681 credits used, of a 1,500-credit monthly plan plus 3,125 add-on credits from the Nebius builder program
   - credits per replay prediction: 40.3 on average (event searches and the skeptic, 9 months)
   - share of dated search results inside the requested window: 77% (1,952 of 2,535)
   - share of quotes verified: 91 of 93 (March 2026 test; the number must appear in the cited line)
@@ -71,8 +71,8 @@ Go / no-go: **GO** under the rule registered before scoring ((c) must beat B1 (0
 - Python, standard library only for the core (no heavy frameworks). The app is built with Streamlit.
 - Tavily (Search, Extract, Map, Crawl) for all web data.
 - NVIDIA Nemotron on Nebius Token Factory, used for extraction only:
-  - `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` as a cheap yes/no gatekeeper (622 calls)
-  - `nvidia/nemotron-3-super-120b-a12b` for price quotes, price events and the skeptic's reads (719 calls)
+  - `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` as a cheap yes/no gatekeeper (622 calls sent; 4,829 including cache hits)
+  - `nvidia/nemotron-3-super-120b-a12b` for price quotes, price events and the skeptic's reads (719 calls sent; 5,177 including cache hits)
   - a large model (`nvidia/Nemotron-3-Ultra-550b-a55b`) is configured but was not needed: the reporter brief is written by code.
 - One Recorder for every outside call: it caches each response (re-runs cost nothing) and keeps a flight-recorder log.
 - Sealing: canonical JSON + SHA-256 + a `seal-<month>` git tag.
@@ -104,7 +104,7 @@ More in `docs/honest_limits.md`.
 - **What worked well:** [I fill in]
 - **What was hard:** [I fill in]
 - **Model sizes:** [I fill in]
-- **Cost and latency:** 1,341 Nemotron calls sent (cached repeats not counted), median 1.6 s each (flight recorder).
+- **Cost and latency:** 1,341 Nemotron calls sent (10,006 including cache hits), median 1.6 s per call sent (flight recorder).
 - **Requests for the platform:** [I fill in]
 
 ## Try it

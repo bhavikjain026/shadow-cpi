@@ -1,11 +1,11 @@
 # Tavily report card
 
-Computed by `tools/prompt_t.py card` from `logs/flight_recorder.jsonl`, `results/credit_ledger.jsonl` and the manifests on 2026-10-21. Credits are Tavily's own per-call `include_usage` counts (the `/usage` endpoint did not update; see FEEDBACK_NOTES.md).
+Computed by `tools/prompt_t.py card` from `logs/flight_recorder.jsonl`, `results/credit_ledger.jsonl` and the manifests on 2026-10-22. Credits are Tavily's own per-call `include_usage` counts (the `/usage` endpoint did not update; see FEEDBACK_NOTES.md).
 
 | Measure | Value |
 | --- | --- |
-| Tavily calls sent (uncached) | 788 (plus 6845 served from the cache) |
-| Credits used (ledger + 160 before it) | 694 of 1500 |
+| Tavily calls sent (uncached) | 787 (plus 6987 served from the cache) |
+| Credits used (ledger + 160 before it, reconciled to the billing page) | 681 of the 1,500-credit plan, plus 3,125 add-on credits |
 | Credits per replay prediction (events + skeptic, mean of 9 months) | 40.3 |
 | Search results inside the requested date window | 1952 of 2535 (77%); 577 undated |
 | Price quotes verified word-for-word (Prompt 2 March run, manifest at f00bd45) | 91 of 93 (98%) |

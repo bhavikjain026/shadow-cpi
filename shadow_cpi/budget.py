@@ -50,6 +50,11 @@ def account_spent(cfg=None, ledger=None, path=LEDGER):
     return cfg["spent_before_ledger"] + sum(e["credits"] for e in entries)
 
 
+def account_limit(cfg):
+    """All credits the account can spend: the monthly plan plus add-on credits (e.g. the Nebius builder program)."""
+    return cfg["plan_limit"] + cfg.get("addon_credits", 0)
+
+
 def cap_of(name, cfg):
     return cfg["caps"][name.split("/")[0]]
 
@@ -92,10 +97,13 @@ class Budgeted:
             s, cap = spent(b, ledger), cap_of(b, self.cfg)
             if s + cost > cap:
                 raise BudgetExceeded(f"budget '{b}': {s} spent + {cost} for the next call > cap {cap}")
-        total, limit = account_spent(self.cfg, ledger), self.cfg["plan_limit"] - self.cfg["reserve"]
+        # the reserve is kept for the seal runs: only budgets in 'reserve_for' may spend it
+        seal = any(b.split("/")[0] in self.cfg.get("reserve_for", []) for b in self.budgets)
+        reserve = 0 if seal else self.cfg["reserve"]
+        total, limit = account_spent(self.cfg, ledger), account_limit(self.cfg) - reserve
         if total + cost > limit:
-            raise BudgetExceeded(f"account: {total} spent + {cost} > {limit} (plan {self.cfg['plan_limit']} "
-                                 f"minus reserve {self.cfg['reserve']})")
+            raise BudgetExceeded(f"account: {total} spent + {cost} > {limit} (plan {self.cfg['plan_limit']} + add-on "
+                                 f"{self.cfg.get('addon_credits', 0)} minus reserve {reserve})")
 
     def _run(self, endpoint, body, fn):
         if self._cached(endpoint, body):

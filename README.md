@@ -20,13 +20,13 @@ official price series it reads (IOCL LPG, PPAC petrol). ([`audit/missed_events.m
 Nemotron only **extracts**: it points to a numbered line on a page, code copies that exact line and checks the number
 is in it. A model never writes a quote, never picks a number and never picks a weight.
 
-| Model ID (Token Factory) | Job | Calls sent |
+| Model ID (Token Factory) | Job | Calls sent (including cache hits) |
 |---|---|---|
-| `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` | Gatekeeper: "does this page state an Indian price or an announced price change?" (yes/no) | 622 |
-| `nvidia/nemotron-3-super-120b-a12b` | Reads a page and lists price quotes and price changes, each citing a numbered line; reads the skeptic's counter-search snippets | 719 |
-| `nvidia/Nemotron-3-Ultra-550b-a55b` | Configured in `config/models.json`, not used: the reporter brief is written by code | 0 |
+| `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` | Gatekeeper: "does this page state an Indian price or an announced price change?" (yes/no) | 622 (4,829) |
+| `nvidia/nemotron-3-super-120b-a12b` | Reads a page and lists price quotes and price changes, each citing a numbered line; reads the skeptic's counter-search snippets | 719 (5,177) |
+| `nvidia/Nemotron-3-Ultra-550b-a55b` | Configured in `config/models.json`, not used: the reporter brief is written by code | 0 (0) |
 
-Calls sent = uncached calls in the flight recorder ([`results/app/flight_recorder.jsonl`](results/app/flight_recorder.jsonl)).
+Calls sent = calls that reached Token Factory; in brackets, the total including cache hits (re-runs served free from the cache), from the flight recorder ([`results/app/flight_recorder.jsonl`](results/app/flight_recorder.jsonl)).
 Token Factory is called at
 [`shadow_cpi/nemotron.py` line 69](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/nemotron.py#L69)
 (`POST /chat/completions` with a JSON schema; plain-JSON fallback on line 78), base URL in
@@ -46,9 +46,9 @@ All requests go through one function,
 | **Search** (evidence chase) | Up to 2 follow-up searches per verified event: the same change elsewhere, and the official notice | [`tools/prompt_t.py` L316](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/tools/prompt_t.py#L316) |
 | **GET /usage** (guard) | Before every live run in the app: refuse below 150 credits left, or if the check fails | [`tavily.py` L70](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/tavily.py#L70), [`live_run.py` L68](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/live_run.py#L68) |
 
-Measured in [`results/tavily_report_card.md`](results/tavily_report_card.md): 788 Tavily calls sent, 694 of 1,500
-credits used, 77% of dated search results inside the requested window. Two sources do not come through Tavily, by
-design: MoSPI's official indices (a JSON API) and the government's daily food prices (behind a CAPTCHA, downloaded by
+Measured in [`results/tavily_report_card.md`](results/tavily_report_card.md): 787 Tavily calls sent, 681 credits used
+(of a 1,500-credit monthly plan plus 3,125 add-on credits), 77% of dated search results inside the requested window.
+Two sources do not come through Tavily, by design: MoSPI's official indices (a JSON API) and the government's daily food prices (behind a CAPTCHA, downloaded by
 hand). Both are logged.
 
 ---

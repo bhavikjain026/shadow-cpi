@@ -16,7 +16,7 @@ import os
 import time
 from datetime import datetime, timedelta, timezone
 
-from .budget import BudgetExceeded, Budgeted, account_spent, cap_of, load_budget, read_ledger
+from .budget import BudgetExceeded, Budgeted, account_limit, account_spent, cap_of, load_budget, read_ledger
 from .settings import ROOT
 
 STATE_FILE = ROOT / "logs" / "live_runs.jsonl"
@@ -51,7 +51,7 @@ def keys():
 
 def credits_left(cfg=None, ledger=None):
     cfg = cfg or load_budget()
-    return cfg["plan_limit"] - account_spent(cfg, read_ledger() if ledger is None else ledger)
+    return account_limit(cfg) - account_spent(cfg, read_ledger() if ledger is None else ledger)
 
 
 def runs_on(day, path=STATE_FILE):

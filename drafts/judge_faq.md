@@ -86,8 +86,8 @@ Two exceptions are logged direct downloads, not Tavily: MoSPI's official indices
 government's daily food prices (behind a CAPTCHA).
 
 Nemotron on Nebius Token Factory only extracts:
-- `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` decides whether a page states an Indian price (622 calls);
-- `nvidia/nemotron-3-super-120b-a12b` lists prices and price changes, each citing a numbered line (719 calls);
+- `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` decides whether a page states an Indian price (622 calls sent; 4,829 including cache hits);
+- `nvidia/nemotron-3-super-120b-a12b` lists prices and price changes, each citing a numbered line (719 calls sent; 5,177 including cache hits);
 - the reporter brief is written by code from computed numbers and verified quotes; no model writes it.
 
 Code checks every cited line word for word and does all the maths.
