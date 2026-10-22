@@ -102,9 +102,10 @@ def page_date(text):
             d = re.search(pat, after)
             if d:
                 try:
-                    found.setdefault(word, set()).add(mk(d).isoformat())
-                except ValueError:
-                    pass
+                    iso = mk(d).isoformat()
+                except ValueError:                      # e.g. "May 32, 2026" or a month name we cannot read
+                    break
+                found.setdefault(word, set()).add(iso)
                 break
     if not found:
         return None, "no explicit published/updated date"

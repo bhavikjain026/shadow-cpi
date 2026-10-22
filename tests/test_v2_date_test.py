@@ -106,3 +106,8 @@ def test_runs_once(tmp_path, monkeypatch):
     monkeypatch.setattr("sys.argv", ["x"])
     with pytest.raises(SystemExit, match="runs once"):
         DT.main()
+
+
+def test_unreadable_date_after_the_word_is_unknown_not_a_crash():
+    assert DT.page_date("Published: Smarch 40, 2026")[0] is None                      # bug fix 2026-10-22
+    assert DT.page_date("Updated: Foo 12, 2026 | Published: May 20, 2026")[0] == "2026-05-20"

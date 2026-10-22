@@ -74,3 +74,5 @@ the same domains (`include_domains` = the English news list in `shadow_cpi/evide
 `results/date_field_test.json` and `results/date_field_test.md`: a one-page plain-English summary with the
 numbers, called a **pilot**. Credit cap **150** (`date-test` in `config/budget.json`); a cap stops it cleanly and
 marks it incomplete. Not run until the Amendment E/F arms have finished.
+
+**Bug fix, 2026-10-22 (logged, before any result was seen).** The first run stopped with an error after its searches, extracts and Wayback lookups, before writing any result: when the text after "published"/"updated" looked like a date but could not be read (e.g. a month name we do not parse), the page-date reader kept an empty entry and then crashed. Fix: such a date now leaves that word with no date (unknown), as the rule says. Re-run from the cache: 0 extra credits, same calls.
