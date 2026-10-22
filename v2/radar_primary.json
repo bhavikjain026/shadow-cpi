@@ -1,0 +1,38 @@
+{
+ "_note": "Primary-source domains for radar corroboration (v2/RADAR_PREREG.md rule 2-3). Any .gov.in or .nic.in domain also counts as primary. Keyed by kind; '*' = any state.",
+ "electricity": {
+  "maharashtra": "mahadiscom.in",
+  "nct of delhi": "derc.gov.in",
+  "uttar pradesh": "uperc.org",
+  "karnataka": "kerc.karnataka.gov.in",
+  "tamil nadu": "tnerc.gov.in",
+  "gujarat": "gercin.org",
+  "madhya pradesh": "mperc.in",
+  "jammu and kashmir": "jkserc.nic.in"
+ },
+ "lpg": {
+  "*": "iocl.com"
+ },
+ "petrol": {
+  "*": "iocl.com"
+ },
+ "diesel": {
+  "*": "iocl.com"
+ },
+ "milk": {
+  "gujarat": "amul.com",
+  "*": "amul.com",
+  "karnataka": "kmfnandini.coop",
+  "tamil nadu": "aavin.tn.gov.in"
+ },
+ "rail": {
+  "*": "indianrailways.gov.in"
+ },
+ "bus": {
+  "maharashtra": "msrtc.maharashtra.gov.in",
+  "karnataka": "ksrtc.in"
+ },
+ "mobile": {
+  "*": "trai.gov.in"
+ }
+}
