@@ -53,3 +53,15 @@ def test_ledger_reconciles_to_the_billing_page():
     led = read_ledger()
     i = next(k for k, e in enumerate(led) if e["call_id"] == "reconcile-2026-10-22")
     assert account_spent(load_budget(), led[:i + 1]) == 681                  # matches the billing page that day
+
+
+def test_credit_ledger_rows_carry_request_id_and_response_sha256(tmp_path):
+    from shadow_cpi.recorder import Recorder, response_sha256
+    from shadow_cpi.tavily import Tavily
+    resp = {"request_id": "req-1", "results": [], "usage": {"credits": 1}}
+    tav = Tavily(api_key="test", recorder=Recorder(cache_dir=tmp_path / "c", log_file=tmp_path / "l.jsonl"),
+                 transport=lambda *a: resp)
+    led = tmp_path / "ledger.jsonl"
+    Budgeted(tav, ["prompt-t"], cfg=cfg(), ledger_path=led).search("q")
+    row = json.loads(led.read_text())
+    assert row["request_id"] == "req-1" and row["response_sha256"] == response_sha256(resp)

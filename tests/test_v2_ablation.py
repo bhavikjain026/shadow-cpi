@@ -157,3 +157,60 @@ def test_diagnostics_and_structured_fields(tmp_path, monkeypatch):
     sf = d["structured_fields"]
     assert sf["searches_checked"] == 8 and sf["with_dates_as_fields"] == 8 and sf["hindi_with_language_field"] == 4
     assert sf["with_domains_as_fields"] == 8 and sf["parameter_names_inside_query_text"] == 0
+
+
+def test_arm_t_sends_b_queries_with_auto_parameters_only(tmp_path, monkeypatch):
+    import json
+    monkeypatch.setattr(LG.save_page, "__defaults__", (tmp_path / "pages",))
+    monkeypatch.setattr(AB, "OUT", tmp_path)
+    plan = [{**AB.validate(good(lang=l, query=f"q{i}"), M, ["en", "hi"])[0], "written_by": "nano", "corrections": []}
+            for i, l in enumerate(["en"] * 4 + ["hi"] * 4)]
+    (tmp_path / f"arm_B_{M}.json").write_text(json.dumps({"plan": plan}))
+
+    class AutoTav(FakeTav):
+        def search(self, query, **kw):
+            resp, sid = super().search(query, **kw)
+            return {**resp, "auto_parameters": {"topic": "news", "search_depth": "advanced"},
+                    "request_id": f"r{self.n}"}, sid
+    meter = AB.Meter(AutoTav())
+    out = AB.run_month("T", M, meter, FakeNem({}), "nano", "super")
+    sent = [c["sent"] for c in meter.calls if c["endpoint"] == "/search"]
+    assert [x["query"] for x in sent] == [f"q{i}" for i in range(8)]
+    assert all(set(x) == {"query", "auto_parameters", "max_results"} and x["auto_parameters"] is True for x in sent)
+    assert meter.calls[0]["auto_parameters"]["search_depth"] == "advanced" and meter.calls[0]["request_id"] == "r1"
+    assert len(meter.calls[0]["response_sha256"]) == 64 and out["plan"][0]["auto_parameters"]["topic"] == "news"
+
+
+def test_equivalence_margin_and_ranking():
+    arms = {"A": {"recall": 6, "credits_per_verified_event": 20.0, "false_events_upper_bound": 3},
+            "B": {"recall": 5, "credits_per_verified_event": 10.0, "false_events_upper_bound": 1},
+            "C": {"recall": 7, "credits_per_verified_event": 30.0, "false_events_upper_bound": 2},
+            "T": {"recall": 4, "credits_per_verified_event": 5.0, "false_events_upper_bound": 0}}
+    eq = AB.equivalence(arms)
+    assert eq["top_group"] == ["A", "C"] and eq["ranking"] == ["A", "C"] and eq["lower_recall"] == ["B", "T"]
+
+
+def test_tavily_auto_parameters_leaves_depth_to_tavily_and_is_budgeted_at_2():
+    from shadow_cpi.budget import call_cost
+    from shadow_cpi.tavily import Tavily
+    seen = {}
+
+    class Rec:
+        def call(self, service, endpoint, body, fn, parent=None, tag=None):
+            seen.update(body)
+            return {}, "id"
+    Tavily(api_key="test", recorder=Rec()).search("q", auto_parameters=True, max_results=10)
+    assert "search_depth" not in seen and seen["auto_parameters"] is True
+    assert call_cost("/search", {"query": "q", "auto_parameters": True}) == 2
+
+
+def test_recorder_stores_request_id_and_response_sha256(tmp_path):
+    import json
+    from shadow_cpi.recorder import Recorder, response_sha256
+    rec = Recorder(cache_dir=tmp_path / "c", log_file=tmp_path / "log.jsonl")
+    resp = {"request_id": "abc", "results": [], "usage": {"credits": 1}}
+    rec.call("tavily", "/search", {"query": "q"}, lambda: resp)
+    e = json.loads((tmp_path / "log.jsonl").read_text())
+    assert e["request_id"] == "abc" and e["response_sha256"] == response_sha256(resp)
+    assert rec.provenance[0]["request_id"] == "abc" and rec.provenance[0]["service"] == "tavily"
+    assert response_sha256({"b": 1, "a": 2}) == response_sha256({"a": 2, "b": 1})

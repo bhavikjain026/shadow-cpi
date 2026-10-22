@@ -126,7 +126,8 @@ def build(month, cutoff, cache_only=True, run_skeptic=False):
                                        "coverage_with": pc["coverage_observed"]},
                 "evidence": pc["evidence"], "inputs": notes, "missing_inputs": missing,
                 "manifest": f"manifests/{month}.json", "code_commit": E.code_commit(), "model_ids": models(),
-                "credits_live_month": spent("live-month")})
+                "credits_live_month": spent("live-month"),
+                "tavily_provenance": [p for p in rec.provenance if p["service"] == "tavily"]})   # Amendment F
     return out
 
 

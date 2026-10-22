@@ -27,6 +27,18 @@ def request_hash(service, endpoint, body):
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
 
+def response_sha256(response):
+    """SHA-256 of a response: its JSON with sorted keys, no spaces, UTF-8 (Amendment F provenance)."""
+    blob = json.dumps(response, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+
+
+def provenance(response):
+    """{'request_id', 'response_sha256'} for one response (request_id is Tavily's own, None if absent)."""
+    rid = response.get("request_id") if isinstance(response, dict) else None
+    return {"request_id": rid, "response_sha256": response_sha256(response)}
+
+
 def _summary(body):
     out = {}
     for k in SUMMARY_KEYS:
@@ -56,6 +68,7 @@ class Recorder:
         self.cache_dir = Path(cache_dir)
         self.log_file = Path(log_file)
         self.use_cache = use_cache
+        self.provenance = []                      # every call made through this recorder (Amendment F)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.log_file.parent.mkdir(parents=True, exist_ok=True)
 
@@ -82,7 +95,9 @@ class Recorder:
         entry = {"id": call_id, "time": datetime.now(timezone.utc).isoformat(), "service": service,
                  "endpoint": endpoint, "params": _summary(body), "cached": cached,
                  "latency_ms": int((time.time() - started) * 1000), "parent": parent, "tag": tag,
-                 "cache_key": h, **_counts(response)}
+                 "cache_key": h, **_counts(response), **provenance(response)}
+        self.provenance.append({k: entry[k] for k in ("id", "service", "endpoint", "cached", "request_id",
+                                                       "response_sha256")})
         with self.log_file.open("a", encoding="utf-8") as f:
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
         return response, call_id

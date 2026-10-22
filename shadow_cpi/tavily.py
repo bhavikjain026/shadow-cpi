@@ -31,7 +31,8 @@ class Tavily:
         max_results, start_date/end_date (YYYY-MM-DD), filter_by_published_date, language,
         filter_by_language, country (general topic only), include_domains, include_domains_mode
         ('restrict'|'prefer'), exclude_domains, exact_match, chunks_per_source, include_raw_content."""
-        params.setdefault("search_depth", "basic")
+        if not params.get("auto_parameters"):          # with auto_parameters Tavily chooses the depth
+            params.setdefault("search_depth", "basic")
         return self._post("/search", {"query": query, **params}, parent, tag)
 
     def extract(self, urls, *, parent=None, tag=None, **params):

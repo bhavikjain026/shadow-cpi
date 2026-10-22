@@ -161,6 +161,7 @@ def main():
               "credits_this_run": tav.used, "budgets": tav.budgets,
               "seconds": round(time.time() - t0)}
     manifest = E.build_manifest(month, quotes, qstats, events, estats, observed, spine_rows, detail)
+    manifest["tavily_provenance"] = [p for p in rec.provenance if p["service"] == "tavily"]   # Amendment F
     E.write_manifest(month, manifest)
     E.EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
     (E.EVIDENCE_DIR / f"{month}_trace.json").write_text(json.dumps(

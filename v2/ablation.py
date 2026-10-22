@@ -4,7 +4,8 @@
     python -m v2.ablation A          # fixed templates (the 13 Amendment C queries), cache only, 0 new credits
     python -m v2.ablation B          # Nemotron writes 8 searches a month, English + Hindi (cap 'v2-ablation-B')
     python -m v2.ablation C          # Nemotron writes 13 searches a month, + 5 regional languages ('v2-ablation-C')
-    python -m v2.ablation --metrics  # once all three arms have run: results/v2_ablation.json and .md
+    python -m v2.ablation T          # Amendment F: B's query texts with Tavily auto_parameters ('v2-ablation-T')
+    python -m v2.ablation --metrics  # once all four arms have run: results/v2_ablation.json and .md
 
 Each arm runs once on Jan-Sep 2026 with the same reader and verifier as issue 14 (v2.pipeline). For arms B and C,
 Nano (Super as fallback) writes each search's parameters as JSON; code validates every parameter (validate) before
@@ -22,6 +23,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from shadow_cpi.budget import BudgetExceeded, Budgeted, spent  # noqa: E402
 from shadow_cpi.nemotron import Nemotron  # noqa: E402
+from shadow_cpi.recorder import provenance  # noqa: E402
 from shadow_cpi.recorder import Recorder  # noqa: E402
 from shadow_cpi.settings import models  # noqa: E402
 from shadow_cpi.tavily import Tavily  # noqa: E402
@@ -41,7 +43,10 @@ ARMS = {
     "B": {"writer": "Nemotron", "langs": ["en", "hi"], "n": 8, "min": {"en": 3, "hi": 3}, "budget": "v2-ablation-B"},
     "C": {"writer": "Nemotron", "langs": list(LANG_NAMES), "n": 13,
           "min": {"en": 3, "hi": 3, **{l: 1 for l in REGIONAL}}, "budget": "v2-ablation-C"},
+    "T": {"writer": "Tavily auto_parameters (B's query texts)", "langs": ["en", "hi"], "n": 8,
+          "budget": "v2-ablation-T"},
 }
+AUTO_MAX_RESULTS = 10                    # Amendment F: Tavily needs max_results from the caller; 10 as in arm A
 MOVES = {k for k, v in K.KINDS.items() if v["role"] == "moves"}
 CPI_NAMES = {"electricity": "electricity charges", "milk": "liquid milk", "lpg": "LPG cylinder", "diesel": "diesel",
              "petrol": "petrol", "metro": "metro fares", "bus": "bus fares", "rail": "rail fares",
@@ -181,7 +186,8 @@ class Meter:
         self.calls.append({"endpoint": endpoint, "call_id": cid, "sent": params,
                            "credits": (resp.get("usage") or {}).get("credits") or 0,
                            "new_credits": self.tav.used - before, "response_time": resp.get("response_time"),
-                           "n_results": len(resp.get("results", []))})
+                           "n_results": len(resp.get("results", [])), **provenance(resp),
+                           "auto_parameters": resp.get("auto_parameters")})
         return resp, cid
 
     def search(self, query, **params):
@@ -210,6 +216,21 @@ def run_month(arm, month, meter, nem, nano, sup):
     if arm == "A":
         cards = PL.propose(meter, nem, nano, K.QUERIES, month, tag, seen, domains=K.DOMAINS, max_results=10,
                            skipped=skipped)
+    elif arm == "T":
+        b = json.loads((OUT / f"arm_B_{month}.json").read_text(encoding="utf-8"))
+        plan, cards = [], []
+        for bs in b["plan"]:
+            s = {"query": bs["query"], "language": bs["language"], "from_arm_b": True,
+                 "sent": {"auto_parameters": True, "max_results": AUTO_MAX_RESULTS}}
+            plan.append(s)
+            try:
+                resp, sid = meter.search(s["query"], **s["sent"], tag=f"{tag} search")
+            except BudgetExceeded as e:
+                skipped.append({"call": "search", "lang": s["language"], "query": s["query"], "why": str(e)})
+                continue
+            s.update(search_call=sid, n_results=len(resp.get("results", [])),
+                     auto_parameters=resp.get("auto_parameters"))
+            cards += PL.read_results(resp, sid, s["language"], month, nem, nano, tag, seen)
     else:
         plan, complete, tries = write_plan(nem, month, arm, nano, sup, tag)
         cards = []
@@ -329,7 +350,8 @@ def diagnostics(runs, bodies=None):
            "super_rereads": sum(bool(c.get("super_reread")) for r in runs for c in r["cards"]),
            "plan_abstentions": sum(len(t["picked"]) < ARMS[r["arm"]]["n"] for r in runs for t in r["plan_tries"]),
            "reader_abstentions": sum(c["reason"] == "Nano found no price in the search text" for c in in_window),
-           "pages_read": len(in_window)}
+           "pages_read": len(in_window),
+           "auto_parameters_returned": sum(c.get("auto_parameters") is not None for c in searches)}
     if bodies is not None and plans:
         leaks = [b["query"] for b in bodies for k in STRUCTURED if f"{k}" in b["query"]]
         out["structured_fields"] = {
@@ -340,6 +362,18 @@ def diagnostics(runs, bodies=None):
             "hindi_with_language_field": sum(b.get("language") == "hi" for b in bodies),
             "parameter_names_inside_query_text": len(leaks)}
     return out
+
+
+def equivalence(arms):
+    """Amendment F: arms within 1 of the best recall are about equal; rank them by credits per verified event (lower
+    first), then false events (lower first)."""
+    best = max(a["recall"] for a in arms.values())
+    top = [k for k, a in arms.items() if a["recall"] >= best - 1]
+    rank = sorted(top, key=lambda k: (arms[k]["credits_per_verified_event"] is None,
+                                      arms[k]["credits_per_verified_event"] or 0,
+                                      arms[k]["false_events_upper_bound"]))
+    return {"margin": 1, "best_recall": best, "top_group": top, "ranking": rank,
+            "lower_recall": [k for k in arms if k not in top]}
 
 
 def summarise():
@@ -354,6 +388,7 @@ def summarise():
             raise SystemExit(f"arm {arm} has {len(runs)} of {len(MONTHS)} months; run every arm first")
         out["arms"][arm] = {"writer": ARMS[arm]["writer"], "languages": ARMS[arm]["langs"], **metrics(runs),
                             "diagnostics": diagnostics(runs, sent_bodies(runs))}
+    out["equivalence"] = equivalence(out["arms"])
     RESULTS.write_text(json.dumps(out, ensure_ascii=False, indent=1))
     lines = ["# Search-parameter ablation (Amendment E)", "",
              f"**DEVELOPMENT data**, Jan–Sep 2026, computed {out['computed_utc'][:16]} UTC by `python -m v2.ablation "
@@ -367,6 +402,11 @@ def summarise():
         lines.append(f"| {arm} | {a['writer']} ({', '.join(a['languages'])}) | {a['recall']} of {a['total']} | "
                      f"{a['false_events_upper_bound']} of {a['moving_events']} | {cpe} | {lat} | {a['credits']} "
                      f"({a['new_credits']}) | {', '.join(a['incomplete_months']) or 'none'} |")
+    eq = out["equivalence"]
+    lines += ["", f"**Verdict (Amendment F, margin ±1 known change):** about equal on recall: "
+              f"{', '.join(eq['top_group'])}; ranked within that group by credits per verified event, then false "
+              f"events: {' > '.join(eq['ranking'])}." + (f" Lower recall: {', '.join(eq['lower_recall'])}."
+                                                         if eq["lower_recall"] else "")]
     lines += ["", "**Diagnostics (reported only, addendum to Amendment E; no target):**", "",
               "| Arm | Duplicate results | Duplicate verified claims | Params corrected by code | Searches dropped "
               "by code | Plan retries (Super) | Super re-reads | Plan abstentions | Reader abstentions (of pages "

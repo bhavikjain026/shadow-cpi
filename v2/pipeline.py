@@ -9,6 +9,7 @@ from urllib.parse import urlparse
 from shadow_cpi import evidence as E
 from shadow_cpi.budget import BudgetExceeded
 from shadow_cpi.event_rules import absolute_change, base_price, normalise_date
+from shadow_cpi.recorder import provenance
 from shadow_cpi.tavily import best_date, iso_date
 from shadow_cpi.verify import norm, split_lines
 from v2 import ledger as LG
@@ -96,6 +97,7 @@ def read_results(resp, sid, lang, month, nem, nano, tag, seen):
         card = {"url": r["url"], "domain": urlparse(r["url"]).netloc.removeprefix("www."),
                 "title": r.get("title") or "", "lang": lang, "published": d or None, "search_call": sid,
                 "tavily_published": iso_date(r.get("published_date")) or None,
+                **{f"search_{k}": v for k, v in provenance(resp).items()},
                 "status": "rejected", "reason": "", "claims": []}
         cards.append(card)
         if not d or d > end or d < start:
@@ -150,6 +152,7 @@ def fetch_and_verify(tav, nem, nano, cards, month, words, units, state, kind, ta
         pages = {p["url"]: p.get("raw_content") or "" for p in resp.get("results", [])}
         for c in batch:
             c["extract_call"] = eid
+            c.update({f"extract_{k}": v for k, v in provenance(resp).items()})
             text = pages.get(c["url"], "")
             if not text:
                 c["reason"] = "Tavily Extract could not fetch the page"
@@ -201,6 +204,12 @@ def fetch_and_verify(tav, nem, nano, cards, month, words, units, state, kind, ta
                 c["reason"] = next((cl["reason"] for cl in c["claims"] if cl.get("reason")), "no claim to check")
 
 
+def ids(card):
+    """Amendment F provenance for a ledger row: Tavily request ids and response SHA-256s of the search and extract."""
+    return {k: card.get(k) for k in ("search_request_id", "search_response_sha256", "extract_request_id",
+                                     "extract_response_sha256")}
+
+
 def ledger_rows(cards, month, cpi_code, cpi_name, kind, state, model):
     """One evidence-ledger row per checked claim (verified or rejected)."""
     for c in cards:
@@ -217,4 +226,4 @@ def ledger_rows(cards, month, cpi_code, cpi_name, kind, state, model):
                        "found_date": c["found"], "line": cl["line"], "url": c["url"], "page_sha256": c["page_sha256"],
                        "page_file": c["page_file"], "status": cl["status"], "reason": cl["reason"],
                        "use": cl.get("use", ""), "search_call": c["search_call"], "extract_call": c["extract_call"],
-                       "model": cl.get("read_by") or model})
+                       **ids(c), "model": cl.get("read_by") or model})

@@ -34,7 +34,7 @@ def run_month(month, tav, nem, nano, super_model, tag="v2:events", skipped=None)
                        "effective_date": cl.get("effective_date"), "found_date": c["found"], "line": cl["line"],
                        "url": c["url"], "page_sha256": c["page_sha256"], "page_file": c["page_file"],
                        "status": cl["status"], "reason": cl["reason"], "use": cfg.get("role", ""),
-                       "search_call": c["search_call"], "extract_call": c["extract_call"],
+                       "search_call": c["search_call"], "extract_call": c["extract_call"], **PL.ids(c),
                        "model": cl.get("read_by") or nano})
     out = {"month": month, "cutoff": R.cutoff(month), "window": list(R.window(month)), "queries": K.QUERIES,
            "cards": cards, "skipped": skipped or [], "complete": not skipped}

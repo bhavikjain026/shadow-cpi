@@ -12,7 +12,7 @@ import math
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .recorder import request_hash
+from .recorder import provenance, request_hash
 from .settings import ROOT
 
 BUDGET_FILE = ROOT / "config" / "budget.json"
@@ -63,7 +63,7 @@ def call_cost(endpoint, body):
     """Upper bound for one call. Search: basic 1, advanced 2. Extract: 1 (basic) or 2 (advanced) per 5 URLs.
     Map: 1 per 10 pages (2 with instructions). Crawl: map cost + extract cost, for `limit` pages."""
     if endpoint == "/search":
-        return 2 if body.get("search_depth") == "advanced" else 1
+        return 2 if body.get("search_depth") == "advanced" or body.get("auto_parameters") else 1
     if endpoint == "/extract":
         return (2 if body.get("extract_depth") == "advanced" else 1) * math.ceil(len(body.get("urls", [])) / 5)
     limit = body.get("limit", 50)
@@ -117,7 +117,7 @@ class Budgeted:
         self.ledger_path.parent.mkdir(parents=True, exist_ok=True)
         with self.ledger_path.open("a", encoding="utf-8") as f:
             f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(), "call_id": cid, "endpoint": endpoint,
-                                "credits": credits, "budgets": self.budgets}) + "\n")
+                                "credits": credits, "budgets": self.budgets, **provenance(resp)}) + "\n")
         return resp, cid
 
     @staticmethod
