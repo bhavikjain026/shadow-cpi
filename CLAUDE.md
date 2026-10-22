@@ -14,6 +14,26 @@ The owner (Shweta) does not code. Explain results in plain English, show PASS/FA
 7. Refuse to run with 2012-series weights (food weight ≈ 45.86% instead of ≈ 36.75%).
 8. Keys live only in `.env` (git-ignored) or hosting secrets.
 
+## Task protocol
+1. One task at a time. If a long run is in the background, only do offline work (tests, code, docs) until it ends.
+2. Before any run that can change a scored or sealed number: write the rule in the relevant pre-registration file and commit it with a timestamp first. State the commit in the report.
+3. Build and test offline first (fake Tavily/Nemotron, 0 credits). Then do one real run under the task's credit cap. Hard caps in config/budget.json; stop cleanly at the cap and mark work incomplete instead of exceeding it.
+4. Never edit results after seeing them, except logged bug fixes with scores before and after.
+5. Every number shown in the app or docs must be read from a results file, never typed. If app and docs disagree, fix both in the same task.
+6. Do not ask for, print or store API keys. Never enable paid usage or pay-as-you-go anywhere.
+7. End every task with the REPORT format below, then stop and wait.
+
+REPORT format (keep it under 40 lines, plain English):
+- DONE: one line on what changed, plus commit hashes
+- DECISIONS NEEDED: at most 3, each with options and your recommended option first (or "none")
+- NUMBERS: any number that changed, as old → new (source file)
+- CREDITS: Tavily used this task / left above the reserve; Nemotron calls sent
+- TESTS: count passing; key scan clean yes/no
+- RULES: pre-registered before running? yes/no/not applicable
+- DEVIATIONS: anything done differently from the task card, and why
+- APP: what to look at on the live app, if anything changed
+- NEXT: the obvious next task
+
 ## Build order
 All build prompts are in **PROMPTS.md** in this folder (no sign-in needed). Prompt 0 is implemented as `checks.py`. Next: Prompt 1 (official data + baselines; files go in `data/official/`), Prompt 2 (evidence engine), Prompt T (Tavily at the centre), Prompt 3 (replay + go/no-go), Prompt 4 (app), Prompt 5 (seal), Prompt 6 (deploy).
 
