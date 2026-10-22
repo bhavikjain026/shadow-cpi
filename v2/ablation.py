@@ -498,6 +498,12 @@ def t_dates_section(ref):
             f"auto time range; {inside} of {dated} dated results fell inside the window."]
 
 
+def hand_checks():
+    """The hand check of audit/arms_unmatched.md (audit/arms_unmatched_check.json), or [] if not done yet."""
+    p = ROOT / "audit" / "arms_unmatched_check.json"
+    return json.loads(p.read_text(encoding="utf-8"))["checks"] if p.exists() else []
+
+
 def write_report():
     """Rewrites results/v2_ablation.md from results/v2_ablation.json and the arm files: corrected labels, the
     reconciliation table, provenance, notes. No metric is recomputed and no number in the JSON changes."""
@@ -576,6 +582,21 @@ def write_report():
           "- Credits per known change found (credits ÷ recall) was added after scoring, as a second credit column; "
           "it is descriptive and cannot change the verdict.",
           "- Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a hand check."]
+    checks = hand_checks()
+    if checks:
+        from collections import Counter
+        n = Counter(c["verdict"] for c in checks)
+        real = [c for c in checks if c["verdict"].startswith("real")]
+        L.append(f"- **Hand check of the {len(checks)} unmatched events** (cached page text only; "
+                 "`audit/arms_unmatched_check.json`): " + ", ".join(f"{v} {k}" for k, v in n.most_common()) + ". "
+                 + "By arm: " + "; ".join(f"{a}: {sum(c['arm'] == a and c['verdict'].startswith('real') for c in checks)}"
+                                          f" real of {sum(c['arm'] == a for c in checks)}"
+                                          for a in sorted({c['arm'] for c in checks})) + ". "
+                 f"The {len(real)} real rows are {len({(c['month'], c['item']) for c in real})} distinct changes "
+                 "missing from the 29 (" + "; ".join(sorted({c['reason'].split(' (')[0].split(';')[0] for c in real
+                                                             if 'same' not in c['reason'] and 'duplicate' not in c['reason']}))
+                 + "). The wrong rows are mostly non-Indian pages, non-domestic or commercial LPG, and lines about a "
+                 "different item. The 29 and every verdict are unchanged: this is reported only.")
     L += t_dates_section(ref)
     RESULTS.with_suffix(".md").write_text("\n".join(L) + "\n")
     A = ["# Verified events not matched to the 29 known changes (four search arms)", "",
@@ -587,8 +608,12 @@ def write_report():
     for arm, r in rec.items():
         for u in r["unmatched"]:
             q = u["quote"].replace("|", "/").replace("\n", " ")[:220]
+            hc = next((c for c in checks if (c["arm"], c["month"], c["item"], c["effective_date"], c["url"])
+                       == (arm, u["month"], u["item"], u["effective_date"], u["url"]) and q.startswith(c["quote_start"])),
+                      None)
             A.append(f"| {arm} | {u['month']} | {u['item']} | {u['effective_date']} | {', '.join(u['states']) or '—'} "
-                     f"| {q} | {u['url']} | {u['page_date'] or '—'} | {u['printed_date'] or '—'} | |")
+                     f"| {q} | {u['url']} | {u['page_date'] or '—'} | {u['printed_date'] or '—'} | "
+                     + (f"**{hc['verdict']}**: {hc['reason']}" if hc else "") + " |")
     (ROOT / "audit" / "arms_unmatched.md").write_text("\n".join(A) + "\n")
     return rec
 

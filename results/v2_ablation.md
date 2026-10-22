@@ -49,3 +49,4 @@ Arm A's credits are those of its calls when first made, in the issue 4 and issue
 - Median latency was pre-registered as Amendment E metric 4, with no target; it is descriptive only and plays no part in the verdict.
 - Credits per known change found (credits ÷ recall) was added after scoring, as a second credit column; it is descriptive and cannot change the verdict.
 - Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a hand check.
+- **Hand check of the 23 unmatched events** (cached page text only; `audit/arms_unmatched_check.json`): 16 wrong, 7 real (missing from the 29). By arm: A: 3 real of 10; B: 3 real of 7; C: 1 real of 6. The 7 real rows are 3 distinct changes missing from the 29 (Bengaluru Metro; Gokul full-cream; MSRTC). The wrong rows are mostly non-Indian pages, non-domestic or commercial LPG, and lines about a different item. The 29 and every verdict are unchanged: this is reported only.
