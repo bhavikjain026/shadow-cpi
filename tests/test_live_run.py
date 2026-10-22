@@ -16,7 +16,7 @@ CFG = load_budget()
 def switched_on_no_network(monkeypatch):
     """Gate tests run with the switch ON and a fake /usage (plenty left); no test may reach Tavily."""
     monkeypatch.setenv("RUN_LIVE_ENABLED", "1")
-    monkeypatch.setattr(L, "usage_remaining", lambda key, fetch=None: (1000, ""))
+    monkeypatch.setattr(L, "usage_remaining", lambda *a, **k: (1000, ""))
     monkeypatch.setattr("shadow_cpi.tavily.Tavily.usage", lambda self, tag=None: pytest.fail("network call"))
 
 
@@ -115,8 +115,23 @@ USAGE = {"key": {"usage": 596, "limit": None}, "account": {"current_plan": "x", 
                                                           "paygo_usage": 0, "paygo_limit": None}}
 
 
+NO_ADDON = {**CFG, "addon_credits": 0}
+
+
 def test_usage_remaining_reads_account_limit_minus_usage():
-    assert REAL_USAGE("k", fetch=lambda: USAGE) == (904, "")
+    assert REAL_USAGE("k", fetch=lambda: USAGE, cfg=NO_ADDON, ledger=[]) == (904, "")
+
+
+def test_usage_remaining_adds_unused_addon_credits():
+    # plan 596 of 1,500 used; ledger spending below the plan limit -> no add-on used yet
+    assert REAL_USAGE("k", fetch=lambda: USAGE, cfg=CFG, ledger=[]) == (904 + CFG["addon_credits"], "")
+
+
+def test_addon_counts_as_used_only_beyond_the_plan_limit():
+    base = CFG["spent_before_ledger"]
+    assert L.addon_left(CFG, ledger(1000 - base), 1000) == CFG["addon_credits"]           # plan just used up
+    assert L.addon_left(CFG, ledger(1200 - base), 1000) == CFG["addon_credits"] - 200     # 200 beyond the plan
+    assert L.addon_left(CFG, ledger(9999), 1000) == 0
 
 
 @pytest.mark.parametrize("resp, why", [({"key": {"usage": 5, "limit": None}}, "no credit limit"),
@@ -146,11 +161,36 @@ def test_gate_refuses_when_usage_fails_or_balance_low(tmp_path, monkeypatch):
     assert not ok and "usage check failed (TimeoutError)" in msg
     ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, ledger(0), have_keys=True, usage_fetch=lambda: {"key": {}})
     assert not ok and "no credit limit" in msg
-    low = {"account": {"plan_limit": 1500, "plan_usage": 1351}}                # 149 left
-    ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, ledger(0), have_keys=True, usage_fetch=lambda: low)
+    low = {"account": {"plan_limit": 1500, "plan_usage": 1351}}                # 149 left, no add-on
+    ok, msg = L.gate(0, NOW, tmp_path / "r", NO_ADDON, ledger(0), have_keys=True, usage_fetch=lambda: low)
     assert not ok and "fewer than 150 credits" in msg
     edge = {"account": {"plan_limit": 1500, "plan_usage": 1350}}               # exactly 150 left
-    assert L.gate(0, NOW, tmp_path / "r", CFG, ledger(0), have_keys=True, usage_fetch=lambda: edge) == (True, "")
+    assert L.gate(0, NOW, tmp_path / "r", NO_ADDON, ledger(0), have_keys=True,
+                  usage_fetch=lambda: edge) == (True, "")
+
+
+def test_plan_exhausted_but_addon_left_is_allowed(tmp_path, monkeypatch):
+    monkeypatch.setattr(L, "usage_remaining", REAL_USAGE)
+    plan_done = {"account": {"plan_limit": 1000, "plan_usage": 1000}}         # /usage: plan used up
+    spent = ledger(1000 - CFG["spent_before_ledger"])                         # ledger agrees: 1,000 spent
+    assert L.gate(0, NOW, tmp_path / "r", CFG, spent, have_keys=True, usage_fetch=lambda: plan_done) == (True, "")
+
+
+def test_plan_and_addon_both_low_is_refused(tmp_path, monkeypatch):
+    monkeypatch.setattr(L, "usage_remaining", REAL_USAGE)
+    plan_done = {"account": {"plan_limit": 1000, "plan_usage": 1000}}
+    spent = ledger(1000 + CFG["addon_credits"] - 125 - CFG["spent_before_ledger"])   # 125 add-on credits left
+    ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, spent, have_keys=True, usage_fetch=lambda: plan_done)
+    assert not ok and "fewer than 150 credits" in msg
+
+
+def test_usage_failure_is_refused_even_with_addon_left(tmp_path, monkeypatch):
+    monkeypatch.setattr(L, "usage_remaining", REAL_USAGE)
+
+    def down():
+        raise ConnectionError("tavily down")
+    ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, ledger(0), have_keys=True, usage_fetch=down)
+    assert not ok and "usage check failed (ConnectionError)" in msg
 
 
 def test_ledger_check_still_applies_when_usage_is_fine(tmp_path):

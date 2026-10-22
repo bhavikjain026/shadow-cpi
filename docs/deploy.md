@@ -82,10 +82,15 @@ before each push that should change what the app shows (step 1).
 - **/usage does not count add-on credits (checked 22 Oct).** The account has the monthly plan (681 of 1,500 used on
   the billing page) plus 3,125 add-on credits from the Nebius builder program, with pay-as-you-go off. GET /usage
   returns only `account.plan_limit` (1000, not the 1,500 on the billing page), `plan_usage` (681), `paygo_limit`
-  (null) and `paygo_usage` (0): no add-on field. So the live-run guard sees about 319 credits left, not 3,944, and
-  will pause live runs once the plan alone is within 150 credits of its /usage limit. That is the safe direction, so
-  the guard is unchanged; when the plan resets each month, /usage drops back and live runs resume. The ledger check
-  in the app counts the plan and the add-on (`config/budget.json`), and keeps 150 credits for the October and
-  November seals.
+  (null) and `paygo_usage` (0): no add-on field. So before every live run the app computes
+  **remaining = (plan_limit − plan_usage, from GET /usage) + (add-on credits in `config/budget.json` − add-on
+  credits used, from the ledger)** and refuses the run below 150. If /usage fails or returns no limit, the run is
+  refused. Today that is 319 + 3,125 = 3,444.
+- **Assumption: Tavily spends plan credits before add-on credits.** So add-on credits count as used only for
+  spending beyond the plan limit that /usage reports (ledger total, reconciled to the billing page, minus that limit).
+  The ledger is cumulative: after the monthly plan reset, add-on credits already counted as used stay counted, and
+  the /usage limit of 1,000 is lower than the billing page's 1,500. Both err towards refusing a run, never towards
+  overspending. If Tavily's billing page ever shows add-on credits being spent while plan credits remain, this
+  assumption is wrong: lower `addon_credits` in `config/budget.json` to what the billing page shows.
 - **Untested on Python 3.12 at run time.** The code was tested on Python 3.14 here; a 3.12 grammar check of every
   file passed. If the build fails, delete the app and redeploy with Python 3.13 (the version is set at deploy time).

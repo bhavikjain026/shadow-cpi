@@ -2,7 +2,8 @@
 
 Off unless RUN_LIVE_ENABLED is set (a Streamlit Cloud secret). Caps (config/budget.json, plans.app_live): at
 most `per_session` runs per visitor session, `per_day` runs per UTC day for the whole app, none when the ledger balance
-would fall below `credit_floor`, and none unless Tavily's own GET /usage reports at least `usage_floor` credits left
+would fall below `credit_floor`, and none unless the plan credits left by Tavily's own GET /usage plus the add-on
+credits left (config minus ledger) come to at least `usage_floor`
 (checked before every run; a failed check or a missing limit refuses the run). Each run is also held to
 the hard caps 'run-now' (total) and 'run-now-scan' (one scan) by shadow_cpi.budget. A run that is refused or fails
 never raises to the page: the app shows the saved run with the message.
@@ -65,9 +66,19 @@ def enabled():
     return (setting("RUN_LIVE_ENABLED") or "").strip().lower() in ("1", "true", "yes", "on")
 
 
-def usage_remaining(tavily_key, fetch=None):
-    """(remaining credits, '') from Tavily's GET /usage (account.plan_limit - account.plan_usage), or (None, reason)
-    when the call fails or returns no limit. fetch: for tests (returns the parsed response)."""
+def addon_left(cfg, ledger, plan_limit):
+    """Add-on credits (config/budget.json `addon_credits`) not yet used. Assumption (docs/deploy.md): Tavily spends
+    plan credits first, so add-on credits count as used only for spending beyond the plan limit; spending comes from
+    the ledger (account_spent, reconciled to the billing page). The ledger is cumulative, so after a monthly plan
+    reset add-on credits already counted as used stay used (the safe direction)."""
+    used = max(0, account_spent(cfg, ledger) - plan_limit)
+    return max(0, cfg.get("addon_credits", 0) - used)
+
+
+def usage_remaining(tavily_key, fetch=None, cfg=None, ledger=None):
+    """(remaining credits, '') = plan credits left from Tavily's GET /usage (account.plan_limit - account.plan_usage)
+    + add-on credits left (addon_left). (None, reason) when the call fails or returns no limit: fail closed.
+    fetch: for tests (returns the parsed response)."""
     try:
         if fetch:
             resp = fetch()
@@ -78,7 +89,9 @@ def usage_remaining(tavily_key, fetch=None):
         limit, used = acc.get("plan_limit"), acc.get("plan_usage")
         if not isinstance(limit, (int, float)) or not isinstance(used, (int, float)):
             return None, "Tavily's usage check returned no credit limit"
-        return limit - used, ""
+        cfg = cfg or load_budget()
+        led = read_ledger() if ledger is None else ledger
+        return max(0, limit - used) + addon_left(cfg, led, limit), ""
     except Exception as e:                                      # fail closed
         return None, f"Tavily's usage check failed ({type(e).__name__})"
 
@@ -107,12 +120,12 @@ def gate(session_runs, now=None, path=STATE_FILE, cfg=None, ledger=None, have_ke
     spent_live = sum(e["credits"] for e in (read_ledger() if ledger is None else ledger) if "run-now" in e["budgets"])
     if spent_live + cap_of("run-now-scan", cfg) > cap_of("run-now", cfg):
         return False, f"The app's live-run credit budget is used up ({spent_live} credits). Showing the saved run."
-    remaining, why = usage_remaining(k[0], usage_fetch)
+    remaining, why = usage_remaining(k[0], usage_fetch, cfg, ledger)
     if remaining is None:
         return False, f"Live runs are paused: {why}. Showing the saved run."
     if remaining < lim["usage_floor"]:
-        return False, (f"Live runs are paused: Tavily reports fewer than {lim['usage_floor']} credits left. "
-                       "Showing the saved run.")
+        return False, (f"Live runs are paused: fewer than {lim['usage_floor']} credits left (Tavily plan plus add-on "
+                       "credits). Showing the saved run.")
     return True, ""
 
 

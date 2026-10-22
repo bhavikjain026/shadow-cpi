@@ -258,3 +258,10 @@ def test_home_scan_table_has_source_column():
     scan = at.dataframe[-1].value
     assert list(scan.columns[:2]) == ["Item", "Source"]
     assert not any(str(l).startswith("#") for l in scan["Exact line"])
+
+
+def test_flight_recorder_labels_credits_against_billing():
+    from shadow_cpi.budget import account_spent, load_budget, read_ledger
+    at = load("flight_recorder")
+    billed = account_spent(load_budget(), read_ledger())
+    assert any(f"by Tavily's per-call counts (billing shows {billed:,})" in c.value for c in at.caption)
