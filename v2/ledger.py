@@ -6,9 +6,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent / "evidence"
 LEDGER = ROOT / "ledger.jsonl"
 PAGES = ROOT / "pages"
-FIELDS = ("id", "month", "cutoff", "cpi_item", "cpi_name", "item", "place", "state", "unit", "price_type", "price",
-          "old_price", "new_price", "change", "published_date", "effective_date", "found_date", "line", "url",
-          "page_sha256", "page_file", "status", "reason", "search_call", "extract_call", "model")
+FIELDS = ("id", "month", "cutoff", "cpi_item", "cpi_name", "item", "kind", "place", "state", "unit", "price_type",
+          "price", "old_price", "new_price", "change", "published_date", "effective_date", "found_date", "line", "url",
+          "page_sha256", "page_file", "status", "reason", "use", "search_call", "extract_call", "model")
 REQUIRED = ("month", "cpi_item", "url", "line", "status", "reason", "published_date", "found_date")
 
 

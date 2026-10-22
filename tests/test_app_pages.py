@@ -269,11 +269,12 @@ def test_flight_recorder_labels_credits_against_billing():
 
 
 def test_live_build_streams_cards_and_moves_the_needle():
-    run = json.loads(sorted((ROOT / "v2" / "evidence").glob("run_*.json"))[-1].read_text(encoding="utf-8"))
+    run = json.loads((ROOT / "v2" / "evidence" / "run_2026-09_basket.json").read_text(encoding="utf-8"))
     at = load("live_build")
-    nd = run["needle"]
-    assert [m.value for m in at.metric] == [f"{nd['after']:.3f}%"]
+    assert [m.value for m in at.metric] == [f"{run['needle']['end']:.3f}%",
+                                            f"{run['measured_share']:.1%} of the basket"]
     text = all_text(at)
-    assert f"{nd['n_verified']} verified** of {len(run['cards'])} proposed pages" in text
-    assert f"from {nd['before']:.3f}% to {nd['after']:.3f}%" in text
-    assert "not a forecast" in text
+    assert f"Final: **{run['needle']['end']:.3f}%**" in text and "not a forecast" in text
+    at.radio[0].set_value("April 2026, milk tracer (Madhya Pradesh)").run()
+    tr = json.loads((ROOT / "v2" / "evidence" / "run_2026-04_milk_madhya-pradesh.json").read_text(encoding="utf-8"))
+    assert not at.exception and [m.value for m in at.metric] == [f"{tr['needle']['end']:.3f}%"]
