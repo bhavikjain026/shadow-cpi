@@ -20,6 +20,7 @@ pages = [
     st.Page("app_pages/evidence.py", title="Evidence", icon="🧾"),
     st.Page("app_pages/replay.py", title="Replay", icon="🔁"),
     st.Page("app_pages/live_build.py", title="Live build (v2)", icon="🧱"),
+    st.Page("app_pages/radar.py", title="October radar (v2)", icon="📡"),
     st.Page("app_pages/tavily_trace.py", title="Tavily trace (March)", icon="🔎"),
     st.Page("app_pages/flight_recorder.py", title="Tavily Flight Recorder", icon="🛰️"),
     st.Page("app_pages/archive.py", title="Archive", icon="🔒"),
