@@ -58,12 +58,12 @@ Go / no-go: **GO** under the rule registered before scoring ((c) must beat B1 (0
 - **Map + Crawl, tried honestly:** we pointed Map + Crawl at 5 official sites and 6 dairy sites to find price circulars and tariff orders. Map returned nothing on the government and PSU sites, and some rate lists are image-only PDFs; the app's Tavily trace page lists each failure.
 - **Evidence chasing:** each verified event gets up to 2 follow-up searches; 5 of 12 replay events found a confirming result on another site (report only).
 - **Measured, not claimed.** The Tavily report card (`results/tavily_report_card.md`) gives:
-  - calls: 787 Tavily calls sent (cached repeats and free balance checks not counted); 681 credits used, of a 1,500-credit monthly plan plus 3,125 add-on credits from the Nebius builder program
+  - calls: 930 Tavily calls sent (cached repeats and free balance checks not counted); 817 credits used, of a 1,000-credit monthly plan plus 3,125 add-on credits from the Nebius builder program (report card, 22 Oct)
   - credits per replay prediction: 40.3 on average (event searches and the skeptic, 9 months)
-  - share of dated search results inside the requested window: 77% (1,952 of 2,535)
+  - share of dated search results inside the requested window: 76% (2,415 of 3,194)
   - share of quotes verified: 91 of 93 (March 2026 test; the number must appear in the cited line)
   - share of events confirmed by 2 sources: 4 of 9 replay events
-  - median latency: 4.3 s per Tavily call
+  - median latency: 4.2 s per Tavily call
   - direct downloads, logged: 154 calls (MoSPI's API, the CAPTCHA-gated spine downloaded by hand, and failed Extracts)
 - **Attribution:** the nowcast with vs without Tavily evidence, each month (`results/tavily_attribution.csv`): Tavily evidence lowered the mean miss from 0.225 to 0.194 pp and was closer in 6 of 9 months (after the Amendment 3 bug fixes).
 

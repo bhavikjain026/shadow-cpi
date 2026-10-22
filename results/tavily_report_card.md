@@ -4,14 +4,14 @@ Computed by `tools/prompt_t.py card` from `logs/flight_recorder.jsonl`, `results
 
 | Measure | Value |
 | --- | --- |
-| Tavily calls sent (uncached) | 787 (plus 6987 served from the cache) |
-| Credits used (ledger + 160 before it, reconciled to the billing page) | 681 of the 1,500-credit plan, plus 3,125 add-on credits |
+| Tavily calls sent (uncached) | 930 (plus 10112 served from the cache) |
+| Credits used (ledger + 160 before it, reconciled to the billing page) | 817 of the 1,000-credit plan, plus 3,125 add-on credits |
 | Credits per replay prediction (events + skeptic, mean of 9 months) | 40.3 |
-| Search results inside the requested date window | 1952 of 2535 (77%); 577 undated |
+| Search results inside the requested date window | 2415 of 3194 (76%); 773 undated |
 | Price quotes verified word-for-word (Prompt 2 March run, manifest at f00bd45) | 91 of 93 (98%) |
 | Events confirmed by 2 sources (replay months) | 4 of 9 |
 | Events with a confirming result from evidence chasing | 5 of 12 |
-| Median latency, uncached calls | 4.3 s |
+| Median latency, uncached calls | 4.2 s |
 | Direct downloads (logged; MoSPI API, DoCA by hand, failed Extracts) | 154 uncached calls |
 
 ## Official sites (Map + Crawl)

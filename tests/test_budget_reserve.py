@@ -11,7 +11,7 @@ class FakeTavily:
 
 
 def cfg(**kw):
-    return {"plan_limit": 1500, "addon_credits": 3125, "reserve": 150, "reserve_for": ["live-month", "skeptic"],
+    return {"plan_limit": 1000, "addon_credits": 3125, "reserve": 150, "reserve_for": ["live-month", "skeptic"],
             "spent_before_ledger": 0, "caps": {"live-month": 120, "skeptic": 48, "prompt-t": 90}, **kw}
 
 
@@ -21,19 +21,19 @@ def write_ledger(path, total):
 
 
 def test_account_limit_includes_addon_credits():
-    assert account_limit(cfg()) == 4625
+    assert account_limit(cfg()) == 4125
     assert account_limit({"plan_limit": 100}) == 100
 
 
 def test_real_config_matches_the_billing_page():
     c = load_budget()
-    assert (c["plan_limit"], c["addon_credits"], c["reserve"]) == (1500, 3125, 150)
+    assert (c["plan_limit"], c["addon_credits"], c["reserve"]) == (1000, 3125, 150)   # lower figure (/usage)
     assert {"live-month", "nov-interim-scan", "skeptic"} <= set(c["reserve_for"])
 
 
 def test_reserve_blocks_other_budgets_but_not_the_seal(tmp_path):
     led = tmp_path / "ledger.jsonl"
-    write_ledger(led, 4625 - 150)                         # exactly the reserve left
+    write_ledger(led, 4125 - 150)                         # exactly the reserve left
     other = Budgeted(FakeTavily(), ["prompt-t"], cfg=cfg(), ledger_path=led)
     with pytest.raises(BudgetExceeded):
         other.check(1)
@@ -43,7 +43,7 @@ def test_reserve_blocks_other_budgets_but_not_the_seal(tmp_path):
 
 def test_nothing_past_the_account_limit_even_for_the_seal(tmp_path):
     led = tmp_path / "ledger.jsonl"
-    write_ledger(led, 4625)
+    write_ledger(led, 4125)
     with pytest.raises(BudgetExceeded):
         Budgeted(FakeTavily(), ["live-month"], cfg=cfg(), ledger_path=led).check(1)
 
