@@ -1,0 +1,538 @@
+{
+ "scored_at_utc": "2026-10-22T09:03:39.557065+00:00",
+ "rules": "v2/PREREGISTRATION.md with Amendments A-D",
+ "v2": {
+  "mae": 0.20574885510907556,
+  "direction_hits": 7,
+  "inside_range": 7,
+  "mae_poll_months": 0.16389850466946979,
+  "measured_sep": 0.18590966610148366,
+  "lift_sep": {
+   "spine_only": 5.877806462209412,
+   "with_all_evidence": 5.8132371397665805
+  },
+  "verified_by_model": {
+   "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": 15,
+   "nvidia/nemotron-3-super-120b-a12b": 12
+  },
+  "claims": {
+   "verified": 27,
+   "context": 11,
+   "rejected": 412
+  },
+  "date_rejections": {
+   "after cutoff": 33,
+   "edited after its date": 5
+  }
+ },
+ "v1": {
+  "mae": 0.1936730193144714,
+  "direction_hits": 7,
+  "inside_range": 5,
+  "mae_poll_months": 0.1496820253765235,
+  "measured_sep": 0.18618229541929066
+ },
+ "baselines": {
+  "B1": 0.4682707025991305,
+  "trend_only": 0.21218839423041663,
+  "poll": 0.14833333333333334
+ },
+ "months": [
+  {
+   "month": "2026-01",
+   "actual": 2.74,
+   "v2": 2.5509623155960837,
+   "miss": -0.18903768440391655,
+   "range": [
+    2.266962315596084,
+    2.8349623155960835
+   ],
+   "inside": true,
+   "direction_hit": true,
+   "spine_only": 2.4732672151511537,
+   "trend_only": 2.519947225930208,
+   "measured": 0.14102195751831897,
+   "v1_measured": 0.14102195751831897,
+   "poll": 2.4
+  },
+  {
+   "month": "2026-02",
+   "actual": 3.21,
+   "v2": 2.8276614327904293,
+   "miss": -0.3823385672095707,
+   "range": [
+    2.5436614327904294,
+    3.111661432790429
+   ],
+   "inside": false,
+   "direction_hit": true,
+   "spine_only": 2.9615179729794994,
+   "trend_only": 3.065565553927385,
+   "measured": 0.14102195751831897,
+   "v1_measured": 0.141202369303206,
+   "poll": null
+  },
+  {
+   "month": "2026-03",
+   "actual": 3.4,
+   "v2": 3.091386395238005,
+   "miss": -0.30861360476199495,
+   "range": [
+    2.807386395238005,
+    3.3753863952380048
+   ],
+   "inside": false,
+   "direction_hit": false,
+   "spine_only": 3.2185648971695624,
+   "trend_only": 3.276026073864835,
+   "measured": 0.14102195751831897,
+   "v1_measured": 0.14102195751831897,
+   "poll": 3.48
+  },
+  {
+   "month": "2026-04",
+   "actual": 3.48,
+   "v2": 3.396742034745115,
+   "miss": -0.08325796525488505,
+   "range": [
+    3.112742034745115,
+    3.6807420347451147
+   ],
+   "inside": true,
+   "direction_hit": false,
+   "spine_only": 3.5350737467305215,
+   "trend_only": 3.4547918887046114,
+   "measured": 0.1422175344444274,
+   "v1_measured": 0.14181317358406023,
+   "poll": 3.8
+  },
+  {
+   "month": "2026-05",
+   "actual": 3.93,
+   "v2": 3.6555488319341523,
+   "miss": -0.2744511680658479,
+   "range": [
+    3.3715488319341524,
+    3.939548831934152
+   ],
+   "inside": true,
+   "direction_hit": true,
+   "spine_only": 3.5891917792293837,
+   "trend_only": 3.424154068568508,
+   "measured": 0.1415458279119511,
+   "v1_measured": 0.18590966610148366,
+   "poll": 4.0
+  },
+  {
+   "month": "2026-06",
+   "actual": 4.38,
+   "v2": 4.16722703901129,
+   "miss": -0.21277296098871012,
+   "range": [
+    3.88322703901129,
+    4.45122703901129
+   ],
+   "inside": true,
+   "direction_hit": true,
+   "spine_only": 4.104369483788584,
+   "trend_only": 3.953253948494395,
+   "measured": 0.18590966610148366,
+   "v1_measured": 0.189047089106324,
+   "poll": null
+  },
+  {
+   "month": "2026-07",
+   "actual": 4.45,
+   "v2": 4.435223184711434,
+   "miss": -0.014776815288565892,
+   "range": [
+    4.1512231847114345,
+    4.719223184711434
+   ],
+   "inside": true,
+   "direction_hit": true,
+   "spine_only": 4.601006124385698,
+   "trend_only": 4.555285588898483,
+   "measured": 0.18646423472920742,
+   "v1_measured": 0.18590966610148366,
+   "poll": 4.5
+  },
+  {
+   "month": "2026-08",
+   "actual": 4.83,
+   "v2": 4.9432537902416085,
+   "miss": 0.11325379024160842,
+   "range": [
+    4.659253790241609,
+    5.227253790241608
+   ],
+   "inside": true,
+   "direction_hit": true,
+   "spine_only": 4.99689768428464,
+   "trend_only": 5.0754623667652154,
+   "measured": 0.18590966610148366,
+   "v1_measured": 0.18590966610148366,
+   "poll": 4.8
+  },
+  {
+   "month": "2026-09",
+   "actual": 5.54,
+   "v2": 5.8132371397665805,
+   "miss": 0.2732371397665805,
+   "range": [
+    5.529237139766581,
+    6.09723713976658
+   ],
+   "inside": true,
+   "direction_hit": true,
+   "spine_only": 5.877806462209412,
+   "trend_only": 5.652686351899994,
+   "measured": 0.18590966610148366,
+   "v1_measured": 0.18618229541929066,
+   "poll": null
+  }
+ ],
+ "month_builds": [
+  {
+   "month": "2026-01",
+   "cutoff": "2026-01-29",
+   "trend_only": 2.519947225930208,
+   "spine_only": 2.4732672151511537,
+   "v2": 2.5509623155960837,
+   "moving_events": [],
+   "measured": 0.14102195751831897,
+   "v1_measured": 0.14102195751831897,
+   "claims": {
+    "verified": 6,
+    "context": 4,
+    "rejected": 66
+   },
+   "verified_by_model": {
+    "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": 6,
+    "nvidia/nemotron-3-super-120b-a12b": 0
+   },
+   "date_rejections": {
+    "after cutoff": 9,
+    "edited after its date": 0
+   },
+   "complete": true,
+   "skipped_calls": []
+  },
+  {
+   "month": "2026-02",
+   "cutoff": "2026-02-28",
+   "trend_only": 3.065565553927385,
+   "spine_only": 2.9615179729794994,
+   "v2": 2.8276614327904293,
+   "moving_events": [],
+   "measured": 0.14102195751831897,
+   "v1_measured": 0.141202369303206,
+   "claims": {
+    "verified": 1,
+    "context": 0,
+    "rejected": 42
+   },
+   "verified_by_model": {
+    "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": 0,
+    "nvidia/nemotron-3-super-120b-a12b": 1
+   },
+   "date_rejections": {
+    "after cutoff": 4,
+    "edited after its date": 1
+   },
+   "complete": true,
+   "skipped_calls": []
+  },
+  {
+   "month": "2026-03",
+   "cutoff": "2026-03-29",
+   "trend_only": 3.276026073864835,
+   "spine_only": 3.2185648971695624,
+   "v2": 3.091386395238005,
+   "moving_events": [],
+   "measured": 0.14102195751831897,
+   "v1_measured": 0.14102195751831897,
+   "claims": {
+    "verified": 1,
+    "context": 0,
+    "rejected": 53
+   },
+   "verified_by_model": {
+    "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": 0,
+    "nvidia/nemotron-3-super-120b-a12b": 1
+   },
+   "date_rejections": {
+    "after cutoff": 2,
+    "edited after its date": 0
+   },
+   "complete": true,
+   "skipped_calls": []
+  },
+  {
+   "month": "2026-04",
+   "cutoff": "2026-04-29",
+   "trend_only": 3.4547918887046114,
+   "spine_only": 3.5350737467305215,
+   "v2": 3.396742034745115,
+   "moving_events": [
+    {
+     "kind": "event",
+     "event_kind": "electricity",
+     "cpi_code": "04.5.1.0.2.01",
+     "where": "jharkhand",
+     "change": 0.061200000000000004,
+     "effective_date": "2026-04-01",
+     "share_of_month": 1.0,
+     "weight_share": 0.017371687702961717,
+     "applied": 0.0010631472874212571,
+     "sources": [
+      {
+       "published": "2026-04-25",
+       "change": 0.061200000000000004,
+       "effective_date": "2026-04-01",
+       "read_by": "nvidia/nemotron-3-super-120b-a12b",
+       "url": "https://energy.economictimes.indiatimes.com/news/power/power-tariff-increase-approved-jharkhands-electricity-rates-see-6-12-hike-consumers-face-higher-bills-starting-april-1/129819394"
+      }
+     ]
+    },
+    {
+     "kind": "event",
+     "event_kind": "electricity",
+     "cpi_code": "04.5.1.0.2.01",
+     "where": "madhya pradesh",
+     "change": 0.048,
+     "effective_date": "2026-04-01",
+     "share_of_month": 1.0,
+     "weight_share": 0.03399131752550116,
+     "applied": 0.0016315832412240555,
+     "sources": [
+      {
+       "published": "2026-03-27",
+       "change": 0.048,
+       "effective_date": "2026-04-01",
+       "read_by": "nvidia/nemotron-3-super-120b-a12b",
+       "url": "https://www.aajtak.in/madhya-pradesh/story/mp-electricity-tariff-hike-new-rates-april-1-power-bill-increase-lcla-rptc-2507841-2026-03-27"
+      },
+      {
+       "published": "2026-03-26",
+       "change": 0.048,
+       "effective_date": "2026-04-01",
+       "read_by": "nvidia/nemotron-3-super-120b-a12b",
+       "url": "https://www.bhaskar.com/local/mp/jabalpur/news/mp-new-electricity-tariff-rates-lt-consumers-minimum-charges-removed-ev-charging-discount-137539609.html"
+      }
+     ]
+    }
+   ],
+   "measured": 0.1422175344444274,
+   "v1_measured": 0.14181317358406023,
+   "claims": {
+    "verified": 5,
+    "context": 0,
+    "rejected": 46
+   },
+   "verified_by_model": {
+    "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": 2,
+    "nvidia/nemotron-3-super-120b-a12b": 3
+   },
+   "date_rejections": {
+    "after cutoff": 7,
+    "edited after its date": 0
+   },
+   "complete": true,
+   "skipped_calls": []
+  },
+  {
+   "month": "2026-05",
+   "cutoff": "2026-05-29",
+   "trend_only": 3.424154068568508,
+   "spine_only": 3.5891917792293837,
+   "v2": 3.6555488319341523,
+   "moving_events": [
+    {
+     "kind": "event",
+     "event_kind": "diesel",
+     "cpi_code": "07.2.2.1.1.01",
+     "where": "maharashtra, nct of delhi",
+     "change": 0.0329374092095408,
+     "effective_date": "2026-05-29",
+     "share_of_month": 0.0967741935483871,
+     "weight_share": 0.16540898772606552,
+     "applied": 0.0005272396950647741,
+     "sources": [
+      {
+       "published": "2026-05-25",
+       "change": 0.03165558721114281,
+       "effective_date": "2026-05-29",
+       "read_by": "nvidia/nemotron-3-super-120b-a12b",
+       "url": "https://money.rediff.com/news/market/petrol-diesel-prices-hike-after-elections/47075220260515"
+      },
+      {
+       "published": "2026-05-25",
+       "change": 0.034219231207938794,
+       "effective_date": "2026-05-29",
+       "read_by": "nvidia/nemotron-3-super-120b-a12b",
+       "url": "https://money.rediff.com/news/market/petrol-diesel-prices-hike-after-elections/47075220260515"
+      }
+     ]
+    }
+   ],
+   "measured": 0.1415458279119511,
+   "v1_measured": 0.18590966610148366,
+   "claims": {
+    "verified": 5,
+    "context": 0,
+    "rejected": 56
+   },
+   "verified_by_model": {
+    "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": 3,
+    "nvidia/nemotron-3-super-120b-a12b": 2
+   },
+   "date_rejections": {
+    "after cutoff": 2,
+    "edited after its date": 1
+   },
+   "complete": true,
+   "skipped_calls": []
+  },
+  {
+   "month": "2026-06",
+   "cutoff": "2026-06-29",
+   "trend_only": 3.953253948494395,
+   "spine_only": 4.104369483788584,
+   "v2": 4.16722703901129,
+   "moving_events": [],
+   "measured": 0.18590966610148366,
+   "v1_measured": 0.189047089106324,
+   "claims": {
+    "verified": 0,
+    "context": 1,
+    "rejected": 32
+   },
+   "verified_by_model": {
+    "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": 0,
+    "nvidia/nemotron-3-super-120b-a12b": 0
+   },
+   "date_rejections": {
+    "after cutoff": 2,
+    "edited after its date": 0
+   },
+   "complete": true,
+   "skipped_calls": []
+  },
+  {
+   "month": "2026-07",
+   "cutoff": "2026-07-29",
+   "trend_only": 4.555285588898483,
+   "spine_only": 4.601006124385698,
+   "v2": 4.435223184711434,
+   "moving_events": [
+    {
+     "kind": "event",
+     "event_kind": "bus",
+     "cpi_code": "07.3.1.2.2.01",
+     "where": "maharashtra",
+     "change": 0.1356,
+     "effective_date": "2026-07-17",
+     "share_of_month": 0.4838709677419355,
+     "weight_share": 0.08110846605557662,
+     "applied": 0.005321761934098157,
+     "sources": [
+      {
+       "published": "2026-07-17",
+       "change": 0.1365,
+       "effective_date": "2026-07-17",
+       "read_by": "nvidia/nemotron-3-super-120b-a12b",
+       "url": "https://indianexpress.com/article/cities/mumbai/msrtc-hikes-bus-fares-temporary-seasonal-surcharge-10791673"
+      },
+      {
+       "published": "2026-07-17",
+       "change": 0.1356,
+       "effective_date": "2026-07-17",
+       "read_by": "nvidia/nemotron-3-super-120b-a12b",
+       "url": "https://www.ndtv.com/india-news/maharashtra-state-transport-bus-fares-to-be-hiked-by-13-5-from-tomorrow-11785653"
+      },
+      {
+       "published": "2026-07-17",
+       "change": 0.1356,
+       "effective_date": "2026-07-18",
+       "read_by": "nvidia/nemotron-3-super-120b-a12b",
+       "url": "https://www.livemint.com/news/india/msrtc-ticket-prices-up-maharashtra-clears-bus-fare-hike-from-18-july-here-is-how-much-more-you-will-pay-11784303743567.html"
+      }
+     ]
+    }
+   ],
+   "measured": 0.18646423472920742,
+   "v1_measured": 0.18590966610148366,
+   "claims": {
+    "verified": 4,
+    "context": 3,
+    "rejected": 31
+   },
+   "verified_by_model": {
+    "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": 0,
+    "nvidia/nemotron-3-super-120b-a12b": 4
+   },
+   "date_rejections": {
+    "after cutoff": 3,
+    "edited after its date": 1
+   },
+   "complete": true,
+   "skipped_calls": []
+  },
+  {
+   "month": "2026-08",
+   "cutoff": "2026-08-29",
+   "trend_only": 5.0754623667652154,
+   "spine_only": 4.99689768428464,
+   "v2": 4.9432537902416085,
+   "moving_events": [],
+   "measured": 0.18590966610148366,
+   "v1_measured": 0.18590966610148366,
+   "claims": {
+    "verified": 4,
+    "context": 0,
+    "rejected": 42
+   },
+   "verified_by_model": {
+    "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": 4,
+    "nvidia/nemotron-3-super-120b-a12b": 0
+   },
+   "date_rejections": {
+    "after cutoff": 1,
+    "edited after its date": 2
+   },
+   "complete": true,
+   "skipped_calls": []
+  },
+  {
+   "month": "2026-09",
+   "cutoff": "2026-09-29",
+   "trend_only": 5.652686351899994,
+   "spine_only": 5.877806462209412,
+   "v2": 5.8132371397665805,
+   "moving_events": [],
+   "measured": 0.18590966610148366,
+   "v1_measured": 0.18618229541929066,
+   "claims": {
+    "verified": 1,
+    "context": 3,
+    "rejected": 44
+   },
+   "verified_by_model": {
+    "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": 0,
+    "nvidia/nemotron-3-super-120b-a12b": 1
+   },
+   "date_rejections": {
+    "after cutoff": 3,
+    "edited after its date": 0
+   },
+   "complete": true,
+   "skipped_calls": []
+  }
+ ],
+ "incomplete_months": [],
+ "recall": "computed once from the ledger afterwards: python -m v2.recall --from-ledger",
+ "credits_budget": "v2-issue14",
+ "credits_spent": 55,
+ "pass_rule": true
+}

@@ -1,0 +1,408 @@
+{
+ "computed_utc": "2026-10-22T09:03:48.573522+00:00",
+ "matcher": "v2/recall.py at db2984c, unchanged",
+ "source": "v2/evidence/ledger.jsonl (issue 14 run)",
+ "v1_found": 9,
+ "v2_found": 6,
+ "total": 29,
+ "incomplete_months": [],
+ "changes": [
+  {
+   "id": "M1",
+   "kind": "milk",
+   "month": "2026-02",
+   "date": "2026-02-28",
+   "states": [
+    "maharashtra"
+   ],
+   "what": "Chitale cow milk +Rs 2/litre",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "M2",
+   "kind": "milk",
+   "month": "2026-04",
+   "date": "2026-04-01",
+   "states": [
+    "madhya pradesh"
+   ],
+   "what": "MP loose milk +Rs 2-4 (Indore, Dhar)",
+   "v1": "FOUND",
+   "v2": "FOUND",
+   "v2_match": {
+    "month": "2026-04",
+    "line": "जिसके बाद धार में वर्तमान में ₹60 प्रति लीटर बिक रहा दूध अब ₹64 प्रति लीटर हो जाएगा.",
+    "url": "https://www.etvbharat.com/hi/state/dhar-milk-prices-hike-by-4-rs-milk-rate-64-rupees-per-liter-madhya-pradesh-news-mps26033002737",
+    "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   }
+  },
+  {
+   "id": "M3",
+   "kind": "milk",
+   "month": "2026-05",
+   "date": "2026-05-14",
+   "states": [],
+   "what": "Amul, Mother Dairy +Rs 2/litre",
+   "v1": "FOUND",
+   "v2": "FOUND",
+   "v2_match": {
+    "month": "2026-05",
+    "line": "Mother Dairy’s Full Cream Milk (FCM) 1-litre pack will now cost Rs 72 compared with Rs 69 earlier, while the 500 ml pack has been increased to Rs 72 from Rs 70. The company has also revised prices for double-toned milk (DTM), toned milk (TM), cow milk and Pro Milk variants.",
+    "url": "https://www.moneycontrol.com/news/business/amul-raises-milk-prices-by-rs-2-per-litre-across-key-variants-from-may-14-13918166.html",
+    "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   }
+  },
+  {
+   "id": "M4",
+   "kind": "milk",
+   "month": "2026-05",
+   "date": "2026-05-15",
+   "states": [
+    "madhya pradesh"
+   ],
+   "what": "Sanchi +Rs 2/litre",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "M5",
+   "kind": "milk",
+   "month": "2026-05",
+   "date": "2026-05-21",
+   "states": [
+    "maharashtra"
+   ],
+   "what": "Gokul cow milk +Rs 2/litre",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "M6",
+   "kind": "milk",
+   "month": "2026-05",
+   "date": "2026-05-22",
+   "states": [
+    "bihar",
+    "jharkhand"
+   ],
+   "what": "Sudha +Rs 2/litre",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "M7",
+   "kind": "milk",
+   "month": "2026-06",
+   "date": "2026-06-01",
+   "states": [
+    "kerala"
+   ],
+   "what": "Milma +Rs 4/litre",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "M8",
+   "kind": "milk",
+   "month": "2026-07",
+   "date": "2026-07-09",
+   "states": [
+    "tamil nadu"
+   ],
+   "what": "Arokya +Rs 4/litre",
+   "v1": "FOUND",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "M9",
+   "kind": "milk",
+   "month": "2026-07",
+   "date": null,
+   "states": [
+    "tamil nadu"
+   ],
+   "what": "TN private dairies +Rs 2-4 (21 Jul to late Jul)",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "M10",
+   "kind": "milk",
+   "month": "2026-08",
+   "date": "2026-08-11",
+   "states": [
+    "maharashtra"
+   ],
+   "what": "Maharashtra dairies +Rs 2/litre",
+   "v1": "FOUND",
+   "v2": "FOUND",
+   "v2_match": {
+    "month": "2026-08",
+    "line": "गौरतलब है कि दूध की कीतमों में बढ़ोत्तरी का सीधा असर आम जनता की जेब पर देखने को मिलेगा। ऐसे में महाराष्ट्र में गाय के दूध की कीमत 60 से बढ़कर 62 रुपये प्रति लीटर और भैंस का दूध 76 रुपये से बढ़कर 78 रुपये प्रति लीटर हो जाएगा।",
+    "url": "https://www.jagran.com/maharashtra/mumbai-maharashtra-milk-price-hike-milk-to-cost-2-more-from-august-11-see-new-rate-list-40334543.html",
+    "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   }
+  },
+  {
+   "id": "M11",
+   "kind": "milk",
+   "month": "2026-09",
+   "date": "2026-09-21",
+   "states": [
+    "tamil nadu"
+   ],
+   "what": "Arokya +Rs 4/litre",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "M12",
+   "kind": "milk",
+   "month": "2026-09",
+   "date": "2026-09-26",
+   "states": [
+    "tamil nadu"
+   ],
+   "what": "Dodla, Heritage and others up to +Rs 4/litre",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "L1",
+   "kind": "lpg",
+   "month": "2026-03",
+   "date": "2026-03-07",
+   "states": [],
+   "what": "Domestic LPG +Rs 60",
+   "v1": "MISSED",
+   "v2": "FOUND",
+   "v2_match": {
+    "month": "2026-03",
+    "line": "Non-subsidised LPG will now cost Rs 913 per 14.2-kg cylinder in Delhi as against Rs 853 previously, according to the Indian Oil Corporation (IOC) website.",
+    "url": "https://www.siasat.com/domestic-lpg-cylinder-prices-hiked-know-rates-in-hyderabad-other-cities-3426480",
+    "read_by": "nvidia/nemotron-3-super-120b-a12b"
+   }
+  },
+  {
+   "id": "L2",
+   "kind": "lpg",
+   "month": "2026-06",
+   "date": "2026-06-07",
+   "states": [],
+   "what": "Domestic LPG +Rs 29",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "F1",
+   "kind": "fuel",
+   "month": "2026-05",
+   "date": "2026-05-15",
+   "states": [],
+   "what": "Petrol and diesel +Rs 3",
+   "v1": "FOUND",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "F2",
+   "kind": "fuel",
+   "month": "2026-05",
+   "date": "2026-05-19",
+   "states": [],
+   "what": "Petrol +0.87, diesel +0.91",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "F3",
+   "kind": "fuel",
+   "month": "2026-05",
+   "date": "2026-05-23",
+   "states": [],
+   "what": "Petrol +0.87, diesel +0.91",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "F4",
+   "kind": "fuel",
+   "month": "2026-05",
+   "date": "2026-05-25",
+   "states": [],
+   "what": "Petrol +2.61, diesel +2.71",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "E1",
+   "kind": "electricity",
+   "month": "2026-04",
+   "date": "2026-04-01",
+   "states": [
+    "madhya pradesh"
+   ],
+   "what": "MPERC +4.80% average",
+   "v1": "FOUND",
+   "v2": "FOUND",
+   "v2_match": {
+    "month": "2026-04",
+    "line": "मध्य प्रदेश की जनता को महंगाई का एक और झटका लगने जा रहा है. रसोई गैस और अन्य चीजों की बढ़ती कीमतों के बीच अब बिजली दरों में भी बढ़ोतरी कर दी गई है. मध्य प्रदेश विद्युत नियामक आयोग ने वित्तीय वर्ष 2026-27 के लिए नया टैरिफ जारी किया है, जिसके तहत बिजली दरों में करीब 4.80 प्रतिशत की वृद्धि की गई है. ये नई दरें 1 अप्रैल 2026 से लागू होंगी. इसका असर प्रदेश के करीब डेढ़ करोड़ घरेलू उपभोक्ताओं पर पड़ेगा.",
+    "url": "https://www.aajtak.in/madhya-pradesh/story/mp-electricity-tariff-hike-new-rates-april-1-power-bill-increase-lcla-rptc-2507841-2026-03-27",
+    "read_by": "nvidia/nemotron-3-super-120b-a12b"
+   }
+  },
+  {
+   "id": "E2",
+   "kind": "electricity",
+   "month": "2026-04",
+   "date": "2026-04-01",
+   "states": [
+    "maharashtra"
+   ],
+   "what": "MSEDCL cut",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "E3",
+   "kind": "electricity",
+   "month": "2026-04",
+   "date": "2026-04-01",
+   "states": [
+    "punjab"
+   ],
+   "what": "Punjab cut",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "E4",
+   "kind": "electricity",
+   "month": "2026-04",
+   "date": null,
+   "states": [
+    "jharkhand"
+   ],
+   "what": "Jharkhand rise, FY 2026-27 (order about 27 Mar)",
+   "v1": "MISSED",
+   "v2": "FOUND",
+   "v2_match": {
+    "month": "2026-04",
+    "line": "# Power tariff increase approved: Jharkhand's electricity rates see 6.12% hike; Consumers face higher bills starting April 1",
+    "url": "https://energy.economictimes.indiatimes.com/news/power/power-tariff-increase-approved-jharkhands-electricity-rates-see-6-12-hike-consumers-face-higher-bills-starting-april-1/129819394",
+    "read_by": "nvidia/nemotron-3-super-120b-a12b"
+   }
+  },
+  {
+   "id": "E5",
+   "kind": "electricity",
+   "month": "2026-06",
+   "date": null,
+   "states": [
+    "uttar pradesh"
+   ],
+   "what": "UP 10% FPPAS surcharge on June bills",
+   "v1": "FOUND",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "E6",
+   "kind": "electricity",
+   "month": "2026-06",
+   "date": null,
+   "states": [
+    "nct of delhi"
+   ],
+   "what": "Delhi monthly FPPAS from June",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "E7",
+   "kind": "electricity",
+   "month": "2026-07",
+   "date": "2026-07-01",
+   "states": [
+    "chhattisgarh"
+   ],
+   "what": "Chhattisgarh +6.23% average",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "E8",
+   "kind": "electricity",
+   "month": "2026-09",
+   "date": "2026-09-01",
+   "states": [
+    "jammu and kashmir"
+   ],
+   "what": "J&K +6.83% average",
+   "v1": "FOUND",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "T1",
+   "kind": "rail",
+   "month": "2026-02",
+   "date": "2026-02-21",
+   "states": [
+    "tamil nadu"
+   ],
+   "what": "Nilgiri Mountain Railway +5% base fare",
+   "v1": "FOUND",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "T2",
+   "kind": "bus",
+   "month": "2026-04",
+   "date": "2026-04-15",
+   "states": [
+    "maharashtra"
+   ],
+   "what": "MSRTC +10% (temporary)",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  },
+  {
+   "id": "T3",
+   "kind": "bus",
+   "month": "2026-06",
+   "date": null,
+   "states": [
+    "odisha"
+   ],
+   "what": "Odisha bus fares (about 2 Jun)",
+   "v1": "MISSED",
+   "v2": "MISSED",
+   "v2_match": null
+  }
+ ],
+ "v2_mae": 0.20574885510907556,
+ "v1_mae": 0.1936730193144714,
+ "v2_better_than_v1": false
+}
