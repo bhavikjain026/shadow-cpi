@@ -38,6 +38,7 @@ from v2.needle import path  # noqa: E402
 from v2.treemap import layout  # noqa: E402
 
 BUDGET = "v2-issue2"
+BUDGETS = [BUDGET, "v2-amendB"]                  # Amendment B re-run: at most 30 more credits
 EVENT_KINDS = ["electricity", "rail", "mobile", "medicine", "school_fee"]
 OBSERVED = [("gold", "13.2.1.1.1.01", "IBJA daily gold rates"), ("silver", "13.2.1.1.1.02", "IBJA daily silver rates"),
             ("lpg", "04.5.2.2.1.01", "IOCL domestic LPG price list"), ("petrol", "07.2.2.2.1.01", "PPAC Delhi petrol")]
@@ -89,7 +90,8 @@ def event_cards(tav, nem, nano, month, items_cfg, meta):
         cfg = items_cfg[kind]
         queries = [(lang, cfg["queries"][lang]) for lang in cfg.get("langs", ["en"]) if lang in cfg["queries"]]
         kc = PL.propose(tav, nem, nano, queries, month, f"v2:basket {kind}", seen)
-        PL.fetch_and_verify(tav, nem, nano, kc, month, cfg["match"], None, None, kind, f"v2:basket {kind}")
+        PL.fetch_and_verify(tav, nem, nano, kc, month, cfg["match"], None, None, kind, f"v2:basket {kind}",
+                            super_model=models()["mid"])
         groups = {}
         for c in kc:
             c["kind"], c["cpi_code"] = kind, cfg["cpi_code"]
@@ -109,17 +111,73 @@ def event_cards(tav, nem, nano, month, items_cfg, meta):
                 groups.setdefault(where, []).append((cl, weight, c))
         PL.ledger_rows(kc, month, cfg["cpi_code"], name_of(meta, cfg["cpi_code"]), kind, "", nano)
         for where, cls in groups.items():
-            change = statistics.median(cl["change"] for cl, _, _ in cls)
-            eff = min(cl["effective_date"] for cl, _, _ in cls)
-            days = calendar.monthrange(int(month[:4]), int(month[5:]))[1]
-            share = (days - int(eff[8:]) + 1) / days
+            sources = [{"published": c["published"], "change": cl["change"], "effective_date": cl["effective_date"],
+                        "read_by": cl.get("read_by"), "url": c["url"]} for cl, _, c in cls]
+            change, eff, share = merge(sources, month)
             weight = cls[0][1]
             moving.append({"kind": "event", "cpi_code": cfg["cpi_code"], "event_kind": kind, "where": where,
                            "change": change, "effective_date": eff, "share_of_month": share, "weight_share": weight,
                            "applied": change * share * weight, "mode": "add", "n_sources": len(cls),
-                           "urls": sorted({c["url"] for _, _, c in cls})})
+                           "sources": sources, "urls": sorted({c["url"] for _, _, c in cls})})
         cards += kc
     return cards, moving
+
+
+def merge(sources, month):
+    """One event per item x place x month (v1 Amendment 3 d): median change, earliest effective date, day share."""
+    change = statistics.median(x["change"] for x in sources)
+    eff = min(x["effective_date"] for x in sources)
+    days = calendar.monthrange(int(month[:4]), int(month[5:]))[1]
+    return change, eff, (days - int(eff[8:]) + 1) / days
+
+
+def stages(timeline, start):
+    """Issue 8, 'What Tavily adds': the needle with the government spine only, then + official series read with
+    Tavily Extract, then + announced price changes found with Tavily Search."""
+    def last(kinds):
+        vals = [t["yoy_after"] for t in timeline if t["kind"] in kinds]
+        return vals[-1] if vals else None
+    spine = last({"spine"}) or start
+    series = last({"spine", "observed"}) or spine
+    events = timeline[-1]["yoy_after"] if timeline else series
+    return [{"label": "Trend + government spine (no web evidence)", "yoy": spine},
+            {"label": "+ official series via Tavily Extract (IBJA, IOCL, PPAC)", "yoy": series},
+            {"label": "+ announced price changes via Tavily Search", "yoy": events}]
+
+
+def time_machine(month, item_cards, moving, inp, meta, total, rec):
+    """Issue 3: for each day of the month up to the cutoff, the needle from evidence published by that day only.
+    Official series: daily rows up to the day (v1's cutoff-aware code). Events: pages published by the day. The spine
+    is a monthly average with no daily prices, so it enters only on the cutoff day."""
+    from datetime import date, timedelta
+    from v2.needle import yoy
+    w, cut = inp["weights"], R.cutoff(month)
+    spine = [c for c in item_cards if c["kind"] == "spine" and c["status"] == "verified"]
+    rows, d = [], date.fromisoformat(f"{month}-01")
+    ledger = [r for r in LG.read() if r["month"] == month]
+    while d.isoformat() <= cut:
+        day = d.isoformat()
+        inp_d, notes_d, _ = BN.gather(month, day, Budgeted(Tavily(recorder=rec), BUDGETS, cache_only=True))
+        changes, measured = {}, 0.0
+        if day == cut:
+            for c in spine:
+                changes[c["cpi_code"]] = ("level", c["change"])
+                measured += w[c["cpi_code"]]
+        for c in observed_cards(inp_d["observed"][month], notes_d, month, meta, inp["factors"]):
+            if c["status"] == "verified":
+                changes[c["cpi_code"]] = ("level", c["change"])
+                measured += w[c["cpi_code"]]
+        for m in moving:
+            src = [x for x in m["sources"] if x["published"] <= day]
+            if src:
+                ch, _, share = merge(src, month)
+                changes[m["cpi_code"]] = ("add", changes.get(m["cpi_code"], ("add", 0.0))[1] + ch * share * m["weight_share"])
+                measured += w[m["cpi_code"]] * m["weight_share"]
+        rows.append({"date": day, "yoy": yoy(month, changes, inp) if changes else P.predict_month(month, "a", inp)["yoy"],
+                     "measured": measured / total, "n_items": len(changes),
+                     "n_ledger_records": sum(r["published_date"] <= day for r in ledger)})
+        d += timedelta(days=1)
+    return rows
 
 
 def basket_tiles(inp, meta, measured_codes):
@@ -134,11 +192,11 @@ def basket_tiles(inp, meta, measured_codes):
 
 def run(month="2026-09", cache_only=False):
     rec = Recorder()
-    tav = Budgeted(Tavily(recorder=rec), [BUDGET], cache_only=cache_only)
+    tav = Budgeted(Tavily(recorder=rec), BUDGETS, cache_only=cache_only)
     nem, nano = Nemotron(recorder=rec), models()["small"]
     cut = R.cutoff(month)
     # official observed series cut at the cutoff (v1's code, cache only: the replay months are all cached)
-    inp, notes, missing = BN.gather(month, cut, Budgeted(Tavily(recorder=rec), [BUDGET], cache_only=True))
+    inp, notes, missing = BN.gather(month, cut, Budgeted(Tavily(recorder=rec), BUDGETS, cache_only=True))
     meta = inp["meta"]
     item_cards = spine_cards(inp, month, meta) + observed_cards(inp["observed"][month], notes, month, meta,
                                                                 inp["factors"])
@@ -163,7 +221,10 @@ def run(month="2026-09", cache_only=False):
            "official": inp["published"][O.HEADLINE][month], "notes": missing + [
                "The spine is DoCA's monthly average for the whole month, so it includes the 30th, one day after the "
                "cutoff (the file has no daily prices)."],
-           "credits_budget": BUDGET, "credits_spent": spent(BUDGET)}
+           "stages": stages(timeline, start), "time_machine": time_machine(month, item_cards, moving, inp, meta, total,
+                                                                          rec),
+           "credits_budget": BUDGET, "credits_spent": spent(BUDGET),
+           "credits_by_budget": {b: spent(b) for b in BUDGETS}}
     p = LG.ROOT / f"run_{month}_basket.json"
     p.write_text(json.dumps(out, ensure_ascii=False, indent=1, default=float))
     return out, p
@@ -175,4 +236,4 @@ if __name__ == "__main__":
     print(f"items: {sum(c['status'] == 'verified' for c in o['item_cards'])} of {len(o['item_cards'])} verified; "
           f"event pages {len(o['cards'])}, claims checked {len(ev)}, verified {sum(cl['status'] == 'verified' for cl in ev)}, "
           f"moving {len(o['moving_events'])}; measured {o['measured_share']:.1%}; needle {o['needle']}; "
-          f"v1 (c) {o['v1']['c']:.3f}; official {o['official']}; credits ({BUDGET}) {o['credits_spent']}")
+          f"v1 (c) {o['v1']['c']:.3f}; official {o['official']}; credits {o['credits_by_budget']}")

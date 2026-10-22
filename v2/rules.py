@@ -62,7 +62,8 @@ def check(claim, page_text, page_date, month, words, units=None, state=None, con
     if not line:
         return False, "no line cited"
     if claim.get("price") is None:
-        return False, "Nano gave no price for this line"
+        who = "Super" if "super" in (claim.get("read_by") or "") else "Nano"
+        return False, f"{who} gave no price for this line"
     if not price_in_line(claim.get("price"), line):
         return False, "the price is not in the cited line"
     if norm(line) not in norm(page_text):

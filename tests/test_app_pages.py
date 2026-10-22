@@ -271,10 +271,25 @@ def test_flight_recorder_labels_credits_against_billing():
 def test_live_build_streams_cards_and_moves_the_needle():
     run = json.loads((ROOT / "v2" / "evidence" / "run_2026-09_basket.json").read_text(encoding="utf-8"))
     at = load("live_build")
-    assert [m.value for m in at.metric] == [f"{run['needle']['end']:.3f}%",
-                                            f"{run['measured_share']:.1%} of the basket"]
+    assert [m.value for m in at.metric][:2] == [f"{run['needle']['end']:.3f}%",
+                                                f"{run['measured_share']:.1%} of the basket"]
     text = all_text(at)
     assert f"Final: **{run['needle']['end']:.3f}%**" in text and "not a forecast" in text
     at.radio[0].set_value("April 2026, milk tracer (Madhya Pradesh)").run()
     tr = json.loads((ROOT / "v2" / "evidence" / "run_2026-04_milk_madhya-pradesh.json").read_text(encoding="utf-8"))
     assert not at.exception and [m.value for m in at.metric] == [f"{tr['needle']['end']:.3f}%"]
+
+
+def test_v2_panels_on_live_build_and_home():
+    from app_pages.v2_panels import TIME_LABEL
+    run = json.loads((ROOT / "v2" / "evidence" / "run_2026-09_basket.json").read_text(encoding="utf-8"))
+    at = load("live_build")
+    text = all_text(at)
+    assert "What Tavily adds" in text and "Time machine" in text and TIME_LABEL in text
+    assert at.select_slider[0].value == run["cutoff"]
+    at.select_slider[0].set_value("2026-09-01").run()
+    assert not at.exception
+    first = run["time_machine"][0]
+    assert f"{first['yoy']:.3f}%" in [m.value for m in at.metric]
+    home = all_text(load("home"))
+    assert "What Tavily adds (v2, September 2026)" in home and "development data" in home

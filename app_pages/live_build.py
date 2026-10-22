@@ -11,6 +11,7 @@ import pandas as pd
 import streamlit as st
 
 from app_pages.common import ROOT, clean_line, header, month_name
+from app_pages.v2_panels import time_machine, what_tavily_adds
 
 header("Live build (v2)", "Shadow CPI v2 builds the number one piece of evidence at a time, under live conditions: "
                           "only pages published up to the 29th of the month count. This page replays a saved run.")
@@ -125,6 +126,12 @@ if basket:
                 f"{run['v1']['c']:.3f}% · official {run['official']:.2f}%.")
     for n in run.get("notes", []):
         st.caption(n)
+    if run.get("stages"):
+        st.subheader("What Tavily adds")
+        what_tavily_adds(run)
+    if run.get("time_machine"):
+        st.subheader("Time machine")
+        time_machine(run)
 else:
     draw_top(run["needle"]["start"], None, "trend only")
     for card in run["cards"]:

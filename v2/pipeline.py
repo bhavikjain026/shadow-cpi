@@ -95,9 +95,26 @@ def propose(tav, nem, nano, queries, month, tag, seen):
     return cards
 
 
-def fetch_and_verify(tav, nem, nano, cards, month, words, units, state, kind, tag):
-    """Extract the pages that carry claims, save + hash them, and check each claim. Fills each claim's status,
-    reason, effective date, change and English gloss; returns nothing (cards are updated in place)."""
+def super_reread(nem, super_model, card, text, tag):
+    """Amendment B: when Nano cited a line but gave no number, Nemotron Super re-reads the fetched page once (same
+    contract: cite a line, give the number). Its claims replace Nano's number-less ones; Nano's claims with a number
+    stay. Code then verifies every claim the same way."""
+    keep = [cl for cl in card["claims"] if cl.get("price") is not None]
+    if not super_model or len(keep) == len(card["claims"]):
+        return
+    card["super_reread"] = True
+    try:
+        evs, _ = nem.price_events(super_model, text[:60000], tag=f"{tag} super re-read")
+    except ValueError as e:
+        card["super_error"] = str(e)
+        return
+    card["claims"] = keep + [{**claim_of(e), "read_by": super_model} for e in evs if e.get("quote")]
+
+
+def fetch_and_verify(tav, nem, nano, cards, month, words, units, state, kind, tag, super_model=None):
+    """Extract the pages that carry claims, save + hash them, (Amendment B) let Super re-read pages where Nano gave
+    no number, and check each claim. Fills each claim's status, reason, effective date, change, English gloss and
+    the model that read it; returns nothing (cards are updated in place)."""
     todo = [c for c in cards if c["claims"]]
     for k in range(0, len(todo), 5):
         batch = todo[k:k + 5]
@@ -115,6 +132,9 @@ def fetch_and_verify(tav, nem, nano, cards, month, words, units, state, kind, ta
             if E.leak_line(text, month):
                 c["reason"] = "the page states the official CPI figure for the month"
                 continue
+            for cl in c["claims"]:
+                cl.setdefault("read_by", nano)
+            super_reread(nem, super_model, c, text, tag)
             for cl in c["claims"]:
                 ctx = context_for(text, cl["line"])
                 ok, why = R.check(cl, text, c["published"], month, words, units, state, ctx)
@@ -153,4 +173,4 @@ def ledger_rows(cards, month, cpi_code, cpi_name, kind, state, model):
                        "found_date": c["found"], "line": cl["line"], "url": c["url"], "page_sha256": c["page_sha256"],
                        "page_file": c["page_file"], "status": cl["status"], "reason": cl["reason"],
                        "use": cl.get("use", ""), "search_call": c["search_call"], "extract_call": c["extract_call"],
-                       "model": model})
+                       "model": cl.get("read_by") or model})

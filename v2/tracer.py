@@ -50,7 +50,8 @@ def run(month="2026-04", item="milk", state="madhya pradesh", cache_only=False):
     nem, nano = Nemotron(recorder=rec), models()["small"]
     inp = P.load_inputs()
     cards = PL.propose(tav, nem, nano, QUERIES[item], month, f"v2:{item}", set())
-    PL.fetch_and_verify(tav, nem, nano, cards, month, cfg["words"], cfg["units"], state, item, f"v2:{item}")
+    PL.fetch_and_verify(tav, nem, nano, cards, month, cfg["words"], cfg["units"], state, item, f"v2:{item}",
+                        super_model=models()["mid"])
     ch, n_zones = spine_change(inp["spine"], item, month)
     factor = inp["factors"][item]["factor"]
     for c in cards:

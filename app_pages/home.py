@@ -6,9 +6,10 @@ import streamlit as st
 
 from shadow_cpi.live_range import THRESHOLD
 
-from app_pages.common import (CODES, LABELS, clean_line, item_label, source_column, LIVE_MONTH, NOWCAST_WORDS, REPO_URL, SEAL_DATE, countdown_text, header,
-                              headline_result, month_name, next_release, pass_fail, pct, poll_direction, poll_months, read_json,
-                              seal_status)
+from app_pages.common import (CODES, LABELS, LIVE_MONTH, NOWCAST_WORDS, REPO_URL, SEAL_DATE, clean_line,
+                              countdown_text, header, headline_result, item_label, month_name, next_release,
+                              pass_fail, pct, poll_direction, poll_months, read_json, seal_status, source_column)
+from app_pages.v2_panels import what_tavily_adds
 
 header("Experimental nowcast", f"Shadow CPI: an {NOWCAST_WORDS} of India's next official CPI inflation number "
                                "(year-on-year, 2024-series All-India Combined). Not an official statistic.")
@@ -92,6 +93,15 @@ if au:
                     f"found directly; {au['found_incl_official_series']} of {au['reference_changes']} including the "
                     "official series (IOCL LPG, PPAC petrol).")
         st.caption(f"[Audit]({REPO_URL}/audit/event_audit.md) · [Recall check]({REPO_URL}/audit/missed_events.md)")
+
+# ---------- v2 (in development): what Tavily adds ----------
+v2run = read_json("v2/evidence/run_2026-09_basket.json")
+if v2run and v2run.get("stages"):
+    with st.container(border=True):
+        st.subheader("What Tavily adds (v2, September 2026)")
+        what_tavily_adds(v2run)
+        st.caption("v2 is in development (v2/PREREGISTRATION.md): September is development data, not a scored result. "
+                   "See the Live build page.")
 
 # ---------- saved run and Run live ----------
 st.subheader("Latest event scan")
