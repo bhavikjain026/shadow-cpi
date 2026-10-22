@@ -115,14 +115,16 @@ def city_shares(path=CITY_SHARES):
     return json.loads(Path(path).read_text(encoding="utf-8")).get("shares", {})
 
 
-def geography(kind, line, region="", seller="", context="", cpi_code="", shares=None):
+def geography(kind, line, region="", seller="", context="", cpi_code="", shares=None, extra_states=None):
     """Rule 2. Returns (scope, weight, where, why): scope 'national' | 'state' | 'city' | 'context'.
-    weight = the share of the item's all-India weight the event moves."""
+    weight = the share of the item's all-India weight the event moves. extra_states: places found with the
+    Amendment C regional names (v2.kinds.states_of)."""
     ev = {"kind": kind, "quote": line, "region": region, "seller_or_authority": seller}
     sc, states = scope(ev)
     if sc == "national":
         return "national", 1.0, "India", ""
-    if sc == "unknown" or not states:
+    states = set(states or ()) | set(extra_states or ())
+    if not states:
         return "context", 0.0, region or "", "no state identified"
     t, ctx = norm(line), norm(context)
     statewide = any(norm(w) in t or norm(w) in ctx for w in STATEWIDE)
