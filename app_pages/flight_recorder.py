@@ -28,7 +28,7 @@ c1, c2, c3 = st.columns(3)
 c1.metric("Tavily calls", len(tav))
 per_call, billed = tavily_credits(log), account_spent(load_budget(), read_ledger())
 c2.metric("Credits used", f"{per_call:,}", help="Sum of Tavily's own per-call credit counts")
-st.caption(f"Credits: {per_call:,} by Tavily's per-call counts (billing shows {billed:,}).")
+st.caption(f"Credits: {per_call:,} by Tavily's per-call counts (ledger total {billed:,}).")
 c3.metric("From cache", sum(bool(e.get("cached")) for e in tav))
 neb = [e for e in log if e["service"] == "nebius"]
 st.caption(f"Nemotron calls: {sum(not e.get('cached') for e in neb):,} sent ({len(neb):,} including cache hits). "

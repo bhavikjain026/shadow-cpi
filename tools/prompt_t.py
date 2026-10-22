@@ -338,14 +338,14 @@ def _save_chase(tree):
     (OUT / "chase.json").write_text(json.dumps(tree, ensure_ascii=False, indent=1))
 
 
-def card():
-    log = read_log()
+def run_stats(log=None):
+    """Run-dependent Tavily counts (calls, credits, results inside the date window, latency), shared by the report
+    card and tools/sync_doc_numbers.py."""
+    log = read_log() if log is None else log
     tav = [e for e in log if e["service"] == "tavily"]
     live = [e for e in tav if not e["cached"] and e["endpoint"] != "/usage"]      # /usage balance checks are free
-    led = read_ledger()
     cfg = load_budget()
     lat = [e["latency_ms"] for e in live]
-    direct = [e for e in log if e["service"] == "direct" and not e["cached"]]
     # results inside the requested date window (searches with start/end dates, from the cached responses)
     inside = total = undated = 0
     for e in live:
@@ -365,6 +365,17 @@ def card():
                 undated += 1
             elif s <= d <= t:
                 inside += 1
+    return {"calls": len(live), "cached": len(tav) - len(live), "credits": account_spent(cfg, read_ledger()),
+            "spent_before_ledger": cfg["spent_before_ledger"], "plan_limit": cfg["plan_limit"],
+            "addon_credits": cfg.get("addon_credits", 0), "inside": inside, "total": total, "undated": undated,
+            "median_latency_s": statistics.median(lat) / 1000 if lat else None}
+
+
+def card():
+    log = read_log()
+    st = run_stats(log)
+    direct = [e for e in log if e["service"] == "direct" and not e["cached"]]
+    inside, total, undated = st["inside"], st["total"], st["undated"]
     qx = qv = 0
     for p in sorted((ROOT / "manifests").glob("*.json")):
         c = json.loads(p.read_text())["counts"]
@@ -389,10 +400,10 @@ def card():
              f"and the manifests on {date.today().isoformat()}. Credits are Tavily's own per-call `include_usage` "
              "counts (the `/usage` endpoint did not update; see FEEDBACK_NOTES.md).", "",
              "| Measure | Value |", "| --- | --- |",
-             f"| Tavily calls sent (uncached) | {len(live)} (plus {len(tav) - len(live)} served from the cache) |",
-             f"| Credits used (ledger + {cfg['spent_before_ledger']} before it, reconciled to the billing page) | "
-             f"{account_spent(cfg, led)} of the {cfg['plan_limit']:,}-credit plan, plus "
-             f"{cfg.get('addon_credits', 0):,} add-on credits |",
+             f"| Tavily calls sent (uncached) | {st['calls']} (plus {st['cached']} served from the cache) |",
+             f"| Credits used (ledger + {st['spent_before_ledger']} before it, reconciled to the billing page) | "
+             f"{st['credits']} of the {st['plan_limit']:,}-credit plan, plus "
+             f"{st['addon_credits']:,} add-on credits |",
              f"| Credits per replay prediction (events + skeptic, mean of 9 months) | {per_pred:.1f} |",
              f"| Search results inside the requested date window | {inside} of {total} "
              f"({inside / total:.0%}); {undated} undated |" if total else "| Search results inside the window | n/a |",
@@ -400,7 +411,7 @@ def card():
              "| Price quotes verified | n/a |",
              f"| Events confirmed by 2 sources (replay months) | {two} of {len(evs)} |",
              f"| Events with a confirming result from evidence chasing | {by_chase} of {len(chased)} |",
-             f"| Median latency, uncached calls | {statistics.median(lat) / 1000:.1f} s |" if lat else "",
+             f"| Median latency, uncached calls | {st['median_latency_s']:.1f} s |" if st["median_latency_s"] else "",
              f"| Direct downloads (logged; MoSPI API, DoCA by hand, failed Extracts) | {len(direct)} uncached calls |",
              "",
              "## Official sites (Map + Crawl)", ""]

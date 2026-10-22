@@ -19,7 +19,7 @@ The owner (Shweta) does not code. Explain results in plain English, show PASS/FA
 2. Before any run that can change a scored or sealed number: write the rule in the relevant pre-registration file and commit it with a timestamp first. State the commit in the report.
 3. Build and test offline first (fake Tavily/Nemotron, 0 credits). Then do one real run under the task's credit cap. Hard caps in config/budget.json; stop cleanly at the cap and mark work incomplete instead of exceeding it.
 4. Never edit results after seeing them, except logged bug fixes with scores before and after.
-5. Every number shown in the app or docs must be read from a results file, never typed. If app and docs disagree, fix both in the same task.
+5. Every number shown in the app or docs must be read from a results file, never typed. If app and docs disagree, fix both in the same task. Exception: run-dependent counts in README/Devpost (calls, credits, % in window, latency) are not updated after each task; `python tools/sync_doc_numbers.py` fills them with an "as of" date in the Sunday consistency pass and again after the seal. Scored numbers from score_lock.json stay as they are.
 6. Do not ask for, print or store API keys. Never enable paid usage or pay-as-you-go anywhere.
 7. End every task with the REPORT format below, then stop and wait.
 
