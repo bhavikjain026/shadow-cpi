@@ -26,7 +26,7 @@ from shadow_cpi.nemotron import Nemotron  # noqa: E402
 from shadow_cpi.recorder import provenance  # noqa: E402
 from shadow_cpi.recorder import Recorder  # noqa: E402
 from shadow_cpi.settings import models  # noqa: E402
-from shadow_cpi.tavily import Tavily  # noqa: E402
+from shadow_cpi.tavily import Tavily, best_date  # noqa: E402
 from v2 import kinds as K  # noqa: E402
 from v2 import pipeline as PL  # noqa: E402
 from v2 import recall as RC  # noqa: E402
@@ -46,6 +46,8 @@ ARMS = {
     "T": {"writer": "Tavily auto_parameters (B's query texts)", "langs": ["en", "hi"], "n": 8,
           "budget": "v2-ablation-T"},
 }
+ARMS["Td"] = {"writer": "Tavily auto_parameters + our date window (exploratory, after scoring)", "langs": ["en", "hi"],
+              "n": 8, "budget": "v2-ablation-Td"}
 AUTO_MAX_RESULTS = 10                    # Amendment F: Tavily needs max_results from the caller; 10 as in arm A
 MOVES = {k for k, v in K.KINDS.items() if v["role"] == "moves"}
 CPI_NAMES = {"electricity": "electricity charges", "milk": "liquid milk", "lpg": "LPG cylinder", "diesel": "diesel",
@@ -199,6 +201,16 @@ class Meter:
                             lambda: self.tav.extract(urls, **params))
 
 
+def dates_kept(resp, start, end):
+    """Did Tavily keep a supplied window? (auto_parameters' own time_range and dates, and how many dated results fall
+    inside the window). For arm T (no window sent) it records the same counts against the pre-registered window."""
+    ap = resp.get("auto_parameters") or {}
+    dated = [d for d in (best_date(r)[0] for r in resp.get("results", [])) if d]
+    return {"auto_time_range": ap.get("time_range"), "auto_start_date": ap.get("start_date"),
+            "auto_end_date": ap.get("end_date"), "dated_results": len(dated),
+            "inside_window": sum(start <= d <= end for d in dated)}
+
+
 def tavily_params(s):
     """What is sent to Tavily for a validated search (Amendment E: language sent only for Hindi, as arm A)."""
     p = {"topic": s["topic"], "search_depth": "basic", "max_results": s["max_results"], "start_date": s["start_date"],
@@ -216,12 +228,14 @@ def run_month(arm, month, meter, nem, nano, sup):
     if arm == "A":
         cards = PL.propose(meter, nem, nano, K.QUERIES, month, tag, seen, domains=K.DOMAINS, max_results=10,
                            skipped=skipped)
-    elif arm == "T":
+    elif arm in ("T", "Td"):
         b = json.loads((OUT / f"arm_B_{month}.json").read_text(encoding="utf-8"))
         plan, cards = [], []
+        start, end = R.window(month)
+        dates = {"start_date": start, "end_date": end} if arm == "Td" else {}   # Td: arm A's window, nothing else
         for bs in b["plan"]:
             s = {"query": bs["query"], "language": bs["language"], "from_arm_b": True,
-                 "sent": {"auto_parameters": True, "max_results": AUTO_MAX_RESULTS}}
+                 "sent": {"auto_parameters": True, "max_results": AUTO_MAX_RESULTS, **dates}}
             plan.append(s)
             try:
                 resp, sid = meter.search(s["query"], **s["sent"], tag=f"{tag} search")
@@ -229,7 +243,7 @@ def run_month(arm, month, meter, nem, nano, sup):
                 skipped.append({"call": "search", "lang": s["language"], "query": s["query"], "why": str(e)})
                 continue
             s.update(search_call=sid, n_results=len(resp.get("results", [])),
-                     auto_parameters=resp.get("auto_parameters"))
+                     auto_parameters=resp.get("auto_parameters"), dates_kept=dates_kept(resp, start, end))
             cards += PL.read_results(resp, sid, s["language"], month, nem, nano, tag, seen)
     else:
         plan, complete, tries = write_plan(nem, month, arm, nano, sup, tag)
@@ -448,6 +462,42 @@ def reconcile(runs, ref):
                  "printed_date": cl["_card"].get("printed_date")} for k, cl in unmatched.items()]}
 
 
+def t_dates_section(ref):
+    """The exploratory arm T+dates, in its own labelled section (results/v2_ablation_t_dates.json); empty until all
+    nine months have run."""
+    files = [OUT / f"arm_Td_{m}.json" for m in MONTHS]
+    if not all(f.exists() for f in files):
+        return []
+    from collections import Counter
+    runs = [json.loads(f.read_text(encoding="utf-8")) for f in files]
+    m, r = metrics(runs), reconcile(runs, ref)
+    plan = [x for run in runs for x in run["plan"] if "auto_parameters" in x]
+    chose = Counter((str((x["auto_parameters"] or {}).get("topic")), str((x["auto_parameters"] or {}).get("search_depth")),
+                     str((x["auto_parameters"] or {}).get("time_range"))) for x in plan)
+    dk = [x["dates_kept"] for x in plan if x.get("dates_kept")]
+    dated, inside = sum(d["dated_results"] for d in dk), sum(d["inside_window"] for d in dk)
+    kept = sum(d["dated_results"] == d["inside_window"] and not d["auto_time_range"] for d in dk)
+    out = {"label": "EXPLORATORY, added after scoring; cannot change the winner or any verdict", **m,
+           "reconciliation": {k: v for k, v in r.items() if k != "unmatched"},
+           "auto_parameters_chosen": [{"topic": t, "search_depth": d, "time_range": tr, "searches": n}
+                                      for (t, d, tr), n in chose.most_common()],
+           "dates_kept_searches": kept, "searches": len(dk), "dated_results": dated, "inside_window": inside}
+    (ROOT / "results" / "v2_ablation_t_dates.json").write_text(json.dumps(out, ensure_ascii=False, indent=1))
+    return ["", "## Exploratory: arm T + dates (added after scoring; cannot change the winner or any verdict)", "",
+            "Same query texts as arm T, `auto_parameters: true`, plus arm A's `start_date`/`end_date` window; no other "
+            "field from us (dated line in v2/PREREGISTRATION.md).", "",
+            "| Credits spent | Search calls | Verified claims | Distinct verified events | Matched to the 29 | Not "
+            "matched (unchecked) | Recall | False events (upper bound) | Credits per verified event |",
+            "|---|---|---|---|---|---|---|---|---|",
+            f"| {r['credits']} | {r['search_calls']} | {r['verified_claims']} | {r['events']} | {r['matched_events']} | "
+            f"{r['unmatched_events']} | {r['recall']} of 29 | {r['moving_unmatched']} of {r['moving_events']} | "
+            + (f"{r['credits'] / r['events']:.1f} |" if r["events"] else "— |"), "",
+            "**What auto_parameters chose** (topic, depth, time range → searches): "
+            + "; ".join(f"{t}, {d}, {tr} → {n}" for (t, d, tr), n in chose.most_common()) + ".",
+            f"**Did Tavily keep our dates?** {kept} of {len(dk)} searches returned only results inside the window with no "
+            f"auto time range; {inside} of {dated} dated results fell inside the window."]
+
+
 def write_report():
     """Rewrites results/v2_ablation.md from results/v2_ablation.json and the arm files: corrected labels, the
     reconciliation table, provenance, notes. No metric is recomputed and no number in the JSON changes."""
@@ -462,7 +512,8 @@ def write_report():
          "db2984c; 29 known changes.", "",
          "## Reconciliation (every number below comes from this table)", "",
          "| Arm | Credits spent | Search calls | Verified claims | Distinct verified events | Events matched to the 29 "
-         "| Verified events not matched | Recall (of the 29) |", "|---|---|---|---|---|---|---|---|"]
+         "| Not matched (unchecked; may include real changes missing from the 29) | Recall (of the 29) |",
+         "|---|---|---|---|---|---|---|---|"]
     for arm, r in rec.items():
         L.append(f"| {arm} | {r['credits']} | {r['search_calls']} | {r['verified_claims']} | {r['events']} | "
                  f"{r['matched_events']} | {r['unmatched_events']} | {r['recall']} of 29 |")
@@ -486,15 +537,17 @@ def write_report():
                  f"{f(r['credits'] / r['events']) if r['events'] else '—'} ({r['credits']} ÷ {r['events']}) | "
                  f"{f(a['median_latency_s'], 2)} s | {', '.join(a['incomplete_months']) or 'none'} |")
     eq = out["equivalence"]
+    wb = out["arms"]["C"]["written_by"]
+    sup_c, all_c = sum(v for k, v in wb.items() if "super" in k), sum(wb.values())
     L += ["", f"**Verdict (Amendment F, margin ±1 known change), unchanged:** top group {', '.join(eq['top_group'])}; "
           f"ranking {' > '.join(eq['ranking'])}; lower recall {', '.join(eq['lower_recall'])}.", "",
           "Arm A's credits are those of its calls when first made, in the issue 4 and issue 14 runs: the flight "
           "recorder has 213 uncached Tavily calls tagged `v2:events`, 205 credits, equal to the credit ledger's "
           "`v2-issue4` (150) + `v2-issue14` (55). Arm A itself re-ran them from the cache at 0 new credits.", "",
-          "**Provenance (Amendment F):** calls with request_id + response hash stored in the arm file: "
-          + "; ".join(f"{arm} {r['with_provenance']} of {r['calls']}" for arm, r in rec.items())
-          + ". Arms A and B ran before the provenance code (84fc72b), so their arm files store none; their responses "
-          "are still in the recorder's cache.", "",
+          "**Provenance (Amendment F):** added mid-test; C and T: "
+          f"{rec['C']['with_provenance'] + rec['T']['with_provenance']} of {rec['C']['calls'] + rec['T']['calls']} "
+          "calls carry a request_id and a response hash; A and B ran earlier (their responses are still in the "
+          "recorder's cache).", "",
           "**Label fix (logged; no number changed).** Before: \"False events (upper bound) | 6 of 8\" next to "
           "\"Recall 6 of 29\" for arm A, which read as 6 false of 8 found. After: the column says it counts "
           "unmatched events among CPI-moving items only (8 for arm A, 2 of them matched: E1 and E4), and the "
@@ -509,8 +562,8 @@ def write_report():
                  f"{d['params_corrected_by_code']} | {d['searches_dropped_by_code']} | {d['plan_retries_super']} | "
                  f"{d['super_rereads']} | {d['plan_abstentions']} | {d['reader_abstentions']} of {d['pages_read']} |")
     L += ["", "## Notes", "",
-          "- Arm C: Nano's search plan failed in 6 of 9 months (no usable JSON or too few valid searches), so "
-          "Nemotron Super wrote them (78 of C's 117 searches).",
+          f"- Super wrote {sup_c} of C's {all_c} searches (Nano's plan failed in "
+          f"{out['arms']['C']['diagnostics']['plan_retries_super']} of 9 months).",
           "- Model-written queries were sometimes poor, e.g. arm C, June: \"ವಿದ್ಯುತ್ ತರiffe ಜೂನ್ 2026 Karnataka Wisconsin "
           "growth\"; arm B, January: \"बस कि Fahrpreiserhöhung news\".",
           "- Arm T: Tavily's auto_parameters chose `time_range: \"w\"` (the past week), topic news and advanced depth for "
@@ -518,6 +571,7 @@ def write_report():
           "the verifier rejected all of them: 0 of 29 is the pre-registered result.",
           "- Median latency was pre-registered as Amendment E metric 4, with no target; it is descriptive only.",
           "- Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a hand check."]
+    L += t_dates_section(ref)
     RESULTS.with_suffix(".md").write_text("\n".join(L) + "\n")
     A = ["# Verified events not matched to the 29 known changes (four search arms)", "",
          "From `v2/ablation/` (Amendments E and F, development data). For a hand check: each is either a real change "

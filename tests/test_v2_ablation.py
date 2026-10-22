@@ -230,3 +230,24 @@ def test_reconcile_counts_events_matches_and_provenance(tmp_path, monkeypatch):
     assert r["search_calls"] == 8 and r["calls"] == 10 and r["credits"] == 10
     r = AB.reconcile([out], [{**ref[0], "states": ["punjab"]}])
     assert r["unmatched_events"] == 1 and r["unmatched"][0]["url"].startswith("https://x.in/")
+
+
+def test_arm_t_dates_sends_window_with_auto_and_records_if_kept(tmp_path, monkeypatch):
+    import json
+    monkeypatch.setattr(LG.save_page, "__defaults__", (tmp_path / "pages",))
+    monkeypatch.setattr(AB, "OUT", tmp_path)
+    plan = [{**AB.validate(good(lang="en", query=f"q{i}"), M, ["en"])[0], "written_by": "nano", "corrections": []}
+            for i in range(8)]
+    (tmp_path / f"arm_B_{M}.json").write_text(json.dumps({"plan": plan}))
+
+    class AutoTav(FakeTav):
+        def search(self, query, **kw):
+            resp, sid = super().search(query, **kw)
+            return {**resp, "auto_parameters": {"topic": "news", "search_depth": "advanced"}}, sid
+    meter = AB.Meter(AutoTav())
+    out = AB.run_month("Td", M, meter, FakeNem({}), "nano", "super")
+    sent = meter.calls[0]["sent"]
+    assert set(sent) == {"query", "auto_parameters", "max_results", "start_date", "end_date"}
+    assert (sent["start_date"], sent["end_date"]) == ("2026-08-22", "2026-09-29")
+    assert out["plan"][0]["dates_kept"] == {"auto_time_range": None, "auto_start_date": None, "auto_end_date": None,
+                                            "dated_results": 1, "inside_window": 1}

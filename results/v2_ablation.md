@@ -4,7 +4,7 @@
 
 ## Reconciliation (every number below comes from this table)
 
-| Arm | Credits spent | Search calls | Verified claims | Distinct verified events | Events matched to the 29 | Verified events not matched | Recall (of the 29) |
+| Arm | Credits spent | Search calls | Verified claims | Distinct verified events | Events matched to the 29 | Not matched (unchecked; may include real changes missing from the 29) | Recall (of the 29) |
 |---|---|---|---|---|---|---|---|
 | A | 205 | 117 | 27 | 16 | 6 | 10 | 6 of 29 |
 | B | 117 | 72 | 10 | 9 | 2 | 7 | 2 of 29 |
@@ -28,7 +28,7 @@
 
 Arm A's credits are those of its calls when first made, in the issue 4 and issue 14 runs: the flight recorder has 213 uncached Tavily calls tagged `v2:events`, 205 credits, equal to the credit ledger's `v2-issue4` (150) + `v2-issue14` (55). Arm A itself re-ran them from the cache at 0 new credits.
 
-**Provenance (Amendment F):** calls with request_id + response hash stored in the arm file: A 0 of 213; B 0 of 122; C 190 of 190; T 72 of 72. Arms A and B ran before the provenance code (84fc72b), so their arm files store none; their responses are still in the recorder's cache.
+**Provenance (Amendment F):** added mid-test; C and T: 262 of 262 calls carry a request_id and a response hash; A and B ran earlier (their responses are still in the recorder's cache).
 
 **Label fix (logged; no number changed).** Before: "False events (upper bound) | 6 of 8" next to "Recall 6 of 29" for arm A, which read as 6 false of 8 found. After: the column says it counts unmatched events among CPI-moving items only (8 for arm A, 2 of them matched: E1 and E4), and the reconciliation table shows all events. The formula is the pre-registered one; the code was right.
 
@@ -43,7 +43,7 @@ Arm A's credits are those of its calls when first made, in the issue 4 and issue
 
 ## Notes
 
-- Arm C: Nano's search plan failed in 6 of 9 months (no usable JSON or too few valid searches), so Nemotron Super wrote them (78 of C's 117 searches).
+- Super wrote 78 of C's 117 searches (Nano's plan failed in 6 of 9 months).
 - Model-written queries were sometimes poor, e.g. arm C, June: "ವಿದ್ಯುತ್ ತರiffe ಜೂನ್ 2026 Karnataka Wisconsin growth"; arm B, January: "बस कि Fahrpreiserhöhung news".
 - Arm T: Tavily's auto_parameters chose `time_range: "w"` (the past week), topic news and advanced depth for every search. Amendment F sends no dates, so every result was from October 2026, after every cutoff, and the verifier rejected all of them: 0 of 29 is the pre-registered result.
 - Median latency was pre-registered as Amendment E metric 4, with no target; it is descriptive only.
