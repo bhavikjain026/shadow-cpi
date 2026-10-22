@@ -258,3 +258,31 @@ metrics. Computed by `v2.ablation.diagnostics` in the same single `--metrics` ru
   `include_domains_mode` as API fields, how many Hindi searches carry `language`, and how many queries contain a
   parameter name as text (expected 0). Three example request bodies are shown verbatim in the report; the API key is
   sent in the Authorization header and is never in a body.
+
+## Amendment F: equivalence margin, arm T (Tavily auto parameters), provenance
+
+**Written 2026-10-22T09:27:44Z (UTC), before any Amendment E metric was computed** (arm B was still running, arm C not started).
+Decided by the owner. Nothing here changes v1, the v2 score locks or Amendment E's four metrics.
+
+1. **Equivalence margin.** On recall, arms within **±1 known change** (of the 29) count as **about equal**. The
+   top group is every arm whose recall is at least the best arm's recall minus 1. Within the top group, arms are
+   compared on **credits per verified event** (lower is better), then **false events** (upper bound; lower is
+   better). An arm outside the top group is reported as lower recall.
+2. **Arm T, Tavily auto parameters.** For each month Jan–Sep 2026, the **same query texts as arm B** (B's validated
+   searches for that month, in order) are sent to Tavily /search with **`auto_parameters: true`** and
+   `max_results` 10 (Tavily requires max_results to be set by the caller; 10 as in arm A), and **no other filter**:
+   no topic, dates, domains, language or search depth from us or from the model, so Tavily chooses them (it may
+   choose advanced depth at 2 credits). The `auto_parameters` object Tavily returns is logged for every search.
+   Results then go through the same reader and verifier as the other arms, with the pre-registered window (a page
+   outside it is rejected). Same 29 known changes, same matcher (db2984c), same four metrics and the same
+   reported-only diagnostics. Run once. Credit cap `v2-ablation-T` **200** (each search budgeted at 2 credits); a
+   cap stops the arm cleanly and the months cut short are listed.
+3. **One table, computed once.** All four arms (A fixed templates, B model-written, C model-written + regional,
+   T Tavily auto) in one table, computed once by `python -m v2.ablation --metrics` after arm T finishes, with the
+   equivalence verdict of point 1.
+4. **Provenance for every run from now on** (including the seal's evidence manifest and nowcast file): each Tavily
+   call stores Tavily's `request_id` and a **SHA-256 of the response** (the response JSON serialised with sorted
+   keys, no spaces, UTF-8) in the flight recorder, the credit ledger, the v2 evidence ledger rows (search and
+   extract), the ablation arm files, and a `tavily_provenance` list in the manifest and nowcast file. Provenance
+   only: no number changes. Runs before this commit (including arm C, started under the earlier code) do not carry
+   it.
