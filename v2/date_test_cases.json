@@ -1,0 +1,201 @@
+{
+ "seed": 20261022,
+ "made_utc": "2026-10-22T09:36:59.663970+00:00",
+ "cases": [
+  {
+   "id": "E1",
+   "kind": "electricity",
+   "month": "2026-04",
+   "states": [
+    "madhya pradesh"
+   ],
+   "cutoff": "2026-04-29",
+   "query": "electricity tariff hike Madhya Pradesh April 2026"
+  },
+  {
+   "id": "E2",
+   "kind": "electricity",
+   "month": "2026-04",
+   "states": [
+    "maharashtra"
+   ],
+   "cutoff": "2026-04-29",
+   "query": "electricity tariff hike Maharashtra April 2026"
+  },
+  {
+   "id": "E4",
+   "kind": "electricity",
+   "month": "2026-04",
+   "states": [
+    "jharkhand"
+   ],
+   "cutoff": "2026-04-29",
+   "query": "electricity tariff hike Jharkhand April 2026"
+  },
+  {
+   "id": "M2",
+   "kind": "milk",
+   "month": "2026-04",
+   "states": [
+    "madhya pradesh"
+   ],
+   "cutoff": "2026-04-29",
+   "query": "milk price hike Madhya Pradesh April 2026"
+  },
+  {
+   "id": "F3",
+   "kind": "fuel",
+   "month": "2026-05",
+   "states": [],
+   "cutoff": "2026-05-29",
+   "query": "petrol diesel price hike India May 2026"
+  },
+  {
+   "id": "M3",
+   "kind": "milk",
+   "month": "2026-05",
+   "states": [],
+   "cutoff": "2026-05-29",
+   "query": "milk price hike India May 2026"
+  },
+  {
+   "id": "M4",
+   "kind": "milk",
+   "month": "2026-05",
+   "states": [
+    "madhya pradesh"
+   ],
+   "cutoff": "2026-05-29",
+   "query": "milk price hike Madhya Pradesh May 2026"
+  },
+  {
+   "id": "M5",
+   "kind": "milk",
+   "month": "2026-05",
+   "states": [
+    "maharashtra"
+   ],
+   "cutoff": "2026-05-29",
+   "query": "milk price hike Maharashtra May 2026"
+  },
+  {
+   "id": "M6",
+   "kind": "milk",
+   "month": "2026-05",
+   "states": [
+    "bihar",
+    "jharkhand"
+   ],
+   "cutoff": "2026-05-29",
+   "query": "milk price hike Bihar, Jharkhand May 2026"
+  },
+  {
+   "id": "E5",
+   "kind": "electricity",
+   "month": "2026-06",
+   "states": [
+    "uttar pradesh"
+   ],
+   "cutoff": "2026-06-29",
+   "query": "electricity tariff hike Uttar Pradesh June 2026"
+  },
+  {
+   "id": "E6",
+   "kind": "electricity",
+   "month": "2026-06",
+   "states": [
+    "nct of delhi"
+   ],
+   "cutoff": "2026-06-29",
+   "query": "electricity tariff hike Delhi June 2026"
+  },
+  {
+   "id": "L2",
+   "kind": "lpg",
+   "month": "2026-06",
+   "states": [],
+   "cutoff": "2026-06-29",
+   "query": "LPG cylinder price hike India June 2026"
+  },
+  {
+   "id": "M7",
+   "kind": "milk",
+   "month": "2026-06",
+   "states": [
+    "kerala"
+   ],
+   "cutoff": "2026-06-29",
+   "query": "milk price hike Kerala June 2026"
+  },
+  {
+   "id": "T3",
+   "kind": "bus",
+   "month": "2026-06",
+   "states": [
+    "odisha"
+   ],
+   "cutoff": "2026-06-29",
+   "query": "bus fare hike Odisha June 2026"
+  },
+  {
+   "id": "E7",
+   "kind": "electricity",
+   "month": "2026-07",
+   "states": [
+    "chhattisgarh"
+   ],
+   "cutoff": "2026-07-29",
+   "query": "electricity tariff hike Chhattisgarh July 2026"
+  },
+  {
+   "id": "M8",
+   "kind": "milk",
+   "month": "2026-07",
+   "states": [
+    "tamil nadu"
+   ],
+   "cutoff": "2026-07-29",
+   "query": "milk price hike Tamil Nadu July 2026"
+  },
+  {
+   "id": "M9",
+   "kind": "milk",
+   "month": "2026-07",
+   "states": [
+    "tamil nadu"
+   ],
+   "cutoff": "2026-07-29",
+   "query": "milk price hike Tamil Nadu July 2026"
+  },
+  {
+   "id": "E8",
+   "kind": "electricity",
+   "month": "2026-09",
+   "states": [
+    "jammu and kashmir"
+   ],
+   "cutoff": "2026-09-29",
+   "query": "electricity tariff hike Jammu and Kashmir September 2026"
+  },
+  {
+   "id": "M11",
+   "kind": "milk",
+   "month": "2026-09",
+   "states": [
+    "tamil nadu"
+   ],
+   "cutoff": "2026-09-29",
+   "query": "milk price hike Tamil Nadu September 2026"
+  },
+  {
+   "id": "M12",
+   "kind": "milk",
+   "month": "2026-09",
+   "states": [
+    "tamil nadu"
+   ],
+   "cutoff": "2026-09-29",
+   "query": "milk price hike Tamil Nadu September 2026"
+  }
+ ]
+}

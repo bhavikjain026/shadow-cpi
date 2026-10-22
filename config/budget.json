@@ -30,7 +30,8 @@
     "v2-issue14": 250,
     "v2-ablation-B": 170,
     "v2-ablation-C": 230,
-    "v2-ablation-T": 200
+    "v2-ablation-T": 200,
+    "date-test": 150
   },
   "plans": {
     "cut1_events": "milk, lpg, electricity: English + Hindi; mobile, rail, medicine, school_fee, gst: English only (config/items.yaml 'langs')",
