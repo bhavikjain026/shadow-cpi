@@ -46,7 +46,7 @@ def text_hash(text):
     return hashlib.sha256((text or "").encode("utf-8")).hexdigest()
 
 
-def check(claim, page_text, page_date, month, words, units=None, state=None, context=""):
+def check(claim, page_text, page_date, month, words, units=None, state=None, context="", scope=True):
     """claim: {'line', 'price' (number claimed), 'unit', 'region'}. Returns (True, 'verified') or (False, reason).
     In order: page date known and inside the window; a price is claimed and is in the cited line; the cited line is
     on the fetched page; the line names the item; (if given) the place is in the state; retail, not wholesale;
@@ -75,8 +75,8 @@ def check(claim, page_text, page_date, month, words, units=None, state=None, con
         places = _states_in(claim.get("region")) | _states_in(line) | _states_in(context)
         if state not in places:
             return False, f"not {state.title()}" + (f" ({', '.join(sorted(places))})" if places else "")
-    why = (non_consumer_reason(claim.get("item"), line) or not_retail_context_reason(line, context)
-           or premium_fuel_reason(claim.get("kind"), claim.get("item"), line))     # v1 scope rules, unchanged
+    why = ((non_consumer_reason(claim.get("item"), line) or not_retail_context_reason(line, context)) if scope else ""
+           ) or premium_fuel_reason(claim.get("kind"), claim.get("item"), line)    # v1 scope rules, unchanged
     if why:
         return False, why
     if units and not any(norm(u) in norm(claim.get("unit") or "") + " " + text for u in units):
@@ -138,3 +138,74 @@ def geography(kind, line, region="", seller="", context="", cpi_code="", shares=
             return "city", state_share(cpi_code, {st}) * entry["share"], f"{c} ({st})", ""
     return "context", 0.0, ", ".join(cities) or region or "", (
         "a city or district event with no statewide confirmation and no documented city share")
+
+
+# ---------- Amendment D ----------
+_MON = {m: i + 1 for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov",
+                                        "dec"])}
+_MON_HI = {m: i + 1 for i, m in enumerate(["जनवरी", "फरवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर",
+                                           "अक्टूबर", "नवंबर", "दिसंबर"])}
+_MONTH_WORD = r"(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sep(?:t(?:ember)?)?|" \
+              r"oct(?:ober)?|nov(?:ember)?|dec(?:ember)?|" + "|".join(_MON_HI) + r")"
+_DATES = [
+    re.compile(r"(?P<y>20\d\d)-(?P<m>\d\d)-(?P<d>\d\d)"),
+    re.compile(r"(?<!\d)(?P<d>\d{1,2})[/.](?P<m>\d{1,2})[/.](?P<y>20\d\d)"),
+    re.compile(r"(?<!\d)(?P<d>\d{1,2})(?:st|nd|rd|th)?\s+" + _MONTH_WORD + r",?\s+(?P<y>20\d\d)", re.I),
+    re.compile(_MONTH_WORD + r"\.?\s+(?P<d>\d{1,2})(?:st|nd|rd|th)?,?\s+(?P<y>20\d\d)", re.I),
+]
+STAMP_WORDS = r"(published|updated|posted|first published|last updated|प्रकाशित|अपडेट|अपडेटेड|अद्यतन)"
+CLOCK = re.compile(r"^\s*[,|·-]?\s*(?:at\s*)?\d{1,2}[:.]\d{2}\b", re.I)
+
+
+def _to_iso(m):
+    gd = m.groupdict()
+    mon = gd.get("m")
+    if mon is None:
+        word = next(g for g in m.groups() if g and not g.isdigit())
+        mon = _MON.get(word.lower()[:3]) or _MON_HI.get(word)
+    try:
+        return date(int(gd["y"]), int(mon), int(gd["d"])).isoformat()
+    except (TypeError, ValueError):
+        return None
+
+
+def printed_date(text):
+    """The date printed on the page as its publish/update stamp: dates within 60 characters after a publish/update
+    word, or followed by a clock time. The latest such date, or None (Amendment D, rule 5)."""
+    found = []
+    for rx in _DATES:
+        for m in rx.finditer(text or ""):
+            iso = _to_iso(m)
+            if not iso:
+                continue
+            before = (text[max(0, m.start() - 60):m.start()]).lower()
+            if re.search(STAMP_WORDS, before) or CLOCK.match(text[m.end():m.end() + 15]):
+                found.append(iso)
+    return max(found) if found else None
+
+
+def page_date_check(text, month, tavily_published):
+    """(ok, reason, printed, flag). flag: 'after cutoff' | 'edited after its date' | ''."""
+    printed = printed_date(text)
+    end = cutoff(month)
+    if printed and printed > end:
+        return False, f"the page shows {printed}, after the cutoff {end}", printed, "after cutoff"
+    if printed and tavily_published:
+        gap = (date.fromisoformat(printed) - date.fromisoformat(tavily_published)).days
+        if gap > 2:
+            return False, (f"page edited after its date: it shows {printed}, {gap} days after Tavily's published date "
+                           f"{tavily_published}"), printed, "edited after its date"
+    return True, "", printed, ""
+
+
+def price_type(line, context="", item=None):
+    """'commercial', 'wholesale', 'other' (a penalty or fine: rejected, not context) or 'retail' (household).
+    Only retail can enter the number."""
+    why = non_consumer_reason(item, line) or not_retail_context_reason(line, context)
+    if not why:
+        return "retail"
+    if why.startswith("not a household"):
+        return "commercial"
+    if why.startswith("not a retail price"):
+        return "wholesale"
+    return "other"

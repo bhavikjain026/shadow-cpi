@@ -38,8 +38,8 @@ def append(rec, path=LEDGER):
     unknown = set(rec) - set(FIELDS)
     if unknown:
         raise ValueError(f"unknown ledger fields {sorted(unknown)}")
-    if rec["status"] not in ("verified", "rejected"):
-        raise ValueError("status must be verified or rejected")
+    if rec["status"] not in ("verified", "rejected", "context"):
+        raise ValueError("status must be verified, rejected or context")
     if any(key(r) == key(rec) for r in read(path)):
         return False
     Path(path).parent.mkdir(parents=True, exist_ok=True)

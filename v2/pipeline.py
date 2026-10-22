@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 
 from shadow_cpi import evidence as E
 from shadow_cpi.event_rules import absolute_change, base_price, normalise_date
-from shadow_cpi.tavily import best_date
+from shadow_cpi.tavily import best_date, iso_date
 from shadow_cpi.verify import norm, split_lines
 from v2 import ledger as LG
 from v2 import rules as R
@@ -78,6 +78,7 @@ def propose(tav, nem, nano, queries, month, tag, seen, domains=None, max_results
             d, _ = best_date(r)
             card = {"url": r["url"], "domain": urlparse(r["url"]).netloc.removeprefix("www."),
                     "title": r.get("title") or "", "lang": lang, "published": d or None, "search_call": sid,
+                    "tavily_published": iso_date(r.get("published_date")) or None,
                     "status": "rejected", "reason": "", "claims": []}
             cards.append(card)
             if not d or d > end or d < start:
@@ -136,10 +137,19 @@ def fetch_and_verify(tav, nem, nano, cards, month, words, units, state, kind, ta
                 continue
             for cl in c["claims"]:
                 cl.setdefault("read_by", nano)
+            okd, why_d, c["printed_date"], c["date_flag"] = R.page_date_check(text, month, c.get("tavily_published"))
+            if not okd:                                   # Amendment D, rule 5: the page's own date fails
+                for cl in c["claims"]:
+                    cl.update({"status": "rejected", "reason": why_d, "price_type": R.price_type(cl["line"]),
+                               "change": R.change_of(cl), "effective_date": None})
+                c["reason"] = why_d
+                continue
             super_reread(nem, super_model, c, text, tag)
             for cl in c["claims"]:
                 ctx = context_for(text, cl["line"])
-                ok, why = R.check(cl, text, c["published"], month, words, units, state, ctx)
+                pt = R.price_type(cl["line"], ctx)
+                ok, why = R.check(cl, text, c["published"], month, words, units, state, ctx,
+                                  scope=pt not in ("wholesale", "commercial"))
                 eff = normalise_date(cl.get("effective_date"), c["published"]) or None
                 change, base = R.change_of(cl), None
                 if change is None and ok:
@@ -150,12 +160,18 @@ def fetch_and_verify(tav, nem, nano, cards, month, words, units, state, kind, ta
                     ok, why = False, f"effective date {eff or 'not stated'} is not in {month}"
                 if ok and change is None:
                     ok, why = False, "the change cannot be computed (no old and new price, % or official base)"
-                cl.update({"status": "verified" if ok else "rejected", "reason": why, "effective_date": eff,
+                status = "verified" if ok else "rejected"
+                if ok and pt in ("wholesale", "commercial"):     # Amendment D: visible context, never in the number
+                    status, why = "context", f"{pt} price: shown as context, never in the number"
+                cl.update({"status": status, "reason": why, "effective_date": eff, "price_type": pt,
                            "change": change, "base_price": base, "context": ctx,
                            "gloss": gloss(nem, nano, cl["line"], f"{tag} gloss")})
         for c in batch:
             if any(cl.get("status") == "verified" for cl in c["claims"]):
                 c["status"], c["reason"] = "verified", "verified"
+            elif any(cl.get("status") == "context" for cl in c["claims"]):
+                c["status"] = "context"
+                c["reason"] = next(cl["reason"] for cl in c["claims"] if cl.get("status") == "context")
             elif not c["reason"]:
                 c["reason"] = next((cl["reason"] for cl in c["claims"] if cl.get("reason")), "no claim to check")
 
@@ -169,7 +185,8 @@ def ledger_rows(cards, month, cpi_code, cpi_name, kind, state, model):
             LG.append({"id": f"{month}:{kind}:{c['page_sha256'][:12]}:{R.text_hash(cl['line'])[:8]}",
                        "month": month, "cutoff": R.cutoff(month), "cpi_item": cpi_code, "cpi_name": cpi_name,
                        "item": kind, "kind": kind, "place": cl.get("region") or "", "state": state or "",
-                       "unit": cl.get("unit") or "", "price_type": "retail price change", "price": cl.get("price"),
+                       "unit": cl.get("unit") or "", "price_type": cl.get("price_type") or "retail",
+                       "price": cl.get("price"),
                        "old_price": cl.get("old_price"), "new_price": cl.get("new_price"), "change": cl.get("change"),
                        "published_date": c["published"], "effective_date": cl.get("effective_date"),
                        "found_date": c["found"], "line": cl["line"], "url": c["url"], "page_sha256": c["page_sha256"],
