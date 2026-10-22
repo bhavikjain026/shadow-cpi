@@ -214,3 +214,19 @@ def test_recorder_stores_request_id_and_response_sha256(tmp_path):
     assert e["request_id"] == "abc" and e["response_sha256"] == response_sha256(resp)
     assert rec.provenance[0]["request_id"] == "abc" and rec.provenance[0]["service"] == "tavily"
     assert response_sha256({"b": 1, "a": 2}) == response_sha256({"a": 2, "b": 1})
+
+
+def test_reconcile_counts_events_matches_and_provenance(tmp_path, monkeypatch):
+    monkeypatch.setattr(LG.save_page, "__defaults__", (tmp_path / "pages",))
+    plan = [good(lang=l) for l in ["en"] * 4 + ["hi"] * 4]
+    ev = [{"quote": LINE, "line": LINE, "new_price": 6.83, "pct_change": 6.83, "effective_date": "2026-09-01",
+           "region": "Jammu and Kashmir"}]
+    meter = AB.Meter(FakeTav())
+    out = AB.run_month("B", M, meter, FakeNem({"nano": plan}, {"JK power": ev}), "nano", "super")
+    out["calls"] = meter.calls
+    ref = [{"id": "E9", "kind": "electricity", "month": M, "date": "2026-09-01", "states": ["jammu and kashmir"]}]
+    r = AB.reconcile([out], ref)
+    assert (r["verified_claims"], r["events"], r["matched_events"], r["unmatched_events"], r["recall"]) == (8, 1, 1, 0, 1)
+    assert r["search_calls"] == 8 and r["calls"] == 10 and r["credits"] == 10
+    r = AB.reconcile([out], [{**ref[0], "states": ["punjab"]}])
+    assert r["unmatched_events"] == 1 and r["unmatched"][0]["url"].startswith("https://x.in/")

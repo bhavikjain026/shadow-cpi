@@ -142,3 +142,11 @@ in the list, so the May 2026 milk rise could not be checked on the dairy's own s
 `milk_rates_english_wef_11_08_2026.pdf` (effective 11 Aug 2026, the date of a scored Maharashtra milk event) came
 back as 607 characters of letterhead with basic and with advanced Extract; the rates themselves are not readable as
 text. The advanced call cost 1 credit. Evidence: flight-recorder ids `a8ce5681fcf2` (basic), `633dd10b693e` (advanced).
+
+**2026-10-22 · Friction: auto_parameters with no dates chose time_range=w.** In our pre-registered arm T
+(`v2/PREREGISTRATION.md`, Amendment F), 72 searches sent only `query`, `auto_parameters: true` and `max_results`.
+Tavily chose `time_range: "w"`, topic news and advanced depth every time, so for a historical month every result was
+from the past week, and 0 of 29 known Jan–Sep 2026 changes were found. A historical, time-locked search needs explicit
+`start_date`/`end_date`. Suggestion: document this, or let auto_parameters respect a supplied date window.
+Evidence: `v2/ablation/arm_T_*.json` (`auto_parameters` logged per call), e.g. flight-recorder id `40f11f00fa88`, Tavily
+request_id `75b29575-d839-49e2-a1b1-76fd7ee28a9b`.

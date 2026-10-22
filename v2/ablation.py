@@ -424,8 +424,117 @@ def summarise():
     print("\n".join(lines))
 
 
+def reconcile(runs, ref):
+    """One row per arm, every figure from the arm files: the reconciliation table (no new call)."""
+    calls = [c for r in runs for c in r["calls"]]
+    claims = [{**cl, "_card": c, "_month": r["month"]} for r in runs for c in r["cards"] for cl in c["claims"]
+              if cl.get("status") == "verified" and cl.get("kind")]
+    evs = events(claims)
+    matched = {k: cl for k, cl in evs.items() if any(RC.matches(x, cl) for x in ref)}
+    unmatched = {k: cl for k, cl in evs.items() if k not in matched}
+    rows = RC.score({r["month"]: [cl for cl in claims if cl["_month"] == r["month"]] for r in runs}, ref)
+    return {"credits": sum(c["credits"] for c in calls), "search_calls": sum(c["endpoint"] == "/search" for c in calls),
+            "verified_claims": len(claims), "events": len(evs), "matched_events": len(matched),
+            "unmatched_events": len(unmatched), "moving_events": sum(k[0] in MOVES for k in evs),
+            "moving_unmatched": sum(k[0] in MOVES for k in unmatched),
+            "recall": sum(r["v2"] == "FOUND" for r in rows),
+            "with_provenance": sum(bool(c.get("request_id")) and bool(c.get("response_sha256")) for c in calls),
+            "calls": len(calls), "unmatched": [
+                {"month": cl["_month"], "item": k[0], "effective_date": k[1], "states": list(k[2]),
+                 "quote": cl["line"], "url": cl["_card"]["url"], "page_date": cl["_card"].get("published"),
+                 "printed_date": cl["_card"].get("printed_date")} for k, cl in unmatched.items()]}
+
+
+def write_report():
+    """Rewrites results/v2_ablation.md from results/v2_ablation.json and the arm files: corrected labels, the
+    reconciliation table, provenance, notes. No metric is recomputed and no number in the JSON changes."""
+    out = json.loads(RESULTS.read_text(encoding="utf-8"))
+    ref = json.loads(RC.REFERENCE.read_text(encoding="utf-8"))["changes"]
+    rec = {arm: reconcile([json.loads((OUT / f"arm_{arm}_{m}.json").read_text(encoding="utf-8")) for m in MONTHS],
+                          ref) for arm in out["arms"]}
+    f = lambda x, d=1: "—" if x is None else f"{x:.{d}f}"  # noqa: E731
+    L = ["# Search-parameter ablation (Amendments E and F)", "",
+         f"**DEVELOPMENT data**, Jan–Sep 2026. Metrics computed once, {out['computed_utc'][:16]} UTC (commit 5b1eec0); "
+         "this page re-presents them with corrected labels (see the label fix below). Matcher unchanged since "
+         "db2984c; 29 known changes.", "",
+         "## Reconciliation (every number below comes from this table)", "",
+         "| Arm | Credits spent | Search calls | Verified claims | Distinct verified events | Events matched to the 29 "
+         "| Verified events not matched | Recall (of the 29) |", "|---|---|---|---|---|---|---|---|"]
+    for arm, r in rec.items():
+        L.append(f"| {arm} | {r['credits']} | {r['search_calls']} | {r['verified_claims']} | {r['events']} | "
+                 f"{r['matched_events']} | {r['unmatched_events']} | {r['recall']} of 29 |")
+    L += ["", "- **Distinct verified event:** a distinct (item, effective date, set of states) among an arm's verified "
+          "claims. **Recall** counts the 29 known changes found by any verified claim; one event can match one change "
+          "and several pages can report it, so recall and matched events differ.",
+          "- **False events (upper bound)** = verified events of an item that moves CPI by itself (electricity, "
+          "diesel, bus, rail, mobile) that match none of the 29, out of all such events (pre-registered, Amendment E "
+          "metric 2). Milk, LPG and petrol events are left out because their spine or official series moves the "
+          "number.",
+          "- **Credits per verified event** = credits spent ÷ distinct verified events of any item (Amendment E "
+          "metric 3).", "",
+          "## Result", "",
+          "| Arm | Searches written by | Recall | False events (upper bound): unmatched of CPI-moving events | "
+          "Credits per verified event | Median Tavily latency (descriptive; no target) | Incomplete months |",
+          "|---|---|---|---|---|---|---|"]
+    for arm, a in out["arms"].items():
+        r = rec[arm]
+        L.append(f"| {arm} | {a['writer']} ({', '.join(a['languages'])}) | {r['recall']} of 29 | "
+                 f"{r['moving_unmatched']} of {r['moving_events']} | "
+                 f"{f(r['credits'] / r['events']) if r['events'] else '—'} ({r['credits']} ÷ {r['events']}) | "
+                 f"{f(a['median_latency_s'], 2)} s | {', '.join(a['incomplete_months']) or 'none'} |")
+    eq = out["equivalence"]
+    L += ["", f"**Verdict (Amendment F, margin ±1 known change), unchanged:** top group {', '.join(eq['top_group'])}; "
+          f"ranking {' > '.join(eq['ranking'])}; lower recall {', '.join(eq['lower_recall'])}.", "",
+          "Arm A's credits are those of its calls when first made, in the issue 4 and issue 14 runs: the flight "
+          "recorder has 213 uncached Tavily calls tagged `v2:events`, 205 credits, equal to the credit ledger's "
+          "`v2-issue4` (150) + `v2-issue14` (55). Arm A itself re-ran them from the cache at 0 new credits.", "",
+          "**Provenance (Amendment F):** calls with request_id + response hash stored in the arm file: "
+          + "; ".join(f"{arm} {r['with_provenance']} of {r['calls']}" for arm, r in rec.items())
+          + ". Arms A and B ran before the provenance code (84fc72b), so their arm files store none; their responses "
+          "are still in the recorder's cache.", "",
+          "**Label fix (logged; no number changed).** Before: \"False events (upper bound) | 6 of 8\" next to "
+          "\"Recall 6 of 29\" for arm A, which read as 6 false of 8 found. After: the column says it counts "
+          "unmatched events among CPI-moving items only (8 for arm A, 2 of them matched: E1 and E4), and the "
+          "reconciliation table shows all events. The formula is the pre-registered one; the code was right.", "",
+          "## Diagnostics (reported only; addendum to Amendment E)", "",
+          "| Arm | Duplicate results | Duplicate verified claims | Params corrected by code | Searches dropped by code "
+          "| Plan retries (Super) | Super re-reads | Plan abstentions | Reader abstentions (of pages read) |",
+          "|---|---|---|---|---|---|---|---|---|"]
+    for arm, a in out["arms"].items():
+        d = a["diagnostics"]
+        L.append(f"| {arm} | {d['duplicate_results']} | {d['duplicate_verified_claims']} | "
+                 f"{d['params_corrected_by_code']} | {d['searches_dropped_by_code']} | {d['plan_retries_super']} | "
+                 f"{d['super_rereads']} | {d['plan_abstentions']} | {d['reader_abstentions']} of {d['pages_read']} |")
+    L += ["", "## Notes", "",
+          "- Arm C: Nano's search plan failed in 6 of 9 months (no usable JSON or too few valid searches), so "
+          "Nemotron Super wrote them (78 of C's 117 searches).",
+          "- Model-written queries were sometimes poor, e.g. arm C, June: \"ವಿದ್ಯುತ್ ತರiffe ಜೂನ್ 2026 Karnataka Wisconsin "
+          "growth\"; arm B, January: \"बस कि Fahrpreiserhöhung news\".",
+          "- Arm T: Tavily's auto_parameters chose `time_range: \"w\"` (the past week), topic news and advanced depth for "
+          "every search. Amendment F sends no dates, so every result was from October 2026, after every cutoff, and "
+          "the verifier rejected all of them: 0 of 29 is the pre-registered result.",
+          "- Median latency was pre-registered as Amendment E metric 4, with no target; it is descriptive only.",
+          "- Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a hand check."]
+    RESULTS.with_suffix(".md").write_text("\n".join(L) + "\n")
+    A = ["# Verified events not matched to the 29 known changes (four search arms)", "",
+         "From `v2/ablation/` (Amendments E and F, development data). For a hand check: each is either a real change "
+         "missing from the audit list or a false event. Page date = the date used by the verifier (address or "
+         "Tavily); printed = the date printed on the page, if any.", "",
+         "| Arm | Month | Item | Effective | States | Quote | URL | Page date | Printed | Hand check |",
+         "|---|---|---|---|---|---|---|---|---|---|"]
+    for arm, r in rec.items():
+        for u in r["unmatched"]:
+            q = u["quote"].replace("|", "/").replace("\n", " ")[:220]
+            A.append(f"| {arm} | {u['month']} | {u['item']} | {u['effective_date']} | {', '.join(u['states']) or '—'} "
+                     f"| {q} | {u['url']} | {u['page_date'] or '—'} | {u['printed_date'] or '—'} | |")
+    (ROOT / "audit" / "arms_unmatched.md").write_text("\n".join(A) + "\n")
+    return rec
+
+
 if __name__ == "__main__":
     if "--metrics" in sys.argv:
         summarise()
+    elif "--report" in sys.argv:
+        write_report()
     else:
         run(sys.argv[1], sys.argv[2:] or MONTHS)
