@@ -13,6 +13,7 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
 - **Only 9 test months** (January to September 2026). The 2024-base series has indices only from January 2025, and 2025 is kept for calibration, so there is no longer history to test on. Nine months is too few to be sure that one method is better than another, and small differences in mean miss may be luck.
 - **The 80% range comes from those same 9 replay misses.** With so few months, the range is itself uncertain.
 - **Replays search today's web with date filters.** Tavily's published date is a best estimate. The code also checks dates written inside pages, and it drops pages that state the official figure for the month. Still, a replay can never perfectly recreate what was on the web at the time.
+- **v1's replay windows ran to each month's last day; a live seal uses evidence up to the 29th, so the replay was slightly easier than live conditions.**
 - **2025 is calibration only.** The pass-through factors were fitted on 2025, and nothing was tuned on the 2026 test months. That keeps the test fair, but the factors may not hold in a new series.
 
 ## Strong baselines
