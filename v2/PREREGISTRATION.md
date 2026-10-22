@@ -286,3 +286,9 @@ Decided by the owner. Nothing here changes v1, the v2 score locks or Amendment E
    extract), the ablation arm files, and a `tavily_provenance` list in the manifest and nowcast file. Provenance
    only: no number changes. Runs before this commit (including arm C, started under the earlier code) do not carry
    it.
+
+### Exploratory arm T+dates
+
+**Written 2026-10-22T12:26:37Z (UTC), before it was run.** Exploratory arm T+dates (added after scoring; cannot change the winner
+or any verdict): same queries as T, auto_parameters=true, plus the same start_date/end_date windows arm A used. No
+other fields from us. Cap 190 credits. Reported in its own labelled section.
