@@ -17,16 +17,18 @@
 
 ## Result
 
-| Arm | Searches written by | Recall | False events (upper bound): unmatched of CPI-moving events | Credits per verified event | Credits per known change found (added after scoring; descriptive) | Median Tavily latency (descriptive; pre-registered with no target, not used in the verdict) | Incomplete months |
-|---|---|---|---|---|---|---|---|
-| A | code (fixed templates) (en, hi, mr, ta, te, kn, bn) | 6 of 29 | 6 of 8 | 12.8 (205 ÷ 16) | 34.2 (205 ÷ 6) | 3.12 s | none |
-| B | Nemotron (en, hi) | 2 of 29 | 2 of 3 | 13.0 (117 ÷ 9) | 58.5 (117 ÷ 2) | 3.12 s | none |
-| C | Nemotron (en, hi, mr, ta, te, kn, bn) | 2 of 29 | 1 of 1 | 23.0 (184 ÷ 8) | 92.0 (184 ÷ 2) | 3.15 s | none |
-| T | Tavily auto_parameters (B's query texts) (en, hi) | 0 of 29 | 0 of 0 | — (121 ÷ 0) | — (121 ÷ 0) | 6.30 s | none |
+| Arm | Searches written by | Recall | False events (upper bound): unmatched of CPI-moving events | Credits per verified event | Credits per known change found (added after scoring; descriptive) | Median Tavily latency (descriptive; pre-registered with no target, not used in the verdict) | Real new credits (charged in this test) | Incomplete months |
+|---|---|---|---|---|---|---|---|---|
+| A | code (fixed templates) (en, hi, mr, ta, te, kn, bn) | 6 of 29 | 6 of 8 | 12.8 (205 ÷ 16) | 34.2 (205 ÷ 6) | 3.12 s | 0 | none |
+| B | Nemotron (en, hi) | 2 of 29 | 2 of 3 | 13.0 (117 ÷ 9) | 58.5 (117 ÷ 2) | 3.12 s | 117 | none |
+| C | Nemotron (en, hi, mr, ta, te, kn, bn) | 2 of 29 | 1 of 1 | 23.0 (184 ÷ 8) | 92.0 (184 ÷ 2) | 3.15 s | 169 | none |
+| T | Tavily auto_parameters (B's query texts) (en, hi) | 0 of 29 | 0 of 0 | — (121 ÷ 0) | — (121 ÷ 0) | 6.30 s | 56 | none |
 
 **Verdict (Amendment F, margin ±1 known change), unchanged:** top group A; ranking A; lower recall B, C, T.
 
 Arm A's credits are those of its calls when first made, in the issue 4 and issue 14 runs: the flight recorder has 213 uncached Tavily calls tagged `v2:events`, 205 credits, equal to the credit ledger's `v2-issue4` (150) + `v2-issue14` (55). Arm A itself re-ran them from the cache at 0 new credits.
+
+**Two credit counts.** The credit columns count every call at its original cost (as agreed for this table). *Real new credits* is what the test itself charged; for arm T it was corrected 121 → 56 (logged): 41 of its 72 searches were cache hits that a budget bug charged again (fixed in 070fa6e; ledger offset row `phantom-T-2026-10-22`).
 
 **Provenance (Amendment F):** request IDs + response hashes on every call of arms C and T (262 of 262); A and B ran before this logging existed (their responses are still in the recorder's cache).
 
@@ -51,3 +53,16 @@ Arm A's credits are those of its calls when first made, in the issue 4 and issue
 - Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a check.
 - **Unmatched events, checked by Claude Code against cached page text; 10 spot-checked by Bhavik (spot check pending)** (`audit/arms_unmatched_check.json`). Of 23: 16 wrong, 7 real change outside the list. Wrong rows by arm: A 7 of 10; B 4 of 7; C 5 of 6. The wrong rows are mostly non-Indian pages, non-domestic or commercial LPG, and lines about a different item.
 - **Real changes outside the list** (reported separately; the pre-registered list of 29 and every recall figure are unchanged): 7 rows, 3 distinct changes. Bengaluru Metro (BMRCL) fares +5% from 9 Feb 2026 (2026-02), found by arms A, B, C; Gokul full-cream (buffalo) milk +Rs 2/litre in Mumbai from 21 Feb 2026 (2026-02), found by arm B; MSRTC (Maharashtra state buses) +13.65% permanent fare revision from 17 Jul 2026 (2026-07), found by arm A.
+
+## Exploratory, partial: arm T + dates (added after scoring; cannot change the winner or any verdict)
+
+Same query texts as arm T, `auto_parameters: true`, plus arm A's `start_date`/`end_date` window; no other field from us (dated line in v2/PREREGISTRATION.md). Cap 190 real credits, not raised: 2026-01, 2026-02, 2026-03, 2026-04, 2026-05, 2026-06 complete; 2026-07, 2026-08, 2026-09 incomplete (the cap stopped them).
+
+**Like-for-like (exploratory, partial, added after scoring):** on the 6 complete months, which hold 22 of the 29 known changes, T+dates found 2 and arm A 5. The all-months row below includes the incomplete months.
+
+| Credits spent | Search calls | Verified claims | Distinct verified events | Matched to the 29 | Not matched (unchecked) | Recall | False events (upper bound) | Credits per verified event |
+|---|---|---|---|---|---|---|---|---|
+| 190 | 56 | 18 | 15 | 2 | 13 | 2 of 29 | 7 of 9 | 12.7 |
+
+**What auto_parameters chose** (topic, depth, time range → searches): news, advanced, w → 38; news, basic, w → 9; news, advanced, d → 7; general, basic, y → 1; news, basic, d → 1.
+**Did Tavily keep our dates?** 0 of 56 searches returned only results inside the window with no auto time range; 532 of 532 dated results fell inside the window.

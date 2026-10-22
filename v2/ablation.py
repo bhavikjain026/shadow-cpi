@@ -477,15 +477,27 @@ def t_dates_section(ref):
     dk = [x["dates_kept"] for x in plan if x.get("dates_kept")]
     dated, inside = sum(d["dated_results"] for d in dk), sum(d["inside_window"] for d in dk)
     kept = sum(d["dated_results"] == d["inside_window"] and not d["auto_time_range"] for d in dk)
-    out = {"label": "EXPLORATORY, added after scoring; cannot change the winner or any verdict", **m,
+    full = [run["month"] for run in runs if run["complete"]]
+    part = [run["month"] for run in runs if not run["complete"]]
+    same = {"months": full, "known_changes_in_them": sum(c["month"] in full for c in ref),
+            "t_dates_recall": reconcile([run for run in runs if run["complete"]], ref)["recall"],
+            "arm_a_recall": reconcile([json.loads((OUT / f"arm_A_{x}.json").read_text(encoding="utf-8"))
+                                       for x in full], ref)["recall"]}
+    out = {"label": "EXPLORATORY, PARTIAL, added after scoring; cannot change the winner or any verdict", **m,
+           "incomplete_months": part, "same_months": same,
            "reconciliation": {k: v for k, v in r.items() if k != "unmatched"},
            "auto_parameters_chosen": [{"topic": t, "search_depth": d, "time_range": tr, "searches": n}
                                       for (t, d, tr), n in chose.most_common()],
            "dates_kept_searches": kept, "searches": len(dk), "dated_results": dated, "inside_window": inside}
     (ROOT / "results" / "v2_ablation_t_dates.json").write_text(json.dumps(out, ensure_ascii=False, indent=1))
-    return ["", "## Exploratory: arm T + dates (added after scoring; cannot change the winner or any verdict)", "",
+    return ["", "## Exploratory, partial: arm T + dates (added after scoring; cannot change the winner or any verdict)",
+            "",
             "Same query texts as arm T, `auto_parameters: true`, plus arm A's `start_date`/`end_date` window; no other "
-            "field from us (dated line in v2/PREREGISTRATION.md).", "",
+            "field from us (dated line in v2/PREREGISTRATION.md). Cap 190 real credits, not raised: "
+            f"{', '.join(full)} complete; {', '.join(part)} incomplete (the cap stopped them).", "",
+            f"**Like-for-like (exploratory, partial, added after scoring):** on the {len(full)} complete months, which "
+            f"hold {same['known_changes_in_them']} of the 29 known changes, T+dates found {same['t_dates_recall']} and "
+            f"arm A {same['arm_a_recall']}. The all-months row below includes the incomplete months.", "",
             "| Credits spent | Search calls | Verified claims | Distinct verified events | Matched to the 29 | Not "
             "matched (unchecked) | Recall | False events (upper bound) | Credits per verified event |",
             "|---|---|---|---|---|---|---|---|---|",
@@ -558,15 +570,15 @@ def write_report():
           "| Arm | Searches written by | Recall | False events (upper bound): unmatched of CPI-moving events | "
           "Credits per verified event | Credits per known change found (added after scoring; descriptive) | "
           "Median Tavily latency (descriptive; pre-registered with no target, not used in the verdict) | "
-          "Incomplete months |",
-          "|---|---|---|---|---|---|---|---|"]
+          "Real new credits (charged in this test) | Incomplete months |",
+          "|---|---|---|---|---|---|---|---|---|"]
     for arm, a in out["arms"].items():
         r = rec[arm]
         L.append(f"| {arm} | {a['writer']} ({', '.join(a['languages'])}) | {r['recall']} of 29 | "
                  f"{r['moving_unmatched']} of {r['moving_events']} | "
                  f"{f(r['credits'] / r['events']) if r['events'] else '—'} ({r['credits']} ÷ {r['events']}) | "
                  f"{f(r['credits'] / r['recall']) if r['recall'] else '—'} ({r['credits']} ÷ {r['recall']}) | "
-                 f"{f(a['median_latency_s'], 2)} s | {', '.join(a['incomplete_months']) or 'none'} |")
+                 f"{f(a['median_latency_s'], 2)} s | {a['new_credits']} | {', '.join(a['incomplete_months']) or 'none'} |")
     eq = out["equivalence"]
     wb = out["arms"]["C"]["written_by"]
     sup_c, all_c = sum(v for k, v in wb.items() if "super" in k), sum(wb.values())
@@ -575,6 +587,10 @@ def write_report():
           "Arm A's credits are those of its calls when first made, in the issue 4 and issue 14 runs: the flight "
           "recorder has 213 uncached Tavily calls tagged `v2:events`, 205 credits, equal to the credit ledger's "
           "`v2-issue4` (150) + `v2-issue14` (55). Arm A itself re-ran them from the cache at 0 new credits.", "",
+          "**Two credit counts.** The credit columns count every call at its original cost (as agreed for this table). "
+          "*Real new credits* is what the test itself charged; for arm T it was corrected 121 → 56 (logged): 41 of its "
+          "72 searches were cache hits that a budget bug charged again (fixed in 070fa6e; ledger offset row "
+          "`phantom-T-2026-10-22`).", "",
           "**Provenance (Amendment F):** request IDs + response hashes on every call of arms C and T "
           f"({rec['C']['with_provenance'] + rec['T']['with_provenance']} of {rec['C']['calls'] + rec['T']['calls']}); "
           "A and B ran before this logging existed (their responses are still in the recorder's cache).", "",

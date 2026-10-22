@@ -299,7 +299,61 @@ def report(m, built):
     return "\n".join(lines) + "\n"
 
 
+def addendum(out):
+    """Offline addendum (2026-10-22, after the results; descriptive, no metric above changes): Wilson intervals,
+    exact McNemar p for A vs B and C vs D, date flags per arm, what D's page-date check removed from C, and the time
+    range auto_parameters reported in the exploratory T+dates arm."""
+    from collections import Counter
+    rows, m = out["rows"], out["metrics"]
+    kept = lambda a, row: row["arms"].get(a, {}).get("results", [])  # noqa: E731
+    leak = {a: {row["id"] for row in rows if any(r["label"] == "L" for r in kept(a, row))} for a in "ABCD"}
+    pct = lambda x: f"{x:.0%}"  # noqa: E731
+    L = ["", "## Addendum (offline, added after the results; descriptive, nothing above changes)", "",
+         "- **Confirmed-leak rate per arm, Wilson 95%:** " + "; ".join(
+             f"{a} {r['leak_cases']} of {r['cases']} ({pct(r['leak_case_wilson95'][0])}–{pct(r['leak_case_wilson95'][1])})"
+             for a, r in m["arms"].items()) + "."]
+    for x, y in (("A", "B"), ("C", "D")):
+        b, c = len(leak[x] - leak[y]), len(leak[y] - leak[x])
+        L.append(f"- **{x} vs {y}, exact McNemar (paired by case):** leaks only in {x} {b}, only in {y} {c}, "
+                 f"p = {mcnemar_exact(b, c):.4f}.")
+    flags = {a: (sum(r["label"] == "F" for row in rows for r in kept(a, row)),
+                 sum(any(r["label"] == "F" for r in kept(a, row)) for row in rows)) for a in "ABCD"}
+    L.append("- **Date flags** (a post-cutoff date from Tavily, the address or the page, without Wayback confirmation; "
+             "not confirmed leaks): " + "; ".join(f"{a} {n} results in {k} cases" for a, (n, k) in flags.items()) + ".")
+    drop, why = Counter(), Counter()
+    for row in rows:
+        if "C" not in row["arms"]:
+            continue
+        dk = {r["url"] for r in row["arms"]["D"]["results"]}
+        for r in row["arms"]["C"]["results"]:
+            if r["url"] not in dk:
+                drop[r["label"]] += 1
+                why["no readable page date" if not r["page_date"] else "page date after the cutoff"] += 1
+    n_c = sum(len(row["arms"]["C"]["results"]) for row in rows if "C" in row["arms"])
+    L.append(f"- **What D flagged that C didn't:** D's page-date check removed {sum(drop.values())} of C's {n_c} results: "
+             + ", ".join(f"{k} {v}" for k, v in why.most_common()) + f". Of those, {drop['P']} were Wayback-confirmed "
+             f"from before the cutoff (valid evidence lost), {drop['L']} confirmed leaks and "
+             f"{sum(drop.values()) - drop['P'] - drop['L']} unconfirmed; D flagged {why['page date after the cutoff']} "
+             "results for a page date after the cutoff that C had kept.")
+    ab = ROOT / "v2" / "ablation"
+    td = [x for f in sorted(ab.glob("arm_Td_*.json")) for x in json.loads(f.read_text(encoding="utf-8"))["plan"]
+          if "auto_parameters" in x]
+    if td:
+        tr = Counter(str((x["auto_parameters"] or {}).get("time_range")) for x in td)
+        dk = [x["dates_kept"] for x in td if x.get("dates_kept")]
+        L.append(f"- **T+dates (exploratory, `v2/ablation/arm_Td_*.json`):** with our start/end dates sent, "
+                 f"auto_parameters still reported time_range " + ", ".join(f"{k} {v}" for k, v in tr.most_common())
+                 + f" over {len(td)} searches, yet {sum(d['inside_window'] for d in dk)} of "
+                 f"{sum(d['dated_results'] for d in dk)} dated results fell inside the supplied window.")
+    return L
+
+
 def main():
+    if "--report" in sys.argv:                     # offline: rewrite the .md from the saved results (0 credits)
+        out = json.loads(OUT.read_text(encoding="utf-8"))
+        OUT.with_suffix(".md").write_text(report(out["metrics"], out["built_utc"]).rstrip("\n") + "\n"
+                                          + "\n".join(addendum(out)) + "\n")
+        return
     if "--sample" in sys.argv:
         cases = sample()
         CASES.write_text(json.dumps({"seed": SEED, "made_utc": datetime.now(timezone.utc).isoformat(),

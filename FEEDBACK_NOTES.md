@@ -159,3 +159,10 @@ arm, a `price_events` call to `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` raised `Co
 Connection reset by peer` while reading the response; our HTTP helper does not retry a reset, so the run stopped
 mid-January and was restarted from the cache. Evidence: `logs/v2_ablation_Td_crash1.txt` (kept locally; the
 traceback).
+
+**2026-10-22 · Friction: auto_parameters reports a time_range that the explicit dates appear to override; confusing
+in traces.** In the exploratory T+dates arm (same queries as arm T, plus our `start_date`/`end_date`), the
+`auto_parameters` echo still said `time_range` w 47, d 8, y 1 over 56 searches, yet 532 of 532 dated results fell
+inside the supplied window. So the dates seem to win, but the logged time_range says otherwise. Suggestion: echo the
+window actually applied, or drop time_range from the echo when dates are sent. Evidence: `v2/ablation/arm_Td_*.json`
+(`plan[].auto_parameters`, `plan[].dates_kept`); `results/date_field_test.md` (addendum).
