@@ -72,3 +72,45 @@ had been scored. In September, Nemotron Nano cited a line but returned no number
   in the cited line, the line on the fetched page, the item, retail not wholesale, and Amendment A's source and
   geography rules. Super, like Nano, only points to a line; it never writes a quote or chooses a number.
 - Each claim records which model read it.
+
+## Amendment C, before scoring: regional-language queries and bus fares
+
+**Written 2026-10-22T07:41:06Z (UTC), before any v2 score and before any run with these queries.**
+
+**Kinds searched** (items with no government spine series, plus milk as context). Each claim's kind is set by code
+from words in its cited line, in this order; the CPI item is fixed per kind:
+
+| Kind | CPI item | Role (Amendment A) | Words (any language) |
+|---|---|---|---|
+| electricity | 04.5.1.0.2.01 Electricity charges | moves | electricity, power tariff, बिजली, वीज, மின், విద్యుత్, ವಿದ್ಯುತ್, বিদ্যুৎ |
+| milk | 01.1.4.1.1.01 Milk: liquid | context (spine) | milk, दूध, பால், పాల, ಹಾಲು, ಹಾಲಿನ, দুধ |
+| lpg | 04.5.2.2.1.01 LPG cylinder and PNG | context (IOCL list) | lpg, cylinder, cooking gas, सिलेंडर, सिलिंडर, गॅस, சிலிண்டர், సిలిండర్, ಸಿಲಿಂಡರ್, সিলিন্ডার |
+| diesel | 07.2.2.1.1.01 Diesel | moves (no official series) | diesel, डीजल, डिझेल, டீசல், డీజిల్, ಡೀಸೆಲ್, ডিজেল |
+| petrol | 07.2.2.2.1.01 Petrol | context (PPAC) | petrol, पेट्रोल, பெட்ரோல், పెట్రోల్, ಪೆಟ್ರೋಲ್, পেট্রোল |
+| metro | (no confident CPI mapping) | context | metro, मेट्रो, மெட்ரோ, మెట్రో, ಮೆಟ್ರೋ, মেট্রো |
+| **bus (new kind; v1 never searched it)** | 07.3.1.2.2.01 Bus/tram fare: occasional | moves | bus, बस, एसटी, பேருந்து, బస్సు, ಬಸ್, বাস |
+| rail | 07.3.1.1.2.01 Rail fare | moves | rail, railway, train, रेल, रेल्वे, ரயில், రైలు, ರೈಲು, রেল, ট্রেন |
+| mobile | 08.3.4.0.2.01 Telephone charges: mobile | moves | mobile tariff, prepaid, postpaid, recharge, रिचार्ज |
+
+**Query sets, per month** (13 searches; date-locked to the v2 window; `max_results` 10; news domains in the language
+"preferred", not required):
+
+- English (4): "electricity tariff hike per unit regulatory commission order"; "milk price hike per litre";
+  "bus fare hike metro fare rail fare revision"; "petrol diesel price hike LPG cylinder price mobile tariff hike".
+- Hindi (4): "बिजली की दरें बढ़ीं प्रति यूनिट"; "दूध के दाम बढ़े प्रति लीटर"; "बस किराया बढ़ा मेट्रो किराया रेल किराया";
+  "पेट्रोल डीजल के दाम बढ़े एलपीजी सिलेंडर".
+- One combined query (electricity, milk, bus fares) in each of Marathi "वीज दरवाढ दूध दरवाढ एसटी बस भाडेवाढ",
+  Tamil "மின் கட்டண உயர்வு பால் விலை உயர்வு பேருந்து கட்டண உயர்வு", Telugu
+  "విద్యుత్ ఛార్జీల పెంపు పాల ధర పెంపు బస్సు ఛార్జీల పెంపు", Kannada
+  "ವಿದ್ಯುತ್ ದರ ಏರಿಕೆ ಹಾಲಿನ ದರ ಏರಿಕೆ ಬಸ್ ಪ್ರಯಾಣ ದರ ಏರಿಕೆ" and Bengali
+  "বিদ্যুতের দাম বৃদ্ধি দুধের দাম বৃদ্ধি বাস ভাড়া বৃদ্ধি". Regional queries are combined because the 150-credit cap
+  does not allow one search per kind per language per month. The regional wording was written by us, not checked by
+  native speakers.
+- Geography: the state and city names of these languages (e.g. தமிழ்நாடு, తెలంగాణ, ಕರ್ನಾಟಕ, পশ্চিমবঙ্গ, சென்னை,
+  ಬೆಂಗಳೂರು, কলকাতা) are added to the place lookup used by Amendment A rule 2.
+
+**Recall (report only).** The 29 known Jan–Sep 2026 changes in `audit/missed_events.md` are transcribed into
+`v2/recall_reference.json` (kind, effective month or date, place, v1 status). A change counts as **found directly by
+v2** if a claim verified by `v2.rules.check` has the same kind, the same effective month (the same date ±2 days where
+the reference gives a day) and, for state changes, the same state. v1's count is the audit's FOUND column (9 of 29).
+The result is reported as it comes out; no query, word list or rule is changed because of it.
