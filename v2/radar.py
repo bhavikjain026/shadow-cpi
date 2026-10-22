@@ -260,5 +260,8 @@ if __name__ == "__main__":
         from shadow_cpi.settings import models
         from shadow_cpi.tavily import Tavily
         rec = Recorder()
-        s = run(Budgeted(Tavily(recorder=rec), [BUDGET]), Nemotron(recorder=rec), models()["small"], models()["mid"])
+        from shadow_cpi.budget import usage_check
+        tav = Budgeted(Tavily(recorder=rec), [BUDGET])
+        s = run(tav, Nemotron(recorder=rec), models()["small"], models()["mid"])
+        print(usage_check(tav.tav)[1])
         print(f"{len(s['events'])} events; {sum(e['tier'] == 'corroborated' for e in s['events'])} corroborated")

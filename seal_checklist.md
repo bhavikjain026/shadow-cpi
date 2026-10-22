@@ -56,3 +56,9 @@ changes a rule, factor or filter.
 - Never change the prediction, the range or the rules after the seal. A seal is never redone.
 - Never solve or bypass a CAPTCHA in software.
 - Never put a key in a committed file.
+
+## 5. Before making the repository public (30 Oct)
+- [ ] **Secret scan over the FULL git history:** all commits and all branches, with gitleaks
+      (`gitleaks detect --source . --log-opts="--all"`) or trufflehog (`trufflehog git file://.`, checked to cover
+      every branch). The working tree alone is not enough: a key removed later is still in the history.
+- [ ] **If anything is found: stop, tell the owner, and do NOT make the repository public.**

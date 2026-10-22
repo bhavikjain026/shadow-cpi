@@ -278,6 +278,9 @@ def run(arm, months=MONTHS):
               f"{'complete' if out['complete'] else 'INCOMPLETE'}; new credits "
               f"{sum(c['new_credits'] for c in meter.calls)}" + (f" (budget total {spent(cfg['budget'])})"
                                                                  if cfg["budget"] else ""), flush=True)
+    if cfg["budget"]:
+        from shadow_cpi.budget import usage_check
+        print(usage_check(tav.tav)[1], flush=True)
 
 
 def events(claims):

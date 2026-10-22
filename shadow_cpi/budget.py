@@ -153,3 +153,30 @@ def run_now_allowed(day, ledger=None, cfg=None, path=LEDGER):
     per_day = cfg["plans"]["cut5_run_now"]["scans_per_day"]
     used = {b for e in entries for b in e["budgets"] if b.startswith(f"run-now-scan/{day}#")}
     return f"run-now-scan/{day}#{len(used) + 1}" if len(used) < per_day else None
+
+
+USAGE_CHECKS = ROOT / "logs" / "usage_checks.jsonl"
+USAGE_SLACK = 30            # Tavily's /usage lags; more than this above our ledger means spending we did not log
+
+
+def usage_check(tav, cfg=None, ledger=None, slack=USAGE_SLACK, log=USAGE_CHECKS):
+    """After a run: compare Tavily's GET /usage (free) with our ledger. Warns if /usage's plan + pay-as-you-go usage
+    exceeds the ledger's account total by more than `slack` credits (e.g. a key used outside this repo), or if any
+    pay-as-you-go usage appears. Appends one line to logs/usage_checks.jsonl and returns (ok, message). Never prints
+    or stores a key; never raises."""
+    cfg = cfg or load_budget()
+    ours = account_spent(cfg, read_ledger() if ledger is None else ledger)
+    try:
+        acc = (tav.usage(tag="usage check after run") or {}).get("account") or {}
+        theirs = (acc.get("plan_usage") or 0) + (acc.get("paygo_usage") or 0)
+        ok = theirs <= ours + slack and not acc.get("paygo_usage")
+        msg = (f"Tavily /usage {theirs} (plan {acc.get('plan_usage')}, pay-as-you-go {acc.get('paygo_usage')}) vs "
+               f"ledger {ours}: " + ("OK" if ok else f"WARNING: /usage is more than {slack} credits above the ledger "
+                                                      "or pay-as-you-go was used. Check for spending outside this repo."))
+    except Exception as e:                                     # the check never breaks a run
+        ok, theirs, msg = None, None, f"Tavily /usage check failed ({type(e).__name__}); ledger {ours}"
+    log.parent.mkdir(parents=True, exist_ok=True)
+    with log.open("a", encoding="utf-8") as f:
+        f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(), "usage": theirs, "ledger": ours,
+                            "ok": ok, "message": msg}) + "\n")
+    return ok, msg

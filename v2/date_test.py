@@ -310,13 +310,16 @@ def main():
     from shadow_cpi.budget import Budgeted
     from shadow_cpi.recorder import Recorder
     from shadow_cpi.tavily import Tavily
+    from shadow_cpi.budget import usage_check
     rec = Recorder()
-    out = run(Budgeted(Tavily(recorder=rec), [BUDGET]), rec)
+    tav = Budgeted(Tavily(recorder=rec), [BUDGET])
+    out = run(tav, rec)
     out["built_utc"] = datetime.now(timezone.utc).isoformat()
     out["metrics"] = metrics(out)
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1))
     OUT.with_suffix(".md").write_text(report(out["metrics"], out["built_utc"]))
     print(OUT.with_suffix(".md").read_text())
+    print(usage_check(tav.tav)[1])
 
 
 if __name__ == "__main__":

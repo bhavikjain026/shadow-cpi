@@ -65,3 +65,26 @@ def test_credit_ledger_rows_carry_request_id_and_response_sha256(tmp_path):
     Budgeted(tav, ["prompt-t"], cfg=cfg(), ledger_path=led).search("q")
     row = json.loads(led.read_text())
     assert row["request_id"] == "req-1" and row["response_sha256"] == response_sha256(resp)
+
+
+def test_usage_check_warns_only_above_ledger_plus_slack(tmp_path):
+    from shadow_cpi.budget import usage_check
+
+    class U:
+        def __init__(self, plan, paygo=0):
+            self.r = {"account": {"plan_usage": plan, "paygo_usage": paygo}}
+
+        def usage(self, tag=None):
+            return self.r
+    led = [{"credits": 100, "budgets": ["x"]}]
+    log = tmp_path / "u.jsonl"
+    assert usage_check(U(120), cfg=cfg(), ledger=led, log=log)[0] is True          # lag allowance
+    ok, msg = usage_check(U(131), cfg=cfg(), ledger=led, log=log)
+    assert ok is False and "WARNING" in msg
+    assert usage_check(U(50, paygo=1), cfg=cfg(), ledger=led, log=log)[0] is False  # any pay-as-you-go
+    assert len(log.read_text().splitlines()) == 3 and "test" not in log.read_text()
+
+    class Broken:
+        def usage(self, tag=None):
+            raise OSError("down")
+    assert usage_check(Broken(), cfg=cfg(), ledger=led, log=log)[0] is None
