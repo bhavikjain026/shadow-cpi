@@ -261,11 +261,11 @@ def test_home_scan_table_has_source_column():
     assert not any(str(l).startswith("#") for l in scan["Exact line"])
 
 
-def test_flight_recorder_labels_credits_against_billing():
+def test_flight_recorder_labels_credits_against_the_ledger():
     from shadow_cpi.budget import account_spent, load_budget, read_ledger
     at = load("flight_recorder")
     billed = account_spent(load_budget(), read_ledger())
-    assert any(f"by Tavily's per-call counts (billing shows {billed:,})" in c.value for c in at.caption)
+    assert any(f"by Tavily's per-call counts (ledger total {billed:,})" in c.value for c in at.caption)
 
 
 def test_live_build_streams_cards_and_moves_the_needle():
