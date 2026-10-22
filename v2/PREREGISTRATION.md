@@ -42,3 +42,19 @@ the Flight Recorder, under hard credit caps in `config/budget.json`.
 - No v1 file, rule or result is changed by v2 work.
 - The cutoff, the pass rule and the metric are not changed after any v2 score is seen.
 - A v2 result is never presented as v1's, or the other way round.
+
+## Amendment A, before scoring
+
+**Dated 2026-10-22, before any v2 score.** Only the April 2026 milk tracer had been run (no prediction scored).
+
+1. **Spine vs events.** For items covered by the government price spine (DoCA: onion, tomato, potato, tur dal,
+   edible oils, atta, milk, eggs), the spine is the source. An announced price change for such an item only fills a
+   month or region the spine does not cover; otherwise it is shown as context. Events lead only for items with no
+   spine series (electricity, fares, LPG, fuel, tariffs). Where an official observed series exists (IBJA gold and
+   silver, IOCL LPG, PPAC petrol), that series is the source and events for the item are context. **No item is moved
+   twice.**
+2. **Geography.** A city or district event moves the state's item only if a statewide source confirms it (the cited
+   line or the page title says it applies across the state, or names the state with no narrower place). Otherwise
+   it gets weight = the city's share of the state's urban population, from a documented source listed in
+   `v2/city_shares.json` with its citation; if no such entry exists, the event is shown as context only and moves
+   nothing. The same rule applies to the needle on the Live build page.
