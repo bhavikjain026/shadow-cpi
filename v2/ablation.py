@@ -506,8 +506,22 @@ def t_choices():
                    for m in MONTHS for x in json.loads((OUT / f"arm_T_{m}.json").read_text(encoding="utf-8"))["plan"])
 
 
+def t_windows():
+    """auto_parameters' time_range over arm T's searches (Counter)."""
+    from collections import Counter
+    return Counter(tr for (_, tr, _), k in t_choices().items() for _ in range(k))
+
+
+def t_result_dates():
+    """Arm T's results: how many were dated October 2026, how many undated, how many in all."""
+    cards = [c for m in MONTHS for c in json.loads((OUT / f"arm_T_{m}.json").read_text(encoding="utf-8"))["cards"]]
+    return {"oct": sum((c.get("published") or "").startswith("2026-10") for c in cards),
+            "none": sum(not c.get("published") for c in cards), "all": len(cards)}
+
+
 def hand_checks():
-    """The hand check of audit/arms_unmatched.md (audit/arms_unmatched_check.json), or [] if not done yet."""
+    """The check of audit/arms_unmatched.md by Claude Code against cached page text (audit/arms_unmatched_check.json),
+    or [] if not done yet."""
     p = ROOT / "audit" / "arms_unmatched_check.json"
     return json.loads(p.read_text(encoding="utf-8"))["checks"] if p.exists() else []
 
@@ -526,7 +540,7 @@ def write_report():
          "db2984c; 29 known changes.", "",
          "## Reconciliation (every number below comes from this table)", "",
          "| Arm | Credits spent | Search calls | Verified claims | Distinct verified events | Events matched to the 29 "
-         "| Not matched (unchecked; may include real changes missing from the 29) | Recall (of the 29) |",
+         "| Not matched (may include real changes outside the list; see the check below) | Recall (of the 29) |",
          "|---|---|---|---|---|---|---|---|"]
     for arm, r in rec.items():
         L.append(f"| {arm} | {r['credits']} | {r['search_calls']} | {r['verified_claims']} | {r['events']} | "
@@ -582,8 +596,11 @@ def write_report():
           f"{out['arms']['C']['diagnostics']['plan_retries_super']} of 9 months).",
           "- Model-written queries were sometimes poor, e.g. arm C, June: \"ವಿದ್ಯುತ್ ತರiffe ಜೂನ್ 2026 Karnataka Wisconsin "
           "growth\"; arm B, January: \"बस कि Fahrpreiserhöhung news\".",
-          "- Arm T: Tavily's auto_parameters chose (topic, time range, depth → searches) "
-          + "; ".join(f"{t}, {tr}, {d} → {k}" for (t, tr, d), k in t_choices().most_common())
+          "- Arm T: auto_parameters with no dates chose recent windows: time_range "
+          + ", ".join(f"{tr} {k}" for tr, k in t_windows().most_common()) + f" of {sum(t_windows().values())} searches "
+          + "(topic, time range, depth → searches: "
+          + "; ".join(f"{t}, {tr}, {d} → {k}" for (t, tr, d), k in t_choices().most_common()) + "); "
+          + "{oct} of {all} results were dated October 2026 and {none} undated".format(**t_result_dates())
           + ". Amendment F sends no dates, so every dated result was from the days before the run, after every "
           "cutoff, and the verifier rejected all of them: 0 of 29 is the pre-registered result (traces: "
           "`audit/arms_traces.md`; this note was corrected from \"advanced depth and time_range w for every "
@@ -592,29 +609,37 @@ def write_report():
           "plays no part in the verdict.",
           "- Credits per known change found (credits ÷ recall) was added after scoring, as a second credit column; "
           "it is descriptive and cannot change the verdict.",
-          "- Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a hand check."]
+          "- Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a check."]
     checks = hand_checks()
     if checks:
         from collections import Counter
         n = Counter(c["verdict"] for c in checks)
         real = [c for c in checks if c["verdict"].startswith("real")]
-        L.append(f"- **Hand check of the {len(checks)} unmatched events** (cached page text only; "
-                 "`audit/arms_unmatched_check.json`): " + ", ".join(f"{v} {k}" for k, v in n.most_common()) + ". "
-                 + "By arm: " + "; ".join(f"{a}: {sum(c['arm'] == a and c['verdict'].startswith('real') for c in checks)}"
-                                          f" real of {sum(c['arm'] == a for c in checks)}"
-                                          for a in sorted({c['arm'] for c in checks})) + ". "
-                 f"The {len(real)} real rows are {len({(c['month'], c['item']) for c in real})} distinct changes "
-                 "missing from the 29 (" + "; ".join(sorted({c['reason'].split(' (')[0].split(';')[0] for c in real
-                                                             if 'same' not in c['reason'] and 'duplicate' not in c['reason']}))
-                 + "). The wrong rows are mostly non-Indian pages, non-domestic or commercial LPG, and lines about a "
-                 "different item. The 29 and every verdict are unchanged: this is reported only.")
+        arms = sorted({c["arm"] for c in checks})
+        extras = {}
+        for c in real:
+            extras.setdefault((c["month"], c["item"]), {"name": None, "arms": set()})["arms"].add(c["arm"])
+            if "same" not in c["reason"] and "duplicate" not in c["reason"]:
+                extras[(c["month"], c["item"])]["name"] = c["reason"].split(";")[0].split(" is a real")[0]
+        L.append(f"- **Unmatched events, checked by Claude Code against cached page text; 10 spot-checked by Bhavik "
+                 f"(spot check pending)** (`audit/arms_unmatched_check.json`). Of {len(checks)}: "
+                 + ", ".join(f"{v} {k}" for k, v in n.most_common()) + ". Wrong rows by arm: "
+                 + "; ".join(f"{a} {sum(c['arm'] == a and c['verdict'] == 'wrong' for c in checks)} of "
+                             f"{sum(c['arm'] == a for c in checks)}" for a in arms)
+                 + ". The wrong rows are mostly non-Indian pages, non-domestic or commercial LPG, and lines about a "
+                 "different item.")
+        L.append(f"- **Real changes outside the list** (reported separately; the pre-registered list of 29 and every "
+                 f"recall figure are unchanged): {len(real)} rows, {len(extras)} distinct changes. "
+                 + "; ".join(f"{e['name']} ({m}), found by arm{'s' if len(e['arms']) > 1 else ''} "
+                             f"{', '.join(sorted(e['arms']))}" for (m, _), e in sorted(extras.items())) + ".")
     L += t_dates_section(ref)
     RESULTS.with_suffix(".md").write_text("\n".join(L) + "\n")
     A = ["# Verified events not matched to the 29 known changes (four search arms)", "",
-         "From `v2/ablation/` (Amendments E and F, development data). For a hand check: each is either a real change "
-         "missing from the audit list or a false event. Page date = the date used by the verifier (address or "
+         "From `v2/ablation/` (Amendments E and F, development data). Each is either a real change outside the list or a "
+         "false event; the last column is a check by Claude Code against cached page text (10 to be spot-checked by "
+         "Bhavik; pending). Page date = the date used by the verifier (address or "
          "Tavily); printed = the date printed on the page, if any.", "",
-         "| Arm | Month | Item | Effective | States | Quote | URL | Page date | Printed | Hand check |",
+         "| Arm | Month | Item | Effective | States | Quote | URL | Page date | Printed | Check (Claude Code, cached page text) |",
          "|---|---|---|---|---|---|---|---|---|---|"]
     for arm, r in rec.items():
         for u in r["unmatched"]:

@@ -1,5 +1,5 @@
 {
- "_note": "Hand check of audit/arms_unmatched.md, from the cached page text only (v2/evidence pages saved by the arm runs); no new calls. Checked 2026-10-22. Verdicts: 'real (missing from the 29)' / 'wrong' / 'unclear'. Read by v2/ablation.py write_report.",
+ "_note": "Check of audit/arms_unmatched.md: checked by Claude Code against cached page text; 10 spot-checked by Bhavik (spot check pending). Done from the cached page text only (pages saved by the arm runs); no new calls, 2026-10-22. Verdicts: 'real change outside the list' / 'wrong' / 'unclear'. The pre-registered 29-change list and every recall figure are unchanged. 'spot_check' is for Bhavik's 10 spot checks. Read by v2/ablation.py write_report.",
  "checks": [
   {
    "arm": "A",
@@ -9,7 +9,8 @@
    "url": "https://www.railway.supply/nyc-subway-fare-increase-2026-new-fares-caps-and-tolls",
    "quote_start": "4, the base fare for New York City subways, buses, and Acces",
    "verdict": "wrong",
-   "reason": "New York City subway/bus fare (MTA), not India"
+   "reason": "New York City subway/bus fare (MTA), not India",
+   "spot_check": ""
   },
   {
    "arm": "A",
@@ -19,7 +20,8 @@
    "url": "https://www.fox5ny.com/news/mta-fare-hikes-2026",
    "quote_start": "Monthly and weekly tickets on the Long Island Rail Road and ",
    "verdict": "wrong",
-   "reason": "Long Island Rail Road / Metro-North tickets, New York, not India"
+   "reason": "Long Island Rail Road / Metro-North tickets, New York, not India",
+   "spot_check": ""
   },
   {
    "arm": "A",
@@ -29,7 +31,8 @@
    "url": "https://www.aajtak.in/business/utility/story/rule-change-from-1st-january-2026-lpg-cylinder-to-car-price-hike-atf-rate-cut-tutc-dskc-2427756-2026-01-01",
    "quote_start": "चीनी कार कंपनी BYD ने Sealion-7 का दाम बढ़ाने का ऐलान किया ह",
    "verdict": "wrong",
-   "reason": "car prices of MG's petrol/diesel variants, not diesel fuel"
+   "reason": "car prices of MG's petrol/diesel variants, not diesel fuel",
+   "spot_check": ""
   },
   {
    "arm": "A",
@@ -38,8 +41,9 @@
    "effective_date": "2026-02-09",
    "url": "https://www.moneycontrol.com/news/india/why-bengaluru-metro-is-enforcing-annual-fare-hikes-while-delhi-resists-despite-similar-panel-recommendations-13813986.html",
    "quote_start": "* Bengaluru Metro fares to increase by 5% from February 9.",
-   "verdict": "real (missing from the 29)",
-   "reason": "Bengaluru Metro (BMRCL) fares +5% from 9 Feb 2026 is a real Karnataka change; the Delhi tag is wrong (the page says Delhi skipped its hike)"
+   "verdict": "real change outside the list",
+   "reason": "Bengaluru Metro (BMRCL) fares +5% from 9 Feb 2026 is a real Karnataka change; the Delhi tag is wrong (the page says Delhi skipped its hike)",
+   "spot_check": ""
   },
   {
    "arm": "A",
@@ -49,7 +53,8 @@
    "url": "https://money.rediff.com/news/market/petrol-diesel-prices-hike-after-elections/47075220260515",
    "quote_start": "Petrol price in the national capital has been increased to R",
    "verdict": "wrong",
-   "reason": "the real nationwide +Rs 3 petrol/diesel rise (F1) recorded with the wrong effective date (29 May; the page is dated 15 May) and only two states"
+   "reason": "the real nationwide +Rs 3 petrol/diesel rise (F1) recorded with the wrong effective date (29 May; the page is dated 15 May) and only two states",
+   "spot_check": ""
   },
   {
    "arm": "A",
@@ -58,8 +63,9 @@
    "effective_date": "2026-07-17",
    "url": "https://indianexpress.com/article/cities/mumbai/msrtc-hikes-bus-fares-temporary-seasonal-surcharge-10791673",
    "quote_start": "The Maharashtra State Road Transport Corporation (MSRTC) has",
-   "verdict": "real (missing from the 29)",
-   "reason": "MSRTC (Maharashtra state buses) +13.65% permanent fare revision from 17 Jul 2026; the 29 hold only April's temporary +10% (T2)"
+   "verdict": "real change outside the list",
+   "reason": "MSRTC (Maharashtra state buses) +13.65% permanent fare revision from 17 Jul 2026; the 29 hold only April's temporary +10% (T2)",
+   "spot_check": ""
   },
   {
    "arm": "A",
@@ -68,8 +74,9 @@
    "effective_date": "2026-07-18",
    "url": "https://www.livemint.com/news/india/msrtc-ticket-prices-up-maharashtra-clears-bus-fare-hike-from-18-july-here-is-how-much-more-you-will-pay-11784303743567.html",
    "quote_start": "The State Transport Authority (STA) has cleared a 13.56% inc",
-   "verdict": "real (missing from the 29)",
-   "reason": "the same MSRTC July revision as the row above (13.56%, from 18 Jul per Mint): a duplicate of one real change"
+   "verdict": "real change outside the list",
+   "reason": "the same MSRTC July revision as the row above (13.56%, from 18 Jul per Mint): a duplicate of one real change",
+   "spot_check": ""
   },
   {
    "arm": "A",
@@ -79,7 +86,8 @@
    "url": "https://www.aajtak.in/business/utility/story/lpg-price-cut-petrol-diesel-cheaper-atf-rate-these-four-good-news-on-1st-july-tutc-dskc-2591452-2026-07-01",
    "quote_start": "मिडिल ईस्ट संकट के बीच बीते जून महीने की शुरुआत में एफटीएल स",
    "verdict": "wrong",
-   "reason": "5 kg free-trade (FTL) LPG cylinder cut; the CPI item is the domestic cylinder"
+   "reason": "5 kg free-trade (FTL) LPG cylinder cut; the CPI item is the domestic cylinder",
+   "spot_check": ""
   },
   {
    "arm": "A",
@@ -89,7 +97,8 @@
    "url": "https://www.ndtv.com/world-news/pakistan-hikes-petrol-high-speed-diesel-prices-amid-rising-us-iran-tensions-11907859",
    "quote_start": "Pakistan has hiked petrol prices by Rs 0.45 to Rs 325.43/lit",
    "verdict": "wrong",
-   "reason": "Pakistan fuel prices, not India"
+   "reason": "Pakistan fuel prices, not India",
+   "spot_check": ""
   },
   {
    "arm": "A",
@@ -99,7 +108,8 @@
    "url": "https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01",
    "quote_start": ">  5 kg FTL Non-Domestic LPG refill: Rs 2.00/cylinder (0.26%",
    "verdict": "wrong",
-   "reason": "5 kg non-domestic FTL LPG refill, not the domestic cylinder"
+   "reason": "5 kg non-domestic FTL LPG refill, not the domestic cylinder",
+   "spot_check": ""
   },
   {
    "arm": "B",
@@ -109,7 +119,8 @@
    "url": "https://www.aajtak.in/business/utility/story/rule-change-from-1st-january-2026-lpg-cylinder-to-car-price-hike-atf-rate-cut-tutc-dskc-2427756-2026-01-01",
    "quote_start": "जहां एक ओर ऑयल मार्केटिंग कंपनियों ने LPG Price Hike कर झटका",
    "verdict": "wrong",
-   "reason": "the cited line is about an aviation turbine fuel (ATF) cut, not LPG"
+   "reason": "the cited line is about an aviation turbine fuel (ATF) cut, not LPG",
+   "spot_check": ""
   },
   {
    "arm": "B",
@@ -118,8 +129,9 @@
    "effective_date": "2026-02-09",
    "url": "https://swarajyamag.com/news-brief/bengaluru-metro-introduces-annual-fare-revision-limits-yearly-hikes-to-5-per-cent-from-february-2026",
    "quote_start": "# Bengaluru Metro To Raise Fares Annually Under New Formula,",
-   "verdict": "real (missing from the 29)",
-   "reason": "Bengaluru Metro +5% from 9 Feb 2026 (same change as row 4)"
+   "verdict": "real change outside the list",
+   "reason": "Bengaluru Metro +5% from 9 Feb 2026 (same change as row 4)",
+   "spot_check": ""
   },
   {
    "arm": "B",
@@ -128,8 +140,9 @@
    "effective_date": "2026-02-09",
    "url": "https://www.moneycontrol.com/news/india/why-bengaluru-metro-is-enforcing-annual-fare-hikes-while-delhi-resists-despite-similar-panel-recommendations-13813986.html",
    "quote_start": "* Bengaluru Metro fares to increase by 5% from February 9.",
-   "verdict": "real (missing from the 29)",
-   "reason": "Bengaluru Metro +5% from 9 Feb 2026 (same page as row 4; Delhi tag wrong)"
+   "verdict": "real change outside the list",
+   "reason": "Bengaluru Metro +5% from 9 Feb 2026 (same page as row 4; Delhi tag wrong)",
+   "spot_check": ""
   },
   {
    "arm": "B",
@@ -138,8 +151,9 @@
    "effective_date": "2026-02-21",
    "url": "https://timesofindia.indiatimes.com/city/mumbai/gokul-raises-price-of-buffalo-milk-by-rs-2-per-litre/articleshow/128640277.cms",
    "quote_start": "MUMBAI: Gokul Dairy has increased the price of full cream mi",
-   "verdict": "real (missing from the 29)",
-   "reason": "Gokul full-cream (buffalo) milk +Rs 2/litre in Mumbai from 21 Feb 2026; the 29 hold Gokul's May cow-milk rise only"
+   "verdict": "real change outside the list",
+   "reason": "Gokul full-cream (buffalo) milk +Rs 2/litre in Mumbai from 21 Feb 2026; the 29 hold Gokul's May cow-milk rise only",
+   "spot_check": ""
   },
   {
    "arm": "B",
@@ -149,7 +163,8 @@
    "url": "https://www.lpm.org/news/2026-02-25/tarc-bus-rides-will-get-more-expensive-starting-march-2",
    "quote_start": "Starting March 2, an adult bus fare will cost $2.25, a 50-ce",
    "verdict": "wrong",
-   "reason": "Louisville (US) TARC bus fare, not India"
+   "reason": "Louisville (US) TARC bus fare, not India",
+   "spot_check": ""
   },
   {
    "arm": "B",
@@ -159,7 +174,8 @@
    "url": "https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01",
    "quote_start": ">  5 kg FTL Non-Domestic LPG refill: Rs 2.00/cylinder (0.26%",
    "verdict": "wrong",
-   "reason": "5 kg non-domestic FTL LPG refill, not the domestic cylinder"
+   "reason": "5 kg non-domestic FTL LPG refill, not the domestic cylinder",
+   "spot_check": ""
   },
   {
    "arm": "B",
@@ -169,7 +185,8 @@
    "url": "https://www.jansatta.com/national/milk-price-hiked-by-rs-9-shock-for-mumbaikars-lpg-cylinder-prices-rise-across-india-adding-to-inflation-burden/4684122",
    "quote_start": "एविएशन सेक्टर में भी 1 सितंबर से लागत बढ़ गई है। IOCL सूत्रो",
    "verdict": "wrong",
-   "reason": "aviation turbine fuel (ATF) price, tagged as rail"
+   "reason": "aviation turbine fuel (ATF) price, tagged as rail",
+   "spot_check": ""
   },
   {
    "arm": "C",
@@ -179,7 +196,8 @@
    "url": "https://www.amny.com/news/fare-hike-new-yorkers-pay-three-dollars-subway-bus",
    "quote_start": "Furthermore, those who buy tickets on one of the commuter ra",
    "verdict": "wrong",
-   "reason": "New York commuter-rail surcharge, not India"
+   "reason": "New York commuter-rail surcharge, not India",
+   "spot_check": ""
   },
   {
    "arm": "C",
@@ -188,8 +206,9 @@
    "effective_date": "2026-02-09",
    "url": "https://www.deccanherald.com/india/karnataka/bengaluru/pay-rs-1-5-more-for-bengaluru-metro-rides-from-february-9-3886552",
    "quote_start": "# Pay Rs 1-5 more for Bengaluru metro rides from February 9",
-   "verdict": "real (missing from the 29)",
-   "reason": "Bengaluru Metro +5% from 9 Feb 2026 (same change as row 4)"
+   "verdict": "real change outside the list",
+   "reason": "Bengaluru Metro +5% from 9 Feb 2026 (same change as row 4)",
+   "spot_check": ""
   },
   {
    "arm": "C",
@@ -199,7 +218,8 @@
    "url": "https://www.indiatv.in/paisa/business/premium-petrol-in-india-becomes-costlier-by-up-to-rs-2-35-from-march-20-2026-2026-03-20-1205441",
    "quote_start": "कंपनियों के ताजा फैसले के बाद इंडस्ट्रियल डीजल की कीमतों में",
    "verdict": "wrong",
-   "reason": "industrial (bulk) diesel price, tagged as LPG; not a retail CPI item"
+   "reason": "industrial (bulk) diesel price, tagged as LPG; not a retail CPI item",
+   "spot_check": ""
   },
   {
    "arm": "C",
@@ -209,7 +229,8 @@
    "url": "https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01",
    "quote_start": ">  5 kg FTL Non-Domestic LPG refill: Rs 2.00/cylinder (0.26%",
    "verdict": "wrong",
-   "reason": "5 kg non-domestic FTL LPG refill, not the domestic cylinder"
+   "reason": "5 kg non-domestic FTL LPG refill, not the domestic cylinder",
+   "spot_check": ""
   },
   {
    "arm": "C",
@@ -219,7 +240,8 @@
    "url": "https://ndtv.in/business-news/lpg-price-hike-9-rupees-50-paise-1-september-2026-lpg-gas-cylinder-price-check-rates-in-delhi-mumbai-chennai-kolkata-and-other-cities-11984381",
    "quote_start": "नोएडा में 19 किलो वाले गैस सिलेंडर के दाम  2,738 रुपये से बढ",
    "verdict": "wrong",
-   "reason": "19 kg commercial LPG cylinder, not the domestic cylinder"
+   "reason": "19 kg commercial LPG cylinder, not the domestic cylinder",
+   "spot_check": ""
   },
   {
    "arm": "C",
@@ -229,7 +251,8 @@
    "url": "https://ndtv.in/business-news/lpg-price-hike-9-rupees-50-paise-1-september-2026-lpg-gas-cylinder-price-check-rates-in-delhi-mumbai-chennai-kolkata-and-other-cities-11984381",
    "quote_start": "कोलकाता में 19 किलो वाले गैस सिलेंडर के दाम  2872.50 रुपये स",
    "verdict": "wrong",
-   "reason": "19 kg commercial LPG cylinder, not the domestic cylinder"
+   "reason": "19 kg commercial LPG cylinder, not the domestic cylinder",
+   "spot_check": ""
   }
  ]
 }

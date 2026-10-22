@@ -4,7 +4,7 @@
 
 ## Reconciliation (every number below comes from this table)
 
-| Arm | Credits spent | Search calls | Verified claims | Distinct verified events | Events matched to the 29 | Not matched (unchecked; may include real changes missing from the 29) | Recall (of the 29) |
+| Arm | Credits spent | Search calls | Verified claims | Distinct verified events | Events matched to the 29 | Not matched (may include real changes outside the list; see the check below) | Recall (of the 29) |
 |---|---|---|---|---|---|---|---|
 | A | 205 | 117 | 27 | 16 | 6 | 10 | 6 of 29 |
 | B | 117 | 72 | 10 | 9 | 2 | 7 | 2 of 29 |
@@ -45,8 +45,9 @@ Arm A's credits are those of its calls when first made, in the issue 4 and issue
 
 - Super wrote 78 of C's 117 searches (Nano's plan failed in 6 of 9 months).
 - Model-written queries were sometimes poor, e.g. arm C, June: "ವಿದ್ಯುತ್ ತರiffe ಜೂನ್ 2026 Karnataka Wisconsin growth"; arm B, January: "बस कि Fahrpreiserhöhung news".
-- Arm T: Tavily's auto_parameters chose (topic, time range, depth → searches) news, w, advanced → 35; news, w, basic → 22; news, d, advanced → 14; general, m, basic → 1. Amendment F sends no dates, so every dated result was from the days before the run, after every cutoff, and the verifier rejected all of them: 0 of 29 is the pre-registered result (traces: `audit/arms_traces.md`; this note was corrected from "advanced depth and time_range w for every search", logged, no number changed).
+- Arm T: auto_parameters with no dates chose recent windows: time_range w 57, d 14, m 1 of 72 searches (topic, time range, depth → searches: news, w, advanced → 35; news, w, basic → 22; news, d, advanced → 14; general, m, basic → 1); 620 of 659 results were dated October 2026 and 38 undated. Amendment F sends no dates, so every dated result was from the days before the run, after every cutoff, and the verifier rejected all of them: 0 of 29 is the pre-registered result (traces: `audit/arms_traces.md`; this note was corrected from "advanced depth and time_range w for every search", logged, no number changed).
 - Median latency was pre-registered as Amendment E metric 4, with no target; it is descriptive only and plays no part in the verdict.
 - Credits per known change found (credits ÷ recall) was added after scoring, as a second credit column; it is descriptive and cannot change the verdict.
-- Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a hand check.
-- **Hand check of the 23 unmatched events** (cached page text only; `audit/arms_unmatched_check.json`): 16 wrong, 7 real (missing from the 29). By arm: A: 3 real of 10; B: 3 real of 7; C: 1 real of 6. The 7 real rows are 3 distinct changes missing from the 29 (Bengaluru Metro; Gokul full-cream; MSRTC). The wrong rows are mostly non-Indian pages, non-domestic or commercial LPG, and lines about a different item. The 29 and every verdict are unchanged: this is reported only.
+- Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a check.
+- **Unmatched events, checked by Claude Code against cached page text; 10 spot-checked by Bhavik (spot check pending)** (`audit/arms_unmatched_check.json`). Of 23: 16 wrong, 7 real change outside the list. Wrong rows by arm: A 7 of 10; B 4 of 7; C 5 of 6. The wrong rows are mostly non-Indian pages, non-domestic or commercial LPG, and lines about a different item.
+- **Real changes outside the list** (reported separately; the pre-registered list of 29 and every recall figure are unchanged): 7 rows, 3 distinct changes. Bengaluru Metro (BMRCL) fares +5% from 9 Feb 2026 (2026-02), found by arms A, B, C; Gokul full-cream (buffalo) milk +Rs 2/litre in Mumbai from 21 Feb 2026 (2026-02), found by arm B; MSRTC (Maharashtra state buses) +13.65% permanent fare revision from 17 Jul 2026 (2026-07), found by arm A.

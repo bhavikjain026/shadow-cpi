@@ -2,7 +2,7 @@
 
 From the arm files in `v2/ablation/` (Amendments E and F, development data). Each trace is one search: who wrote the
 query, what was sent to Tavily, what came back, and what the verifier did with each page. Read from the files; no
-new calls. Verdicts on unmatched events come from the hand check (`audit/arms_unmatched_check.json`).
+new calls. Verdicts on unmatched events: checked by Claude Code against cached page text; 10 spot-checked by Bhavik (spot check pending) (`audit/arms_unmatched_check.json`).
 
 ## 1. Bad query, arm C, June: "ವಿದ್ಯುತ್ ತರiffe ಜೂನ್ 2026 Karnataka Wisconsin growth"
 - **Written by** Nemotron Super (`v2/ablation/arm_C_2026-06.json`). Kannada "electricity", a half-English
@@ -26,14 +26,14 @@ new calls. Verdicts on unmatched events come from the hand check (`audit/arms_un
 - **Back:** 5 pages, all on Bengaluru Metro's fare revision. 2 verified (Swarajya headline; Moneycontrol: "Bengaluru
   Metro fares to increase by 5% from February 9"); 3 rejected (price not in the cited line, no price given, and
   The Hindu's "fare hike put on hold" page with no claim to check).
-- **Hand check:** a real change **missing from the 29** (Karnataka). The Moneycontrol row also tags Delhi, wrongly.
+- **Check (Claude Code, cached page text):** a **real change outside the list** of 29 (Karnataka). The Moneycontrol row also tags Delhi, wrongly.
 
 ## 4. Verified but wrong, arm C, March: "पेट्रोल डीजल मूल्य वृद्धि मार्च 2026 भारत"
 - **Written by** Super (`arm_C_2026-03.json`). **Sent:** news, basic, 8 results, Hindi, 19 Feb – 29 Mar.
 - **Back:** 8 pages on the 20 Mar premium-petrol and industrial-diesel rise. 4 rejected for no publication date, 1
   for no price; 2 kept only as context (commercial / wholesale price). 1 verified (India TV): "industrial diesel up
   Rs 22.02 a litre".
-- **Hand check: wrong.** The number is in the line, so it passed the line check, but it is industrial (bulk) diesel,
+- **Check (Claude Code, cached page text): wrong.** The number is in the line, so it passed the line check, but it is industrial (bulk) diesel,
   not a retail CPI item, and it was tagged LPG. The line check proves a quote is real, not that it is relevant.
 
 ## 5. Good query, arm C, May: "दूध की कीमत अप्रैल मई 2026 भारत में बढ़ी"
@@ -60,5 +60,5 @@ Dutch rail fares, a Telangana Dasara bus fare piece — each "published … afte
 the pre-registered result. The exploratory arm T+dates sends the same queries with arm A's dates added.
 
 **Correction (logged; no number changed).** The ablation notes said auto_parameters chose "`time_range: \"w\"`,
-topic news and advanced depth for every search". The arm files show the mix above (57 of 72 week, 14 past day, 1
-past month; 49 advanced, 23 basic). The note is now computed from the arm files.
+topic news and advanced depth for every search". The arm files show recent windows, not always "w": w 57, d 14, m 1
+of 72 searches (49 advanced, 23 basic); 620 of 659 results were dated October 2026 and 38 undated. The note is now computed from the arm files.

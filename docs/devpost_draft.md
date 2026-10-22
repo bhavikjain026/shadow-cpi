@@ -44,7 +44,7 @@ See `docs/pipeline.md` for the diagram.
 
 Go / no-go: **GO** under the rule registered before scoring ((c) must beat B1 (0.468) and trend-only (0.212) on mean absolute miss). (c) vs (b), stated honestly: accuracy improved by 0.031 pp (0.225 → 0.194), better in 6 of 9 months; coverage rose from 11% to 14–21% of the basket. Government food prices on their own (b) did slightly worse than trend-only (a). Scored once, then re-scored once after logged bug fixes found by an independent audit (`docs/after_scoring_changes.md` §4); the June event, a 10% Uttar Pradesh electricity surcharge that was later put on hold, is inside the score; see `results/scoreboard.md` and `docs/preregistration.md`. All numbers in this table: `results/score_lock.json`.
 
-**Independent audit:** 12 events independently audited (AI-assisted search); every source page then opened in a browser: 9 quotes verbatim, 1 paywalled, 2 unreachable (`audit/quote_check.md`). Verdicts: 5 correct, 3 partly, 3 wrong, 1 unclear; confirmed by another outlet: 9 of 12 (audit, other outlets; `audit/event_audit.md`). The four general bug fixes that followed (retail only, the CPI fuel grade, national vs regional scope, no double counting) dropped 2 events and merged 2 into 1, taking the replay from 12 events to 9.
+**Independent audit:** 12 events independently audited (AI-assisted search). Browser check of every source page: 9 quotes verbatim, 1 paywalled, 2 unreachable (**UNVERIFIED: tally reported by Eshan, per-row evidence not in repo**; `audit/quote_check.md`). Verdicts: 5 correct, 3 partly, 3 wrong, 1 unclear; confirmed by another outlet: 9 of 12 (audit, other outlets; `audit/event_audit.md`). The four general bug fixes that followed (retail only, the CPI fuel grade, national vs regional scope, no double counting) dropped 2 events and merged 2 into 1, taking the replay from 12 events to 9.
 
 **Recall:** of 29 known retail price changes in Jan–Sep 2026, the pipeline found 9 directly, and 14 including the official price series it reads (IOCL LPG, PPAC petrol) (`audit/missed_events.md`).
 
@@ -108,7 +108,7 @@ Every point below is a dated entry in `FEEDBACK_NOTES.md`, with its evidence (fl
 
 ## Tavily feedback
 
-- **auto_parameters chooses a recent time range when no dates are sent** (undocumented): in 72 pre-registered searches it chose the past week 57 times, the past day 14 times and the past month once, so a historical month returned 620 of 659 results dated October 2026 and found 0 of 29 known changes. A time-locked search needs explicit `start_date`/`end_date`.
+- **auto_parameters with no dates chose recent windows** (undocumented): w 57, d 14, m 1 of 72 pre-registered searches; 620 of 659 results were dated Oct 2026 and 38 undated, so a historical month found 0 of 29 known changes. A time-locked search needs explicit `start_date`/`end_date`.
 - **Map returns 0 silently** (undocumented): on 4 government/PSU sites (merc.gov.in, derc.gov.in, uperc.org, iocl.com) and 3 of 6 dairy sites, Map came back with `results: []`, no `failed_results` and no error, with and without `instructions`; an empty answer cannot be told apart from "blocked". A bad start address, by contrast, got a clear HTTP 400.
 - **Scanned PDFs return only the letterhead** (undocumented): Gokul's rate-list PDF (effective 11 Aug 2026) came back as 607 characters of letterhead with basic and with advanced Extract; the advanced call cost 1 credit.
 - **An Extract where every URL failed was still charged**: 14 such calls each cost 1 credit, while empty Map/Crawl calls (16) cost 0.

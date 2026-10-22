@@ -145,9 +145,9 @@ text. The advanced call cost 1 credit. Evidence: flight-recorder ids `a8ce5681fc
 
 **2026-10-22 · Friction: auto_parameters with no dates chose time_range=w.** In our pre-registered arm T
 (`v2/PREREGISTRATION.md`, Amendment F), 72 searches sent only `query`, `auto_parameters: true` and `max_results`.
-Tavily always picked a recent time range: `time_range: "w"` (past week) in 57, `"d"` (past day) in 14 and `"m"`
-(past month) in 1; topic news in 71; advanced depth in 49 and basic in 23. So for a historical month every dated
-result was from the weeks before the run (620 of 659 results dated October 2026, 1 September, 38 undated), and 0 of
+auto_parameters with no dates chose recent windows, not always "w": `time_range` w 57, d 14, m 1 of 72 searches
+(topic news in 71; advanced depth in 49, basic in 23). 620 of 659 results were dated October 2026, 1 September 2026
+and 38 undated, and 0 of
 29 known Jan–Sep 2026 changes were found. (Corrected 2026-10-22 from "w, news and advanced every time"; counted from
 the arm files.) A historical, time-locked search needs explicit
 `start_date`/`end_date`. Suggestion: document this, or let auto_parameters respect a supplied date window.
