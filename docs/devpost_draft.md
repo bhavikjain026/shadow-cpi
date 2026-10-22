@@ -98,13 +98,22 @@ More in `docs/honest_limits.md`.
 - A weekly automated run, more items, Hindi price quotes at scale, and mandi early warning.
 
 ## Nebius and NVIDIA feedback
-> Required section. Replace every prompt below with what actually happened. Do not keep a sentence that isn't true for us.
+Every point below is a dated entry in `FEEDBACK_NOTES.md`, with its evidence (flight-recorder ids or a committed file).
 
-- **What worked well:** [I fill in]
-- **What was hard:** [I fill in]
-- **Model sizes:** [I fill in]
+- **What worked well:** JSON-schema output worked on the first call (`checks.py`). Citing line numbers instead of copying text made Hindi work: 59 of 62 Hindi quotes (95.2%) passed the "number is in the cited line" check, against 117 of 117 English quotes, on the March 2026 test.
+- **What was hard:** the small model (Nano) answered "no" to a page that plainly listed Indian rupee prices, so code now never skips a page with a visible ₹ price. The extraction model (Super) sometimes named the item from the page's context rather than the cited line (onion for a potato line), took the low end of price ranges, or took the old price in "from X to Y"; all are now handled in code. A 180-second read timeout (20 Oct) and a connection reset (22 Oct) each stopped a run once; our HTTP helper now retries timeouts.
+- **Model sizes:** Nano (30B) as the yes/no gatekeeper and Super (120B) for reading pages and writing search plans were enough; the extraction job is small because the model only points to a line and code checks it.
 - **Cost and latency:** 1,341 Nemotron calls sent (10,006 including cache hits), median 1.6 s per call sent (flight recorder).
-- **Requests for the platform:** [I fill in]
+- **Requests for the platform:** consistent model IDs in `/models` (mixed case, `3.5` vs `3_5`); a documented retry policy for resets and timeouts on long runs.
+
+## Tavily feedback
+
+- **auto_parameters chooses a recent time range when no dates are sent** (undocumented): in 72 pre-registered searches it chose the past week 57 times, the past day 14 times and the past month once, so a historical month returned 620 of 659 results dated October 2026 and found 0 of 29 known changes. A time-locked search needs explicit `start_date`/`end_date`.
+- **Map returns 0 silently** (undocumented): on 4 government/PSU sites (merc.gov.in, derc.gov.in, uperc.org, iocl.com) and 3 of 6 dairy sites, Map came back with `results: []`, no `failed_results` and no error, with and without `instructions`; an empty answer cannot be told apart from "blocked". A bad start address, by contrast, got a clear HTTP 400.
+- **Scanned PDFs return only the letterhead** (undocumented): Gokul's rate-list PDF (effective 11 Aug 2026) came back as 607 characters of letterhead with basic and with advanced Extract; the advanced call cost 1 credit.
+- **An Extract where every URL failed was still charged**: 14 such calls each cost 1 credit, while empty Map/Crawl calls (16) cost 0.
+- **`/usage` lagged for a day** (it reported 6 credits used all day on 20 Oct while per-call counts reached 226), so we budget from per-call `include_usage`.
+- **`include_domains_mode="prefer"` let many off-target results through** (Reuters polls on other countries; New York fare news for a Hindi bus-fare query).
 
 ## Try it
 - App: https://shadow-cpi.streamlit.app

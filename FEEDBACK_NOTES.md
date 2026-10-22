@@ -145,8 +145,17 @@ text. The advanced call cost 1 credit. Evidence: flight-recorder ids `a8ce5681fc
 
 **2026-10-22 · Friction: auto_parameters with no dates chose time_range=w.** In our pre-registered arm T
 (`v2/PREREGISTRATION.md`, Amendment F), 72 searches sent only `query`, `auto_parameters: true` and `max_results`.
-Tavily chose `time_range: "w"`, topic news and advanced depth every time, so for a historical month every result was
-from the past week, and 0 of 29 known Jan–Sep 2026 changes were found. A historical, time-locked search needs explicit
+Tavily always picked a recent time range: `time_range: "w"` (past week) in 57, `"d"` (past day) in 14 and `"m"`
+(past month) in 1; topic news in 71; advanced depth in 49 and basic in 23. So for a historical month every dated
+result was from the weeks before the run (620 of 659 results dated October 2026, 1 September, 38 undated), and 0 of
+29 known Jan–Sep 2026 changes were found. (Corrected 2026-10-22 from "w, news and advanced every time"; counted from
+the arm files.) A historical, time-locked search needs explicit
 `start_date`/`end_date`. Suggestion: document this, or let auto_parameters respect a supplied date window.
 Evidence: `v2/ablation/arm_T_*.json` (`auto_parameters` logged per call), e.g. flight-recorder id `40f11f00fa88`, Tavily
 request_id `75b29575-d839-49e2-a1b1-76fd7ee28a9b`.
+
+**2026-10-22 · Friction: one Token Factory connection reset stopped a long run.** During the exploratory T+dates
+arm, a `price_events` call to `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` raised `ConnectionResetError: [Errno 54]
+Connection reset by peer` while reading the response; our HTTP helper does not retry a reset, so the run stopped
+mid-January and was restarted from the cache. Evidence: `logs/v2_ablation_Td_crash1.txt` (kept locally; the
+traceback).
