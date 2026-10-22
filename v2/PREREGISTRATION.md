@@ -177,3 +177,65 @@ Scored once; `results/v2_score_lock.json` refuses a second run; credit cap 250 (
 reading and Ultra for refereeing). The verifier fetches the **full page** with Tavily Extract instead of the PRD's
 "focused query per item, a few chunks", because checking the exact cited line needs the whole page. Board issues
 5 (official-site Map and Crawl), 6 (Research sweep) and 7 (Ultra referee) are cut before scoring.
+
+## Amendment E, search-parameter ablation (DEVELOPMENT data, report only)
+
+**Written 2026-10-22T09:14:19Z (UTC), before any code for it was written and before any run.** Decided by the owner. v1 and the v2
+score lock (results/v2_score_lock.json, results/v2_recall_lock.json) are final and are not changed by anything here.
+
+**Question.** Does letting Nemotron write each Tavily search (its query and its filters) find more of the known price
+changes than our fixed query templates, at what cost?
+
+**Data label.** Jan–Sep 2026 have already been scored and the 29-change reference set was built from them, so every
+result here is **DEVELOPMENT data**, not a test. No rule, query or score in v1 or the v2 locks is changed because of it.
+
+**Three arms**, each run **once** on each month Jan–Sep 2026, same window and cutoff (`v2.rules.window`: 10 days
+before the month to the 29th), same reader and verifier (search proposes → Nano reads → Extract verifies, Super
+re-reads under Amendment B, every check of Amendments A–D), same kind and place rules (`v2.kinds`):
+
+| Arm | Who writes the searches | Languages | Searches per month |
+|---|---|---|---|
+| **A** fixed templates | code: the 13 Amendment C queries, exactly as in issue 14 (topic news, max_results 10, window dates, the language's news domains preferred) | en, hi, mr, ta, te, kn, bn | 13 |
+| **B** model-written | Nemotron | English and Hindi only | 8 (at least 3 English, 3 Hindi) |
+| **C** model-written + regional | Nemotron | en, hi, mr, ta, te, kn, bn | 13 (at least 3 English, 3 Hindi, 1 in each regional language) |
+
+**How the model writes a search (arms B and C).** One call per month and arm. Nemotron **Nano** gets: the month, the
+window start and cutoff dates, the kinds of retail price change we look for (the Amendment C kinds and their CPI
+items, no reference change and no known event), the allowed languages and counts, and the allowed values below. It
+returns JSON, one object per search: `query`, `language`, `topic`, `start_date`, `end_date`,
+`include_domains`, `include_domains_mode`, `max_results`. If Nano's reply has no usable JSON or gives fewer
+valid searches than the arm needs, **Nemotron Super** gets the same prompt once; the arm then runs the valid searches
+it has, and a month with fewer than required is marked "plan incomplete". Temperature 0.
+
+**Code validates every parameter before any Tavily call** (each correction is logged next to the search):
+- `query`: non-empty, at most 400 characters; otherwise the search is dropped.
+- `language`: one of the arm's languages; otherwise the search is dropped. As in arm A, it is sent to Tavily as
+  `language` only for Hindi; for every language it is recorded and decides the query's script.
+- `topic`: "news" or "general"; anything else becomes "news".
+- `start_date`, `end_date`: ISO dates inside the window (window start to the cutoff), start ≤ end; a date outside
+  is clamped to the window edge, a missing or unreadable one becomes the window edge.
+- `include_domains`: host names only (lower case, "www." removed); at most **20** (the rest dropped); may be empty.
+- `include_domains_mode`: "prefer" or "restrict"; anything else becomes "prefer".
+- `max_results`: an integer 1–10; outside is clamped, missing becomes 10.
+- search depth is always "basic" (cost is fixed by code, not by the model). The page-date and window checks of the
+  verifier use the pre-registered window, never the model's dates.
+
+Every written parameter, the model that wrote it, each correction and what was sent to Tavily are saved
+(`v2/ablation/`), logged in the flight recorder, and shown on the Tavily trace page.
+
+**Metrics** (computed by code after all three arms have run, once):
+1. **Recall:** known changes found directly, of the 29 in `v2/recall_reference.json`, with the matcher committed in
+   db2984c (`v2/recall.py` `matches`, `score`), unchanged.
+2. **False events:** an *event* is a distinct (kind, effective date, set of states) among an arm's verified claims
+   whose kind moves CPI under Amendment A (electricity, diesel, bus, rail, mobile). A false event is one that matches no
+   reference change under the same matcher rules. The reference set is the audit's list, so this is an **upper
+   bound** on false events, labelled as such.
+3. **Credits per verified event:** the Tavily credits of every search and extract the arm made (Tavily's own
+   `usage.credits` in each response, counted whether the response is new or served from the cache, so arm A is
+   costed as when first run), divided by the arm's distinct verified events of any kind (same distinctness rule).
+4. **Median latency:** the median of Tavily's own `response_time` over the arm's search and extract calls.
+
+**Credit caps** (config/budget.json): arm A runs from the cache only (0 new credits; a cache miss is recorded, not
+fetched); arm B `v2-ablation-B` 170; arm C `v2-ablation-C` 230; **400 in total**. A cap stops the arm cleanly; the
+months cut short are listed and their figures marked incomplete. Results: `results/v2_ablation.json` and
+`results/v2_ablation.md`, one table: arm → recall, false events, credits per verified event, median latency.
