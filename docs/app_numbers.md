@@ -56,3 +56,4 @@ rebuild `results/app/` with `python tools/build_app_data.py`.
 
 **Nothing shows sample data.** `data/sample/` was removed; `tests/test_app_pages.py` checks that no page shows
 the word SAMPLE and that the folder is gone.
+| Home, Replay | v1 vs v2 (experimental, stricter rules): average miss, poll-month miss, changes found, inside range, page-date rejections, verified claims by model | 0.194 vs 0.206; 0.150 vs 0.164; 9 vs 6 of 29; 5 vs 7 of 9 (not like-for-like); 38 (5 edited after their date); Nano 15 / Super 12 | `results/v2_score_lock.json` `v1`, `v2` (`mae`, `mae_poll_months`, `inside_range`, `date_rejections`, `verified_by_model`); `results/v2_recall_lock.json` `v1_found`, `v2_found`, `v2_better_than_v1` |

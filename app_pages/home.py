@@ -8,7 +8,8 @@ from shadow_cpi.live_range import THRESHOLD
 
 from app_pages.common import (CODES, LABELS, LIVE_MONTH, NOWCAST_WORDS, REPO_URL, SEAL_DATE, clean_line,
                               countdown_text, header, headline_result, item_label, month_name, next_release,
-                              pass_fail, pct, poll_direction, poll_months, read_json, seal_status, source_column)
+                              pass_fail, pct, poll_direction, poll_months, read_json, seal_status, source_column,
+                              v2_comparison)
 from app_pages.v2_panels import what_tavily_adds
 
 header("Experimental nowcast", f"Shadow CPI: an {NOWCAST_WORDS} of India's next official CPI inflation number "
@@ -74,6 +75,7 @@ if lock:
                "then re-scored once after logged bug fixes.")
     st.markdown(f"[Before/after table and every fix]({REPO_URL}/docs/after_scoring_changes.md"
                 "#4-amendment-3-bug-fixes-found-by-the-independent-audit-re-scored-once)")
+    v2_comparison()
 else:
     st.info("No scored replay yet (results/score_lock.json).")
 

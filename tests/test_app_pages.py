@@ -293,3 +293,16 @@ def test_v2_panels_on_live_build_and_home():
     assert f"{first['yoy']:.3f}%" in [m.value for m in at.metric]
     home = all_text(load("home"))
     assert "What Tavily adds (v2, September 2026)" in home and "development data" in home
+
+
+@pytest.mark.parametrize("page", ["home", "replay"])
+def test_v1_vs_v2_table_reads_the_v2_locks(page):
+    sc = json.loads((ROOT / "results" / "v2_score_lock.json").read_text())
+    rc = json.loads((ROOT / "results" / "v2_recall_lock.json").read_text())
+    at = load(page)
+    assert "**v2 (experimental, stricter rules)**" in [m.value for m in at.markdown]
+    df = next(d.value for d in at.dataframe if "v2" in d.value.columns)
+    cells = dict(zip(df["Measure"], df["v2"]))
+    assert cells["Average miss (percentage points)"] == f"{sc['v2']['mae']:.3f}"
+    assert cells[f"Known price changes found directly (of {rc['total']})"] == str(rc["v2_found"])
+    assert "Nano" in cells["Verified claims, by model"] and "not like-for-like" in all_text(at).lower()

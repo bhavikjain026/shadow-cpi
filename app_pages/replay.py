@@ -7,7 +7,7 @@ import pandas as pd
 import streamlit as st
 
 from app_pages.common import (CODES, LABELS, NOWCAST_WORDS, header, month_name, num, pass_fail, pct, poll_direction,
-                              read_csv, read_json)
+                              read_csv, read_json, v2_comparison)
 
 header("Replay", f"How the {NOWCAST_WORDS} would have done in January-September 2026, using only evidence "
                  "available before each month's cutoff. Rules were frozen before scoring. After scoring we made only "
@@ -50,6 +50,7 @@ if lock:
                + ", ".join(f"{LABELS[k]} = {CODES[k]}" for k in ("c", "a", "b", "c_strict", "B1")) + ".")
 inside = sum(r.get("c_inside_range") in ("True", "true", "1") for r in replay)
 st.markdown(f"80% range for Shadow CPI: actual inside in **{inside} of {len(replay)}** months")
+v2_comparison()
 
 # ---------- chart ----------
 st.subheader("Predicted vs actual")

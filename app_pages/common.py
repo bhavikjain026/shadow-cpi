@@ -199,3 +199,34 @@ def readable_quote(q):
         return (f"Domestic LPG 14.2 kg, ₹{indian_number(q['price'])} per cylinder in {q.get('place', '')} "
                 f"(IOCL price list, from {q['date']})")
     return clean_line(q.get("line"))
+
+
+def v2_comparison():
+    """The v1-vs-v2 table (v2 = experimental, stricter rules), every number from results/v2_score_lock.json and
+    results/v2_recall_lock.json. Shown under v1, which stays the headline."""
+    sc, rc = read_json("results/v2_score_lock.json"), read_json("results/v2_recall_lock.json")
+    if not (sc and rc):
+        return
+    v1, v2, n = sc["v1"], sc["v2"], len(sc["months"])
+    pm = sum(r["poll"] is not None for r in sc["months"])
+    nano, sup = (v2["verified_by_model"][k] for k in sorted(v2["verified_by_model"], key=lambda k: "super" in k))
+    dr = v2["date_rejections"]
+    st.markdown("**v2 (experimental, stricter rules)**")
+    st.dataframe([
+        {"Measure": "Average miss (percentage points)", "v1 Shadow CPI": f"{v1['mae']:.3f}", "v2": f"{v2['mae']:.3f}"},
+        {"Measure": f"Average miss on the {pm} poll months", "v1 Shadow CPI": f"{v1['mae_poll_months']:.3f}",
+         "v2": f"{v2['mae_poll_months']:.3f}"},
+        {"Measure": f"Known price changes found directly (of {rc['total']})", "v1 Shadow CPI": str(rc["v1_found"]),
+         "v2": str(rc["v2_found"])},
+        {"Measure": "Actual inside the range*", "v1 Shadow CPI": f"{v1['inside_range']} of {n}",
+         "v2": f"{v2['inside_range']} of {n}"},
+        {"Measure": "Pages rejected by the page-date check", "v1 Shadow CPI": "no such check",
+         "v2": f"{dr['after cutoff'] + dr['edited after its date']} ({dr['edited after its date']} edited after their "
+               "date)"},
+        {"Measure": "Verified claims, by model", "v1 Shadow CPI": "—", "v2": f"Nano {nano} / Super {sup}"},
+    ], hide_index=True, width="stretch")
+    st.caption("*Not like-for-like: v2's range is a fixed ± 0.284 pp; v1's 80% range was set by its own "
+               "pre-registered rule. Rule set before scoring: v2 counts as better only with a lower average miss AND "
+               f"more than {rc['v1_found']} changes found → "
+               + ("met" if rc["v2_better_than_v1"] else "not met: v1 stays the headline") + ". Scored once "
+               "(v2/PREREGISTRATION.md, Amendments A–D).")
