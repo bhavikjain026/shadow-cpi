@@ -105,19 +105,32 @@ class Budgeted:
             raise BudgetExceeded(f"account: {total} spent + {cost} > {limit} (plan {self.cfg['plan_limit']} + add-on "
                                  f"{self.cfg.get('addon_credits', 0)} minus reserve {reserve})")
 
+    def _write(self, cid, endpoint, resp, real, cached):
+        """One ledger row: `credits` = `real_spent` (what the caps count), `original_cost` = Tavily's own count
+        for the call when first made (what the credits-per-event metrics use; cached rows keep it at 0 real)."""
+        original = (resp.get("usage") or {}).get("credits") or 0
+        row = {"time": datetime.now(timezone.utc).isoformat(), "call_id": cid, "endpoint": endpoint,
+               "credits": real, "real_spent": real, "original_cost": original, "budgets": self.budgets,
+               **provenance(resp)}
+        if cached:
+            row["cached"] = True
+        self.ledger_path.parent.mkdir(parents=True, exist_ok=True)
+        with self.ledger_path.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(row) + "\n")
+
     def _run(self, endpoint, body, fn):
         if self._cached(endpoint, body):
-            return fn()
+            resp, cid = fn()
+            if not self.cache_only:                 # frozen re-runs spend nothing and leave the ledger alone
+                self._write(cid, endpoint, resp, 0, cached=True)
+            return resp, cid
         if self.cache_only:
             raise CacheMiss(f"cache-only run: {endpoint} not in the cache, skipped (no call sent)")
         self.check(call_cost(endpoint, body))
         resp, cid = fn()
         credits = (resp.get("usage") or {}).get("credits") or 0
         self.used += credits
-        self.ledger_path.parent.mkdir(parents=True, exist_ok=True)
-        with self.ledger_path.open("a", encoding="utf-8") as f:
-            f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(), "call_id": cid, "endpoint": endpoint,
-                                "credits": credits, "budgets": self.budgets, **provenance(resp)}) + "\n")
+        self._write(cid, endpoint, resp, credits, cached=False)
         return resp, cid
 
     @staticmethod
@@ -126,7 +139,8 @@ class Budgeted:
 
     def search(self, query, **params):
         p = self._body(params)
-        p.setdefault("search_depth", "basic")
+        if not p.get("auto_parameters"):        # as Tavily.search, so the cache check hashes the body actually sent
+            p.setdefault("search_depth", "basic")
         return self._run("/search", {"query": query, **p}, lambda: self.tav.search(query, **params))
 
     def extract(self, urls, **params):
@@ -151,7 +165,7 @@ def run_now_allowed(day, ledger=None, cfg=None, path=LEDGER):
     cfg = cfg or load_budget()
     entries = ledger if ledger is not None else read_ledger(path)
     per_day = cfg["plans"]["cut5_run_now"]["scans_per_day"]
-    used = {b for e in entries for b in e["budgets"] if b.startswith(f"run-now-scan/{day}#")}
+    used = {b for e in entries if not e.get("cached") for b in e["budgets"] if b.startswith(f"run-now-scan/{day}#")}
     return f"run-now-scan/{day}#{len(used) + 1}" if len(used) < per_day else None
 
 

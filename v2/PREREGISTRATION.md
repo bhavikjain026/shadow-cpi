@@ -292,3 +292,14 @@ Decided by the owner. Nothing here changes v1, the v2 score locks or Amendment E
 **Written 2026-10-22T12:26:37Z (UTC), before it was run.** Exploratory arm T+dates (added after scoring; cannot change the winner
 or any verdict): same queries as T, auto_parameters=true, plus the same start_date/end_date windows arm A used. No
 other fields from us. Cap 190 credits. Reported in its own labelled section.
+
+**Bug fix (logged) 2026-10-22T17:04:44Z, before T+dates resumes; no result or score number changes.**
+`Budgeted.search` added `search_depth: basic` to `auto_parameters` searches, which `Tavily.search` does not send,
+so the cap's cache check never matched them: T+dates searches served free from the cache were charged to the ledger
+again. Found after the first T+dates run stopped mid-February. Phantom so far: 4 credits (calls af08b01d1d32 and
+00eca106d1e5, 2026-10-22T14:31:10Z, both `cached: true` in the flight recorder); those rows stay in the ledger,
+offset by one correction row (-4, `phantom_of` both call ids), so the 190 cap counts real credits only. From now
+on every ledger row carries `real_spent` (what caps count; `credits` = `real_spent`) and `original_cost`
+(Tavily's own count when the call was first made); cache hits in runs that can spend write a row with
+`real_spent: 0`, `cached: true`. Credits per verified event still counts every call at its original cost (arm
+files, `calls[].credits`), as for the four-arm table. Test: tests/test_budget_reserve.py.

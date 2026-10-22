@@ -88,3 +88,34 @@ def test_usage_check_warns_only_above_ledger_plus_slack(tmp_path):
         def usage(self, tag=None):
             raise OSError("down")
     assert usage_check(Broken(), cfg=cfg(), ledger=led, log=log)[0] is None
+
+
+def test_cached_auto_parameters_search_is_not_charged_but_keeps_its_original_cost(tmp_path):
+    """Bug fix (logged, 2026-10-22): Budgeted added search_depth='basic' to auto_parameters searches, which Tavily.search
+    does not send, so the cache check never matched and cached T+dates searches were charged again."""
+    from shadow_cpi.budget import read_ledger, spent
+    from shadow_cpi.recorder import Recorder
+    from shadow_cpi.tavily import Tavily
+    sent = []
+
+    def transport(*a):
+        sent.append(a)
+        return {"request_id": f"req-{len(sent)}", "results": [], "usage": {"credits": 2}}
+    tav = Tavily(api_key="test", recorder=Recorder(cache_dir=tmp_path / "c", log_file=tmp_path / "l.jsonl"),
+                 transport=transport)
+    led = tmp_path / "ledger.jsonl"
+    b = Budgeted(tav, ["prompt-t"], cfg=cfg(), ledger_path=led)
+    b.search("q", auto_parameters=True, max_results=8)
+    b.search("q", auto_parameters=True, max_results=8)
+    assert len(sent) == 1 and b.used == 2
+    first, again = read_ledger(led)
+    assert (first["real_spent"], first["original_cost"], first.get("cached")) == (2, 2, None)
+    assert (again["credits"], again["real_spent"], again["original_cost"], again["cached"]) == (0, 0, 2, True)
+    assert spent("prompt-t", path=led) == 2
+
+
+def test_cached_rows_do_not_use_up_a_run_now_scan():
+    from shadow_cpi.budget import run_now_allowed
+    c = {"plans": {"cut5_run_now": {"scans_per_day": 1}}}
+    led = [{"credits": 0, "cached": True, "budgets": ["run-now-scan/2026-12-01#1"]}]
+    assert run_now_allowed("2026-12-01", led, c) == "run-now-scan/2026-12-01#1"
