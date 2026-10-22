@@ -223,7 +223,7 @@
    "false_events_upper_bound": 0,
    "false_events": [],
    "credits": 121,
-   "new_credits": 121,
+   "new_credits": 56,
    "credits_per_verified_event": null,
    "median_latency_s": 6.305,
    "searches": 72,
@@ -250,7 +250,8 @@
      "hindi_with_language_field": 0,
      "parameter_names_inside_query_text": 0
     }
-   }
+   },
+   "new_credits_note": "Corrected 2026-10-22 (logged bug fix, 070fa6e): 121 -> 56. 41 of arm T's 72 searches were cache hits (flight recorder cached: true) that the budget bug charged again (65 credits; offset by ledger row phantom-T-2026-10-22). 'credits' stays 121: credits per verified event counts every call at its original cost."
   }
  },
  "equivalence": {

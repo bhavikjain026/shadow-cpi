@@ -303,3 +303,9 @@ on every ledger row carries `real_spent` (what caps count; `credits` = `real_spe
 (Tavily's own count when the call was first made); cache hits in runs that can spend write a row with
 `real_spent: 0`, `cached: true`. Credits per verified event still counts every call at its original cost (arm
 files, `calls[].credits`), as for the four-arm table. Test: tests/test_budget_reserve.py.
+
+**Arm T credit correction (logged) 2026-10-22, after the T+dates run; no metric, recall or verdict changes.** The
+same budget bug (070fa6e) charged 41 of arm T's 72 searches again although they were cache hits (65 credits; arm
+T's real spend was 56, not 121). The rows stay in the ledger, offset by one correction row (-65,
+`phantom-T-2026-10-22`, `phantom_of` the 41 call ids). `results/v2_ablation.json` arm T `new_credits` 121 → 56;
+`credits` stays 121, because credits per verified event counts every call at its original cost.
