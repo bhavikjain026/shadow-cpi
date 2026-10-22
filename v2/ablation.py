@@ -295,6 +295,53 @@ def metrics(runs, reference=None):
             "incomplete_months": [r["month"] for r in runs if not r["complete"]]}
 
 
+STRUCTURED = ("language", "topic", "start_date", "end_date", "include_domains", "include_domains_mode")
+
+
+def sent_bodies(runs, read_log=None, cache_dir=None):
+    """The exact JSON bodies POSTed to Tavily /search for an arm (from the recorder's cache, found through the flight
+    recorder's cache_key for each call id). The API key travels in the Authorization header, never in the body."""
+    from shadow_cpi import recorder as RCD
+    log = {e["id"]: e for e in (read_log or RCD.read_log)()}
+    cache = Path(cache_dir or RCD.CACHE_DIR) / "tavily"
+    out = []
+    for r in runs:
+        for c in r["calls"]:
+            e = log.get(c["call_id"])
+            if c["endpoint"] == "/search" and e and (cache / f"{e['cache_key']}.json").exists():
+                out.append(json.loads((cache / f"{e['cache_key']}.json").read_text(encoding="utf-8"))["request"])
+    return out
+
+
+def diagnostics(runs, bodies=None):
+    """Reported only (Amendment E addendum): no target, and they change none of the pre-registered metrics."""
+    plans = [s for r in runs for s in (r["plan"] or [])]
+    tries = [t for r in runs for t in r["plan_tries"]]
+    searches = [c for r in runs for c in r["calls"] if c["endpoint"] == "/search"]
+    claims = [cl for r in runs for c in r["cards"] for cl in c["claims"] if cl.get("status") == "verified"
+              and cl.get("kind")]
+    in_window = [c for r in runs for c in r["cards"] if not c["reason"].startswith(("published", "no publication"))]
+    out = {"duplicate_results": sum(c["n_results"] for c in searches) - sum(len(r["cards"]) for r in runs),
+           "duplicate_verified_claims": len(claims) - len(events(claims)),
+           "params_corrected_by_code": sum(len(s.get("corrections", [])) for s in plans),
+           "searches_dropped_by_code": sum(len(t["dropped"]) for t in tries),
+           "plan_retries_super": sum(max(0, len(r["plan_tries"]) - 1) for r in runs),
+           "super_rereads": sum(bool(c.get("super_reread")) for r in runs for c in r["cards"]),
+           "plan_abstentions": sum(len(t["picked"]) < ARMS[r["arm"]]["n"] for r in runs for t in r["plan_tries"]),
+           "reader_abstentions": sum(c["reason"] == "Nano found no price in the search text" for c in in_window),
+           "pages_read": len(in_window)}
+    if bodies is not None and plans:
+        leaks = [b["query"] for b in bodies for k in STRUCTURED if f"{k}" in b["query"]]
+        out["structured_fields"] = {
+            "searches_checked": len(bodies),
+            "with_dates_as_fields": sum("start_date" in b and "end_date" in b for b in bodies),
+            "with_topic_field": sum("topic" in b for b in bodies),
+            "with_domains_as_fields": sum("include_domains" in b and "include_domains_mode" in b for b in bodies),
+            "hindi_with_language_field": sum(b.get("language") == "hi" for b in bodies),
+            "parameter_names_inside_query_text": len(leaks)}
+    return out
+
+
 def summarise():
     if RESULTS.exists():
         raise SystemExit(f"{RESULTS} exists: the ablation metrics are computed once (Amendment E)")
@@ -305,7 +352,8 @@ def summarise():
                 if (OUT / f"arm_{arm}_{m}.json").exists()]
         if len(runs) != len(MONTHS):
             raise SystemExit(f"arm {arm} has {len(runs)} of {len(MONTHS)} months; run every arm first")
-        out["arms"][arm] = {"writer": ARMS[arm]["writer"], "languages": ARMS[arm]["langs"], **metrics(runs)}
+        out["arms"][arm] = {"writer": ARMS[arm]["writer"], "languages": ARMS[arm]["langs"], **metrics(runs),
+                            "diagnostics": diagnostics(runs, sent_bodies(runs))}
     RESULTS.write_text(json.dumps(out, ensure_ascii=False, indent=1))
     lines = ["# Search-parameter ablation (Amendment E)", "",
              f"**DEVELOPMENT data**, Jan–Sep 2026, computed {out['computed_utc'][:16]} UTC by `python -m v2.ablation "
@@ -319,6 +367,16 @@ def summarise():
         lines.append(f"| {arm} | {a['writer']} ({', '.join(a['languages'])}) | {a['recall']} of {a['total']} | "
                      f"{a['false_events_upper_bound']} of {a['moving_events']} | {cpe} | {lat} | {a['credits']} "
                      f"({a['new_credits']}) | {', '.join(a['incomplete_months']) or 'none'} |")
+    lines += ["", "**Diagnostics (reported only, addendum to Amendment E; no target):**", "",
+              "| Arm | Duplicate results | Duplicate verified claims | Params corrected by code | Searches dropped "
+              "by code | Plan retries (Super) | Super re-reads | Plan abstentions | Reader abstentions (of pages "
+              "read) |", "|---|---|---|---|---|---|---|---|---|"]
+    for arm, a in out["arms"].items():
+        d = a["diagnostics"]
+        lines.append(f"| {arm} | {d['duplicate_results']} | {d['duplicate_verified_claims']} | "
+                     f"{d['params_corrected_by_code']} | {d['searches_dropped_by_code']} | {d['plan_retries_super']} | "
+                     f"{d['super_rereads']} | {d['plan_abstentions']} | {d['reader_abstentions']} of "
+                     f"{d['pages_read']} |")
     lines += ["", "False events: distinct CPI-moving verified events that match none of the 29 known changes; the "
               "reference list is the audit's, so this is an upper bound. Credits are Tavily's own per-call counts, "
               "including calls served from the cache (arm A is costed as when first run)."]

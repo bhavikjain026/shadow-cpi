@@ -139,3 +139,21 @@ def test_metrics_computed_once(tmp_path, monkeypatch):
     monkeypatch.setattr(AB, "RESULTS", p)
     with pytest.raises(SystemExit, match="computed once"):
         AB.summarise()
+
+
+def test_diagnostics_and_structured_fields(tmp_path, monkeypatch):
+    monkeypatch.setattr(LG.save_page, "__defaults__", (tmp_path / "pages",))
+    plan = [good(lang=l) for l in ["en"] * 4 + ["hi"] * 4] + [good(lang="ta")]
+    nem = FakeNem({"nano": plan}, {"JK power": [{"quote": LINE, "line": LINE, "new_price": 6.83, "pct_change": 6.83,
+                                                  "effective_date": "2026-09-01", "region": "Jammu and Kashmir"}]})
+    meter = AB.Meter(FakeTav())
+    out = AB.run_month("B", M, meter, nem, "nano", "super")
+    out["calls"] = meter.calls
+    bodies = [{"query": c["sent"]["query"], **{k: v for k, v in c["sent"].items() if k != "query"},
+               "include_usage": True} for c in meter.calls if c["endpoint"] == "/search"]
+    d = AB.diagnostics([out], bodies)
+    assert d["searches_dropped_by_code"] == 1 and d["plan_retries_super"] == 0 and d["plan_abstentions"] == 0
+    assert d["duplicate_verified_claims"] == 7                  # 8 pages, the same change: one event
+    sf = d["structured_fields"]
+    assert sf["searches_checked"] == 8 and sf["with_dates_as_fields"] == 8 and sf["hindi_with_language_field"] == 4
+    assert sf["with_domains_as_fields"] == 8 and sf["parameter_names_inside_query_text"] == 0

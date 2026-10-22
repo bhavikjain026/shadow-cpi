@@ -239,3 +239,22 @@ Every written parameter, the model that wrote it, each correction and what was s
 fetched); arm B `v2-ablation-B` 170; arm C `v2-ablation-C` 230; **400 in total**. A cap stops the arm cleanly; the
 months cut short are listed and their figures marked incomplete. Results: `results/v2_ablation.json` and
 `results/v2_ablation.md`, one table: arm → recall, false events, credits per verified event, median latency.
+
+### Amendment E addendum: reported-only diagnostics
+
+**Written 2026-10-22T09:23:34Z (UTC), while arms B and C were still running and before any Amendment E metric was computed.**
+Decided by the owner. These are **reported only**: no target, and they change none of the four pre-registered
+metrics. Computed by `v2.ablation.diagnostics` in the same single `--metrics` run, per arm:
+- **Credits per verified event** and **false events (upper bound)**: the pre-registered metrics 2 and 3, shown
+  beside the diagnostics so the arms are compared on cost as well as recall.
+- **Duplicates:** (a) duplicate results = search results whose page another search in the same arm and month had
+  already returned; (b) duplicate verified claims = verified claims minus distinct verified events.
+- **Validation failures:** model-written parameters corrected by code, and model-written searches dropped by code.
+- **Retries:** plan calls handed to Super after Nano failed; Amendment B Super re-reads of fetched pages.
+- **Abstentions:** plan calls that wrote fewer searches than asked (including none); in-window pages where Nano
+  found no price in the search text (of the pages read).
+- **Structured fields check:** from the exact JSON bodies POSTed to Tavily /search (the recorder's cache, found by
+  each call's cache key): how many carry `start_date`/`end_date`, `topic` and `include_domains` +
+  `include_domains_mode` as API fields, how many Hindi searches carry `language`, and how many queries contain a
+  parameter name as text (expected 0). Three example request bodies are shown verbatim in the report; the API key is
+  sent in the Authorization header and is never in a body.
