@@ -1,7 +1,5 @@
 """Amendment C (v2/PREREGISTRATION.md): the event kinds, their CPI items, roles and words in every language; the
 monthly query sets; preferred news domains per language; regional state and city names for geography."""
-import re
-
 from shadow_cpi import evidence as E
 from shadow_cpi.event_rules import _states_in
 from shadow_cpi.verify import norm
@@ -77,10 +75,3 @@ def states_of(*texts):
         found |= {s for s, names in REGIONAL_PLACES.items() if any(norm(x) in n for x in names)}
     return found
 
-
-SCRIPTS = {"mr": r"[ऀ-ॿ]", "hi": r"[ऀ-ॿ]", "ta": r"[஀-௿]", "te": r"[ఀ-౿]",
-           "kn": r"[ಀ-೿]", "bn": r"[ঀ-৿]"}
-
-
-def script_lang(text):
-    return next((k for k, p in SCRIPTS.items() if re.search(p, text or "")), "en")

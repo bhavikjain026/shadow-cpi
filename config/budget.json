@@ -25,7 +25,8 @@
     "fuel-gap": 40,
     "v2-issue1": 40,
     "v2-issue2": 120,
-    "v2-amendB": 30
+    "v2-amendB": 30,
+    "v2-issue4": 150
   },
   "plans": {
     "cut1_events": "milk, lpg, electricity: English + Hindi; mobile, rail, medicine, school_fee, gst: English only (config/items.yaml 'langs')",

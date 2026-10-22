@@ -114,3 +114,21 @@ from words in its cited line, in this order; the CPI item is fixed per kind:
 v2** if a claim verified by `v2.rules.check` has the same kind, the same effective month (the same date ±2 days where
 the reference gives a day) and, for state changes, the same state. v1's count is the audit's FOUND column (9 of 29).
 The result is reported as it comes out; no query, word list or rule is changed because of it.
+
+### Amendment C, recall matcher rules (2026-10-22T08:06:02Z, before any v2 recall number was computed or seen)
+
+The matcher is `v2/recall.py` (`matches`, `score`), tested in `tests/test_v2_recall.py`. A reference change in
+`v2/recall_reference.json` counts as **found directly by v2** if at least one claim satisfies all of:
+
+1. **Verified only:** the claim passed `v2.rules.check` (status "verified"). Its Amendment A role does not matter:
+   a verified context-only claim (e.g. milk) still counts as found.
+2. **Kind:** the claim's kind (from the words in its cited line) equals the reference kind, except that a reference
+   of kind **fuel** is matched by a claim of kind **petrol or diesel**.
+3. **Date:** the claim's effective date is in the reference month; where the reference gives a day, it is within
+   **2 days** of that day (inclusive).
+4. **Place:** for a state change, the claim's states (from its region field, cited line, line context and page title,
+   with the Amendment C regional names) **overlap** the reference states (one shared state is enough). A national
+   change (no states) is matched by a claim from any place.
+
+Each reference change counts once; one claim may match more than one reference change. Recall is computed once.
+A matcher bug found afterwards is fixed only as a logged bug fix, with recall reported before and after.

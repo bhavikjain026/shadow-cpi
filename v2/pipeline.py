@@ -60,13 +60,15 @@ def gloss(nem, model, line, tag):
         return ""
 
 
-def propose(tav, nem, nano, queries, month, tag, seen):
-    """Date-locked searches; Nano reads each in-window result's search text. Returns cards (one per new page)."""
+def propose(tav, nem, nano, queries, month, tag, seen, domains=None, max_results=8):
+    """Date-locked searches; Nano reads each in-window result's search text. Returns cards (one per new page).
+    domains: {language: preferred news domains} (default: English and Hindi lists, as v1)."""
     start, end = R.window(month)
     cards = []
     for lang, q in queries:
-        resp, sid = tav.search(q, topic="news", search_depth="basic", max_results=8, start_date=start, end_date=end,
-                               include_domains=E.INDIAN_NEWS if lang == "en" else E.HINDI_NEWS,
+        doms = (domains or {}).get(lang) or (E.INDIAN_NEWS if lang == "en" else E.HINDI_NEWS)
+        resp, sid = tav.search(q, topic="news", search_depth="basic", max_results=max_results, start_date=start,
+                               end_date=end, include_domains=doms,
                                include_domains_mode="prefer", **({"language": "hi"} if lang == "hi" else {}),
                                tag=f"{tag} search")
         for r in resp.get("results", []):
