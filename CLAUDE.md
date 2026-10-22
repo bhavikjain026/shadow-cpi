@@ -22,6 +22,7 @@ The owner (Shweta) does not code. Explain results in plain English, show PASS/FA
 5. Every number shown in the app or docs must be read from a results file, never typed. If app and docs disagree, fix both in the same task. Exception: run-dependent counts in README/Devpost (calls, credits, % in window, latency) are not updated after each task; `python tools/sync_doc_numbers.py` fills them with an "as of" date in the Sunday consistency pass and again after the seal. Scored numbers from score_lock.json stay as they are.
 6. Do not ask for, print or store API keys. Never enable paid usage or pay-as-you-go anywhere.
 7. End every task with the REPORT format below, then stop and wait.
+8. Matt Pocock skills (/implement, /tdd, /code-review, /to-tickets, /pr, /retro) run under these rules and the non-negotiable rules: one writer on main, hard credit caps, pre-register before scored runs, no parallel sub-agents that call Tavily or Nemotron, and end with the REPORT format. Never use /implement-spec on this repo.
 
 REPORT format (keep it under 40 lines, plain English):
 - DONE: one line on what changed, plus commit hashes
