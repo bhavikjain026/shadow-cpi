@@ -498,6 +498,14 @@ def t_dates_section(ref):
             f"auto time range; {inside} of {dated} dated results fell inside the window."]
 
 
+def t_choices():
+    """What Tavily's auto_parameters chose for arm T's searches: Counter of (topic, time_range, search_depth)."""
+    from collections import Counter
+    return Counter((str((x.get("auto_parameters") or {}).get("topic")), str((x.get("auto_parameters") or {}).get("time_range")),
+                    str((x.get("auto_parameters") or {}).get("search_depth")))
+                   for m in MONTHS for x in json.loads((OUT / f"arm_T_{m}.json").read_text(encoding="utf-8"))["plan"])
+
+
 def hand_checks():
     """The hand check of audit/arms_unmatched.md (audit/arms_unmatched_check.json), or [] if not done yet."""
     p = ROOT / "audit" / "arms_unmatched_check.json"
@@ -574,9 +582,12 @@ def write_report():
           f"{out['arms']['C']['diagnostics']['plan_retries_super']} of 9 months).",
           "- Model-written queries were sometimes poor, e.g. arm C, June: \"ವಿದ್ಯುತ್ ತರiffe ಜೂನ್ 2026 Karnataka Wisconsin "
           "growth\"; arm B, January: \"बस कि Fahrpreiserhöhung news\".",
-          "- Arm T: Tavily's auto_parameters chose `time_range: \"w\"` (the past week), topic news and advanced depth for "
-          "every search. Amendment F sends no dates, so every result was from October 2026, after every cutoff, and "
-          "the verifier rejected all of them: 0 of 29 is the pre-registered result.",
+          "- Arm T: Tavily's auto_parameters chose (topic, time range, depth → searches) "
+          + "; ".join(f"{t}, {tr}, {d} → {k}" for (t, tr, d), k in t_choices().most_common())
+          + ". Amendment F sends no dates, so every dated result was from the days before the run, after every "
+          "cutoff, and the verifier rejected all of them: 0 of 29 is the pre-registered result (traces: "
+          "`audit/arms_traces.md`; this note was corrected from \"advanced depth and time_range w for every "
+          "search\", logged, no number changed).",
           "- Median latency was pre-registered as Amendment E metric 4, with no target; it is descriptive only and "
           "plays no part in the verdict.",
           "- Credits per known change found (credits ÷ recall) was added after scoring, as a second credit column; "

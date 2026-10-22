@@ -45,7 +45,7 @@ Arm A's credits are those of its calls when first made, in the issue 4 and issue
 
 - Super wrote 78 of C's 117 searches (Nano's plan failed in 6 of 9 months).
 - Model-written queries were sometimes poor, e.g. arm C, June: "ವಿದ್ಯುತ್ ತರiffe ಜೂನ್ 2026 Karnataka Wisconsin growth"; arm B, January: "बस कि Fahrpreiserhöhung news".
-- Arm T: Tavily's auto_parameters chose `time_range: "w"` (the past week), topic news and advanced depth for every search. Amendment F sends no dates, so every result was from October 2026, after every cutoff, and the verifier rejected all of them: 0 of 29 is the pre-registered result.
+- Arm T: Tavily's auto_parameters chose (topic, time range, depth → searches) news, w, advanced → 35; news, w, basic → 22; news, d, advanced → 14; general, m, basic → 1. Amendment F sends no dates, so every dated result was from the days before the run, after every cutoff, and the verifier rejected all of them: 0 of 29 is the pre-registered result (traces: `audit/arms_traces.md`; this note was corrected from "advanced depth and time_range w for every search", logged, no number changed).
 - Median latency was pre-registered as Amendment E metric 4, with no target; it is descriptive only and plays no part in the verdict.
 - Credits per known change found (credits ÷ recall) was added after scoring, as a second credit column; it is descriptive and cannot change the verdict.
 - Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a hand check.
