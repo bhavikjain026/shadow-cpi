@@ -1,0 +1,4709 @@
+{
+ "arm": "H",
+ "month": "2026-05",
+ "window": [
+  "2026-04-21",
+  "2026-05-29"
+ ],
+ "writer": "arm A's templates + Nemotron-chosen topic, domains, mode and language (exploratory, after scoring)",
+ "plan": [
+  {
+   "index": 0,
+   "query": "electricity tariff hike per unit regulatory commission order",
+   "language": "en",
+   "fields": {
+    "topic": "news",
+    "include_domains_mode": "prefer",
+    "language": "en",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ]
+   },
+   "valid": {
+    "topic": true,
+    "include_domains_mode": true,
+    "language": true,
+    "include_domains": true
+   },
+   "differs_from_a": {
+    "topic": false,
+    "include_domains": true,
+    "include_domains_mode": false,
+    "language": true
+   },
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "597f3684e127",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "en"
+   },
+   "search_call": "4d63ffeed670",
+   "n_results": 10
+  },
+  {
+   "index": 1,
+   "query": "milk price hike per litre",
+   "language": "en",
+   "fields": {
+    "topic": "news",
+    "include_domains_mode": "prefer",
+    "language": "en",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ]
+   },
+   "valid": {
+    "topic": true,
+    "include_domains_mode": true,
+    "language": true,
+    "include_domains": true
+   },
+   "differs_from_a": {
+    "topic": false,
+    "include_domains": true,
+    "include_domains_mode": false,
+    "language": true
+   },
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "597f3684e127",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "en"
+   },
+   "search_call": "4f6e0bb3bc33",
+   "n_results": 10
+  },
+  {
+   "index": 2,
+   "query": "bus fare hike metro fare rail fare revision",
+   "language": "en",
+   "fields": {
+    "topic": "news",
+    "include_domains_mode": "prefer",
+    "language": "en",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ]
+   },
+   "valid": {
+    "topic": true,
+    "include_domains_mode": true,
+    "language": true,
+    "include_domains": true
+   },
+   "differs_from_a": {
+    "topic": false,
+    "include_domains": true,
+    "include_domains_mode": false,
+    "language": true
+   },
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "597f3684e127",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "en"
+   },
+   "search_call": "93a49dcf9849",
+   "n_results": 10
+  },
+  {
+   "index": 3,
+   "query": "petrol diesel price hike LPG cylinder price mobile tariff hike",
+   "language": "en",
+   "fields": {
+    "topic": "news",
+    "include_domains_mode": "prefer",
+    "language": "en",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ]
+   },
+   "valid": {
+    "topic": true,
+    "include_domains_mode": true,
+    "language": true,
+    "include_domains": true
+   },
+   "differs_from_a": {
+    "topic": false,
+    "include_domains": true,
+    "include_domains_mode": false,
+    "language": true
+   },
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "597f3684e127",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "en"
+   },
+   "search_call": "ff1b94ebf3dc",
+   "n_results": 10
+  },
+  {
+   "index": 4,
+   "query": "बिजली की दरें बढ़ीं प्रति यूनिट",
+   "language": "hi",
+   "fields": {
+    "topic": "news",
+    "include_domains_mode": "prefer",
+    "language": "hi",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ]
+   },
+   "valid": {
+    "topic": true,
+    "include_domains_mode": true,
+    "language": true,
+    "include_domains": true
+   },
+   "differs_from_a": {
+    "topic": false,
+    "include_domains": true,
+    "include_domains_mode": false,
+    "language": false
+   },
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "597f3684e127",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "54aebeb68569",
+   "n_results": 10
+  },
+  {
+   "index": 5,
+   "query": "दूध के दाम बढ़े प्रति लीटर",
+   "language": "hi",
+   "fields": {
+    "topic": "news",
+    "include_domains_mode": "prefer",
+    "language": "hi",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ]
+   },
+   "valid": {
+    "topic": true,
+    "include_domains_mode": true,
+    "language": true,
+    "include_domains": true
+   },
+   "differs_from_a": {
+    "topic": false,
+    "include_domains": true,
+    "include_domains_mode": false,
+    "language": false
+   },
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "597f3684e127",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "d1f0c6e9a461",
+   "n_results": 10
+  },
+  {
+   "index": 6,
+   "query": "बस किराया बढ़ा मेट्रो किराया रेल किराया",
+   "language": "hi",
+   "fields": {
+    "topic": "news",
+    "include_domains_mode": "prefer",
+    "language": "hi",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ]
+   },
+   "valid": {
+    "topic": true,
+    "include_domains_mode": true,
+    "language": true,
+    "include_domains": true
+   },
+   "differs_from_a": {
+    "topic": false,
+    "include_domains": true,
+    "include_domains_mode": false,
+    "language": false
+   },
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "597f3684e127",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "a929b0b409cd",
+   "n_results": 10
+  },
+  {
+   "index": 7,
+   "query": "पेट्रोल डीजल के दाम बढ़े एलपीजी सिलेंडर",
+   "language": "hi",
+   "fields": {
+    "topic": "news",
+    "include_domains_mode": "prefer",
+    "language": "hi",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ]
+   },
+   "valid": {
+    "topic": true,
+    "include_domains_mode": true,
+    "language": true,
+    "include_domains": true
+   },
+   "differs_from_a": {
+    "topic": false,
+    "include_domains": true,
+    "include_domains_mode": false,
+    "language": false
+   },
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "597f3684e127",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "search_call": "5b44f819997b",
+   "n_results": 10
+  },
+  {
+   "index": 8,
+   "query": "वीज दरवाढ दूध दरवाढ एसटी बस भाडेवाढ",
+   "language": "mr",
+   "fields": {
+    "topic": "news",
+    "include_domains_mode": "prefer",
+    "language": "mr",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ]
+   },
+   "valid": {
+    "topic": true,
+    "include_domains_mode": true,
+    "language": true,
+    "include_domains": true
+   },
+   "differs_from_a": {
+    "topic": false,
+    "include_domains": true,
+    "include_domains_mode": false,
+    "language": true
+   },
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "597f3684e127",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "mr"
+   },
+   "search_call": "e02e6a8b38ae",
+   "n_results": 10
+  },
+  {
+   "index": 9,
+   "query": "மின் கட்டண உயர்வு பால் விலை உயர்வு பேருந்து கட்டண உயர்வு",
+   "language": "ta",
+   "fields": {
+    "topic": "news",
+    "include_domains_mode": "prefer",
+    "language": "ta",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ]
+   },
+   "valid": {
+    "topic": true,
+    "include_domains_mode": true,
+    "language": true,
+    "include_domains": true
+   },
+   "differs_from_a": {
+    "topic": false,
+    "include_domains": true,
+    "include_domains_mode": false,
+    "language": true
+   },
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "597f3684e127",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "ta"
+   },
+   "search_call": "c8df9f5f1574",
+   "n_results": 10
+  },
+  {
+   "index": 10,
+   "query": "విద్యుత్ ఛార్జీల పెంపు పాల ధర పెంపు బస్సు ఛార్జీల పెంపు",
+   "language": "te",
+   "fields": {
+    "topic": "news",
+    "include_domains_mode": "prefer",
+    "language": "te",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ]
+   },
+   "valid": {
+    "topic": true,
+    "include_domains_mode": true,
+    "language": true,
+    "include_domains": true
+   },
+   "differs_from_a": {
+    "topic": false,
+    "include_domains": true,
+    "include_domains_mode": false,
+    "language": true
+   },
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "597f3684e127",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "te"
+   },
+   "search_call": "42b42df0563d",
+   "n_results": 3
+  },
+  {
+   "index": 11,
+   "query": "ವಿದ್ಯುತ್ ದರ ಏರಿಕೆ ಹಾಲಿನ ದರ ಏರಿಕೆ ಬಸ್ ಪ್ರಯಾಣ ದರ ಏರಿಕೆ",
+   "language": "kn",
+   "fields": {
+    "topic": "news",
+    "include_domains_mode": "prefer",
+    "language": "kn",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ]
+   },
+   "valid": {
+    "topic": true,
+    "include_domains_mode": true,
+    "language": true,
+    "include_domains": true
+   },
+   "differs_from_a": {
+    "topic": false,
+    "include_domains": true,
+    "include_domains_mode": false,
+    "language": true
+   },
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "597f3684e127",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "kn"
+   },
+   "search_call": "f41ce427d4cb",
+   "n_results": 1
+  },
+  {
+   "index": 12,
+   "query": "বিদ্যুতের দাম বৃদ্ধি দুধের দাম বৃদ্ধি বাস ভাড়া বৃদ্ধি",
+   "language": "bn",
+   "fields": {
+    "topic": "news",
+    "include_domains_mode": "prefer",
+    "language": "bn",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ]
+   },
+   "valid": {
+    "topic": true,
+    "include_domains_mode": true,
+    "language": true,
+    "include_domains": true
+   },
+   "differs_from_a": {
+    "topic": false,
+    "include_domains": true,
+    "include_domains_mode": false,
+    "language": true
+   },
+   "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "model_call": "597f3684e127",
+   "corrections": [],
+   "sent": {
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "bn"
+   },
+   "search_call": "4dd0e76165f1",
+   "n_results": 5
+  }
+ ],
+ "plan_complete": true,
+ "plan_tries": [
+  {
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "call": "597f3684e127",
+   "error": "",
+   "written": [
+    {
+     "index": 0,
+     "topic": "news",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "language": "en"
+    },
+    {
+     "index": 1,
+     "topic": "news",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "language": "en"
+    },
+    {
+     "index": 2,
+     "topic": "news",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "language": "en"
+    },
+    {
+     "index": 3,
+     "topic": "news",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "language": "en"
+    },
+    {
+     "index": 4,
+     "topic": "news",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "language": "hi"
+    },
+    {
+     "index": 5,
+     "topic": "news",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "language": "hi"
+    },
+    {
+     "index": 6,
+     "topic": "news",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "language": "hi"
+    },
+    {
+     "index": 7,
+     "topic": "news",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "language": "hi"
+    },
+    {
+     "index": 8,
+     "topic": "news",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "language": "mr"
+    },
+    {
+     "index": 9,
+     "topic": "news",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "language": "ta"
+    },
+    {
+     "index": 10,
+     "topic": "news",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "language": "te"
+    },
+    {
+     "index": 11,
+     "topic": "news",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "language": "kn"
+    },
+    {
+     "index": 12,
+     "topic": "news",
+     "include_domains": [
+      "timesofindia.indiatimes.com",
+      "economictimes.indiatimes.com"
+     ],
+     "include_domains_mode": "prefer",
+     "language": "bn"
+    }
+   ],
+   "picked": [
+    {
+     "index": 0,
+     "query": "electricity tariff hike per unit regulatory commission order",
+     "language": "en",
+     "fields": {
+      "topic": "news",
+      "include_domains_mode": "prefer",
+      "language": "en",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ]
+     },
+     "valid": {
+      "topic": true,
+      "include_domains_mode": true,
+      "language": true,
+      "include_domains": true
+     },
+     "differs_from_a": {
+      "topic": false,
+      "include_domains": true,
+      "include_domains_mode": false,
+      "language": true
+     },
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "597f3684e127",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 10,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "en"
+     },
+     "search_call": "4d63ffeed670",
+     "n_results": 10
+    },
+    {
+     "index": 1,
+     "query": "milk price hike per litre",
+     "language": "en",
+     "fields": {
+      "topic": "news",
+      "include_domains_mode": "prefer",
+      "language": "en",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ]
+     },
+     "valid": {
+      "topic": true,
+      "include_domains_mode": true,
+      "language": true,
+      "include_domains": true
+     },
+     "differs_from_a": {
+      "topic": false,
+      "include_domains": true,
+      "include_domains_mode": false,
+      "language": true
+     },
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "597f3684e127",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 10,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "en"
+     },
+     "search_call": "4f6e0bb3bc33",
+     "n_results": 10
+    },
+    {
+     "index": 2,
+     "query": "bus fare hike metro fare rail fare revision",
+     "language": "en",
+     "fields": {
+      "topic": "news",
+      "include_domains_mode": "prefer",
+      "language": "en",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ]
+     },
+     "valid": {
+      "topic": true,
+      "include_domains_mode": true,
+      "language": true,
+      "include_domains": true
+     },
+     "differs_from_a": {
+      "topic": false,
+      "include_domains": true,
+      "include_domains_mode": false,
+      "language": true
+     },
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "597f3684e127",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 10,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "en"
+     },
+     "search_call": "93a49dcf9849",
+     "n_results": 10
+    },
+    {
+     "index": 3,
+     "query": "petrol diesel price hike LPG cylinder price mobile tariff hike",
+     "language": "en",
+     "fields": {
+      "topic": "news",
+      "include_domains_mode": "prefer",
+      "language": "en",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ]
+     },
+     "valid": {
+      "topic": true,
+      "include_domains_mode": true,
+      "language": true,
+      "include_domains": true
+     },
+     "differs_from_a": {
+      "topic": false,
+      "include_domains": true,
+      "include_domains_mode": false,
+      "language": true
+     },
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "597f3684e127",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 10,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "en"
+     },
+     "search_call": "ff1b94ebf3dc",
+     "n_results": 10
+    },
+    {
+     "index": 4,
+     "query": "बिजली की दरें बढ़ीं प्रति यूनिट",
+     "language": "hi",
+     "fields": {
+      "topic": "news",
+      "include_domains_mode": "prefer",
+      "language": "hi",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ]
+     },
+     "valid": {
+      "topic": true,
+      "include_domains_mode": true,
+      "language": true,
+      "include_domains": true
+     },
+     "differs_from_a": {
+      "topic": false,
+      "include_domains": true,
+      "include_domains_mode": false,
+      "language": false
+     },
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "597f3684e127",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 10,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "54aebeb68569",
+     "n_results": 10
+    },
+    {
+     "index": 5,
+     "query": "दूध के दाम बढ़े प्रति लीटर",
+     "language": "hi",
+     "fields": {
+      "topic": "news",
+      "include_domains_mode": "prefer",
+      "language": "hi",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ]
+     },
+     "valid": {
+      "topic": true,
+      "include_domains_mode": true,
+      "language": true,
+      "include_domains": true
+     },
+     "differs_from_a": {
+      "topic": false,
+      "include_domains": true,
+      "include_domains_mode": false,
+      "language": false
+     },
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "597f3684e127",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 10,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "d1f0c6e9a461",
+     "n_results": 10
+    },
+    {
+     "index": 6,
+     "query": "बस किराया बढ़ा मेट्रो किराया रेल किराया",
+     "language": "hi",
+     "fields": {
+      "topic": "news",
+      "include_domains_mode": "prefer",
+      "language": "hi",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ]
+     },
+     "valid": {
+      "topic": true,
+      "include_domains_mode": true,
+      "language": true,
+      "include_domains": true
+     },
+     "differs_from_a": {
+      "topic": false,
+      "include_domains": true,
+      "include_domains_mode": false,
+      "language": false
+     },
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "597f3684e127",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 10,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "a929b0b409cd",
+     "n_results": 10
+    },
+    {
+     "index": 7,
+     "query": "पेट्रोल डीजल के दाम बढ़े एलपीजी सिलेंडर",
+     "language": "hi",
+     "fields": {
+      "topic": "news",
+      "include_domains_mode": "prefer",
+      "language": "hi",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ]
+     },
+     "valid": {
+      "topic": true,
+      "include_domains_mode": true,
+      "language": true,
+      "include_domains": true
+     },
+     "differs_from_a": {
+      "topic": false,
+      "include_domains": true,
+      "include_domains_mode": false,
+      "language": false
+     },
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "597f3684e127",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 10,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "hi"
+     },
+     "search_call": "5b44f819997b",
+     "n_results": 10
+    },
+    {
+     "index": 8,
+     "query": "वीज दरवाढ दूध दरवाढ एसटी बस भाडेवाढ",
+     "language": "mr",
+     "fields": {
+      "topic": "news",
+      "include_domains_mode": "prefer",
+      "language": "mr",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ]
+     },
+     "valid": {
+      "topic": true,
+      "include_domains_mode": true,
+      "language": true,
+      "include_domains": true
+     },
+     "differs_from_a": {
+      "topic": false,
+      "include_domains": true,
+      "include_domains_mode": false,
+      "language": true
+     },
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "597f3684e127",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 10,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "mr"
+     },
+     "search_call": "e02e6a8b38ae",
+     "n_results": 10
+    },
+    {
+     "index": 9,
+     "query": "மின் கட்டண உயர்வு பால் விலை உயர்வு பேருந்து கட்டண உயர்வு",
+     "language": "ta",
+     "fields": {
+      "topic": "news",
+      "include_domains_mode": "prefer",
+      "language": "ta",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ]
+     },
+     "valid": {
+      "topic": true,
+      "include_domains_mode": true,
+      "language": true,
+      "include_domains": true
+     },
+     "differs_from_a": {
+      "topic": false,
+      "include_domains": true,
+      "include_domains_mode": false,
+      "language": true
+     },
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "597f3684e127",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 10,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "ta"
+     },
+     "search_call": "c8df9f5f1574",
+     "n_results": 10
+    },
+    {
+     "index": 10,
+     "query": "విద్యుత్ ఛార్జీల పెంపు పాల ధర పెంపు బస్సు ఛార్జీల పెంపు",
+     "language": "te",
+     "fields": {
+      "topic": "news",
+      "include_domains_mode": "prefer",
+      "language": "te",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ]
+     },
+     "valid": {
+      "topic": true,
+      "include_domains_mode": true,
+      "language": true,
+      "include_domains": true
+     },
+     "differs_from_a": {
+      "topic": false,
+      "include_domains": true,
+      "include_domains_mode": false,
+      "language": true
+     },
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "597f3684e127",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 10,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "te"
+     },
+     "search_call": "42b42df0563d",
+     "n_results": 3
+    },
+    {
+     "index": 11,
+     "query": "ವಿದ್ಯುತ್ ದರ ಏರಿಕೆ ಹಾಲಿನ ದರ ಏರಿಕೆ ಬಸ್ ಪ್ರಯಾಣ ದರ ಏರಿಕೆ",
+     "language": "kn",
+     "fields": {
+      "topic": "news",
+      "include_domains_mode": "prefer",
+      "language": "kn",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ]
+     },
+     "valid": {
+      "topic": true,
+      "include_domains_mode": true,
+      "language": true,
+      "include_domains": true
+     },
+     "differs_from_a": {
+      "topic": false,
+      "include_domains": true,
+      "include_domains_mode": false,
+      "language": true
+     },
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "597f3684e127",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 10,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "kn"
+     },
+     "search_call": "f41ce427d4cb",
+     "n_results": 1
+    },
+    {
+     "index": 12,
+     "query": "বিদ্যুতের দাম বৃদ্ধি দুধের দাম বৃদ্ধি বাস ভাড়া বৃদ্ধি",
+     "language": "bn",
+     "fields": {
+      "topic": "news",
+      "include_domains_mode": "prefer",
+      "language": "bn",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ]
+     },
+     "valid": {
+      "topic": true,
+      "include_domains_mode": true,
+      "language": true,
+      "include_domains": true
+     },
+     "differs_from_a": {
+      "topic": false,
+      "include_domains": true,
+      "include_domains_mode": false,
+      "language": true
+     },
+     "written_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "model_call": "597f3684e127",
+     "corrections": [],
+     "sent": {
+      "topic": "news",
+      "search_depth": "basic",
+      "max_results": 10,
+      "start_date": "2026-04-21",
+      "end_date": "2026-05-29",
+      "include_domains": [
+       "timesofindia.indiatimes.com",
+       "economictimes.indiatimes.com"
+      ],
+      "include_domains_mode": "prefer",
+      "language": "bn"
+     },
+     "search_call": "4dd0e76165f1",
+     "n_results": 5
+    }
+   ],
+   "dropped": [],
+   "covered": 13,
+   "valid_fields": 52,
+   "complete": true
+  }
+ ],
+ "cards": [
+  {
+   "url": "https://thefinancialexpress.com.bd/trade/bpdb-bent-on-hiking-power-price-by-21pc",
+   "domain": "thefinancialexpress.com.bd",
+   "title": "The FE - BPDB bent on hiking power price by 21pc",
+   "lang": "en",
+   "published": "2026-05-21",
+   "search_call": "4d63ffeed670",
+   "tavily_published": "2026-05-21",
+   "search_request_id": "b04e4bba-f52c-4ff0-8833-2c47dacb2ea9",
+   "search_response_sha256": "e267f969c747aa85f4751e88cc8b73ec87ef6a5d037fbd5a5649e3724d78e891",
+   "status": "rejected",
+   "reason": "effective date 2024-02-29 is not in 2026-05",
+   "claims": [
+    {
+     "line": "In the latest, power tariffs were raised on February 29, 2024 by an executive order when wholesale electricity price was increased by 5.0 per cent from Tk 6.70 to Tk 6.99 per unit, while retail -level prices rose by an average of 8.50 per cent.",
+     "price": 6.99,
+     "unit": "per unit",
+     "region": "India",
+     "seller": "BPDB",
+     "old_price": 6.7,
+     "new_price": 6.99,
+     "pct_change": 5.0,
+     "effective_date": "2024-02-29",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2024-02-29 is not in 2026-05",
+     "price_type": "wholesale",
+     "change": 0.0432835820895523,
+     "base_price": null,
+     "context": "# BPDB bent on hiking power price by 21pc \n The commission held the public hearing on retail power -tariff hikes against the proposals of the BPDB and other state-run electricity-distribution companies. \n The regulator last raised bulk tariffs on November 21, 2022, by 19.92 per cent, setting the rate at Tk 6.20 per unit after a public hearing.",
+     "gloss": "",
+     "kind": "electricity",
+     "cpi": "04.5.1.0.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "In the latest, power tariffs were raised on February 29, 2024 by an executive order when wholesale electricity price was increased by 5.0 per cent from Tk 6.70 to Tk 6.99 per unit, while retail -level prices rose by an average of 8.50 per cent.",
+     "price": 8.5,
+     "unit": "per unit",
+     "region": "India",
+     "seller": "BPDB",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": 8.5,
+     "effective_date": "2024-02-29",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2024-02-29 is not in 2026-05",
+     "price_type": "wholesale",
+     "change": 0.085,
+     "base_price": null,
+     "context": "# BPDB bent on hiking power price by 21pc \n The commission held the public hearing on retail power -tariff hikes against the proposals of the BPDB and other state-run electricity-distribution companies. \n The regulator last raised bulk tariffs on November 21, 2022, by 19.92 per cent, setting the rate at Tk 6.20 per unit after a public hearing.",
+     "gloss": "",
+     "kind": "electricity",
+     "cpi": "04.5.1.0.2.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "The regulator last raised bulk tariffs on November 21, 2022, by 19.92 per cent, setting the rate at Tk 6.20 per unit after a public hearing.",
+     "price": 19.92,
+     "unit": "per unit",
+     "region": "India",
+     "seller": "BPDB",
+     "old_price": 6.2,
+     "new_price": null,
+     "pct_change": 19.92,
+     "effective_date": "2022-11-21",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the line is not about this item",
+     "price_type": "commercial",
+     "change": 0.19920000000000002,
+     "base_price": null,
+     "context": "# BPDB bent on hiking power price by 21pc \n In the latest, power tariffs were raised on February 29, 2024 by an executive order when wholesale electricity price was increased by 5.0 per cent from Tk 6.70 to Tk 6.99 per unit, while retail -level prices rose by an average of 8.50 per cent. \n *[[email protected]](/cdn-cgi/l/email-protection)*",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    }
+   ],
+   "extract_call": "c9e27b6c2c87",
+   "extract_request_id": "e08c4cc1-21f2-49f1-b4af-9764be4490df",
+   "extract_response_sha256": "8b232c79f5e458b69f208d5b27eb34254539e93de0a6bf144ea6ae6a42a40255",
+   "page_sha256": "f929264cee8a52c8177313d41b14cc32004de521cda1924ffa085eea7da93c72",
+   "page_file": "pages/f929264cee8a52c8177313d41b14cc32004de521cda1924ffa085eea7da93c72.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://en.prothomalo.com/bangladesh/v7gjbn15p5",
+   "domain": "en.prothomalo.com",
+   "title": "Power Sector: Proposal to increase electricity prices again | Prothom Alo",
+   "lang": "en",
+   "published": "2026-05-05",
+   "search_call": "4d63ffeed670",
+   "tavily_published": "2026-05-05",
+   "search_request_id": "b04e4bba-f52c-4ff0-8833-2c47dacb2ea9",
+   "search_response_sha256": "e267f969c747aa85f4751e88cc8b73ec87ef6a5d037fbd5a5649e3724d78e891",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "The last electricity price hike was in February 2024 through an executive order, increasing wholesale tariffs by 5 per cent and retail prices by an average of 8 per cent.",
+     "price": 8.24,
+     "unit": "Tk per unit",
+     "region": "Bangladesh",
+     "seller": "BPDB",
+     "old_price": 7.04,
+     "new_price": 8.24,
+     "pct_change": 17.33,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "wholesale",
+     "change": 0.17045454545454541,
+     "base_price": null,
+     "context": "## Power Sector \n The deficit is covered through government subsidies. Distribution companies, however, do not receive subsidies and generate profit by selling electricity to consumers at retail rates. \n According to BERC sources, BPDB has proposed raising wholesale tariffs by Tk 1.20 to Tk 1.50 per unit. With an annual supply of around 90 billion units, a Tk 1.50 increase could generate over Tk 135 billion in additional revenue, while a Tk 1.20 hike would bring in more than Tk 100 billion. Retail prices could rise proportionately by up to Tk 1.38 per unit.",
+     "gloss": "",
+     "kind": "electricity",
+     "cpi": "04.5.1.0.2.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "c9e27b6c2c87",
+   "extract_request_id": "e08c4cc1-21f2-49f1-b4af-9764be4490df",
+   "extract_response_sha256": "8b232c79f5e458b69f208d5b27eb34254539e93de0a6bf144ea6ae6a42a40255",
+   "page_sha256": "9c46b5ce4aa78d74e5dd904c321893a25ef7457844f572cc4dc11d76c69bed3a",
+   "page_file": "pages/9c46b5ce4aa78d74e5dd904c321893a25ef7457844f572cc4dc11d76c69bed3a.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://timesofindia.indiatimes.com/city/coimbatore/industry-bodies-urges-cm-to-waive-this-years-eb-charge-hike/articleshow/131069182.cms",
+   "domain": "timesofindia.indiatimes.com",
+   "title": "Industry bodies urge CM to waive this year’s EB charge hike | Coimbatore News - The Times of India",
+   "lang": "en",
+   "published": "2026-05-13",
+   "search_call": "4d63ffeed670",
+   "tavily_published": "2026-05-13",
+   "search_request_id": "b04e4bba-f52c-4ff0-8833-2c47dacb2ea9",
+   "search_response_sha256": "e267f969c747aa85f4751e88cc8b73ec87ef6a5d037fbd5a5649e3724d78e891",
+   "status": "rejected",
+   "reason": "the line is not about this item",
+   "claims": [
+    {
+     "line": "The charge, which was Rs 35 per kW earlier, was increased to Rs 150 in 2022, Rs 153 in 2023, Rs 160 in 2024 and Rs 165 last year.",
+     "price": 165,
+     "unit": "Rs per kW",
+     "region": "India",
+     "seller": "Tamil Nadu Electricity Regulatory Commission",
+     "old_price": 150,
+     "new_price": 165,
+     "pct_change": 10,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the line is not about this item",
+     "price_type": "retail",
+     "change": 0.10000000000000009,
+     "base_price": null,
+     "context": "# Industry bodies urge CM to waive this year’s EB charge hike \n He said these units make a major contribution to employment, exports and industrial growth.Karthikeyan said fixed electricity charges for LT and LTCT consumers had risen sharply since 2022. \n He said the increase was based on a 2022 [Tamil Nadu](https://timesofindia.indiatimes.com/topic/tamil-nadu) Electricity Regulatory Commission order providing for annual revision over five years.",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": [
+      "tamil nadu"
+     ]
+    }
+   ],
+   "extract_call": "c9e27b6c2c87",
+   "extract_request_id": "e08c4cc1-21f2-49f1-b4af-9764be4490df",
+   "extract_response_sha256": "8b232c79f5e458b69f208d5b27eb34254539e93de0a6bf144ea6ae6a42a40255",
+   "page_sha256": "c0e0a88999cdc4784352e5cf8c148abb5b8918084a368688c7e8948cce0aed35",
+   "page_file": "pages/c0e0a88999cdc4784352e5cf8c148abb5b8918084a368688c7e8948cce0aed35.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-13",
+   "date_flag": ""
+  },
+  {
+   "url": "https://asianews.network/thailands-energy-ministry-plans-tiered-tariff-to-ease-power-bills",
+   "domain": "asianews.network",
+   "title": "Thailand’s Energy Ministry plans tiered tariff to ease power bills – Asia News Network",
+   "lang": "en",
+   "published": "2026-04-28",
+   "search_call": "4d63ffeed670",
+   "tavily_published": "2026-04-28",
+   "search_request_id": "b04e4bba-f52c-4ff0-8833-2c47dacb2ea9",
+   "search_response_sha256": "e267f969c747aa85f4751e88cc8b73ec87ef6a5d037fbd5a5649e3724d78e891",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "c9e27b6c2c87",
+   "extract_request_id": "e08c4cc1-21f2-49f1-b4af-9764be4490df",
+   "extract_response_sha256": "8b232c79f5e458b69f208d5b27eb34254539e93de0a6bf144ea6ae6a42a40255",
+   "page_sha256": "2f7c07f165d6e7cd88d5c35f96640b4d24bb20da50598b193b4e9882841322b8",
+   "page_file": "pages/2f7c07f165d6e7cd88d5c35f96640b4d24bb20da50598b193b4e9882841322b8.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.nationthailand.com/news/policy/40066540",
+   "domain": "nationthailand.com",
+   "title": "New power tariff may raise bills for homes using over 400 units from July",
+   "lang": "en",
+   "published": "2026-05-22",
+   "search_call": "4d63ffeed670",
+   "tavily_published": "2026-05-22",
+   "search_request_id": "b04e4bba-f52c-4ff0-8833-2c47dacb2ea9",
+   "search_response_sha256": "e267f969c747aa85f4751e88cc8b73ec87ef6a5d037fbd5a5649e3724d78e891",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "c9e27b6c2c87",
+   "extract_request_id": "e08c4cc1-21f2-49f1-b4af-9764be4490df",
+   "extract_response_sha256": "8b232c79f5e458b69f208d5b27eb34254539e93de0a6bf144ea6ae6a42a40255",
+   "page_sha256": "38f55e6fe6921d0f17f1192de6476c2dc3cc052855a35f0c1f5407a3dc2d267e",
+   "page_file": "pages/38f55e6fe6921d0f17f1192de6476c2dc3cc052855a35f0c1f5407a3dc2d267e.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://economictimes.indiatimes.com/industry/energy/power/power-prices-hit-regulatory-ceiling-as-heatwave-drives-demand/articleshow/130699798.cms",
+   "domain": "economictimes.indiatimes.com",
+   "title": "Power prices hit regulatory ceiling as heatwave drives demand - The Economic Times",
+   "lang": "en",
+   "published": "2026-05-02",
+   "search_call": "4d63ffeed670",
+   "tavily_published": "2026-05-02",
+   "search_request_id": "b04e4bba-f52c-4ff0-8833-2c47dacb2ea9",
+   "search_response_sha256": "e267f969c747aa85f4751e88cc8b73ec87ef6a5d037fbd5a5649e3724d78e891",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "bebd1ec73d6d",
+   "extract_request_id": "5177fe75-7fae-4ef7-be2f-13147a3a084f",
+   "extract_response_sha256": "f896ed06c8ec6e9f533b5525a83ee0e53b393d1e32fc1d42aef7ea9db91f8912",
+   "page_sha256": "30dc8a62a92c9f08c23f10b3b38859af519686417420f7ac1a1ac496e147ab90",
+   "page_file": "pages/30dc8a62a92c9f08c23f10b3b38859af519686417420f7ac1a1ac496e147ab90.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://economictimes.indiatimes.com/news/new-updates/delhi-residents-may-have-to-pay-more-for-electricity-this-year-heres-why/articleshow/130411225.cms",
+   "domain": "economictimes.indiatimes.com",
+   "title": "Delhi residents may have to pay more for electricity this year. Here’s why - The Economic Times",
+   "lang": "en",
+   "published": "2026-04-21",
+   "search_call": "4d63ffeed670",
+   "tavily_published": "2026-04-21",
+   "search_request_id": "b04e4bba-f52c-4ff0-8833-2c47dacb2ea9",
+   "search_response_sha256": "e267f969c747aa85f4751e88cc8b73ec87ef6a5d037fbd5a5649e3724d78e891",
+   "status": "rejected",
+   "reason": "Nano could not read this result (model returned no JSON object)",
+   "claims": []
+  },
+  {
+   "url": "https://timesofindia.indiatimes.com/business/india-business/cea-proposes-sharp-rise-in-fixed-monthly-power-charges-for-consumers/articleshow/131147661.cms",
+   "domain": "timesofindia.indiatimes.com",
+   "title": "CEA proposes sharp rise in fixed monthly power charges for consumers - The Times of India",
+   "lang": "en",
+   "published": "2026-05-17",
+   "search_call": "4d63ffeed670",
+   "tavily_published": "2026-05-17",
+   "search_request_id": "b04e4bba-f52c-4ff0-8833-2c47dacb2ea9",
+   "search_response_sha256": "e267f969c747aa85f4751e88cc8b73ec87ef6a5d037fbd5a5649e3724d78e891",
+   "status": "rejected",
+   "reason": "Nano could not read this result (model returned no JSON object)",
+   "claims": []
+  },
+  {
+   "url": "https://timesofindia.indiatimes.com/city/chennai/tn-prepares-draft-rules-for-5-yr-power-tariff-revision/articleshow/131075958.cms",
+   "domain": "timesofindia.indiatimes.com",
+   "title": "TN prepares draft rules for 5-yr power tariff revision | Chennai News - The Times of India",
+   "lang": "en",
+   "published": "2026-05-14",
+   "search_call": "4d63ffeed670",
+   "tavily_published": "2026-05-14",
+   "search_request_id": "b04e4bba-f52c-4ff0-8833-2c47dacb2ea9",
+   "search_response_sha256": "e267f969c747aa85f4751e88cc8b73ec87ef6a5d037fbd5a5649e3724d78e891",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "bebd1ec73d6d",
+   "extract_request_id": "5177fe75-7fae-4ef7-be2f-13147a3a084f",
+   "extract_response_sha256": "f896ed06c8ec6e9f533b5525a83ee0e53b393d1e32fc1d42aef7ea9db91f8912",
+   "page_sha256": "9f9e4ba9d4b22f42013e9b1f75542e3e7bc2dc47aede1d32760198bc9f2508eb",
+   "page_file": "pages/9f9e4ba9d4b22f42013e9b1f75542e3e7bc2dc47aede1d32760198bc9f2508eb.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-14",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.newagebd.net/post/power-energy/300357/pdb-proposes-21pc-hike-in-wholesale-electricity-prices-faces-strong-opposition",
+   "domain": "newagebd.net",
+   "title": "PDB proposes 21pc hike in wholesale electricity prices, faces strong opposition",
+   "lang": "en",
+   "published": "2026-05-26",
+   "search_call": "4d63ffeed670",
+   "tavily_published": "2026-05-26",
+   "search_request_id": "b04e4bba-f52c-4ff0-8833-2c47dacb2ea9",
+   "search_response_sha256": "e267f969c747aa85f4751e88cc8b73ec87ef6a5d037fbd5a5649e3724d78e891",
+   "status": "rejected",
+   "reason": "Tavily Extract could not fetch the page",
+   "claims": [
+    {
+     "line": "The Bangladesh Power Development Board on Wednesday proposed a 21 per cent hike in wholesale electricity prices amid strong opposition from consumer rights",
+     "price": null,
+     "unit": null,
+     "region": "India",
+     "seller": "Bangladesh Power Development Board",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": null
+    }
+   ],
+   "extract_call": "bebd1ec73d6d",
+   "extract_request_id": "5177fe75-7fae-4ef7-be2f-13147a3a084f",
+   "extract_response_sha256": "f896ed06c8ec6e9f533b5525a83ee0e53b393d1e32fc1d42aef7ea9db91f8912"
+  },
+  {
+   "url": "https://www.bbc.com/news/articles/c5ye37jrk3go",
+   "domain": "bbc.com",
+   "title": "Farmers warn of ‘no future’ as milk prices fall below cost - BBC",
+   "lang": "en",
+   "published": "2026-05-27",
+   "search_call": "4f6e0bb3bc33",
+   "tavily_published": "2026-05-27",
+   "search_request_id": "423f9ad3-cbcd-4b76-8683-872d06cb3111",
+   "search_response_sha256": "5e313a1d574db3ab4a2702ad61686cd6db5904402996c99a7984c79a9a787df8",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://en.edairynews.com/milk-price-hike-sparks-debate-across-australia/",
+   "domain": "en.edairynews.com",
+   "title": "Dairy farmers support | Milk Price Hike Sparks Debate Across Australia - en.edairynews.com",
+   "lang": "en",
+   "published": "2026-04-29",
+   "search_call": "4f6e0bb3bc33",
+   "tavily_published": "2026-04-29",
+   "search_request_id": "423f9ad3-cbcd-4b76-8683-872d06cb3111",
+   "search_response_sha256": "5e313a1d574db3ab4a2702ad61686cd6db5904402996c99a7984c79a9a787df8",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.farmprogress.com/livestock-and-dairy/butter-and-nfdm-exports-drive-milk-price-surge",
+   "domain": "farmprogress.com",
+   "title": "More money in milk checks after rough start to 2026 - Farm Progress",
+   "lang": "en",
+   "published": "2026-05-18",
+   "search_call": "4f6e0bb3bc33",
+   "tavily_published": "2026-05-18",
+   "search_request_id": "423f9ad3-cbcd-4b76-8683-872d06cb3111",
+   "search_response_sha256": "5e313a1d574db3ab4a2702ad61686cd6db5904402996c99a7984c79a9a787df8",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "bebd1ec73d6d",
+   "extract_request_id": "5177fe75-7fae-4ef7-be2f-13147a3a084f",
+   "extract_response_sha256": "f896ed06c8ec6e9f533b5525a83ee0e53b393d1e32fc1d42aef7ea9db91f8912",
+   "page_sha256": "30316e92aaff9332af54f6d255c4d2f283a6efc7df5581aec4bbb76c87300fc1",
+   "page_file": "pages/30316e92aaff9332af54f6d255c4d2f283a6efc7df5581aec4bbb76c87300fc1.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.bbc.com/news/articles/cd6pw4zg5p9o",
+   "domain": "bbc.com",
+   "title": "'Six eggs used to be £1' - why everyday essentials cost so much more now - BBC",
+   "lang": "en",
+   "published": "2026-05-24",
+   "search_call": "4f6e0bb3bc33",
+   "tavily_published": "2026-05-24",
+   "search_request_id": "423f9ad3-cbcd-4b76-8683-872d06cb3111",
+   "search_response_sha256": "5e313a1d574db3ab4a2702ad61686cd6db5904402996c99a7984c79a9a787df8",
+   "status": "rejected",
+   "reason": "effective date not stated is not in 2026-05",
+   "claims": [
+    {
+     "line": "Milk is another everyday essential that's gone up, from £1.29 for four pints of semi-skimmed in 2022 to £1.65 today, according to Assosia's data on supermarket budget ranges.",
+     "price": 1.65,
+     "unit": "per four pints",
+     "region": "India",
+     "seller": "Assosia's data on supermarket budget ranges",
+     "old_price": 1.29,
+     "new_price": 1.65,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date not stated is not in 2026-05",
+     "price_type": "retail",
+     "change": 0.2790697674418603,
+     "base_price": null,
+     "context": "# 'Six eggs used to be £1' - why everyday essentials cost so much more now \n ![Getty Images A man's hand pouring milk into a steaming mug with boiled eggs on the wooden worktop](https://ichef.bbci.co.uk/news/480/cpsprodpb/8251/live/bbc21e60-55ec-11f1-b851-ed1f362c74c1.jpg.webp) \n Dairy production uses a lot of energy in milking, processing and transportation so the energy price hikes following the war in Ukraine hit the industry hard and pushed up prices.",
+     "gloss": "",
+     "kind": "milk",
+     "cpi": "01.1.4.1.1.01",
+     "role": "context",
+     "states": []
+    }
+   ],
+   "extract_call": "bebd1ec73d6d",
+   "extract_request_id": "5177fe75-7fae-4ef7-be2f-13147a3a084f",
+   "extract_response_sha256": "f896ed06c8ec6e9f533b5525a83ee0e53b393d1e32fc1d42aef7ea9db91f8912",
+   "page_sha256": "18f85a5141b37f58f5662cda8cad3926d913c80a84b43db19b1212858254e7dc",
+   "page_file": "pages/18f85a5141b37f58f5662cda8cad3926d913c80a84b43db19b1212858254e7dc.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.gulte.com/featured/412839/fuel-shock-again-petrol-diesel-prices-hiked-heavily",
+   "domain": "gulte.com",
+   "title": "Massive Shock: Petrol, Diesel Prices Hiked by ₹ 7.5 in 10 Days - Gulte",
+   "lang": "en",
+   "published": "2026-05-25",
+   "search_call": "4f6e0bb3bc33",
+   "tavily_published": "2026-05-25",
+   "search_request_id": "423f9ad3-cbcd-4b76-8683-872d06cb3111",
+   "search_response_sha256": "5e313a1d574db3ab4a2702ad61686cd6db5904402996c99a7984c79a9a787df8",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "158558b18d4d",
+   "extract_request_id": "185c6698-2c99-4371-97ce-01d21867b166",
+   "extract_response_sha256": "fece3e3fe6ffae8e438a75eca5dd20df5a69f8015cb490fd0b8d3e41048145fb",
+   "page_sha256": "fcec7d63c2dbc3b7e641f53b54baafc4077dbce6942fcf47966a442cdf6d7245",
+   "page_file": "pages/fcec7d63c2dbc3b7e641f53b54baafc4077dbce6942fcf47966a442cdf6d7245.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-25",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.reuters.com/business/energy/indian-retailers-raise-fuel-prices-fourth-time-amid-iran-war-2026-05-25/",
+   "domain": "reuters.com",
+   "title": "Indian retailers raise fuel prices a fourth time amid Iran war - Reuters",
+   "lang": "en",
+   "published": "2026-05-25",
+   "search_call": "4f6e0bb3bc33",
+   "tavily_published": "2026-05-25",
+   "search_request_id": "423f9ad3-cbcd-4b76-8683-872d06cb3111",
+   "search_response_sha256": "5e313a1d574db3ab4a2702ad61686cd6db5904402996c99a7984c79a9a787df8",
+   "status": "rejected",
+   "reason": "Tavily Extract could not fetch the page",
+   "claims": [
+    {
+     "line": "May 25 (Reuters) - State-owned fuel retailers ​in India increased ‌diesel prices by 2.71 ​rupees ($0.0283) per ​litre and petrol ⁠by 2.61 ​rupees on ​Monday, dealers said on Monday, the ​fourth ​hike in May as ‌authorities ⁠try to recoup losses driven by ​higher ​crude ⁠costs due to ​the Iran ​war.",
+     "price": null,
+     "unit": "rupees per litre",
+     "region": "India",
+     "seller": "State-owned fuel retailers",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "Monday"
+    },
+    {
+     "line": "May 25 (Reuters) - State-owned fuel retailers ​in India increased ‌diesel prices by 2.71 ​rupees ($0.0283) per ​litre and petrol ⁠by 2.61 ​rupees on ​Monday, dealers said on Monday, the ​fourth ​hike in May as ‌authorities ⁠try to recoup losses driven by ​higher ​crude ⁠costs due to ​the Iran ​war.",
+     "price": null,
+     "unit": "rupees",
+     "region": "India",
+     "seller": "State-owned fuel retailers",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "Monday"
+    }
+   ],
+   "extract_call": "158558b18d4d",
+   "extract_request_id": "185c6698-2c99-4371-97ce-01d21867b166",
+   "extract_response_sha256": "fece3e3fe6ffae8e438a75eca5dd20df5a69f8015cb490fd0b8d3e41048145fb"
+  },
+  {
+   "url": "https://www.farmprogress.com/commentary/dairy-demand-supports-milk-prices",
+   "domain": "farmprogress.com",
+   "title": "Milk futures hold firm on hot demand — how to market now - Farm Progress",
+   "lang": "en",
+   "published": "2026-04-30",
+   "search_call": "4f6e0bb3bc33",
+   "tavily_published": "2026-04-30",
+   "search_request_id": "423f9ad3-cbcd-4b76-8683-872d06cb3111",
+   "search_response_sha256": "5e313a1d574db3ab4a2702ad61686cd6db5904402996c99a7984c79a9a787df8",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "158558b18d4d",
+   "extract_request_id": "185c6698-2c99-4371-97ce-01d21867b166",
+   "extract_response_sha256": "fece3e3fe6ffae8e438a75eca5dd20df5a69f8015cb490fd0b8d3e41048145fb",
+   "page_sha256": "f09b33b0c84c4f006ee9daa1493eccdab417944518e07f3767a4ff89511afe5c",
+   "page_file": "pages/f09b33b0c84c4f006ee9daa1493eccdab417944518e07f3767a4ff89511afe5c.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.bbc.com/news/articles/c248j1r7qrdo",
+   "domain": "bbc.com",
+   "title": "Lorry firm says war in Iran \"has cost us £100,000\" in fuel costs - BBC",
+   "lang": "en",
+   "published": "2026-04-22",
+   "search_call": "4f6e0bb3bc33",
+   "tavily_published": "2026-04-22",
+   "search_request_id": "423f9ad3-cbcd-4b76-8683-872d06cb3111",
+   "search_response_sha256": "5e313a1d574db3ab4a2702ad61686cd6db5904402996c99a7984c79a9a787df8",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "158558b18d4d",
+   "extract_request_id": "185c6698-2c99-4371-97ce-01d21867b166",
+   "extract_response_sha256": "fece3e3fe6ffae8e438a75eca5dd20df5a69f8015cb490fd0b8d3e41048145fb",
+   "page_sha256": "b827a23726b21258a2c4d7bbfb69c445b3e6d328d681642e58f974a926036132",
+   "page_file": "pages/b827a23726b21258a2c4d7bbfb69c445b3e6d328d681642e58f974a926036132.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.voronoiapp.com/energy/Gasoline-Price-Changes-Since-the-Start-of-the-Iran-War-8112",
+   "domain": "voronoiapp.com",
+   "title": "Gasoline Price Changes Since the Start of the Iran War - Voronoi by Visual Capitalist",
+   "lang": "en",
+   "published": "2026-04-22",
+   "search_call": "4f6e0bb3bc33",
+   "tavily_published": "2026-04-22",
+   "search_request_id": "423f9ad3-cbcd-4b76-8683-872d06cb3111",
+   "search_response_sha256": "5e313a1d574db3ab4a2702ad61686cd6db5904402996c99a7984c79a9a787df8",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "158558b18d4d",
+   "extract_request_id": "185c6698-2c99-4371-97ce-01d21867b166",
+   "extract_response_sha256": "fece3e3fe6ffae8e438a75eca5dd20df5a69f8015cb490fd0b8d3e41048145fb",
+   "page_sha256": "56b622a0102ac487f94c595ebea7f17cb51dfca5df9b63690bf60846a20a03ca",
+   "page_file": "pages/56b622a0102ac487f94c595ebea7f17cb51dfca5df9b63690bf60846a20a03ca.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.reuters.com/world/india/india-announces-second-fuel-price-hike-week-local-media-reports-2026-05-19/",
+   "domain": "reuters.com",
+   "title": "India hikes fuel prices for second time in a week - Reuters",
+   "lang": "en",
+   "published": "2026-05-19",
+   "search_call": "4f6e0bb3bc33",
+   "tavily_published": "2026-05-19",
+   "search_request_id": "423f9ad3-cbcd-4b76-8683-872d06cb3111",
+   "search_response_sha256": "5e313a1d574db3ab4a2702ad61686cd6db5904402996c99a7984c79a9a787df8",
+   "status": "rejected",
+   "reason": "Tavily Extract could not fetch the page",
+   "claims": [
+    {
+     "line": "NEW DELHI, May 19 (Reuters) - India raised prices of petrol and diesel by nearly a rupee a litre on Tuesday, ​fuel retailers in Delhi said, as the government moves to ‌recover losses incurred from high global crude prices.",
+     "price": null,
+     "unit": "rupee",
+     "region": "India",
+     "seller": "government",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "May 19"
+    },
+    {
+     "line": "NEW DELHI, May 19 (Reuters) - India raised prices of petrol and diesel by nearly a rupee a litre on Tuesday, ​fuel retailers in Delhi said, as the government moves to ‌recover losses incurred from high global crude prices.",
+     "price": null,
+     "unit": "rupee",
+     "region": "India",
+     "seller": "government",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "May 19"
+    }
+   ],
+   "extract_call": "7b673d366797",
+   "extract_request_id": "e608db04-8413-4f8f-96a0-e70f7de23816",
+   "extract_response_sha256": "fb3b5ccef4e1a07fa4dab9dcc712cd5b0777ad0a4bd083bf08a7bc8e9ba32e81"
+  },
+  {
+   "url": "https://www.bbc.com/news/articles/clyp0d3zly0o",
+   "domain": "bbc.com",
+   "title": "Minister defends Translink fares freeze despite possibility of cuts to services - BBC",
+   "lang": "en",
+   "published": "2026-05-24",
+   "search_call": "93a49dcf9849",
+   "tavily_published": "2026-05-24",
+   "search_request_id": "6e6bc3c0-f13e-4736-9c91-c8ed814c43c1",
+   "search_response_sha256": "1c83e711ab9f18e26a30321540999df8a8749983c8042d560ef4e6fef74ff818",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://gothamist.com/news/mta-braces-for-lirr-strike-threatens-fare-hike-and-service-cuts-if-workers-get-demands",
+   "domain": "gothamist.com",
+   "title": "MTA braces for LIRR strike, threatens fare hike and service cuts if workers get demands - Gothamist",
+   "lang": "en",
+   "published": "2026-04-29",
+   "search_call": "93a49dcf9849",
+   "tavily_published": "2026-04-29",
+   "search_request_id": "6e6bc3c0-f13e-4736-9c91-c8ed814c43c1",
+   "search_response_sha256": "1c83e711ab9f18e26a30321540999df8a8749983c8042d560ef4e6fef74ff818",
+   "status": "rejected",
+   "reason": "the page shows 2026-09-28, after the cutoff 2026-05-29",
+   "claims": [
+    {
+     "line": "Patel warned that if the MTA gives in to the unions’ demands, the agency would have to increase fares by 8% next year and cut service and jobs.",
+     "price": null,
+     "unit": null,
+     "region": "India",
+     "seller": "MTA",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the page shows 2026-09-28, after the cutoff 2026-05-29",
+     "price_type": "retail",
+     "change": null,
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    }
+   ],
+   "extract_call": "7b673d366797",
+   "extract_request_id": "e608db04-8413-4f8f-96a0-e70f7de23816",
+   "extract_response_sha256": "fb3b5ccef4e1a07fa4dab9dcc712cd5b0777ad0a4bd083bf08a7bc8e9ba32e81",
+   "page_sha256": "0306dcabc6e11d0dd5cd738d2b52fcb68a0f9b23613c72ce8a9b521e9a2c6c78",
+   "page_file": "pages/0306dcabc6e11d0dd5cd738d2b52fcb68a0f9b23613c72ce8a9b521e9a2c6c78.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-09-28",
+   "date_flag": "after cutoff"
+  },
+  {
+   "url": "https://www.cbsnews.com/newyork/video/path-train-riders-will-see-a-fare-hike-and-service-change/",
+   "domain": "cbsnews.com",
+   "title": "PATH Train riders will see a fare hike and service change - CBS News",
+   "lang": "en",
+   "published": "2026-05-01",
+   "search_call": "93a49dcf9849",
+   "tavily_published": "2026-05-01",
+   "search_request_id": "6e6bc3c0-f13e-4736-9c91-c8ed814c43c1",
+   "search_response_sha256": "1c83e711ab9f18e26a30321540999df8a8749983c8042d560ef4e6fef74ff818",
+   "status": "rejected",
+   "reason": "Nano could not read this result (model returned no JSON object)",
+   "claims": []
+  },
+  {
+   "url": "https://www.cbsnews.com/newyork/video/25-cent-fare-hike-on-path-trains-begins-monday/",
+   "domain": "cbsnews.com",
+   "title": "25-cent fare hike on PATH trains begins Monday - CBS News",
+   "lang": "en",
+   "published": "2026-05-03",
+   "search_call": "93a49dcf9849",
+   "tavily_published": "2026-05-03",
+   "search_request_id": "6e6bc3c0-f13e-4736-9c91-c8ed814c43c1",
+   "search_response_sha256": "1c83e711ab9f18e26a30321540999df8a8749983c8042d560ef4e6fef74ff818",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "# 25-cent fare hike on PATH trains begins Monday",
+     "price": 3.25,
+     "unit": "per ride",
+     "region": "New York",
+     "seller": "Port Authority",
+     "old_price": null,
+     "new_price": 3.25,
+     "pct_change": null,
+     "effective_date": "2026-05-04",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# 25-cent fare hike on PATH trains begins Monday \n * [Memorials](/newyork/memorials/) \n The Port Authority says the increase to $3.25 per ride is necessary to bear the cost of infrastructure rebuilding projects. CBS News New York's Allen Devlin reports.",
+     "gloss": "",
+     "kind": "rail",
+     "cpi": "07.3.1.1.2.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "7b673d366797",
+   "extract_request_id": "e608db04-8413-4f8f-96a0-e70f7de23816",
+   "extract_response_sha256": "fb3b5ccef4e1a07fa4dab9dcc712cd5b0777ad0a4bd083bf08a7bc8e9ba32e81",
+   "page_sha256": "1f13a6a4dee75ac5bfff311c6017caacbc04362897eff144d0d6965ed07b8379",
+   "page_file": "pages/1f13a6a4dee75ac5bfff311c6017caacbc04362897eff144d0d6965ed07b8379.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.6sqft.com/path-fare-hike-takes-effect-ahead-of-return-of-7-day-service/",
+   "domain": "6sqft.com",
+   "title": "PATH fare hike takes effect Monday ahead of return of 7-day service - 6sqft",
+   "lang": "en",
+   "published": "2026-05-04",
+   "search_call": "93a49dcf9849",
+   "tavily_published": "2026-05-04",
+   "search_request_id": "6e6bc3c0-f13e-4736-9c91-c8ed814c43c1",
+   "search_response_sha256": "1c83e711ab9f18e26a30321540999df8a8749983c8042d560ef4e6fef74ff818",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "PATH fare hike takes effect Monday ahead of return of 7-day service - 6sqft",
+     "price": 3.25,
+     "unit": "USD",
+     "region": "India",
+     "seller": "Port Authority of New York and New Jersey",
+     "old_price": 3,
+     "new_price": 3.25,
+     "pct_change": null,
+     "effective_date": "2026-05-04",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": 0.08333333333333326,
+     "base_price": null,
+     "context": "[![6sqft](https://www.6sqft.com/wp-content/uploads/2023/02/logo_6sqft.svg)](https://www.6sqft.com/)",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    }
+   ],
+   "extract_call": "7b673d366797",
+   "extract_request_id": "e608db04-8413-4f8f-96a0-e70f7de23816",
+   "extract_response_sha256": "fb3b5ccef4e1a07fa4dab9dcc712cd5b0777ad0a4bd083bf08a7bc8e9ba32e81",
+   "page_sha256": "f89ebd77b3fb1e6bf9dd95cb40b4a37592b03469944d5ee84a66bdc8006caf21",
+   "page_file": "pages/f89ebd77b3fb1e6bf9dd95cb40b4a37592b03469944d5ee84a66bdc8006caf21.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.6sqft.com/mta-rolls-out-modern-fare-enforcement-on-nyc-buses/",
+   "domain": "6sqft.com",
+   "title": "MTA rolls out modern fare enforcement on NYC buses - 6sqft",
+   "lang": "en",
+   "published": "2026-05-06",
+   "search_call": "93a49dcf9849",
+   "tavily_published": "2026-05-06",
+   "search_request_id": "6e6bc3c0-f13e-4736-9c91-c8ed814c43c1",
+   "search_response_sha256": "1c83e711ab9f18e26a30321540999df8a8749983c8042d560ef4e6fef74ff818",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.nytimes.com/2026/05/06/nyregion/fare-enforcers-buses-nyc.html",
+   "domain": "nytimes.com",
+   "title": "Fare Enforcers Are Coming to New York City Buses - The New York Times",
+   "lang": "en",
+   "published": "2026-05-06",
+   "search_call": "93a49dcf9849",
+   "tavily_published": "2026-05-06",
+   "search_request_id": "6e6bc3c0-f13e-4736-9c91-c8ed814c43c1",
+   "search_response_sha256": "1c83e711ab9f18e26a30321540999df8a8749983c8042d560ef4e6fef74ff818",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.nytimes.com/2026/05/04/nyregion/path-fare-increase.html",
+   "domain": "nytimes.com",
+   "title": "Fare on PATH Trains Increases to $3.25 as Part of Revitalization Plan - The New York Times",
+   "lang": "en",
+   "published": "2026-05-04",
+   "search_call": "93a49dcf9849",
+   "tavily_published": "2026-05-04",
+   "search_request_id": "6e6bc3c0-f13e-4736-9c91-c8ed814c43c1",
+   "search_response_sha256": "1c83e711ab9f18e26a30321540999df8a8749983c8042d560ef4e6fef74ff818",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "The Port Authority of New York and New Jersey, which operates the PATH, had announced in November that by early 2029, it would increase the fare to $4, from $3, in four equal increments.",
+     "price": 3.25,
+     "unit": "USD",
+     "region": "India",
+     "seller": "Port Authority of New York and New Jersey",
+     "old_price": 3,
+     "new_price": 3.25,
+     "pct_change": 8.33,
+     "effective_date": "2029-01-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": 0.08333333333333326,
+     "base_price": null,
+     "context": "# Fare on PATH Trains Increases to $3.25 as Part of Revitalization Plan \n A one-way ride on a PATH train, which connects North Jersey and Manhattan, now costs $3.25, up from $3. That makes the PATH more expensive than the New York City subway, which charges riders $3 per trip through the turnstiles. \n At the Journal Square station in Jersey City, Tyrell Little, who lives in Bayonne and takes the PATH train six days a week, learned about the fare increase when he received a notification on his phone on Monday morning that he had paid $3.25 for his ride.",
+     "gloss": "",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": []
+    }
+   ],
+   "extract_call": "7b673d366797",
+   "extract_request_id": "e608db04-8413-4f8f-96a0-e70f7de23816",
+   "extract_response_sha256": "fb3b5ccef4e1a07fa4dab9dcc712cd5b0777ad0a4bd083bf08a7bc8e9ba32e81",
+   "page_sha256": "aac39a722687e8424b9a7756130b815e535459e596efecb96e52752fc0c854f0",
+   "page_file": "pages/aac39a722687e8424b9a7756130b815e535459e596efecb96e52752fc0c854f0.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.6sqft.com/nj-transit-cuts-world-cup-train-fare-to-metlife-by-30/",
+   "domain": "6sqft.com",
+   "title": "NJ Transit cuts World Cup train fare to MetLife by 30% - 6sqft",
+   "lang": "en",
+   "published": "2026-05-08",
+   "search_call": "93a49dcf9849",
+   "tavily_published": "2026-05-08",
+   "search_request_id": "6e6bc3c0-f13e-4736-9c91-c8ed814c43c1",
+   "search_response_sha256": "1c83e711ab9f18e26a30321540999df8a8749983c8042d560ef4e6fef74ff818",
+   "status": "rejected",
+   "reason": "the cited line is not on the fetched page",
+   "claims": [
+    {
+     "line": "After fierce backlash over its controversial $150 round-trip fare for service to FIFA World Cup matches at MetLife Stadium, NJ Transit has lowered the train tickets to $105.",
+     "price": 105,
+     "unit": "percent",
+     "region": "India",
+     "seller": "NJ Transit",
+     "old_price": 150,
+     "new_price": 105,
+     "pct_change": 30,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "retail",
+     "change": -0.30000000000000004,
+     "base_price": null,
+     "context": "[![6sqft](https://www.6sqft.com/wp-content/uploads/2023/02/logo_6sqft.svg)](https://www.6sqft.com/)",
+     "gloss": "",
+     "kind": "rail",
+     "cpi": "07.3.1.1.2.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "2580040412b7",
+   "extract_request_id": "d974c880-ab86-4708-be7f-fcc6c720e683",
+   "extract_response_sha256": "d779ce14573d5409d3d23a98858f0a2672f1889b3cf9815ecbd3bee16eee5222",
+   "page_sha256": "4e1426a40b37b28a6a47ac89dd99ff5477fa8b528ce71b14edc2f5b6b1e5cec3",
+   "page_file": "pages/4e1426a40b37b28a6a47ac89dd99ff5477fa8b528ce71b14edc2f5b6b1e5cec3.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.cbsnews.com/newyork/video/path-train-fares-increase-to-3-25/",
+   "domain": "cbsnews.com",
+   "title": "PATH train fares increase to $3.25 - CBS News",
+   "lang": "en",
+   "published": "2026-05-04",
+   "search_call": "93a49dcf9849",
+   "tavily_published": "2026-05-04",
+   "search_request_id": "6e6bc3c0-f13e-4736-9c91-c8ed814c43c1",
+   "search_response_sha256": "1c83e711ab9f18e26a30321540999df8a8749983c8042d560ef4e6fef74ff818",
+   "status": "rejected",
+   "reason": "Super gave no price for this line",
+   "claims": [
+    {
+     "line": "# PATH train fares increase to $3.25",
+     "price": null,
+     "unit": null,
+     "region": null,
+     "seller": null,
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-05-04",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# PATH train fares increase to $3.25 \n * [Memorials](/newyork/memorials/) \n Starting Monday, a single ride on the PATH costs an extra 25 cents. CBS News New York's Elijah Westbrook reports.",
+     "gloss": "",
+     "kind": "rail",
+     "cpi": "07.3.1.1.2.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "2580040412b7",
+   "extract_request_id": "d974c880-ab86-4708-be7f-fcc6c720e683",
+   "extract_response_sha256": "d779ce14573d5409d3d23a98858f0a2672f1889b3cf9815ecbd3bee16eee5222",
+   "page_sha256": "4fab601f5f404a769106b6194bfe96b64fdc3a0ac486cecee1d490123462fae4",
+   "page_file": "pages/4fab601f5f404a769106b6194bfe96b64fdc3a0ac486cecee1d490123462fae4.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.thehindu.com/news/cities/bangalore/explained-how-commercial-lpg-cylinder-price-hike-will-impact-not-just-food-prices-but-also-bottled-water-and-spices/article70928265.ece",
+   "domain": "thehindu.com",
+   "title": "Explained | How LPG price hike will impact not just food prices, but also bottled water and spices - The Hindu",
+   "lang": "en",
+   "published": "2026-05-01",
+   "search_call": "ff1b94ebf3dc",
+   "tavily_published": "2026-05-01",
+   "search_request_id": "b34c196d-049e-4a58-996a-b5e000580e30",
+   "search_response_sha256": "335f1a2d271be0be3cc9b47d7d5d219e2a5ee8c9c3b00162b1afd14eafa6a7a6",
+   "status": "rejected",
+   "reason": "the cited line is not on the fetched page",
+   "claims": [
+    {
+     "line": "From filter coffee to idli, dosa, meals and beyond, eating out in Bengaluru is set to pinch more after the price of a commercial LPG cylinder in the city touched ₹3,152 following a steep ₹993 hike announced by the Union Government on May 1 — an all-time high.",
+     "price": 3152,
+     "unit": "₹",
+     "region": "India",
+     "seller": "Union Government",
+     "old_price": null,
+     "new_price": 3152,
+     "pct_change": null,
+     "effective_date": "2026-05-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "commercial",
+     "change": null,
+     "base_price": null,
+     "context": "![](https://sb.scorecardresearch.com/p?c1=2&c2=11398210&cs_ucfr=1&cv=4.4.0&cj=1)",
+     "gloss": "",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "karnataka"
+     ]
+    }
+   ],
+   "extract_call": "2580040412b7",
+   "extract_request_id": "d974c880-ab86-4708-be7f-fcc6c720e683",
+   "extract_response_sha256": "d779ce14573d5409d3d23a98858f0a2672f1889b3cf9815ecbd3bee16eee5222",
+   "page_sha256": "d8c85bae8c5a8adf151b9871841142837b7758f7ffcbf2bccc480af492dcb174",
+   "page_file": "pages/d8c85bae8c5a8adf151b9871841142837b7758f7ffcbf2bccc480af492dcb174.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-01",
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.thehindu.com/news/cities/bangalore/bengaluru-commercial-lpg-cylinder-price-hike-will-impact-food-prices-bottled-water-spices/article70928265.ece",
+   "domain": "thehindu.com",
+   "title": "How LPG price hike will impact not just food prices in Bengaluru, but also bottled water and spices - The Hindu",
+   "lang": "en",
+   "published": "2026-05-01",
+   "search_call": "ff1b94ebf3dc",
+   "tavily_published": "2026-05-01",
+   "search_request_id": "b34c196d-049e-4a58-996a-b5e000580e30",
+   "search_response_sha256": "335f1a2d271be0be3cc9b47d7d5d219e2a5ee8c9c3b00162b1afd14eafa6a7a6",
+   "status": "rejected",
+   "reason": "the cited line is not on the fetched page",
+   "claims": [
+    {
+     "line": "From filter coffee to idli, dosa, meals and beyond, eating out in Bengaluru is set to pinch more after the price of a commercial LPG cylinder in the city touched ₹3,152 following a steep ₹993 hike announced by the Union Government on May 1 — an all-time high.",
+     "price": 3152,
+     "unit": "₹",
+     "region": "India",
+     "seller": "Union Government",
+     "old_price": 2159,
+     "new_price": 3152,
+     "pct_change": 46.45,
+     "effective_date": "2026-05-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the cited line is not on the fetched page",
+     "price_type": "commercial",
+     "change": 0.45993515516442796,
+     "base_price": null,
+     "context": "You are logged in",
+     "gloss": "",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": [
+      "karnataka"
+     ]
+    }
+   ],
+   "extract_call": "2580040412b7",
+   "extract_request_id": "d974c880-ab86-4708-be7f-fcc6c720e683",
+   "extract_response_sha256": "d779ce14573d5409d3d23a98858f0a2672f1889b3cf9815ecbd3bee16eee5222",
+   "page_sha256": "cfe7795048e3dc403d03bccb87d6f78daf20b9e320a0259094a679daa3cc9065",
+   "page_file": "pages/cfe7795048e3dc403d03bccb87d6f78daf20b9e320a0259094a679daa3cc9065.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-01",
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.bloomberg.com/news/articles/2026-05-23/india-raises-diesel-gasoline-prices-for-third-time-in-eight-days",
+   "domain": "bloomberg.com",
+   "title": "India Raises Diesel, Gasoline Prices for Third Time in Eight Days - Bloomberg.com",
+   "lang": "en",
+   "published": "2026-05-23",
+   "search_call": "ff1b94ebf3dc",
+   "tavily_published": "2026-05-23",
+   "search_request_id": "b34c196d-049e-4a58-996a-b5e000580e30",
+   "search_response_sha256": "335f1a2d271be0be3cc9b47d7d5d219e2a5ee8c9c3b00162b1afd14eafa6a7a6",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "India’s state-run refiners raised retail prices again of diesel and gasoline on Saturday to help processors cut losses on discounted sales and to control a spike in demand.",
+     "price": 92.49,
+     "unit": "rupees per liter",
+     "region": "India",
+     "seller": "Indian Oil Corp.",
+     "old_price": null,
+     "new_price": 92.49,
+     "pct_change": null,
+     "effective_date": "2026-05-23",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "[Skip to content](https://www.bloomberg.com/news/articles/2026-05-23/india-raises-diesel-gasoline-prices-for-third-time-in-eight-days#that-jump-content--default)",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": []
+    },
+    {
+     "line": "India’s state-run refiners raised retail prices again of diesel and gasoline on Saturday to help processors cut losses on discounted sales and to control a spike in demand.",
+     "price": 99.51,
+     "unit": "rupees per liter",
+     "region": "India",
+     "seller": "Indian Oil Corp.",
+     "old_price": null,
+     "new_price": 99.51,
+     "pct_change": null,
+     "effective_date": "2026-05-23",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "[Skip to content](https://www.bloomberg.com/news/articles/2026-05-23/india-raises-diesel-gasoline-prices-for-third-time-in-eight-days#that-jump-content--default)",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": []
+    }
+   ],
+   "extract_call": "2580040412b7",
+   "extract_request_id": "d974c880-ab86-4708-be7f-fcc6c720e683",
+   "extract_response_sha256": "d779ce14573d5409d3d23a98858f0a2672f1889b3cf9815ecbd3bee16eee5222",
+   "page_sha256": "e191dc2cea1e4bca12af45103cdcf437d984a3c7ddd4fde3e4a51b5f626260a4",
+   "page_file": "pages/e191dc2cea1e4bca12af45103cdcf437d984a3c7ddd4fde3e4a51b5f626260a4.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-23",
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.reuters.com/business/energy/indian-retailers-raises-fuel-prices-third-time-response-iran-war-2026-05-23/",
+   "domain": "reuters.com",
+   "title": "Indian retailers raise fuel prices for a third time amid Iran war - Reuters",
+   "lang": "en",
+   "published": "2026-05-23",
+   "search_call": "ff1b94ebf3dc",
+   "tavily_published": "2026-05-23",
+   "search_request_id": "b34c196d-049e-4a58-996a-b5e000580e30",
+   "search_response_sha256": "335f1a2d271be0be3cc9b47d7d5d219e2a5ee8c9c3b00162b1afd14eafa6a7a6",
+   "status": "rejected",
+   "reason": "Tavily Extract could not fetch the page",
+   "claims": [
+    {
+     "line": "May 23 (Reuters) - Indian state-owned fuel retailers raised petrol and diesel prices for the third time this month, dealers said ​on Saturday, as the companies look to recoup losses caused ‌by elevated crude oil prices amid the Iran war.",
+     "price": null,
+     "unit": null,
+     "region": "India",
+     "seller": "Indian state-owned fuel retailers",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "May 19"
+    }
+   ],
+   "extract_call": "bc9eb68b2cdd",
+   "extract_request_id": "e8024f5f-fcb2-43f0-8cc8-bdbf2817dc6e",
+   "extract_response_sha256": "c2eea90d38fdd31961994a6df419688833ae4b0b76d5551164456363e7dda03f"
+  },
+  {
+   "url": "https://www.politico.com/news/2026/05/06/diesel-price-spike-raises-stakes-for-trump-gop-ahead-of-midterms-00907349",
+   "domain": "politico.com",
+   "title": "Diesel price spike raises stakes for Trump, GOP ahead of midterms - Politico",
+   "lang": "en",
+   "published": "2026-05-06",
+   "search_call": "ff1b94ebf3dc",
+   "tavily_published": "2026-05-06",
+   "search_request_id": "b34c196d-049e-4a58-996a-b5e000580e30",
+   "search_response_sha256": "335f1a2d271be0be3cc9b47d7d5d219e2a5ee8c9c3b00162b1afd14eafa6a7a6",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://subscriber.politicopro.com/article/eenews/2026/05/06/diesel-price-spike-raises-stakes-for-trump-gop-ahead-of-midterms-ee-00907349",
+   "domain": "subscriber.politicopro.com",
+   "title": "E&E News: Diesel price spike raises stakes for Trump, GOP ahead of midterms - POLITICO Pro",
+   "lang": "en",
+   "published": "2026-05-06",
+   "search_call": "ff1b94ebf3dc",
+   "tavily_published": "2026-05-06",
+   "search_request_id": "b34c196d-049e-4a58-996a-b5e000580e30",
+   "search_response_sha256": "335f1a2d271be0be3cc9b47d7d5d219e2a5ee8c9c3b00162b1afd14eafa6a7a6",
+   "status": "rejected",
+   "reason": "Tavily Extract could not fetch the page",
+   "claims": [
+    {
+     "line": "E&E News: Diesel price spike raises stakes for Trump, GOP ahead of midterms - POLITICO Pro",
+     "price": null,
+     "unit": "per gallon",
+     "region": "United States",
+     "seller": "U.S. government",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "null"
+    }
+   ],
+   "extract_call": "bc9eb68b2cdd",
+   "extract_request_id": "e8024f5f-fcb2-43f0-8cc8-bdbf2817dc6e",
+   "extract_response_sha256": "c2eea90d38fdd31961994a6df419688833ae4b0b76d5551164456363e7dda03f"
+  },
+  {
+   "url": "https://www.agenzianova.com/en/news/Fuel%3A-Average-self-service-price%3A-petrol-at-1968-euros-per-litre--diesel-at-2046-per-litre/",
+   "domain": "agenzianova.com",
+   "title": "Fuel: average self-service petrol price at €1,968 per litre, diesel at €2,046 per litre - Agenzia Nova",
+   "lang": "en",
+   "published": "2026-05-25",
+   "search_call": "ff1b94ebf3dc",
+   "tavily_published": "2026-05-25",
+   "search_request_id": "b34c196d-049e-4a58-996a-b5e000580e30",
+   "search_response_sha256": "335f1a2d271be0be3cc9b47d7d5d219e2a5ee8c9c3b00162b1afd14eafa6a7a6",
+   "status": "rejected",
+   "reason": "Tavily Extract could not fetch the page",
+   "claims": [
+    {
+     "line": "The Ministry of Enterprise and Made in Italy announces that, based on the latest data collected by the Ministry's Fuel Price Observatory, the average price of self-service fuel along the national road network today is €1,968 per litre for petrol and €2,046 per litre for diesel.",
+     "price": null,
+     "unit": "euros per litre",
+     "region": "India",
+     "seller": "Ministry of Enterprise and Made in Italy",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "null"
+    },
+    {
+     "line": "The Ministry of Enterprise and Made in Italy announces that, based on the latest data collected by the Ministry's Fuel Price Observatory, the average price of self-service fuel along the national road network today is €1,968 per litre for petrol and €2,046 per litre for diesel.",
+     "price": null,
+     "unit": "euros per litre",
+     "region": "India",
+     "seller": "Ministry of Enterprise and Made in Italy",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "null"
+    }
+   ],
+   "extract_call": "bc9eb68b2cdd",
+   "extract_request_id": "e8024f5f-fcb2-43f0-8cc8-bdbf2817dc6e",
+   "extract_response_sha256": "c2eea90d38fdd31961994a6df419688833ae4b0b76d5551164456363e7dda03f"
+  },
+  {
+   "url": "https://hindi.news18.com/news/madhya-pradesh/bhopal-madhya-pradesh-electricity-tariff-hike-new-fppas-surcharge-consumers-local18-10430283.html",
+   "domain": "hindi.news18.com",
+   "title": "MP में महंगी हुई बिजली, एक महीने में दूसरी बार दाम बढ़ने से लगा झटका, जानें नया सरचार्ज",
+   "lang": "hi",
+   "published": "2026-05-02",
+   "search_call": "54aebeb68569",
+   "tavily_published": "2026-05-02",
+   "search_request_id": "eb43973b-4161-43e3-99c5-d00188a570fd",
+   "search_response_sha256": "97e2e9556864eaf1ef0889e6da8635937f1949236400fc3546fcfcb3e193830c",
+   "status": "rejected",
+   "reason": "the page shows 2026-10-14, after the cutoff 2026-05-29",
+   "claims": [
+    {
+     "line": "खास बात यह है कि अप्रैल 2026 में ही 4.8 फीसदी टैरिफ चार्ज बढ़ाया गया था, और अब एक महीने के भीतर दूसरी बार दरों में बढ़ोतरी से लोगों की चिंता बढ़ गई है और इसका सीधा असर आम आदमी की जेब पर पड़ेगा.",
+     "price": null,
+     "unit": null,
+     "region": "Madhya Pradesh",
+     "seller": "Madhya Pradesh Electricity Board",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the page shows 2026-10-14, after the cutoff 2026-05-29",
+     "price_type": "retail",
+     "change": null,
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": [
+      "madhya pradesh"
+     ]
+    },
+    {
+     "line": "Advertisement [...] Madhya Pradesh Electricity Tariff Hike: मध्य प्रदेश के बिजली उपभोक्ताओं को एक बार फिर महंगाई का झटका लगा है राज्य में मई महीने से बिजली दरों में 5.36 फीसदी का नया सरचार्ज (FPPAS) लागू किया जा रहा है, जिससे उपभोक्ताओं के बिजली बिल में सीधा इजाफा होगा.",
+     "price": null,
+     "unit": null,
+     "region": "Madhya Pradesh",
+     "seller": "Madhya Pradesh Electricity Board",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the page shows 2026-10-14, after the cutoff 2026-05-29",
+     "price_type": "retail",
+     "change": null,
+     "kind": "electricity",
+     "cpi": "04.5.1.0.2.01",
+     "role": "moves",
+     "states": [
+      "madhya pradesh"
+     ]
+    }
+   ],
+   "extract_call": "bc9eb68b2cdd",
+   "extract_request_id": "e8024f5f-fcb2-43f0-8cc8-bdbf2817dc6e",
+   "extract_response_sha256": "c2eea90d38fdd31961994a6df419688833ae4b0b76d5551164456363e7dda03f",
+   "page_sha256": "79eeb69fdd5e36dcdbfcee88f608aa56d472aab13786366a0b7f0fb6aece16c8",
+   "page_file": "pages/79eeb69fdd5e36dcdbfcee88f608aa56d472aab13786366a0b7f0fb6aece16c8.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-10-14",
+   "date_flag": "after cutoff"
+  },
+  {
+   "url": "https://www.jagran.com/himachal-pradesh/shimla-commercial-electricity-becomes-expensive-in-himachal-sukhu-government-imposes-extra-cess-of-one-rupee-per-unit-40240748.html",
+   "domain": "jagran.com",
+   "title": "हिमाचल में महंगी हुई कमर्शियल बिजली, सुक्खू सरकार ने प्रति यूनिट लगाया एक रुपये का एक्स्ट्रा सेस\n - commercial electricity becomes expensive in himachal sukhu government imposes extra cess of one rupee per unit",
+   "lang": "hi",
+   "published": "2026-05-16",
+   "search_call": "54aebeb68569",
+   "tavily_published": "2026-05-16",
+   "search_request_id": "eb43973b-4161-43e3-99c5-d00188a570fd",
+   "search_response_sha256": "97e2e9556864eaf1ef0889e6da8635937f1949236400fc3546fcfcb3e193830c",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "हिमाचल में महंगी हुई कमर्शियल बिजली, सुक्खू सरकार ने प्रति यूनिट लगाया एक रुपये का एक्स्ट्रा सेस",
+     "price": 7.39,
+     "unit": "rupee per unit",
+     "region": "Himachal",
+     "seller": "Himachal government",
+     "old_price": 6.2,
+     "new_price": 7.39,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "commercial",
+     "change": 0.1919354838709677,
+     "base_price": null,
+     "context": "# हिमाचल में महंगी हुई कमर्शियल बिजली, सुक्खू सरकार ने प्रति यूनिट लगाया एक रुपये का एक्स्ट्रा सेस \n हिमाचल प्रदेश सरकार ने व्यावसायिक उपभोक्ताओं के लिए बिजली की दरों में प्रति यूनिट एक रुपये का अतिरिक्त सेस लगाने ...और पढ़ें",
+     "gloss": "Commercial electricity has become more expensive in Himachal; the Sukhu government has imposed an additional surcharge of one rupee per unit.",
+     "kind": "electricity",
+     "cpi": "04.5.1.0.2.01",
+     "role": "moves",
+     "states": [
+      "himachal pradesh"
+     ]
+    }
+   ],
+   "extract_call": "bc9eb68b2cdd",
+   "extract_request_id": "e8024f5f-fcb2-43f0-8cc8-bdbf2817dc6e",
+   "extract_response_sha256": "c2eea90d38fdd31961994a6df419688833ae4b0b76d5551164456363e7dda03f",
+   "page_sha256": "4d9c5e0d2cf25b0d43e1638b0104b0761277769e150df7d49225b00c1042f43d",
+   "page_file": "pages/4d9c5e0d2cf25b0d43e1638b0104b0761277769e150df7d49225b00c1042f43d.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://navbharattimes.indiatimes.com/business/business-news/electricity-bills-may-hike-soon-after-petrol-diesel-and-cng-cea-proposed-increasing-fixed-monthly-charge/articleshow/131150379.cms",
+   "domain": "navbharattimes.indiatimes.com",
+   "title": "Electricity Bill: पंखा-AC बंद रहे या घर पर ताला लगा हो, फिर भी चुकाना होगा ज्यादा बिजली बिल, सरकार बढ़ा सकती है यह चार्ज - electricity bills may hike soon after petrol diesel and cng cea proposed increasing fixed monthly charge - Navbharat Times",
+   "lang": "hi",
+   "published": "2026-05-17",
+   "search_call": "54aebeb68569",
+   "tavily_published": "2026-05-17",
+   "search_request_id": "eb43973b-4161-43e3-99c5-d00188a570fd",
+   "search_response_sha256": "97e2e9556864eaf1ef0889e6da8635937f1949236400fc3546fcfcb3e193830c",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "bcb0a624c117",
+   "extract_request_id": "666910bc-8e9e-423e-ad2f-983c21dc51ba",
+   "extract_response_sha256": "464601a64ab946255d013968baea19c198759b50ab84c8583799dafa2ca7a3c9",
+   "page_sha256": "3108a5251b8169c3253d03099dcf20f974ca22df4c41cda844fee9fd35d5dc4c",
+   "page_file": "pages/3108a5251b8169c3253d03099dcf20f974ca22df4c41cda844fee9fd35d5dc4c.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.jagran.com/news/national-after-fuel-price-hike-electricity-bills-may-also-increase-soon-40242470.html",
+   "domain": "jagran.com",
+   "title": "पेट्रोल-डीजल, CNG के बाद अब लगेगा महंगी बिजली का झटका? बढ़ सकते हैं फिक्स्ड चार्ज - after fuel price hike electricity bills may also increase soon",
+   "lang": "hi",
+   "published": "2026-05-17",
+   "search_call": "54aebeb68569",
+   "tavily_published": "2026-05-17",
+   "search_request_id": "eb43973b-4161-43e3-99c5-d00188a570fd",
+   "search_response_sha256": "97e2e9556864eaf1ef0889e6da8635937f1949236400fc3546fcfcb3e193830c",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "bcb0a624c117",
+   "extract_request_id": "666910bc-8e9e-423e-ad2f-983c21dc51ba",
+   "extract_response_sha256": "464601a64ab946255d013968baea19c198759b50ab84c8583799dafa2ca7a3c9",
+   "page_sha256": "07da941ccbd87c14a6099d2d1559b61a4763d5e9b77f1cbf25c42c346c3ecafa",
+   "page_file": "pages/07da941ccbd87c14a6099d2d1559b61a4763d5e9b77f1cbf25c42c346c3ecafa.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.etvbharat.com/hi/state/learn-how-your-roof-can-become-a-source-of-big-income-solar-rooftop-project-ups26050901671",
+   "domain": "etvbharat.com",
+   "title": "UP में अब उपभोक्ता भी बेच सकते हैं बिजली ! सोलर रूफ टॉप बना कमाई का शानदार ज़रिया",
+   "lang": "hi",
+   "published": "2026-05-09",
+   "search_call": "54aebeb68569",
+   "tavily_published": "2026-05-09",
+   "search_request_id": "eb43973b-4161-43e3-99c5-d00188a570fd",
+   "search_response_sha256": "97e2e9556864eaf1ef0889e6da8635937f1949236400fc3546fcfcb3e193830c",
+   "status": "rejected",
+   "reason": "effective date 2023-10-01 is not in 2026-05",
+   "claims": [
+    {
+     "line": "पॉवर एक्सचेंज ऐप पर न्यूनतम आप 4 रुपए प्रति यूनिट बिजली बेच सकेंगे.",
+     "price": 4,
+     "unit": "rupees per unit",
+     "region": "Uttar Pradesh",
+     "seller": "Uttar Pradesh Power Corporation Limited (UPPCL) and UPERC",
+     "old_price": 2,
+     "new_price": 4,
+     "pct_change": null,
+     "effective_date": "2023-10-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2023-10-01 is not in 2026-05",
+     "price_type": "retail",
+     "change": 1.0,
+     "base_price": null,
+     "context": "# UP में अब उपभोक्ता भी बेच सकते हैं बिजली ! सोलर रूफ टॉप बना कमाई का शानदार ज़रिया \n **कैसे संभव होगी ज्यादा कमाई:** पॉवर एक्सचेंज के जनरल मैनेजर अंकित ने बताया कि यदि आपके घर पर सोलर पैनल लगा है. आपने जो एक्स्ट्रा बिजली बनाई, वह आपने ग्रिड को दे दी. ग्रिड आपको 2 से 3 रुपए प्रति यूनिट की दर से भुगतान करता है. \n अब हमारे ऐप पर बिजली बनाने यानी सोलर पैनल लगाने वाले उपभोक्ता और कमर्शियल बिजली खरीदने वाले दोनों होंगे. सोलर पैनल वाले ऐप पर कहेंगे कि हम 6 रुपए यूनिट बेच रहे हैं, तो कमर्शियल वाले को भी फायदा होगा और वह 12 की जगह 6 रुपए में ही आपकी बिजली खरीद लेगा.",
+     "gloss": "On the Power Exchange app, you can sell electricity at a minimum rate of Rs 4 per unit.",
+     "kind": "electricity",
+     "cpi": "04.5.1.0.2.01",
+     "role": "moves",
+     "states": [
+      "uttar pradesh"
+     ]
+    },
+    {
+     "line": "जैसे किसी की दुकान है, कॉमर्शियल प्लेस है, कंपनी या छोटा उद्योग है, उन्हें डिस्कॉम से 12 रुपए प्रति यूनिट बिजली खरीदनी होती है.",
+     "price": 12,
+     "unit": "rupees per unit",
+     "region": "Uttar Pradesh",
+     "seller": "Uttar Pradesh Power Corporation Limited (UPPCL) and UPERC",
+     "old_price": 12,
+     "new_price": 12,
+     "pct_change": null,
+     "effective_date": "2023-10-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2023-10-01 is not in 2026-05",
+     "price_type": "commercial",
+     "change": 0.0,
+     "base_price": null,
+     "context": "# UP में अब उपभोक्ता भी बेच सकते हैं बिजली ! सोलर रूफ टॉप बना कमाई का शानदार ज़रिया \n **कैसे संभव होगी ज्यादा कमाई:** पॉवर एक्सचेंज के जनरल मैनेजर अंकित ने बताया कि यदि आपके घर पर सोलर पैनल लगा है. आपने जो एक्स्ट्रा बिजली बनाई, वह आपने ग्रिड को दे दी. ग्रिड आपको 2 से 3 रुपए प्रति यूनिट की दर से भुगतान करता है. \n अब हमारे ऐप पर बिजली बनाने यानी सोलर पैनल लगाने वाले उपभोक्ता और कमर्शियल बिजली खरीदने वाले दोनों होंगे. सोलर पैनल वाले ऐप पर कहेंगे कि हम 6 रुपए यूनिट बेच रहे हैं, तो कमर्शियल वाले को भी फायदा होगा और वह 12 की जगह 6 रुपए में ही आपकी बिजली खरीद लेगा.",
+     "gloss": "As for someone who has a shop, a commercial place, a company or a small industry, they have to buy electricity from DISCOM at 12 rupees per unit.",
+     "kind": "electricity",
+     "cpi": "04.5.1.0.2.01",
+     "role": "moves",
+     "states": [
+      "uttar pradesh"
+     ]
+    }
+   ],
+   "extract_call": "bcb0a624c117",
+   "extract_request_id": "666910bc-8e9e-423e-ad2f-983c21dc51ba",
+   "extract_response_sha256": "464601a64ab946255d013968baea19c198759b50ab84c8583799dafa2ca7a3c9",
+   "page_sha256": "d52fc998705566871852fffe530189ed412de871f7b99283e63b3a364ee96998",
+   "page_file": "pages/d52fc998705566871852fffe530189ed412de871f7b99283e63b3a364ee96998.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-09",
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.livehindustan.com/business/fixed-charge-in-electricity-bill-will-be-increased-significantly-cea-proposed-major-electricity-tariff-structure-201778999734198.html",
+   "domain": "livehindustan.com",
+   "title": "बिजली उपभोक्ताओं को बड़ा झटका! सरकार बढ़ाने जा रही महीने का इलेक्ट्रिक बिल? इस नए प्रस्ताव से मचा हड़कंप, Business  Hindi News - Hindustan",
+   "lang": "hi",
+   "published": "2026-05-17",
+   "search_call": "54aebeb68569",
+   "tavily_published": "2026-05-17",
+   "search_request_id": "eb43973b-4161-43e3-99c5-d00188a570fd",
+   "search_response_sha256": "97e2e9556864eaf1ef0889e6da8635937f1949236400fc3546fcfcb3e193830c",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "bcb0a624c117",
+   "extract_request_id": "666910bc-8e9e-423e-ad2f-983c21dc51ba",
+   "extract_response_sha256": "464601a64ab946255d013968baea19c198759b50ab84c8583799dafa2ca7a3c9",
+   "page_sha256": "613a6fa0c43028ac1e0f75783afdf4a86ff404d768bd6c72b8a532f2dd137f65",
+   "page_file": "pages/613a6fa0c43028ac1e0f75783afdf4a86ff404d768bd6c72b8a532f2dd137f65.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.vietnam.vn/hi/giai-bai-toan-tien-dien-mua-nong-voi-dieu-hoa-ai",
+   "domain": "vietnam.vn",
+   "title": "एआई एयर कंडीशनर की मदद से गर्मी के मौसम में अपने बिजली के बिल की समस्या का समाधान करें।",
+   "lang": "hi",
+   "published": null,
+   "search_call": "54aebeb68569",
+   "tavily_published": null,
+   "search_request_id": "eb43973b-4161-43e3-99c5-d00188a570fd",
+   "search_response_sha256": "97e2e9556864eaf1ef0889e6da8635937f1949236400fc3546fcfcb3e193830c",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.abplive.com/news/india/tamil-nadu-new-vijay-government-swings-action-immediately-upon-assuming-cm-chair-free-electricity-up-to-200-units-3127860",
+   "domain": "abplive.com",
+   "title": "CM की कुर्सी संभालते ही एक्शन में विजय, 200 यूनिट तक बिजली फ्री; राज्य पर कितना बढ़ेगा बोझ? | Tamil Nadu New Vijay Government Swings Action Immediately Upon Assuming CM Chair Free Electricity Up to 200 Units",
+   "lang": "hi",
+   "published": "2026-05-10",
+   "search_call": "54aebeb68569",
+   "tavily_published": "2026-05-10",
+   "search_request_id": "eb43973b-4161-43e3-99c5-d00188a570fd",
+   "search_response_sha256": "97e2e9556864eaf1ef0889e6da8635937f1949236400fc3546fcfcb3e193830c",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "bcb0a624c117",
+   "extract_request_id": "666910bc-8e9e-423e-ad2f-983c21dc51ba",
+   "extract_response_sha256": "464601a64ab946255d013968baea19c198759b50ab84c8583799dafa2ca7a3c9",
+   "page_sha256": "56f3e9b97b1095f99af3934eeab28d3ed4e7edb0d7ac17f08abbf2758c0260f1",
+   "page_file": "pages/56f3e9b97b1095f99af3934eeab28d3ed4e7edb0d7ac17f08abbf2758c0260f1.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-10",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.etvbharat.com/hi/bharat/kumheda-village-ghaziabad-200-households-have-installed-solar-systems-generating-60000-units-of-electricity-every-month-dln26051403149",
+   "domain": "etvbharat.com",
+   "title": "गाजियाबाद का कुम्हेड़ा गांव बना 'सोलर ऊर्जा' का हब, हर महीने पैदा हो रही 60 हजार यूनिट बिजली, बिल घटकर हुआ सिर्फ 200 रुपये!",
+   "lang": "hi",
+   "published": "2026-05-14",
+   "search_call": "54aebeb68569",
+   "tavily_published": "2026-05-14",
+   "search_request_id": "eb43973b-4161-43e3-99c5-d00188a570fd",
+   "search_response_sha256": "97e2e9556864eaf1ef0889e6da8635937f1949236400fc3546fcfcb3e193830c",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "e778123cc3db",
+   "extract_request_id": "c71e596a-9bb6-4656-b34e-2116d3d062a4",
+   "extract_response_sha256": "011d1a7c8f90609566a619eb30c05a3aa86784dc30024d098a8f21ec2286d42c",
+   "page_sha256": "0454ff79d89e828a57296cbd7f1926ecf009ec8a7bcbc18e7e0f9360b5843bd9",
+   "page_file": "pages/0454ff79d89e828a57296cbd7f1926ecf009ec8a7bcbc18e7e0f9360b5843bd9.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-14",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://timesofindia.indiatimes.com/videos/news/supreme-court-upholds-election-commissions-power-to-conduct-special-roll-revision-drive-watch/videoshow/131345678.cms",
+   "domain": "timesofindia.indiatimes.com",
+   "title": "Supreme Court Upholds Election Commission's Power To ...",
+   "lang": "hi",
+   "published": null,
+   "search_call": "54aebeb68569",
+   "tavily_published": null,
+   "search_request_id": "eb43973b-4161-43e3-99c5-d00188a570fd",
+   "search_response_sha256": "97e2e9556864eaf1ef0889e6da8635937f1949236400fc3546fcfcb3e193830c",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.timesofisrael.com/milking-it-new-figures-show-israelis-consuming-more-dairy-products-and-alternatives/",
+   "domain": "timesofisrael.com",
+   "title": "Milking it: New figures show Israelis consuming more dairy products and alternatives - The Times of Israel",
+   "lang": "hi",
+   "published": "2026-05-17",
+   "search_call": "d1f0c6e9a461",
+   "tavily_published": "2026-05-17",
+   "search_request_id": "f09d1d67-42a1-4ad3-8810-b487ed2ad53f",
+   "search_response_sha256": "b4b5ae47c0f81f19d89fe50b934f42d3d3a17f2e9a980273e8aa0daa2b016fe7",
+   "status": "rejected",
+   "reason": "Tavily Extract could not fetch the page",
+   "claims": [
+    {
+     "line": "The average Israeli consumed around 157 liters (41.5 gallons) of locally produced milk and dairy products last year, according to figures for 2025 published Sunday by the Agriculture Ministry in the run-up to the Shavuot holiday.",
+     "price": null,
+     "unit": "per liter",
+     "region": "Israel",
+     "seller": "Agriculture Ministry",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2025-05-18"
+    }
+   ],
+   "extract_call": "e778123cc3db",
+   "extract_request_id": "c71e596a-9bb6-4656-b34e-2116d3d062a4",
+   "extract_response_sha256": "011d1a7c8f90609566a619eb30c05a3aa86784dc30024d098a8f21ec2286d42c"
+  },
+  {
+   "url": "https://nypost.com/2026/05/12/lifestyle/prices-for-6-grocery-store-staples-are-increasing-right-now/",
+   "domain": "nypost.com",
+   "title": "Prices for 6 grocery store staples are increasing right now as affordability spirals - New York Post",
+   "lang": "hi",
+   "published": "2026-05-12",
+   "search_call": "d1f0c6e9a461",
+   "tavily_published": "2026-05-12",
+   "search_request_id": "f09d1d67-42a1-4ad3-8810-b487ed2ad53f",
+   "search_response_sha256": "b4b5ae47c0f81f19d89fe50b934f42d3d3a17f2e9a980273e8aa0daa2b016fe7",
+   "status": "rejected",
+   "reason": "Nano could not read this result (model returned no JSON object)",
+   "claims": []
+  },
+  {
+   "url": "https://www.greenwichtime.com/news/world/article/india-raises-fuel-prices-as-global-energy-crisis-22260399.php",
+   "domain": "greenwichtime.com",
+   "title": "India raises fuel prices as global energy crisis adds pressure on economy - Greenwich Time",
+   "lang": "hi",
+   "published": "2026-05-15",
+   "search_call": "d1f0c6e9a461",
+   "tavily_published": "2026-05-15",
+   "search_request_id": "f09d1d67-42a1-4ad3-8810-b487ed2ad53f",
+   "search_response_sha256": "b4b5ae47c0f81f19d89fe50b934f42d3d3a17f2e9a980273e8aa0daa2b016fe7",
+   "status": "rejected",
+   "reason": "the change cannot be computed (no old and new price, % or official base)",
+   "claims": [
+    {
+     "line": "In New Delhi, gasoline prices rose to 97.77 rupees ($1.17) a liter, while diesel climbed to 90.67 rupees ($1.09) a liter.",
+     "price": 97.77,
+     "unit": "rupees/liter",
+     "region": "New Delhi",
+     "seller": "India",
+     "old_price": null,
+     "new_price": 97.77,
+     "pct_change": null,
+     "effective_date": "2026-05-15",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the change cannot be computed (no old and new price, % or official base)",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# India raises fuel prices as global energy crisis adds pressure on economy \n ![](https://cdn-channels-pixel.ex.co/events/0012000001fxZm9AAE?integrationType=DEFAULT&template=design%2Farticle%2Fplatypus_two_column.tpl) \n Advertisement",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "In New Delhi, gasoline prices rose to 97.77 rupees ($1.17) a liter, while diesel climbed to 90.67 rupees ($1.09) a liter.",
+     "price": 90.67,
+     "unit": "rupees/liter",
+     "region": "New Delhi",
+     "seller": "India",
+     "old_price": null,
+     "new_price": 90.67,
+     "pct_change": null,
+     "effective_date": "2026-05-15",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "the change cannot be computed (no old and new price, % or official base)",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# India raises fuel prices as global energy crisis adds pressure on economy \n ![](https://cdn-channels-pixel.ex.co/events/0012000001fxZm9AAE?integrationType=DEFAULT&template=design%2Farticle%2Fplatypus_two_column.tpl) \n Advertisement",
+     "gloss": "",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "nct of delhi"
+     ]
+    }
+   ],
+   "extract_call": "e778123cc3db",
+   "extract_request_id": "c71e596a-9bb6-4656-b34e-2116d3d062a4",
+   "extract_response_sha256": "011d1a7c8f90609566a619eb30c05a3aa86784dc30024d098a8f21ec2286d42c",
+   "page_sha256": "1bb7a3d8c4e3b436c2747aaf42610dce0bd3c8b1b8c8e819d0cdcdd182dcfd97",
+   "page_file": "pages/1bb7a3d8c4e3b436c2747aaf42610dce0bd3c8b1b8c8e819d0cdcdd182dcfd97.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://mezha.net/eng/bukvy/abe12517_diesel_prices_rose/",
+   "domain": "mezha.net",
+   "title": "Diesel prices rose above 87 UAH per liter in April, autogas also climbed - mezha.net",
+   "lang": "hi",
+   "published": "2026-05-04",
+   "search_call": "d1f0c6e9a461",
+   "tavily_published": "2026-05-04",
+   "search_request_id": "f09d1d67-42a1-4ad3-8810-b487ed2ad53f",
+   "search_response_sha256": "b4b5ae47c0f81f19d89fe50b934f42d3d3a17f2e9a980273e8aa0daa2b016fe7",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "e778123cc3db",
+   "extract_request_id": "c71e596a-9bb6-4656-b34e-2116d3d062a4",
+   "extract_response_sha256": "011d1a7c8f90609566a619eb30c05a3aa86784dc30024d098a8f21ec2286d42c",
+   "page_sha256": "3b295eed0f93adf200cf78a3de192a9bfba10637b1afe26c6fc0d3a6151650d7",
+   "page_file": "pages/3b295eed0f93adf200cf78a3de192a9bfba10637b1afe26c6fc0d3a6151650d7.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.abplive.com/utility-news/metro-will-now-run-on-water-preparations-are-underway-to-launch-it-in-18-cities-across-the-country-3132300",
+   "domain": "abplive.com",
+   "title": "Metro News: पटरी नहीं अब पानी पर दौड़ेगी मेट्रो, देश के 18 शहरों में शुरू करने की तैयारी, कितना होगा किराया | metro will now run on water preparations are underway to launch it in 18 cities across the country",
+   "lang": "hi",
+   "published": "2026-05-19",
+   "search_call": "a929b0b409cd",
+   "tavily_published": "2026-05-19",
+   "search_request_id": "554d1a8f-4d2e-4099-9cbe-1172859b5037",
+   "search_response_sha256": "8b790d92a52b445e449ff96843454a64213c1ce03559abe8161dbe615d4c1389",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "तो वहीं, दूसरी तरफ एक हफ्ते का पास बनवाने के लिए 180 रुपये का भुगतान करना पड़ सकता है.",
+     "price": 40,
+     "unit": "rupees",
+     "region": "Kerala",
+     "seller": "Kerala government",
+     "old_price": null,
+     "new_price": 40,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# Metro News: पटरी नहीं अब पानी पर दौड़ेगी मेट्रो, देश के 18 शहरों में शुरू करने की तैयारी, कितना होगा किराया \n **कितना होगा वाटर मेट्रो का किराया और क्या हैं सुविधाएं?** \n तो वहीं, वाटर मेट्रो में यात्रियों को कई तरह की सुविधाएं भी दी जाएंगी. जिसमें फ्री वाई-फाई, मोबाइल चार्जिंग पॉइंट, सीसीटीवी कैमरे और लाइफ जैकेट जैसी सुविधाएं मिलेंगी. इसके अलावा आप खुबसूरत नज़ारों का जमकर आनंद भी ले सकते हैं.",
+     "gloss": "On the other hand, it may cost 180 rupees to get a one-week pass.",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": [
+      "kerala"
+     ]
+    },
+    {
+     "line": "तो वहीं, दूसरी तरफ एक हफ्ते का पास बनवाने के लिए 180 रुपये का भुगतान करना पड़ सकता है.",
+     "price": 180,
+     "unit": "rupees",
+     "region": "Kerala",
+     "seller": "Kerala government",
+     "old_price": null,
+     "new_price": 180,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the line is not about this item",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# Metro News: पटरी नहीं अब पानी पर दौड़ेगी मेट्रो, देश के 18 शहरों में शुरू करने की तैयारी, कितना होगा किराया \n **कितना होगा वाटर मेट्रो का किराया और क्या हैं सुविधाएं?** \n तो वहीं, वाटर मेट्रो में यात्रियों को कई तरह की सुविधाएं भी दी जाएंगी. जिसमें फ्री वाई-फाई, मोबाइल चार्जिंग पॉइंट, सीसीटीवी कैमरे और लाइफ जैकेट जैसी सुविधाएं मिलेंगी. इसके अलावा आप खुबसूरत नज़ारों का जमकर आनंद भी ले सकते हैं.",
+     "gloss": "On the other hand, it may cost 180 rupees to get a one-week pass.",
+     "kind": null,
+     "cpi": "",
+     "role": "",
+     "states": [
+      "kerala"
+     ]
+    }
+   ],
+   "extract_call": "e778123cc3db",
+   "extract_request_id": "c71e596a-9bb6-4656-b34e-2116d3d062a4",
+   "extract_response_sha256": "011d1a7c8f90609566a619eb30c05a3aa86784dc30024d098a8f21ec2286d42c",
+   "page_sha256": "ae743b7f3841b634c30a4ad8a83e5cf6839f3ddb8bf64d7d1314ad33476c2249",
+   "page_file": "pages/ae743b7f3841b634c30a4ad8a83e5cf6839f3ddb8bf64d7d1314ad33476c2249.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-19",
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.etvbharat.com/hi/bharat/indias-first-hydrogen-bus-service-started-in-delhi-know-route-timings-and-fare-hin26051503996",
+   "domain": "etvbharat.com",
+   "title": "दिल्ली में भारत की पहली हाइड्रोजन बस सेवा शुरू, किराया 10 और 15 रुपये",
+   "lang": "hi",
+   "published": "2026-05-15",
+   "search_call": "a929b0b409cd",
+   "tavily_published": "2026-05-15",
+   "search_request_id": "554d1a8f-4d2e-4099-9cbe-1172859b5037",
+   "search_response_sha256": "8b790d92a52b445e449ff96843454a64213c1ce03559abe8161dbe615d4c1389",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "567022fde2af",
+   "extract_request_id": "67030fbd-d072-4a17-a617-7f1564962172",
+   "extract_response_sha256": "2a8dd1fb1ccfc53ec0ec8a6a778d025ce70c1e48ceb416acd123f9f867f8b9e3",
+   "page_sha256": "563b2ac19a80c7554adccd1aa29c00811faf3ccb11ed2a9b7cf2a05e299aaf62",
+   "page_file": "pages/563b2ac19a80c7554adccd1aa29c00811faf3ccb11ed2a9b7cf2a05e299aaf62.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-15",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.abplive.com/gk/does-pakistan-have-a-metro-like-india-here-s-the-fare-and-full-comparison-3121609",
+   "domain": "abplive.com",
+   "title": "Pakistan Metro: क्या भारत की तरह पाकिस्तान में भी है मेट्रो, जानें वहां कितना लगता है किराया | Does Pakistan Have a Metro Like India Here’s the Fare and Full Comparison",
+   "lang": "hi",
+   "published": "2026-04-28",
+   "search_call": "a929b0b409cd",
+   "tavily_published": "2026-04-28",
+   "search_request_id": "554d1a8f-4d2e-4099-9cbe-1172859b5037",
+   "search_response_sha256": "8b790d92a52b445e449ff96843454a64213c1ce03559abe8161dbe615d4c1389",
+   "status": "rejected",
+   "reason": "the price is not in the cited line",
+   "claims": [
+    {
+     "line": "रूट नेटवर्क और कवरेज [...] पाकिस्तान की पहली मेट्रो लाहौर में 25 अक्टूबर 2020 को शुरू हुई।",
+     "price": 45,
+     "unit": "PKR",
+     "region": "Lahore",
+     "seller": "Pakistan Metro Authority",
+     "old_price": 25,
+     "new_price": 45,
+     "pct_change": 80,
+     "effective_date": "2020-10-25",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the price is not in the cited line",
+     "price_type": "retail",
+     "change": 0.8,
+     "base_price": null,
+     "context": "[हिंदी](https://www.abplive.com \"हिंदी\")[English](https://news.abplive.com \"English\")[मराठी](https://marathi.abplive.com \"मराठी\")[ਪੰਜਾਬੀ](https://punjabi.abplive.com \"ਪੰਜਾਬੀ\")[বাংলা](https://bengali.abplive.com \"বাংলা\")[ગુજરાતી](https://gujarati.abplive.com \"ગુજરાતી\")[நாடு](https://tamil.abplive.com \"நாடு\")[దేశం](https://telugu.abplive.com \"దేశం\")",
+     "gloss": "The root network and coverage [...] Lahore's first metro was launched on 25 October 2020.",
+     "kind": "metro",
+     "cpi": "",
+     "role": "context",
+     "states": []
+    }
+   ],
+   "extract_call": "567022fde2af",
+   "extract_request_id": "67030fbd-d072-4a17-a617-7f1564962172",
+   "extract_response_sha256": "2a8dd1fb1ccfc53ec0ec8a6a778d025ce70c1e48ceb416acd123f9f867f8b9e3",
+   "page_sha256": "aa039a758e48f900b3244de7f988c68d2d0118daccc306c0f08aaa5c4a2f22ea",
+   "page_file": "pages/aa039a758e48f900b3244de7f988c68d2d0118daccc306c0f08aaa5c4a2f22ea.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-04-28",
+   "date_flag": ""
+  },
+  {
+   "url": "https://www.livehindustan.com/ncr/buses-to-kaushambi-will-depart-from-anand-vihar-depot-fares-will-also-increase-201778632684414.html",
+   "domain": "livehindustan.com",
+   "title": "आनंद विहार डिपो से चलेंगी कौशांबी की बसें, किराये में भी बढ़ोतरी होगी",
+   "lang": "hi",
+   "published": null,
+   "search_call": "a929b0b409cd",
+   "tavily_published": null,
+   "search_request_id": "554d1a8f-4d2e-4099-9cbe-1172859b5037",
+   "search_response_sha256": "8b790d92a52b445e449ff96843454a64213c1ce03559abe8161dbe615d4c1389",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://ndtv.in/utility-news/delhi-metro-hydrogen-shuttle-bus-service-start-at-central-vista-starting-may-15-known-hydrogen-shuttle-bus-route-timings-and-fare-11495269",
+   "domain": "ndtv.in",
+   "title": "दिल्ली में 15 मई से चलेगी हाइड्रोजन शटल बस, हफ्ते में 5 दिन मिलेगी सेवा, जानिए रूट, टिकट और टाइमिंग | Delhi Metro hydrogen shuttle bus service start at Central Vista starting May 15 known hydrogen shuttle bus route timings and fare - NDTV India",
+   "lang": "hi",
+   "published": "2026-05-14",
+   "search_call": "a929b0b409cd",
+   "tavily_published": "2026-05-14",
+   "search_request_id": "554d1a8f-4d2e-4099-9cbe-1172859b5037",
+   "search_response_sha256": "8b790d92a52b445e449ff96843454a64213c1ce03559abe8161dbe615d4c1389",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "567022fde2af",
+   "extract_request_id": "67030fbd-d072-4a17-a617-7f1564962172",
+   "extract_response_sha256": "2a8dd1fb1ccfc53ec0ec8a6a778d025ce70c1e48ceb416acd123f9f867f8b9e3",
+   "page_sha256": "fb824b44dcd36e291bf3cf04e87c96a2227b2df5cace2e1467386e54d9dc8be6",
+   "page_file": "pages/fb824b44dcd36e291bf3cf04e87c96a2227b2df5cace2e1467386e54d9dc8be6.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-14",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.livehindustan.com/ncr/delhi-metro-to-run-hydrogen-powered-shuttle-bus-service-from-15th-may-in-central-vista-201778760996677.html",
+   "domain": "livehindustan.com",
+   "title": "दिल्लीवासियों को बड़ी सौगात, शुक्रवार से दौड़ेंगी हाइड्रोजन बसें; कब चलेंगी, क्या होगा रूट और कितना होगा किराया?, Ncr  Hindi News - Hindustan",
+   "lang": "hi",
+   "published": "2026-05-14",
+   "search_call": "a929b0b409cd",
+   "tavily_published": "2026-05-14",
+   "search_request_id": "554d1a8f-4d2e-4099-9cbe-1172859b5037",
+   "search_response_sha256": "8b790d92a52b445e449ff96843454a64213c1ce03559abe8161dbe615d4c1389",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "567022fde2af",
+   "extract_request_id": "67030fbd-d072-4a17-a617-7f1564962172",
+   "extract_response_sha256": "2a8dd1fb1ccfc53ec0ec8a6a778d025ce70c1e48ceb416acd123f9f867f8b9e3",
+   "page_sha256": "2239b43881b092ef62b8eb42672746302c7854904e13a4d147b8b67cd4d8308b",
+   "page_file": "pages/2239b43881b092ef62b8eb42672746302c7854904e13a4d147b8b67cd4d8308b.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://navbharattimes.indiatimes.com/metro/mumbai/other-news/mumbai-best-buses-ticket-available-through-google-pay-phone-pay-whatsapp-via-qr-code-ondc-services-active-know-all/articleshow/130423471.cms",
+   "domain": "navbharattimes.indiatimes.com",
+   "title": "Mumbai Best Bus Ticket News,मुंबई में BEST बस टिकट डिजिटल, अब गूगलपे, पेटीएम और व्हाटसएप से QR कोड स्कैन करके करिए बुक - mumbai best buses ticket available through google pay phone pay whatsapp via qr code ondc services active know all - Other news News - Navbharat Times",
+   "lang": "hi",
+   "published": "2026-04-21",
+   "search_call": "a929b0b409cd",
+   "tavily_published": "2026-04-21",
+   "search_request_id": "554d1a8f-4d2e-4099-9cbe-1172859b5037",
+   "search_response_sha256": "8b790d92a52b445e449ff96843454a64213c1ce03559abe8161dbe615d4c1389",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "567022fde2af",
+   "extract_request_id": "67030fbd-d072-4a17-a617-7f1564962172",
+   "extract_response_sha256": "2a8dd1fb1ccfc53ec0ec8a6a778d025ce70c1e48ceb416acd123f9f867f8b9e3",
+   "page_sha256": "3bd074e7bd67b140f29e7021b39f164d083084623e67cc15944f7ef9f705ca06",
+   "page_file": "pages/3bd074e7bd67b140f29e7021b39f164d083084623e67cc15944f7ef9f705ca06.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.amarujala.com/delhi-ncr/operations-of-a-hydrogen-powered-bus-have-begun-in-delhi-2026-05-15",
+   "domain": "amarujala.com",
+   "title": "Hydrogen Bus In Delhi:पहली बार दिल्ली में हाइड्रोजन बसें, जानें कहां से कहां तक चलेंगी, कितना होगा किराया? - Operations Of A Hydrogen-powered Bus Have Begun In Delhi - Amar Ujala Hindi News Live",
+   "lang": "hi",
+   "published": "2026-05-15",
+   "search_call": "a929b0b409cd",
+   "tavily_published": null,
+   "search_request_id": "554d1a8f-4d2e-4099-9cbe-1172859b5037",
+   "search_response_sha256": "8b790d92a52b445e449ff96843454a64213c1ce03559abe8161dbe615d4c1389",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "9333b23a4025",
+   "extract_request_id": "3650fb76-b75a-4df7-a224-c3e633d42bee",
+   "extract_response_sha256": "c8266b965d520b4def86a6d155a366b4d613be80701cf693161bd241eb8bc283",
+   "page_sha256": "491cbd7c3ccf8f2987cef3c6bef34ba9d90f34aeabcfea244706c4462a040b1a",
+   "page_file": "pages/491cbd7c3ccf8f2987cef3c6bef34ba9d90f34aeabcfea244706c4462a040b1a.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-15",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.jagran.com/uttar-pradesh/noida-noida-ecity-bus-fares-routes-daily-pass-50-minimum-10-40238007.html",
+   "domain": "jagran.com",
+   "title": "Noida E- City Bus: एप से होगी टिकट बुकिंग, 50 रुपये डे-पास के साथ जल्द शुरू होंगी 100 ई-बसें\n - noida ecity bus fares routes daily pass 50 minimum 10",
+   "lang": "hi",
+   "published": "2026-05-13",
+   "search_call": "a929b0b409cd",
+   "tavily_published": "2026-05-13",
+   "search_request_id": "554d1a8f-4d2e-4099-9cbe-1172859b5037",
+   "search_response_sha256": "8b790d92a52b445e449ff96843454a64213c1ce03559abe8161dbe615d4c1389",
+   "status": "rejected",
+   "reason": "effective date 2023-10-01 is not in 2026-05",
+   "claims": [
+    {
+     "line": "Noida E- City Bus: एप से होगी टिकट बुकिंग, 50 रुपये डे-पास के साथ जल्द शुरू होंगी 100 ई-बसें",
+     "price": 50,
+     "unit": "rupees",
+     "region": "Noida",
+     "seller": "Noida Authority",
+     "old_price": null,
+     "new_price": 50,
+     "pct_change": null,
+     "effective_date": "2023-10-01",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "effective date 2023-10-01 is not in 2026-05",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# Noida E- City Bus: एप से होगी टिकट बुकिंग, 50 रुपये डे-पास के साथ जल्द शुरू होंगी 100 ई-बसें \n नोएडा में ई-सिटी बस सेवा शुरू हो रही है, जिसमें न्यूनतम 10 रुपये और दिनभर के लिए 50 रुपये का ...और पढ़ें",
+     "gloss": "Noida E- City Bus: Ticket booking will be done via app, and 100 e-buses with a 50 rupee day pass will start soon.",
+     "kind": "bus",
+     "cpi": "07.3.1.2.2.01",
+     "role": "moves",
+     "states": [
+      "uttar pradesh"
+     ]
+    }
+   ],
+   "extract_call": "9333b23a4025",
+   "extract_request_id": "3650fb76-b75a-4df7-a224-c3e633d42bee",
+   "extract_response_sha256": "c8266b965d520b4def86a6d155a366b4d613be80701cf693161bd241eb8bc283",
+   "page_sha256": "fbb3b58e510b9b50a13f4981e4f419aa8190b64391ca2a557dff6a1659e182e5",
+   "page_file": "pages/fbb3b58e510b9b50a13f4981e4f419aa8190b64391ca2a557dff6a1659e182e5.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": ""
+  },
+  {
+   "url": "https://youtu.be/gzaJAl-JePA?t=3956",
+   "domain": "youtu.be",
+   "title": "( Short's Live ) One Sub One pushup ★ STOP SPAMMING ★ SLEEP STREAM LATER 🍾🌠",
+   "lang": "hi",
+   "published": null,
+   "search_call": "a929b0b409cd",
+   "tavily_published": null,
+   "search_request_id": "554d1a8f-4d2e-4099-9cbe-1172859b5037",
+   "search_response_sha256": "8b790d92a52b445e449ff96843454a64213c1ce03559abe8161dbe615d4c1389",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://upstox.com/hindi/news/business-news/latest-updates/fuel-price-hike-timeline-petrol-diesel-cng-lpg-rates-may-2026-india/article-194245",
+   "domain": "upstox.com",
+   "title": "ईंधन के दामों में लगी भीषण आग, 10 दिनों में पेट्रोल-डीजल से लेकर CNG-LPG तक सब हुआ महंगा, देखें पूरी लिस्ट",
+   "lang": "hi",
+   "published": null,
+   "search_call": "5b44f819997b",
+   "tavily_published": null,
+   "search_request_id": "6e275d67-1844-4a91-bf75-00b0edf3a4e2",
+   "search_response_sha256": "f1a3ca56d47984cdb34fa84e223059ce65ef6bd4122f7f4a513600f22cc55311",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.aajtak.in/business/news/story/petrol-diesel-lpg-price-likely-to-hike-by-government-check-update-tutd-dskc-2539352-2026-05-01",
+   "domain": "aajtak.in",
+   "title": "4 से 5 रुपये तक बढ़ सकते हैं पेट्रोल-डीजल के दाम, रसोई गैस भी हो सकती है महंगी - Petrol Diesel LPG Price Likely to Hike By Government Check Update tutd - AajTak",
+   "lang": "hi",
+   "published": "2026-05-01",
+   "search_call": "5b44f819997b",
+   "tavily_published": "2026-05-01",
+   "search_request_id": "6e275d67-1844-4a91-bf75-00b0edf3a4e2",
+   "search_response_sha256": "f1a3ca56d47984cdb34fa84e223059ce65ef6bd4122f7f4a513600f22cc55311",
+   "status": "rejected",
+   "reason": "Super gave no price for this line",
+   "claims": [
+    {
+     "line": "यह खबर ऐसे समय में आई है, जब आज यानी 1 मई 2026 से कमर्शियल [एलपीजी](https://www.aajtak.in/topic/lpg) के दाम में 993 रुपये की बढ़ोतरी की गई है. अब ईंधन और रसोई गैस की कीमतें बढ़ाने पर विचार किया जा रहा है.",
+     "price": null,
+     "unit": null,
+     "region": "India",
+     "seller": "Government/Oil Companies",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-05-01",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "commercial",
+     "change": null,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n कच्‍चे तेल के दाम में लगातार बढ़ोतरी के कारण सरकार पेट्रोल-डीजल और LPG रसोई गैस सिलेंडर के दाम बढ़ाने पर विचार कर रही है. सूत्रों का कहना है कि पेट्रोल और डीजल की कीमतें ₹4-5 प्रति लीटर तक बढ़ानी पड़ सकती हैं. वहीं घरेलू LPG की कीमत ₹40-50 प्रति सिलेंडर तक बढ़ सकती हैं. \n सरकार के शीर्ष अधिकारी सूत्रों का कहना है कि सरकार एलपीजी गैस के दाम और पेट्रोल-डीजल में बढ़ोतरी करके तेल कंपनियों और सरकारी खजाने पर से बोझ को कम करना चाहती है, क्‍योंकि ईरान-अमेरि‍का तनाव के कारण कच्‍चे तेल की कीमतें लगातार ऊपर बनी हुई हैं.",
+     "gloss": "The news comes at a time when, as of today, May 1, 2026, a hike of 993 rupees has been applied to the price of commercial LPG. Now, there is consideration of raising the prices of fuel and cooking gas.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": []
+    },
+    {
+     "line": "## आज कमर्शियल सिलेंडर के दाम में बढ़ोतरी हुई है. वहीं सरकार अब पेट्रोल-डीजल और रसोई गैस के दाम बढ़ाने पर विचार कर रही है. पेट्रोल-डीजल ₹4-5 प्रति लीटर महंगा हो सकता है.",
+     "price": null,
+     "unit": "₹4-5 per litre",
+     "region": "India",
+     "seller": "Government considering increase",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "commercial",
+     "change": null,
+     "base_price": null,
+     "context": "#### NOTIFICATIONS \n # 4 से 5 रुपये तक बढ़ सकते हैं पेट्रोल-डीजल के दाम, रसोई गैस भी हो सकती है महंगी \n Advertisement",
+     "gloss": "There has been an increase in the price of commercial cylinders today. Meanwhile, the government is considering raising the prices of petrol, diesel, and cooking gas. Petrol and diesel could become ₹4-5 more expensive per litre.",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": []
+    }
+   ],
+   "extract_call": "9333b23a4025",
+   "extract_request_id": "3650fb76-b75a-4df7-a224-c3e633d42bee",
+   "extract_response_sha256": "c8266b965d520b4def86a6d155a366b4d613be80701cf693161bd241eb8bc283",
+   "page_sha256": "af5b004fa17300e23af4dd49a70a3832ee36eaf86fda97239a87e13bddd63f67",
+   "page_file": "pages/af5b004fa17300e23af4dd49a70a3832ee36eaf86fda97239a87e13bddd63f67.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-01",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.amarujala.com/business/business-diary/commercial-lpg-price-hike-oil-companies-losses-petrol-diesel-prices-crude-oil-under-recovery-2026-05-02",
+   "domain": "amarujala.com",
+   "title": "Lpg Crisis:कमर्शियल के बाद अब घरेलू रसोई गैस और पेट्रोल-डीजल के बढ़ सकते हैं दाम, जानें क्या है वजह - Commercial Lpg Price Hike Oil Companies Losses Petrol Diesel Prices Crude Oil Under Recovery - Amar Ujala Hindi News Live",
+   "lang": "hi",
+   "published": "2026-05-02",
+   "search_call": "5b44f819997b",
+   "tavily_published": null,
+   "search_request_id": "6e275d67-1844-4a91-bf75-00b0edf3a4e2",
+   "search_response_sha256": "f1a3ca56d47984cdb34fa84e223059ce65ef6bd4122f7f4a513600f22cc55311",
+   "status": "rejected",
+   "reason": "the change cannot be computed (no old and new price, % or official base)",
+   "claims": [
+    {
+     "line": "कमर्शियल सिलिंडर 993 रुपये महंगा हो गया। लेकिन, रसोई गैस सिलिंडर और पेट्रोल-डीजल के दाम नहीं बढ़े। पहली नजर में यह राहत लगती है, लेकिन असली कहानी रोके हुए दबाव की है। बाजार में पेट्रोलियम उत्पादों की लागत बढ़ चुकी है और तेल कंपनियों पर नुकसान का बोझ बढ़ रहा है। ऐसे में सरकार के सामने बड़ी चुनौती है कि आम उपभोक्ता को कब तक बचाया जा सकता है?",
+     "price": 993,
+     "unit": "rupees",
+     "region": "India",
+     "seller": "Oil companies",
+     "old_price": null,
+     "new_price": 993,
+     "pct_change": null,
+     "effective_date": "2026-05-02",
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the change cannot be computed (no old and new price, % or official base)",
+     "price_type": "commercial",
+     "change": null,
+     "base_price": null,
+     "context": "# LPG Crisis: कमर्शियल के बाद अब घरेलू रसोई गैस और पेट्रोल-डीजल के बढ़ सकते हैं दाम, जानें क्या है वजह \n ### विस्तार [Follow Amar Ujala on Google News Add as a preferred source on google](https://www.google.com/preferences/source?q=amarujala.com \"Follow Amar Ujala on Google News\") \n ![loader](https://staticimg.amarujala.com/assets/images/2020/01/22/throbber-12-5d288d258d383_5e28205ebe79a.gif?w=32&dpr=1.0&q=80 \"loader\")",
+     "gloss": "The commercial cylinder has become Rs 993 more expensive. But the prices of cooking gas cylinders and petrol-diesel have not increased. At first glance, it seems like relief, but the real story is about the pressure that has been held back. The cost of petroleum products in the market has gone up and the burden of losses is increasing on oil companies. In this situation, the government faces a big challenge: for how long can it protect the common consumer?",
+     "kind": "lpg",
+     "cpi": "04.5.2.2.1.01",
+     "role": "context",
+     "states": []
+    }
+   ],
+   "extract_call": "9333b23a4025",
+   "extract_request_id": "3650fb76-b75a-4df7-a224-c3e633d42bee",
+   "extract_response_sha256": "c8266b965d520b4def86a6d155a366b4d613be80701cf693161bd241eb8bc283",
+   "page_sha256": "54051c3ebd3cdfd2f12c5b2e1aa5938f27adfaf37b3a14f9bae4aa57c19a13d9",
+   "page_file": "pages/54051c3ebd3cdfd2f12c5b2e1aa5938f27adfaf37b3a14f9bae4aa57c19a13d9.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-02",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.jansatta.com/business/petrol-diesel-may-become-expensive-government-sources-indicated/4512787",
+   "domain": "jansatta.com",
+   "title": "Petrol-Diesel Price Hike: पेट्रोल-डीजल महंगा हो सकता है, सरकारी सूत्रों ने दिए संकेत | Petrol diesel may become expensive government sources indicated | Jansatta",
+   "lang": "hi",
+   "published": "2026-05-01",
+   "search_call": "5b44f819997b",
+   "tavily_published": "2026-05-01",
+   "search_request_id": "6e275d67-1844-4a91-bf75-00b0edf3a4e2",
+   "search_response_sha256": "f1a3ca56d47984cdb34fa84e223059ce65ef6bd4122f7f4a513600f22cc55311",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "9333b23a4025",
+   "extract_request_id": "3650fb76-b75a-4df7-a224-c3e633d42bee",
+   "extract_response_sha256": "c8266b965d520b4def86a6d155a366b4d613be80701cf693161bd241eb8bc283",
+   "page_sha256": "098a2706d15c4b8ce23ef688cfb4c8778ec4f9d79ef54e9b926113c0cb89b32f",
+   "page_file": "pages/098a2706d15c4b8ce23ef688cfb4c8778ec4f9d79ef54e9b926113c0cb89b32f.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.livehindustan.com/business/lpg-price-today-20-may-after-rate-of-petrol-and-diesel-increased-by-rs-4-check-rate-201779238406729.html",
+   "domain": "livehindustan.com",
+   "title": "पेट्रोल-डीजल के दाम 4 रुपये बढ़ने के बाद आज LPG सिलेंडर का क्या है हाल? चेक करें रेट",
+   "lang": "hi",
+   "published": null,
+   "search_call": "5b44f819997b",
+   "tavily_published": null,
+   "search_request_id": "6e275d67-1844-4a91-bf75-00b0edf3a4e2",
+   "search_response_sha256": "f1a3ca56d47984cdb34fa84e223059ce65ef6bd4122f7f4a513600f22cc55311",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.jagran.com/business/biz-petrol-diesel-price-hike-100-in-many-indian-cities-40251457.html",
+   "domain": "jagran.com",
+   "title": "Petrol Diesel Price: ज्यादातर शहरों में ₹100 के पार पहुंचा पेट्रोल-डीजल, इस शहर में सबसे महंगा; 15 राज्यों की लिस्ट\n - petrol diesel price hike 100 in many indian cities",
+   "lang": "hi",
+   "published": "2026-05-25",
+   "search_call": "5b44f819997b",
+   "tavily_published": "2026-05-25",
+   "search_request_id": "6e275d67-1844-4a91-bf75-00b0edf3a4e2",
+   "search_response_sha256": "f1a3ca56d47984cdb34fa84e223059ce65ef6bd4122f7f4a513600f22cc55311",
+   "status": "rejected",
+   "reason": "Super gave no price for this line",
+   "claims": [
+    {
+     "line": "**11 दिन में लगातार चौथी बार दाम बढ़ने के बाद कई शहरों में पेट्रोल 100 रुपए प्रति लीटर के पार पहुंच गया है, जबकि डीजल भी तेजी से 100 रुपए के करीब पहुंच रहा है।** तेल कंपनियों ने सोमवार को पेट्रोल के दाम में 2.61 रुपए प्रति लीटर और डीजल में 2.71 रुपए प्रति लीटर की बढ़ोतरी की।",
+     "price": null,
+     "unit": "per liter",
+     "region": "India",
+     "seller": "Oil companies",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-05-25",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# Petrol Diesel Price: ज्यादातर शहरों में ₹100 के पार पहुंचा पेट्रोल-डीजल, इस शहर में सबसे महंगा; 15 राज्यों की लिस्ट \n **नई दिल्ली|** देशभर में पेट्रोल-डीजल की कीमतों ([petrol price hike today](https://www.jagran.com/business/biz-mgl-ends-pngcng-subsidies-impact-on-mumbai-customers-40251145.html)) ने एक बार फिर आम आदमी की टेंशन बढ़ा दी है। \n 15 मई से अब तक पेट्रोल-डीजल की कीमतों में करीब 7.5 रुपए प्रति लीटर का इजाफा हो चुका है। इससे ट्रांसपोर्ट, रोजमर्रा के सामान और घरेलू बजट पर असर पड़ने की आशंका बढ़ गई है।",
+     "gloss": "After petrol prices rose for the fourth consecutive day in more than 11 days, petrol in several cities has crossed Rs 100 per litre, while diesel is also nearing Rs 100. Oil companies increased petrol prices by Rs 2.61 per litre and diesel by Rs 2.71 per litre on Monday.",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "maharashtra",
+      "nct of delhi"
+     ]
+    },
+    {
+     "line": "**11 दिन में लगातार चौथी बार दाम बढ़ने के बाद कई शहरों में पेट्रोल 100 रुपए प्रति लीटर के पार पहुंच गया है, जबकि डीजल भी तेजी से 100 रुपए के करीब पहुंच रहा है।** तेल कंपनियों ने सोमवार को पेट्रोल के दाम में 2.61 रुपए प्रति लीटर और डीजल में 2.71 रुपए प्रति लीटर की बढ़ोतरी की।",
+     "price": null,
+     "unit": "per liter",
+     "region": "India",
+     "seller": "Oil companies",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": "2026-05-25",
+     "read_by": "nvidia/nemotron-3-super-120b-a12b",
+     "status": "rejected",
+     "reason": "Super gave no price for this line",
+     "price_type": "retail",
+     "change": null,
+     "base_price": null,
+     "context": "# Petrol Diesel Price: ज्यादातर शहरों में ₹100 के पार पहुंचा पेट्रोल-डीजल, इस शहर में सबसे महंगा; 15 राज्यों की लिस्ट \n **नई दिल्ली|** देशभर में पेट्रोल-डीजल की कीमतों ([petrol price hike today](https://www.jagran.com/business/biz-mgl-ends-pngcng-subsidies-impact-on-mumbai-customers-40251145.html)) ने एक बार फिर आम आदमी की टेंशन बढ़ा दी है। \n 15 मई से अब तक पेट्रोल-डीजल की कीमतों में करीब 7.5 रुपए प्रति लीटर का इजाफा हो चुका है। इससे ट्रांसपोर्ट, रोजमर्रा के सामान और घरेलू बजट पर असर पड़ने की आशंका बढ़ गई है।",
+     "gloss": "After petrol prices rose for the fourth consecutive day in more than 11 days, petrol in several cities has crossed Rs 100 per litre, while diesel is also nearing Rs 100. Oil companies increased petrol prices by Rs 2.61 per litre and diesel by Rs 2.71 per litre on Monday.",
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "maharashtra",
+      "nct of delhi"
+     ]
+    }
+   ],
+   "extract_call": "d771c4a15110",
+   "extract_request_id": "96f3e0ee-dfc5-4dcb-a970-fbd914178f88",
+   "extract_response_sha256": "c1cf96cb986400a87516aaf2e6816a4d9f2806b1e84c7f9f69d4fcec3074fc67",
+   "page_sha256": "8d6487ff3b2c2bbbc8d444180afa68e33b181fb951ba4e25352d561109a5a981",
+   "page_file": "pages/8d6487ff3b2c2bbbc8d444180afa68e33b181fb951ba4e25352d561109a5a981.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.abplive.com/business/lpg-price-today-after-petrol-diesel-price-hike-check-commercial-and-domestic-cylinder-rate-today-3134128",
+   "domain": "abplive.com",
+   "title": "LPG Rate Today: पेट्रोल-डीजल के बाद क्या LPG भी हुआ महंगा? जानें आज गैस सिलेंडर की कीमत",
+   "lang": "hi",
+   "published": null,
+   "search_call": "5b44f819997b",
+   "tavily_published": null,
+   "search_request_id": "6e275d67-1844-4a91-bf75-00b0edf3a4e2",
+   "search_response_sha256": "f1a3ca56d47984cdb34fa84e223059ce65ef6bd4122f7f4a513600f22cc55311",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.abplive.com/business/lpg-cylinder-price-today-on-may-24-amid-petrol-diesel-price-hike-check-commercial-and-domestic-cylinder-rate-here-3134519",
+   "domain": "abplive.com",
+   "title": "LPG Cylinder Rate: पेट्रोल-डीजल की बढ़ती कीमतों में बीच क्या LPG का भी बढ़ा रेट? यहां चेक करें",
+   "lang": "hi",
+   "published": null,
+   "search_call": "5b44f819997b",
+   "tavily_published": null,
+   "search_request_id": "6e275d67-1844-4a91-bf75-00b0edf3a4e2",
+   "search_response_sha256": "f1a3ca56d47984cdb34fa84e223059ce65ef6bd4122f7f4a513600f22cc55311",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.facebook.com/DNHindi/videos/%E0%A4%B9%E0%A4%AE%E0%A5%80%E0%A4%B0%E0%A4%AA%E0%A5%81%E0%A4%B0-%E0%A4%AE%E0%A5%87%E0%A4%82-%E0%A4%AA%E0%A5%87%E0%A4%9F%E0%A5%8D%E0%A4%B0%E0%A5%8B%E0%A4%B2-%E0%A4%A1%E0%A5%80%E0%A4%9C%E0%A4%B2-%E0%A4%95%E0%A5%80-%E0%A4%AC%E0%A4%A2%E0%A4%BC%E0%A4%A4%E0%A5%80-%E0%A4%95%E0%A5%80%E0%A4%AE%E0%A4%A4%E0%A5%8B%E0%A4%82-%E0%A4%A8%E0%A5%87-%E0%A4%86%E0%A4%AE-%E0%A4%B2%E0%A5%8B%E0%A4%97%E0%A5%8B%E0%A4%82-%E0%A4%95%E0%A5%80-%E0%A4%AE%E0%A5%81%E0%A4%B6%E0%A5%8D%E0%A4%95%E0%A4%BF%E0%A4%B2%E0%A5%87%E0%A4%82-%E0%A4%AC%E0%A4%A2%E0%A4%BC%E0%A4%BE-%E0%A4%A6%E0%A5%80-%E0%A4%B9%E0%A5%88%E0%A4%82-%E0%A4%88%E0%A4%82/4533539790210443",
+   "domain": "facebook.com",
+   "title": "Dynamite News Hindi. . हमीरपुर में पेट्रोल-डीजल की बढ़ती कीमतों ने आम लोगों की मुश्किलें बढ़ा दी हैं। ईंधन महंगा होने से घरेलू बजट बिगड़ रहा है और बाजार में भी महंगाई को लेकर चिंता बढ़ने लगी है।",
+   "lang": "hi",
+   "published": null,
+   "search_call": "5b44f819997b",
+   "tavily_published": null,
+   "search_request_id": "6e275d67-1844-4a91-bf75-00b0edf3a4e2",
+   "search_response_sha256": "f1a3ca56d47984cdb34fa84e223059ce65ef6bd4122f7f4a513600f22cc55311",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.etvbharat.com/hi/business/petrol-diesel-price-hike-in-near-future-not-ruled-out-say-govt-sources-hin26050104540",
+   "domain": "etvbharat.com",
+   "title": "'पेट्रोल-डीजल की कीमत में बढ़ोतरी की संभावना से सरकार का इनकार नहीं'",
+   "lang": "hi",
+   "published": null,
+   "search_call": "5b44f819997b",
+   "tavily_published": null,
+   "search_request_id": "6e275d67-1844-4a91-bf75-00b0edf3a4e2",
+   "search_response_sha256": "f1a3ca56d47984cdb34fa84e223059ce65ef6bd4122f7f4a513600f22cc55311",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://siouxcityjournal.com/life-entertainment/nation-world/wellness/article_424ef48f-2719-57cf-b3c0-783662dfee48.html",
+   "domain": "siouxcityjournal.com",
+   "title": "Weight-loss drugs fuel protein-rich whey craving - Sioux City Journal",
+   "lang": "mr",
+   "published": "2026-05-06",
+   "search_call": "e02e6a8b38ae",
+   "tavily_published": "2026-05-06",
+   "search_request_id": "f5d9d539-d019-4d84-8c6e-61e3b019a86a",
+   "search_response_sha256": "a0ea1cbb800b026c4d2c3b5218236fb417eef9ce6eadd24f578b086849d0dd56",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.global-agriculture.com/global-agriculture/dairy-farmers-of-america-applauds-usdas-final-school-milk-rule/",
+   "domain": "global-agriculture.com",
+   "title": "Dairy Farmers Of America Applauds USDA’s Final School Milk Rule - Global Agriculture",
+   "lang": "mr",
+   "published": "2026-05-12",
+   "search_call": "e02e6a8b38ae",
+   "tavily_published": "2026-05-12",
+   "search_request_id": "f5d9d539-d019-4d84-8c6e-61e3b019a86a",
+   "search_response_sha256": "a0ea1cbb800b026c4d2c3b5218236fb417eef9ce6eadd24f578b086849d0dd56",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://rapidcityjournal.com/life-entertainment/nation-world/wellness/article_98107f7c-495a-56d9-9777-5b39e9b6aa89.html",
+   "domain": "rapidcityjournal.com",
+   "title": "Weight-loss drugs fuel protein-rich whey craving - Rapid City Journal",
+   "lang": "mr",
+   "published": "2026-05-06",
+   "search_call": "e02e6a8b38ae",
+   "tavily_published": "2026-05-06",
+   "search_request_id": "f5d9d539-d019-4d84-8c6e-61e3b019a86a",
+   "search_response_sha256": "a0ea1cbb800b026c4d2c3b5218236fb417eef9ce6eadd24f578b086849d0dd56",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://timesofindia.indiatimes.com/city/ranchi/union-threatens-stir-over-bsl-plan-to-prune-contractual-workforce-psu-refuses-comment/amp_articleshow/130450456.cms",
+   "domain": "timesofindia.indiatimes.com",
+   "title": "Union threatens stir over BSL plan to ‘prune’ contractual workforce; PSU refuses comment - The Times of India",
+   "lang": "mr",
+   "published": "2026-04-22",
+   "search_call": "e02e6a8b38ae",
+   "tavily_published": "2026-04-22",
+   "search_request_id": "f5d9d539-d019-4d84-8c6e-61e3b019a86a",
+   "search_response_sha256": "a0ea1cbb800b026c4d2c3b5218236fb417eef9ce6eadd24f578b086849d0dd56",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "d771c4a15110",
+   "extract_request_id": "96f3e0ee-dfc5-4dcb-a970-fbd914178f88",
+   "extract_response_sha256": "c1cf96cb986400a87516aaf2e6816a4d9f2806b1e84c7f9f69d4fcec3074fc67",
+   "page_sha256": "041bf4e8779d44c425ccd865e4de86df11d35a8fa9da5fd12fb56091e8ec401a",
+   "page_file": "pages/041bf4e8779d44c425ccd865e4de86df11d35a8fa9da5fd12fb56091e8ec401a.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-04-23",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.australianmining.com.au/detail/vawdrey-24p-drop-deck-curtain-sider-auto-mezz-decks-1073379",
+   "domain": "australianmining.com.au",
+   "title": "2016 VAWDREY 24P DROP DECK CURTAIN SIDER AUTO MEZZ DECKS for sale (refcode TA1316590) - Australian Mining",
+   "lang": "mr",
+   "published": "2026-04-24",
+   "search_call": "e02e6a8b38ae",
+   "tavily_published": "2026-04-24",
+   "search_request_id": "f5d9d539-d019-4d84-8c6e-61e3b019a86a",
+   "search_response_sha256": "a0ea1cbb800b026c4d2c3b5218236fb417eef9ce6eadd24f578b086849d0dd56",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.just-food.com/news/dmk-group-german-plant-capex/",
+   "domain": "just-food.com",
+   "title": "DMK Group invests in German dairy plant - Global Food Industry News",
+   "lang": "mr",
+   "published": "2026-05-27",
+   "search_call": "e02e6a8b38ae",
+   "tavily_published": "2026-05-27",
+   "search_request_id": "f5d9d539-d019-4d84-8c6e-61e3b019a86a",
+   "search_response_sha256": "a0ea1cbb800b026c4d2c3b5218236fb417eef9ce6eadd24f578b086849d0dd56",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "d771c4a15110",
+   "extract_request_id": "96f3e0ee-dfc5-4dcb-a970-fbd914178f88",
+   "extract_response_sha256": "c1cf96cb986400a87516aaf2e6816a4d9f2806b1e84c7f9f69d4fcec3074fc67",
+   "page_sha256": "057197ac518af94bcdfddc9ed18c169c27eb8c9548bf7c71e57f12ca4cb8b2af",
+   "page_file": "pages/057197ac518af94bcdfddc9ed18c169c27eb8c9548bf7c71e57f12ca4cb8b2af.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "http://www.lancasterfarming.com/farming-news/news/court-approves-sale-of-harrisburg-dairies-to-patanjali-dairy-usa/article_ef1f776d-7468-45c3-8ab9-ea041393f8b7.html",
+   "domain": "lancasterfarming.com",
+   "title": "Court Approves Sale of Harrisburg Dairies to Patanjali Dairy USA - Lancaster Farming",
+   "lang": "mr",
+   "published": "2026-04-22",
+   "search_call": "e02e6a8b38ae",
+   "tavily_published": "2026-04-22",
+   "search_request_id": "f5d9d539-d019-4d84-8c6e-61e3b019a86a",
+   "search_response_sha256": "a0ea1cbb800b026c4d2c3b5218236fb417eef9ce6eadd24f578b086849d0dd56",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://thekashmirhorizon.com/2026/05/01/agriculture-department-distributes-72000-hybrid-seedlings-in-3-days-in-kishtwar/",
+   "domain": "thekashmirhorizon.com",
+   "title": "Agriculture Department distributes 72,000 Hybrid Seedlings in 3 days in Kishtwar - The Kashmir Horizon",
+   "lang": "mr",
+   "published": "2026-05-01",
+   "search_call": "e02e6a8b38ae",
+   "tavily_published": "2026-05-01",
+   "search_request_id": "f5d9d539-d019-4d84-8c6e-61e3b019a86a",
+   "search_response_sha256": "a0ea1cbb800b026c4d2c3b5218236fb417eef9ce6eadd24f578b086849d0dd56",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "d771c4a15110",
+   "extract_request_id": "96f3e0ee-dfc5-4dcb-a970-fbd914178f88",
+   "extract_response_sha256": "c1cf96cb986400a87516aaf2e6816a4d9f2806b1e84c7f9f69d4fcec3074fc67",
+   "page_sha256": "992d57da04010783e3f9b5f2429c427025f1de1da19a9700106e779ff34a0c93",
+   "page_file": "pages/992d57da04010783e3f9b5f2429c427025f1de1da19a9700106e779ff34a0c93.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.knskashmir.com/declare-2026-disaster-year-for-horticulture--agriculture-in-jandk--sopore-fruit-mandi-president-204347",
+   "domain": "knskashmir.com",
+   "title": "Declare 2026 disaster year for horticulture, agriculture in J&K: Sopore fruit mandi president - Kashmir News Service",
+   "lang": "mr",
+   "published": "2026-05-23",
+   "search_call": "e02e6a8b38ae",
+   "tavily_published": "2026-05-23",
+   "search_request_id": "f5d9d539-d019-4d84-8c6e-61e3b019a86a",
+   "search_response_sha256": "a0ea1cbb800b026c4d2c3b5218236fb417eef9ce6eadd24f578b086849d0dd56",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "d771c4a15110",
+   "extract_request_id": "96f3e0ee-dfc5-4dcb-a970-fbd914178f88",
+   "extract_response_sha256": "c1cf96cb986400a87516aaf2e6816a4d9f2806b1e84c7f9f69d4fcec3074fc67",
+   "page_sha256": "1bd496c83b771c089fd6485a63773c4b94839115eee6c237e346005dd6d0dd62",
+   "page_file": "pages/1bd496c83b771c089fd6485a63773c4b94839115eee6c237e346005dd6d0dd62.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-05",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://dredgewire.com/ad-ports-group-delivers-41-yoy-net-profit-growth-to-aed-653-million-in-q1-2026-best-quarterly-profits-on-record-2/",
+   "domain": "dredgewire.com",
+   "title": "AD Ports Group Delivers 41% YoY Net Profit Growth to AED 653 Million in Q1 2026; Best Quarterly Profits on Record - DredgeWire",
+   "lang": "mr",
+   "published": "2026-05-18",
+   "search_call": "e02e6a8b38ae",
+   "tavily_published": "2026-05-18",
+   "search_request_id": "f5d9d539-d019-4d84-8c6e-61e3b019a86a",
+   "search_response_sha256": "a0ea1cbb800b026c4d2c3b5218236fb417eef9ce6eadd24f578b086849d0dd56",
+   "status": "rejected",
+   "reason": "Nano found no price in the search text",
+   "claims": []
+  },
+  {
+   "url": "https://www.facebook.com/BJP4TamilNadu/videos/-%E0%AE%A4%E0%AE%BF%E0%AE%B0%E0%AF%81k%E0%AE%85%E0%AE%A3%E0%AF%8D%E0%AE%A3%E0%AE%BE%E0%AE%AE%E0%AE%B2%E0%AF%88-%E0%AE%85%E0%AE%B5%E0%AE%B0%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AF%8D-%E0%AE%95%E0%AF%81%E0%AE%B4%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AF%88%E0%AE%95%E0%AE%B3%E0%AF%81%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AF%81-%E0%AE%8E%E0%AE%A4%E0%AE%BF%E0%AE%B0%E0%AE%BE%E0%AE%A9-%E0%AE%AA%E0%AF%8B%E0%AE%95%E0%AF%8D%E0%AE%9A%E0%AF%8B-%E0%AE%95%E0%AF%81%E0%AE%B1%E0%AF%8D%E0%AE%B1%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AF%8D-%E0%AE%AA%E0%AF%86%E0%AE%A3%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AF%81%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AF%81-%E0%AE%8E%E0%AE%A4%E0%AE%BF%E0%AE%B0%E0%AE%BE/2479432509150498",
+   "domain": "facebook.com",
+   "title": "திரு.K.அண்ணாமலை அவர்கள் குழந்தைகளுக்கு ...",
+   "lang": "ta",
+   "published": null,
+   "search_call": "c8df9f5f1574",
+   "tavily_published": null,
+   "search_request_id": "27ad1d08-3a8c-46d2-a5b8-7bc42cc06556",
+   "search_response_sha256": "93f6a9ed1da96a7a07c3c02185e632a38b4ca59c1f47a555efe184614a9cc82d",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.facebook.com/k.annamalai.ips/posts/%E0%AE%A4%E0%AE%AE%E0%AE%BF%E0%AE%B4%E0%AE%95-%E0%AE%85%E0%AE%B0%E0%AE%9A%E0%AE%BF%E0%AE%AF%E0%AE%B2%E0%AF%8D-%E0%AE%B5%E0%AE%B0%E0%AE%B2%E0%AE%BE%E0%AE%B1%E0%AF%8D%E0%AE%B1%E0%AE%BF%E0%AE%B2%E0%AF%8D-%E0%AE%87%E0%AE%B0%E0%AF%81%E0%AE%A3%E0%AF%8D%E0%AE%9F-%E0%AE%95%E0%AE%BE%E0%AE%B2%E0%AE%AE%E0%AF%8D-%E0%AE%8E%E0%AE%A9-%E0%AE%9A%E0%AF%8A%E0%AE%B2%E0%AF%8D%E0%AE%B2%E0%AF%81%E0%AE%AE%E0%AF%8D-%E0%AE%85%E0%AE%B3%E0%AE%B5%E0%AE%BF%E0%AE%B1%E0%AF%8D%E0%AE%95%E0%AF%81-%E0%AE%AE%E0%AF%8B%E0%AE%9A%E0%AE%AE%E0%AE%BE%E0%AE%A9-%E0%AE%86%E0%AE%9F%E0%AF%8D%E0%AE%9A%E0%AE%BF%E0%AE%AF%E0%AF%88-%E0%AE%A8%E0%AE%9F%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AE%BF/1588775033256899",
+   "domain": "facebook.com",
+   "title": "தமிழக அரசியல் வரலாற்றில் இருண்ட காலம் ...",
+   "lang": "ta",
+   "published": null,
+   "search_call": "c8df9f5f1574",
+   "tavily_published": null,
+   "search_request_id": "27ad1d08-3a8c-46d2-a5b8-7bc42cc06556",
+   "search_response_sha256": "93f6a9ed1da96a7a07c3c02185e632a38b4ca59c1f47a555efe184614a9cc82d",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.facebook.com/sundaramoorthypremanand/posts/28149006361354626",
+   "domain": "facebook.com",
+   "title": "Prem Anand",
+   "lang": "ta",
+   "published": null,
+   "search_call": "c8df9f5f1574",
+   "tavily_published": null,
+   "search_request_id": "27ad1d08-3a8c-46d2-a5b8-7bc42cc06556",
+   "search_response_sha256": "93f6a9ed1da96a7a07c3c02185e632a38b4ca59c1f47a555efe184614a9cc82d",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.facebook.com/TNCPIM/posts/%E0%AE%AA%E0%AF%86%E0%AE%9F%E0%AF%8D%E0%AE%B0%E0%AF%8B%E0%AE%B2%E0%AF%8D-%E0%AE%9F%E0%AF%80%E0%AE%9A%E0%AE%B2%E0%AF%8D-%E0%AE%B5%E0%AE%BF%E0%AE%B2%E0%AF%88%E0%AE%95%E0%AE%B3%E0%AF%88-%E0%AE%B2%E0%AE%BF%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AE%B0%E0%AF%81%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AF%81-%E0%AE%B0%E0%AF%82-3-%E0%AE%89%E0%AE%AF%E0%AE%B0%E0%AF%8D%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AE%BF%E0%AE%AF%E0%AF%81%E0%AE%AE%E0%AF%8D-%E0%AE%9A%E0%AE%BF%E0%AE%8E%E0%AE%A9%E0%AF%8D%E0%AE%9C%E0%AE%BF-%E0%AE%8E%E0%AE%B0%E0%AE%BF%E0%AE%B5%E0%AE%BE%E0%AE%AF%E0%AF%81-%E0%AE%95%E0%AE%BF%E0%AE%B2%E0%AF%8B-%E0%AE%B0%E0%AF%82-2-%E0%AE%89/1493369738834580",
+   "domain": "facebook.com",
+   "title": "பெட்ரோல், டீசல் விலைகளை லிட்டருக்கு ரூ. 3 ...",
+   "lang": "ta",
+   "published": null,
+   "search_call": "c8df9f5f1574",
+   "tavily_published": null,
+   "search_request_id": "27ad1d08-3a8c-46d2-a5b8-7bc42cc06556",
+   "search_response_sha256": "93f6a9ed1da96a7a07c3c02185e632a38b4ca59c1f47a555efe184614a9cc82d",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.dinamalar.com/archive/2026-May/18",
+   "domain": "dinamalar.com",
+   "title": "முந்தய பதிப்புகள் (18-May-2026) - Archive News and Articles from Dinamalar Web",
+   "lang": "ta",
+   "published": "2026-05-18",
+   "search_call": "c8df9f5f1574",
+   "tavily_published": "2026-05-18",
+   "search_request_id": "27ad1d08-3a8c-46d2-a5b8-7bc42cc06556",
+   "search_response_sha256": "93f6a9ed1da96a7a07c3c02185e632a38b4ca59c1f47a555efe184614a9cc82d",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "f3529756a22e",
+   "extract_request_id": "037e9d07-a135-4fa0-a52e-c14d81543a03",
+   "extract_response_sha256": "436e017b1372ca9dd44ede6160aa36b7c122ff8c63d665fd46a83ade0fee2bf4",
+   "page_sha256": "d9f60d2fbcbe9756ecf7af1f06481bde00031585c7e45d0c767c46427aecf4ef",
+   "page_file": "pages/d9f60d2fbcbe9756ecf7af1f06481bde00031585c7e45d0c767c46427aecf4ef.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.dinamalar.com/archive/2026-Apr/26",
+   "domain": "dinamalar.com",
+   "title": "முந்தய பதிப்புகள் (26-Apr-2026) - Archive News and Articles from Dinamalar Web",
+   "lang": "ta",
+   "published": null,
+   "search_call": "c8df9f5f1574",
+   "tavily_published": null,
+   "search_request_id": "27ad1d08-3a8c-46d2-a5b8-7bc42cc06556",
+   "search_response_sha256": "93f6a9ed1da96a7a07c3c02185e632a38b4ca59c1f47a555efe184614a9cc82d",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.instagram.com/reel/DYjvgzYzV4B",
+   "domain": "instagram.com",
+   "title": "Instagram",
+   "lang": "ta",
+   "published": null,
+   "search_call": "c8df9f5f1574",
+   "tavily_published": null,
+   "search_request_id": "27ad1d08-3a8c-46d2-a5b8-7bc42cc06556",
+   "search_response_sha256": "93f6a9ed1da96a7a07c3c02185e632a38b4ca59c1f47a555efe184614a9cc82d",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.instagram.com/reel/DYUrK7gGof8",
+   "domain": "instagram.com",
+   "title": "Instagram",
+   "lang": "ta",
+   "published": null,
+   "search_call": "c8df9f5f1574",
+   "tavily_published": null,
+   "search_request_id": "27ad1d08-3a8c-46d2-a5b8-7bc42cc06556",
+   "search_response_sha256": "93f6a9ed1da96a7a07c3c02185e632a38b4ca59c1f47a555efe184614a9cc82d",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.instagram.com/reel/DX9pUMRRaBr?hl=de",
+   "domain": "instagram.com",
+   "title": "Instagram",
+   "lang": "ta",
+   "published": null,
+   "search_call": "c8df9f5f1574",
+   "tavily_published": null,
+   "search_request_id": "27ad1d08-3a8c-46d2-a5b8-7bc42cc06556",
+   "search_response_sha256": "93f6a9ed1da96a7a07c3c02185e632a38b4ca59c1f47a555efe184614a9cc82d",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.instagram.com/p/DYE47VRGsMZ",
+   "domain": "instagram.com",
+   "title": "பாலன் இல்லத்தில் விஜய் abpnadu.com",
+   "lang": "ta",
+   "published": null,
+   "search_call": "c8df9f5f1574",
+   "tavily_published": null,
+   "search_request_id": "27ad1d08-3a8c-46d2-a5b8-7bc42cc06556",
+   "search_response_sha256": "93f6a9ed1da96a7a07c3c02185e632a38b4ca59c1f47a555efe184614a9cc82d",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.instagram.com/reel/DYz5CPvjqpZ",
+   "domain": "instagram.com",
+   "title": "Instagram",
+   "lang": "te",
+   "published": null,
+   "search_call": "42b42df0563d",
+   "tavily_published": null,
+   "search_request_id": "65cb1558-7fd3-4d21-9899-66a3a0369bda",
+   "search_response_sha256": "5a1ac216aeab180f5a3fa59ad7d47a93d7a82e67190d61c6558a40f860d638a3",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://dnbnews.in/news/details/1327",
+   "domain": "dnbnews.in",
+   "title": "ఆంధ్ర రాష్ట్రంలో గత కొన్ని రోజులుగా పెట్రోల్, డీజిల్ కోసం సామాన్య ప్రజలు బారులు తీరడం",
+   "lang": "te",
+   "published": "2026-04-27",
+   "search_call": "42b42df0563d",
+   "tavily_published": "2026-04-27",
+   "search_request_id": "65cb1558-7fd3-4d21-9899-66a3a0369bda",
+   "search_response_sha256": "5a1ac216aeab180f5a3fa59ad7d47a93d7a82e67190d61c6558a40f860d638a3",
+   "status": "rejected",
+   "reason": "the page shows 2026-10-22, after the cutoff 2026-05-29",
+   "claims": [
+    {
+     "line": "ఆంధ్ర రాష్ట్రంలో గత కొన్ని రోజులుగా పెట్రోల్, డీజిల్ కోసం సామాన్య ప్రజలు బారులు తీరడం",
+     "price": null,
+     "unit": "Litre",
+     "region": "Andhra Pradesh",
+     "seller": "Andhra Pradesh Government",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the page shows 2026-10-22, after the cutoff 2026-05-29",
+     "price_type": "retail",
+     "change": null,
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "andhra pradesh"
+     ]
+    },
+    {
+     "line": "ఆంధ్ర రాష్ట్రంలో గత కొన్ని రోజులుగా పెట్రోల్, డీజిల్ కోసం సామాన్య ప్రజలు బారులు తీరడం",
+     "price": null,
+     "unit": "Litre",
+     "region": "Andhra Pradesh",
+     "seller": "Andhra Pradesh Government",
+     "old_price": null,
+     "new_price": null,
+     "pct_change": null,
+     "effective_date": null,
+     "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "status": "rejected",
+     "reason": "the page shows 2026-10-22, after the cutoff 2026-05-29",
+     "price_type": "retail",
+     "change": null,
+     "kind": "diesel",
+     "cpi": "07.2.2.1.1.01",
+     "role": "moves",
+     "states": [
+      "andhra pradesh"
+     ]
+    }
+   ],
+   "extract_call": "f3529756a22e",
+   "extract_request_id": "037e9d07-a135-4fa0-a52e-c14d81543a03",
+   "extract_response_sha256": "436e017b1372ca9dd44ede6160aa36b7c122ff8c63d665fd46a83ade0fee2bf4",
+   "page_sha256": "2ef4e3bf6e00f6652872a064076bd7a3f2e7918c018e66eeb6fe77d3b7976615",
+   "page_file": "pages/2ef4e3bf6e00f6652872a064076bd7a3f2e7918c018e66eeb6fe77d3b7976615.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-10-22",
+   "date_flag": "after cutoff"
+  },
+  {
+   "url": "https://telugu.economictimes.com/market/petrol-diesel-prices/fuel-price-hike-impact-from-vegetables-to-edible-oils-what-gets-costlier-for-the-common-man/articleshow/131107420.cms",
+   "domain": "telugu.economictimes.com",
+   "title": "దెబ్బ మీద దెబ్బ.. కూరగాయలు, నిత్యావసరాలు.. ఇకపై అన్ని ...",
+   "lang": "te",
+   "published": null,
+   "search_call": "42b42df0563d",
+   "tavily_published": null,
+   "search_request_id": "65cb1558-7fd3-4d21-9899-66a3a0369bda",
+   "search_response_sha256": "5a1ac216aeab180f5a3fa59ad7d47a93d7a82e67190d61c6558a40f860d638a3",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://vijaykarnataka.com/news/karnataka/three-years-into-the-karnataka-congress-government-sixteen-price-increases-bjp-mp-tejasvi-surya-releases-list/articleshow/131198934.cms",
+   "domain": "vijaykarnataka.com",
+   "title": "ಬೆಲೆ ಏರಿಕೆ ಪಟ್ಟಿ ಬಿಡುಗಡೆ ಮಾಡಿದ ತೇಜಸ್ವಿ ಸೂರ್ಯ,ಕಾಂಗ್ರೆಸ್‌ ಸರ್ಕಾರಕ್ಕೆ ವರ್ಷ ಮೂರು, ಬೆಲೆ ಏರಿಕೆ ಹದಿನಾರು! ಪಟ್ಟಿ ಬಿಡುಗಡೆ ಮಾಡಿದ ತೇಜಸ್ವಿ ಸೂರ್ಯ - three years into the karnataka congress government sixteen price increases bjp mp tejasvi surya releases list - vijaykarnataka",
+   "lang": "kn",
+   "published": "2026-05-19",
+   "search_call": "f41ce427d4cb",
+   "tavily_published": "2026-05-19",
+   "search_request_id": "acc487a8-1361-4983-80d0-a2195793b145",
+   "search_response_sha256": "6f14316a0352ca13108be2f73f61eb11fe854f05c242f7a371363064e2c385ea",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "f3529756a22e",
+   "extract_request_id": "037e9d07-a135-4fa0-a52e-c14d81543a03",
+   "extract_response_sha256": "436e017b1372ca9dd44ede6160aa36b7c122ff8c63d665fd46a83ade0fee2bf4",
+   "page_sha256": "6117cf0547bb655ab34a45637b52cceeebcdce8a38820d574feff422225c6743",
+   "page_file": "pages/6117cf0547bb655ab34a45637b52cceeebcdce8a38820d574feff422225c6743.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.ekushey-tv.com/%E0%A6%AC%E0%A6%BE%E0%A6%B8-%E0%A6%AD%E0%A6%BE%E0%A7%9C%E0%A6%BE-%E0%A6%AC%E0%A6%BE%E0%A7%9C%E0%A6%B2%E0%A7%8B-%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%A4%E0%A6%BF-%E0%A6%95%E0%A6%BF%E0%A6%B2%E0%A7%8B%E0%A6%AE%E0%A6%BF%E0%A6%9F%E0%A6%BE%E0%A6%B0%E0%A7%87-%E0%A7%A7%E0%A7%A7-%E0%A6%AA%E0%A7%9F%E0%A6%B8%E0%A6%BE/1360873111111174066",
+   "domain": "ekushey-tv.com",
+   "title": "বাস ভাড়া বাড়লো প্রতি কিলোমিটারে ১১ পয়সা",
+   "lang": "bn",
+   "published": null,
+   "search_call": "4dd0e76165f1",
+   "tavily_published": null,
+   "search_request_id": "7a3d593f-d24b-4ee5-aca0-0d8b3081c8f0",
+   "search_response_sha256": "2564aaa7fefb1d1e43b0113a2b9befaebf792aa8696a01f6bcf72db090aa7b56",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.jugantor.com/country-news/1093712",
+   "domain": "jugantor.com",
+   "title": "বাসে অতিরিক্ত ভাড়া নিলে ব্যবস্থা: বাণিজ্যমন্ত্রী",
+   "lang": "bn",
+   "published": "2026-04-25",
+   "search_call": "4dd0e76165f1",
+   "tavily_published": "2026-04-25",
+   "search_request_id": "7a3d593f-d24b-4ee5-aca0-0d8b3081c8f0",
+   "search_response_sha256": "2564aaa7fefb1d1e43b0113a2b9befaebf792aa8696a01f6bcf72db090aa7b56",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "f3529756a22e",
+   "extract_request_id": "037e9d07-a135-4fa0-a52e-c14d81543a03",
+   "extract_response_sha256": "436e017b1372ca9dd44ede6160aa36b7c122ff8c63d665fd46a83ade0fee2bf4",
+   "page_sha256": "089f72717beaf70cbfe78f4f234530132a4536f4aeb3edac940398b96f9dee60",
+   "page_file": "pages/089f72717beaf70cbfe78f4f234530132a4536f4aeb3edac940398b96f9dee60.txt",
+   "found": "2026-10-23",
+   "printed_date": null,
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://www.ajkerpatrika.com/business/ajpriunhwx1fq",
+   "domain": "ajkerpatrika.com",
+   "title": "বাজার পরিস্থিতি: হিসাব মেলাতে হিমশিম নিম্ন ও মধ্যবিত্তের",
+   "lang": "bn",
+   "published": null,
+   "search_call": "4dd0e76165f1",
+   "tavily_published": null,
+   "search_request_id": "7a3d593f-d24b-4ee5-aca0-0d8b3081c8f0",
+   "search_response_sha256": "2564aaa7fefb1d1e43b0113a2b9befaebf792aa8696a01f6bcf72db090aa7b56",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  },
+  {
+   "url": "https://www.tbsnews.net/bangla/bangladesh/news-details-489376",
+   "domain": "tbsnews.net",
+   "title": "ময়লার বিল ১০০ টাকার বেশি নিলে বাতিল হবে লাইসেন্স: ডিএসসিসি প্রশাসক | The Business Standard",
+   "lang": "bn",
+   "published": "2026-05-11",
+   "search_call": "4dd0e76165f1",
+   "tavily_published": "2026-05-11",
+   "search_request_id": "7a3d593f-d24b-4ee5-aca0-0d8b3081c8f0",
+   "search_response_sha256": "2564aaa7fefb1d1e43b0113a2b9befaebf792aa8696a01f6bcf72db090aa7b56",
+   "status": "rejected",
+   "reason": "no claim to check",
+   "claims": [],
+   "extract_call": "f3529756a22e",
+   "extract_request_id": "037e9d07-a135-4fa0-a52e-c14d81543a03",
+   "extract_response_sha256": "436e017b1372ca9dd44ede6160aa36b7c122ff8c63d665fd46a83ade0fee2bf4",
+   "page_sha256": "e309c2832cd0efbcaadc7aaaa1e92becd8c10f0200baede6018713ae61d72d00",
+   "page_file": "pages/e309c2832cd0efbcaadc7aaaa1e92becd8c10f0200baede6018713ae61d72d00.txt",
+   "found": "2026-10-23",
+   "printed_date": "2026-05-11",
+   "date_flag": "",
+   "super_reread": true
+  },
+  {
+   "url": "https://samakal.com/bangladesh/article/349674/%E0%A6%86%E0%A6%AF%E0%A6%BC-%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0-%E0%A6%B9%E0%A6%BF%E0%A6%B8%E0%A6%BE%E0%A6%AC-%E0%A6%AE%E0%A7%87%E0%A6%B2%E0%A6%BE%E0%A6%A4%E0%A7%87-%E0%A6%AC%E0%A6%BE%E0%A6%9C%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0-%E0%A6%A4%E0%A6%BE%E0%A6%B2%E0%A6%BF%E0%A6%95%E0%A6%BE-%E0%A6%95%E0%A6%BE%E0%A6%9F%E0%A6%9B%E0%A6%BE%E0%A6%81%E0%A6%9F",
+   "domain": "samakal.com",
+   "title": "আয়-ব্যয়ের হিসাব মেলাতে বাজারের তালিকা কাটছাঁট",
+   "lang": "bn",
+   "published": null,
+   "search_call": "4dd0e76165f1",
+   "tavily_published": null,
+   "search_request_id": "7a3d593f-d24b-4ee5-aca0-0d8b3081c8f0",
+   "search_response_sha256": "2564aaa7fefb1d1e43b0113a2b9befaebf792aa8696a01f6bcf72db090aa7b56",
+   "status": "rejected",
+   "reason": "no publication date",
+   "claims": []
+  }
+ ],
+ "skipped": [],
+ "complete": true,
+ "calls": [
+  {
+   "endpoint": "/search",
+   "call_id": "4d63ffeed670",
+   "sent": {
+    "query": "electricity tariff hike per unit regulatory commission order",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "en"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 6.0,
+   "n_results": 10,
+   "request_id": "b04e4bba-f52c-4ff0-8833-2c47dacb2ea9",
+   "response_sha256": "e267f969c747aa85f4751e88cc8b73ec87ef6a5d037fbd5a5649e3724d78e891",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "4f6e0bb3bc33",
+   "sent": {
+    "query": "milk price hike per litre",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "en"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.58,
+   "n_results": 10,
+   "request_id": "423f9ad3-cbcd-4b76-8683-872d06cb3111",
+   "response_sha256": "5e313a1d574db3ab4a2702ad61686cd6db5904402996c99a7984c79a9a787df8",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "93a49dcf9849",
+   "sent": {
+    "query": "bus fare hike metro fare rail fare revision",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "en"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.65,
+   "n_results": 10,
+   "request_id": "6e6bc3c0-f13e-4736-9c91-c8ed814c43c1",
+   "response_sha256": "1c83e711ab9f18e26a30321540999df8a8749983c8042d560ef4e6fef74ff818",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "ff1b94ebf3dc",
+   "sent": {
+    "query": "petrol diesel price hike LPG cylinder price mobile tariff hike",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "en"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.58,
+   "n_results": 10,
+   "request_id": "b34c196d-049e-4a58-996a-b5e000580e30",
+   "response_sha256": "335f1a2d271be0be3cc9b47d7d5d219e2a5ee8c9c3b00162b1afd14eafa6a7a6",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "54aebeb68569",
+   "sent": {
+    "query": "बिजली की दरें बढ़ीं प्रति यूनिट",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 4.87,
+   "n_results": 10,
+   "request_id": "eb43973b-4161-43e3-99c5-d00188a570fd",
+   "response_sha256": "97e2e9556864eaf1ef0889e6da8635937f1949236400fc3546fcfcb3e193830c",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "d1f0c6e9a461",
+   "sent": {
+    "query": "दूध के दाम बढ़े प्रति लीटर",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.59,
+   "n_results": 10,
+   "request_id": "f09d1d67-42a1-4ad3-8810-b487ed2ad53f",
+   "response_sha256": "b4b5ae47c0f81f19d89fe50b934f42d3d3a17f2e9a980273e8aa0daa2b016fe7",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "a929b0b409cd",
+   "sent": {
+    "query": "बस किराया बढ़ा मेट्रो किराया रेल किराया",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.28,
+   "n_results": 10,
+   "request_id": "554d1a8f-4d2e-4099-9cbe-1172859b5037",
+   "response_sha256": "8b790d92a52b445e449ff96843454a64213c1ce03559abe8161dbe615d4c1389",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "5b44f819997b",
+   "sent": {
+    "query": "पेट्रोल डीजल के दाम बढ़े एलपीजी सिलेंडर",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "hi"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 4.92,
+   "n_results": 10,
+   "request_id": "6e275d67-1844-4a91-bf75-00b0edf3a4e2",
+   "response_sha256": "f1a3ca56d47984cdb34fa84e223059ce65ef6bd4122f7f4a513600f22cc55311",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "e02e6a8b38ae",
+   "sent": {
+    "query": "वीज दरवाढ दूध दरवाढ एसटी बस भाडेवाढ",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "mr"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.87,
+   "n_results": 10,
+   "request_id": "f5d9d539-d019-4d84-8c6e-61e3b019a86a",
+   "response_sha256": "a0ea1cbb800b026c4d2c3b5218236fb417eef9ce6eadd24f578b086849d0dd56",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "c8df9f5f1574",
+   "sent": {
+    "query": "மின் கட்டண உயர்வு பால் விலை உயர்வு பேருந்து கட்டண உயர்வு",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "ta"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.96,
+   "n_results": 10,
+   "request_id": "27ad1d08-3a8c-46d2-a5b8-7bc42cc06556",
+   "response_sha256": "93f6a9ed1da96a7a07c3c02185e632a38b4ca59c1f47a555efe184614a9cc82d",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "42b42df0563d",
+   "sent": {
+    "query": "విద్యుత్ ఛార్జీల పెంపు పాల ధర పెంపు బస్సు ఛార్జీల పెంపు",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "te"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.17,
+   "n_results": 3,
+   "request_id": "65cb1558-7fd3-4d21-9899-66a3a0369bda",
+   "response_sha256": "5a1ac216aeab180f5a3fa59ad7d47a93d7a82e67190d61c6558a40f860d638a3",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "f41ce427d4cb",
+   "sent": {
+    "query": "ವಿದ್ಯುತ್ ದರ ಏರಿಕೆ ಹಾಲಿನ ದರ ಏರಿಕೆ ಬಸ್ ಪ್ರಯಾಣ ದರ ಏರಿಕೆ",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "kn"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 2.36,
+   "n_results": 1,
+   "request_id": "acc487a8-1361-4983-80d0-a2195793b145",
+   "response_sha256": "6f14316a0352ca13108be2f73f61eb11fe854f05c242f7a371363064e2c385ea",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/search",
+   "call_id": "4dd0e76165f1",
+   "sent": {
+    "query": "বিদ্যুতের দাম বৃদ্ধি দুধের দাম বৃদ্ধি বাস ভাড়া বৃদ্ধি",
+    "topic": "news",
+    "search_depth": "basic",
+    "max_results": 10,
+    "start_date": "2026-04-21",
+    "end_date": "2026-05-29",
+    "include_domains": [
+     "timesofindia.indiatimes.com",
+     "economictimes.indiatimes.com"
+    ],
+    "include_domains_mode": "prefer",
+    "language": "bn"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 3.26,
+   "n_results": 5,
+   "request_id": "7a3d593f-d24b-4ee5-aca0-0d8b3081c8f0",
+   "response_sha256": "2564aaa7fefb1d1e43b0113a2b9befaebf792aa8696a01f6bcf72db090aa7b56",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "c9e27b6c2c87",
+   "sent": {
+    "urls": [
+     "https://thefinancialexpress.com.bd/trade/bpdb-bent-on-hiking-power-price-by-21pc",
+     "https://en.prothomalo.com/bangladesh/v7gjbn15p5",
+     "https://timesofindia.indiatimes.com/city/coimbatore/industry-bodies-urges-cm-to-waive-this-years-eb-charge-hike/articleshow/131069182.cms",
+     "https://asianews.network/thailands-energy-ministry-plans-tiered-tariff-to-ease-power-bills",
+     "https://www.nationthailand.com/news/policy/40066540"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.03,
+   "n_results": 5,
+   "request_id": "e08c4cc1-21f2-49f1-b4af-9764be4490df",
+   "response_sha256": "8b232c79f5e458b69f208d5b27eb34254539e93de0a6bf144ea6ae6a42a40255",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "bebd1ec73d6d",
+   "sent": {
+    "urls": [
+     "https://economictimes.indiatimes.com/industry/energy/power/power-prices-hit-regulatory-ceiling-as-heatwave-drives-demand/articleshow/130699798.cms",
+     "https://timesofindia.indiatimes.com/city/chennai/tn-prepares-draft-rules-for-5-yr-power-tariff-revision/articleshow/131075958.cms",
+     "https://www.newagebd.net/post/power-energy/300357/pdb-proposes-21pc-hike-in-wholesale-electricity-prices-faces-strong-opposition",
+     "https://www.farmprogress.com/livestock-and-dairy/butter-and-nfdm-exports-drive-milk-price-surge",
+     "https://www.bbc.com/news/articles/cd6pw4zg5p9o"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.26,
+   "n_results": 4,
+   "request_id": "5177fe75-7fae-4ef7-be2f-13147a3a084f",
+   "response_sha256": "f896ed06c8ec6e9f533b5525a83ee0e53b393d1e32fc1d42aef7ea9db91f8912",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "158558b18d4d",
+   "sent": {
+    "urls": [
+     "https://www.gulte.com/featured/412839/fuel-shock-again-petrol-diesel-prices-hiked-heavily",
+     "https://www.reuters.com/business/energy/indian-retailers-raise-fuel-prices-fourth-time-amid-iran-war-2026-05-25/",
+     "https://www.farmprogress.com/commentary/dairy-demand-supports-milk-prices",
+     "https://www.bbc.com/news/articles/c248j1r7qrdo",
+     "https://www.voronoiapp.com/energy/Gasoline-Price-Changes-Since-the-Start-of-the-Iran-War-8112"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 0,
+   "new_credits": 0,
+   "response_time": 0.79,
+   "n_results": 4,
+   "request_id": "185c6698-2c99-4371-97ce-01d21867b166",
+   "response_sha256": "fece3e3fe6ffae8e438a75eca5dd20df5a69f8015cb490fd0b8d3e41048145fb",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "7b673d366797",
+   "sent": {
+    "urls": [
+     "https://www.reuters.com/world/india/india-announces-second-fuel-price-hike-week-local-media-reports-2026-05-19/",
+     "https://gothamist.com/news/mta-braces-for-lirr-strike-threatens-fare-hike-and-service-cuts-if-workers-get-demands",
+     "https://www.cbsnews.com/newyork/video/25-cent-fare-hike-on-path-trains-begins-monday/",
+     "https://www.6sqft.com/path-fare-hike-takes-effect-ahead-of-return-of-7-day-service/",
+     "https://www.nytimes.com/2026/05/04/nyregion/path-fare-increase.html"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 1.41,
+   "n_results": 4,
+   "request_id": "e608db04-8413-4f8f-96a0-e70f7de23816",
+   "response_sha256": "fb3b5ccef4e1a07fa4dab9dcc712cd5b0777ad0a4bd083bf08a7bc8e9ba32e81",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "2580040412b7",
+   "sent": {
+    "urls": [
+     "https://www.6sqft.com/nj-transit-cuts-world-cup-train-fare-to-metlife-by-30/",
+     "https://www.cbsnews.com/newyork/video/path-train-fares-increase-to-3-25/",
+     "https://www.thehindu.com/news/cities/bangalore/explained-how-commercial-lpg-cylinder-price-hike-will-impact-not-just-food-prices-but-also-bottled-water-and-spices/article70928265.ece",
+     "https://www.thehindu.com/news/cities/bangalore/bengaluru-commercial-lpg-cylinder-price-hike-will-impact-food-prices-bottled-water-spices/article70928265.ece",
+     "https://www.bloomberg.com/news/articles/2026-05-23/india-raises-diesel-gasoline-prices-for-third-time-in-eight-days"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 1.68,
+   "n_results": 5,
+   "request_id": "d974c880-ab86-4708-be7f-fcc6c720e683",
+   "response_sha256": "d779ce14573d5409d3d23a98858f0a2672f1889b3cf9815ecbd3bee16eee5222",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "bc9eb68b2cdd",
+   "sent": {
+    "urls": [
+     "https://www.reuters.com/business/energy/indian-retailers-raises-fuel-prices-third-time-response-iran-war-2026-05-23/",
+     "https://subscriber.politicopro.com/article/eenews/2026/05/06/diesel-price-spike-raises-stakes-for-trump-gop-ahead-of-midterms-ee-00907349",
+     "https://www.agenzianova.com/en/news/Fuel%3A-Average-self-service-price%3A-petrol-at-1968-euros-per-litre--diesel-at-2046-per-litre/",
+     "https://hindi.news18.com/news/madhya-pradesh/bhopal-madhya-pradesh-electricity-tariff-hike-new-fppas-surcharge-consumers-local18-10430283.html",
+     "https://www.jagran.com/himachal-pradesh/shimla-commercial-electricity-becomes-expensive-in-himachal-sukhu-government-imposes-extra-cess-of-one-rupee-per-unit-40240748.html"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 1.21,
+   "n_results": 2,
+   "request_id": "e8024f5f-fcb2-43f0-8cc8-bdbf2817dc6e",
+   "response_sha256": "c2eea90d38fdd31961994a6df419688833ae4b0b76d5551164456363e7dda03f",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "bcb0a624c117",
+   "sent": {
+    "urls": [
+     "https://navbharattimes.indiatimes.com/business/business-news/electricity-bills-may-hike-soon-after-petrol-diesel-and-cng-cea-proposed-increasing-fixed-monthly-charge/articleshow/131150379.cms",
+     "https://www.jagran.com/news/national-after-fuel-price-hike-electricity-bills-may-also-increase-soon-40242470.html",
+     "https://www.etvbharat.com/hi/state/learn-how-your-roof-can-become-a-source-of-big-income-solar-rooftop-project-ups26050901671",
+     "https://www.livehindustan.com/business/fixed-charge-in-electricity-bill-will-be-increased-significantly-cea-proposed-major-electricity-tariff-structure-201778999734198.html",
+     "https://www.abplive.com/news/india/tamil-nadu-new-vijay-government-swings-action-immediately-upon-assuming-cm-chair-free-electricity-up-to-200-units-3127860"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5,
+   "request_id": "666910bc-8e9e-423e-ad2f-983c21dc51ba",
+   "response_sha256": "464601a64ab946255d013968baea19c198759b50ab84c8583799dafa2ca7a3c9",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "e778123cc3db",
+   "sent": {
+    "urls": [
+     "https://www.etvbharat.com/hi/bharat/kumheda-village-ghaziabad-200-households-have-installed-solar-systems-generating-60000-units-of-electricity-every-month-dln26051403149",
+     "https://www.timesofisrael.com/milking-it-new-figures-show-israelis-consuming-more-dairy-products-and-alternatives/",
+     "https://www.greenwichtime.com/news/world/article/india-raises-fuel-prices-as-global-energy-crisis-22260399.php",
+     "https://mezha.net/eng/bukvy/abe12517_diesel_prices_rose/",
+     "https://www.abplive.com/utility-news/metro-will-now-run-on-water-preparations-are-underway-to-launch-it-in-18-cities-across-the-country-3132300"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 0,
+   "new_credits": 0,
+   "response_time": 0.72,
+   "n_results": 4,
+   "request_id": "c71e596a-9bb6-4656-b34e-2116d3d062a4",
+   "response_sha256": "011d1a7c8f90609566a619eb30c05a3aa86784dc30024d098a8f21ec2286d42c",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "567022fde2af",
+   "sent": {
+    "urls": [
+     "https://www.etvbharat.com/hi/bharat/indias-first-hydrogen-bus-service-started-in-delhi-know-route-timings-and-fare-hin26051503996",
+     "https://www.abplive.com/gk/does-pakistan-have-a-metro-like-india-here-s-the-fare-and-full-comparison-3121609",
+     "https://ndtv.in/utility-news/delhi-metro-hydrogen-shuttle-bus-service-start-at-central-vista-starting-may-15-known-hydrogen-shuttle-bus-route-timings-and-fare-11495269",
+     "https://www.livehindustan.com/ncr/delhi-metro-to-run-hydrogen-powered-shuttle-bus-service-from-15th-may-in-central-vista-201778760996677.html",
+     "https://navbharattimes.indiatimes.com/metro/mumbai/other-news/mumbai-best-buses-ticket-available-through-google-pay-phone-pay-whatsapp-via-qr-code-ondc-services-active-know-all/articleshow/130423471.cms"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.03,
+   "n_results": 5,
+   "request_id": "67030fbd-d072-4a17-a617-7f1564962172",
+   "response_sha256": "2a8dd1fb1ccfc53ec0ec8a6a778d025ce70c1e48ceb416acd123f9f867f8b9e3",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "9333b23a4025",
+   "sent": {
+    "urls": [
+     "https://www.amarujala.com/delhi-ncr/operations-of-a-hydrogen-powered-bus-have-begun-in-delhi-2026-05-15",
+     "https://www.jagran.com/uttar-pradesh/noida-noida-ecity-bus-fares-routes-daily-pass-50-minimum-10-40238007.html",
+     "https://www.aajtak.in/business/news/story/petrol-diesel-lpg-price-likely-to-hike-by-government-check-update-tutd-dskc-2539352-2026-05-01",
+     "https://www.amarujala.com/business/business-diary/commercial-lpg-price-hike-oil-companies-losses-petrol-diesel-prices-crude-oil-under-recovery-2026-05-02",
+     "https://www.jansatta.com/business/petrol-diesel-may-become-expensive-government-sources-indicated/4512787"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5,
+   "request_id": "3650fb76-b75a-4df7-a224-c3e633d42bee",
+   "response_sha256": "c8266b965d520b4def86a6d155a366b4d613be80701cf693161bd241eb8bc283",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "d771c4a15110",
+   "sent": {
+    "urls": [
+     "https://www.jagran.com/business/biz-petrol-diesel-price-hike-100-in-many-indian-cities-40251457.html",
+     "https://timesofindia.indiatimes.com/city/ranchi/union-threatens-stir-over-bsl-plan-to-prune-contractual-workforce-psu-refuses-comment/amp_articleshow/130450456.cms",
+     "https://www.just-food.com/news/dmk-group-german-plant-capex/",
+     "https://thekashmirhorizon.com/2026/05/01/agriculture-department-distributes-72000-hybrid-seedlings-in-3-days-in-kishtwar/",
+     "https://www.knskashmir.com/declare-2026-disaster-year-for-horticulture--agriculture-in-jandk--sopore-fruit-mandi-president-204347"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.02,
+   "n_results": 5,
+   "request_id": "96f3e0ee-dfc5-4dcb-a970-fbd914178f88",
+   "response_sha256": "c1cf96cb986400a87516aaf2e6816a4d9f2806b1e84c7f9f69d4fcec3074fc67",
+   "auto_parameters": null
+  },
+  {
+   "endpoint": "/extract",
+   "call_id": "f3529756a22e",
+   "sent": {
+    "urls": [
+     "https://www.dinamalar.com/archive/2026-May/18",
+     "https://dnbnews.in/news/details/1327",
+     "https://vijaykarnataka.com/news/karnataka/three-years-into-the-karnataka-congress-government-sixteen-price-increases-bjp-mp-tejasvi-surya-releases-list/articleshow/131198934.cms",
+     "https://www.jugantor.com/country-news/1093712",
+     "https://www.tbsnews.net/bangla/bangladesh/news-details-489376"
+    ],
+    "extract_depth": "basic"
+   },
+   "credits": 1,
+   "new_credits": 1,
+   "response_time": 0.03,
+   "n_results": 5,
+   "request_id": "037e9d07-a135-4fa0-a52e-c14d81543a03",
+   "response_sha256": "436e017b1372ca9dd44ede6160aa36b7c122ff8c63d665fd46a83ade0fee2bf4",
+   "auto_parameters": null
+  }
+ ],
+ "finished_utc": "2026-10-23T02:46:17.068992+00:00"
+}
