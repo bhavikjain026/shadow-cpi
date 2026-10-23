@@ -251,3 +251,63 @@ def test_arm_t_dates_sends_window_with_auto_and_records_if_kept(tmp_path, monkey
     assert (sent["start_date"], sent["end_date"]) == ("2026-08-22", "2026-09-29")
     assert out["plan"][0]["dates_kept"] == {"auto_time_range": None, "auto_start_date": None, "auto_end_date": None,
                                             "dated_results": 1, "inside_window": 1}
+
+
+# ---------- arm H (v2/HYBRID_PREREG.md) ----------
+def h_reply(**kw):
+    return [{"index": i, "topic": "general", "include_domains": ["thehindu.com"], "include_domains_mode": "restrict",
+             "language": lang, **kw} for i, (lang, _) in enumerate(AB.K.QUERIES)]
+
+
+def test_h_valid_fields_kept_invalid_fall_back_to_arm_a():
+    f, ok, fixes = AB.validate_h({"topic": "finance", "include_domains": ["https://www.TheHindu.com/x"],
+                                  "include_domains_mode": "restrict", "language": "ta"}, "ta")
+    assert f == {"topic": "finance", "include_domains": ["thehindu.com"], "include_domains_mode": "restrict",
+                 "language": "ta"} and all(ok.values()) and fixes == []
+    f, ok, fixes = AB.validate_h({"topic": "sports", "include_domains": ["not a host"], "include_domains_mode": "only",
+                                  "language": "fr"}, "hi")
+    assert f == AB.a_fields("hi") and not any(ok.values()) and len(fixes) == 4
+    f, ok, _ = AB.validate_h(None, "en")                                        # missing entry: all of A's fields
+    assert f == AB.a_fields("en") and not any(ok.values())
+    assert not AB.validate_h({"include_domains": [f"s{i}.in" for i in range(21)]}, "en")[1]["include_domains"]
+
+
+def test_h_super_asked_when_nano_covers_too_few_and_better_reply_used():
+    nem = FakeNem({"nano": h_reply()[:5], "super": h_reply()})
+    plan, ok, tries = AB.write_h_plan(nem, M, "nano", "super", "t")
+    assert nem.asked == ["nano", "super"] and ok and len(plan) == 13 and {s["written_by"] for s in plan} == {"super"}
+    nem = FakeNem({"nano": ValueError("no JSON"), "super": ValueError("no JSON")})
+    plan, ok, _ = AB.write_h_plan(nem, M, "nano", "super", "t")
+    assert not ok and all(s["fields"] == AB.a_fields(s["language"]) for s in plan)    # plan incomplete: A's fields
+
+
+class ProvTav(FakeTav):
+    def search(self, query, **kw):
+        resp, sid = super().search(query, **kw)
+        self.last = kw
+        return {**resp, "request_id": f"req-{self.n}"}, sid
+
+
+def test_h_month_end_to_end_dates_fixed_by_code_and_provenance_logged(tmp_path, monkeypatch):
+    monkeypatch.setattr(LG.save_page, "__defaults__", (tmp_path / "pages",))
+    nem = FakeNem({"nano": h_reply(start_date="2020-01-01")})                  # an extra field is ignored
+    meter = AB.Meter(ProvTav(cap_after=12))
+    out = AB.run_month("H", M, meter, nem, "nano", "super")
+    s0 = out["plan"][0]["sent"]
+    assert (s0["start_date"], s0["end_date"]) == ("2026-08-22", "2026-09-29") and s0["max_results"] == 10
+    assert s0["topic"] == "general" and s0["include_domains_mode"] == "restrict" and s0["search_depth"] == "basic"
+    assert "language" in out["plan"][4]["sent"] and len(out["skipped"]) == 1 and not out["complete"]
+    assert all(c["request_id"] and len(c["response_sha256"]) == 64 for c in meter.calls)
+
+
+def test_h_with_arm_a_fields_sends_arm_a_body():
+    from shadow_cpi.recorder import request_hash
+    lang, q = AB.K.QUERIES[4]
+    s = {"query": q, "language": lang, "fields": AB.a_fields(lang)}
+    p = AB.h_params(s, "2026-01")
+    start, end = AB.R.window("2026-01")
+    a_body = {"query": q, "topic": "news", "search_depth": "basic", "max_results": 10, "start_date": start,
+              "end_date": end, "include_domains": AB.K.DOMAINS[lang], "include_domains_mode": "prefer",
+              "language": "hi", "include_usage": True}
+    assert request_hash("tavily", "/search", {"query": q, **p, "include_usage": True}) == \
+        request_hash("tavily", "/search", a_body)

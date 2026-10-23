@@ -5,6 +5,7 @@
     python -m v2.ablation B          # Nemotron writes 8 searches a month, English + Hindi (cap 'v2-ablation-B')
     python -m v2.ablation C          # Nemotron writes 13 searches a month, + 5 regional languages ('v2-ablation-C')
     python -m v2.ablation T          # Amendment F: B's query texts with Tavily auto_parameters ('v2-ablation-T')
+    python -m v2.ablation H          # v2/HYBRID_PREREG.md: A's queries, Nemotron picks 4 fields ('v2-ablation-H')
     python -m v2.ablation --metrics  # once all four arms have run: results/v2_ablation.json and .md
 
 Each arm runs once on Jan-Sep 2026 with the same reader and verifier as issue 14 (v2.pipeline). For arms B and C,
@@ -48,6 +49,8 @@ ARMS = {
 }
 ARMS["Td"] = {"writer": "Tavily auto_parameters + our date window (exploratory, after scoring)", "langs": ["en", "hi"],
               "n": 8, "budget": "v2-ablation-Td"}
+ARMS["H"] = {"writer": "arm A's templates + Nemotron-chosen topic, domains, mode and language (exploratory, after "
+                       "scoring)", "langs": list(LANG_NAMES), "n": 13, "budget": "v2-ablation-H"}
 AUTO_MAX_RESULTS = 10                    # Amendment F: Tavily needs max_results from the caller; 10 as in arm A
 MOVES = {k for k, v in K.KINDS.items() if v["role"] == "moves"}
 CPI_NAMES = {"electricity": "electricity charges", "milk": "liquid milk", "lpg": "LPG cylinder", "diesel": "diesel",
@@ -137,6 +140,106 @@ def validate(raw, month, langs):
         fixes.append(f"max_results {mr!r} → {min(10, max(1, mr_ok))}")
     return {"query": q, "language": lang, "topic": topic, "start_date": s, "end_date": e, "include_domains": doms,
             "include_domains_mode": mode, "max_results": min(10, max(1, mr_ok))}, fixes
+
+
+# ---------- arm H (v2/HYBRID_PREREG.md): arm A's query text, Nemotron chooses four fields, code fixes the rest ----------
+H_FIELDS = ("topic", "include_domains", "include_domains_mode", "language")
+H_TOPICS = ("news", "general", "finance")
+H_MODES = ("prefer", "restrict")
+H_LANGS = tuple(LANG_NAMES) + ("none",)
+H_SCHEMA = {"type": "object", "additionalProperties": False, "required": ["searches"], "properties": {
+    "searches": {"type": "array", "items": {
+        "type": "object", "additionalProperties": False,
+        "required": ["index", "topic", "include_domains", "include_domains_mode", "language"],
+        "properties": {"index": {"type": "integer"}, "topic": {"type": "string"},
+                       "include_domains": {"type": "array", "items": {"type": "string"}},
+                       "include_domains_mode": {"type": "string"}, "language": {"type": "string"}}}}}}
+H_SYSTEM = ("You choose the filters for fixed web searches with the Tavily search API. The searches look for ANNOUNCED "
+            "retail price changes in India (price hikes or cuts, tariff orders, fare revisions) reported in news. "
+            "You do not change the query text. Reply with JSON only.")
+
+
+def h_prompt(month):
+    lines = "\n".join(f"{i}. [{lang}] {q}" for i, (lang, q) in enumerate(K.QUERIES))
+    return (f"Month: {datetime.strptime(month, '%Y-%m'):%B %Y}.\n"
+            f"Price changes we look for (household retail prices): {', '.join(CPI_NAMES[k] for k in K.KINDS)}.\n"
+            f"These {len(K.QUERIES)} searches are fixed (index, [language of the query], query text):\n{lines}\n"
+            "For EACH index choose: topic (one of 'news', 'general', 'finance'); include_domains (0 to 20 site host "
+            "names, e.g. example.com); include_domains_mode ('prefer' ranks those sites first, 'restrict' searches "
+            "only them); language (one of " + ", ".join(H_LANGS[:-1]) + ", or 'none' to send no language). "
+            "The dates, depth and number of results are set by us.\n"
+            "Return {\"searches\": [{\"index\": 0, ...}, ...]} with one object per index.")
+
+
+def a_fields(lang):
+    """Arm A's value for each of the four fields (the fallback for an invalid or missing field)."""
+    return {"topic": "news", "include_domains": list(K.DOMAINS[lang]), "include_domains_mode": "prefer",
+            "language": "hi" if lang == "hi" else "none"}
+
+
+def validate_h(raw, lang):
+    """(fields, valid, fixes): each of the four fields is kept if present and allowed, else arm A's value is used."""
+    raw = raw if isinstance(raw, dict) else {}
+    a, out, ok, fixes = a_fields(lang), {}, {}, []
+    out["topic"], ok["topic"] = (raw.get("topic"), True) if raw.get("topic") in H_TOPICS else (a["topic"], False)
+    out["include_domains_mode"], ok["include_domains_mode"] = (
+        (raw.get("include_domains_mode"), True) if raw.get("include_domains_mode") in H_MODES
+        else (a["include_domains_mode"], False))
+    lg = str(raw.get("language") or "").strip().lower()
+    out["language"], ok["language"] = (lg, True) if lg in H_LANGS else (a["language"], False)
+    doms = raw.get("include_domains")
+    clean = [re.sub(r"^https?://", "", str(d).strip().lower()).split("/")[0].removeprefix("www.")
+             for d in doms] if isinstance(doms, list) else None
+    if clean is not None and len(clean) <= 20 and len(set(clean)) == len(clean) and all(HOST.match(h) for h in clean):
+        out["include_domains"], ok["include_domains"] = clean, True
+    else:
+        out["include_domains"], ok["include_domains"] = a["include_domains"], False
+    for f in H_FIELDS:
+        if not ok[f]:
+            fixes.append(f"{f} {raw.get(f)!r} invalid or missing → arm A's value")
+    return out, ok, fixes
+
+
+def write_h_plan(nem, month, nano, sup, tag):
+    """Nano chooses the four fields for each of arm A's searches; Super once if Nano gives no usable JSON or covers
+    fewer than all indexes. The reply with more valid fields is used; invalid fields fall back to arm A's."""
+    tries = []
+    for model in (nano, sup):
+        try:
+            out, cid = nem.chat_json(model, H_SYSTEM, h_prompt(month), H_SCHEMA, tag=f"{tag} plan")
+            raws, err = out.get("searches") or [], ""
+        except ValueError as e:
+            raws, cid, err = [], None, str(e)
+        by_index = {}
+        for r in raws:
+            if isinstance(r, dict) and isinstance(r.get("index"), int) and 0 <= r["index"] < len(K.QUERIES):
+                by_index.setdefault(r["index"], r)
+        plan = []
+        for i, (lang, q) in enumerate(K.QUERIES):
+            fields, ok, fixes = validate_h(by_index.get(i), lang)
+            plan.append({"index": i, "query": q, "language": lang, "fields": fields, "valid": ok,
+                         "differs_from_a": {f: ok[f] and fields[f] != a_fields(lang)[f] for f in H_FIELDS},
+                         "written_by": model if i in by_index else None, "model_call": cid, "corrections": fixes})
+        covered = len(by_index) == len(K.QUERIES)
+        tries.append({"model": model, "call": cid, "error": err, "written": raws, "picked": plan, "dropped": [],
+                      "covered": len(by_index), "valid_fields": sum(sum(s["valid"].values()) for s in plan),
+                      "complete": covered})
+        if covered:
+            break
+    best = max(tries, key=lambda t: (t["valid_fields"], t["covered"]))
+    return best["picked"], best["covered"] > 0, tries
+
+
+def h_params(s, month):
+    """What is sent to Tavily for one arm H search: the model's four fields, code's dates, depth and size."""
+    start, end = R.window(month)
+    f = s["fields"]
+    p = {"topic": f["topic"], "search_depth": "basic", "max_results": 10, "start_date": start, "end_date": end}
+    if f["include_domains"]:
+        p.update(include_domains=f["include_domains"], include_domains_mode=f["include_domains_mode"])
+    if f["language"] != "none":
+        p["language"] = f["language"]
+    return p
 
 
 def select(valid, arm):
@@ -244,6 +347,18 @@ def run_month(arm, month, meter, nem, nano, sup):
                 continue
             s.update(search_call=sid, n_results=len(resp.get("results", [])),
                      auto_parameters=resp.get("auto_parameters"), dates_kept=dates_kept(resp, start, end))
+            cards += PL.read_results(resp, sid, s["language"], month, nem, nano, tag, seen)
+    elif arm == "H":
+        plan, complete, tries = write_h_plan(nem, month, nano, sup, tag)
+        cards = []
+        for s in plan:
+            s["sent"] = h_params(s, month)
+            try:
+                resp, sid = meter.search(s["query"], **s["sent"], tag=f"{tag} search")
+            except BudgetExceeded as e:
+                skipped.append({"call": "search", "lang": s["language"], "query": s["query"], "why": str(e)})
+                continue
+            s["search_call"], s["n_results"] = sid, len(resp.get("results", []))
             cards += PL.read_results(resp, sid, s["language"], month, nem, nano, tag, seen)
     else:
         plan, complete, tries = write_plan(nem, month, arm, nano, sup, tag)
