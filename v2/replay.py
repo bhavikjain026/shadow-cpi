@@ -14,6 +14,7 @@ import json
 import os
 import sys
 import tempfile
+import threading
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -24,6 +25,7 @@ from v2 import ledger as LG  # noqa: E402
 
 PLACEHOLDER = "replay-no-key"
 TOL = 1e-12
+_LOCK = threading.Lock()                         # one replay at a time: it points LG.LEDGER at a scratch copy
 
 
 class ReplayRecorder(Recorder):
@@ -78,17 +80,18 @@ def replay(month="2026-09", cache=None):
     cache = Path(cache or cache_dir())
     committed_path = LG.ROOT / f"run_{month}_basket.json"
     committed = json.loads(committed_path.read_text(encoding="utf-8"))
-    res = {"month": month, "cache": str(cache), "pass": False, "error": None}
-    committed_ledger = LG.LEDGER
-    with tempfile.TemporaryDirectory() as tmp:
+    res = {"month": month, "cache": str(cache), "pass": False, "error": None, "calls": 0, "from_cache": 0, "sent": 0,
+           "credits": 0, "committed_needle": committed["needle"]["end"]}
+    if not (cache / "tavily").exists():               # checked before a Recorder is built (it would create the folder)
+        return {**res, "error": f"no cache at {cache}"}
+    with _LOCK, tempfile.TemporaryDirectory() as tmp:
+        committed_ledger = LG.LEDGER
         rec = ReplayRecorder(cache, Path(tmp) / "flight_recorder.jsonl")
         scratch = Path(tmp) / "ledger.jsonl"            # the replay writes its ledger rows here, never to the real one
         scratch.write_bytes(committed_ledger.read_bytes() if committed_ledger.exists() else b"")
         n_before = len(LG.read(scratch))
         LG.LEDGER = scratch
         try:
-            if not (cache / "tavily").exists():
-                raise CacheMiss(f"no cache at {cache}")
             out, _ = B.run(month, cache_only=True, rec=rec, keys=(PLACEHOLDER, PLACEHOLDER), out_dir=tmp)
         except CacheMiss as e:
             out, res["error"] = None, str(e)
@@ -99,8 +102,7 @@ def replay(month="2026-09", cache=None):
             if rec.log_file.exists() else []
     res.update({"calls": len(log), "from_cache": sum(e["cached"] for e in log),
                 "sent": sum(not e["cached"] for e in log),
-                "credits": sum((e.get("credits") or 0) for e in log if not e["cached"] and e["service"] == "tavily"),
-                "committed_needle": committed["needle"]["end"]})
+                "credits": sum((e.get("credits") or 0) for e in log if not e["cached"] and e["service"] == "tavily")})
     if out is not None:
         res["differences"] = differences(fingerprint(out), fingerprint(committed))
         res["needle"] = out["needle"]["end"]

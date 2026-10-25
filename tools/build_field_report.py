@@ -209,12 +209,12 @@ def leakage_table():
         for a in "ABCD":
             x = m[a]
             calls = x["cases"] + (n_extract if a == "D" else 0)
-            cav = ["pilot, 20 cases; leak = Wayback-confirmed (no capture by the cutoff)"]
+            cav = [f"pilot, {len(o['rows'])} cases; leak = Wayback-confirmed (no capture by the cutoff)"]
             if a == "D":
                 cav.append(f"page check adds {n_extract} Extract calls; keeps only pages with an explicit date")
             if run == "after retry":
                 cav.append("retry only recovers failed Wayback lookups; valid total grows")
-            rows.append(leak_row("Date test (20 replay cases)", run, SETTINGS[a], x["cases"], x["leak_cases"],
+            rows.append(leak_row(f"Date test ({len(o['rows'])} replay cases)", run, SETTINGS[a], x["cases"], x["leak_cases"],
                                  x["valid_total"] - x["valid_lost"], x["valid_total"], x["credits"], calls,
                                  x["median_latency_s"], "; ".join(cav)))
     fo, frt = load("results/finance_lookahead.json"), load("results/finance_lookahead_wayback_retry.json")
@@ -222,7 +222,7 @@ def leakage_table():
         m = F.metrics(o)
         for a, setting in (("N", SETTINGS["A"]), ("D", "start_date + end_date + filter_by_published_date")):
             x = m["arms"][a]
-            rows.append(leak_row("Finance check (14 scheduled events)", run, setting, m["events"],
+            rows.append(leak_row(f"Finance check ({m['events']} scheduled events)", run, setting, m["events"],
                                  x["confirmed"]["events"], x["valid_total"] - x["valid_lost"], x["valid_total"],
                                  x["credits"], m["events"], x["median_latency_s"],
                                  f"exploratory; {x['wayback_failed']} Wayback lookups failed; C4 date from a "
@@ -234,10 +234,10 @@ def leakage_table():
                          "caveats": f"placeholder: fills in from {path} when it exists"})
             continue
         res = json.loads(p.read_text(encoding="utf-8"))
-        for x in res["leakage_rows"]:
-            rows.append(leak_row(f"Check {chk}", res.get("label", ""), x["setting"], x["n"], x["leaks"],
-                                 x["valid_kept"], x["valid_total"], x["credits"], x["calls"], x["median_latency_s"],
-                                 x.get("caveats", "")))
+        for x in res.get("leakage_rows", []):
+            rows.append(leak_row(f"Check {chk}", res.get("label", ""), x.get("setting"), x.get("n", 0),
+                                 x.get("leaks", 0), x.get("valid_kept"), x.get("valid_total"), x.get("credits", 0),
+                                 x.get("calls", 0), x.get("median_latency_s"), x.get("caveats", "")))
     return {"label": COMPUTED, "rows": rows,
             "columns": "leak rate = cases (events) with at least one confirmed post-cutoff result among the kept "
                        "results, Wilson 95%; valid evidence kept = Wayback-confirmed pre-cutoff, on-topic results "
