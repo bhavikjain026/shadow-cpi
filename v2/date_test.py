@@ -299,6 +299,29 @@ def report(m, built):
     return "\n".join(lines) + "\n"
 
 
+def retry_mcnemar(out, rt, x, y, when):
+    """Exact McNemar (paired by case) on confirmed-leak cases, first pass ('before') or with the retry's recovered
+    captures applied and the same labels recomputed ('after')."""
+    import copy
+    o = copy.deepcopy(out)
+    if when == "after":
+        for row in o["rows"]:
+            for a in row["arms"].values():
+                for r in a.get("results", []):
+                    if r["url"] in rt["recovered_captures"]:
+                        r["captures"] = rt["recovered_captures"][r["url"]]
+                    r["label"] = label(row["cutoff"], r["captures"], r["tavily_date"], url_date(r["url"]),
+                                       r["page_date"])
+        for row in o["rows"]:                      # D keeps C's page-dated results: refresh its labels from C's
+            if "C" in row["arms"] and "D" in row["arms"]:
+                by = {r["url"]: r["label"] for r in row["arms"]["C"]["results"]}
+                for r in row["arms"]["D"]["results"]:
+                    r["label"] = by.get(r["url"], r["label"])
+    leak = {a: {row["id"] for row in o["rows"] if any(r["label"] == "L" for r in row["arms"].get(a, {})
+                                                     .get("results", []))} for a in (x, y)}
+    return mcnemar_exact(len(leak[x] - leak[y]), len(leak[y] - leak[x]))
+
+
 def addendum(out):
     """Offline addendum (2026-10-22, after the results; descriptive, no metric above changes): Wilson intervals,
     exact McNemar p for A vs B and C vs D, date flags per arm, what D's page-date check removed from C, and the time
@@ -345,6 +368,27 @@ def addendum(out):
                  f"auto_parameters still reported time_range " + ", ".join(f"{k} {v}" for k, v in tr.most_common())
                  + f" over {len(td)} searches, yet {sum(d['inside_window'] for d in dk)} of "
                  f"{sum(d['dated_results'] for d in dk)} dated results fell inside the supplied window.")
+    retry = OUT.with_name(OUT.stem + "_wayback_retry.json")
+    if retry.exists():
+        rt = json.loads(retry.read_text(encoding="utf-8"))
+        L += ["", "## Network retry of failed Wayback lookups (logged; the first pass above stays primary)", "",
+              f"{rt['run_utc'][:16]} UTC, `tools/wayback_retry.py date`: the {rt['failed_urls']} lookups that failed in "
+              f"the first pass were retried ({rt['rule']}); {rt['recovered']} recovered, {rt['still_failed']} still "
+              "failed. First pass and after retry, side by side:", "",
+              "| Arm | Confirmed-leak cases (Wilson 95%): first pass | after retry | Leak fraction (bounds): first pass | "
+              "after retry | Valid evidence lost: first pass | after retry |", "|---|---|---|---|---|---|---|"]
+        pc = lambda x: "—" if x is None else f"{x:.0%}"  # noqa: E731
+        cases = lambda r: (f"{r['leak_cases']} of {r['cases']} ({pc(r['leak_case_wilson95'][0])}–"  # noqa: E731
+                           f"{pc(r['leak_case_wilson95'][1])})")
+        frac = lambda f: f"{pc(f['point'])} ({pc(f['lower'])}–{pc(f['upper'])})"  # noqa: E731
+        for a in "ABCD":
+            b, f = rt["before"]["arms"][a], rt["after"]["arms"][a]
+            L.append(f"| {a} | {cases(b)} | {cases(f)} | {frac(b['leak_fraction'])} | {frac(f['leak_fraction'])} | "
+                     f"{b['valid_lost']} of {b['valid_total']} | {f['valid_lost']} of {f['valid_total']} |")
+        L += ["", "Exact McNemar, first pass → after retry: " + "; ".join(
+            f"{x} vs {y} p = {retry_mcnemar(out, rt, x, y, 'before'):.4f} → {retry_mcnemar(out, rt, x, y, 'after'):.4f}"
+            for x, y in (("A", "B"), ("C", "D"))) + ". The retry recovers lookups only; the labelling rules and the "
+            "pre-registered first-pass numbers are unchanged."]
     return L
 
 
