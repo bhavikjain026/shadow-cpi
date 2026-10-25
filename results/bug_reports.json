@@ -1,0 +1,67 @@
+{
+ "reports": [
+  {
+   "title": "auto_parameters picks a recent time_range when no dates are sent",
+   "to": "Tavily",
+   "did": "72 searches with auto_parameters: true, a query and max_results only, for months Jan–Sep 2026",
+   "happened": "time_range w 57, d 14, m 1; 620 of 659 results dated October 2026, 38 undated",
+   "expected": "a documented default, or a warning that a historical query needs start_date/end_date",
+   "fix": "document the behaviour; let auto_parameters return no time_range for queries naming a past month",
+   "evidence": "v2/ablation/arm_T_*.json (plan[].auto_parameters, cards[].published)"
+  },
+  {
+   "title": "auto_parameters reports a time_range that explicit dates override",
+   "to": "Tavily",
+   "did": "56 searches with auto_parameters plus start_date/end_date",
+   "happened": "auto_parameters echoed time_range w 47, d 8, y 1, yet 532 of 532 dated results fell inside the window",
+   "expected": "the echo shows the window actually applied",
+   "fix": "echo start_date/end_date (or drop time_range) when the caller sends dates",
+   "evidence": "v2/ablation/arm_Td_*.json (plan[].auto_parameters, plan[].dates_kept)"
+  },
+  {
+   "title": "published_date later than the page's own date",
+   "to": "Tavily",
+   "did": "compared Tavily's published_date with the page's own published/updated date on 70 date-test results that had both",
+   "happened": "9 had a later published_date (8 by more than 7 days; largest gap 345 days)",
+   "expected": "published_date equal to the page's first-publication date",
+   "fix": "return first-published and last-updated separately",
+   "evidence": "results/date_field_test.json (rows[].arms[].results[].tavily_date, page_date)"
+  },
+  {
+   "title": "Map returns 0 results silently",
+   "to": "Tavily",
+   "did": "Map on the 5 sites of our official crawl list and 7 dairy sites, with and without instructions",
+   "happened": "empty results with no failed_results and no error on 5 sites of the official crawl list (merc, derc, uperc, iocl, amul) and 3 dairy sites (aavin, nandini-kmf, sanchi-indore (MPCDF union)); without instructions also empty on merc, derc, uperc, iocl; a bad start URL did get a clear error (sanchi-mpcdf)",
+   "expected": "an empty answer that says why (blocked, robots, nothing matched)",
+   "fix": "a reason field on empty Map/Crawl responses",
+   "evidence": "results/prompt_t/official_crawl_2026-10.json, dairy_map_2026-10-21.json, map_noinstr.json"
+  },
+  {
+   "title": "Scanned PDFs return only the letterhead",
+   "to": "Tavily",
+   "did": "Extract (basic and advanced) on Gokul's dairy rate-list PDF",
+   "happened": "607 characters of letterhead; the rates are an image",
+   "expected": "OCR of image-only PDF pages, or a flag that the text layer is empty",
+   "fix": "an ocr option, or an 'image_only' flag on the result",
+   "evidence": "results/prompt_t/dairy_followup_2026-10-21.json (gokul_adv_chars)"
+  },
+  {
+   "title": "/usage lags per-call usage",
+   "to": "Tavily",
+   "did": "compared GET /usage with the per-call include_usage credits the same day",
+   "happened": "/usage reported plan_usage 6 while per-call include_usage credits added up to 226",
+   "expected": "/usage close to the sum of per-call usage",
+   "fix": "update /usage within minutes, or document the lag",
+   "evidence": "results/feedback_evidence/tavily_usage_2026-10-20.json"
+  },
+  {
+   "title": "Nano gives no number where Super finds one on the same page",
+   "to": "Nebius / NVIDIA (Nemotron Nano)",
+   "did": "Nano read each fetched page; where it gave no number, Super re-read the page (63 saved arm and evidence files)",
+   "happened": "Super re-read 1692 pages and found a verified number (the number is in the cited line) on 43 of them",
+   "expected": "a number whenever the cited line states one",
+   "fix": "a schema-level 'required number when a currency or % is present' hint, or a confidence field",
+   "evidence": "v2/ablation/arm_*.json, v2/evidence/events_*.json (cards[].super_reread, claims[].read_by)"
+  }
+ ]
+}

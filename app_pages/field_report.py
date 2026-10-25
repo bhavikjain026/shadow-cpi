@@ -137,3 +137,14 @@ if voi:
                 f"{sp['stop_after']} of {len(sp['order'])} items are worth a search. "
                 f"{voi['credits_by_item'].get('not item-specific', 0):.0f} ledger credits are not item-specific "
                 "(page reads, and calls without a saved query).")
+
+# ---------- bug reports ----------
+br = read_json("results/bug_reports.json")
+if br:
+    st.subheader("Feedback as bug reports")
+    st.caption("Counts read from the committed results files (`results/bug_reports.json`, also `docs/tavily_bug_reports.md`).")
+    for b in br["reports"]:
+        with st.expander(f"{b['title']} · to {b['to']}"):
+            st.markdown(f"- **What we did:** {b['did']}.\n- **What happened:** {b['happened']}.\n"
+                        f"- **What we expected:** {b['expected']}.\n- **Suggested fix:** {b['fix']}.\n"
+                        f"- **Evidence:** `{b['evidence']}`.")
