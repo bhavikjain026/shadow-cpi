@@ -104,6 +104,13 @@ def label(ev, r):
     return "none"
 
 
+def own_month(ev, r):
+    """RBI only: the result names the event's own month (a page about another meeting can state an outcome too)."""
+    if ev["kind"] != "rbi":
+        return True
+    return f"{date.fromisoformat(ev['event_date']):%B}".lower() in f"{r['title']} {r['content']}".lower()
+
+
 def run(tav, rec, events=None, seed=SEED):
     """tav: a Budgeted Tavily client (cap 'finance-lookahead'). Returns the result dict (written by main)."""
     evs = [event(e) for e in (events or EVENTS)]
@@ -147,10 +154,15 @@ def metrics(out, drop=()):
         for lab in ("confirmed", "snippet", "flag"):
             res_a[lab] = {"results": sum(r["label"] == lab for i in kept[a] for r in kept[a][i]),
                           "events": sum(any(r["label"] == lab for r in kept[a][i]) for i in kept[a])}
+        by_id = {row["id"]: row for row in rows}
+        strict = {i: [r for r in kept[a][i] if r["label"] == "snippet" and own_month(by_id[i], r)] for i in kept[a]}
+        res_a["snippet_own_month"] = {"results": sum(len(v) for v in strict.values()),
+                                      "events": sum(bool(v) for v in strict.values())}
         calls = [row["arms"][a] for row in rows if a in row["arms"]]
         times = [c["response_time"] for c in calls if c.get("response_time") is not None]
         res_a.update(events=n, confirmed_wilson95=DT.wilson(res_a["confirmed"]["events"], n),
                      snippet_wilson95=DT.wilson(res_a["snippet"]["events"], n),
+                     snippet_own_month_wilson95=DT.wilson(res_a["snippet_own_month"]["events"], n),
                      results=sum(len(v) for v in kept[a].values()),
                      valid_lost=sum(len(valid[i] - {r["url"] for r in kept[a][i]}) for i in valid),
                      valid_total=sum(len(v) for v in valid.values()),
@@ -178,14 +190,17 @@ def report(out):
     for key, title in (("all", "All 14 events"), ("without_C4", f"13 events, without C4 ({FLAGGED['C4']})")):
         m = out["metrics"][key]
         L += [f"## {title}", "",
-              "| Arm | Confirmed-leak events (Wilson 95%) | Snippet-leak events (Wilson 95%) | Date-flag events | "
-              "Confirmed / snippet / date-flag results | Valid evidence lost | Undated | Credits | Median latency |",
+              "| Arm | Confirmed-leak events (Wilson 95%) | Snippet-leak events, RBI own month (Wilson 95%) "
+              "[loose] | Date-flag events | Confirmed / snippet (own month) [loose] / date-flag results | Valid evidence "
+              "lost | Undated | Credits | Median latency |",
               "|---|---|---|---|---|---|---|---|---|"]
         for a, r in m["arms"].items():
-            c, s = r["confirmed_wilson95"], r["snippet_wilson95"]
+            c, s = r["confirmed_wilson95"], r["snippet_own_month_wilson95"]
             L.append(f"| {a} | {r['confirmed']['events']} of {r['events']} ({pct(c[0])}–{pct(c[1])}) | "
-                     f"{r['snippet']['events']} of {r['events']} ({pct(s[0])}–{pct(s[1])}) | {r['flag']['events']} | "
-                     f"{r['confirmed']['results']} / {r['snippet']['results']} / {r['flag']['results']} of "
+                     f"{r['snippet_own_month']['events']} of {r['events']} ({pct(s[0])}–{pct(s[1])}) "
+                     f"[{r['snippet']['events']}] | {r['flag']['events']} | "
+                     f"{r['confirmed']['results']} / {r['snippet_own_month']['results']} [{r['snippet']['results']}] / "
+                     f"{r['flag']['results']} of "
                      f"{r['results']} | {r['valid_lost']} of {r['valid_total']} | {r['undated']} | {r['credits']} | "
                      f"{'—' if r['median_latency_s'] is None else f'{r['median_latency_s']:.2f} s'} |")
         for lab in ("confirmed", "snippet"):
@@ -197,13 +212,39 @@ def report(out):
           "first copy is after it, and Tavily's or the address's date is after it. **Snippet leak** = states the "
           "outcome with a post-cutoff date, not Wayback-confirmed (reported separately, never counted as confirmed). "
           "**Date flag** = a post-cutoff date on a result that does not state the outcome. With 13–14 events the "
-          "intervals are wide."]
+          "intervals are wide.",
+          "",
+          "**Snippet figures:** for the RBI events the primary count uses only pages that name the event's own month "
+          "(a page about another meeting can also state a repo-rate outcome); the loose count, in brackets, is the "
+          "pre-registered rule as written. Company events are the same in both.",
+          "",
+          "**Valid evidence lost** = results that are Wayback-confirmed from on or before the cutoff and name the RBI "
+          "or the company, found by either arm, that this arm did not return."]
+    retry = OUT.with_name(OUT.stem + "_wayback_retry.json")
+    if retry.exists():
+        rt = json.loads(retry.read_text(encoding="utf-8"))
+        L += ["", "## Network retry of failed Wayback lookups (logged; the results above stay primary)", "",
+              f"{rt['run_utc'][:16]} UTC, `tools/wayback_retry.py finance`: {rt['failed_urls']} failed lookups retried "
+              f"({rt['rule']}); {rt['recovered']} recovered, {rt['still_failed']} still failed.", "",
+              "| Events | Arm | Confirmed-leak events before → after | Snippet-leak events (loose) before → after | "
+              "Valid evidence lost before → after |", "|---|---|---|---|---|"]
+        for key, title in (("all", "14"), ("without_C4", "13")):
+            for a in ("N", "D"):
+                b, f = rt["before"][key]["arms"][a], rt["after"][key]["arms"][a]
+                L.append(f"| {title} | {a} | {b['confirmed']['events']} → {f['confirmed']['events']} | "
+                         f"{b['snippet']['events']} → {f['snippet']['events']} | {b['valid_lost']} of "
+                         f"{b['valid_total']} → {f['valid_lost']} of {f['valid_total']} |")
     if out["skipped"]:
         L += ["", "**Incomplete:** the credit cap stopped some calls (listed in results/finance_lookahead.json)."]
     return "\n".join(L) + "\n"
 
 
 def main():
+    if "--report" in sys.argv:                     # offline: rewrite the .md from the saved rows (0 credits)
+        out = json.loads(OUT.read_text(encoding="utf-8"))
+        out["metrics"] = {"all": metrics(out), "without_C4": metrics(out, drop=("C4",))}
+        OUT.with_suffix(".md").write_text(report(out))
+        return
     if OUT.exists():
         raise SystemExit(f"{OUT} exists: the finance check runs once")
     from shadow_cpi.budget import Budgeted, usage_check
