@@ -42,8 +42,9 @@ def test_credits_by_item_joins_ledger_to_queries():
     assert V.credits_by_item(led, calls) == {"electricity": 1.0, "milk": 1.0, "not item-specific": 1}
 
 
-def test_saved_file_is_display_only_and_current():
-    d = json.loads(V.OUT.read_text())
+def test_fresh_build_is_display_only(tmp_path, monkeypatch):
+    monkeypatch.setattr(V, "OUT", tmp_path / "voi.json")
+    d = V.build()
     assert "display only" in d["label"] and d["calibration_year"] == "2025"
     assert d["stop"]["total_pp"] == pytest.approx(sum(v["voi_pp"] for v in d["items"].values() if v["voi_pp"] is not None))
 

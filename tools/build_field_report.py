@@ -20,6 +20,7 @@ from shadow_cpi.budget import load_budget, read_ledger, spent  # noqa: E402
 from v2 import ablation as AB  # noqa: E402
 from v2 import date_test as DT  # noqa: E402
 from v2 import finance_lookahead as F  # noqa: E402
+from v2 import kinds as K  # noqa: E402
 from v2 import recall as RC  # noqa: E402
 
 OUT = ROOT / "results" / "field_report.json"
@@ -166,7 +167,7 @@ def monthly_run_cost():
     rd = radar()["runs"]
     return {"radar_run_real_credits": [x["real_credits"] for x in rd],
             "arm_a_per_month_original": a["credits"] / len(AB.MONTHS), "arm_a_searches_per_month": a["searches"] / len(AB.MONTHS),
-            "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits "
+            "note": f"one radar run = {len(K.QUERIES)} fixed searches + page reads + corroboration; arm A per month = its credits "
                     "at original cost / 9 months"}
 
 
