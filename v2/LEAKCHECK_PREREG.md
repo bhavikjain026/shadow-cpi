@@ -1,6 +1,6 @@
 # Leak checks P and E: pre-registration
 
-**Written 2026-10-25T19:05Z (UTC) (2026-10-26 00:35 IST), committed before any code for these checks and before any
+**Written 2026-10-25T19:01Z (UTC) (2026-10-26 00:31 IST), committed at `dcbb7ac` (00:32 IST) before any code for these checks and before any
 call.** Decided by the owner. **Exploratory and descriptive**: neither check changes a scored verdict, v1, the v2
 locks, the October seal or any earlier check's numbers. The rules below are not changed after results are seen;
 a bug fix is logged here with the numbers before and after.
@@ -156,3 +156,6 @@ Common: query = the span in double quotes, `exact_match` true, `search_depth` ba
 | Q047 | arm B | 2026-09-29 | b2bc34e1504f | price, 15 words | के लिए एविएशन टर्बाइन फ्यूल यानी ATF की कीमत 6.28 रुपये प्रति लीटर बढ़कर 121.28 |
 | Q048 | arm C | 2026-09-29 | fac6af09abb7 | price, 15 words | कोलकाता में 19 किलो वाले गैस सिलेंडर के दाम 2872.50 रुपये से बढ़कर 2,982 रुपये |
 | Q052 | arm H | 2026-09-29 | 9e61a9fffc4c | price, 15 words | by the Joint Electricity Regulatory Commission (JERC) for J&K and Ladakh, introduces an average 6.83 |
+
+**Correction (logged 2026-10-26, before any code or call):** the header's time first read 19:05Z, typed by hand; the
+file was written at 19:01Z and committed at 19:02Z (`dcbb7ac`). No rule changed.
