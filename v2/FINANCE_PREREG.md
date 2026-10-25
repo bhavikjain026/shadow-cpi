@@ -112,3 +112,7 @@ interval is still wide (0 of 14 → 0–22%; 7 of 14 → 27–73%); this is a sm
   but Wayback does not confirm it. Reported separately (results and events per arm); never counted as a confirmed
   leak. This replaces the earlier "date flag" for results that state the outcome.
 - **Date flag:** a date signal after the cutoff on a result that does not state the outcome, as in the date test.
+
+**Amendment 1, addendum (logged 2026-10-25T12:52:02Z UTC, offline, before any finance call).** Decided by the owner: **C4 is kept**,
+flagged "date from the board-meeting notice; no official outcome filing found". Every metric is reported **both
+ways**: all 14 events, and 13 events without C4.
