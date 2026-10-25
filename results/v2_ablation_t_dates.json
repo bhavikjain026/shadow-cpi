@@ -1,0 +1,123 @@
+{
+ "label": "EXPLORATORY, PARTIAL, added after scoring; cannot change the winner or any verdict",
+ "recall": 2,
+ "total": 29,
+ "found": [
+  "F4",
+  "T2"
+ ],
+ "verified_events": 15,
+ "moving_events": 9,
+ "false_events_upper_bound": 7,
+ "false_events": [
+  [
+   "bus",
+   "2026-01-28",
+   []
+  ],
+  [
+   "bus",
+   "2026-03-02",
+   []
+  ],
+  [
+   "bus",
+   "2026-04-21",
+   []
+  ],
+  [
+   "rail",
+   "2026-05-04",
+   []
+  ],
+  [
+   "rail",
+   "2026-05-11",
+   []
+  ],
+  [
+   "diesel",
+   "2026-06-11",
+   []
+  ],
+  [
+   "diesel",
+   "2026-07-16",
+   []
+  ]
+ ],
+ "credits": 190,
+ "new_credits": 177,
+ "credits_per_verified_event": 12.666666666666666,
+ "median_latency_s": 0.06,
+ "searches": 56,
+ "extracts": 94,
+ "corrections": 0,
+ "written_by": {},
+ "incomplete_months": [
+  "2026-07",
+  "2026-08",
+  "2026-09"
+ ],
+ "same_months": {
+  "months": [
+   "2026-01",
+   "2026-02",
+   "2026-03",
+   "2026-04",
+   "2026-05",
+   "2026-06"
+  ],
+  "known_changes_in_them": 22,
+  "t_dates_recall": 2,
+  "arm_a_recall": 5
+ },
+ "reconciliation": {
+  "credits": 190,
+  "search_calls": 56,
+  "verified_claims": 18,
+  "events": 15,
+  "matched_events": 2,
+  "unmatched_events": 13,
+  "moving_events": 9,
+  "moving_unmatched": 7,
+  "recall": 2,
+  "with_provenance": 150,
+  "calls": 150
+ },
+ "auto_parameters_chosen": [
+  {
+   "topic": "news",
+   "search_depth": "advanced",
+   "time_range": "w",
+   "searches": 38
+  },
+  {
+   "topic": "news",
+   "search_depth": "basic",
+   "time_range": "w",
+   "searches": 9
+  },
+  {
+   "topic": "news",
+   "search_depth": "advanced",
+   "time_range": "d",
+   "searches": 7
+  },
+  {
+   "topic": "general",
+   "search_depth": "basic",
+   "time_range": "y",
+   "searches": 1
+  },
+  {
+   "topic": "news",
+   "search_depth": "basic",
+   "time_range": "d",
+   "searches": 1
+  }
+ ],
+ "dates_kept_searches": 0,
+ "dated_results": 532,
+ "inside_window": 532
+}

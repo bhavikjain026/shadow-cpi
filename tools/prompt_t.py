@@ -402,8 +402,8 @@ def card():
              "| Measure | Value |", "| --- | --- |",
              f"| Tavily calls sent (uncached) | {st['calls']} (plus {st['cached']} served from the cache) |",
              f"| Credits used (ledger + {st['spent_before_ledger']} before it, reconciled to the billing page) | "
-             f"{st['credits']} of the {st['plan_limit']:,}-credit plan, plus "
-             f"{st['addon_credits']:,} add-on credits |",
+             f"{st['credits']:,} credits used of {st['plan_limit'] + st['addon_credits']:,} "
+             f"({st['plan_limit']:,} plan + {st['addon_credits']:,} add-on) |",
              f"| Credits per replay prediction (events + skeptic, mean of 9 months) | {per_pred:.1f} |",
              f"| Search results inside the requested date window | {inside} of {total} "
              f"({inside / total:.0%}); {undated} undated |" if total else "| Search results inside the window | n/a |",

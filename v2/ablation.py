@@ -13,6 +13,7 @@ Nano (Super as fallback) writes each search's parameters as JSON; code validates
 any Tavily call and logs each correction. Nothing here writes the v2 evidence ledger or touches the score locks.
 Saves v2/ablation/arm_<arm>_<month>.json.
 """
+import functools
 import json
 import re
 import statistics
@@ -22,7 +23,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from shadow_cpi.budget import BudgetExceeded, Budgeted, spent  # noqa: E402
+from shadow_cpi.budget import BudgetExceeded, Budgeted, load_budget, read_ledger, spent  # noqa: E402
 from shadow_cpi.nemotron import Nemotron  # noqa: E402
 from shadow_cpi.recorder import provenance  # noqa: E402
 from shadow_cpi.recorder import Recorder  # noqa: E402
@@ -592,15 +593,28 @@ def t_dates_section(ref):
     dk = [x["dates_kept"] for x in plan if x.get("dates_kept")]
     dated, inside = sum(d["dated_results"] for d in dk), sum(d["inside_window"] for d in dk)
     kept = sum(d["dated_results"] == d["inside_window"] and not d["auto_time_range"] for d in dk)
-    out = {"label": "EXPLORATORY, added after scoring; cannot change the winner or any verdict", **m,
+    full = [run["month"] for run in runs if run["complete"]]
+    part = [run["month"] for run in runs if not run["complete"]]
+    same = {"months": full, "known_changes_in_them": sum(c["month"] in full for c in ref),
+            "t_dates_recall": reconcile([run for run in runs if run["complete"]], ref)["recall"],
+            "arm_a_recall": reconcile([json.loads((OUT / f"arm_A_{x}.json").read_text(encoding="utf-8"))
+                                       for x in full], ref)["recall"]}
+    out = {"label": "EXPLORATORY, PARTIAL, added after scoring; cannot change the winner or any verdict", **m,
+           "incomplete_months": part, "same_months": same,
            "reconciliation": {k: v for k, v in r.items() if k != "unmatched"},
            "auto_parameters_chosen": [{"topic": t, "search_depth": d, "time_range": tr, "searches": n}
                                       for (t, d, tr), n in chose.most_common()],
            "dates_kept_searches": kept, "searches": len(dk), "dated_results": dated, "inside_window": inside}
     (ROOT / "results" / "v2_ablation_t_dates.json").write_text(json.dumps(out, ensure_ascii=False, indent=1))
-    return ["", "## Exploratory: arm T + dates (added after scoring; cannot change the winner or any verdict)", "",
+    return ["", "## Exploratory, partial: arm T + dates (added after scoring; cannot change the winner or any verdict)",
+            "",
             "Same query texts as arm T, `auto_parameters: true`, plus arm A's `start_date`/`end_date` window; no other "
-            "field from us (dated line in v2/PREREGISTRATION.md).", "",
+            "field from us (dated line in v2/PREREGISTRATION.md). "
+            f"Cap {load_budget()['caps'][ARMS['Td']['budget']]} real credits, not raised: {', '.join(full) or 'no month'} complete"
+            + (f"; {', '.join(part)} incomplete (the cap stopped them)." if part else "; no month incomplete.") + "", "",
+            f"**Like-for-like (exploratory, partial, added after scoring):** on the {len(full)} complete months, which "
+            f"hold {same['known_changes_in_them']} of the 29 known changes, T+dates found {same['t_dates_recall']} and "
+            f"arm A {same['arm_a_recall']}. The all-months row below includes the incomplete months.", "",
             "| Credits spent | Search calls | Verified claims | Distinct verified events | Matched to the 29 | Not "
             "matched (unchecked) | Recall | False events (upper bound) | Credits per verified event |",
             "|---|---|---|---|---|---|---|---|---|",
@@ -611,6 +625,50 @@ def t_dates_section(ref):
             + "; ".join(f"{t}, {d}, {tr} → {n}" for (t, d, tr), n in chose.most_common()) + ".",
             f"**Did Tavily keep our dates?** {kept} of {len(dk)} searches returned only results inside the window with no "
             f"auto time range; {inside} of {dated} dated results fell inside the window."]
+
+
+@functools.lru_cache(maxsize=None)
+def arm_t():
+    """Arm T's month files, read once per process."""
+    return tuple(json.loads((OUT / f"arm_T_{m}.json").read_text(encoding="utf-8")) for m in MONTHS)
+
+
+def t_choices():
+    """What Tavily's auto_parameters chose for arm T's searches: Counter of (topic, time_range, search_depth)."""
+    from collections import Counter
+    return Counter((str((x.get("auto_parameters") or {}).get("topic")), str((x.get("auto_parameters") or {}).get("time_range")),
+                    str((x.get("auto_parameters") or {}).get("search_depth"))) for run in arm_t() for x in run["plan"])
+
+
+def t_windows():
+    """auto_parameters' time_range over arm T's searches (Counter)."""
+    from collections import Counter
+    return Counter(tr for (_, tr, _), k in t_choices().items() for _ in range(k))
+
+
+def t_result_dates():
+    """Arm T's results: how many were dated October 2026, how many undated, how many in all."""
+    cards = [c for run in arm_t() for c in run["cards"]]
+    return {"oct": sum((c.get("published") or "").startswith("2026-10") for c in cards),
+            "none": sum(not c.get("published") for c in cards), "all": len(cards)}
+
+
+def two_credit_counts(out):
+    """The 'Two credit counts' note, from results/v2_ablation.json and the ledger's arm T offset row."""
+    t = out["arms"]["T"]
+    row = next((e for e in read_ledger() if e.get("call_id") == "phantom-T-2026-10-22"), None)
+    fix = (f" for arm T it was corrected {t['credits']} → {t['new_credits']} (logged): {len(row['phantom_of'])} of its "
+           f"{t['searches']} searches were cache hits that a budget bug charged again (ledger offset row "
+           f"`{row['call_id']}`, {row['credits']} credits)." if row else "")
+    return ("**Two credit counts.** The credit columns count every call at its original cost (as agreed for this "
+            "table). *Real new credits* is what the test itself charged;" + fix)
+
+
+def hand_checks():
+    """The check of audit/arms_unmatched.md by Claude Code against cached page text (audit/arms_unmatched_check.json),
+    or [] if not done yet."""
+    p = ROOT / "audit" / "arms_unmatched_check.json"
+    return json.loads(p.read_text(encoding="utf-8"))["checks"] if p.exists() else []
 
 
 def write_report():
@@ -627,7 +685,7 @@ def write_report():
          "db2984c; 29 known changes.", "",
          "## Reconciliation (every number below comes from this table)", "",
          "| Arm | Credits spent | Search calls | Verified claims | Distinct verified events | Events matched to the 29 "
-         "| Not matched (unchecked; may include real changes missing from the 29) | Recall (of the 29) |",
+         "| Not matched (may include real changes outside the list; see the check below) | Recall (of the 29) |",
          "|---|---|---|---|---|---|---|---|"]
     for arm, r in rec.items():
         L.append(f"| {arm} | {r['credits']} | {r['search_calls']} | {r['verified_claims']} | {r['events']} | "
@@ -643,14 +701,17 @@ def write_report():
           "metric 3).", "",
           "## Result", "",
           "| Arm | Searches written by | Recall | False events (upper bound): unmatched of CPI-moving events | "
-          "Credits per verified event | Median Tavily latency (descriptive; no target) | Incomplete months |",
-          "|---|---|---|---|---|---|---|"]
+          "Credits per verified event | Credits per known change found (added after scoring; descriptive) | "
+          "Median Tavily latency (descriptive; pre-registered with no target, not used in the verdict) | "
+          "Real new credits (charged in this test) | Incomplete months |",
+          "|---|---|---|---|---|---|---|---|---|"]
     for arm, a in out["arms"].items():
         r = rec[arm]
         L.append(f"| {arm} | {a['writer']} ({', '.join(a['languages'])}) | {r['recall']} of 29 | "
                  f"{r['moving_unmatched']} of {r['moving_events']} | "
                  f"{f(r['credits'] / r['events']) if r['events'] else '—'} ({r['credits']} ÷ {r['events']}) | "
-                 f"{f(a['median_latency_s'], 2)} s | {', '.join(a['incomplete_months']) or 'none'} |")
+                 f"{f(r['credits'] / r['recall']) if r['recall'] else '—'} ({r['credits']} ÷ {r['recall']}) | "
+                 f"{f(a['median_latency_s'], 2)} s | {a['new_credits']} | {', '.join(a['incomplete_months']) or 'none'} |")
     eq = out["equivalence"]
     wb = out["arms"]["C"]["written_by"]
     sup_c, all_c = sum(v for k, v in wb.items() if "super" in k), sum(wb.values())
@@ -659,10 +720,10 @@ def write_report():
           "Arm A's credits are those of its calls when first made, in the issue 4 and issue 14 runs: the flight "
           "recorder has 213 uncached Tavily calls tagged `v2:events`, 205 credits, equal to the credit ledger's "
           "`v2-issue4` (150) + `v2-issue14` (55). Arm A itself re-ran them from the cache at 0 new credits.", "",
-          "**Provenance (Amendment F):** added mid-test; C and T: "
-          f"{rec['C']['with_provenance'] + rec['T']['with_provenance']} of {rec['C']['calls'] + rec['T']['calls']} "
-          "calls carry a request_id and a response hash; A and B ran earlier (their responses are still in the "
-          "recorder's cache).", "",
+          two_credit_counts(out), "",
+          "**Provenance (Amendment F):** request IDs + response hashes on every call of arms C and T "
+          f"({rec['C']['with_provenance'] + rec['T']['with_provenance']} of {rec['C']['calls'] + rec['T']['calls']}); "
+          "A and B ran before this logging existed (their responses are still in the recorder's cache).", "",
           "**Label fix (logged; no number changed).** Before: \"False events (upper bound) | 6 of 8\" next to "
           "\"Recall 6 of 29\" for arm A, which read as 6 false of 8 found. After: the column says it counts "
           "unmatched events among CPI-moving items only (8 for arm A, 2 of them matched: E1 and E4), and the "
@@ -681,24 +742,67 @@ def write_report():
           f"{out['arms']['C']['diagnostics']['plan_retries_super']} of 9 months).",
           "- Model-written queries were sometimes poor, e.g. arm C, June: \"ವಿದ್ಯುತ್ ತರiffe ಜೂನ್ 2026 Karnataka Wisconsin "
           "growth\"; arm B, January: \"बस कि Fahrpreiserhöhung news\".",
-          "- Arm T: Tavily's auto_parameters chose `time_range: \"w\"` (the past week), topic news and advanced depth for "
-          "every search. Amendment F sends no dates, so every result was from October 2026, after every cutoff, and "
-          "the verifier rejected all of them: 0 of 29 is the pre-registered result.",
-          "- Median latency was pre-registered as Amendment E metric 4, with no target; it is descriptive only.",
-          "- Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a hand check."]
+          "- Arm T: auto_parameters with no dates chose recent windows: time_range "
+          + ", ".join(f"{tr} {k}" for tr, k in t_windows().most_common()) + f" of {sum(t_windows().values())} searches "
+          + "(topic, time range, depth → searches: "
+          + "; ".join(f"{t}, {tr}, {d} → {k}" for (t, tr, d), k in t_choices().most_common()) + "); "
+          + "{oct} of {all} results were dated October 2026 and {none} undated".format(**t_result_dates())
+          + ". Amendment F sends no dates, so every dated result was from the days before the run, after every "
+          "cutoff, and the verifier rejected all of them: 0 of 29 is the pre-registered result (traces: "
+          "`audit/arms_traces.md`; this note was corrected from \"advanced depth and time_range w for every "
+          "search\", logged, no number changed).",
+          "- Median latency was pre-registered as Amendment E metric 4, with no target; it is descriptive only and "
+          "plays no part in the verdict.",
+          "- Credits per known change found (credits ÷ recall) was added after scoring, as a second credit column; "
+          "it is descriptive and cannot change the verdict.",
+          "- Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a check."]
+    checks = hand_checks()
+    if checks:
+        from collections import Counter
+        n = Counter(c["verdict"] for c in checks)
+        real = [c for c in checks if c["verdict"].startswith("real")]
+        arms = sorted({c["arm"] for c in checks})
+        extras = {}
+        for c in real:
+            extras.setdefault(c["change"], set()).add(c["arm"])
+        spot = [c for c in checks if c.get("spot_check", "").startswith(("CONFIRMED", "OVERTURNED", "NOT RE-CHECKED"))]
+        opened = sum(c["spot_check"].startswith(("CONFIRMED", "OVERTURNED")) for c in spot)
+        over = {c["change"] for c in spot if c["spot_check"].startswith("OVERTURNED")}
+        over_rows = sum(c["change"] in over for c in checks)
+        L.append(f"- **Unmatched events, checked by Claude Code against cached text, {len(spot)} re-checked live in a "
+                 f"browser** (2026-10-25: {opened} opened, {len(spot) - opened} refused by the browser; "
+                 f"`audit/arms_unmatched_check.json`). Of {len(checks)}: "
+                 + ", ".join(f"{v} {k}" for k, v in n.most_common()) + ". Wrong rows by arm: "
+                 + "; ".join(f"{a} {sum(c['arm'] == a and c['verdict'] == 'wrong' for c in checks)} of "
+                             f"{sum(c['arm'] == a for c in checks)}" for a in arms)
+                 + ". The wrong rows are mostly non-Indian pages, non-domestic or commercial LPG, and lines about a "
+                 "different item."
+                 + (f" The live re-check overturned {len(over)} change{'s' if len(over) != 1 else ''} "
+                    f"({'; '.join(sorted(over))}; {over_rows} rows)." if over else ""))
+        L.append(f"- **Real changes outside the list** (reported separately; the pre-registered list of 29 and every "
+                 f"recall figure are unchanged): {len(real)} rows, {len(extras)} distinct changes. "
+                 + "; ".join(f"{ch}, found by arm{'s' if len(a) > 1 else ''} {', '.join(sorted(a))}"
+                             for ch, a in sorted(extras.items())) + ".")
     L += t_dates_section(ref)
     RESULTS.with_suffix(".md").write_text("\n".join(L) + "\n")
     A = ["# Verified events not matched to the 29 known changes (four search arms)", "",
-         "From `v2/ablation/` (Amendments E and F, development data). For a hand check: each is either a real change "
-         "missing from the audit list or a false event. Page date = the date used by the verifier (address or "
+         "From `v2/ablation/` (Amendments E and F, development data). Each is either a real change outside the list or a "
+         "false event; the last column is a check by Claude Code against cached text; rows re-checked live in a "
+         "browser on 2026-10-25 show the result after \"live:\". Page date = the date used by the verifier (address or "
          "Tavily); printed = the date printed on the page, if any.", "",
-         "| Arm | Month | Item | Effective | States | Quote | URL | Page date | Printed | Hand check |",
+         "| Arm | Month | Item | Effective | States | Quote | URL | Page date | Printed | Check (Claude Code, cached text; "
+         "live re-check) |",
          "|---|---|---|---|---|---|---|---|---|---|"]
     for arm, r in rec.items():
         for u in r["unmatched"]:
             q = u["quote"].replace("|", "/").replace("\n", " ")[:220]
+            hc = next((c for c in checks if (c["arm"], c["month"], c["item"], c["effective_date"], c["url"])
+                       == (arm, u["month"], u["item"], u["effective_date"], u["url"]) and q.startswith(c["quote_start"])),
+                      None)
             A.append(f"| {arm} | {u['month']} | {u['item']} | {u['effective_date']} | {', '.join(u['states']) or '—'} "
-                     f"| {q} | {u['url']} | {u['page_date'] or '—'} | {u['printed_date'] or '—'} | |")
+                     f"| {q} | {u['url']} | {u['page_date'] or '—'} | {u['printed_date'] or '—'} | "
+                     + (f"**{hc['verdict']}**: {hc['reason']}" if hc else "")
+                     + (f" — live: {hc['spot_check']}" if hc and hc.get("spot_check") else "") + " |")
     (ROOT / "audit" / "arms_unmatched.md").write_text("\n".join(A) + "\n")
     return rec
 
