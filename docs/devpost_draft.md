@@ -58,12 +58,12 @@ Go / no-go: **GO** under the rule registered before scoring ((c) must beat B1 (0
 - **Map + Crawl, tried honestly:** trialled on 11 official/dairy sites to find price circulars and tariff orders; returned nothing usable. The app's Tavily trace page lists each failure.
 - **Evidence chasing:** each verified event gets up to 2 follow-up searches; 5 of 12 replay events (Tavily chase, before the audit's fixes) found a confirming result on another site (report only).
 - **Measured, not claimed.** The Tavily report card (`results/tavily_report_card.md`) gives:
-  - calls: 1,888 Tavily calls sent (cached repeats and free balance checks not counted); 1,809 credits used, of a 1,000-credit monthly plan plus 3,125 add-on credits from the Nebius builder program (as of 25 Oct 2026)
+  - calls: 1,888 Tavily calls sent (cached repeats and free balance checks not counted); 1,809 credits used, of a 1,000-credit monthly plan plus 3,125 add-on credits from the Nebius builder program (as of 26 Oct 2026)
   - credits per replay prediction: 40.3 on average (event searches and the skeptic, 9 months)
-  - share of dated search results inside the requested window: 78% (5,160 of 6,592; as of 25 Oct 2026)
+  - share of dated search results inside the requested window: 78% (5,160 of 6,592; as of 26 Oct 2026)
   - share of quotes verified: 91 of 93 (March 2026 test; the number must appear in the cited line)
   - share of events confirmed by 2 sources: 4 of 9 replay events (after the audit's fixes)
-  - median latency: 4.1 s per Tavily call (as of 25 Oct 2026)
+  - median latency: 4.1 s per Tavily call (as of 26 Oct 2026)
   - direct downloads, logged: 154 calls (MoSPI's API, the CAPTCHA-gated DoCA food prices downloaded by hand, and failed Extracts)
 - **Attribution:** the nowcast with vs without Tavily evidence, each month (`results/tavily_attribution.csv`): Tavily evidence lowered the mean miss from 0.225 to 0.194 pp and was closer in 6 of 9 months (after the audit's bug fixes).
 

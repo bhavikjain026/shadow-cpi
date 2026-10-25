@@ -52,7 +52,7 @@ logged in the flight recorder. All Tavily requests go through one function,
 | **Search** (evidence chase) | Up to 2 follow-up searches per verified event: the same change elsewhere, and the official notice | [`tools/prompt_t.py` L316](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/tools/prompt_t.py#L316) |
 | **GET /usage** (guard) | Before every live run in the app: refuse below 400 credits left (hard reserve), or if the check fails | [`tavily.py` L70](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/tavily.py#L70), [`live_run.py` L68](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/live_run.py#L68) |
 
-Measured in [`results/tavily_report_card.md`](results/tavily_report_card.md) (as of 25 Oct 2026): 1,888 Tavily calls
+Measured in [`results/tavily_report_card.md`](results/tavily_report_card.md) (as of 26 Oct 2026): 1,888 Tavily calls
 sent, 1,809 credits used (of a 1,000-credit monthly plan plus 3,125 add-on credits), 78% of dated search results inside
 the requested window.
 Three sources do not come through Tavily, and each is logged as a direct download: the Ministry of Statistics and
