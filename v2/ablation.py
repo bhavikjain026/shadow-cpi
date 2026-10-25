@@ -752,13 +752,16 @@ def write_report():
             extras.setdefault((c["month"], c["item"]), {"name": None, "arms": set()})["arms"].add(c["arm"])
             if "same" not in c["reason"] and "duplicate" not in c["reason"]:
                 extras[(c["month"], c["item"])]["name"] = c["reason"].split(";")[0].split(" is a real")[0]
-        L.append(f"- **Unmatched events, checked by Claude Code against cached page text; 10 spot-checked by Bhavik "
-                 f"(spot check pending)** (`audit/arms_unmatched_check.json`). Of {len(checks)}: "
+        rechecked = sum(c.get("spot_check", "").startswith(("CONFIRMED", "OVERTURNED")) for c in checks)
+        L.append(f"- **Unmatched events, checked by Claude Code against cached text, 10 re-checked live in a browser** "
+                 f"(2026-10-25: {rechecked} opened, {10 - rechecked} refused by the browser; `audit/arms_unmatched_check.json`). "
+                 f"Of {len(checks)}: "
                  + ", ".join(f"{v} {k}" for k, v in n.most_common()) + ". Wrong rows by arm: "
                  + "; ".join(f"{a} {sum(c['arm'] == a and c['verdict'] == 'wrong' for c in checks)} of "
                              f"{sum(c['arm'] == a for c in checks)}" for a in arms)
                  + ". The wrong rows are mostly non-Indian pages, non-domestic or commercial LPG, and lines about a "
-                 "different item.")
+                 "different item. The live re-check overturned one change: Bengaluru Metro's 9 Feb rise was put on hold "
+                 "before it took effect (4 rows).")
         L.append(f"- **Real changes outside the list** (reported separately; the pre-registered list of 29 and every "
                  f"recall figure are unchanged): {len(real)} rows, {len(extras)} distinct changes. "
                  + "; ".join(f"{e['name']} ({m}), found by arm{'s' if len(e['arms']) > 1 else ''} "
@@ -767,10 +770,11 @@ def write_report():
     RESULTS.with_suffix(".md").write_text("\n".join(L) + "\n")
     A = ["# Verified events not matched to the 29 known changes (four search arms)", "",
          "From `v2/ablation/` (Amendments E and F, development data). Each is either a real change outside the list or a "
-         "false event; the last column is a check by Claude Code against cached page text (10 to be spot-checked by "
-         "Bhavik; pending). Page date = the date used by the verifier (address or "
+         "false event; the last column is a check by Claude Code against cached text, 10 re-checked live in a browser "
+         "on 2026-10-25 (shown after \"live:\"). Page date = the date used by the verifier (address or "
          "Tavily); printed = the date printed on the page, if any.", "",
-         "| Arm | Month | Item | Effective | States | Quote | URL | Page date | Printed | Check (Claude Code, cached page text) |",
+         "| Arm | Month | Item | Effective | States | Quote | URL | Page date | Printed | Check (Claude Code, cached text; "
+         "live re-check) |",
          "|---|---|---|---|---|---|---|---|---|---|"]
     for arm, r in rec.items():
         for u in r["unmatched"]:
@@ -780,7 +784,8 @@ def write_report():
                       None)
             A.append(f"| {arm} | {u['month']} | {u['item']} | {u['effective_date']} | {', '.join(u['states']) or '—'} "
                      f"| {q} | {u['url']} | {u['page_date'] or '—'} | {u['printed_date'] or '—'} | "
-                     + (f"**{hc['verdict']}**: {hc['reason']}" if hc else "") + " |")
+                     + (f"**{hc['verdict']}**: {hc['reason']}" if hc else "")
+                     + (f" — live: {hc['spot_check']}" if hc and hc.get("spot_check") else "") + " |")
     (ROOT / "audit" / "arms_unmatched.md").write_text("\n".join(A) + "\n")
     return rec
 

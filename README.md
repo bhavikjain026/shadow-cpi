@@ -8,8 +8,8 @@ number cited, and seals each call in public before release.**
 **Result.** Jan–Sep 2026 replay: Shadow CPI missed by 0.194 percentage points on average; on the 6 months with an
 economists' poll, 0.150 vs the poll's 0.148 (about a tie). ([`results/score_lock.json`](results/score_lock.json))
 
-**Independent audit.** 12 events independently audited (AI-assisted search). Browser check of every source page:
-9 quotes verbatim, 1 paywalled, 2 unreachable (**UNVERIFIED: tally reported by Eshan, per-row evidence not in repo**; [`audit/quote_check.md`](audit/quote_check.md)). Verdicts:
+**Independent audit.** 12 events independently audited (AI-assisted search). Source pages then opened in a browser
+(2026-10-25): 10 quotes verbatim (9 in the article text, 1 in the page title only), 1 paywalled, 1 not checked (the browser refuses Times of India) ([`audit/quote_check.md`](audit/quote_check.md)). Verdicts:
 5 correct, 3 partly, 3 wrong, 1 unclear. Confirmed by another outlet: **9 of 12** (audit, other outlets). Confirmed
 by Tavily's own evidence chase: **5 of 12** (before the fixes) and **4 of 9** (after them). The audit led to four
 general bug fixes, logged with scores before and after: retail prices only (dropped a wholesale milk event), the

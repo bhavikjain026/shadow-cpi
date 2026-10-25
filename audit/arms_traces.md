@@ -2,7 +2,7 @@
 
 From the arm files in `v2/ablation/` (Amendments E and F, development data). Each trace is one search: who wrote the
 query, what was sent to Tavily, what came back, and what the verifier did with each page. Read from the files; no
-new calls. Verdicts on unmatched events: checked by Claude Code against cached page text; 10 spot-checked by Bhavik (spot check pending) (`audit/arms_unmatched_check.json`).
+new calls. Verdicts on unmatched events: checked by Claude Code against cached text, 10 re-checked live in a browser on 2026-10-25 (`audit/arms_unmatched_check.json`).
 
 ## 1. Bad query, arm C, June: "ವಿದ್ಯುತ್ ತರiffe ಜೂನ್ 2026 Karnataka Wisconsin growth"
 - **Written by** Nemotron Super (`v2/ablation/arm_C_2026-06.json`). Kannada "electricity", a half-English
@@ -26,7 +26,10 @@ new calls. Verdicts on unmatched events: checked by Claude Code against cached p
 - **Back:** 5 pages, all on Bengaluru Metro's fare revision. 2 verified (Swarajya headline; Moneycontrol: "Bengaluru
   Metro fares to increase by 5% from February 9"); 3 rejected (price not in the cited line, no price given, and
   The Hindu's "fare hike put on hold" page with no claim to check).
-- **Check (Claude Code, cached page text):** a **real change outside the list** of 29 (Karnataka). The Moneycontrol row also tags Delhi, wrongly.
+- **Check:** from the cached text, a real change outside the list of 29 (Karnataka). **Overturned by the live re-check
+  (2026-10-25): wrong.** The same search had returned The Hindu's "fare hike put on hold" page (8 Feb 2026): the
+  rise was put on hold before 9 Feb, so it never took effect. A verified line can still describe a change that was
+  later withdrawn; the verifier does not follow events up.
 
 ## 4. Verified but wrong, arm C, March: "पेट्रोल डीजल मूल्य वृद्धि मार्च 2026 भारत"
 - **Written by** Super (`arm_C_2026-03.json`). **Sent:** news, basic, 8 results, Hindi, 19 Feb – 29 Mar.

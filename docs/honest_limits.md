@@ -43,8 +43,10 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
 - **GST rate cuts are a structural miss.** The 22 Sep 2025 GST cuts changed many items by different amounts, with no single price change to apply, so the event layer does not apply them.
 
 ## Independent audit
-- **12 events independently audited (AI-assisted search).** A browser check of every source page is reported as
-  9 quotes verbatim, 1 paywalled, 2 unreachable (**UNVERIFIED: tally reported by Eshan, per-row evidence not in repo**; `audit/quote_check.md`). Eshan audited the 12 verified test-month events
+- **12 events independently audited (AI-assisted search).** Source pages then opened in a browser on
+  2026-10-25 by Claude Code: 10 quotes verbatim (9 in the article text, 1 in the page title only), 1 paywalled, 1 not checked (the browser refuses Times of India) (`audit/quote_check.md`). **This differs from
+  the 9/1/2 tally reported earlier by Eshan; ours is used everywhere**, with the page date seen for each row. One
+  quote is verbatim only in the page's title, not its article text. Eshan audited the 12 verified test-month events
   by web search (`audit/event_audit.md`, PR #4): 5 correct, 3 partly, 3 wrong, 1 unclear. Confirmed by another
   outlet: 9 of 12 (audit, other outlets). Confirmed by Tavily's evidence chase: 5 of 12 (before the fixes) and 4 of
   9 (after them).
