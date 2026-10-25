@@ -120,7 +120,7 @@ def test_run_live_usage_failure_or_low_balance_shows_saved_run(monkeypatch):
     assert "usage check failed" in text and "Saved run" in text
     monkeypatch.setattr(L, "usage_remaining", lambda *a, **k: (120, ""))
     text = _click_run(load("home"))
-    assert "fewer than 150 credits" in text and "Saved run" in text
+    assert "fewer than 400 credits" in text and "Saved run" in text
 
 
 def test_run_live_session_cap_shows_saved_run(monkeypatch):

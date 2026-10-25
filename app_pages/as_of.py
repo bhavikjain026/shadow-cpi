@@ -18,7 +18,7 @@ c1, c2, c3 = st.columns(3)
 c1.metric("Nowcast (YoY)", "—" if v["nowcast"] is None else pct(v["nowcast"], 2))
 c2.metric("Basket measured", "—" if v["coverage"] is None else f"{v['coverage']:.0%}")
 c3.metric("Verified quotes found", len(v["evidence"]))
-st.caption(v["note"] + ".")
+st.caption(v["note"][0].upper() + v["note"][1:] + ".")
 if v["evidence"]:
     st.dataframe([{"Published": e["published"], "Kind": e["kind"] or "—",
                    "Change": "—" if e["change"] is None else f"{e['change'] * 100:+.2f}%", "Quote": e["quote"],

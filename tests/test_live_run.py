@@ -27,7 +27,7 @@ def ledger(spent_total=0, live=0):
 
 def test_limits_are_the_owner_caps():
     lim = L.limits(CFG)
-    assert (lim["per_session"], lim["per_day"], lim["credit_floor"], lim["usage_floor"]) == (3, 8, 100, 150)
+    assert (lim["per_session"], lim["per_day"], lim["credit_floor"], lim["usage_floor"]) == (3, 8, 400, 400)
 
 
 def test_allowed_with_keys_and_room(tmp_path):
@@ -56,12 +56,12 @@ def test_day_cap_8_for_the_whole_app(tmp_path):
     assert L.gate(0, datetime(2026, 10, 23, tzinfo=timezone.utc), p, CFG, ledger(0), have_keys=True)[0]
 
 
-def test_credit_floor_100(tmp_path):
+def test_credit_floor_400(tmp_path):
     from shadow_cpi.budget import account_limit
-    room = account_limit(CFG) - CFG["spent_before_ledger"] - 100 - 8   # balance minus one scan cap = exactly 100
+    room = account_limit(CFG) - CFG["spent_before_ledger"] - 400 - 8   # balance minus one scan cap = exactly 400
     assert L.gate(0, NOW, tmp_path / "r", CFG, ledger(room), have_keys=True)[0]
     ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, ledger(room + 1), have_keys=True)
-    assert not ok and "floor of 100" in msg
+    assert not ok and "floor of 400" in msg
 
 
 def test_total_live_budget(tmp_path):
@@ -161,10 +161,10 @@ def test_gate_refuses_when_usage_fails_or_balance_low(tmp_path, monkeypatch):
     assert not ok and "usage check failed (TimeoutError)" in msg
     ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, ledger(0), have_keys=True, usage_fetch=lambda: {"key": {}})
     assert not ok and "no credit limit" in msg
-    low = {"account": {"plan_limit": 1500, "plan_usage": 1351}}                # 149 left, no add-on
+    low = {"account": {"plan_limit": 1500, "plan_usage": 1101}}                # 399 left, no add-on
     ok, msg = L.gate(0, NOW, tmp_path / "r", NO_ADDON, ledger(0), have_keys=True, usage_fetch=lambda: low)
-    assert not ok and "fewer than 150 credits" in msg
-    edge = {"account": {"plan_limit": 1500, "plan_usage": 1350}}               # exactly 150 left
+    assert not ok and "fewer than 400 credits" in msg
+    edge = {"account": {"plan_limit": 1500, "plan_usage": 1100}}               # exactly 400 left
     assert L.gate(0, NOW, tmp_path / "r", NO_ADDON, ledger(0), have_keys=True,
                   usage_fetch=lambda: edge) == (True, "")
 
@@ -181,7 +181,7 @@ def test_plan_and_addon_both_low_is_refused(tmp_path, monkeypatch):
     plan_done = {"account": {"plan_limit": 1000, "plan_usage": 1000}}
     spent = ledger(1000 + CFG["addon_credits"] - 125 - CFG["spent_before_ledger"])   # 125 add-on credits left
     ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, spent, have_keys=True, usage_fetch=lambda: plan_done)
-    assert not ok and "fewer than 150 credits" in msg
+    assert not ok and "floor of 400" in msg            # the 400-credit hard reserve refuses before /usage is asked
 
 
 def test_usage_failure_is_refused_even_with_addon_left(tmp_path, monkeypatch):
@@ -196,7 +196,7 @@ def test_usage_failure_is_refused_even_with_addon_left(tmp_path, monkeypatch):
 def test_ledger_check_still_applies_when_usage_is_fine(tmp_path):
     from shadow_cpi.budget import account_limit
     ok, msg = L.gate(0, NOW, tmp_path / "r", CFG, ledger(account_limit(CFG)), have_keys=True)
-    assert not ok and "floor of 100" in msg
+    assert not ok and "floor of 400" in msg
 
 
 def test_tavily_usage_is_a_fresh_get_with_the_same_key(tmp_path, monkeypatch):

@@ -73,7 +73,7 @@ before each push that should change what the app shows (step 1).
   GitHub turns scheduled workflows off after 60 days without activity in the repository, which is after judging
   ends (15 Dec 12:00 PT = 16 Dec 01:30 IST). Open the app yourself before a demo.
 - **Live-run guards.** Before every live run the app asks Tavily for the real balance (GET /usage, same key) and
-  refuses the run if fewer than 150 credits are left, or if that check fails or returns no limit. It also keeps the
+  refuses the run if fewer than 400 credits are left, or if that check fails or returns no limit. It also keeps the
   ledger check (100-credit floor), at most 8 runs per day for the whole app and 3 per visitor, and the per-run caps
   (8 credits per scan, 120 for all scans). The per-day count and the ledger live inside the running app and reset
   on a reboot or redeploy; the /usage check does not, so it is the one that holds the balance. /usage can lag: on
@@ -84,7 +84,7 @@ before each push that should change what the app shows (step 1).
   showed a 1,500-credit plan, but GET /usage reports `account.plan_limit` 1000 (`plan_usage` 697, `paygo_limit` null,
   `paygo_usage` 0, no add-on field). `config/budget.json` uses the lower figure, 1,000, until the two agree. Before
   every live run the app computes **remaining = (plan_limit − plan_usage, from GET /usage) + (add-on credits in
-  `config/budget.json` − add-on credits used, from the ledger)** and refuses the run below 150. If /usage fails or
+  `config/budget.json` − add-on credits used, from the ledger)** and refuses the run below 400. If /usage fails or
   returns no limit, the run is refused.
 - **Assumption: Tavily spends plan credits before add-on credits.** So add-on credits count as used only for
   spending beyond the plan limit that /usage reports (ledger total, reconciled to the billing page, minus that limit).

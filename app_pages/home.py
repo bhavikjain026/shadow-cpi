@@ -17,7 +17,7 @@ header("Experimental nowcast", f"Shadow CPI: an {NOWCAST_WORDS} of India's next 
 st.markdown("**How it works:** Tavily searches the web, with dates locked, for price evidence → Nemotron on Nebius "
             "Token Factory pulls out only quoted, dated prices → plain code turns them into a CPI estimate with a "
             "range, sealed before release.")
-st.page_link("app_pages/field_report.py", label="Tavily field report: what we measured about Tavily's search parameters",
+st.page_link("app_pages/field_report.py", label="Tavily field report",
              icon="🧪")
 lock = read_json("results/score_lock.json")
 if lock:
