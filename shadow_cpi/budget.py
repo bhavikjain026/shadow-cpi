@@ -76,8 +76,11 @@ def call_cost(endpoint, body):
 class Budgeted:
     """Wraps a Tavily client; every call charges `budgets` (list of names). Hard caps, see module docstring."""
 
-    def __init__(self, tav, budgets, cfg=None, ledger_path=LEDGER, cache_only=False):
+    def __init__(self, tav, budgets, cfg=None, ledger_path=LEDGER, cache_only=False, fresh=False):
         self.tav, self.budgets, self.cache_only = tav, list(budgets), cache_only
+        # fresh: every call is sent and charged even if a cached copy exists (a recorder that does not read its cache
+        # forces this, so a real call can never pass as a free cache hit)
+        self.fresh = fresh or (getattr(tav, "rec", None) is not None and not tav.rec.use_cache)
         self.cfg = cfg or load_budget()
         self.ledger_path = Path(ledger_path)
         self.used = 0
@@ -85,7 +88,7 @@ class Budgeted:
 
     def charge(self, *budgets):
         """A copy charging these budgets instead (same ledger, same client)."""
-        return Budgeted(self.tav, budgets, self.cfg, self.ledger_path, self.cache_only)
+        return Budgeted(self.tav, budgets, self.cfg, self.ledger_path, self.cache_only, self.fresh)
 
     def _cached(self, endpoint, body):
         body = {**body, "include_usage": True}
@@ -119,7 +122,7 @@ class Budgeted:
             f.write(json.dumps(row) + "\n")
 
     def _run(self, endpoint, body, fn):
-        if self._cached(endpoint, body):
+        if not self.fresh and self._cached(endpoint, body):
             resp, cid = fn()
             if not self.cache_only:                 # frozen re-runs spend nothing and leave the ledger alone
                 self._write(cid, endpoint, resp, 0, cached=True)
