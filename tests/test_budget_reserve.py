@@ -119,3 +119,25 @@ def test_cached_rows_do_not_use_up_a_run_now_scan():
     c = {"plans": {"cut5_run_now": {"scans_per_day": 1}}}
     led = [{"credits": 0, "cached": True, "budgets": ["run-now-scan/2026-12-01#1"]}]
     assert run_now_allowed("2026-12-01", led, c) == "run-now-scan/2026-12-01#1"
+
+
+def test_fresh_client_sends_and_charges_even_when_a_cached_copy_exists(tmp_path):
+    """Amendment R1 (radar): a recorder that does not read its cache must never pass a real call as a free cache hit."""
+    from shadow_cpi.budget import read_ledger, spent
+    from shadow_cpi.recorder import Recorder
+    from shadow_cpi.tavily import Tavily
+    sent = []
+
+    def transport(*a):
+        sent.append(a)
+        return {"request_id": f"r{len(sent)}", "results": [], "usage": {"credits": 1}}
+    led = tmp_path / "ledger.jsonl"
+    cached = Budgeted(Tavily(api_key="t", recorder=Recorder(cache_dir=tmp_path / "c", log_file=tmp_path / "l"),
+                             transport=transport), ["prompt-t"], cfg=cfg(), ledger_path=led)
+    cached.search("q")                                                         # fills the cache, 1 credit
+    fresh = Budgeted(Tavily(api_key="t", recorder=Recorder(cache_dir=tmp_path / "c", log_file=tmp_path / "l",
+                                                           use_cache=False), transport=transport),
+                     ["prompt-t"], cfg=cfg(), ledger_path=led)
+    assert fresh.fresh
+    fresh.search("q")
+    assert len(sent) == 2 and spent("prompt-t", path=led) == 2 and not any(e.get("cached") for e in read_ledger(led))

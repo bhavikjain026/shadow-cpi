@@ -101,22 +101,23 @@ def same_event(ev, cl):
 
 
 def corroborate(ev, month, meter, nem, nano, sup, seen, skipped, tag):
-    dom = primary_for(ev["kind"], ev["states"])
-    if not dom or any(is_primary(s["domain"]) for s in ev["sources"]):
+    """Amendment R1: one news search with arm A's settings (English news domains, mode prefer, no restriction to a
+    primary domain), so a second independent outlet can be found for a single-source event."""
+    if any(is_primary(s["domain"]) for s in ev["sources"]):
         return None
     start, end = R.window(month)
     place = ", ".join(ev["states"]) or "India"
     q = f"{ev['kind']} price {place} {datetime.strptime(month, '%Y-%m'):%B %Y}"
     try:
-        resp, sid = meter.search(q, topic="news", search_depth="basic", max_results=5, start_date=start,
-                                 end_date=end, include_domains=[dom], include_domains_mode="restrict",
+        resp, sid = meter.search(q, topic="news", search_depth="basic", max_results=10, start_date=start,
+                                 end_date=end, include_domains=K.DOMAINS["en"], include_domains_mode="prefer",
                                  tag=f"{tag} corroborate")
     except BudgetExceeded as e:
         skipped.append({"call": "corroborate", "query": q, "why": str(e)})
         return None
     cards = PL.read_results(resp, sid, "en", month, nem, nano, f"{tag} corroborate", seen)
     verify(cards, month, meter, nem, nano, sup, skipped, f"{tag} corroborate")
-    return {"domain": dom, "query": q, "cards": cards}
+    return {"domain": None, "mode": "prefer", "query": q, "cards": cards}
 
 
 # ---------- events, tiers, effect ----------
@@ -261,7 +262,8 @@ if __name__ == "__main__":
         from shadow_cpi.tavily import Tavily
         rec = Recorder()
         from shadow_cpi.budget import usage_check
-        tav = Budgeted(Tavily(recorder=rec), [BUDGET])
+        # Amendment R1: Tavily calls are sent fresh each day (saved and logged, never served from the cache) and charged
+        tav = Budgeted(Tavily(recorder=Recorder(use_cache=False)), [BUDGET], fresh=True)
         s = run(tav, Nemotron(recorder=rec), models()["small"], models()["mid"])
         print(usage_check(tav.tav)[1])
         print(f"{len(s['events'])} events; {sum(e['tier'] == 'corroborated' for e in s['events'])} corroborated")

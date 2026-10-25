@@ -53,3 +53,17 @@ October CPI, frozen, then scored against a list built independently afterwards.
 2026-10-25 (no Tavily credits; `v2/RADAR_DOMAIN_CHECK.md`). Replaced in `v2/radar_primary.json`: electricity /
 Tamil Nadu tnerc.gov.in → tnerc.tn.gov.in; electricity / Jammu and Kashmir jkserc.nic.in → jpdcl.jk.gov.in; bus /
 Karnataka ksrtc.in → ksrtc.karnataka.gov.in. Nothing else in this file changes; strategy A and the 150 cap stand.
+
+**Amendment R1 (logged), 2026-10-25T13:42:19Z (UTC), after run 1 and before run 2.** Decided by the owner, with one technical
+change logged alongside it. Rules 3–8 and the 150 cap are unchanged; run 1 stands as run.
+1. **Corroboration of a single-source event** (tier "verified") no longer restricts the search to a primary domain.
+   It is one news search with arm A's settings: topic news, basic depth, `max_results` 10, the radar window
+   (`v2.rules.window("2026-10")`), arm A's English news domains in `include_domains_mode` **prefer**; query =
+   "<kind> price <states or India> October 2026". Any new verified page that matches the event (the Amendment C
+   matcher) is added to its sources, so a second independent outlet can make it corroborated (rule 3). The primary
+   domain list (`v2/radar_primary.json`) is unchanged and still makes a page primary.
+2. **Fresh searches each day (technical, logged).** The radar's searches are fixed, so a run on a later day would
+   otherwise send the same requests and be served the first day's cached responses. From run 2, the radar's Tavily
+   calls bypass the cache (responses are still saved and logged), and the credit cap charges every such call: a
+   client that does not read the cache is never treated as "cached" by the budget check. Nemotron reads still use
+   the cache (same page text, same reading). Pages already read on an earlier day are not read again.

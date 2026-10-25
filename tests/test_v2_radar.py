@@ -87,8 +87,9 @@ def test_run_freeze_score_end_to_end(tmp_path, monkeypatch):
     s = RD.run(tav, FakeNem(), "nano", "super", now=datetime(2026, 10, 25, tzinfo=timezone.utc), strat="A")
     e = s["events"][0]
     assert e["kind"] == "electricity" and e["tavily_only"] and e["tier"] == "verified"
-    assert tav.last["include_domains"] == ["derc.gov.in"] and tav.last["include_domains_mode"] == "restrict"
-    assert s["corroboration"][0]["domain"] == "derc.gov.in"
+    # Amendment R1: corroboration is an open news search (arm A's English domains, prefer), not restricted
+    assert tav.last["include_domains"] == RD.K.DOMAINS["en"] and tav.last["include_domains_mode"] == "prefer"
+    assert s["corroboration"][0]["mode"] == "prefer"
     RD.freeze(now=datetime(2026, 10, 29, 18, 0, tzinfo=timezone.utc))
     assert len(RD.FROZEN.with_suffix(".sha256").read_text().strip()) == 64
     lst = [{"kind": "electricity", "month": "2026-10", "date": "2026-10-11", "states": ["nct of delhi"],
@@ -99,3 +100,19 @@ def test_run_freeze_score_end_to_end(tmp_path, monkeypatch):
     assert sc["tiers"]["verified"]["recall"] == 1.0 and sc["tiers"]["corroborated"]["events"] == 0
     with pytest.raises(SystemExit, match="scored once"):
         RD.score(scoring=lst)
+
+
+def test_corroboration_is_open_news_search_with_arm_a_settings(monkeypatch):
+    """Amendment R1: no restriction to a primary domain; arm A's English domains in prefer mode."""
+    sent = {}
+
+    class M:
+        def search(self, q, **kw):
+            sent.update(q=q, **kw)
+            return {"results": []}, "sid"
+    monkeypatch.setattr(RD, "verify", lambda *a, **k: None)
+    out = RD.corroborate(ev(src("thehindu.com"), kind="milk", states=("madhya pradesh",)), "2026-10", M(), None, None,
+                         None, set(), [], "t")
+    assert sent["include_domains_mode"] == "prefer" and sent["include_domains"] == RD.K.DOMAINS["en"]
+    assert sent["max_results"] == 10 and sent["q"] == "milk price madhya pradesh October 2026" and out["mode"] == "prefer"
+    assert RD.corroborate(ev(src("derc.gov.in")), "2026-10", M(), None, None, None, set(), [], "t") is None
