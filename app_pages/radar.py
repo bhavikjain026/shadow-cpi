@@ -42,3 +42,14 @@ if sc:
                    "Events": v["events"], "Listed changes found": f"{v['found']} of {sc['counted']}"}
                   for t, v in sc["tiers"].items()], hide_index=True, width="stretch")
     st.caption("Changes first reported after the freeze are not counted as misses.")
+
+# ---------- value of information (display only: the radar does not use it) ----------
+voi = read_json("results/voi.json")
+if voi:
+    st.subheader("Why these searches (value of information)")
+    st.caption(f"Each fixed search is worth up to the summed value of information of the items it names: CPI weight × "
+               f"{voi['calibration_year']} month-on-month uncertainty × chance of a change of at least "
+               f"{voi['change_pct']:.0f}% ({voi['calibration_year']} history). {voi['label'].capitalize()}.")
+    st.dataframe([{"Language": s["lang"], "Search": s["query"], "Items": ", ".join(s["items"]) or "—",
+                   "Why this search: worth up to (pp)": "—" if s["worth_up_to_pp"] is None
+                   else f"{s['worth_up_to_pp']:.4f}"} for s in voi["searches"]], hide_index=True, width="stretch")

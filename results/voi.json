@@ -1,0 +1,267 @@
+{
+ "calibration_year": "2025",
+ "change_pct": 1.0,
+ "items": {
+  "electricity": {
+   "cpi_code": "04.5.1.0.2.01",
+   "weight_share": 0.02327700493361841,
+   "sd_mom_pct": 0.6291687365292754,
+   "p_change": 0.09090909090909091,
+   "months": 11,
+   "voi_pp": 0.0013313785258427641
+  },
+  "milk": {
+   "cpi_code": "01.1.4.1.1.01",
+   "weight_share": 0.05255174458527576,
+   "sd_mom_pct": 0.22184173634880328,
+   "p_change": 0.0,
+   "months": 11,
+   "voi_pp": 0.0
+  },
+  "lpg": {
+   "cpi_code": "04.5.2.2.1.01",
+   "weight_share": 0.01981365827973307,
+   "sd_mom_pct": 0.7445301779299155,
+   "p_change": 0.18181818181818182,
+   "months": 11,
+   "voi_pp": 0.0026821575499004014
+  },
+  "diesel": {
+   "cpi_code": "07.2.2.1.1.01",
+   "weight_share": 0.0031671216953441054,
+   "sd_mom_pct": 0.0664387978837192,
+   "p_change": 0.0,
+   "months": 11,
+   "voi_pp": 0.0
+  },
+  "petrol": {
+   "cpi_code": "07.2.2.2.1.01",
+   "weight_share": 0.04488770858316457,
+   "sd_mom_pct": 0.010289561406531466,
+   "p_change": 0.0,
+   "months": 11,
+   "voi_pp": 0.0
+  },
+  "metro": {
+   "cpi_code": null,
+   "voi_pp": null,
+   "why_missing": "no official item index"
+  },
+  "bus": {
+   "cpi_code": "07.3.1.2.2.01",
+   "weight_share": 0.006837370433608975,
+   "sd_mom_pct": 0.11332574511832645,
+   "p_change": 0.0,
+   "months": 11,
+   "voi_pp": 0.0
+  },
+  "rail": {
+   "cpi_code": "07.3.1.1.2.01",
+   "weight_share": 0.0018580334091352,
+   "sd_mom_pct": 0.45172587154066934,
+   "p_change": 0.09090909090909091,
+   "months": 11,
+   "voi_pp": 7.630197828120721e-05
+  },
+  "mobile": {
+   "cpi_code": "08.3.4.0.2.01",
+   "weight_share": 0.019203878624504556,
+   "sd_mom_pct": 0.214731277593126,
+   "p_change": 0.0,
+   "months": 11,
+   "voi_pp": 0.0
+  }
+ },
+ "stop": {
+  "order": [
+   {
+    "kind": "lpg",
+    "voi_pp": 0.0026821575499004014,
+    "remaining_before_pp": 0.004089838054024373,
+    "worth_searching": false
+   },
+   {
+    "kind": "electricity",
+    "voi_pp": 0.0013313785258427641,
+    "remaining_before_pp": 0.0014076805041239714,
+    "worth_searching": false
+   },
+   {
+    "kind": "rail",
+    "voi_pp": 7.630197828120721e-05,
+    "remaining_before_pp": 7.630197828120732e-05,
+    "worth_searching": false
+   },
+   {
+    "kind": "milk",
+    "voi_pp": 0.0,
+    "remaining_before_pp": 1.0842021724855044e-19,
+    "worth_searching": false
+   },
+   {
+    "kind": "diesel",
+    "voi_pp": 0.0,
+    "remaining_before_pp": 1.0842021724855044e-19,
+    "worth_searching": false
+   },
+   {
+    "kind": "petrol",
+    "voi_pp": 0.0,
+    "remaining_before_pp": 1.0842021724855044e-19,
+    "worth_searching": false
+   },
+   {
+    "kind": "bus",
+    "voi_pp": 0.0,
+    "remaining_before_pp": 1.0842021724855044e-19,
+    "worth_searching": false
+   },
+   {
+    "kind": "mobile",
+    "voi_pp": 0.0,
+    "remaining_before_pp": 1.0842021724855044e-19,
+    "worth_searching": false
+   }
+  ],
+  "stop_after": 0,
+  "stop_pp": 0.01,
+  "total_pp": 0.004089838054024373
+ },
+ "searches": [
+  {
+   "lang": "en",
+   "query": "electricity tariff hike per unit regulatory commission order",
+   "items": [
+    "electricity"
+   ],
+   "worth_up_to_pp": 0.0013313785258427641
+  },
+  {
+   "lang": "en",
+   "query": "milk price hike per litre",
+   "items": [
+    "milk"
+   ],
+   "worth_up_to_pp": 0.0
+  },
+  {
+   "lang": "en",
+   "query": "bus fare hike metro fare rail fare revision",
+   "items": [
+    "metro",
+    "bus",
+    "rail"
+   ],
+   "worth_up_to_pp": 7.630197828120721e-05
+  },
+  {
+   "lang": "en",
+   "query": "petrol diesel price hike LPG cylinder price mobile tariff hike",
+   "items": [
+    "lpg",
+    "diesel",
+    "petrol",
+    "mobile"
+   ],
+   "worth_up_to_pp": 0.0026821575499004014
+  },
+  {
+   "lang": "hi",
+   "query": "बिजली की दरें बढ़ीं प्रति यूनिट",
+   "items": [
+    "electricity"
+   ],
+   "worth_up_to_pp": 0.0013313785258427641
+  },
+  {
+   "lang": "hi",
+   "query": "दूध के दाम बढ़े प्रति लीटर",
+   "items": [
+    "milk"
+   ],
+   "worth_up_to_pp": 0.0
+  },
+  {
+   "lang": "hi",
+   "query": "बस किराया बढ़ा मेट्रो किराया रेल किराया",
+   "items": [
+    "metro",
+    "bus",
+    "rail"
+   ],
+   "worth_up_to_pp": 7.630197828120721e-05
+  },
+  {
+   "lang": "hi",
+   "query": "पेट्रोल डीजल के दाम बढ़े एलपीजी सिलेंडर",
+   "items": [
+    "lpg",
+    "diesel",
+    "petrol"
+   ],
+   "worth_up_to_pp": 0.0026821575499004014
+  },
+  {
+   "lang": "mr",
+   "query": "वीज दरवाढ दूध दरवाढ एसटी बस भाडेवाढ",
+   "items": [
+    "electricity",
+    "milk",
+    "bus"
+   ],
+   "worth_up_to_pp": 0.0013313785258427641
+  },
+  {
+   "lang": "ta",
+   "query": "மின் கட்டண உயர்வு பால் விலை உயர்வு பேருந்து கட்டண உயர்வு",
+   "items": [
+    "electricity",
+    "milk",
+    "bus"
+   ],
+   "worth_up_to_pp": 0.0013313785258427641
+  },
+  {
+   "lang": "te",
+   "query": "విద్యుత్ ఛార్జీల పెంపు పాల ధర పెంపు బస్సు ఛార్జీల పెంపు",
+   "items": [
+    "electricity",
+    "milk",
+    "bus"
+   ],
+   "worth_up_to_pp": 0.0013313785258427641
+  },
+  {
+   "lang": "kn",
+   "query": "ವಿದ್ಯುತ್ ದರ ಏರಿಕೆ ಹಾಲಿನ ದರ ಏರಿಕೆ ಬಸ್ ಪ್ರಯಾಣ ದರ ಏರಿಕೆ",
+   "items": [
+    "electricity",
+    "milk",
+    "bus"
+   ],
+   "worth_up_to_pp": 0.0013313785258427641
+  },
+  {
+   "lang": "bn",
+   "query": "বিদ্যুতের দাম বৃদ্ধি দুধের দাম বৃদ্ধি বাস ভাড়া বৃদ্ধি",
+   "items": [
+    "milk",
+    "bus"
+   ],
+   "worth_up_to_pp": 0.0
+  }
+ ],
+ "credits_by_item": {
+  "not item-specific": 1257.0,
+  "bus": 65.00000000000013,
+  "rail": 43.666666666666714,
+  "mobile": 32.5,
+  "electricity": 105.33333333333314,
+  "milk": 79.33333333333331,
+  "lpg": 30.83333333333332,
+  "metro": 26.666666666666643,
+  "petrol": 73.83333333333329,
+  "diesel": 16.833333333333336
+ },
+ "label": "display only: the radar and the score do not use it"
+}
