@@ -82,8 +82,8 @@ def build():
          "fix": "echo start_date/end_date (or drop time_range) when the caller sends dates",
          "evidence": "v2/ablation/arm_Td_*.json (plan[].auto_parameters, plan[].dates_kept)"},
         {"title": "published_date later than the page's own date", "to": "Tavily",
-         "did": f"compared Tavily's published_date with the page's own published/updated date on {lag['with_both_dates']} "
-                "distinct date-test pages that had both",
+         "did": f"compared, by code (not a hand check), Tavily's published_date with the page's own published/updated date "
+                f"on the {lag['with_both_dates']} distinct date-test pages that had both (sample: results/date_field_test.json)",
          "happened": f"{lag['tavily_later']} had a later published_date ({lag['over_7_days']} by more than 7 days; "
                      f"largest gap {lag['max_days']} days)",
          "expected": "published_date equal to the page's first-publication date",

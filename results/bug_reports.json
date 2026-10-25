@@ -21,7 +21,7 @@
   {
    "title": "published_date later than the page's own date",
    "to": "Tavily",
-   "did": "compared Tavily's published_date with the page's own published/updated date on 42 distinct date-test pages that had both",
+   "did": "compared, by code (not a hand check), Tavily's published_date with the page's own published/updated date on the 42 distinct date-test pages that had both (sample: results/date_field_test.json)",
    "happened": "4 had a later published_date (3 by more than 7 days; largest gap 345 days)",
    "expected": "published_date equal to the page's first-publication date",
    "fix": "return first-published and last-updated separately",
