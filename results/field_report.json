@@ -1,0 +1,480 @@
+{
+ "built": "2026-10-25",
+ "four_arms": {
+  "rows": [
+   {
+    "arm": "A",
+    "writer": "code (fixed templates)",
+    "recall": 6,
+    "of": 29,
+    "real_new_credits": 0,
+    "credits_original": 205,
+    "credits_per_verified_event": 12.8125,
+    "credits_per_known_change": 34.166666666666664,
+    "median_latency_s": 3.12
+   },
+   {
+    "arm": "B",
+    "writer": "Nemotron",
+    "recall": 2,
+    "of": 29,
+    "real_new_credits": 117,
+    "credits_original": 117,
+    "credits_per_verified_event": 13.0,
+    "credits_per_known_change": 58.5,
+    "median_latency_s": 3.12
+   },
+   {
+    "arm": "C",
+    "writer": "Nemotron",
+    "recall": 2,
+    "of": 29,
+    "real_new_credits": 169,
+    "credits_original": 184,
+    "credits_per_verified_event": 23.0,
+    "credits_per_known_change": 92.0,
+    "median_latency_s": 3.15
+   },
+   {
+    "arm": "T",
+    "writer": "Tavily auto_parameters (B's query texts)",
+    "recall": 0,
+    "of": 29,
+    "real_new_credits": 56,
+    "credits_original": 121,
+    "credits_per_verified_event": null,
+    "credits_per_known_change": null,
+    "median_latency_s": 6.305
+   }
+  ],
+  "verdict": {
+   "margin": 1,
+   "best_recall": 6,
+   "top_group": [
+    "A"
+   ],
+   "ranking": [
+    "A"
+   ],
+   "lower_recall": [
+    "B",
+    "C",
+    "T"
+   ]
+  },
+  "computed_utc": "2026-10-22T11:26:36.823399+00:00",
+  "latency_label": "median Tavily response_time; pre-registered with no target, not used in the verdict"
+ },
+ "exploratory": {
+  "H": {
+   "arm": "H",
+   "label": "exploratory, added after scoring; cannot change the winner (A)",
+   "months_run": [
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09"
+   ],
+   "complete_months": [
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08"
+   ],
+   "incomplete_months": [
+    "2026-09"
+   ],
+   "recall_all": 4,
+   "events": 12,
+   "matched_events": 5,
+   "real_credits": 230,
+   "credits_original": 230,
+   "credits_per_verified_event": 19.166666666666668,
+   "credits_per_known_change_real": 57.5,
+   "like_for_like": {
+    "months": 8,
+    "known_changes_in_them": 26,
+    "recall": 3,
+    "arm_a_recall": 6
+   },
+   "fields_valid": {
+    "valid": 468,
+    "of": 468,
+    "differs_from_a": {
+     "topic": 0,
+     "include_domains": 117,
+     "include_domains_mode": 0,
+     "language": 82
+    }
+   }
+  },
+  "Td": {
+   "arm": "Td",
+   "label": "exploratory, added after scoring; cannot change the winner (A)",
+   "months_run": [
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09"
+   ],
+   "complete_months": [
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06"
+   ],
+   "incomplete_months": [
+    "2026-07",
+    "2026-08",
+    "2026-09"
+   ],
+   "recall_all": 2,
+   "events": 15,
+   "matched_events": 2,
+   "real_credits": 190,
+   "credits_original": 190,
+   "credits_per_verified_event": 12.666666666666666,
+   "credits_per_known_change_real": 95.0,
+   "like_for_like": {
+    "months": 6,
+    "known_changes_in_them": 22,
+    "recall": 2,
+    "arm_a_recall": 5
+   }
+  }
+ },
+ "date_test": {
+  "label": "pilot, 20 cases; first pass is the pre-registered result, the retry only recovers failed Wayback lookups",
+  "retry": {
+   "failed_urls": 11,
+   "recovered": 11,
+   "still_failed": 0
+  },
+  "first_pass": {
+   "arms": {
+    "A": {
+     "leak_cases": 9,
+     "cases": 20,
+     "wilson95": [
+      0.25819785703764037,
+      0.6579146589808726
+     ],
+     "valid_lost": 34,
+     "valid_total": 40
+    },
+    "B": {
+     "leak_cases": 0,
+     "cases": 20,
+     "wilson95": [
+      0.0,
+      0.16112516018512965
+     ],
+     "valid_lost": 19,
+     "valid_total": 40
+    },
+    "C": {
+     "leak_cases": 0,
+     "cases": 20,
+     "wilson95": [
+      0.0,
+      0.16112516018512965
+     ],
+     "valid_lost": 12,
+     "valid_total": 40
+    },
+    "D": {
+     "leak_cases": 0,
+     "cases": 20,
+     "wilson95": [
+      0.0,
+      0.16112516018512965
+     ],
+     "valid_lost": 27,
+     "valid_total": 40
+    }
+   },
+   "mcnemar_A_vs_B": {
+    "only_A": 9,
+    "only_B": 0,
+    "p_exact": 0.00390625
+   },
+   "mcnemar_C_vs_D": {
+    "only_C": 0,
+    "only_D": 0,
+    "p_exact": 1.0
+   }
+  },
+  "after_retry": {
+   "arms": {
+    "A": {
+     "leak_cases": 10,
+     "cases": 20,
+     "wilson95": [
+      0.2992980068701797,
+      0.7007019931298203
+     ],
+     "valid_lost": 39,
+     "valid_total": 48
+    },
+    "B": {
+     "leak_cases": 0,
+     "cases": 20,
+     "wilson95": [
+      0.0,
+      0.16112516018512965
+     ],
+     "valid_lost": 22,
+     "valid_total": 48
+    },
+    "C": {
+     "leak_cases": 0,
+     "cases": 20,
+     "wilson95": [
+      0.0,
+      0.16112516018512965
+     ],
+     "valid_lost": 20,
+     "valid_total": 48
+    },
+    "D": {
+     "leak_cases": 0,
+     "cases": 20,
+     "wilson95": [
+      0.0,
+      0.16112516018512965
+     ],
+     "valid_lost": 35,
+     "valid_total": 48
+    }
+   },
+   "mcnemar_A_vs_B": {
+    "only_A": 10,
+    "only_B": 0,
+    "p_exact": 0.001953125
+   },
+   "mcnemar_C_vs_D": {
+    "only_C": 0,
+    "only_D": 0,
+    "p_exact": 1.0
+   }
+  }
+ },
+ "finance": {
+  "label": "exploratory; changes no scored verdict",
+  "retry": {
+   "failed_urls": 94,
+   "recovered": 94,
+   "still_failed": 0
+  },
+  "first_pass": {
+   "all_14": {
+    "events": 14,
+    "mcnemar_confirmed": {
+     "N_only": 2,
+     "D_only": 0,
+     "p_exact": 0.5,
+     "role": "pre-registered (metric 3)"
+    },
+    "arms": {
+     "N": {
+      "confirmed_events": 2,
+      "confirmed_wilson95": [
+       0.04009392090764893,
+       0.39941379723733705
+      ],
+      "snippet_own_month_events": 14,
+      "snippet_loose_events": 14,
+      "flag_events": 9,
+      "valid_lost": 10,
+      "valid_total": 11
+     },
+     "D": {
+      "confirmed_events": 0,
+      "confirmed_wilson95": [
+       0.0,
+       0.21531080540298042
+      ],
+      "snippet_own_month_events": 0,
+      "snippet_loose_events": 0,
+      "flag_events": 0,
+      "valid_lost": 1,
+      "valid_total": 11
+     }
+    }
+   },
+   "without_C4": {
+    "events": 13,
+    "mcnemar_confirmed": {
+     "N_only": 2,
+     "D_only": 0,
+     "p_exact": 0.5,
+     "role": "pre-registered (metric 3)"
+    },
+    "arms": {
+     "N": {
+      "confirmed_events": 2,
+      "confirmed_wilson95": [
+       0.04325817796522907,
+       0.4223463125106327
+      ],
+      "snippet_own_month_events": 13,
+      "snippet_loose_events": 13,
+      "flag_events": 8,
+      "valid_lost": 10,
+      "valid_total": 11
+     },
+     "D": {
+      "confirmed_events": 0,
+      "confirmed_wilson95": [
+       0.0,
+       0.22809537513180025
+      ],
+      "snippet_own_month_events": 0,
+      "snippet_loose_events": 0,
+      "flag_events": 0,
+      "valid_lost": 1,
+      "valid_total": 11
+     }
+    }
+   }
+  },
+  "after_retry": {
+   "all_14": {
+    "events": 14,
+    "mcnemar_confirmed": {
+     "N_only": 10,
+     "D_only": 0,
+     "p_exact": 0.001953125,
+     "role": "pre-registered (metric 3)"
+    },
+    "arms": {
+     "N": {
+      "confirmed_events": 10,
+      "confirmed_wilson95": [
+       0.45350915474002584,
+       0.8827862143729825
+      ],
+      "snippet_own_month_events": 14,
+      "snippet_loose_events": 14,
+      "flag_events": 9,
+      "valid_lost": 26,
+      "valid_total": 29
+     },
+     "D": {
+      "confirmed_events": 0,
+      "confirmed_wilson95": [
+       0.0,
+       0.21531080540298042
+      ],
+      "snippet_own_month_events": 0,
+      "snippet_loose_events": 0,
+      "flag_events": 0,
+      "valid_lost": 3,
+      "valid_total": 29
+     }
+    }
+   },
+   "without_C4": {
+    "events": 13,
+    "mcnemar_confirmed": {
+     "N_only": 10,
+     "D_only": 0,
+     "p_exact": 0.001953125,
+     "role": "pre-registered (metric 3)"
+    },
+    "arms": {
+     "N": {
+      "confirmed_events": 10,
+      "confirmed_wilson95": [
+       0.49743623839480355,
+       0.918204713457304
+      ],
+      "snippet_own_month_events": 13,
+      "snippet_loose_events": 13,
+      "flag_events": 8,
+      "valid_lost": 23,
+      "valid_total": 26
+     },
+     "D": {
+      "confirmed_events": 0,
+      "confirmed_wilson95": [
+       0.0,
+       0.22809537513180025
+      ],
+      "snippet_own_month_events": 0,
+      "snippet_loose_events": 0,
+      "flag_events": 0,
+      "valid_lost": 3,
+      "valid_total": 26
+     }
+    }
+   }
+  }
+ },
+ "auto_parameters": {
+  "no_dates": {
+   "searches": 72,
+   "time_range": {
+    "w": 57,
+    "d": 14,
+    "m": 1
+   },
+   "results": 659,
+   "results_dated_oct_2026": 620,
+   "results_undated": 38
+  },
+  "with_dates": {
+   "searches": 56,
+   "time_range": {
+    "w": 47,
+    "d": 8,
+    "y": 1
+   },
+   "dated_results": 532,
+   "inside_window": 532
+  }
+ },
+ "radar": {
+  "strategy": "A",
+  "runs": [
+   {
+    "utc": "2026-10-25T13:14:17.562335+00:00",
+    "real_credits": 27,
+    "calls": 28,
+    "searches": 14,
+    "complete": true,
+    "with_provenance": 28
+   }
+  ],
+  "events": 1,
+  "corroborated": 0,
+  "cap": 150,
+  "cap_source": "config/budget.json radar-2026-10",
+  "spent": 27
+ },
+ "monthly_run_cost": {
+  "radar_run_real_credits": [
+   27
+  ],
+  "arm_a_per_month_original": 22.77777777777778,
+  "arm_a_searches_per_month": 13.0,
+  "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits at original cost / 9 months"
+ },
+ "ledger_rows": 1758
+}

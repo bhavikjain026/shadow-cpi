@@ -9,7 +9,8 @@ pytest.importorskip("streamlit")
 from streamlit.testing.v1 import AppTest  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ["home", "evidence", "replay", "live_build", "radar", "tavily_trace", "flight_recorder", "archive", "brief"]
+PAGES = ["home", "evidence", "replay", "live_build", "radar", "field_report", "tavily_trace", "flight_recorder", "archive",
+         "brief"]
 LOCK = json.loads((ROOT / "results" / "score_lock.json").read_text())
 AUDIT = json.loads((ROOT / "results" / "app" / "audit_summary.json").read_text())
 
