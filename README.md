@@ -50,7 +50,7 @@ logged in the flight recorder. All Tavily requests go through one function,
 | **Extract** | Reads the top dated pages with query-focused chunks; reads the India Bullion and Jewellers Association (IBJA) daily gold/silver report PDFs, IOCL's LPG price list and PPAC's petrol prices | [`evidence.py` L280](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/evidence.py#L280), [L522](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/evidence.py#L522) |
 | **Map + Crawl** (trial) | Trialled on 11 official/dairy sites to find price circulars and tariff orders; returned nothing usable. Reported, not used | [`tools/prompt_t.py` L65](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/tools/prompt_t.py#L65) |
 | **Search** (evidence chase) | Up to 2 follow-up searches per verified event: the same change elsewhere, and the official notice | [`tools/prompt_t.py` L316](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/tools/prompt_t.py#L316) |
-| **GET /usage** (guard) | Before every live run in the app: refuse below 150 credits left, or if the check fails | [`tavily.py` L70](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/tavily.py#L70), [`live_run.py` L68](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/live_run.py#L68) |
+| **GET /usage** (guard) | Before every live run in the app: refuse below 400 credits left (hard reserve), or if the check fails | [`tavily.py` L70](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/tavily.py#L70), [`live_run.py` L68](https://github.com/bhavikjain026/shadow-cpi/blob/9345bdc034f066490c8679bff18d66f296bcbe3a/shadow_cpi/live_run.py#L68) |
 
 Measured in [`results/tavily_report_card.md`](results/tavily_report_card.md) (as of 25 Oct 2026): 1,888 Tavily calls
 sent, 1,809 credits used (of a 1,000-credit monthly plan plus 3,125 add-on credits), 78% of dated search results inside
@@ -112,6 +112,31 @@ Each month's call is written as canonical JSON with its SHA-256 fingerprint and 
 before MoSPI publishes. Anyone can download the file at the tag and recompute the fingerprint:
 [`verify.md`](verify.md). After the release, the Archive page shows the miss and whether the official figure was
 inside the range.
+
+## For research teams
+
+Shadow CPI is designed for research teams that need web evidence without **look-ahead bias**: a replay that quietly
+uses a page published after its cutoff looks better than it could ever be live. Three tools help:
+
+- **Exports** (`python tools/export.py`): `exports/nowcast.csv`, `exports/evidence.csv` (short cited lines only,
+  never page text) and `exports/radar.jsonl`. Columns and coverage limits: [`docs/exports_schema.md`](docs/exports_schema.md).
+- **`as_of(day)`** ([`v2/asof.py`](v2/asof.py), app page "As of a date"): the nowcast, evidence and coverage from items
+  found on or before a day; a test proves nothing found later can appear.
+- **Seal checks** ([`verify.md`](verify.md)) and the app's "Chain of custody" page: from any number to its quote, page,
+  page date, Tavily request ID, response hash and seal.
+- **Leak checker** ([`shadow_cpi/leakcheck.py`](shadow_cpi/leakcheck.py), example in
+  [`examples/leakcheck_example.py`](examples/leakcheck_example.py)): label any search result safe / date_flag / leak
+  against a cutoff; undated pages are flagged, not dropped.
+
+Research tool, not investment advice.
+
+## Beyond CPI
+
+The same date discipline carries to other scheduled events. The second domain we tested is **finance**: replaying the
+day before RBI policy decisions and large-company results, with and without Tavily's date fields
+([`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md), results in [`results/finance_lookahead.md`](results/finance_lookahead.md)
+and on the app's "Tavily field report" page). Designed for event studies and backtests that must not see the outcome
+early. Research tool, not investment advice.
 
 ## Honest limits
 
