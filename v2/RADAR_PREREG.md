@@ -48,3 +48,8 @@ October CPI, frozen, then scored against a list built independently afterwards.
    line here before the first run. A cap stops a run cleanly and marks it incomplete.
 
 **Search strategy decided: A (fixed templates), per Amendment F, results 5b1eec0.** Written 2026-10-22T12:11:28Z (UTC), 2026-10-22, before any radar run.
+
+**Domain list fixed, 2026-10-25T13:04:16Z (UTC), before any radar run.** Every primary-source domain was opened directly on
+2026-10-25 (no Tavily credits; `v2/RADAR_DOMAIN_CHECK.md`). Replaced in `v2/radar_primary.json`: electricity /
+Tamil Nadu tnerc.gov.in → tnerc.tn.gov.in; electricity / Jammu and Kashmir jkserc.nic.in → jpdcl.jk.gov.in; bus /
+Karnataka ksrtc.in → ksrtc.karnataka.gov.in. Nothing else in this file changes; strategy A and the 150 cap stand.
