@@ -72,7 +72,7 @@ def build(month, lock, rec):
             "v1": {"c": preds[month]["c"]["yoy"], "a": preds[month]["a"]["yoy"]}, "official": scored["actual"],
             "notes": missing, "development": DEVELOPMENT.get(month, ""), "complete": saved.get("complete", True),
             "stages": B.stages(timeline, start),
-            "time_machine": B.time_machine(month, item_cards, moving, inp, meta, total, rec),
+            "time_machine": B.time_machine(month, item_cards, moving, inp, meta, total, Tavily(recorder=rec)),
             "credits_budget": S.BUDGET, "credits_spent": 0}
 
 

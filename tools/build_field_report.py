@@ -171,10 +171,138 @@ def monthly_run_cost():
                     "at original cost / 9 months"}
 
 
+COMPUTED = "computed by tools/build_field_report.py from the committed results files"
+SETTINGS = {"A": "no dates", "B": "start_date + end_date", "C": "+ filter_by_published_date", "D": "+ our page check"}
+# checks P and E: their rows appear once these files exist, each {"label": ..., "leakage_rows": [{"setting", "n",
+# "leaks", "valid_kept", "valid_total", "credits", "calls", "median_latency_s", "caveats"}, ...]}
+PENDING_CHECKS = {"P": "results/check_p.json", "E": "results/check_e.json"}
+
+
+def median(xs):
+    xs = sorted(xs)
+    return (xs[(len(xs) - 1) // 2] + xs[len(xs) // 2]) / 2 if xs else None
+
+
+def p95(xs):
+    """Nearest-rank 95th percentile."""
+    xs = sorted(xs)
+    return xs[max(0, -(-95 * len(xs) // 100) - 1)] if xs else None
+
+
+def leak_row(check, run, setting, n, leaks, valid_kept, valid_total, credits, calls, lat, caveats):
+    w = DT.wilson(leaks, n) if n else [None, None]
+    return {"check": check, "run": run, "setting": setting, "n": n, "leaks": leaks, "leak_rate": leaks / n if n else None,
+            "wilson95": list(w), "valid_kept": valid_kept, "valid_total": valid_total,
+            "credits_per_call": credits / calls if calls else None, "median_latency_s": lat, "caveats": caveats}
+
+
+def leakage_table():
+    """'Time-locked search leakage': one row per setting, for the date test and the finance check (first pass and
+    after the Wayback retry), plus placeholder rows for checks P and E until their results files exist."""
+    rows = []
+    out, rt = load("results/date_field_test.json"), load("results/date_field_test_wayback_retry.json")
+    after = with_retry(out, rt, lambda row, r: DT.label(row["cutoff"], r["captures"], r["tavily_date"],
+                                                         DT.url_date(r["url"]), r["page_date"]))
+    n_extract = len(out["extract_calls"].get("D", []))
+    for run, o in (("first pass", out), ("after retry", after)):
+        m = DT.metrics(o)["arms"]
+        for a in "ABCD":
+            x = m[a]
+            calls = x["cases"] + (n_extract if a == "D" else 0)
+            cav = ["pilot, 20 cases; leak = Wayback-confirmed (no capture by the cutoff)"]
+            if a == "D":
+                cav.append(f"page check adds {n_extract} Extract calls; keeps only pages with an explicit date")
+            if run == "after retry":
+                cav.append("retry only recovers failed Wayback lookups; valid total grows")
+            rows.append(leak_row("Date test (20 replay cases)", run, SETTINGS[a], x["cases"], x["leak_cases"],
+                                 x["valid_total"] - x["valid_lost"], x["valid_total"], x["credits"], calls,
+                                 x["median_latency_s"], "; ".join(cav)))
+    fo, frt = load("results/finance_lookahead.json"), load("results/finance_lookahead_wayback_retry.json")
+    for run, o in (("first pass", fo), ("after retry", with_retry(fo, frt, F.label))):
+        m = F.metrics(o)
+        for a, setting in (("N", SETTINGS["A"]), ("D", "start_date + end_date + filter_by_published_date")):
+            x = m["arms"][a]
+            rows.append(leak_row("Finance check (14 scheduled events)", run, setting, m["events"],
+                                 x["confirmed"]["events"], x["valid_total"] - x["valid_lost"], x["valid_total"],
+                                 x["credits"], m["events"], x["median_latency_s"],
+                                 f"exploratory; {x['wayback_failed']} Wayback lookups failed; C4 date from a "
+                                 "board-meeting notice (see the finance table)"))
+    for chk, path in PENDING_CHECKS.items():
+        p = ROOT / path
+        if not p.exists():
+            rows.append({"check": f"Check {chk}", "run": "pending", "setting": None, "placeholder": True,
+                         "caveats": f"placeholder: fills in from {path} when it exists"})
+            continue
+        res = json.loads(p.read_text(encoding="utf-8"))
+        for x in res["leakage_rows"]:
+            rows.append(leak_row(f"Check {chk}", res.get("label", ""), x["setting"], x["n"], x["leaks"],
+                                 x["valid_kept"], x["valid_total"], x["credits"], x["calls"], x["median_latency_s"],
+                                 x.get("caveats", "")))
+    return {"label": COMPUTED, "rows": rows,
+            "columns": "leak rate = cases (events) with at least one confirmed post-cutoff result among the kept "
+                       "results, Wilson 95%; valid evidence kept = Wayback-confirmed pre-cutoff, on-topic results "
+                       "this setting kept, of those any setting found; median latency = Tavily response_time"}
+
+
+# experiments whose evidence was quote-checked (code takes the cited line and finds the number in it): the files
+# holding their claims. Others (date test, finance, recall audit, ...) have no quote step, so no ratio.
+QUOTE_SOURCES = {"scored v2 pipeline (arm A)": (("v2-issue4", "v2-issue14"), "v2/ablation/arm_A_*.json"),
+                 "arm B (Nemotron writes)": (("v2-ablation-B",), "v2/ablation/arm_B_*.json"),
+                 "arm C (Nemotron, regional)": (("v2-ablation-C",), "v2/ablation/arm_C_*.json"),
+                 "arm T (Tavily auto_parameters)": (("v2-ablation-T",), "v2/ablation/arm_T_*.json"),
+                 "T+dates (exploratory)": (("v2-ablation-Td",), "v2/ablation/arm_Td_*.json"),
+                 "H (exploratory)": (("v2-ablation-H",), "v2/ablation/arm_H_*.json"),
+                 "September Live build": (("v2-issue2",), "v2/evidence/run_2026-09_basket.json"),
+                 "October radar": (("radar-2026-10",), "v2/radar/radar_2026-10.json")}
+
+
+def verified_quotes(pattern):
+    seen = set()
+    for p in sorted(ROOT.glob(pattern)):
+        for c in json.loads(p.read_text(encoding="utf-8")).get("cards", []):
+            seen |= {(c["url"], cl["line"]) for cl in c.get("claims", []) if cl.get("status") == "verified"}
+    return len(seen)
+
+
+def receipt():
+    """Credit and speed receipt: per endpoint and per experiment, from results/call_receipts.json (the ledger joined
+    to Tavily's response_time by tools/build_call_receipts.py)."""
+    cr = load("results/call_receipts.json")
+    calls = cr["rows"]
+
+    def agg(rows):
+        rts = [r["response_time"] for r in rows if r["response_time"] is not None]
+        cr_ = sum(r["credits"] for r in rows)
+        return {"calls": len(rows), "credits": cr_, "credits_per_call": cr_ / len(rows) if rows else None,
+                "median_latency_s": median(rts), "p95_latency_s": p95(rts), "with_latency": len(rts)}
+
+    by_ep = [{"endpoint": ep, **agg([r for r in calls if r["endpoint"] == ep])}
+             for ep in sorted({r["endpoint"] for r in calls})]
+    by_exp = [{"experiment": ex, "endpoint": ep, **agg([r for r in calls if (r["experiment"], r["endpoint"]) == (ex, ep)])}
+              for ex, ep in sorted({(r["experiment"], r["endpoint"]) for r in calls})]
+    per_quote = []
+    for label, (exps, pattern) in QUOTE_SOURCES.items():
+        cr_ = sum(r["credits"] for r in calls if r["experiment"] in exps)
+        q = verified_quotes(pattern)
+        per_quote.append({"what": label, "budgets": list(exps), "credits": cr_, "verified_quotes": q,
+                          "credits_per_verified_quote": cr_ / q if q else None, "source": pattern})
+    return {"label": COMPUTED, "built_from": f"results/call_receipts.json (built {cr['built']})",
+            "by_endpoint": by_ep, "by_experiment": by_exp, "per_verified_quote": per_quote,
+            "total": agg(calls), "reconcile_credits": sum(r["credits"] for r in cr["reconcile"]),
+            "notes": ["include_usage can read 0 credits for calls below Tavily's reporting threshold, so a call "
+                      "showing 0 is not proof it was free; account totals are reconciled to the billing page "
+                      "(the reconcile rows, not in the per-endpoint figures)",
+                      "credits are those charged to the experiment's budgets in the ledger; arm A re-used the "
+                      "scored pipeline's searches from the cache, so its credits are v2-issue4 + v2-issue14",
+                      "latency = Tavily's response_time (server time), not our wall-clock time",
+                      "cache hits and phantom rows (cache hits charged by an old budget bug) are left out"]}
+
+
 def build():
     ref = json.loads(RC.REFERENCE.read_text(encoding="utf-8"))["changes"]
     ledger = read_ledger()
-    rep = {"built": date.today().isoformat(), "four_arms": four_arms(),
+    rep = {"built": date.today().isoformat(), "leakage": leakage_table(), "receipt": receipt(),
+           "four_arms": four_arms(),
            "exploratory": {"H": exploratory("H", "v2-ablation-H", ref), "Td": exploratory("Td", "v2-ablation-Td", ref)},
            "date_test": date_test(), "finance": finance(), "auto_parameters": auto_parameters(), "radar": radar(),
            "monthly_run_cost": monthly_run_cost(), "ledger_rows": len(ledger)}

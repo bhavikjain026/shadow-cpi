@@ -29,6 +29,27 @@ fast = os.environ.get("SHADOW_CPI_NO_ANIMATION") or st.checkbox("Show the result
 pause = 0 if fast else (0.12 if basket else 0.3)
 st.caption(f"{month_name(run['month'])}: evidence published from {run['window'][0]} to the cutoff "
            f"{run['window'][1]}. Development data under v2/PREREGISTRATION.md (with Amendment A), not a forecast.")
+if basket:
+    with st.expander("Replay a saved run: no keys, 0 credits"):
+        from v2.replay import cache_dir, replay
+        st.caption("Re-runs this whole build (search, Nemotron reading, Extract, quote check, maths, time machine) "
+                   "from saved responses only, with placeholder keys and a recorder that refuses any call not in the "
+                   "cache, then compares every verdict and the needle with the committed run. Same as "
+                   "`python -m v2.replay`.")
+        if not (cache_dir() / "tavily").exists():
+            st.info("This deployment has no saved responses to replay from (the cache is kept out of the public "
+                    "repository). Run `python -m v2.replay` on a machine with the cache.")
+        elif st.button("Replay a saved run"):
+            with st.spinner("Replaying from the cache…"):
+                rp = replay(run["month"])
+            (st.success if rp["pass"] else st.error)(
+                f"{'PASS' if rp['pass'] else 'FAIL'}: {rp['calls']} calls, {rp['from_cache']} from the cache, "
+                f"{rp['sent']} sent, {rp['credits']} credits.")
+            if rp["error"]:
+                st.caption(f"Stopped: {rp['error']}")
+            else:
+                st.caption(f"Needle {rp['needle']:.6f}% vs committed {rp['committed_needle']:.6f}%; differences: "
+                           f"{', '.join(rp['differences']) or 'none'}.")
 
 top, tree_box, cards_box = st.empty(), st.empty(), st.container()
 lo_hi = [run["needle"]["start"], run["needle"]["end"]] + ([run["v1"]["c"], run["official"]] if basket else [])
