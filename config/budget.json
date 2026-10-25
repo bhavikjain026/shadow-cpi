@@ -35,7 +35,9 @@
     "date-test": 150,
     "radar-2026-10": 150,
     "v2-ablation-H": 230,
-    "finance-lookahead": 60
+    "finance-lookahead": 60,
+    "leakcheck-full-page": 100,
+    "leakcheck-exact-match": 100
   },
   "plans": {
     "cut1_events": "milk, lpg, electricity: English + Hindi; mobile, rail, medicine, school_fee, gst: English only (config/items.yaml 'langs')",
