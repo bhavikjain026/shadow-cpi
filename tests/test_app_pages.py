@@ -9,7 +9,7 @@ pytest.importorskip("streamlit")
 from streamlit.testing.v1 import AppTest  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ["home", "evidence", "replay", "live_build", "radar", "field_report", "custody", "as_of", "tavily_trace", "flight_recorder", "archive",
+PAGES = ["home", "evidence", "replay", "live_build", "radar", "field_report", "custody", "as_of", "research", "tavily_trace", "flight_recorder", "archive",
          "brief"]
 LOCK = json.loads((ROOT / "results" / "score_lock.json").read_text())
 AUDIT = json.loads((ROOT / "results" / "app" / "audit_summary.json").read_text())
@@ -307,3 +307,8 @@ def test_v1_vs_v2_table_reads_the_v2_locks(page):
     assert cells["Average miss (percentage points)"] == f"{sc['v2']['mae']:.3f}"
     assert cells[f"Known price changes found directly (of {rc['total']})"] == str(rc["v2_found"])
     assert "Nano" in cells["Verified claims, by model"] and "not like-for-like" in all_text(at).lower()
+
+
+def test_research_page_wording():
+    text = all_text(load("research"))
+    assert "Research tool, not investment advice." in text and "Designed for" in text and "used by" not in text.lower()

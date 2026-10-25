@@ -24,6 +24,7 @@ pages = [
     st.Page("app_pages/field_report.py", title="Tavily field report", icon="🧪"),
     st.Page("app_pages/custody.py", title="Chain of custody", icon="🔗"),
     st.Page("app_pages/as_of.py", title="As of a date", icon="🗓️"),
+    st.Page("app_pages/research.py", title="For research teams", icon="🔬"),
     st.Page("app_pages/tavily_trace.py", title="Tavily trace (March)", icon="🔎"),
     st.Page("app_pages/flight_recorder.py", title="Tavily Flight Recorder", icon="🛰️"),
     st.Page("app_pages/archive.py", title="Archive", icon="🔒"),

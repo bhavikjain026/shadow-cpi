@@ -102,6 +102,31 @@ before MoSPI publishes. Anyone can download the file at the tag and recompute th
 [`verify.md`](verify.md). After the release, the Archive page shows the miss and whether the official figure was
 inside the range.
 
+## For research teams
+
+Shadow CPI is designed for research teams that need web evidence without **look-ahead bias**: a replay that quietly
+uses a page published after its cutoff looks better than it could ever be live. Three tools help:
+
+- **Exports** (`python tools/export.py`): `exports/nowcast.csv`, `exports/evidence.csv` (short cited lines only,
+  never page text) and `exports/radar.jsonl`. Columns and coverage limits: [`docs/exports_schema.md`](docs/exports_schema.md).
+- **`as_of(day)`** ([`v2/asof.py`](v2/asof.py), app page "As of a date"): the nowcast, evidence and coverage from items
+  found on or before a day; a test proves nothing found later can appear.
+- **Seal checks** ([`verify.md`](verify.md)) and the app's "Chain of custody" page: from any number to its quote, page,
+  page date, Tavily request ID, response hash and seal.
+- **Leak checker** ([`shadow_cpi/leakcheck.py`](shadow_cpi/leakcheck.py), example in
+  [`examples/leakcheck_example.py`](examples/leakcheck_example.py)): label any search result safe / date_flag / leak
+  against a cutoff; undated pages are flagged, not dropped.
+
+Research tool, not investment advice.
+
+## Beyond CPI
+
+The same date discipline carries to other scheduled events. The second domain we tested is **finance**: replaying the
+day before RBI policy decisions and large-company results, with and without Tavily's date fields
+([`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md), results in [`results/finance_lookahead.md`](results/finance_lookahead.md)
+and on the app's "Tavily field report" page). Designed for event studies and backtests that must not see the outcome
+early. Research tool, not investment advice.
+
 ## Honest limits
 
 Nine test months is a small sample; the 80% range held the official figure in only 5 of 9 replay months; about
