@@ -120,7 +120,7 @@ def cdx_url(url):
             urllib.parse.urlencode({"url": url, "output": "json", "fl": "timestamp", "filter": "statuscode:200"}))
 
 
-def wayback(rec, url):
+def wayback(rec, url, tag="date-test wayback"):
     """Capture dates (ISO) of the URL in the Wayback Machine, via a logged direct download of the CDX API (service
     'direct', as the MoSPI exception). None if the lookup failed."""
     def get():
@@ -128,7 +128,7 @@ def wayback(rec, url):
         with urllib.request.urlopen(req, timeout=30) as r:
             return {"rows": json.loads(r.read().decode("utf-8") or "[]")}
     try:
-        resp, _ = rec.call("direct", "GET", {"url": cdx_url(url)}, get, tag="date-test wayback")
+        resp, _ = rec.call("direct", "GET", {"url": cdx_url(url)}, get, tag=tag)
     except (OSError, ValueError):
         return None
     rows = resp.get("rows") or []

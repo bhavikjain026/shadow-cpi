@@ -1,0 +1,303 @@
+{
+ "label": "NETWORK RETRY of failed Wayback lookups (logged); the pre-registered result in date_field_test.json stays primary",
+ "run_utc": "2026-10-25T13:06:06.535306+00:00",
+ "rule": "only lookups that failed; 3 tries, 5 s apart; same CDX query and labels",
+ "failed_urls": 11,
+ "recovered": 11,
+ "still_failed": 0,
+ "tries_used": {
+  "https://9to5google.com/2026/06/05/youtube-premium-price-hikes-cancel-poll/": 1,
+  "https://indianexpress.com/article/explained/explained-economics/why-egg-chicken-and-milk-prices-are-unlikely-to-fall-10866037": 1,
+  "https://m.economictimes.com/news/new-updates/nandini-milk-price-hike-karnataka-clears-rs-8-per-litre-hike-blue-packet-toned-milk-may-cost-rs-54-ec-nod-awaited/articleshow/134768099.cms": 1,
+  "https://timesofindia.indiatimes.com/city/bengaluru/nandini-milk-price-may-go-up-by-5/lt-cms-call-today/articleshow/134491593.cms": 1,
+  "https://timesofindia.indiatimes.com/city/bhubaneswar/state-increases-private-bus-fares-after-diesel-price-hike/articleshow/131469810.cms": 1,
+  "https://timesofindia.indiatimes.com/city/pune/milk-procurement-price-goes-up-retail-rate-likely-to-increase/articleshow/134644764.cms": 1,
+  "https://www.dtnext.in/news/tamilnadu/private-dairies-to-hike-milk-curd-prices-from-saturday-aavin-faces-widening-price-gap-in-tamil-nadu": 1,
+  "https://www.india.com/business/lpg-cng-png-june-15-2026-petrol-price-diesel-rates-strait-of-hormuz-iran-israel-united-states-delhi-noida-ghaziabad-mumbai-chennai-kolkata-bengaluru-8446806": 1,
+  "https://www.livemint.com/news/india/milk-price-hike-mumbai-tamil-nadu-households-to-face-higher-bills-as-prices-rise-ahead-of-festive-season-11788240212433.html": 1,
+  "https://www.newindianexpress.com/states/karnataka/2026/Sep/27/milk-price-hike-after-cabinet-discussion-says-cm-shivakumar": 1,
+  "https://www.thequint.com/news/breaking-news/domestic-lpg-cylinder-price-hike-june-2026-india": 1
+ },
+ "before": {
+  "arms": {
+   "A": {
+    "leak_cases": 9,
+    "cases": 20,
+    "leak_case_wilson95": [
+     0.25819785703764037,
+     0.6579146589808726
+    ],
+    "leak_fraction": {
+     "L": 12,
+     "P": 6,
+     "unconfirmed": 42,
+     "point": 0.6666666666666666,
+     "lower": 0.2,
+     "upper": 0.9
+    },
+    "results": 60,
+    "valid_lost": 34,
+    "valid_total": 40,
+    "undated": 8,
+    "credits": 20,
+    "median_latency_s": 3.8049999999999997
+   },
+   "B": {
+    "leak_cases": 0,
+    "cases": 20,
+    "leak_case_wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "leak_fraction": {
+     "L": 0,
+     "P": 31,
+     "unconfirmed": 27,
+     "point": 0.0,
+     "lower": 0.0,
+     "upper": 0.46551724137931033
+    },
+    "results": 58,
+    "valid_lost": 19,
+    "valid_total": 40,
+    "undated": 0,
+    "credits": 20,
+    "median_latency_s": 3.395
+   },
+   "C": {
+    "leak_cases": 0,
+    "cases": 20,
+    "leak_case_wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "leak_fraction": {
+     "L": 0,
+     "P": 38,
+     "unconfirmed": 21,
+     "point": 0.0,
+     "lower": 0.0,
+     "upper": 0.3559322033898305
+    },
+    "results": 59,
+    "valid_lost": 12,
+    "valid_total": 40,
+    "undated": 0,
+    "credits": 20,
+    "median_latency_s": 3.55
+   },
+   "D": {
+    "leak_cases": 0,
+    "cases": 20,
+    "leak_case_wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "leak_fraction": {
+     "L": 0,
+     "P": 18,
+     "unconfirmed": 8,
+     "point": 0.0,
+     "lower": 0.0,
+     "upper": 0.3076923076923077
+    },
+    "results": 26,
+    "valid_lost": 27,
+    "valid_total": 40,
+    "undated": 0,
+    "credits": 29,
+    "median_latency_s": 3.16
+   }
+  },
+  "c_vs_d_mcnemar": {
+   "b_C_only": 0,
+   "c_D_only": 0,
+   "p_exact": 1.0
+  },
+  "undated_b_vs_c": {
+   "B": 0,
+   "C": 0
+  },
+  "evaluation_extract_credits": 12,
+  "incomplete": false
+ },
+ "after": {
+  "arms": {
+   "A": {
+    "leak_cases": 10,
+    "cases": 20,
+    "leak_case_wilson95": [
+     0.2992980068701797,
+     0.7007019931298203
+    ],
+    "leak_fraction": {
+     "L": 14,
+     "P": 9,
+     "unconfirmed": 37,
+     "point": 0.6086956521739131,
+     "lower": 0.23333333333333334,
+     "upper": 0.85
+    },
+    "results": 60,
+    "valid_lost": 39,
+    "valid_total": 48,
+    "undated": 8,
+    "credits": 20,
+    "median_latency_s": 3.8049999999999997
+   },
+   "B": {
+    "leak_cases": 0,
+    "cases": 20,
+    "leak_case_wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "leak_fraction": {
+     "L": 0,
+     "P": 37,
+     "unconfirmed": 21,
+     "point": 0.0,
+     "lower": 0.0,
+     "upper": 0.3620689655172414
+    },
+    "results": 58,
+    "valid_lost": 22,
+    "valid_total": 48,
+    "undated": 0,
+    "credits": 20,
+    "median_latency_s": 3.395
+   },
+   "C": {
+    "leak_cases": 0,
+    "cases": 20,
+    "leak_case_wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "leak_fraction": {
+     "L": 0,
+     "P": 38,
+     "unconfirmed": 21,
+     "point": 0.0,
+     "lower": 0.0,
+     "upper": 0.3559322033898305
+    },
+    "results": 59,
+    "valid_lost": 20,
+    "valid_total": 48,
+    "undated": 0,
+    "credits": 20,
+    "median_latency_s": 3.55
+   },
+   "D": {
+    "leak_cases": 0,
+    "cases": 20,
+    "leak_case_wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "leak_fraction": {
+     "L": 0,
+     "P": 18,
+     "unconfirmed": 8,
+     "point": 0.0,
+     "lower": 0.0,
+     "upper": 0.3076923076923077
+    },
+    "results": 26,
+    "valid_lost": 35,
+    "valid_total": 48,
+    "undated": 0,
+    "credits": 29,
+    "median_latency_s": 3.16
+   }
+  },
+  "c_vs_d_mcnemar": {
+   "b_C_only": 0,
+   "c_D_only": 0,
+   "p_exact": 1.0
+  },
+  "undated_b_vs_c": {
+   "B": 0,
+   "C": 0
+  },
+  "evaluation_extract_credits": 12,
+  "incomplete": false
+ },
+ "recovered_captures": {
+  "https://9to5google.com/2026/06/05/youtube-premium-price-hikes-cancel-poll/": [
+   "2026-06-05",
+   "2026-06-06",
+   "2026-06-06",
+   "2026-07-15",
+   "2026-08-24"
+  ],
+  "https://indianexpress.com/article/explained/explained-economics/why-egg-chicken-and-milk-prices-are-unlikely-to-fall-10866037": [
+   "2026-09-08",
+   "2026-09-19"
+  ],
+  "https://m.economictimes.com/news/new-updates/nandini-milk-price-hike-karnataka-clears-rs-8-per-litre-hike-blue-packet-toned-milk-may-cost-rs-54-ec-nod-awaited/articleshow/134768099.cms": [],
+  "https://timesofindia.indiatimes.com/city/bengaluru/nandini-milk-price-may-go-up-by-5/lt-cms-call-today/articleshow/134491593.cms": [
+   "2026-09-25",
+   "2026-09-25",
+   "2026-09-25",
+   "2026-09-26",
+   "2026-09-26",
+   "2026-09-26",
+   "2026-09-26",
+   "2026-09-26",
+   "2026-09-26",
+   "2026-09-26",
+   "2026-09-26",
+   "2026-09-26",
+   "2026-09-26",
+   "2026-09-26",
+   "2026-09-27",
+   "2026-09-27",
+   "2026-09-29",
+   "2026-10-16",
+   "2026-10-17"
+  ],
+  "https://timesofindia.indiatimes.com/city/bhubaneswar/state-increases-private-bus-fares-after-diesel-price-hike/articleshow/131469810.cms": [
+   "2026-06-02",
+   "2026-06-03",
+   "2026-06-03",
+   "2026-06-03",
+   "2026-06-03",
+   "2026-06-03",
+   "2026-06-09",
+   "2026-06-11",
+   "2026-07-31"
+  ],
+  "https://timesofindia.indiatimes.com/city/pune/milk-procurement-price-goes-up-retail-rate-likely-to-increase/articleshow/134644764.cms": [
+   "2026-10-02",
+   "2026-10-02",
+   "2026-10-02",
+   "2026-10-02",
+   "2026-10-02",
+   "2026-10-03",
+   "2026-10-03",
+   "2026-10-03",
+   "2026-10-03",
+   "2026-10-03"
+  ],
+  "https://www.dtnext.in/news/tamilnadu/private-dairies-to-hike-milk-curd-prices-from-saturday-aavin-faces-widening-price-gap-in-tamil-nadu": [],
+  "https://www.india.com/business/lpg-cng-png-june-15-2026-petrol-price-diesel-rates-strait-of-hormuz-iran-israel-united-states-delhi-noida-ghaziabad-mumbai-chennai-kolkata-bengaluru-8446806": [],
+  "https://www.livemint.com/news/india/milk-price-hike-mumbai-tamil-nadu-households-to-face-higher-bills-as-prices-rise-ahead-of-festive-season-11788240212433.html": [
+   "2026-09-01",
+   "2026-09-01",
+   "2026-09-01",
+   "2026-09-01",
+   "2026-09-02",
+   "2026-09-02",
+   "2026-09-03",
+   "2026-09-04"
+  ],
+  "https://www.newindianexpress.com/states/karnataka/2026/Sep/27/milk-price-hike-after-cabinet-discussion-says-cm-shivakumar": [
+   "2026-09-28"
+  ],
+  "https://www.thequint.com/news/breaking-news/domestic-lpg-cylinder-price-hike-june-2026-india": [
+   "2026-06-08"
+  ]
+ }
+}

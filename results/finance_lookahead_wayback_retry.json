@@ -1,0 +1,951 @@
+{
+ "label": "NETWORK RETRY of failed Wayback lookups (logged); the pre-registered result in finance_lookahead.json stays primary",
+ "run_utc": "2026-10-25T13:11:31.154689+00:00",
+ "rule": "only lookups that failed; 3 tries, 5 s apart; same CDX query and labels",
+ "failed_urls": 94,
+ "recovered": 94,
+ "still_failed": 0,
+ "tries_used": {
+  "https://ddindia.co.in/2026/08/rbi-mpc-meeting-begins-today-repo-rate-likely-to-remain-unchanged": 1,
+  "https://dhruva.substack.com/p/hdfc-bank-q2-fy27-deposits-are-growing": 1,
+  "https://enterpriseai.economictimes.indiatimes.com/news/industry/q2-fy27-preview-infosys-tcs-hcl-tech-peers-brace-for-subdued-growth-amid-ai-pressure/134541080": 1,
+  "https://m.economictimes.com/markets/stocks/earnings/earnings-tracker-hdfc-bank-hcl-tech-wipro-among-129-companies-set-to-report-q2-results-this-week/articleshow/134866148.cms": 1,
+  "https://m.economictimes.com/markets/stocks/earnings/icici-bank-q2-results-preview-pat-nii-may-rise-up-to-21-yoy-margins-deposit-growth-in-focus/articleshow/134988975.cms": 1,
+  "https://m.economictimes.com/markets/stocks/earnings/infosys-q2-results-preview-will-the-results-provide-oomph-to-surging-it-stocks/articleshow/135107078.cms": 1,
+  "https://m.economictimes.com/markets/stocks/earnings/infosys-q2-results-profit-rises-6-yoy-to-rs-7823-crore-co-lowers-revenue-guidance/articleshow/135143193.cms": 1,
+  "https://scanx.trade/stock-market-news/companies/icici-bank-to-discuss-q1fy27-results-on-july-18/45584079": 1,
+  "https://sec-api.io/insights/financial-analysis-of-lam-research-lrcx-q1-fy27-earnings": 1,
+  "https://shoonya.com/blog/rbi-repo-rate-oct-2026": 3,
+  "https://thefederal.com/category/business/rbi-monetary-policy-repo-rate-252510": 1,
+  "https://ticker.finology.in/company/RELIANCE": 2,
+  "https://ticker.finology.in/discover/market-update/hdfc-bank-q2-fy27-results-analysis": 1,
+  "https://ticker.finology.in/discover/market-update/icici-bank-q2-fy27-results-analysis": 2,
+  "https://timesofindia.indiatimes.com/business/india-business/rbi-mpc-meeting-october-2026-live-updates-governor-sanjay-malhotra-repo-rate-cut-fd-rate-monetary-policy-committee-emi-west-asia-crisis-rbi-news-today/liveblog/134753997.cms": 1,
+  "https://timesofindia.indiatimes.com/business/india-business/your-loan-emi-has-a-washington-problem-how-the-fed-quietly-influences-rbi-rate-decisions/articleshow/134432773.cms": 1,
+  "https://uk.finance.yahoo.com/quote/RELIANCE.NS": 1,
+  "https://univest.in/blogs/icici-bank-q1-results-fy27": 1,
+  "https://upstox.com/news/market-news/earnings/infosys-q1-fy-27-results-time-press-conference-earnings-call-and-key-monitorables-to-track/article-197405": 1,
+  "https://upstox.com/news/market-news/earnings/tcs-q1-fy-27-earnings-schedule-out-check-date-share-price-trend-and-other-details/article-195773": 1,
+  "https://upstox.com/news/market-news/earnings/upcoming-q1-results-this-week-hcl-tech-ril-jio-fin-wipro-kotak-mahindra-bank-itc-hotels-and-more/article-196747": 1,
+  "https://upstox.com/news/market-news/stocks/tcs-q2-results-in-focus-five-key-things-investors-need-to-track-in-quarterly-earnings-on-october-8/article-201477": 1,
+  "https://upstox.com/news/market-news/stocks/upcoming-q2-fy-27-results-this-week-hcl-tech-nestle-wipro-bhel-tech-mahindra-hdfc-bank-and-more-check-list/article-201629": 1,
+  "https://www.bajajfinserv.in/infosys-quarterly-results": 1,
+  "https://www.business-standard.com/companies/news/south-indian-bank-posts-17-3-rise-in-q1-fy27-profit-at-378-crore-126071601028_1.html": 1,
+  "https://www.business-standard.com/companies/quarterly-results/infosys-q2-results-net-profit-rises-6-2-to-7-823-cr-revenue-up-10-2-126102300941_1.html": 1,
+  "https://www.business-standard.com/finance/news/rbi-mpc-august-meet-governor-monetary-policy-repo-rate-when-where-to-watch-126080300374_1.html": 1,
+  "https://www.business-standard.com/finance/news/rbi-mpc-october-2026-meeting-when-and-where-to-watch-rate-decision-live-126100600090_1.html": 1,
+  "https://www.business-standard.com/markets/news/hdfc-bank-q1-preview-pat-may-rise-9-on-strong-loan-growth-nims-seen-flat-126071600186_1.html": 1,
+  "https://www.business-standard.com/markets/news/hdfc-bank-q2-preview-single-digit-pat-growth-likely-margin-pressure-seen-126101600449_1.html": 2,
+  "https://www.business-standard.com/markets/news/infosys-q1-results-expectations-preview-revenue-may-rise-by-15-guidance-deal-pipeline-eyed-126072100760_1.html": 2,
+  "https://www.business-standard.com/markets/news/ril-q1-results-preview-brokerages-expectations-healthy-growth-pat-revenue-ebitda-jio-arpu-retail-o2c-126071600203_1.html": 1,
+  "https://www.business-standard.com/markets/news/tcs-q1-result-expectations-preview-dividend-record-date-revenue-seen-flat-wage-hikes-to-weigh-on-margins-126070700096_1.html": 1,
+  "https://www.cnbctv18.com/market/infosys-q2-results-live-updates-fy27-guidance-deal-wins-ai-impact-in-focus-liveblog-20017822.htm": 1,
+  "https://www.cnbctv18.com/market/it-q2-earnings-preview-infosys-may-cut-fy27-revenue-growth-guidance-hcltech-what-to-watch-20000802.htm": 1,
+  "https://www.cnbctv18.com/market/stocks/tcs-share-price-board-to-meet-on-july-9-for-q1-fy27-results-interim-dividend-on-agenda-19929992.htm": 1,
+  "https://www.conagrabrands.com/news-room/news-conagra-brands-reports-first-quarter-results-prn-122968": 1,
+  "https://www.corplawupdates.in/rbi/repo-rate": 1,
+  "https://www.facebook.com/MVIRDCWTCMumbaiindia/posts/rbi-raises-the-repo-rate-by-25-basis-points-to-550-on-october-7-2026-its-first-r/1150811340941382": 1,
+  "https://www.forbesindia.com/article/news/all-eyes-on-rbi-as-mpc-meets-amid-rising-inflation-and-global-uncertainty/2996655/1": 2,
+  "https://www.forbesindia.com/article/news/tcs-q2-results-marginally-beat-analyst-expectations/2999232/1": 2,
+  "https://www.fortuneindia.com/business-news/infosys-q1-results-preview-top-things-to-watch-out-for/149547": 3,
+  "https://www.ft.com/content/28233206-79b5-4bd7-bd86-45631c7d2ca8": 1,
+  "https://www.genvest.ai/events/rbi-monetary-policy": 1,
+  "https://www.genvest.ai/results/infosys-q2-fy27": 1,
+  "https://www.genvest.ai/results/tcs-q2-fy27": 1,
+  "https://www.goodreturns.in/news/infosys-q1-results-cons-pat-rises-12-yoy-to-rs-7-769-crore-but-fy27-cc-revenue-growth-guidance-cut-1523913.html": 2,
+  "https://www.goodreturns.in/news/q1-results-next-week-13-18july-reliance-hdfc-icici-bank-wipro-lead-141-companies-earnings-full-list-1521663.html": 1,
+  "https://www.hdfc.bank.in/content/dam/hdfcbankpws/in/en/pdf/about-us/financial-results/2026-2027/quarter-2/q2fy27-earnings-presentation.pdf": 2,
+  "https://www.icici.bank.in/about-us/invest-relations": 2,
+  "https://www.icici.bank.in/about-us/news-room/2026/performance-review-quarter-ended-september-30-2026": 1,
+  "https://www.indiainfoline.com/news/companies/tcs-share-price-jumps-5-46-after-q2-fy27-results-net-profit-rises-4-qoq-to-13884-crore": 1,
+  "https://www.indmoney.com/blog/stocks/hdfc-bank-q2-results-analysis": 1,
+  "https://www.indmoney.com/blog/stocks/icici-prudential-amc-q2-results": 1,
+  "https://www.indmoney.com/blog/stocks/why-hdfc-bank-share-is-rising-after-q1-update": 1,
+  "https://www.infosys.com/investors/reports-filings.html": 1,
+  "https://www.infosys.com/investors/reports-filings/quarterly-results/2026-2027/q1/press-meet.html": 2,
+  "https://www.instagram.com/p/DevpXZylaVK": 2,
+  "https://www.instagram.com/reel/DemVS0cgDHi?hl=en": 2,
+  "https://www.instagram.com/reel/DepEik4Pl0C": 2,
+  "https://www.kotakneo.com/news/stocks/it-q2-earnings-fy-2026-27-tcs-hcltech-infosys-results-dates": 1,
+  "https://www.livemint.com/market/stock-market-news/infosys-q2-2026-quarterly-results-announcement-date-and-time-earnings-schedule-dividend-history-details-11791268614764.html": 1,
+  "https://www.moneycontrol.com/banking/q2-fy27-results-icici-life-s-q2-profit-rises-25-to-rs-374-crore-h1-profit-up-26-5-article-14050979.html": 1,
+  "https://www.moneycontrol.com/news/business/earnings/hdfc-bank-q2-results-net-profit-rises-4-7-to-rs-19-510-crore-meets-estimates-nii-up-9-7-14054372.html": 1,
+  "https://www.moneycontrol.com/news/business/earnings/icici-bank-q2-results-net-profit-rises-20-to-rs-14-843-crore-beats-estimates-nii-up-18-14054374.html": 1,
+  "https://www.moneycontrol.com/news/business/earnings/infosys-q1-results-2026-date-and-time-all-eyes-on-fy27-guidance-deal-pipeline-margins-and-ai-commentary-13980194.html": 1,
+  "https://www.moneycontrol.com/news/business/information-technology/tcs-q1-preview-ai-strategy-updates-hiring-plans-fy27-discretionary-spending-among-five-things-to-watch-out-for-13967775.html": 1,
+  "https://www.moneycontrol.com/news/business/markets/reliance-industries-q1-preview-strong-o2c-steady-jio-seen-supporting-earnings-retail-margins-a-key-watch-13975703.html": 1,
+  "https://www.multibagg.ai/market-pulse/articles/hdfc-bank-q2-results-preview-cmvc5mh3k00043dnupc0ljvad": 2,
+  "https://www.ndtvprofit.com/economy/rbi-mpc-meeting-august-2026-date-time-expectations-where-to-watch-governor-sanjay-malhotras-speech-live-11857784": 2,
+  "https://www.ndtvprofit.com/markets/bank-q2-results-fy27-hdfc-bank-axis-bank-icici-bank-announce-results-dates-12090167": 1,
+  "https://www.ndtvprofit.com/markets/hdfc-bank-in-focus-issue-esop-of-19-lakh-shares-to-employees-q2-earnings-lender-asset-quality-12096270": 1,
+  "https://www.ndtvprofit.com/markets/hdfc-bank-q1-date-dividend-share-price-history-earnings-call-schedule-and-more-11679151": 1,
+  "https://www.ndtvprofit.com/markets/ril-q1-results-date-time-dividend-news-earnings-call-schedule-and-more-11754299": 1,
+  "https://www.newindianexpress.com/business/2026/Oct/05/october-monetary-policy-meeting-why-a-25-basis-point-rate-hike-is-likely-this-time": 1,
+  "https://www.niftytrader.in/markets/icici-bank-q2-result-fy27-nii-nim": 1,
+  "https://www.niftytrader.in/markets/tcs-q2-results-fy27-deal-expectations": 2,
+  "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63742": 2,
+  "https://www.reddit.com/r/IndianStockMarket/comments/1x85vwm/hdfc_bank_q2_fy27_results_out": 2,
+  "https://www.rediff.com/business/report/rbi-monetary-policy-rate-hikes-expected-in-october-and-december-amid-inflation-surge/20260916.htm": 3,
+  "https://www.sahi.com/news/hdfc-bank-schedules-q1-earnings-call-for-july-18-at-4-pm-2012-PE1_COR": 1,
+  "https://www.sahi.com/news/icici-bank-board-meets-july-18-to-review-q1-earnings-after-10-707-cr-profit-2191-PE1_COR": 1,
+  "https://www.sahi.com/news/lcc-projects-secures-70-35-crore-reliance-industries-substation-contract": 1,
+  "https://www.sahi.com/news/reliance-sets-july-17-for-q1-financials-as-analysts-eye-12-growth-in-digital-services-246-PE1_CORP": 2,
+  "https://www.sahi.com/news/tcs-sets-july-9-for-q1-results-market-tracks-24-operating-margin-guidance-2185-PE1_COR": 1,
+  "https://www.tcs.com/content/dam/tcs/investor-relations/financial-statements/2026-27/q2/Presentations/Q2%202026-27%20Fact%20Sheet.pdf": 1,
+  "https://www.thehindu.com/business/Economy/rbi-may-deliver-two-rate-hikes-by-cy-2026analysts/article71481500.ece": 1,
+  "https://www.thehindu.com/business/rbi-monetary-policy-meeting-decision-on-repo-rate-live-updates-october-7-2026/article71554262.ece": 1,
+  "https://www.tradingview.com/news/tradingview:407a317e18fc8:0-weekly-recap-dol-halts-perm-and-infosys-adr-infy-q2-fy27-oct-23": 1,
+  "https://www.youtube.com/watch?v=8KRZdcVMXBs": 1,
+  "https://www.youtube.com/watch?v=K840aMZdkPs": 1,
+  "https://www.youtube.com/watch?v=rRqUKs3B4pw": 1,
+  "https://www.youtube.com/watch?v=tO1li5QusFc": 1,
+  "https://www.youtube.com/watch?v=xtom-cnNdhY": 1
+ },
+ "before": {
+  "all": {
+   "events": 14,
+   "dropped": [],
+   "arms": {
+    "N": {
+     "confirmed": {
+      "results": 6,
+      "events": 2
+     },
+     "snippet": {
+      "results": 44,
+      "events": 14
+     },
+     "flag": {
+      "results": 12,
+      "events": 9
+     },
+     "events": 14,
+     "confirmed_wilson95": [
+      0.04009392090764893,
+      0.39941379723733705
+     ],
+     "snippet_wilson95": [
+      0.7846891945970195,
+      0.9999999999999999
+     ],
+     "results": 70,
+     "valid_lost": 10,
+     "valid_total": 11,
+     "undated": 2,
+     "wayback_failed": 60,
+     "credits": 14,
+     "median_latency_s": 3.175
+    },
+    "D": {
+     "confirmed": {
+      "results": 0,
+      "events": 0
+     },
+     "snippet": {
+      "results": 0,
+      "events": 0
+     },
+     "flag": {
+      "results": 0,
+      "events": 0
+     },
+     "events": 14,
+     "confirmed_wilson95": [
+      0.0,
+      0.21531080540298042
+     ],
+     "snippet_wilson95": [
+      0.0,
+      0.21531080540298042
+     ],
+     "results": 67,
+     "valid_lost": 1,
+     "valid_total": 11,
+     "undated": 0,
+     "wayback_failed": 52,
+     "credits": 14,
+     "median_latency_s": 1.435
+    }
+   },
+   "mcnemar_confirmed": {
+    "N_only": 2,
+    "D_only": 0,
+    "p_exact": 0.5,
+    "role": "pre-registered (metric 3)"
+   },
+   "mcnemar_snippet": {
+    "N_only": 14,
+    "D_only": 0,
+    "p_exact": 0.0001220703125,
+    "role": "descriptive"
+   }
+  },
+  "without_C4": {
+   "events": 13,
+   "dropped": [
+    "C4"
+   ],
+   "arms": {
+    "N": {
+     "confirmed": {
+      "results": 6,
+      "events": 2
+     },
+     "snippet": {
+      "results": 41,
+      "events": 13
+     },
+     "flag": {
+      "results": 10,
+      "events": 8
+     },
+     "events": 13,
+     "confirmed_wilson95": [
+      0.04325817796522907,
+      0.4223463125106327
+     ],
+     "snippet_wilson95": [
+      0.7719046248681998,
+      1.0
+     ],
+     "results": 65,
+     "valid_lost": 10,
+     "valid_total": 11,
+     "undated": 2,
+     "wayback_failed": 55,
+     "credits": 13,
+     "median_latency_s": 3.11
+    },
+    "D": {
+     "confirmed": {
+      "results": 0,
+      "events": 0
+     },
+     "snippet": {
+      "results": 0,
+      "events": 0
+     },
+     "flag": {
+      "results": 0,
+      "events": 0
+     },
+     "events": 13,
+     "confirmed_wilson95": [
+      0.0,
+      0.22809537513180025
+     ],
+     "snippet_wilson95": [
+      0.0,
+      0.22809537513180025
+     ],
+     "results": 62,
+     "valid_lost": 1,
+     "valid_total": 11,
+     "undated": 0,
+     "wayback_failed": 47,
+     "credits": 13,
+     "median_latency_s": 1.44
+    }
+   },
+   "mcnemar_confirmed": {
+    "N_only": 2,
+    "D_only": 0,
+    "p_exact": 0.5,
+    "role": "pre-registered (metric 3)"
+   },
+   "mcnemar_snippet": {
+    "N_only": 13,
+    "D_only": 0,
+    "p_exact": 0.000244140625,
+    "role": "descriptive"
+   }
+  }
+ },
+ "after": {
+  "all": {
+   "events": 14,
+   "dropped": [],
+   "arms": {
+    "N": {
+     "confirmed": {
+      "results": 23,
+      "events": 10
+     },
+     "snippet": {
+      "results": 27,
+      "events": 14
+     },
+     "flag": {
+      "results": 12,
+      "events": 9
+     },
+     "events": 14,
+     "confirmed_wilson95": [
+      0.45350915474002584,
+      0.8827862143729825
+     ],
+     "snippet_wilson95": [
+      0.7846891945970195,
+      0.9999999999999999
+     ],
+     "results": 70,
+     "valid_lost": 26,
+     "valid_total": 29,
+     "undated": 2,
+     "wayback_failed": 0,
+     "credits": 14,
+     "median_latency_s": 3.175
+    },
+    "D": {
+     "confirmed": {
+      "results": 0,
+      "events": 0
+     },
+     "snippet": {
+      "results": 0,
+      "events": 0
+     },
+     "flag": {
+      "results": 0,
+      "events": 0
+     },
+     "events": 14,
+     "confirmed_wilson95": [
+      0.0,
+      0.21531080540298042
+     ],
+     "snippet_wilson95": [
+      0.0,
+      0.21531080540298042
+     ],
+     "results": 67,
+     "valid_lost": 3,
+     "valid_total": 29,
+     "undated": 0,
+     "wayback_failed": 0,
+     "credits": 14,
+     "median_latency_s": 1.435
+    }
+   },
+   "mcnemar_confirmed": {
+    "N_only": 10,
+    "D_only": 0,
+    "p_exact": 0.001953125,
+    "role": "pre-registered (metric 3)"
+   },
+   "mcnemar_snippet": {
+    "N_only": 14,
+    "D_only": 0,
+    "p_exact": 0.0001220703125,
+    "role": "descriptive"
+   }
+  },
+  "without_C4": {
+   "events": 13,
+   "dropped": [
+    "C4"
+   ],
+   "arms": {
+    "N": {
+     "confirmed": {
+      "results": 23,
+      "events": 10
+     },
+     "snippet": {
+      "results": 24,
+      "events": 13
+     },
+     "flag": {
+      "results": 10,
+      "events": 8
+     },
+     "events": 13,
+     "confirmed_wilson95": [
+      0.49743623839480355,
+      0.918204713457304
+     ],
+     "snippet_wilson95": [
+      0.7719046248681998,
+      1.0
+     ],
+     "results": 65,
+     "valid_lost": 23,
+     "valid_total": 26,
+     "undated": 2,
+     "wayback_failed": 0,
+     "credits": 13,
+     "median_latency_s": 3.11
+    },
+    "D": {
+     "confirmed": {
+      "results": 0,
+      "events": 0
+     },
+     "snippet": {
+      "results": 0,
+      "events": 0
+     },
+     "flag": {
+      "results": 0,
+      "events": 0
+     },
+     "events": 13,
+     "confirmed_wilson95": [
+      0.0,
+      0.22809537513180025
+     ],
+     "snippet_wilson95": [
+      0.0,
+      0.22809537513180025
+     ],
+     "results": 62,
+     "valid_lost": 3,
+     "valid_total": 26,
+     "undated": 0,
+     "wayback_failed": 0,
+     "credits": 13,
+     "median_latency_s": 1.44
+    }
+   },
+   "mcnemar_confirmed": {
+    "N_only": 10,
+    "D_only": 0,
+    "p_exact": 0.001953125,
+    "role": "pre-registered (metric 3)"
+   },
+   "mcnemar_snippet": {
+    "N_only": 13,
+    "D_only": 0,
+    "p_exact": 0.000244140625,
+    "role": "descriptive"
+   }
+  }
+ },
+ "recovered_captures": {
+  "https://ddindia.co.in/2026/08/rbi-mpc-meeting-begins-today-repo-rate-likely-to-remain-unchanged": [],
+  "https://dhruva.substack.com/p/hdfc-bank-q2-fy27-deposits-are-growing": [],
+  "https://enterpriseai.economictimes.indiatimes.com/news/industry/q2-fy27-preview-infosys-tcs-hcl-tech-peers-brace-for-subdued-growth-amid-ai-pressure/134541080": [],
+  "https://m.economictimes.com/markets/stocks/earnings/earnings-tracker-hdfc-bank-hcl-tech-wipro-among-129-companies-set-to-report-q2-results-this-week/articleshow/134866148.cms": [],
+  "https://m.economictimes.com/markets/stocks/earnings/icici-bank-q2-results-preview-pat-nii-may-rise-up-to-21-yoy-margins-deposit-growth-in-focus/articleshow/134988975.cms": [],
+  "https://m.economictimes.com/markets/stocks/earnings/infosys-q2-results-preview-will-the-results-provide-oomph-to-surging-it-stocks/articleshow/135107078.cms": [],
+  "https://m.economictimes.com/markets/stocks/earnings/infosys-q2-results-profit-rises-6-yoy-to-rs-7823-crore-co-lowers-revenue-guidance/articleshow/135143193.cms": [],
+  "https://scanx.trade/stock-market-news/companies/icici-bank-to-discuss-q1fy27-results-on-july-18/45584079": [],
+  "https://sec-api.io/insights/financial-analysis-of-lam-research-lrcx-q1-fy27-earnings": [],
+  "https://shoonya.com/blog/rbi-repo-rate-oct-2026": [],
+  "https://thefederal.com/category/business/rbi-monetary-policy-repo-rate-252510": [
+   "2026-08-04"
+  ],
+  "https://ticker.finology.in/company/RELIANCE": [
+   "2020-08-13",
+   "2020-09-26",
+   "2020-10-25",
+   "2020-12-01",
+   "2020-12-01",
+   "2021-01-27",
+   "2021-04-22",
+   "2021-07-27",
+   "2021-10-23",
+   "2022-01-27",
+   "2022-07-02",
+   "2022-09-26",
+   "2022-10-03",
+   "2023-01-27",
+   "2023-03-15",
+   "2023-06-04",
+   "2023-12-07",
+   "2024-04-26",
+   "2024-05-10",
+   "2024-05-16",
+   "2024-05-28",
+   "2024-09-18",
+   "2025-04-21",
+   "2025-05-05",
+   "2025-05-05",
+   "2025-09-12",
+   "2025-10-08",
+   "2025-12-07",
+   "2026-02-09",
+   "2026-06-13"
+  ],
+  "https://ticker.finology.in/discover/market-update/hdfc-bank-q2-fy27-results-analysis": [],
+  "https://ticker.finology.in/discover/market-update/icici-bank-q2-fy27-results-analysis": [],
+  "https://timesofindia.indiatimes.com/business/india-business/rbi-mpc-meeting-october-2026-live-updates-governor-sanjay-malhotra-repo-rate-cut-fd-rate-monetary-policy-committee-emi-west-asia-crisis-rbi-news-today/liveblog/134753997.cms": [
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-08",
+   "2026-10-08",
+   "2026-10-11",
+   "2026-10-11",
+   "2026-10-12",
+   "2026-10-12",
+   "2026-10-12",
+   "2026-10-12"
+  ],
+  "https://timesofindia.indiatimes.com/business/india-business/your-loan-emi-has-a-washington-problem-how-the-fed-quietly-influences-rbi-rate-decisions/articleshow/134432773.cms": [
+   "2026-09-23",
+   "2026-09-23",
+   "2026-09-23",
+   "2026-09-23",
+   "2026-09-23",
+   "2026-09-23",
+   "2026-09-23",
+   "2026-09-23",
+   "2026-09-23",
+   "2026-09-23",
+   "2026-09-24",
+   "2026-09-24",
+   "2026-09-24",
+   "2026-09-24",
+   "2026-09-24",
+   "2026-09-24",
+   "2026-09-24",
+   "2026-09-24"
+  ],
+  "https://uk.finance.yahoo.com/quote/RELIANCE.NS": [
+   "2022-05-17",
+   "2022-09-26",
+   "2023-04-21",
+   "2024-02-23",
+   "2024-11-04",
+   "2024-11-04",
+   "2024-12-23",
+   "2025-07-12"
+  ],
+  "https://univest.in/blogs/icici-bank-q1-results-fy27": [
+   "2026-07-11"
+  ],
+  "https://upstox.com/news/market-news/earnings/infosys-q1-fy-27-results-time-press-conference-earnings-call-and-key-monitorables-to-track/article-197405": [],
+  "https://upstox.com/news/market-news/earnings/tcs-q1-fy-27-earnings-schedule-out-check-date-share-price-trend-and-other-details/article-195773": [],
+  "https://upstox.com/news/market-news/earnings/upcoming-q1-results-this-week-hcl-tech-ril-jio-fin-wipro-kotak-mahindra-bank-itc-hotels-and-more/article-196747": [
+   "2026-07-13"
+  ],
+  "https://upstox.com/news/market-news/stocks/tcs-q2-results-in-focus-five-key-things-investors-need-to-track-in-quarterly-earnings-on-october-8/article-201477": [
+   "2026-10-13"
+  ],
+  "https://upstox.com/news/market-news/stocks/upcoming-q2-fy-27-results-this-week-hcl-tech-nestle-wipro-bhel-tech-mahindra-hdfc-bank-and-more-check-list/article-201629": [
+   "2026-10-12"
+  ],
+  "https://www.bajajfinserv.in/infosys-quarterly-results": [
+   "2025-10-15"
+  ],
+  "https://www.business-standard.com/companies/news/south-indian-bank-posts-17-3-rise-in-q1-fy27-profit-at-378-crore-126071601028_1.html": [],
+  "https://www.business-standard.com/companies/quarterly-results/infosys-q2-results-net-profit-rises-6-2-to-7-823-cr-revenue-up-10-2-126102300941_1.html": [],
+  "https://www.business-standard.com/finance/news/rbi-mpc-august-meet-governor-monetary-policy-repo-rate-when-where-to-watch-126080300374_1.html": [
+   "2026-08-26"
+  ],
+  "https://www.business-standard.com/finance/news/rbi-mpc-october-2026-meeting-when-and-where-to-watch-rate-decision-live-126100600090_1.html": [
+   "2026-10-06",
+   "2026-10-06",
+   "2026-10-06",
+   "2026-10-06",
+   "2026-10-07",
+   "2026-10-08",
+   "2026-10-09"
+  ],
+  "https://www.business-standard.com/markets/news/hdfc-bank-q1-preview-pat-may-rise-9-on-strong-loan-growth-nims-seen-flat-126071600186_1.html": [
+   "2026-09-03"
+  ],
+  "https://www.business-standard.com/markets/news/hdfc-bank-q2-preview-single-digit-pat-growth-likely-margin-pressure-seen-126101600449_1.html": [
+   "2026-10-16",
+   "2026-10-16",
+   "2026-10-16",
+   "2026-10-17",
+   "2026-10-17"
+  ],
+  "https://www.business-standard.com/markets/news/infosys-q1-results-expectations-preview-revenue-may-rise-by-15-guidance-deal-pipeline-eyed-126072100760_1.html": [],
+  "https://www.business-standard.com/markets/news/ril-q1-results-preview-brokerages-expectations-healthy-growth-pat-revenue-ebitda-jio-arpu-retail-o2c-126071600203_1.html": [
+   "2026-08-23",
+   "2026-08-27"
+  ],
+  "https://www.business-standard.com/markets/news/tcs-q1-result-expectations-preview-dividend-record-date-revenue-seen-flat-wage-hikes-to-weigh-on-margins-126070700096_1.html": [
+   "2026-07-09",
+   "2026-08-22",
+   "2026-09-05"
+  ],
+  "https://www.cnbctv18.com/market/infosys-q2-results-live-updates-fy27-guidance-deal-wins-ai-impact-in-focus-liveblog-20017822.htm": [],
+  "https://www.cnbctv18.com/market/it-q2-earnings-preview-infosys-may-cut-fy27-revenue-growth-guidance-hcltech-what-to-watch-20000802.htm": [
+   "2026-09-30",
+   "2026-09-30",
+   "2026-09-30",
+   "2026-10-14",
+   "2026-10-15"
+  ],
+  "https://www.cnbctv18.com/market/stocks/tcs-share-price-board-to-meet-on-july-9-for-q1-fy27-results-interim-dividend-on-agenda-19929992.htm": [
+   "2026-06-22",
+   "2026-06-23",
+   "2026-06-28"
+  ],
+  "https://www.conagrabrands.com/news-room/news-conagra-brands-reports-first-quarter-results-prn-122968": [
+   "2026-10-03",
+   "2026-10-05"
+  ],
+  "https://www.corplawupdates.in/rbi/repo-rate": [
+   "2026-08-18"
+  ],
+  "https://www.facebook.com/MVIRDCWTCMumbaiindia/posts/rbi-raises-the-repo-rate-by-25-basis-points-to-550-on-october-7-2026-its-first-r/1150811340941382": [],
+  "https://www.forbesindia.com/article/news/all-eyes-on-rbi-as-mpc-meets-amid-rising-inflation-and-global-uncertainty/2996655/1": [
+   "2026-08-05",
+   "2026-08-05"
+  ],
+  "https://www.forbesindia.com/article/news/tcs-q2-results-marginally-beat-analyst-expectations/2999232/1": [
+   "2026-10-08",
+   "2026-10-09",
+   "2026-10-09",
+   "2026-10-09",
+   "2026-10-10"
+  ],
+  "https://www.fortuneindia.com/business-news/infosys-q1-results-preview-top-things-to-watch-out-for/149547": [
+   "2026-07-23"
+  ],
+  "https://www.ft.com/content/28233206-79b5-4bd7-bd86-45631c7d2ca8": [],
+  "https://www.genvest.ai/events/rbi-monetary-policy": [
+   "2026-10-09"
+  ],
+  "https://www.genvest.ai/results/infosys-q2-fy27": [
+   "2026-10-12"
+  ],
+  "https://www.genvest.ai/results/tcs-q2-fy27": [],
+  "https://www.goodreturns.in/news/infosys-q1-results-cons-pat-rises-12-yoy-to-rs-7-769-crore-but-fy27-cc-revenue-growth-guidance-cut-1523913.html": [],
+  "https://www.goodreturns.in/news/q1-results-next-week-13-18july-reliance-hdfc-icici-bank-wipro-lead-141-companies-earnings-full-list-1521663.html": [
+   "2026-07-13"
+  ],
+  "https://www.hdfc.bank.in/content/dam/hdfcbankpws/in/en/pdf/about-us/financial-results/2026-2027/quarter-2/q2fy27-earnings-presentation.pdf": [
+   "2026-10-17"
+  ],
+  "https://www.icici.bank.in/about-us/invest-relations": [
+   "2025-10-28",
+   "2025-11-12",
+   "2026-02-06",
+   "2026-02-06",
+   "2026-02-07",
+   "2026-02-07",
+   "2026-02-07",
+   "2026-02-08",
+   "2026-02-08",
+   "2026-02-08",
+   "2026-02-08",
+   "2026-02-08",
+   "2026-02-08",
+   "2026-02-08",
+   "2026-02-09",
+   "2026-02-09",
+   "2026-02-09",
+   "2026-02-09",
+   "2026-02-09",
+   "2026-02-09",
+   "2026-02-10",
+   "2026-02-10",
+   "2026-02-10",
+   "2026-02-10",
+   "2026-02-10",
+   "2026-02-11",
+   "2026-02-11",
+   "2026-02-11",
+   "2026-02-11",
+   "2026-02-11",
+   "2026-02-12",
+   "2026-02-12",
+   "2026-02-12",
+   "2026-02-12",
+   "2026-02-13",
+   "2026-02-13",
+   "2026-02-13",
+   "2026-02-13",
+   "2026-02-13",
+   "2026-02-13",
+   "2026-02-14",
+   "2026-02-14",
+   "2026-02-14",
+   "2026-02-14",
+   "2026-02-14",
+   "2026-02-15",
+   "2026-02-15",
+   "2026-02-15",
+   "2026-02-15",
+   "2026-02-15",
+   "2026-02-16",
+   "2026-02-16",
+   "2026-02-16",
+   "2026-02-16",
+   "2026-02-16",
+   "2026-02-16",
+   "2026-02-16",
+   "2026-02-17",
+   "2026-02-17",
+   "2026-02-17",
+   "2026-02-17",
+   "2026-02-17",
+   "2026-02-17",
+   "2026-02-18",
+   "2026-02-18",
+   "2026-02-18",
+   "2026-02-19",
+   "2026-02-19",
+   "2026-03-03",
+   "2026-03-05",
+   "2026-03-05",
+   "2026-03-06",
+   "2026-03-06",
+   "2026-03-06",
+   "2026-03-06",
+   "2026-03-06",
+   "2026-03-07",
+   "2026-03-07",
+   "2026-03-07",
+   "2026-03-07",
+   "2026-03-08",
+   "2026-03-08",
+   "2026-03-08",
+   "2026-03-08",
+   "2026-03-08",
+   "2026-03-08",
+   "2026-03-09",
+   "2026-03-09",
+   "2026-03-09",
+   "2026-03-09",
+   "2026-03-09",
+   "2026-03-10",
+   "2026-03-10",
+   "2026-03-10",
+   "2026-03-11",
+   "2026-03-11",
+   "2026-03-11",
+   "2026-03-11",
+   "2026-03-11",
+   "2026-03-11",
+   "2026-03-12",
+   "2026-03-12",
+   "2026-03-13",
+   "2026-03-13",
+   "2026-03-14",
+   "2026-03-14",
+   "2026-03-14",
+   "2026-03-14",
+   "2026-03-15",
+   "2026-03-15",
+   "2026-03-15",
+   "2026-03-16",
+   "2026-03-17",
+   "2026-04-01",
+   "2026-04-10",
+   "2026-04-10",
+   "2026-04-10",
+   "2026-04-11",
+   "2026-04-13",
+   "2026-04-15",
+   "2026-04-18",
+   "2026-04-20",
+   "2026-04-21",
+   "2026-04-21",
+   "2026-05-01",
+   "2026-05-09",
+   "2026-05-09",
+   "2026-05-11",
+   "2026-05-12",
+   "2026-05-12",
+   "2026-05-12",
+   "2026-05-16",
+   "2026-05-21",
+   "2026-05-21",
+   "2026-06-06",
+   "2026-06-07",
+   "2026-06-07",
+   "2026-06-08",
+   "2026-06-09",
+   "2026-06-12",
+   "2026-06-17",
+   "2026-06-18",
+   "2026-07-11",
+   "2026-07-11",
+   "2026-07-24",
+   "2026-10-02"
+  ],
+  "https://www.icici.bank.in/about-us/news-room/2026/performance-review-quarter-ended-september-30-2026": [
+   "2026-10-17"
+  ],
+  "https://www.indiainfoline.com/news/companies/tcs-share-price-jumps-5-46-after-q2-fy27-results-net-profit-rises-4-qoq-to-13884-crore": [
+   "2026-10-09",
+   "2026-10-09"
+  ],
+  "https://www.indmoney.com/blog/stocks/hdfc-bank-q2-results-analysis": [],
+  "https://www.indmoney.com/blog/stocks/icici-prudential-amc-q2-results": [],
+  "https://www.indmoney.com/blog/stocks/why-hdfc-bank-share-is-rising-after-q1-update": [],
+  "https://www.infosys.com/investors/reports-filings.html": [
+   "2019-12-06",
+   "2019-12-07",
+   "2020-03-29",
+   "2020-05-05",
+   "2020-09-25",
+   "2020-11-25",
+   "2021-11-29",
+   "2021-12-19",
+   "2022-01-22",
+   "2022-05-26",
+   "2023-03-06",
+   "2023-03-12",
+   "2023-03-14",
+   "2023-06-07",
+   "2023-12-17",
+   "2024-06-20",
+   "2024-08-12",
+   "2024-11-03",
+   "2025-01-21",
+   "2025-06-18",
+   "2025-07-22",
+   "2025-07-22",
+   "2025-07-23",
+   "2025-09-14",
+   "2025-10-10",
+   "2025-10-10",
+   "2025-11-27",
+   "2025-11-28",
+   "2025-11-29",
+   "2025-12-07",
+   "2025-12-08",
+   "2025-12-14",
+   "2025-12-16",
+   "2026-04-18",
+   "2026-05-28",
+   "2026-09-05"
+  ],
+  "https://www.infosys.com/investors/reports-filings/quarterly-results/2026-2027/q1/press-meet.html": [],
+  "https://www.instagram.com/p/DevpXZylaVK": [],
+  "https://www.instagram.com/reel/DemVS0cgDHi?hl=en": [],
+  "https://www.instagram.com/reel/DepEik4Pl0C": [],
+  "https://www.kotakneo.com/news/stocks/it-q2-earnings-fy-2026-27-tcs-hcltech-infosys-results-dates": [
+   "2026-10-12"
+  ],
+  "https://www.livemint.com/market/stock-market-news/infosys-q2-2026-quarterly-results-announcement-date-and-time-earnings-schedule-dividend-history-details-11791268614764.html": [
+   "2026-10-06",
+   "2026-10-06",
+   "2026-10-06",
+   "2026-10-06",
+   "2026-10-07",
+   "2026-10-08",
+   "2026-10-09"
+  ],
+  "https://www.moneycontrol.com/banking/q2-fy27-results-icici-life-s-q2-profit-rises-25-to-rs-374-crore-h1-profit-up-26-5-article-14050979.html": [],
+  "https://www.moneycontrol.com/news/business/earnings/hdfc-bank-q2-results-net-profit-rises-4-7-to-rs-19-510-crore-meets-estimates-nii-up-9-7-14054372.html": [
+   "2026-10-17",
+   "2026-10-17",
+   "2026-10-17",
+   "2026-10-17"
+  ],
+  "https://www.moneycontrol.com/news/business/earnings/icici-bank-q2-results-net-profit-rises-20-to-rs-14-843-crore-beats-estimates-nii-up-18-14054374.html": [
+   "2026-10-17"
+  ],
+  "https://www.moneycontrol.com/news/business/earnings/infosys-q1-results-2026-date-and-time-all-eyes-on-fy27-guidance-deal-pipeline-margins-and-ai-commentary-13980194.html": [],
+  "https://www.moneycontrol.com/news/business/information-technology/tcs-q1-preview-ai-strategy-updates-hiring-plans-fy27-discretionary-spending-among-five-things-to-watch-out-for-13967775.html": [
+   "2026-07-09"
+  ],
+  "https://www.moneycontrol.com/news/business/markets/reliance-industries-q1-preview-strong-o2c-steady-jio-seen-supporting-earnings-retail-margins-a-key-watch-13975703.html": [
+   "2026-07-17"
+  ],
+  "https://www.multibagg.ai/market-pulse/articles/hdfc-bank-q2-results-preview-cmvc5mh3k00043dnupc0ljvad": [],
+  "https://www.ndtvprofit.com/economy/rbi-mpc-meeting-august-2026-date-time-expectations-where-to-watch-governor-sanjay-malhotras-speech-live-11857784": [],
+  "https://www.ndtvprofit.com/markets/bank-q2-results-fy27-hdfc-bank-axis-bank-icici-bank-announce-results-dates-12090167": [
+   "2026-09-25",
+   "2026-09-25",
+   "2026-10-04",
+   "2026-10-04"
+  ],
+  "https://www.ndtvprofit.com/markets/hdfc-bank-in-focus-issue-esop-of-19-lakh-shares-to-employees-q2-earnings-lender-asset-quality-12096270": [
+   "2026-09-26",
+   "2026-09-26"
+  ],
+  "https://www.ndtvprofit.com/markets/hdfc-bank-q1-date-dividend-share-price-history-earnings-call-schedule-and-more-11679151": [],
+  "https://www.ndtvprofit.com/markets/ril-q1-results-date-time-dividend-news-earnings-call-schedule-and-more-11754299": [],
+  "https://www.newindianexpress.com/business/2026/Oct/05/october-monetary-policy-meeting-why-a-25-basis-point-rate-hike-is-likely-this-time": [
+   "2026-10-05",
+   "2026-10-05",
+   "2026-10-05",
+   "2026-10-05",
+   "2026-10-06",
+   "2026-10-08"
+  ],
+  "https://www.niftytrader.in/markets/icici-bank-q2-result-fy27-nii-nim": [],
+  "https://www.niftytrader.in/markets/tcs-q2-results-fy27-deal-expectations": [
+   "2026-10-08"
+  ],
+  "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63742": [
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-08",
+   "2026-10-11",
+   "2026-10-17",
+   "2026-10-19"
+  ],
+  "https://www.reddit.com/r/IndianStockMarket/comments/1x85vwm/hdfc_bank_q2_fy27_results_out": [],
+  "https://www.rediff.com/business/report/rbi-monetary-policy-rate-hikes-expected-in-october-and-december-amid-inflation-surge/20260916.htm": [
+   "2026-09-16",
+   "2026-09-16",
+   "2026-09-16",
+   "2026-09-17"
+  ],
+  "https://www.sahi.com/news/hdfc-bank-schedules-q1-earnings-call-for-july-18-at-4-pm-2012-PE1_COR": [],
+  "https://www.sahi.com/news/icici-bank-board-meets-july-18-to-review-q1-earnings-after-10-707-cr-profit-2191-PE1_COR": [],
+  "https://www.sahi.com/news/lcc-projects-secures-70-35-crore-reliance-industries-substation-contract": [],
+  "https://www.sahi.com/news/reliance-sets-july-17-for-q1-financials-as-analysts-eye-12-growth-in-digital-services-246-PE1_CORP": [],
+  "https://www.sahi.com/news/tcs-sets-july-9-for-q1-results-market-tracks-24-operating-margin-guidance-2185-PE1_COR": [],
+  "https://www.tcs.com/content/dam/tcs/investor-relations/financial-statements/2026-27/q2/Presentations/Q2%202026-27%20Fact%20Sheet.pdf": [
+   "2026-10-12"
+  ],
+  "https://www.thehindu.com/business/Economy/rbi-may-deliver-two-rate-hikes-by-cy-2026analysts/article71481500.ece": [],
+  "https://www.thehindu.com/business/rbi-monetary-policy-meeting-decision-on-repo-rate-live-updates-october-7-2026/article71554262.ece": [
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-07",
+   "2026-10-08",
+   "2026-10-08",
+   "2026-10-08",
+   "2026-10-08",
+   "2026-10-08",
+   "2026-10-10"
+  ],
+  "https://www.tradingview.com/news/tradingview:407a317e18fc8:0-weekly-recap-dol-halts-perm-and-infosys-adr-infy-q2-fy27-oct-23": [
+   "2026-10-13",
+   "2026-10-13"
+  ],
+  "https://www.youtube.com/watch?v=8KRZdcVMXBs": [],
+  "https://www.youtube.com/watch?v=K840aMZdkPs": [],
+  "https://www.youtube.com/watch?v=rRqUKs3B4pw": [],
+  "https://www.youtube.com/watch?v=tO1li5QusFc": [],
+  "https://www.youtube.com/watch?v=xtom-cnNdhY": []
+ }
+}
