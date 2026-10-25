@@ -299,9 +299,15 @@ def report(m, built):
     return "\n".join(lines) + "\n"
 
 
+def leak_cases(out, arms):
+    """{arm: ids of cases with at least one confirmed leak (label L)} for the given arms."""
+    return {a: {row["id"] for row in out["rows"] if any(r["label"] == "L" for r in row["arms"].get(a, {})
+                                                       .get("results", []))} for a in arms}
+
+
 def retry_mcnemar(out, rt, x, y, when):
     """Exact McNemar (paired by case) on confirmed-leak cases, first pass ('before') or with the retry's recovered
-    captures applied and the same labels recomputed ('after')."""
+    captures applied and the labels recomputed ('after'; D's results are C's, so the same URLs are updated)."""
     import copy
     o = copy.deepcopy(out)
     if when == "after":
@@ -312,13 +318,7 @@ def retry_mcnemar(out, rt, x, y, when):
                         r["captures"] = rt["recovered_captures"][r["url"]]
                     r["label"] = label(row["cutoff"], r["captures"], r["tavily_date"], url_date(r["url"]),
                                        r["page_date"])
-        for row in o["rows"]:                      # D keeps C's page-dated results: refresh its labels from C's
-            if "C" in row["arms"] and "D" in row["arms"]:
-                by = {r["url"]: r["label"] for r in row["arms"]["C"]["results"]}
-                for r in row["arms"]["D"]["results"]:
-                    r["label"] = by.get(r["url"], r["label"])
-    leak = {a: {row["id"] for row in o["rows"] if any(r["label"] == "L" for r in row["arms"].get(a, {})
-                                                     .get("results", []))} for a in (x, y)}
+    leak = leak_cases(o, (x, y))
     return mcnemar_exact(len(leak[x] - leak[y]), len(leak[y] - leak[x]))
 
 
@@ -329,7 +329,7 @@ def addendum(out):
     from collections import Counter
     rows, m = out["rows"], out["metrics"]
     kept = lambda a, row: row["arms"].get(a, {}).get("results", [])  # noqa: E731
-    leak = {a: {row["id"] for row in rows if any(r["label"] == "L" for r in kept(a, row))} for a in "ABCD"}
+    leak = leak_cases(out, "ABCD")
     pct = lambda x: f"{x:.0%}"  # noqa: E731
     L = ["", "## Addendum (offline, added after the results; descriptive, nothing above changes)", "",
          "- **Confirmed-leak rate per arm, Wilson 95%:** " + "; ".join(
@@ -385,6 +385,10 @@ def addendum(out):
             b, f = rt["before"]["arms"][a], rt["after"]["arms"][a]
             L.append(f"| {a} | {cases(b)} | {cases(f)} | {frac(b['leak_fraction'])} | {frac(f['leak_fraction'])} | "
                      f"{b['valid_lost']} of {b['valid_total']} | {f['valid_lost']} of {f['valid_total']} |")
+        tb, ta = rt["before"]["arms"]["A"]["valid_total"], rt["after"]["arms"]["A"]["valid_total"]
+        if tb != ta:
+            L += ["", f"Valid-evidence totals differ ({tb} first pass vs {ta} after retry) because recovered lookups "
+                      "added results: the after-retry \"lost\" counts are out of a larger total, not a worse result."]
         L += ["", "Exact McNemar, first pass → after retry: " + "; ".join(
             f"{x} vs {y} p = {retry_mcnemar(out, rt, x, y, 'before'):.4f} → {retry_mcnemar(out, rt, x, y, 'after'):.4f}"
             for x, y in (("A", "B"), ("C", "D"))) + ". The retry recovers lookups only; the labelling rules and the "

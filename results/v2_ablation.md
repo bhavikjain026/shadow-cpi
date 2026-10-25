@@ -28,7 +28,7 @@
 
 Arm A's credits are those of its calls when first made, in the issue 4 and issue 14 runs: the flight recorder has 213 uncached Tavily calls tagged `v2:events`, 205 credits, equal to the credit ledger's `v2-issue4` (150) + `v2-issue14` (55). Arm A itself re-ran them from the cache at 0 new credits.
 
-**Two credit counts.** The credit columns count every call at its original cost (as agreed for this table). *Real new credits* is what the test itself charged; for arm T it was corrected 121 → 56 (logged): 41 of its 72 searches were cache hits that a budget bug charged again (fixed in 070fa6e; ledger offset row `phantom-T-2026-10-22`).
+**Two credit counts.** The credit columns count every call at its original cost (as agreed for this table). *Real new credits* is what the test itself charged; for arm T it was corrected 121 → 56 (logged): 41 of its 72 searches were cache hits that a budget bug charged again (ledger offset row `phantom-T-2026-10-22`, -65 credits).
 
 **Provenance (Amendment F):** request IDs + response hashes on every call of arms C and T (262 of 262); A and B ran before this logging existed (their responses are still in the recorder's cache).
 
@@ -51,8 +51,8 @@ Arm A's credits are those of its calls when first made, in the issue 4 and issue
 - Median latency was pre-registered as Amendment E metric 4, with no target; it is descriptive only and plays no part in the verdict.
 - Credits per known change found (credits ÷ recall) was added after scoring, as a second credit column; it is descriptive and cannot change the verdict.
 - Every verified event that matches none of the 29 is listed in `audit/arms_unmatched.md` for a check.
-- **Unmatched events, checked by Claude Code against cached text, 10 re-checked live in a browser** (2026-10-25: 9 opened, 1 refused by the browser; `audit/arms_unmatched_check.json`). Of 23: 20 wrong, 3 real change outside the list. Wrong rows by arm: A 8 of 10; B 6 of 7; C 6 of 6. The wrong rows are mostly non-Indian pages, non-domestic or commercial LPG, and lines about a different item. The live re-check overturned one change: Bengaluru Metro's 9 Feb rise was put on hold before it took effect (4 rows).
-- **Real changes outside the list** (reported separately; the pre-registered list of 29 and every recall figure are unchanged): 3 rows, 2 distinct changes. Gokul full-cream (buffalo) milk +Rs 2/litre in Mumbai from 21 Feb 2026 (2026-02), found by arm B; MSRTC (Maharashtra state buses) +13.65% permanent fare revision from 17 Jul 2026 (2026-07), found by arm A.
+- **Unmatched events, checked by Claude Code against cached text, 10 re-checked live in a browser** (2026-10-25: 9 opened, 1 refused by the browser; `audit/arms_unmatched_check.json`). Of 23: 20 wrong, 3 real change outside the list. Wrong rows by arm: A 8 of 10; B 6 of 7; C 6 of 6. The wrong rows are mostly non-Indian pages, non-domestic or commercial LPG, and lines about a different item. The live re-check overturned 1 change (Bengaluru Metro +5% from 9 Feb 2026 (put on hold); 4 rows).
+- **Real changes outside the list** (reported separately; the pre-registered list of 29 and every recall figure are unchanged): 3 rows, 2 distinct changes. Gokul full-cream (buffalo) milk +Rs 2/litre in Mumbai (from 21 Feb 2026), found by arm B; MSRTC permanent bus fare revision (+13.65%, from 17 Jul 2026), found by arm A.
 
 ## Exploratory, partial: arm T + dates (added after scoring; cannot change the winner or any verdict)
 

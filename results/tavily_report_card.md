@@ -5,7 +5,7 @@ Computed by `tools/prompt_t.py card` from `logs/flight_recorder.jsonl`, `results
 | Measure | Value |
 | --- | --- |
 | Tavily calls sent (uncached) | 1888 (plus 13827 served from the cache) |
-| Credits used (ledger + 160 before it, reconciled to the billing page) | 1809 of the 1,000-credit plan, plus 3,125 add-on credits |
+| Credits used (ledger + 160 before it, reconciled to the billing page) | 1,809 credits used of 4,125 (1,000 plan + 3,125 add-on) |
 | Credits per replay prediction (events + skeptic, mean of 9 months) | 40.3 |
 | Search results inside the requested date window | 5160 of 6592 (78%); 1424 undated |
 | Price quotes verified word-for-word (Prompt 2 March run, manifest at f00bd45) | 91 of 93 (98%) |

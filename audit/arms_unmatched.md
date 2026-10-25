@@ -1,6 +1,6 @@
 # Verified events not matched to the 29 known changes (four search arms)
 
-From `v2/ablation/` (Amendments E and F, development data). Each is either a real change outside the list or a false event; the last column is a check by Claude Code against cached text, 10 re-checked live in a browser on 2026-10-25 (shown after "live:"). Page date = the date used by the verifier (address or Tavily); printed = the date printed on the page, if any.
+From `v2/ablation/` (Amendments E and F, development data). Each is either a real change outside the list or a false event; the last column is a check by Claude Code against cached text; rows re-checked live in a browser on 2026-10-25 show the result after "live:". Page date = the date used by the verifier (address or Tavily); printed = the date printed on the page, if any.
 
 | Arm | Month | Item | Effective | States | Quote | URL | Page date | Printed | Check (Claude Code, cached text; live re-check) |
 |---|---|---|---|---|---|---|---|---|---|

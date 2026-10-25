@@ -33,4 +33,6 @@ A **confirmed leak** needs independent version evidence: the Wayback Machine has
 | C | 0 of 20 (0%–16%) | 0 of 20 (0%–16%) | 0% (0%–36%) | 0% (0%–36%) | 12 of 40 | 20 of 48 |
 | D | 0 of 20 (0%–16%) | 0 of 20 (0%–16%) | 0% (0%–31%) | 0% (0%–31%) | 27 of 40 | 35 of 48 |
 
+Valid-evidence totals differ (40 first pass vs 48 after retry) because recovered lookups added results: the after-retry "lost" counts are out of a larger total, not a worse result.
+
 Exact McNemar, first pass → after retry: A vs B p = 0.0039 → 0.0020; C vs D p = 1.0000 → 1.0000. The retry recovers lookups only; the labelling rules and the pre-registered first-pass numbers are unchanged.
