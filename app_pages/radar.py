@@ -34,6 +34,8 @@ st.dataframe([{"Kind": e["kind"], "Where": ", ".join(e["states"]) or "India", "E
                "Effect (pp)": f"{e['effect_pp']:+.3f}" if e.get("effect_pp") is not None else "—",
                "Source": e["sources"][0]["url"], "Sources": len(e["sources"])} for e in evs],
              hide_index=True, width="stretch", column_config={"Source": source_column()})
+st.page_link("app_pages/custody.py", label="Chain of custody for each number: quote → page → request_id → hash → seal",
+             icon="🔗")
 sc = read_json("results/radar_2026-10_score.json")
 if sc:
     st.subheader("Score")
