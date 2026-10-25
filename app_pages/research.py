@@ -27,11 +27,15 @@ r = read_json("results/field_report.json")
 if r:
     m = r["finance"]["first_pass"]["all_14"]
     a = r["finance"]["after_retry"]["all_14"]
+    n, d = m["arms"]["N"], m["arms"]["D"]
+    an, ad = a["arms"]["N"], a["arms"]["D"]
     st.markdown(f"Replaying the day before {m['events']} scheduled financial events (RBI policy decisions, large-company "
-                f"results): with **no dates**, pages stating the outcome were returned for "
-                f"{m['arms']['N']['snippet_own_month_events']} of {m['events']} events (snippet leaks; Wayback-confirmed "
-                f"for {a['arms']['N']['confirmed_events']} after a network retry); with **dates + "
-                f"filter_by_published_date**, for {a['arms']['D']['confirmed_events']}. Designed for event studies and "
-                "backtests that must not see the outcome early.")
+                "results), with **no dates** (N) vs **dates + filter_by_published_date** (D):\n"
+                f"- **Snippet leaks** (a result's snippet states the outcome, dated after the cutoff): N "
+                f"{n['snippet_own_month_events']} of {m['events']} events, D {d['snippet_own_month_events']} of "
+                f"{m['events']}.\n"
+                f"- **Confirmed leaks** (the same, and the Wayback Machine shows the page appeared after the cutoff), "
+                f"after a network retry of failed lookups: N {an['confirmed_events']}, D {ad['confirmed_events']} of "
+                f"{a['events']}.\n\nDesigned for event studies and backtests that must not see the outcome early.")
     st.page_link("app_pages/field_report.py", label="Full numbers: Tavily field report", icon="🧪")
 st.caption("Research tool, not investment advice.")

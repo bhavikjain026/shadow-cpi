@@ -75,10 +75,10 @@ st.subheader("Date fields test (pilot)")
 dt = r["date_test"]
 st.caption(f"{dt['label']}. Retry: {dt['retry']['recovered']} of {dt['retry']['failed_urls']} failed lookups "
            "recovered.")
-st.dataframe([{"Arm": a, "Confirmed-leak cases, first pass": f"{p['leak_cases']} of {p['cases']} ({wilson(p['wilson95'])})",
-               "After retry": f"{q['leak_cases']} of {q['cases']} ({wilson(q['wilson95'])})",
-               "Valid evidence lost, first pass": f"{p['valid_lost']} of {p['valid_total']}",
-               "After retry ": f"{q['valid_lost']} of {q['valid_total']}"}
+st.dataframe([{"Arm": a, "Leak cases, first pass": f"{p['leak_cases']} of {p['cases']} ({wilson(p['wilson95'])})",
+               "Leak cases, after retry": f"{q['leak_cases']} of {q['cases']} ({wilson(q['wilson95'])})",
+               "Valid lost, first pass": f"{p['valid_lost']} of {p['valid_total']}",
+               "Valid lost, after retry": f"{q['valid_lost']} of {q['valid_total']}"}
               for a, p, q in ((a, dt["first_pass"]["arms"][a], dt["after_retry"]["arms"][a]) for a in "ABCD")],
              hide_index=True, width="stretch")
 for k, lab in (("mcnemar_A_vs_B", "A (no dates) vs B (dates)"), ("mcnemar_C_vs_D", "C (filter) vs D (+ page date)")):
@@ -118,25 +118,6 @@ mc = r["monthly_run_cost"]
 st.markdown(f"**Credits for one full monthly run:** radar run(s) {', '.join(str(x) for x in mc['radar_run_real_credits'])}"
             f" real credits; arm A {mc['arm_a_per_month_original']:.1f} per month at original cost "
             f"({mc['arm_a_searches_per_month']:.0f} searches). _{mc['note']}._")
-
-# ---------- value of information ----------
-voi = read_json("results/voi.json")
-if voi:
-    st.subheader("Value of information: credits spent vs what a search is worth")
-    st.caption(f"VOI per item = CPI weight × {voi['calibration_year']} uncertainty × chance of a ≥{voi['change_pct']:.0f}% "
-               f"change ({voi['calibration_year']} history), in pp of headline month-on-month CPI. "
-               f"{voi['label'].capitalize()}. Source: `results/voi.json` (`python -m v2.voi`).")
-    rows = [{"Item": k, "VOI (pp)": v["voi_pp"], "Credits spent (ledger)": voi["credits_by_item"].get(k, 0.0)}
-            for k, v in voi["items"].items() if v["voi_pp"] is not None]
-    st.scatter_chart(rows, x="VOI (pp)", y="Credits spent (ledger)", color="Item")
-    st.dataframe([{**r, "VOI (pp)": f"{r['VOI (pp)']:.4f}", "Credits spent (ledger)": f"{r['Credits spent (ledger)']:.1f}"}
-                  for r in rows], hide_index=True, width="stretch")
-    sp = voi["stop"]
-    st.markdown(f"**Stop rule:** stop searching once the uncovered VOI is below {sp['stop_pp']} pp. The whole searchable "
-                f"basket is worth {sp['total_pp']:.4f} pp in {voi['calibration_year']}, so the rule says "
-                f"{sp['stop_after']} of {len(sp['order'])} items are worth a search. "
-                f"{voi['credits_by_item'].get('not item-specific', 0):.0f} ledger credits are not item-specific "
-                "(page reads, and calls without a saved query).")
 
 # ---------- bug reports ----------
 br = read_json("results/bug_reports.json")

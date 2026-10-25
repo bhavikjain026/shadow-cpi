@@ -12,6 +12,7 @@ A search is "worth up to" the summed VOI of the items its words name. The stop r
 once the VOI of the items not yet covered is below STOP_PP.
 """
 import json
+import re
 import statistics
 import sys
 from pathlib import Path
@@ -47,9 +48,15 @@ def item_stats(series, weights, year=CALIBRATION_YEAR):
     return out
 
 
+def _has(word, text):
+    """Whole-word match for Latin-script words ('bus' does not match 'business'); substring for Indic scripts."""
+    w = norm(word)
+    return bool(re.search(rf"(?<![a-z]){re.escape(w)}(?![a-z])", text)) if w.isascii() else w in text
+
+
 def kinds_in(query):
     t = norm(query or "")
-    return [k for k, v in K.KINDS.items() if any(norm(w) in t for w in v["words"])]
+    return [k for k, v in K.KINDS.items() if any(_has(w, t) for w in v["words"])]
 
 
 def search_worth(query, stats):

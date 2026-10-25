@@ -46,3 +46,8 @@ def test_saved_file_is_display_only_and_current():
     d = json.loads(V.OUT.read_text())
     assert "display only" in d["label"] and d["calibration_year"] == "2025"
     assert d["stop"]["total_pp"] == pytest.approx(sum(v["voi_pp"] for v in d["items"].values() if v["voi_pp"] is not None))
+
+
+def test_words_match_whole_words_only():
+    assert V.kinds_in("business news price hike") == [] and V.kinds_in("bus fare hike") == ["bus"]
+    assert V.kinds_in("trail of evidence") == [] and V.kinds_in("बस किराया") == ["bus"]

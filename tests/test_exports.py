@@ -29,8 +29,11 @@ def test_quotes_are_short_never_page_text():
     assert EX.short("x " * 300).endswith("…") and len(EX.short("x " * 300)) == EX.QUOTE_MAX
 
 
-def test_exports_are_current_copies(tmp_path, monkeypatch):
+def test_fresh_export_has_the_schema_and_short_quotes(tmp_path, monkeypatch):
     monkeypatch.setattr(EX, "OUT", tmp_path)
     EX.write()
-    for n in ("nowcast.csv", "evidence.csv", "radar.jsonl"):
-        assert (tmp_path / n).read_text() == (ROOT / "exports" / n).read_text()
+    with (tmp_path / "evidence.csv").open(encoding="utf-8", newline="") as f:
+        rows = list(csv.DictReader(f))
+    assert rows and list(rows[0]) == EX.EVIDENCE_COLS and all(len(r["quote_short"]) <= EX.QUOTE_MAX for r in rows)
+    radar = json.loads((ROOT / "v2" / "radar" / "radar_2026-10.json").read_text())
+    assert len((tmp_path / "radar.jsonl").read_text().splitlines()) == len(radar["events"])

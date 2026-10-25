@@ -23,8 +23,9 @@ def load(p):
 def date_lag():
     """Results whose Tavily published_date is later than the page's own published/updated date (date test)."""
     rows = load("results/date_field_test.json")["rows"]
-    pairs = [(r["tavily_date"], r["page_date"]) for row in rows for a in ("A", "B", "C")
-             for r in row["arms"].get(a, {}).get("results", []) if r.get("tavily_date") and r.get("page_date")]
+    pages = {r["url"]: (r["tavily_date"], r["page_date"]) for row in rows for a in ("A", "B", "C")
+             for r in row["arms"].get(a, {}).get("results", []) if r.get("tavily_date") and r.get("page_date")}
+    pairs = list(pages.values())                                     # one per distinct page, not per arm
     later = [(t, p) for t, p in pairs if t > p]
     from datetime import date
     gap = [(date.fromisoformat(t) - date.fromisoformat(p)).days for t, p in later]
@@ -82,7 +83,7 @@ def build():
          "evidence": "v2/ablation/arm_Td_*.json (plan[].auto_parameters, plan[].dates_kept)"},
         {"title": "published_date later than the page's own date", "to": "Tavily",
          "did": f"compared Tavily's published_date with the page's own published/updated date on {lag['with_both_dates']} "
-                "date-test results that had both",
+                "distinct date-test pages that had both",
          "happened": f"{lag['tavily_later']} had a later published_date ({lag['over_7_days']} by more than 7 days; "
                      f"largest gap {lag['max_days']} days)",
          "expected": "published_date equal to the page's first-publication date",

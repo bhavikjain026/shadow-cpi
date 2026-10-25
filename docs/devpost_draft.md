@@ -92,6 +92,7 @@ More in `docs/honest_limits.md`.
 - The flight recorder: every call, its credits and its latency, with the evidence chase drawn as a tree.
 
 ## What we learned
+- A value-of-information score built from 2025 official item indices rated almost every search as worthless (0.004 pp for the basket), because those indices move smoothly while retail prices jump in steps; we dropped it rather than tune it.
 [I fill in: only claims the replay supports.]
 
 ## What's next

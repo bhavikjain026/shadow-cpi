@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tools"))
-from shadow_cpi.budget import read_ledger, spent  # noqa: E402
+from shadow_cpi.budget import load_budget, read_ledger, spent  # noqa: E402
 from v2 import ablation as AB  # noqa: E402
 from v2 import date_test as DT  # noqa: E402
 from v2 import finance_lookahead as F  # noqa: E402
@@ -157,7 +157,7 @@ def radar():
             for x in r["runs"]]
     return {"strategy": r["strategy"], "runs": runs, "events": len(r["events"]),
             "corroborated": sum(e["tier"] == "corroborated" for e in r["events"]),
-            "cap": 150, "cap_source": "config/budget.json radar-2026-10",
+            "cap": load_budget()["caps"]["radar-2026-10"], "cap_source": "config/budget.json radar-2026-10",
             "spent": spent("radar-2026-10")}
 
 
@@ -165,7 +165,7 @@ def monthly_run_cost():
     a = load("results/v2_ablation.json")["arms"]["A"]
     rd = radar()["runs"]
     return {"radar_run_real_credits": [x["real_credits"] for x in rd],
-            "arm_a_per_month_original": a["credits"] / len(AB.MONTHS), "arm_a_searches_per_month": a["searches"] / 9,
+            "arm_a_per_month_original": a["credits"] / len(AB.MONTHS), "arm_a_searches_per_month": a["searches"] / len(AB.MONTHS),
             "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits "
                     "at original cost / 9 months"}
 

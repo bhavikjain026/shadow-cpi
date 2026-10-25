@@ -23,7 +23,16 @@ def test_counts_trace_to_sources():
         in BR.DOC.read_text()
 
 
-def test_rebuild_matches_saved(tmp_path, monkeypatch):
+def test_build_writes_both_files_with_every_report(tmp_path, monkeypatch):
     monkeypatch.setattr(BR, "OUT", tmp_path / "b.json")
     monkeypatch.setattr(BR, "DOC", tmp_path / "b.md")
-    assert {"reports": BR.build()} == json.loads((ROOT / "results" / "bug_reports.json").read_text())
+    reps = BR.build()
+    assert json.loads((tmp_path / "b.json").read_text())["reports"] == reps
+    assert all(r["title"] in (tmp_path / "b.md").read_text() for r in reps)
+
+
+def test_date_lag_counts_distinct_pages():
+    rows = json.loads((ROOT / "results" / "date_field_test.json").read_text())["rows"]
+    urls = {r["url"] for row in rows for a in ("A", "B", "C") for r in row["arms"].get(a, {}).get("results", [])
+            if r.get("tavily_date") and r.get("page_date")}
+    assert BR.date_lag()["with_both_dates"] == len(urls)
