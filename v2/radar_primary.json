@@ -1,5 +1,5 @@
 {
- "_note": "Primary-source domains for radar corroboration (v2/RADAR_PREREG.md rule 2-3). Any .gov.in or .nic.in domain also counts as primary. Keyed by kind; '*' = any state.",
+ "_note": "Primary-source domains for radar corroboration (v2/RADAR_PREREG.md rule 2-3). Any .gov.in or .nic.in domain also counts as primary. Keyed by kind; '*' = any state. Checked 2026-10-25: every domain opened directly (curl / browser / WebFetch, no Tavily credits); see v2/RADAR_DOMAIN_CHECK.md",
  "electricity": {
   "maharashtra": "mahadiscom.in",
   "nct of delhi": "derc.gov.in",
@@ -34,6 +34,5 @@
  },
  "mobile": {
   "*": "trai.gov.in"
- },
- "_checked": "2026-10-25: every domain opened directly (curl / browser / WebFetch, no Tavily credits); see v2/RADAR_DOMAIN_CHECK.md"
+ }
 }
