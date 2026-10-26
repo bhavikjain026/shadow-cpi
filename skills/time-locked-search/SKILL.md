@@ -25,14 +25,14 @@ Not for ordinary current-events search: use tavily-search there.
 
 1. **Fixed date window the model can't change.** The cutoff (and optional window start) is set by the calling code
    or the user, never by the model. Every call sends `start_date`, `end_date` and `filter_by_published_date=true`.
-   Passing `start_date`, `end_date`, `filter_by_published_date`, `time_range`, `days` or `auto_parameters` raises
-   `TimeLockError` (`auto_parameters` can pick its own `time_range`).
+   An `end_date` after the cutoff, `filter_by_published_date` other than true, `time_range`, `days` or
+   `auto_parameters` raises `TimeLockError` before any call (`auto_parameters` can pick its own `time_range`).
 2. **Undated results are flagged, not trusted.** A result with no published date and no date in its address is
-   labelled `date_flag` and returned in `flagged`, never in `kept`. Use it only after its date is established
+   labelled `date_flag`, never `safe`. Use it only after its date is established
    another way (for example a page date read from the page itself, or an archive capture before the cutoff).
 3. **Every date is checked again in code.** `check_result` reads Tavily's `published_date`, any `/YYYY/MM/DD/` date
-   in the address, and an optional page date. Any date after the cutoff makes the result a `leak`; it is dropped
-   even when Tavily's filter returned it.
+   in the address, and the page's own date when it was extracted. Any date after the cutoff makes the result a
+   `leak`, even when Tavily's filter returned it; drop it.
 4. **Quotes are verified on the page.** A snippet is a pointer, not evidence. Read the page (Tavily Extract), take
    the exact line that holds the fact, and check the number is in that line before using it. Never let the model
    write or paraphrase a quote.
@@ -43,19 +43,23 @@ Not for ordinary current-events search: use tavily-search there.
 ## How to call it
 
 ```python
-from shadow_cpi.pit import pit_search
+from timelock import TavilyHTTP, timelocked_search      # standard library only; key from TAVILY_API_KEY
 
-r = pit_search("RBI repo rate decision October 2026", cutoff="2026-10-06",
-               topic="news", max_results=5,                   # the model may set these
-               include_domains=["rbi.org.in", "livemint.com"])
-r["kept"]       # results dated on or before the cutoff: usable after the page check (rule 4)
-r["flagged"]    # undated: not trusted
-r["leaks"]      # dated after the cutoff: dropped
-r["counts"], r["request_id"], r["response_sha256"], r["credits"]
+results = timelocked_search(TavilyHTTP(), "RBI repo rate decision October 2026", cutoff="2026-10-06",
+                            topic="news", max_results=5,                   # the model may set these
+                            include_domains=["rbi.org.in", "livemint.com"])
+results.safe()      # dated on or before the cutoff: usable after the page check (rule 4)
+[r for r in results if r["status"] == "date_flag"]     # undated: not trusted
+[r for r in results if r["status"] == "leak"]          # dated after the cutoff: drop
+results.counts, results.request_id, results.response_sha256
 ```
 
-Optional: `start="2026-09-01"` widens the window (default: first day of the cutoff's month);
-`page_dates={url: "2026-10-05"}` adds a date read from the page, which can turn a result into a leak.
+Each result keeps Tavily's fields plus `published_date` (ISO), `page_date`, `status`, `request_id` and
+`response_sha256`. The window defaults to the 30 days ending on the cutoff; `start_date`/`end_date` may narrow it,
+never extend it. `include_raw_content=True` lets the page's own published/updated date count (`page_date`);
+`page_dates={url: "2026-10-05"}` adds a date read another way. Any client with `.search(query, **kwargs) -> dict`
+works (tavily-python's `TavilyClient`, or `timelock.Replay` for a saved response, 0 credits).
 
-Code: `shadow_cpi/pit/` in the Shadow CPI repository. Evidence that the lock matters: the "Time-locked search
-leakage" table at the top of the app's Tavily field report.
+Code: `timelock/` in the Shadow CPI repository (example: `examples/timelock_rbi.py`, "Use it in 10 lines" in the
+README). Evidence that the lock matters: the "Time-locked search leakage" table at the top of the app's Tavily field
+report.

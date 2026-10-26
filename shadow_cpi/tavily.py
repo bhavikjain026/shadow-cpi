@@ -3,14 +3,13 @@
 Every call asks Tavily for its credit usage (include_usage=true), is cached, and is written
 to the Flight Recorder. Extract always reports failed_results (Tavily returns them even on HTTP 200).
 """
-import re
 import time
 import urllib.request
-from email.utils import parsedate_to_datetime
 
 from .http import ApiError, request_json
 from .recorder import Recorder
 from .settings import TAVILY_BASE, tavily_key
+from timelock.dates import iso_date  # noqa: F401  (moved to timelock/; re-exported here)
 
 
 class Tavily:
@@ -85,18 +84,6 @@ class Tavily:
         params.setdefault("allow_external", False)
         params.setdefault("max_depth", 1)
         return self._post("/crawl", {"url": url, **params}, parent, tag, timeout=160)
-
-
-def iso_date(s):
-    """Tavily's published_date as 'YYYY-MM-DD', or '' if missing/unreadable.
-    Accepts ISO ('2026-03-24...') and the news format ('Tue, 24 Mar 2026 14:00:00 GMT')."""
-    s = (s or "").strip()
-    if re.match(r"\d{4}-\d{2}-\d{2}", s):
-        return s[:10]
-    try:
-        return parsedate_to_datetime(s).date().isoformat()
-    except (TypeError, ValueError, IndexError):
-        return ""
 
 
 def best_date(result):

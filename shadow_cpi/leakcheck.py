@@ -1,42 +1,5 @@
-"""Look-ahead check for one search result: safe / date_flag / leak against a cutoff (pure code, no API call).
+"""Look-ahead check (safe / date_flag / leak). Moved to the standalone timelock/ module; kept here for old imports."""
+from timelock.check import DATE_FLAG, LEAK, SAFE, check_result, check_results
+from timelock.dates import url_date
 
-    from shadow_cpi.leakcheck import check_result
-    check_result({"url": "...", "published_date": "2026-10-08"}, cutoff="2026-10-07")   # -> "leak"
-
-Date signals: Tavily's `published_date`, a date in the address (/2026/10/08/), and an optional page date (e.g. the
-page's own published/updated date, v2.date_test.page_date). Optional Wayback captures (ISO dates).
-  - leak:      any date signal is after the cutoff (and no Wayback capture shows the page before it);
-  - date_flag: no date signal at all (undated pages are flagged, not rejected), or a post-cutoff date conflicts with a
-               Wayback capture on or before the cutoff (the page existed then; its date may be an update);
-  - safe:      every date signal is on or before the cutoff.
-"""
-import re
-from datetime import date
-
-from shadow_cpi.tavily import iso_date
-
-SAFE, DATE_FLAG, LEAK = "safe", "date_flag", "leak"
-
-
-def url_date(url):
-    """A /YYYY/MM/DD/ (or YYYY-MM-DD) date in the address, as ISO, or None (same rule as v2.date_test.url_date)."""
-    m = re.search(r"/(20\d{2})[/-](\d{1,2})[/-](\d{1,2})/", url or "")
-    try:
-        return date(int(m[1]), int(m[2]), int(m[3])).isoformat() if m else None
-    except ValueError:
-        return None
-
-
-def check_result(result, cutoff, page_date=None, captures=None):
-    dates = [d for d in (iso_date(result.get("published_date")), url_date(result.get("url")), page_date) if d]
-    if not dates:
-        return DATE_FLAG
-    if any(d > cutoff for d in dates):
-        return DATE_FLAG if captures and min(captures) <= cutoff else LEAK
-    return SAFE
-
-
-def check_results(results, cutoff, **kw):
-    """{label: count} and the labelled results, for a whole Tavily response's `results` list."""
-    labelled = [(r, check_result(r, cutoff, **kw)) for r in results]
-    return {lab: sum(x == lab for _, x in labelled) for lab in (SAFE, DATE_FLAG, LEAK)}, labelled
+__all__ = ["check_result", "check_results", "url_date", "SAFE", "DATE_FLAG", "LEAK"]

@@ -246,6 +246,10 @@ def facts(st, as_of, root=ROOT):
              lahib_revealed_pct=f"{cit['el_lahib_2026']['revealed_pct']}%", release_hour=cit["mospi_release"]["time_ist"],
              research_checked=day_month(date.fromisoformat(cit["tavily_research_params"]["checked"][:10])))
 
+    # examples/timelock_rbi.py: lines of code in the reusable example (blank lines and the docstring not counted)
+    ex = (root / "examples" / "timelock_rbi.py").read_text(encoding="utf-8").splitlines()
+    f["example_lines"] = sum(1 for line in ex if line.strip() and not line.startswith('"""'))
+
     # run-dependent Tavily counts (tools/prompt_t.py run_stats), labelled as of a date
     f.update(as_of=human(as_of), run_calls=f"{st['calls']:,}", run_credits=f"{st['credits']:,}",
              plan_limit=f"{st['plan_limit']:,}", addon_credits=f"{st['addon_credits']:,}",
