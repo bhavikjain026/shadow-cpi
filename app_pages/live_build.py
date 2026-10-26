@@ -29,6 +29,31 @@ fast = os.environ.get("SHADOW_CPI_NO_ANIMATION") or st.checkbox("Show the result
 pause = 0 if fast else (0.12 if basket else 0.3)
 st.caption(f"{month_name(run['month'])}: evidence published from {run['window'][0]} to the cutoff "
            f"{run['window'][1]}. Development data under v2/PREREGISTRATION.md (with Amendment A), not a forecast.")
+REC = ROOT / "results" / f"replay_{month_name(run['month'])[:3].lower()}.jsonl"
+rec_events = ([json.loads(line) for line in REC.read_text(encoding="utf-8").splitlines() if line.strip()]
+              if basket and REC.exists() else [])
+if rec_events and rec_events[0].get("month") == run["month"]:
+    with st.expander("Replay a saved run: 0 calls, 0 credits"):
+        built = pd.Timestamp(rec_events[0]["built_utc"])
+        st.caption(f"Replay of a recorded run ({built.day} {built:%b}). Recomputing it needs the page cache, which "
+                   "holds copyrighted article text and isn't published; run `python -m v2.replay` locally to "
+                   f"recompute. Source: `{REC.relative_to(ROOT)}`.")
+        if st.button("Replay a saved run"):
+            needle_box, log_box = st.empty(), st.container(height=320)
+            for e in rec_events:
+                needle_box.metric("Needle (CPI inflation, year-on-year)", f"{e['needle_after']:.3f}%",
+                                  f"after event {e['seq']} of {len(rec_events) - 1}", delta_color="off")
+                if e["type"] != "start":
+                    mark = {"verified": "✅", "applied": "➡️"}.get(e["verdict"], "❌")
+                    where = f" · {e['place']}" if e.get("place") else ""
+                    quote = f" “{e['quote_short']}”" if e.get("quote_short") else ""
+                    link = f" · [{e['url'][:60]}]({e['url']})" if e.get("url") else ""
+                    date = f" · page date {e['page_date']}" if e.get("page_date") else ""
+                    log_box.markdown(f"{mark} **{e['item']}**{where} · {e['verdict']}: {e['reason']}{quote}{link}"
+                                     f"{date}")
+                time.sleep(pause / 2)
+            st.caption(f"Played {len(rec_events) - 1} recorded events; final needle {rec_events[-1]['needle_after']:.3f}%"
+                       f" (committed run {run['needle']['end']:.3f}%). No call was made.")
 
 top, tree_box, cards_box = st.empty(), st.empty(), st.container()
 lo_hi = [run["needle"]["start"], run["needle"]["end"]] + ([run["v1"]["c"], run["official"]] if basket else [])

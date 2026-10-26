@@ -25,6 +25,24 @@ if not r:
     st.stop()
 st.caption(f"Built {r['built']} from the committed results files · source: `results/field_report.json`")
 
+# ---------- time-locked search leakage (first block) ----------
+lk = r.get("leakage")
+if lk:
+    st.subheader("Time-locked search leakage")
+    st.caption("Can a search see the future? Each row replays searches as of a past cutoff with a different date "
+               f"setting. All figures {lk['label']}. {lk['columns']}.")
+    st.dataframe([{"Check": x["check"], "Run": x["run"], "Setting": x["setting"] or "—",
+                   "N": x.get("n", "—"),
+                   "Leak rate (Wilson 95%)": "—" if x.get("placeholder") else
+                   f"{x['leaks']} of {x['n']} = {pct(x['leak_rate'])} ({wilson(x['wilson95'])})",
+                   "Valid evidence kept": "—" if x.get("placeholder") else f"{x['valid_kept']} of {x['valid_total']}",
+                   "Credits per call": "—" if x.get("placeholder") else f"{x['credits_per_call']:.2f}",
+                   "Median latency (s)": "—" if x.get("placeholder") else f1(x["median_latency_s"]),
+                   "Caveats": x["caveats"]} for x in lk["rows"]], hide_index=True, width="stretch")
+    st.markdown("Our own wrapper, `shadow_cpi.pit.pit_search`, always sends the date window and "
+                "`filter_by_published_date`, then re-checks every result's date in code: *let the model program its "
+                "filters, inside a time lock it cannot move.*")
+
 # ---------- four arms ----------
 st.subheader("Who should write the search? Four arms, pre-registered")
 fa = r["four_arms"]
@@ -118,6 +136,35 @@ mc = r["monthly_run_cost"]
 st.markdown(f"**Credits for one full monthly run:** radar run(s) {', '.join(str(x) for x in mc['radar_run_real_credits'])}"
             f" real credits; arm A {mc['arm_a_per_month_original']:.1f} per month at original cost "
             f"({mc['arm_a_searches_per_month']:.0f} searches). _{mc['note']}._")
+
+# ---------- credit and speed receipt ----------
+rc = r.get("receipt")
+if rc:
+    st.subheader("Credit and speed receipt")
+    t = rc["total"]
+    st.caption(f"All figures {rc['label']} · {rc['built_from']} · {t['calls']} real calls, {t['credits']} credits "
+               f"(account reconcile rows {rc['reconcile_credits']:+d}, not in these rows).")
+
+    def receipt_rows(rows, first):
+        return [{**({first: x[first.lower()]} if first != "Experiment" else
+                    {"Experiment": x["experiment"], "Endpoint": x["endpoint"]}),
+                 "Calls": x["calls"], "Credits": x["credits"], "Credits per call": f"{x['credits_per_call']:.2f}",
+                 "Median latency (s)": f"{x['median_latency_s']:.2f}" if x["median_latency_s"] is not None else "—",
+                 "p95 latency (s)": f"{x['p95_latency_s']:.2f}" if x["p95_latency_s"] is not None else "—"}
+                for x in rows]
+
+    st.markdown("**By endpoint**")
+    st.dataframe(receipt_rows(rc["by_endpoint"], "Endpoint"), hide_index=True, width="stretch")
+    st.markdown("**Credits per verified quote** (a quote counts once code has found the number in the exact line "
+                "on the page)")
+    st.dataframe([{"Run": x["what"], "Budgets": ", ".join(x["budgets"]), "Credits": x["credits"],
+                   "Verified quotes": x["verified_quotes"], "Credits per verified quote":
+                   f1(x["credits_per_verified_quote"]), "Source": x["source"]} for x in rc["per_verified_quote"]],
+                 hide_index=True, width="stretch")
+    with st.expander("By experiment and endpoint"):
+        st.dataframe(receipt_rows(rc["by_experiment"], "Experiment"), hide_index=True, width="stretch")
+    for n in rc["notes"]:
+        st.caption(n)
 
 # ---------- bug reports ----------
 br = read_json("results/bug_reports.json")
