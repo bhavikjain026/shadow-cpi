@@ -317,10 +317,48 @@ def report(m, built):
     return "\n".join(L) + "\n"
 
 
+def relevance(out, eng=None):
+    """Post-hoc (added after the results; not pre-registered): per language and arm, results whose title or snippet
+    names the item, and results from that language's preferred domains. English from the date test's rows."""
+    from urllib.parse import urlparse
+    eng = eng or json.loads(ENGLISH.read_text(encoding="utf-8"))
+
+    def stats(rows, lang, arm):
+        rs = [(row, r) for row in rows for r in row["arms"].get(arm, {}).get("results", [])]
+        host = lambda u: urlparse(u).netloc.lower()  # noqa: E731
+        return {"results": len(rs),
+                "on_topic": sum(any(w.lower() in f"{r['title']} {r['content']}".lower()
+                                    for w in TOPIC_WORDS[row["kind"]]) for row, r in rs),
+                "preferred_domain": sum(any(host(r["url"]) == d or host(r["url"]).endswith("." + d)
+                                            for d in K.DOMAINS[lang]) for row, r in rs)}
+    langs = list(dict.fromkeys(row["lang"] for row in out["rows"]))
+    res = {l: {a: stats([r for r in out["rows"] if r["lang"] == l], l, a) for a in ("A", "C")} for l in langs}
+    res["en"] = {a: stats(eng["rows"], "en", a) for a in ("A", "C")}
+    return res
+
+
+def addendum(out):
+    rel = relevance(out)
+    f = lambda s: f"{s['on_topic']} of {s['results']}"  # noqa: E731
+    L = ["", "## Addendum (offline, added after the results; post-hoc, nothing above changes)", "",
+         "Not pre-registered: noticed when reading arm C's Tamil results (sports and car pages). Results whose title or "
+         "snippet names the item, and results from the language's preferred news domains, arms A and C:", "",
+         "| Language | A: names the item | C: names the item | A: preferred domain | C: preferred domain |",
+         "|---|---|---|---|---|"]
+    for l, s in rel.items():
+        L.append(f"| {LANG_NAMES[l]} | {f(s['A'])} | {f(s['C'])} | {s['A']['preferred_domain']} of {s['A']['results']} "
+                 f"| {s['C']['preferred_domain']} of {s['C']['results']} |")
+    L += ["", "With the date window and `filter_by_published_date` set, the date fields did their job in every language "
+          "(nothing dated outside the window, no undated result, no confirmed leak), but relevance fell further in "
+          "Marathi and Tamil than in English or Hindi. Twelve cases, post-hoc: a lead to check, not a finding."]
+    return L
+
+
 def main():
     if "--report" in sys.argv:                     # offline: rewrite the .md from the saved results (0 credits)
         out = json.loads(OUT.read_text(encoding="utf-8"))
-        OUT.with_suffix(".md").write_text(report(out["metrics"], out["built_utc"]))
+        OUT.with_suffix(".md").write_text(report(out["metrics"], out["built_utc"]).rstrip("\n") + "\n"
+                                          + "\n".join(addendum(out)) + "\n")
         return
     if "--sample" in sys.argv:
         cases = sample()

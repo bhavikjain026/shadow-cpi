@@ -72,9 +72,9 @@ class FakeRec:
 
 
 def english(rows=None):
-    r = {"url": "https://e.in/2026/07/10/milk", "tavily_date": "2026-07-10", "label": "P", "on_topic": True,
+    r = {"url": "https://e.in/2026/07/10/milk", "title": "milk up", "content": "", "tavily_date": "2026-07-10", "label": "P", "on_topic": True,
          "page_date": "2026-07-10"}
-    return {"rows": rows or [{"id": "M8", "month": "2026-07", "cutoff": "2026-07-29",
+    return {"rows": rows or [{"id": "M8", "kind": "milk", "month": "2026-07", "cutoff": "2026-07-29",
                               "arms": {a: {"results": [dict(r)], "credits": 1, "response_time": 1.0}
                                        for a in "ABCD"}}]}
 
@@ -100,6 +100,14 @@ def test_full_run_with_fakes():
     assert m["differs_from_english"] == []
     md = LT.report(m, "2026-10-27T00:00")
     assert "pilot" in md.lower() and "English (date test)" in md and "no pre-registered difference" in md
+
+
+def test_relevance_post_hoc_counts_item_words_and_domains():
+    _, out, _ = run_one()
+    rel = LT.relevance(out, english())
+    assert rel["ta"]["A"] == {"results": 2, "on_topic": 2, "preferred_domain": 0}
+    assert rel["en"]["C"]["on_topic"] == 1
+    assert any("post-hoc" in x for x in LT.addendum.__code__.co_consts if isinstance(x, str))
 
 
 def test_feedback_trigger_when_filter_leaks():
