@@ -35,9 +35,10 @@ if lk:
                    "N": x.get("n", "—"),
                    "Leak rate (Wilson 95%)": "—" if x.get("placeholder") else
                    f"{x['leaks']} of {x['n']} = {pct(x['leak_rate'])} ({wilson(x['wilson95'])})",
-                   "Valid evidence kept": "—" if x.get("placeholder") else f"{x['valid_kept']} of {x['valid_total']}",
-                   "Credits per call": "—" if x.get("placeholder") else f"{x['credits_per_call']:.2f}",
-                   "Median latency (s)": "—" if x.get("placeholder") else f1(x["median_latency_s"]),
+                   "Valid evidence kept": "—" if x.get("valid_kept") is None else
+                   f"{x['valid_kept']} of {x['valid_total']}",
+                   "Credits per call": "—" if x.get("credits_per_call") is None else f"{x['credits_per_call']:.2f}",
+                   "Median latency (s)": f1(x.get("median_latency_s")),
                    "Caveats": x["caveats"]} for x in lk["rows"]], hide_index=True, width="stretch")
     st.markdown("Our own wrapper, `shadow_cpi.pit.pit_search`, always sends the date window and "
                 "`filter_by_published_date`, then re-checks every result's date in code: *let the model program its "

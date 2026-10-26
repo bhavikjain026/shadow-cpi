@@ -159,3 +159,7 @@ Common: query = the span in double quotes, `exact_match` true, `search_depth` ba
 
 **Correction (logged 2026-10-26, before any code or call):** the header's time first read 19:05Z, typed by hand; the
 file was written at 19:01Z and committed at 19:02Z (`dcbb7ac`). No rule changed.
+
+**Label reason reworded (logged 2026-10-26T12:21Z, owner's decision, after the results were seen):** check P, unit U53
+(indiainfoline, "nine months up to December 2026"), line 64: the reason "an evident typo for December 2025 (FY26)"
+now reads "a forward-looking statement". The label stays **benign**; no count, rate or outcome changes.
