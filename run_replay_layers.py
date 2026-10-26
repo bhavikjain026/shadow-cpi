@@ -29,12 +29,16 @@ PPAC_URL = "https://ppac.gov.in/archives/impnews"
 PPAC_ROW = re.compile(r"RSP of Petrol in Delhi as per IOCL outlet as on (\d{1,2})-(\w+)-(\d{4}), Rs\. ([\d.]+)/ltr")
 
 
-def cached_page(url_part, tag):
-    """Text of an already-fetched page (from the Tavily cache, via the flight recorder)."""
+def cached_page(url_part, tag, cache_dir=None, log_file=None):
+    """Text of an already-fetched page (from the Tavily cache, via the flight recorder). Defaults: cache/, logs/."""
     from pathlib import Path
-    for e in reversed(read_log()):
+    cache_dir = Path(cache_dir or O.ROOT / "cache")
+    for e in reversed(read_log(log_file) if log_file else read_log()):
         if e.get("tag") == tag and e["endpoint"] == "/extract":
-            resp = json.loads(Path(O.ROOT / "cache" / "tavily" / f"{e['cache_key']}.json").read_text())["response"]
+            p = cache_dir / "tavily" / f"{e['cache_key']}.json"
+            if not p.exists():
+                continue
+            resp = json.loads(p.read_text())["response"]
             for p in resp["results"]:
                 if url_part in p["url"]:
                     return p["raw_content"]
@@ -56,16 +60,21 @@ def month_avg(daily, month):
     return (sum(v) / len(v), len(v)) if v else (None, 0)
 
 
-def cached_lpg_petrol():
+def cached_lpg_petrol(cache_dir=None, log_file=None):
     """(IOCL LPG revisions, PPAC Delhi petrol {date: (price, line)}, IOCL list retrieved_at) from the Tavily cache.
-    Also used by build_nowcast.py."""
-    lpg_rev = E.parse_iocl_lpg(cached_page("iocl.com/indane-14Kg", "p2-history")
-                               or cached_page("iocl.com/indane-14Kg", "observed:lpg extract"))
-    petrol = ppac_petrol(cached_page("ppac.gov.in", "observed:petrol extract"))
+    Also used by build_nowcast.py. Defaults: cache/ and logs/flight_recorder.jsonl."""
+    from pathlib import Path
+    cache_dir = Path(cache_dir or O.ROOT / "cache")
+    kw = {"cache_dir": cache_dir, "log_file": log_file}
+    lpg_rev = E.parse_iocl_lpg(cached_page("iocl.com/indane-14Kg", "p2-history", **kw)
+                               or cached_page("iocl.com/indane-14Kg", "observed:lpg extract", **kw))
+    petrol = ppac_petrol(cached_page("ppac.gov.in", "observed:petrol extract", **kw))
     iocl_at = ""
-    for e in read_log():
-        if e["endpoint"] == "/extract" and "iocl.com/indane-14Kg" in json.dumps(e.get("params")) and not e["cached"]:
-            iocl_at = json.loads((O.ROOT / "cache" / "tavily" / f"{e['cache_key']}.json").read_text())["retrieved_at"]
+    for e in read_log(log_file) if log_file else read_log():
+        p = cache_dir / "tavily" / f"{e['cache_key']}.json" if e.get("cache_key") else None
+        if (e["endpoint"] == "/extract" and "iocl.com/indane-14Kg" in json.dumps(e.get("params")) and not e["cached"]
+                and p and p.exists()):
+            iocl_at = json.loads(p.read_text())["retrieved_at"]
             break
     return lpg_rev, petrol, iocl_at
 

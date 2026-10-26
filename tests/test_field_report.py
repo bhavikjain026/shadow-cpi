@@ -45,7 +45,7 @@ def test_leakage_table_reads_the_date_and_finance_results(built):
     first = [r for r in rows if r["check"].startswith("Date test") and r["run"] == "first pass"]
     assert [r["leaks"] for r in first] == [dt[a]["leak_cases"] for a in "ABCD"]
     assert [r["valid_kept"] for r in first] == [dt[a]["valid_total"] - dt[a]["valid_lost"] for a in "ABCD"]
-    assert {r["run"] for r in rows if r["check"].startswith("Finance")} == {"first pass", "after retry"}
+    assert {r["run"] for r in rows if r["check"].startswith("Finance")} == {"first pass", "after logged retry"}
     for chk in ("P", "E"):                       # placeholders until their results files exist
         mine = [r for r in rows if r["check"] == f"Check {chk}"]
         assert mine and (mine[0].get("placeholder") or (ROOT / FR.PENDING_CHECKS[chk]).exists())
@@ -58,4 +58,17 @@ def test_receipt_credits_match_the_ledger(built):
         assert x["credits"] == sum(spent(b) for b in x["budgets"])
     assert sum(e["calls"] for e in rc["by_endpoint"]) == rc["total"]["calls"]
     assert all(e["p95_latency_s"] >= e["median_latency_s"] for e in rc["by_endpoint"])
-    assert FR.p95([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) == 10 and FR.median([1, 2, 3, 4]) == 2.5
+    assert FR.p95(list(range(1, 21))) == pytest.approx(19.05) and FR.median([1, 2, 3, 4]) == 2.5 and FR.p95([3.0]) == 3.0
+    exp = {x["experiment"]: 0 for x in rc["by_experiment"]}
+    for x in rc["by_experiment"]:
+        exp[x["experiment"]] += x["credits"]
+    assert all(c == spent(e) for e, c in exp.items() if e != "reconcile")
+
+
+def test_date_test_no_dates_row_reads_like_the_finance_rows(built):
+    rows = [r for r in built["leakage"]["rows"] if r["setting"] == "no dates"]
+    assert [(r["check"].split(" (")[0], r["run"]) for r in rows] == [
+        ("Date test", "first pass"), ("Date test", "after logged retry"),
+        ("Finance check", "first pass"), ("Finance check", "after logged retry")]
+    dt = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["A"]
+    assert (rows[0]["leaks"], rows[0]["n"]) == (dt["leak_cases"], dt["cases"])

@@ -73,7 +73,7 @@
    },
    {
     "check": "Date test (20 replay cases)",
-    "run": "after retry",
+    "run": "after logged retry",
     "setting": "no dates",
     "n": 20,
     "leaks": 10,
@@ -90,7 +90,7 @@
    },
    {
     "check": "Date test (20 replay cases)",
-    "run": "after retry",
+    "run": "after logged retry",
     "setting": "start_date + end_date",
     "n": 20,
     "leaks": 0,
@@ -107,7 +107,7 @@
    },
    {
     "check": "Date test (20 replay cases)",
-    "run": "after retry",
+    "run": "after logged retry",
     "setting": "+ filter_by_published_date",
     "n": 20,
     "leaks": 0,
@@ -124,7 +124,7 @@
    },
    {
     "check": "Date test (20 replay cases)",
-    "run": "after retry",
+    "run": "after logged retry",
     "setting": "+ our page check",
     "n": 20,
     "leaks": 0,
@@ -175,7 +175,7 @@
    },
    {
     "check": "Finance check (14 scheduled events)",
-    "run": "after retry",
+    "run": "after logged retry",
     "setting": "no dates",
     "n": 14,
     "leaks": 10,
@@ -192,7 +192,7 @@
    },
    {
     "check": "Finance check (14 scheduled events)",
-    "run": "after retry",
+    "run": "after logged retry",
     "setting": "start_date + end_date + filter_by_published_date",
     "n": 14,
     "leaks": 0,
@@ -234,7 +234,7 @@
     "credits": 1,
     "credits_per_call": 0.1111111111111111,
     "median_latency_s": 10.38,
-    "p95_latency_s": 21.83,
+    "p95_latency_s": 19.33,
     "with_latency": 9
    },
    {
@@ -243,7 +243,7 @@
     "credits": 656,
     "credits_per_call": 0.8746666666666667,
     "median_latency_s": 0.175,
-    "p95_latency_s": 5.27,
+    "p95_latency_s": 5.225,
     "with_latency": 750
    },
    {
@@ -252,7 +252,7 @@
     "credits": 8,
     "credits_per_call": 0.47058823529411764,
     "median_latency_s": 11.25,
-    "p95_latency_s": 19.23,
+    "p95_latency_s": 18.830000000000002,
     "with_latency": 17
    },
    {
@@ -261,7 +261,7 @@
     "credits": 997,
     "credits_per_call": 1.075512405609493,
     "median_latency_s": 3.64,
-    "p95_latency_s": 6.37,
+    "p95_latency_s": 6.349,
     "with_latency": 927
    }
   ],
@@ -283,7 +283,7 @@
     "credits": 3,
     "credits_per_call": 1.0,
     "median_latency_s": 2.51,
-    "p95_latency_s": 3.05,
+    "p95_latency_s": 2.996,
     "with_latency": 3
    },
    {
@@ -293,7 +293,7 @@
     "credits": 23,
     "credits_per_call": 1.0,
     "median_latency_s": 2.41,
-    "p95_latency_s": 4.2,
+    "p95_latency_s": 4.144,
     "with_latency": 23
    },
    {
@@ -303,7 +303,7 @@
     "credits": 21,
     "credits_per_call": 0.875,
     "median_latency_s": 0.04,
-    "p95_latency_s": 4.87,
+    "p95_latency_s": 4.657000000000001,
     "with_latency": 24
    },
    {
@@ -313,7 +313,7 @@
     "credits": 54,
     "credits_per_call": 1.0,
     "median_latency_s": 3.56,
-    "p95_latency_s": 5.03,
+    "p95_latency_s": 4.906499999999999,
     "with_latency": 54
    },
    {
@@ -323,7 +323,7 @@
     "credits": 28,
     "credits_per_call": 1.0,
     "median_latency_s": 1.8699999999999999,
-    "p95_latency_s": 3.79,
+    "p95_latency_s": 3.7305,
     "with_latency": 28
    },
    {
@@ -333,7 +333,7 @@
     "credits": 9,
     "credits_per_call": 0.9,
     "median_latency_s": 2.3200000000000003,
-    "p95_latency_s": 7.53,
+    "p95_latency_s": 6.728999999999999,
     "with_latency": 10
    },
    {
@@ -343,7 +343,7 @@
     "credits": 10,
     "credits_per_call": 1.0,
     "median_latency_s": 3.3,
-    "p95_latency_s": 4.79,
+    "p95_latency_s": 4.6055,
     "with_latency": 10
    },
    {
@@ -353,7 +353,7 @@
     "credits": 9,
     "credits_per_call": 0.5625,
     "median_latency_s": 2.25,
-    "p95_latency_s": 10.04,
+    "p95_latency_s": 6.109999999999999,
     "with_latency": 16
    },
    {
@@ -363,28 +363,38 @@
     "credits": 1,
     "credits_per_call": 0.1111111111111111,
     "median_latency_s": 10.38,
-    "p95_latency_s": 21.83,
+    "p95_latency_s": 19.33,
     "with_latency": 9
    },
    {
     "experiment": "prompt-t",
+    "endpoint": "/extract",
+    "calls": 4,
+    "credits": 2,
+    "credits_per_call": 0.5,
+    "median_latency_s": 0.325,
+    "p95_latency_s": 1.065,
+    "with_latency": 4
+   },
+   {
+    "experiment": "prompt-t",
     "endpoint": "/map",
-    "calls": 10,
-    "credits": 1,
-    "credits_per_call": 0.1,
-    "median_latency_s": 10.870000000000001,
-    "p95_latency_s": 15.93,
-    "with_latency": 10
+    "calls": 17,
+    "credits": 8,
+    "credits_per_call": 0.47058823529411764,
+    "median_latency_s": 11.25,
+    "p95_latency_s": 18.830000000000002,
+    "with_latency": 17
    },
    {
     "experiment": "prompt-t",
     "endpoint": "/search",
-    "calls": 4,
-    "credits": 4,
+    "calls": 28,
+    "credits": 28,
     "credits_per_call": 1.0,
-    "median_latency_s": 2.725,
-    "p95_latency_s": 3.27,
-    "with_latency": 4
+    "median_latency_s": 2.425,
+    "p95_latency_s": 4.004,
+    "with_latency": 28
    },
    {
     "experiment": "prompt-t-dairy",
@@ -393,7 +403,7 @@
     "credits": 2,
     "credits_per_call": 0.5,
     "median_latency_s": 0.325,
-    "p95_latency_s": 1.14,
+    "p95_latency_s": 1.065,
     "with_latency": 4
    },
    {
@@ -403,7 +413,7 @@
     "credits": 7,
     "credits_per_call": 1.0,
     "median_latency_s": 12.61,
-    "p95_latency_s": 19.23,
+    "p95_latency_s": 19.080000000000002,
     "with_latency": 7
    },
    {
@@ -423,7 +433,7 @@
     "credits": 13,
     "credits_per_call": 0.9285714285714286,
     "median_latency_s": 0.03,
-    "p95_latency_s": 1.32,
+    "p95_latency_s": 0.6635,
     "with_latency": 14
    },
    {
@@ -432,8 +442,8 @@
     "calls": 14,
     "credits": 14,
     "credits_per_call": 1.0,
-    "median_latency_s": 4.14,
-    "p95_latency_s": 6.49,
+    "median_latency_s": 4.145,
+    "p95_latency_s": 6.022,
     "with_latency": 14
    },
    {
@@ -443,7 +453,7 @@
     "credits": 51,
     "credits_per_call": 0.8225806451612904,
     "median_latency_s": 2.0149999999999997,
-    "p95_latency_s": 5.98,
+    "p95_latency_s": 5.978,
     "with_latency": 62
    },
    {
@@ -459,22 +469,22 @@
    {
     "experiment": "replay-layers",
     "endpoint": "/extract",
-    "calls": 171,
-    "credits": 141,
-    "credits_per_call": 0.8245614035087719,
-    "median_latency_s": 1.43,
-    "p95_latency_s": 5.48,
-    "with_latency": 171
+    "calls": 197,
+    "credits": 159,
+    "credits_per_call": 0.8071065989847716,
+    "median_latency_s": 1.57,
+    "p95_latency_s": 5.516,
+    "with_latency": 197
    },
    {
     "experiment": "replay-layers",
     "endpoint": "/search",
-    "calls": 176,
-    "credits": 176,
+    "calls": 186,
+    "credits": 186,
     "credits_per_call": 1.0,
-    "median_latency_s": 4.215,
-    "p95_latency_s": 5.75,
-    "with_latency": 176
+    "median_latency_s": 4.165,
+    "p95_latency_s": 5.6850000000000005,
+    "with_latency": 186
    },
    {
     "experiment": "skeptic",
@@ -483,7 +493,7 @@
     "credits": 27,
     "credits_per_call": 1.0,
     "median_latency_s": 2.86,
-    "p95_latency_s": 3.64,
+    "p95_latency_s": 3.6399999999999997,
     "with_latency": 27
    },
    {
@@ -493,7 +503,7 @@
     "credits": 45,
     "credits_per_call": 0.9,
     "median_latency_s": 0.02,
-    "p95_latency_s": 0.56,
+    "p95_latency_s": 0.5509999999999999,
     "with_latency": 50
    },
    {
@@ -503,7 +513,7 @@
     "credits": 72,
     "credits_per_call": 1.0,
     "median_latency_s": 3.17,
-    "p95_latency_s": 4.64,
+    "p95_latency_s": 4.6125,
     "with_latency": 72
    },
    {
@@ -513,7 +523,7 @@
     "credits": 67,
     "credits_per_call": 0.9178082191780822,
     "median_latency_s": 0.03,
-    "p95_latency_s": 3.58,
+    "p95_latency_s": 3.184,
     "with_latency": 73
    },
    {
@@ -523,7 +533,7 @@
     "credits": 117,
     "credits_per_call": 1.0,
     "median_latency_s": 3.75,
-    "p95_latency_s": 5.93,
+    "p95_latency_s": 5.906000000000001,
     "with_latency": 117
    },
    {
@@ -533,7 +543,7 @@
     "credits": 112,
     "credits_per_call": 0.9105691056910569,
     "median_latency_s": 0.03,
-    "p95_latency_s": 3.41,
+    "p95_latency_s": 3.378,
     "with_latency": 123
    },
    {
@@ -543,7 +553,7 @@
     "credits": 118,
     "credits_per_call": 1.0,
     "median_latency_s": 3.59,
-    "p95_latency_s": 5.75,
+    "p95_latency_s": 5.5715,
     "with_latency": 118
    },
    {
@@ -553,7 +563,7 @@
     "credits": 56,
     "credits_per_call": 1.8064516129032258,
     "median_latency_s": 6.2,
-    "p95_latency_s": 9.02,
+    "p95_latency_s": 8.794999999999998,
     "with_latency": 31
    },
    {
@@ -563,7 +573,7 @@
     "credits": 89,
     "credits_per_call": 0.9468085106382979,
     "median_latency_s": 0.03,
-    "p95_latency_s": 3.77,
+    "p95_latency_s": 2.4635,
     "with_latency": 94
    },
    {
@@ -573,7 +583,7 @@
     "credits": 101,
     "credits_per_call": 1.8035714285714286,
     "median_latency_s": 6.0649999999999995,
-    "p95_latency_s": 10.72,
+    "p95_latency_s": 8.815,
     "with_latency": 56
    },
    {
@@ -583,7 +593,7 @@
     "credits": 2,
     "credits_per_call": 0.6666666666666666,
     "median_latency_s": 0.02,
-    "p95_latency_s": 0.02,
+    "p95_latency_s": 0.019999999999999997,
     "with_latency": 3
    },
    {
@@ -593,7 +603,7 @@
     "credits": 2,
     "credits_per_call": 1.0,
     "median_latency_s": 3.26,
-    "p95_latency_s": 3.34,
+    "p95_latency_s": 3.332,
     "with_latency": 2
    },
    {
@@ -603,7 +613,7 @@
     "credits": 27,
     "credits_per_call": 0.9,
     "median_latency_s": 0.055,
-    "p95_latency_s": 3.23,
+    "p95_latency_s": 2.366,
     "with_latency": 30
    },
    {
@@ -613,7 +623,7 @@
     "credits": 28,
     "credits_per_call": 1.0,
     "median_latency_s": 3.475,
-    "p95_latency_s": 4.86,
+    "p95_latency_s": 4.7445,
     "with_latency": 28
    },
    {
@@ -623,7 +633,7 @@
     "credits": 6,
     "credits_per_call": 0.6666666666666666,
     "median_latency_s": 0.02,
-    "p95_latency_s": 5.54,
+    "p95_latency_s": 3.748,
     "with_latency": 9
    },
    {
@@ -633,7 +643,7 @@
     "credits": 6,
     "credits_per_call": 1.0,
     "median_latency_s": 3.205,
-    "p95_latency_s": 4.45,
+    "p95_latency_s": 4.175,
     "with_latency": 6
    },
    {
@@ -643,7 +653,7 @@
     "credits": 61,
     "credits_per_call": 0.9242424242424242,
     "median_latency_s": 0.02,
-    "p95_latency_s": 2.16,
+    "p95_latency_s": 2.1025,
     "with_latency": 66
    },
    {
@@ -653,7 +663,7 @@
     "credits": 89,
     "credits_per_call": 1.0,
     "median_latency_s": 3.54,
-    "p95_latency_s": 5.37,
+    "p95_latency_s": 5.326,
     "with_latency": 89
    }
   ],
@@ -745,13 +755,13 @@
    "credits": 1662,
    "credits_per_call": 0.9759248385202584,
    "median_latency_s": 3.14,
-   "p95_latency_s": 6.16,
+   "p95_latency_s": 6.159,
    "with_latency": 1703
   },
   "reconcile_credits": -82,
   "notes": [
    "include_usage can read 0 credits for calls below Tavily's reporting threshold, so a call showing 0 is not proof it was free; account totals are reconciled to the billing page (the reconcile rows, not in the per-endpoint figures)",
-   "credits are those charged to the experiment's budgets in the ledger; arm A re-used the scored pipeline's searches from the cache, so its credits are v2-issue4 + v2-issue14",
+   "a call charged to two budgets counts under both experiments (as the caps count it), so the experiment rows add up to more than the endpoint totals; arm A re-used the scored pipeline's searches from the cache, so its credits are v2-issue4 + v2-issue14",
    "latency = Tavily's response_time (server time), not our wall-clock time",
    "cache hits and phantom rows (cache hits charged by an old budget bug) are left out"
   ]

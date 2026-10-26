@@ -56,7 +56,9 @@ def gather(month, cutoff, tav):
     factors = inp["factors"]
     window_end = min(E.month_window(month)[1], cutoff)
     ibja = {d: r for d, r in ibja_rates(tav, month, missing).items() if d <= cutoff}
-    lpg_rev, petrol, iocl_at = R.cached_lpg_petrol()
+    rec = getattr(getattr(tav, "tav", None), "rec", None)     # the cache and flight recorder this run reads
+    lpg_rev, petrol, iocl_at = (R.cached_lpg_petrol(rec.cache_dir, rec.history_log) if rec
+                                else R.cached_lpg_petrol())
     lpg_rev = [r for r in lpg_rev if r[0] <= cutoff]
     petrol = {d: v for d, v in petrol.items() if d <= cutoff}
     row = {"month": month}

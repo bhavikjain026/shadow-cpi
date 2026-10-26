@@ -8,13 +8,13 @@ placeholder keys and a recorder that refuses any call not already in the cache, 
 can be spent. The rebuilt run goes to a scratch folder and is compared with the committed
 v2/evidence/run_<month>_basket.json; the committed run file and the evidence ledger are left as they were.
 
-Cache folder: $SCPI_REPLAY_CACHE, else replay_cache/ (a bundle shipped for judges, if present), else cache/.
+Cache folder: $SCPI_REPLAY_CACHE, else replay_cache/ (a bundle, if present), else cache/. The original flight
+recorder is read from <cache>/flight_recorder.jsonl if present, else logs/flight_recorder.jsonl.
 """
 import json
 import os
 import sys
 import tempfile
-import threading
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -25,11 +25,15 @@ from v2 import ledger as LG  # noqa: E402
 
 PLACEHOLDER = "replay-no-key"
 TOL = 1e-12
-_LOCK = threading.Lock()                         # one replay at a time: it points LG.LEDGER at a scratch copy
 
 
 class ReplayRecorder(Recorder):
-    """A Recorder that only serves the cache: a miss raises CacheMiss before anything is sent."""
+    """A Recorder that only serves the cache: a miss raises CacheMiss before anything is sent. Its own log goes to a
+    scratch file; `history_log` is the flight recorder the original run wrote (saved pages are found through it)."""
+
+    def __init__(self, cache_dir, log_file, history_log):
+        super().__init__(cache_dir, log_file)
+        self.history_log = Path(history_log)
 
     def call(self, service, endpoint, body, fn, parent=None, tag=None):
         if not self._path(service, request_hash(service, endpoint, body)).exists():
@@ -44,16 +48,15 @@ def cache_dir():
     return bundle if bundle.exists() else ROOT / "cache"
 
 
-def refuse(*_a, **_k):
-    raise CacheMiss("replay: network call refused")
-
-
 def fingerprint(run):
-    """What must match: every card's verdict, every verified quote, the needle path, coverage, time machine."""
+    """What must match: every card's verdict, every claim's verdict and numbers, the needle path, coverage, time
+    machine."""
     return {"item_cards": [(c["cpi_code"], c["status"]) for c in run["item_cards"]],
             "cards": [(c["url"], c["status"]) for c in run["cards"]],
             "verified_quotes": sorted((c["url"], cl["line"]) for c in run["cards"] for cl in c["claims"]
                                       if cl.get("status") == "verified"),
+            "claims": [(c["url"], cl.get("line"), cl.get("status"), cl.get("reason"), cl.get("change"),
+                        cl.get("effective_date")) for c in run["cards"] for cl in c["claims"]],
             "moving_events": [(m["cpi_code"], m["where"]) for m in run["moving_events"]],
             "needle": [run["needle"]["start"], run["needle"]["end"]], "measured_share": [run["measured_share"]],
             "timeline": [s["yoy_after"] for s in run["timeline"]],
@@ -73,9 +76,14 @@ def differences(a, b):
     return out
 
 
+def history_log(cache):
+    own = Path(cache) / "flight_recorder.jsonl"
+    return own if own.exists() else ROOT / "logs" / "flight_recorder.jsonl"
+
+
 def replay(month="2026-09", cache=None):
     """{'pass', 'month', 'calls', 'from_cache', 'sent', 'credits', 'differences', 'needle', 'committed_needle',
-    'verified_quotes', 'error'}"""
+    'verified_quotes', 'ledger_rows_not_in_committed_ledger', 'error'}"""
     from v2 import basket as B
     cache = Path(cache or cache_dir())
     committed_path = LG.ROOT / f"run_{month}_basket.json"
@@ -84,19 +92,16 @@ def replay(month="2026-09", cache=None):
            "credits": 0, "committed_needle": committed["needle"]["end"]}
     if not (cache / "tavily").exists():               # checked before a Recorder is built (it would create the folder)
         return {**res, "error": f"no cache at {cache}"}
-    with _LOCK, tempfile.TemporaryDirectory() as tmp:
-        committed_ledger = LG.LEDGER
-        rec = ReplayRecorder(cache, Path(tmp) / "flight_recorder.jsonl")
+    with tempfile.TemporaryDirectory() as tmp:
+        rec = ReplayRecorder(cache, Path(tmp) / "flight_recorder.jsonl", history_log(cache))
         scratch = Path(tmp) / "ledger.jsonl"            # the replay writes its ledger rows here, never to the real one
-        scratch.write_bytes(committed_ledger.read_bytes() if committed_ledger.exists() else b"")
+        scratch.write_bytes(LG.LEDGER.read_bytes() if LG.LEDGER.exists() else b"")
         n_before = len(LG.read(scratch))
-        LG.LEDGER = scratch
         try:
-            out, _ = B.run(month, cache_only=True, rec=rec, keys=(PLACEHOLDER, PLACEHOLDER), out_dir=tmp)
-        except CacheMiss as e:
+            out, _ = B.run(month, cache_only=True, rec=rec, keys=(PLACEHOLDER, PLACEHOLDER), out_dir=tmp,
+                           ledger=scratch)
+        except (CacheMiss, FileNotFoundError) as e:
             out, res["error"] = None, str(e)
-        finally:
-            LG.LEDGER = committed_ledger
         res["ledger_rows_not_in_committed_ledger"] = len(LG.read(scratch)) - n_before
         log = [json.loads(line) for line in rec.log_file.read_text(encoding="utf-8").splitlines()] \
             if rec.log_file.exists() else []

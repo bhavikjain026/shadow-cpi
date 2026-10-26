@@ -8,6 +8,7 @@ so the page never types a number. Exploratory parts are labelled as such; nothin
 """
 import copy
 import json
+import statistics
 import sys
 from collections import Counter
 from datetime import date
@@ -179,14 +180,12 @@ PENDING_CHECKS = {"P": "results/check_p.json", "E": "results/check_e.json"}
 
 
 def median(xs):
-    xs = sorted(xs)
-    return (xs[(len(xs) - 1) // 2] + xs[len(xs) // 2]) / 2 if xs else None
+    return statistics.median(xs) if xs else None
 
 
 def p95(xs):
-    """Nearest-rank 95th percentile."""
-    xs = sorted(xs)
-    return xs[max(0, -(-95 * len(xs) // 100) - 1)] if xs else None
+    """95th percentile (statistics.quantiles, inclusive method)."""
+    return statistics.quantiles(xs, n=20, method="inclusive")[-1] if len(xs) > 1 else (xs[0] if xs else None)
 
 
 def leak_row(check, run, setting, n, leaks, valid_kept, valid_total, credits, calls, lat, caveats):
@@ -204,7 +203,7 @@ def leakage_table():
     after = with_retry(out, rt, lambda row, r: DT.label(row["cutoff"], r["captures"], r["tavily_date"],
                                                          DT.url_date(r["url"]), r["page_date"]))
     n_extract = len(out["extract_calls"].get("D", []))
-    for run, o in (("first pass", out), ("after retry", after)):
+    for run, o in (("first pass", out), ("after logged retry", after)):
         m = DT.metrics(o)["arms"]
         for a in "ABCD":
             x = m[a]
@@ -212,13 +211,13 @@ def leakage_table():
             cav = [f"pilot, {len(o['rows'])} cases; leak = Wayback-confirmed (no capture by the cutoff)"]
             if a == "D":
                 cav.append(f"page check adds {n_extract} Extract calls; keeps only pages with an explicit date")
-            if run == "after retry":
+            if run == "after logged retry":
                 cav.append("retry only recovers failed Wayback lookups; valid total grows")
             rows.append(leak_row(f"Date test ({len(o['rows'])} replay cases)", run, SETTINGS[a], x["cases"], x["leak_cases"],
                                  x["valid_total"] - x["valid_lost"], x["valid_total"], x["credits"], calls,
                                  x["median_latency_s"], "; ".join(cav)))
     fo, frt = load("results/finance_lookahead.json"), load("results/finance_lookahead_wayback_retry.json")
-    for run, o in (("first pass", fo), ("after retry", with_retry(fo, frt, F.label))):
+    for run, o in (("first pass", fo), ("after logged retry", with_retry(fo, frt, F.label))):
         m = F.metrics(o)
         for a, setting in (("N", SETTINGS["A"]), ("D", "start_date + end_date + filter_by_published_date")):
             x = m["arms"][a]
@@ -278,11 +277,12 @@ def receipt():
 
     by_ep = [{"endpoint": ep, **agg([r for r in calls if r["endpoint"] == ep])}
              for ep in sorted({r["endpoint"] for r in calls})]
-    by_exp = [{"experiment": ex, "endpoint": ep, **agg([r for r in calls if (r["experiment"], r["endpoint"]) == (ex, ep)])}
-              for ex, ep in sorted({(r["experiment"], r["endpoint"]) for r in calls})]
+    pairs = sorted({(ex, r["endpoint"]) for r in calls for ex in r["experiments"]})
+    by_exp = [{"experiment": ex, "endpoint": ep,
+               **agg([r for r in calls if ex in r["experiments"] and r["endpoint"] == ep])} for ex, ep in pairs]
     per_quote = []
     for label, (exps, pattern) in QUOTE_SOURCES.items():
-        cr_ = sum(r["credits"] for r in calls if r["experiment"] in exps)
+        cr_ = sum(r["credits"] for r in calls if set(r["experiments"]) & set(exps))
         q = verified_quotes(pattern)
         per_quote.append({"what": label, "budgets": list(exps), "credits": cr_, "verified_quotes": q,
                           "credits_per_verified_quote": cr_ / q if q else None, "source": pattern})
@@ -292,7 +292,8 @@ def receipt():
             "notes": ["include_usage can read 0 credits for calls below Tavily's reporting threshold, so a call "
                       "showing 0 is not proof it was free; account totals are reconciled to the billing page "
                       "(the reconcile rows, not in the per-endpoint figures)",
-                      "credits are those charged to the experiment's budgets in the ledger; arm A re-used the "
+                      "a call charged to two budgets counts under both experiments (as the caps count it), so the "
+                      "experiment rows add up to more than the endpoint totals; arm A re-used the "
                       "scored pipeline's searches from the cache, so its credits are v2-issue4 + v2-issue14",
                       "latency = Tavily's response_time (server time), not our wall-clock time",
                       "cache hits and phantom rows (cache hits charged by an old budget bug) are left out"]}

@@ -29,27 +29,30 @@ fast = os.environ.get("SHADOW_CPI_NO_ANIMATION") or st.checkbox("Show the result
 pause = 0 if fast else (0.12 if basket else 0.3)
 st.caption(f"{month_name(run['month'])}: evidence published from {run['window'][0]} to the cutoff "
            f"{run['window'][1]}. Development data under v2/PREREGISTRATION.md (with Amendment A), not a forecast.")
-if basket:
-    with st.expander("Replay a saved run: no keys, 0 credits"):
-        from v2.replay import cache_dir, replay
-        st.caption("Re-runs this whole build (search, Nemotron reading, Extract, quote check, maths, time machine) "
-                   "from saved responses only, with placeholder keys and a recorder that refuses any call not in the "
-                   "cache, then compares every verdict and the needle with the committed run. Same as "
-                   "`python -m v2.replay`.")
-        if not (cache_dir() / "tavily").exists():
-            st.info("This deployment has no saved responses to replay from (the cache is kept out of the public "
-                    "repository). Run `python -m v2.replay` on a machine with the cache.")
-        elif st.button("Replay a saved run"):
-            with st.spinner("Replaying from the cache…"):
-                rp = replay(run["month"])
-            (st.success if rp["pass"] else st.error)(
-                f"{'PASS' if rp['pass'] else 'FAIL'}: {rp['calls']} calls, {rp['from_cache']} from the cache, "
-                f"{rp['sent']} sent, {rp['credits']} credits.")
-            if rp["error"]:
-                st.caption(f"Stopped: {rp['error']}")
-            else:
-                st.caption(f"Needle {rp['needle']:.6f}% vs committed {rp['committed_needle']:.6f}%; differences: "
-                           f"{', '.join(rp['differences']) or 'none'}.")
+REC = ROOT / "results" / f"replay_{month_name(run['month'])[:3].lower()}.jsonl"
+if basket and REC.exists():
+    with st.expander("Replay a saved run: 0 calls, 0 credits"):
+        rec_events = [json.loads(line) for line in REC.read_text(encoding="utf-8").splitlines() if line.strip()]
+        built = pd.Timestamp(rec_events[0]["built_utc"])
+        st.caption(f"Replay of a recorded run ({built.day} {built:%b}). Recomputing it needs the page cache, which "
+                   "holds copyrighted article text and isn't published; run `python -m v2.replay` locally to "
+                   f"recompute. Source: `{REC.relative_to(ROOT)}`.")
+        if st.button("Replay a saved run"):
+            needle_box, log_box = st.empty(), st.container(height=320)
+            for e in rec_events:
+                needle_box.metric("Needle (CPI inflation, year-on-year)", f"{e['needle_after']:.3f}%",
+                                  f"after event {e['seq']} of {len(rec_events) - 1}", delta_color="off")
+                if e["type"] != "start":
+                    mark = {"verified": "✅", "applied": "➡️"}.get(e["verdict"], "❌")
+                    where = f" · {e['place']}" if e.get("place") else ""
+                    quote = f" “{e['quote_short']}”" if e.get("quote_short") else ""
+                    link = f" · [{e['url'][:60]}]({e['url']})" if e.get("url") else ""
+                    date = f" · page date {e['page_date']}" if e.get("page_date") else ""
+                    log_box.markdown(f"{mark} **{e['item']}**{where} · {e['verdict']}: {e['reason']}{quote}{link}"
+                                     f"{date}")
+                time.sleep(pause / 2)
+            st.caption(f"Played {len(rec_events) - 1} recorded events; final needle {rec_events[-1]['needle_after']:.3f}%"
+                       f" (committed run {run['needle']['end']:.3f}%). No call was made.")
 
 top, tree_box, cards_box = st.empty(), st.empty(), st.container()
 lo_hi = [run["needle"]["start"], run["needle"]["end"]] + ([run["v1"]["c"], run["official"]] if basket else [])

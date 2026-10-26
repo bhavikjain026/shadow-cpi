@@ -24,11 +24,11 @@ from shadow_cpi.recorder import CACHE_DIR, LOG_FILE, read_log  # noqa: E402
 OUT = ROOT / "results" / "call_receipts.json"
 
 
-def experiment(budgets):
-    """The experiment a call belongs to: its most specific budget, except a per-month slice of a parent budget."""
-    names = [b.split("/")[0] for b in budgets]
-    specific = [n for n in names if not n.endswith("-month")]
-    return (specific or names)[-1]
+def experiments(budgets):
+    """Every experiment a call was charged to: its budgets' top-level names, without per-month slices of a parent
+    budget (a call charged to 'prompt-t' and 'chase' counts in both, as the ledger's caps count it)."""
+    names = list(dict.fromkeys(b.split("/")[0] for b in budgets))
+    return [n for n in names if not n.endswith("-month")] or names
 
 
 def build(log=LOG_FILE, cache=CACHE_DIR, ledger=None, out=OUT):
@@ -47,14 +47,16 @@ def build(log=LOG_FILE, cache=CACHE_DIR, ledger=None, out=OUT):
                 rt = json.loads(p.read_text(encoding="utf-8"))["response"].get("response_time")
         missing += rt is None
         rows.append({"call_id": e["call_id"], "time": e["time"], "endpoint": e["endpoint"],
-                     "experiment": experiment(e["budgets"]), "credits": e["credits"],
+                     "experiments": experiments(e["budgets"]), "credits": e["credits"],
                      "response_time": float(rt) if rt is not None else None, "request_id": e.get("request_id")})
     rec = [{k: e.get(k) for k in ("call_id", "time", "credits", "budgets", "note")} for e in ledger
            if e["endpoint"] == "reconcile"]
     res = {"built": date.today().isoformat(), "rows": rows, "reconcile": rec, "without_response_time": missing,
            "note": "response_time is Tavily's own field from the saved response; ledger credits are Tavily's "
                    "include_usage count, which can read 0 for calls below Tavily's reporting threshold"}
-    Path(out).write_text(json.dumps(res, ensure_ascii=False, indent=0))
+    head = json.dumps({k: v for k, v in res.items() if k != "rows"}, ensure_ascii=False)[:-1]
+    body = ",\n".join(json.dumps(r, ensure_ascii=False) for r in rows)          # one call per line
+    Path(out).write_text(f'{head}, "rows": [\n{body}\n]}}\n', encoding="utf-8")
     return res
 
 

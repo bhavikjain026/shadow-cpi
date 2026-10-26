@@ -10,7 +10,7 @@ from v2 import replay as RP
 
 
 def test_replay_recorder_serves_hits_and_refuses_misses(tmp_path):
-    rec = RP.ReplayRecorder(tmp_path / "cache", tmp_path / "log.jsonl")
+    rec = RP.ReplayRecorder(tmp_path / "cache", tmp_path / "log.jsonl", tmp_path / "history.jsonl")
     body = {"query": "q", "include_usage": True}
     p = tmp_path / "cache" / "tavily" / f"{request_hash('tavily', '/search', body)}.json"
     p.parent.mkdir(parents=True, exist_ok=True)
@@ -27,7 +27,7 @@ def test_no_cache_stops_cleanly_and_leaves_the_ledger_alone(tmp_path):
     before = LG.LEDGER.read_bytes()
     r = RP.replay("2026-09", cache=tmp_path / "empty")
     assert not r["pass"] and "no cache" in r["error"] and r["sent"] == 0 and r["credits"] == 0
-    assert LG.LEDGER.read_bytes() == before and LG.LEDGER == LG.ROOT / "ledger.jsonl"
+    assert LG.LEDGER.read_bytes() == before and not (tmp_path / "empty").exists()   # no folder created
 
 
 def test_differences_catch_a_changed_needle():
@@ -36,3 +36,11 @@ def test_differences_catch_a_changed_needle():
     assert RP.differences(fp, fp) == []
     moved = {**fp, "needle": [fp["needle"][0], fp["needle"][1] + 0.01]}
     assert RP.differences(moved, fp) == ["needle"]
+
+
+def test_claim_level_change_is_a_difference():
+    run = json.loads((LG.ROOT / "run_2026-09_basket.json").read_text())
+    fp = RP.fingerprint(run)
+    claims = list(fp["claims"])
+    claims[0] = claims[0][:4] + (0.123,) + claims[0][5:]
+    assert RP.differences({**fp, "claims": claims}, fp) == ["claims"]
