@@ -239,12 +239,12 @@
    },
    {
     "endpoint": "/extract",
-    "calls": 750,
-    "credits": 656,
-    "credits_per_call": 0.8746666666666667,
-    "median_latency_s": 0.175,
-    "p95_latency_s": 5.225,
-    "with_latency": 750
+    "calls": 764,
+    "credits": 669,
+    "credits_per_call": 0.8756544502617801,
+    "median_latency_s": 0.16,
+    "p95_latency_s": 5.255,
+    "with_latency": 764
    },
    {
     "endpoint": "/map",
@@ -257,12 +257,12 @@
    },
    {
     "endpoint": "/search",
-    "calls": 927,
-    "credits": 997,
-    "credits_per_call": 1.075512405609493,
-    "median_latency_s": 3.64,
-    "p95_latency_s": 6.349,
-    "with_latency": 927
+    "calls": 1009,
+    "credits": 1079,
+    "credits_per_call": 1.0693756194251733,
+    "median_latency_s": 3.57,
+    "p95_latency_s": 6.252000000000001,
+    "with_latency": 1009
    }
   ],
   "by_experiment": [
@@ -357,6 +357,26 @@
     "with_latency": 16
    },
    {
+    "experiment": "leakcheck-exact-match",
+    "endpoint": "/search",
+    "calls": 80,
+    "credits": 80,
+    "credits_per_call": 1.0,
+    "median_latency_s": 1.74,
+    "p95_latency_s": 3.0315,
+    "with_latency": 80
+   },
+   {
+    "experiment": "leakcheck-full-page",
+    "endpoint": "/extract",
+    "calls": 14,
+    "credits": 13,
+    "credits_per_call": 0.9285714285714286,
+    "median_latency_s": 0.03,
+    "p95_latency_s": 2.5725000000000002,
+    "with_latency": 14
+   },
+   {
     "experiment": "prompt-t",
     "endpoint": "/crawl",
     "calls": 9,
@@ -439,12 +459,12 @@
    {
     "experiment": "radar-2026-10",
     "endpoint": "/search",
-    "calls": 14,
-    "credits": 14,
+    "calls": 16,
+    "credits": 16,
     "credits_per_call": 1.0,
-    "median_latency_s": 4.145,
-    "p95_latency_s": 6.022,
-    "with_latency": 14
+    "median_latency_s": 4.11,
+    "p95_latency_s": 5.95,
+    "with_latency": 16
    },
    {
     "experiment": "recall-audit",
@@ -744,19 +764,19 @@
     "budgets": [
      "radar-2026-10"
     ],
-    "credits": 27,
+    "credits": 29,
     "verified_quotes": 1,
-    "credits_per_verified_quote": 27.0,
+    "credits_per_verified_quote": 29.0,
     "source": "v2/radar/radar_2026-10.json"
    }
   ],
   "total": {
-   "calls": 1703,
-   "credits": 1662,
-   "credits_per_call": 0.9759248385202584,
-   "median_latency_s": 3.14,
-   "p95_latency_s": 6.159,
-   "with_latency": 1703
+   "calls": 1799,
+   "credits": 1757,
+   "credits_per_call": 0.9766536964980544,
+   "median_latency_s": 3.12,
+   "p95_latency_s": 6.082,
+   "with_latency": 1799
   },
   "reconcile_credits": -82,
   "notes": [
@@ -1232,7 +1252,7 @@
   "corroborated": 0,
   "cap": 150,
   "cap_source": "config/budget.json radar-2026-10",
-  "spent": 27
+  "spent": 29
  },
  "monthly_run_cost": {
   "radar_run_real_credits": [
@@ -1242,5 +1262,5 @@
   "arm_a_searches_per_month": 13.0,
   "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits at original cost / 9 months"
  },
- "ledger_rows": 1758
+ "ledger_rows": 1854
 }
