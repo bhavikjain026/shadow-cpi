@@ -133,3 +133,7 @@ files are kept as `results/*_before_bugfix_2026-10-21T151419.*` and in `results/
   file, seal, score lock or needle value changed: SHA-256 of every file in `results/` and `sealed/` identical before
   and after; every existing field of the run files identical (`tests/test_needle_jumps.py`). Final v2 for
   September 2026 unchanged.
+- **2026-10-27, labels (display only):** each Live build step is labelled against its own trend, e.g. "Petrol: 0%
+  change, trend expected a rise of 1.4% → −0.067 pp vs. trend", with the caption "Each step is the item's measured
+  change minus what its own trend expected." The run files gain only `trend_change` per step (`v2.needle.own_trend`);
+  the same hash check passes (`tests/test_needle_jumps.py`).

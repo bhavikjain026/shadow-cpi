@@ -154,10 +154,11 @@ def add_jumps(run, month, inp=None):
     """Display only (docs/after_scoring_changes.md, 2026-10-27): adds 'jump_pp' to each timeline step and 'adds' (the
     'What Tavily adds' bars: trend, each stage's summed jumps, then carving measured items out of their groups) so
     the bars end exactly at the final needle. Reads the steps already in the run; changes no existing field."""
-    from v2.needle import jumps
+    from v2.needle import jumps, own_trend
+    inp = inp or P.load_inputs()
     seq = [(t["cpi_code"], t["mode"], t["value"]) for t in run["timeline"]]
     for t, j in zip(run["timeline"], jumps(month, seq, inp)):
-        t["jump_pp"] = j
+        t["jump_pp"], t["trend_change"] = j, own_trend(month, t["cpi_code"], inp)
     start, end = run["needle"]["start"], run["needle"]["end"]
     bars = [{"label": label, "pp": sum(t["jump_pp"] for t in run["timeline"] if t["kind"] in kinds)}
             for label, kinds in STAGE_KINDS]

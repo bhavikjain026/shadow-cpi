@@ -38,6 +38,12 @@ def path(month, steps, inp=None):
     return start, out
 
 
+def own_trend(month, code, inp):
+    """Display only: the change the item's own trend expects this month (the baseline its jump is measured from)."""
+    s = inp["series"][code]
+    return M.trend_change({k: v for k, v in s.items() if k <= M.add_months(month, -1)}, month)
+
+
 def jumps(month, steps, inp=None):
     """Display only (docs/after_scoring_changes.md, 2026-10-27): each step's jump, in pp = needle(steps 1..k) -
     needle(steps 1..k-1 with item k carved out on its own trend, no change). A step whose evidence equals the item's

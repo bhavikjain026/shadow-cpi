@@ -38,7 +38,7 @@ def _hashes():
 
 def _strip(o):
     if isinstance(o, dict):
-        return {k: _strip(v) for k, v in o.items() if k not in ("jump_pp", "adds")}
+        return {k: _strip(v) for k, v in o.items() if k not in ("jump_pp", "trend_change", "adds")}
     return [_strip(x) for x in o] if isinstance(o, list) else o
 
 

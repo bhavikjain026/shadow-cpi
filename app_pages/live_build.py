@@ -81,9 +81,23 @@ def draw_top(value, measured, label):
         st.altair_chart((base + ticks).properties(height=90), width="stretch")
 
 
+def pct(x):
+    return "0%" if x == 0 else f"{x * 100:+.1f}%"
+
+
 def jump(step):
-    """Display only: the step's jump against the item's own trend (0 when the evidence equals that trend)."""
-    return f" · this step {step['jump_pp']:+.3f} pp vs its own trend" if "jump_pp" in step else ""
+    """Display only: the step against the item's own trend, e.g. 'Petrol: 0% change, trend expected a rise of 1.4%
+    → −0.067 pp vs. trend' (0 pp when the evidence equals that trend)."""
+    if "jump_pp" not in step:
+        return ""
+    t = step.get("trend_change")
+    if t is None:
+        return f" · {step['jump_pp']:+.3f} pp vs. trend"
+    expected = "no change" if t == 0 else f"a {'rise' if t > 0 else 'fall'} of {abs(t) * 100:.1f}%"
+    change = (f"{pct(step['value'])} announced on top of its trend" if step.get("mode") == "add"
+              else f"{pct(step.get('value', step.get('change')))} change")
+    pp = "0.000" if abs(step["jump_pp"]) < 0.0005 else f"{step['jump_pp']:+.3f}"
+    return f" · {step['name']}: {change}, trend expected {expected} → {pp} pp vs. trend"
 
 
 def draw_tree(done):
@@ -128,6 +142,8 @@ def stream(card, label_ok, body):
     return ok
 
 
+if any("jump_pp" in s for s in run.get("timeline", run.get("items", []))):
+    st.caption("Each step is the item's measured change minus what its own trend expected.")
 if basket:
     draw_top(run["needle"]["start"], 0.0, "everything on trend")
     draw_tree(set())

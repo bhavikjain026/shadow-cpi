@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Display only (docs/after_scoring_changes.md, 2026-10-27): add each step's jump to the saved Live build runs, offline
 and with 0 calls. Reads the steps already in each run, recomputes its needle path to check it still matches the
-saved values, then adds only 'jump_pp' (per step) and 'adds' (the 'What Tavily adds' bars). No existing field changes.
+saved values, then adds only 'jump_pp' and 'trend_change' (per step) and 'adds' (the 'What Tavily adds' bars). No existing field changes.
 
     python tools/build_needle_jumps.py
 """
@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from shadow_cpi import predict as P  # noqa: E402
 from v2 import basket as B  # noqa: E402
-from v2.needle import jumps, path  # noqa: E402
+from v2.needle import jumps, own_trend, path  # noqa: E402
 
 RUNS = [ROOT / "v2" / "evidence" / "run_2026-09_basket.json",
         ROOT / "v2" / "evidence" / "run_2026-04_milk_madhya-pradesh.json"]
@@ -31,7 +31,7 @@ def add(p, inp):
         B.add_jumps(run, run["month"], inp)
     else:
         for s, j in zip(steps, jumps(run["month"], seq, inp)):
-            s["jump_pp"] = j
+            s["jump_pp"], s["trend_change"] = j, own_trend(run["month"], s["cpi_code"], inp)
     p.write_text(json.dumps(run, ensure_ascii=False, indent=1, default=float))
     return run
 
