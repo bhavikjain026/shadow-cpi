@@ -19,6 +19,24 @@
    "seal": "radar not frozen yet (freeze 29 Oct 23:59 IST)"
   },
   {
+   "source": "radar",
+   "month": "2026-10",
+   "kind": "rail",
+   "change": 0.12280701754385959,
+   "price": 3.2,
+   "effective_date": "2026-10-01",
+   "quote": "वहीं, उच्च वोल्टेज घरेलू सेवा के उपभोक्ताओं के लिए फिक्स्ड चार्ज 75 रुपये से बढ़कर 85 रुपये प्रति केवीए प्रति माह कर दिया गया है. ऊर्जा शुल्क 2.85 रुपये से बढ़कर 3.20 रुपये प्रति केवीए हो गया है.",
+   "url": "https://www.prabhatkhabar.com/state/jharkhand/bokaro/bokaro-residents-prepare-higher-electricity-bills-october-2026",
+   "page_date": "2026-09-27",
+   "printed_date": null,
+   "search_request_id": "17c1a87a-f476-4a30-af67-4a31d170e085",
+   "search_response_sha256": "b42c83bd8a5277444b87d2ab8a6ddbe08ebf678e9adb1fc8c16058cb56b70a31",
+   "extract_request_id": "12e89f53-e4d4-4b9c-8cd6-d931c24404e5",
+   "extract_response_sha256": "98ae16d0b95a438b1fad4f59a8a0e022fbd7902b797bb3c1d4db54cc7e752c89",
+   "page_sha256": "981b71a76cb5b66f0c0cf79919033a38be84bce2230e2f1a0aaaa7d4843902fa",
+   "seal": "radar not frozen yet (freeze 29 Oct 23:59 IST)"
+  },
+  {
    "source": "v2 scored evidence",
    "month": "2026-01",
    "kind": "bus",
