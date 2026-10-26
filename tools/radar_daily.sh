@@ -6,8 +6,10 @@
 #   3. stop if the whole-word bug fixes (Amendments R2 and R3) are not logged in RADAR_PREREG.md, or the date is not a run day
 #   4. stop if the radar budget (cap read from config/budget.json) is used up
 #   5. python -m v2.radar once, under caffeinate
-#   6. commit the radar file and the credit ledger, push
-#   7. a 3-line report in logs/radar_daily_<date>.txt and a macOS notification
+#   6. after the radar: page drift (python -m v2.drift) and the radar skeptic (python -m v2.radar_skeptic),
+#      v2/DRIFT_PREREG.md, each under its own cap; a failure there is reported but never undoes the radar step
+#   7. commit the radar, drift and skeptic files and the credit ledger, push
+#   8. a 3-line report in logs/radar_daily_<date>.txt and a macOS notification
 set -u
 REPO="/Users/bhavikjain/NVIDIA HACKATHON/shadow-cpi"
 cd "$REPO" || exit 1
@@ -67,8 +69,23 @@ EOF
 )
 [ $RC -ne 0 ] && report "FAILED: python -m v2.radar exit $RC; $SUMMARY" "credits: $((AFTER - USED)) this run, radar $AFTER of $CAP" "next: read $LOG; nothing committed" 1
 
+# after the radar (v2/DRIFT_PREREG.md): page drift, then the skeptic; descriptive only, separate caps
+EXTRA=""
+if grep -q "pre-registration" v2/DRIFT_PREREG.md 2>/dev/null; then
+  caffeinate -i python -m v2.drift && EXTRA="drift $(python -c "
+import json; r = json.load(open('v2/radar/drift_2026-10.json'))['runs'][-1]
+print(f\"{r['changed']} of {r['checked']} pages changed, {r['credits']} cr\")")" || EXTRA="drift FAILED"
+  caffeinate -i python -m v2.radar_skeptic && EXTRA="$EXTRA; skeptic $(python -c "
+import json; e = json.load(open('v2/radar/skeptic_2026-10.json'))['events']
+print(f\"{sum(bool(v['challenged']) for v in e.values())} of {len(e)} events challenged\")")" || EXTRA="$EXTRA; skeptic FAILED"
+else
+  EXTRA="drift and skeptic SKIPPED: v2/DRIFT_PREREG.md not on main"
+fi
+SUMMARY="$SUMMARY; $EXTRA"
+
 git add v2/radar/radar_2026-10.json results/credit_ledger.jsonl
-git commit -m "Radar 2026-10 daily run $DAY: $SUMMARY ($((AFTER - USED)) credits, radar total $AFTER of $CAP)
+for F in v2/radar/drift_2026-10.json v2/radar/skeptic_2026-10.json; do [ -f "$F" ] && git add "$F"; done
+git commit -m "Radar 2026-10 daily run $DAY: $SUMMARY ($((AFTER - USED)) radar credits, radar total $AFTER of $CAP)
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || report "FAILED: commit ($SUMMARY)" "credits: $((AFTER - USED)) this run, radar $AFTER of $CAP" "next: commit by hand" 1
 git push origin main || report "RAN but push FAILED: $SUMMARY (committed locally)" "credits: $((AFTER - USED)) this run, radar $AFTER of $CAP" "next: git pull --no-rebase origin main && git push" 1
