@@ -10,8 +10,16 @@ TIME_LABEL = "retrospective replay: today's pages, filtered by their publish dat
 def what_tavily_adds(run):
     """Issue 8: the needle with the spine only, + official series (Tavily Extract), + events (Tavily Search), with the
     official figure marked."""
+    adds = run.get("adds")                          # display only: each stage's jumps, then the carve-out
+    if adds:
+        level, stages = adds["start"], [{"label": "Trend only (everything on its trend)", "yoy": adds["start"]}]
+        for b in adds["bars"]:
+            level += b["pp"]
+            stages.append({"label": b["label"], "yoy": level})
+    else:
+        stages = run["stages"]
     rows = [{"Stage": s["label"], "CPI inflation, year-on-year (%)": s["yoy"], "order": i}
-            for i, s in enumerate(run["stages"])]
+            for i, s in enumerate(stages)]
     df = pd.DataFrame(rows)
     vals = list(df["CPI inflation, year-on-year (%)"]) + [run["official"], run["v1"]["c"]]
     x = alt.Scale(domain=[min(vals) - 0.15, max(vals) + 0.1], nice=False)
@@ -29,10 +37,18 @@ def what_tavily_adds(run):
                                                 legend=alt.Legend(orient="bottom", title=None)))
     st.altair_chart((bars + labels + rules).properties(height=210).configure_axisY(labelPadding=6),
                     width="stretch")
-    s = run["stages"]
-    st.caption(f"Spine only {s[0]['yoy']:.3f}% → with official series {s[1]['yoy']:.3f}% → with announced changes "
-               f"{s[2]['yoy']:.3f}%. Official figure {run['official']:.2f}%. v2 on development data "
-               f"({run['month']}, cutoff {run['cutoff']}).")
+    if adds:
+        b = adds["bars"]
+        st.caption(f"Trend only {adds['start']:.3f}%; government spine {b[0]['pp']:+.3f} pp; official series via "
+                   f"Tavily Extract {b[1]['pp']:+.3f} pp; announced changes via Tavily Search {b[2]['pp']:+.3f} pp; "
+                   f"carving measured items out of their groups {b[3]['pp']:+.3f} pp; final {adds['end']:.3f}%. Each "
+                   f"step counts against the item's own trend, so evidence equal to that trend adds 0. Official figure "
+                   f"{run['official']:.2f}%. v2 on development data ({run['month']}, cutoff {run['cutoff']}).")
+    else:
+        s = run["stages"]
+        st.caption(f"Spine only {s[0]['yoy']:.3f}% → with official series {s[1]['yoy']:.3f}% → with announced "
+                   f"changes {s[2]['yoy']:.3f}%. Official figure {run['official']:.2f}%. v2 on development data "
+                   f"({run['month']}, cutoff {run['cutoff']}).")
 
 
 def time_machine(run, key="tm"):

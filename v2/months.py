@@ -64,7 +64,7 @@ def build(month, lock, rec):
                          "value": value, "yoy_after": yoy_after, "measured_after": measured / total,
                          "weight": w[code], "weight_share": src.get("weight_share", 1.0)})
     preds = json.loads((ROOT / "results" / "replay_predictions.json").read_text())
-    return {"month": month, "cutoff": cut, "window": list(R.window(month)),
+    return B.add_jumps({"month": month, "cutoff": cut, "window": list(R.window(month)),
             "built_utc": datetime.now(timezone.utc).isoformat(), "source": "issue 14 scoring run (display rebuild)",
             "item_cards": item_cards, "cards": cards, "moving_events": moving, "timeline": timeline,
             "needle": {"start": start, "end": end}, "measured_share": measured / total,
@@ -73,7 +73,7 @@ def build(month, lock, rec):
             "notes": missing, "development": DEVELOPMENT.get(month, ""), "complete": saved.get("complete", True),
             "stages": B.stages(timeline, start),
             "time_machine": B.time_machine(month, item_cards, moving, inp, meta, total, Tavily(recorder=rec)),
-            "credits_budget": S.BUDGET, "credits_spent": 0}
+            "credits_budget": S.BUDGET, "credits_spent": 0}, month, inp)        # jumps: display only
 
 
 def main(months=S.MONTHS):

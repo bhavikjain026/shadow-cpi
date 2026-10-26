@@ -563,7 +563,8 @@
    "detail": "5 zones, pass-through factor 0.748",
    "change": 0.002595965972944768,
    "mode": "level",
-   "yoy_after": 3.4758159322522575
+   "yoy_after": 3.4758159322522575,
+   "jump_pp": 0.00490014267735539
   }
  ],
  "needle": {

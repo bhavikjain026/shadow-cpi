@@ -145,6 +145,28 @@ def stages(timeline, start):
             {"label": "+ announced price changes via Tavily Search", "yoy": events}]
 
 
+STAGE_KINDS = [("+ government spine (DoCA)", {"spine"}),
+               ("+ official series via Tavily Extract (IBJA, IOCL, PPAC)", {"observed"}),
+               ("+ announced price changes via Tavily Search", {"event"})]
+
+
+def add_jumps(run, month, inp=None):
+    """Display only (docs/after_scoring_changes.md, 2026-10-27): adds 'jump_pp' to each timeline step and 'adds' (the
+    'What Tavily adds' bars: trend, each stage's summed jumps, then carving measured items out of their groups) so
+    the bars end exactly at the final needle. Reads the steps already in the run; changes no existing field."""
+    from v2.needle import jumps
+    seq = [(t["cpi_code"], t["mode"], t["value"]) for t in run["timeline"]]
+    for t, j in zip(run["timeline"], jumps(month, seq, inp)):
+        t["jump_pp"] = j
+    start, end = run["needle"]["start"], run["needle"]["end"]
+    bars = [{"label": label, "pp": sum(t["jump_pp"] for t in run["timeline"] if t["kind"] in kinds)}
+            for label, kinds in STAGE_KINDS]
+    bars.append({"label": "+ carving measured items out of their groups (own trend, not the group's)",
+                 "pp": end - start - sum(b["pp"] for b in bars)})
+    run["adds"] = {"start": start, "end": end, "bars": bars}
+    return run
+
+
 def time_machine(month, item_cards, moving, inp, meta, total, client, ledger=None):
     """Issue 3: for each day of the month up to the cutoff, the needle from evidence published by that day only.
     Official series: daily rows up to the day (v1's cutoff-aware code). Events: pages published by the day. The spine
@@ -228,6 +250,7 @@ def run(month="2026-09", cache_only=False, rec=None, keys=(None, None), out_dir=
                                                                           client, ledger),
            "credits_budget": BUDGET, "credits_spent": spent(BUDGET),
            "credits_by_budget": {b: spent(b) for b in BUDGETS}}
+    add_jumps(out, month, inp)                       # display only
     p = Path(out_dir or LG.ROOT) / f"run_{month}_basket.json"
     p.write_text(json.dumps(out, ensure_ascii=False, indent=1, default=float))
     return out, p

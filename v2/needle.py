@@ -38,6 +38,20 @@ def path(month, steps, inp=None):
     return start, out
 
 
+def jumps(month, steps, inp=None):
+    """Display only (docs/after_scoring_changes.md, 2026-10-27): each step's jump, in pp = needle(steps 1..k) -
+    needle(steps 1..k-1 with item k carved out on its own trend, no change). A step whose evidence equals the item's
+    own trend jumps exactly 0. The jumps do not sum to end - start: the rest is carving items out of their groups
+    (each measured item follows its own trend, not its group's), shown separately. Changes no needle value."""
+    inp = inp or P.load_inputs()
+    changes, out = {}, []
+    for code, mode, value in steps:
+        base = yoy(month, {**changes, code: ("add", 0.0)}, inp)
+        changes[code] = (mode, value)
+        out.append(yoy(month, dict(changes), inp) - base)
+    return out
+
+
 def trend_only(month, inp=None):
     """v1 model (a), 'trend only', for reference."""
     return P.predict_month(month, "a", inp or P.load_inputs())["yoy"]

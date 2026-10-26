@@ -1369,7 +1369,8 @@
    "yoy_after": 5.932013421107718,
    "measured_after": 0.00700562826961053,
    "weight": 0.7005628269610509,
-   "weight_share": 1.0
+   "weight_share": 1.0,
+   "jump_pp": 0.1518331680232743
   },
   {
    "cpi_code": "01.1.7.2.1.01",
@@ -1380,7 +1381,8 @@
    "yoy_after": 5.941049842434043,
    "measured_after": 0.011966234619046223,
    "weight": 0.4960606349435679,
-   "weight_share": 1.0
+   "weight_share": 1.0,
+   "jump_pp": 0.06573873493187499
   },
   {
    "cpi_code": "01.1.7.5.1.01",
@@ -1391,7 +1393,8 @@
    "yoy_after": 5.932768613103256,
    "measured_after": 0.019515639866329013,
    "weight": 0.7549405247282767,
-   "weight_share": 1.0
+   "weight_share": 1.0,
+   "jump_pp": -0.03140603279323528
   },
   {
    "cpi_code": "01.1.7.6.1.01",
@@ -1402,7 +1405,8 @@
    "yoy_after": 5.930442757977961,
    "measured_after": 0.024849052845187188,
    "weight": 0.5333412978858155,
-   "weight_share": 1.0
+   "weight_share": 1.0,
+   "jump_pp": -0.0005581209451488434
   },
   {
    "cpi_code": "01.1.5.1",
@@ -1413,7 +1417,8 @@
    "yoy_after": 5.956466942501204,
    "measured_after": 0.04669636795427292,
    "weight": 2.1847315109085668,
-   "weight_share": 1.0
+   "weight_share": 1.0,
+   "jump_pp": 0.033184934087282514
   },
   {
    "cpi_code": "01.1.1.2.1.01",
@@ -1424,7 +1429,8 @@
    "yoy_after": 5.9499361794408845,
    "measured_after": 0.054362022152742086,
    "weight": 0.7665654198469135,
-   "weight_share": 1.0
+   "weight_share": 1.0,
+   "jump_pp": -0.0004564122795036596
   },
   {
    "cpi_code": "01.1.4.1.1.01",
@@ -1435,7 +1441,8 @@
    "yoy_after": 5.894775603167002,
    "measured_after": 0.106913766738018,
    "weight": 5.255174458527576,
-   "weight_share": 1.0
+   "weight_share": 1.0,
+   "jump_pp": -0.012043995521771045
   },
   {
    "cpi_code": "01.1.4.8.1.01",
@@ -1446,7 +1453,8 @@
    "yoy_after": 5.877806462209412,
    "measured_after": 0.11185202427110892,
    "weight": 0.4938257533090902,
-   "weight_share": 1.0
+   "weight_share": 1.0,
+   "jump_pp": -0.026652170008611975
   },
   {
    "cpi_code": "13.2.1.1.1.01",
@@ -1457,7 +1465,8 @@
    "yoy_after": 5.873146786404138,
    "measured_after": 0.11808176975452445,
    "weight": 0.6229745483415509,
-   "weight_share": 1.0
+   "weight_share": 1.0,
+   "jump_pp": -0.013549279350955068
   },
   {
    "cpi_code": "13.2.1.1.1.02",
@@ -1468,7 +1477,8 @@
    "yoy_after": 5.890517519752558,
    "measured_after": 0.12120829923858585,
    "weight": 0.3126529484061393,
-   "weight_share": 1.0
+   "weight_share": 1.0,
+   "jump_pp": 0.02282459874134446
   },
   {
    "cpi_code": "04.5.2.2.1.01",
@@ -1479,7 +1489,8 @@
    "yoy_after": 5.879571087030899,
    "measured_after": 0.141021957518319,
    "weight": 1.9813658279733073,
-   "weight_share": 1.0
+   "weight_share": 1.0,
+   "jump_pp": -0.015795104468629972
   },
   {
    "cpi_code": "07.2.2.2.1.01",
@@ -1490,7 +1501,8 @@
    "yoy_after": 5.8132371397665805,
    "measured_after": 0.18590966610148368,
    "weight": 4.488770858316457,
-   "weight_share": 1.0
+   "weight_share": 1.0,
+   "jump_pp": -0.06655359191165555
   },
   {
    "cpi_code": "04.5.1.0.2.01",
@@ -1501,7 +1513,8 @@
    "yoy_after": 5.807065045235671,
    "measured_after": 0.1861822954192907,
    "weight": 2.327700493361841,
-   "weight_share": 0.01171238819532333
+   "weight_share": 0.01171238819532333,
+   "jump_pp": 0.001747346130720473
   }
  ],
  "needle": {
@@ -2303,5 +2316,27 @@
  "credits_by_budget": {
   "v2-issue2": 12,
   "v2-amendB": 0
+ },
+ "adds": {
+  "start": 5.652686351899994,
+  "end": 5.807065045235671,
+  "bars": [
+   {
+    "label": "+ government spine (DoCA)",
+    "pp": 0.17964010549416098
+   },
+   {
+    "label": "+ official series via Tavily Extract (IBJA, IOCL, PPAC)",
+    "pp": -0.07307337698989613
+   },
+   {
+    "label": "+ announced price changes via Tavily Search",
+    "pp": 0.001747346130720473
+   },
+   {
+    "label": "+ carving measured items out of their groups (own trend, not the group's)",
+    "pp": 0.046064618700691895
+   }
+  ]
  }
 }

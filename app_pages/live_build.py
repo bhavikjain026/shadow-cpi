@@ -81,6 +81,11 @@ def draw_top(value, measured, label):
         st.altair_chart((base + ticks).properties(height=90), width="stretch")
 
 
+def jump(step):
+    """Display only: the step's jump against the item's own trend (0 when the evidence equals that trend)."""
+    return f" · this step {step['jump_pp']:+.3f} pp vs its own trend" if "jump_pp" in step else ""
+
+
 def draw_tree(done):
     df = pd.DataFrame([{**t, "status": "measured" if t["code"] in done else "on trend",
                         "label": t["name"][:18] if (t["x1"] - t["x0"]) * (t["y1"] - t["y0"]) > 60 else "",
@@ -134,13 +139,13 @@ if basket:
         if stream(card, f"{card['name']} · {card['source']}", body):
             step = next(steps)
             done.add(step["cpi_code"])
-            draw_top(step["yoy_after"], step["measured_after"], f"after {step['name']}")
+            draw_top(step["yoy_after"], step["measured_after"], f"after {step['name']}" + jump(step))
             draw_tree(done)
     for card in run["cards"]:
         stream(card, f"{card['domain']} · {card['published']}", lambda c=card: card_body(c))
     for step, m in zip(run["timeline"][len(done):], run["moving_events"]):
         done.add(step["cpi_code"])
-        draw_top(step["yoy_after"], step["measured_after"], f"after {m['event_kind']} in {m['where']}")
+        draw_top(step["yoy_after"], step["measured_after"], f"after {m['event_kind']} in {m['where']}" + jump(step))
         draw_tree(done)
     ev = [cl for c in run["cards"] for cl in c["claims"] if "status" in cl]
     st.markdown(f"**{sum(c['status'] == 'verified' for c in run['item_cards'])} of {len(run['item_cards'])}** "
@@ -162,7 +167,7 @@ else:
     for card in run["cards"]:
         stream(card, f"{card['domain']} · {card['published']}", lambda c=card: card_body(c))
     for it in run.get("items", []):
-        draw_top(it["yoy_after"], None, f"{it['name']} from the {it['source']}")
+        draw_top(it["yoy_after"], None, f"{it['name']} from the {it['source']}" + jump(it))
         st.markdown(f"Milk moves by the **{it['source']}** ({it['detail']}): {it['change'] * 100:+.3f}%. Verified "
                     "milk events are context only under Amendment A (the spine is milk's source; a city event "
                     "with no statewide confirmation moves nothing).")

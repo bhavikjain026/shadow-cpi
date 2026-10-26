@@ -26,7 +26,7 @@ from shadow_cpi.tavily import Tavily  # noqa: E402
 from v2 import ledger as LG  # noqa: E402
 from v2 import pipeline as PL  # noqa: E402
 from v2 import rules as R  # noqa: E402
-from v2.needle import path  # noqa: E402
+from v2.needle import jumps, path  # noqa: E402
 
 BUDGET = "v2-issue1"
 QUERIES = {"milk": [("en", "milk price hike per litre Madhya Pradesh"),
@@ -69,6 +69,8 @@ def run(month="2026-04", item="milk", state="madhya pradesh", cache_only=False):
                       "mode": "level", "yoy_after": after[0]}] if steps else [],
            "needle": {"start": start, "end": after[-1] if after else start},
            "credits_budget": BUDGET, "credits_spent": spent(BUDGET)}
+    for it, j in zip(out["items"], jumps(month, steps, inp)):             # display only
+        it["jump_pp"] = j
     LG.ROOT.mkdir(parents=True, exist_ok=True)
     p = LG.ROOT / f"run_{month}_{item}_{state.replace(' ', '-')}.json"
     p.write_text(json.dumps(out, ensure_ascii=False, indent=1))

@@ -114,3 +114,22 @@ files are kept as `results/*_before_bugfix_2026-10-21T151419.*` and in `results/
   two months).
 - Not tuned further.
 - **Commit:** `b88a6fd`
+
+## 5. Needle step jumps on the Live build page (display only)
+
+- **Date:** 2026-10-27
+- **Why:** the Live build page and the "What Tavily adds" chart showed each step as the difference between
+  successive needle values. Carving an item out of its group swaps the group's trend for the item's own trend, so
+  that difference moved even when the evidence equalled the item's trend (the same artefact fixed in the October
+  radar's effect formula, `v2/RADAR_PREREG.md` Amendment R2).
+- **Change:** each step's jump = needle(with the item's change) − needle(the item carved out on its own trend, no
+  change) (`v2.needle.jumps`); a step whose evidence equals the item's own trend shows exactly 0. "What Tavily adds"
+  now shows trend only, then each stage's summed jumps (government spine; official series via Tavily Extract;
+  announced changes via Tavily Search), then a separate bar for carving measured items out of their groups, so the
+  bars still end exactly at the final needle. Items whose measured change is 0% while their own trend rises (LPG,
+  petrol in September) now show a real jump: that is evidence, not the artefact.
+- **Display only:** the two saved runs were rebuilt offline (`tools/build_needle_jumps.py`, 0 calls), adding only
+  `jump_pp` and `adds`. Their needle path is recomputed and checked against the saved values first. No results
+  file, seal, score lock or needle value changed: SHA-256 of every file in `results/` and `sealed/` identical before
+  and after; every existing field of the run files identical (`tests/test_needle_jumps.py`). Final v2 for
+  September 2026 unchanged.
