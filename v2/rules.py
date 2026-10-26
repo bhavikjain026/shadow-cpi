@@ -10,6 +10,7 @@ from pathlib import Path
 from shadow_cpi.event_rules import (CITY_STATE, _states_in, non_consumer_reason, not_retail_context_reason,
                                      premium_fuel_reason, scope, state_share)
 from shadow_cpi.verify import norm, price_in_line
+from v2 import kinds as K
 
 CUTOFF_DAY = 29
 PRE_DAYS = 10            # announcements made in the last 10 days before the month
@@ -46,11 +47,12 @@ def text_hash(text):
     return hashlib.sha256((text or "").encode("utf-8")).hexdigest()
 
 
-def check(claim, page_text, page_date, month, words, units=None, state=None, context="", scope=True):
+def check(claim, page_text, page_date, month, words, units=None, state=None, context="", scope=True,
+          whole_words=False):
     """claim: {'line', 'price' (number claimed), 'unit', 'region'}. Returns (True, 'verified') or (False, reason).
     In order: page date known and inside the window; a price is claimed and is in the cited line; the cited line is
     on the fetched page; the line names the item; (if given) the place is in the state; retail, not wholesale;
-    (if given) the unit."""
+    (if given) the unit. whole_words (the radar, Amendment R2): the line names the item as a whole word."""
     start, end = window(month)
     line = claim.get("line") or ""
     if not page_date:
@@ -69,7 +71,7 @@ def check(claim, page_text, page_date, month, words, units=None, state=None, con
     if norm(line) not in norm(page_text):
         return False, "the cited line is not on the fetched page"
     text = norm(line)
-    if not any(norm(w) in text for w in words):
+    if not (any(K.has_word(line, w) for w in words) if whole_words else any(norm(w) in text for w in words)):
         return False, "the line is not about this item"
     if state:
         places = _states_in(claim.get("region")) | _states_in(line) | _states_in(context)

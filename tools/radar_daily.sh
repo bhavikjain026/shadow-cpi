@@ -1,0 +1,73 @@
+#!/bin/zsh
+# One daily radar run (v2/RADAR_PREREG.md), started by launchd at 10:07 IST on 27, 28 and 29 Oct 2026
+# (~/Library/LaunchAgents/in.shadowcpi.radar-daily.plist). Never freezes the radar: freezing needs the owner's OK.
+#   1. stop if another radar run is going (lock + process check)
+#   2. git pull --no-rebase origin main
+#   3. stop if the whole-word bug fix (Amendment R2) is not logged in RADAR_PREREG.md, or the date is not a run day
+#   4. stop if the radar budget (cap read from config/budget.json) is used up
+#   5. python -m v2.radar once, under caffeinate
+#   6. commit the radar file and the credit ledger, push
+#   7. a 3-line report in logs/radar_daily_<date>.txt and a macOS notification
+set -u
+REPO="/Users/bhavikjain/NVIDIA HACKATHON/shadow-cpi"
+cd "$REPO" || exit 1
+DAY=$(TZ=Asia/Kolkata date +%Y-%m-%d)
+LOG="logs/radar_daily_$DAY.txt"
+LOCK="/tmp/shadow-cpi-radar.lock"
+mkdir -p logs
+
+report() {    # three lines: what happened, credits, next
+  printf '%s\n%s\n%s\n' "$1" "$2" "$3" > "$LOG.report"
+  cat "$LOG.report" >> "$LOG"
+  /usr/bin/osascript -e "display notification \"$1 | $2\" with title \"Shadow CPI radar $DAY\"" 2>/dev/null
+  exit "${4:-0}"
+}
+
+exec >>"$LOG" 2>&1
+echo "=== $(TZ=Asia/Kolkata date '+%Y-%m-%d %H:%M:%S IST') radar daily run"
+
+case "$DAY" in 2026-10-27|2026-10-28|2026-10-29) ;; *) report "SKIPPED: $DAY is not a radar run day" "credits: none used" "next: nothing scheduled";; esac
+
+if ! mkdir "$LOCK" 2>/dev/null || pgrep -f "v2.radar" >/dev/null; then
+  report "SKIPPED: another radar run is going (lock $LOCK or a v2.radar process)" "credits: none used" "next: check the other run's log"
+fi
+trap 'rmdir "$LOCK" 2>/dev/null' EXIT
+
+git pull --no-rebase origin main || report "FAILED: git pull --no-rebase origin main (see $LOG)" "credits: none used" "next: fix the repo state by hand" 1
+
+if ! grep -q "Amendment R2 (logged bug fix)" v2/RADAR_PREREG.md; then
+  report "SKIPPED: the whole-word bug fix (Amendment R2) is not on main; no run with the old matching" "credits: none used" "next: push the fix, the next run day picks it up"
+fi
+
+source .venv/bin/activate
+LEFT=$(python - <<'EOF'
+import json
+from shadow_cpi.budget import spent
+cap = json.load(open("config/budget.json"))["caps"]["radar-2026-10"]
+used = spent("radar-2026-10")
+print(f"{used} {cap} {cap - used}")
+EOF
+) || report "FAILED: could not read the radar budget" "credits: none used" "next: check config/budget.json and the ledger" 1
+read USED CAP REMAIN <<< "$LEFT"
+[ "$REMAIN" -le 0 ] && report "SKIPPED: radar budget used up ($USED of $CAP)" "credits: none used" "next: freeze at 29 Oct 23:59 IST needs the owner's OK"
+
+caffeinate -i python -m v2.radar
+RC=$?
+AFTER=$(python -c "from shadow_cpi.budget import spent; print(spent('radar-2026-10'))")
+SUMMARY=$(python - <<'EOF'
+import json
+d = json.load(open("v2/radar/radar_2026-10.json"))
+ev = d.get("events", [])
+r = d["runs"][-1] if d.get("runs") else {}
+print(f"{len(ev)} events, {sum(e['tier'] == 'corroborated' for e in ev)} corroborated; run {len(d.get('runs', []))} "
+      f"{'complete' if r.get('complete') else 'INCOMPLETE'}")
+EOF
+)
+[ $RC -ne 0 ] && report "FAILED: python -m v2.radar exit $RC; $SUMMARY" "credits: $((AFTER - USED)) this run, radar $AFTER of $CAP" "next: read $LOG; nothing committed" 1
+
+git add v2/radar/radar_2026-10.json results/credit_ledger.jsonl
+git commit -m "Radar 2026-10 daily run $DAY: $SUMMARY ($((AFTER - USED)) credits, radar total $AFTER of $CAP)
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || report "FAILED: commit ($SUMMARY)" "credits: $((AFTER - USED)) this run, radar $AFTER of $CAP" "next: commit by hand" 1
+git push origin main || report "RAN but push FAILED: $SUMMARY (committed locally)" "credits: $((AFTER - USED)) this run, radar $AFTER of $CAP" "next: git pull --no-rebase origin main && git push" 1
+report "DONE: $SUMMARY; pushed $(git rev-parse --short HEAD)" "credits: $((AFTER - USED)) this run, radar $AFTER of $CAP" "next: $([ "$DAY" = 2026-10-29 ] && echo 'freeze at 29 Oct 23:59 IST needs the owner OK' || echo 'next run tomorrow 10:07 IST')"

@@ -37,6 +37,10 @@ SCORE = ROOT / "results" / f"radar_{MONTH}_score.json"
 PRIMARY = json.loads((ROOT / "v2" / "radar_primary.json").read_text(encoding="utf-8"))
 TAVILY_ONLY_KINDS = {k for k, v in K.KINDS.items() if v["role"] == "moves"}
 SECOND_LEVEL = ("gov.in", "nic.in", "co.in", "org.in", "net.in", "ac.in")
+# Amendment R2: distribution licensees whose tariff covers part of a state only (their own licence area), with no
+# documented share of the state's CPI weight. Delhi's discoms are left out: DERC sets one tariff for all of Delhi.
+LICENSEES = ["bsl", "बीएसएल", "bokaro steel", "बोकारो स्टील", "tata steel", "jusco", "tsuisl", "cesc",
+             "tata power", "adani electricity", "best undertaking", "torrent power", "noida power", "npcl"]
 
 
 def strategy(text=None):
@@ -83,15 +87,40 @@ def discovery(strat, month, meter, nem, nano, sup, seen, skipped, tag):
 
 
 def verify(cards, month, meter, nem, nano, sup, skipped, tag):
-    PL.fetch_and_verify(meter, nem, nano, cards, month, K.ALL_WORDS, None, None, "", tag, super_model=sup,
-                        skipped=skipped)
+    PL.fetch_and_verify(meter, nem, nano, cards, month, K.WHOLE_WORDS, None, None, "", tag, super_model=sup,
+                        skipped=skipped, whole_words=True)
     for c in cards:
         for cl in c["claims"]:
             if "status" in cl:
-                kind = K.kind_of(cl["line"])
-                cl.update({"kind": kind, "role": K.KINDS.get(kind, {}).get("role", ""),
-                           "states": sorted(K.states_of(cl.get("region"), cl["line"], cl.get("context"),
-                                                        c["title"]))})
+                classify(c, cl)
+
+
+def classify(card, cl):
+    """Amendment R2: kind from whole words in the cited line; states from the page, the model's region last."""
+    kind = K.kind_of(cl["line"], whole=True)
+    cl.update({"kind": kind, "role": K.KINDS.get(kind, {}).get("role", ""),
+               "states": sorted(K.page_states(cl["line"], cl.get("context"), card["title"], card["url"],
+                                              cl.get("region")))})
+
+
+def reclassify(state):
+    """Amendment R2, 0 credits: re-check saved claims with whole-word matching (the verifier's 'line names the item'
+    test and the kind) and page-first states. Whole words only narrow the substring test, and every added form
+    contains a listed word, so a rejected claim cannot become verified; a verified or context claim whose line
+    names no item as a whole word is rejected with the verifier's own reason."""
+    before = state.get("events", [])
+    for c in state["cards"] + [cc for co in state["corroboration"] for cc in co["cards"]]:
+        for cl in c["claims"]:
+            if "status" not in cl:
+                continue
+            if cl["status"] in ("verified", "context") and not any(K.has_word(cl["line"], w) for w in K.WHOLE_WORDS):
+                cl.update({"status": "rejected", "reason": "the line is not about this item",
+                           "reason_before_r2": cl["reason"], "status_before_r2": cl["status"]})
+            classify(c, cl)
+    state["events"] = summarise(state["cards"])
+    state["reclassified"] = {"amendment": "R2", "utc": datetime.now(timezone.utc).isoformat(), "credits": 0,
+                             "events_before": before, "events_after": state["events"]}
+    return before, state["events"]
 
 
 def same_event(ev, cl):
@@ -155,7 +184,8 @@ def tier(ev):
 
 
 def effect_pp(ev, inp=None):
-    """needle(item trend + change x share of October x state share) - needle(all on trend), percentage points."""
+    """needle(item trend + change x share of October x state share) - needle(item trend + 0), percentage points
+    (Amendment R2: the baseline carves the item out too, so a zero change gives exactly 0 pp)."""
     from v2 import needle as N
     from v2.score import SCOPE_KIND
     code = K.KINDS.get(ev["kind"], {}).get("cpi")
@@ -164,10 +194,15 @@ def effect_pp(ev, inp=None):
     share = (31 - int(ev["effective_date"][8:]) + 1) / 31
     scope, weight, _, _ = R.geography(SCOPE_KIND[ev["kind"]], " ".join(s["line"] for s in ev["sources"]), "", "",
                                       "", code, extra_states=ev["states"])
-    if scope == "context":
-        return None                                  # a city change with no documented share moves nothing
+    if scope == "context" or licence_area(ev):
+        return None                                  # a city or licence-area change with no documented share
     inp = inp or N.P.load_inputs()
-    return N.yoy(MONTH, {code: ("add", ev["change"] * share * weight)}, inp) - N.trend_only(MONTH, inp)
+    return N.yoy(MONTH, {code: ("add", ev["change"] * share * weight)}, inp) - N.yoy(MONTH, {code: ("add", 0.0)}, inp)
+
+
+def licence_area(ev):
+    """Amendment R2: an electricity tariff for one named distribution licensee (LICENSEES), narrower than the state."""
+    return ev["kind"] == "electricity" and any(K.has_word(s["line"], n) for s in ev["sources"] for n in LICENSEES)
 
 
 # ---------- run, freeze, score ----------
@@ -252,6 +287,12 @@ def score(frozen=None, scoring=None):
 if __name__ == "__main__":
     if "--freeze" in sys.argv:
         print(freeze()["frozen_utc"])
+    elif "--reclassify" in sys.argv:                 # Amendment R2: saved claims, cached text, 0 credits
+        st = json.loads(RADAR.read_text())
+        b, a = reclassify(st)
+        RADAR.write_text(json.dumps(st, ensure_ascii=False, indent=1, default=float))
+        for name, evs in (("before", b), ("after", a)):
+            print(name, [(e["kind"], e["effective_date"], e["states"], e["tier"], e["effect_pp"]) for e in evs])
     elif "--score" in sys.argv:
         print(json.dumps(score(), indent=1))
     else:

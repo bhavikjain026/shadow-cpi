@@ -819,8 +819,8 @@
      "radar-2026-10"
     ],
     "credits": 52,
-    "verified_quotes": 2,
-    "credits_per_verified_quote": 26.0,
+    "verified_quotes": 1,
+    "credits_per_verified_quote": 52.0,
     "source": "v2/radar/radar_2026-10.json"
    }
   ],
@@ -1310,7 +1310,7 @@
     "with_provenance": 25
    }
   ],
-  "events": 2,
+  "events": 1,
   "corroborated": 0,
   "cap": 150,
   "cap_source": "config/budget.json radar-2026-10",

@@ -1,7 +1,10 @@
 """Amendment C (v2/PREREGISTRATION.md): the event kinds, their CPI items, roles and words in every language; the
 monthly query sets; preferred news domains per language; regional state and city names for geography."""
+import re
+import unicodedata
+
 from shadow_cpi import evidence as E
-from shadow_cpi.event_rules import _states_in
+from shadow_cpi.event_rules import CITY_STATE, STATE_ALIASES, _states_in, state_item_weights
 from shadow_cpi.verify import norm
 
 # order matters: a claim's kind is the first kind whose words appear in its cited line
@@ -25,7 +28,12 @@ KINDS = {
     "mobile": {"cpi": "08.3.4.0.2.01", "role": "moves",
                "words": ["mobile tariff", "prepaid", "postpaid", "recharge", "रिचार्ज"]},
 }
+# Amendment R2 (v2/RADAR_PREREG.md): plural and case forms of words already listed above, for whole-word matching.
+# No new items or synonyms. Used by the radar only (whole=True); the substring matcher above is left as it was.
+FORMS = {"bus": ["buses", "बसों", "बसें", "बसच्या"], "rail": ["trains", "railways"], "lpg": ["cylinders"],
+         "electricity": ["மின்சார", "மின்சாரம்"]}
 ALL_WORDS = [w for k in KINDS.values() for w in k["words"]]
+WHOLE_WORDS = ALL_WORDS + [w for f in FORMS.values() for w in f]
 
 QUERIES = [
     ("en", "electricity tariff hike per unit regulatory commission order"),
@@ -61,7 +69,28 @@ REGIONAL_PLACES = {
 }
 
 
-def kind_of(line):
+def _word_char(ch):
+    return unicodedata.category(ch)[0] in "LMN"          # letters, combining marks (matras, viramas), digits
+
+
+def has_word(text, word, start_only=False):
+    """Amendment R2: `word` occurs in `text` as a whole word (after norm), in any script. A word is a run of letters,
+    marks and digits, so 'रेल' is not found in 'घरेलू' and 'bus' is not found in 'business'. start_only: the word
+    must begin at a word boundary but may carry a suffix (regional place stems such as 'சென்னை' in 'சென்னையில்')."""
+    t, w = norm(text or ""), norm(word or "")
+    for m in re.finditer(re.escape(w), t) if w else ():
+        a, b = m.start(), m.end()
+        if (a == 0 or not _word_char(t[a - 1])) and (start_only or b == len(t) or not _word_char(t[b])):
+            return True
+    return False
+
+
+def kind_of(line, whole=False):
+    """The first kind whose words appear in the line. whole=True (the radar, Amendment R2): whole words only, with
+    the listed plural and case forms (FORMS)."""
+    if whole:
+        return next((k for k, v in KINDS.items() if any(has_word(line, w) for w in v["words"] + FORMS.get(k, []))),
+                    None)
     t = norm(line or "")
     return next((k for k, v in KINDS.items() if any(norm(w) in t for w in v["words"])), None)
 
@@ -75,3 +104,44 @@ def states_of(*texts):
         found |= {s for s, names in REGIONAL_PLACES.items() if any(norm(x) in n for x in names)}
     return found
 
+
+
+# Amendment R2: state regulators (abbreviation and Hindi name) -> state. A page naming one names the state.
+REGULATORS = {
+    "jserc": "jharkhand", "berc": "bihar", "merc": "maharashtra", "tnerc": "tamil nadu", "kerc": "karnataka",
+    "kserc": "kerala", "uperc": "uttar pradesh", "derc": "nct of delhi", "gerc": "gujarat", "rerc": "rajasthan",
+    "herc": "haryana", "pserc": "punjab", "mperc": "madhya pradesh", "cserc": "chhattisgarh", "oerc": "odisha",
+    "wberc": "west bengal", "aperc": "andhra pradesh", "tserc": "telangana", "tgerc": "telangana",
+    "hperc": "himachal pradesh", "uerc": "uttarakhand", "aerc": "assam", "jkerc": "jammu and kashmir",
+}
+URL_STATES = {s: s.replace(" ", "-") for s in STATE_ALIASES} | {"nct of delhi": "delhi"}
+
+
+def _places(text):
+    """States named in one text, whole words in every script (Amendment R2); regional-language place stems
+    (REGIONAL_PLACES) match at a word start, since their case endings attach to the name."""
+    found = set()
+    names = {s: [s] for s in {s for v in state_item_weights().values() for s in v}}
+    for s, aliases in STATE_ALIASES.items():
+        names.setdefault(s, []).extend(aliases)
+    for city, s in CITY_STATE.items():
+        names.setdefault(s, []).append(city)
+    for s, ws in names.items():
+        if any(has_word(text, w) for w in ws):
+            found.add(s)
+    found |= {s for s, ws in REGIONAL_PLACES.items() if any(has_word(text, w, start_only=True) for w in ws)}
+    found |= {s for r, s in REGULATORS.items() if has_word(text, r)}
+    return found
+
+
+def page_states(line, context="", title="", url="", region=""):
+    """Amendment R2: the claim's states come from the page (place names and regulators in the cited line, its
+    context and the title), then from the source URL (a /<state>/ path segment, e.g. /state/jharkhand/bokaro/); the
+    model's region field is used only when the page names no state."""
+    found = set()
+    for t in (line, context, title):
+        found |= _places(t)
+    if not found and url:
+        segs = set(re.split(r"[/?#]", url.lower()))
+        found = {s for s, slug in URL_STATES.items() if slug in segs}
+    return found or _places(region)

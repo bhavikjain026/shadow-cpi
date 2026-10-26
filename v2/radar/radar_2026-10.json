@@ -2360,8 +2360,8 @@
      "base_price": null,
      "context": "[![](https://npr.brightspotcdn.com/dims4/default/fbee873/2147483647/strip/true/crop/77x60+0+0/resize/77x60!/quality/90/?url=https%3A%2F%2Fnpr.brightspotcdn.com%2Fdims4%2Fdefault%2F25e5da6%2F2147483647%2Fresize%2Fx60%2Fquality%2F90%2F%3Furl%3Dhttp%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F6a%2Fdf%2Fd2313bd840e991cb307384d1dba7%2Fwlrn-logo-white-pbs-npr.png)](/)",
      "gloss": "",
-     "kind": "metro",
-     "role": "context",
+     "kind": "bus",
+     "role": "moves",
      "states": []
     }
    ],
@@ -2804,8 +2804,7 @@
      "kind": null,
      "role": "",
      "states": [
-      "gujarat",
-      "madhya pradesh"
+      "gujarat"
      ]
     }
    ],
@@ -2852,7 +2851,9 @@
      "gloss": "The electricity bill in MP will increase again, adding to consumers' tension! The FPPAS rate jumps from 4.59 to 5.063, find out how much the amount will increase - mp electricity bill hike fppas rate jumps to 5063",
      "kind": "electricity",
      "role": "moves",
-     "states": []
+     "states": [
+      "madhya pradesh"
+     ]
     }
    ],
    "extract_call": "9750d42015d1",
@@ -2897,7 +2898,9 @@
      "gloss": "The fixed charge in the domestic service category has been increased from Rs 125 to Rs 140 per kilowatt per month, and the energy charge has risen from Rs 5.70 to Rs 6.40 per kilowatt hour.",
      "kind": null,
      "role": "",
-     "states": []
+     "states": [
+      "jharkhand"
+     ]
     },
     {
      "line": "व्यावसायिक सेवा श्रेणी में फिक्स्ड चार्ज 125 रुपये से बढ़ाकर 140 रुपये प्रति किलोवाट प्रतिमाह किया गया है। ऊर्जा शुल्क भी 5.70 रुपये प्रति किलोवाट घंटा से बढ़कर 6.40 रुपये हो गया है।",
@@ -2919,7 +2922,9 @@
      "gloss": "The fixed charge in the domestic service category has been increased from Rs 125 to Rs 140 per kilowatt per month, and the energy charge has risen from Rs 5.70 to Rs 6.40 per kilowatt hour.",
      "kind": null,
      "role": "",
-     "states": []
+     "states": [
+      "jharkhand"
+     ]
     },
     {
      "line": "एचटी/एलटी स्ट्रीट लाइट श्रेणी में फिक्स्ड चार्ज 50 से बढ़कर 60 रुपये तथा ऊर्जा शुल्क 4.50 से बढ़कर 5 रुपये प्रति किलोवाट घंटा कर दिया गया है।",
@@ -2941,7 +2946,9 @@
      "gloss": "The fixed charge in the HT/LT street light category has been increased from Rs 50 to Rs 60, and the energy charge from Rs 4.50 to Rs 5 per kilowatt hour.",
      "kind": null,
      "role": "",
-     "states": []
+     "states": [
+      "jharkhand"
+     ]
     },
     {
      "line": "एचटी/एलटी स्ट्रीट लाइट श्रेणी में फिक्स्ड चार्ज 50 से बढ़कर 60 रुपये तथा ऊर्जा शुल्क 4.50 से बढ़कर 5 रुपये प्रति किलोवाट घंटा कर दिया गया है।",
@@ -2963,7 +2970,9 @@
      "gloss": "The fixed charge in the HT/LT street light category has been increased from Rs 50 to Rs 60, and the energy charge from Rs 4.50 to Rs 5 per kilowatt hour.",
      "kind": null,
      "role": "",
-     "states": []
+     "states": [
+      "jharkhand"
+     ]
     },
     {
      "line": "[...] आयोग की स्वीकृत टैरिफ तालिका के अनुसार घरेलू सेवा (डीएस-एलटी) के लिए वर्तमान फिक्स्ड चार्ज 80 रुपये प्रति कनेक्शन प्रतिमाह है, जिसे बढ़ाकर 90 रुपये कर दिया गया है।",
@@ -2983,9 +2992,11 @@
      "base_price": null,
      "context": "# बोकारो में बिजली दरों में बढ़ोतरी, उपभोक्ताओं को झटका; 1 अक्टूबर से नई दरें लागू",
      "gloss": "According to the tariff schedule approved by the Commission, the current fixed charge for domestic service (DS-LT) is Rs 80 per connection per month, which has been increased to Rs 90.",
-     "kind": "rail",
-     "role": "moves",
-     "states": []
+     "kind": null,
+     "role": "",
+     "states": [
+      "jharkhand"
+     ]
     },
     {
      "line": "वहीं ऊर्जा शुल्क 3.30 रुपये प्रति किलोवाट घंटा से बढ़कर 3.75 रुपये प्रति किलोवाट घंटा हो गया है।",
@@ -3007,7 +3018,9 @@
      "gloss": "The energy charge has increased from Rs 3.30 per kilowatt hour to Rs 3.75 per kilowatt hour.",
      "kind": null,
      "role": "",
-     "states": []
+     "states": [
+      "jharkhand"
+     ]
     },
     {
      "line": "## व्यावसायिक उपभोक्ताओं का भी बढ़ेगा खर्च [...] एचटीएस-11 केवी श्रेणी में फिक्स्ड चार्ज 300 रुपये प्रति केवीए प्रतिमाह से बढ़कर 340 रुपये हो गया है। ऊर्जा शुल्क भी 5.05 रुपये प्रति केवीए घंटा से बढ़ाकर 5.75 रुपये किया गया है।",
@@ -3029,7 +3042,9 @@
      "gloss": "The cost for commercial consumers will also increase [...] The fixed charge in the HTS-11 kVA category has risen from Rs 300 per kVA per month to Rs 340, and the energy charge has been increased from Rs 5.05 per kWh to Rs 5.75.",
      "kind": null,
      "role": "",
-     "states": []
+     "states": [
+      "jharkhand"
+     ]
     },
     {
      "line": "## व्यावसायिक उपभोक्ताओं का भी बढ़ेगा खर्च [...] एचटीएस-11 केवी श्रेणी में फिक्स्ड चार्ज 300 रुपये प्रति केवीए प्रतिमाह से बढ़कर 340 रुपये हो गया है। ऊर्जा शुल्क भी 5.05 रुपये प्रति केवीए घंटा से बढ़ाकर 5.75 रुपये किया गया है।",
@@ -3051,7 +3066,9 @@
      "gloss": "The cost for commercial consumers will also increase [...] The fixed charge in the HTS-11 kVA category has risen from Rs 300 per kVA per month to Rs 340, and the energy charge has been increased from Rs 5.05 per kWh to Rs 5.75.",
      "kind": null,
      "role": "",
-     "states": []
+     "states": [
+      "jharkhand"
+     ]
     }
    ],
    "extract_call": "9750d42015d1",
@@ -4923,8 +4940,8 @@
      "base_price": null,
      "context": "[Close Menu](#)",
      "gloss": "",
-     "kind": "milk",
-     "role": "context",
+     "kind": "diesel",
+     "role": "moves",
      "states": []
     },
     {
@@ -4945,8 +4962,8 @@
      "base_price": null,
      "context": "[Close Menu](#)",
      "gloss": "",
-     "kind": "milk",
-     "role": "context",
+     "kind": "diesel",
+     "role": "moves",
      "states": []
     },
     {
@@ -4967,8 +4984,8 @@
      "base_price": null,
      "context": "[Close Menu](#)",
      "gloss": "",
-     "kind": "milk",
-     "role": "context",
+     "kind": "diesel",
+     "role": "moves",
      "states": []
     },
     {
@@ -4989,8 +5006,8 @@
      "base_price": null,
      "context": "[Close Menu](#)",
      "gloss": "",
-     "kind": "milk",
-     "role": "context",
+     "kind": "diesel",
+     "role": "moves",
      "states": []
     }
    ],
@@ -5953,7 +5970,6 @@
      "kind": "electricity",
      "role": "moves",
      "states": [
-      "bihar",
       "jharkhand"
      ]
     },
@@ -5978,7 +5994,6 @@
      "kind": "electricity",
      "role": "moves",
      "states": [
-      "bihar",
       "jharkhand"
      ]
     },
@@ -5993,18 +6008,20 @@
      "pct_change": null,
      "effective_date": "2026-10-01",
      "read_by": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
-     "status": "verified",
-     "reason": "verified",
+     "status": "rejected",
+     "reason": "the line is not about this item",
      "price_type": "retail",
      "change": 0.12280701754385959,
      "base_price": null,
      "context": "# बोकारो में एक अक्टूबर से महंगी होगी BSL की बिजली, घरेलू उपभोक्ताओं पर बढ़ेगा बिल का बोझ \n प्रतीकात्मक फोटो \n ## कॉमर्शियल बिजली भी हुई महंगी",
      "gloss": "Meanwhile, the fixed charge for high‑voltage domestic consumers has been increased from Rs 75 to Rs 85 per kVA per month, and the energy charge has risen from Rs 2.85 to Rs 3.20 per kVA.",
-     "kind": "rail",
-     "role": "moves",
+     "kind": null,
+     "role": "",
      "states": [
-      "bihar"
-     ]
+      "jharkhand"
+     ],
+     "reason_before_r2": "verified",
+     "status_before_r2": "verified"
     },
     {
      "line": "कॉमर्शियल सर्विस के लिए फिक्स्ड चार्ज 125 रुपये से बढ़ाकर 140 रुपये प्रति किलोवाट प्रति माह कर दिया गया है. ऊर्जा शुल्क भी 5.70 रुपये से बढ़कर 6.40 रुपये प्रति यूनिट हो गया है.",
@@ -6027,7 +6044,7 @@
      "kind": null,
      "role": "",
      "states": [
-      "bihar"
+      "jharkhand"
      ]
     },
     {
@@ -6051,7 +6068,7 @@
      "kind": null,
      "role": "",
      "states": [
-      "bihar"
+      "jharkhand"
      ]
     }
    ],
@@ -7443,28 +7460,81 @@
    "tier": "verified",
    "tavily_only": false,
    "effect_pp": null
-  },
-  {
-   "kind": "rail",
-   "effective_date": "2026-10-01",
-   "states": [
-    "bihar"
-   ],
-   "change": 0.12280701754385959,
-   "sources": [
-    {
-     "url": "https://www.prabhatkhabar.com/state/jharkhand/bokaro/bokaro-residents-prepare-higher-electricity-bills-october-2026",
-     "domain": "prabhatkhabar.com",
-     "line": "वहीं, उच्च वोल्टेज घरेलू सेवा के उपभोक्ताओं के लिए फिक्स्ड चार्ज 75 रुपये से बढ़कर 85 रुपये प्रति केवीए प्रति माह कर दिया गया है. ऊर्जा शुल्क 2.85 रुपये से बढ़कर 3.20 रुपये प्रति केवीए हो गया है.",
-     "published": "2026-09-27",
-     "search_request_id": "17c1a87a-f476-4a30-af67-4a31d170e085",
-     "extract_request_id": "12e89f53-e4d4-4b9c-8cd6-d931c24404e5",
-     "via": "tavily"
-    }
-   ],
-   "tier": "verified",
-   "tavily_only": true,
-   "effect_pp": 0.0013340698580721622
   }
- ]
+ ],
+ "reclassified": {
+  "amendment": "R2",
+  "utc": "2026-10-26T18:12:51.384900+00:00",
+  "credits": 0,
+  "events_before": [
+   {
+    "kind": "milk",
+    "effective_date": "2026-10-01",
+    "states": [
+     "madhya pradesh"
+    ],
+    "change": 0.048387096774193505,
+    "sources": [
+     {
+      "url": "https://navbharattimes.indiatimes.com/state/madhya-pradesh/indore/indore-milk-price-hike-october-1-new-rates-dairy-delivery-rate/articleshow/134590661.cms",
+      "domain": "navbharattimes.indiatimes.com",
+      "line": "## Indore Milk Price: इंदौर में 1 अक्टूबर से दूध के दाम बढ़ा दिए गए हैं। अब घर तक पहुंचने वाला दूध 62 रुपए की जगह 65 रुपए प्रति लीटर मिलेगा, जबकि डेयरी या दुकान से खरीदने पर 68 रुपए चुकाने होंगे। दूध विक्रेता संघ ने पशु आहार और उत्पादन लागत बढ़ने का हवाला देते हुए यह नए रेट तय किए हैं।",
+      "published": "2026-09-30",
+      "search_request_id": "dde70a9b-7429-4e14-b012-7c42e348cb19",
+      "extract_request_id": "ad9b543f-764f-4136-9fba-1d5c1b8edabe",
+      "via": "tavily"
+     }
+    ],
+    "tier": "verified",
+    "tavily_only": false,
+    "effect_pp": null
+   },
+   {
+    "kind": "rail",
+    "effective_date": "2026-10-01",
+    "states": [
+     "bihar"
+    ],
+    "change": 0.12280701754385959,
+    "sources": [
+     {
+      "url": "https://www.prabhatkhabar.com/state/jharkhand/bokaro/bokaro-residents-prepare-higher-electricity-bills-october-2026",
+      "domain": "prabhatkhabar.com",
+      "line": "वहीं, उच्च वोल्टेज घरेलू सेवा के उपभोक्ताओं के लिए फिक्स्ड चार्ज 75 रुपये से बढ़कर 85 रुपये प्रति केवीए प्रति माह कर दिया गया है. ऊर्जा शुल्क 2.85 रुपये से बढ़कर 3.20 रुपये प्रति केवीए हो गया है.",
+      "published": "2026-09-27",
+      "search_request_id": "17c1a87a-f476-4a30-af67-4a31d170e085",
+      "extract_request_id": "12e89f53-e4d4-4b9c-8cd6-d931c24404e5",
+      "via": "tavily"
+     }
+    ],
+    "tier": "verified",
+    "tavily_only": true,
+    "effect_pp": 0.0013340698580721622
+   }
+  ],
+  "events_after": [
+   {
+    "kind": "milk",
+    "effective_date": "2026-10-01",
+    "states": [
+     "madhya pradesh"
+    ],
+    "change": 0.048387096774193505,
+    "sources": [
+     {
+      "url": "https://navbharattimes.indiatimes.com/state/madhya-pradesh/indore/indore-milk-price-hike-october-1-new-rates-dairy-delivery-rate/articleshow/134590661.cms",
+      "domain": "navbharattimes.indiatimes.com",
+      "line": "## Indore Milk Price: इंदौर में 1 अक्टूबर से दूध के दाम बढ़ा दिए गए हैं। अब घर तक पहुंचने वाला दूध 62 रुपए की जगह 65 रुपए प्रति लीटर मिलेगा, जबकि डेयरी या दुकान से खरीदने पर 68 रुपए चुकाने होंगे। दूध विक्रेता संघ ने पशु आहार और उत्पादन लागत बढ़ने का हवाला देते हुए यह नए रेट तय किए हैं।",
+      "published": "2026-09-30",
+      "search_request_id": "dde70a9b-7429-4e14-b012-7c42e348cb19",
+      "extract_request_id": "ad9b543f-764f-4136-9fba-1d5c1b8edabe",
+      "via": "tavily"
+     }
+    ],
+    "tier": "verified",
+    "tavily_only": false,
+    "effect_pp": null
+   }
+  ]
+ }
 }

@@ -133,7 +133,8 @@ def super_reread(nem, super_model, card, text, tag):
     card["claims"] = keep + [{**claim_of(e), "read_by": super_model} for e in evs if e.get("quote")]
 
 
-def fetch_and_verify(tav, nem, nano, cards, month, words, units, state, kind, tag, super_model=None, skipped=None):
+def fetch_and_verify(tav, nem, nano, cards, month, words, units, state, kind, tag, super_model=None, skipped=None,
+                     whole_words=False):
     """Extract the pages that carry claims, save + hash them, (Amendment B) let Super re-read pages where Nano gave
     no number, and check each claim. Fills each claim's status, reason, effective date, change, English gloss and
     the model that read it; returns nothing (cards are updated in place)."""
@@ -177,7 +178,7 @@ def fetch_and_verify(tav, nem, nano, cards, month, words, units, state, kind, ta
                 ctx = context_for(text, cl["line"])
                 pt = R.price_type(cl["line"], ctx)
                 ok, why = R.check(cl, text, c["published"], month, words, units, state, ctx,
-                                  scope=pt not in ("wholesale", "commercial"))
+                                  scope=pt not in ("wholesale", "commercial"), whole_words=whole_words)
                 eff = normalise_date(cl.get("effective_date"), c["published"]) or None
                 change, base = R.change_of(cl), None
                 if change is None and ok:

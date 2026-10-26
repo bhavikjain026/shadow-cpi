@@ -67,3 +67,36 @@ change logged alongside it. Rules 3–8 and the 150 cap are unchanged; run 1 sta
    calls bypass the cache (responses are still saved and logged), and the credit cap charges every such call: a
    client that does not read the cache is never treated as "cached" by the budget check. Nemotron reads still use
    the cache (same page text, same reading). Pages already read on an earlier day are not read again.
+
+**Amendment R2 (logged bug fix), 2026-10-26T18:16:01Z (UTC), after run 2 and before run 3.** Decided by the owner.
+Rules 1–4, 6–8, strategy A and the 150 cap are unchanged. The verifier's rules are unchanged; only how a keyword is
+found in text is fixed. Applies to the radar only (`whole=True` / `whole_words=True`); v1 and the locked v2 scores
+keep the old matcher.
+1. **Whole-word keyword matching (bug).** Kind words and the verifier's "the line names the item" test matched
+   substrings, so "रेल" (rail) was found inside "घरेलू" (domestic). A keyword now matches only as a whole word in
+   every script (`v2.kinds.has_word`: a word is a run of letters, combining marks and digits). Added, as whole words,
+   only plural and case forms of words already listed (`v2.kinds.FORMS`), no new items or synonyms: bus → buses,
+   बसों, बसें, बसच्या; rail → trains, railways; lpg → cylinders; electricity → மின்சார, மின்சாரம். None of the
+   saved claims they touch is verified or context (4 claims, all rejected for other reasons), so they change no event.
+2. **State from the page (bug).** A claim's states come from the page: place names and state regulators (e.g. JSERC →
+   Jharkhand, `v2.kinds.REGULATORS`) in the cited line, its context and the title, all as whole words; then the
+   source URL's `/<state>/` path segment; the model's region field only when the page names no state.
+3. **Licence areas (new radar-only rule, for runs 3–5).** An electricity tariff for one named distribution licensee
+   (`v2.radar.LICENSEES`, e.g. BSL in Bokaro, CESC, Tata Power Mumbai), narrower than the state and with no
+   documented share, is context with no effect, the same as an undocumented city event. It changes no saved event.
+4. **Effect baseline (bug in rule 5).** Rule 5 subtracted needle(everything on trend); carving the item out swaps its
+   group's trend for the item's own trend, so a zero change already moved the needle (rail −0.0010 pp, electricity
+   −0.0049 pp). Now: effect = needle(item trend + change × share of October × state share) − needle(item trend + 0);
+   a zero change gives exactly 0 pp.
+5. **Re-classification of runs 1 and 2** (`python -m v2.radar --reclassify`, saved claims and cached page text,
+   0 credits; recorded under `reclassified` in `v2/radar/radar_2026-10.json`). One claim changed status; before → after
+   for every saved event:
+   - **Indore milk** (milk, 2026-10-01, Madhya Pradesh, verified): unchanged, verified, Madhya Pradesh. Effect: none →
+     none (milk is a context kind and moves through its spine series, so rule 5 gives it no effect either way).
+   - **"Bihar rail +12.3% from 1 Oct"** (rail, 2026-10-01, Bihar, verified, Tavily-only, effect
+     +0.0013340698580721622 pp under the old rule 5; +0.0023777317438522516 pp under the R2 baseline) → **rejected**:
+     the cited line names no item as a whole word. Its state is now Jharkhand (URL `/state/jharkhand/`), not the
+     model's "Bihar". Real tariff change (JSERC, Bokaro/BSL licence area, domestic HV), found by search, rejected
+     under rule 3 after the substring fix; context only, not counted.
+   - Radar totals: events 2 → 1; corroborated 0 → 0; Tavily-only events 1 → 0; Tavily-only effect sum
+     +0.0013340698580721622 pp → 0 pp.
