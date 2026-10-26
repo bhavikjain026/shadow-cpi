@@ -1,0 +1,2008 @@
+{
+ "cases": [
+  {
+   "id": "Q001",
+   "source": "arm B",
+   "month": "2026-01",
+   "cutoff": "2026-01-29",
+   "url": "https://www.aajtak.in/business/utility/story/rule-change-from-1st-january-2026-lpg-cylinder-to-car-price-hike-atf-rate-cut-tutc-dskc-2427756-2026-01-01",
+   "page_sha256": "a69c3e92a219eefd8c1b44af96427b1abacc83881b9c166e7e5f98f8b432980c",
+   "price": 92323.02,
+   "span": "Price Cut) दिए हैं. दिल्ली में इसकी कीमत 99,676.77 रुपये से कम करके अब 92,323.02",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "6ef90b12b0c4",
+     "credits": 1,
+     "response_time": 3.01,
+     "request_id": "9759d76b-7b06-4d02-8c29-ef2eebb20c51",
+     "response_sha256": "e82013d46763ed643a90af29dd613a3787a55e9febdada449004fa6ec9fa5677",
+     "results": []
+    },
+    "dated": {
+     "call": "04c430c54f0f",
+     "credits": 1,
+     "response_time": 1.76,
+     "request_id": "5c5ea192-29b3-4310-abf7-8c826bd1a89f",
+     "response_sha256": "ddccfbcbe746a0f35a894d1fc58cedd16664749af8d8841a224bcbb6e67c0cfd",
+     "results": [
+      {
+       "url": "https://www.aajtak.in/business/utility/story/rule-change-from-1st-january-2026-lpg-cylinder-to-car-price-hike-atf-rate-cut-tutc-dskc-2427756-2026-01-01",
+       "published_date": "Thu, 01 Jan 2026 04:13:50 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q002",
+   "source": "arm C",
+   "month": "2026-01",
+   "cutoff": "2026-01-29",
+   "url": "https://www.amny.com/news/fare-hike-new-yorkers-pay-three-dollars-subway-bus",
+   "page_sha256": "0f28abcf5d9866af0f4755cb4580e1254b89e9fa0a4a91327636450fb9531b31",
+   "price": 8.0,
+   "span": "buy tickets on one of the commuter rails will now have to pay an $8,",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "b28eb1f0bd27",
+     "credits": 1,
+     "response_time": 0.97,
+     "request_id": "98821269-79d3-4357-9767-151377ba0e70",
+     "response_sha256": "9bdde20ffaf9e629c6e41d39ccfb92cbba6e1e0d2756a68b5fd8297e2f721f4a",
+     "results": [
+      {
+       "url": "https://www.amny.com/news/fare-hike-new-yorkers-pay-three-dollars-subway-bus",
+       "published_date": "Fri, 02 Jan 2026 21:35:40 GMT",
+       "source_page": true
+      },
+      {
+       "url": "https://co.headtopics.com/news/fare-hike-new-yorkers-will-begin-having-to-pay-3-to-ride-77890537",
+       "published_date": null,
+       "source_page": false
+      }
+     ]
+    },
+    "dated": {
+     "call": "5405d2d921a8",
+     "credits": 1,
+     "response_time": 2.5,
+     "request_id": "b0cac252-ccc5-45df-8837-c54b0bfb3d71",
+     "response_sha256": "793694505ebb7f2012a674a972843990f0c9d4a6f5b0793552d62cf247cfc489",
+     "results": [
+      {
+       "url": "https://www.amny.com/news/fare-hike-new-yorkers-pay-three-dollars-subway-bus",
+       "published_date": "Fri, 02 Jan 2026 21:35:40 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q004",
+   "source": "v2 scored evidence",
+   "month": "2026-01",
+   "cutoff": "2026-01-29",
+   "url": "https://www.railway.supply/nyc-subway-fare-increase-2026-new-fares-caps-and-tolls",
+   "page_sha256": "5cbbe7cf846f5f193d88e17495fd1e6cae73b9b103e8743ca5fe9e9ddb809713",
+   "price": 3.0,
+   "span": "buses, and Access-A-Ride increases by 10 cents, moving a standard ride from $2.90 to $3.",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "81851871f51c",
+     "credits": 1,
+     "response_time": 0.94,
+     "request_id": "64f98c1a-3367-4270-a87d-674994270467",
+     "response_sha256": "48dd1571dac2250f90276169c6cd5501109468cce6743e567e0f75bfc26579ef",
+     "results": [
+      {
+       "url": "https://www.railway.supply/nyc-subway-fare-increase-2026-new-fares-caps-and-tolls",
+       "published_date": "Wed, 24 Dec 2025 09:35:19 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "dated": {
+     "call": "6320dc49a622",
+     "credits": 1,
+     "response_time": 2.56,
+     "request_id": "29ddc672-b01e-4f5c-a268-dd4174b1d4a4",
+     "response_sha256": "b1f70ccd4248971c5fe7596d139dd0194219223a63167358ddf2047707a7728b",
+     "results": [
+      {
+       "url": "https://www.railway.supply/nyc-subway-fare-increase-2026-new-fares-caps-and-tolls",
+       "published_date": "Wed, 24 Dec 2025 09:35:19 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q005",
+   "source": "v2 scored evidence",
+   "month": "2026-01",
+   "cutoff": "2026-01-29",
+   "url": "https://www.railway.supply/nyc-subway-fare-increase-2026-new-fares-caps-and-tolls",
+   "page_sha256": "5cbbe7cf846f5f193d88e17495fd1e6cae73b9b103e8743ca5fe9e9ddb809713",
+   "price": 7.25,
+   "span": "Express bus fares also tick up: the full fare goes from $7 to $7.25, and",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "f00d6f24c02d",
+     "credits": 1,
+     "response_time": 0.91,
+     "request_id": "76a2d68a-12ed-4de5-87de-f96d9b52638a",
+     "response_sha256": "108b2f8771cb6e7f1b6ae989bcc46e9a268bd379acc263f631e3d5e6dc97b5dc",
+     "results": [
+      {
+       "url": "https://www.railway.supply/nyc-subway-fare-increase-2026-new-fares-caps-and-tolls",
+       "published_date": "Wed, 24 Dec 2025 09:35:19 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "dated": {
+     "call": "9d497d3bc3a7",
+     "credits": 1,
+     "response_time": 2.8,
+     "request_id": "66077f75-e7e8-40fd-9b69-eb8aa5f72db8",
+     "response_sha256": "54a60c3978446c4e44a67017f1247fdc210b7f025bea95a09beb26ba5f192473",
+     "results": [
+      {
+       "url": "https://www.railway.supply/nyc-subway-fare-increase-2026-new-fares-caps-and-tolls",
+       "published_date": "Wed, 24 Dec 2025 09:35:19 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q006",
+   "source": "v2 scored evidence",
+   "month": "2026-01",
+   "cutoff": "2026-01-29",
+   "url": "https://www.fox5ny.com/news/mta-fare-hikes-2026",
+   "page_sha256": "85d49a202f2a6a390a4ec8bea547cf32a9a7e3fe3ec83febd535a816d1e2dff9",
+   "price": 4.5,
+   "span": "on the Long Island Rail Road and Metro-North Railroad will increase by up to 4.5%,",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "1eb0a325c61d",
+     "credits": 1,
+     "response_time": 0.81,
+     "request_id": "962f3fc6-f754-4626-9fdf-efd7aea905c4",
+     "response_sha256": "b2118a648923b4a2308307355f110aa667d3e0ace3e83d8019996e9981ca2f88",
+     "results": [
+      {
+       "url": "https://www.fox5ny.com/news/mta-fare-hikes-2026",
+       "published_date": "Fri, 02 Jan 2026 16:53:11 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "dated": {
+     "call": "99c3caae6df0",
+     "credits": 1,
+     "response_time": 2.13,
+     "request_id": "2becf11c-e6dd-4cb1-94a6-d8c33af523fc",
+     "response_sha256": "312d605eaa9c37418782e20dcd979409b3bdda3fe0ecefb50fcc84710d0580c4",
+     "results": [
+      {
+       "url": "https://www.fox5ny.com/news/mta-fare-hikes-2026",
+       "published_date": "Fri, 02 Jan 2026 16:53:11 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q007",
+   "source": "v2 scored evidence",
+   "month": "2026-01",
+   "cutoff": "2026-01-29",
+   "url": "https://www.aajtak.in/business/utility/story/rule-change-from-1st-january-2026-lpg-cylinder-to-car-price-hike-atf-rate-cut-tutc-dskc-2427756-2026-01-01",
+   "page_sha256": "a69c3e92a219eefd8c1b44af96427b1abacc83881b9c166e7e5f98f8b432980c",
+   "price": 2,
+   "span": "किया है, तो वहीं MG Motors पेट्रोल-डीजल और ईवी सभी वैरिएंट की कीमतों में 2%",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "b5494382b262",
+     "credits": 1,
+     "response_time": 3.01,
+     "request_id": "ebb761ff-16bc-43f9-987d-0ace7a07d521",
+     "response_sha256": "ca0669c2ce30ad6274c8b1e14daff58cb42bff1d9fcaa8c4d1f8cf04c4b25164",
+     "results": []
+    },
+    "undated": {
+     "call": "08a525a56834",
+     "credits": 1,
+     "response_time": 3.03,
+     "request_id": "5945223c-68c4-4b88-bbff-0800a0f345d1",
+     "response_sha256": "75a5487604ba41131cbb8423b166ed0a5feec1a012e16000f6fffbd099cefe0b",
+     "results": [
+      {
+       "url": "https://firstchhattisgarhnews.com/2026/01/01/rising-lpg-prices-and-5-new-changes-that-will-change-your-daily-life",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://www.aajtak.in/business/utility/story/rule-change-from-1st-january-2026-lpg-cylinder-to-car-price-hike-atf-rate-cut-tutc-dskc-2427756-2026-01-01",
+       "published_date": "Thu, 01 Jan 2026 04:13:50 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found only without dates"
+  },
+  {
+   "id": "Q008",
+   "source": "arm B",
+   "month": "2026-02",
+   "cutoff": "2026-02-28",
+   "url": "https://timesofindia.indiatimes.com/city/mumbai/gokul-raises-price-of-buffalo-milk-by-rs-2-per-litre/articleshow/128640277.cms",
+   "page_sha256": "4f61541f5db6a7b5a747bcb178f9e2c78d3b5acc3804a8cd9526184e97906baf",
+   "price": 76,
+   "span": "cream milk (buffalo milk) by Rs 2 per litre, from Rs 74 to Rs 76",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "8d9e7faa321a",
+     "credits": 1,
+     "response_time": 1.11,
+     "request_id": "b1021ae4-dc55-4eca-b154-4bd7e06ec964",
+     "response_sha256": "022eb8c80fe06472ca03a73e5cf9485c1a3d1c55c4223790b9cdc662a82ffd98",
+     "results": [
+      {
+       "url": "https://timesofindia.indiatimes.com/city/mumbai/gokul-raises-price-of-buffalo-milk-by-rs-2-per-litre/articleshow/128640277.cms",
+       "published_date": "Sat, 21 Feb 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "dated": {
+     "call": "618397ad3132",
+     "credits": 1,
+     "response_time": 1.97,
+     "request_id": "da6bb0e9-c46e-47a4-a49c-97bc822b6c34",
+     "response_sha256": "2ef3e92e8214c7ea5ad87bf25673cecb0f93d4a840cd28a9afcd023d2f2d37cd",
+     "results": [
+      {
+       "url": "https://timesofindia.indiatimes.com/city/mumbai/gokul-raises-price-of-buffalo-milk-by-rs-2-per-litre/articleshow/128640277.cms",
+       "published_date": "Sat, 21 Feb 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q009",
+   "source": "arm B",
+   "month": "2026-02",
+   "cutoff": "2026-02-28",
+   "url": "https://swarajyamag.com/news-brief/bengaluru-metro-introduces-annual-fare-revision-limits-yearly-hikes-to-5-per-cent-from-february-2026",
+   "page_sha256": "5a739d6070856a8caee7be7f898d722f9de43804f00fee5ae2b021e9f35a2cbc",
+   "price": 5,
+   "span": "Bengaluru Metro To Raise Fares Annually Under New Formula, Limits Yearly Hikes To 5 Per",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "b1d484bca3ec",
+     "credits": 1,
+     "response_time": 0.83,
+     "request_id": "6ab294bd-5e98-45d7-a813-bca782524118",
+     "response_sha256": "8ad9269007e67db25712d29f69381c5e1dfa749305fa05024a41a446ce707cf6",
+     "results": [
+      {
+       "url": "https://swarajyamag.com/news-brief/bengaluru-metro-introduces-annual-fare-revision-limits-yearly-hikes-to-5-per-cent-from-february-2026",
+       "published_date": null,
+       "source_page": true
+      },
+      {
+       "url": "https://swarajyamag.com/topic/Bengaluru%20Metro%20fare%20hike",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://swarajyamag.com/topic/Bengaluru%20Metro%20fare%20table",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://swarajyamag.com/topic/BMRCL%20annual%20fare%20revision",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://x.com/SwarajyaMag/status/2019404944156291555?lang=en",
+       "published_date": null,
+       "source_page": false
+      }
+     ]
+    },
+    "dated": {
+     "call": "e7ba8917b905",
+     "credits": 1,
+     "response_time": 3.01,
+     "request_id": "d59257f5-a0f0-4245-a7e0-6faccfa70583",
+     "response_sha256": "dc0e089c65ac78e5f55f40ce4c40662542141cdc4b874bbe16dfce57ad1af200",
+     "results": []
+    }
+   },
+   "outcome": "found only without dates"
+  },
+  {
+   "id": "Q010",
+   "source": "arm C",
+   "month": "2026-02",
+   "cutoff": "2026-02-28",
+   "url": "https://www.deccanherald.com/india/karnataka/bengaluru/pay-rs-1-5-more-for-bengaluru-metro-rides-from-february-9-3886552",
+   "page_sha256": "a0bae2afbbd0653f44e181435e03af2b5a77ee84e75a89e22b3eb80dcfa1e6ef",
+   "price": 5,
+   "span": "Pay Rs 1-5 more for Bengaluru metro rides from February 9",
+   "anchor": "price",
+   "words": 11,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "37a50bb8061f",
+     "credits": 1,
+     "response_time": 1.2,
+     "request_id": "8ecf876a-3da4-47d8-9037-8d247efd167c",
+     "response_sha256": "47b1cfd8a07a1706094217f5aee4cf7be1c3e02001571c0e41c9ddb26951f1b5",
+     "results": [
+      {
+       "url": "https://www.deccanherald.com/india/karnataka/bengaluru/pay-rs-1-5-more-for-bengaluru-metro-rides-from-february-9-3886552",
+       "published_date": "Wed, 04 Feb 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "dated": {
+     "call": "db6863fa360a",
+     "credits": 1,
+     "response_time": 2.12,
+     "request_id": "31bf736c-e6ef-45d7-879e-f40745cf38d4",
+     "response_sha256": "c2212efc4a509c04d95622d1bb76f1775f8d0e56c0847ef98eabebfd8d8d5887",
+     "results": [
+      {
+       "url": "https://www.deccanherald.com/india/karnataka/bengaluru/pay-rs-1-5-more-for-bengaluru-metro-rides-from-february-9-3886552",
+       "published_date": "Wed, 04 Feb 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q011",
+   "source": "arm Td",
+   "month": "2026-02",
+   "cutoff": "2026-02-28",
+   "url": "https://navbharattimes.indiatimes.com/business/commodity/budget-2026-lpg-19-kg-cylinder-becomes-costlier-second-consecutive-month-know-new-prices-in-four-metros/articleshow/127830474.cms",
+   "page_sha256": "e0a52cd608a9af4069e50419efcb7855b223c5de013d0515874391582471bf03",
+   "price": 1844.5,
+   "span": "कोलकाता में आज से 19 किलो वाले एलपीजी सिलेंडर की कीमत अब 1844.50 रुपये हो",
+   "anchor": "number",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "14c34cd9fc7f",
+     "credits": 1,
+     "response_time": 1.36,
+     "request_id": "e4cd8272-ed2a-4bcd-a170-6e34e713a119",
+     "response_sha256": "caaadf08c65ba5612dc89b3aef41667ae2903182ecb098f93f979ff71973803c",
+     "results": [
+      {
+       "url": "https://navbharattimes.indiatimes.com/business/commodity/budget-2026-lpg-19-kg-cylinder-becomes-costlier-second-consecutive-month-know-new-prices-in-four-metros/articleshow/127830474.cms",
+       "published_date": "Sun, 01 Feb 2026 00:25:10 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "dated": {
+     "call": "63a025f61bc4",
+     "credits": 1,
+     "response_time": 3.01,
+     "request_id": "b4545066-d669-410f-898e-668da9721860",
+     "response_sha256": "6bae037a1dcb17c13507d2ffa55686b2894520300ff33da0d73f06f65c1f5aec",
+     "results": []
+    }
+   },
+   "outcome": "found only without dates"
+  },
+  {
+   "id": "Q012",
+   "source": "v2 scored evidence",
+   "month": "2026-02",
+   "cutoff": "2026-02-28",
+   "url": "https://www.moneycontrol.com/news/india/why-bengaluru-metro-is-enforcing-annual-fare-hikes-while-delhi-resists-despite-similar-panel-recommendations-13813986.html",
+   "page_sha256": "bc521c30efce8f9c985a8470c342fe9b5a933de8cdd3905643a5775264558ed6",
+   "price": 5,
+   "span": "Bengaluru Metro fares to increase by 5% from February 9.",
+   "anchor": "price",
+   "words": 10,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "37538bf97d0a",
+     "credits": 1,
+     "response_time": 1.02,
+     "request_id": "c04b3711-1bff-49c1-80ba-7a296f73257f",
+     "response_sha256": "979d8a22ea401e334f2ab82d552f58f585c8dbb824f1320526a369bbfa27199b",
+     "results": [
+      {
+       "url": "https://www.moneycontrol.com/news/india/why-bengaluru-metro-is-enforcing-annual-fare-hikes-while-delhi-resists-despite-similar-panel-recommendations-13813986.html",
+       "published_date": "Thu, 05 Feb 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "undated": {
+     "call": "4989bed2364c",
+     "credits": 1,
+     "response_time": 2.62,
+     "request_id": "7371492c-55bc-439a-9af2-c53e94dbf4fe",
+     "response_sha256": "ff8663b6f1ce745c2d26cb62b476fb1f6c2adb7633bbd1ebc027dca5a07dcf27",
+     "results": [
+      {
+       "url": "https://www.facebook.com/MetroRailNewsHQ/posts/bmrcl-announces-5-increase-in-fare-of-bengalurus-namma-metro-from-february-9-nam/1449259230543923",
+       "published_date": "Sat, 28 Feb 2026 11:00:00 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://www.facebook.com/logical.indian/posts/bengalurus-namma-metro-fares-will-increase-by-5-from-february-9-following-an-ann/1322476856577953",
+       "published_date": "Sat, 28 Feb 2026 11:00:00 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://www.facebook.com/61576051905810/posts/hello-bengaluru-bmrcl_official-has-revised-the-namma-metro-faresee-pinned-commen/122160385850868396",
+       "published_date": "Sat, 28 Feb 2026 11:00:00 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://www.facebook.com/WhatsHotBangalore/posts/bengaluru-metro-travel-just-got-costlier-bmrcl-has-announced-a-5-fare-hike-acros/1833884944050006",
+       "published_date": "Sat, 28 Feb 2026 11:00:00 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://www.moneycontrol.com/news/india/why-bengaluru-metro-is-enforcing-annual-fare-hikes-while-delhi-resists-despite-similar-panel-recommendations-13813986.html",
+       "published_date": "Thu, 05 Feb 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q013",
+   "source": "arm B",
+   "month": "2026-03",
+   "cutoff": "2026-03-29",
+   "url": "https://www.lpm.org/news/2026-02-25/tarc-bus-rides-will-get-more-expensive-starting-march-2",
+   "page_sha256": "7c1d1adf9231457e1416e2d1e27936842a615112e4ffab683a812ae55e42a9ab",
+   "price": 4.5,
+   "span": "Starting March 2, an adult bus fare will cost $2.25, a 50-cent increase. Fares for",
+   "anchor": "number",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "d602bda22a31",
+     "credits": 1,
+     "response_time": 0.94,
+     "request_id": "a06e8183-6620-4090-990c-b78b7356baff",
+     "response_sha256": "39b18e26a626e9f6fc4c1b0ed3b03ca5ad7766a97e3b68ff9026ace1a9cfa3fb",
+     "results": [
+      {
+       "url": "https://www.lpm.org/news/2026-02-25/tarc-bus-rides-will-get-more-expensive-starting-march-2",
+       "published_date": "Wed, 25 Feb 2026 16:33:46 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "undated": {
+     "call": "c0e4a899f9f9",
+     "credits": 1,
+     "response_time": 3.01,
+     "request_id": "9c14952f-97f6-43dd-85d4-a31fa9d48dc1",
+     "response_sha256": "42fe5b224819a9819d0612b6d3cf8bf15c8ba7ae1631fad4e5ef889e3c2ebb68",
+     "results": []
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q014",
+   "source": "arm C",
+   "month": "2026-03",
+   "cutoff": "2026-03-29",
+   "url": "https://www.indiatv.in/paisa/business/premium-petrol-in-india-becomes-costlier-by-up-to-rs-2-35-from-march-20-2026-2026-03-20-1205441",
+   "page_sha256": "64122dc115dcb542b7b273a09b3fb29df52c9fcc4d8d1674a6f7dba682f8667a",
+   "price": 109.59,
+   "span": "हो गई है। इस बढ़ोतरी के बाद इंडस्ट्रियल डीजल की कीमत 87.57 से बढ़कर 109.59",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "e696a3eef65d",
+     "credits": 1,
+     "response_time": 1.62,
+     "request_id": "86945394-93bd-41fe-9d35-fd3cb38d42fb",
+     "response_sha256": "f94ebf5ed4223c5b065eb0b8b79dad48c3c5872963e4fb4795676ce5387d8b9b",
+     "results": []
+    },
+    "undated": {
+     "call": "0c8165bd2bad",
+     "credits": 1,
+     "response_time": 1.62,
+     "request_id": "c62f57b1-0a2a-4221-ae18-8f2b765edd73",
+     "response_sha256": "22bd98d7182f71284fbff1e61508e957fa61f9adfaa1bb34545d4977805c7f48",
+     "results": []
+    }
+   },
+   "outcome": "not found either way"
+  },
+  {
+   "id": "Q015",
+   "source": "v2 scored evidence",
+   "month": "2026-03",
+   "cutoff": "2026-03-29",
+   "url": "https://www.siasat.com/domestic-lpg-cylinder-prices-hiked-know-rates-in-hyderabad-other-cities-3426480",
+   "page_sha256": "2a3c6b46326c4824e5bb74d38ab09f664a1e525bf4f6bfb316add4f95e1bb4f2",
+   "price": 913,
+   "span": "Non-subsidised LPG will now cost Rs 913 per 14.2-kg cylinder in Delhi as against Rs",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "67015f897b88",
+     "credits": 1,
+     "response_time": 0.93,
+     "request_id": "c34ba25d-4fb9-4ebb-aa61-52d0b2b806fd",
+     "response_sha256": "ede4db026b00f53dd0063040e17f99ec293a3cce5831f1abe329cedb504b5c6a",
+     "results": [
+      {
+       "url": "https://www.siasat.com/domestic-lpg-cylinder-prices-hiked-know-rates-in-hyderabad-other-cities-3426480",
+       "published_date": "Sun, 08 Mar 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "dated": {
+     "call": "09e71214ee3b",
+     "credits": 1,
+     "response_time": 1.02,
+     "request_id": "02b31f47-66b6-4bb9-a0c3-4d0b01a72fd5",
+     "response_sha256": "fb59db83b3e20279cdba2b7149f5c0ea3f6bd53279a14c78290b5725dc0a8922",
+     "results": [
+      {
+       "url": "https://www.siasat.com/domestic-lpg-cylinder-prices-hiked-know-rates-in-hyderabad-other-cities-3426480",
+       "published_date": "Sun, 08 Mar 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q016",
+   "source": "arm B",
+   "month": "2026-04",
+   "cutoff": "2026-04-29",
+   "url": "https://navbharattimes.indiatimes.com/metro/mumbai/development/maharashtra-bus-travel-expensive-msrtc-bus-passenger-fare-hike-and-cleanliness-charge-hits-travelers-financially/articleshow/130325621.cms",
+   "page_sha256": "7b23ac472cdf8aec30327aafb57f97e5954c6879eb42237b9fe772d80b4275da",
+   "price": 10,
+   "span": "बावजूद महाराष्ट्र परिवहन निगम (ST) ने गर्मियों की छुट्टियों को देखते हुए किराए में 10",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "492e2ee54361",
+     "credits": 1,
+     "response_time": 1.17,
+     "request_id": "30088654-6e1f-495c-a342-aea278d7d763",
+     "response_sha256": "c2cf2ebb54e3b5335e4361ec6eb4e2cfc3295e99005fb68766b50b79047f5402",
+     "results": [
+      {
+       "url": "https://navbharattimes.indiatimes.com/metro/mumbai/development/maharashtra-bus-travel-expensive-msrtc-bus-passenger-fare-hike-and-cleanliness-charge-hits-travelers-financially/articleshow/130325621.cms",
+       "published_date": "Fri, 17 Apr 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "dated": {
+     "call": "5a6cd29900ae",
+     "credits": 1,
+     "response_time": 2.19,
+     "request_id": "f82f4922-fc67-4cfb-ba64-5f26571a204b",
+     "response_sha256": "19cbf659a9949443f5ee0bf8f11be700a01db12cf9279013ca8be5664d2eec44",
+     "results": [
+      {
+       "url": "https://navbharattimes.indiatimes.com/metro/mumbai/development/maharashtra-bus-travel-expensive-msrtc-bus-passenger-fare-hike-and-cleanliness-charge-hits-travelers-financially/articleshow/130325621.cms",
+       "published_date": "Fri, 17 Apr 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q017",
+   "source": "arm Td",
+   "month": "2026-04",
+   "cutoff": "2026-04-29",
+   "url": "https://www.amarujala.com/photo-gallery/technology/tech-diary/telecom-tariff-hike-india-airtel-jio-vi-prepaid-plan-changes-hindi-2026-04-21",
+   "page_sha256": "5fed74f0f0c09a7f603eeeaa042763e66e8d2d4ee456dca4f41c9f218e51ffcb",
+   "price": 899,
+   "span": "वैल्यू-फॉर-मनी माना जाता था। इसके साथ ही 859 रुपये वाले प्लान की कीमत बढ़ाकर 899",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "8b1b44b77393",
+     "credits": 1,
+     "response_time": 1.42,
+     "request_id": "eaa3572b-2b96-4815-ac59-cb3184cd1167",
+     "response_sha256": "19ae54ec49ce38af244c53c02f7399e52eb4c5d9aedbf58de1657b96b92ec2bd",
+     "results": []
+    },
+    "undated": {
+     "call": "0dd3fd8bd19b",
+     "credits": 1,
+     "response_time": 1.93,
+     "request_id": "afcc0a1d-c3bd-495a-b418-58a58a41e3cf",
+     "response_sha256": "747e0999bee02bf330a6edfffab28ef62862e47c2b46d13d1f52f38f1ccdad78",
+     "results": []
+    }
+   },
+   "outcome": "not found either way"
+  },
+  {
+   "id": "Q018",
+   "source": "v2 scored evidence",
+   "month": "2026-04",
+   "cutoff": "2026-04-29",
+   "url": "https://www.amarujala.com/madhya-pradesh/indore/indore-milk-prices-will-increase-by-rs-3-per-litre-in-indore-from-april-1-along-with-a-home-delivery-service-2026-03-31",
+   "page_sha256": "1980bc50d41ee74b18ef944f2450058dbbad49d6a0fc90ce5653d22df258b605",
+   "price": 63,
+   "span": "लीटर की बढ़ोतरी का निर्णय लिया है। अब शहर में दूध 60 के बजाय 63",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "c762289f39d7",
+     "credits": 1,
+     "response_time": 1.5,
+     "request_id": "236956ea-b7a9-4055-b63d-41d83dec745e",
+     "response_sha256": "794623a3fac58c34a3a44f22d48a3b7496720926a46c5e5aef9104a1972133ee",
+     "results": []
+    },
+    "dated": {
+     "call": "bf014087f7ea",
+     "credits": 1,
+     "response_time": 2.07,
+     "request_id": "a9983147-5c6e-4da2-bfb8-057f41641ea9",
+     "response_sha256": "daf4326cabec633b1a9a1850ef040418442b551a29271b5838fe23973e0036c1",
+     "results": []
+    }
+   },
+   "outcome": "not found either way"
+  },
+  {
+   "id": "Q020",
+   "source": "v2 scored evidence",
+   "month": "2026-04",
+   "cutoff": "2026-04-29",
+   "url": "https://www.aajtak.in/madhya-pradesh/story/mp-electricity-tariff-hike-new-rates-april-1-power-bill-increase-lcla-rptc-2507841-2026-03-27",
+   "page_sha256": "a4c1ff82be05bd7c9d4ed04df6b44936321e4617d28efa472eb53eb8b690b2c8",
+   "price": 4.8,
+   "span": "भी बढ़ोतरी कर दी गई है. मध्य प्रदेश विद्युत नियामक आयोग ने वित्तीय वर्ष 2026-27",
+   "anchor": "number",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "7cdb8d2ec978",
+     "credits": 1,
+     "response_time": 2.39,
+     "request_id": "3defbe5c-25b1-42e0-9243-1222a03ab0d0",
+     "response_sha256": "6e7d871ff5746572fdd37d5815d112aff8b003739425c2be65b66c02733ba66f",
+     "results": [
+      {
+       "url": "https://www.aajtak.in/madhya-pradesh/story/mp-electricity-tariff-hike-new-rates-april-1-power-bill-increase-lcla-rptc-2507841-2026-03-27",
+       "published_date": "Fri, 27 Mar 2026 04:33:26 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "undated": {
+     "call": "3da2e0c6c84f",
+     "credits": 1,
+     "response_time": 3.01,
+     "request_id": "815ba352-92d1-4cd3-9cec-c4c7524a7cd7",
+     "response_sha256": "0843aea27680a684d84995331accdaa69b60b877644fcd574c7fa8ac0045d756",
+     "results": []
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q022",
+   "source": "v2 scored evidence",
+   "month": "2026-04",
+   "cutoff": "2026-04-29",
+   "url": "https://energy.economictimes.indiatimes.com/news/power/power-tariff-increase-approved-jharkhands-electricity-rates-see-6-12-hike-consumers-face-higher-bills-starting-april-1/129819394",
+   "page_sha256": "ee3434c062560bc90ac237e2a99942f394dbe3abd551b0a33cf4ffdf028e93de",
+   "price": 6.12,
+   "span": "Power tariff increase approved: Jharkhand's electricity rates see 6.12% hike; Consumers face higher bills starting",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "0839fc811338",
+     "credits": 1,
+     "response_time": 2.4,
+     "request_id": "03094754-3e01-4038-b8b0-16f1b5ce3c45",
+     "response_sha256": "61a628beff560f937a9d13eb91b6e06fc23a0a4cef84a4ffb77a18233beed4bb",
+     "results": []
+    },
+    "dated": {
+     "call": "511a52cbeb53",
+     "credits": 1,
+     "response_time": 1.91,
+     "request_id": "540ea80f-34f4-4c6b-b0a2-0dd408ff26f2",
+     "response_sha256": "e03b9abf02e857626ae6efbee870aa3e224ba47fbf498f4e7c3bea34b5f4d3b0",
+     "results": []
+    }
+   },
+   "outcome": "not found either way"
+  },
+  {
+   "id": "Q023",
+   "source": "arm C",
+   "month": "2026-05",
+   "cutoff": "2026-05-29",
+   "url": "https://www.amarujala.com/india-news/milk-price-after-amul-mother-dairy-also-increased-price-of-milk-know-when-new-prices-will-be-applicable-2026-05-14",
+   "page_sha256": "6e703b87b06b9d902975f9bd481a5040624f651a2f3747dc853d7d5aae720664",
+   "price": 62,
+   "span": "गाय के दूध की कीमत 60 रुपए से बढ़ाकर 62 रुपए प्रति लीटर कर दी",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "71d2e28ba108",
+     "credits": 1,
+     "response_time": 1.22,
+     "request_id": "f474909f-2935-444b-b04f-f6f6fbc90e44",
+     "response_sha256": "1619a44b8b0f2527d4329f068c3d75c52a4871dfb40fc601efd74becd96cf1f0",
+     "results": [
+      {
+       "url": "https://www.amarujala.com/india-news/milk-price-after-amul-mother-dairy-also-increased-price-of-milk-know-when-new-prices-will-be-applicable-2026-05-14",
+       "published_date": "Thu, 14 May 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "undated": {
+     "call": "b5cac9956295",
+     "credits": 1,
+     "response_time": 2.83,
+     "request_id": "7c800de2-3a6b-426d-8e1d-3d9d27cbe9f2",
+     "response_sha256": "f051367c060bd1cb4f6c20807facfe543de87b78e9cb98b0ea558419b83ee72a",
+     "results": [
+      {
+       "url": "https://www.amarujala.com/india-news/milk-price-after-amul-mother-dairy-also-increased-price-of-milk-know-when-new-prices-will-be-applicable-2026-05-14",
+       "published_date": "Thu, 14 May 2026 00:00:00 GMT",
+       "source_page": true
+      },
+      {
+       "url": "https://newstrack.com/india/amul-milk-price-hike-india-2-rupees-per-litre-dudh-ka-daam-kitna-badha-599895",
+       "published_date": "Wed, 13 May 2026 00:00:00 GMT",
+       "source_page": false
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q024",
+   "source": "arm C",
+   "month": "2026-05",
+   "cutoff": "2026-05-29",
+   "url": "https://www.amarujala.com/india-news/milk-price-after-amul-mother-dairy-also-increased-price-of-milk-know-when-new-prices-will-be-applicable-2026-05-14",
+   "page_sha256": "6e703b87b06b9d902975f9bd481a5040624f651a2f3747dc853d7d5aae720664",
+   "price": 72,
+   "span": "फुल क्रीम दूध अब 70 रुपए की जगह 72 रुपए प्रति लीटर मिलेगा।",
+   "anchor": "price",
+   "words": 13,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "71c9c3972c9c",
+     "credits": 1,
+     "response_time": 1.21,
+     "request_id": "da0c687d-66da-434a-88bc-6eebef87816e",
+     "response_sha256": "9d45d5d9cd2355cdef08a788d50fb4c8ac53eb18ec78d1c808a10da28741db09",
+     "results": [
+      {
+       "url": "https://www.amarujala.com/india-news/milk-price-after-amul-mother-dairy-also-increased-price-of-milk-know-when-new-prices-will-be-applicable-2026-05-14",
+       "published_date": "Thu, 14 May 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "undated": {
+     "call": "ae91618962d0",
+     "credits": 1,
+     "response_time": 2.39,
+     "request_id": "6fa7da21-e4f5-4cec-b6b0-87d88e984e93",
+     "response_sha256": "9bf1554ee434e5a9ea697e6fd369abbfa26338c8ae62b73862cb68e5cd371953",
+     "results": [
+      {
+       "url": "https://www.amarujala.com/india-news/milk-price-after-amul-mother-dairy-also-increased-price-of-milk-know-when-new-prices-will-be-applicable-2026-05-14",
+       "published_date": null,
+       "source_page": true
+      },
+      {
+       "url": "https://newstrack.com/india/amul-milk-price-hike-india-2-rupees-per-litre-dudh-ka-daam-kitna-badha-599895",
+       "published_date": "Wed, 13 May 2026 13:40:14 GMT",
+       "source_page": false
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q025",
+   "source": "arm Td",
+   "month": "2026-05",
+   "cutoff": "2026-05-29",
+   "url": "https://www.jagran.com/news/national-petrol-diesel-price-hike-90-paise-increase-second-time-this-week-40244908.html",
+   "page_sha256": "2027c2fb99e6f5b08b587f03a7299ca06bfa9178186fcd642c19b9e745df3528",
+   "price": 98.64,
+   "span": "राष्ट्रीय राजधानी में पेट्रोल की कीमत अब 97.77 रुपये प्रति लीटर से बढ़कर 98.64 रुपये",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "82a8da336bfd",
+     "credits": 1,
+     "response_time": 1.07,
+     "request_id": "99382c9a-8c3d-4d48-995c-9299e4eaa7ad",
+     "response_sha256": "5b1cd041795065ffbcb261b7b0930fe59f28e9c8f9a1ea81f68a0210f0bb2ee5",
+     "results": [
+      {
+       "url": "https://www.jagran.com/news/national-petrol-diesel-price-hike-90-paise-increase-second-time-this-week-40244908.html",
+       "published_date": "Tue, 19 May 2026 16:30:00 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "dated": {
+     "call": "b222d662ac81",
+     "credits": 1,
+     "response_time": 3.01,
+     "request_id": "072617fd-6543-44cc-a549-374d78971ea4",
+     "response_sha256": "b1e2ef6187624de5738c2765a25a3f0035064c868a8800a96f3629f26f4b2c82",
+     "results": []
+    }
+   },
+   "outcome": "found only without dates"
+  },
+  {
+   "id": "Q026",
+   "source": "arm Td",
+   "month": "2026-05",
+   "cutoff": "2026-05-29",
+   "url": "https://www.6sqft.com/nj-transit-cuts-world-cup-train-fare-to-metlife-by-30",
+   "page_sha256": "4e1426a40b37b28a6a47ac89dd99ff5477fa8b528ce71b14edc2f5b6b1e5cec3",
+   "price": 3.25,
+   "span": "The cost to ride PATH trains officially increased from $3 to $3.25 on Monday as",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "c4fe38d70b68",
+     "credits": 1,
+     "response_time": 1.26,
+     "request_id": "7147ae5a-edfa-4784-a246-820c65b03fb9",
+     "response_sha256": "c197ddfec2eb7b74466e832c4c3e6394d61d2bbcbbdd26a9ba89fe0ec8abb74a",
+     "results": [
+      {
+       "url": "https://ground.news/article/path-train-fare-increases-take-effect-monday-weekend-service-to-expand",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://www.6sqft.com/path-fare-hike-takes-effect-ahead-of-return-of-7-day-service",
+       "published_date": "Mon, 04 May 2026 16:45:09 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://www.6sqft.com/biz/path",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://www.6sqft.com/tunnel-boring-for-16b-hudson-river-tunnel-project-begins",
+       "published_date": "Mon, 28 Sep 2026 16:50:54 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://www.6sqft.com/work-on-gateway-project-will-stop-next-week-unless-trump-restores-funding",
+       "published_date": "Wed, 28 Jan 2026 00:00:00 GMT",
+       "source_page": false
+      }
+     ]
+    },
+    "dated": {
+     "call": "2538a7782171",
+     "credits": 1,
+     "response_time": 2.89,
+     "request_id": "88931333-b263-430a-a752-41e7f51e76c8",
+     "response_sha256": "ff2ef2362961bae6ad84d8ebdae7a7b420237fea11936f2bfe95f38bf786b878",
+     "results": [
+      {
+       "url": "https://www.nytimes.com/2026/05/04/nyregion/path-fare-increase.html",
+       "published_date": "Mon, 04 May 2026 09:02:28 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://www.cbsnews.com/newyork/news/path-train-fare-hike-25-cents",
+       "published_date": "Mon, 04 May 2026 11:29:26 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://www.roi-nj.com/2026/04/30/transportation/path-announces-service-improvements-in-may-fare-set-to-rise",
+       "published_date": "Thu, 30 Apr 2026 09:00:37 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://secretnyc.co/path-train-fare-increasing-to-325-starting-may-4",
+       "published_date": "Fri, 01 May 2026 18:06:22 GMT",
+       "source_page": false
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "another page only"
+  },
+  {
+   "id": "Q028",
+   "source": "v2 scored evidence",
+   "month": "2026-05",
+   "cutoff": "2026-05-29",
+   "url": "https://www.moneycontrol.com/news/business/amul-raises-milk-prices-by-rs-2-per-litre-across-key-variants-from-may-14-13918166.html",
+   "page_sha256": "1339c7a30def43a3eed635457494ea331cb9fdc6069dd664cd240ca9b55acbc6",
+   "price": 72,
+   "span": "Mother Dairy’s Full Cream Milk (FCM) 1-litre pack will now cost Rs 72 compared with",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "aa8b1745a17e",
+     "credits": 1,
+     "response_time": 1.13,
+     "request_id": "ef362a1e-0db8-4368-a44c-464cae2dffbf",
+     "response_sha256": "17d5fff5d30c902108af8293da16bb619e5d2cd52665df2e6ba154f7f615c4e2",
+     "results": [
+      {
+       "url": "https://timesofindia.indiatimes.com/life-style/food-news/milk-price-hike-popular-packaged-milk-prices-rise-across-india-healthy-milk-alternatives-to-add-to-daily-diet/photostory/131098516.cms",
+       "published_date": "Thu, 14 May 2026 00:00:00 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://www.moneycontrol.com/news/business/amul-raises-milk-prices-by-rs-2-per-litre-across-key-variants-from-may-14-13918166.html",
+       "published_date": "Wed, 13 May 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "undated": {
+     "call": "26f585c2d323",
+     "credits": 1,
+     "response_time": 2.72,
+     "request_id": "5b5bd056-f20c-4a22-b2a8-35397a82a3b7",
+     "response_sha256": "c930cf9433251ae818426d182dbf691ac291dd39f42ac71ecf1a07faa3af36c5",
+     "results": [
+      {
+       "url": "https://www.moneycontrol.com/news/business/amul-raises-milk-prices-by-rs-2-per-litre-across-key-variants-from-may-14-13918166.html",
+       "published_date": "Wed, 13 May 2026 13:38:46 GMT",
+       "source_page": true
+      },
+      {
+       "url": "https://timesofindia.indiatimes.com/life-style/food-news/milk-price-hike-popular-packaged-milk-prices-rise-across-india-healthy-milk-alternatives-to-add-to-daily-diet/photostory/131098516.cms",
+       "published_date": "Thu, 14 May 2026 00:00:00 GMT",
+       "source_page": false
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q030",
+   "source": "v2 scored evidence",
+   "month": "2026-05",
+   "cutoff": "2026-05-29",
+   "url": "https://money.rediff.com/news/market/petrol-diesel-prices-hike-after-elections/47075220260515",
+   "page_sha256": "ba75dcaeed5ce198dcf86d7daebc96c39028c2f4a70a988af7f19d8ba402cf8f",
+   "price": 97.77,
+   "span": "Petrol price in the national capital has been increased to Rs 97.77 per litre from",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "fa5e30612fc1",
+     "credits": 1,
+     "response_time": 0.93,
+     "request_id": "f0d16e53-6111-4d4b-a153-e4e8e98b6d8d",
+     "response_sha256": "9b06d087566bc2bb1e5138871e09cecf764440ef6aca12fa3e9894ba8fca7806",
+     "results": []
+    },
+    "undated": {
+     "call": "ec6234572030",
+     "credits": 1,
+     "response_time": 3.4,
+     "request_id": "89d5de30-cb8b-4c62-be47-a8b4e3d14d62",
+     "response_sha256": "798c9bc4441dd198238acaa9d12db9cb4e9e2cb830d443caa5c93c725c667a31",
+     "results": [
+      {
+       "url": "https://money.rediff.com/news/market/petrol-diesel-prices-hike-after-elections/47075220260515",
+       "published_date": "Fri, 15 May 2026 12:54:00 GMT",
+       "source_page": true
+      },
+      {
+       "url": "https://www.thesangaiexpress.com/Encyc/2026/5/15/new-delhi-may-15-petrol-and-diesel-prices-were-hiked-by-rs-3-per-litre-each-on-friday-marking-the-first-increa.html",
+       "published_date": "Fri, 15 May 2026 00:00:00 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://statetimes.in/petrol-diesel-prices-hiked-by-rs-3-l-after-elections-cng-up-by-rs-2-kg-as-crude-costs-bite",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://www.dailyexcelsior.com/petrol-diesel-prices-hiked-by-rs-3-per-litre-cng-up-by-rs-2-per-kg",
+       "published_date": "Sat, 16 May 2026 00:00:00 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://www.ptinews.com/story/business/petrol-diesel-prices-hiked-by-rs-3-l-after-elections-cng-up-by-rs-2-kg-as-crude-costs-bite/3668848",
+       "published_date": "Fri, 15 May 2026 00:00:00 GMT",
+       "source_page": false
+      }
+     ]
+    }
+   },
+   "outcome": "found only without dates"
+  },
+  {
+   "id": "Q032",
+   "source": "arm H",
+   "month": "2026-06",
+   "cutoff": "2026-06-29",
+   "url": "https://www.livehindustan.com/ncr/11-city-buses-to-run-in-noida-greater-noida-cm-yogi-adityanath-to-flag-them-off-know-route-and-fare-201781238429634.html",
+   "page_sha256": "61607124244a3f803e35363b54aaf325edd7cef673fa748dd78629b5f084b8cd",
+   "price": 20,
+   "span": "किराया 30 रुपये निर्धारित किया गया था। अब किराये में वृद्धि कर न्यूनतम किराया 20",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "bab67a1da80f",
+     "credits": 1,
+     "response_time": 1.1,
+     "request_id": "1c969d60-7ad2-451a-9d78-8d46170020fd",
+     "response_sha256": "5c1d6f78ca994eaa6320d7655c610e7c2f98296bee76f40fc11bb64df43c81e3",
+     "results": []
+    },
+    "undated": {
+     "call": "4bb8b7042e79",
+     "credits": 1,
+     "response_time": 2.75,
+     "request_id": "5b4ced5e-9089-4d18-9c2a-8c90fc047beb",
+     "response_sha256": "0fc2f2a0c870ba8a3d5c2a4102dc9b5a1f7d0766025e2ce8ec426c1b02c2f19b",
+     "results": []
+    }
+   },
+   "outcome": "not found either way"
+  },
+  {
+   "id": "Q034",
+   "source": "arm Td",
+   "month": "2026-06",
+   "cutoff": "2026-06-29",
+   "url": "https://www.livehindustan.com/business/lpg-price-today-no-change-in-gas-cylinder-rates-check-lates-updates-here-201780717791073.html",
+   "page_sha256": "3ab587d1aab6f92efdd984de52df96ad6232f185a448e8e7cd29caaf10d1c346",
+   "price": 54,
+   "span": "तब एलपीजी सिलेंडर का रेट 42 रुपये से 54 रुपये तक बढ़ा दिया गया था।",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "15664d636310",
+     "credits": 1,
+     "response_time": 1.96,
+     "request_id": "2df698fb-d292-4ade-9820-004860b2e0da",
+     "response_sha256": "8e869166d60ccad01f4e235c9f7b5ba45f0762d8df93947bdf5ae53a1eeff9a5",
+     "results": [
+      {
+       "url": "https://www.msn.com/hi-in/money/topstories/lpg-price-today-%E0%A4%98%E0%A4%B0%E0%A5%87%E0%A4%B2%E0%A5%82-%E0%A4%8F%E0%A4%B2%E0%A4%AA-%E0%A4%9C-%E0%A4%B8-%E0%A4%B2%E0%A5%87%E0%A4%82%E0%A4%A1%E0%A4%B0-%E0%A4%95-%E0%A4%A8%E0%A4%AF-%E0%A4%B0%E0%A5%87%E0%A4%9F-%E0%A4%9C-%E0%A4%B0-%E0%A4%95%E0%A5%8D%E0%A4%AF-%E0%A4%95-%E0%A4%AE%E0%A4%A4-%E0%A4%82-%E0%A4%AE%E0%A5%87%E0%A4%82-%E0%A4%B9%E0%A5%81%E0%A4%88-%E0%A4%95-%E0%A4%88-%E0%A4%AC%E0%A4%A2%E0%A4%BC-%E0%A4%A4%E0%A4%B0-%E0%A4%AF-%E0%A4%98%E0%A4%9F-%E0%A4%97%E0%A4%8F-%E0%A4%A6-%E0%A4%AE-%E0%A4%95%E0%A4%B0%E0%A5%87%E0%A4%82-%E0%A4%9A%E0%A5%87%E0%A4%95/ar-AA24Yibv?ocid=finance-verthp-feeds&apiversion=v2&domshim=1&noservercache=1&noservertelemetry=1&batchservertelemetry=1&renderwebcomponents=1&wcseo=1",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://www.livehindustan.com/business/lpg-price-today-no-change-in-gas-cylinder-rates-check-lates-updates-here-201780717791073.html",
+       "published_date": "Sat, 06 Jun 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "dated": {
+     "call": "8dc89f443610",
+     "credits": 1,
+     "response_time": 2.31,
+     "request_id": "f97163ab-c1bf-47eb-8f42-6434c2902472",
+     "response_sha256": "41a74f70d00634ede5fd86af813edb28d55352b636cdf7e7f117c1e9d5a787eb",
+     "results": [
+      {
+       "url": "https://www.livehindustan.com/business/lpg-price-today-no-change-in-gas-cylinder-rates-check-lates-updates-here-201780717791073.html",
+       "published_date": "Sat, 06 Jun 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q035",
+   "source": "arm Td",
+   "month": "2026-06",
+   "cutoff": "2026-06-29",
+   "url": "https://ndtv.in/business-news/lpg-prices-hike-19-kg-commercial-gas-cylinder-prices-hiked-5-kg-ftl-cylinder-is-costlier-now-know-14-point-2-kg-domestic-lpg-cylinder-prices-11573204",
+   "page_sha256": "c73bb4cf0185ea0d03232cd056c5720b6f81be600b0fccf07c60c2e58ef4f277",
+   "price": 821.5,
+   "span": "दिल्‍ली में अब 5 किलो वाले छोटू गैस सिलेंडर की कीमत 821.50 रुपये हो गई",
+   "anchor": "number",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "e2563d4d4b9c",
+     "credits": 1,
+     "response_time": 1.62,
+     "request_id": "d2b002c5-6a03-4278-bd6a-101da725e414",
+     "response_sha256": "81bde2f199d2e8546809188ec6f7316b9e5e6c6c8266d2c9ef40cb7f047092ca",
+     "results": [
+      {
+       "url": "https://ndtv.in/utility-news/new-rule-changes-from-june-1-2026-live-lpg-upi-railways-income-tax-pan-updates-you-must-know-11573468",
+       "published_date": "Mon, 01 Jun 2026 00:00:00 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://ndtv.in/business-news/lpg-prices-hike-19-kg-commercial-gas-cylinder-prices-hiked-5-kg-ftl-cylinder-is-costlier-now-know-14-point-2-kg-domestic-lpg-cylinder-prices-11573204",
+       "published_date": "Mon, 01 Jun 2026 00:29:19 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "undated": {
+     "call": "d8ca0c224656",
+     "credits": 1,
+     "response_time": 3.01,
+     "request_id": "1d927fa9-b8d8-420d-9850-9bb0d27cbeae",
+     "response_sha256": "3e8f7da578b06c8716c462ec5cd81ee199ccfa0411d84ce7adda0b61e5b28cc6",
+     "results": []
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q036",
+   "source": "arm H",
+   "month": "2026-07",
+   "cutoff": "2026-07-29",
+   "url": "https://timesofindia.indiatimes.com/city/bengaluru/kmf-hikes-prices-of-nandini-ghee-butter/articleshow/132587315.cms",
+   "page_sha256": "58461b2c36d19717bbf6e1f139c2574d69be88b3f471eb9862f5e09d3f33dba7",
+   "price": 715,
+   "span": "24 (Friday).Under the revised prices, a one-litre pouch of Nandini ghee will cost Rs 715,",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "29bd8ab9621f",
+     "credits": 1,
+     "response_time": 1.28,
+     "request_id": "d54d21ce-85c4-4104-973d-1e1ee1ace05c",
+     "response_sha256": "9e6b822f53601e0c7f887fec0dfa05488fa7c57a8c292054dc5da761d1b9b1a5",
+     "results": [
+      {
+       "url": "https://retail.economictimes.indiatimes.com/news/food-entertainment/grocery/nandini-butter-and-ghee-prices-hiked/132595014",
+       "published_date": "Fri, 24 Jul 2026 02:38:25 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://m.economictimes.com/industry/cons-products/food/nandini-butter-and-ghee-prices-hiked/articleshow/132588341.cms",
+       "published_date": "Thu, 23 Jul 2026 00:00:00 GMT",
+       "source_page": false
+      }
+     ]
+    },
+    "undated": {
+     "call": "1e86eabf90db",
+     "credits": 1,
+     "response_time": 1.66,
+     "request_id": "4c5f7bc6-2fb4-45d2-883f-37d172d1c2c7",
+     "response_sha256": "d0544490771111395c7603fa3f12b52abe1f43733cbba2fe5e28a426c329f0ca",
+     "results": []
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "another page only"
+  },
+  {
+   "id": "Q038",
+   "source": "arm Td",
+   "month": "2026-07",
+   "cutoff": "2026-07-29",
+   "url": "https://vietnamnews.vn/economy/1785616/fuel-prices-increase-in-latest-adjustment.html",
+   "page_sha256": "5530b0e80a5ae23d8a2352f0948f869c8abd3788c7614a08afaf2f8c5bc9d3b1",
+   "price": 20550,
+   "span": "to a maximum of VNĐ19,826 (US$0.76) per litre, while E10RON95-III went up VNĐ547 to VNĐ20,550",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "8a50c9d49f79",
+     "credits": 1,
+     "response_time": 0.8,
+     "request_id": "b636e118-ae3e-464c-a3f3-299471d2a73f",
+     "response_sha256": "1f2d1e663247a60bfa89eaa83a51c9f680af48b87f8a39efbf9a7dea2b2aa0eb",
+     "results": [
+      {
+       "url": "https://vietnamnews.vn/economy/1785626/us-highlights-potential-in-viet-nam-s-fruit-market.html",
+       "published_date": "Thu, 16 Jul 2026 00:00:00 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://vietnamnews.vn/economy/1785616/fuel-prices-increase-in-latest-adjustment.html",
+       "published_date": "Thu, 16 Jul 2026 00:00:00 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "undated": {
+     "call": "9439f9158e24",
+     "credits": 1,
+     "response_time": 3.01,
+     "request_id": "202a5f9d-53c3-4e7c-9327-5a56593391bb",
+     "response_sha256": "28b6eee489ddd770f6b45777732759cf004a23db76ffb06d5778df0d71c4b909",
+     "results": []
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q039",
+   "source": "v2 scored evidence",
+   "month": "2026-07",
+   "cutoff": "2026-07-29",
+   "url": "https://www.ndtv.com/india-news/maharashtra-state-transport-bus-fares-to-be-hiked-by-13-5-from-tomorrow-11785653",
+   "page_sha256": "6e20ae54a0463188a44693b09b3320f3c8821614811be909fe02b5c5560d6c1b",
+   "price": 13.56,
+   "span": "The State Transport Authority (STA) has approved a 13.56 per cent fare hike for the",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "c878b8242032",
+     "credits": 1,
+     "response_time": 0.83,
+     "request_id": "12a50cfa-a4d6-4130-bf95-fa14d5e1cf36",
+     "response_sha256": "102ecbb99d459bd269bb2320cdc2bc06ff33aafe025db254cdd39dfd5492b442",
+     "results": [
+      {
+       "url": "https://www.ndtv.com/india-news/maharashtra-state-transport-bus-fares-to-be-hiked-by-13-5-from-tomorrow-11785653",
+       "published_date": "Fri, 17 Jul 2026 15:25:03 GMT",
+       "source_page": true
+      },
+      {
+       "url": "https://www.ptinews.com/detail/business/ST-bus-fares-hiked-by-13-5-per-cent-in-Maharashtra/3871239",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://www.ptinews.com/detail/national/ST-bus-fares-hiked-by-13-5-per-cent-in-Maharashtra/3871056",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://www.freepressjournal.in/mumbai/maharashtra-approves-1356-msrtc-bus-fare-hike-effective-july-18",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://theprint.in/india/st-bus-fares-hiked-by-13-5-per-cent-in-maharashtra/2989476",
+       "published_date": null,
+       "source_page": false
+      }
+     ]
+    },
+    "dated": {
+     "call": "341ca6a1160c",
+     "credits": 1,
+     "response_time": 3.15,
+     "request_id": "84890401-86d9-418b-b476-a3bc17dc5794",
+     "response_sha256": "51d510656f81489fa1c88b626e92a77e9958d0a6653dc4bcc8bfc20baa9599ab",
+     "results": [
+      {
+       "url": "https://www.ndtv.com/india-news/maharashtra-state-transport-bus-fares-to-be-hiked-by-13-5-from-tomorrow-11785653",
+       "published_date": "Fri, 17 Jul 2026 15:25:03 GMT",
+       "source_page": true
+      },
+      {
+       "url": "https://www.latestly.com/india/news/msrtc-announces-13-56-fare-hike-effective-july-17-as-rising-diesel-costs-hit-operations-7521045.html",
+       "published_date": "Fri, 17 Jul 2026 00:00:00 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://trak.in/stories/maharashtra-state-bus-increases-fare-by-13-56-across-the-state",
+       "published_date": "Mon, 20 Jul 2026 00:00:00 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://theprint.in/india/st-bus-fares-hiked-by-13-5-per-cent-in-maharashtra/2989476",
+       "published_date": "Fri, 17 Jul 2026 00:00:00 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://www.deccanherald.com/india/maharashtra/st-bus-fares-hiked-by-135-in-maharashtra-4077777",
+       "published_date": "Fri, 17 Jul 2026 00:00:00 GMT",
+       "source_page": false
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q040",
+   "source": "v2 scored evidence",
+   "month": "2026-07",
+   "cutoff": "2026-07-29",
+   "url": "https://www.livemint.com/news/india/msrtc-ticket-prices-up-maharashtra-clears-bus-fare-hike-from-18-july-here-is-how-much-more-you-will-pay-11784303743567.html",
+   "page_sha256": "742b8640b0cb990ee42cb3ac817077ef2517c4227e2283eb9cf368bbf9b3dc99",
+   "price": 13.56,
+   "span": "The State Transport Authority (STA) has cleared a 13.56% increase in fares for buses operated",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "58f4975565bb",
+     "credits": 1,
+     "response_time": 3.01,
+     "request_id": "03487518-39af-40ce-8b09-e01b1c849aee",
+     "response_sha256": "f7679c622b8e8ccf66787188d43724f3cbc9af3f93b375049d10f92b69f05bf0",
+     "results": []
+    },
+    "dated": {
+     "call": "38c2d353645a",
+     "credits": 1,
+     "response_time": 1.92,
+     "request_id": "644a0be8-b3e9-4b17-a1af-53f4c909ebff",
+     "response_sha256": "61caa821d8acfe7ad4d6ec3181e06b031e23781f490e868273604af6249f473e",
+     "results": [
+      {
+       "url": "https://www.livemint.com/news/india/msrtc-ticket-prices-up-maharashtra-clears-bus-fare-hike-from-18-july-here-is-how-much-more-you-will-pay-11784303743567.html",
+       "published_date": "Fri, 17 Jul 2026 16:52:53 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q041",
+   "source": "v2 scored evidence",
+   "month": "2026-07",
+   "cutoff": "2026-07-29",
+   "url": "https://www.aajtak.in/business/utility/story/lpg-price-cut-petrol-diesel-cheaper-atf-rate-these-four-good-news-on-1st-july-tutc-dskc-2591452-2026-07-01",
+   "page_sha256": "bcc3454dfaf868374c5cdbe79b27486dda505a9c0f5d917afd0767163a620af9",
+   "price": 808.5,
+   "span": "के बीच बीते जून महीने की शुरुआत में एफटीएल सिलेंडर की कीमत में भी 11",
+   "anchor": "number",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "825403f9b9dd",
+     "credits": 1,
+     "response_time": 1.19,
+     "request_id": "b825d4a7-b37d-49ff-aa31-2c3c9961bfa1",
+     "response_sha256": "f777dbfda77c584ef91c36a62e7910cdb4f45a0f82c8ef9950cfd30cfc10c44a",
+     "results": [
+      {
+       "url": "https://www.msn.com/hi-in/money/topstories/lpg-%E0%A4%AA%E0%A5%87%E0%A4%9F%E0%A5%8D%E0%A4%B0-%E0%A4%B2-%E0%A4%A1-%E0%A4%9C%E0%A4%B2-%E0%A4%B8%E0%A5%87-atf-%E0%A4%A4%E0%A4%95-%E0%A4%86%E0%A4%9C-%E0%A4%B8%E0%A5%81%E0%A4%AC%E0%A4%B9-%E0%A4%B8%E0%A5%81%E0%A4%AC%E0%A4%B9-%E0%A4%86%E0%A4%88%E0%A4%82-%E0%A4%AF%E0%A5%87-4-%E0%A4%96%E0%A5%81%E0%A4%B6%E0%A4%96%E0%A4%AC%E0%A4%B0-%E0%A4%86%E0%A4%AA%E0%A4%95-%E0%A4%9C%E0%A5%87%E0%A4%AC-%E0%A4%AA%E0%A4%B0-%E0%A4%B9-%E0%A4%97-%E0%A4%85%E0%A4%B8%E0%A4%B0/ar-AA26WDOZ",
+       "published_date": "Wed, 01 Jul 2026 00:00:00 GMT",
+       "source_page": false
+      },
+      {
+       "url": "https://www.aajtak.in/business/utility/story/lpg-price-cut-petrol-diesel-cheaper-atf-rate-these-four-good-news-on-1st-july-tutc-dskc-2591452-2026-07-01",
+       "published_date": "Wed, 01 Jul 2026 05:32:46 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "dated": {
+     "call": "87c7b13706cf",
+     "credits": 1,
+     "response_time": 3.01,
+     "request_id": "ce4b6e94-f4c1-475d-b46b-3454c4b2ef9a",
+     "response_sha256": "198f52d5423e34892e0c8394f8ec7ba0cdb8fc2b2639c5eeda7f43e69d88bcaa",
+     "results": []
+    }
+   },
+   "outcome": "found only without dates"
+  },
+  {
+   "id": "Q042",
+   "source": "v2 scored evidence",
+   "month": "2026-07",
+   "cutoff": "2026-07-29",
+   "url": "https://indianexpress.com/article/cities/mumbai/msrtc-hikes-bus-fares-temporary-seasonal-surcharge-10791673",
+   "page_sha256": "ca39be4ee069942c60430ea6a0422eaf604e4385399585602ed15add1ce0173d",
+   "price": 13.65,
+   "span": "The Maharashtra State Road Transport Corporation (MSRTC) has increased bus fares by 13.65 per cent",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "48c8609af90f",
+     "credits": 1,
+     "response_time": 1.0,
+     "request_id": "3b0890ed-f8d9-42df-8608-0eca0696f045",
+     "response_sha256": "f25772c7c00442f7320c26c8c67cfdf37c1766429139bd07e6e486ce603cc4e8",
+     "results": [
+      {
+       "url": "https://indianexpress.com/article/cities/mumbai/msrtc-hikes-bus-fares-temporary-seasonal-surcharge-10791673",
+       "published_date": "Fri, 17 Jul 2026 16:19:38 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "dated": {
+     "call": "663e2b63f2dc",
+     "credits": 1,
+     "response_time": 1.63,
+     "request_id": "94cb7d10-10c6-4696-830a-7f7664b3f49d",
+     "response_sha256": "61f78273c0a394cbf2ae73db299cc8fae69df129b4cbeac8b465695a9c16f8ed",
+     "results": [
+      {
+       "url": "https://indianexpress.com/article/cities/mumbai/msrtc-hikes-bus-fares-temporary-seasonal-surcharge-10791673",
+       "published_date": "Fri, 17 Jul 2026 16:19:38 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q044",
+   "source": "v2 scored evidence",
+   "month": "2026-08",
+   "cutoff": "2026-08-29",
+   "url": "https://www.ndtv.com/world-news/pakistan-hikes-petrol-high-speed-diesel-prices-amid-rising-us-iran-tensions-11907859",
+   "page_sha256": "5e41e8d8a18602adcccc0587504420b2a38fa9d40be2d89e0b10ee76cca78371",
+   "price": 325.43,
+   "span": "Pakistan has hiked petrol prices by Rs 0.45 to Rs 325.43/litre and diesel by Rs",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "56e506f0392d",
+     "credits": 1,
+     "response_time": 0.78,
+     "request_id": "a7c89033-85f2-4435-9cdc-f7a05687f954",
+     "response_sha256": "36a6023128b34768c97e19540301c90c2d1a1edd2b93b3d2bb538c09225e6997",
+     "results": [
+      {
+       "url": "https://www.ndtv.com/world-news/pakistan-hikes-petrol-high-speed-diesel-prices-amid-rising-us-iran-tensions-11907859",
+       "published_date": "Fri, 14 Aug 2026 03:33:46 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "undated": {
+     "call": "089b540958ca",
+     "credits": 1,
+     "response_time": 1.72,
+     "request_id": "20d3f730-40fc-4e07-a10d-fcf9aa9e552f",
+     "response_sha256": "093c48f58a1d31b97f80f668c9832f68f54cb4dc1845755c847f7d71447fb535",
+     "results": [
+      {
+       "url": "https://www.ndtv.com/world-news/pakistan-hikes-petrol-high-speed-diesel-prices-amid-rising-us-iran-tensions-11907859",
+       "published_date": "Fri, 14 Aug 2026 03:33:46 GMT",
+       "source_page": true
+      },
+      {
+       "url": "https://www.justdial.com/JdSocial/news/Top-generic/Pakistan-Hikes-Petrol-High-Speed-Diesel-Prices-Amid-Rising-US-Iran-Tensions/1786679231031512",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://www.ndtv.com/topic/fuel-price-hike",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://www.ndtv.com/topic/fuel-price-hikes",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://ground.news/article/govt-announces-45-paisas-increase-in-petrol-rs116-in-hsd-price-for-august-14",
+       "published_date": null,
+       "source_page": false
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q045",
+   "source": "v2 scored evidence",
+   "month": "2026-08",
+   "cutoff": "2026-08-29",
+   "url": "https://www.jagran.com/maharashtra/mumbai-maharashtra-milk-price-hike-milk-to-cost-2-more-from-august-11-see-new-rate-list-40334543.html",
+   "page_sha256": "fb94db70368600a24bd183f2825040ef9f333c445ab2d76915b496291f31fd17",
+   "price": 10,
+   "span": "की कीमत में 2 रुपये प्रति लीटर और दही-पनीर जैसे डेयरी प्रोडक्ट्स के दाम 10",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "d87ee81c0ebe",
+     "credits": 1,
+     "response_time": 1.55,
+     "request_id": "fe2d91ec-26df-4faa-aced-3b09f91f323f",
+     "response_sha256": "7a6260a1860f4367f84961c2f6e9ef52889e83f54c638d1759f81049d4d57d5a",
+     "results": []
+    },
+    "undated": {
+     "call": "5a8b81faf41a",
+     "credits": 1,
+     "response_time": 3.06,
+     "request_id": "0cdf2199-a033-473d-877c-f0dd9139675b",
+     "response_sha256": "edcd39eeb81aa43fa9c6202ef0921f8ec507a2c0c755698abbc2274b3e78b57e",
+     "results": [
+      {
+       "url": "https://www.jagran.com/maharashtra/mumbai-maharashtra-milk-price-hike-milk-to-cost-2-more-from-august-11-see-new-rate-list-40334543.html",
+       "published_date": "Sun, 09 Aug 2026 00:00:00 GMT",
+       "source_page": true
+      },
+      {
+       "url": "https://hindi.banganews.net/maharashtra-milk-price-hike-2-rupees-per-litre",
+       "published_date": null,
+       "source_page": false
+      }
+     ]
+    }
+   },
+   "outcome": "found only without dates"
+  },
+  {
+   "id": "Q046",
+   "source": "v2 scored evidence",
+   "month": "2026-08",
+   "cutoff": "2026-08-29",
+   "url": "https://www.jagran.com/maharashtra/mumbai-maharashtra-milk-price-hike-milk-to-cost-2-more-from-august-11-see-new-rate-list-40334543.html",
+   "page_sha256": "fb94db70368600a24bd183f2825040ef9f333c445ab2d76915b496291f31fd17",
+   "price": 62,
+   "span": "को मिलेगा। ऐसे में महाराष्ट्र में गाय के दूध की कीमत 60 से बढ़कर 62",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "5d16ea17a575",
+     "credits": 1,
+     "response_time": 1.48,
+     "request_id": "893e57c9-66b3-490b-b508-752b1be39c8e",
+     "response_sha256": "1a6916bffe421ef579ad8c847ffc60c6d2bf7e8066e5612846abee40e22b1bd6",
+     "results": []
+    },
+    "dated": {
+     "call": "7634078d7223",
+     "credits": 1,
+     "response_time": 3.01,
+     "request_id": "6f69b708-3234-4f80-a7c8-0fc5c3962e6d",
+     "response_sha256": "929a07a1c0b1a540f0c6a5755d457ee414dc3f1721c0d11123ce03a8d723da01",
+     "results": []
+    }
+   },
+   "outcome": "not found either way"
+  },
+  {
+   "id": "Q047",
+   "source": "arm B",
+   "month": "2026-09",
+   "cutoff": "2026-09-29",
+   "url": "https://www.jansatta.com/national/milk-price-hiked-by-rs-9-shock-for-mumbaikars-lpg-cylinder-prices-rise-across-india-adding-to-inflation-burden/4684122",
+   "page_sha256": "b2bc34e1504f5c48e04ceee7bfacffb135a83aca0e65959eff1a6db143517bab",
+   "price": 121.28,
+   "span": "के लिए एविएशन टर्बाइन फ्यूल यानी ATF की कीमत 6.28 रुपये प्रति लीटर बढ़कर 121.28",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "82d841450cfa",
+     "credits": 1,
+     "response_time": 1.18,
+     "request_id": "a008fbe3-fe6d-4e45-80b2-cb36d093fbd7",
+     "response_sha256": "d0af02290be9d25ad2ff0f383f486c7642b9c89c62b889fb58365a782d72facf",
+     "results": [
+      {
+       "url": "https://www.jansatta.com/national/milk-price-hiked-by-rs-9-shock-for-mumbaikars-lpg-cylinder-prices-rise-across-india-adding-to-inflation-burden/4684122",
+       "published_date": "Tue, 01 Sep 2026 03:41:05 GMT",
+       "source_page": true
+      }
+     ]
+    },
+    "undated": {
+     "call": "6fdaf2f38519",
+     "credits": 1,
+     "response_time": 1.72,
+     "request_id": "c052c08b-47a0-4a20-b247-7b80f8a345c3",
+     "response_sha256": "05e24fd739d3ff3a8b0fca4780c512c9a682c1cebd61894942fb2c2e97503fe1",
+     "results": [
+      {
+       "url": "https://www.jansatta.com/national/milk-price-hiked-by-rs-9-shock-for-mumbaikars-lpg-cylinder-prices-rise-across-india-adding-to-inflation-burden/4684122",
+       "published_date": "Tue, 01 Sep 2026 03:41:05 GMT",
+       "source_page": true
+      }
+     ]
+    }
+   },
+   "outcome": "found before cutoff",
+   "found_by": "the source page"
+  },
+  {
+   "id": "Q048",
+   "source": "arm C",
+   "month": "2026-09",
+   "cutoff": "2026-09-29",
+   "url": "https://ndtv.in/business-news/lpg-price-hike-9-rupees-50-paise-1-september-2026-lpg-gas-cylinder-price-check-rates-in-delhi-mumbai-chennai-kolkata-and-other-cities-11984381",
+   "page_sha256": "fac6af09abb7991e9683453e9fd4804cfdf84e174dcfa4dde2569f5e448425d8",
+   "price": 2982,
+   "span": "कोलकाता में 19 किलो वाले गैस सिलेंडर के दाम 2872.50 रुपये से बढ़कर 2,982 रुपये",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "undated",
+    "dated"
+   ],
+   "searches": {
+    "undated": {
+     "call": "15d27755132f",
+     "credits": 1,
+     "response_time": 1.44,
+     "request_id": "bcfe07a3-fbe7-4d9f-aacd-0354cd579ed7",
+     "response_sha256": "f316f58ab13bba1fc6c9f50226a03b474a8a9e75254b0af2e5720d5c8ef00c3d",
+     "results": [
+      {
+       "url": "https://www.livemint.com/hindi/business/lpg-price-hike-commercial-gas-cylinder-form-1-september-check-new-rates-241788230776832.html",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://www.instagram.com/p/DcuqVu-ic49",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://ndtv.in/business-news/lpg-price-hike-9-rupees-50-paise-1-september-2026-lpg-gas-cylinder-price-check-rates-in-delhi-mumbai-chennai-kolkata-and-other-cities-11984381",
+       "published_date": null,
+       "source_page": true
+      },
+      {
+       "url": "https://udaipurtimes.com/hindi/lpg-price-hike-big-blow-to-lpg-consumers-cylinders-become/cid19192342.htm",
+       "published_date": null,
+       "source_page": false
+      },
+      {
+       "url": "https://www.facebook.com/spnewsofficial112journalism/videos/%E0%A4%B8%E0%A4%BF%E0%A4%A4%E0%A4%82%E0%A4%AC%E0%A4%B0-%E0%A4%95%E0%A5%80-%E0%A4%B6%E0%A5%81%E0%A4%B0%E0%A5%81%E0%A4%86%E0%A4%A4-%E0%A4%AE%E0%A5%87%E0%A4%82-%E0%A4%AE%E0%A4%B9%E0%A4%82%E0%A4%97%E0%A4%BE%E0%A4%88-%E0%A4%95%E0%A4%BE-%E0%A4%9D%E0%A4%9F%E0%A4%95%E0%A4%BE-%E0%A4%95%E0%A4%AE%E0%A4%B0%E0%A5%8D%E0%A4%B6%E0%A4%BF%E0%A4%AF%E0%A4%B2-%E0%A4%97%E0%A5%88%E0%A4%B8-%E0%A4%B8%E0%A4%BF%E0%A4%B2%E0%A5%87%E0%A4%82%E0%A4%A1%E0%A4%B0-950-%E0%A4%AE%E0%A4%B9%E0%A4%82%E0%A4%97%E0%A4%BE1-%E0%A4%B8%E0%A4%BF%E0%A4%A4%E0%A4%82%E0%A4%AC%E0%A4%B0-%E0%A4%B8%E0%A5%87-%E0%A4%95%E0%A4%AE/1426807542683936",
+       "published_date": null,
+       "source_page": false
+      }
+     ]
+    },
+    "dated": {
+     "call": "b72a7a6ed174",
+     "credits": 1,
+     "response_time": 3.01,
+     "request_id": "a553cd7b-a950-4674-afec-5925d947721c",
+     "response_sha256": "404802e88f093b3172835cae19573b1510003df159c75cb24256f44af7c3a8bf",
+     "results": []
+    }
+   },
+   "outcome": "found only without dates"
+  },
+  {
+   "id": "Q052",
+   "source": "arm H",
+   "month": "2026-09",
+   "cutoff": "2026-09-29",
+   "url": "https://www.deccanchronicle.com/nation/omar-abdullah-defends-power-tariff-hike-amid-rising-political-tempers-in-jk-1981879",
+   "page_sha256": "9e61a9fffc4cd147ec49f496310a28217ae61abd767e75b726001330cf8f7242",
+   "price": 6.83,
+   "span": "by the Joint Electricity Regulatory Commission (JERC) for J&K and Ladakh, introduces an average 6.83",
+   "anchor": "price",
+   "words": 15,
+   "order": [
+    "dated",
+    "undated"
+   ],
+   "searches": {
+    "dated": {
+     "call": "a85b838bf33a",
+     "credits": 1,
+     "response_time": 1.31,
+     "request_id": "6e8f42de-1ad4-40f2-946f-026eddb59cb8",
+     "response_sha256": "bab262d8e321b055f141c04e8724c00eca9d7db6a050ad614f9c4e48fda9e2e0",
+     "results": []
+    },
+    "undated": {
+     "call": "59281b6c5ff6",
+     "credits": 1,
+     "response_time": 3.67,
+     "request_id": "b4495bbe-d250-460e-98ff-77fa4f3ed2bf",
+     "response_sha256": "a1c262feec36c7a2f69f8625040aefd7a92fe648343cf68c1b6d3332da8fdd69",
+     "results": []
+    }
+   },
+   "outcome": "not found either way"
+  }
+ ],
+ "skipped": [],
+ "built_utc": "2026-10-26T11:53:07.338088+00:00",
+ "metrics": {
+  "quotes": 40,
+  "run": 40,
+  "not_run": 0,
+  "shares": {
+   "found before cutoff": {
+    "x": 25,
+    "wilson95": [
+     0.4703243901750228,
+     0.7577702092103612
+    ]
+   },
+   "found only without dates": {
+    "x": 8,
+    "wilson95": [
+     0.1049998967188637,
+     0.3475730647562145
+    ]
+   },
+   "not found either way": {
+    "x": 7,
+    "wilson95": [
+     0.08745413698495559,
+     0.3194999046130458
+    ]
+   }
+  },
+  "found_by": {
+   "the source page": 23,
+   "another page only": 2
+  },
+  "undated_finds_source": 25,
+  "credits": 80,
+  "credits_per_quote": 2.0,
+  "incomplete": false
+ }
+}
