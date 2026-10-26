@@ -24,8 +24,8 @@ The Tavily field report (app page "Tavily field report", built by `tools/build_f
 - **Date test (pilot, 20 replay cases, pre-registered in [`v2/DATE_TEST_PREREG.md`](v2/DATE_TEST_PREREG.md)).**
   With no dates, 9 of 20 cases leaked a page that did not yet exist at the cutoff
   (10 of 20 after a logged retry of the 11 archive lookups that had failed).
-  With `start_date`/`end_date` plus `filter_by_published_date`: 0 of 20, before and after the
-  retry. A leak counts only when the Wayback Machine confirms it.
+  With `start_date`/`end_date` plus `filter_by_published_date`: 0 of 20
+  (0 of 20 after the retry). A leak counts only when the Wayback Machine confirms it.
 - **Finance check (exploratory, 14 RBI decisions and company results, [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md)).**
   The day-before search with no dates leaked the outcome for 2 of 14 events
   (10 of 14 after the logged archive retry); with dates and the filter,
@@ -187,7 +187,7 @@ Written as bug reports in [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports
   cost (above).
 - **Research has no date window.** The Research endpoint takes no `start_date`/`end_date`, so it stays out of
   time-locked work (from the API reference; not measured).
-- **Map returned nothing on Indian government sites,** silently: 5 of 5 sites
+- **Map returned nothing on Indian official sites,** silently: 5 of 5 sites
   on our official crawl list (state electricity regulators, IOCL, Amul) and 3 of 7 dairy sites, with no error or `failed_results`.
 - **Scanned PDFs extract only the letterhead.** A dairy's rate-list PDF came back as its letterhead; the rates are an
   image.

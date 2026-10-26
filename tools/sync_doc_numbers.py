@@ -109,6 +109,10 @@ def seal_date(root=ROOT):
 
 
 def earliest_commit(root=ROOT):
+    shallow = subprocess.run(["git", "rev-parse", "--is-shallow-repository"], cwd=root, capture_output=True,
+                             text=True, check=True).stdout.strip()
+    if shallow == "true":
+        raise SystemExit("shallow clone: the earliest commit is not visible; run `git fetch --unshallow` first")
     out = subprocess.run(["git", "log", "--reverse", "--format=%ad", "--date=short"], cwd=root,
                          capture_output=True, text=True, check=True).stdout.split()
     return date.fromisoformat(out[0])
@@ -170,11 +174,12 @@ def facts(st, as_of, root=ROOT):
              arm_h_diff_language=h["fields_valid"]["differs_from_a"]["language"],
              arm_td_recall=td["recall_all"], arm_td_complete=len(td["complete_months"]),
              arm_td_months=len(td["months_run"]))
-    sf = [load("results/v2_ablation.json", root)["arms"][a]["diagnostics"]["structured_fields"] for a in "BC"]
+    abl = load("results/v2_ablation.json", root)
+    sf = [abl["arms"][a]["diagnostics"]["structured_fields"] for a in "BC"]
     f["bc_fields_valid"] = sum(min(s["with_dates_as_fields"], s["with_topic_field"], s["with_domains_as_fields"])
                                for s in sf if not s["parameter_names_inside_query_text"])
     f["bc_fields"] = sum(s["searches_checked"] for s in sf)
-    f["arm_c_langs"] = len(load("results/v2_ablation.json", root)["arms"]["C"]["languages"])
+    f["arm_c_langs"] = len(abl["arms"]["C"]["languages"])
     f["wilson"] = "95%" if "wilson95" in fr["leakage"]["rows"][0] else None    # the interval the report computes
     ap = fr["auto_parameters"]
     f.update(auto_searches=ap["no_dates"]["searches"], auto_results=ap["no_dates"]["results"],
@@ -214,7 +219,8 @@ def facts(st, as_of, root=ROOT):
 
     # flight recorder: Nemotron on Token Factory
     sent, total = nemotron_calls(root)
-    nano, sup = "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B", "nvidia/nemotron-3-super-120b-a12b"
+    roles = load("config/models.json", root)
+    nano, sup = roles["small"], roles["mid"]
     f.update(nano_sent=f"{sent[nano]:,}", nano_total=f"{total[nano]:,}", super_sent=f"{sent[sup]:,}",
              super_total=f"{total[sup]:,}")
 
@@ -226,8 +232,8 @@ def facts(st, as_of, root=ROOT):
     f.update(seal_day=day_month(seal), release_day=day_month(rel), release_lag=(rel - month_end).days,
              live_month=f"{seal:%B %Y}", earliest_commit=human(earliest_commit(root)))
     tag = f"seal-{month}"
-    tagged = subprocess.run(["git", "tag", "-l", tag], cwd=root, capture_output=True, text=True).stdout.strip()
-    f["seal_status"] = (f"Sealed on {day_month(seal)} (tag `{tag}`)" if tagged
+    sealed = (root / "sealed" / f"{month}.sha256").exists()       # committed by seal_month.py, unlike a local tag
+    f["seal_status"] = (f"Sealed on {day_month(seal)} (tag `{tag}`)" if sealed
                         else f"To be sealed on {day_month(seal)} (tag `{tag}`); not sealed as of {human(as_of)}")
     # the submission period's start, from the hackathon checklist in v2/PRD.md
     m = re.search(r"If any part existed before (\d+ \w{3}),", (root / "v2/PRD.md").read_text(encoding="utf-8"))
