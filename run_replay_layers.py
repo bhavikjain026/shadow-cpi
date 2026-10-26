@@ -71,10 +71,9 @@ def cached_lpg_petrol(cache_dir=None, log_file=None):
     petrol = ppac_petrol(cached_page("ppac.gov.in", "observed:petrol extract", **kw))
     iocl_at = ""
     for e in read_log(log_file) if log_file else read_log():
-        p = cache_dir / "tavily" / f"{e['cache_key']}.json" if e.get("cache_key") else None
-        if (e["endpoint"] == "/extract" and "iocl.com/indane-14Kg" in json.dumps(e.get("params")) and not e["cached"]
-                and p and p.exists()):
-            iocl_at = json.loads(p.read_text())["retrieved_at"]
+        if e["endpoint"] == "/extract" and "iocl.com/indane-14Kg" in json.dumps(e.get("params")) and not e["cached"]:
+            p = cache_dir / "tavily" / f"{e['cache_key']}.json"      # the first fetch only; missing = unknown date
+            iocl_at = json.loads(p.read_text())["retrieved_at"] if p.exists() else ""
             break
     return lpg_rev, petrol, iocl_at
 

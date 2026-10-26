@@ -100,8 +100,10 @@ def replay(month="2026-09", cache=None):
         try:
             out, _ = B.run(month, cache_only=True, rec=rec, keys=(PLACEHOLDER, PLACEHOLDER), out_dir=tmp,
                            ledger=scratch)
-        except (CacheMiss, FileNotFoundError) as e:
+        except CacheMiss as e:
             out, res["error"] = None, str(e)
+        except FileNotFoundError as e:
+            out, res["error"] = None, f"a saved file is missing: {e.filename}"
         res["ledger_rows_not_in_committed_ledger"] = len(LG.read(scratch)) - n_before
         log = [json.loads(line) for line in rec.log_file.read_text(encoding="utf-8").splitlines()] \
             if rec.log_file.exists() else []
@@ -125,6 +127,9 @@ def main():
     else:
         print(f"  needle {r['needle']:.6f}% vs committed {r['committed_needle']:.6f}%; verified quotes "
               f"{r['verified_quotes']}; differences: {', '.join(r['differences']) or 'none'}")
+        if r["ledger_rows_not_in_committed_ledger"]:
+            print(f"  note: {r['ledger_rows_not_in_committed_ledger']} checked claim(s) in this run are not in "
+                  "v2/evidence/ledger.jsonl (written to the replay's scratch ledger only)")
     return 0 if r["pass"] else 1
 
 

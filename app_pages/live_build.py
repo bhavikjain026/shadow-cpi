@@ -30,9 +30,10 @@ pause = 0 if fast else (0.12 if basket else 0.3)
 st.caption(f"{month_name(run['month'])}: evidence published from {run['window'][0]} to the cutoff "
            f"{run['window'][1]}. Development data under v2/PREREGISTRATION.md (with Amendment A), not a forecast.")
 REC = ROOT / "results" / f"replay_{month_name(run['month'])[:3].lower()}.jsonl"
-if basket and REC.exists():
+rec_events = ([json.loads(line) for line in REC.read_text(encoding="utf-8").splitlines() if line.strip()]
+              if basket and REC.exists() else [])
+if rec_events and rec_events[0].get("month") == run["month"]:
     with st.expander("Replay a saved run: 0 calls, 0 credits"):
-        rec_events = [json.loads(line) for line in REC.read_text(encoding="utf-8").splitlines() if line.strip()]
         built = pd.Timestamp(rec_events[0]["built_utc"])
         st.caption(f"Replay of a recorded run ({built.day} {built:%b}). Recomputing it needs the page cache, which "
                    "holds copyrighted article text and isn't published; run `python -m v2.replay` locally to "
