@@ -10,6 +10,9 @@ Run:  python score.py
    the sealed number and range, the official number, the miss (nowcast minus official, in percentage points),
    whether the official number fell inside the range, whether the seal still matches its SHA-256, and the
    main surprise: the division whose real contribution differed most from the sealed contribution.
+   From October 2026 on (docs/after_scoring_changes.md, a new metric): the Brier score of the sealed
+   P(headline >= 6.0%), (p - outcome)^2 with outcome 1 if the official number is >= 6.0, else 0. Not applied to
+   earlier months (they sealed no probability).
    Months without an official number yet are listed as "waiting for release".
 The sealed files are only read, never changed. No API calls. Plain code, no AI.
 """
@@ -21,11 +24,22 @@ from pathlib import Path
 from shadow_cpi import cpi_math as M
 from shadow_cpi import official as O
 from shadow_cpi import seal as S
+from shadow_cpi.live_range import THRESHOLD
 
 ROOT = Path(__file__).resolve().parent
 RELEASE_FIELDS = ["month", "official_yoy", "release_date", "source_url"]
 ARCHIVE_FIELDS = ["month", "sealed_yoy", "range_low", "range_high", "official_yoy", "release_date", "source_url",
-                  "miss_pp", "inside_range", "main_surprise", "main_surprise_pp", "seal_check", "sha256"]
+                  "miss_pp", "inside_range", "main_surprise", "main_surprise_pp", "p_headline_ge_6", "brier_ge_6",
+                  "seal_check", "sha256"]
+BRIER_FROM = "2026-10"          # new metric from October on; earlier months are not re-scored with it
+
+
+def brier(month, sealed, official):
+    """(p, Brier score) for P(headline >= 6.0%) from October on; ('', '') before October or without a sealed p."""
+    p = sealed.get("p_headline_ge_6")
+    if month < BRIER_FROM or p is None:
+        return "", ""
+    return p, (p - (1.0 if official >= THRESHOLD else 0.0)) ** 2
 
 
 def read_releases(path):
@@ -94,11 +108,13 @@ def score(root=ROOT, out=print):
             miss = sealed["headline_yoy"] - off
             inside = sealed["range_low"] <= off <= sealed["range_high"]
             surprise, gap = main_surprise(sealed, month, tidy)
+            p, bs = brier(month, sealed, off)
             row.update(official_yoy=off, release_date=rel.get("release_date", ""), source_url=rel.get("source_url", ""),
                        miss_pp=miss, inside_range="yes" if inside else "no", main_surprise=surprise,
-                       main_surprise_pp=gap)
+                       main_surprise_pp=gap, p_headline_ge_6=p, brier_ge_6=bs)
             out(f"[{row['seal_check']}] {month}: sealed {sealed['headline_yoy']:.2f}%, official {off:.2f}%, "
-                f"miss {miss:+.2f} pp, inside range: {row['inside_range']}. Main surprise: {surprise}")
+                f"miss {miss:+.2f} pp, inside range: {row['inside_range']}. Main surprise: {surprise}"
+                + ("" if bs == "" else f". P(>= 6.0%) sealed {p:.2f}, Brier {bs:.3f}"))
         else:
             row.update(main_surprise="waiting for release")
             out(f"[{row['seal_check']}] {month}: sealed {sealed['headline_yoy']:.2f}% - waiting for the official release")
