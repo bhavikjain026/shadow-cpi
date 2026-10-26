@@ -263,17 +263,17 @@
     "run": "first pass",
     "setting": "exact_match + end_date + filter_by_published_date, vs the same search undated",
     "n": 40,
-    "leaks": 8,
-    "leak_rate": 0.2,
+    "leaks": null,
+    "leak_rate": null,
     "wilson95": [
-     0.1049998967188637,
-     0.3475730647562145
+     null,
+     null
     ],
     "valid_kept": 25,
     "valid_total": 40,
     "credits_per_call": 1.0,
-    "median_latency_s": 1.915,
-    "caveats": "exploratory; 'leak' = quote found only without dates; of those 8, Tavily's published_date for the source page is after the cutoff for 0, on or before it for 6, missing for 2 (descriptive); not found either way 7; valid evidence kept = found before the cutoff"
+    "median_latency_s": 1.74,
+    "caveats": "exploratory; no leak measure: missed by the dated search but found undated 8 of 40 (10%–35%, Wilson 95%); for those 8, Tavily's published_date for the source page is after the cutoff for 0, on or before it for 6, missing for 2 (descriptive), so they read as filter misses, not back-dating; not found either way 7; valid evidence kept = found before the cutoff; credits and latency cover both searches"
    }
   ],
   "columns": "leak rate = cases (events) with at least one confirmed post-cutoff result among the kept results, Wilson 95%; valid evidence kept = Wayback-confirmed pre-cutoff, on-topic results this setting kept, of those any setting found; median latency = Tavily response_time"

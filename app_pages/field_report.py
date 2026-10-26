@@ -33,7 +33,7 @@ if lk:
                f"setting. All figures {lk['label']}. {lk['columns']}.")
     st.dataframe([{"Check": x["check"], "Run": x["run"], "Setting": x["setting"] or "—",
                    "N": x.get("n", "—"),
-                   "Leak rate (Wilson 95%)": "—" if x.get("placeholder") else
+                   "Leak rate (Wilson 95%)": "—" if x.get("leaks") is None else
                    f"{x['leaks']} of {x['n']} = {pct(x['leak_rate'])} ({wilson(x['wilson95'])})",
                    "Valid evidence kept": "—" if x.get("valid_kept") is None else
                    f"{x['valid_kept']} of {x['valid_total']}",

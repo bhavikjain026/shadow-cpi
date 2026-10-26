@@ -83,6 +83,8 @@ def test_population_from_the_saved_results():
     assert len({u["url"] for u in by["b"]}) == 65 and all(u["page_file"] for u in by["c"])
 
 
+@pytest.mark.skipif(not (ROOT / "cache" / "tavily").exists() or not (ROOT / "v2" / "evidence" / "pages").exists(),
+                    reason="needs the local page cache (git-ignored: copyrighted article text)")
 def test_saved_text_comes_from_the_date_tests_own_extracts_and_the_evidence_pages():
     units, texts = LC.population(), LC.date_test_texts()
     got = {s: sum(bool(LC.saved_text(u, texts)) for u in units if u["source"] == s) for s in "abc"}

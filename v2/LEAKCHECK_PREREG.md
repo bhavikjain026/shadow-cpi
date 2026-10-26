@@ -162,4 +162,5 @@ file was written at 19:01Z and committed at 19:02Z (`dcbb7ac`). No rule changed.
 
 **Label reason reworded (logged 2026-10-26T12:21Z, owner's decision, after the results were seen):** check P, unit U53
 (indiainfoline, "nine months up to December 2026"), line 64: the reason "an evident typo for December 2025 (FY26)"
-now reads "a forward-looking statement". The label stays **benign**; no count, rate or outcome changes.
+now reads "a forward-looking statement". The label stays **benign**; no count, rate or outcome changes: `results/leakcheck_full_page.json` is byte-identical
+before and after (`python -m v2.leakcheck P --report` re-run offline); only the labels file and the .md report change.

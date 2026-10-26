@@ -201,10 +201,12 @@ def leak_row(check, run, setting, n, leaks, valid_kept, valid_total, credits, ca
 def check_p_rows(res):
     """Check P, full-page date check: per source, pages whose text holds later content (Claude Code's labels)."""
     calls = res["extract_calls"]
-    src_of = {u["url"]: u["source"] for u in res["units"]}
+    src_of = {}
+    for u in res["units"]:                       # a page kept by two checks belongs to both sources
+        src_of.setdefault(u["url"], set()).add(u["source"])
     rows = []
     for s, m in res["metrics"].items():
-        mine = [c for c in calls if any(src_of.get(u) == s for u in c["urls"])]
+        mine = [c for c in calls if any(s in src_of.get(u, ()) for u in c["urls"])]
         oc = ", ".join(f"{k} {v}" for k, v in m["outcomes"].items())
         rows.append(leak_row("Check P: full-page date check", "first pass", P_SETTINGS[s], m["with_text"],
                              m["later_content"], None, None, sum(c["credits"] for c in mine), len(mine), None,
@@ -222,7 +224,8 @@ def check_e_dates(res):
         if c.get("outcome") != "found only without dates":
             continue
         src = [r for r in c["searches"]["undated"]["results"] if r.get("source_page")]
-        d = iso_date(src[0].get("published_date")) if src else ""
+        dates = [x for x in (iso_date(r.get("published_date")) for r in src) if x]
+        d = max(dates) if dates else ""                  # any copy of the page dated after the cutoff counts
         out.append({"id": c["id"], "cutoff": c["cutoff"], "source_page_returned": bool(src), "published": d or None,
                     "after_cutoff": bool(d) and d > c["cutoff"]})
     return {"quotes": len(out), "after_cutoff": sum(x["after_cutoff"] for x in out),
@@ -233,18 +236,21 @@ def check_e_dates(res):
 def check_e_rows(res):
     """Check E, exact_match back-dating: a verified quote that a dated search cannot find may have appeared later."""
     m, sh = res["metrics"], res["metrics"]["shares"]
-    lat = median([c["searches"]["dated"]["response_time"] for c in res["cases"]
-                  if c["searches"]["dated"].get("response_time") is not None])
-    d = check_e_dates(res)
-    return [leak_row("Check E: exact_match back-dating", "first pass",
-                     "exact_match + end_date + filter_by_published_date, vs the same search undated", m["run"],
-                     sh["found only without dates"]["x"], sh["found before cutoff"]["x"], m["run"], m["credits"],
-                     2 * m["run"], lat,
-                     f"exploratory; 'leak' = quote found only without dates; of those {d['quotes']}, Tavily's "
-                     f"published_date for the source page is after the cutoff for {d['after_cutoff']}, on or before "
-                     f"it for {d['on_or_before_cutoff']}, missing for {d['undated_or_missing']} (descriptive); "
-                     f"not found either way {sh['not found either way']['x']}; valid evidence kept = found before "
-                     "the cutoff")]
+    lat = median([s["response_time"] for c in res["cases"] for s in c["searches"].values()
+                   if s.get("response_time") is not None])
+    d, miss = check_e_dates(res), sh["found only without dates"]
+    w = miss["wilson95"]
+    row = leak_row("Check E: exact_match back-dating", "first pass",
+                   "exact_match + end_date + filter_by_published_date, vs the same search undated", m["run"], 0,
+                   sh["found before cutoff"]["x"], m["run"], m["credits"], 2 * m["run"], lat, "")
+    row.update({"leaks": None, "leak_rate": None, "wilson95": [None, None], "caveats":
+                f"exploratory; no leak measure: missed by the dated search but found undated {miss['x']} of "
+                f"{m['run']} ({w[0]:.0%}\u2013{w[1]:.0%}, Wilson 95%); for those {d['quotes']}, Tavily's "
+                f"published_date for the source page is after the cutoff for {d['after_cutoff']}, on or before it for "
+                f"{d['on_or_before_cutoff']}, missing for {d['undated_or_missing']} (descriptive), so they read as "
+                f"filter misses, not back-dating; not found either way {sh['not found either way']['x']}; valid "
+                "evidence kept = found before the cutoff; credits and latency cover both searches"})
+    return [row]
 
 
 def leakage_table():
