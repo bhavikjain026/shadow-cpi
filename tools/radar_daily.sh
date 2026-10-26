@@ -2,7 +2,7 @@
 # One daily radar run (v2/RADAR_PREREG.md), started by launchd at 10:07 IST on 27, 28 and 29 Oct 2026
 # (~/Library/LaunchAgents/in.shadowcpi.radar-daily.plist). Never freezes the radar: freezing needs the owner's OK.
 #   1. stop if another radar run is going (lock + process check)
-#   2. git pull --no-rebase origin main
+#   2. stop (nothing stashed, a notification sent) unless this folder is on main with a clean tree; git pull --no-rebase origin main
 #   3. stop if the whole-word bug fixes (Amendments R2 and R3) are not logged in RADAR_PREREG.md, or the date is not a run day
 #   4. stop if the radar budget (cap read from config/budget.json) is used up
 #   5. python -m v2.radar once, under caffeinate
@@ -34,6 +34,12 @@ if ! mkdir "$LOCK" 2>/dev/null || pgrep -f "v2.radar" >/dev/null; then
   report "SKIPPED: another radar run is going (lock $LOCK or a v2.radar process)" "credits: none used" "next: check the other run's log"
 fi
 trap 'rmdir "$LOCK" 2>/dev/null' EXIT
+
+BRANCH=$(git branch --show-current)
+DIRTY=$(git status --porcelain | wc -l | tr -d ' ')
+if [ "$BRANCH" != "main" ] || [ "$DIRTY" != "0" ]; then    # never stash or switch: someone is working here
+  report "SKIPPED: this folder is on '${BRANCH:-detached}' with $DIRTY changed files, not main and clean; nothing stashed" "credits: none used" "next: put the folder back on a clean main; the next run day picks it up"
+fi
 
 git pull --no-rebase origin main || report "FAILED: git pull --no-rebase origin main (see $LOG)" "credits: none used" "next: fix the repo state by hand" 1
 
