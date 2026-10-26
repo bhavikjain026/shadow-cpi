@@ -1,5 +1,5 @@
 {
- "built": "2026-10-26",
+ "built": "2026-10-27",
  "leakage": {
   "label": "computed by tools/build_field_report.py from the committed results files",
   "rows": [
@@ -1325,5 +1325,143 @@
   "arm_a_searches_per_month": 13.0,
   "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits at original cost / 9 months"
  },
- "ledger_rows": 1879
+ "ledger_rows": 1879,
+ "pages_changed": null,
+ "leak_by_source_type": {
+  "rows": [
+   {
+    "type": "article",
+    "date test": {
+     "leaks": 12,
+     "results": 186,
+     "rate": 0.06451612903225806,
+     "wilson95": [
+      0.0372876955700846,
+      0.10936867256657568
+     ]
+    },
+    "finance": {
+     "leaks": 5,
+     "results": 97,
+     "rate": 0.05154639175257732,
+     "wilson95": [
+      0.02221605089687992,
+      0.11504355477373282
+     ]
+    },
+    "pooled": {
+     "leaks": 17,
+     "results": 283,
+     "rate": 0.06007067137809187,
+     "wilson95": [
+      0.037839939689099086,
+      0.09408470965859504
+     ]
+    }
+   },
+   {
+    "type": "live blog",
+    "date test": {
+     "leaks": 0,
+     "results": 5,
+     "rate": 0.0,
+     "wilson95": [
+      0.0,
+      0.43448246865939283
+     ]
+    },
+    "finance": {
+     "leaks": 1,
+     "results": 13,
+     "rate": 0.07692307692307693,
+     "wilson95": [
+      0.013710421090225994,
+      0.333139511713605
+     ]
+    },
+    "pooled": {
+     "leaks": 1,
+     "results": 18,
+     "rate": 0.05555555555555555,
+     "wilson95": [
+      0.009875190868776959,
+      0.2575730099608091
+     ]
+    }
+   },
+   {
+    "type": "hub or tag page",
+    "date test": {
+     "leaks": 0,
+     "results": 1,
+     "rate": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    },
+    "finance": {
+     "leaks": 0,
+     "results": 1,
+     "rate": 0.0,
+     "wilson95": [
+      0.0,
+      0.7934506882081973
+     ]
+    },
+    "pooled": {
+     "leaks": 0,
+     "results": 2,
+     "rate": 0.0,
+     "wilson95": [
+      0.0,
+      0.6576197760453506
+     ]
+    }
+   },
+   {
+    "type": "other",
+    "date test": {
+     "leaks": 0,
+     "results": 11,
+     "rate": 0.0,
+     "wilson95": [
+      0.0,
+      0.25883296999442634
+     ]
+    },
+    "finance": {
+     "leaks": 0,
+     "results": 26,
+     "rate": 0.0,
+     "wilson95": [
+      0.0,
+      0.12872892362858793
+     ]
+    },
+    "pooled": {
+     "leaks": 0,
+     "results": 37,
+     "rate": 0.0,
+     "wilson95": [
+      0.0,
+      0.09405782718146873
+     ]
+    }
+   }
+  ],
+  "results": 340,
+  "leaks": 18,
+  "leaks_by_arm": {
+   "date test A": 12,
+   "finance N": 6
+  },
+  "rule": "v2/DRIFT_PREREG.md part C (URL only; first match wins: live blog, hub or tag page, article, other)",
+  "leak_definition": "date test: Wayback-confirmed leak (label L); finance: confirmed leak; unconfirmed results count in the totals only",
+  "label": "exploratory, 0 credits, after both tests were scored; changes no verdict",
+  "sources": [
+   "results/date_field_test.json",
+   "results/finance_lookahead.json"
+  ]
+ }
 }
