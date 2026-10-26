@@ -77,11 +77,15 @@ def check(claim, page_text, page_date, month, words, units=None, state=None, con
         places = _states_in(claim.get("region")) | _states_in(line) | _states_in(context)
         if state not in places:
             return False, f"not {state.title()}" + (f" ({', '.join(sorted(places))})" if places else "")
-    why = ((non_consumer_reason(claim.get("item"), line) or not_retail_context_reason(line, context)) if scope else ""
-           ) or premium_fuel_reason(claim.get("kind"), claim.get("item"), line)    # v1 scope rules, unchanged
+    from v2 import whole as WH                       # Amendment R3: the same rules with whole words (radar)
+    ncr, nrc, pfr = ((WH.non_consumer_reason, WH.not_retail_context_reason, WH.premium_fuel_reason) if whole_words
+                     else (non_consumer_reason, not_retail_context_reason, premium_fuel_reason))
+    why = ((ncr(claim.get("item"), line) or nrc(line, context)) if scope else ""
+           ) or pfr(claim.get("kind"), claim.get("item"), line)                # v1 scope rules, unchanged
     if why:
         return False, why
-    if units and not any(norm(u) in norm(claim.get("unit") or "") + " " + text for u in units):
+    if units and not (WH.unit_ok(units, claim.get("unit"), text) if whole_words else
+                      any(norm(u) in norm(claim.get("unit") or "") + " " + text for u in units)):
         return False, f"not a price per {units[0]}"
     return True, "verified"
 

@@ -36,7 +36,7 @@ def test_effect_only_for_tavily_only_kinds_and_uses_the_needle(monkeypatch):
     from v2 import needle as N
     monkeypatch.setattr(N, "yoy", lambda month, changes, inp: 5.0 + sum(v for _, v in changes.values()) * 10)
     monkeypatch.setattr(N, "trend_only", lambda month, inp: 5.0)
-    monkeypatch.setattr(RD.R, "geography", lambda *a, **k: ("state", 0.05, "nct of delhi", "state"))
+    monkeypatch.setattr(RD.WH, "geography", lambda *a, **k: ("state", 0.05, "nct of delhi", "state"))
     e = RD.effect_pp(ev(src("thehindu.com")), inp={})
     assert e == pytest.approx(0.05 * (22 / 31) * 0.05 * 10)
     assert RD.effect_pp(ev(src("amul.com"), kind="milk"), inp={}) is None            # context kind: spine moves it
@@ -174,19 +174,69 @@ def test_zero_change_gives_exactly_zero_pp():
     assert RD.effect_pp({**e, "change": 0.05}, inp) > 0                  # a rise moves the needle up
 
 
-def test_reclassify_rejects_substring_only_claims_and_keeps_the_rest():
-    url = "https://www.prabhatkhabar.com/state/jharkhand/bokaro/a"
-    bad = {"line": BOKARO, "status": "verified", "reason": "verified", "region": "Bihar", "context": "",
-           "effective_date": "2026-10-01", "change": 0.12}
-    good = {"line": "इंदौर में 1 अक्टूबर से दूध के दाम 62 से 65 रुपए प्रति लीटर", "status": "verified",
-            "reason": "verified", "region": "इंदौर", "context": "", "effective_date": "2026-10-01", "change": 0.048}
-    st = {"cards": [{"url": url, "domain": "prabhatkhabar.com", "title": "बोकारो", "published": "2026-09-27",
-                     "claims": [bad]},
-                    {"url": "https://navbharattimes.indiatimes.com/b", "domain": "navbharattimes.indiatimes.com",
-                     "title": "Indore Milk Price", "published": "2026-09-30", "claims": [good]}],
+def test_reclassify_rejudges_from_cached_text(tmp_path):
+    milk = "इंदौर में 1 अक्टूबर से दूध के दाम 62 रुपए से बढ़कर 65 रुपए प्रति लीटर हो गए"
+    (tmp_path / "pages").mkdir()
+    (tmp_path / "pages" / "b.txt").write_text("Published: Sep 27, 2026, 09:00\n" + BOKARO, encoding="utf-8")
+    (tmp_path / "pages" / "m.txt").write_text("Published: Sep 30, 2026, 09:00\n" + milk, encoding="utf-8")
+    bad = {"line": BOKARO, "price": 3.2, "old_price": 2.85, "new_price": 3.2, "status": "verified",
+           "reason": "verified", "region": "Bihar", "effective_date": "2026-10-01"}
+    good = {"line": milk, "price": 65, "old_price": 62, "new_price": 65, "status": "verified", "reason": "verified",
+            "region": "इंदौर", "effective_date": "2026-10-01"}
+    card = lambda url, title, pub, f, cl: {"url": url, "domain": url.split("/")[2], "title": title,  # noqa: E731
+                                           "published": pub, "tavily_published": pub, "page_file": f"pages/{f}",
+                                           "status": "verified", "reason": "verified", "claims": [cl]}
+    st = {"cards": [card("https://www.prabhatkhabar.com/state/jharkhand/bokaro/a", "बोकारो", "2026-09-27", "b.txt", bad),
+                    card("https://navbharattimes.indiatimes.com/b", "Indore Milk Price", "2026-09-30", "m.txt", good)],
           "corroboration": [], "events": [{"kind": "rail"}, {"kind": "milk"}]}
-    before, after = RD.reclassify(st)
+    before, after, changed = RD.reclassify(st, "R2", pages=tmp_path)
     assert [e["kind"] for e in before] == ["rail", "milk"]
-    assert bad["status"] == "rejected" and bad["status_before_r2"] == "verified" and bad["states"] == ["jharkhand"]
+    assert (bad["status"], bad["reason"], bad["status_before_r2"]) == ("rejected", "the line is not about this item",
+                                                                       "verified")
+    assert bad["states"] == ["jharkhand"] and st["cards"][0]["status"] == "rejected"
     assert [(e["kind"], e["states"]) for e in after] == [("milk", ["madhya pradesh"])]
-    assert st["reclassified"]["credits"] == 0
+    assert len(changed) == 2 and st["reclassified"][-1]["credits"] == 0    # Bokaro: status; milk: kind/states filled
+
+
+# ---------- Amendment R3: whole words in every keyword list the radar reaches (scope, places, grade, units) ----------
+from shadow_cpi.verify import norm  # noqa: E402
+from v2 import whole as WH  # noqa: E402
+
+
+def test_shahar_not_inside_dussehra():
+    assert not WH.hit("शहर", norm("दशहरा पर बिजली दरें बढ़ीं")) and WH.hit("शहर", norm("शहर में दरें बढ़ीं"))
+    assert WH.hit("शहर", norm("शहरों में दरें बढ़ीं"))                            # a case ending: still the stem
+    line = "दशहरा से पहले बिजली दरें 5% बढ़ीं"
+    assert WH.geography("electricity", line, cpi_code="04.5.1.0.2.01", extra_states=["bihar"])[0] == "state"
+    assert RD.R.geography("electricity", line, cpi_code="04.5.1.0.2.01", extra_states=["bihar"])[0] == "context"
+
+
+def test_deshbhar_not_inside_pradeshbhar():
+    line = "प्रदेशभर में बिजली दरें 5% बढ़ीं"
+    assert not WH.word("देशभर", norm(line)) and WH.word("देशभर", norm("देशभर में दाम बढ़े"))
+    assert WH.scope({"kind": "rail", "quote": line, "region": "बिहार"}) == ("regional", frozenset({"bihar"}))
+    assert RD.R.scope({"kind": "rail", "quote": line, "region": "बिहार"}) == ("national", None)   # the old matcher
+
+
+def test_ranchi_not_inside_hazaranchi():
+    assert not WH.word("रांची", norm("हजारांची गर्दी")) and WH.word("रांची", norm("रांची में बिजली"))
+    assert K.page_states("हजारांची गर्दी झाली") == set()
+
+
+def test_residential_not_inside_presidential():
+    line = "presidential order: commercial tariff up 5%"
+    assert WH.non_consumer_reason("", line).startswith("not a household")       # 'presidential' is not 'residential'
+    assert RD.R.non_consumer_reason("", line) == ""                            # the old matcher
+    assert WH.non_consumer_reason("", "residential and commercial tariff up 5%") == ""
+
+
+def test_stems_take_endings_but_not_other_words():
+    assert WH.hit("उपभोक्ता", norm("घरेलू उपभोक्ताओं के लिए")) and WH.hit("तेल कंपनि", norm("तेल कंपनियों ने"))
+    assert WH.word("household", "households pay more") and not WH.word("liter", "literature")
+    assert not WH.word("ftl", "swiftly") and not WH.hit("नियमित", norm("अनियमित"))
+    assert K.page_states("महाराष्ट्रात दूध") == {"maharashtra"} and K.page_states("असमर्थ") == set()
+    assert K.page_states("धार्मिक आधार") == set()
+
+
+def test_old_matcher_paths_unchanged():
+    assert RD.R.check.__defaults__[-1] is False and K.kind_of(BOKARO) == "rail"

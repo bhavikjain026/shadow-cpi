@@ -13,6 +13,7 @@ from shadow_cpi.recorder import provenance
 from shadow_cpi.tavily import best_date, iso_date
 from shadow_cpi.verify import norm, split_lines
 from v2 import ledger as LG
+from v2 import whole as WH
 from v2 import rules as R
 
 NON_LATIN = re.compile(r"[ऀ-෿]")          # Indic scripts (Devanagari to Sinhala)
@@ -169,40 +170,52 @@ def fetch_and_verify(tav, nem, nano, cards, month, words, units, state, kind, ta
             okd, why_d, c["printed_date"], c["date_flag"] = R.page_date_check(text, month, c.get("tavily_published"))
             if not okd:                                   # Amendment D, rule 5: the page's own date fails
                 for cl in c["claims"]:
-                    cl.update({"status": "rejected", "reason": why_d, "price_type": R.price_type(cl["line"]),
+                    cl.update({"status": "rejected", "reason": why_d,
+                               "price_type": (WH.price_type if whole_words else R.price_type)(cl["line"]),
                                "change": R.change_of(cl), "effective_date": None})
                 c["reason"] = why_d
                 continue
             super_reread(nem, super_model, c, text, tag)
             for cl in c["claims"]:
-                ctx = context_for(text, cl["line"])
-                pt = R.price_type(cl["line"], ctx)
-                ok, why = R.check(cl, text, c["published"], month, words, units, state, ctx,
-                                  scope=pt not in ("wholesale", "commercial"), whole_words=whole_words)
-                eff = normalise_date(cl.get("effective_date"), c["published"]) or None
-                change, base = R.change_of(cl), None
-                if change is None and ok:
-                    amount, b = absolute_change(cl["line"]), base_price(kind, eff or c["published"])
-                    if amount is not None and b:
-                        base, change = b[0], amount / b[0]
-                if ok and not (eff and eff.startswith(month)):
-                    ok, why = False, f"effective date {eff or 'not stated'} is not in {month}"
-                if ok and change is None:
-                    ok, why = False, "the change cannot be computed (no old and new price, % or official base)"
-                status = "verified" if ok else "rejected"
-                if ok and pt in ("wholesale", "commercial"):     # Amendment D: visible context, never in the number
-                    status, why = "context", f"{pt} price: shown as context, never in the number"
-                cl.update({"status": status, "reason": why, "effective_date": eff, "price_type": pt,
-                           "change": change, "base_price": base, "context": ctx,
+                cl.update({**judge(cl, c, text, month, words, units, state, kind, whole_words),
                            "gloss": gloss(nem, nano, cl["line"], f"{tag} gloss")})
         for c in batch:
-            if any(cl.get("status") == "verified" for cl in c["claims"]):
-                c["status"], c["reason"] = "verified", "verified"
-            elif any(cl.get("status") == "context" for cl in c["claims"]):
-                c["status"] = "context"
-                c["reason"] = next(cl["reason"] for cl in c["claims"] if cl.get("status") == "context")
-            elif not c["reason"]:
-                c["reason"] = next((cl["reason"] for cl in c["claims"] if cl.get("reason")), "no claim to check")
+            card_status(c)
+
+
+def judge(cl, c, text, month, words, units, state, kind, whole_words=False):
+    """One claim on a fetched page, code only: the verifier, the effective date, the change, retail vs context.
+    Returns the fields to update (no gloss). Amendment R3 re-runs it on cached page text (v2.radar.reclassify)."""
+    ctx = context_for(text, cl["line"])
+    pt = (WH.price_type if whole_words else R.price_type)(cl["line"], ctx)
+    ok, why = R.check(cl, text, c["published"], month, words, units, state, ctx,
+                      scope=pt not in ("wholesale", "commercial"), whole_words=whole_words)
+    eff = normalise_date(cl.get("effective_date"), c["published"]) or None
+    change, base = R.change_of(cl), None
+    if change is None and ok:
+        amount, b = absolute_change(cl["line"]), base_price(kind, eff or c["published"])
+        if amount is not None and b:
+            base, change = b[0], amount / b[0]
+    if ok and not (eff and eff.startswith(month)):
+        ok, why = False, f"effective date {eff or 'not stated'} is not in {month}"
+    if ok and change is None:
+        ok, why = False, "the change cannot be computed (no old and new price, % or official base)"
+    status = "verified" if ok else "rejected"
+    if ok and pt in ("wholesale", "commercial"):     # Amendment D: visible context, never in the number
+        status, why = "context", f"{pt} price: shown as context, never in the number"
+    return {"status": status, "reason": why, "effective_date": eff, "price_type": pt, "change": change,
+            "base_price": base, "context": ctx}
+
+
+def card_status(c):
+    """A card's status and reason from its claims (verified > context > the first claim's reason)."""
+    if any(cl.get("status") == "verified" for cl in c["claims"]):
+        c["status"], c["reason"] = "verified", "verified"
+    elif any(cl.get("status") == "context" for cl in c["claims"]):
+        c["status"] = "context"
+        c["reason"] = next(cl["reason"] for cl in c["claims"] if cl.get("status") == "context")
+    elif not c["reason"]:
+        c["reason"] = next((cl["reason"] for cl in c["claims"] if cl.get("reason")), "no claim to check")
 
 
 def ids(card):

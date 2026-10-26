@@ -195,6 +195,10 @@ Written as bug reports in [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports
   {{q_not_checked}} not checked ([`audit/quote_check.md`](audit/quote_check.md)).
 - We built a value-of-information score to rank searches; it rated almost every search as worthless, so we dropped it
   rather than tune it.
+- A Hindi substring match ('rail' inside 'domestic') turned a Jharkhand power tariff into a 'Bihar rail' event.
+  Our manual check caught it; the fix (whole-word matching, state from the page) removed the event, so the October
+  radar has {{radar_events_phrase}}. Logged as Amendments `R2`–`R3`, with before and after
+  ([`v2/RADAR_PREREG.md`](v2/RADAR_PREREG.md)).
 
 More: [`docs/honest_limits.md`](docs/honest_limits.md), [`docs/frozen_rules.md`](docs/frozen_rules.md),
 [`docs/after_scoring_changes.md`](docs/after_scoring_changes.md).

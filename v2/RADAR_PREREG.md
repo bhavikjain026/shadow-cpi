@@ -100,3 +100,34 @@ keep the old matcher.
      under rule 3 after the substring fix; context only, not counted.
    - Radar totals: events 2 → 1; corroborated 0 → 0; Tavily-only events 1 → 0; Tavily-only effect sum
      +0.0013340698580721622 pp → 0 pp.
+
+**Amendment R3 (logged bug fix), 2026-10-26T18:31:13Z (UTC), after R2 and before run 3.** Decided by the owner.
+Extends R2's whole-word matching (same radar-only flag) to every keyword list the radar reaches: scope (nationwide,
+statewide, national bodies, local markers, narrower-than-state), places, retail/domestic and penalty words, fuel grade
+and units. The radar now uses `v2/whole.py`, which imports the v1 and v2 lists unchanged and changes only how they are
+matched; `shadow_cpi/event_rules.py` (v1, frozen for the seal) and the locked v2 paths are unchanged.
+1. **Rule.** A keyword may not start or end inside a word (letters, combining marks, digits; every script). Patterns
+   that carry their own `\b` keep it, made script-aware. **Start-of-word only** (may take an ending, may not start
+   mid-word): the regional place names (as in R2); Indian-script state and city names, which take case endings
+   (महाराष्ट्रात, दिल्लीत), except असम, धार and यूपी, whose longer forms in the cached pages are other words (असमर्थ,
+   धार्मिक, यूपीआई); and the listed stems whose endings are their own plural or case forms in the cached pages
+   (`v2.whole.STEMS`: उपभोक्ता → उपभोक्ताओं, ग्राहक → ग्राहकों, तेल कंपनि → तेल कंपनियों, शहर → शहरों, देशभर → देशभरात,
+   household → households, procurement price → procurement prices, and the others listed there). Left whole-word
+   where the longer words are other words: commercial, industrial, domestic, liter (literature), सामान्य, साधारण.
+2. **Hits fixed** (mid-word matches in the 1,574 cached pages that no longer count; counts from those pages):
+   शहर inside दशहरा/दशहरे (Dussehra, 118) and सरदारशहर (2), which made a statewide change "narrower than the state";
+   देशभर inside प्रदेशभर (9) and देश भर inside प्रदेश भर (1), which made a statewide change nationwide; residential
+   inside presidential (85), which hid a commercial line from the domestic test; ftl inside swiftly/softly (7);
+   industrial inside deindustrialisation (1); रूट inside फ्रूट (1); मंडी inside गुलमंडी (1); सामान्य inside सर्वसामान्य
+   (9+), साधारण inside सर्वसाधारण/असाधारण (6), नियमित inside अनियमित/अनियमितता/विनियमित (5) (fuel grade); धार (Dhar,
+   Madhya Pradesh) inside आधार/आधारित/मुसळधार (314); मुंबई inside बृहन्मुंबई/महामुंबई (4); units, not used by the radar:
+   ltr inside ultra/poultry, litre inside kilolitre, लीटर inside किलोलीटर/मिलीलीटर. Hindi रांची inside the Marathi हजारांची
+   is in v1's `evidence.CITY_HI`, not in the radar's place lists; the matcher test covers it.
+3. **Re-classification of runs 1 and 2** (`python -m v2.radar --reclassify R3`, every saved claim re-judged from the
+   cached page text with `v2.pipeline.judge`, 0 credits; recorded under `reclassified` in the radar file). Before → after
+   per claim: **no claim changed** status, reason, price type, kind or states (96 claims; re-judging with the old
+   matcher reproduces every saved verdict, so the harness is exact). In the saved claims' lines and contexts R3
+   removes no hit. One card-level fix: the Bokaro card (prabhatkhabar.com) still showed "verified" after R2 although
+   its only verified claim was rejected; it is now rejected. Events: Indore milk (milk, 2026-10-01, Madhya Pradesh,
+   verified, no effect) → unchanged. Radar totals unchanged: 1 event, 0 corroborated, 0 Tavily-only, 0 pp.
+4. **Daily runs** (`tools/radar_daily.sh`) refuse to run unless both R2 and R3 are logged on main.

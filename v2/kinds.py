@@ -114,10 +114,12 @@ REGULATORS = {
     "wberc": "west bengal", "aperc": "andhra pradesh", "tserc": "telangana", "tgerc": "telangana",
     "hperc": "himachal pradesh", "uerc": "uttarakhand", "aerc": "assam", "jkerc": "jammu and kashmir",
 }
+# Amendment R3: short names whose start-of-word hits in the cached pages are other words (असमर्थ, धार्मिक, यूपीआई)
+PLACE_WHOLE_ONLY = {"असम", "धार", "यूपी"}
 URL_STATES = {s: s.replace(" ", "-") for s in STATE_ALIASES} | {"nct of delhi": "delhi"}
 
 
-def _places(text):
+def _places(text, regulators=True, regional=True):
     """States named in one text, whole words in every script (Amendment R2); regional-language place stems
     (REGIONAL_PLACES) match at a word start, since their case endings attach to the name."""
     found = set()
@@ -126,11 +128,13 @@ def _places(text):
         names.setdefault(s, []).extend(aliases)
     for city, s in CITY_STATE.items():
         names.setdefault(s, []).append(city)
-    for s, ws in names.items():
-        if any(has_word(text, w) for w in ws):
+    for s, ws in names.items():                    # Indian-script names take case endings (महाराष्ट्रात, दिल्लीत)
+        if any(has_word(text, w, start_only=not w.isascii() and w not in PLACE_WHOLE_ONLY) for w in ws):
             found.add(s)
-    found |= {s for s, ws in REGIONAL_PLACES.items() if any(has_word(text, w, start_only=True) for w in ws)}
-    found |= {s for r, s in REGULATORS.items() if has_word(text, r)}
+    if regional:
+        found |= {s for s, ws in REGIONAL_PLACES.items() if any(has_word(text, w, start_only=True) for w in ws)}
+    if regulators:
+        found |= {s for r, s in REGULATORS.items() if has_word(text, r)}
     return found
 
 

@@ -5,6 +5,7 @@ MoSPI publishes, frozen at 29 Oct 23:59 IST, scored afterwards against an indepe
     python -m v2.radar               # one run (cap 'radar-2026-10'); refused without a decided strategy or after the freeze
     python -m v2.radar --freeze      # at the freeze: v2/radar/radar_2026-10.frozen.json + SHA-256
     python -m v2.radar --score       # once, after the scoring list exists
+    python -m v2.radar --reclassify R3   # logged bug fix: saved claims, cached page text, 0 credits
 
 Discovery uses the strategy decided in RADAR_PREREG.md ("Search strategy decided: X") with include_domains_mode
 prefer; corroboration searches are restricted to a primary source's domain where one is known.
@@ -24,6 +25,7 @@ from v2 import kinds as K  # noqa: E402
 from v2 import pipeline as PL  # noqa: E402
 from v2 import recall as RC  # noqa: E402
 from v2 import rules as R  # noqa: E402
+from v2 import whole as WH  # noqa: E402
 
 MONTH = "2026-10"
 BUDGET = "radar-2026-10"
@@ -103,24 +105,42 @@ def classify(card, cl):
                                               cl.get("region")))})
 
 
-def reclassify(state):
-    """Amendment R2, 0 credits: re-check saved claims with whole-word matching (the verifier's 'line names the item'
-    test and the kind) and page-first states. Whole words only narrow the substring test, and every added form
-    contains a listed word, so a rejected claim cannot become verified; a verified or context claim whose line
-    names no item as a whole word is rejected with the verifier's own reason."""
-    before = state.get("events", [])
+def reclassify(state, amendment="R3", pages=None):
+    """Amendments R2-R3, 0 credits: re-judge every saved claim from the cached page text with the radar's whole-word
+    rules (`v2.pipeline.judge`: the verifier, retail/domestic scope, dates, change), then kind and page-first states.
+    The model's reading of each page (line, price, region, gloss) is kept as saved. Pages that failed the leak guard
+    or their own date check are left as they were. Returns (events before, events after, per-claim changes)."""
+    from shadow_cpi import evidence as E
+    pages = pages or (ROOT / "v2" / "evidence")
+    before, changes = state.get("events", []), []
     for c in state["cards"] + [cc for co in state["corroboration"] for cc in co["cards"]]:
-        for cl in c["claims"]:
-            if "status" not in cl:
-                continue
-            if cl["status"] in ("verified", "context") and not any(K.has_word(cl["line"], w) for w in K.WHOLE_WORDS):
-                cl.update({"status": "rejected", "reason": "the line is not about this item",
-                           "reason_before_r2": cl["reason"], "status_before_r2": cl["status"]})
+        claims = [cl for cl in c["claims"] if "status" in cl]
+        if not claims or not c.get("page_file"):
+            continue
+        text = (pages / c["page_file"]).read_text(encoding="utf-8")
+        judged = not E.leak_line(text, MONTH) and R.page_date_check(text, MONTH, c.get("tavily_published"))[0]
+        for cl in claims:
+            old = {f: cl.get(f) for f in ("status", "reason", "price_type", "kind", "states")}
+            if judged:
+                cl.update(PL.judge(cl, c, text, MONTH, K.WHOLE_WORDS, None, None, "", whole_words=True))
             classify(c, cl)
+            new = {f: cl.get(f) for f in old}
+            if new != old:
+                changes.append({"url": c["url"], "line": cl["line"], "before": old, "after": new})
+                if old["status"] != new["status"]:
+                    cl.setdefault(f"status_before_{amendment.lower()}", old["status"])
+                    cl.setdefault(f"reason_before_{amendment.lower()}", old["reason"])
+        if c.get("status") in ("verified", "context") and not any(cl.get("status") in ("verified", "context")
+                                                                    for cl in claims):
+            c["status"], c["reason"] = "rejected", ""
+        PL.card_status(c)
     state["events"] = summarise(state["cards"])
-    state["reclassified"] = {"amendment": "R2", "utc": datetime.now(timezone.utc).isoformat(), "credits": 0,
-                             "events_before": before, "events_after": state["events"]}
-    return before, state["events"]
+    log = state.get("reclassified", [])
+    log = [log] if isinstance(log, dict) else log
+    state["reclassified"] = log + [{"amendment": amendment, "utc": datetime.now(timezone.utc).isoformat(),
+                                    "credits": 0, "events_before": before, "events_after": state["events"],
+                                    "claims_changed": changes}]
+    return before, state["events"], changes
 
 
 def same_event(ev, cl):
@@ -192,8 +212,8 @@ def effect_pp(ev, inp=None):
     if ev["kind"] not in TAVILY_ONLY_KINDS or ev.get("change") is None or not ev.get("effective_date"):
         return None                                  # context kinds move through their spine / official series
     share = (31 - int(ev["effective_date"][8:]) + 1) / 31
-    scope, weight, _, _ = R.geography(SCOPE_KIND[ev["kind"]], " ".join(s["line"] for s in ev["sources"]), "", "",
-                                      "", code, extra_states=ev["states"])
+    scope, weight, _, _ = WH.geography(SCOPE_KIND[ev["kind"]], " ".join(s["line"] for s in ev["sources"]), "", "",
+                                       "", code, extra_states=ev["states"])          # Amendment R3: whole words
     if scope == "context" or licence_area(ev):
         return None                                  # a city or licence-area change with no documented share
     inp = inp or N.P.load_inputs()
@@ -289,10 +309,12 @@ if __name__ == "__main__":
         print(freeze()["frozen_utc"])
     elif "--reclassify" in sys.argv:                 # Amendment R2: saved claims, cached text, 0 credits
         st = json.loads(RADAR.read_text())
-        b, a = reclassify(st)
+        b, a, ch = reclassify(st, sys.argv[sys.argv.index("--reclassify") + 1])
         RADAR.write_text(json.dumps(st, ensure_ascii=False, indent=1, default=float))
         for name, evs in (("before", b), ("after", a)):
             print(name, [(e["kind"], e["effective_date"], e["states"], e["tier"], e["effect_pp"]) for e in evs])
+        for x in ch:
+            print("claim", x["url"][:70], x["before"], "->", x["after"])
     elif "--score" in sys.argv:
         print(json.dumps(score(), indent=1))
     else:

@@ -189,7 +189,8 @@ def facts(st, as_of, root=ROOT):
     # results/field_report.json radar
     rd = fr["radar"]
     f.update(radar_events=rd["events"], radar_corroborated=rd["corroborated"], radar_spent=rd["spent"],
-             radar_cap=rd["cap"], radar_runs=len(rd["runs"]))
+             radar_cap=rd["cap"], radar_runs=len(rd["runs"]),
+             radar_events_phrase=f"{rd['events']} event" + ("" if rd["events"] == 1 else "s"))
 
     # results/bug_reports.json builders (tools/build_bug_reports.py, same code)
     lag, mz = date_lag(), map_zero()

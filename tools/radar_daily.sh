@@ -3,7 +3,7 @@
 # (~/Library/LaunchAgents/in.shadowcpi.radar-daily.plist). Never freezes the radar: freezing needs the owner's OK.
 #   1. stop if another radar run is going (lock + process check)
 #   2. git pull --no-rebase origin main
-#   3. stop if the whole-word bug fix (Amendment R2) is not logged in RADAR_PREREG.md, or the date is not a run day
+#   3. stop if the whole-word bug fixes (Amendments R2 and R3) are not logged in RADAR_PREREG.md, or the date is not a run day
 #   4. stop if the radar budget (cap read from config/budget.json) is used up
 #   5. python -m v2.radar once, under caffeinate
 #   6. commit the radar file and the credit ledger, push
@@ -35,9 +35,11 @@ trap 'rmdir "$LOCK" 2>/dev/null' EXIT
 
 git pull --no-rebase origin main || report "FAILED: git pull --no-rebase origin main (see $LOG)" "credits: none used" "next: fix the repo state by hand" 1
 
-if ! grep -q "Amendment R2 (logged bug fix)" v2/RADAR_PREREG.md; then
-  report "SKIPPED: the whole-word bug fix (Amendment R2) is not on main; no run with the old matching" "credits: none used" "next: push the fix, the next run day picks it up"
-fi
+for AMEND in R2 R3; do
+  if ! grep -q "Amendment $AMEND (logged bug fix)" v2/RADAR_PREREG.md; then
+    report "SKIPPED: the whole-word bug fix (Amendment $AMEND) is not on main; no run with the old matching" "credits: none used" "next: push the fix, the next run day picks it up"
+  fi
+done
 
 source .venv/bin/activate
 LEFT=$(python - <<'EOF'

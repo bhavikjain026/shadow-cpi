@@ -118,6 +118,9 @@ better (0.206).
 samples with Wilson intervals; request IDs logged only on later arms; direct non-Tavily sources (MoSPI API, DoCA
 download, Wayback lookups); quote check 10 verbatim, 1 paywalled, 1 not
 checked; a value-of-information score was dropped rather than tuned.
+A Hindi substring match ('rail' inside 'domestic') turned a Jharkhand power tariff into a 'Bihar rail' event. Our
+manual check caught it; the fix (whole-word matching, state from the page) removed the event, so the October radar
+has 1 event. Logged as Amendments `R2`–`R3`, with before and after.
 
 ## Built with
 Python, Streamlit, Tavily (Search, Extract; Map and Crawl trialled), NVIDIA Nemotron on Nebius Token Factory. Tavily
