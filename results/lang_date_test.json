@@ -1,0 +1,1973 @@
+{
+ "rows": [
+  {
+   "id": "M2",
+   "lang": "hi",
+   "kind": "milk",
+   "month": "2026-04",
+   "states": [
+    "madhya pradesh"
+   ],
+   "cutoff": "2026-04-29",
+   "query": "दूध के दाम बढ़े मध्य प्रदेश अप्रैल 2026",
+   "arms": {
+    "C": {
+     "order": 0,
+     "call": "a25b2539e98e",
+     "credits": 1,
+     "response_time": 3.14,
+     "request_id": "7960cce7-d9e4-48ad-afc7-cf9efd2b9000",
+     "response_sha256": "bf225db11db7bb2c6cb7f67b52a7e594aca6c54e174753a3d5116d9cfb4f00c1",
+     "results": [
+      {
+       "url": "https://www.etvbharat.com/hi/state/mp-milk-price-hike-private-vendors-increase-milk-rates-65-rs-per-liter-indore-bhopal-food-grade-plastic-rate-increase-madhya-pradesh-news-mps26040104785",
+       "title": "मध्य प्रदेश में दूध की कीमतों में उबाल, निजी विक्रेताओं ने बढ़ाए दाम, सांची-अमूल क्या करेंगे",
+       "content": "ETV Bharat / state\n\n# मध्य प्रदेश में दूध की कीमतों में उबाल, निजी विक्रेताओं ने बढ़ाए दाम, सांची-अमूल क्या करेंगे\n\n## मध्य प्रदेश में दूध की कीमतों में बढ़ोतरी, 60 की जगह प्रति लीटर चुकाना होंगे 65 रुपए, ईरान-इजराइल युद्ध से 40% मंहगी फूड ग्रेड प्लास्टिक.\n\nMadhya Pradesh Milk supply\n\nमध्य प्रदेश में दूध की कीमतों में उबाल(ETV Bharat)\n\nauthor img\n\nBy ETV Bharat Madhya Pradesh Team\n\nPublished :April 1, 2026 at 5:11 PM IST\n\n4 Min Read\n\nChoose ETV Bharat [...] भोपाल-इंदौर समेत प्रदेशभर में एक अप्रैल से निजी दूध विक्रेताओं ने दूध के दाम बढ़ा दिए हैं. इंदौर दूध विक्रेता संघ के फैसले के बाद अब घर पहुंच सेवा के तहत मिलने वाला बंदी का दूध तीन रुपये महंगा हो गया है. पहले उपभोक्ताओं को मासिक बंदी में दूध 60 रुपये प्रति लीटर मिलता था, जो अब बढ़कर 63 रुपये प्रति लीटर हो गया है. इसके अलावा डेयरी और दुकानों पर खुला दूध अब 65 रुपये प्रति लीटर के भाव से मिलेगा. दुकानदारों का कहना है कि लेबर, पैकिंग मटेरियल और अन्य खर्च बढ़ने के कारण कीमतों में यह बढ़ोतरी की गई है. [...] MADHYA PRADESH MILK SUPPLYINDORE BHOPAL MILK RATES INCREASEPRIVATE VENDORS MILK 65 RS PER LTRFOOD GRADE PLASTIC RATE INCREASEMP MILK PRICE HIKE\n\n### Quick Links / Policies\n\n CONTACT US\n ABOUT US\n AUTHORS\n CSR POLICY\n\n PRIVACY POLICY\n CODE OF ETHICS\n TERMS & CONDITIONS\n AWARDS\n\n### संपादक की पसंद\n\nETV Bharat Logo\n\nCopyright © 2026 Ushodaya Enterprises Pvt. Ltd., All Rights Reserved.",
+       "tavily_date": "2026-04-01",
+       "best_date": "2026-04-01",
+       "page_date": "2026-04-01",
+       "page_date_why": "published/updated date on the page",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      }
+     ]
+    },
+    "A": {
+     "order": 1,
+     "call": "788a34836421",
+     "credits": 1,
+     "response_time": 4.21,
+     "request_id": "06391e8b-a93b-4781-a544-a27e8b1946c7",
+     "response_sha256": "6fcdc99a55166f83f6f58d5d912e197ba89605461643f15553028dd7a52d22cb",
+     "results": [
+      {
+       "url": "https://www.farmprogress.com/livestock-and-dairy/butter-and-nfdm-exports-drive-milk-price-surge",
+       "title": "More money in milk checks after rough start to 2026 - Farm Progress",
+       "content": "# More money in milk checks after rough start to 2026. Dairy Outlook: After early-year lows, dairy economist Corey Geiger sees better fluid-milk prices for farmers ahead following a historic swing. Rising butter and nonfat dry milk prices are helping strengthen Class IV milk prices and improve milk check prospects. Butter and nonfat dry milk started 2026 in a slump and dragged dairy milk checks lower, but a recent rebound pushed Class IV milk prices higher. “That’s an unprecedented movement in just five months,” Geiger said, noting the higher forecasts also lifted expectations for producer milk checks this year. What’s prompting the turnaround is butter and nonfat dry milk (NFDM) — two of the four dairy products that drive Federal Milk Marketing Order pricing formulas and serve as the foundation for dairy producers’ milk checks. ## Nonfat dairy milk record prices. CME spot NFDM prices climbed to a record $2.30 per pound this spring, surpassing prices in both the European Union and New Zealand.",
+       "tavily_date": "2026-05-18",
+       "best_date": "2026-05-18",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-05-18"
+       ],
+       "label": "L",
+       "on_topic": true,
+       "outside_window": true
+      },
+      {
+       "url": "https://www.chicagotribune.com/2026/07/17/june-consumer-price-tracker/",
+       "title": "Milk prices at an all-time high, but most consumer prices slip in June after months of increases - Chicago Tribune",
+       "content": "Business |   Milk prices at an all-time high, but most…. # Milk prices at an all-time high, but most consumer prices slip in June after months of increases. That month-over-month change is largely due to easing oil and gas prices, with the index for energy falling a noticeable 5.7% — the most since April 2020. Energy costs are up a whopping 15.7% in the last 12 months, and overall inflation is 3.5% higher than it was just a year ago — still well above the Federal Reserve’s target of 2%. The Tribune is tracking 11 everyday costs for Americans — eggs, milk, bread, bananas, oranges, tomatoes, chicken, ground beef, gasoline, electricity and natural gas — and how they are changing, or not, under the second Trump administration. Prices spiked by 10 cents month-over-month to $4.32 for a gallon of fresh, fortified whole milk — an all-time high according to BLS data.",
+       "tavily_date": "2026-07-17",
+       "best_date": "2026-07-17",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-07-17",
+        "2026-07-18",
+        "2026-07-18",
+        "2026-07-18",
+        "2026-07-18",
+        "2026-07-18",
+        "2026-07-19",
+        "2026-07-20",
+        "2026-07-20",
+        "2026-07-20",
+        "2026-07-20",
+        "2026-07-29",
+        "2026-08-28",
+        "2026-08-30"
+       ],
+       "label": "L",
+       "on_topic": true,
+       "outside_window": true
+      },
+      {
+       "url": "https://www.thelandonline.com/news/mielke-market-weekly-agriculture-department-lowered-its-2026-and-2027-milk-production-forecasts/article_580f5c85-deb3-4aee-8c83-0e08d6840c40.html",
+       "title": "Mielke Market Weekly: Agriculture Department lowered its 2026 and 2027 Milk Production Forecasts - TheLandOnline",
+       "content": "As reported last week the Agriculture Department lowered its 2026 and 2027 milk production forecasts in the World Agricultural Supply and Demand Estimates report. 2026 production was projected at 236.9 billion pounds, down 300 million pounds from last month’s report. 2027 production was projected to hit 238.4 billion pounds, down 200 million pounds from a month ago. Commercial exports for 2026 and 2027 were lowered on a fat basis due to lower-than-expected shipments of butter and cheese. Commercial exports were virtually unchanged for 2026 on a skim-solids basis but lowered slightly in 2027 due to lower expected shipments of dry whey. Commercial imports for 2026 and 2027 were raised on a fat basis on increased shipments of butter. It was estimated to average $18.90 in 2026, up 35 cents from a month ago, and compares to $17.38 in 2025 and $20.75 in 2024.",
+       "tavily_date": "2026-10-23",
+       "best_date": "2026-10-23",
+       "page_date": "2026-10-23",
+       "page_date_why": "published/updated date on the page",
+       "captures": [],
+       "label": "F",
+       "on_topic": true,
+       "outside_window": true
+      }
+     ]
+    },
+    "D": {
+     "from": "C",
+     "results": [
+      {
+       "url": "https://www.etvbharat.com/hi/state/mp-milk-price-hike-private-vendors-increase-milk-rates-65-rs-per-liter-indore-bhopal-food-grade-plastic-rate-increase-madhya-pradesh-news-mps26040104785",
+       "title": "मध्य प्रदेश में दूध की कीमतों में उबाल, निजी विक्रेताओं ने बढ़ाए दाम, सांची-अमूल क्या करेंगे",
+       "content": "ETV Bharat / state\n\n# मध्य प्रदेश में दूध की कीमतों में उबाल, निजी विक्रेताओं ने बढ़ाए दाम, सांची-अमूल क्या करेंगे\n\n## मध्य प्रदेश में दूध की कीमतों में बढ़ोतरी, 60 की जगह प्रति लीटर चुकाना होंगे 65 रुपए, ईरान-इजराइल युद्ध से 40% मंहगी फूड ग्रेड प्लास्टिक.\n\nMadhya Pradesh Milk supply\n\nमध्य प्रदेश में दूध की कीमतों में उबाल(ETV Bharat)\n\nauthor img\n\nBy ETV Bharat Madhya Pradesh Team\n\nPublished :April 1, 2026 at 5:11 PM IST\n\n4 Min Read\n\nChoose ETV Bharat [...] भोपाल-इंदौर समेत प्रदेशभर में एक अप्रैल से निजी दूध विक्रेताओं ने दूध के दाम बढ़ा दिए हैं. इंदौर दूध विक्रेता संघ के फैसले के बाद अब घर पहुंच सेवा के तहत मिलने वाला बंदी का दूध तीन रुपये महंगा हो गया है. पहले उपभोक्ताओं को मासिक बंदी में दूध 60 रुपये प्रति लीटर मिलता था, जो अब बढ़कर 63 रुपये प्रति लीटर हो गया है. इसके अलावा डेयरी और दुकानों पर खुला दूध अब 65 रुपये प्रति लीटर के भाव से मिलेगा. दुकानदारों का कहना है कि लेबर, पैकिंग मटेरियल और अन्य खर्च बढ़ने के कारण कीमतों में यह बढ़ोतरी की गई है. [...] MADHYA PRADESH MILK SUPPLYINDORE BHOPAL MILK RATES INCREASEPRIVATE VENDORS MILK 65 RS PER LTRFOOD GRADE PLASTIC RATE INCREASEMP MILK PRICE HIKE\n\n### Quick Links / Policies\n\n CONTACT US\n ABOUT US\n AUTHORS\n CSR POLICY\n\n PRIVACY POLICY\n CODE OF ETHICS\n TERMS & CONDITIONS\n AWARDS\n\n### संपादक की पसंद\n\nETV Bharat Logo\n\nCopyright © 2026 Ushodaya Enterprises Pvt. Ltd., All Rights Reserved.",
+       "tavily_date": "2026-04-01",
+       "best_date": "2026-04-01",
+       "page_date": "2026-04-01",
+       "page_date_why": "published/updated date on the page",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "F1",
+   "lang": "hi",
+   "kind": "fuel",
+   "month": "2026-05",
+   "states": [],
+   "cutoff": "2026-05-29",
+   "query": "पेट्रोल डीजल के दाम बढ़े भारत मई 2026",
+   "arms": {
+    "C": {
+     "order": 0,
+     "call": "0e03aa5d3e11",
+     "credits": 1,
+     "response_time": 4.71,
+     "request_id": "58d15c33-9dc4-468a-9da3-e033f3e58853",
+     "response_sha256": "e461a2c3834182d9f2b20a65607917c2e3088d3380a975564d590fa4032a0fa9",
+     "results": [
+      {
+       "url": "https://www.bbc.com/hindi/articles/c8r88jzey11o",
+       "title": "फिर बढ़े पेट्रोल-डीज़ल के दाम, विपक्ष ने पूछे सरकार से ये सवाल - BBC News हिंदी",
+       "content": "# फिर बढ़े पेट्रोल-डीज़ल के दाम, विपक्ष ने पूछे सरकार से ये सवाल\n\nएक पेट्रोल पंप पर गाड़ी में पेट्रोल भरती पंप का कर्मचारी \n\nइमेज स्रोत, Sonu Mehta/Hindustan Times via Getty Image\n\nदेश में पेट्रोल-डीजल के दाम बढ़ने का सिलसिला जारी है.\n\nसोमवार ( 25 मई 2026) को पेट्रोल की क़ीमत में 2.61 रुपये और डीजल की क़ीमत में 2.71 रुपये प्रति लीटर की बढ़ोतरी की गई.\n\nपिछले दो हफ़्तों में पेट्रोल-डीजल की क़ीमतों में ये चौथी बढ़ोतरी है. [...] चुनाव ख़त्म होने के बाद सबसे पहले 15 मई को पेट्रोल और डीज़ल के दाम 3 रुपये प्रति लीटर बढ़ाए गए थे. इसके कुछ ही दिन बाद पेट्रोल के दाम में दो बार में 90 पैसे और 94 पैसे प्रति लीटर की बढ़ोतरी की गई और आज यानी 25 मई को चौथी बार 2 रुपये 61 पैसे की बढ़ोतरी की गई है.\n\nकुल मिलाकर चार बार में ऑयल मार्केटिंग कंपनियां पेट्रोल के भाव प्रति लीटर 7 रुपये 41 पैसे बढ़ा चुकी हैं. [...] समाचार एजेंसी पीटीआई के मुताबिक़, इस बढ़ोतरी के साथ देश की राजधानी दिल्ली में पेट्रोल की क़ीमत 102.12 रुपये प्रति लीटर हो गई है. वहीं डीजल 95.20 रुपये प्रति लीटर बिक रहा है.\n\nविपक्ष ने पेट्रोल-डीजल की क़ीमतों की बढ़ोतरी पर तीख़ी प्रतिक्रिया दी है.\n\n## 'चुनाव में वादे और बाक़ी समय जनता की जेब पर वार'\n\nपेट्रोल-डीजल \n\nइमेज स्रोत, AFP via Getty Images",
+       "tavily_date": "2026-05-25",
+       "best_date": "2026-05-25",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-05-25",
+        "2026-05-25",
+        "2026-05-26",
+        "2026-05-26",
+        "2026-05-26",
+        "2026-05-26",
+        "2026-05-26",
+        "2026-05-27",
+        "2026-05-27",
+        "2026-06-27"
+       ],
+       "label": "P",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.jagran.com/business/biz-petrol-diesel-price-hike-100-in-many-indian-cities-40251457.html",
+       "title": "Petrol Diesel Price: ज्यादातर शहरों में ₹100 के पार पहुंचा पेट्रोल-डीजल, इस शहर में सबसे महंगा; 15 राज्यों की लिस्ट\n - petrol diesel price hike 100 in many indian cities",
+       "content": "15 मई से अब तक पेट्रोल-डीजल की कीमतों में करीब 7.5 रुपए प्रति लीटर का इजाफा हो चुका है। इससे ट्रांसपोर्ट, रोजमर्रा के सामान और घरेलू बजट पर असर पड़ने की आशंका बढ़ गई है।\n\n## आंध्र प्रदेश के नेल्लोर में सबसे महंगा है पेट्रोल-डीजल [...] इस बीच सिर्फ पेट्रोल-डीजल ही नहीं, घरेलू गैस और CNG भी महंगी हो चुकी है। मई के मध्य से घरेलू LPG सिलेंडर की कीमत में 60 रुपए की बढ़ोतरी हुई है, जबकि CNG 4 रुपए प्रति किलो महंगी हो चुकी है।\n\nतेल कंपनियों का कहना है कि, [...] पेट्रोल-डीजल के दाम 11 दिन में चौथी बार बढ़े, जो ज्यादातर शहरों में 100 रुपए के पार पहुंच गए हैं। (फोटो AI जनरेटेट है।)\n\n## HighLights\n\nदेशभर में पेट्रोल-डीजल की कीमतें 100 रुपये के पार।\n\n11 दिन में चौथी बार बढ़े दाम, कुल 7.5 रुपये का इजाफा।\n\nमहंगाई बढ़ने की आशंका, विपक्ष ने सरकार पर साधा निशाना।",
+       "tavily_date": "2026-05-25",
+       "best_date": "2026-05-25",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-05-25",
+        "2026-05-26",
+        "2026-05-26",
+        "2026-06-22",
+        "2026-06-28"
+       ],
+       "label": "P",
+       "on_topic": true,
+       "outside_window": false
+      }
+     ]
+    },
+    "A": {
+     "order": 1,
+     "call": "1b0c1dc37fbf",
+     "credits": 1,
+     "response_time": 5.92,
+     "request_id": "966abe72-724d-4e78-a644-65ad82cdee70",
+     "response_sha256": "de9d49555f3d612f445422bbd6e2c8ce7c6424d96062fadc6c4f3eaeee15004a",
+     "results": [
+      {
+       "url": "https://www.bloomberg.com/news/articles/2026-05-23/india-raises-diesel-gasoline-prices-for-third-time-in-eight-days",
+       "title": "India Raises Diesel, Gasoline Prices for Third Time in Eight Days - Bloomberg.com",
+       "content": "# India Raises Diesel, Gasoline Prices for Third Time in Eight Days. Provide news feedback or report an error. Send a tip to our reporters. India’s state-run refiners raised retail prices again of diesel and gasoline on Saturday to help processors cut losses on discounted sales and to control a spike in demand. Prices of both fuels rose by nearly 1%, or less than 1 rupee, with gasoline now sold at 99.51 rupees ($1.0399) and diesel at 92.49 rupees per liter in New Delhi, according to the website of Indian Oil Corp., the country’s largest fuel retailer. Prices vary across India due to local taxes. Before it's here, it's on the Bloomberg Terminal. NewslettersExplainersPointed News QuizAlphadots GameThe Big TakeGraphicsSubmit a TipAbout Us.",
+       "tavily_date": "2026-05-23",
+       "best_date": "2026-05-23",
+       "page_date": "2026-05-23",
+       "page_date_why": "published/updated date on the page",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.gulte.com/featured/412839/fuel-shock-again-petrol-diesel-prices-hiked-heavily",
+       "title": "Massive Shock: Petrol, Diesel Prices Hiked by ₹ 7.5 in 10 Days - Gulte",
+       "content": "After adopting a wait and watch approach for a few weeks due to the assembly elections in several states, the government has started increasing their prices after the poll results. In another big shock to consumers, the fuel prices of both Petrol and Diesel have been hiked for the fourth time in less than two weeks across the country. While the cost of one litre petrol is increased by Rs 2.61, diesel has become more dearer with an uptick of Rs 2.71. The prices have been revised for the fourth time in the last ten days as oil companies are trying to offset their losses in the last few months despite the rising crude oil prices due to the ongoing geopolitical tensions following the conflict between US-Israel, which led to restrictions on the crucial waterway, Strait of Hormuz. Both petrol and diesel have seen an incremental hike of more than Rs 7 in the last few days since the first rise after the election results were out on May 4.",
+       "tavily_date": "2026-05-25",
+       "best_date": "2026-05-25",
+       "page_date": "2026-05-25",
+       "page_date_why": "published/updated date on the page",
+       "captures": [
+        "2026-06-24",
+        "2026-06-27",
+        "2026-07-30"
+       ],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.cnbc.com/video/2026/09/09/expecting-refineries-to-run-hard-causing-diesel-price-correction.html",
+       "title": "Chinese, U.S. refineries will likely 'run hard', triggering correction in diesel prices: Analyst - CNBC",
+       "content": "Chinese, U.S. refineries will likely 'run hard', triggering correction in diesel prices: Analyst. Amid rising oil prices due to renewed U.S.-Iran hostilities, XAnalysts' Chief Oil Analyst Mukesh Sahdev believes multiple factors might converge and bring correction to diesel prices going forward - including dark trade and a ramp-up in production of Chinese and U.S. refineries.",
+       "tavily_date": "2026-09-09",
+       "best_date": "2026-09-09",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-09-09",
+        "2026-09-09"
+       ],
+       "label": "L",
+       "on_topic": true,
+       "outside_window": true
+      }
+     ]
+    },
+    "D": {
+     "from": "C",
+     "results": []
+    }
+   }
+  },
+  {
+   "id": "F4",
+   "lang": "hi",
+   "kind": "fuel",
+   "month": "2026-05",
+   "states": [],
+   "cutoff": "2026-05-29",
+   "query": "पेट्रोल डीजल के दाम बढ़े भारत मई 2026",
+   "arms": {
+    "C": {
+     "order": 0,
+     "call": "12d4a8a8f560",
+     "credits": 1,
+     "response_time": 4.71,
+     "request_id": "58d15c33-9dc4-468a-9da3-e033f3e58853",
+     "response_sha256": "e461a2c3834182d9f2b20a65607917c2e3088d3380a975564d590fa4032a0fa9",
+     "results": [
+      {
+       "url": "https://www.bbc.com/hindi/articles/c8r88jzey11o",
+       "title": "फिर बढ़े पेट्रोल-डीज़ल के दाम, विपक्ष ने पूछे सरकार से ये सवाल - BBC News हिंदी",
+       "content": "# फिर बढ़े पेट्रोल-डीज़ल के दाम, विपक्ष ने पूछे सरकार से ये सवाल\n\nएक पेट्रोल पंप पर गाड़ी में पेट्रोल भरती पंप का कर्मचारी \n\nइमेज स्रोत, Sonu Mehta/Hindustan Times via Getty Image\n\nदेश में पेट्रोल-डीजल के दाम बढ़ने का सिलसिला जारी है.\n\nसोमवार ( 25 मई 2026) को पेट्रोल की क़ीमत में 2.61 रुपये और डीजल की क़ीमत में 2.71 रुपये प्रति लीटर की बढ़ोतरी की गई.\n\nपिछले दो हफ़्तों में पेट्रोल-डीजल की क़ीमतों में ये चौथी बढ़ोतरी है. [...] चुनाव ख़त्म होने के बाद सबसे पहले 15 मई को पेट्रोल और डीज़ल के दाम 3 रुपये प्रति लीटर बढ़ाए गए थे. इसके कुछ ही दिन बाद पेट्रोल के दाम में दो बार में 90 पैसे और 94 पैसे प्रति लीटर की बढ़ोतरी की गई और आज यानी 25 मई को चौथी बार 2 रुपये 61 पैसे की बढ़ोतरी की गई है.\n\nकुल मिलाकर चार बार में ऑयल मार्केटिंग कंपनियां पेट्रोल के भाव प्रति लीटर 7 रुपये 41 पैसे बढ़ा चुकी हैं. [...] समाचार एजेंसी पीटीआई के मुताबिक़, इस बढ़ोतरी के साथ देश की राजधानी दिल्ली में पेट्रोल की क़ीमत 102.12 रुपये प्रति लीटर हो गई है. वहीं डीजल 95.20 रुपये प्रति लीटर बिक रहा है.\n\nविपक्ष ने पेट्रोल-डीजल की क़ीमतों की बढ़ोतरी पर तीख़ी प्रतिक्रिया दी है.\n\n## 'चुनाव में वादे और बाक़ी समय जनता की जेब पर वार'\n\nपेट्रोल-डीजल \n\nइमेज स्रोत, AFP via Getty Images",
+       "tavily_date": "2026-05-25",
+       "best_date": "2026-05-25",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-05-25",
+        "2026-05-25",
+        "2026-05-26",
+        "2026-05-26",
+        "2026-05-26",
+        "2026-05-26",
+        "2026-05-26",
+        "2026-05-27",
+        "2026-05-27",
+        "2026-06-27"
+       ],
+       "label": "P",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.jagran.com/business/biz-petrol-diesel-price-hike-100-in-many-indian-cities-40251457.html",
+       "title": "Petrol Diesel Price: ज्यादातर शहरों में ₹100 के पार पहुंचा पेट्रोल-डीजल, इस शहर में सबसे महंगा; 15 राज्यों की लिस्ट\n - petrol diesel price hike 100 in many indian cities",
+       "content": "15 मई से अब तक पेट्रोल-डीजल की कीमतों में करीब 7.5 रुपए प्रति लीटर का इजाफा हो चुका है। इससे ट्रांसपोर्ट, रोजमर्रा के सामान और घरेलू बजट पर असर पड़ने की आशंका बढ़ गई है।\n\n## आंध्र प्रदेश के नेल्लोर में सबसे महंगा है पेट्रोल-डीजल [...] इस बीच सिर्फ पेट्रोल-डीजल ही नहीं, घरेलू गैस और CNG भी महंगी हो चुकी है। मई के मध्य से घरेलू LPG सिलेंडर की कीमत में 60 रुपए की बढ़ोतरी हुई है, जबकि CNG 4 रुपए प्रति किलो महंगी हो चुकी है।\n\nतेल कंपनियों का कहना है कि, [...] पेट्रोल-डीजल के दाम 11 दिन में चौथी बार बढ़े, जो ज्यादातर शहरों में 100 रुपए के पार पहुंच गए हैं। (फोटो AI जनरेटेट है।)\n\n## HighLights\n\nदेशभर में पेट्रोल-डीजल की कीमतें 100 रुपये के पार।\n\n11 दिन में चौथी बार बढ़े दाम, कुल 7.5 रुपये का इजाफा।\n\nमहंगाई बढ़ने की आशंका, विपक्ष ने सरकार पर साधा निशाना।",
+       "tavily_date": "2026-05-25",
+       "best_date": "2026-05-25",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-05-25",
+        "2026-05-26",
+        "2026-05-26",
+        "2026-06-22",
+        "2026-06-28"
+       ],
+       "label": "P",
+       "on_topic": true,
+       "outside_window": false
+      }
+     ]
+    },
+    "A": {
+     "order": 1,
+     "call": "88eb3cc6772a",
+     "credits": 1,
+     "response_time": 5.92,
+     "request_id": "966abe72-724d-4e78-a644-65ad82cdee70",
+     "response_sha256": "de9d49555f3d612f445422bbd6e2c8ce7c6424d96062fadc6c4f3eaeee15004a",
+     "results": [
+      {
+       "url": "https://www.bloomberg.com/news/articles/2026-05-23/india-raises-diesel-gasoline-prices-for-third-time-in-eight-days",
+       "title": "India Raises Diesel, Gasoline Prices for Third Time in Eight Days - Bloomberg.com",
+       "content": "# India Raises Diesel, Gasoline Prices for Third Time in Eight Days. Provide news feedback or report an error. Send a tip to our reporters. India’s state-run refiners raised retail prices again of diesel and gasoline on Saturday to help processors cut losses on discounted sales and to control a spike in demand. Prices of both fuels rose by nearly 1%, or less than 1 rupee, with gasoline now sold at 99.51 rupees ($1.0399) and diesel at 92.49 rupees per liter in New Delhi, according to the website of Indian Oil Corp., the country’s largest fuel retailer. Prices vary across India due to local taxes. Before it's here, it's on the Bloomberg Terminal. NewslettersExplainersPointed News QuizAlphadots GameThe Big TakeGraphicsSubmit a TipAbout Us.",
+       "tavily_date": "2026-05-23",
+       "best_date": "2026-05-23",
+       "page_date": "2026-05-23",
+       "page_date_why": "published/updated date on the page",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.gulte.com/featured/412839/fuel-shock-again-petrol-diesel-prices-hiked-heavily",
+       "title": "Massive Shock: Petrol, Diesel Prices Hiked by ₹ 7.5 in 10 Days - Gulte",
+       "content": "After adopting a wait and watch approach for a few weeks due to the assembly elections in several states, the government has started increasing their prices after the poll results. In another big shock to consumers, the fuel prices of both Petrol and Diesel have been hiked for the fourth time in less than two weeks across the country. While the cost of one litre petrol is increased by Rs 2.61, diesel has become more dearer with an uptick of Rs 2.71. The prices have been revised for the fourth time in the last ten days as oil companies are trying to offset their losses in the last few months despite the rising crude oil prices due to the ongoing geopolitical tensions following the conflict between US-Israel, which led to restrictions on the crucial waterway, Strait of Hormuz. Both petrol and diesel have seen an incremental hike of more than Rs 7 in the last few days since the first rise after the election results were out on May 4.",
+       "tavily_date": "2026-05-25",
+       "best_date": "2026-05-25",
+       "page_date": "2026-05-25",
+       "page_date_why": "published/updated date on the page",
+       "captures": [
+        "2026-06-24",
+        "2026-06-27",
+        "2026-07-30"
+       ],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.cnbc.com/video/2026/09/09/expecting-refineries-to-run-hard-causing-diesel-price-correction.html",
+       "title": "Chinese, U.S. refineries will likely 'run hard', triggering correction in diesel prices: Analyst - CNBC",
+       "content": "Chinese, U.S. refineries will likely 'run hard', triggering correction in diesel prices: Analyst. Amid rising oil prices due to renewed U.S.-Iran hostilities, XAnalysts' Chief Oil Analyst Mukesh Sahdev believes multiple factors might converge and bring correction to diesel prices going forward - including dark trade and a ramp-up in production of Chinese and U.S. refineries.",
+       "tavily_date": "2026-09-09",
+       "best_date": "2026-09-09",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-09-09",
+        "2026-09-09"
+       ],
+       "label": "L",
+       "on_topic": true,
+       "outside_window": true
+      }
+     ]
+    },
+    "D": {
+     "from": "C",
+     "results": []
+    }
+   }
+  },
+  {
+   "id": "E7",
+   "lang": "hi",
+   "kind": "electricity",
+   "month": "2026-07",
+   "states": [
+    "chhattisgarh"
+   ],
+   "cutoff": "2026-07-29",
+   "query": "बिजली की दरें बढ़ीं छत्तीसगढ़ जुलाई 2026",
+   "arms": {
+    "A": {
+     "order": 0,
+     "call": "fcf48aad8bb5",
+     "credits": 1,
+     "response_time": 4.5,
+     "request_id": "2f35b4b5-c9ec-4db7-9fc1-cd8373e6e5b0",
+     "response_sha256": "94dec1e190886995e6711bf7c66d721a186a445a35e600dbd5a9a426a1958b7d",
+     "results": [
+      {
+       "url": "https://www.jagran.com/business/biz-chhattisgarh-electricity-tariff-hikes-623-from-july-1-40275830.html",
+       "title": "1 जुलाई से महंगी होगी बिजली, यहां बिजली की दरों में औसतन 6.23 की हुई बढ़ोतरी - chhattisgarh electricity tariff hikes 623 from july 1",
+       "content": "छत्तीसगढ़ में राज्य विद्युत नियामक आयोग ने वित्त वर्ष 2026-27 के लिए नया बिजली टैरिफ जारी करते हुए दरों में औसतन 6.23 प्रतिशत की बढ़ोतरी को मंजूरी दी है। नए टैरिफ के अनुसार किसानों को कृषि पंप या अन्य सिंचाई यंत्र चलाने पर 40 पैसे प्रति यूनिट अतिरिक्त देने होंगे।\n\n## घरेलू उपभोक्ताओं के लिए कितनी बढ़ी दरें? [...] # 1 जुलाई से महंगी होगी बिजली, यहां बिजली की दरों में औसतन 6.23% की हुई बढ़ोतरी\n\n1 जुलाई से बिजली महंगी हो जाएगी, नियामक आयोग ने दरों में औसतन 6.23% की बढ़ोतरी को मंजूरी दी है। ...और पढ़ें\n\nछत्तीसगढ़ में 1 जुलाई से लागू होंगी बिजली की नई दरें\n\nछत्तीसगढ़ में 1 जुलाई से लागू होंगी बिजली की नई दरें\n\n## HighLights\n\n1 जुलाई से छत्तीसगढ़ में बिजली की दरें बढ़ीं।\n\nऔसतन 6.23% की बढ़ोतरी, किसानों पर भी असर।\n\nकुछ छात्रावासों और महिला समूहों को छूट जारी। [...] घरेलू बिजली दरों में भी बढ़ोतरी की गई है। 0 से 200 यूनिट तक बिजली खपत होने पर 30 पैसे प्रति यूनिट की बढ़ोतरी लागू होगी। 201 से 600 यूनिट तक की खपत करने वाले उपभोक्ताओं को प्रति यूनिट 40 पैसे प्रति और 600 यूनिट से अधिक खपत करने वालों को 50 पैसे प्रति यूनिट का अतिरिक्त भुगतान लागू होगा। गैर-घरेलू और व्यावसायिक उपभोक्ताओं के लिए बिजली दरों में 20 से 40 पैसे प्रति यूनिट तक चुकाने होंगे।",
+       "tavily_date": "2026-06-17",
+       "best_date": "2026-06-17",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": true
+      },
+      {
+       "url": "https://www.abplive.com/states/chhattisgarh/chhattisgarh-electricity-rate-hike-domestic-commercial-farmers-pump-per-unit-bill-increase-from-july-1-3145838",
+       "title": "छत्तीसगढ़ में बिजली हुई महंगी, घरेलू और कमर्शियल उपभोक्ताओं पर बढ़ा भार, 1 जुलाई से ये होंगी नई दरें | Chhattisgarh Electricity Rate Hike Domestic Commercial Farmers Pump Per Unit Bill Increase from July 1",
+       "content": "साल 2026-27 के लिए वर्तमान शुल्क (टैरिफ) के आधार पर औसत बिलिंग दर 6.71 रुपये प्रति यूनिट अनुमानित की है, जो कि औसत लागत दर 7.13 रुपये प्रति यूनिट से 42 पैसे कम है. घरेलू उपभोक्ताओं के लिए बिजली की दरों में 30 से 50 पैसे प्रति यूनिट की बढ़ोतरी की गई है, जिससे राज्य के लगभग 60 लाख उपभोक्ता प्रभावित होंगे.\n\nयह भी पढ़ें: Chhattisgarh News: शिक्षा विभाग के आदेश से बवाल, कांग्रेस बोली- स्कूलों में चलाया जा रहा RSS का एजेंडा\n\n, बंसल न्यूज़, हिंदी खबर और पंजाब केसरी में काम कर चुके हैं.\n\nRead More [...] यह बढ़ोतरी राज्य की बिजली वितरण कंपनी द्वारा वित्तीय वर्ष 2026-27 के लिए मांगी गई 24 प्रतिशत की बढ़ोतरी की तुलना में काफी कम है. आयोग ने कहा कि संशोधित दरों को मंजूरी वित्तीय वर्ष के लिए अनुमानित राजस्व की जरूरत को पूरा करने के लिए दी गई है. साल 2026-27 के लिए वितरण कंपनी ने 8.40 रुपये प्रति यूनिट औसत विद्युत प्रदाय दर का प्रस्ताव प्रस्तुत किया था. विश्लेषण के बाद आयोग ने औसत विद्युत प्रदाय दर 7.13 रुपये प्रति यूनिट स्वीकृत की है. [...] CSERC द्वारा जारी नई दरों के तहत घरेलू बिजली दरों में 30 से 50 पैसे प्रति यूनिट तक बढ़ोतरी की गई है. वहीं,  कमर्शियल बिजली 20 से 40 पैसे प्रति यूनिट महंगी होने वाली है. इसके अलावा, कृषि पंपों की बिजली दर में 40 पैसे प्रति यूनिट की वृद्धि की गई है.\n\nबिजली की नई दरें 1 जुलाई से होंगी लागू\n\nदूसरी ओर, गैर-सब्सिडी कृषि पंपों को बड़ी राहत मिली है. विद्युत नियामक आयोग ने ऊर्जा प्रभार पर छूट 30 फीसदी से बढ़ाकर 40 फीसदी कर दी है. बिजली की ये नई दरें 1 जुलाई 2026 से लागू होंगी.",
+       "tavily_date": "2026-06-16",
+       "best_date": "2026-06-16",
+       "page_date": "2026-06-16",
+       "page_date_why": "published/updated date on the page",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": true
+      },
+      {
+       "url": "https://hindi.news18.com/news/chhattisgarh/raipur-electricity-become-costlier-from-july-1-6-23-percent-hike-approved-know-tariff-2026-local18-10573402.html",
+       "title": "छत्तीसगढ़ में 1 जुलाई से बिजली महंगी, 6.23% की बढ़ोतरी का फैसला, जानें आपकी जेब पर कितना बढ़ेगा बोझ",
+       "content": "# छत्तीसगढ़ में 1 जुलाई से बिजली महंगी, 6.23% की बढ़ोतरी का फैसला, जानें आपकी जेब पर कितना बढ़ेगा बोझ\n\nReported by:\n\n युगल तिवारी\n\nEdited by:\n\n Rishi mishra\n\nAgency:Local18\n\nLast Updated:\n\n## Chhattisgarh Electricity Tariff 2026: छत्तीसगढ़ में बिजली की दरों में औसतन 6.23% की बढ़ोतरी की गई है. नई दरें 1 जुलाई 2026 से लागू होंगी. अब घरेलू उपभोक्ताओं को इतनी रकम प्रति यूनिट अतिरिक्त देनी होगी. किसानों और व्यावसायिक उपभोक्ताओं पर भी इसका असर पड़ेगा. जानें सब...\n\nimpact short icon\n\nख़बरें फटाफट [...] 1 जुलाई से लागू होंगी नई दरें  \n विद्युत नियामक आयोग के सदस्य विवेक गनोदवाले ने इस संबंध में जानकारी साझा की है. उन्होंने बताया कि नई बिजली दरें 1 जुलाई 2026 से पूरे राज्य में प्रभावशील हो जाएंगी. इस बार बिजली की दरों में औसतन 6.23% की बढ़ोतरी की गई है. इस बदलाव के बाद राज्य में अब औसत विद्युत बिलिंग दर 6.71 रुपये प्रति यूनिट तय की गई है. [...] भाषा चुनें\n\nThu, Oct 15, 2026 | 03:22 AM\n\nपेपरऐप डाउनलोड करेंलोकल 18लाइव टीवीfor_you\n\nask search iconask news18Sign in\n\nOct 15, 2026 03:22 AM\n\nTrending:\n\n Raghopur Boat Accident\n Delhi Protest\n Navratri Day 4\n Saudi Arab War\n अनूठे मंद‍िरअनूठे मंद‍िर\n फोटो\n KADAK\n #NiveshKaSahiKadam\n\n Follow Us\n\nAdvertisement\n\nहोमताजा खबरछत्तीसगढ़रायपुर\n\nछत्तीसगढ़ में 1 जुलाई से बिजली महंगी, 6.23% की बढ़ोतरी, जानें कितना बढ़ेगा बोझ",
+       "tavily_date": "2026-06-15",
+       "best_date": "2026-06-15",
+       "page_date": "2026-06-15",
+       "page_date_why": "published/updated date on the page",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": true
+      }
+     ]
+    },
+    "C": {
+     "order": 1,
+     "call": "2765bb2682ff",
+     "credits": 1,
+     "response_time": 3.12,
+     "request_id": "575f387d-1314-4717-8b39-9c923060c2b4",
+     "response_sha256": "2c966809b791a149b73259965150dd59c1c4effec2cbb3c0c64b740d3852a983",
+     "results": [
+      {
+       "url": "https://navbharattimes.indiatimes.com/state/uttar-pradesh/lucknow/up-electricity-price-news-relief-for-consumers-july-bills/articleshow/132137522.cms",
+       "title": "UP Electricity Price News: बिजली उपभोक्ताओं को बड़ी राहत, जुलाई में 4.43 फीसदी कम आएगा बिल - up electricity price news relief for consumers july bills - Navbharat Times",
+       "content": "किया और 2017 में डिप्टी एडिटर बने। जनवरी 2025 में वे एनडीटीवी में सेवानिवृत्त हुए। सूर्यकांत पाठक ने डॉ हरिसिंह गौर सेंट्रल यूनिवर्सिटी, सागर से बीए, एमए -परफॉर्मिंग आर्ट (थिएटर), बीसीजे और एसजेसी की डिग्रियां ली हैं। इंदिरा कला संगीत विश्वविद्यालय, खैरागढ़ (छत्तीसगढ़) से हिंदुस्तानी शास्त्रीय गायन में डिप्लोमा किया है। उन्होंने भारत भवन- भोपाल पर रिसर्च की है। उन्होंने'बच्चों पर केबिल टेलिविजन का असर' विषय पर लघु शोध किया है। इंदौर की गंदी बस्तियों में लोगों के जीवन स्तर पर एक वृहत सर्वे किया [...] यूपी पावर कॉर्पोरेशन लिमिटेड (UPPCL) ने उत्तर प्रदेश विद्युत नियामक आयोग (UPERC) के नियमों और ताजा निर्देशों पर जुलाई के लिए संशोधित एफपीपीएएस जारी किया है। यह समायोजन अप्रैल 2026 में बिजली खरीद की वास्तविक लागत के आधार पर हो रहा है। इससे राज्य भर के सभी बिजली उपभोक्ताओं को फायदा मिलेगा। यूपीपीसीएल की रेगुलेटरी अफेयर्स यूनिट ने कहा है कि, अप्रैल 2026 के लिए फ्यूल एंड पावर परचेज एडजस्टमेंट सरचार्ज की गणना माइनस 4.43 प्रतिशत की गई है। इसे जुलाई माह के बिजली बिल में एडजस्ट किया जाएगा। [...] ### लागत के औसत में आई कमी\n\nबताया गया है कि अप्रैल में बिजली खरीद की वास्तविक औसत लागत 4.78 रुपये प्रति यूनिट थी। दूसरी तरफ स्वीकृत की गई लागत 4.94 रुपये प्रति यूनिट थी। इससे 358.31 करोड़ रुपये का नेगेटिव एडजस्टमेंट हुआ। इसका लाभ राज्य के बिजली उपभोक्ताओं को मिलेगा।  \n  \n\n### सभी वर्गों के उपभोक्ताओं को मिलेगा लाभ",
+       "tavily_date": "2026-07-02",
+       "best_date": "2026-07-02",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-07-02",
+        "2026-07-03"
+       ],
+       "label": "P",
+       "on_topic": true,
+       "outside_window": false
+      }
+     ]
+    },
+    "D": {
+     "from": "C",
+     "results": []
+    }
+   }
+  },
+  {
+   "id": "M1",
+   "lang": "mr",
+   "kind": "milk",
+   "month": "2026-02",
+   "states": [
+    "maharashtra"
+   ],
+   "cutoff": "2026-02-28",
+   "query": "दूध दरवाढ महाराष्ट्र फेब्रुवारी 2026",
+   "arms": {
+    "C": {
+     "order": 0,
+     "call": "a53c644d3715",
+     "credits": 1,
+     "response_time": 5.24,
+     "request_id": "e8d27dfe-e400-4bf7-9cbf-b04a82175926",
+     "response_sha256": "356b0460029c51f42299b7b90a3d06d0e0489f858f9f93fdb587628a7152ba34",
+     "results": [
+      {
+       "url": "https://www.just-food.com/news/arlas-record-2025-sales-to-face-new-year-pressures-from-milk-prices/",
+       "title": "Arla’s “record” 2025 sales to face new year pressures from milk prices - Global Food Industry News",
+       "content": "# Arla’s “record” 2025 sales to face new year pressures from milk prices. “While lower price levels will impact total revenue, they are also expected to support consumer purchasing power,” Arla said. Arla Foods notched up an unprecedented year for group revenues but predicts a rise in raw milk volumes will weigh on sales in 2026. Combine business intelligence and editorial excellence to reach engaged professionals across 36 leading media platforms. However, for the new year, Arla provided a group sales revenue outlook of €13bn to €14.1bn, “reflecting the lower market prices compared to the highs of early 2025”. Arla added in the commentary: “While these price levels impacted volumes in the first half of the year, the underlying demand remained intact. Looking ahead to the new year, Arla said: “While lower price levels will impact total revenue, they are also expected to support consumer purchasing power. #### Access deeper industry intelligence.",
+       "tavily_date": "2026-02-18",
+       "best_date": "2026-02-18",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-02-18",
+        "2026-02-18",
+        "2026-02-18",
+        "2026-02-22",
+        "2026-02-25",
+        "2026-03-07",
+        "2026-04-18",
+        "2026-04-21",
+        "2026-05-20"
+       ],
+       "label": "P",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.dnaindia.com/business/report-budget-2026-what-changes-for-agriculture-animal-husbandry-and-fisheries-nirmala-sitharaman-big-promises-what-experts-say-3198954",
+       "title": "Budget 2026: What changes for Agriculture, Animal Husbandry, and Fisheries? Nirmala Sitharaman BIG promises, what experts say - DNA India",
+       "content": "**Budget 2026: Bharat-VISTAAR, high-value crops, farmers' income**. CropLife India says, \"These initiatives will translate into consistent farm-level outcomes only if they are supported by stronger on-ground extension systems and sustained investment in crop science research to help farmers manage climate stress, rising pest pressure and resistance.\". By strengthening value chains from accessibility of veterinary professionals to agricultural output and processing, the Budget supports higher efficiency, greater farmer participation in value-added segments and improved availability of milk, eggs and protein-rich foods, highlighting the growing role of allied sectors in India’s journey toward Viksit Bharat. “The Union Budget 2026 recognises dairy as a key driver of farm income stability, nutrition security and rural employment,\" says Akshali Shah, Executive Director, Parag Milk Foods. By encouraging entrepreneurship and investment in dairy enterprises, the Budget creates a supportive environment for sustainable supply chains while contributing to inclusive rural growth,\" she adds.",
+       "tavily_date": "2026-02-01",
+       "best_date": "2026-02-01",
+       "page_date": "2026-02-01",
+       "page_date_why": "published/updated date on the page",
+       "captures": [
+        "2026-02-01",
+        "2026-02-01"
+       ],
+       "label": "P",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.etvbharat.com/en/bharat/budget-2026-agriculture-sector-allocations-farmers-welfare-crop-subsidy-finance-minister-nirmala-sitharaman-enn26012905417",
+       "title": "Budget 2026 Agriculture Sector Allocations: What Can Farmers Expect From Budget Today - ETV Bharat",
+       "content": "# Budget 2026 Agriculture Sector Allocations: What Can Farmers Expect From Budget Today. ## Ahead of Budget 2026-27, the Union Agriculture Ministry held a pre-budget meeting with farmers’ associations and allied sector workers to discuss their suggestions. Budget 2026 Agriculture Sector(ETV Bharat). **New Delhi:** With agriculture functioning as the backbone of India, farmers and other stakeholders would be keenly looking at the allocations and announcements in this sector as Union Finance Minister Nirmala Sitharaman presents the Budget 2026-27 in Parliament today (February 1, 2026). The 2025-26 Union Budget had allocated Rs 1.27 lakh crore to the Department of Agriculture and Farmers Welfare, with a total of Rs 1.37 lakh crore for the entire ministry. The allocations for the Agriculture sector in this year's budget will be closely watched by people, especially those from rural areas associated with farming. Ahead of the Budget 2026-27, the Union Agriculture Ministry recently held a pre-budget meeting with farmers’ associations and allied sector workers to discuss their suggestions over the allocations for the sector.",
+       "tavily_date": "2026-02-01",
+       "best_date": "2026-02-01",
+       "page_date": "2026-02-01",
+       "page_date_why": "published/updated date on the page",
+       "captures": [
+        "2026-02-04"
+       ],
+       "label": "P",
+       "on_topic": false,
+       "outside_window": false
+      }
+     ]
+    },
+    "A": {
+     "order": 1,
+     "call": "046ff2450d9e",
+     "credits": 1,
+     "response_time": 3.17,
+     "request_id": "d34c2207-2a42-43df-9895-35dc1ec5aa3c",
+     "response_sha256": "f51925636d01ec413e6d100e64194458a46ce437148a92b2234ecd64e47df814",
+     "results": [
+      {
+       "url": "https://www.facebook.com/Zee24Taas/videos/maharashtra-fodder-camps-%E0%A4%B0%E0%A4%BE%E0%A4%9C%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%A4-%E0%A4%91%E0%A4%95%E0%A5%8D%E0%A4%9F%E0%A5%8B%E0%A4%AC%E0%A4%B0%E0%A4%AE%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A5%87-%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A4%BE-%E0%A4%9B%E0%A4%BE%E0%A4%B5%E0%A4%A3%E0%A5%8D%E0%A4%AF%E0%A4%BE-%E0%A4%B8%E0%A5%81%E0%A4%B0%E0%A5%82-%E0%A4%B9%E0%A5%8B%E0%A4%A3%E0%A4%BE%E0%A4%B0-zee24taasm/2324142378122786",
+       "title": "राज्यात ऑक्टोबरमध्ये चारा छावण्या सुरू होणार | Zee24Taas",
+       "content": "Maharashtra Drought 2026 : दूध उत्पादकांनी फेब्रुवारी ते जूनपर्यंतच्या... ... दरवाढ |. 04:22. Special Reprt",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.instagram.com/p/DebDsq4DpFn",
+       "title": "वाढत्या उत्पादन खर्चाने आर्थिक कोंडीत सापडलेल्या दूध ...",
+       "content": "ही दरवाढ 1 सप्टेंबर 2026 पासून लागू होणार आहे.पशुखाद्य, जनावरांच्या देखभालीचा वाढता",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.instagram.com/reel/Dey5PtfDwQK",
+       "title": "Maharashtra Milk Production | राज्यात दूध उत्पादन १६६ २६ ...",
+       "content": "Maharashtra Milk Production | राज्यात दूध उत्पादन १६६ २६ लाख मेट्रिक टनांवर; चाऱ्याची टंचाई कायम",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      }
+     ]
+    },
+    "D": {
+     "from": "C",
+     "results": [
+      {
+       "url": "https://www.dnaindia.com/business/report-budget-2026-what-changes-for-agriculture-animal-husbandry-and-fisheries-nirmala-sitharaman-big-promises-what-experts-say-3198954",
+       "title": "Budget 2026: What changes for Agriculture, Animal Husbandry, and Fisheries? Nirmala Sitharaman BIG promises, what experts say - DNA India",
+       "content": "**Budget 2026: Bharat-VISTAAR, high-value crops, farmers' income**. CropLife India says, \"These initiatives will translate into consistent farm-level outcomes only if they are supported by stronger on-ground extension systems and sustained investment in crop science research to help farmers manage climate stress, rising pest pressure and resistance.\". By strengthening value chains from accessibility of veterinary professionals to agricultural output and processing, the Budget supports higher efficiency, greater farmer participation in value-added segments and improved availability of milk, eggs and protein-rich foods, highlighting the growing role of allied sectors in India’s journey toward Viksit Bharat. “The Union Budget 2026 recognises dairy as a key driver of farm income stability, nutrition security and rural employment,\" says Akshali Shah, Executive Director, Parag Milk Foods. By encouraging entrepreneurship and investment in dairy enterprises, the Budget creates a supportive environment for sustainable supply chains while contributing to inclusive rural growth,\" she adds.",
+       "tavily_date": "2026-02-01",
+       "best_date": "2026-02-01",
+       "page_date": "2026-02-01",
+       "page_date_why": "published/updated date on the page",
+       "captures": [
+        "2026-02-01",
+        "2026-02-01"
+       ],
+       "label": "P",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.etvbharat.com/en/bharat/budget-2026-agriculture-sector-allocations-farmers-welfare-crop-subsidy-finance-minister-nirmala-sitharaman-enn26012905417",
+       "title": "Budget 2026 Agriculture Sector Allocations: What Can Farmers Expect From Budget Today - ETV Bharat",
+       "content": "# Budget 2026 Agriculture Sector Allocations: What Can Farmers Expect From Budget Today. ## Ahead of Budget 2026-27, the Union Agriculture Ministry held a pre-budget meeting with farmers’ associations and allied sector workers to discuss their suggestions. Budget 2026 Agriculture Sector(ETV Bharat). **New Delhi:** With agriculture functioning as the backbone of India, farmers and other stakeholders would be keenly looking at the allocations and announcements in this sector as Union Finance Minister Nirmala Sitharaman presents the Budget 2026-27 in Parliament today (February 1, 2026). The 2025-26 Union Budget had allocated Rs 1.27 lakh crore to the Department of Agriculture and Farmers Welfare, with a total of Rs 1.37 lakh crore for the entire ministry. The allocations for the Agriculture sector in this year's budget will be closely watched by people, especially those from rural areas associated with farming. Ahead of the Budget 2026-27, the Union Agriculture Ministry recently held a pre-budget meeting with farmers’ associations and allied sector workers to discuss their suggestions over the allocations for the sector.",
+       "tavily_date": "2026-02-01",
+       "best_date": "2026-02-01",
+       "page_date": "2026-02-01",
+       "page_date_why": "published/updated date on the page",
+       "captures": [
+        "2026-02-04"
+       ],
+       "label": "P",
+       "on_topic": false,
+       "outside_window": false
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "E2",
+   "lang": "mr",
+   "kind": "electricity",
+   "month": "2026-04",
+   "states": [
+    "maharashtra"
+   ],
+   "cutoff": "2026-04-29",
+   "query": "वीज दरवाढ महाराष्ट्र एप्रिल 2026",
+   "arms": {
+    "A": {
+     "order": 0,
+     "call": "b3e0eb6fe4e8",
+     "credits": 1,
+     "response_time": 4.59,
+     "request_id": "428e2b0e-c806-428f-9232-8c36d0935b3e",
+     "response_sha256": "e45649d6954b4052942491badc6cc7b8ca9d644003072dea42e09388fe46ba74",
+     "results": [
+      {
+       "url": "https://saamtv.esakal.com/maharashtra/aajchya-tajya-batmya-maharashtra-latest-live-news-updates-today-7th-october-2026-mpsc-student-protest-rahul-gandhi-aandolan-shivsena-konachi-maharashtra-drought-weather-update-gyanesh-kumar-election-commission-mumbai-pune-nagpur-kolhapur-solapur-latur-local-nashik-crime-politics-latest-breaking-news",
+       "title": "Maharashtra News Live Update: जालना जिल्ह्यातल्या भोकरदन ...",
+       "content": "... वीज दराच्या मुद्द्यावर ... एप्रिल २०२४ ते जुलै २०२६ या २८ महिन्यांच्या कालावधीत",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-10-07",
+        "2026-10-09"
+       ],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.loksatta.com/explained/solar-rooftop-new-rules-electricity-bill-savings-impact-analysis-print-exp-ssb-93-6159489",
+       "title": "सौरविजेचे गणित बदलणार; ग्राहकांच्या बचतीवर किती परिणाम?",
+       "content": "दहा किलोवॅटच्या पुढील क्षमतेनुसार दिवसाचे चार, आठ, बारा किंवा २४ कालखंड करून विजेचा",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-09-29"
+       ],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      },
+      {
+       "url": "https://epaper.loksatta.com/t/643/Pune",
+       "title": "Pune Marathi Epaper online. Access today's Marathi newspaper, Mumbai edition headlines, breaking news, and full digital e-paper pages.",
+       "content": "Pune\n\n#### Oct 02, 2026\n\nPune\n\n#### Oct 01, 2026\n\nNext » [...] ### Pune\n\nPune\n\n#### Oct 22, 2026\n\nPune\n\n#### Oct 20, 2026\n\nPune\n\n#### Oct 19, 2026\n\nPune\n\n#### Oct 18, 2026\n\nPune\n\n#### Oct 17, 2026\n\nPune\n\n#### Oct 16, 2026\n\nPune\n\n#### Oct 15, 2026\n\nPune\n\n#### Oct 14, 2026\n\nPune\n\n#### Oct 13, 2026\n\nPune\n\n#### Oct 12, 2026\n\nPune\n\n#### Oct 11, 2026\n\nPune\n\n#### Oct 10, 2026\n\nPune\n\n#### Oct 09, 2026\n\nPune\n\n#### Oct 08, 2026\n\nPune\n\n#### Oct 07, 2026\n\nPune\n\n#### Oct 06, 2026\n\nPune\n\n#### Oct 05, 2026\n\nPune\n\n#### Oct 04, 2026\n\nPune\n\n#### Oct 03, 2026\n\nPune [...] English English\n தமிழ் தமிழ்\n বাংলা বাংলা\n മലയാളം മലയാളം\n ગુજરાતી ગુજરાતી\n हिंदी हिंदी\n मराठी मराठी\n Business Business\n Insurance Insurance\n\nFollow Us \n\n Facebook Facebook\n Twitter Twitter\n\n होम\n महाराष्ट्र\n शहर\n सत्ताकारण\n देश-विदेश\n राशीभविष्य\n मनोरंजन\n ट्रेंडिंग\n क्रीडा\n अर्थभान\n चतुरा\n विचारमंच\n विश्लेषण\n फोटो\n व्हिडिओ\n वेब स्टोरीज\n ईपेपर\n\n ट्रेंडिंग\n प्रीमियम स्टोरीज\n विधिमंडळ हिवाळी अधिवेश\n चंद्रकांत पाटील\n संजय राऊत\n एकनाथ शिंदे\n देवेंद्र फडणवीस\n बिग बॉस मराठी\n\n### Pune\n\nPune",
+       "tavily_date": "2016-02-01",
+       "best_date": "2016-02-01",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-01-12",
+        "2026-01-14",
+        "2026-02-12",
+        "2026-03-14",
+        "2026-05-21",
+        "2026-06-13"
+       ],
+       "label": "P",
+       "on_topic": false,
+       "outside_window": true
+      }
+     ]
+    },
+    "C": {
+     "order": 1,
+     "call": "8883f38ed594",
+     "credits": 1,
+     "response_time": 4.97,
+     "request_id": "89a143b9-2b54-4803-bde5-f8bc44e07a60",
+     "response_sha256": "490b495149dc85a36845ac4200d31b3664c42a3bad1df90a03297d11b6d407ad",
+     "results": [
+      {
+       "url": "https://www.global-agriculture.com/india-region/bioagri-next-global-conference-expo-2026-to-be-held-in-india/",
+       "title": "BioAgri Next Global Conference & Expo 2026 to be held in India - Global Agriculture",
+       "content": "# BioAgri Next Global Conference & Expo 2026 to be held in India. ****05** April 2026, **New Delhi**:** The second edition of the BioAgri Next Global Conference & Expo will take place on 14–15 May 2026 at Hotel Hyatt Regency, Pune, Maharashtra, India. BioAgri Next Global Conference & Expo. The theme for the 2026 edition is “Showcasing India as the Global Hub for Agricultural Biologicals.” The event will examine India’s role in research, manufacturing, and trade of biological inputs, and its position in the global agriculture sector. Media partners include Global Agriculture, among others, supporting outreach and coverage. According to Amit Khare, Founder and Managing Partner of Snail Integral Pvt. Ltd., the event is designed to bring together science, business, and policy stakeholders and support collaboration in the agricultural biologicals sector. *Global Agriculture is an independent international media platform covering agri-business, policy, technology, and sustainability. 3. New Delhi to Host Groundbreaking Global Conference on Women in Agri-Food Systems (GCWAS–2026) from 12–14 March 2026 from 12–14 March 2026\").",
+       "tavily_date": "2026-04-05",
+       "best_date": "2026-04-05",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.iplt20.com/video/64827/double-strike-bartletts-hooping-swing-finds-prabhsimrans-gloves-twice?tagNames=2026",
+       "title": "Double Strike! Bartlett’s Hooping Swing Finds Prabhsimran’s Gloves Twice - IPL T20",
+       "content": "Bartlett’s Hooping Swing Finds Prabhsimran’s Gloves Twice. 06 Apr, 2026|42.1k| 01:43 mins. * 06 Apr, 2026|  16.4k. * 06 Apr, 2026|  29.8k. * 06 Apr, 2026|  7.6k. * 06 Apr, 2026|  4.6k. Prabhsimran's Direct Hit on Xavier Bartlett! * 06 Apr, 2026|  35.2k. * 06 Apr, 2026|  35.2k. * 06 Apr, 2026|  5.7k. * 06 Apr, 2026|  2.2k. * 06 Apr, 2026|  1.7k. * 06 Apr, 2026|  47.4k. * 04 Apr, 2026|  20.9k. * 03 Apr, 2026|  12.2k. * 03 Apr, 2026|  7.3k. * 03 Apr, 2026|  11.7k. * 03 Apr, 2026|  6.1k. * 03 Apr, 2026|  3.1k. * 03 Apr, 2026|  3.4k. * 03 Apr, 2026|  3.4k. * 03 Apr, 2026|  1.6k. * 03 Apr, 2026|  1.3k. * 06 Apr, 2026|  47.4k. * 06 Apr, 2026|  25.8k. * 06 Apr, 2026|  16.2k. * 05 Apr, 2026|  37.4k. * 05 Apr, 2026|  24.5k. * 04 Apr, 2026|  41.8k. * 04 Apr, 2026|  30.4k. * 04 Apr, 2026|  20.9k.",
+       "tavily_date": "2026-04-06",
+       "best_date": "2026-04-06",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-04-06"
+       ],
+       "label": "P",
+       "on_topic": false,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.iplt20.com/video/64823/wrong-target-prabhsimrans-direct-hit-on-xavier-bartlett?tagNames=2026",
+       "title": "Wrong Target! Prabhsimran's Direct Hit on Xavier Bartlett! - IPL T20",
+       "content": "Prabhsimran's Direct Hit on Xavier Bartlett! 06 Apr, 2026|30.2k| 00:27 mins. * 06 Apr, 2026|  4.4k. Bartlett’s Hooping Swing Finds Prabhsimran’s Gloves Twice. * 06 Apr, 2026|  31.7k. * 06 Apr, 2026|  7.3k. * 06 Apr, 2026|  4.3k. * 06 Apr, 2026|  33.7k. * 06 Apr, 2026|  5.4k. * 06 Apr, 2026|  2.1k. * 06 Apr, 2026|  1.6k. * 06 Apr, 2026|  46.1k. * 04 Apr, 2026|  20.9k. * 03 Apr, 2026|  12.2k. * 03 Apr, 2026|  7.3k. * 03 Apr, 2026|  11.6k. * 03 Apr, 2026|  6.1k. * 03 Apr, 2026|  3.4k. * 03 Apr, 2026|  3.4k. * 03 Apr, 2026|  1.6k. * 03 Apr, 2026|  1.3k. * 06 Apr, 2026|  46.1k. * 06 Apr, 2026|  24.4k. * 06 Apr, 2026|  15.5k. * 05 Apr, 2026|  37.1k. * 05 Apr, 2026|  24.4k. * 04 Apr, 2026|  41.7k. * 04 Apr, 2026|  30.3k. * 04 Apr, 2026|  20.9k. * 03 Apr, 2026|  94.8k. * 03 Apr, 2026|  36.8k.",
+       "tavily_date": "2026-04-06",
+       "best_date": "2026-04-06",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      }
+     ]
+    },
+    "D": {
+     "from": "C",
+     "results": []
+    }
+   }
+  },
+  {
+   "id": "T2",
+   "lang": "mr",
+   "kind": "bus",
+   "month": "2026-04",
+   "states": [
+    "maharashtra"
+   ],
+   "cutoff": "2026-04-29",
+   "query": "एसटी बस भाडेवाढ महाराष्ट्र एप्रिल 2026",
+   "arms": {
+    "C": {
+     "order": 0,
+     "call": "403a0dbf1e1a",
+     "credits": 1,
+     "response_time": 3.65,
+     "request_id": "033ccb26-e5ac-4d15-bef8-1c798f433837",
+     "response_sha256": "c436f3296a12aca498a4ec4209f739758a669bd844b0271a5f98a33a745ea034",
+     "results": [
+      {
+       "url": "https://www.cbsnews.com/philadelphia/video/septa-doesnt-plan-fare-increases-or-service-cuts-in-new-budget-proposal-for-next-year/",
+       "title": "SEPTA doesn't plan fare increases or service cuts in new budget proposal for next year - CBS News",
+       "content": "* Send Us a News Tip. # SEPTA doesn't plan fare increases or service cuts in new budget proposal for next year. The $2.7 billion budget includes money to buy new buses, trolleys, and cars on the El and Regional Rail.",
+       "tavily_date": "2026-04-09",
+       "best_date": "2026-04-09",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-04-10",
+        "2026-04-11"
+       ],
+       "label": "P",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://mezha.net/eng/bukvy/openai_launches_gpt_rosalind/",
+       "title": "OpenAI launches GPT Rosalind to accelerate life sciences research - mezha.net",
+       "content": "17 apr 2026, 10:34. 17 apr 2026, 10:34. 17 apr 2026, 10:33. 17 apr 2026, 10:23. 17 apr 2026, 10:22. 17 apr 2026, 10:22. 17 apr 2026, 10:15. 17 apr 2026, 10:15 Affiliate material. 17 apr 2026, 10:15. 17 apr 2026, 10:15. 17 apr 2026, 09:53. 17 apr 2026, 09:45. 17 apr 2026, 09:45. 17 apr 2026, 09:45. 17 apr 2026, 09:34. 17 apr 2026, 09:15. 17 apr 2026, 09:10. 17 apr 2026, 09:04. 17 apr 2026, 09:04. 17 apr 2026, 08:49. 17 apr 2026, 08:45. 17 apr 2026, 08:39. 17 apr 2026, 08:34. 17 apr 2026, 08:33. 17 apr 2026, 08:33. 17 apr 2026, 08:24. 17 apr 2026, 08:16. 17 apr 2026, 08:14. 17 apr 2026, 08:07. 17 apr 2026, 08:03. 17 apr 2026, 07:57. 17 apr 2026, 07:49. 17 apr 2026, 07:36. 17 apr 2026, 07:33. 17 apr 2026, 07:28. 17 apr 2026, 07:25. 17 apr 2026, 07:24. 17 apr 2026, 07:24. 17 apr 2026, 07:23. 17 apr 2026, 07:19.",
+       "tavily_date": "2026-04-17",
+       "best_date": "2026-04-17",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.iplt20.com/video/64823/wrong-target-prabhsimrans-direct-hit-on-xavier-bartlett?tagNames=2026",
+       "title": "Wrong Target! Prabhsimran's Direct Hit on Xavier Bartlett! - IPL T20",
+       "content": "Prabhsimran's Direct Hit on Xavier Bartlett! 06 Apr, 2026|30.2k| 00:27 mins. * 06 Apr, 2026|  4.4k. Bartlett’s Hooping Swing Finds Prabhsimran’s Gloves Twice. * 06 Apr, 2026|  31.7k. * 06 Apr, 2026|  7.3k. * 06 Apr, 2026|  4.3k. * 06 Apr, 2026|  33.7k. * 06 Apr, 2026|  5.4k. * 06 Apr, 2026|  2.1k. * 06 Apr, 2026|  1.6k. * 06 Apr, 2026|  46.1k. * 04 Apr, 2026|  20.9k. * 03 Apr, 2026|  12.2k. * 03 Apr, 2026|  7.3k. * 03 Apr, 2026|  11.6k. * 03 Apr, 2026|  6.1k. * 03 Apr, 2026|  3.4k. * 03 Apr, 2026|  3.4k. * 03 Apr, 2026|  1.6k. * 03 Apr, 2026|  1.3k. * 06 Apr, 2026|  46.1k. * 06 Apr, 2026|  24.4k. * 06 Apr, 2026|  15.5k. * 05 Apr, 2026|  37.1k. * 05 Apr, 2026|  24.4k. * 04 Apr, 2026|  41.7k. * 04 Apr, 2026|  30.3k. * 04 Apr, 2026|  20.9k. * 03 Apr, 2026|  94.8k. * 03 Apr, 2026|  36.8k.",
+       "tavily_date": "2026-04-06",
+       "best_date": "2026-04-06",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      }
+     ]
+    },
+    "A": {
+     "order": 1,
+     "call": "7593c59c130a",
+     "credits": 1,
+     "response_time": 3.09,
+     "request_id": "e8550f4f-9e25-42c0-944d-c602e8e32860",
+     "response_sha256": "de1c65d6b4c57c86999c4fc8b433ebecc897166b7cdb92c40f2a14f22e10807c",
+     "results": [
+      {
+       "url": "https://pudhari.news/maharashtra/kokan/ratnagiri/msrtc-st-bus-10-percent-fare-hike-from-wednesday-dc95",
+       "title": "ST Bus Fare Hike : बुधवारपासून एसटीची 10 टक्के हंगामी भाडेवाढ",
+       "content": "मुंबई, पुणे,तुळजापूर, अक्कलकोट, सोलापूर, धाराशिवसह इतर लांब पल्ल्याचा प्रवास",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-04-14",
+        "2026-04-28"
+       ],
+       "label": "P",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.esakal.com/maharashtra/msrtc-st-bus-fare-hike-april-15-maharashtra-ticket-price-increase-srs92",
+       "title": "MSRTC Bus Fare Hike : एसटी प्रवास महागणार, हंगामी वाढ १५ एप्रिलपासून; किती रुपयांनी वाढले आकडेवारी आली",
+       "content": "MSRTC ticket rates increase news : उन्हाळी हंगामामुळे एसटी महामंडळाने १५ एप्रिलपासून",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-04-11",
+        "2026-04-12"
+       ],
+       "label": "P",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.loksatta.com/mumbai/msrtc-ticket-fare-hike-summer-vacation-maharashtra-st-bus-bus-ticket-prices-mumbai-print-news-vsd-99-5822733",
+       "title": "MSRTC Bus Fare Hike: एसटी प्रवास महागला! १० टक्के भाडेवाढ; उन्हाळी सुट्ट्यांच्या पार्श्वभूमीवर तिकीट दर वाढणार",
+       "content": "MSRTC Bus Fare Hike in Summer Vacation : राज्य परिवहन (एसटी) महामंडळाच्या परिवर्तनशील भाडेवाढ",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-04-08",
+        "2026-04-08",
+        "2026-04-09",
+        "2026-04-17"
+       ],
+       "label": "P",
+       "on_topic": true,
+       "outside_window": false
+      }
+     ]
+    },
+    "D": {
+     "from": "C",
+     "results": []
+    }
+   }
+  },
+  {
+   "id": "M10",
+   "lang": "mr",
+   "kind": "milk",
+   "month": "2026-08",
+   "states": [
+    "maharashtra"
+   ],
+   "cutoff": "2026-08-29",
+   "query": "दूध दरवाढ महाराष्ट्र ऑगस्ट 2026",
+   "arms": {
+    "A": {
+     "order": 0,
+     "call": "848e21bb358f",
+     "credits": 1,
+     "response_time": 3.12,
+     "request_id": "6ac2878b-f969-4798-8066-17b81abdedfd",
+     "response_sha256": "3ed36ea725dce2fc497301cd12f7b8624014753cad617e952620c26b8819b4a9",
+     "results": [
+      {
+       "url": "https://saamtv.esakal.com/maharashtra/cow-and-buffalo-milk-prices-hiked-by-rs-2-from-august-11-milk-prices-hiked-in-maharashtra-big-blow-to-consumers-cow-milk-to-cost-62-buffalo-milk-78-sjk95",
+       "title": "Maharashtra Milk Price Hike: सर्वसामान्यांना फटका! गाई-म्हशीचं दूध 2 रूपयांनी महागलं; कधीपासून होणार दरवाढ लागू?",
+       "content": "Milk Price Increase: महाराष्ट्रात ११ ऑगस्टपासून दूध दरवाढ लागू होणार आहे.",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://pudhari.news/maharashtra/pune/milk-price-hike-maharashtra-rs-2-per-litre-new-rates-effective-from-11-august-rg84",
+       "title": "Milk Price Hike : राज्यात दूध प्रतिलिटर २ रुपयांनी महागणार, ‘या’ तारखेपासून वाढीव विक्री दर होणार लागू",
+       "content": "Milk Price Hike : राज्यात दूध प्रतिलिटर २ रुपयांनी महागणार, 'या' तारखेपासून वाढीव",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-08-07",
+        "2026-08-07",
+        "2026-08-08"
+       ],
+       "label": "P",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://divyamarathi.bhaskar.com/local/maharashtra/mumbai/news/maharashtra-milk-price-hike-cow-buffalo-curd-paneer-ghee-138693914.html",
+       "title": "महाराष्ट्रात आजपासून दूध महागलं: आता गायीच्या दुधासाठी 62, तर म्हशीच्या दुधासाठी 78 रुपये मोजावे लागणार, दह...",
+       "content": "Maharashtra milk price hike, cow and buffalo milk rates increased today. Follow Divya Marathi. महाराष्ट्रात आज",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-08-11",
+        "2026-08-11",
+        "2026-08-11",
+        "2026-08-12"
+       ],
+       "label": "P",
+       "on_topic": true,
+       "outside_window": false
+      }
+     ]
+    },
+    "C": {
+     "order": 1,
+     "call": "6a8b9959679c",
+     "credits": 1,
+     "response_time": 3.64,
+     "request_id": "4da258c6-4d53-4283-8793-2b7adefd1b1a",
+     "response_sha256": "49339241447c32fdf6374279ba204244988f3c22c36d15c1d92c9b7e1f22d8c2",
+     "results": [
+      {
+       "url": "https://www.farmprogress.com/week-agribusiness/this-week-in-agribusiness-august-22-2026",
+       "title": "This Week in Agribusiness, August 22, 2026 - Farm Progress",
+       "content": "# This Week in Agribusiness, August 22, 2026. Dairy trade challenges, Farm Progress Show preview, biodiesel boom, and new precision ag tools included this week. Jaime Castaneda, Executive Vice President of the National Milk Producers Federation, discussed dairy access challenges with Canada. Castaneda emphasized the need for retail-focused import licenses rather than processor-controlled ones to improve market access for American dairy producers. Chris Robinson of Robinson Ag Marketing urges farmers to capitalize on strong commodity markets, with soybeans hitting 3.5-year highs. Robinson recommends protective puts for corn and beans, emphasizing strategic hedging for 2026-2027 crops. Weather forecast with Greg Soulje. Stacey Swain, Integrated Brand and Communication Manager of Helena Agri Enterprises announced the company's first-ever appearance at the 2026 Farm Progress Show in Boone, Iowa. Greg Soulje is back with an extended weather forecast. Farm Progress Events Manager Matt Youngman confirms the Farm Progress Show is ready for September 1-3 in Boone, Iowa. Related:This Week in Agribusiness, August 8, 2026. September 1-3, 2026 | BOONE, IOWA.",
+       "tavily_date": "2026-08-22",
+       "best_date": "2026-08-22",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.babushahi.com/full-news.php?id=225695",
+       "title": "\"What kind of self-reliant India is this?\": Mallikarjun Kharge slams Centre over sugar price hike, low stocks - Babushahi.com",
+       "content": "* Aug 22, 2026Breaking: Govt restricts Fixed Dose Combinations containing Chlorpheniramine, Phenylephrine for children below four years * Aug 22, 2026Punjab Legal Metrology Wing collects Rs 53.26 lakh in compounding fees from Jan to July * Aug 22, 2026ANTF Ferozepur Range busts two major narco-arms modules, four arrested * Aug 22, 2026Breaking: Panjab University announces Student Council Election Schedule 2026-27 * Aug 22, 2026Health Minister felicitates Mayank Foundation  for promoting voluntary blood donation * Aug 22, 2026AAP strengthens Malerkotla unit as Dr Gulzar Mohammad, three independent councillors join party * Aug 22, 2026\"Routine legal procedure, truth will emerge later\": AAP's Kuldeep Dhaliwal on NHRC notice to CM Mann's wife * Aug 22, 2026Visually impaired Women from Aurangabad celebrate Rakhi with BSF at JCP Hussainiwala * Aug 22, 2026ETT teachers detained during Chandigarh protest outside Minister Harpal Cheema’s residence * Aug 22, 2026Col Jasjit Singh Gill urges Punjab CM Mann to meet Himachal counterpart over Baddi pollution entering Punjab * Aug 22, 2026Two-Day Satya Dharma Bodh Utsav concludes at Dev Samaj Educational Institution * Aug 22, 2026Tripura Govt to bear 100% additional electricity tariff burden; relief for over 10 lakh consumer families * Aug 22, 2026Make ‘Yudh Nashian Virudh’ a mass movement through public participation: Padma Shri Jitender Singh Shunty * Aug 22, 2026\"We have to be at our best from the first match\": Ludhiana Lions' Arshdeep Singh ahead of Sher-e-Punjab T20 League 2026 * Aug 22, 2026Punjab releases Rs 383.52 crore to 75,199 beneficiaries under Ashirwad Scheme.",
+       "tavily_date": "2026-08-22",
+       "best_date": "2026-08-22",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.global-agriculture.com/india-region/steps-to-increase-production-of-oilseeds-and-pulses/",
+       "title": "Steps To Increase Production Of Oilseeds And Pulses - Global Agriculture",
+       "content": "Home » India Region » Steps To Increase Production Of Oilseeds And Pulses. # Steps To Increase Production Of Oilseeds And Pulses. ****08** August 2026, ****New Delhi****:** The National Mission on Edible Oils-Oilseeds (NMEO-OS) was approved on 3rd October, 2024 to boost domestic oilseed production and to strive towards self-reliance in edible oils. The Government has launched the Mission for Aatmanirbharta in Pulses on 11th October, 2025 to increase the domestic production of pulses. The mission aims to increase pulse production from 242 lakh tonnes to 350 lakh tonnes by 2030-31. As reported by the Directorate of Sugar and Vegetable Oils, Department of Food and Public Distribution, the domestic availability of edible oils increased from 124.23 lakh tonnes in 2022–23 to 126.30 lakh tonnes in 2024-25 and edible oil imports declined from 165.00 lakh tonnes in 2022–23 to 160.72 lakh tonnes in 2024–25. 1. Steps To Increase Production Of Oilseeds And Edible Oil in India.",
+       "tavily_date": "2026-08-08",
+       "best_date": "2026-08-08",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      }
+     ]
+    },
+    "D": {
+     "from": "C",
+     "results": []
+    }
+   }
+  },
+  {
+   "id": "T1",
+   "lang": "ta",
+   "kind": "rail",
+   "month": "2026-02",
+   "states": [
+    "tamil nadu"
+   ],
+   "cutoff": "2026-02-28",
+   "query": "ரயில் கட்டண உயர்வு தமிழ்நாடு பிப்ரவரி 2026",
+   "arms": {
+    "C": {
+     "order": 0,
+     "call": "d40eb6b81f1d",
+     "credits": 1,
+     "response_time": 4.13,
+     "request_id": "1c4e50fc-4dfd-4e46-86fc-9ad15f5d38f6",
+     "response_sha256": "a32f1663afe6283b02ec9a748252e52667c6f0c7bf26fba2b3c55a0efcf10aab",
+     "results": [
+      {
+       "url": "https://www.autoweek.com/photos/g70302013/gallery-2026-audi-a6-refresh-photos/",
+       "title": "Gallery: 2026 Audi A6 Photos - Autoweek",
+       "content": "# Gallery: 2026 Audi A6 Photos. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## 2026 Audi A6. ## Photos. Gallery: Ferrari Luce EV Interior PhotosGallery: Toyota Pixis Van BEV PhotosGallery: Jaguar EV Cold Weather Testing PhotosGallery: 2026 Ferrari SF-26 Formula 1 Car Photos. Bentley Supersports with Travis Pastrana PhotosGallery: 2026 Kia K4 Hatchback PhotosGallery: Apollo EVO PhotosGallery: Ford Ranger PHEV Photos. Gallery: Bugatti LEGO Sets PhotosGallery: Italdesign NSX PhotosGallery: Michael Schumacher’s 1992 Benetton F1 CarGallery: Ferrari 250 GTO Bianco Speciale Photos.",
+       "tavily_date": "2026-02-10",
+       "best_date": "2026-02-10",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-02-10",
+        "2026-02-11",
+        "2026-03-26",
+        "2026-09-16"
+       ],
+       "label": "P",
+       "on_topic": false,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.foxsports.com/soccer/uefa-womens-champions-league-fc-barcelona-vs-real-madrid-apr-01-2026-game-boxscore-669758",
+       "title": "FC Barcelona vs. Real Madrid - Live Score - April 01, 2026 - FOX Sports",
+       "content": "Access and manage your favorites here. QUARTERFINALS AGG TIED (0-0). # 2025-26 UEFA Women's Champions League Quarterfinals: Apr 1, 2026. ### TEAM STATS. ### TEAM LEADERS. | 12/17 | PAR (A) | W2-0 |. | 12/10 | SLB (H) | W3-1 |. | 11/20 | CFC (A) | D1-1 |. | 11/12 | OHL (H) | W3-0 |. | 10/15 | ROM (A) | W4-0 |. | 2/11 | PAR (A) | W3-2 |. | 12/17 | TWE (A) | D1-1 |. | 12/9 | WOL (H) | W2-0 |. | 11/11 | PAR (H) | D1-1 |. Follow a team and personalize your FOX Sports experience. The Herd with Colin Cowherd First Things First The Joel Klatt Show Kevin Harvick's Happy Hour Bear Bets. FIFA World Cup 2026™ Best Betting Apps & Sites Best Sportsbook Promos Missouri Sports Betting. FOX SPORTS™, SPEED™, SPEED.COM™ & © 2026 Fox Media LLC and Fox Sports Interactive Media, LLC. FS1FOXFOX NewsFox CorporationFOX Sports SupportsFOX Deportes.",
+       "tavily_date": "2026-02-18",
+       "best_date": "2026-02-18",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      },
+      {
+       "url": "https://wwd.com/beauty-industry-news/beauty-features/gallery/couture-hairstyles-from-the-spring-2026-runways-1238535334/",
+       "title": "Couture Hairstyles From the Spring 2026 Runways [PHOTOS] - WWD",
+       "content": "* ## Couture Hairstyles from the Spring 2026 Runways. * ## Couture Hairstyles from the Spring 2026 Runways. * ## Couture Hairstyles from the Spring 2026 Runways. Gaurav Gupta Spring 2026 Couture. * ## Couture Hairstyles from the Spring 2026 Runways. Phan Huy Spring 2026 Couture. * ## Couture Hairstyles from the Spring 2026 Runways. Rahul Mishra Spring 2026 Couture. * ## Couture Hairstyles from the Spring 2026 Runways. * ## Couture Hairstyles from the Spring 2026 Runways. * ## Couture Hairstyles from the Spring 2026 Runways. Stephane Rolland Spring 2026 Couture. * ## Couture Hairstyles from the Spring 2026 Runways. Tamara Ralph Spring 2026 Couture. * ## Couture Hairstyles from the Spring 2026 Runways. * ## Couture Hairstyles from the Spring 2026 Runways. Viktor & Rolf Spring 2026 Couture. * ## Couture Hairstyles from the Spring 2026 Runways. Yuima Kakazato Spring 2026 Couture. * ## Couture Hairstyles from the Spring 2026 Runways. Zuhair Murad Spring 2026 Couture.",
+       "tavily_date": "2026-02-03",
+       "best_date": "2026-02-03",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-02-03"
+       ],
+       "label": "P",
+       "on_topic": false,
+       "outside_window": false
+      }
+     ]
+    },
+    "A": {
+     "order": 1,
+     "call": "03d4fb9c2c6d",
+     "credits": 1,
+     "response_time": 3.21,
+     "request_id": "ca4effa0-689b-4291-8d4e-55d0067fec9e",
+     "response_sha256": "1489890ecba2fbe6a58e7b1b893ee9e4f1ab0994ac19b65a472876ec8cacceef",
+     "results": [
+      {
+       "url": "https://www.tamilmurasu.com.sg/singapore/bus-and-train-fares-increase-13-paise-december-26",
+       "title": "சிங்கப்பூர் பேருந்து, ரயில் கட்டண உயர்வு",
+       "content": "டிசம்பர் 26 முதல் பேருந்து, ரயில் கட்டணங்கள் 13 காசு வரை அதிகரிப்பு ... பயணங்களுக்கு",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-09-29",
+        "2026-09-29",
+        "2026-09-30",
+        "2026-09-30"
+       ],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.facebook.com/curecukumar.tamilp.pattatariyaciriyar/posts/%E0%AE%A4%E0%AF%86%E0%AE%B1%E0%AF%8D%E0%AE%95%E0%AF%81-%E0%AE%B0%E0%AE%AF%E0%AE%BF%E0%AE%B2%E0%AF%8D%E0%AE%B5%E0%AF%87%E0%AE%AF%E0%AE%BF%E0%AE%B2%E0%AF%8D-%E0%AE%B5%E0%AF%87%E0%AE%B2%E0%AF%88%E0%AE%B5%E0%AE%BE%E0%AE%AF%E0%AF%8D%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AF%81-%E0%AE%9A%E0%AE%BE%E0%AE%B0%E0%AE%A3%E0%AE%B0%E0%AF%8D-%E0%AE%87%E0%AE%AF%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AE%AE%E0%AF%8D-%E0%AE%B5%E0%AE%B4%E0%AE%BF%E0%AE%95%E0%AE%BE%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AE%BF-%E0%AE%95%E0%AF%88%E0%AE%9F%E0%AF%81-%E0%AE%92%E0%AE%A4%E0%AF%81%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AF%80%E0%AE%9F%E0%AF%81%E0%AE%A4%E0%AF%86%E0%AE%B1%E0%AF%8D%E0%AE%95%E0%AF%81-%E0%AE%B0%E0%AE%AF/1630364945158924",
+       "title": "தெற்கு ரயில்வேயில் வேலைவாய்ப்பு: சாரணர் ...",
+       "content": "... 2026 | | சாதாரணக் கட்டணத்துடன் விண்ணப்பிக்க கடைசி நாள் | அக்டோபர் 5, 2026 | | தாமதக்",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://tamil.abplive.com/news/tamil-nadu/no-bidder-mtc-electric-bus-fleet-expansion-hits-roadblock-comes-after-tender-for-1220-e-buses-cancelled-277448",
+       "title": "E-bus Tender: 11 முறை முயற்சித்தும் தோல்வி ...",
+       "content": "மீண்டும் மீண்டும் ஒத்திவைக்கப்பட்ட டெண்டர் திறப்பு: கடந்த திமுக ஆட்சியில் 2026ம் ஆண்டு",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": "2026-10-15",
+       "page_date_why": "published/updated date on the page",
+       "captures": [
+        "2026-10-15",
+        "2026-10-15"
+       ],
+       "label": "F",
+       "on_topic": false,
+       "outside_window": false
+      }
+     ]
+    },
+    "D": {
+     "from": "C",
+     "results": []
+    }
+   }
+  },
+  {
+   "id": "M8",
+   "lang": "ta",
+   "kind": "milk",
+   "month": "2026-07",
+   "states": [
+    "tamil nadu"
+   ],
+   "cutoff": "2026-07-29",
+   "query": "பால் விலை உயர்வு தமிழ்நாடு ஜூலை 2026",
+   "arms": {
+    "C": {
+     "order": 0,
+     "call": "28e7a67bcfe6",
+     "credits": 1,
+     "response_time": 4.76,
+     "request_id": "5d6d2b09-6afe-4619-8a93-e85e90c80d45",
+     "response_sha256": "9775b55624b6ddd98b61a9c9951c0b91a9cbeab9c90e2174605be3b61325f3cb",
+     "results": [
+      {
+       "url": "https://www.espn.com/watch/player/_/eventCalendarId/401816270",
+       "title": "Los Angeles Dodgers vs. New York Mets 7/26/26 - Stream the Game Live - ESPN",
+       "content": "## Follow ESPN India. ## India at Commonwealth Games 2026: Jhandu Kumar wins bronze in para powerlifting to close out day 1. Follow live coverage of India at the 2026 Commonwealth Games on July 24, Friday. * Lovlina wins India's first medal at 2026 Commonwealth Games, even before event begins. ## 2026 COMMONWEALTH GAMES. ## India at Commonwealth Games 2026: Live updates from Glasgow on July 25, Saturday. ## India at Commonwealth Games 2026: Full schedule of medal events and fixtures on July 25, Saturday. * India's medals at Commonwealth Games: Live tracker. ## Grading LeBron to the 76ers: Why he could put Philly over the top -- at a discount. ## Commonwealth Games 2026: Full schedule of India's contingent in Glasgow. ## India at Commonwealth Games 2026: All you need to know about athletes, schedule, medal favourites. * Commonwealth Games 2026: Full list of India's contingent going to Glasgow. ESPN's coverage of the 2026 Commonwealth Games in Glasgow.",
+       "tavily_date": "2026-07-25",
+       "best_date": "2026-07-25",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      },
+      {
+       "url": "https://manufacturing.economictimes.indiatimes.com/amp/news/food-beverages/pepsico-q2-growth-driven-by-india-beverages-snacks-demand/132341707",
+       "title": "PepsiCo Q2 growth driven by India beverages, snacks demand - ET Manufacturing",
+       "content": "As we transition into an era dominated by technological advancements, the need to embrace smart manufacturing ## ET Design & Verification Summit 2026. ### Tune in to know the latest updates on the manufacturing industry. In its quarter ending June 13, 2026, PepsiCo reported both global convenient foods and global beverages delivering strong organic volume and net revenue growth. Its International Beverage Franchise (IBF) business, which accounts for over 60 per cent of its global beverage volumes, posted a 5 per cent increase in organic volumes during the second quarter. * PepsiCo's India market boosts revenue growth in Q2 2026. Growth from the beverage and convenience food business from the India market contributed in PepsiCo's revenue upswing in the international market in the second quarter of 2026, the American multinational said. India also contributed to the growth of convenient food as in the Asia Pacific Foods business net revenue increased 12 per cent.",
+       "tavily_date": "2026-07-12",
+       "best_date": "2026-07-12",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.nba.com/pelicans/videos/pelicans-summer-league-highlights-vs-indiana-pacers-7-18-26",
+       "title": "Pelicans Summer League Highlights vs. Indiana Pacers 7/18/26 - NBA.com",
+       "content": "# Pelicans Summer League Highlights vs. Watch New Orleans Pelicans highlights from their game against the Indiana Pacers at 2026 Summer League. * ### God Shammgod Postgame Interview | 2026 NBA Summer League | July 15, 2026. * ### Malik Dia Postgame Interview | 2026 NBA Summer League | July 15, 2026. * ### Jaron Pierre Jr. Postgame Interview | 2026 NBA Summer League | July 12, 2026. * ### Malik Dia On-Court Postgame Interview | 2026 Pelicans Summer League 7/12/26. * ### Jalon Moore Postgame Interview | 2026 NBA Summer League | July 11, 2026. * ### Hunter Dickinson Postgame Interview | 2026 NBA Summer League | July 11, 2026. * ### Hunter Dickinson On-Court Postgame Interview | 2026 NBA Summer League | July 11, 2026. * ### Kobe Bufkin Postgame Interview | 2026 NBA Summer League | July 9, 2026. * ### Pelicans Summer League Highlights vs Hornets 7/11/2026. * ### Derik Queen's Top Plays | 2025-26 NBA Season Highlights.",
+       "tavily_date": "2026-07-18",
+       "best_date": "2026-07-18",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      }
+     ]
+    },
+    "A": {
+     "order": 1,
+     "call": "5c6756b31781",
+     "credits": 1,
+     "response_time": 14.01,
+     "request_id": "ae1b9251-bd38-4225-8a2e-fe51b411f087",
+     "response_sha256": "40ac9f4d53bd75f7c79c1230ab55ee4317251d62e5b77db9dd8b8241ef1cfbf2",
+     "results": [
+      {
+       "url": "https://english.punjabkesari.com/india/tamil-nadu-agriculture-budget-today-crop-loan-waiver-higher-msp-in-focus/",
+       "title": "TN agriculture budget today; crop loan waiver, higher MSP in focus - Punjab Kesari English",
+       "content": "Vinoth will present the state’s separate Agriculture Budget for 2026-27 in the Legislative Assembly on Thursday, with farmers looking for major announcements on crop loan waivers, higher procurement prices and measures to address climate-related challenges. Marie Wilson presented the Revised Budget Estimates for 2026-27, the maiden Budget of the TVK government headed by Chief Minister C. Farmers’ organisations have been pressing the government to waive cooperative crop loans availed up to February 28, and are hoping the Agriculture Budget will provide clarity on the extent and financial framework of such relief. In the general Budget presented on Wednesday, the government earmarked Rs 14,984 crore under the Revised Budget Estimates for the Agriculture and Farmers’ Welfare Department, providing the financial backdrop for Thursday’s sector-specific announcements. The Agriculture Budget is also expected to spell out the TVK government’s longer-term strategy for increasing agricultural productivity, strengthening farmers’ incomes and attracting investment into food processing and allied sectors.",
+       "tavily_date": "2026-08-06",
+       "best_date": "2026-08-06",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "F",
+       "on_topic": false,
+       "outside_window": true
+      },
+      {
+       "url": "https://www.tbsnews.net/economy/major-tariff-changes-likely-protect-local-industries-boost-domestic-production-1459541",
+       "title": "Major tariff changes likely to protect local industries, boost domestic production - The Business Standard",
+       "content": "**The FY2026-27 budget, scheduled to be placed in parliament today (11 June), is expected to bring wide-ranging changes to the import duty and tax structure to support local industries, encourage import-substitute production and improve the competitiveness of domestic manufacturers, according to finance ministry and National Board of Revenue (NBR) sources.**. The expected measures include duty relief on raw materials for several industries, alongside higher import duties on a range of products to protect local producers. Under the proposals, the existing 45% supplementary duty on imports of float glass – a key raw material used in the production of washing machines, electric ovens and microwave ovens – may be fully withdrawn. The proposal also seeks to extend existing concessional and duty exemption facilities on raw material imports used in the production of LPG cylinders, auto tanks, valves and bungs until 30 June 2027. To strengthen the domestic transformer industry, the government is also considering increasing the import duty on transformers with capacities of up to 1kVA from 10% to 25%, along with a new 5% regulatory duty.",
+       "tavily_date": "2026-06-10",
+       "best_date": "2026-06-10",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": true
+      },
+      {
+       "url": "https://www.iplt20.com/video/64823/wrong-target-prabhsimrans-direct-hit-on-xavier-bartlett?tagNames=2026",
+       "title": "Wrong Target! Prabhsimran's Direct Hit on Xavier Bartlett! - IPL T20",
+       "content": "Prabhsimran's Direct Hit on Xavier Bartlett! 06 Apr, 2026|30.2k| 00:27 mins. * 06 Apr, 2026|  4.4k. Bartlett’s Hooping Swing Finds Prabhsimran’s Gloves Twice. * 06 Apr, 2026|  31.7k. * 06 Apr, 2026|  7.3k. * 06 Apr, 2026|  4.3k. * 06 Apr, 2026|  33.7k. * 06 Apr, 2026|  5.4k. * 06 Apr, 2026|  2.1k. * 06 Apr, 2026|  1.6k. * 06 Apr, 2026|  46.1k. * 04 Apr, 2026|  20.9k. * 03 Apr, 2026|  12.2k. * 03 Apr, 2026|  7.3k. * 03 Apr, 2026|  11.6k. * 03 Apr, 2026|  6.1k. * 03 Apr, 2026|  3.4k. * 03 Apr, 2026|  3.4k. * 03 Apr, 2026|  1.6k. * 03 Apr, 2026|  1.3k. * 06 Apr, 2026|  46.1k. * 06 Apr, 2026|  24.4k. * 06 Apr, 2026|  15.5k. * 05 Apr, 2026|  37.1k. * 05 Apr, 2026|  24.4k. * 04 Apr, 2026|  41.7k. * 04 Apr, 2026|  30.3k. * 04 Apr, 2026|  20.9k. * 03 Apr, 2026|  94.8k. * 03 Apr, 2026|  36.8k.",
+       "tavily_date": "2026-04-06",
+       "best_date": "2026-04-06",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": true
+      }
+     ]
+    },
+    "D": {
+     "from": "C",
+     "results": []
+    }
+   }
+  },
+  {
+   "id": "M9",
+   "lang": "ta",
+   "kind": "milk",
+   "month": "2026-07",
+   "states": [
+    "tamil nadu"
+   ],
+   "cutoff": "2026-07-29",
+   "query": "பால் விலை உயர்வு தமிழ்நாடு ஜூலை 2026",
+   "arms": {
+    "C": {
+     "order": 0,
+     "call": "b5f095d26f47",
+     "credits": 1,
+     "response_time": 4.76,
+     "request_id": "5d6d2b09-6afe-4619-8a93-e85e90c80d45",
+     "response_sha256": "9775b55624b6ddd98b61a9c9951c0b91a9cbeab9c90e2174605be3b61325f3cb",
+     "results": [
+      {
+       "url": "https://www.espn.com/watch/player/_/eventCalendarId/401816270",
+       "title": "Los Angeles Dodgers vs. New York Mets 7/26/26 - Stream the Game Live - ESPN",
+       "content": "## Follow ESPN India. ## India at Commonwealth Games 2026: Jhandu Kumar wins bronze in para powerlifting to close out day 1. Follow live coverage of India at the 2026 Commonwealth Games on July 24, Friday. * Lovlina wins India's first medal at 2026 Commonwealth Games, even before event begins. ## 2026 COMMONWEALTH GAMES. ## India at Commonwealth Games 2026: Live updates from Glasgow on July 25, Saturday. ## India at Commonwealth Games 2026: Full schedule of medal events and fixtures on July 25, Saturday. * India's medals at Commonwealth Games: Live tracker. ## Grading LeBron to the 76ers: Why he could put Philly over the top -- at a discount. ## Commonwealth Games 2026: Full schedule of India's contingent in Glasgow. ## India at Commonwealth Games 2026: All you need to know about athletes, schedule, medal favourites. * Commonwealth Games 2026: Full list of India's contingent going to Glasgow. ESPN's coverage of the 2026 Commonwealth Games in Glasgow.",
+       "tavily_date": "2026-07-25",
+       "best_date": "2026-07-25",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      },
+      {
+       "url": "https://manufacturing.economictimes.indiatimes.com/amp/news/food-beverages/pepsico-q2-growth-driven-by-india-beverages-snacks-demand/132341707",
+       "title": "PepsiCo Q2 growth driven by India beverages, snacks demand - ET Manufacturing",
+       "content": "As we transition into an era dominated by technological advancements, the need to embrace smart manufacturing ## ET Design & Verification Summit 2026. ### Tune in to know the latest updates on the manufacturing industry. In its quarter ending June 13, 2026, PepsiCo reported both global convenient foods and global beverages delivering strong organic volume and net revenue growth. Its International Beverage Franchise (IBF) business, which accounts for over 60 per cent of its global beverage volumes, posted a 5 per cent increase in organic volumes during the second quarter. * PepsiCo's India market boosts revenue growth in Q2 2026. Growth from the beverage and convenience food business from the India market contributed in PepsiCo's revenue upswing in the international market in the second quarter of 2026, the American multinational said. India also contributed to the growth of convenient food as in the Asia Pacific Foods business net revenue increased 12 per cent.",
+       "tavily_date": "2026-07-12",
+       "best_date": "2026-07-12",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.nba.com/pelicans/videos/pelicans-summer-league-highlights-vs-indiana-pacers-7-18-26",
+       "title": "Pelicans Summer League Highlights vs. Indiana Pacers 7/18/26 - NBA.com",
+       "content": "# Pelicans Summer League Highlights vs. Watch New Orleans Pelicans highlights from their game against the Indiana Pacers at 2026 Summer League. * ### God Shammgod Postgame Interview | 2026 NBA Summer League | July 15, 2026. * ### Malik Dia Postgame Interview | 2026 NBA Summer League | July 15, 2026. * ### Jaron Pierre Jr. Postgame Interview | 2026 NBA Summer League | July 12, 2026. * ### Malik Dia On-Court Postgame Interview | 2026 Pelicans Summer League 7/12/26. * ### Jalon Moore Postgame Interview | 2026 NBA Summer League | July 11, 2026. * ### Hunter Dickinson Postgame Interview | 2026 NBA Summer League | July 11, 2026. * ### Hunter Dickinson On-Court Postgame Interview | 2026 NBA Summer League | July 11, 2026. * ### Kobe Bufkin Postgame Interview | 2026 NBA Summer League | July 9, 2026. * ### Pelicans Summer League Highlights vs Hornets 7/11/2026. * ### Derik Queen's Top Plays | 2025-26 NBA Season Highlights.",
+       "tavily_date": "2026-07-18",
+       "best_date": "2026-07-18",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      }
+     ]
+    },
+    "A": {
+     "order": 1,
+     "call": "9698d541ee41",
+     "credits": 1,
+     "response_time": 14.01,
+     "request_id": "ae1b9251-bd38-4225-8a2e-fe51b411f087",
+     "response_sha256": "40ac9f4d53bd75f7c79c1230ab55ee4317251d62e5b77db9dd8b8241ef1cfbf2",
+     "results": [
+      {
+       "url": "https://english.punjabkesari.com/india/tamil-nadu-agriculture-budget-today-crop-loan-waiver-higher-msp-in-focus/",
+       "title": "TN agriculture budget today; crop loan waiver, higher MSP in focus - Punjab Kesari English",
+       "content": "Vinoth will present the state’s separate Agriculture Budget for 2026-27 in the Legislative Assembly on Thursday, with farmers looking for major announcements on crop loan waivers, higher procurement prices and measures to address climate-related challenges. Marie Wilson presented the Revised Budget Estimates for 2026-27, the maiden Budget of the TVK government headed by Chief Minister C. Farmers’ organisations have been pressing the government to waive cooperative crop loans availed up to February 28, and are hoping the Agriculture Budget will provide clarity on the extent and financial framework of such relief. In the general Budget presented on Wednesday, the government earmarked Rs 14,984 crore under the Revised Budget Estimates for the Agriculture and Farmers’ Welfare Department, providing the financial backdrop for Thursday’s sector-specific announcements. The Agriculture Budget is also expected to spell out the TVK government’s longer-term strategy for increasing agricultural productivity, strengthening farmers’ incomes and attracting investment into food processing and allied sectors.",
+       "tavily_date": "2026-08-06",
+       "best_date": "2026-08-06",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "F",
+       "on_topic": false,
+       "outside_window": true
+      },
+      {
+       "url": "https://www.tbsnews.net/economy/major-tariff-changes-likely-protect-local-industries-boost-domestic-production-1459541",
+       "title": "Major tariff changes likely to protect local industries, boost domestic production - The Business Standard",
+       "content": "**The FY2026-27 budget, scheduled to be placed in parliament today (11 June), is expected to bring wide-ranging changes to the import duty and tax structure to support local industries, encourage import-substitute production and improve the competitiveness of domestic manufacturers, according to finance ministry and National Board of Revenue (NBR) sources.**. The expected measures include duty relief on raw materials for several industries, alongside higher import duties on a range of products to protect local producers. Under the proposals, the existing 45% supplementary duty on imports of float glass – a key raw material used in the production of washing machines, electric ovens and microwave ovens – may be fully withdrawn. The proposal also seeks to extend existing concessional and duty exemption facilities on raw material imports used in the production of LPG cylinders, auto tanks, valves and bungs until 30 June 2027. To strengthen the domestic transformer industry, the government is also considering increasing the import duty on transformers with capacities of up to 1kVA from 10% to 25%, along with a new 5% regulatory duty.",
+       "tavily_date": "2026-06-10",
+       "best_date": "2026-06-10",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": true
+      },
+      {
+       "url": "https://www.iplt20.com/video/64823/wrong-target-prabhsimrans-direct-hit-on-xavier-bartlett?tagNames=2026",
+       "title": "Wrong Target! Prabhsimran's Direct Hit on Xavier Bartlett! - IPL T20",
+       "content": "Prabhsimran's Direct Hit on Xavier Bartlett! 06 Apr, 2026|30.2k| 00:27 mins. * 06 Apr, 2026|  4.4k. Bartlett’s Hooping Swing Finds Prabhsimran’s Gloves Twice. * 06 Apr, 2026|  31.7k. * 06 Apr, 2026|  7.3k. * 06 Apr, 2026|  4.3k. * 06 Apr, 2026|  33.7k. * 06 Apr, 2026|  5.4k. * 06 Apr, 2026|  2.1k. * 06 Apr, 2026|  1.6k. * 06 Apr, 2026|  46.1k. * 04 Apr, 2026|  20.9k. * 03 Apr, 2026|  12.2k. * 03 Apr, 2026|  7.3k. * 03 Apr, 2026|  11.6k. * 03 Apr, 2026|  6.1k. * 03 Apr, 2026|  3.4k. * 03 Apr, 2026|  3.4k. * 03 Apr, 2026|  1.6k. * 03 Apr, 2026|  1.3k. * 06 Apr, 2026|  46.1k. * 06 Apr, 2026|  24.4k. * 06 Apr, 2026|  15.5k. * 05 Apr, 2026|  37.1k. * 05 Apr, 2026|  24.4k. * 04 Apr, 2026|  41.7k. * 04 Apr, 2026|  30.3k. * 04 Apr, 2026|  20.9k. * 03 Apr, 2026|  94.8k. * 03 Apr, 2026|  36.8k.",
+       "tavily_date": "2026-04-06",
+       "best_date": "2026-04-06",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": true
+      }
+     ]
+    },
+    "D": {
+     "from": "C",
+     "results": []
+    }
+   }
+  },
+  {
+   "id": "M11",
+   "lang": "ta",
+   "kind": "milk",
+   "month": "2026-09",
+   "states": [
+    "tamil nadu"
+   ],
+   "cutoff": "2026-09-29",
+   "query": "பால் விலை உயர்வு தமிழ்நாடு செப்டம்பர் 2026",
+   "arms": {
+    "C": {
+     "order": 0,
+     "call": "3dac2133ae22",
+     "credits": 1,
+     "response_time": 4.92,
+     "request_id": "ef0e8993-0dd1-4454-ae62-ceaed2dd0934",
+     "response_sha256": "5cc0f25fa48d2fab150d46925bcebb9a4a70581398fbecfe63542acb6e9fd4e0",
+     "results": [
+      {
+       "url": "https://www.stocktitan.net/news/BALL/ball-announces-investment-in-new-manufacturing-facility-in-uttar-muozscvxsj8u.html",
+       "title": "A beverage-can factory is planned in India for 2029. Ball is investing. - Stock Titan",
+       "content": "4. Ball Announces Investment in New Manufacturing Facility in Uttar Pradesh, India. Ball plans a new greenfield beverage can plant in Uttar Pradesh, extending its India network with operations targeted to start in 2029. **Ball (BALL)** plans to build a new two-line beverage can manufacturing facility in Uttar Pradesh, India, which is expected to be operational in 2029. The project is backed by customer contracts, is expected to generate strong EVA, and is aligned with Ball's guidance that capital expenditures will average depreciation and amortization over time. * New **two-line facility** in Uttar Pradesh expands Ball’s manufacturing footprint in India. 11, 2026 /PRNewswire/ -- Ball Corporation (NYSE: BALL), a global leader in sustainable aluminum packaging solutions, today announced plans to further expand its manufacturing footprint in India with a new beverage can manufacturing facility in Uttar Pradesh. With two established facilities in India located in Taloja, Maharashtra, and Sri City, Andhra Pradesh, Ball will now invest in a new two-line beverage can manufacturing facility in Uttar Pradesh, expected to be operational in 2029.",
+       "tavily_date": "2026-09-11",
+       "best_date": "2026-09-11",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-10-07"
+       ],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.newsquawk.com/headlines/daily-us-conference-calendar-28th-september-2026-amd-de-cop-eog",
+       "title": "Daily US Conference Calendar 28th September 2026: AMD, DE, COP, EOG - Newsquawk",
+       "content": "# Daily US Conference Calendar 28th September 2026: AMD, DE, COP, EOG. Nvidia (NVDA) says Anthropic's reported contracted value tops USD 180bln; commitments rose to USD 279bln from USD 119bln last quarter and commitments primarily related to procurement of memory. | AESI | Atlas Energy Solutions Inc. Presents at 6th Annual PEP Energy Conference 2026, Sep-28-2026 |. | AR | Antero Resources Corporation Presents at 6th Annual PEP Energy Conference 2026, Sep-28-2026 |. | CHRD | Chord Energy Corporation Presents at 6th Annual PEP Energy Conference 2026, Sep-28-2026 |. | **COP** | **ConocoPhillips Presents at 6th Annual PEP Energy Conference 2026, Sep-28-2026** |. | CRGY | Crescent Energy Company Presents at 6th Annual PEP Energy Conference 2026, Sep-28-2026 |. | CRK | Comstock Resources, Inc. Presents at 6th Annual PEP Energy Conference 2026, Sep-28-2026 |. | FET | Forum Energy Technologies, Inc. Presents at 6th Annual PEP Energy Conference 2026, Sep-28-2026 |. Presents at 6th Annual PEP Energy Conference 2026, Sep-28-2026 |.",
+       "tavily_date": "2026-09-28",
+       "best_date": "2026-09-28",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [
+        "2026-09-29"
+       ],
+       "label": "P",
+       "on_topic": false,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.espn.com/watch/player/_/id/49976770",
+       "title": "Dylan Crews smashes a home run - ESPN",
+       "content": "## Featured Sports. ## Follow ESPN India. ## Hockey, Tajinderpal Singh Toor, Manu Bhaker: India's top gold medal contenders at Asian Games 2026. ## ASIAN GAMES 2026. ## Asian Games schedule: How to plan your day, from medal events to big names. ## Asian Games: All you need to know about Aichi-Nagoya 2026. * Asian Games 2026: Full list of India's contingent going to Aichi-Nagoya. * Brentford 3-0 Chelsea: Premier League action as Bees sink Xabi Alonso's Blues - as it happened. ## Indian teams in action at FIDE Chess Olympiad; Quimcy Dsouza goes down in Asian Games Teqball semifinal: Indian Sports LIVE, September 19. * Sep 17: India begin Asian Games with Teqball, in action at FIDE Chess Olympiad; East Bengal draw in AFC CL 2. ## After England's World Cup post-mortem, Tuchel is ready for a little chaos in bid for Euro 2028 redemption. Here's the 2026 sporting calendar to keep track of big tournaments and ESPN India's coverage.",
+       "tavily_date": "2026-09-19",
+       "best_date": "2026-09-19",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      }
+     ]
+    },
+    "A": {
+     "order": 1,
+     "call": "6cb9096bf821",
+     "credits": 1,
+     "response_time": 4.19,
+     "request_id": "36769677-577f-4096-b74c-c47dd4447a5b",
+     "response_sha256": "f0b4e29d009871d659f3b28f3e9bc50d5d2c376dc63d4ee2b693201d469a502f",
+     "results": [
+      {
+       "url": "https://www.facebook.com/eyesoftn/videos/%E0%AE%B5%E0%AE%BF%E0%AE%B2%E0%AF%88%E0%AE%B5%E0%AE%BE%E0%AE%9A%E0%AE%BF-%E0%AE%89%E0%AE%9A%E0%AF%8D%E0%AE%9A%E0%AE%AE%E0%AF%8D-%E0%AE%A4%E0%AF%8A%E0%AE%9F%E0%AF%8D%E0%AE%9F-%E0%AE%A4%E0%AE%AE%E0%AE%BF%E0%AE%B4%E0%AF%8D%E0%AE%A8%E0%AE%BE%E0%AE%9F%E0%AF%81-price-hike-aavin-milk-rice-sugar-tvk-govt-public/2099326700952951",
+       "title": "விலைவாசி உச்சம் தொட்ட தமிழ்நாடு | Price Hike",
+       "content": "4 ஆண்டுகளுக்குப் பிறகு ஆவின் பால் கொள்முதல் விலை உயர்வு! ... Sep 23, 2026 · 4.9K views.",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.instagram.com/p/Debu2cgD6WR",
+       "title": "விலைவாசி உயர்வு… தமிழகம் முதலிடம்… *2026 ...",
+       "content": "மத்திய அரசின் தேசிய புள்ளியியல் அலுவலகம் (NSO) வெளியிட்ட செப்டம்பர் 2026 தரவுகளின்படி,",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": false,
+       "outside_window": false
+      },
+      {
+       "url": "https://www.instagram.com/reel/DeEXkaPkrrw",
+       "title": "உடுமலையில் உயர்த்தப்பட்ட பால் விலையை ...",
+       "content": "1 முதல் ஒரு லிட்டர் பால் விலை மொத்த விற்பனைக்கு ரூ.102-ஆகவும், சில்லறை விற்பனைக்கு ரூ.110-",
+       "tavily_date": null,
+       "best_date": "",
+       "page_date": null,
+       "page_date_why": "no explicit published/updated date",
+       "captures": [],
+       "label": "U",
+       "on_topic": true,
+       "outside_window": false
+      }
+     ]
+    },
+    "D": {
+     "from": "C",
+     "results": []
+    }
+   }
+  }
+ ],
+ "skipped": [],
+ "extract_calls": {
+  "D": [
+   {
+    "call": "b8e8dfd7937f",
+    "credits": 1,
+    "response_time": 0.02,
+    "request_id": "24e12ef4-71f4-4493-b452-20735668373d",
+    "response_sha256": "124c514ff43a58fb1b207e5d0b49719505dd7434a54c90a8988d90f97c4f5189"
+   },
+   {
+    "call": "13e9a871e92c",
+    "credits": 1,
+    "response_time": 2.67,
+    "request_id": "6e73ba23-5253-4d4e-a9ea-8f1da19d7cbc",
+    "response_sha256": "28517a9f54a430212b644c8c2f04ea3fa6e0933597cc9947602654cad1d21f7b"
+   },
+   {
+    "call": "5c8d34731ea7",
+    "credits": 1,
+    "response_time": 2.13,
+    "request_id": "3c4d2de3-9c1e-482f-8795-85aa86bc2d5a",
+    "response_sha256": "ef67ed26ac2354cf00791fea39f229b32e587e14054012218f15e092cb920c1e"
+   },
+   {
+    "call": "c17197b8504f",
+    "credits": 1,
+    "response_time": 2.32,
+    "request_id": "4a1aa2ae-9ae3-430c-8021-14b509952205",
+    "response_sha256": "a6c12dd7386c9c7742499156e7a46294f4b6ba17bb31f2a8551c354eab244f2b"
+   },
+   {
+    "call": "e47acc180615",
+    "credits": 0,
+    "response_time": 6.61,
+    "request_id": "1c1f4572-a854-4236-aab6-a7c2c1acb5e9",
+    "response_sha256": "d7b81fe8342491c5a272e26fde82336f9b6e72b518a3cc59bdc4506bceae55ed"
+   }
+  ],
+  "evaluation": [
+   {
+    "call": "bf6fd62261de",
+    "credits": 1,
+    "response_time": 0.02,
+    "request_id": "c1b7acf2-0313-4a6b-9d49-bf5f624e81a1",
+    "response_sha256": "5ed5942b4562fff9ec2ab2b635aee916055982bf7f2c647e53390aa82a42ddd8"
+   },
+   {
+    "call": "057e733a8771",
+    "credits": 1,
+    "response_time": 3.03,
+    "request_id": "34d773a0-dda1-40cd-b19a-293bef2d5ab1",
+    "response_sha256": "cb134611c9817de823cfe1f620d74312f5f27b34b561788569537f486c0cb46a"
+   },
+   {
+    "call": "ed3ba9b16523",
+    "credits": 1,
+    "response_time": 0.03,
+    "request_id": "c1c3af52-0c3c-4866-86d5-fae1f26403b2",
+    "response_sha256": "49bd4df37432d2d85a4b15042981fe6c477f3e73554b6dfa49223da743790659"
+   },
+   {
+    "call": "fd227cc9c21d",
+    "credits": 1,
+    "response_time": 0.03,
+    "request_id": "510afaa4-41ee-4aeb-a065-c80567404cd3",
+    "response_sha256": "84b850189be9e2490bc9c9895463c8fddf1f5f07f9749fa26628690de54957aa"
+   },
+   {
+    "call": "956f7c1144f4",
+    "credits": 1,
+    "response_time": 4.71,
+    "request_id": "8dfd5807-ebd8-4986-8d9a-2285e989c297",
+    "response_sha256": "7607f06877663274581c28fb11d6ea3b72b0511fd19f1b462a5da98516a11195"
+   },
+   {
+    "call": "d4cc8fd37191",
+    "credits": 1,
+    "response_time": 2.29,
+    "request_id": "aadd5d2a-569a-42e1-a338-b8327f33b467",
+    "response_sha256": "17e7bc2ad0d762ea33da43271b559ba504dcac46d3616a8d77ca870564b91cd4"
+   }
+  ]
+ },
+ "seed": 20261027,
+ "wayback_failed": [],
+ "built_utc": "2026-10-26T19:02:20.588438+00:00",
+ "metrics": {
+  "arms": {
+   "A": {
+    "cases": 12,
+    "leak_cases": 3,
+    "leak_case_wilson95": [
+     0.08894166769488562,
+     0.5323053370816633
+    ],
+    "leak_fraction": {
+     "L": 4,
+     "P": 6,
+     "unconfirmed": 26,
+     "point": 0.4,
+     "lower": 0.1111111111111111,
+     "upper": 0.8333333333333334
+    },
+    "results": 36,
+    "undated": 17,
+    "undated_share": 0.4722222222222222,
+    "outside_window": 15,
+    "valid_lost": 8,
+    "valid_total": 13,
+    "no_page_date": 28,
+    "credits": 12,
+    "median_latency_s": 4.355
+   },
+   "C": {
+    "cases": 12,
+    "leak_cases": 0,
+    "leak_case_wilson95": [
+     0.0,
+     0.2424940095530979
+    ],
+    "leak_fraction": {
+     "L": 0,
+     "P": 13,
+     "unconfirmed": 17,
+     "point": 0.0,
+     "lower": 0.0,
+     "upper": 0.5666666666666667
+    },
+    "results": 30,
+    "undated": 0,
+    "undated_share": 0.0,
+    "outside_window": 0,
+    "valid_lost": 5,
+    "valid_total": 13,
+    "no_page_date": 27,
+    "credits": 12,
+    "median_latency_s": 4.71
+   },
+   "D": {
+    "cases": 12,
+    "leak_cases": 0,
+    "leak_case_wilson95": [
+     0.0,
+     0.2424940095530979
+    ],
+    "leak_fraction": {
+     "L": 0,
+     "P": 2,
+     "unconfirmed": 1,
+     "point": 0.0,
+     "lower": 0.0,
+     "upper": 0.3333333333333333
+    },
+    "results": 3,
+    "undated": 0,
+    "undated_share": 0.0,
+    "outside_window": 0,
+    "valid_lost": 12,
+    "valid_total": 13,
+    "no_page_date": 0,
+    "credits": 16,
+    "median_latency_s": 4.13
+   }
+  },
+  "by_lang": {
+   "hi": {
+    "A": {
+     "cases": 4,
+     "leak_cases": 3,
+     "leak_case_wilson95": [
+      0.3006418400969081,
+      0.954412739704631
+     ],
+     "leak_fraction": {
+      "L": 4,
+      "P": 0,
+      "unconfirmed": 8,
+      "point": 1.0,
+      "lower": 0.3333333333333333,
+      "upper": 1.0
+     },
+     "results": 12,
+     "undated": 0,
+     "undated_share": 0.0,
+     "outside_window": 8,
+     "valid_lost": 5,
+     "valid_total": 5,
+     "no_page_date": 5
+    },
+    "C": {
+     "cases": 4,
+     "leak_cases": 0,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "leak_fraction": {
+      "L": 0,
+      "P": 5,
+      "unconfirmed": 1,
+      "point": 0.0,
+      "lower": 0.0,
+      "upper": 0.16666666666666666
+     },
+     "results": 6,
+     "undated": 0,
+     "undated_share": 0.0,
+     "outside_window": 0,
+     "valid_lost": 0,
+     "valid_total": 5,
+     "no_page_date": 5
+    },
+    "D": {
+     "cases": 4,
+     "leak_cases": 0,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "leak_fraction": {
+      "L": 0,
+      "P": 0,
+      "unconfirmed": 1,
+      "point": null,
+      "lower": 0.0,
+      "upper": 1.0
+     },
+     "results": 1,
+     "undated": 0,
+     "undated_share": 0.0,
+     "outside_window": 0,
+     "valid_lost": 5,
+     "valid_total": 5,
+     "no_page_date": 0
+    }
+   },
+   "mr": {
+    "A": {
+     "cases": 4,
+     "leak_cases": 0,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "leak_fraction": {
+      "L": 0,
+      "P": 6,
+      "unconfirmed": 6,
+      "point": 0.0,
+      "lower": 0.0,
+      "upper": 0.5
+     },
+     "results": 12,
+     "undated": 11,
+     "undated_share": 0.9166666666666666,
+     "outside_window": 1,
+     "valid_lost": 3,
+     "valid_total": 8,
+     "no_page_date": 12
+    },
+    "C": {
+     "cases": 4,
+     "leak_cases": 0,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "leak_fraction": {
+      "L": 0,
+      "P": 5,
+      "unconfirmed": 7,
+      "point": 0.0,
+      "lower": 0.0,
+      "upper": 0.5833333333333334
+     },
+     "results": 12,
+     "undated": 0,
+     "undated_share": 0.0,
+     "outside_window": 0,
+     "valid_lost": 5,
+     "valid_total": 8,
+     "no_page_date": 10
+    },
+    "D": {
+     "cases": 4,
+     "leak_cases": 0,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "leak_fraction": {
+      "L": 0,
+      "P": 2,
+      "unconfirmed": 0,
+      "point": 0.0,
+      "lower": 0.0,
+      "upper": 0.0
+     },
+     "results": 2,
+     "undated": 0,
+     "undated_share": 0.0,
+     "outside_window": 0,
+     "valid_lost": 7,
+     "valid_total": 8,
+     "no_page_date": 0
+    }
+   },
+   "ta": {
+    "A": {
+     "cases": 4,
+     "leak_cases": 0,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "leak_fraction": {
+      "L": 0,
+      "P": 0,
+      "unconfirmed": 12,
+      "point": null,
+      "lower": 0.0,
+      "upper": 1.0
+     },
+     "results": 12,
+     "undated": 6,
+     "undated_share": 0.5,
+     "outside_window": 6,
+     "valid_lost": 0,
+     "valid_total": 0,
+     "no_page_date": 11
+    },
+    "C": {
+     "cases": 4,
+     "leak_cases": 0,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "leak_fraction": {
+      "L": 0,
+      "P": 3,
+      "unconfirmed": 9,
+      "point": 0.0,
+      "lower": 0.0,
+      "upper": 0.75
+     },
+     "results": 12,
+     "undated": 0,
+     "undated_share": 0.0,
+     "outside_window": 0,
+     "valid_lost": 0,
+     "valid_total": 0,
+     "no_page_date": 12
+    },
+    "D": {
+     "cases": 4,
+     "leak_cases": 0,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "leak_fraction": {
+      "L": 0,
+      "P": 0,
+      "unconfirmed": 0,
+      "point": null,
+      "lower": null,
+      "upper": null
+     },
+     "results": 0,
+     "undated": 0,
+     "undated_share": null,
+     "outside_window": 0,
+     "valid_lost": 0,
+     "valid_total": 0,
+     "no_page_date": 0
+    }
+   }
+  },
+  "english": {
+   "A": {
+    "cases": 20,
+    "leak_cases": 9,
+    "leak_case_wilson95": [
+     0.25819785703764037,
+     0.6579146589808726
+    ],
+    "leak_fraction": {
+     "L": 12,
+     "P": 6,
+     "unconfirmed": 42,
+     "point": 0.6666666666666666,
+     "lower": 0.2,
+     "upper": 0.9
+    },
+    "results": 60,
+    "undated": 8,
+    "undated_share": 0.13333333333333333,
+    "outside_window": 36,
+    "valid_lost": 27,
+    "valid_total": 33,
+    "no_page_date": 39
+   },
+   "C": {
+    "cases": 20,
+    "leak_cases": 0,
+    "leak_case_wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "leak_fraction": {
+     "L": 0,
+     "P": 38,
+     "unconfirmed": 21,
+     "point": 0.0,
+     "lower": 0.0,
+     "upper": 0.3559322033898305
+    },
+    "results": 59,
+    "undated": 0,
+    "undated_share": 0.0,
+    "outside_window": 0,
+    "valid_lost": 5,
+    "valid_total": 33,
+    "no_page_date": 33
+   },
+   "D": {
+    "cases": 20,
+    "leak_cases": 0,
+    "leak_case_wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "leak_fraction": {
+     "L": 0,
+     "P": 18,
+     "unconfirmed": 8,
+     "point": 0.0,
+     "lower": 0.0,
+     "upper": 0.3076923076923077
+    },
+    "results": 26,
+    "undated": 0,
+    "undated_share": 0.0,
+    "outside_window": 0,
+    "valid_lost": 20,
+    "valid_total": 33,
+    "no_page_date": 0
+   }
+  },
+  "paired_with_english": {
+   "ids": [
+    "M2",
+    "E7",
+    "E2",
+    "M8",
+    "M9",
+    "M11"
+   ],
+   "A": {
+    "english_only": 4,
+    "language_only": 1,
+    "p_exact": 0.375
+   },
+   "C": {
+    "english_only": 0,
+    "language_only": 0,
+    "p_exact": 1.0
+   },
+   "D": {
+    "english_only": 0,
+    "language_only": 0,
+    "p_exact": 1.0
+   }
+  },
+  "c_vs_d_mcnemar": {
+   "b_C_only": 0,
+   "c_D_only": 0,
+   "p_exact": 1.0
+  },
+  "evaluation_extract_credits": 6,
+  "differs_from_english": [],
+  "wayback_failed": 0,
+  "incomplete": false
+ }
+}

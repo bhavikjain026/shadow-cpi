@@ -22,6 +22,7 @@ from v2 import ablation as AB  # noqa: E402
 from v2 import date_test as DT  # noqa: E402
 from v2 import finance_lookahead as F  # noqa: E402
 from v2 import kinds as K  # noqa: E402
+from v2 import lang_date_test as LT  # noqa: E402
 from v2 import recall as RC  # noqa: E402
 from shadow_cpi.tavily import iso_date  # noqa: E402
 
@@ -113,6 +114,27 @@ def date_test():
     return {"label": "pilot, 20 cases; first pass is the pre-registered result, the retry only recovers failed "
                      "Wayback lookups", "retry": {k: rt[k] for k in ("failed_urls", "recovered", "still_failed")},
             **passes}
+
+
+def lang_date_test():
+    """The language date test (v2/LANG_DATE_PREREG.md), recomputed from its results file; None until it has run."""
+    if not LT.OUT.exists():
+        return None
+    out = load("results/lang_date_test.json")
+    m = LT.metrics(out)
+    keep = ("leak_cases", "cases", "leak_case_wilson95", "results", "undated", "undated_share", "outside_window",
+            "valid_lost", "valid_total", "no_page_date")
+    pick = lambda arms: {a: {k: arms[a][k] for k in keep} for a in LT.ARMS}  # noqa: E731
+    return {"label": f"pilot, {m['arms']['A']['cases']} cases (Hindi, Marathi, Tamil; no Kannada, Bengali or Telugu "
+                     "change in the reference list); language field set; compared with the English date test's first "
+                     "pass", "built_utc": out["built_utc"],
+            "arms": {a: {**pick(m["arms"])[a], "credits": m["arms"][a]["credits"],
+                         "median_latency_s": m["arms"][a]["median_latency_s"]} for a in LT.ARMS},
+            "by_lang": {LT.LANG_NAMES[l]: pick(s) for l, s in m["by_lang"].items()},
+            "english": pick(m["english"]), "paired_with_english": m["paired_with_english"],
+            "differs_from_english": m["differs_from_english"], "wayback_failed": m["wayback_failed"],
+            "incomplete": m["incomplete"],
+            "relevance_post_hoc": {LT.LANG_NAMES[l]: v for l, v in LT.relevance(out).items()}}
 
 
 def finance():
@@ -358,7 +380,8 @@ def build():
     rep = {"built": date.today().isoformat(), "leakage": leakage_table(), "receipt": receipt(),
            "four_arms": four_arms(),
            "exploratory": {"H": exploratory("H", "v2-ablation-H", ref), "Td": exploratory("Td", "v2-ablation-Td", ref)},
-           "date_test": date_test(), "finance": finance(), "auto_parameters": auto_parameters(), "radar": radar(),
+           "date_test": date_test(), "lang_date_test": lang_date_test(), "finance": finance(),
+           "auto_parameters": auto_parameters(), "radar": radar(),
            "monthly_run_cost": monthly_run_cost(), "ledger_rows": len(ledger)}
     OUT.write_text(json.dumps(rep, ensure_ascii=False, indent=1, default=float))
     return rep

@@ -106,6 +106,32 @@ for k, lab in (("mcnemar_A_vs_B", "A (no dates) vs B (dates)"), ("mcnemar_C_vs_D
 st.caption("Valid evidence lost: Wayback-confirmed pre-cutoff results found by any arm that this arm did not return; "
            "the retry adds newly confirmed pages, so its denominator is larger.")
 
+# ---------- language date test ----------
+ld = r.get("lang_date_test")
+if ld:
+    st.subheader("Date fields by language (pilot)")
+    st.caption(f"{ld['label']}. A = no dates, C = dates + filter_by_published_date, D = C + our page-date check "
+               "(it reads English and Hindi date words only).")
+    by = {**ld["by_lang"], "English (date test)": ld["english"]}
+    st.dataframe([{"Language": name, "Cases": s["A"]["cases"],
+                   "Leak cases A / C / D": " / ".join(str(s[a]["leak_cases"]) for a in "ACD"),
+                   "Undated A": f"{s['A']['undated']} of {s['A']['results']}",
+                   "Undated C": f"{s['C']['undated']} of {s['C']['results']} ({pct(s['C']['undated_share'])})",
+                   "C dated outside window": s["C"]["outside_window"],
+                   "Valid lost C / D": f"{s['C']['valid_lost']} / {s['D']['valid_lost']} of {s['C']['valid_total']}",
+                   "C with no readable page date": f"{s['C']['no_page_date']} of {s['C']['results']}"}
+                  for name, s in by.items()], hide_index=True, width="stretch")
+    pw = ld["paired_with_english"]
+    st.caption(f"Paired with English on {len(pw['ids'])} shared cases, exact McNemar: "
+               + "; ".join(f"{a} p = {pw[a]['p_exact']:.3f}" for a in "ACD") + ". "
+               + ("Differs from English: " + "; ".join(ld["differs_from_english"]) + "."
+                  if ld["differs_from_english"] else "No pre-registered difference from English."))
+    rel = ld["relevance_post_hoc"]
+    st.markdown("**Post-hoc, not pre-registered:** with the date filter on, how many results still named the item "
+                "(arm A → arm C): " + "; ".join(f"{name} {v['A']['on_topic']} of {v['A']['results']} → "
+                                                f"{v['C']['on_topic']} of {v['C']['results']}" for name, v in rel.items())
+                + ". The dates held in every language; relevance fell further in Marathi and Tamil. A lead, 12 cases.")
+
 # ---------- finance ----------
 st.subheader("Second domain: finance look-ahead check")
 fi = r["finance"]
