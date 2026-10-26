@@ -53,7 +53,33 @@ print(f"{used} {cap} {cap - used}")
 EOF
 ) || report "FAILED: could not read the radar budget" "credits: none used" "next: check config/budget.json and the ledger" 1
 read USED CAP REMAIN <<< "$LEFT"
-[ "$REMAIN" -le 0 ] && report "SKIPPED: radar budget used up ($USED of $CAP)" "credits: none used" "next: freeze at 29 Oct 23:59 IST needs the owner's OK"
+# after the radar (v2/DRIFT_PREREG.md): page drift, then the skeptic; descriptive only, separate caps.
+# Sets EXTRA (one summary line) and DS (credits the two spent); a failure here never undoes the radar step.
+side_spent() { python -c "from shadow_cpi.budget import spent; print(spent('drift-2026-10') + spent('radar-skeptic-2026-10'))"; }
+after_radar() {
+  local before=$(side_spent)
+  if grep -q "pre-registration" v2/DRIFT_PREREG.md 2>/dev/null; then
+    caffeinate -i python -m v2.drift && EXTRA="drift $(python -c "
+import json; r = json.load(open('v2/radar/drift_2026-10.json'))['runs'][-1]
+print(f\"{r['changed']} of {r['checked']} pages changed\")")" || EXTRA="drift FAILED"
+    caffeinate -i python -m v2.radar_skeptic && EXTRA="$EXTRA; skeptic $(python -c "
+import json; e = json.load(open('v2/radar/skeptic_2026-10.json'))['events']
+print(f\"{sum(bool(v['challenged']) for v in e.values())} of {len(e)} events challenged\")")" || EXTRA="$EXTRA; skeptic FAILED"
+  else
+    EXTRA="drift and skeptic SKIPPED: v2/DRIFT_PREREG.md not on main"
+  fi
+  DS=$(( $(side_spent) - before ))
+}
+add_side_files() { for F in v2/radar/drift_2026-10.json v2/radar/skeptic_2026-10.json; do [ -f "$F" ] && git add "$F"; done; }
+
+if [ "$REMAIN" -le 0 ]; then              # no radar run, but drift and skeptic have their own caps
+  after_radar
+  git add results/credit_ledger.jsonl; add_side_files
+  git commit -m "Drift and skeptic $DAY (radar budget used up): $EXTRA ($DS credits)
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" && git push origin main
+  report "SKIPPED radar: budget used up ($USED of $CAP); $EXTRA" "credits: radar none; drift+skeptic $DS" "next: freeze at 29 Oct 23:59 IST needs the owner's OK"
+fi
 
 caffeinate -i python -m v2.radar
 RC=$?
@@ -69,24 +95,13 @@ EOF
 )
 [ $RC -ne 0 ] && report "FAILED: python -m v2.radar exit $RC; $SUMMARY" "credits: $((AFTER - USED)) this run, radar $AFTER of $CAP" "next: read $LOG; nothing committed" 1
 
-# after the radar (v2/DRIFT_PREREG.md): page drift, then the skeptic; descriptive only, separate caps
-EXTRA=""
-if grep -q "pre-registration" v2/DRIFT_PREREG.md 2>/dev/null; then
-  caffeinate -i python -m v2.drift && EXTRA="drift $(python -c "
-import json; r = json.load(open('v2/radar/drift_2026-10.json'))['runs'][-1]
-print(f\"{r['changed']} of {r['checked']} pages changed, {r['credits']} cr\")")" || EXTRA="drift FAILED"
-  caffeinate -i python -m v2.radar_skeptic && EXTRA="$EXTRA; skeptic $(python -c "
-import json; e = json.load(open('v2/radar/skeptic_2026-10.json'))['events']
-print(f\"{sum(bool(v['challenged']) for v in e.values())} of {len(e)} events challenged\")")" || EXTRA="$EXTRA; skeptic FAILED"
-else
-  EXTRA="drift and skeptic SKIPPED: v2/DRIFT_PREREG.md not on main"
-fi
+after_radar
 SUMMARY="$SUMMARY; $EXTRA"
 
 git add v2/radar/radar_2026-10.json results/credit_ledger.jsonl
-for F in v2/radar/drift_2026-10.json v2/radar/skeptic_2026-10.json; do [ -f "$F" ] && git add "$F"; done
-git commit -m "Radar 2026-10 daily run $DAY: $SUMMARY ($((AFTER - USED)) radar credits, radar total $AFTER of $CAP)
+add_side_files
+git commit -m "Radar 2026-10 daily run $DAY: $SUMMARY ($((AFTER - USED)) radar credits, radar total $AFTER of $CAP; drift+skeptic $DS)
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || report "FAILED: commit ($SUMMARY)" "credits: $((AFTER - USED)) this run, radar $AFTER of $CAP" "next: commit by hand" 1
 git push origin main || report "RAN but push FAILED: $SUMMARY (committed locally)" "credits: $((AFTER - USED)) this run, radar $AFTER of $CAP" "next: git pull --no-rebase origin main && git push" 1
-report "DONE: $SUMMARY; pushed $(git rev-parse --short HEAD)" "credits: $((AFTER - USED)) this run, radar $AFTER of $CAP" "next: $([ "$DAY" = 2026-10-29 ] && echo 'freeze at 29 Oct 23:59 IST needs the owner OK' || echo 'next run tomorrow 10:07 IST')"
+report "DONE: $SUMMARY; pushed $(git rev-parse --short HEAD)" "credits: $((AFTER - USED)) this run, radar $AFTER of $CAP; drift+skeptic $DS" "next: $([ "$DAY" = 2026-10-29 ] && echo 'freeze at 29 Oct 23:59 IST needs the owner OK' || echo 'next run tomorrow 10:07 IST')"

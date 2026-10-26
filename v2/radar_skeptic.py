@@ -137,16 +137,20 @@ def run(tav, nem, models, radar=None, state=None, now=None):
         raise SystemExit("the radar is frozen (29 Oct 23:59 IST): no more skeptic searches")
     radar = radar or json.loads(RD.RADAR.read_text(encoding="utf-8"))
     state = state or load_state()
-    stopped = None
+    stopped, errors = None, []
     for ev in todo(radar, state):
         try:
             row = check_event(tav, nem, models, ev, radar)
         except BudgetExceeded as e:
             stopped = str(e)
             break
+        except Exception as e:                  # a failed call is not charged: the event is tried again next run
+            errors.append({"event": key(ev), "error": f"{type(e).__name__}: {str(e)[:200]}"})
+            continue
         state["events"][key(ev)] = {**row, "utc": now.isoformat()}
-    state.setdefault("runs", []).append({"utc": now.isoformat(), "complete": stopped is None,
-                                         **({"stopped": stopped} if stopped else {})})
+    state.setdefault("runs", []).append({"utc": now.isoformat(), "complete": stopped is None and not errors,
+                                         **({"stopped": stopped} if stopped else {}),
+                                         **({"errors": errors} if errors else {})})
     return state
 
 

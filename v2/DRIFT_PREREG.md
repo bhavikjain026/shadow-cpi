@@ -88,3 +88,8 @@ radar effect or the radar freeze.
 4. **Table.** Per type: leaks, total results, leak rate with **Wilson 95%** (`v2.date_test.wilson`), by source file
    and pooled. Shown on the Field Report; a suggestion in `FEEDBACK_NOTES.md`. Exploratory: written after both
    tests were run and scored; it changes no verdict.
+
+**Clarification, 2026-10-26T19:01:44Z (UTC), before any drift or skeptic run (code review).** A URL saved more
+than once is compared with its latest saved copy and the lines cited from that copy. A URL whose saved copy is
+missing is listed ("no saved copy") and not fetched. A failed call (not charged) stops the drift run as incomplete and
+keeps what was already checked; a failed skeptic call leaves that event to the next run. Nothing else changes.

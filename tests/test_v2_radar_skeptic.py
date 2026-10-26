@@ -101,3 +101,18 @@ def test_never_changes_the_radar_events():
 def test_cap_in_config():
     from shadow_cpi.budget import cap_of, load_budget
     assert cap_of(S.BUDGET, load_budget()) == 40
+
+
+def test_an_api_error_keeps_the_other_events_and_retries_next_run():
+    radar = copy.deepcopy(RADAR)
+    radar["events"].append({**EV, "kind": "electricity", "effective_date": "2026-10-10"})
+
+    class Flaky(FakeTav):
+        def search(self, query, **kw):
+            if query == "a":
+                raise ConnectionResetError("reset")
+            return super().search(query, **kw)
+
+    st = S.run(Flaky([]), FakeNem([{"query": "a"}, {"query": "b"}]), ["small"], radar, {"events": {}}, NOW)
+    assert len(st["events"]) == 1 and st["runs"][-1]["errors"][0]["error"].startswith("ConnectionResetError")
+    assert len(S.todo(radar, st)) == 1

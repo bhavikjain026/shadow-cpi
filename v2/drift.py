@@ -9,7 +9,6 @@ the saved copy. A change is logged with a diff of at most 300 characters (never 
 still there and whether its number changed. Output: v2/radar/drift_2026-10.json.
 """
 import difflib
-import hashlib
 import json
 import math
 import re
@@ -21,6 +20,7 @@ from shadow_cpi.budget import BudgetExceeded, cap_of, load_budget, spent
 from shadow_cpi.recorder import provenance
 from v2 import leakcheck as LC
 from v2 import radar as RD
+from v2 import rules as R
 
 ROOT = Path(__file__).resolve().parent.parent
 BUDGET = "drift-2026-10"
@@ -40,13 +40,13 @@ def normalise(text):
     return "\n".join(ln for ln in lines if ln)
 
 
-def sha(text):
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+sha = R.text_hash
 
 
 def short_diff(old, new, limit=DIFF_MAX):
-    """Lines removed (-) and added (+), in order, cut to `limit` characters."""
-    out = [f"{d[0]} {d[2:]}" for d in difflib.ndiff(old.split("\n"), new.split("\n")) if d[:1] in "-+"]
+    """Lines removed (-) and added (+), in order, cut to `limit` characters (line-level diff, no intraline pass)."""
+    out = [f"{d[0]} {d[1:]}" for d in difflib.unified_diff(old.split("\n"), new.split("\n"), n=0, lineterm="")
+           if d[:1] in "-+" and not d.startswith(("---", "+++"))]
     s = "\n".join(out)
     return s if len(s) <= limit else s[:limit - 1] + "…"
 
@@ -79,14 +79,18 @@ def summarise_quotes(checks):
 
 # ---------- rule A.1: which URLs ----------
 def bundle(radar):
-    """{url: {'page_file', 'found', 'lines'}} for cards with a saved page and at least one cited line."""
+    """{url: {'page_file', 'found', 'lines'}} for cards with a saved page and at least one cited line. A URL saved
+    more than once keeps its latest copy and the lines cited from that copy."""
     out = {}
     for c in radar["cards"] + [cc for co in radar.get("corroboration", []) for cc in co["cards"]]:
         lines = [cl["line"] for cl in c.get("claims", []) if cl.get("line")]
         if not c.get("page_file") or not lines:
             continue
-        u = out.setdefault(c["url"], {"page_file": c["page_file"], "found": c.get("found"), "lines": []})
-        u["lines"] += [ln for ln in lines if ln not in u["lines"]]
+        u = out.get(c["url"])
+        if u is None or (c.get("found") or "") > (u["found"] or "") and c["page_file"] != u["page_file"]:
+            u = out[c["url"]] = {"page_file": c["page_file"], "found": c.get("found"), "lines": []}
+        if c["page_file"] == u["page_file"]:
+            u["lines"] += [ln for ln in lines if ln not in u["lines"]]
     return out
 
 
@@ -118,7 +122,9 @@ def run(tav, radar=None, state=None, now=None, pages=PAGES):
         raise SystemExit(f"drift already ran on {day} (IST): once a day")
     urls = bundle(radar)
     todo = due(urls, now)
-    rows, failed, not_checked, credits, complete = [], [], [], 0, True
+    no_copy = [u for u in todo if not (Path(pages) / urls[u]["page_file"]).exists()]   # never fetched: nothing to compare
+    todo = [u for u in todo if u not in no_copy]
+    rows, failed, not_checked, credits, complete, why = [], [], [], 0, True, None
     for k in range(0, len(todo), BATCH):
         batch = todo[k:k + BATCH]
         try:
@@ -126,6 +132,10 @@ def run(tav, radar=None, state=None, now=None, pages=PAGES):
         except BudgetExceeded as e:
             not_checked += todo[k:]
             complete, why = False, str(e)
+            break
+        except Exception as e:                  # a failed call is not charged; keep what was already paid for
+            not_checked += todo[k:]
+            complete, why = False, f"{type(e).__name__}: {str(e)[:200]}"
             break
         credits += (resp.get("usage") or {}).get("credits") or 0
         got = {p["url"]: p.get("raw_content") or "" for p in resp.get("results", [])}
@@ -149,7 +159,7 @@ def run(tav, radar=None, state=None, now=None, pages=PAGES):
         "ist_date": day, "utc": now.isoformat(), "credits": credits, "complete": complete,
         "urls_in_set": len(urls), "skipped_fetched_today": len(urls) - len(todo), "checked": len(rows),
         "changed": sum(r["changed"] for r in rows), "failed": failed, "not_checked": not_checked,
-        **({} if complete else {"stopped": why}), "pages": rows})
+        "no_saved_copy": no_copy, **({} if complete else {"stopped": why}), "pages": rows})
     return state
 
 
@@ -170,10 +180,11 @@ def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     radar = json.loads(RD.RADAR.read_text(encoding="utf-8"))
     now = datetime.now(timezone.utc)
-    todo = due(bundle(radar), now)
+    urls = bundle(radar)
+    todo = due(urls, now)
     cfg = load_budget()
     left = cap_of(BUDGET, cfg) - spent(BUDGET)
-    print(f"{len(bundle(radar))} URLs in the set, {len(todo)} to fetch: about {estimate(len(todo))} credits; "
+    print(f"{len(urls)} URLs in the set, {len(todo)} to fetch: about {estimate(len(todo))} credits; "
           f"{left} left of the {cap_of(BUDGET, cfg)} cap")
     if "--dry" in argv:
         return

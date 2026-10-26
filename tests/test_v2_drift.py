@@ -120,3 +120,23 @@ def test_latest_summary_for_the_field_report(pages):
 def test_caps_in_config():
     from shadow_cpi.budget import cap_of, load_budget
     assert cap_of(D.BUDGET, load_budget()) == 60
+
+
+def test_missing_saved_copy_is_listed_not_fetched_and_an_api_error_keeps_paid_results(pages):
+    class Flaky(FakeTav):
+        def extract(self, urls, **kw):
+            if self.calls:
+                raise ConnectionResetError("reset")
+            return super().extract(urls, **kw)
+
+    cards = [card(f"u/{c}") for c in "abcdefg"] + [card("u/z")]           # no pages/z.txt
+    r = D.run(Flaky({c["url"]: SAVED for c in cards}), radar(*cards), {"runs": []}, NOW, pages)["runs"][-1]
+    assert r["no_saved_copy"] == ["u/z"] and r["checked"] == 5 and r["not_checked"] == ["u/f", "u/g"]
+    assert not r["complete"] and r["stopped"].startswith("ConnectionResetError")
+
+
+def test_url_saved_twice_keeps_the_latest_copy_and_its_lines():
+    old = {**card("u/a", lines=("old line",), found="2026-10-25"), "page_file": "pages/old.txt"}
+    new = {**card("u/a", lines=("new line",), found="2026-10-26"), "page_file": "pages/new.txt"}
+    b = D.bundle(radar(old, corr=[new]))["u/a"]
+    assert (b["page_file"], b["lines"]) == ("pages/new.txt", ["new line"])
