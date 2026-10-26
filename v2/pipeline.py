@@ -210,8 +210,8 @@ def ids(card):
                                      "extract_response_sha256")}
 
 
-def ledger_rows(cards, month, cpi_code, cpi_name, kind, state, model):
-    """One evidence-ledger row per checked claim (verified or rejected)."""
+def ledger_rows(cards, month, cpi_code, cpi_name, kind, state, model, ledger=None):
+    """One evidence-ledger row per checked claim (verified or rejected), into `ledger` (default v2/evidence/ledger.jsonl)."""
     for c in cards:
         for cl in c["claims"]:
             if "status" not in cl:
@@ -226,4 +226,4 @@ def ledger_rows(cards, month, cpi_code, cpi_name, kind, state, model):
                        "found_date": c["found"], "line": cl["line"], "url": c["url"], "page_sha256": c["page_sha256"],
                        "page_file": c["page_file"], "status": cl["status"], "reason": cl["reason"],
                        "use": cl.get("use", ""), "search_call": c["search_call"], "extract_call": c["extract_call"],
-                       **ids(c), "model": cl.get("read_by") or model})
+                       **ids(c), "model": cl.get("read_by") or model}, ledger)

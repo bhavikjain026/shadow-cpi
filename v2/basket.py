@@ -83,7 +83,7 @@ def observed_cards(row, notes, month, meta, factors):
     return cards
 
 
-def event_cards(tav, nem, nano, month, items_cfg, meta):
+def event_cards(tav, nem, nano, month, items_cfg, meta, ledger=None):
     """Proposed pages per kind, verified, with Amendment A use; and the moving events (one per kind x place)."""
     seen, cards, moving = set(), [], []
     for kind in EVENT_KINDS:
@@ -109,7 +109,7 @@ def event_cards(tav, nem, nano, month, items_cfg, meta):
                     continue
                 cl["use"] = f"moves CPI ({sc}: {where})"
                 groups.setdefault(where, []).append((cl, weight, c))
-        PL.ledger_rows(kc, month, cfg["cpi_code"], name_of(meta, cfg["cpi_code"]), kind, "", nano)
+        PL.ledger_rows(kc, month, cfg["cpi_code"], name_of(meta, cfg["cpi_code"]), kind, "", nano, ledger)
         for where, cls in groups.items():
             sources = [{"published": c["published"], "change": cl["change"], "effective_date": cl["effective_date"],
                         "read_by": cl.get("read_by"), "url": c["url"]} for cl, _, c in cls]
@@ -145,7 +145,7 @@ def stages(timeline, start):
             {"label": "+ announced price changes via Tavily Search", "yoy": events}]
 
 
-def time_machine(month, item_cards, moving, inp, meta, total, rec):
+def time_machine(month, item_cards, moving, inp, meta, total, client, ledger=None):
     """Issue 3: for each day of the month up to the cutoff, the needle from evidence published by that day only.
     Official series: daily rows up to the day (v1's cutoff-aware code). Events: pages published by the day. The spine
     is a monthly average with no daily prices, so it enters only on the cutoff day."""
@@ -154,10 +154,10 @@ def time_machine(month, item_cards, moving, inp, meta, total, rec):
     w, cut = inp["weights"], R.cutoff(month)
     spine = [c for c in item_cards if c["kind"] == "spine" and c["status"] == "verified"]
     rows, d = [], date.fromisoformat(f"{month}-01")
-    ledger = [r for r in LG.read() if r["month"] == month]
+    ledger = [r for r in LG.read(ledger) if r["month"] == month]
     while d.isoformat() <= cut:
         day = d.isoformat()
-        inp_d, notes_d, _ = BN.gather(month, day, Budgeted(Tavily(recorder=rec), BUDGETS, cache_only=True))
+        inp_d, notes_d, _ = BN.gather(month, day, Budgeted(client, BUDGETS, cache_only=True))
         changes, measured = {}, 0.0
         if day == cut:
             for c in spine:
@@ -190,17 +190,20 @@ def basket_tiles(inp, meta, measured_codes):
     return layout(groups)
 
 
-def run(month="2026-09", cache_only=False):
-    rec = Recorder()
-    tav = Budgeted(Tavily(recorder=rec), BUDGETS, cache_only=cache_only)
-    nem, nano = Nemotron(recorder=rec), models()["small"]
+def run(month="2026-09", cache_only=False, rec=None, keys=(None, None), out_dir=None, ledger=None):
+    """keys = (Tavily, Nebius) keys, None = from the environment; v2.replay passes placeholders with a recorder that
+    refuses any call not in the cache, and a scratch out_dir and ledger so committed files are left alone."""
+    rec = rec or Recorder()
+    client = Tavily(api_key=keys[0], recorder=rec)
+    tav = Budgeted(client, BUDGETS, cache_only=cache_only)
+    nem, nano = Nemotron(api_key=keys[1], recorder=rec), models()["small"]
     cut = R.cutoff(month)
     # official observed series cut at the cutoff (v1's code, cache only: the replay months are all cached)
-    inp, notes, missing = BN.gather(month, cut, Budgeted(Tavily(recorder=rec), BUDGETS, cache_only=True))
+    inp, notes, missing = BN.gather(month, cut, Budgeted(client, BUDGETS, cache_only=True))
     meta = inp["meta"]
     item_cards = spine_cards(inp, month, meta) + observed_cards(inp["observed"][month], notes, month, meta,
                                                                 inp["factors"])
-    ev_cards, moving = event_cards(tav, nem, nano, month, E.load_items()["events"], meta)
+    ev_cards, moving = event_cards(tav, nem, nano, month, E.load_items()["events"], meta, ledger)
     steps = [c for c in item_cards if c["status"] == "verified"]
     seq = [(c["cpi_code"], c["mode"], c["change"]) for c in steps] + [(m["cpi_code"], "add", m["applied"])
                                                                        for m in moving]
@@ -222,10 +225,10 @@ def run(month="2026-09", cache_only=False):
                "The spine is DoCA's monthly average for the whole month, so it includes the 30th, one day after the "
                "cutoff (the file has no daily prices)."],
            "stages": stages(timeline, start), "time_machine": time_machine(month, item_cards, moving, inp, meta, total,
-                                                                          rec),
+                                                                          client, ledger),
            "credits_budget": BUDGET, "credits_spent": spent(BUDGET),
            "credits_by_budget": {b: spent(b) for b in BUDGETS}}
-    p = LG.ROOT / f"run_{month}_basket.json"
+    p = Path(out_dir or LG.ROOT) / f"run_{month}_basket.json"
     p.write_text(json.dumps(out, ensure_ascii=False, indent=1, default=float))
     return out, p
 

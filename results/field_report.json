@@ -1,5 +1,771 @@
 {
  "built": "2026-10-26",
+ "leakage": {
+  "label": "computed by tools/build_field_report.py from the committed results files",
+  "rows": [
+   {
+    "check": "Date test (20 replay cases)",
+    "run": "first pass",
+    "setting": "no dates",
+    "n": 20,
+    "leaks": 9,
+    "leak_rate": 0.45,
+    "wilson95": [
+     0.25819785703764037,
+     0.6579146589808726
+    ],
+    "valid_kept": 6,
+    "valid_total": 40,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.8049999999999997,
+    "caveats": "pilot, 20 cases; leak = Wayback-confirmed (no capture by the cutoff)"
+   },
+   {
+    "check": "Date test (20 replay cases)",
+    "run": "first pass",
+    "setting": "start_date + end_date",
+    "n": 20,
+    "leaks": 0,
+    "leak_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "valid_kept": 21,
+    "valid_total": 40,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.395,
+    "caveats": "pilot, 20 cases; leak = Wayback-confirmed (no capture by the cutoff)"
+   },
+   {
+    "check": "Date test (20 replay cases)",
+    "run": "first pass",
+    "setting": "+ filter_by_published_date",
+    "n": 20,
+    "leaks": 0,
+    "leak_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "valid_kept": 28,
+    "valid_total": 40,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.55,
+    "caveats": "pilot, 20 cases; leak = Wayback-confirmed (no capture by the cutoff)"
+   },
+   {
+    "check": "Date test (20 replay cases)",
+    "run": "first pass",
+    "setting": "+ our page check",
+    "n": 20,
+    "leaks": 0,
+    "leak_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "valid_kept": 13,
+    "valid_total": 40,
+    "credits_per_call": 0.9354838709677419,
+    "median_latency_s": 3.16,
+    "caveats": "pilot, 20 cases; leak = Wayback-confirmed (no capture by the cutoff); page check adds 11 Extract calls; keeps only pages with an explicit date"
+   },
+   {
+    "check": "Date test (20 replay cases)",
+    "run": "after logged retry",
+    "setting": "no dates",
+    "n": 20,
+    "leaks": 10,
+    "leak_rate": 0.5,
+    "wilson95": [
+     0.2992980068701797,
+     0.7007019931298203
+    ],
+    "valid_kept": 9,
+    "valid_total": 48,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.8049999999999997,
+    "caveats": "pilot, 20 cases; leak = Wayback-confirmed (no capture by the cutoff); retry only recovers failed Wayback lookups; valid total grows"
+   },
+   {
+    "check": "Date test (20 replay cases)",
+    "run": "after logged retry",
+    "setting": "start_date + end_date",
+    "n": 20,
+    "leaks": 0,
+    "leak_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "valid_kept": 26,
+    "valid_total": 48,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.395,
+    "caveats": "pilot, 20 cases; leak = Wayback-confirmed (no capture by the cutoff); retry only recovers failed Wayback lookups; valid total grows"
+   },
+   {
+    "check": "Date test (20 replay cases)",
+    "run": "after logged retry",
+    "setting": "+ filter_by_published_date",
+    "n": 20,
+    "leaks": 0,
+    "leak_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "valid_kept": 28,
+    "valid_total": 48,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.55,
+    "caveats": "pilot, 20 cases; leak = Wayback-confirmed (no capture by the cutoff); retry only recovers failed Wayback lookups; valid total grows"
+   },
+   {
+    "check": "Date test (20 replay cases)",
+    "run": "after logged retry",
+    "setting": "+ our page check",
+    "n": 20,
+    "leaks": 0,
+    "leak_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "valid_kept": 13,
+    "valid_total": 48,
+    "credits_per_call": 0.9354838709677419,
+    "median_latency_s": 3.16,
+    "caveats": "pilot, 20 cases; leak = Wayback-confirmed (no capture by the cutoff); page check adds 11 Extract calls; keeps only pages with an explicit date; retry only recovers failed Wayback lookups; valid total grows"
+   },
+   {
+    "check": "Finance check (14 scheduled events)",
+    "run": "first pass",
+    "setting": "no dates",
+    "n": 14,
+    "leaks": 2,
+    "leak_rate": 0.14285714285714285,
+    "wilson95": [
+     0.04009392090764893,
+     0.39941379723733705
+    ],
+    "valid_kept": 1,
+    "valid_total": 11,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.175,
+    "caveats": "exploratory; 60 Wayback lookups failed; C4 date from a board-meeting notice (see the finance table)"
+   },
+   {
+    "check": "Finance check (14 scheduled events)",
+    "run": "first pass",
+    "setting": "start_date + end_date + filter_by_published_date",
+    "n": 14,
+    "leaks": 0,
+    "leak_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.21531080540298042
+    ],
+    "valid_kept": 10,
+    "valid_total": 11,
+    "credits_per_call": 1.0,
+    "median_latency_s": 1.435,
+    "caveats": "exploratory; 52 Wayback lookups failed; C4 date from a board-meeting notice (see the finance table)"
+   },
+   {
+    "check": "Finance check (14 scheduled events)",
+    "run": "after logged retry",
+    "setting": "no dates",
+    "n": 14,
+    "leaks": 10,
+    "leak_rate": 0.7142857142857143,
+    "wilson95": [
+     0.45350915474002584,
+     0.8827862143729825
+    ],
+    "valid_kept": 3,
+    "valid_total": 29,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.175,
+    "caveats": "exploratory; 0 Wayback lookups failed; C4 date from a board-meeting notice (see the finance table)"
+   },
+   {
+    "check": "Finance check (14 scheduled events)",
+    "run": "after logged retry",
+    "setting": "start_date + end_date + filter_by_published_date",
+    "n": 14,
+    "leaks": 0,
+    "leak_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.21531080540298042
+    ],
+    "valid_kept": 26,
+    "valid_total": 29,
+    "credits_per_call": 1.0,
+    "median_latency_s": 1.435,
+    "caveats": "exploratory; 0 Wayback lookups failed; C4 date from a board-meeting notice (see the finance table)"
+   },
+   {
+    "check": "Check P",
+    "run": "pending",
+    "setting": null,
+    "placeholder": true,
+    "caveats": "placeholder: fills in from results/check_p.json when it exists"
+   },
+   {
+    "check": "Check E",
+    "run": "pending",
+    "setting": null,
+    "placeholder": true,
+    "caveats": "placeholder: fills in from results/check_e.json when it exists"
+   }
+  ],
+  "columns": "leak rate = cases (events) with at least one confirmed post-cutoff result among the kept results, Wilson 95%; valid evidence kept = Wayback-confirmed pre-cutoff, on-topic results this setting kept, of those any setting found; median latency = Tavily response_time"
+ },
+ "receipt": {
+  "label": "computed by tools/build_field_report.py from the committed results files",
+  "built_from": "results/call_receipts.json (built 2026-10-26)",
+  "by_endpoint": [
+   {
+    "endpoint": "/crawl",
+    "calls": 9,
+    "credits": 1,
+    "credits_per_call": 0.1111111111111111,
+    "median_latency_s": 10.38,
+    "p95_latency_s": 19.33,
+    "with_latency": 9
+   },
+   {
+    "endpoint": "/extract",
+    "calls": 750,
+    "credits": 656,
+    "credits_per_call": 0.8746666666666667,
+    "median_latency_s": 0.175,
+    "p95_latency_s": 5.225,
+    "with_latency": 750
+   },
+   {
+    "endpoint": "/map",
+    "calls": 17,
+    "credits": 8,
+    "credits_per_call": 0.47058823529411764,
+    "median_latency_s": 11.25,
+    "p95_latency_s": 18.830000000000002,
+    "with_latency": 17
+   },
+   {
+    "endpoint": "/search",
+    "calls": 927,
+    "credits": 997,
+    "credits_per_call": 1.075512405609493,
+    "median_latency_s": 3.64,
+    "p95_latency_s": 6.349,
+    "with_latency": 927
+   }
+  ],
+  "by_experiment": [
+   {
+    "experiment": "backup-check",
+    "endpoint": "/extract",
+    "calls": 1,
+    "credits": 1,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.27,
+    "p95_latency_s": 3.27,
+    "with_latency": 1
+   },
+   {
+    "experiment": "backup-check",
+    "endpoint": "/search",
+    "calls": 3,
+    "credits": 3,
+    "credits_per_call": 1.0,
+    "median_latency_s": 2.51,
+    "p95_latency_s": 2.996,
+    "with_latency": 3
+   },
+   {
+    "experiment": "chase",
+    "endpoint": "/search",
+    "calls": 23,
+    "credits": 23,
+    "credits_per_call": 1.0,
+    "median_latency_s": 2.41,
+    "p95_latency_s": 4.144,
+    "with_latency": 23
+   },
+   {
+    "experiment": "date-test",
+    "endpoint": "/extract",
+    "calls": 24,
+    "credits": 21,
+    "credits_per_call": 0.875,
+    "median_latency_s": 0.04,
+    "p95_latency_s": 4.657000000000001,
+    "with_latency": 24
+   },
+   {
+    "experiment": "date-test",
+    "endpoint": "/search",
+    "calls": 54,
+    "credits": 54,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.56,
+    "p95_latency_s": 4.906499999999999,
+    "with_latency": 54
+   },
+   {
+    "experiment": "finance-lookahead",
+    "endpoint": "/search",
+    "calls": 28,
+    "credits": 28,
+    "credits_per_call": 1.0,
+    "median_latency_s": 1.8699999999999999,
+    "p95_latency_s": 3.7305,
+    "with_latency": 28
+   },
+   {
+    "experiment": "fuel-gap",
+    "endpoint": "/extract",
+    "calls": 10,
+    "credits": 9,
+    "credits_per_call": 0.9,
+    "median_latency_s": 2.3200000000000003,
+    "p95_latency_s": 6.728999999999999,
+    "with_latency": 10
+   },
+   {
+    "experiment": "fuel-gap",
+    "endpoint": "/search",
+    "calls": 10,
+    "credits": 10,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.3,
+    "p95_latency_s": 4.6055,
+    "with_latency": 10
+   },
+   {
+    "experiment": "ibja-iocl",
+    "endpoint": "/extract",
+    "calls": 16,
+    "credits": 9,
+    "credits_per_call": 0.5625,
+    "median_latency_s": 2.25,
+    "p95_latency_s": 6.109999999999999,
+    "with_latency": 16
+   },
+   {
+    "experiment": "prompt-t",
+    "endpoint": "/crawl",
+    "calls": 9,
+    "credits": 1,
+    "credits_per_call": 0.1111111111111111,
+    "median_latency_s": 10.38,
+    "p95_latency_s": 19.33,
+    "with_latency": 9
+   },
+   {
+    "experiment": "prompt-t",
+    "endpoint": "/extract",
+    "calls": 4,
+    "credits": 2,
+    "credits_per_call": 0.5,
+    "median_latency_s": 0.325,
+    "p95_latency_s": 1.065,
+    "with_latency": 4
+   },
+   {
+    "experiment": "prompt-t",
+    "endpoint": "/map",
+    "calls": 17,
+    "credits": 8,
+    "credits_per_call": 0.47058823529411764,
+    "median_latency_s": 11.25,
+    "p95_latency_s": 18.830000000000002,
+    "with_latency": 17
+   },
+   {
+    "experiment": "prompt-t",
+    "endpoint": "/search",
+    "calls": 28,
+    "credits": 28,
+    "credits_per_call": 1.0,
+    "median_latency_s": 2.425,
+    "p95_latency_s": 4.004,
+    "with_latency": 28
+   },
+   {
+    "experiment": "prompt-t-dairy",
+    "endpoint": "/extract",
+    "calls": 4,
+    "credits": 2,
+    "credits_per_call": 0.5,
+    "median_latency_s": 0.325,
+    "p95_latency_s": 1.065,
+    "with_latency": 4
+   },
+   {
+    "experiment": "prompt-t-dairy",
+    "endpoint": "/map",
+    "calls": 7,
+    "credits": 7,
+    "credits_per_call": 1.0,
+    "median_latency_s": 12.61,
+    "p95_latency_s": 19.080000000000002,
+    "with_latency": 7
+   },
+   {
+    "experiment": "prompt-t-dairy",
+    "endpoint": "/search",
+    "calls": 1,
+    "credits": 1,
+    "credits_per_call": 1.0,
+    "median_latency_s": 1.56,
+    "p95_latency_s": 1.56,
+    "with_latency": 1
+   },
+   {
+    "experiment": "radar-2026-10",
+    "endpoint": "/extract",
+    "calls": 14,
+    "credits": 13,
+    "credits_per_call": 0.9285714285714286,
+    "median_latency_s": 0.03,
+    "p95_latency_s": 0.6635,
+    "with_latency": 14
+   },
+   {
+    "experiment": "radar-2026-10",
+    "endpoint": "/search",
+    "calls": 14,
+    "credits": 14,
+    "credits_per_call": 1.0,
+    "median_latency_s": 4.145,
+    "p95_latency_s": 6.022,
+    "with_latency": 14
+   },
+   {
+    "experiment": "recall-audit",
+    "endpoint": "/extract",
+    "calls": 62,
+    "credits": 51,
+    "credits_per_call": 0.8225806451612904,
+    "median_latency_s": 2.0149999999999997,
+    "p95_latency_s": 5.978,
+    "with_latency": 62
+   },
+   {
+    "experiment": "recall-audit",
+    "endpoint": "/search",
+    "calls": 68,
+    "credits": 68,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.8899999999999997,
+    "p95_latency_s": 5.57,
+    "with_latency": 68
+   },
+   {
+    "experiment": "replay-layers",
+    "endpoint": "/extract",
+    "calls": 197,
+    "credits": 159,
+    "credits_per_call": 0.8071065989847716,
+    "median_latency_s": 1.57,
+    "p95_latency_s": 5.516,
+    "with_latency": 197
+   },
+   {
+    "experiment": "replay-layers",
+    "endpoint": "/search",
+    "calls": 186,
+    "credits": 186,
+    "credits_per_call": 1.0,
+    "median_latency_s": 4.165,
+    "p95_latency_s": 5.6850000000000005,
+    "with_latency": 186
+   },
+   {
+    "experiment": "skeptic",
+    "endpoint": "/search",
+    "calls": 27,
+    "credits": 27,
+    "credits_per_call": 1.0,
+    "median_latency_s": 2.86,
+    "p95_latency_s": 3.6399999999999997,
+    "with_latency": 27
+   },
+   {
+    "experiment": "v2-ablation-B",
+    "endpoint": "/extract",
+    "calls": 50,
+    "credits": 45,
+    "credits_per_call": 0.9,
+    "median_latency_s": 0.02,
+    "p95_latency_s": 0.5509999999999999,
+    "with_latency": 50
+   },
+   {
+    "experiment": "v2-ablation-B",
+    "endpoint": "/search",
+    "calls": 72,
+    "credits": 72,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.17,
+    "p95_latency_s": 4.6125,
+    "with_latency": 72
+   },
+   {
+    "experiment": "v2-ablation-C",
+    "endpoint": "/extract",
+    "calls": 73,
+    "credits": 67,
+    "credits_per_call": 0.9178082191780822,
+    "median_latency_s": 0.03,
+    "p95_latency_s": 3.184,
+    "with_latency": 73
+   },
+   {
+    "experiment": "v2-ablation-C",
+    "endpoint": "/search",
+    "calls": 117,
+    "credits": 117,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.75,
+    "p95_latency_s": 5.906000000000001,
+    "with_latency": 117
+   },
+   {
+    "experiment": "v2-ablation-H",
+    "endpoint": "/extract",
+    "calls": 123,
+    "credits": 112,
+    "credits_per_call": 0.9105691056910569,
+    "median_latency_s": 0.03,
+    "p95_latency_s": 3.378,
+    "with_latency": 123
+   },
+   {
+    "experiment": "v2-ablation-H",
+    "endpoint": "/search",
+    "calls": 118,
+    "credits": 118,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.59,
+    "p95_latency_s": 5.5715,
+    "with_latency": 118
+   },
+   {
+    "experiment": "v2-ablation-T",
+    "endpoint": "/search",
+    "calls": 31,
+    "credits": 56,
+    "credits_per_call": 1.8064516129032258,
+    "median_latency_s": 6.2,
+    "p95_latency_s": 8.794999999999998,
+    "with_latency": 31
+   },
+   {
+    "experiment": "v2-ablation-Td",
+    "endpoint": "/extract",
+    "calls": 94,
+    "credits": 89,
+    "credits_per_call": 0.9468085106382979,
+    "median_latency_s": 0.03,
+    "p95_latency_s": 2.4635,
+    "with_latency": 94
+   },
+   {
+    "experiment": "v2-ablation-Td",
+    "endpoint": "/search",
+    "calls": 56,
+    "credits": 101,
+    "credits_per_call": 1.8035714285714286,
+    "median_latency_s": 6.0649999999999995,
+    "p95_latency_s": 8.815,
+    "with_latency": 56
+   },
+   {
+    "experiment": "v2-issue1",
+    "endpoint": "/extract",
+    "calls": 3,
+    "credits": 2,
+    "credits_per_call": 0.6666666666666666,
+    "median_latency_s": 0.02,
+    "p95_latency_s": 0.019999999999999997,
+    "with_latency": 3
+   },
+   {
+    "experiment": "v2-issue1",
+    "endpoint": "/search",
+    "calls": 2,
+    "credits": 2,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.26,
+    "p95_latency_s": 3.332,
+    "with_latency": 2
+   },
+   {
+    "experiment": "v2-issue14",
+    "endpoint": "/extract",
+    "calls": 30,
+    "credits": 27,
+    "credits_per_call": 0.9,
+    "median_latency_s": 0.055,
+    "p95_latency_s": 2.366,
+    "with_latency": 30
+   },
+   {
+    "experiment": "v2-issue14",
+    "endpoint": "/search",
+    "calls": 28,
+    "credits": 28,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.475,
+    "p95_latency_s": 4.7445,
+    "with_latency": 28
+   },
+   {
+    "experiment": "v2-issue2",
+    "endpoint": "/extract",
+    "calls": 9,
+    "credits": 6,
+    "credits_per_call": 0.6666666666666666,
+    "median_latency_s": 0.02,
+    "p95_latency_s": 3.748,
+    "with_latency": 9
+   },
+   {
+    "experiment": "v2-issue2",
+    "endpoint": "/search",
+    "calls": 6,
+    "credits": 6,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.205,
+    "p95_latency_s": 4.175,
+    "with_latency": 6
+   },
+   {
+    "experiment": "v2-issue4",
+    "endpoint": "/extract",
+    "calls": 66,
+    "credits": 61,
+    "credits_per_call": 0.9242424242424242,
+    "median_latency_s": 0.02,
+    "p95_latency_s": 2.1025,
+    "with_latency": 66
+   },
+   {
+    "experiment": "v2-issue4",
+    "endpoint": "/search",
+    "calls": 89,
+    "credits": 89,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.54,
+    "p95_latency_s": 5.326,
+    "with_latency": 89
+   }
+  ],
+  "per_verified_quote": [
+   {
+    "what": "scored v2 pipeline (arm A)",
+    "budgets": [
+     "v2-issue4",
+     "v2-issue14"
+    ],
+    "credits": 205,
+    "verified_quotes": 22,
+    "credits_per_verified_quote": 9.318181818181818,
+    "source": "v2/ablation/arm_A_*.json"
+   },
+   {
+    "what": "arm B (Nemotron writes)",
+    "budgets": [
+     "v2-ablation-B"
+    ],
+    "credits": 117,
+    "verified_quotes": 9,
+    "credits_per_verified_quote": 13.0,
+    "source": "v2/ablation/arm_B_*.json"
+   },
+   {
+    "what": "arm C (Nemotron, regional)",
+    "budgets": [
+     "v2-ablation-C"
+    ],
+    "credits": 184,
+    "verified_quotes": 9,
+    "credits_per_verified_quote": 20.444444444444443,
+    "source": "v2/ablation/arm_C_*.json"
+   },
+   {
+    "what": "arm T (Tavily auto_parameters)",
+    "budgets": [
+     "v2-ablation-T"
+    ],
+    "credits": 56,
+    "verified_quotes": 0,
+    "credits_per_verified_quote": null,
+    "source": "v2/ablation/arm_T_*.json"
+   },
+   {
+    "what": "T+dates (exploratory)",
+    "budgets": [
+     "v2-ablation-Td"
+    ],
+    "credits": 190,
+    "verified_quotes": 13,
+    "credits_per_verified_quote": 14.615384615384615,
+    "source": "v2/ablation/arm_Td_*.json"
+   },
+   {
+    "what": "H (exploratory)",
+    "budgets": [
+     "v2-ablation-H"
+    ],
+    "credits": 230,
+    "verified_quotes": 15,
+    "credits_per_verified_quote": 15.333333333333334,
+    "source": "v2/ablation/arm_H_*.json"
+   },
+   {
+    "what": "September Live build",
+    "budgets": [
+     "v2-issue2"
+    ],
+    "credits": 12,
+    "verified_quotes": 1,
+    "credits_per_verified_quote": 12.0,
+    "source": "v2/evidence/run_2026-09_basket.json"
+   },
+   {
+    "what": "October radar",
+    "budgets": [
+     "radar-2026-10"
+    ],
+    "credits": 27,
+    "verified_quotes": 1,
+    "credits_per_verified_quote": 27.0,
+    "source": "v2/radar/radar_2026-10.json"
+   }
+  ],
+  "total": {
+   "calls": 1703,
+   "credits": 1662,
+   "credits_per_call": 0.9759248385202584,
+   "median_latency_s": 3.14,
+   "p95_latency_s": 6.159,
+   "with_latency": 1703
+  },
+  "reconcile_credits": -82,
+  "notes": [
+   "include_usage can read 0 credits for calls below Tavily's reporting threshold, so a call showing 0 is not proof it was free; account totals are reconciled to the billing page (the reconcile rows, not in the per-endpoint figures)",
+   "a call charged to two budgets counts under both experiments (as the caps count it), so the experiment rows add up to more than the endpoint totals; arm A re-used the scored pipeline's searches from the cache, so its credits are v2-issue4 + v2-issue14",
+   "latency = Tavily's response_time (server time), not our wall-clock time",
+   "cache hits and phantom rows (cache hits charged by an old budget bug) are left out"
+  ]
+ },
  "four_arms": {
   "rows": [
    {

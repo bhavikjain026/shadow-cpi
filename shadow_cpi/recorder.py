@@ -68,6 +68,7 @@ class Recorder:
         self.cache_dir = Path(cache_dir)
         self.log_file = Path(log_file)
         self.use_cache = use_cache
+        self.history_log = self.log_file          # the flight recorder earlier runs wrote (v2.replay points it elsewhere)
         self.provenance = []                      # every call made through this recorder (Amendment F)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.log_file.parent.mkdir(parents=True, exist_ok=True)
