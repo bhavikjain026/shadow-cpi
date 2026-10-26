@@ -46,9 +46,28 @@ def test_leakage_table_reads_the_date_and_finance_results(built):
     assert [r["leaks"] for r in first] == [dt[a]["leak_cases"] for a in "ABCD"]
     assert [r["valid_kept"] for r in first] == [dt[a]["valid_total"] - dt[a]["valid_lost"] for a in "ABCD"]
     assert {r["run"] for r in rows if r["check"].startswith("Finance")} == {"first pass", "after logged retry"}
-    for chk in ("P", "E"):                       # placeholders until their results files exist
-        mine = [r for r in rows if r["check"] == f"Check {chk}"]
-        assert mine and (mine[0].get("placeholder") or (ROOT / FR.PENDING_CHECKS[chk]).exists())
+    p = json.loads((ROOT / FR.LEAKCHECKS["P"]).read_text())["metrics"]
+    prows = [r for r in rows if r["check"].startswith("Check P")]
+    assert [(r["n"], r["leaks"]) for r in prows] == [(m["with_text"], m["later_content"]) for m in p.values()]
+    e = json.loads((ROOT / FR.LEAKCHECKS["E"]).read_text())
+    (erow,) = [r for r in rows if r["check"].startswith("Check E")]
+    assert (erow["n"], erow["leaks"], erow["valid_kept"]) == (e["metrics"]["run"], None,
+                                                               e["metrics"]["shares"]["found before cutoff"]["x"])
+    assert f"{e['metrics']['shares']['found only without dates']['x']} of {e['metrics']['run']}" in erow["caveats"]
+    assert not any(r.get("placeholder") for r in rows)
+
+
+def test_check_e_dates_are_read_from_the_saved_undated_responses():
+    e = json.loads((ROOT / FR.LEAKCHECKS["E"]).read_text())
+    d = FR.check_e_dates(e)
+    assert d["quotes"] == e["metrics"]["shares"]["found only without dates"]["x"]
+    assert d["after_cutoff"] + d["on_or_before_cutoff"] + d["undated_or_missing"] == d["quotes"]
+    fake = {"cases": [{"id": "Q", "cutoff": "2026-05-29", "outcome": "found only without dates",
+                       "searches": {"undated": {"results": [{"source_page": True,
+                                                             "published_date": "Sat, 30 May 2026 10:00:00 GMT"}]}}}]}
+    assert FR.check_e_dates(fake)["after_cutoff"] == 1
+    fake["cases"][0]["searches"]["undated"]["results"].insert(0, {"source_page": True, "published_date": "2026-05-01"})
+    assert FR.check_e_dates(fake)["after_cutoff"] == 1           # any copy dated after the cutoff counts
 
 
 def test_receipt_credits_match_the_ledger(built):

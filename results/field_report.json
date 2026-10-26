@@ -208,18 +208,72 @@
     "caveats": "exploratory; 0 Wayback lookups failed; C4 date from a board-meeting notice (see the finance table)"
    },
    {
-    "check": "Check P",
-    "run": "pending",
-    "setting": null,
-    "placeholder": true,
-    "caveats": "placeholder: fills in from results/check_p.json when it exists"
+    "check": "Check P: full-page date check",
+    "run": "first pass",
+    "setting": "start_date + end_date + filter_by_published_date (date test, arm C)",
+    "n": 47,
+    "leaks": 0,
+    "leak_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.07555760526591085
+    ],
+    "valid_kept": null,
+    "valid_total": null,
+    "credits_per_call": 0.0,
+    "median_latency_s": null,
+    "caveats": "exploratory; leak = page text describes later content (labels by Claude Code); flagged 28 of 47 with a date after the cutoff anywhere in the text (later content 0, unclear 0, sidebar or related links 22, benign 6); 4 without text left out"
    },
    {
-    "check": "Check E",
-    "run": "pending",
-    "setting": null,
-    "placeholder": true,
-    "caveats": "placeholder: fills in from results/check_e.json when it exists"
+    "check": "Check P: full-page date check",
+    "run": "first pass",
+    "setting": "start_date + end_date + filter_by_published_date (finance check, arm D)",
+    "n": 65,
+    "leaks": 1,
+    "leak_rate": 0.015384615384615385,
+    "wilson95": [
+     0.0027209445719428432,
+     0.08213284813120839
+    ],
+    "valid_kept": null,
+    "valid_total": null,
+    "credits_per_call": 1.0,
+    "median_latency_s": null,
+    "caveats": "exploratory; leak = page text describes later content (labels by Claude Code); flagged 38 of 65 with a date after the cutoff anywhere in the text (later content 1, unclear 6, sidebar or related links 16, benign 15); 1 without text left out"
+   },
+   {
+    "check": "Check P: full-page date check",
+    "run": "first pass",
+    "setting": "start_date + end_date + our date checks (v2 verified evidence, no filter)",
+    "n": 20,
+    "leaks": 0,
+    "leak_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "valid_kept": null,
+    "valid_total": null,
+    "credits_per_call": null,
+    "median_latency_s": null,
+    "caveats": "exploratory; leak = page text describes later content (labels by Claude Code); flagged 5 of 20 with a date after the cutoff anywhere in the text (later content 0, unclear 0, sidebar or related links 5, benign 0); 0 without text left out"
+   },
+   {
+    "check": "Check E: exact_match back-dating",
+    "run": "first pass",
+    "setting": "exact_match + end_date + filter_by_published_date, vs the same search undated",
+    "n": 40,
+    "leaks": null,
+    "leak_rate": null,
+    "wilson95": [
+     null,
+     null
+    ],
+    "valid_kept": 25,
+    "valid_total": 40,
+    "credits_per_call": 1.0,
+    "median_latency_s": 1.74,
+    "caveats": "exploratory; no leak measure: missed by the dated search but found undated 8 of 40 (10%–35%, Wilson 95%); for those 8, Tavily's published_date for the source page is after the cutoff for 0, on or before it for 6, missing for 2 (descriptive), so they read as filter misses, not back-dating; not found either way 7; valid evidence kept = found before the cutoff; credits and latency cover both searches"
    }
   ],
   "columns": "leak rate = cases (events) with at least one confirmed post-cutoff result among the kept results, Wilson 95%; valid evidence kept = Wayback-confirmed pre-cutoff, on-topic results this setting kept, of those any setting found; median latency = Tavily response_time"

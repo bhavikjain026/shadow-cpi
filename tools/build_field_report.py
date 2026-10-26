@@ -23,6 +23,7 @@ from v2 import date_test as DT  # noqa: E402
 from v2 import finance_lookahead as F  # noqa: E402
 from v2 import kinds as K  # noqa: E402
 from v2 import recall as RC  # noqa: E402
+from shadow_cpi.tavily import iso_date  # noqa: E402
 
 OUT = ROOT / "results" / "field_report.json"
 EXPLORATORY = "exploratory, added after scoring; cannot change the winner (A)"
@@ -174,9 +175,11 @@ def monthly_run_cost():
 
 COMPUTED = "computed by tools/build_field_report.py from the committed results files"
 SETTINGS = {"A": "no dates", "B": "start_date + end_date", "C": "+ filter_by_published_date", "D": "+ our page check"}
-# checks P and E: their rows appear once these files exist, each {"label": ..., "leakage_rows": [{"setting", "n",
-# "leaks", "valid_kept", "valid_total", "credits", "calls", "median_latency_s", "caveats"}, ...]}
-PENDING_CHECKS = {"P": "results/check_p.json", "E": "results/check_e.json"}
+# checks P and E (v2/LEAKCHECK_PREREG.md): their rows appear once these results files exist
+LEAKCHECKS = {"P": "results/leakcheck_full_page.json", "E": "results/leakcheck_exact_match.json"}
+P_SETTINGS = {"a": "start_date + end_date + filter_by_published_date (date test, arm C)",
+              "b": "start_date + end_date + filter_by_published_date (finance check, arm D)",
+              "c": "start_date + end_date + our date checks (v2 verified evidence, no filter)"}
 
 
 def median(xs):
@@ -195,9 +198,64 @@ def leak_row(check, run, setting, n, leaks, valid_kept, valid_total, credits, ca
             "credits_per_call": credits / calls if calls else None, "median_latency_s": lat, "caveats": caveats}
 
 
+def check_p_rows(res):
+    """Check P, full-page date check: per source, pages whose text holds later content (Claude Code's labels)."""
+    calls = res["extract_calls"]
+    src_of = {}
+    for u in res["units"]:                       # a page kept by two checks belongs to both sources
+        src_of.setdefault(u["url"], set()).add(u["source"])
+    rows = []
+    for s, m in res["metrics"].items():
+        mine = [c for c in calls if any(s in src_of.get(u, ()) for u in c["urls"])]
+        oc = ", ".join(f"{k} {v}" for k, v in m["outcomes"].items())
+        rows.append(leak_row("Check P: full-page date check", "first pass", P_SETTINGS[s], m["with_text"],
+                             m["later_content"], None, None, sum(c["credits"] for c in mine), len(mine), None,
+                             f"exploratory; leak = page text describes later content (labels by Claude Code); "
+                             f"flagged {m['flagged']} of {m['with_text']} with a date after the cutoff anywhere in "
+                             f"the text ({oc}); {m['no_text']} without text left out"))
+    return rows
+
+
+def check_e_dates(res):
+    """For check E's 'found only without dates' quotes: does Tavily's published_date for the source page, as saved
+    in the undated search's response, fall after the cutoff? (descriptive)"""
+    out = []
+    for c in res["cases"]:
+        if c.get("outcome") != "found only without dates":
+            continue
+        src = [r for r in c["searches"]["undated"]["results"] if r.get("source_page")]
+        dates = [x for x in (iso_date(r.get("published_date")) for r in src) if x]
+        d = max(dates) if dates else ""                  # any copy of the page dated after the cutoff counts
+        out.append({"id": c["id"], "cutoff": c["cutoff"], "source_page_returned": bool(src), "published": d or None,
+                    "after_cutoff": bool(d) and d > c["cutoff"]})
+    return {"quotes": len(out), "after_cutoff": sum(x["after_cutoff"] for x in out),
+            "on_or_before_cutoff": sum(bool(x["published"]) and not x["after_cutoff"] for x in out),
+            "undated_or_missing": sum(not x["published"] for x in out), "rows": out}
+
+
+def check_e_rows(res):
+    """Check E, exact_match back-dating: a verified quote that a dated search cannot find may have appeared later."""
+    m, sh = res["metrics"], res["metrics"]["shares"]
+    lat = median([s["response_time"] for c in res["cases"] for s in c["searches"].values()
+                   if s.get("response_time") is not None])
+    d, miss = check_e_dates(res), sh["found only without dates"]
+    w = miss["wilson95"]
+    row = leak_row("Check E: exact_match back-dating", "first pass",
+                   "exact_match + end_date + filter_by_published_date, vs the same search undated", m["run"], 0,
+                   sh["found before cutoff"]["x"], m["run"], m["credits"], 2 * m["run"], lat, "")
+    row.update({"leaks": None, "leak_rate": None, "wilson95": [None, None], "caveats":
+                f"exploratory; no leak measure: missed by the dated search but found undated {miss['x']} of "
+                f"{m['run']} ({w[0]:.0%}\u2013{w[1]:.0%}, Wilson 95%); for those {d['quotes']}, Tavily's "
+                f"published_date for the source page is after the cutoff for {d['after_cutoff']}, on or before it for "
+                f"{d['on_or_before_cutoff']}, missing for {d['undated_or_missing']} (descriptive), so they read as "
+                f"filter misses, not back-dating; not found either way {sh['not found either way']['x']}; valid "
+                "evidence kept = found before the cutoff; credits and latency cover both searches"})
+    return [row]
+
+
 def leakage_table():
     """'Time-locked search leakage': one row per setting, for the date test and the finance check (first pass and
-    after the Wayback retry), plus placeholder rows for checks P and E until their results files exist."""
+    after the Wayback retry), and checks P and E (placeholder rows until their results files exist)."""
     rows = []
     out, rt = load("results/date_field_test.json"), load("results/date_field_test_wayback_retry.json")
     after = with_retry(out, rt, lambda row, r: DT.label(row["cutoff"], r["captures"], r["tavily_date"],
@@ -226,17 +284,12 @@ def leakage_table():
                                  x["credits"], m["events"], x["median_latency_s"],
                                  f"exploratory; {x['wayback_failed']} Wayback lookups failed; C4 date from a "
                                  "board-meeting notice (see the finance table)"))
-    for chk, path in PENDING_CHECKS.items():
-        p = ROOT / path
-        if not p.exists():
+    for chk, path in LEAKCHECKS.items():
+        if not (ROOT / path).exists():
             rows.append({"check": f"Check {chk}", "run": "pending", "setting": None, "placeholder": True,
                          "caveats": f"placeholder: fills in from {path} when it exists"})
-            continue
-        res = json.loads(p.read_text(encoding="utf-8"))
-        for x in res.get("leakage_rows", []):
-            rows.append(leak_row(f"Check {chk}", res.get("label", ""), x.get("setting"), x.get("n", 0),
-                                 x.get("leaks", 0), x.get("valid_kept"), x.get("valid_total"), x.get("credits", 0),
-                                 x.get("calls", 0), x.get("median_latency_s"), x.get("caveats", "")))
+        else:
+            rows += (check_p_rows if chk == "P" else check_e_rows)(load(path))
     return {"label": COMPUTED, "rows": rows,
             "columns": "leak rate = cases (events) with at least one confirmed post-cutoff result among the kept "
                        "results, Wilson 95%; valid evidence kept = Wayback-confirmed pre-cutoff, on-topic results "
