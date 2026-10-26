@@ -243,7 +243,8 @@ def facts(st, as_of, root=ROOT):
     # config/doc_citations.json: other people's numbers, with their sources
     cit = load("config/doc_citations.json", root)
     f.update(lahib_arxiv=cit["el_lahib_2026"]["arxiv"], lahib_year=cit["el_lahib_2026"]["year"], lahib_pct=f"{cit['el_lahib_2026']['leaked_pct']}%",
-             release_hour=cit["mospi_release"]["time_ist"])
+             lahib_revealed_pct=f"{cit['el_lahib_2026']['revealed_pct']}%", release_hour=cit["mospi_release"]["time_ist"],
+             research_checked=day_month(date.fromisoformat(cit["tavily_research_params"]["checked"][:10])))
 
     # run-dependent Tavily counts (tools/prompt_t.py run_stats), labelled as of a date
     f.update(as_of=human(as_of), run_calls=f"{st['calls']:,}", run_credits=f"{st['credits']:,}",

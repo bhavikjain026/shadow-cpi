@@ -25,8 +25,8 @@ average, against {{mae_trend}} for trend-only; on poll months it was about a tie
 ## Inspiration
 India's CPI arrives about {{release_lag}} days after the month ends. Forecasting it from the web means replaying past
 months, and a replay that reads a page published after its cutoff looks better than it could ever be live. El Lahib et
-al. ({{lahib_year}}, arXiv {{lahib_arxiv}}) found that {{lahib_pct}} of forecasting questions leaked through Google's
-date filter. We found no published audit of Tavily's date filters, so we measured it.
+al. ({{lahib_year}}, arXiv {{lahib_arxiv}}) found that on Google, for {{lahib_pct}} of forecasting questions, at least
+one retrieved page contained major post-cutoff leakage ({{lahib_revealed_pct}} revealed the answer directly). We found no published audit of Tavily's date filters, so we measured it.
 
 ## Time-locked search leakage
 - **Date test** (pilot, pre-registered): no dates, {{dt_nodates}} of {{dt_cases}} cases leaked
@@ -96,7 +96,7 @@ better ({{mae_v2}}).
 - `published_date` can be later than the page's own date: {{pd_later}} of {{pd_pages}} distinct pages.
 - Undated pages are dropped by the filter ({{dt_undated_nodates}} undated results with no dates,
   {{dt_undated_filter}} with the filter).
-- The Research endpoint has no date window (API reference; not measured).
+- The Research endpoint has no date window (checked in the API reference on {{research_checked}}; not measured).
 - Map returned nothing, silently, on {{map_official_empty}} of {{map_official}} official crawl-list sites (regulators, IOCL, Amul) and
   {{map_dairy_empty}} of {{map_dairy}} dairy sites.
 - Scanned PDFs extract only the letterhead.

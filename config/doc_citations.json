@@ -4,14 +4,33 @@
     "arxiv": "2602.00758",
     "year": 2026,
     "leaked_pct": 71,
-    "what": "share of forecasting questions whose answer leaked through Google's date filter",
+    "what": "share of forecasting questions for which at least one page retrieved on Google contains major post-cutoff leakage (revealed_pct: the answer directly revealed)",
     "source": "https://arxiv.org/abs/2602.00758",
-    "added": "2026-10-26, from the owner's task card; not re-read offline"
+    "revealed_pct": 41,
+    "quote": "at least one retrieved page contains major post-cutoff leakage for 71% of questions on Google",
+    "checked": "2026-10-26, by the owner, against the arXiv abstract"
   },
   "mospi_release": {
     "time_ist": "4 pm",
     "what": "MoSPI's CPI press release time",
     "source": "MoSPI advance release calendar",
     "added": "2026-10-26, from the owner's task card; not re-read offline"
+  },
+  "tavily_research_params": {
+    "params": [
+      "input",
+      "model",
+      "stream",
+      "output_schema",
+      "citation_format",
+      "include_domains",
+      "exclude_domains",
+      "output_length",
+      "files"
+    ],
+    "date_param": false,
+    "what": "the Tavily Research request body: no date parameter",
+    "source": "https://docs.tavily.com (API reference, Research endpoint)",
+    "checked": "2026-10-26, by the owner, in the API reference; not measured"
   }
 }

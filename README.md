@@ -13,7 +13,8 @@ move, verifies every quote on the page, and seals India's inflation forecast bef
 India's official CPI inflation figure arrives about 12 days after the month ends, so anyone forecasting
 it from the web has to replay past months, and a replay that quietly reads a page published after its cutoff looks
 better than it could ever be live (look-ahead bias). El Lahib et al. (2026, [arXiv 2602.00758](https://arxiv.org/abs/2602.00758))
-found that 71% of forecasting questions leaked their answer through Google's date filter. We found no
+found that on Google, for 71% of forecasting questions, at least one retrieved page contained major
+post-cutoff leakage (41% revealed the answer directly). We found no
 published audit of Tavily's date filters, so we measured it.
 
 ## Time-locked search leakage
@@ -117,12 +118,12 @@ made Hindi pages work. Details: [`FEEDBACK_NOTES.md`](FEEDBACK_NOTES.md).
 
 ## The product
 
-- **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 26 Oct 2026; MoSPI publishes on 12 Nov at 4 pm
+- **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 27 Oct 2026; MoSPI publishes on 12 Nov at 4 pm
   IST. Anyone can check the seal: download `sealed/2026-10.json` at tag `seal-2026-10`, recompute its `SHA-256`, and
   compare it with `sealed/2026-10.sha256` ([`verify.md`](verify.md)). After the release, the Archive page shows the
   miss and whether the official figure was inside the range.
 - **Price Shock Radar** (exploratory, report only; app page "October radar"): announced retail price changes taking
-  effect this month, found with Tavily before MoSPI publishes. So far 2 verified events,
+  effect this month, found with Tavily before MoSPI publishes. So far 1 event verified,
   0 corroborated, 52 of a 150-credit cap. It never changes the sealed call.
 - **Live build** with **Replay a saved run**: watch the number build one verified card at a time. Replays make no
   API call and cost no credits.
@@ -186,7 +187,7 @@ Written as bug reports in [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports
   results were undated; with the filter, 0. Some valid evidence is undated, so strictness has a
   cost (above).
 - **Research has no date window.** The Research endpoint takes no `start_date`/`end_date`, so it stays out of
-  time-locked work (from the API reference; not measured).
+  time-locked work (checked in the API reference on 26 Oct; not measured).
 - **Map returned nothing on Indian official sites,** silently: 5 of 5 sites
   on our official crawl list (state electricity regulators, IOCL, Amul) and 3 of 7 dairy sites, with no error or `failed_results`.
 - **Scanned PDFs extract only the letterhead.** A dairy's rate-list PDF came back as its letterhead; the rates are an
@@ -235,7 +236,7 @@ To run the pipeline, copy `.env.example` to `.env`, add the two keys, and start 
 [`docs/deploy.md`](docs/deploy.md). Every number in this README is filled from the results files by
 `python tools/sync_doc_numbers.py` (template: [`docs/templates/README.md`](docs/templates/README.md)).
 
-Tavily usage so far (as of 26 Oct 2026, [`results/tavily_report_card.md`](results/tavily_report_card.md)):
+Tavily usage so far (as of 27 Oct 2026, [`results/tavily_report_card.md`](results/tavily_report_card.md)):
 2,009 calls sent, 1,927 credits used (a 1,000-credit monthly plan plus 3,125
 add-on credits), 79% of dated search results inside the requested window, median latency
 4.0 s.

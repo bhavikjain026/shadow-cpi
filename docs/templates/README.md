@@ -12,7 +12,8 @@ move, verifies every quote on the page, and seals India's inflation forecast bef
 India's official CPI inflation figure arrives about {{release_lag}} days after the month ends, so anyone forecasting
 it from the web has to replay past months, and a replay that quietly reads a page published after its cutoff looks
 better than it could ever be live (look-ahead bias). El Lahib et al. ({{lahib_year}}, [arXiv {{lahib_arxiv}}](https://arxiv.org/abs/{{lahib_arxiv}}))
-found that {{lahib_pct}} of forecasting questions leaked their answer through Google's date filter. We found no
+found that on Google, for {{lahib_pct}} of forecasting questions, at least one retrieved page contained major
+post-cutoff leakage ({{lahib_revealed_pct}} revealed the answer directly). We found no
 published audit of Tavily's date filters, so we measured it.
 
 ## Time-locked search leakage
@@ -110,7 +111,7 @@ made Hindi pages work. Details: [`FEEDBACK_NOTES.md`](FEEDBACK_NOTES.md).
   compare it with `sealed/2026-10.sha256` ([`verify.md`](verify.md)). After the release, the Archive page shows the
   miss and whether the official figure was inside the range.
 - **Price Shock Radar** (exploratory, report only; app page "October radar"): announced retail price changes taking
-  effect this month, found with Tavily before MoSPI publishes. So far {{radar_events}} verified events,
+  effect this month, found with Tavily before MoSPI publishes. So far {{radar_events_phrase}} verified,
   {{radar_corroborated}} corroborated, {{radar_spent}} of a {{radar_cap}}-credit cap. It never changes the sealed call.
 - **Live build** with **Replay a saved run**: watch the number build one verified card at a time. Replays make no
   API call and cost no credits.
@@ -174,7 +175,7 @@ Written as bug reports in [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports
   results were undated; with the filter, {{dt_undated_filter}}. Some valid evidence is undated, so strictness has a
   cost (above).
 - **Research has no date window.** The Research endpoint takes no `start_date`/`end_date`, so it stays out of
-  time-locked work (from the API reference; not measured).
+  time-locked work (checked in the API reference on {{research_checked}}; not measured).
 - **Map returned nothing on Indian official sites,** silently: {{map_official_empty}} of {{map_official}} sites
   on our official crawl list (state electricity regulators, IOCL, Amul) and {{map_dairy_empty}} of {{map_dairy}} dairy sites, with no error or `failed_results`.
 - **Scanned PDFs extract only the letterhead.** A dairy's rate-list PDF came back as its letterhead; the rates are an

@@ -26,8 +26,8 @@ average, against 0.212 for trend-only; on poll months it was about a tie with ec
 ## Inspiration
 India's CPI arrives about 12 days after the month ends. Forecasting it from the web means replaying past
 months, and a replay that reads a page published after its cutoff looks better than it could ever be live. El Lahib et
-al. (2026, arXiv 2602.00758) found that 71% of forecasting questions leaked through Google's
-date filter. We found no published audit of Tavily's date filters, so we measured it.
+al. (2026, arXiv 2602.00758) found that on Google, for 71% of forecasting questions, at least
+one retrieved page contained major post-cutoff leakage (41% revealed the answer directly). We found no published audit of Tavily's date filters, so we measured it.
 
 ## Time-locked search leakage
 - **Date test** (pilot, pre-registered): no dates, 9 of 20 cases leaked
@@ -83,10 +83,10 @@ C and H (719 calls sent; 5,177 including cache hits). Token Factory helped: JSON
 worked on the opening call, and both sizes sit behind one OpenAI-compatible endpoint, so roles are a config change.
 
 ## What it does
-- **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 26 Oct 2026. MoSPI publishes on 12 Nov at 4 pm IST.
+- **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 27 Oct 2026. MoSPI publishes on 12 Nov at 4 pm IST.
   Anyone can recompute the seal's `SHA-256` from the file at tag `seal-2026-10` (`verify.md`).
 - **Price Shock Radar** (exploratory, report only): announced price changes taking effect this month;
-  2 verified so far, 0 corroborated.
+  1 verified so far, 0 corroborated.
 - **Live build** with **Replay a saved run** (no API call, no credits).
 - **Chain of custody** from any number to its quote, page, Tavily request ID, response hash and seal; **`as_of()`**
   shows what was known on a past day.
@@ -108,7 +108,7 @@ better (0.206).
 - `published_date` can be later than the page's own date: 4 of 42 distinct pages.
 - Undated pages are dropped by the filter (8 undated results with no dates,
   0 with the filter).
-- The Research endpoint has no date window (API reference; not measured).
+- The Research endpoint has no date window (checked in the API reference on 26 Oct; not measured).
 - Map returned nothing, silently, on 5 of 5 official crawl-list sites (regulators, IOCL, Amul) and
   3 of 7 dairy sites.
 - Scanned PDFs extract only the letterhead.
@@ -124,7 +124,7 @@ has 1 event. Logged as Amendments `R2`–`R3`, with before and after.
 
 ## Built with
 Python, Streamlit, Tavily (Search, Extract; Map and Crawl trialled), NVIDIA Nemotron on Nebius Token Factory. Tavily
-usage as of 26 Oct 2026: 2,009 calls, 1,927 credits, 79% of dated results inside the
+usage as of 27 Oct 2026: 2,009 calls, 1,927 credits, 79% of dated results inside the
 requested window (5,343 of 6,756), median latency 4.0 s.
 
 ## Try it

@@ -166,3 +166,10 @@ in traces.** In the exploratory T+dates arm (same queries as arm T, plus our `st
 inside the supplied window. So the dates seem to win, but the logged time_range says otherwise. Suggestion: echo the
 window actually applied, or drop time_range from the echo when dates are sent. Evidence: `v2/ablation/arm_Td_*.json`
 (`plan[].auto_parameters`, `plan[].dates_kept`); `results/date_field_test.md` (addendum).
+
+**2026-10-26 · Friction: the Research endpoint has no date parameter, so it cannot be time-locked.** Checked in the
+API reference at docs.tavily.com on 26 Oct 2026 (not measured; no call made): the Research request body is `input`,
+`model`, `stream`, `output_schema`, `citation_format`, `include_domains`, `exclude_domains`, `output_length` and
+`files`, with no `start_date`/`end_date` or other date window. So Research stays out of our replays and the October
+radar, where every search must be date-locked. Suggestion: accept the same `start_date`/`end_date` as Search.
+Evidence: `config/doc_citations.json` (`tavily_research_params`, with the date checked).
