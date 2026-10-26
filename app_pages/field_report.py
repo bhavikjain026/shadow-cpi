@@ -25,6 +25,32 @@ if not r:
     st.stop()
 st.caption(f"Built {r['built']} from the committed results files · source: `results/field_report.json`")
 
+# ---------- summary (six findings, each read from its file) ----------
+dt1, dt2 = r["date_test"]["first_pass"]["arms"], r["date_test"]["after_retry"]["arms"]
+fn1, fn2 = r["finance"]["first_pass"]["all_14"], r["finance"]["after_retry"]["all_14"]
+em = read_json("results/leakcheck_exact_match.json")
+top = {x["arm"]: x for x in r["four_arms"]["rows"]}[r["four_arms"]["verdict"]["ranking"][0]]
+summary = [
+    ("Date test, no time lock: cases with a confirmed leak (Wayback)",
+     f"{dt1['A']['leak_cases']} of {dt1['A']['cases']} ({dt2['A']['leak_cases']} after the logged retry)",
+     "results/field_report.json"),
+    ("Date test, Tavily time lock (dates + filter_by_published_date)",
+     f"{dt1['C']['leak_cases']} of {dt1['C']['cases']} ({dt2['C']['leak_cases']} after the retry)",
+     "results/field_report.json"),
+    ("Finance check, no time lock: events with a confirmed leak",
+     f"{fn1['arms']['N']['confirmed_events']} of {fn1['events']} ({fn2['arms']['N']['confirmed_events']} after the "
+     "logged retry)", "results/field_report.json"),
+    ("Finance check, Tavily time lock",
+     f"{fn1['arms']['D']['confirmed_events']} of {fn1['events']} ({fn2['arms']['D']['confirmed_events']} after the retry)",
+     "results/field_report.json"),
+    ("Cost of strictness: known-good quotes the dated search missed",
+     f"{em['metrics']['shares']['found only without dates']['x']} of {em['metrics']['quotes']}" if em else "—",
+     "results/leakcheck_exact_match.json"),
+    (f"Who should write the searches: best arm ({top['writer']})", f"{top['recall']} of {top['of']} known changes",
+     "results/field_report.json"),
+]
+st.dataframe([{"Finding": a, "Number": b, "File": c} for a, b, c in summary], hide_index=True, width="stretch")
+
 # ---------- time-locked search leakage (first block) ----------
 lk = r.get("leakage")
 if lk:

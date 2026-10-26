@@ -2,7 +2,8 @@
 
 Run:  streamlit run app.py
 It reads the results files in this repository (docs/app_numbers.md). The only API calls are the capped "Run live"
-button on Home, with keys from the environment (SCPI_TAVILY_API_KEY, SCPI_NEBIUS_API_KEY).
+button on October forecast and the Leak demo's live mode (both off unless RUN_LIVE_ENABLED), with keys from the
+environment (SCPI_TAVILY_API_KEY, SCPI_NEBIUS_API_KEY).
 """
 import sys
 from pathlib import Path
@@ -15,13 +16,15 @@ from app_pages.common import NOWCAST_WORDS  # noqa: E402
 
 st.set_page_config(page_title="Shadow CPI", page_icon="📈", layout="centered", initial_sidebar_state="auto")
 
-pages = [
-    st.Page("app_pages/home.py", title="Home", icon="🏠", default=True),
+pages = {"": [
+    st.Page("app_pages/leak_demo.py", title="Leak demo", icon="🕳️", default=True),
+    st.Page("app_pages/field_report.py", title="Field Report", icon="🧪"),
+    st.Page("app_pages/home.py", title="October forecast", icon="📈"),
+    st.Page("app_pages/radar.py", title="Radar", icon="📡"),
+], "More": [
     st.Page("app_pages/evidence.py", title="Evidence", icon="🧾"),
     st.Page("app_pages/replay.py", title="Replay", icon="🔁"),
     st.Page("app_pages/live_build.py", title="Live build (v2)", icon="🧱"),
-    st.Page("app_pages/radar.py", title="October radar (v2)", icon="📡"),
-    st.Page("app_pages/field_report.py", title="Tavily field report", icon="🧪"),
     st.Page("app_pages/custody.py", title="Chain of custody", icon="🔗"),
     st.Page("app_pages/as_of.py", title="As of a date", icon="🗓️"),
     st.Page("app_pages/research.py", title="For research teams", icon="🔬"),
@@ -29,7 +32,7 @@ pages = [
     st.Page("app_pages/flight_recorder.py", title="Tavily Flight Recorder", icon="🛰️"),
     st.Page("app_pages/archive.py", title="Archive", icon="🔒"),
     st.Page("app_pages/brief.py", title="Reporter brief", icon="📰"),
-]
+]}
 
 with st.sidebar:
     st.markdown("**Shadow CPI**")

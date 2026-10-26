@@ -60,6 +60,9 @@ def cache_keys(ids):
 
 def request_body(call, keys):
     """The body sent for one call, from the cache, after checking the cached response is the one the results saved."""
+    if call["call"] not in keys:
+        raise SystemExit(f"call {call['call']} is not in {LOG.relative_to(ROOT)}: the local flight recorder is "
+                         "incomplete on this machine")
     entry = json.loads((CACHE / f"{keys[call['call']]}.json").read_text(encoding="utf-8"))
     if response_sha256(entry["response"]) != call["response_sha256"]:
         raise SystemExit(f"call {call['call']}: cached response does not match the saved SHA-256")
@@ -70,6 +73,25 @@ def request_body(call, keys):
 def short(text, n=QUOTE_WORDS):
     words = (text or "").replace("\n", " ").split()
     return " ".join(words[:n]) + (" …" if len(words) > n else "")
+
+
+def item_words(test, row):
+    """Words that name the case's item (date test: v2.kinds words; finance: the company or RBI names)."""
+    from v2 import kinds as K
+    if test == "finance":
+        return F.NAMES[row["name"]]
+    return [w for k in ({"fuel": ["petrol", "diesel"]}.get(row["kind"]) or [row["kind"]]) for w in K.KINDS[k]["words"]]
+
+
+def quote(test, row, r):
+    """A short quote from the result's snippet: the first sentence that names the case's item, else the title."""
+    import re
+    from v2 import kinds as K
+    words = item_words(test, row)
+    for sent in re.split(r"(?<=[.!?])\s+|\n+|#+", r.get("content") or ""):
+        if any(K.has_word(sent, w) for w in words):
+            return short(sent.strip(" *-|"))
+    return short(r["title"])
 
 
 def relabelled(test, out, retry):
@@ -95,14 +117,15 @@ def search(test, row, arm, first, keys):
     a = row["arms"][arm]
     results = []
     for r, r0 in zip(a["results"], first["arms"][arm]["results"]):
-        dated = r.get("tavily_date") or (DT.url_date(r["url"]) if test == "date" else r.get("url_date"))
+        signals = (r.get("tavily_date"), DT.url_date(r["url"]) if test == "date" else r.get("url_date"))
+        dated = next((d for d in signals if d and d > row["cutoff"]), None)      # the signal that made it a leak
         results.append({"url": r["url"], "title": r["title"], "published_date": r.get("tavily_date"),
                         "page_date": r.get("page_date") if test == "date" else None,
                         "url_date": DT.url_date(r["url"]) if test == "date" else r.get("url_date"),
                         "label": LABELS[test][r["label"]], "leak": r["label"] == LEAK[test],
                         "label_first_pass": LABELS[test][r0["label"]],
                         "days_after_cutoff": days_after(dated, row["cutoff"]) if r["label"] == LEAK[test] else None,
-                        "quote": short(r.get("content")) if r["label"] == LEAK[test] else ""})
+                        "quote": quote(test, row, r) if r["label"] == LEAK[test] else ""})
     return {"arm": arm, "request": request_body(a, keys), "credits": a["credits"],
             "latency_s": a["response_time"], "request_id": a["request_id"], "call": a["call"],
             "response_sha256": a["response_sha256"], "results": results}
@@ -169,12 +192,12 @@ def totals():
 
 
 def build():
-    cs = cases()
-    for t, key in (("date", "A"), ("finance", "N")):                # the per-case labels must give the totals
+    cs, tot = cases(), totals()
+    for t in ("date", "finance"):                                     # the per-case labels must give the totals
         n = sum(any(r["leak"] for r in c["open"]["results"]) for c in cs if c["test"] == t)
-        if n != totals()[t]["open"]["retry"]:
+        if n != tot[t]["open"]["retry"]:
             raise SystemExit(f"{t}: {n} cases with a confirmed leak after the retry, field report says otherwise")
-    return {"built_utc": datetime.now(timezone.utc).isoformat(), "examples": examples(cs), "totals": totals(),
+    return {"built_utc": datetime.now(timezone.utc).isoformat(), "examples": examples(cs), "totals": tot,
             "cases": cs, "labels_note": "labels after the logged Wayback retry (each result also carries its "
                                         "first-pass label); the totals show both",
             "sources": [t["file"] for t in TESTS.values()] + [t["retry"] for t in TESTS.values()]}
