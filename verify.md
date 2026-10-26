@@ -58,6 +58,20 @@ git show seal-2026-10:sealed/2026-10.json > check.json
 sha256sum check.json          # Mac: shasum -a 256 check.json
 ```
 
+## 3b. The experimental v3 bundle (a separate check; v1's check above does not depend on it)
+
+Right after v1's seal, the experimental v3 numbers (`v3/PREREG.md`) are sealed in `sealed/2026-10.v3.json`, and
+`sealed/2026-10.bundle.sha256` lists the fingerprints of v1's file, v1's `.sha256` and the v3 file. Its tag is
+`seal-2026-10-bundle`. From a copy of the repository, one command checks all three at the bundle tag and shows the
+tag's date:
+
+```
+git checkout -q seal-2026-10-bundle && (cd sealed && shasum -a 256 -c 2026-10.bundle.sha256) && git for-each-ref refs/tags/seal-2026-10-bundle --format="tag created %(taggerdate:iso-strict)"
+```
+
+Linux: use `sha256sum -c` instead of `shasum -a 256 -c`. Three `OK` lines → PASS. The tag date must be before MoSPI's
+release, and GitHub's push record (step 3) is again the strongest proof. Go back with `git checkout -q main`.
+
 ## 4. After the official release
 
 `python score.py` compares each seal with the official number in `data/official_releases.csv` and writes
