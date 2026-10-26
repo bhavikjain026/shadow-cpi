@@ -1,0 +1,1598 @@
+{
+ "by": "Claude Code (claude-opus-5-5), 2026-10-26, after reading every flagged line in context; not revised after the rates were computed",
+ "rule": "v2/LEAKCHECK_PREREG.md, Check P outcomes",
+ "labels": {
+  "a|2026-04-29|https://www.edie.net/partner-content/uk-businesses-face-rising-electricity-costs-as-network-charges-increase-under-new-price-control-period/": {
+   "28": {
+    "label": "benign",
+    "reason": "the new UK network-charging framework 'will run until March 2031' (a fixed price-control period)",
+    "unit": "U0"
+   },
+   "42": {
+    "label": "benign",
+    "reason": "the five-year price-control period ending April 2031, set in advance",
+    "unit": "U0"
+   }
+  },
+  "a|2026-04-29|https://www.birminghammail.co.uk/news/cost-of-living/energy-bills-forecast-hit-almost-33692661": {
+   "29": {
+    "label": "benign",
+    "reason": "the energy price cap 'set' for 1 April to 30 June 2026, announced in advance",
+    "unit": "U1"
+   }
+  },
+  "a|2026-04-29|https://www.thehindu.com/sci-tech/agriculture/lack-of-funds-wont-hamper-growth-of-agriculture-sector-says-rajnath-singh/article70851063.ece": {
+   "33": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U2"
+   },
+   "161": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U2"
+   }
+  },
+  "a|2026-04-29|https://timesofindia.indiatimes.com/city/delhi/power-likely-to-get-costlier-as-aptel-orders-derc-to-start-liquidating-rs-39k-cr-regulatory-assets/articleshow/130399420.cms": {
+   "47": {
+    "label": "benign",
+    "reason": "quotes DERC's request for an extension 'till July 1, 2026' from an April order",
+    "unit": "U5"
+   }
+  },
+  "a|2026-04-29|https://timesofindia.indiatimes.com/city/bengaluru/bangalore-electricity-supply-company-takes-rs-2-8kcr-hit-consumers-to-pay-more-for-next-1-year/articleshow/130342106.cms": {
+   "89": {
+    "label": "benign",
+    "reason": "tariff revision 'from the first meter reading after May 1, 2026 ... until April 30, 2027', a schedule",
+    "unit": "U6"
+   },
+   "323": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U6"
+   }
+  },
+  "a|2026-04-29|https://www.pib.gov.in/PressReleasePage.aspx?PRID=2249431&reg=3&lang=1": {
+   "84": {
+    "label": "benign",
+    "reason": "PIB briefing: policies valid 'till 30 June 2026' / imports allowed 'till 31 March 2027'",
+    "unit": "U7"
+   },
+   "220": {
+    "label": "benign",
+    "reason": "PIB briefing: policies valid 'till 30 June 2026' / imports allowed 'till 31 March 2027'",
+    "unit": "U7"
+   },
+   "222": {
+    "label": "benign",
+    "reason": "PIB briefing: policies valid 'till 30 June 2026' / imports allowed 'till 31 March 2027'",
+    "unit": "U7"
+   },
+   "326": {
+    "label": "benign",
+    "reason": "PIB briefing: policies valid 'till 30 June 2026' / imports allowed 'till 31 March 2027'",
+    "unit": "U7"
+   },
+   "407": {
+    "label": "benign",
+    "reason": "PIB briefing: policies valid 'till 30 June 2026' / imports allowed 'till 31 March 2027'",
+    "unit": "U7"
+   },
+   "543": {
+    "label": "benign",
+    "reason": "PIB briefing: policies valid 'till 30 June 2026' / imports allowed 'till 31 March 2027'",
+    "unit": "U7"
+   },
+   "545": {
+    "label": "benign",
+    "reason": "PIB briefing: policies valid 'till 30 June 2026' / imports allowed 'till 31 March 2027'",
+    "unit": "U7"
+   }
+  },
+  "a|2026-04-29|https://english.punjabkesari.com/india/rajnath-singh-cm-mohan-yadav-to-inaugurate-national-agricultural-fair-in-raisen-today/amp/": {
+   "57": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U10"
+   },
+   "61": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U10"
+   },
+   "65": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U10"
+   },
+   "69": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U10"
+   },
+   "73": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U10"
+   },
+   "77": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U10"
+   }
+  },
+  "a|2026-05-29|https://www.thehindu.com/news/national/petrol-diesel-price-hike-fuel-rise-may-19-2026/article70996398.ece": {
+   "33": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U11"
+   },
+   "163": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U11"
+   }
+  },
+  "a|2026-05-29|https://www.thehindu.com/news/national/israel-us-iran-war-live-updates-petrol-diesel-price-hike-india-rates-may-15-2026/article70981418.ece": {
+   "33": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U12"
+   },
+   "145": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U12"
+   }
+  },
+  "a|2026-05-29|https://www.thehindu.com/news/national/amul-hikes-milk-prices-by-2-per-litre-across-india-effective-may-14/article70974685.ece": {
+   "33": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U14"
+   },
+   "161": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U14"
+   }
+  },
+  "a|2026-05-29|https://www.bhaskarenglish.in/local/mp/bhopal/news/sanchi-milk-price-hike-mp-may-15-137933205.html": {
+   "4": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U18"
+   }
+  },
+  "a|2026-05-29|https://www.farmprogress.com/livestock-and-dairy/butter-and-nfdm-exports-drive-milk-price-surge": {
+   "103": {
+    "label": "sidebar or related links",
+    "reason": "promo box for the 2027 Farm Progress Show",
+    "unit": "U20"
+   },
+   "133": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U20"
+   },
+   "138": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U20"
+   },
+   "143": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U20"
+   },
+   "151": {
+    "label": "sidebar or related links",
+    "reason": "promo box for the 2027 Farm Progress Show",
+    "unit": "U20"
+   }
+  },
+  "a|2026-05-29|https://www.bloomberg.com/news/articles/2026-05-23/india-raises-diesel-gasoline-prices-for-third-time-in-eight-days": {
+   "176": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U22"
+   },
+   "178": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U22"
+   },
+   "180": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U22"
+   },
+   "182": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U22"
+   },
+   "184": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U22"
+   }
+  },
+  "a|2026-06-29|https://thebikejunction.com/news/ola-electric-recorded-sales-15139-units-may-2026": {
+   "198": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U25"
+   },
+   "200": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U25"
+   },
+   "202": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U25"
+   },
+   "231": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U25"
+   },
+   "235": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U25"
+   },
+   "237": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U25"
+   },
+   "239": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U25"
+   },
+   "241": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U25"
+   },
+   "243": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U25"
+   },
+   "245": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U25"
+   },
+   "247": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U25"
+   },
+   "249": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U25"
+   },
+   "251": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U25"
+   },
+   "253": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U25"
+   },
+   "261": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U25"
+   },
+   "271": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U25"
+   },
+   "281": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U25"
+   }
+  },
+  "a|2026-06-29|https://frontline.thehindu.com/economy/us-iran-war-india-impact/article71076699.ece": {
+   "236": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U27"
+   },
+   "244": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U27"
+   }
+  },
+  "a|2026-06-29|https://www.ndtv.com/delhi-news/explained-why-some-in-delhi-may-have-to-pay-higher-electricity-bills-from-june-11631259": {
+   "137": {
+    "label": "benign",
+    "reason": "a mechanism that 'will apply from July 2026 onwards', a schedule",
+    "unit": "U28"
+   }
+  },
+  "a|2026-06-29|https://www.thehindu.com/news/national/kerala/revised-budget-envisions-hike-in-daily-milk-production-to-1-crore-litres-within-three-years/article71122121.ece": {
+   "33": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U34"
+   },
+   "163": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U34"
+   }
+  },
+  "a|2026-06-29|https://www.newindianexpress.com/states/kerala/2026/Jun/15/rubber-prices-shoot-up-across-kerala-sparking-resurgence-in-plantation-sector": {
+   "3": {
+    "label": "sidebar or related links",
+    "reason": "date inside the site logo's image address",
+    "unit": "U35"
+   },
+   "18": {
+    "label": "sidebar or related links",
+    "reason": "date inside the site logo's image address",
+    "unit": "U35"
+   },
+   "105": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U35"
+   },
+   "111": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U35"
+   },
+   "117": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U35"
+   },
+   "123": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U35"
+   }
+  },
+  "a|2026-06-29|https://www.chicagotribune.com/2026/06/18/illinois-drivers-higher-tolls/": {
+   "27": {
+    "label": "benign",
+    "reason": "proposed toll increases that would take effect Jan. 1, 2027, if approved",
+    "unit": "U39"
+   },
+   "69": {
+    "label": "sidebar or related links",
+    "reason": "photo caption of a related story",
+    "unit": "U39"
+   },
+   "73": {
+    "label": "sidebar or related links",
+    "reason": "photo caption of a related story",
+    "unit": "U39"
+   }
+  },
+  "a|2026-07-29|https://www.orfonline.org/research/energy-news-monitor-volume-xxii-issue-48": {
+   "304": {
+    "label": "benign",
+    "reason": "VAT cut 'applicable till 14 November 2026'",
+    "unit": "U40"
+   },
+   "408": {
+    "label": "benign",
+    "reason": "rules phased in 'by June 2028'",
+    "unit": "U40"
+   },
+   "470": {
+    "label": "benign",
+    "reason": "projects to be inaugurated 'by December 2026'",
+    "unit": "U40"
+   },
+   "472": {
+    "label": "benign",
+    "reason": "projects 'between June and December 2026'",
+    "unit": "U40"
+   },
+   "496": {
+    "label": "benign",
+    "reason": "provisions 'will come into effect from 1 August 2026'",
+    "unit": "U40"
+   },
+   "522": {
+    "label": "benign",
+    "reason": "target 'by November 2027'",
+    "unit": "U40"
+   },
+   "534": {
+    "label": "benign",
+    "reason": "commissioned ahead of 'the earlier guided timeline of October 2026'",
+    "unit": "U40"
+   },
+   "566": {
+    "label": "benign",
+    "reason": "supplies secured 'through March 2028'",
+    "unit": "U40"
+   },
+   "568": {
+    "label": "benign",
+    "reason": "supplies secured 'through the end of March 2028'",
+    "unit": "U40"
+   },
+   "754": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U40"
+   },
+   "762": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U40"
+   }
+  },
+  "a|2026-07-29|https://countercurrents.org/2026/07/airtel-jios-proposed-tariff-increases-are-unjust": {
+   "283": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U41"
+   },
+   "284": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U41"
+   },
+   "285": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U41"
+   }
+  },
+  "a|2026-07-29|https://www.thehindu.com/news/cities/Coimbatore/association-urges-state-government-to-increase-aavin-milk-procurement-price/article71221215.ece": {
+   "33": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U42"
+   },
+   "163": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U42"
+   }
+  },
+  "a|2026-07-29|https://www.newindianexpress.com/states/tamil-nadu/2026/Jul/09/aavin-to-cut-down-sugar-content-to-10-plain-lassi-to-turn-healthier-in-tn": {
+   "77": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U43"
+   },
+   "83": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U43"
+   },
+   "89": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U43"
+   },
+   "95": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U43"
+   }
+  },
+  "a|2026-07-29|https://www.cnbctv18.com/market/commodities/amul-not-looking-at-another-milk-price-hike-says-june-sales-strong-on-ice-cream-beverages-19937301.htm": {
+   "82": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U44"
+   },
+   "84": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U44"
+   },
+   "86": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U44"
+   },
+   "88": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U44"
+   }
+  },
+  "a|2026-09-29|https://www.northernminer.com/news/copper-price-miners-slide-on-trump-tariff-doubts/1003894737/": {
+   "11": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   },
+   "12": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   },
+   "13": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   },
+   "14": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   },
+   "15": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   },
+   "16": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   },
+   "17": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   },
+   "18": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   },
+   "19": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   },
+   "20": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   },
+   "21": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   },
+   "22": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   },
+   "23": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   },
+   "24": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   },
+   "25": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U45"
+   }
+  },
+  "a|2026-09-29|https://news24online.com/india/milk-gets-costlier-mumbai-milk-prices-rise-by-rs-9-per-litre-from-september-1-check-latest-rates-in-delhi-noida-tamil-nadu-kolkata-bengaluru-other-cities/914204": {
+   "10": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U48"
+   }
+  },
+  "a|2026-09-29|https://www.india.com/news/india/milk-price-hike-joseph-vijay-tamil-nadu-increase-in-procurement-price-milk-prices-cross-rs-100-in-mumbai-milk-products-dairy-8514275": {
+   "64": {
+    "label": "benign",
+    "reason": "a wholesale milk price hike that 'remains in effect until February 28, 2027'",
+    "unit": "U49"
+   }
+  },
+  "a|2026-09-29|https://www.newindianexpress.com/states/karnataka/2026/Sep/23/karnataka-milk-unions-meet-cm-seek-price-hike-of-rs-8-10-per-litre": {
+   "77": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U50"
+   },
+   "83": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U50"
+   },
+   "89": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U50"
+   },
+   "95": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U50"
+   }
+  },
+  "b|2026-02-05|https://groww.in/blog/rbi-repo-rate-remains-unchanged": {
+   "84": {
+    "label": "later content",
+    "reason": "the article's dateline, 06 February 2026, under the headline 'RBI Repo Rate Remains Unchanged at 5.25%'",
+    "unit": "U51"
+   },
+   "102": {
+    "label": "later content",
+    "reason": "states the outcome: on 6 February 2026 the RBI kept the repo rate unchanged at 5.25%",
+    "unit": "U51"
+   },
+   "134": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U51"
+   },
+   "138": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U51"
+   }
+  },
+  "b|2026-02-05|https://m.economictimes.com/news/new-updates/rbi-mpc-meet-feb-2026-date-time-expectations-when-and-where-to-watch-the-live-speech-of-governer-sanjay-malhotra/articleshow/127932686.cms": {
+   "58": {
+    "label": "benign",
+    "reason": "the MPC meeting's scheduled decision date",
+    "unit": "U52"
+   },
+   "69": {
+    "label": "benign",
+    "reason": "the review 'will conclude on February 6, 2026'",
+    "unit": "U52"
+   }
+  },
+  "b|2026-02-05|https://www.indiainfoline.com/blog/what-to-expect-from-february-2026-rbi-monetary-policy": {
+   "64": {
+    "label": "benign",
+    "reason": "'nine months up to December 2026' in a February 2026 preview: an evident typo for December 2025 (FY26), not later content",
+    "unit": "U53"
+   },
+   "102": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U53"
+   },
+   "116": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U53"
+   },
+   "130": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U53"
+   },
+   "144": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U53"
+   },
+   "162": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U53"
+   },
+   "164": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U53"
+   },
+   "166": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U53"
+   },
+   "176": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U53"
+   },
+   "190": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U53"
+   },
+   "204": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U53"
+   },
+   "218": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U53"
+   },
+   "724": {
+    "label": "benign",
+    "reason": "footer: validity date of the publisher's ARN registration",
+    "unit": "U53"
+   }
+  },
+  "b|2026-02-05|https://www.ndtvprofit.com/economy/rbi-monetary-policy-2026-date-time-what-to-expect-and-where-to-watch-rbi-governors-statement-live-10949309": {
+   "151": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U54"
+   }
+  },
+  "b|2026-02-05|https://www.business-standard.com/finance/news/rbi-mpc-february-2026-meeting-when-where-watch-live-policy-governor-126020500453_1.html": {
+   "0": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U55"
+   },
+   "18": {
+    "label": "unclear",
+    "reason": "the article's own published/updated stamp is after the cutoff, but its body only previews the scheduled event; whether the pre-cutoff version differed cannot be told",
+    "unit": "U55"
+   }
+  },
+  "b|2026-04-07|https://www.cnbctv18.com/economy/rbi-mpc-meeting-dates-2026-monetary-policy-next-meeting-date-19873617.htm": {
+   "73": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U56"
+   },
+   "75": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U56"
+   },
+   "77": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U56"
+   }
+  },
+  "b|2026-06-04|https://www.cnbc.com/amp/2026/06/03/-like-indonesia-indias-central-bank-may-hike-rates-to-defend-its-currency.html": {
+   "38": {
+    "label": "benign",
+    "reason": "a brokerage's inflation forecast for the year to March 2027",
+    "unit": "U60"
+   }
+  },
+  "b|2026-08-04|https://www.business-standard.com/finance/news/rbi-mpc-august-meet-governor-monetary-policy-repo-rate-when-where-to-watch-126080300374_1.html": {
+   "0": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U65"
+   },
+   "18": {
+    "label": "unclear",
+    "reason": "the article's own published/updated stamp is after the cutoff, but its body only previews the scheduled event; whether the pre-cutoff version differed cannot be told",
+    "unit": "U65"
+   },
+   "26": {
+    "label": "benign",
+    "reason": "the MPC meeting 'will be held from August 3 to August 5, 2026'",
+    "unit": "U65"
+   }
+  },
+  "b|2026-08-04|https://ddindia.co.in/2026/08/rbi-mpc-meeting-begins-today-repo-rate-likely-to-remain-unchanged": {
+   "0": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U66"
+   },
+   "67": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U66"
+   },
+   "70": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U66"
+   },
+   "73": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U66"
+   },
+   "76": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U66"
+   },
+   "79": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U66"
+   },
+   "82": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U66"
+   },
+   "85": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U66"
+   },
+   "88": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U66"
+   },
+   "91": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U66"
+   },
+   "106": {
+    "label": "sidebar or related links",
+    "reason": "site footer 'Last updated on', next to the copyright line",
+    "unit": "U66"
+   }
+  },
+  "b|2026-10-06|https://www.newindianexpress.com/business/2026/Oct/05/october-monetary-policy-meeting-why-a-25-basis-point-rate-hike-is-likely-this-time": {
+   "105": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U69"
+   },
+   "111": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U69"
+   },
+   "117": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U69"
+   },
+   "123": {
+    "label": "sidebar or related links",
+    "reason": "date of an item in a related-stories or 'latest' list",
+    "unit": "U69"
+   }
+  },
+  "b|2026-10-06|https://www.thehindu.com/business/Economy/rbi-may-deliver-two-rate-hikes-by-cy-2026analysts/article71481500.ece": {
+   "33": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U71"
+   },
+   "161": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U71"
+   },
+   "185": {
+    "label": "benign",
+    "reason": "analysts' forecast of rate hikes 'by the end of December 2026'",
+    "unit": "U71"
+   }
+  },
+  "b|2026-10-06|https://www.rediff.com/business/report/rbi-monetary-policy-rate-hikes-expected-in-october-and-december-amid-inflation-surge/20260916.htm": {
+   "66": {
+    "label": "benign",
+    "reason": "MUFG's forecast for the December 2026 and February 2027 meetings",
+    "unit": "U72"
+   }
+  },
+  "b|2026-07-08|https://www.cnbctv18.com/market/stocks/tcs-share-price-board-to-meet-on-july-9-for-q1-fy27-results-interim-dividend-on-agenda-19929992.htm": {
+   "37": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U74"
+   },
+   "43": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U74"
+   },
+   "83": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U74"
+   },
+   "85": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U74"
+   },
+   "87": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U74"
+   }
+  },
+  "b|2026-07-08|https://www.business-standard.com/markets/news/tcs-q1-result-expectations-preview-dividend-record-date-revenue-seen-flat-wage-hikes-to-weigh-on-margins-126070700096_1.html": {
+   "0": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U75"
+   },
+   "18": {
+    "label": "unclear",
+    "reason": "the article's own published/updated stamp is after the cutoff, but its body only previews the scheduled event; whether the pre-cutoff version differed cannot be told",
+    "unit": "U75"
+   },
+   "22": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U75"
+   },
+   "24": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U75"
+   }
+  },
+  "b|2026-07-08|https://upstox.com/news/market-news/earnings/tcs-q1-fy-27-earnings-schedule-out-check-date-share-price-trend-and-other-details/article-195773": {
+   "60": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U76"
+   },
+   "62": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U76"
+   }
+  },
+  "b|2026-07-08|https://www.sahi.com/news/tcs-sets-july-9-for-q1-results-market-tracks-24-operating-margin-guidance-2185-PE1_COR": {
+   "6": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U77"
+   },
+   "20": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U77"
+   },
+   "24": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U77"
+   }
+  },
+  "b|2026-07-16|https://www.moneycontrol.com/news/business/markets/reliance-industries-q1-preview-strong-o2c-steady-jio-seen-supporting-earnings-retail-margins-a-key-watch-13975703.html": {
+   "86": {
+    "label": "unclear",
+    "reason": "the article's own published/updated stamp is after the cutoff, but its body only previews the scheduled event; whether the pre-cutoff version differed cannot be told",
+    "unit": "U79"
+   }
+  },
+  "b|2026-07-16|https://www.business-standard.com/markets/news/ril-q1-results-preview-brokerages-expectations-healthy-growth-pat-revenue-ebitda-jio-arpu-retail-o2c-126071600203_1.html": {
+   "0": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U80"
+   }
+  },
+  "b|2026-07-16|https://www.sahi.com/news/reliance-sets-july-17-for-q1-financials-as-analysts-eye-12-growth-in-digital-services-246-PE1_CORP": {
+   "6": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U81"
+   },
+   "20": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U81"
+   },
+   "24": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U81"
+   },
+   "89": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U81"
+   }
+  },
+  "b|2026-07-16|https://www.ndtvprofit.com/markets/ril-q1-results-date-time-dividend-news-earnings-call-schedule-and-more-11754299": {
+   "47": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U82"
+   }
+  },
+  "b|2026-07-16|https://www.business-standard.com/companies/news/south-indian-bank-posts-17-3-rise-in-q1-fy27-profit-at-378-crore-126071601028_1.html": {
+   "0": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U83"
+   }
+  },
+  "b|2026-07-17|https://www.business-standard.com/markets/news/hdfc-bank-q1-preview-pat-may-rise-9-on-strong-loan-growth-nims-seen-flat-126071600186_1.html": {
+   "0": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U85"
+   },
+   "26": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U85"
+   }
+  },
+  "b|2026-07-17|https://www.ndtvprofit.com/markets/hdfc-bank-q1-date-dividend-share-price-history-earnings-call-schedule-and-more-11679151": {
+   "10": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U86"
+   },
+   "41": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U86"
+   },
+   "45": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U86"
+   },
+   "49": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U86"
+   }
+  },
+  "b|2026-07-17|https://www.sahi.com/news/hdfc-bank-schedules-q1-earnings-call-for-july-18-at-4-pm-2012-PE1_COR": {
+   "6": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U87"
+   },
+   "24": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U87"
+   }
+  },
+  "b|2026-07-17|https://univest.in/blogs/icici-bank-q1-results-fy27": {
+   "4": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U88"
+   },
+   "16": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U88"
+   },
+   "41": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U88"
+   },
+   "105": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U88"
+   },
+   "113": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U88"
+   },
+   "141": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U88"
+   },
+   "148": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U88"
+   },
+   "155": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U88"
+   },
+   "162": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U88"
+   },
+   "192": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U88"
+   }
+  },
+  "b|2026-07-17|https://scanx.trade/stock-market-news/companies/icici-bank-to-discuss-q1fy27-results-on-july-18/45584079": {
+   "19": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U89"
+   },
+   "27": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U89"
+   },
+   "82": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U89"
+   },
+   "90": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U89"
+   },
+   "98": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U89"
+   },
+   "204": {
+    "label": "sidebar or related links",
+    "reason": "a 'latest news' list item ('49 mins ago') about another company",
+    "unit": "U89"
+   }
+  },
+  "b|2026-07-17|https://www.sahi.com/news/icici-bank-board-meets-july-18-to-review-q1-earnings-after-10-707-cr-profit-2191-PE1_COR": {
+   "6": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U90"
+   },
+   "20": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U90"
+   },
+   "24": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U90"
+   }
+  },
+  "b|2026-07-17|https://www.goodreturns.in/news/q1-results-next-week-13-18july-reliance-hdfc-icici-bank-wipro-lead-141-companies-earnings-full-list-1521663.html": {
+   "360": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U91"
+   }
+  },
+  "b|2026-07-17|https://upstox.com/news/market-news/earnings/upcoming-q1-results-this-week-hcl-tech-ril-jio-fin-wipro-kotak-mahindra-bank-itc-hotels-and-more/article-196747": {
+   "82": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U92"
+   }
+  },
+  "b|2026-07-22|https://www.business-standard.com/markets/news/infosys-q1-results-expectations-preview-revenue-may-rise-by-15-guidance-deal-pipeline-eyed-126072100760_1.html": {
+   "0": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U95"
+   }
+  },
+  "b|2026-07-22|https://upstox.com/news/market-news/earnings/infosys-q1-fy-27-results-time-press-conference-earnings-call-and-key-monitorables-to-track/article-197405": {
+   "24": {
+    "label": "unclear",
+    "reason": "the article's own published/updated stamp is after the cutoff, but its body only previews the scheduled event; whether the pre-cutoff version differed cannot be told",
+    "unit": "U96"
+   },
+   "50": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U96"
+   },
+   "52": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U96"
+   },
+   "70": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U96"
+   },
+   "74": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U96"
+   },
+   "80": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U96"
+   }
+  },
+  "b|2026-10-07|https://www.niftytrader.in/markets/tcs-q2-results-fy27-deal-expectations": {
+   "20": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U98"
+   },
+   "166": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U98"
+   },
+   "180": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U98"
+   },
+   "184": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U98"
+   }
+  },
+  "b|2026-10-07|https://upstox.com/news/market-news/stocks/tcs-q2-results-in-focus-five-key-things-investors-need-to-track-in-quarterly-earnings-on-october-8/article-201477": {
+   "24": {
+    "label": "unclear",
+    "reason": "the article's own published/updated stamp is after the cutoff, but its body only previews the scheduled event; whether the pre-cutoff version differed cannot be told",
+    "unit": "U99"
+   },
+   "62": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U99"
+   }
+  },
+  "b|2026-10-07|https://www.business-standard.com/markets/news/tcs-q2-results-earnings-preview-expectation-dividend-announcement-record-date-2026-revenue-growth-pat-126100600110_1.html": {
+   "0": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U101"
+   }
+  },
+  "b|2026-10-07|https://www.ndtvprofit.com/markets/it-q2-results-fy27-tcs-infosys-hcltech-coforge-tata-technologies-announce-schedule-12089821": {
+   "226": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U102"
+   }
+  },
+  "b|2026-10-16|https://www.ndtvprofit.com/markets/hdfc-bank-in-focus-issue-esop-of-19-lakh-shares-to-employees-q2-earnings-lender-asset-quality-12096270": {
+   "59": {
+    "label": "benign",
+    "reason": "HDFC Bank 'is scheduled to announce' Q2 results on October 17, 2026",
+    "unit": "U105"
+   },
+   "63": {
+    "label": "benign",
+    "reason": "trading window closed until October 19, 2026, announced in advance",
+    "unit": "U105"
+   },
+   "171": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U105"
+   }
+  },
+  "b|2026-10-16|https://upstox.com/news/market-news/stocks/upcoming-q2-fy-27-results-this-week-hcl-tech-nestle-wipro-bhel-tech-mahindra-hdfc-bank-and-more-check-list/article-201629": {
+   "84": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U106"
+   }
+  },
+  "b|2026-10-16|https://www.niftytrader.in/markets/icici-bank-q2-result-fy27-nii-nim": {
+   "24": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U108"
+   },
+   "46": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U108"
+   },
+   "48": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U108"
+   },
+   "120": {
+    "label": "benign",
+    "reason": "a scheduled date (results, board meeting, call, dividend record/payment or trading window) announced before the event",
+    "unit": "U108"
+   }
+  },
+  "c|2026-01-29|https://www.aajtak.in/business/utility/story/rule-change-from-1st-january-2026-lpg-cylinder-to-car-price-hike-atf-rate-cut-tutc-dskc-2427756-2026-01-01": {
+   "95": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "99": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "103": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "107": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "111": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "157": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "159": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "161": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "163": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "165": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "167": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "169": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "171": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "173": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "175": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   },
+   "181": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U119"
+   }
+  },
+  "c|2026-04-29|https://www.aajtak.in/madhya-pradesh/story/mp-electricity-tariff-hike-new-rates-april-1-power-bill-increase-lcla-rptc-2507841-2026-03-27": {
+   "151": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U123"
+   },
+   "153": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U123"
+   },
+   "155": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U123"
+   },
+   "157": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U123"
+   },
+   "159": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U123"
+   },
+   "161": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U123"
+   },
+   "163": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U123"
+   },
+   "165": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U123"
+   },
+   "167": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U123"
+   },
+   "169": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U123"
+   },
+   "175": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U123"
+   }
+  },
+  "c|2026-04-29|https://www.bhaskar.com/local/mp/jabalpur/news/mp-new-electricity-tariff-rates-lt-consumers-minimum-charges-removed-ev-charging-discount-137539609.html": {
+   "0": {
+    "label": "sidebar or related links",
+    "reason": "site header date bar showing the day the page was fetched",
+    "unit": "U124"
+   }
+  },
+  "c|2026-04-29|https://www.amarujala.com/madhya-pradesh/indore/indore-milk-prices-will-increase-by-rs-3-per-litre-in-indore-from-april-1-along-with-a-home-delivery-service-2026-03-31": {
+   "12": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U126"
+   },
+   "13": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U126"
+   },
+   "14": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U126"
+   },
+   "15": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U126"
+   },
+   "16": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U126"
+   },
+   "17": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U126"
+   },
+   "18": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U126"
+   },
+   "19": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U126"
+   },
+   "20": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U126"
+   },
+   "21": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U126"
+   }
+  },
+  "c|2026-07-29|https://www.aajtak.in/business/utility/story/lpg-price-cut-petrol-diesel-cheaper-atf-rate-these-four-good-news-on-1st-july-tutc-dskc-2591452-2026-07-01": {
+   "98": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "102": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "106": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "110": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "114": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "148": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "150": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "152": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "154": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "156": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "158": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "160": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "162": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "164": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "166": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   },
+   "172": {
+    "label": "sidebar or related links",
+    "reason": "link in a related-stories, navigation or archive list",
+    "unit": "U133"
+   }
+  }
+ }
+}

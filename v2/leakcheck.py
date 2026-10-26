@@ -43,7 +43,8 @@ OUT_P = ROOT / "results" / "leakcheck_full_page.json"
 LABELS_P = ROOT / "results" / "leakcheck_full_page_labels.json"
 OUT_E = ROOT / "results" / "leakcheck_exact_match.json"
 BUDGET_P, BUDGET_E = "leakcheck-full-page", "leakcheck-exact-match"
-SOURCES = {"a": "date test arm C", "b": "finance check arm D", "c": "v2 replay verified evidence"}
+SOURCES = {"a": "date test arm C", "b": "finance check arm D",
+           "c": "v2 replay verified evidence (date window only, no filter_by_published_date)"}
 OUTCOMES_P = ["later content", "unclear", "sidebar or related links", "benign"]      # precedence, first wins
 OUTCOMES_E = ["found before cutoff", "found only without dates", "not found either way"]
 
@@ -218,6 +219,23 @@ def ci(w):
     return "—" if not w or w[0] is None else f"{pct(w[0])}–{pct(w[1])}"
 
 
+def examples(out, labels, k=5):
+    """{outcome: up to k flagged lines labelled so}, for a sanity check: one per page, taken in turn from sources
+    a, b, c (file order within each)."""
+    ex = {o: [] for o in OUTCOMES_P}
+    for o in OUTCOMES_P:
+        per = {s: [] for s in SOURCES}
+        for u in out["units"]:
+            h = next((h for h in u["hits"] if labels[key(u)][str(h["line_no"])]["label"] == o), None)
+            if h:
+                per[u["source"]].append((u, h, labels[key(u)][str(h["line_no"])]["reason"]))
+        while len(ex[o]) < k and any(per.values()):
+            for s in SOURCES:
+                if per[s] and len(ex[o]) < k:
+                    ex[o].append(per[s].pop(0))
+    return ex
+
+
 def report_p(out, labels):
     m = metrics_p(out, labels)
     L = ["# Leak check P: full-page date check (exploratory)", "",
@@ -234,13 +252,27 @@ def report_p(out, labels):
                  f"{o['benign']} | {o['unclear']} |")
     L += ["", f"Credits: {out['credits']} (Extract of pages with no saved text). Pages with no text are left out of "
           "the rates and listed in the JSON.",
-          "", "Source (c) note: the v2 replay sent start/end dates but not `filter_by_published_date`; its pages passed "
-          "that window plus the code's own date checks.", "", "## Later-content pages", ""]
+          "", "Source (c) is **date window only, no filter_by_published_date**: the v2 replay sent start/end dates "
+          "but not the filter; its pages passed that window plus the code's own date checks.", "",
+          "A page takes the first outcome any of its flagged lines has: later content > unclear > sidebar or related "
+          "links > benign. Flagged lines by label: " + ", ".join(
+              f"{o} {sum(v['label'] == o for d in labels.values() for v in d.values())}" for o in OUTCOMES_P) + ".",
+          "", "## Later-content pages", ""]
     for u in out["units"]:
         if u["flagged"] and unit_outcome(u, labels) == "later content":
             lab = next(labels[key(u)][str(h["line_no"])] for h in u["hits"]
                        if labels[key(u)][str(h["line_no"])]["label"] == "later content")
             L.append(f"- ({u['source']}) cutoff {u['cutoff']}: {u['url']} — {lab['reason']}")
+    L += ["", "## Example flagged lines per outcome (one per page, sources a, b, c in turn; for checking the labels)"]
+    for o, rows in examples(out, labels).items():
+        L += ["", f"**{o}** ({len(rows)} shown)", "", "| Source | Cutoff | Date found | Line (shortened) | Claude Code's reason |",
+              "|---|---|---|---|---|"]
+        for u, h, why in rows:
+            line = re.sub(r"\]\([^)]*\)", "]", h["line"]).replace("|", "/")
+            at = line.find(h["matched"])
+            k = max(0, at - 80)
+            shown = f"{'…' if k else ''}{line[k:k + 180]}…" + (" (the date is further along the line)" if at < 0 else "")
+            L.append(f"| ({u['source']}) {urlparse(u['url']).netloc} | {u['cutoff']} | {h['date']} | {shown} | {why} |")
     if out["skipped"]:
         L += ["", "**Incomplete:** the credit cap stopped some Extract calls (listed in the JSON)."]
     return "\n".join(L) + "\n"
