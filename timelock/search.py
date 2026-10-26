@@ -51,11 +51,11 @@ def window(cutoff, start_date=None, end_date=None):
 class Results(list):
     """The labelled results, plus the call's receipt: window, request_id, response_sha256, counts, response."""
 
-    def __init__(self, items, *, cutoff, window, response):
+    def __init__(self, items, *, cutoff, window, response, sha256=None):
         super().__init__(items)
         self.cutoff, self.window, self.response = cutoff, window, response
         self.request_id = response.get("request_id")
-        self.response_sha256 = response_sha256(response)
+        self.response_sha256 = sha256 or response_sha256(response)
         self.counts = {lab: sum(r["status"] == lab for r in items) for lab in (SAFE, DATE_FLAG, LEAK)}
 
     def safe(self):
@@ -80,13 +80,13 @@ def timelocked_search(client, query, cutoff, *, page_dates=None, **tavily_kwargs
     if tavily_kwargs.pop("filter_by_published_date", True) is not True:
         raise TimeLockError("filter_by_published_date is always on inside the time lock")
     start, end = window(cut, tavily_kwargs.pop("start_date", None), tavily_kwargs.pop("end_date", None))
+    page_dates = {u: _iso(f"page date for {u}", d) for u, d in (page_dates or {}).items() if d}
     resp = client.search(query, start_date=start, end_date=end, filter_by_published_date=True, **tavily_kwargs)
     receipt = {"request_id": resp.get("request_id"), "response_sha256": response_sha256(resp)}
-    page_dates = page_dates or {}
     out = []
     for r in resp.get("results") or []:
         pd = page_dates.get(r.get("url")) or read_page_date(r.get("raw_content"))[0]
         out.append({**r, "published_date": iso_date(r.get("published_date")) or None,
                     "published_date_raw": r.get("published_date"), "page_date": pd,
                     "status": check_result(r, cut, page_date=pd), **receipt})
-    return Results(out, cutoff=cut, window=[start, end], response=resp)
+    return Results(out, cutoff=cut, window=[start, end], response=resp, sha256=receipt["response_sha256"])

@@ -26,9 +26,10 @@ class TavilyHTTP:
 
 class Replay:
     """Serves one saved Tavily /search response ({'request': ..., 'response': ...}) with no network call.
-    Refuses a query or date window other than the one recorded, so a replay never claims a lock it did not have."""
+    Refuses any request other than the one recorded (include_usage aside), so a replay never answers a different
+    question, window or filter with a saved response."""
 
-    CHECKED = ("query", "start_date", "end_date", "filter_by_published_date")
+    IGNORED = ("include_usage",)
 
     def __init__(self, path):
         saved = json.loads(Path(path).read_text(encoding="utf-8"))
@@ -36,7 +37,8 @@ class Replay:
 
     def search(self, query, **params):
         sent = {"query": query, **params}
-        diff = {k: (sent.get(k), self.request.get(k)) for k in self.CHECKED if sent.get(k) != self.request.get(k)}
+        keys = (sent.keys() | self.request.keys()) - set(self.IGNORED)
+        diff = {k: (sent.get(k), self.request.get(k)) for k in sorted(keys) if sent.get(k) != self.request.get(k)}
         if diff:
             raise ValueError(f"saved response was recorded for a different request (sent, recorded): {diff}")
         return copy.deepcopy(self.response)

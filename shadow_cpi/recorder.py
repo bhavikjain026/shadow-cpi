@@ -27,10 +27,7 @@ def request_hash(service, endpoint, body):
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
 
-def response_sha256(response):
-    """SHA-256 of a response: its JSON with sorted keys, no spaces, UTF-8 (Amendment F provenance)."""
-    blob = json.dumps(response, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
-    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+from timelock.search import response_sha256  # noqa: E402,F401  (Amendment F provenance; one copy, in timelock/)
 
 
 def provenance(response):

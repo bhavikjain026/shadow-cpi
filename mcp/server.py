@@ -5,8 +5,8 @@
     TAVILY_API_KEY=... python mcp/server.py
     TIMELOCK_REPLAY=tests/fixtures/timelock/rbi_2026-10-06_locked.json python mcp/server.py   # saved response, no key
 
-Only results dated on or before the cutoff reach the model with their title and snippet; undated results and leaks
-come back as URL, dates and status only, so the agent knows they exist without reading them.
+Only results dated on or before the cutoff reach the model with their URL, title and snippet; undated results and
+leaks come back as domain, dates and status only (a news URL's slug can state the outcome).
 """
 import os
 import sys
@@ -16,7 +16,10 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 from timelock import SAFE, Replay, TavilyHTTP, timelocked_search  # noqa: E402
 
-WITHHELD = ("title", "content", "raw_content", "score", "favicon", "images")
+from urllib.parse import urlparse  # noqa: E402
+
+# what a date_flag or leak result keeps: no text and no full URL (news slugs often state the outcome)
+SHOWN_IF_NOT_SAFE = ("published_date", "url_date", "page_date", "status")
 
 
 def client():
@@ -31,7 +34,8 @@ def search(query: str, cutoff: str, topic: str = "general", max_results: int = 5
     """Search the web as it was on `cutoff` (YYYY-MM-DD): nothing published after it. The cutoff is a date the
     user or task sets; do not move it to get more results. start_date/end_date may narrow the window, never extend
     it past the cutoff. Each result has a status: safe (dated on or before the cutoff; title and snippet included),
-    date_flag (undated: not trusted, text withheld) or leak (dated after the cutoff: text withheld). A snippet is a
+    date_flag (undated: not trusted) or leak (dated after the cutoff); those two come back as domain, dates and status
+    only. A snippet is a
     pointer, not evidence: read the page before quoting it. include_raw_content=True also checks each page's own
     published/updated date (page text is not returned)."""
     return run(client(), query, cutoff, topic=topic, max_results=max_results, include_domains=include_domains,
@@ -45,7 +49,8 @@ def run(tavily, query, cutoff, *, include_raw_content=False, **params):
     if include_raw_content:
         kw["include_raw_content"] = True
     results = timelocked_search(tavily, query, cutoff, include_published_date=True, **kw)
-    shown = [{k: v for k, v in r.items() if k != "raw_content" and (r["status"] == SAFE or k not in WITHHELD)}
+    shown = [{k: v for k, v in r.items() if k != "raw_content"} if r["status"] == SAFE else
+             {"domain": urlparse(r.get("url") or "").netloc, **{k: r.get(k) for k in SHOWN_IF_NOT_SAFE}}
              for r in results]
     return {"cutoff": results.cutoff, "window": results.window, "counts": results.counts,
             "request_id": results.request_id, "response_sha256": results.response_sha256, "results": shown}

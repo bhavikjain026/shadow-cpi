@@ -50,7 +50,11 @@ def test_leaks_and_undated_results_come_back_without_their_text():
     out = server.run(fake, Q, CUT, topic="news", include_domains=None, include_raw_content=True)
     assert out["counts"] == {"safe": 2, "date_flag": 1, "leak": 3}
     for r in out["results"]:
-        assert ("content" in r) == (r["status"] == "safe") and "raw_content" not in r
+        if r["status"] == "safe":
+            assert r["url"] and r["content"] and "raw_content" not in r
+        else:                                            # no text and no full URL: slugs can state the outcome
+            assert set(r) == {"domain", "published_date", "url_date", "page_date", "status"} and r["domain"]
+    assert not any("repo-rate" in json.dumps(r) for r in out["results"] if r["status"] == "leak")
     assert fake.sent[0]["include_raw_content"] is True and "include_domains" not in fake.sent[0]
     with pytest.raises(TimeLockError):
         server.run(fake, Q, CUT, end_date="2026-10-07")

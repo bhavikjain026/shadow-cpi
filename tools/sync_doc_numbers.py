@@ -11,6 +11,7 @@ tools/prompt_t.py run_stats, labelled "as of <date>"). The only numbers not from
 other people's work (a paper's leak rate, MoSPI's release hour), kept with their sources in config/doc_citations.json.
 Edit the templates, never the rendered files; tests/test_sync_doc_numbers.py fails if a template types a digit.
 """
+import ast
 import csv
 import json
 import re
@@ -247,8 +248,9 @@ def facts(st, as_of, root=ROOT):
              research_checked=day_month(date.fromisoformat(cit["tavily_research_params"]["checked"][:10])))
 
     # examples/timelock_rbi.py: lines of code in the reusable example (blank lines and the docstring not counted)
-    ex = (root / "examples" / "timelock_rbi.py").read_text(encoding="utf-8").splitlines()
-    f["example_lines"] = sum(1 for line in ex if line.strip() and not line.startswith('"""'))
+    src = (root / "examples" / "timelock_rbi.py").read_text(encoding="utf-8")
+    doc = ast.parse(src).body[0]                                     # the module docstring
+    f["example_lines"] = sum(1 for line in src.splitlines()[doc.end_lineno:] if line.strip())
 
     # run-dependent Tavily counts (tools/prompt_t.py run_stats), labelled as of a date
     f.update(as_of=human(as_of), run_calls=f"{st['calls']:,}", run_credits=f"{st['credits']:,}",

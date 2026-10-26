@@ -7,8 +7,8 @@ fixed by the task, and an `end_date` after it is refused.
 
 What the agent gets back: `counts`, the `window`, Tavily's `request_id`, the response's `response_sha256`, and the
 results. Results dated on or before the cutoff (`safe`) include title and snippet. Undated results (`date_flag`) and
-results dated after the cutoff (`leak`) come back as URL, dates and status only: the agent knows they exist but
-never reads their text.
+results dated after the cutoff (`leak`) come back as domain, dates and status only: the agent knows they exist but
+never reads their text or their URL (a news URL's slug often states the outcome).
 
 ## 1. Install
 
@@ -20,7 +20,7 @@ python -m pip install -r mcp/requirements.txt
 
 You need a Tavily API key (each call costs 1 credit at `search_depth="basic"`). To try it with no key and no
 credits, set `TIMELOCK_REPLAY` to a saved response instead (it answers only the question it was recorded for:
-"RBI monetary policy repo rate decision October 2026", cutoff 2026-10-06).
+"RBI monetary policy repo rate decision October 2026", cutoff 2026-10-06, `topic="news"`).
 
 Use the absolute path to `mcp/server.py` below; `/path/to/shadow-cpi` stands for your clone.
 

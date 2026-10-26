@@ -69,7 +69,11 @@ def score(search, cases=None):
 
 def recorded(arm, cases=None):
     """A search function that replays one recorded arm ('no_dates', 'dates', 'dates_filter', ...)."""
-    by = {(c["question"], c["cutoff"]): c for c in (cases if cases is not None else load_cases())}
+    by = {}
+    for c in cases if cases is not None else load_cases():
+        prev = by.setdefault((c["question"], c["cutoff"]), c)          # M8/M9, M11/M12 share a question
+        if prev["result_urls"] != c["result_urls"]:
+            raise ValueError(f"{prev['id']} and {c['id']} share a question but not their recorded results")
 
     def search(question, cutoff):
         c = by[(question, cutoff)]

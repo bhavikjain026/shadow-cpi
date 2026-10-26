@@ -169,11 +169,11 @@ TAVILY_API_KEY=... python -m examples.timelock_rbi --live    # live
 ```
 
 Offline it replays a real saved response (`tests/fixtures/timelock/`, request ID and hash checked in
-[`tests/test_timelock.py`](tests/test_timelock.py)); `Replay` refuses any other question or window. Any client with
+[`tests/test_timelock.py`](tests/test_timelock.py)); `Replay` refuses any other request. Any client with
 `.search(query, **kwargs) -> dict` works, including tavily-python's `TavilyClient`.
 
 - **MCP server** [`mcp/`](mcp/README.md): `timelocked_search` as a tool for Claude Code, Claude Desktop or any MCP
-  client; results after the cutoff come back as URL and date only, never their text.
+  client; results after the cutoff come back as domain and date only, never their text or URL.
 - **Benchmark** [`benchmarks/timelock34/`](benchmarks/timelock34/DATASHEET.md): the 20 date-test and
   14 finance replay cases with every result URL labelled (Wayback-confirmed leak, date flag, unknown) and a
   scorer for any search function (leak rate with Wilson intervals, valid evidence kept). Labels under CC BY.

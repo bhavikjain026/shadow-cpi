@@ -53,7 +53,8 @@ def test_refuses_anything_that_moves_the_window_before_calling(kw):
 
 
 def test_saved_rbi_response_receipt_and_labels():
-    results = timelocked_search(Replay(LOCKED_FIX), Q, CUT, topic="news", max_results=5)
+    results = timelocked_search(Replay(LOCKED_FIX), Q, CUT, topic="news", max_results=5, search_depth="basic",
+                                include_published_date=True)
     resp = saved(LOCKED_FIX)
     assert results.counts == {SAFE: 5, DATE_FLAG: 0, LEAK: 0} and len(results.safe()) == 5
     assert results.request_id == resp["request_id"] == "5e7387cb-67c8-455d-931d-fab9b7523f49"
@@ -83,6 +84,10 @@ def test_page_date_from_extracted_text_or_given():
                                 page_dates={"https://x.in/c": "2026-10-02"})
     assert [(r["page_date"], r["status"]) for r in results] == [("2026-10-08", LEAK), (None, DATE_FLAG),
                                                                 ("2026-10-02", SAFE)]
+    c = Fake(resp)
+    with pytest.raises(TimeLockError):                       # '5 Oct 2026' would compare wrongly as a string
+        timelocked_search(c, "q", CUT, page_dates={"https://x.in/c": "5 Oct 2026"})
+    assert c.sent == []
 
 
 def test_replay_refuses_a_request_it_did_not_record():
@@ -90,6 +95,9 @@ def test_replay_refuses_a_request_it_did_not_record():
         timelocked_search(Replay(LOCKED_FIX), Q, CUT, start_date="2026-10-01")
     with pytest.raises(ValueError, match="different request"):
         timelocked_search(Replay(LOCKED_FIX), "another question", CUT)
+    with pytest.raises(ValueError, match="include_domains"):
+        timelocked_search(Replay(LOCKED_FIX), Q, CUT, topic="news", max_results=5, search_depth="basic",
+                          include_published_date=True, include_domains=["rbi.org.in"])
 
 
 def test_live_client_sends_the_lock(monkeypatch):
