@@ -1,0 +1,2 @@
+# Only for the MCP server (mcp/server.py); timelock/ itself needs nothing outside the standard library.
+mcp>=1.2,<2
