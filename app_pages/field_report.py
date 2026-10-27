@@ -53,7 +53,7 @@ summary = [
     (f"Who should write the searches: best arm ({top['writer']})", f"{top['recall']} of {top['of']} known changes",
      "results/field_report.json"),
 ]
-st.dataframe([{"Finding": a, "Number": b, "File": c} for a, b, c in summary], hide_index=True, width="stretch")
+st.table([{"Finding": a, "Number": b, "File": c} for a, b, c in summary], hide_index=True)  # wraps, nothing cut off
 
 # ---------- time-locked search leakage (first block) ----------
 lk = r.get("leakage")
