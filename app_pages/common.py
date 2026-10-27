@@ -32,6 +32,21 @@ def path(rel):
     return ROOT / rel
 
 
+# Time-lock tables: time-locked cells bold, no-lock cells tinted (works in light and dark themes).
+LOCK_CSS, OPEN_CSS = "font-weight: 700", "background-color: rgba(255, 75, 75, 0.12)"
+
+
+def lock_table(rows, kind):
+    """st.table (wraps text, nothing clipped) with each cell styled by kind(row, column) -> 'lock' | 'open' | None."""
+    import pandas as pd
+    df = pd.DataFrame(rows)
+    df = df.map(lambda v: "\\" + v if isinstance(v, str) and v[:2] in ("+ ", "- ", "* ") else v)   # not a list
+    css = {"lock": LOCK_CSS, "open": OPEN_CSS}
+    styles = pd.DataFrame([[css.get(kind(rows[i], c), "") for c in df.columns] for i in range(len(rows))],
+                          index=df.index, columns=df.columns)
+    st.table(df.style.apply(lambda _: styles, axis=None).hide(axis="index"), hide_index=True)
+
+
 def header(title, intro=None):
     st.title(title)
     if intro:

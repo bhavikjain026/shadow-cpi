@@ -14,7 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from app_pages.common import NOWCAST_WORDS  # noqa: E402
 
-st.set_page_config(page_title="Shadow CPI", page_icon="📈", layout="centered", initial_sidebar_state="auto")
+st.set_page_config(page_title="Shadow CPI", page_icon="📈", layout="wide", initial_sidebar_state="auto")
 
 pages = {"": [
     st.Page("app_pages/leak_demo.py", title="Leak demo", icon="🕳️", default=True),
