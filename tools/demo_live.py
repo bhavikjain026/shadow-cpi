@@ -4,13 +4,15 @@ config/budget.json).
 
     python tools/demo_live.py            # prints the plan and the credit estimate; sends nothing (0 credits)
     python tools/demo_live.py --live     # one time-locked Tavily Search, Extract, Nemotron Nano gate, Super citation
+    python tools/demo_live.py --live --fresh   # the same, ignoring the cache: every call is sent (and charged)
 
 The case is the date test's frozen case E8 (v2/date_test_cases.json): its query and cutoff, searched with
 shadow_cpi.pit (start_date/end_date + filter_by_published_date; results after the cutoff dropped). The top results
 the lock keeps are read with Tavily Extract, one at a time, until Nemotron Nano says the page states a price change and
 Nemotron Super cites a line that code verifies (the line is copied from the Extract output and the number checked in
 it). Prints the Token Factory endpoint host, both model IDs, Tavily's request_id and response hash, and the verified
-line. Never prints a key. Every call goes through the Recorder (cache + flight recorder) and the credit ledger.
+line. Never prints a key. Every call goes through the Recorder (cache + flight recorder) and the credit ledger; a
+re-run is served from the cache, and the output says so for every call ("live" or "from cache").
 """
 import json
 import sys
@@ -62,6 +64,11 @@ def verified_line(events):
     return None
 
 
+def source(rec):
+    """'live' or 'from cache' for the last call this recorder made."""
+    return "from cache" if rec.provenance and rec.provenance[-1]["cached"] else "live"
+
+
 def run(case, tav, nem, roles, host, out=print):
     """The demo. `tav` is a Budgeted Tavily client, `nem` a Nemotron client, `roles` config/models.json."""
     nano, sup = roles["small"], roles["mid"]
@@ -70,7 +77,8 @@ def run(case, tav, nem, roles, host, out=print):
     out(f"Nemotron Super (line citation): {sup}")
     out(f"Case {case['id']}: {case['query']!r}, cutoff {case['cutoff']}")
     res = pit_search(case["query"], case["cutoff"], tavily=tav, tag=TAG, **SEARCH)
-    out(f"Tavily search, window {res['window'][0]} to {res['window'][1]}, filter_by_published_date=true")
+    out(f"Tavily search ({source(tav.rec)}), window {res['window'][0]} to {res['window'][1]}, "
+        "filter_by_published_date=true")
     out(f"  request_id {res['request_id']}")
     out(f"  response SHA-256 {res['response_sha256']}")
     out(f"  {len(res['kept'])} kept, {len(res['flagged'])} undated (not trusted), {len(res['leaks'])} after the cutoff "
@@ -80,19 +88,21 @@ def run(case, tav, nem, roles, host, out=print):
     for r in res["kept"][:EXTRACT_TOP]:
         resp, ecid = tav.extract([r["url"]], tag=TAG, parent=res["call_id"])
         text = (resp["results"][0].get("raw_content") or "") if resp["results"] else ""
-        out(f"Extract {r['url']} ({r.get('published_date') or 'undated'}): {len(text):,} characters")
+        out(f"Extract ({source(tav.rec)}) {r['url']} ({r.get('published_date') or 'undated'}): {len(text):,} "
+            "characters")
         if not text:
             continue
         gate, _ = nem.chat_json(nano, GATE_SYSTEM, GATE_QUESTION + text[:6000], GATE_SCHEMA, max_tokens=20, tag=TAG,
                                 parent=ecid)
-        out(f"  Nano gate: {gate.get('answer')}")
+        out(f"  Nano gate ({source(nem.rec)}): {gate.get('answer')}")
         if gate.get("answer") != "yes":
             continue
         events, _ = nem.price_events(sup, text, tag=TAG, parent=ecid)
         e = verified_line(events)
         if e:
             found.update(url=r["url"], gate=gate.get("answer"), line=e["quote"], event=e)
-            out(f"  Super cited a line; code checked the number is in it: VERIFIED\n  \"{e['quote']}\"")
+            out(f"  Super ({source(nem.rec)}) cited a line; code checked the number is in it: VERIFIED\n"
+                f"  \"{e['quote']}\"")
             return found
         out("  Super cited no line that holds its number")
     out("No verified line in the pages read")
@@ -110,9 +120,11 @@ def main(argv):
     from shadow_cpi.budget import Budgeted
     from shadow_cpi.nemotron import Nemotron
     from shadow_cpi.settings import NEBIUS_BASE, models
+    from shadow_cpi.recorder import Recorder
     from shadow_cpi.tavily import Tavily
-    tav = Budgeted(Tavily(), [BUDGET])
-    nem = Nemotron(base=NEBIUS_BASE)
+    use_cache = "--fresh" not in argv
+    tav = Budgeted(Tavily(recorder=Recorder(use_cache=use_cache)), [BUDGET])
+    nem = Nemotron(base=NEBIUS_BASE, recorder=Recorder(use_cache=use_cache))
     found = run(case, tav, nem, models(), urlparse(NEBIUS_BASE).netloc)
     print(f"Tavily credits used: {tav.used}")
     return found

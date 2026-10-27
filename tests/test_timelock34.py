@@ -17,6 +17,9 @@ def test_cases_file_is_up_to_date_and_has_34_cases():
     assert [c["dataset"] for c in cases].count("date_test") == 20 and len(cases) == 34
     # M8/M9 and M11/M12: two price changes in the same state and month, so the same question and searches
     assert len({(c["question"], c["cutoff"]) for c in cases}) == 32
+    n, q = len(cases), len({(c["question"], c["cutoff"]) for c in cases})
+    for doc in ("benchmarks/timelock34/DATASHEET.md", "README.md", "docs/devpost_draft.md"):
+        assert f"{n} cases, {q} distinct questions" in " ".join((ROOT / doc).read_text().split()), doc
 
 
 def test_no_page_text_only_short_quotes():

@@ -66,11 +66,22 @@ def test_end_to_end_prints_host_models_receipt_and_verified_line(tmp_path):
     assert "request_id rid-demo-1" in text and found["response_sha256"] in text
     assert found["line"] == LINE and LINE in text and "VERIFIED" in text
     assert KEY not in text and "nb-NOT-A-REAL-KEY" not in text
+    assert "Tavily search (live)" in text and "Nano gate (live)" in text
     search = sent[0][1]
     assert search["filter_by_published_date"] is True and search["end_date"] == "2026-09-29"
     assert search["query"] == D.load_case()["query"]
     assert [e for e, _ in sent] == ["search", "extract"]           # the post-cutoff result is never read
     assert tav.used == 2 <= D.estimate() <= load_budget()["caps"][D.BUDGET]
+
+
+def test_a_rerun_says_it_came_from_the_cache(tmp_path):
+    tav, nem, _ = clients(tmp_path, RESULTS)
+    D.run(D.load_case(), tav, nem, ROLES, "h", out=lambda s: None)
+    lines = []
+    D.run(D.load_case(), tav, nem, ROLES, "h", out=lines.append)
+    text = "\n".join(lines)
+    assert "Tavily search (from cache)" in text and "Extract (from cache)" in text
+    assert "Nano gate (from cache)" in text and "Super (from cache)" in text and "(live)" not in text
 
 
 def test_cap_is_its_own_budget_of_ten():

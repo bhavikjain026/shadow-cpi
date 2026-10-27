@@ -87,6 +87,8 @@ def r196_receipt(ex):
 
 
 def ids_text(n, with_id, ids, k=2):
+    if not ids:
+        return f"no Tavily request ID was logged for these {n} searches"
     return f"Tavily request IDs logged for {with_id} of {n} searches, e.g. " + ", ".join(f"`{i}`" for i in ids[:k])
 
 

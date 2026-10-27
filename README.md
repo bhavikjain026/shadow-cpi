@@ -9,7 +9,7 @@ quote on its source page, and seals India's inflation forecast before the govern
 **The leak, measured (date test, 20 replay cases, pilot).** With no dates, **10 of
 20** cases leaked (Wilson 95% 30–70%); with `start_date`/`end_date` +
 `filter_by_published_date`, **0 of 20** (0–16%). These counts are after a
-logged retry of the 11 archive lookups that had failed; on the initial pass (sensitivity) they were
+logged retry of the 11 archive lookups that had failed; on the initial pass (the pre-registered result, shown as sensitivity) they were
 9 of 20 (26–66%) and 0 of 20 (0–16%).
 
 *What a leak is.* A case leaks when at least one result the search kept is a confirmed leak, which the

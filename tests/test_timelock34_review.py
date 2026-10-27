@@ -65,6 +65,7 @@ def test_docs_match_the_results_file_and_never_say_no_leaks():
         assert unclear in text and "post-hoc AI-assisted review (ChatGPT agent)" in text, doc
         assert "independent reviewer" not in text.lower(), doc
         assert "no leaks" not in text.lower(), doc
+    assert unclear in " ".join((ROOT / "FEEDBACK_NOTES.md").read_text(encoding="utf-8").split())
     ds = (ROOT / "benchmarks/timelock34/DATASHEET.md").read_text(encoding="utf-8")
     assert f"decided {rep['decided']} of {rep['rows']} rows" in " ".join(ds.split())
     ct = rep["crosstab"]["date_test"]

@@ -8,7 +8,7 @@ quote on its source page, and seals India's inflation forecast before the govern
 **The leak, measured (date test, {{dt_cases}} replay cases, pilot).** With no dates, **{{dt_nodates_retry}} of
 {{dt_cases}}** cases leaked (Wilson {{wilson}} {{dt_nodates_retry_w}}); with `start_date`/`end_date` +
 `filter_by_published_date`, **{{dt_dated_retry}} of {{dt_cases}}** ({{dt_dated_retry_w}}). These counts are after a
-logged retry of the {{dt_retry_urls}} archive lookups that had failed; on the initial pass (sensitivity) they were
+logged retry of the {{dt_retry_urls}} archive lookups that had failed; on the initial pass (the pre-registered result, shown as sensitivity) they were
 {{dt_nodates}} of {{dt_cases}} ({{dt_nodates_w}}) and {{dt_dated}} of {{dt_cases}} ({{dt_dated_w}}).
 
 *What a leak is.* A case leaks when at least one result the search kept is a confirmed leak, which the

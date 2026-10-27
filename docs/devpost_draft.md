@@ -25,9 +25,9 @@ code compute India's October 2026 inflation nowcast, and seals it before the Min
 <!-- short:end -->
 
 ## The leak, measured
-- **Main result (date test, pilot, pre-registered; after the logged archive retry):** no dates, 10
+- **Main result (date test, a pre-registered pilot; counts after the logged archive retry):** no dates, 10
   of 20 cases leaked (Wilson 95% 30–70%); `start_date`/`end_date` +
-  `filter_by_published_date`, 0 of 20 (0–16%). Initial pass (sensitivity):
+  `filter_by_published_date`, 0 of 20 (0–16%). Initial pass (the pre-registered result, shown as sensitivity):
   9 of 20 (26–66%) and 0 of 20 (0–16%); the retry only
   re-ran the 11 archive lookups that had failed.
 - **What a leak is.** A case leaks when at least one result the search kept is a confirmed leak, which

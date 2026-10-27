@@ -24,9 +24,9 @@ code compute India's {{live_month}} inflation nowcast, and seals it before the M
 <!-- short:end -->
 
 ## The leak, measured
-- **Main result (date test, pilot, pre-registered; after the logged archive retry):** no dates, {{dt_nodates_retry}}
+- **Main result (date test, a pre-registered pilot; counts after the logged archive retry):** no dates, {{dt_nodates_retry}}
   of {{dt_cases}} cases leaked (Wilson {{wilson}} {{dt_nodates_retry_w}}); `start_date`/`end_date` +
-  `filter_by_published_date`, {{dt_dated_retry}} of {{dt_cases}} ({{dt_dated_retry_w}}). Initial pass (sensitivity):
+  `filter_by_published_date`, {{dt_dated_retry}} of {{dt_cases}} ({{dt_dated_retry_w}}). Initial pass (the pre-registered result, shown as sensitivity):
   {{dt_nodates}} of {{dt_cases}} ({{dt_nodates_w}}) and {{dt_dated}} of {{dt_cases}} ({{dt_dated_w}}); the retry only
   re-ran the {{dt_retry_urls}} archive lookups that had failed.
 - **What a leak is.** A case leaks when at least one result the search kept is a confirmed leak, which

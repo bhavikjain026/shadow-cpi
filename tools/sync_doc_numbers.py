@@ -109,7 +109,10 @@ def prereg_rule(rel, label, root=ROOT):
     hits = re.findall(r"^- " + re.escape(label) + r"(.*?\.)(?=\s+Only|\s*$|\n- )", text, re.M | re.S)
     if not hits:
         raise SystemExit(f"{rel}: rule '{label}' not found")
-    return re.sub(r"\s*\n\s*", " ", label + hits[-1]).strip()
+    rule = re.sub(r"\s*\n\s*", " ", label + hits[-1]).strip()
+    if not rule.endswith(("cutoff.", "cutoff).")) or rule.count("(") != rule.count(")"):
+        raise SystemExit(f"{rel}: rule '{label}' looks cut short: {rule!r}")
+    return rule
 
 
 def nemotron_calls(root=ROOT):
@@ -329,8 +332,8 @@ def facts(st, as_of, root=ROOT):
     # required technologies: the Token Factory host (shadow_cpi/settings.py), model IDs (config/models.json), and the
     # Tavily endpoints with at least one call (results/field_report.json receipt, from results/call_receipts.json)
     from urllib.parse import urlparse
-    from shadow_cpi.settings import NEBIUS_BASE
-    f.update(nebius_host=urlparse(NEBIUS_BASE).netloc, nano_id=nano, super_id=sup,
+    from shadow_cpi.settings import NEBIUS_DEFAULT_BASE                  # the default, not a local override
+    f.update(nebius_host=urlparse(NEBIUS_DEFAULT_BASE).netloc, nano_id=nano, super_id=sup,
              tavily_endpoints=", ".join(f"`{e['endpoint']}`" for e in sorted(fr["receipt"]["by_endpoint"],
                                                                              key=lambda e: -e["calls"]) if e["calls"]))
     # Nano gave no number, Super re-read the page (tools/build_bug_reports.py nano_nulls, same code)
