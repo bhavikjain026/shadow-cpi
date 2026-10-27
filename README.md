@@ -43,7 +43,7 @@ returns the updated page ([details](#search-dates-do-not-freeze-page-content)).
 
 **Reuse it:** [`timelock/`](timelock/) (time-locked search, standard library only,
 [10-line example](#use-it-in-10-lines)) · [`mcp/`](mcp/README.md) (the same as an MCP
-tool) · [`benchmarks/timelock34/`](benchmarks/timelock34/DATASHEET.md) (the labelled benchmark and scorer).
+tool) · [`benchmarks/timelock34/`](benchmarks/timelock34/DATASHEET.md) (the labelled benchmark and scorer) · [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bhavikjain026/shadow-cpi/blob/main/notebooks/reproduce_leak.ipynb) reproduce the leak with your own Tavily key ([`repro/`](repro/README.md) for the Tavily items).
 
 **Live app:** https://shadow-cpi.streamlit.app · **Demo video:** [TBD] · **Devpost:** [TBD]
 

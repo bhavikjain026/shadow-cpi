@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "timelock"
+version = "0.1.0"
+description = "Time-locked Tavily search: a search that cannot see past a cutoff date. Standard library only."
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+
+[tool.setuptools]
+packages = ["timelock"]

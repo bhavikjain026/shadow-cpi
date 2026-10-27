@@ -1,0 +1,72 @@
+{
+ "date": "2026-10-27",
+ "budget": "repro-kit",
+ "credits_used": 5,
+ "runs": [
+  {
+   "script": "auto_parameters_time_range",
+   "exit_code": 0,
+   "credits": 2,
+   "request_ids": [
+    "8e30c12f-ef75-4c31-ace6-983d491b046c"
+   ],
+   "output": "POST /search: request_id 8e30c12f-ef75-4c31-ace6-983d491b046c, credits reported 2 (estimate 2, cap 2)\nquery: 'electricity tariff hike India March 2026' (asks about 2026-03); no start_date/end_date sent\nauto_parameters echo: {'exclude_domains': ['wikipedia.org'], 'topic': 'finance', 'time_range': 'm', 'search_depth': 'advanced'}\n10 results; published_date by month (None = undated): {None: 10}\nresults dated 2026-03: 0 of 10\n"
+  },
+  {
+   "script": "auto_parameters_echo_dates",
+   "exit_code": 0,
+   "credits": 1,
+   "request_ids": [
+    "5a769cdf-2c2d-42bb-a8dc-100b29388012"
+   ],
+   "output": "POST /search: request_id 5a769cdf-2c2d-42bb-a8dc-100b29388012, credits reported 1 (estimate 2, cap 2)\nsent window: 2026-03-01 to 2026-03-31\nauto_parameters echo: {'topic': 'finance', 'time_range': 'm', 'search_depth': 'basic'}\necho shows start_date or end_date: False; echo shows time_range: True\n0 dated results, 0 inside the window (0 undated)\n"
+  },
+  {
+   "script": "extract_no_asof",
+   "exit_code": 0,
+   "credits": 0,
+   "request_ids": [
+    "a2e57fe9-b6fe-4bf4-b7ec-f5c003bb5b80"
+   ],
+   "output": "POST /extract: request_id a2e57fe9-b6fe-4bf4-b7ec-f5c003bb5b80, credits reported 0 (estimate 1, cap 2)\nurl: https://www.business-standard.com/markets/news/tcs-q1-result-expectations-preview-dividend-record-date-revenue-seen-flat-wage-hikes-to-weigh-on-margins-126070700096_1.html\ntop-level response keys: ['failed_results', 'request_id', 'response_time', 'results', 'usage']\nresult keys: ['images', 'raw_content', 'title', 'url']\ndate-like keys (as-of / crawl date would show here): ['response_time']\n13931 characters of text; 'updated/published' lines in it: ['Updated : Jul 09 2026 | 7:34 AMIST', 'Published: Jul 07 2026 | 8:23 AMIST']\n"
+  },
+  {
+   "script": "published_vs_modified",
+   "exit_code": 0,
+   "credits": 1,
+   "request_ids": [
+    "ee3145e5-c1ca-491a-b93e-e2f02ba4d1ee"
+   ],
+   "output": "POST /search: request_id ee3145e5-c1ca-491a-b93e-e2f02ba4d1ee, credits reported 1 (estimate 1, cap 2)\nTue, 07 Jul 2026 00:00:00 GMT  page says: Updated : Jul 09 2026 | 7:34 AMIST  https://www.business-standard.com/markets/news/tcs-q1-result-expectations-previe\nThu, 09 Jul 2026 03:15:06 GMT  page says: published: Thursday, July 9, 2026, 8:45 [IST]  https://www.goodreturns.in/news/tcs-q1-results-preview-will-tata-groups-behemoth\nTue, 30 Jun 2026 05:01:39 GMT  page says: published: Tuesday, June 30, 2026, 10:31 [IST]  https://www.goodreturns.in/news/tcs-hcl-wipro-infosys-bleeding-why-it-stocks-are\nFri, 10 Jul 2026 00:00:00 GMT  page says: Updated : Jul 13 2026 | 8:10 AMIST  https://www.business-standard.com/markets/news/hcl-tech-q1-preview-revenue-growt\nWed, 08 Jul 2026 00:00:00 GMT  page says: -  https://www.ndtvprofit.com/markets/tcs-q1-results-preview-what-analysts-expect-d\n"
+  },
+  {
+   "script": "map_empty",
+   "exit_code": 0,
+   "credits": 0,
+   "request_ids": [
+    "feb15853-9c17-4aab-9361-b03019c922a6"
+   ],
+   "output": "POST /map: request_id feb15853-9c17-4aab-9361-b03019c922a6, credits reported 0 (estimate 2, cap 2)\nsite: https://merc.gov.in; instructions: True\nresponse keys: ['base_url', 'request_id', 'response_time', 'results', 'usage']\n0 urls; failed_results: None; error: None\nempty answer; reason-like keys present: []\n"
+  },
+  {
+   "script": "scanned_pdf_extract",
+   "exit_code": 0,
+   "credits": 0,
+   "request_ids": [
+    "8df568ab-6d0b-4b9d-959d-eacdae63528f"
+   ],
+   "output": "POST /extract: request_id 8df568ab-6d0b-4b9d-959d-eacdae63528f, credits reported 0 (estimate 1, cap 2)\nurl: https://www.gokulmilk.coop/uploads/milk_prices/milk_rates_english_wef_11_08_2026.pdf\nresult keys: ['images', 'raw_content', 'title', 'url']; failed_results: []\n607 characters of text; digits in the text: 24\nstart of text: '\\n\\n \\n  \\n   \\n\\n\\n\\n\\nKolhapur Zilla Sahakari Dudh Utpadak Sangh Ltd., Kolhapur.\\nB -1, M.I.D.C, Gokul Shirgaon, Tal.: Karveer. District : Kolhapur - 416 234. Phone : 0231-2672311 to 15\\nE-mail : mktg@gokulmil'\na flag for image-only pages is present: False\n"
+  },
+  {
+   "script": "usage_lag",
+   "exit_code": 0,
+   "credits": 1,
+   "request_ids": [
+    null,
+    "13db35fd-290a-4f41-9ada-140bde19837d",
+    null
+   ],
+   "output": "GET /usage: request_id None, credits reported 0 (estimate 0, cap 2)\nPOST /search: request_id 13db35fd-290a-4f41-9ada-140bde19837d, credits reported 1 (estimate 1, cap 2)\nGET /usage: request_id None, credits reported 0 (estimate 0, cap 2)\n/usage (account plan_usage, key usage) before: (1980, 1980); after: (1980, 1980)\nthe search reported 1 credit(s); /usage moved by 0 (account) and 0 (key)\n"
+  }
+ ]
+}
