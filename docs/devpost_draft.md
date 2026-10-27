@@ -90,7 +90,7 @@ and C) 2 and 2, `auto_parameters` (arm T) 0; exploratory arm H
 (templates + model-chosen fields) 4, and T+dates 2. The model's fields were always
 valid (189 of 189; 468 of 468 in arm H), but fixed
 templates found more; the likely cause is source choice (arm H differed from A only in domains and language).
-Observed in our test, `auto_parameters` with no dates assumed "now": 620 of 659 results came from October 2026.
+Observed in our test, `auto_parameters` with no dates assumed "now": 620 of 659 results came from October 2026 (measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it).
 So the model chooses the query, topic, domains and language; code owns the dates.
 
 ## What we found about Tavily: feedback for the Most Valuable Feedback prize
@@ -102,7 +102,7 @@ Full reports with request IDs: `docs/tavily_bug_reports.md`.
 **Top 3**
 1. **`auto_parameters` picks a recent `time_range` for queries about a past month.**
    *Observed:* with no dates, on 72 searches naming a month in Jan–Sep 2026, it chose recent time
-   ranges; 620 of 659 results came from October 2026. *Expected:* a window covering the month
+   ranges; 620 of 659 results came from October 2026 (measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it). *Expected:* a window covering the month
    the query names, or none. *Suggested fix:* return no `time_range` (or that month's window) when the query names a
    past month; document the default. *Evidence:* `v2/ablation/arm_T_*.json`; request IDs in the report.
 2. **With explicit dates, `auto_parameters` still reports a `time_range`.**
