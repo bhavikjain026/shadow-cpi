@@ -3,8 +3,8 @@
 
 ## The web rewrites history. Our agent catches it.
 
-**An AI agent that searches the past without cheating: it searches the past with Tavily inside a time lock it cannot
-move, verifies every quote on the page, and seals India's inflation forecast before the government publishes it.**
+**An AI agent that searches the past without cheating: it uses Tavily inside a time lock it cannot move, checks every
+quote on its source page, and seals India's inflation forecast before the government publishes it.**
 
 **The leak, measured:** with no dates, 9 of 20 replay cases read a page that did not yet exist at
 the cutoff (10 after a logged archive retry); inside the time lock, 0 of 20. The

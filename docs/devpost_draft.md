@@ -8,8 +8,8 @@
 The web rewrites history. Our agent catches it.
 
 ## Tagline
-An AI agent that searches the past without cheating: it searches the past with Tavily inside a time lock it cannot
-move, verifies every quote on the page, and seals India's inflation forecast before the government publishes it.
+An AI agent that searches the past without cheating: it uses Tavily inside a time lock it cannot move, checks every
+quote on its source page, and seals India's inflation forecast before the government publishes it.
 
 ## Short description
 <!-- short:start -->
