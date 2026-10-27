@@ -1,7 +1,7 @@
 /* Shadow CPI app styles: display only. Injected once per run by common.inject_style() from app.py.
    Selectors are data-testid / roles, never Streamlit's hashed class names. Colours come from the theme
    (.streamlit/config.toml): borders here are currentColor mixes, so they follow whichever theme the viewer picks.
-   Rules applied: logs/design_notes.md (local). */
+   Rules applied: docs/design_notes.md. */
 
 /* ---------- type ---------- */
 [data-testid="stMain"] h1 { letter-spacing: -0.025em; line-height: 1.15; }
