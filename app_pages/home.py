@@ -11,6 +11,7 @@ from app_pages.common import (CODES, LABELS, LIVE_MONTH, NOWCAST_WORDS, REPO_URL
                               pass_fail, pct, poll_direction, poll_months, read_json, seal_status, source_column,
                               v2_comparison)
 from app_pages.v2_panels import what_tavily_adds
+from app_pages.v3_panel import v3_beside_v1
 
 header("Experimental nowcast", f"Shadow CPI: an {NOWCAST_WORDS} of India's next official CPI inflation number "
                                "(year-on-year, 2024-series All-India Combined). Not an official statistic.")
@@ -58,6 +59,7 @@ with st.container(border=True):
     if rel:
         st.metric(f"Official {month_name(rel['month'])} CPI in", countdown_text(rel["left"]))
         st.caption(f"MoSPI release: {rel['note']}.")
+v3_beside_v1(LIVE_MONTH)
 
 # ---------- replay scoreboard ----------
 st.subheader("Replay scoreboard, January–September 2026")
