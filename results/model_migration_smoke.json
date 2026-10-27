@@ -1,0 +1,94 @@
+{
+ "run_utc": "2026-10-27T13:55:15.373286+00:00",
+ "call_date_used": "2026-11-09 IST (clock set)",
+ "nebius_calls_sent": 2,
+ "cap": 4,
+ "cases": [
+  {
+   "job": "gatekeeper",
+   "original_model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "cached_request": "d60e288b3cc1df5d682042d5a232b85df0b9ce79f5e270d431e68719a55f9260",
+   "original_answer": {
+    "answer": "yes"
+   },
+   "call": "480f872b6f32",
+   "answer": {
+    "answer": "yes"
+   },
+   "schema_valid": true,
+   "schema_error": "",
+   "attempts": [
+    {
+     "model": "nvidia/Nemotron-3_5-Lightning",
+     "response_format": "json_schema",
+     "status": 200
+    }
+   ],
+   "replacement_model": "nvidia/Nemotron-3_5-Lightning",
+   "schema_request_accepted": true
+  },
+  {
+   "job": "line-citing (price events)",
+   "original_model": "nvidia/nemotron-3-super-120b-a12b",
+   "cached_request": "d1558eb9bd905e19c62375e778cf8c20cfe246b4de3031f07d096e79a023c92e",
+   "original_answer": {
+    "events": [
+     {
+      "item_or_service": "Milk",
+      "seller_or_authority": "Mother Dairy",
+      "region": "Delhi-NCR including all markets",
+      "old_price": null,
+      "new_price": null,
+      "pct_change": null,
+      "unit": "per liter",
+      "announced_date": "April 29, 2025",
+      "effective_date": "April 30, 2025",
+      "line": 5
+     }
+    ]
+   },
+   "call": "b503c737e6a2",
+   "answer": {
+    "events": [
+     {
+      "item_or_service": "Milk",
+      "seller_or_authority": "Mother Dairy",
+      "region": "Delhi-NCR and all markets",
+      "old_price": null,
+      "new_price": null,
+      "pct_change": null,
+      "unit": "per litre",
+      "announced_date": null,
+      "effective_date": "30 April 2025",
+      "line": 5
+     }
+    ]
+   },
+   "schema_valid": true,
+   "schema_error": "",
+   "attempts": [
+    {
+     "model": "nvidia/Nemotron-3.5-Super-VL",
+     "response_format": "json_schema",
+     "status": 200
+    }
+   ],
+   "replacement_model": "nvidia/Nemotron-3.5-Super-VL",
+   "schema_request_accepted": true,
+   "answer_cited_lines": [
+    {
+     "line": 5,
+     "verified": true,
+     "quote": "**जागरण संवदादाता, नई दिल्ली:** मदर डेयरी ने बुधवार से दूध की कीमतों में प्रति लीटर दो रुपये तक की बढ़ोतरी करने की घोषणा की है। यह निर्णय बढ़ती इनपुट लागत की भरपाई के लिए लिया गया है। नई दरें 30 अप्रै"
+    }
+   ],
+   "original_answer_cited_lines": [
+    {
+     "line": 5,
+     "verified": true,
+     "quote": "**जागरण संवदादाता, नई दिल्ली:** मदर डेयरी ने बुधवार से दूध की कीमतों में प्रति लीटर दो रुपये तक की बढ़ोतरी करने की घोषणा की है। यह निर्णय बढ़ती इनपुट लागत की भरपाई के लिए लिया गया है। नई दरें 30 अप्रै"
+    }
+   ]
+  }
+ ]
+}

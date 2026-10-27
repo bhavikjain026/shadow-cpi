@@ -88,3 +88,21 @@ def test_seal_payload_names_the_models_at_the_cutoff():
     assert MM.in_use(datetime(2026, 10, 28, 18, 29, tzinfo=timezone.utc), cfg) == {"small": NANO, "mid": SUPER}
     assert MM.in_use(datetime(2026, 11, 28, 18, 29, tzinfo=timezone.utc), cfg) == {"small": LIGHTNING,
                                                                                    "mid": SUPER_VL}
+
+
+def test_schema_fallback_is_logged(tmp_path):
+    from shadow_cpi.http import ApiError
+
+    class Refuses(Fake):
+        def __call__(self, method, url, key, body, timeout):
+            if body["response_format"]["type"] == "json_schema":
+                self.sent.append(body)
+                raise ApiError(400, "schema mode not supported")
+            return super().__call__(method, url, key, body, timeout)
+
+    fake = Refuses()
+    rec = Recorder(cache_dir=tmp_path / "cache", log_file=tmp_path / "log.jsonl")
+    n = Nemotron(api_key="test", recorder=rec, transport=fake, clock=lambda: LAST_OLD)
+    n.chat_json(SUPER, "sys", "user", {"type": "object"})
+    assert [b["response_format"]["type"] for b in fake.sent] == ["json_schema", "json_object"]
+    assert read_log(rec.log_file)[-1]["json_schema_fallback"] is True

@@ -75,7 +75,7 @@ class Nemotron:
         body = request(model)
         if use != model and not self.rec.has("nebius", "/chat/completions", body):
             body = request(use)
-        migration = {"model_requested": model, "model_migrated": body["model"] != model}
+        migration = {"model_requested": model, "model_migrated": body["model"] != model, "json_schema_fallback": False}
 
         def do():
             try:
@@ -83,6 +83,7 @@ class Nemotron:
             except ApiError as e:   # some models reject schema mode or extra fields: fall back
                 if e.status != 400:
                     raise
+                migration["json_schema_fallback"] = True     # logged: this answer came from JSON mode
                 fb = {k: v for k, v in body.items() if k != "chat_template_kwargs"}
                 fb["response_format"] = {"type": "json_object"}
                 if schema:
