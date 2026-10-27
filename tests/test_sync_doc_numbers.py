@@ -37,14 +37,17 @@ def values():
     return S.facts(ST, date(2026, 10, 25))
 
 
-@pytest.mark.parametrize("tmpl", S.TEMPLATES.values())
+ALL_TEMPLATES = [*S.TEMPLATES.values(), *S.BLOCKS.values()]
+
+
+@pytest.mark.parametrize("tmpl", ALL_TEMPLATES)
 def test_templates_type_no_number(tmpl):
     typed = [(i + 1, line) for i, line in enumerate(prose((ROOT / tmpl).read_text()).splitlines())
              if re.search(r"\d", line)]
     assert typed == [], f"{tmpl} types a number; use a {{{{key}}}} from facts(): {typed}"
 
 
-@pytest.mark.parametrize("tmpl", S.TEMPLATES.values())
+@pytest.mark.parametrize("tmpl", ALL_TEMPLATES)
 def test_templates_avoid_banned_phrases(tmpl):
     text = (ROOT / tmpl).read_text()
     hits = [b for b in BANNED if re.search(b, text, re.I)]
@@ -55,6 +58,46 @@ def test_every_key_resolves(values):
     for tmpl in S.TEMPLATES.values():
         out = S.render((ROOT / tmpl).read_text(), values)
         assert "{{" not in out and "None" not in prose(out)
+
+
+def test_readme_top_keeps_checks_apart(values):
+    """The headline table: date test and finance check in separate rows, never summed, initial pass in a footnote."""
+    out = S.render((ROOT / "docs/templates/README.md").read_text(), values)
+    top = out.split("## Time-locked search leakage")[0]
+    v = {k: int(values[k]) for k in ("dt_cases", "fin_events", "dt_dated_retry", "fin_dated_retry",
+                                     "dt_nodates_retry", "fin_nodates_retry")}
+    assert f"| Date test ({v['dt_cases']} cases) | **{v['dt_nodates_retry']} of {v['dt_cases']}** |" in top
+    assert f"| {v['fin_dated_retry']} of {v['fin_events']} |" in top
+    total = v["dt_cases"] + v["fin_events"]
+    for summed in (v["dt_dated_retry"] + v["fin_dated_retry"], v["dt_nodates_retry"] + v["fin_nodates_retry"]):
+        assert not re.search(rf"\b{summed} (of|/) {total}\b", out)
+    details = top.split("<details>")[1].split("</details>")[0]
+    assert values["dt_leak_rule"] in details and values["fin_leak_rule"] in details and "Initial pass" in details
+    assert "The cost." in top and values["ex_row"] in top
+
+
+def test_drift_phrase_reads_the_drift_file():
+    as_of = date(2026, 10, 27)
+    assert S.drift_phrase({"runs": []}, as_of) == "no drift run is committed yet, as of 27 Oct 2026"
+    assert S.drift_phrase(None, as_of) == "no drift run is committed yet, as of 27 Oct 2026"
+    run = lambda d, k, c, ok=True: {"ist_date": d, "checked": k, "changed": c, "complete": ok}   # noqa: E731
+    one = {"runs": [run("2026-10-27", 12, 2)]}
+    assert S.drift_phrase(one, as_of) == "2 of 12 radar pages had changed since they were saved (one run, 27 Oct 2026 IST)"
+    many = {"runs": [run("2026-10-27", 12, 2), run("2026-10-28", 10, 1, ok=False), run("2026-10-29", 12, 3)]}
+    assert S.drift_phrase(many, as_of) == (
+        "3 runs committed (27 Oct 2026 to 29 Oct 2026 IST), 34 page checks, 6 changes found; in the latest run, "
+        "3 of 12 radar pages had changed since they were saved; 1 of the runs stopped incomplete")
+
+
+def test_feedback_summary_only_restates_filed_reports(values):
+    """Every filed report gets one row whose text, fix and evidence are copied from results/bug_reports.json."""
+    br = S.load("results/bug_reports.json")
+    rows = values["feedback_summary_rows"].splitlines()
+    assert len(rows) == len(br["reports"])
+    for r in br["reports"]:
+        (row,) = [x for x in rows if r["title"] in x]
+        assert r["happened"] in row and r["fix"] in row
+        assert re.search(r"`([^`]+)`", row.split(" | ")[-2]).group(1) in r["evidence"]
 
 
 def test_missing_key_stops(values):
@@ -69,10 +112,13 @@ def test_devpost_short_description_fits(values):
 
 
 def test_sync_renders_with_as_of_label_and_is_idempotent(tmp_path, values):
-    for rel in S.TEMPLATES.values():
+    for rel in [*S.TEMPLATES.values(), *S.BLOCKS.values(), *S.BLOCKS]:
         (tmp_path / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(ROOT / rel, tmp_path / rel)
-    assert S.sync(ST, date(2026, 10, 25), root=tmp_path, values=values) == ["README.md", "docs/devpost_draft.md"]
+    (tmp_path / "FEEDBACK_NOTES.md").write_text(S.render_block((ROOT / "FEEDBACK_NOTES.md").read_text(),
+                                                               S.BLOCKS["FEEDBACK_NOTES.md"], "stale"))
+    assert S.sync(ST, date(2026, 10, 25), root=tmp_path, values=values) == ["README.md", "docs/devpost_draft.md",
+                                                                             "FEEDBACK_NOTES.md"]
     readme = (tmp_path / "README.md").read_text().replace("\n", " ")
     assert "as of 25 Oct 2026" in readme and "1,234 calls sent, 900 credits used" in readme
     assert "75% of dated" in readme and "median latency 4.0 s" in readme

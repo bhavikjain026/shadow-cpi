@@ -5,16 +5,31 @@
 **An AI agent that searches the past without cheating: it uses Tavily inside a time lock it cannot move, checks every
 quote on its source page, and seals India's inflation forecast before the government publishes it.**
 
-**The leak, measured (date test, {{dt_cases}} replay cases, pilot).** With no dates, **{{dt_nodates_retry}} of
-{{dt_cases}}** cases leaked (Wilson {{wilson}} {{dt_nodates_retry_w}}); with `start_date`/`end_date` +
-`filter_by_published_date`, **{{dt_dated_retry}} of {{dt_cases}}** ({{dt_dated_retry_w}}). These counts are after a
-logged retry of the {{dt_retry_urls}} archive lookups that had failed; on the initial pass (the pre-registered result, shown as sensitivity) they were
-{{dt_nodates}} of {{dt_cases}} ({{dt_nodates_w}}) and {{dt_dated}} of {{dt_cases}} ({{dt_dated_w}}).
+| Leaks, measured | No dates | Dates + filter |
+|---|---|---|
+| Date test ({{dt_cases}} cases) | **{{dt_nodates_retry}} of {{dt_cases}}** | **{{dt_dated_retry}} of {{dt_cases}}** (Wilson {{dt_dated_retry_w}}) |
+| Finance check ({{fin_events}} cases, exploratory, different leak rule) | {{fin_nodates_retry}} of {{fin_events}} | {{fin_dated_retry}} of {{fin_events}} |
 
-*What a leak is.* A case leaks when at least one result the search kept is a confirmed leak, which the
-pre-registration ([`v2/DATE_TEST_PREREG.md`](v2/DATE_TEST_PREREG.md)) defines as: "{{dt_leak_rule}}" The finance
-check uses a different rule, so its counts are reported apart and never added to these
-([`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md), as amended): "{{fin_leak_rule}}"
+Separate rules; never added together. After the logged archive retry; initial pass in the footnote.
+
+<details>
+<summary>Footnote: what counts as a leak, and the initial pass</summary>
+
+- **Dates + filter** means `start_date`/`end_date` plus `filter_by_published_date`; no dates means neither.
+- **Date test** (pilot, replay cases; [`v2/DATE_TEST_PREREG.md`](v2/DATE_TEST_PREREG.md)). A case leaks when at least
+  one result the search kept is a confirmed leak: "{{dt_leak_rule}}"
+- **Finance check** (exploratory, Reserve Bank of India (RBI) decisions and company results;
+  [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md), as amended). A different rule, so its counts are reported apart:
+  "{{fin_leak_rule}}"
+- **After the logged archive retry.** The table counts follow a logged retry of the archive lookups that had failed
+  ({{dt_retry_urls}} in the date test, {{fin_retry_urls}} in the finance check). Wilson {{wilson}} intervals: date
+  test no dates {{dt_nodates_retry_w}}, dates + filter {{dt_dated_retry_w}}; finance check no dates
+  {{fin_nodates_retry_w}}, dates + filter {{fin_dated_retry_w}}.
+- **Initial pass** (the pre-registered result, shown as sensitivity): date test {{dt_nodates}} of {{dt_cases}}
+  ({{dt_nodates_w}}) with no dates and {{dt_dated}} of {{dt_cases}} ({{dt_dated_w}}) with dates + filter; finance
+  check {{fin_nodates}} of {{fin_events}} and {{fin_dated}} of {{fin_events}}.
+
+</details>
 
 **The cost.** The filter dropped {{dt_lost_filter}} of the date test's {{dt_valid_total}} pieces of valid evidence
 (initial pass).
