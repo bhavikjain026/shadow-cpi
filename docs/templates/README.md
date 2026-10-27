@@ -141,7 +141,7 @@ Tavily's dynamic filtering lets a model choose its own search fields. We built o
 - **Fixed templates still found more.** The likely cause is source choice: arm H differed from arm A only in
   `include_domains` ({{arm_h_diff_domains}} searches) and `language` ({{arm_h_diff_language}}).
 - **`auto_parameters` with no dates assumed "now" (observed in our test).** On {{auto_searches}} searches about past months it picked recent
-  time ranges, and {{auto_oct}} of {{auto_results}} results were from {{live_month}}. With our dates added,
+  time ranges, and {{auto_oct}} of {{auto_results}} results were from {{live_month}} ({{auto_note}}). With our dates added,
   {{autod_inside}} of {{autod_dated}} dated results fell inside the window.
 
 So the time lock lives in code: the model may choose the query, topic, domains and language; code owns the dates.
@@ -158,7 +158,7 @@ Full write-up with observed / expected / suggested fix / evidence (counts and Ta
 
 1. **`auto_parameters` picks a recent `time_range` for queries about a past month.** With no dates, on
    {{auto_searches}} searches naming a month in {{replay_span}}, {{auto_oct}} of {{auto_results}} results came from
-   {{live_month}}.
+   {{live_month}} ({{auto_note}}).
 2. **With explicit dates, `auto_parameters` still reports a `time_range`.** On {{autod_searches}} searches with our
    `start_date`/`end_date`, the echo said `time_range` {{autod_ranges}} and held a start or end date in
    {{autod_echo_dates}} of them, while {{autod_inside}} of {{autod_dated}} dated results fell inside our window: the
