@@ -7,14 +7,14 @@
 The web rewrites history. Our agent catches it.
 
 ## Tagline
-An AI agent that searches the past without cheating: it writes its own Tavily searches inside a time lock it cannot
+An AI agent that searches the past without cheating: it searches the past with Tavily inside a time lock it cannot
 move, verifies every quote on the page, and seals India's inflation forecast before the government publishes it.
 
 ## Short description
 <!-- short:start -->
 Shadow CPI is a Tavily-grounded nowcast of India's Consumer Price Index (CPI) inflation that tests, rather
-than assumes, Tavily's date controls and measures what they cost. An AI agent writes Tavily searches inside a
-time lock, verifies every quote on the page with Tavily Extract and NVIDIA Nemotron, lets code
+than assumes, Tavily's date controls and measures what they cost. An AI agent searches the past with Tavily inside a
+time lock, verifies every quote with Tavily Extract and NVIDIA Nemotron, lets code
 compute the number, and seals the {{live_month}} nowcast with a SHA-256 hash and git tag before the Ministry
 of Statistics (MoSPI) publishes on {{release_day}}. With no dates, {{dt_nodates}} of {{dt_cases}} cases leaked a
 not-yet-published page ({{dt_nodates_retry}} after an archive retry); with dates and the filter, {{dt_dated}} of {{dt_cases}}. The
@@ -73,7 +73,7 @@ pages daily ({{drift_phrase}}); and Wayback Machine checks, with failed lookups 
 ({{dt_retry_urls}} in the date test, {{fin_retry_urls}} in the finance check; {{sr_unclear}} of {{sr_rows}} second-review rows stayed unclear, partly
 from archive rate limits).
 
-## Let the model program its filters, inside a time lock it cannot move
+## Who writes the search: model-written fields vs fixed templates, inside a time lock it cannot move
 Building on Tavily's dynamic-filtering idea, we let Nemotron write the search fields and tested it on
 {{known_changes}} known price changes: code templates (arm A) found {{arm_a_recall}}, Nemotron-written fields (arms B
 and C) {{arm_b_recall}} and {{arm_c_recall}}, `auto_parameters` (arm T) {{arm_t_recall}}; exploratory arm H

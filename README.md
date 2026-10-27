@@ -3,7 +3,7 @@
 
 ## The web rewrites history. Our agent catches it.
 
-**An AI agent that searches the past without cheating: it writes its own Tavily searches inside a time lock it cannot
+**An AI agent that searches the past without cheating: it searches the past with Tavily inside a time lock it cannot
 move, verifies every quote on the page, and seals India's inflation forecast before the government publishes it.**
 
 **The leak, measured:** with no dates, 9 of 20 replay cases read a page that did not yet exist at
@@ -118,7 +118,7 @@ cover the gap, none of them completely:
   the second review, 146 of 283 rows stayed unclear, partly because archive lookups were
   rate-limited.
 
-## Let the model program its filters, inside a time lock it cannot move
+## Who writes the search: model-written fields vs fixed templates, inside a time lock it cannot move
 
 Tavily's dynamic filtering lets a model choose its own search fields. We built on that idea and tested it on
 29 known retail price changes in Jan–Sep 2026 (pre-registered in

@@ -8,14 +8,14 @@
 The web rewrites history. Our agent catches it.
 
 ## Tagline
-An AI agent that searches the past without cheating: it writes its own Tavily searches inside a time lock it cannot
+An AI agent that searches the past without cheating: it searches the past with Tavily inside a time lock it cannot
 move, verifies every quote on the page, and seals India's inflation forecast before the government publishes it.
 
 ## Short description
 <!-- short:start -->
 Shadow CPI is a Tavily-grounded nowcast of India's Consumer Price Index (CPI) inflation that tests, rather
-than assumes, Tavily's date controls and measures what they cost. An AI agent writes Tavily searches inside a
-time lock, verifies every quote on the page with Tavily Extract and NVIDIA Nemotron, lets code
+than assumes, Tavily's date controls and measures what they cost. An AI agent searches the past with Tavily inside a
+time lock, verifies every quote with Tavily Extract and NVIDIA Nemotron, lets code
 compute the number, and seals the October 2026 nowcast with a SHA-256 hash and git tag before the Ministry
 of Statistics (MoSPI) publishes on 12 Nov. With no dates, 9 of 20 cases leaked a
 not-yet-published page (10 after an archive retry); with dates and the filter, 0 of 20. The
@@ -88,7 +88,7 @@ pages daily (no drift run is committed yet, as of 27 Oct 2026); and Wayback Mach
 (11 in the date test, 94 in the finance check; 146 of 283 second-review rows stayed unclear, partly
 from archive rate limits).
 
-## Let the model program its filters, inside a time lock it cannot move
+## Who writes the search: model-written fields vs fixed templates, inside a time lock it cannot move
 Building on Tavily's dynamic-filtering idea, we let Nemotron write the search fields and tested it on
 29 known price changes: code templates (arm A) found 6, Nemotron-written fields (arms B
 and C) 2 and 2, `auto_parameters` (arm T) 0; exploratory arm H

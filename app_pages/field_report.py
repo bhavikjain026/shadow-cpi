@@ -72,8 +72,8 @@ if lk:
                    "Median latency (s)": f1(x.get("median_latency_s")),
                    "Caveats": x["caveats"]} for x in lk["rows"]], hide_index=True, width="stretch")
     st.markdown("Our own wrapper, `shadow_cpi.pit.pit_search`, always sends the date window and "
-                "`filter_by_published_date`, then re-checks every result's date in code: *let the model program its "
-                "filters, inside a time lock it cannot move.*")
+                "`filter_by_published_date`, then re-checks every result's date in code: *a model may choose the "
+                "query, topic, domains and language; code owns the dates.* (Fixed templates won the four-arm test.)")
 
 # ---------- four arms ----------
 st.subheader("Who should write the search? Four arms, pre-registered")
