@@ -78,6 +78,11 @@ the two retry files (leak cases, and valid evidence lost = total − kept).
 - **Wayback is incomplete evidence.** A capture after the cutoff does not prove the page was published after it
   (it may simply not have been archived earlier); `confirmed` also needs a date signal after the cutoff, so it is
   conservative, and `date_flag` holds the uncertain rest. `unknown` is not "safe".
+- **`url_date` can't read /2026/Oct/05/-style dates.** It reads only numeric address dates (`/2026/10/05/`,
+  `2026-10-05`), so a month-name date in the address (newindianexpress.com uses `/2026/Oct/05/`) is not a date
+  signal. A page whose only post-cutoff date is written that way gets `date_flag` or `unknown` instead of
+  `confirmed`, and the labels here undercount for those pages. Left as is because changing it would change labels
+  behind numbers already published.
 - **India, 2026, English-language news**, Tavily `topic=news`, `search_depth=basic`. Batch dates and Tavily's
   behaviour drift; results may differ when re-run.
 - **Questions are tied to our own pipeline** (CPI items, a fixed event list); no question was tuned on these
