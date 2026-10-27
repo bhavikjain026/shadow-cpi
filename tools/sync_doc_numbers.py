@@ -58,27 +58,61 @@ def credits_per_call(x):
     return "n/a" if x is None else f"{x:.2f}"
 
 
-def leakage_table(fr):
-    """The field report's leakage rows (results/field_report.json), one line per check and setting."""
-    out = ["| Check | Setting | Leaked, before retry | Leaked, after the logged archive retry | Kept, before retry "
-           "(valid evidence; check E: known-good quotes) | Credits per call | Median latency |", "|---|---|---|---|---|---|---|"]
-    rows = fr["leakage"]["rows"]
+def wilson(w):
+    """A Wilson 95% interval [lo, hi] as '26–66%'."""
+    return f"{w[0]:.0%}–{w[1]:.0%}".replace("%–", "–")
+
+
+def leak_count_table(fr):
+    """Case-level leak counts (results/field_report.json leakage rows): after the logged archive retry first, the
+    initial pass as sensitivity, each with its Wilson 95% interval. Date test and finance check stay in separate rows."""
+    out = ["| Check (unit) | Setting | Leak cases, after the logged archive retry (Wilson 95%) | Initial pass "
+           "(sensitivity; Wilson 95%) | Credits per call | Median latency |", "|---|---|---|---|---|---|"]
     keyed = {}
-    for r in rows:
-        keyed.setdefault((r["check"], r["setting"]), {})[r["run"]] = r
+    for r in fr["leakage"]["rows"]:
+        if r["check"].startswith(("Date test", "Finance check")):
+            keyed.setdefault((r["check"], r["setting"]), {})[r["run"]] = r
     for (check, setting), runs in keyed.items():
-        a = runs.get("first pass") or next(iter(runs.values()))
-        b = runs.get("after logged retry")
-
-        def leaks(r):
-            return "—" if r is None or r["leaks"] is None else f"{r['leaks']} of {r['n']}"
-
-        kept = "—" if a["valid_kept"] is None else f"{a['valid_kept']} of {a['valid_total']}" + (
-            " known-good quotes re-found (check E)" if check.startswith("Check E") else " valid evidence")
+        a, b = runs["first pass"], runs["after logged retry"]
+        unit = "cases" if check.startswith("Date test") else "events"
         lat = "—" if a["median_latency_s"] is None else secs(a["median_latency_s"])
-        out.append(f"| {check} | {setting} | {leaks(a)} | {leaks(b) if b else '—'} | {kept} "
-                   f"| {credits_per_call(a['credits_per_call'])} | {lat} |")
+        out.append(f"| {check}, {unit} | {setting} | **{b['leaks']} of {b['n']}** ({wilson(b['wilson95'])}) "
+                   f"| {a['leaks']} of {a['n']} ({wilson(a['wilson95'])}) | {credits_per_call(a['credits_per_call'])} "
+                   f"| {lat} |")
     return "\n".join(out)
+
+
+def evidence_kept_table(fr, em):
+    """Valid evidence kept by the time-locked setting (dates + filter), one row per check with its own denominator
+    (initial pass): date test and finance check from results/field_report.json, check E from
+    results/leakcheck_exact_match.json."""
+    rows = {(r["check"].split(" (")[0].split(":")[0], r["setting"]): r for r in fr["leakage"]["rows"]
+            if r["run"] == "first pass"}
+    dt = rows[("Date test", "+ filter_by_published_date")]
+    fn = rows[("Finance check", "start_date + end_date + filter_by_published_date")]
+    sh = em["metrics"]["shares"]
+    out = ["| Check | What is counted | Kept with dates + filter | Lost |", "|---|---|---|---|",
+           f"| Date test (pilot) | valid evidence: pages Wayback shows existed by the cutoff that name the item "
+           f"| {dt['valid_kept']} of {dt['valid_total']} | {dt['valid_total'] - dt['valid_kept']} |",
+           f"| Finance check (exploratory) | valid evidence: pages Wayback shows existed by the cutoff that name the RBI "
+           f"or the company | {fn['valid_kept']} of {fn['valid_total']} | {fn['valid_total'] - fn['valid_kept']} |",
+           f"| Check E (exploratory, `exact_match`) | known-good quotes re-found by the dated search "
+           f"| {sh['found before cutoff']['x']} of {em['metrics']['quotes']} | {sh['found only without dates']['x']} "
+           f"found only without dates; {sh['not found either way']['x']} by neither |"]
+    return "\n".join(out)
+
+
+def prereg_rule(rel, label, root=ROOT):
+    """The pre-registered leak rule, quoted verbatim: the bullet that starts with `label` in a pre-registration file
+    (the last one, so an amendment wins), up to the end of its sentence."""
+    text = (root / rel).read_text(encoding="utf-8")
+    hits = re.findall(r"^- " + re.escape(label) + r"(.*?\.)(?=\s+Only|\s*$|\n- )", text, re.M | re.S)
+    if not hits:
+        raise SystemExit(f"{rel}: rule '{label}' not found")
+    rule = re.sub(r"\s*\n\s*", " ", label + hits[-1]).strip()
+    if not rule.endswith(("cutoff.", "cutoff).")) or rule.count("(") != rule.count(")"):
+        raise SystemExit(f"{rel}: rule '{label}' looks cut short: {rule!r}")
+    return rule
 
 
 def nemotron_calls(root=ROOT):
@@ -122,7 +156,7 @@ def earliest_commit(root=ROOT):
 
 def facts(st, as_of, root=ROOT):
     """Every {{key}} the templates use, as display strings. Source file named on each block."""
-    from build_bug_reports import date_lag, map_zero
+    from build_bug_reports import date_lag, map_zero, nano_nulls
     from build_field_report import check_e_dates
     from shadow_cpi.polls import release_date
     f = {}
@@ -141,7 +175,7 @@ def facts(st, as_of, root=ROOT):
              fin_nodates_retry=fn2["arms"]["N"]["confirmed_events"], fin_dated=fn1["arms"]["D"]["confirmed_events"],
              fin_dated_retry=fn2["arms"]["D"]["confirmed_events"])
 
-    # results/timelock34_second_review.json: independent second review (AI-assisted) of the filtered finance search
+    # results/timelock34_second_review.json: separate, post-hoc AI-assisted review (ChatGPT agent) of the filtered finance search
     ff = load("results/timelock34_second_review.json", root)["finance_filtered"]
     f.update(sr_fin_searches=ff["searches"], sr_fin_dated_after=ff["searches_with_result_dated_after_cutoff"],
              sr_fin_reviewer_leaks=ff["reviewer_leak_pages"])
@@ -152,7 +186,24 @@ def facts(st, as_of, root=ROOT):
              ex_cutoff=day_month(date.fromisoformat(ex["cutoff"])),
              ex_published=day_month(date.fromisoformat(ex["our_published_date"])),
              ex_updated=day_month(date.fromisoformat(ex["reviewer_date"])))
-    f["leakage_table"] = leakage_table(fr)
+    f["leak_count_table"] = leak_count_table(fr)
+    f["evidence_kept_table"] = evidence_kept_table(fr, load("results/leakcheck_exact_match.json", root))
+
+    # Wilson 95% intervals for the headline counts (results/field_report.json)
+    f.update(dt_nodates_w=wilson(dt1["A"]["wilson95"]), dt_nodates_retry_w=wilson(dt2["A"]["wilson95"]),
+             dt_dated_w=wilson(dt1["C"]["wilson95"]), dt_dated_retry_w=wilson(dt2["C"]["wilson95"]),
+             fin_nodates_retry_w=wilson(fn2["arms"]["N"]["confirmed_wilson95"]),
+             fin_dated_retry_w=wilson(fn2["arms"]["D"]["confirmed_wilson95"]))
+    # the pre-registered leak rules, quoted (v2/DATE_TEST_PREREG.md; v2/FINANCE_PREREG.md Amendment 1 (e))
+    f.update(dt_leak_rule=prereg_rule("v2/DATE_TEST_PREREG.md", "**Confirmed leak (L):**", root),
+             fin_leak_rule=prereg_rule("v2/FINANCE_PREREG.md", "**Confirmed leak:**", root))
+
+    # timelock34 (benchmarks/timelock34/cases.jsonl): cases, and distinct questions (cases sharing a query count once)
+    cases = [json.loads(x) for x in (root / "benchmarks/timelock34/cases.jsonl").read_text(encoding="utf-8").splitlines()
+             if x.strip()]
+    qs = {(c["question"], c["cutoff"]) for c in cases}
+    f.update(tl_cases=len(cases), tl_questions=len(qs),
+             tl_shared_pairs=len(cases) - len(qs))
 
     # leaks at three levels. Task and call: results/date_field_test.json and results/finance_lookahead.json (one
     # search call per task and setting); result: results/field_report.json leak_by_source_type
@@ -231,6 +282,13 @@ def facts(st, as_of, root=ROOT):
     f.update(auto_searches=ap["no_dates"]["searches"], auto_results=ap["no_dates"]["results"],
              auto_oct=ap["no_dates"]["results_dated_oct_2026"], auto_undated=ap["no_dates"]["results_undated"],
              autod_inside=ap["with_dates"]["inside_window"], autod_dated=ap["with_dates"]["dated_results"])
+    from build_bug_reports import echo_dates
+    f.update(autod_searches=ap["with_dates"]["searches"],
+             autod_ranges=", ".join(f"{k} {v}" for k, v in ap["with_dates"]["time_range"].items()),
+             autod_echo_dates=echo_dates("arm_Td_*.json")[1])
+    us = load("results/feedback_evidence/tavily_usage_2026-10-20.json", root)        # the /usage lag (bug report)
+    f.update(usage_endpoint=us["tavily_usage_endpoint_response"]["account"]["plan_usage"],
+             usage_per_call=us["flight_recorder_credits_include_usage"])
 
     # results/field_report.json radar
     rd = fr["radar"]
@@ -240,6 +298,7 @@ def facts(st, as_of, root=ROOT):
 
     # results/bug_reports.json builders (tools/build_bug_reports.py, same code)
     lag, mz = date_lag(), map_zero()
+    f["top_n"] = sum(r["section"] == "top" for r in load("results/bug_reports.json", root)["reports"])
     f.update(pd_later=lag["tavily_later"], pd_pages=lag["with_both_dates"],
              map_official_empty=len(mz["official_silent_empty"]), map_official=mz["official_sites"],
              map_dairy_empty=len(mz["dairy_silent_empty"]), map_dairy=mz["dairy_sites"])
@@ -276,7 +335,21 @@ def facts(st, as_of, root=ROOT):
     dated = roles["dated"]
     new = dated["periods"][-1]
     f.update(nano_new=new["small"], super_new=new["mid"], switch_day=human(date.fromisoformat(new["from"])),
-             migration_registered=day_month(date.fromisoformat(dated["pre_registered"])))
+             migration_registered=day_month(date.fromisoformat(dated["pre_registered"])),
+             switch_last_day=human(date.fromisoformat(dated["periods"][0]["until"])))
+    dep = load("config/doc_citations.json", root)["nebius_model_deprecation"]   # Nebius's notice, as checked
+    if dep["date"] != new["from"] or dep["replacements"] != {roles["small"]: new["small"], roles["mid"]: new["mid"]}:
+        raise SystemExit("config/models.json dated map does not match nebius_model_deprecation in doc_citations")
+    # required technologies: the Token Factory host (shadow_cpi/settings.py), model IDs (config/models.json), and the
+    # Tavily endpoints with at least one call (results/field_report.json receipt, from results/call_receipts.json)
+    from urllib.parse import urlparse
+    from shadow_cpi.settings import NEBIUS_DEFAULT_BASE                  # the default, not a local override
+    f.update(nebius_host=urlparse(NEBIUS_DEFAULT_BASE).netloc, nano_id=nano, super_id=sup,
+             tavily_endpoints=", ".join(f"`{e['endpoint']}`" for e in sorted(fr["receipt"]["by_endpoint"],
+                                                                             key=lambda e: -e["calls"]) if e["calls"]))
+    # Nano gave no number, Super re-read the page (tools/build_bug_reports.py nano_nulls, same code)
+    nn = nano_nulls()
+    f.update(nano_null_rereads=f"{nn['super_rereads']:,}", nano_null_found=nn["super_found_verified"])
 
     # dates: the seal (app_pages/common.py), MoSPI's release rule (shadow_cpi/polls.py), git history
     seal = seal_date(root)

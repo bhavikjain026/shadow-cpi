@@ -127,7 +127,7 @@ def test_field_report_starts_with_six_findings():
     at.switch_page("app_pages/field_report.py")
     at.run()
     assert not at.exception
-    df = at.dataframe[0].value
+    df = at.table[0].value
     assert list(df.columns) == ["Finding", "Number", "File"] and len(df) == 6
 
 
@@ -180,3 +180,28 @@ def test_web_titles_cannot_inject_markdown():
     exec(src[src.index("def link("):src.index("def case_title(")], ns)
     out = ns["link"]("Price ![x](https://t.example/p.png) [a]", "https://a.example/x(1) y")
     assert "![" not in out.replace("\\!\\[", "") and out.endswith("(<https://a.example/x(1)%20y>)")
+
+
+# ---------- ui-polish: summary line, default examples, text badges ----------
+def test_summary_line_at_top_reads_the_results_file():
+    at = page()
+    d, s = DATA["totals"]["date"], DATA["totals"]["strictness"]
+    first = at.markdown[0].value
+    assert (f"No time lock: {d['open']['retry']}/{d['cases']} cases leaked (after retry). Tavily time lock: "
+            f"{d['locked']['retry']}/{d['cases']}. Cost: {s['missed']} of {s['quotes']} known-good quotes missed."
+            ) in first and "(#all-cases)" in first
+
+
+def test_default_examples_start_rbi_then_petrol_and_drop_m7():
+    at = page()
+    default = at.selectbox[0].options[0]
+    assert default.startswith("Examples: R1, F3") and "M7" not in default
+    assert any(o.startswith("M7") for o in at.selectbox[0].options)          # still in the picker
+    assert "names both the case's item and its state" in text(at)
+
+
+def test_every_result_has_a_text_badge():
+    at = page()
+    lines = [m.value for m in at.markdown if "Tavily published_date" in m.value] + [e.value for e in at.error]
+    assert lines and all(any(b in x for b in ("[LEAK]", "[OK]", "[UNCHECKED]")) for x in lines)
+    assert all(":red-badge[LEAK]" in e.value for e in at.error)

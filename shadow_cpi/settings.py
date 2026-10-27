@@ -5,7 +5,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 TAVILY_BASE = os.environ.get("SCPI_TAVILY_BASE_URL", "https://api.tavily.com")
-NEBIUS_BASE = os.environ.get("SCPI_NEBIUS_BASE_URL", "https://api.tokenfactory.nebius.com/v1")
+NEBIUS_DEFAULT_BASE = "https://api.tokenfactory.nebius.com/v1"
+NEBIUS_BASE = os.environ.get("SCPI_NEBIUS_BASE_URL", NEBIUS_DEFAULT_BASE)
 MODELS_FILE = ROOT / "config" / "models.json"
 
 

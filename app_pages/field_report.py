@@ -53,7 +53,7 @@ summary = [
     (f"Who should write the searches: best arm ({top['writer']})", f"{top['recall']} of {top['of']} known changes",
      "results/field_report.json"),
 ]
-st.dataframe([{"Finding": a, "Number": b, "File": c} for a, b, c in summary], hide_index=True, width="stretch")
+st.table([{"Finding": a, "Number": b, "File": c} for a, b, c in summary], hide_index=True)  # wraps, nothing cut off
 
 # ---------- time-locked search leakage (first block) ----------
 lk = r.get("leakage")
@@ -193,12 +193,12 @@ if rr:
                    "Before": x["before"], "After": x["after"], "Reason": " · ".join(x["reasons"])}
                   for x in rr["rows"]], hide_index=True, width="stretch")
 
-# ---------- independent second review ----------
+# ---------- post-hoc second review (AI-assisted) ----------
 sr = read_json("results/timelock34_second_review.json")
 if sr:
-    st.subheader("Independent second review (AI-assisted, ChatGPT agent)")
-    st.caption(f"Every result URL in the timelock34 benchmark labelled again by an independent reviewer "
-               f"({sr['reviewer']}). Our leak: {sr['leak_definitions']['ours']}. The reviewer's leak: "
+    st.subheader("Second review (separate, post-hoc, AI-assisted: ChatGPT agent)")
+    st.caption(f"Every result URL in the timelock34 benchmark labelled again in a separate, post-hoc AI-assisted "
+               f"review (ChatGPT agent); {sr['unclear']} of {sr['rows']} rows stayed unclear. Our leak: {sr['leak_definitions']['ours']}. The reviewer's leak: "
                f"{sr['leak_definitions']['reviewer']}. Source: `results/timelock34_second_review.json`.")
     st.markdown(f"The reviewer decided **{sr['decided']} of {sr['rows']}** rows (LEAK or SAFE); {sr['unclear']} are "
                 "UNCLEAR, because the live page would not open and archive lookups were rate-limited.")
@@ -214,7 +214,7 @@ if sr:
     ff, ex = sr["finance_filtered"], sr["finance_filtered"]["example"]
     st.markdown(f"**Search filters by date; Extract reads the page as it is today.** "
                 f"{ff['searches_with_result_dated_after_cutoff']} of {ff['searches']} filtered searches returned a "
-                f"result dated after the cutoff; an independent reviewer found {ff['reviewer_leak_pages']} page whose "
+                f"result dated after the cutoff; the post-hoc review found {ff['reviewer_leak_pages']} page whose "
                 f"current version leaks the outcome. Example `{ex['row_id']}` ({ex['case']}, cutoff {ex['cutoff']}): "
                 f"Tavily's published date {ex['our_published_date']} "
                 f"({'before' if ex['our_published_date'] < ex['cutoff'] else 'not before'} the cutoff); the reviewer "
@@ -240,8 +240,8 @@ if sr:
 lt = r.get("leak_by_source_type")
 if lt:
     st.subheader("Which pages leak? Leaks by source type")
-    st.caption(f"{lt['label']}. {lt['leaks']} leaks among {lt['results']} results from the date test and the finance "
-               f"check. Leak = {lt['leak_definition']}. Type from the URL only, by a rule written before counting "
+    st.caption(f"{lt['label']}. {lt['leaks']} leaks among {lt['results']} returned result rows, pooled across settings, "
+               f"exploratory (date test and finance check each by its own rule). Leak = {lt['leak_definition']}. Type from the URL only, by a rule written before counting "
                f"({lt['rule'].replace('first match wins', 'earliest match wins')}).")
 
     def cell(x):
@@ -279,7 +279,8 @@ if dta and fna and lt:
                    "Source": "results/date_field_test.json, results/finance_lookahead.json"},
                   {"Level": "Result (exploratory, counted after scoring, initial pass)",
                    "Date test": str(lt["leaks_by_arm"]["date test A"]), "Finance check": str(lt["leaks_by_arm"]["finance N"]),
-                   "Source": f"leak_by_source_type: {lt['leaks']} of {lt['results']} results across all settings"}],
+                   "Source": f"leak_by_source_type: {lt['leaks']} of {lt['results']} returned result rows, pooled "
+                             "across settings, exploratory"}],
                  hide_index=True, width="stretch")
 
 # ---------- radar and cost ----------

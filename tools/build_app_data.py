@@ -263,7 +263,7 @@ def brief(month="2026-09"):
     lines = [f"# Reporter brief: {mname}", "",
              "> **Example from replay month — not a forecast.** Built after the fact from the replay results "
              "(`results/replay.csv`, `results/replay_predictions.json`, `manifests/2026-09.json`) to show what a brief "
-             "looks like. Every number is computed; every quote is a line verified word for word on its page.", "",
+             "looks like. Every number is computed; for each quote the model returned a line number, and code copied that line from the Extract output and checked the number is in it.", "",
              f"**Shadow CPI for {mname}: {c:.2f}% year-on-year**, 80% range {lo:.2f}% to {hi:.2f}%. Coverage: "
              f"{cov:.0%} of the CPI basket was measured from evidence this month; the other {1 - cov:.0%} was "
              "carried on its recent trend.", "",

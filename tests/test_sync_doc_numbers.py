@@ -80,6 +80,16 @@ def test_sync_renders_with_as_of_label_and_is_idempotent(tmp_path, values):
     assert S.sync(ST, date(2026, 10, 25), root=tmp_path, values=values) == []
 
 
+def test_leak_rules_are_quoted_whole(values):
+    for key, rel in (("dt_leak_rule", "v2/DATE_TEST_PREREG.md"), ("fin_leak_rule", "v2/FINANCE_PREREG.md")):
+        rule = values[key]
+        assert rule in " ".join((ROOT / rel).read_text().split())             # verbatim, modulo line breaks
+        assert "no capture on or before the cutoff" in rule and rule.endswith(("cutoff.", "cutoff)."))
+    for doc in ("README.md", "docs/devpost_draft.md"):
+        text = " ".join((ROOT / doc).read_text().split())
+        assert values["dt_leak_rule"] in text and values["fin_leak_rule"] in text
+
+
 def test_numbers_come_from_the_results_files(values):
     import json
     sl = json.loads((ROOT / "results/score_lock.json").read_text())

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare our timelock34 leak labels with an independent second review (AI-assisted, ChatGPT agent).
+"""Compare our timelock34 leak labels with a separate, post-hoc AI-assisted review (ChatGPT agent).
 
     python benchmarks/timelock34/compare_review.py            # writes results/timelock34_second_review.json
     python benchmarks/timelock34/compare_review.py --check    # exit 1 if the file would change
@@ -111,7 +111,7 @@ def build(cases=None, review=None):
     fin = next(t for t in task_rows if (t["dataset"], t["setting"]) == ("finance", "dates_filter"))
     return {
         "source": f"benchmarks/timelock34/{REVIEW.name}",
-        "reviewer": "independent second review, AI-assisted (ChatGPT agent)",
+        "reviewer": "separate, post-hoc AI-assisted review (ChatGPT agent)",
         "leak_definitions": {"ours": "a result dated after the cutoff (confirmed: no Wayback capture by the cutoff)",
                              "reviewer": "content that reveals the outcome"},
         "rows": len(joined), "decided": len(decided), "unclear": len(joined) - len(decided),

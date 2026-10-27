@@ -83,5 +83,15 @@
     "what": "the hackathon's submission period opening date (eligibility line)",
     "source": "v2/PRD.md hackathon checklist (26 Aug); year from the owner's task card",
     "added": "2026-10-27, from the owner's task card"
+  },
+  "nebius_model_deprecation": {
+    "date": "2026-11-09",
+    "what": "Nemotron model IDs removed from Nebius Token Factory Serverless on this date; Dedicated Endpoints unaffected",
+    "replacements": {
+      "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": "nvidia/Nemotron-3_5-Lightning",
+      "nvidia/nemotron-3-super-120b-a12b": "nvidia/Nemotron-3.5-Super-VL"
+    },
+    "source": "Nebius Token Factory docs, \"Model Deprecations: November 2026\", https://docs.tokenfactory.nebius.com/model-deprecations-november-2026",
+    "checked": "2026-10-27, by the owner"
   }
 }

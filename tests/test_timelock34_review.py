@@ -57,12 +57,15 @@ def test_headline_numbers():
 def test_docs_match_the_results_file_and_never_say_no_leaks():
     rep = json.loads(CR.OUT.read_text(encoding="utf-8"))
     ff = rep["finance_filtered"]
-    sentence = (f"{ff['searches_with_result_dated_after_cutoff']} of {ff['searches']} filtered searches returned a "
-                f"result dated after the cutoff; an independent")
+    count = f"{ff['searches_with_result_dated_after_cutoff']} of {ff['searches']} filtered searches"
+    unclear = f"{rep['unclear']} of {rep['rows']} rows stayed unclear"
     for doc in ("benchmarks/timelock34/DATASHEET.md", "README.md", "docs/devpost_draft.md"):
         text = " ".join((ROOT / doc).read_text(encoding="utf-8").split())
-        assert sentence in text, doc
+        assert count in text and "returned a result dated after the cutoff" in text, doc
+        assert unclear in text and "post-hoc AI-assisted review (ChatGPT agent)" in text, doc
+        assert "independent reviewer" not in text.lower(), doc
         assert "no leaks" not in text.lower(), doc
+    assert unclear in " ".join((ROOT / "FEEDBACK_NOTES.md").read_text(encoding="utf-8").split())
     ds = (ROOT / "benchmarks/timelock34/DATASHEET.md").read_text(encoding="utf-8")
     assert f"decided {rep['decided']} of {rep['rows']} rows" in " ".join(ds.split())
     ct = rep["crosstab"]["date_test"]

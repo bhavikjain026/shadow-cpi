@@ -181,7 +181,7 @@ def test_saved_run_shows_window_replay_date_searches_credits():
     text = all_text(load("home"))
     assert f"Evidence window {s['evidence_window'][0]} to {s['evidence_window'][1]}" in text
     assert f"replayed from saved results on {s['replayed_on']}" in text
-    assert f"{s['n_searches']} searches" in text and f"{s['credits']} credits when first run" in text
+    assert f"{s['n_searches']} searches" in text and f"{s['credits']} credits when originally run" in text
     assert "Searches run" not in text
 
 
