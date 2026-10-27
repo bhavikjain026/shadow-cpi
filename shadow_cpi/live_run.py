@@ -96,16 +96,23 @@ def usage_remaining(tavily_key, fetch=None, cfg=None, ledger=None):
         return None, f"Tavily's usage check failed ({type(e).__name__})"
 
 
-def gate(session_runs, now=None, path=STATE_FILE, cfg=None, ledger=None, have_keys=None, usage_fetch=None):
+def gate(session_runs, now=None, path=STATE_FILE, cfg=None, ledger=None, have_keys=None, usage_fetch=None,
+         tavily_only=False):
     """(allowed, message). The message is shown with the saved run when a run is not allowed. Checks run cheapest
-    first; the Tavily /usage check (a free call) runs last and fails closed."""
+    first; the Tavily /usage check (a free call) runs last and fails closed. tavily_only: the leak demo's live
+    search, which needs only the Tavily key (no Nemotron)."""
     cfg = cfg or load_budget()
     lim = limits(cfg)
     now = now or datetime.now(timezone.utc)
     day = now.date().isoformat()
     if not enabled():
         return False, "Live runs open on 1 Dec (judging period). Showing the saved run."
-    k = keys() if have_keys is None else (("test", "test") if have_keys else None)
+    if have_keys is not None:
+        k = ("test", "test") if have_keys else None
+    elif tavily_only:
+        k = (setting(KEY_VARS[0]),) if setting(KEY_VARS[0]) else None
+    else:
+        k = keys()
     if not k:
         return False, "Live runs are switched off on this copy of the app (no API keys). Showing the saved run."
     if session_runs >= lim["per_session"]:

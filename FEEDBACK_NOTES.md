@@ -173,3 +173,14 @@ API reference at docs.tavily.com on 26 Oct 2026 (not measured; no call made): th
 `files`, with no `start_date`/`end_date` or other date window. So Research stays out of our replays and the October
 radar, where every search must be date-locked. Suggestion: accept the same `start_date`/`end_date` as Search.
 Evidence: `config/doc_citations.json` (`tavily_research_params`, with the date checked).
+
+**2026-10-27 · Good, with a lead: the date fields held in Hindi, Marathi and Tamil; relevance did not.** Pre-registered
+pilot (`v2/LANG_DATE_PREREG.md`), 12 cases, `language` set to hi/mr/ta: with `start_date`/`end_date` and
+`filter_by_published_date`, no result in any language was dated outside the window, none was undated, and none was a
+Wayback-confirmed leak, the same as the English date test. Without dates, 3 of 4 Hindi cases leaked and Marathi
+results were mostly undated. Post-hoc, not pre-registered: with the filter on, results naming the item fell from 10 to
+4 of 12 in Marathi and from 4 to 0 of 12 in Tamil (English 55 of 60 → 41 of 59; Hindi 12 of 12 → 6 of 6); Tamil arm C
+returned English sports and car pages, and no Marathi or Tamil result came from the preferred regional domains.
+Suggestion: when a date filter leaves few matches in the requested `language`, return fewer results rather than
+off-language ones, or say so in the response. Evidence: `results/lang_date_test.md` (table and addendum),
+`results/lang_date_test.json` (every result, request id and response hash).
