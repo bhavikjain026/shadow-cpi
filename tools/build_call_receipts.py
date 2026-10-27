@@ -46,6 +46,8 @@ def build(log=LOG_FILE, cache=CACHE_DIR, ledger=None, out=OUT):
             continue
         fr = flight.get(e["call_id"])
         rt = known.get(e["call_id"])
+        if rt is None:
+            rt = e.get("response_time")          # rows written by tools/run_repro.py carry it (no flight recorder)
         if rt is None and fr:
             p = Path(cache) / "tavily" / f"{fr['cache_key']}.json"
             if p.exists():

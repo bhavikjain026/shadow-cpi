@@ -8,7 +8,8 @@
    "happened": "auto_parameters chose time_range w 57, d 14, m 1; 620 of 659 results were dated October 2026 and 38 were undated",
    "expected": "a time_range that covers the month the query names, or none, with a note that a historical query needs start_date/end_date",
    "fix": "when the query names a past month, return no time_range (or that month's window); document the default",
-   "evidence": "620 of 659 results from October 2026, 72 searches; Tavily request IDs logged for 31 of 72 searches, e.g. `73a3cac7-ae69-4e16-847d-726c5baec6c3`, `22b874a7-56ab-4d36-b4f6-73c737b18e62`; files `v2/ablation/arm_T_*.json` (plan[].auto_parameters, cards[].published)"
+   "evidence": "620 of 659 results from October 2026, 72 searches; Tavily request IDs logged for 31 of 72 searches, e.g. `73a3cac7-ae69-4e16-847d-726c5baec6c3`, `22b874a7-56ab-4d36-b4f6-73c737b18e62`; files `v2/ablation/arm_T_*.json` (plan[].auto_parameters, cards[].published)",
+   "repro": "repro/auto_parameters_time_range.py"
   },
   {
    "section": "top",
@@ -18,7 +19,8 @@
    "happened": "the auto_parameters echo in the response reported time_range w 47, d 8, y 1, and a start_date or end_date in 0 of 56 echoes; yet 532 of 532 dated results fell inside our window, so the dates were applied",
    "expected": "the echo shows the window actually applied (our start_date/end_date)",
    "fix": "echo start_date/end_date, or drop time_range from the echo, when the caller sends dates",
-   "evidence": "532 of 532 dated results inside the window, 56 searches; Tavily request IDs logged for 47 of 56 searches, e.g. `0e8e93b5-57d6-49a7-b1bf-204b2c6f4249`, `e63b56ba-9a8c-407a-acbc-215c66d4dcce`; files `v2/ablation/arm_Td_*.json` (plan[].auto_parameters, plan[].dates_kept)"
+   "evidence": "532 of 532 dated results inside the window, 56 searches; Tavily request IDs logged for 47 of 56 searches, e.g. `0e8e93b5-57d6-49a7-b1bf-204b2c6f4249`, `e63b56ba-9a8c-407a-acbc-215c66d4dcce`; files `v2/ablation/arm_Td_*.json` (plan[].auto_parameters, plan[].dates_kept)",
+   "repro": "repro/auto_parameters_echo_dates.py"
   },
   {
    "section": "top",
@@ -28,7 +30,8 @@
    "happened": "0 of 14 searches returned a result dated after the cutoff, yet 1 page's current version leaks the outcome: R196 was dated 2026-07-07 by Tavily (cutoff 2026-07-08) and updated on 2026-07-09 with a link to the actual result",
    "expected": "a way for a time-locked user to read, or at least detect, the page as it was on the cutoff",
    "fix": "an as-of / crawl-date field on Extract (the date of the copy returned), or an as_of parameter",
-   "evidence": "1 of 67 filtered result pages; R196 from the search with request ID `dce7e851-b012-4dfe-84d4-ea43b27b1bd9` (response SHA-256 `a509b8bc8a346701…`); file `results/timelock34_second_review.json` (finance_filtered.example)"
+   "evidence": "1 of 67 filtered result pages; R196 from the search with request ID `dce7e851-b012-4dfe-84d4-ea43b27b1bd9` (response SHA-256 `a509b8bc8a346701…`); file `results/timelock34_second_review.json` (finance_filtered.example)",
+   "repro": "repro/extract_no_asof.py"
   },
   {
    "section": "feature",
@@ -38,7 +41,8 @@
    "happened": "4 had a later published_date (3 by more than 7 days; largest gap 345 days)",
    "expected": "nothing different: this is consistent with Tavily's documented definition of published_date (published or last updated, beta)",
    "fix": "return original-publication and last-modified dates as two fields, and let the date filter choose",
-   "evidence": "4 of 42 pages; file `results/date_field_test.json` (rows[].arms[].results[].tavily_date, page_date)"
+   "evidence": "4 of 42 pages; file `results/date_field_test.json` (rows[].arms[].results[].tavily_date, page_date)",
+   "repro": "repro/published_vs_modified.py"
   },
   {
    "section": "smaller",
@@ -48,7 +52,8 @@
    "happened": "empty results with no failed_results and no error on 5 sites of the official crawl list (merc, derc, uperc, iocl, amul) and 3 dairy sites (aavin, nandini-kmf, sanchi-indore (MPCDF union)); without instructions also empty on merc, derc, uperc, iocl; a bad start URL did get a clear error (sanchi-mpcdf)",
    "expected": "an empty answer that says why (blocked, robots, nothing matched)",
    "fix": "a reason field on empty Map/Crawl responses",
-   "evidence": "files `results/prompt_t/official_crawl_2026-10.json`, `dairy_map_2026-10-21.json`, `map_noinstr.json`"
+   "evidence": "files `results/prompt_t/official_crawl_2026-10.json`, `dairy_map_2026-10-21.json`, `map_noinstr.json`",
+   "repro": "repro/map_empty.py"
   },
   {
    "section": "smaller",
@@ -58,7 +63,8 @@
    "happened": "607 characters of letterhead; the rates are an image and did not come back",
    "expected": "OCR of image-only PDF pages, or a flag that the text layer is empty",
    "fix": "an ocr option, or an 'image_only' flag on the result",
-   "evidence": "file `results/prompt_t/dairy_followup_2026-10-21.json` (gokul_adv_chars)"
+   "evidence": "file `results/prompt_t/dairy_followup_2026-10-21.json` (gokul_adv_chars)",
+   "repro": "repro/scanned_pdf_extract.py"
   },
   {
    "section": "smaller",
@@ -68,7 +74,8 @@
    "happened": "/usage reported plan_usage 6 while per-call include_usage credits added up to 226",
    "expected": "/usage close to the sum of per-call usage",
    "fix": "update /usage within minutes, or document the lag",
-   "evidence": "file `results/feedback_evidence/tavily_usage_2026-10-20.json`"
+   "evidence": "file `results/feedback_evidence/tavily_usage_2026-10-20.json`",
+   "repro": "repro/usage_lag.py"
   }
  ],
  "nebius": [

@@ -293,27 +293,27 @@
    },
    {
     "endpoint": "/extract",
-    "calls": 790,
+    "calls": 792,
     "credits": 691,
-    "credits_per_call": 0.8746835443037975,
+    "credits_per_call": 0.8724747474747475,
     "median_latency_s": 0.15000000000000002,
     "p95_latency_s": 5.225,
     "with_latency": 790
    },
    {
     "endpoint": "/map",
-    "calls": 17,
+    "calls": 18,
     "credits": 8,
-    "credits_per_call": 0.47058823529411764,
+    "credits_per_call": 0.4444444444444444,
     "median_latency_s": 11.25,
     "p95_latency_s": 18.830000000000002,
     "with_latency": 17
    },
    {
     "endpoint": "/search",
-    "calls": 1058,
-    "credits": 1128,
-    "credits_per_call": 1.0661625708884688,
+    "calls": 1062,
+    "credits": 1133,
+    "credits_per_call": 1.066854990583804,
     "median_latency_s": 3.58,
     "p95_latency_s": 6.214499999999999,
     "with_latency": 1058
@@ -581,6 +581,36 @@
     "with_latency": 186
    },
    {
+    "experiment": "repro-kit",
+    "endpoint": "/extract",
+    "calls": 2,
+    "credits": 0,
+    "credits_per_call": 0.0,
+    "median_latency_s": null,
+    "p95_latency_s": null,
+    "with_latency": 0
+   },
+   {
+    "experiment": "repro-kit",
+    "endpoint": "/map",
+    "calls": 1,
+    "credits": 0,
+    "credits_per_call": 0.0,
+    "median_latency_s": null,
+    "p95_latency_s": null,
+    "with_latency": 0
+   },
+   {
+    "experiment": "repro-kit",
+    "endpoint": "/search",
+    "calls": 4,
+    "credits": 5,
+    "credits_per_call": 1.25,
+    "median_latency_s": null,
+    "p95_latency_s": null,
+    "with_latency": 0
+   },
+   {
     "experiment": "skeptic",
     "endpoint": "/search",
     "calls": 27,
@@ -845,9 +875,9 @@
    }
   ],
   "total": {
-   "calls": 1874,
-   "credits": 1828,
-   "credits_per_call": 0.9754535752401281,
+   "calls": 1881,
+   "credits": 1833,
+   "credits_per_call": 0.9744816586921851,
    "median_latency_s": 3.12,
    "p95_latency_s": 6.0635,
    "with_latency": 1874
@@ -1679,7 +1709,7 @@
   "arm_a_searches_per_month": 13.0,
   "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits at original cost / 9 months"
  },
- "ledger_rows": 1933,
+ "ledger_rows": 1940,
  "pages_changed": null,
  "leak_by_source_type": {
   "rows": [
