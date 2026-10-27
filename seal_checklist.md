@@ -39,10 +39,22 @@ changes a rule, factor or filter.
 - [ ] Commit everything (the real seal refuses with uncommitted changes).
 
 ## 3. Seal (29 Oct)
-- [ ] `python seal_month.py 2026-10 --dry-run`: every line must be PASS. Then delete `sealed/dry-run/`.
+- [ ] `python seal_month.py 2026-10 --dry-run`: every line must be PASS.
+- [ ] **v3 in the dry run (Wed 28 Oct, 0 credits):**
+      `python -m v3.build 2026-10 --cutoff 2026-10-28 --v1-seal sealed/dry-run/2026-10.json --dry-run` must print
+      `"all_match": true`. Then delete `sealed/dry-run/`. (`v3.seal_bundle --dry-run` needs a real v1 seal, so it is
+      first run for real on the 29th; its checks are covered by `tests/test_v3.py`.)
 - [ ] `python seal_month.py 2026-10`: writes `sealed/2026-10.json` + `.sha256`, commits, tags `seal-2026-10`,
       pushes the branch and the tag.
-- [ ] Check it from outside, following `verify.md` (download at the tag, recompute the SHA-256).
+- [ ] **v3, right after, same session, before 29 Oct 23:59 IST** (`v3/PREREG.md` §6; cache only, 0 credits):
+      1. `python -m v3.build 2026-10 --cutoff 2026-10-28`: checks v3 used v1's sealed inputs (cutoff, manifest and
+         prediction SHA-256, no code change since v1's commit, (c) = v1's number), writes
+         `results/v3_nowcast_2026-10.json`. Commit it.
+      2. `python -m v3.seal_bundle 2026-10 --dry-run`, then `python -m v3.seal_bundle 2026-10`: writes
+         `sealed/2026-10.v3.json` + `sealed/2026-10.bundle.sha256`, commits, tags `seal-2026-10-bundle`, pushes.
+         v1's file, hash and tag are not touched. Any FAIL: stop; v1's seal stands on its own.
+- [ ] Check it from outside, following `verify.md` (download at the tag, recompute the SHA-256; the v3 bundle has
+      its own check in §4 there).
 - [ ] Put the SHA-256 into `docs/devpost_draft.md` (`[TBD: from seal]`).
 - [ ] Tag `submission-v1.0` before submitting (Prompt 5). After it, prompts, weights, item list, source rules and
       scoring must not change.

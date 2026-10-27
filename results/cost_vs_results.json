@@ -1,0 +1,166 @@
+{
+ "built": "2026-10-27",
+ "note": "Descriptive, from saved runs: each setting was used by different tasks and queries, so rows are not a controlled comparison. Real calls only; credits are Tavily's own count per call.",
+ "credits_spent_building": 0,
+ "rows": [
+  {
+   "search_depth": "advanced",
+   "max_results": 8,
+   "calls": 7,
+   "credits": 14,
+   "credits_per_call": 2.0,
+   "results": 56,
+   "results_per_call": 8.0,
+   "fill_rate": 1.0,
+   "credits_per_100_results": 25.0,
+   "dated_share": 1.0,
+   "median_seconds": 5.83,
+   "mean_seconds": 5.7457142857142856,
+   "tasks": [
+    "poll"
+   ]
+  },
+  {
+   "search_depth": "auto",
+   "max_results": 10,
+   "calls": 87,
+   "credits": 157,
+   "credits_per_call": 1.8045977011494252,
+   "results": 848,
+   "results_per_call": 9.74712643678161,
+   "fill_rate": 0.9747126436781609,
+   "credits_per_100_results": 18.514150943396228,
+   "dated_share": 0.9339622641509434,
+   "median_seconds": 6.07,
+   "mean_seconds": 6.110459770114942,
+   "tasks": [
+    "ablation"
+   ]
+  },
+  {
+   "search_depth": "basic",
+   "max_results": 1,
+   "calls": 1,
+   "credits": 1,
+   "credits_per_call": 1.0,
+   "results": 1,
+   "results_per_call": 1.0,
+   "fill_rate": 1.0,
+   "credits_per_100_results": 100.0,
+   "dated_share": 1.0,
+   "median_seconds": 4.08,
+   "mean_seconds": 4.08,
+   "tasks": [
+    "ablation"
+   ]
+  },
+  {
+   "search_depth": "basic",
+   "max_results": 3,
+   "calls": 59,
+   "credits": 59,
+   "credits_per_call": 1.0,
+   "results": 165,
+   "results_per_call": 2.7966101694915255,
+   "fill_rate": 0.9322033898305084,
+   "credits_per_100_results": 35.75757575757576,
+   "dated_share": 0.9393939393939394,
+   "median_seconds": 3.57,
+   "mean_seconds": 3.956949152542373,
+   "tasks": [
+    "ablation",
+    "date-test"
+   ]
+  },
+  {
+   "search_depth": "basic",
+   "max_results": 5,
+   "calls": 223,
+   "credits": 223,
+   "credits_per_call": 1.0,
+   "results": 783,
+   "results_per_call": 3.5112107623318387,
+   "fill_rate": 0.7022421524663677,
+   "credits_per_100_results": 28.480204342273307,
+   "dated_share": 0.8109833971902938,
+   "median_seconds": 3.11,
+   "mean_seconds": 2.8097757847533633,
+   "tasks": [
+    "ablation",
+    "backup",
+    "finance",
+    "leakcheck",
+    "prompt-t",
+    "radar"
+   ]
+  },
+  {
+   "search_depth": "basic",
+   "max_results": 6,
+   "calls": 5,
+   "credits": 5,
+   "credits_per_call": 1.0,
+   "results": 28,
+   "results_per_call": 5.6,
+   "fill_rate": 0.9333333333333333,
+   "credits_per_100_results": 17.857142857142858,
+   "dated_share": 0.9285714285714286,
+   "median_seconds": 4.07,
+   "mean_seconds": 3.882,
+   "tasks": [
+    "ablation"
+   ]
+  },
+  {
+   "search_depth": "basic",
+   "max_results": 8,
+   "calls": 454,
+   "credits": 454,
+   "credits_per_call": 1.0,
+   "results": 3032,
+   "results_per_call": 6.6784140969163,
+   "fill_rate": 0.8348017621145375,
+   "credits_per_100_results": 14.973614775725594,
+   "dated_share": 0.7209762532981531,
+   "median_seconds": 3.75,
+   "mean_seconds": 3.9204405286343613,
+   "tasks": [
+    "ablation",
+    "basket",
+    "chase",
+    "event",
+    "explore-gold",
+    "milk",
+    "p2-events",
+    "p2-history",
+    "p2-quotes",
+    "poll",
+    "skeptic"
+   ]
+  },
+  {
+   "search_depth": "basic",
+   "max_results": 10,
+   "calls": 275,
+   "credits": 275,
+   "credits_per_call": 1.0,
+   "results": 2433,
+   "results_per_call": 8.847272727272728,
+   "fill_rate": 0.8847272727272727,
+   "credits_per_100_results": 11.302918207973695,
+   "dated_share": 0.6991368680641183,
+   "median_seconds": 3.57,
+   "mean_seconds": 3.8159272727272726,
+   "tasks": [
+    "ablation",
+    "check-search",
+    "events",
+    "find-weights",
+    "radar",
+    "recall"
+   ]
+  }
+ ],
+ "calls_without_cache_file": 0,
+ "default_max_results": 5
+}

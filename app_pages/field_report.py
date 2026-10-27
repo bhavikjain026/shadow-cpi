@@ -251,6 +251,20 @@ if rc:
     for n in rc["notes"]:
         st.caption(n)
 
+# ---------- cost vs results by search setting ----------
+cv = read_json("results/cost_vs_results.json")
+if cv:
+    st.subheader("Cost vs results: search depth and max_results")
+    st.caption(f"Built {cv['built']} from saved runs, {cv['credits_spent_building']} credits · {cv['note']} "
+               "Source: `results/cost_vs_results.json`.")
+    st.dataframe([{"search_depth": x["search_depth"], "max_results": x["max_results"], "Real calls": x["calls"],
+                   "Credits": x["credits"], "Credits per call": f"{x['credits_per_call']:.2f}",
+                   "Results per call": f1(x["results_per_call"]), "Filled (of max_results)": pct(x["fill_rate"]),
+                   "Credits per 100 results": f1(x["credits_per_100_results"]),
+                   "Results with a published_date": pct(x["dated_share"]),
+                   "Median response_time (s)": "—" if x["median_seconds"] is None else f"{x['median_seconds']:.2f}",
+                   "Used by": ", ".join(x["tasks"])} for x in cv["rows"]], hide_index=True, width="stretch")
+
 # ---------- bug reports ----------
 br = read_json("results/bug_reports.json")
 if br:

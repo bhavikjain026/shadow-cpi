@@ -60,7 +60,7 @@ def test_home_call_slot_scoreboard_and_audit():
         assert "sealing on 29 Oct" in [m.value for m in at.metric]
     assert "P(headline ≥ 6.0%)" in text
     assert "Official October 2026 CPI in" in text and "Thu 12 Nov 2026, 4:00 PM IST" in text
-    board = at.dataframe[0].value
+    board = next(d.value for d in at.dataframe if "Average miss (percentage points)" in d.value.columns)
     assert list(board["Average miss (percentage points)"])[:5] == [f"{LOCK['mae'][k]:.3f}"
                                                                    for k in ("c", "a", "b", "c_strict", "B1")]
     assert list(board["Method"])[:5] == ["Shadow CPI", "Trend only", "Government prices only",
@@ -312,3 +312,14 @@ def test_v1_vs_v2_table_reads_the_v2_locks(page):
 def test_research_page_wording():
     text = all_text(load("research"))
     assert "Research tool, not investment advice." in text and "Designed for" in text and "used by" not in text.lower()
+
+
+def test_home_shows_v3_beside_v1_labelled_experimental():
+    at = load("home")
+    text = all_text(at)
+    subs = [h.value for h in at.subheader]
+    assert any(s.startswith("Experimental v3, beside v1") for s in subs)
+    v1_at = next(i for i, s in enumerate(subs) if s.endswith(" call"))
+    assert subs.index(next(s for s in subs if s.startswith("Experimental v3"))) == v1_at + 1   # right under v1
+    assert any(e.label == "Jan–Sep 2026: retrospective, not a test" for e in at.expander)
+    assert "v3/PREREG.md" in " ".join(c.value for c in at.caption) or "v3/PREREG.md" in text

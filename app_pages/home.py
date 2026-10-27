@@ -11,6 +11,7 @@ from app_pages.common import (CODES, LABELS, LIVE_MONTH, NOWCAST_WORDS, REPO_URL
                               pass_fail, pct, poll_direction, poll_months, read_json, seal_status, source_column,
                               v2_comparison)
 from app_pages.v2_panels import what_tavily_adds
+from app_pages.v3_panel import v3_beside_v1
 
 header("Experimental nowcast", f"Shadow CPI: an {NOWCAST_WORDS} of India's next official CPI inflation number "
                                "(year-on-year, 2024-series All-India Combined). Not an official statistic.")
@@ -67,6 +68,7 @@ with st.expander("How to check the seal yourself", expanded=not sealed):
                 f"3. Same code as in the .sha256 file → PASS; different → FAIL. The git tag `seal-{LIVE_MONTH}` and "
                 f"GitHub's push record show when it was locked.")
     st.caption("Full steps: verify.md in the repository. Before the seal the links open once the tag exists.")
+v3_beside_v1(LIVE_MONTH)
 
 # ---------- replay scoreboard ----------
 st.subheader("Replay scoreboard, January–September 2026")
