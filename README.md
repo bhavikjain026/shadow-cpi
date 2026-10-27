@@ -22,8 +22,10 @@ Separate rules; never added together. After the logged archive retry; initial pa
 - **Finance check** (exploratory, Reserve Bank of India (RBI) decisions and company results;
   [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md), as amended). A different rule, so its counts are reported apart:
   "**Confirmed leak:** states the outcome **and** Wayback-confirmed (no capture on or before the cutoff, first capture after it, and Tavily's or the address's date after the cutoff)."
-- **After the logged archive retry.** The table counts follow a logged retry of the archive lookups that had failed
-  (11 in the date test, 94 in the finance check). Wilson 95% intervals: date
+- **After the logged archive retry.** The table counts follow a logged retry of the archive lookups that had failed.
+  On the initial pass, 94 finance-check archive lookups (and 11 in the date test) failed
+  for network reasons, so those pages could only be flagged, not confirmed; the retry recovered all of them,
+  which is why the finance count rises from 2 to 10 of 14. Wilson 95% intervals: date
   test no dates 30–70%, dates + filter 0–16%; finance check no dates
   45–88%, dates + filter 0–22%.
 - **Initial pass** (the pre-registered result, shown as sensitivity): date test 9 of 20
