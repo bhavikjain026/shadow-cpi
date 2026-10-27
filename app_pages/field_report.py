@@ -25,6 +25,32 @@ if not r:
     st.stop()
 st.caption(f"Built {r['built']} from the committed results files · source: `results/field_report.json`")
 
+# ---------- summary (six findings, each read from its file) ----------
+dt1, dt2 = r["date_test"]["first_pass"]["arms"], r["date_test"]["after_retry"]["arms"]
+fn1, fn2 = r["finance"]["first_pass"]["all_14"], r["finance"]["after_retry"]["all_14"]
+em = read_json("results/leakcheck_exact_match.json")
+top = {x["arm"]: x for x in r["four_arms"]["rows"]}[r["four_arms"]["verdict"]["ranking"][0]]
+summary = [
+    ("Date test, no time lock: cases with a confirmed leak (Wayback)",
+     f"{dt1['A']['leak_cases']} of {dt1['A']['cases']} ({dt2['A']['leak_cases']} after the logged retry)",
+     "results/field_report.json"),
+    ("Date test, Tavily time lock (dates + filter_by_published_date)",
+     f"{dt1['C']['leak_cases']} of {dt1['C']['cases']} ({dt2['C']['leak_cases']} after the retry)",
+     "results/field_report.json"),
+    ("Finance check, no time lock: events with a confirmed leak",
+     f"{fn1['arms']['N']['confirmed_events']} of {fn1['events']} ({fn2['arms']['N']['confirmed_events']} after the "
+     "logged retry)", "results/field_report.json"),
+    ("Finance check, Tavily time lock",
+     f"{fn1['arms']['D']['confirmed_events']} of {fn1['events']} ({fn2['arms']['D']['confirmed_events']} after the retry)",
+     "results/field_report.json"),
+    ("Cost of strictness: known-good quotes the dated search missed",
+     f"{em['metrics']['shares']['found only without dates']['x']} of {em['metrics']['quotes']}" if em else "—",
+     "results/leakcheck_exact_match.json"),
+    (f"Who should write the searches: best arm ({top['writer']})", f"{top['recall']} of {top['of']} known changes",
+     "results/field_report.json"),
+]
+st.dataframe([{"Finding": a, "Number": b, "File": c} for a, b, c in summary], hide_index=True, width="stretch")
+
 # ---------- time-locked search leakage (first block) ----------
 lk = r.get("leakage")
 if lk:
@@ -105,6 +131,32 @@ for k, lab in (("mcnemar_A_vs_B", "A (no dates) vs B (dates)"), ("mcnemar_C_vs_D
                f"{dt['after_retry'][k]['p_exact']:.4f} after retry.")
 st.caption("Valid evidence lost: Wayback-confirmed pre-cutoff results found by any arm that this arm did not return; "
            "the retry adds newly confirmed pages, so its denominator is larger.")
+
+# ---------- language date test ----------
+ld = r.get("lang_date_test")
+if ld:
+    st.subheader("Date fields by language (pilot)")
+    st.caption(f"{ld['label']}. A = no dates, C = dates + filter_by_published_date, D = C + our page-date check "
+               "(it reads English and Hindi date words only).")
+    by = {**ld["by_lang"], "English (date test)": ld["english"]}
+    st.dataframe([{"Language": name, "Cases": s["A"]["cases"],
+                   "Leak cases A / C / D": " / ".join(str(s[a]["leak_cases"]) for a in "ACD"),
+                   "Undated A": f"{s['A']['undated']} of {s['A']['results']}",
+                   "Undated C": f"{s['C']['undated']} of {s['C']['results']} ({pct(s['C']['undated_share'])})",
+                   "C dated outside window": s["C"]["outside_window"],
+                   "Valid lost C / D": f"{s['C']['valid_lost']} / {s['D']['valid_lost']} of {s['C']['valid_total']}",
+                   "C with no readable page date": f"{s['C']['no_page_date']} of {s['C']['results']}"}
+                  for name, s in by.items()], hide_index=True, width="stretch")
+    pw = ld["paired_with_english"]
+    st.caption(f"Paired with English on {len(pw['ids'])} shared cases, exact McNemar: "
+               + "; ".join(f"{a} p = {pw[a]['p_exact']:.3f}" for a in "ACD") + ". "
+               + ("Differs from English: " + "; ".join(ld["differs_from_english"]) + "."
+                  if ld["differs_from_english"] else "No pre-registered difference from English."))
+    rel = ld["relevance_post_hoc"]
+    st.markdown("**Post-hoc, not pre-registered:** with the date filter on, how many results still named the item "
+                "(arm A → arm C): " + "; ".join(f"{name} {v['A']['on_topic']} of {v['A']['results']} → "
+                                                f"{v['C']['on_topic']} of {v['C']['results']}" for name, v in rel.items())
+                + ". The dates held in every language; relevance fell further in Marathi and Tamil. A lead, 12 cases.")
 
 # ---------- finance ----------
 st.subheader("Second domain: finance look-ahead check")

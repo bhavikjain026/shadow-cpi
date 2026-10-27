@@ -6,6 +6,11 @@ rebuild `results/app/` with `python tools/build_app_data.py`.
 
 | Page | Number | Value now | Source file → field |
 |---|---|---|---|
+| Leak demo | Per case (34): each search's request body, credits, latency, request id; per result Tavily published_date, page date, label, days after the cutoff, short quote | as built | `results/leak_demo.json` (`tools/build_leak_demo.py`, offline, from `results/date_field_test.json`, `results/finance_lookahead.json`, their `_wayback_retry.json` files and the local response cache) |
+| Leak demo, Field Report | Date test cases with a confirmed leak, no lock / time lock, first pass and after the retry, with Wilson 95% | 9 / 0 of 20; 10 / 0 of 20 after the retry | `results/field_report.json` `date_test.first_pass.arms.{A,C}`, `date_test.after_retry.arms.{A,C}` |
+| Leak demo, Field Report | Finance events with a confirmed leak, no lock / time lock, first pass and after the retry, with Wilson 95% | 2 / 0 of 14; 10 / 0 of 14 after the retry | `results/field_report.json` `finance.{first_pass,after_retry}.all_14.arms.{N,D}` |
+| Leak demo, Field Report | Cost of strictness: known-good quotes missed by the dated search | 8 of 40 (10%–35%) | `results/leakcheck_exact_match.json` `metrics.shares["found only without dates"]`, `metrics.quotes` |
+| Field Report | Best search arm's recall | 6 of 29 (arm A, fixed templates) | `results/field_report.json` `four_arms.rows`, `four_arms.verdict.ranking` |
 | Home | October call: headline YoY, 80% range, P(headline ≥ 6.0%), coverage, top 3 contributors, SHA-256, sealed time | not shown yet: “sealing on 29 Oct” | `sealed/2026-10.json` (else `results/nowcast_2026-10.json`, labelled “not sealed yet”): `headline_yoy`, `range_low`, `range_high`, `p_headline_ge_6`, `coverage`, `contributors`, `sealed_at_utc`; `sealed/2026-10.sha256` |
 | Home | Headline result: Shadow CPI average miss; number of poll months; Shadow CPI vs poll on those months | 0.194 percentage points; 6; 0.150 vs 0.148 (“about a tie”: within 0.005) | `results/score_lock.json` `mae.c`, `mae_poll_months.c`, `mae_poll_months.poll`; poll months counted in `results/baselines.csv` (`poll_pred` filled) |
 | Home, Replay | Pass/fail rule result | passed | `results/score_lock.json` `go` |

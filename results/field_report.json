@@ -1,5 +1,5 @@
 {
- "built": "2026-10-26",
+ "built": "2026-10-27",
  "leakage": {
   "label": "computed by tools/build_field_report.py from the committed results files",
   "rows": [
@@ -1115,6 +1115,331 @@
    }
   }
  },
+ "lang_date_test": {
+  "label": "pilot, 12 cases (Hindi, Marathi, Tamil; no Kannada, Bengali or Telugu change in the reference list); language field set; compared with the English date test's first pass",
+  "built_utc": "2026-10-26T19:02:20.588438+00:00",
+  "arms": {
+   "A": {
+    "leak_cases": 3,
+    "cases": 12,
+    "leak_case_wilson95": [
+     0.08894166769488562,
+     0.5323053370816633
+    ],
+    "results": 36,
+    "undated": 17,
+    "undated_share": 0.4722222222222222,
+    "outside_window": 15,
+    "valid_lost": 8,
+    "valid_total": 13,
+    "no_page_date": 28,
+    "credits": 12,
+    "median_latency_s": 4.355
+   },
+   "C": {
+    "leak_cases": 0,
+    "cases": 12,
+    "leak_case_wilson95": [
+     0.0,
+     0.2424940095530979
+    ],
+    "results": 30,
+    "undated": 0,
+    "undated_share": 0.0,
+    "outside_window": 0,
+    "valid_lost": 5,
+    "valid_total": 13,
+    "no_page_date": 27,
+    "credits": 12,
+    "median_latency_s": 4.71
+   },
+   "D": {
+    "leak_cases": 0,
+    "cases": 12,
+    "leak_case_wilson95": [
+     0.0,
+     0.2424940095530979
+    ],
+    "results": 3,
+    "undated": 0,
+    "undated_share": 0.0,
+    "outside_window": 0,
+    "valid_lost": 12,
+    "valid_total": 13,
+    "no_page_date": 0,
+    "credits": 16,
+    "median_latency_s": 4.13
+   }
+  },
+  "by_lang": {
+   "Hindi": {
+    "A": {
+     "leak_cases": 3,
+     "cases": 4,
+     "leak_case_wilson95": [
+      0.3006418400969081,
+      0.954412739704631
+     ],
+     "results": 12,
+     "undated": 0,
+     "undated_share": 0.0,
+     "outside_window": 8,
+     "valid_lost": 5,
+     "valid_total": 5,
+     "no_page_date": 5
+    },
+    "C": {
+     "leak_cases": 0,
+     "cases": 4,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "results": 6,
+     "undated": 0,
+     "undated_share": 0.0,
+     "outside_window": 0,
+     "valid_lost": 0,
+     "valid_total": 5,
+     "no_page_date": 5
+    },
+    "D": {
+     "leak_cases": 0,
+     "cases": 4,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "results": 1,
+     "undated": 0,
+     "undated_share": 0.0,
+     "outside_window": 0,
+     "valid_lost": 5,
+     "valid_total": 5,
+     "no_page_date": 0
+    }
+   },
+   "Marathi": {
+    "A": {
+     "leak_cases": 0,
+     "cases": 4,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "results": 12,
+     "undated": 11,
+     "undated_share": 0.9166666666666666,
+     "outside_window": 1,
+     "valid_lost": 3,
+     "valid_total": 8,
+     "no_page_date": 12
+    },
+    "C": {
+     "leak_cases": 0,
+     "cases": 4,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "results": 12,
+     "undated": 0,
+     "undated_share": 0.0,
+     "outside_window": 0,
+     "valid_lost": 5,
+     "valid_total": 8,
+     "no_page_date": 10
+    },
+    "D": {
+     "leak_cases": 0,
+     "cases": 4,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "results": 2,
+     "undated": 0,
+     "undated_share": 0.0,
+     "outside_window": 0,
+     "valid_lost": 7,
+     "valid_total": 8,
+     "no_page_date": 0
+    }
+   },
+   "Tamil": {
+    "A": {
+     "leak_cases": 0,
+     "cases": 4,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "results": 12,
+     "undated": 6,
+     "undated_share": 0.5,
+     "outside_window": 6,
+     "valid_lost": 0,
+     "valid_total": 0,
+     "no_page_date": 11
+    },
+    "C": {
+     "leak_cases": 0,
+     "cases": 4,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "results": 12,
+     "undated": 0,
+     "undated_share": 0.0,
+     "outside_window": 0,
+     "valid_lost": 0,
+     "valid_total": 0,
+     "no_page_date": 12
+    },
+    "D": {
+     "leak_cases": 0,
+     "cases": 4,
+     "leak_case_wilson95": [
+      0.0,
+      0.4898908403969213
+     ],
+     "results": 0,
+     "undated": 0,
+     "undated_share": null,
+     "outside_window": 0,
+     "valid_lost": 0,
+     "valid_total": 0,
+     "no_page_date": 0
+    }
+   }
+  },
+  "english": {
+   "A": {
+    "leak_cases": 9,
+    "cases": 20,
+    "leak_case_wilson95": [
+     0.25819785703764037,
+     0.6579146589808726
+    ],
+    "results": 60,
+    "undated": 8,
+    "undated_share": 0.13333333333333333,
+    "outside_window": 36,
+    "valid_lost": 27,
+    "valid_total": 33,
+    "no_page_date": 39
+   },
+   "C": {
+    "leak_cases": 0,
+    "cases": 20,
+    "leak_case_wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "results": 59,
+    "undated": 0,
+    "undated_share": 0.0,
+    "outside_window": 0,
+    "valid_lost": 5,
+    "valid_total": 33,
+    "no_page_date": 33
+   },
+   "D": {
+    "leak_cases": 0,
+    "cases": 20,
+    "leak_case_wilson95": [
+     0.0,
+     0.16112516018512965
+    ],
+    "results": 26,
+    "undated": 0,
+    "undated_share": 0.0,
+    "outside_window": 0,
+    "valid_lost": 20,
+    "valid_total": 33,
+    "no_page_date": 0
+   }
+  },
+  "paired_with_english": {
+   "ids": [
+    "M2",
+    "E7",
+    "E2",
+    "M8",
+    "M9",
+    "M11"
+   ],
+   "A": {
+    "english_only": 4,
+    "language_only": 1,
+    "p_exact": 0.375
+   },
+   "C": {
+    "english_only": 0,
+    "language_only": 0,
+    "p_exact": 1.0
+   },
+   "D": {
+    "english_only": 0,
+    "language_only": 0,
+    "p_exact": 1.0
+   }
+  },
+  "differs_from_english": [],
+  "wayback_failed": 0,
+  "incomplete": false,
+  "relevance_post_hoc": {
+   "Hindi": {
+    "A": {
+     "results": 12,
+     "on_topic": 12,
+     "preferred_domain": 3
+    },
+    "C": {
+     "results": 6,
+     "on_topic": 6,
+     "preferred_domain": 3
+    }
+   },
+   "Marathi": {
+    "A": {
+     "results": 12,
+     "on_topic": 10,
+     "preferred_domain": 6
+    },
+    "C": {
+     "results": 12,
+     "on_topic": 4,
+     "preferred_domain": 0
+    }
+   },
+   "Tamil": {
+    "A": {
+     "results": 12,
+     "on_topic": 4,
+     "preferred_domain": 0
+    },
+    "C": {
+     "results": 12,
+     "on_topic": 0,
+     "preferred_domain": 0
+    }
+   },
+   "English": {
+    "A": {
+     "results": 60,
+     "on_topic": 55,
+     "preferred_domain": 13
+    },
+    "C": {
+     "results": 59,
+     "on_topic": 41,
+     "preferred_domain": 20
+    }
+   }
+  }
+ },
  "finance": {
   "label": "exploratory; changes no scored verdict",
   "retry": {
@@ -1325,5 +1650,5 @@
   "arm_a_searches_per_month": 13.0,
   "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits at original cost / 9 months"
  },
- "ledger_rows": 1879
+ "ledger_rows": 1914
 }

@@ -9,7 +9,7 @@ pytest.importorskip("streamlit")
 from streamlit.testing.v1 import AppTest  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ["home", "evidence", "replay", "live_build", "radar", "field_report", "custody", "as_of", "research", "tavily_trace", "flight_recorder", "archive",
+PAGES = ["leak_demo", "home", "evidence", "replay", "live_build", "radar", "field_report", "custody", "as_of", "research", "tavily_trace", "flight_recorder", "archive",
          "brief"]
 LOCK = json.loads((ROOT / "results" / "score_lock.json").read_text())
 AUDIT = json.loads((ROOT / "results" / "app" / "audit_summary.json").read_text())
@@ -28,7 +28,7 @@ def load(page, session=None):
     for k, v in (session or {}).items():
         at.session_state[k] = v
     at.run()
-    if page != "home":
+    if page != "leak_demo":                         # the default page
         at.switch_page(f"app_pages/{page}.py")
         at.run()
     assert not at.exception, [e.value for e in at.exception]

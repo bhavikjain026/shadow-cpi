@@ -59,6 +59,15 @@ with st.container(border=True):
     if rel:
         st.metric(f"Official {month_name(rel['month'])} CPI in", countdown_text(rel["left"]))
         st.caption(f"MoSPI release: {rel['note']}.")
+with st.expander("How to check the seal yourself", expanded=not sealed):
+    raw = f"https://raw.githubusercontent.com/bhavikjain026/shadow-cpi/seal-{LIVE_MONTH}/sealed/{LIVE_MONTH}"
+    st.markdown(f"1. Save the sealed file and its fingerprint exactly as tagged: [{LIVE_MONTH}.json]({raw}.json) and "
+                f"[{LIVE_MONTH}.sha256]({raw}.sha256) (don't open and re-save the .json).\n"
+                f"2. Recompute the fingerprint: `shasum -a 256 {LIVE_MONTH}.json` (Mac), `sha256sum {LIVE_MONTH}.json` "
+                f"(Linux) or `Get-FileHash {LIVE_MONTH}.json -Algorithm SHA256` (Windows).\n"
+                f"3. Same code as in the .sha256 file → PASS; different → FAIL. The git tag `seal-{LIVE_MONTH}` and "
+                f"GitHub's push record show when it was locked.")
+    st.caption("Full steps: verify.md in the repository. Before the seal the links open once the tag exists.")
 v3_beside_v1(LIVE_MONTH)
 
 # ---------- replay scoreboard ----------
