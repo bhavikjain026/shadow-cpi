@@ -14,12 +14,13 @@ move, verifies every quote on the page, and seals India's inflation forecast bef
 <!-- short:start -->
 Shadow CPI is a Tavily-grounded nowcast of India's Consumer Price Index (CPI) inflation that tests, rather
 than assumes, Tavily's date controls and measures what they cost. An AI agent writes Tavily searches inside a
-time lock it cannot move, verifies every quote on the page with Tavily Extract and NVIDIA Nemotron, lets code
+time lock, verifies every quote on the page with Tavily Extract and NVIDIA Nemotron, lets code
 compute the number, and seals the {{live_month}} nowcast with a SHA-256 hash and git tag before the Ministry
-of Statistics (MoSPI) publishes on {{release_day}}. With no dates, {{dt_nodates}} of {{dt_cases}} replay cases leaked a
-page that did not exist yet ({{dt_nodates_retry}} after an archive retry); with dates and the published-date filter, {{dt_dated}} of {{dt_cases}}. In a
+of Statistics (MoSPI) publishes on {{release_day}}. With no dates, {{dt_nodates}} of {{dt_cases}} cases leaked a
+not-yet-published page ({{dt_nodates_retry}} after an archive retry); with dates and the filter, {{dt_dated}} of {{dt_cases}}. The
+cost: the time-locked search missed {{e_missed}} of {{e_quotes}} known-good quotes. In a
 {{replay_span}} replay it missed by {{mae_c}} percentage points on average, against {{mae_trend}} for trend-only; on
-poll months it was about a tie with economists ({{mae_poll_c}} vs {{mae_poll}}).
+poll months, about a tie with economists ({{mae_poll_c}} vs {{mae_poll}}).
 <!-- short:end -->
 
 ## Inspiration
@@ -51,9 +52,10 @@ Tavily's date controls and measures what they cost.
 - **Check P, full page** (exploratory): of {{p_pages}} pages that passed the date lock, {{p_later}} described a later
   event; most later dates were page furniture ({{p_furniture}} of {{p_flagged}} flagged pages: date bars, sidebars,
   related links).
-- **The cost of strictness:** the filter lost {{dt_lost_filter}} of {{dt_valid_total}} pieces of valid evidence in
-  the date test. Check E (exploratory, `exact_match`): the dated search re-found {{e_found}} of {{e_quotes}} verified
-  quotes and missed {{e_missed}}; filter misses, not back-dating ({{e_missed_later}} of {{e_missed}} have a later
+- **The cost of strictness in valid evidence lost (date test):** the filter dropped {{dt_lost_filter}} of
+  the date test's {{dt_valid_total}} pieces of valid evidence.
+- **The cost of strictness in known-good quotes missed (check E, exploratory, `exact_match`):** of
+  {{e_quotes}} verified quotes, the dated search re-found {{e_found}} and missed {{e_missed}}; filter misses, not back-dating ({{e_missed_later}} of {{e_missed}} have a later
   `published_date`).
 - **Receipt:** credits and median latency per setting:
 
@@ -65,8 +67,8 @@ second review, post-hoc): `{{ex_row}}`, a {{ex_company}} results preview, cutoff
 {{ex_published}}, and the page was updated on {{ex_updated}} with a link to the actual result. {{sr_fin_dated_after}}
 of {{sr_fin_searches}} filtered searches returned a result dated after the cutoff; an independent reviewer found
 {{sr_fin_reviewer_leaks}} page whose current version leaks the outcome. What covers the gap, partly: our page-date
-check (kept {{dt_results_pagecheck}} of {{dt_results_filter}} filtered results in the date test; valid evidence
-lost: {{dt_lost_pagecheck}} of {{dt_valid_total}} with it, {{dt_lost_filter}} with the filter alone); the drift monitor, which re-reads October radar
+check (kept {{dt_results_pagecheck}} of {{dt_results_filter}} filtered results in the date test; date-test valid
+evidence lost: {{dt_lost_pagecheck}} of {{dt_valid_total}} with it, {{dt_lost_filter}} with the filter alone); the drift monitor, which re-reads October radar
 pages daily ({{drift_phrase}}); and Wayback Machine checks, with failed lookups retried and logged
 ({{dt_retry_urls}} in the date test, {{fin_retry_urls}} in the finance check; {{sr_unclear}} of {{sr_rows}} second-review rows stayed unclear, partly
 from archive rate limits).

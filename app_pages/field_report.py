@@ -47,7 +47,7 @@ summary = [
     ("Finance check, Tavily time lock",
      f"{fn1['arms']['D']['confirmed_events']} of {fn1['events']} ({fn2['arms']['D']['confirmed_events']} after the retry)",
      "results/field_report.json"),
-    ("Cost of strictness: known-good quotes the dated search missed",
+    ("Cost of strictness: known-good quotes the dated search missed (check E, exploratory)",
      f"{em['metrics']['shares']['found only without dates']['x']} of {em['metrics']['quotes']}" if em else "—",
      "results/leakcheck_exact_match.json"),
     (f"Who should write the searches: best arm ({top['writer']})", f"{top['recall']} of {top['of']} known changes",
@@ -65,8 +65,9 @@ if lk:
                    "N": x.get("n", "—"),
                    "Leak rate (Wilson 95%)": "—" if x.get("leaks") is None else
                    f"{x['leaks']} of {x['n']} = {pct(x['leak_rate'])} ({wilson(x['wilson95'])})",
-                   "Valid evidence kept": "—" if x.get("valid_kept") is None else
-                   f"{x['valid_kept']} of {x['valid_total']}",
+                   "Kept (valid evidence; check E: known-good quotes)": "—" if x.get("valid_kept") is None else
+                   f"{x['valid_kept']} of {x['valid_total']}"
+                   + (" known-good quotes" if x["check"].startswith("Check E") else " valid evidence"),
                    "Credits per call": "—" if x.get("credits_per_call") is None else f"{x['credits_per_call']:.2f}",
                    "Median latency (s)": f1(x.get("median_latency_s")),
                    "Caveats": x["caveats"]} for x in lk["rows"]], hide_index=True, width="stretch")
@@ -126,8 +127,8 @@ st.caption(f"{dt['label'].replace('first pass', 'initial pass')}. Retry: {dt['re
            "recovered.")
 st.dataframe([{"Arm": a, "Leak cases, initial pass": f"{p['leak_cases']} of {p['cases']} ({wilson(p['wilson95'])})",
                "Leak cases, after retry": f"{q['leak_cases']} of {q['cases']} ({wilson(q['wilson95'])})",
-               "Valid lost, initial pass": f"{p['valid_lost']} of {p['valid_total']}",
-               "Valid lost, after retry": f"{q['valid_lost']} of {q['valid_total']}"}
+               "Valid evidence lost (date test), initial pass": f"{p['valid_lost']} of {p['valid_total']}",
+               "Valid evidence lost (date test), after retry": f"{q['valid_lost']} of {q['valid_total']}"}
               for a, p, q in ((a, dt["first_pass"]["arms"][a], dt["after_retry"]["arms"][a]) for a in "ABCD")],
              hide_index=True, width="stretch")
 for k, lab in (("mcnemar_A_vs_B", "A (no dates) vs B (dates)"), ("mcnemar_C_vs_D", "C (filter) vs D (+ page date)")):
@@ -148,7 +149,7 @@ if ld:
                    "Undated A": f"{s['A']['undated']} of {s['A']['results']}",
                    "Undated C": f"{s['C']['undated']} of {s['C']['results']} ({pct(s['C']['undated_share'])})",
                    "C dated outside window": s["C"]["outside_window"],
-                   "Valid lost C / D": f"{s['C']['valid_lost']} / {s['D']['valid_lost']} of {s['C']['valid_total']}",
+                   "Valid evidence lost C / D (language test)": f"{s['C']['valid_lost']} / {s['D']['valid_lost']} of {s['C']['valid_total']}",
                    "C with no readable page date": f"{s['C']['no_page_date']} of {s['C']['results']}"}
                   for name, s in by.items()], hide_index=True, width="stretch")
     pw = ld["paired_with_english"]
@@ -178,7 +179,7 @@ for name, lab in (("first_pass", "initial pass"), ("after_retry", "after Wayback
                      "McNemar p": f"{m['mcnemar_confirmed']['p_exact']:.4f}",
                      "Snippet leaks N, RBI own month [loose]": f"{n['snippet_own_month_events']} "
                                                                f"[{n['snippet_loose_events']}]",
-                     "Valid lost N / D": f"{n['valid_lost']} / {d['valid_lost']} of {n['valid_total']}"})
+                     "Valid evidence lost N / D (finance check)": f"{n['valid_lost']} / {d['valid_lost']} of {n['valid_total']}"})
 st.dataframe(rows, hide_index=True, width="stretch")
 
 # ---------- independent second review ----------
@@ -214,7 +215,7 @@ if sr:
         m = dta["metrics"]["arms"]
         st.markdown("**What covers the gap, partly.** "
                     f"Our page-date check reads the date printed on the extracted page: in the date test it kept "
-                    f"{m['D']['results']} of the {m['C']['results']} results the filter let through (valid evidence lost: "
+                    f"{m['D']['results']} of the {m['C']['results']} results the filter let through (date-test valid evidence lost: "
                     f"{m['D']['valid_lost']} of {m['D']['valid_total']} with it, {m['C']['valid_lost']} with the filter "
                     "alone). It reads a page's date, not its edit history. The drift monitor re-reads October radar "
                     "pages daily: " + ("no drift run committed yet" if not pc else

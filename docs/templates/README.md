@@ -6,7 +6,8 @@
 move, verifies every quote on the page, and seals India's inflation forecast before the government publishes it.**
 
 **The leak, measured:** with no dates, {{dt_nodates}} of {{dt_cases}} replay cases read a page that did not yet exist at
-the cutoff ({{dt_nodates_retry}} after a logged archive retry); inside the time lock, {{dt_dated}} of {{dt_cases}}.
+the cutoff ({{dt_nodates_retry}} after a logged archive retry); inside the time lock, {{dt_dated}} of {{dt_cases}}. The
+cost: the time-locked search missed {{e_missed}} of {{e_quotes}} known-good quotes (check E, exploratory).
 
 **The gap we found: Search filters by date; Extract reads the page as it is today.** A page published before the cutoff
 can be updated after it, and Extract returns the updated version ([details](#search-filters-by-date-extract-reads-the-page-as-it-is-today)).
@@ -66,9 +67,11 @@ The Tavily field report (app page "Tavily field report", built by `tools/build_f
   {{p_pages}} pages that passed the date lock (Tavily's filter, or our own date check), {{p_later}} described an event
   after the cutoff. {{p_flagged}} pages held a later date somewhere in the text, but mostly as page furniture:
   {{p_furniture}} in date bars, sidebars and related links, {{p_benign}} benign, {{p_unclear}} unclear.
-- **The cost of strictness: valid evidence lost.** In the date test, the filter dropped {{dt_lost_filter}} of
-  {{dt_valid_total}} pieces of valid evidence, and our extra page-date check lost {{dt_lost_pagecheck}}.
-  Check E (exploratory, `exact_match`, [`results/leakcheck_exact_match.md`](results/leakcheck_exact_match.md)): the
+- **The cost of strictness in valid evidence lost (date test).** Of the date test's {{dt_valid_total}}
+  pieces of valid evidence (pages dated before the cutoff that state the right change), the filter dropped
+  {{dt_lost_filter}}; with our extra page-date check added, {{dt_lost_pagecheck}} were lost.
+- **The cost of strictness in known-good quotes missed (check E, exploratory, `exact_match`,
+  [`results/leakcheck_exact_match.md`](results/leakcheck_exact_match.md)).** Of {{e_quotes}} verified quotes, the
   dated search re-found {{e_found}} of {{e_quotes}} verified quotes and missed {{e_missed}} that the undated search
   found. Those are filter misses, not back-dating: {{e_missed_later}} of {{e_missed}} have a Tavily
   `published_date` after the cutoff ({{e_missed_earlier}} on or before it, {{e_missed_undated}} undated).
@@ -91,7 +94,7 @@ cover the gap, none of them completely:
 
 - **Our page-date check** reads the date printed on the extracted page and drops anything after the cutoff. In the
   date test it kept {{dt_results_pagecheck}} of the {{dt_results_filter}} results the filter let through; with it,
-  {{dt_lost_pagecheck}} of {{dt_valid_total}} pieces of valid evidence were lost ({{dt_lost_filter}} with the filter
+  {{dt_lost_pagecheck}} of the date test's {{dt_valid_total}} pieces of valid evidence were lost ({{dt_lost_filter}} with the filter
   alone). It reads a page's date, not its edit history.
 - **The drift monitor** re-reads each October radar page with Extract once a day and compares it with the saved copy
   ([`v2/DRIFT_PREREG.md`](v2/DRIFT_PREREG.md)): {{drift_phrase}}.

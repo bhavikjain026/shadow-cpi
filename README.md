@@ -7,7 +7,8 @@
 move, verifies every quote on the page, and seals India's inflation forecast before the government publishes it.**
 
 **The leak, measured:** with no dates, 9 of 20 replay cases read a page that did not yet exist at
-the cutoff (10 after a logged archive retry); inside the time lock, 0 of 20.
+the cutoff (10 after a logged archive retry); inside the time lock, 0 of 20. The
+cost: the time-locked search missed 8 of 40 known-good quotes (check E, exploratory).
 
 **The gap we found: Search filters by date; Extract reads the page as it is today.** A page published before the cutoff
 can be updated after it, and Extract returns the updated version ([details](#search-filters-by-date-extract-reads-the-page-as-it-is-today)).
@@ -70,27 +71,29 @@ The Tavily field report (app page "Tavily field report", built by `tools/build_f
   132 pages that passed the date lock (Tavily's filter, or our own date check), 1 described an event
   after the cutoff. 71 pages held a later date somewhere in the text, but mostly as page furniture:
   43 in date bars, sidebars and related links, 21 benign, 6 unclear.
-- **The cost of strictness: valid evidence lost.** In the date test, the filter dropped 12 of
-  40 pieces of valid evidence, and our extra page-date check lost 27.
-  Check E (exploratory, `exact_match`, [`results/leakcheck_exact_match.md`](results/leakcheck_exact_match.md)): the
+- **The cost of strictness in valid evidence lost (date test).** Of the date test's 40
+  pieces of valid evidence (pages dated before the cutoff that state the right change), the filter dropped
+  12; with our extra page-date check added, 27 were lost.
+- **The cost of strictness in known-good quotes missed (check E, exploratory, `exact_match`,
+  [`results/leakcheck_exact_match.md`](results/leakcheck_exact_match.md)).** Of 40 verified quotes, the
   dated search re-found 25 of 40 verified quotes and missed 8 that the undated search
   found. Those are filter misses, not back-dating: 0 of 8 have a Tavily
   `published_date` after the cutoff (6 on or before it, 2 undated).
 - **Receipt.** Credits and latency per setting are in the table; every call is in the flight recorder and the
   credit ledger.
 
-| Check | Setting | Leaked, before retry | Leaked, after the logged archive retry | Valid evidence kept (before retry) | Credits per call | Median latency |
+| Check | Setting | Leaked, before retry | Leaked, after the logged archive retry | Kept, before retry (valid evidence; check E: known-good quotes) | Credits per call | Median latency |
 |---|---|---|---|---|---|---|
-| Date test (20 replay cases) | no dates | 9 of 20 | 10 of 20 | 6 of 40 | 1.00 | 3.8 s |
-| Date test (20 replay cases) | start_date + end_date | 0 of 20 | 0 of 20 | 21 of 40 | 1.00 | 3.4 s |
-| Date test (20 replay cases) | + filter_by_published_date | 0 of 20 | 0 of 20 | 28 of 40 | 1.00 | 3.5 s |
-| Date test (20 replay cases) | + our page check | 0 of 20 | 0 of 20 | 13 of 40 | 0.94 | 3.2 s |
-| Finance check (14 scheduled events) | no dates | 2 of 14 | 10 of 14 | 1 of 11 | 1.00 | 3.2 s |
-| Finance check (14 scheduled events) | start_date + end_date + filter_by_published_date | 0 of 14 | 0 of 14 | 10 of 11 | 1.00 | 1.4 s |
+| Date test (20 replay cases) | no dates | 9 of 20 | 10 of 20 | 6 of 40 valid evidence | 1.00 | 3.8 s |
+| Date test (20 replay cases) | start_date + end_date | 0 of 20 | 0 of 20 | 21 of 40 valid evidence | 1.00 | 3.4 s |
+| Date test (20 replay cases) | + filter_by_published_date | 0 of 20 | 0 of 20 | 28 of 40 valid evidence | 1.00 | 3.5 s |
+| Date test (20 replay cases) | + our page check | 0 of 20 | 0 of 20 | 13 of 40 valid evidence | 0.94 | 3.2 s |
+| Finance check (14 scheduled events) | no dates | 2 of 14 | 10 of 14 | 1 of 11 valid evidence | 1.00 | 3.2 s |
+| Finance check (14 scheduled events) | start_date + end_date + filter_by_published_date | 0 of 14 | 0 of 14 | 10 of 11 valid evidence | 1.00 | 1.4 s |
 | Check P: full-page date check | start_date + end_date + filter_by_published_date (date test, arm C) | 0 of 47 | — | — | 0.00 | — |
 | Check P: full-page date check | start_date + end_date + filter_by_published_date (finance check, arm D) | 1 of 65 | — | — | 1.00 | — |
 | Check P: full-page date check | start_date + end_date + our date checks (v2 verified evidence, no filter) | 0 of 20 | — | — | n/a | — |
-| Check E: exact_match back-dating | exact_match + end_date + filter_by_published_date, vs the same search undated | — | — | 25 of 40 | 1.00 | 1.7 s |
+| Check E: exact_match back-dating | exact_match + end_date + filter_by_published_date, vs the same search undated | — | — | 25 of 40 known-good quotes re-found (check E) | 1.00 | 1.7 s |
 
 Small samples: every rate in the field report carries a Wilson interval (95%).
 
@@ -106,7 +109,7 @@ cover the gap, none of them completely:
 
 - **Our page-date check** reads the date printed on the extracted page and drops anything after the cutoff. In the
   date test it kept 26 of the 59 results the filter let through; with it,
-  27 of 40 pieces of valid evidence were lost (12 with the filter
+  27 of the date test's 40 pieces of valid evidence were lost (12 with the filter
   alone). It reads a page's date, not its edit history.
 - **The drift monitor** re-reads each October radar page with Extract once a day and compares it with the saved copy
   ([`v2/DRIFT_PREREG.md`](v2/DRIFT_PREREG.md)): no drift run is committed yet, as of 27 Oct 2026.

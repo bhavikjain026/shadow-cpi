@@ -15,12 +15,13 @@ move, verifies every quote on the page, and seals India's inflation forecast bef
 <!-- short:start -->
 Shadow CPI is a Tavily-grounded nowcast of India's Consumer Price Index (CPI) inflation that tests, rather
 than assumes, Tavily's date controls and measures what they cost. An AI agent writes Tavily searches inside a
-time lock it cannot move, verifies every quote on the page with Tavily Extract and NVIDIA Nemotron, lets code
+time lock, verifies every quote on the page with Tavily Extract and NVIDIA Nemotron, lets code
 compute the number, and seals the October 2026 nowcast with a SHA-256 hash and git tag before the Ministry
-of Statistics (MoSPI) publishes on 12 Nov. With no dates, 9 of 20 replay cases leaked a
-page that did not exist yet (10 after an archive retry); with dates and the published-date filter, 0 of 20. In a
+of Statistics (MoSPI) publishes on 12 Nov. With no dates, 9 of 20 cases leaked a
+not-yet-published page (10 after an archive retry); with dates and the filter, 0 of 20. The
+cost: the time-locked search missed 8 of 40 known-good quotes. In a
 Jan–Sep 2026 replay it missed by 0.194 percentage points on average, against 0.212 for trend-only; on
-poll months it was about a tie with economists (0.150 vs 0.148).
+poll months, about a tie with economists (0.150 vs 0.148).
 <!-- short:end -->
 
 ## Inspiration
@@ -55,24 +56,25 @@ Tavily's date controls and measures what they cost.
 - **Check P, full page** (exploratory): of 132 pages that passed the date lock, 1 described a later
   event; most later dates were page furniture (43 of 71 flagged pages: date bars, sidebars,
   related links).
-- **The cost of strictness:** the filter lost 12 of 40 pieces of valid evidence in
-  the date test. Check E (exploratory, `exact_match`): the dated search re-found 25 of 40 verified
-  quotes and missed 8; filter misses, not back-dating (0 of 8 have a later
+- **The cost of strictness in valid evidence lost (date test):** the filter dropped 12 of
+  the date test's 40 pieces of valid evidence.
+- **The cost of strictness in known-good quotes missed (check E, exploratory, `exact_match`):** of
+  40 verified quotes, the dated search re-found 25 and missed 8; filter misses, not back-dating (0 of 8 have a later
   `published_date`).
 - **Receipt:** credits and median latency per setting:
 
-| Check | Setting | Leaked, before retry | Leaked, after the logged archive retry | Valid evidence kept (before retry) | Credits per call | Median latency |
+| Check | Setting | Leaked, before retry | Leaked, after the logged archive retry | Kept, before retry (valid evidence; check E: known-good quotes) | Credits per call | Median latency |
 |---|---|---|---|---|---|---|
-| Date test (20 replay cases) | no dates | 9 of 20 | 10 of 20 | 6 of 40 | 1.00 | 3.8 s |
-| Date test (20 replay cases) | start_date + end_date | 0 of 20 | 0 of 20 | 21 of 40 | 1.00 | 3.4 s |
-| Date test (20 replay cases) | + filter_by_published_date | 0 of 20 | 0 of 20 | 28 of 40 | 1.00 | 3.5 s |
-| Date test (20 replay cases) | + our page check | 0 of 20 | 0 of 20 | 13 of 40 | 0.94 | 3.2 s |
-| Finance check (14 scheduled events) | no dates | 2 of 14 | 10 of 14 | 1 of 11 | 1.00 | 3.2 s |
-| Finance check (14 scheduled events) | start_date + end_date + filter_by_published_date | 0 of 14 | 0 of 14 | 10 of 11 | 1.00 | 1.4 s |
+| Date test (20 replay cases) | no dates | 9 of 20 | 10 of 20 | 6 of 40 valid evidence | 1.00 | 3.8 s |
+| Date test (20 replay cases) | start_date + end_date | 0 of 20 | 0 of 20 | 21 of 40 valid evidence | 1.00 | 3.4 s |
+| Date test (20 replay cases) | + filter_by_published_date | 0 of 20 | 0 of 20 | 28 of 40 valid evidence | 1.00 | 3.5 s |
+| Date test (20 replay cases) | + our page check | 0 of 20 | 0 of 20 | 13 of 40 valid evidence | 0.94 | 3.2 s |
+| Finance check (14 scheduled events) | no dates | 2 of 14 | 10 of 14 | 1 of 11 valid evidence | 1.00 | 3.2 s |
+| Finance check (14 scheduled events) | start_date + end_date + filter_by_published_date | 0 of 14 | 0 of 14 | 10 of 11 valid evidence | 1.00 | 1.4 s |
 | Check P: full-page date check | start_date + end_date + filter_by_published_date (date test, arm C) | 0 of 47 | — | — | 0.00 | — |
 | Check P: full-page date check | start_date + end_date + filter_by_published_date (finance check, arm D) | 1 of 65 | — | — | 1.00 | — |
 | Check P: full-page date check | start_date + end_date + our date checks (v2 verified evidence, no filter) | 0 of 20 | — | — | n/a | — |
-| Check E: exact_match back-dating | exact_match + end_date + filter_by_published_date, vs the same search undated | — | — | 25 of 40 | 1.00 | 1.7 s |
+| Check E: exact_match back-dating | exact_match + end_date + filter_by_published_date, vs the same search undated | — | — | 25 of 40 known-good quotes re-found (check E) | 1.00 | 1.7 s |
 
 ## Search filters by date; Extract reads the page as it is today
 A page dated before the cutoff can be updated after it, and Extract returns the updated page. Example (AI-assisted
@@ -80,8 +82,8 @@ second review, post-hoc): `R196`, a TCS results preview, cutoff 8 Jul; Tavily da
 7 Jul, and the page was updated on 9 Jul with a link to the actual result. 0
 of 14 filtered searches returned a result dated after the cutoff; an independent reviewer found
 1 page whose current version leaks the outcome. What covers the gap, partly: our page-date
-check (kept 26 of 59 filtered results in the date test; valid evidence
-lost: 27 of 40 with it, 12 with the filter alone); the drift monitor, which re-reads October radar
+check (kept 26 of 59 filtered results in the date test; date-test valid
+evidence lost: 27 of 40 with it, 12 with the filter alone); the drift monitor, which re-reads October radar
 pages daily (no drift run is committed yet, as of 27 Oct 2026); and Wayback Machine checks, with failed lookups retried and logged
 (11 in the date test, 94 in the finance check; 146 of 283 second-review rows stayed unclear, partly
 from archive rate limits).

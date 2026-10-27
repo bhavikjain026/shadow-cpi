@@ -60,8 +60,8 @@ def credits_per_call(x):
 
 def leakage_table(fr):
     """The field report's leakage rows (results/field_report.json), one line per check and setting."""
-    out = ["| Check | Setting | Leaked, before retry | Leaked, after the logged archive retry | Valid evidence kept "
-           "(before retry) | Credits per call | Median latency |", "|---|---|---|---|---|---|---|"]
+    out = ["| Check | Setting | Leaked, before retry | Leaked, after the logged archive retry | Kept, before retry "
+           "(valid evidence; check E: known-good quotes) | Credits per call | Median latency |", "|---|---|---|---|---|---|---|"]
     rows = fr["leakage"]["rows"]
     keyed = {}
     for r in rows:
@@ -73,7 +73,8 @@ def leakage_table(fr):
         def leaks(r):
             return "—" if r is None or r["leaks"] is None else f"{r['leaks']} of {r['n']}"
 
-        kept = "—" if a["valid_kept"] is None else f"{a['valid_kept']} of {a['valid_total']}"
+        kept = "—" if a["valid_kept"] is None else f"{a['valid_kept']} of {a['valid_total']}" + (
+            " known-good quotes re-found (check E)" if check.startswith("Check E") else " valid evidence")
         lat = "—" if a["median_latency_s"] is None else secs(a["median_latency_s"])
         out.append(f"| {check} | {setting} | {leaks(a)} | {leaks(b) if b else '—'} | {kept} "
                    f"| {credits_per_call(a['credits_per_call'])} | {lat} |")
