@@ -177,6 +177,33 @@ for name, lab in (("first_pass", "first pass"), ("after_retry", "after Wayback r
                      "Valid lost N / D": f"{n['valid_lost']} / {d['valid_lost']} of {n['valid_total']}"})
 st.dataframe(rows, hide_index=True, width="stretch")
 
+# ---------- independent second review ----------
+sr = read_json("results/timelock34_second_review.json")
+if sr:
+    st.subheader("Independent second review (AI-assisted, ChatGPT agent)")
+    st.caption(f"Every result URL in the timelock34 benchmark labelled again by an independent reviewer "
+               f"({sr['reviewer']}). Our leak: {sr['leak_definitions']['ours']}. The reviewer's leak: "
+               f"{sr['leak_definitions']['reviewer']}. Source: `results/timelock34_second_review.json`.")
+    st.markdown(f"The reviewer decided **{sr['decided']} of {sr['rows']}** rows (LEAK or SAFE); {sr['unclear']} are "
+                "UNCLEAR, because the live page would not open and archive lookups were rate-limited.")
+    ag = sr["agreement"]
+    st.dataframe([{"Our leak =": lab, "Rows": ag[k]["rows"], "Agreement": f"{ag[k]['agreement']:.1%}",
+                   "Cohen's kappa": f"{ag[k]['kappa']:.2f}"}
+                  for k, lab in (("confirmed_or_date_flag", "confirmed or date_flag"), ("confirmed", "confirmed only"))],
+                 hide_index=True, width="stretch")
+    st.dataframe([{"Set": t["dataset"].replace("_", " "), "Setting": t["setting"], "Cases": t["cases"],
+                   "Cases with a leak: reviewer": t["reviewer_leak"], "Ours (confirmed)": t["ours_confirmed"],
+                   "Ours (confirmed or date_flag)": t["ours_confirmed_or_date_flag"]} for t in sr["tasks"]],
+                 hide_index=True, width="stretch")
+    ff, ex = sr["finance_filtered"], sr["finance_filtered"]["example"]
+    st.markdown(f"**Search filters by date; Extract reads the page as it is today.** "
+                f"{ff['searches_with_result_dated_after_cutoff']} of {ff['searches']} filtered searches returned a "
+                f"result dated after the cutoff; an independent reviewer found {ff['reviewer_leak_pages']} page whose "
+                f"current version leaks the outcome. Example `{ex['row_id']}` ({ex['case']}, cutoff {ex['cutoff']}): "
+                f"first published {ex['our_published_date']}, before the cutoff, then updated {ex['reviewer_date']} "
+                f"with a link to the actual result (reviewer's quote: _{ex['reviewer_quote']}_). A date filter "
+                "checks when a page was first published; Extract returns what the page says now.")
+
 # ---------- leaks by source type ----------
 lt = r.get("leak_by_source_type")
 if lt:

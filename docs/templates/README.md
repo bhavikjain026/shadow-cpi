@@ -35,7 +35,9 @@ The Tavily field report (app page "Tavily field report", built by `tools/build_f
 - **Finance check (exploratory, {{fin_events}} RBI decisions and company results, [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md)).**
   The day-before search with no dates leaked the outcome for {{fin_nodates}} of {{fin_events}} events
   ({{fin_nodates_retry}} of {{fin_events}} after the logged archive retry); with dates and the filter,
-  {{fin_dated}} of {{fin_events}}.
+  {{fin_dated}} of {{fin_events}}. {{sr_fin_dated_after}} of {{sr_fin_searches}} filtered searches returned a result dated after the cutoff; an independent
+  reviewer found {{sr_fin_reviewer_leaks}} page whose current version leaks the outcome
+  ([`results/timelock34_second_review.json`](results/timelock34_second_review.json)).
 - **Check P, full page (exploratory, [`results/leakcheck_full_page.md`](results/leakcheck_full_page.md)).** Of
   {{p_pages}} pages that passed the date lock (Tavily's filter, or our own date check), {{p_later}} described an event
   after the cutoff. {{p_flagged}} pages held a later date somewhere in the text, but mostly as page furniture:

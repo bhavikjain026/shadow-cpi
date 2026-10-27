@@ -63,3 +63,16 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
     them up.
 - The audit also noted possible misses (a second fuel rise on 19 May, Sanchi milk from 15 May, Gokul from 21 May).
   They were not added: the replay months are not re-searched.
+
+## Method limits found by an outside methodology review
+Disclosed only: v1 is frozen and none of these changes a sealed or scored number.
+- **Days, not weeks.** We prorate a price change by days in the month; MoSPI collects prices weekly and fuel prices on the 15th, so a mid-month change can count differently in the official figure.
+- **A city or route event gets the full state weight.** A bus fare or milk price change in one city or on one route moves the whole state's weight for that item.
+- **Electricity is one percentage.** We apply the announced tariff change to the whole electricity item, not to bills by distribution company and usage slab.
+- **Delhi petrol stands in for all of India,** and the pass-through from pump price to the CPI item is assumed to be 1.0, not estimated.
+- **Milk variety match is not shown.** The app does not show whether the milk variety in a quote is the one MoSPI prices.
+- **The carve-out is not fully clean.** The rest of a group, after a tracked item is taken out, still follows a trend that includes that item's own history.
+- **Seasonality comes from one year.** The seasonal adjustment uses a single 2025 cycle.
+- **v3's weights are judgement calls,** and v3b's inputs overlap (they are not independent of each other).
+- **v3's ranges are retrospective.** They were set on months we had already seen, not tested on new ones.
+- **The Brier score will cover at most two outcomes** (October and November), far too few to judge calibration.

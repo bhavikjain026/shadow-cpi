@@ -139,6 +139,11 @@ def facts(st, as_of, root=ROOT):
     f.update(fin_events=fn1["events"], fin_nodates=fn1["arms"]["N"]["confirmed_events"],
              fin_nodates_retry=fn2["arms"]["N"]["confirmed_events"], fin_dated=fn1["arms"]["D"]["confirmed_events"],
              fin_dated_retry=fn2["arms"]["D"]["confirmed_events"])
+
+    # results/timelock34_second_review.json: independent second review (AI-assisted) of the filtered finance search
+    ff = load("results/timelock34_second_review.json", root)["finance_filtered"]
+    f.update(sr_fin_searches=ff["searches"], sr_fin_dated_after=ff["searches_with_result_dated_after_cutoff"],
+             sr_fin_reviewer_leaks=ff["reviewer_leak_pages"])
     f["leakage_table"] = leakage_table(fr)
 
     # results/date_field_test.json: undated results per arm

@@ -35,7 +35,8 @@ one retrieved page contained major post-cutoff leakage (41% revealed the answer 
   `filter_by_published_date`, 0 of 20.
 - **Finance check** (exploratory; RBI decisions and company results): no dates, 2 of 14
   on the initial pass, 10 of 14 after the retry; with dates and the filter,
-  0 of 14.
+  0 of 14. 0 of 14 filtered searches returned a result dated after the cutoff; an independent
+  reviewer found 1 page whose current version leaks the outcome (AI-assisted second review).
 - **Check P, full page** (exploratory): of 132 pages that passed the date lock, 1 described a later
   event; most later dates were page furniture (43 of 71 flagged pages: date bars, sidebars,
   related links).
@@ -124,8 +125,8 @@ has 1 event. Logged as Amendments `R2`–`R3`, with before and after.
 
 ## Built with
 Python, Streamlit, Tavily (Search, Extract; Map and Crawl trialled), NVIDIA Nemotron on Nebius Token Factory. Tavily
-usage as of 27 Oct 2026: 2,009 calls, 1,927 credits, 79% of dated results inside the
-requested window (5,343 of 6,756), median latency 4.0 s.
+usage as of 27 Oct 2026: 2,028 calls, 1,975 credits, 79% of dated results inside the
+requested window (5,454 of 6,872), median latency 4.0 s.
 
 ## Try it
 - App: https://shadow-cpi.streamlit.app
