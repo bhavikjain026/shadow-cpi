@@ -1,6 +1,6 @@
 # Reporter brief: September 2026
 
-> **Example from replay month — not a forecast.** Built after the fact from the replay results (`results/replay.csv`, `results/replay_predictions.json`, `manifests/2026-09.json`) to show what a brief looks like. Every number is computed; every quote is a line verified word for word on its page.
+> **Example from replay month — not a forecast.** Built after the fact from the replay results (`results/replay.csv`, `results/replay_predictions.json`, `manifests/2026-09.json`) to show what a brief looks like. Every number is computed; for each quote the model returned a line number, and code copied that line from the Extract output and checked the number is in it.
 
 **Shadow CPI for September 2026: 5.80% year-on-year**, 80% range 5.78% to 6.14%. Coverage: 21% of the CPI basket was measured from evidence this month; the other 79% was carried on its recent trend.
 

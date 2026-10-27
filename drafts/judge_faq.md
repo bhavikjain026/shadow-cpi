@@ -60,8 +60,8 @@ re-searched.
 
 ## 5. What if the sealed October number is wrong?
 
-Then we show it. The October prediction is sealed before 12 Nov with a SHA-256 fingerprint and a git tag, so it
-can't be changed quietly afterwards. The Archive page shows the official figure, our miss, and whether it fell
+Then we show it. We publish the prediction's SHA-256 and a Git tag before
+release, so anyone can verify the file they have. The Archive page shows the official figure, our miss, and whether it fell
 inside the range. One month is a single data point: a miss inside the range is expected some of the time, and a miss
 outside it would add to the evidence that the range is too narrow. We'd also publish the reasons for the miss, for
 example a big change in a part of the basket we carry on trend.

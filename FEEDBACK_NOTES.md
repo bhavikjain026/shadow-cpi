@@ -199,8 +199,8 @@ and consider returning a page-type field (article / live blog / listing) so user
 `results/field_report.json` (`leak_by_source_type`), `v2/leak_types.py`.
 
 **2026-10-27 · Suggestion: an as-of / crawl-date field for Extract.** Search filters by date; Extract reads the page
-as it is today. In the finance check, filtered searches returned no result dated after the cutoff, yet an independent
-AI-assisted second review (post-hoc) found a page whose current version leaks the outcome: a results preview dated
+as it is today. In the finance check, filtered searches returned no result dated after the cutoff, yet a separate,
+post-hoc AI-assisted review (ChatGPT agent; 146 of 283 rows stayed unclear) found a page whose current version leaks the outcome: a results preview dated
 before the cutoff and updated after it with a link to the actual result. An as-of or crawl-date field on Extract
 would let time-locked users tell if a page changed. Related: `published_date` later than a page's own date is
 consistent with Tavily's documented definition (published or last updated, beta); separate original-publication and

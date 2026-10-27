@@ -9,11 +9,36 @@ import build_bug_reports as BR  # noqa: E402
 
 
 def test_reports_have_all_parts_and_cover_the_asked_topics():
-    reps = json.loads(BR.OUT.read_text())["reports"]
+    out = json.loads(BR.OUT.read_text())
+    reps = out["reports"] + out["nebius"]
     assert all(all(r[k] for k in ("did", "happened", "expected", "fix", "evidence")) for r in reps)
     titles = " ".join(r["title"].lower() for r in reps)
-    for t in ("auto_parameters", "published_date", "map", "scanned pdf", "/usage", "nano"):
+    for t in ("auto_parameters", "last-modified", "map", "scanned pdf", "/usage", "nano"):
         assert t in titles
+
+
+def test_top_three_first_then_feature_requests_then_smaller():
+    reps = json.loads(BR.OUT.read_text())["reports"]
+    assert [r["section"] for r in reps] == ["top"] * 3 + ["feature"] + ["smaller"] * 3
+    top = [r["title"] for r in reps[:3]]
+    assert "past month" in top[0] and "explicit dates" in top[1] and "as-of" in top[2]
+    doc = BR.DOC.read_text()
+    assert doc.index("## Top 3") < doc.index("## Feature requests") < doc.index("## Smaller observations")
+    assert all(r["to"] == "Tavily" for r in reps)
+
+
+def test_top_three_carry_counts_and_request_ids():
+    reps = json.loads(BR.OUT.read_text())["reports"]
+    n, with_id, ids = BR.request_ids("arm_T_*.json")
+    assert 0 < with_id <= n and ids[0] in reps[0]["evidence"]
+    assert BR.request_ids("arm_Td_*.json")[2][0] in reps[1]["evidence"]
+    ex = json.loads((ROOT / "results/timelock34_second_review.json").read_text())["finance_filtered"]["example"]
+    rid, sha = BR.r196_receipt(ex)
+    assert rid in reps[2]["evidence"] and sha[:16] in reps[2]["evidence"]
+    ap = json.loads((ROOT / "results/field_report.json").read_text())["auto_parameters"]
+    assert f"{ap['no_dates']['results_dated_oct_2026']} of {ap['no_dates']['results']}" in reps[0]["evidence"]
+    td_n, td_dates = BR.echo_dates("arm_Td_*.json")
+    assert td_n == ap["with_dates"]["searches"] and f"{td_dates} of {td_n} echoes" in reps[1]["happened"]
 
 
 def test_counts_trace_to_sources():
