@@ -3,7 +3,7 @@
 Who does what:
 - **Tavily** brings in every piece of web data. Logged direct downloads are a counted fallback.
 - **Nemotron** (on Nebius Token Factory) only *extracts* facts and cites a numbered line: Nano 30B as a yes/no gatekeeper, Super 120B for quotes and price changes.
-- **Plain code** decides everything else: it checks each quote, matches prices, does all the arithmetic, and seals the result.
+- **Plain code** decides everything else: the model returns a line number, code copies that line from the Extract output and checks the number is in it; code matches prices, does all the arithmetic, and seals the result.
 
 ```mermaid
 flowchart TD

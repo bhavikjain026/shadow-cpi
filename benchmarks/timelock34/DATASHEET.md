@@ -1,7 +1,7 @@
 # timelock34: datasheet
 
-34 replay questions with a cutoff date, the exact Tavily searches we ran for each, and a leak label for every result
-URL those searches returned. Use it to measure whether a search setup returns pages that did not yet exist at the
+34 cases, 32 distinct questions (two pairs share a question and its searches), each with a cutoff date, the exact
+Tavily searches we ran for each, and a leak label for every result URL those searches returned. Use it to measure whether a search setup returns pages that did not yet exist at the
 cutoff (look-ahead leakage), and how much valid evidence it keeps while doing so.
 
 Files: `cases.jsonl` (one case per line), `score.py` (scorer, standard library only), `build.py` (rebuilds
@@ -65,13 +65,15 @@ s["all"]["leak_cases"], s["all"]["wilson95"], s["all"]["valid_kept"], s["all"]["
 ```
 
 A leak case is a case where at least one returned URL is labelled `confirmed`; the rate comes with a Wilson 95%
-interval. Valid evidence kept = returned URLs with `valid_evidence` / all such URLs in the case. `python
+interval. Valid evidence kept = returned URLs with `valid_evidence` / all such URLs in the case. New URLs a search
+returns are unlabelled until reviewed and are never counted as safe. `python
 benchmarks/timelock34/score.py` replays the recorded settings offline; it reproduces the after-retry numbers in
 the two retry files (leak cases, and valid evidence lost = total − kept).
 
-## Independent second review (AI-assisted, ChatGPT agent)
+## Second review (separate, post-hoc, AI-assisted: ChatGPT agent)
 
-`second_review_chatgpt.csv` is a second, independent label for every result URL (283 rows; `R001` is the top
+`second_review_chatgpt.csv` is a second label for every result URL from a separate, post-hoc AI-assisted review
+(ChatGPT agent); 146 of 283 rows stayed unclear (`R001` is the top
 result of the top case in `cases.jsonl`, in that order). It was done by a ChatGPT agent, not by a person, and is
 kept as received: a short quote (at most 14 words, from the page), the date relied on and its source, and a reason.
 `compare_review.py` joins it to our labels (it refuses to run if a row's case or URL differs) and writes
@@ -102,8 +104,8 @@ The date-test gap is mostly the definitions: every date-test row we label a leak
 is a post-cutoff page on another topic, which reveals nothing, and 17 more were UNCLEAR. The finance gap goes the
 other way: 3 rows with no date signal after the cutoff were judged LEAK because the page states the result.
 
-**Filtered search, finance:** 0 of 14 filtered searches returned a result dated after the cutoff; an independent
-reviewer found 1 page whose current version leaks the outcome (`R196`, a TCS results preview originally published
+**Filtered search, finance:** 0 of 14 filtered searches returned a result dated after the cutoff; a separate, post-hoc
+AI-assisted review (ChatGPT agent; 146 of 283 rows stayed unclear) found 1 page whose current version leaks the outcome (`R196`, a TCS results preview originally published
 7 Jul 2026, the day before the 8 Jul cutoff, and updated 9 Jul with a link to the actual result). Search filters by
 date; Extract reads the page as it is today. Our published labels are not changed.
 
@@ -111,8 +113,8 @@ date; Extract reads the page as it is today. Our published labels are not change
 
 - **Small.** 34 cases; one setting with 0 leak cases still has an upper 95% bound of about 10% (all 34) or 16–22%
   (one set). The date test is a pilot; the finance check is exploratory.
-- **Labels exist only for URLs we saw.** A live search returns other URLs; `score.py` counts them as `unlabelled`,
-  never as safe. Scoring a new search setup properly needs Wayback lookups for its new URLs.
+- **Labels exist only for URLs we saw.** New URLs a search returns are unlabelled until reviewed and are never
+  counted as safe (`score.py` reports them as `unlabelled`). Scoring a new search setup properly needs Wayback lookups for its new URLs.
 - **Wayback is incomplete evidence.** A capture after the cutoff does not prove the page was published after it
   (it may simply not have been archived earlier); `confirmed` also needs a date signal after the cutoff, so it is
   conservative, and `date_flag` holds the uncertain rest. `unknown` is not "safe".

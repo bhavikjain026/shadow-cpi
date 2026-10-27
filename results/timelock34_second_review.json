@@ -1,6 +1,6 @@
 {
  "source": "benchmarks/timelock34/second_review_chatgpt.csv",
- "reviewer": "independent second review, AI-assisted (ChatGPT agent)",
+ "reviewer": "separate, post-hoc AI-assisted review (ChatGPT agent)",
  "leak_definitions": {
   "ours": "a result dated after the cutoff (confirmed: no Wayback capture by the cutoff)",
   "reviewer": "content that reveals the outcome"
