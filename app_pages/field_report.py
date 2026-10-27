@@ -2,7 +2,7 @@
 from results/field_report.json (built offline by tools/build_field_report.py from the committed results files)."""
 import streamlit as st
 
-from app_pages.common import header, read_json
+from app_pages.common import header, lock_table, read_json
 
 
 def pct(x):
@@ -27,7 +27,6 @@ r = read_json("results/field_report.json")
 if not r:
     st.info("Not built yet: run `python tools/build_field_report.py` (offline, 0 credits).")
     st.stop()
-st.caption(f"Built {r['built']} from the committed results files · source: `results/field_report.json`")
 
 # ---------- summary (six findings, each read from its file) ----------
 dt1, dt2 = r["date_test"]["first_pass"]["arms"], r["date_test"]["after_retry"]["arms"]
@@ -53,27 +52,35 @@ summary = [
     (f"Who should write the searches: best arm ({top['writer']})", f"{top['recall']} of {top['of']} known changes",
      "results/field_report.json"),
 ]
-st.table([{"Finding": a, "Number": b, "File": c} for a, b, c in summary], hide_index=True)  # wraps, nothing cut off
+lock_table([{"Finding": a, "Number": b, "File": c} for a, b, c in summary],
+           lambda row, col: None if col == "File" else "open" if "no time lock" in row["Finding"]
+           else "lock" if "time lock" in row["Finding"] else None)
 
 # ---------- time-locked search leakage (first block) ----------
 lk = r.get("leakage")
 if lk:
     st.subheader("Time-locked search leakage")
-    st.caption("Can a search see the future? Each row replays searches as of a past cutoff with a different date "
-               f"setting. All figures {lk['label']}. {lk['columns']}.")
-    st.dataframe([{"Check": x["check"], "Run": x["run"].replace("first pass", "initial pass"), "Setting": x["setting"] or "—",
-                   "N": x.get("n", "—"),
-                   "Leak rate (Wilson 95%)": "—" if x.get("leaks") is None else
-                   f"{x['leaks']} of {x['n']} = {pct(x['leak_rate'])} ({wilson(x['wilson95'])})",
-                   "Kept (valid evidence; check E: known-good quotes)": "—" if x.get("valid_kept") is None else
-                   f"{x['valid_kept']} of {x['valid_total']}"
-                   + (" known-good quotes" if x["check"].startswith("Check E") else " valid evidence"),
-                   "Credits per call": "—" if x.get("credits_per_call") is None else f"{x['credits_per_call']:.2f}",
-                   "Median latency (s)": f1(x.get("median_latency_s")),
-                   "Caveats": x["caveats"]} for x in lk["rows"]], hide_index=True, width="stretch")
-    st.markdown("Our own wrapper, `shadow_cpi.pit.pit_search`, always sends the date window and "
-                "`filter_by_published_date`, then re-checks every result's date in code: *a model may choose the "
-                "query, topic, domains and language; code owns the dates.* (Fixed templates won the four-arm test.)")
+    lock_table([{"Check": x["check"], "Run": x["run"].replace("first pass", "initial pass"), "Setting": x["setting"] or "—",
+                "N": x.get("n", "—"),
+                "Leak rate (Wilson 95%)": "—" if x.get("leaks") is None else
+                f"{x['leaks']} of {x['n']} = {pct(x['leak_rate'])} ({wilson(x['wilson95'])})",
+                "Kept (valid evidence; check E: known-good quotes)": "—" if x.get("valid_kept") is None else
+                f"{x['valid_kept']} of {x['valid_total']}"
+                + (" known-good quotes" if x["check"].startswith("Check E") else " valid evidence"),
+                "Credits per call": "—" if x.get("credits_per_call") is None else f"{x['credits_per_call']:.2f}",
+                "Median latency (s)": f1(x.get("median_latency_s")),
+                "Caveats": x["caveats"]} for x in lk["rows"]],
+               lambda row, col: None if col in ("Check", "Run", "Caveats") else
+               "lock" if "filter_by_published_date" in row["Setting"] else "open" if row["Setting"] == "no dates"
+               else None)
+    with st.expander("Method, intervals and source files"):
+        st.markdown(f"Built {r['built']} from the committed results files · source: `results/field_report.json`. "
+                    "Can a search see the future? Each row replays searches as of a past cutoff with a different date "
+                    f"setting. All figures {lk['label']}. {lk['columns']}. Bold = Tavily time lock "
+                    "(filter_by_published_date); tinted = no dates.")
+        st.markdown("Our own wrapper, `shadow_cpi.pit.pit_search`, always sends the date window and "
+                    "`filter_by_published_date`, then re-checks every result's date in code: *a model may choose the "
+                    "query, topic, domains and language; code owns the dates.* (Fixed templates won the four-arm test.)")
 
 # ---------- four arms ----------
 st.subheader("Who should write the search? Four arms, pre-registered")
@@ -125,12 +132,12 @@ st.subheader("Date fields test (pilot)")
 dt = r["date_test"]
 st.caption(f"{dt['label'].replace('first pass', 'initial pass')}. Retry: {dt['retry']['recovered']} of {dt['retry']['failed_urls']} failed lookups "
            "recovered.")
-st.dataframe([{"Arm": a, "Leak cases, initial pass": f"{p['leak_cases']} of {p['cases']} ({wilson(p['wilson95'])})",
-               "Leak cases, after retry": f"{q['leak_cases']} of {q['cases']} ({wilson(q['wilson95'])})",
-               "Valid evidence lost (date test), initial pass": f"{p['valid_lost']} of {p['valid_total']}",
-               "Valid evidence lost (date test), after retry": f"{q['valid_lost']} of {q['valid_total']}"}
-              for a, p, q in ((a, dt["first_pass"]["arms"][a], dt["after_retry"]["arms"][a]) for a in "ABCD")],
-             hide_index=True, width="stretch")
+lock_table([{"Arm": a, "Leak cases, initial pass": f"{p['leak_cases']} of {p['cases']} ({wilson(p['wilson95'])})",
+            "Leak cases, after retry": f"{q['leak_cases']} of {q['cases']} ({wilson(q['wilson95'])})",
+            "Valid evidence lost (date test), initial pass": f"{p['valid_lost']} of {p['valid_total']}",
+            "Valid evidence lost (date test), after retry": f"{q['valid_lost']} of {q['valid_total']}"}
+            for a, p, q in ((a, dt["first_pass"]["arms"][a], dt["after_retry"]["arms"][a]) for a in "ABCD")],
+           lambda row, col: "open" if row["Arm"] == "A" else "lock" if row["Arm"] in "CD" else None)
 for k, lab in (("mcnemar_A_vs_B", "A (no dates) vs B (dates)"), ("mcnemar_C_vs_D", "C (filter) vs D (+ page date)")):
     st.caption(f"Exact McNemar, {lab}: p = {dt['first_pass'][k]['p_exact']:.4f} initial pass, "
                f"{dt['after_retry'][k]['p_exact']:.4f} after retry.")

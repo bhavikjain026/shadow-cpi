@@ -192,12 +192,27 @@ def test_summary_line_at_top_reads_the_results_file():
             ) in first and "(#all-cases)" in first
 
 
-def test_default_examples_start_rbi_then_petrol_and_drop_m7():
+def test_default_examples_follow_the_rule_f3_first_r1_out():
+    ok = ("confirmed pre-cutoff", "valid")
+    want = [c["id"] for c in DATA["cases"] if any(r["leak"] for r in c["open"]["results"])
+            and c["locked"]["results"] and all(r["label"].startswith(ok) for r in c["locked"]["results"])]
     at = page()
     default = at.selectbox[0].options[0]
-    assert default.startswith("Examples: R1, F3") and "M7" not in default
-    assert any(o.startswith("M7") for o in at.selectbox[0].options)          # still in the picker
-    assert "names both the case's item and its state" in text(at)
+    ids = default.removeprefix("Examples: ").split(", ")
+    assert ids[0] == "F3" and sorted(ids) == sorted(want) and "R1" not in ids
+    assert any(o.startswith("R1") for o in at.selectbox[0].options) and any(o.startswith("M7") for o in
+                                                                            at.selectbox[0].options)
+    assert f"Cases that qualify: {', '.join(ids)}" in text(at)
+    if len(ids) > 1:
+        assert len(at.tabs) == len(ids)
+
+
+def test_card_metadata_is_short_and_finance_page_dates_said_once():
+    t = text(at := page())
+    assert "Tavily: **21 Sep 2026** · Page: 21 Sep 2026 · Wayback: **confirmed leak**" in t
+    assert "not read in this test" not in t
+    if any(by.startswith("R") for by in at.selectbox[0].options[0].removeprefix("Examples: ").split(", ")):
+        assert t.count("Page dates not read in the finance check.") == 1
 
 
 def test_every_result_has_a_text_badge():

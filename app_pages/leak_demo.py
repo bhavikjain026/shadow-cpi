@@ -2,20 +2,20 @@
 searched with no time lock and with Tavily's time lock. Built only from saved results (results/leak_demo.json, made
 offline by tools/build_leak_demo.py from the date test and the finance check; totals from results/field_report.json
 and results/leakcheck_exact_match.json). The only API calls are the optional live mode, off unless RUN_LIVE_ENABLED."""
-import re
 from datetime import date, timedelta
 
 import streamlit as st
 
-from app_pages.common import header, read_json
+from app_pages.common import header, lock_table, read_json
 
-OPEN = "No time lock"
-LOCKED = "Tavily time lock (start_date/end_date + filter_by_published_date)"
+OPEN, OPEN_NOTE = "No time lock", "default search, no dates"
+LOCKED, LOCKED_NOTE = "Tavily time lock", "start_date/end_date + filter_by_published_date"
 EXAMPLES = "examples chosen for clarity; all {n} in the picker and the totals below"
-FIRST = ["R1", "F3"]                         # RBI (finance check), then petrol (date test)
-EXAMPLE_RULE = ("R1 (RBI) and F3 (petrol) first, then the first other date-test case whose no-lock search has a "
-                "confirmed leak whose title names both the case's item and its state")
+FIRST = "F3"                                  # petrol (date test) leads
+EXAMPLE_RULE = ("a Wayback-confirmed leak with no time lock, and every time-locked result confirmed before the "
+                "cutoff (no UNCHECKED)")
 UNCHECKED_HELP = "no archive check was made for this result"
+OK_LABELS = ("confirmed pre-cutoff", "valid")
 
 
 def pct(x):
@@ -39,47 +39,59 @@ def link(title, url):
     return f"[{t}](<{(url or '').replace('>', '%3E').replace(' ', '%20')}>)"
 
 
-def names_item_and_state(c, title):
-    """The title names the case's item (v2.kinds words, whole words; 'fuel' = petrol or diesel) and the state in its
-    query ('... hike <state> <Month> <year>'; 'India' is not a state)."""
-    from v2 import kinds as K
-    m = re.search(r"hike (.+) [A-Z][a-z]+ \d{4}$", c["query"])
-    states = [x.strip() for x in m.group(1).split(",")] if m else []
-    words = [w for k in ({"fuel": ["petrol", "diesel"]}.get(c["kind"]) or [c["kind"]]) for w in K.KINDS[k]["words"]]
-    return (any(K.has_word(title, w) for w in words)
-            and any(K.has_word(title, x) for x in states if x.lower() != "india"))
+def qualifies(c):
+    """EXAMPLE_RULE: a confirmed leak on the left, and every result on the right confirmed pre-cutoff."""
+    right = c["locked"]["results"]
+    return (any(r["leak"] for r in c["open"]["results"])
+            and bool(right) and all(r["label"].startswith(OK_LABELS) for r in right))
 
 
 def examples(cases):
-    """FIRST, then the first other date-test case (file order) meeting EXAMPLE_RULE, if any."""
-    third = [c["id"] for c in cases if c["test"] == "date" and c["id"] not in FIRST
-             and any(r["leak"] and names_item_and_state(c, r["title"]) for r in c["open"]["results"])]
-    return [x for x in FIRST if x in {c["id"] for c in cases}] + third[:1]
+    """F3 first, then every other case meeting EXAMPLE_RULE, in file order."""
+    ok = [c["id"] for c in cases if qualifies(c)]
+    return sorted(ok, key=lambda x: x != FIRST)
 
 
 def badge(r):
     """A text badge so colour is not the only signal: LEAK (confirmed), OK (confirmed pre-cutoff), UNCHECKED (else)."""
     if r.get("leak"):
         return ":red-badge[LEAK]"
-    if r["label"].startswith(("confirmed pre-cutoff", "valid")):
+    if r["label"].startswith(OK_LABELS):
         return ":green-badge[OK]"
     return ":gray-badge[UNCHECKED]"
+
+
+def badge_help(r):
+    if r.get("leak") or r["label"].startswith(OK_LABELS):
+        return None
+    return UNCHECKED_HELP if r["label"] == "unknown" else f"{r['label']}: not confirmed by an archive check"
 
 
 def case_title(c):
     return f"{c['id']} · {c['test_name']} · {c['name']} · cutoff {human(c['cutoff'])} · “{c['query']}”"
 
 
+def wayback(label):
+    """The label without the '(Wayback)' it repeats after 'Wayback:'."""
+    return label.replace(" (Wayback)", "").replace(", Wayback)", ")")
+
+
 def result_line(r, test):
-    page = human(r["page_date"]) if test == "date" else "not read in this test"
-    return (f"{badge(r)} {link(r['title'], r['url'])}  \nTavily published_date **{human(r['published_date'])}** · page date {page}"
-            f" · **{r['label']}**" + (f" (initial pass: {r['label_first_pass']})"
-                                      if r.get("label_first_pass") and r["label_first_pass"] != r["label"] else ""))
+    page = f" · Page: {human(r['page_date'])}" if test == "date" else ""
+    first = (f" (initial pass: {wayback(r['label_first_pass'])})"
+             if r.get("label_first_pass") and r["label_first_pass"] != r["label"] else "")
+    return (f"{badge(r)} {link(r['title'], r['url'])}  \nTavily: **{human(r['published_date'])}**{page} · "
+            f"Wayback: **{wayback(r['label'])}**{first}")
 
 
-def search_column(col, title, s, test):
+def column_head(title, note):
+    st.markdown(f"**{title}**")
+    st.caption(note)
+
+
+def search_column(col, title, note, s, test):
     with col:
-        st.markdown(f"**{title}**")
+        column_head(title, note)
         if not s["results"]:
             st.caption("No results.")
         for r in s["results"]:
@@ -87,9 +99,7 @@ def search_column(col, title, s, test):
                 st.error(result_line(r, test) + f"  \nPublished **{r['days_after_cutoff']} days after the cutoff**."
                          + (f"  \n> {r['quote']}" if r.get("quote") else ""))
             else:
-                st.markdown(result_line(r, test), help=None if r.get("leak") or "OK" in badge(r) else
-                            UNCHECKED_HELP if r["label"] == "unknown" else
-                            f"{r['label']}: not confirmed by an archive check")
+                st.markdown(result_line(r, test), help=badge_help(r))
         with st.expander("Request sent, credits, latency"):
             st.json(s["request"], expanded=True)
             st.caption(f"The API key travels in a request header and is never part of the body. Credits "
@@ -99,9 +109,11 @@ def search_column(col, title, s, test):
 
 def show_case(c):
     st.markdown(f"#### {case_title(c)}")
+    if c["test"] == "finance":
+        st.caption("Page dates not read in the finance check.")
     left, right = st.columns(2)
-    search_column(left, OPEN, c["open"], c["test"])
-    search_column(right, LOCKED, c["locked"], c["test"])
+    search_column(left, OPEN, OPEN_NOTE, c["open"], c["test"])
+    search_column(right, LOCKED, LOCKED_NOTE, c["locked"], c["test"])
 
 
 def summary_line(t):
@@ -123,14 +135,25 @@ def totals(t, n):
                      "No lock, after retry": cell(x["open"]["retry"], n, x["open"]["retry_wilson95"]),
                      "Tavily time lock": cell(x["locked"]["first"], n, x["locked"]["first_wilson95"]),
                      "Time lock, after retry": cell(x["locked"]["retry"], n, x["locked"]["retry_wilson95"])})
-    st.table(rows)
-    st.caption(f"Files: `{d['source']}`, `{f['source']}`. Wilson 95% intervals in brackets. The initial pass is the pre-registered result; the retry only "
-               "recovered Wayback lookups that had failed on the network (logged). A confirmed leak needs the "
-               "Wayback Machine to show the page appeared after the cutoff.")
+    lock_table(rows, lambda row, col: "open" if col.startswith("No ") else "lock" if "ime lock" in col else None)
     st.markdown(f"**The cost of strictness.** The time lock also drops good evidence: the dated search missed "
                 f"**{s['missed']} of {s['quotes']}** known-good quotes that the undated search found "
-                f"({wilson(s['wilson95'])}, Wilson 95%; `{s['source']}`).")
+                f"({wilson(s['wilson95'])}, Wilson 95%).")
     st.page_link("app_pages/field_report.py", label="Field Report: every measurement, with its file", icon="🧪")
+    return d, f, s
+
+
+def method(data, d, f, s):
+    note = data["labels_note"]
+    with st.expander("Method, intervals and source files"):
+        st.markdown(f"- **Labels:** {note}. Badges: LEAK = confirmed leak (Wayback), OK = confirmed before the "
+                    "cutoff (Wayback), UNCHECKED = no archive confirmation either way.\n"
+                    "- **Intervals:** Wilson 95% in brackets. The initial pass is the pre-registered result; the retry "
+                    "only recovered Wayback lookups that had failed on the network (logged). A confirmed leak needs "
+                    "the Wayback Machine to show the page appeared after the cutoff.\n"
+                    f"- **Files:** `results/leak_demo.json`; totals `{d['source']}`, `{f['source']}`; cost of "
+                    f"strictness `{s['source']}`.")
+
 
 
 def live():
@@ -170,9 +193,9 @@ def live():
     if res:
         st.markdown(f"**“{res['question']}”**, cutoff {human(res['cutoff'])}")
         left, right = st.columns(2)
-        for col, title, side in ((left, OPEN, "open"), (right, LOCKED, "locked")):
+        for col, title, note, side in ((left, OPEN, OPEN_NOTE, "open"), (right, LOCKED, LOCKED_NOTE, "locked")):
             with col:
-                st.markdown(f"**{title}**")
+                column_head(title, note)
                 for r in res[side]["results"]:
                     line = f"{link(r['title'], r['url'])}  \nTavily published_date {human(r['published_date'])}"
                     (st.warning if r["label"] == "date flag" else st.success)(f"{line} · **{r['label']}**")
@@ -182,8 +205,9 @@ def live():
                                f"`{res[side]['request_id']}`")
 
 
-header("Leak demo", "Can a web search see the future? We replayed past questions as of a cutoff date and searched "
-                    "twice: with no time lock, and with Tavily's time lock. Saved results, no calls.")
+
+
+header("Leak demo", "The same past question, searched twice as of its cutoff: no time lock vs Tavily's time lock.")
 data = read_json("results/leak_demo.json")
 if not data:
     st.info("Not built yet: run `python tools/build_leak_demo.py` (offline, 0 credits).")
@@ -193,13 +217,13 @@ by_id = {c["id"]: c for c in data["cases"]}
 shown = examples(data["cases"])
 choice = st.selectbox("Case", ["Examples: " + ", ".join(shown)] + list(by_id),
                       format_func=lambda k: k if k.startswith("Examples") else case_title(by_id[k]))
-note = data["labels_note"]
-st.caption(f"Default: {EXAMPLES.format(n=len(data['cases']))}: {EXAMPLE_RULE}"
-           + ("" if len(shown) > len(FIRST) else " (no other case meets this rule, so two are shown)")
-           + f". {note[:1].upper() + note[1:]}. Badges: LEAK = confirmed leak (Wayback), OK = confirmed before the "
-             "cutoff (Wayback), UNCHECKED = no archive confirmation either way.")
-for cid in (shown if choice.startswith("Examples") else [choice]):
-    show_case(by_id[cid])
-    st.divider()
-totals(data["totals"], len(data["cases"]))
+st.caption(f"Default: {EXAMPLES.format(n=len(data['cases']))}. Rule: {EXAMPLE_RULE}. Cases that qualify: "
+           f"{', '.join(shown)}" + (" (only one qualifies, so one is shown)." if len(shown) == 1 else "."))
+cases = shown if choice.startswith("Examples") else [choice]
+for tab, cid in zip(st.tabs([case_title(by_id[x]).split(" · “")[0] for x in cases]) if len(cases) > 1
+                    else [st.container()], cases):
+    with tab:
+        show_case(by_id[cid])
+st.divider()
+method(data, *totals(data["totals"], len(data["cases"])))
 live()

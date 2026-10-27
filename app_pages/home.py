@@ -14,15 +14,21 @@ from app_pages.v2_panels import what_tavily_adds
 from app_pages.v3_panel import v3_beside_v1
 
 header("Experimental nowcast", f"Shadow CPI: an {NOWCAST_WORDS} of India's next official CPI inflation number "
-                               "(year-on-year, 2024-series All-India Combined). Not an official statistic.")
+                               "(year-on-year, 2024-series All-India Combined).")
+lock = read_json("results/score_lock.json")
+if lock:
+    m1, m2, m3 = st.columns(3)
+    m1.metric(f"{LABELS['c']}: average miss", f"{lock['mae']['c']:.3f} pp", help="Replay, Jan–Sep 2026")
+    m2.metric(f"{LABELS['a']}: average miss", f"{lock['mae']['a']:.3f} pp", help="Replay, Jan–Sep 2026")
+    m3.metric(f"Poll months: {LABELS['c']} vs poll",
+              f"{lock['mae_poll_months']['c']:.3f} vs {lock['mae_poll_months']['poll']:.3f}",
+              help=f"The {poll_months()} months with a published economists' poll")
+    st.caption(f"{headline_result(lock)} Source: `results/score_lock.json`.")
 st.markdown("**How it works:** Tavily searches the web, with dates locked, for price evidence → Nemotron on Nebius "
             "Token Factory pulls out only quoted, dated prices → plain code turns them into a CPI estimate with a "
             "range, sealed before release.")
 st.page_link("app_pages/field_report.py", label="Tavily field report",
              icon="🧪")
-lock = read_json("results/score_lock.json")
-if lock:
-    st.markdown(f"**{headline_result(lock)}**")
 
 # ---------- the October call ----------
 sealed = read_json(f"sealed/{LIVE_MONTH}.json")
@@ -48,18 +54,22 @@ with st.container(border=True):
                                              f"`{stored}` · " + ("PASS" if ok else "FAIL"))
         else:
             st.warning(f"Built but not sealed yet: sealing on {SEAL_DATE:%d %b}.")
-    else:
-        st.markdown(f"**Sealing on {SEAL_DATE:%d %b}.** The number, its 80% range and P(headline ≥ "
-                    f"{THRESHOLD:.1f}%) appear here once the call is sealed. {THRESHOLD:.1f}% is the RBI's quarterly "
-                    "projection for Oct–Dec 2026, not a forecast for October.")
-        c1, c2 = st.columns(2)
+    else:                                      # compact status banner until the seal
+        rel = next_release()
+        c1, c2, c3 = st.columns(3)
         c1.metric("CPI inflation, year-on-year", f"sealing on {SEAL_DATE:%d %b}")
         c2.metric(f"P(headline ≥ {THRESHOLD:.1f}%)", "with the seal")
-    rel = next_release()
-    if rel:
-        st.metric(f"Official {month_name(rel['month'])} CPI in", countdown_text(rel["left"]))
-        st.caption(f"MoSPI release: {rel['note']}.")
-with st.expander("How to check the seal yourself", expanded=not sealed):
+        if rel:
+            c3.metric(f"Official {month_name(rel['month'])} CPI in", countdown_text(rel["left"]))
+        st.caption(f"The number, its 80% range and P(headline ≥ {THRESHOLD:.1f}%) appear here once sealed; "
+                   f"{THRESHOLD:.1f}% is the RBI's quarterly projection for Oct–Dec 2026, not a forecast for October."
+                   + (f" MoSPI release: {rel['note']}." if rel else ""))
+    if sealed or call:
+        rel = next_release()
+        if rel:
+            st.metric(f"Official {month_name(rel['month'])} CPI in", countdown_text(rel["left"]))
+            st.caption(f"MoSPI release: {rel['note']}.")
+with st.expander("How to check the seal yourself"):
     raw = f"https://raw.githubusercontent.com/bhavikjain026/shadow-cpi/seal-{LIVE_MONTH}/sealed/{LIVE_MONTH}"
     st.markdown(f"1. Save the sealed file and its fingerprint exactly as tagged: [{LIVE_MONTH}.json]({raw}.json) and "
                 f"[{LIVE_MONTH}.sha256]({raw}.sha256) (don't open and re-save the .json).\n"
