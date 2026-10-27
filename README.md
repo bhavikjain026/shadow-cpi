@@ -36,7 +36,9 @@ The Tavily field report (app page "Tavily field report", built by `tools/build_f
 - **Finance check (exploratory, 14 RBI decisions and company results, [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md)).**
   The day-before search with no dates leaked the outcome for 2 of 14 events
   (10 of 14 after the logged archive retry); with dates and the filter,
-  0 of 14.
+  0 of 14 events with a confirmed leak. 0 of 14 filtered searches returned a result dated after the cutoff; an independent
+  reviewer found 1 page whose current version leaks the outcome
+  ([`results/timelock34_second_review.json`](results/timelock34_second_review.json)).
 - **Check P, full page (exploratory, [`results/leakcheck_full_page.md`](results/leakcheck_full_page.md)).** Of
   132 pages that passed the date lock (Tavily's filter, or our own date check), 1 described an event
   after the cutoff. 71 pages held a later date somewhere in the text, but mostly as page furniture:
@@ -267,7 +269,7 @@ To run the pipeline, copy `.env.example` to `.env`, add the two keys, and start 
 `python tools/sync_doc_numbers.py` (template: [`docs/templates/README.md`](docs/templates/README.md)).
 
 Tavily usage so far (as of 27 Oct 2026, [`results/tavily_report_card.md`](results/tavily_report_card.md)):
-2,009 calls sent, 1,927 credits used (a 1,000-credit monthly plan plus 3,125
+2,028 calls sent, 1,975 credits used (a 1,000-credit monthly plan plus 3,125
 add-on credits), 79% of dated search results inside the requested window, median latency
 4.0 s.
 

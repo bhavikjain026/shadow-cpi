@@ -1,0 +1,197 @@
+{
+ "source": "benchmarks/timelock34/second_review_chatgpt.csv",
+ "reviewer": "independent second review, AI-assisted (ChatGPT agent)",
+ "leak_definitions": {
+  "ours": "a result dated after the cutoff (confirmed: no Wayback capture by the cutoff)",
+  "reviewer": "content that reveals the outcome"
+ },
+ "rows": 283,
+ "decided": 137,
+ "unclear": 146,
+ "reviewer_labels": {
+  "LEAK": 43,
+  "SAFE": 94,
+  "UNCLEAR": 146
+ },
+ "unclear_reasons": [
+  "Live page could not be verified; a Wayback capture could not be checked after archive requests were rate-limited."
+ ],
+ "agreement": {
+  "confirmed": {
+   "rows": 137,
+   "agreement": 0.7591240875912408,
+   "kappa": 0.3553400827035503,
+   "both_leak": 16,
+   "ours_only": 6,
+   "reviewer_only": 27,
+   "both_safe": 88
+  },
+  "confirmed_or_date_flag": {
+   "rows": 137,
+   "agreement": 0.8905109489051095,
+   "kappa": 0.7594521830738616,
+   "both_leak": 40,
+   "ours_only": 12,
+   "reviewer_only": 3,
+   "both_safe": 82
+  }
+ },
+ "crosstab": {
+  "date_test": {
+   "confirmed/LEAK": 3,
+   "confirmed/SAFE": 6,
+   "confirmed/UNCLEAR": 5,
+   "date_flag/LEAK": 3,
+   "date_flag/SAFE": 3,
+   "date_flag/UNCLEAR": 12,
+   "unknown/LEAK": 0,
+   "unknown/SAFE": 47,
+   "unknown/UNCLEAR": 67
+  },
+  "finance": {
+   "confirmed/LEAK": 13,
+   "confirmed/SAFE": 0,
+   "confirmed/UNCLEAR": 10,
+   "date_flag/LEAK": 21,
+   "date_flag/SAFE": 3,
+   "date_flag/UNCLEAR": 15,
+   "unknown/LEAK": 3,
+   "unknown/SAFE": 35,
+   "unknown/UNCLEAR": 37
+  }
+ },
+ "tasks": [
+  {
+   "dataset": "date_test",
+   "setting": "no_dates",
+   "cases": 20,
+   "results": 60,
+   "reviewer_leak": 4,
+   "reviewer_unclear_results": 31,
+   "ours_confirmed": 10,
+   "ours_confirmed_or_date_flag": 15,
+   "dated_after_cutoff": 15
+  },
+  {
+   "dataset": "date_test",
+   "setting": "dates",
+   "cases": 20,
+   "results": 58,
+   "reviewer_leak": 0,
+   "reviewer_unclear_results": 32,
+   "ours_confirmed": 0,
+   "ours_confirmed_or_date_flag": 0,
+   "dated_after_cutoff": 0
+  },
+  {
+   "dataset": "date_test",
+   "setting": "dates_filter",
+   "cases": 20,
+   "results": 59,
+   "reviewer_leak": 0,
+   "reviewer_unclear_results": 38,
+   "ours_confirmed": 0,
+   "ours_confirmed_or_date_flag": 0,
+   "dated_after_cutoff": 0
+  },
+  {
+   "dataset": "date_test",
+   "setting": "dates_filter_page_date",
+   "cases": 20,
+   "results": 26,
+   "reviewer_leak": 0,
+   "reviewer_unclear_results": 20,
+   "ours_confirmed": 0,
+   "ours_confirmed_or_date_flag": 0,
+   "dated_after_cutoff": 0
+  },
+  {
+   "dataset": "finance",
+   "setting": "no_dates",
+   "cases": 14,
+   "results": 70,
+   "reviewer_leak": 14,
+   "reviewer_unclear_results": 29,
+   "ours_confirmed": 10,
+   "ours_confirmed_or_date_flag": 14,
+   "dated_after_cutoff": 14
+  },
+  {
+   "dataset": "finance",
+   "setting": "dates_filter",
+   "cases": 14,
+   "results": 67,
+   "reviewer_leak": 1,
+   "reviewer_unclear_results": 33,
+   "ours_confirmed": 0,
+   "ours_confirmed_or_date_flag": 0,
+   "dated_after_cutoff": 0
+  }
+ ],
+ "finance_filtered": {
+  "searches": 14,
+  "results": 67,
+  "searches_with_result_dated_after_cutoff": 0,
+  "reviewer_leak_pages": 1,
+  "example": {
+   "row_id": "R196",
+   "case": "C1",
+   "dataset": "finance",
+   "cutoff": "2026-07-08",
+   "url": "https://www.business-standard.com/markets/news/tcs-q1-result-expectations-preview-dividend-record-date-revenue-seen-flat-wage-hikes-to-weigh-on-margins-126070700096_1.html",
+   "reviewer_label": "LEAK",
+   "reviewer_date": "2026-07-09",
+   "reviewer_date_source": "page last-updated date",
+   "reviewer_quote": "TCS Q1FY27 results: Net profit rises 4.6% to ₹13,349 cr",
+   "reviewer_reason": "The current page includes the actual Q1 result link and is visibly updated July 9, after the July 8 cutoff.",
+   "our_leak": "unknown",
+   "our_published_date": "2026-07-07",
+   "our_page_date": null,
+   "wayback_captures": [
+    "2026-07-09",
+    "2026-08-22",
+    "2026-09-05"
+   ]
+  }
+ },
+ "page_date_checks": [
+  {
+   "row_id": "R010",
+   "case": "E2",
+   "dataset": "date_test",
+   "cutoff": "2026-04-29",
+   "url": "https://assets.bbhub.io/professional/sites/44/BNEF-India-Transition-Factbook-2026.pdf",
+   "reviewer_label": "SAFE",
+   "reviewer_date": "2026-10-13",
+   "reviewer_date_source": "PDF cover",
+   "reviewer_quote": "India Transition Factbook 2026",
+   "reviewer_reason": "The report is about energy transition, not the target state’s consumer tariff; its cover is dated October 13.",
+   "our_leak": "confirmed",
+   "our_published_date": "2026-10-14",
+   "our_page_date": "2025-11-03",
+   "wayback_captures": [
+    "2026-10-13"
+   ]
+  },
+  {
+   "row_id": "R020",
+   "case": "E4",
+   "dataset": "date_test",
+   "cutoff": "2026-04-29",
+   "url": "https://itif.org/publications/2026/10/13/2026-us-india-subnational-innovation-competitiveness-index",
+   "reviewer_label": "SAFE",
+   "reviewer_date": "2026-10-13",
+   "reviewer_date_source": "page byline",
+   "reviewer_quote": "2026 US-India Subnational Innovation Competitiveness Index",
+   "reviewer_reason": "The October 13 page is unrelated to the target electricity tariff; its visible page date is October 13.",
+   "our_leak": "confirmed",
+   "our_published_date": "2026-10-13",
+   "our_page_date": "2026-04-15",
+   "wayback_captures": [
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15"
+   ]
+  }
+ ]
+}

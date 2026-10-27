@@ -69,6 +69,44 @@ interval. Valid evidence kept = returned URLs with `valid_evidence` / all such U
 benchmarks/timelock34/score.py` replays the recorded settings offline; it reproduces the after-retry numbers in
 the two retry files (leak cases, and valid evidence lost = total − kept).
 
+## Independent second review (AI-assisted, ChatGPT agent)
+
+`second_review_chatgpt.csv` is a second, independent label for every result URL (283 rows; `R001` is the first
+result of the first case in `cases.jsonl`, in that order). It was done by a ChatGPT agent, not by a person, and is
+kept as received: a short quote (at most 14 words, from the page), the date relied on and its source, and a reason.
+`compare_review.py` joins it to our labels (it refuses to run if a row's case or URL differs) and writes
+`results/timelock34_second_review.json`.
+
+The two reviews define a leak differently:
+- **ours:** a result dated after the cutoff (`confirmed` when the Wayback Machine also has no capture by then);
+- **the reviewer's:** content that reveals the outcome.
+
+The reviewer decided 137 of 283 rows (LEAK or SAFE); 146 are UNCLEAR, because the live page would not open and
+archive lookups were rate-limited. On the 137 decided rows:
+
+| Our leak = | Agreement | Cohen's kappa |
+|---|---|---|
+| `confirmed` or `date_flag` | 89.1% | 0.76 |
+| `confirmed` only | 75.9% | 0.36 |
+
+Cases with at least one leak, by setting (reviewer vs ours, `confirmed`):
+
+| Set | Setting | Reviewer | Ours |
+|---|---|---|---|
+| date test | `no_dates` | 4 | 10 |
+| date test | `dates`, `dates_filter`, `dates_filter_page_date` | 0 | 0 |
+| finance | `no_dates` | 14 | 10 |
+| finance | `dates_filter` | 1 | 0 |
+
+The date-test gap is mostly the definitions: every date-test row we label a leak that the reviewer called SAFE (9)
+is a post-cutoff page on another topic, which reveals nothing, and 17 more were UNCLEAR. The finance gap goes the
+other way: 3 rows with no date signal after the cutoff were judged LEAK because the page states the result.
+
+**Filtered search, finance:** 0 of 14 filtered searches returned a result dated after the cutoff; an independent
+reviewer found 1 page whose current version leaks the outcome (`R196`, a TCS results preview first published
+7 Jul 2026, the day before the 8 Jul cutoff, and updated 9 Jul with a link to the actual result). Search filters by
+date; Extract reads the page as it is today. Our published labels are not changed.
+
 ## Limits
 
 - **Small.** 34 cases; one setting with 0 leak cases still has an upper 95% bound of about 10% (all 34) or 16–22%
@@ -83,6 +121,14 @@ the two retry files (leak cases, and valid evidence lost = total − kept).
   signal. A page whose only post-cutoff date is written that way gets `date_flag` or `unknown` instead of
   `confirmed`, and the labels here undercount for those pages. Left as is because changing it would change labels
   behind numbers already published.
+- **`page_date` can pick up a date from the body, not the page's own.** The reader (`timelock.dates.page_date`)
+  accepts "published"/"updated" + a date anywhere in the extracted text. On `R010` (a BNEF PDF) it read 2025-11-03
+  from a citation ("Climatescope 2025 … published on Nov. 3, 2025"); the cover says 2026-10-13. On `R020` (an ITIF
+  report) it read 2026-04-15 from a footnote ("… updated April 15, 2026"); the page says 2026-10-13. Both rows are
+  still `confirmed` from Tavily's date and the Wayback captures, so their labels are right; but a wrong page date
+  can let a post-cutoff page through the `dates_filter_page_date` setting. Labels left as published.
+- **The second review used a different leak definition** and is AI-assisted; 146 of its 283 rows are UNCLEAR. It
+  is a cross-check, not ground truth.
 - **India, 2026, English-language news**, Tavily `topic=news`, `search_depth=basic`. Batch dates and Tavily's
   behaviour drift; results may differ when re-run.
 - **Questions are tied to our own pipeline** (CPI items, a fixed event list); no question was tuned on these
