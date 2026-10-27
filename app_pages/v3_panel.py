@@ -4,7 +4,7 @@ import streamlit as st
 
 from shadow_cpi.live_range import THRESHOLD
 
-from app_pages.common import month_name, pct, read_json
+from app_pages.common import SEAL_DATE, month_name, pct, read_json
 
 NAMES = {"v3a": "v3a (tier-weighted evidence)", "v3b": "v3b (equal-weight average of trend, spine and v1)"}
 
@@ -33,7 +33,7 @@ def v3_beside_v1(month):
                        ("Sealed with v1 in one hash bundle (`sealed/" + month + ".bundle.sha256`)." if sealed else
                         "Built, not sealed yet: sealed right after v1."))
         else:
-            st.markdown("Built from v1's sealed inputs and sealed right after v1 on 29 Oct.")
+            st.markdown(f"Built from v1's sealed inputs and sealed right after v1 on {SEAL_DATE:%d %b}.")
         if retro:
             with st.expander("Jan–Sep 2026: retrospective, not a test"):
                 st.caption(f"{retro['label'].capitalize()}: v3 was designed after v1's Jan–Sep scores were public, "

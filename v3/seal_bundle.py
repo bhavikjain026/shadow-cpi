@@ -16,6 +16,7 @@ IST on the 29th of the month, or (real seal) tracked files are uncommitted. No A
 import argparse
 import hashlib
 import json
+import re
 import subprocess
 import sys
 from datetime import datetime, timedelta, timezone
@@ -68,10 +69,13 @@ def git(root, *args):
 
 def run(month, dry_run=False, root=ROOT, now=None, out=print):
     root = Path(root)
+    if not re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])", month) or month.endswith("-02"):
+        raise Refuse(f"month must look like 2026-10 (and have a 29th), got {month!r}")
     n = names(month)
     sealed = root / "sealed"
-    v1_dir = sealed / ("dry-run" if dry_run else "")
-    seal_dir = v1_dir
+    # v1's real seal when it exists (seal day), else v1's dry-run seal; a dry run always writes to sealed/dry-run/
+    v1_dir = sealed if (sealed / n["v1"]).exists() or not dry_run else sealed / "dry-run"
+    seal_dir = sealed / ("dry-run" if dry_run else "")
     now = now or datetime.now(timezone.utc)
     if now > deadline(month):
         raise Refuse(f"past the deadline {deadline(month).isoformat()} (v3 is sealed the same day as v1)")
@@ -97,6 +101,9 @@ def run(month, dry_run=False, root=ROOT, now=None, out=print):
     v3_path = root / "results" / f"v3_nowcast_{month}.json"
     if not v3_path.exists():
         raise Refuse(f"{SM.rel(root, v3_path)} not found: run python -m v3.build {month} --cutoff ... first")
+    if not dry_run and (not git(root, "ls-files", SM.rel(root, v3_path))
+                        or git(root, "status", "--porcelain", "--", SM.rel(root, v3_path))):
+        raise Refuse(f"{SM.rel(root, v3_path)} is not committed: commit it first so the sealed hash is in the repo")
     v3 = json.loads(v3_path.read_text(encoding="utf-8"))
     v1 = json.loads((v1_dir / n["v1"]).read_text(encoding="utf-8"))
     chk = v3.get("inputs_match_v1") or {}
@@ -111,6 +118,9 @@ def run(month, dry_run=False, root=ROOT, now=None, out=print):
     payload = {**v3, "v3_file": SM.rel(root, v3_path), "v3_file_sha256": SM.sha256_file(v3_path),
                "bundle_git_tag": tag, "sealed_at_utc": now.isoformat()}
     seal_dir.mkdir(parents=True, exist_ok=True)
+    if seal_dir != v1_dir:                                   # dry run on seal day: copy v1's pair next to the bundle
+        for k in ("v1", "v1_hash"):
+            (seal_dir / n[k]).write_bytes((v1_dir / n[k]).read_bytes())
     (seal_dir / n["v3"]).write_text(S.canonical(payload), encoding="utf-8")
     (seal_dir / n["bundle"]).write_text(bundle_text(seal_dir, month), encoding="utf-8")
     if not verify(month, seal_dir):

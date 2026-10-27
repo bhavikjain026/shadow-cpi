@@ -52,6 +52,19 @@ def build_retro(inp=None):
             "created_utc": datetime.now(timezone.utc).isoformat()}
 
 
+def committed_retro(root=ROOT):
+    """results/v3_retrospective.json, refused unless today's inputs still give the same half-widths."""
+    p = Path(root) / "results" / "v3_retrospective.json"
+    if not p.exists():
+        raise Refuse("results/v3_retrospective.json not found: run python -m v3.build retro and commit it")
+    saved, fresh = json.loads(p.read_text(encoding="utf-8")), build_retro()
+    for m in V.METHODS:
+        if saved["methods"][m]["half_width"] != fresh["methods"][m]["half_width"]:
+            raise Refuse(f"{m} half-width now {fresh['methods'][m]['half_width']!r}, committed "
+                         f"{saved['methods'][m]['half_width']!r}: the Jan-Sep inputs changed")
+    return saved
+
+
 def check_against_v1(month, cutoff_utc, v1c_yoy, v1_seal, root=ROOT):
     """Refuse unless v3 used exactly v1's sealed inputs. Returns the checks for the output file."""
     root = Path(root)
@@ -70,6 +83,7 @@ def check_against_v1(month, cutoff_utc, v1c_yoy, v1_seal, root=ROOT):
         if now != sealed.get(key):
             raise Refuse(f"{rel}: SHA-256 now {now}, v1 sealed {sealed.get(key)}")
     changed = [f for f in git(root, "diff", "--name-only", sealed["code_commit"], "HEAD").splitlines()
+               + [l[3:] for l in git(root, "status", "--porcelain", "--untracked-files=no").splitlines()]
                if not f.startswith(CODE_FREE)]
     if changed:
         raise Refuse(f"code changed since v1's commit {sealed['code_commit'][:12]}: {', '.join(changed[:5])}")
@@ -100,7 +114,7 @@ def build_live(month, cutoff, v1_seal, gather=default_gather, retro=None, root=R
     inp, missing = gather(month, cutoff)
     pred = V.predict(month, inp)
     checks = check_against_v1(month, cut, pred["v1_c"], v1_seal, root)
-    retro = retro or build_retro()          # the 9 Jan-Sep misses, from v1's scored replay inputs
+    retro = retro or committed_retro(root)  # the 9 Jan-Sep misses, as published
     out = {"target_month": month, "label": "experimental (v3)", "primary": "v3a", "prereg": "v3/PREREG.md",
            "range_label": V.LABEL, "evidence_cutoff_utc": cut, "tier_weights": V.W,
            "created_utc": datetime.now(timezone.utc).isoformat(), "inputs_match_v1": checks,

@@ -152,8 +152,10 @@ def test_bundle_dry_run_then_real_seal(repo):
     fake_v3(repo)
     git(repo, "add", "-A")
     git(repo, "commit", "-qm", "v3 file")
-    with pytest.raises(SB.Refuse, match="v1 seal not found"):
-        SB.run(MONTH, dry_run=True, root=repo, now=BEFORE, out=lambda *_: None)   # no v1 dry-run seal there
+    head = git(repo, "rev-parse", "HEAD")
+    SB.run(MONTH, dry_run=True, root=repo, now=BEFORE, out=lambda *_: None)    # seal day: reads v1's real seal
+    assert SB.verify(MONTH, repo / "sealed" / "dry-run") and git(repo, "rev-parse", "HEAD") == head
+    assert not (repo / "sealed" / f"{MONTH}.bundle.sha256").exists()
     digest = SB.run(MONTH, root=repo, now=BEFORE, out=lambda *_: None)
     assert SB.verify(MONTH, repo / "sealed")
     assert git(repo, "tag", "--list", f"seal-{MONTH}-bundle") and git(repo, "tag", "--list", f"seal-{MONTH}")
@@ -180,3 +182,28 @@ def test_bundle_refuses_late_or_unmatched(repo):
     git(repo, "commit", "-qam", "tamper")
     with pytest.raises(SB.Refuse, match="not built against this v1 seal"):
         SB.run(MONTH, root=repo, now=BEFORE, out=lambda *_: None)
+
+
+def test_bundle_refuses_uncommitted_v3_file_and_bad_month(repo):
+    fake_v3(repo)                                                 # written, not committed
+    with pytest.raises(SB.Refuse, match="not committed"):
+        SB.run(MONTH, root=repo, now=BEFORE, out=lambda *_: None)
+    for bad in ("2026-1", "2027-02"):
+        with pytest.raises(SB.Refuse, match="must look like"):
+            SB.run(bad, root=repo, now=BEFORE, out=lambda *_: None)
+
+
+def test_build_live_refuses_uncommitted_code_edit(repo):
+    (repo / "code.py").write_text("x = 3\n")
+    with pytest.raises(B.Refuse, match="code changed"):
+        fake_v3(repo)
+
+
+def test_committed_retro_refuses_changed_half_width(tmp_path, monkeypatch):
+    saved = json.loads((ROOT / "results" / "v3_retrospective.json").read_text())
+    assert B.committed_retro(ROOT)["methods"]["v3a"]["half_width"] == saved["methods"]["v3a"]["half_width"]
+    saved["methods"]["v3a"]["half_width"] += 0.01
+    (tmp_path / "results").mkdir()
+    (tmp_path / "results" / "v3_retrospective.json").write_text(json.dumps(saved))
+    with pytest.raises(B.Refuse, match="inputs changed"):
+        B.committed_retro(tmp_path)
