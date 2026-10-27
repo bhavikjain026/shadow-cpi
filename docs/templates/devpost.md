@@ -142,6 +142,9 @@ writes the search fields in arms B, C and H ({{super_sent}} calls sent).
 - Reliability: one read timeout and one connection reset each stopped a long run; our client now retries timeouts.
   The `/models` list mixes naming styles (case, `3.5` vs `3_5`), and a vision model sits next to the text models, so
   picking by name needs care.
+- Billing onboarding was confusing: the free trial, a separate promo balance and the 'paid usage after trial' switch
+  were hard to tell apart, and with a card saved we couldn't be sure the card wouldn't be charged, so we kept paid
+  usage off.
 
 **Onboarding, from zero to hello world.** Put the key in `.env`, point any OpenAI-compatible client at the endpoint,
 call `/models`, then one chat completion with a JSON schema: that is `checks.py`, and it passed on the opening call.
