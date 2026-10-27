@@ -9,6 +9,10 @@ def pct(x):
     return "—" if x is None else f"{x:.0%}"
 
 
+def pct1(x):
+    return "—" if x is None else f"{x:.1%}"
+
+
 def f1(x):
     return "—" if x is None else f"{x:.1f}"
 
@@ -187,8 +191,8 @@ if sr:
     st.markdown(f"The reviewer decided **{sr['decided']} of {sr['rows']}** rows (LEAK or SAFE); {sr['unclear']} are "
                 "UNCLEAR, because the live page would not open and archive lookups were rate-limited.")
     ag = sr["agreement"]
-    st.dataframe([{"Our leak =": lab, "Rows": ag[k]["rows"], "Agreement": f"{ag[k]['agreement']:.1%}",
-                   "Cohen's kappa": f"{ag[k]['kappa']:.2f}"}
+    st.dataframe([{"Our leak =": lab, "Rows": ag[k]["rows"], "Agreement": pct1(ag[k]["agreement"]),
+                   "Cohen's kappa": "—" if ag[k]["kappa"] is None else f"{ag[k]['kappa']:.2f}"}
                   for k, lab in (("confirmed_or_date_flag", "confirmed or date_flag"), ("confirmed", "confirmed only"))],
                  hide_index=True, width="stretch")
     st.dataframe([{"Set": t["dataset"].replace("_", " "), "Setting": t["setting"], "Cases": t["cases"],
@@ -200,9 +204,10 @@ if sr:
                 f"{ff['searches_with_result_dated_after_cutoff']} of {ff['searches']} filtered searches returned a "
                 f"result dated after the cutoff; an independent reviewer found {ff['reviewer_leak_pages']} page whose "
                 f"current version leaks the outcome. Example `{ex['row_id']}` ({ex['case']}, cutoff {ex['cutoff']}): "
-                f"first published {ex['our_published_date']}, before the cutoff, then updated {ex['reviewer_date']} "
-                f"with a link to the actual result (reviewer's quote: _{ex['reviewer_quote']}_). A date filter "
-                "checks when a page was first published; Extract returns what the page says now.")
+                f"Tavily's published date {ex['our_published_date']} "
+                f"({'before' if ex['our_published_date'] < ex['cutoff'] else 'not before'} the cutoff); the reviewer "
+                f"relied on the {ex['reviewer_date_source']} {ex['reviewer_date']}. Reviewer: _{ex['reviewer_reason']}_ "
+                f"Quote: _{ex['reviewer_quote']}_.")
 
 # ---------- leaks by source type ----------
 lt = r.get("leak_by_source_type")

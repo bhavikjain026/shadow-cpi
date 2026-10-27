@@ -68,3 +68,26 @@ def test_docs_match_the_results_file_and_never_say_no_leaks():
     ct = rep["crosstab"]["date_test"]
     assert f"called SAFE ({ct['confirmed/SAFE'] + ct['date_flag/SAFE']})" in ds
     assert f"{rep['crosstab']['finance']['unknown/LEAK']} rows with no date signal" in ds
+
+
+def test_datasheet_tables_match_the_results_file():
+    rep = json.loads(CR.OUT.read_text(encoding="utf-8"))
+    ds = (ROOT / "benchmarks/timelock34/DATASHEET.md").read_text(encoding="utf-8")
+    for key, lab in (("confirmed_or_date_flag", "`confirmed` or `date_flag`"), ("confirmed", "`confirmed` only")):
+        a = rep["agreement"][key]
+        assert f"| {lab} | {a['agreement']:.1%} | {a['kappa']:.2f} |" in ds
+    t = {(x["dataset"], x["setting"]): x for x in rep["tasks"]}
+    for (d, s), lab in ((("date_test", "no_dates"), "| date test | `no_dates` |"),
+                        (("finance", "no_dates"), "| finance | `no_dates` |"),
+                        (("finance", "dates_filter"), "| finance | `dates_filter` |")):
+        assert f"{lab} {t[d, s]['reviewer_leak']} | {t[d, s]['ours_confirmed']} |" in ds
+    assert all(t[("date_test", s)]["reviewer_leak"] == t[("date_test", s)]["ours_confirmed"] == 0
+               for s in ("dates", "dates_filter", "dates_filter_page_date"))
+
+
+def test_join_checks_the_cutoff_and_kappa_is_none_when_undefined():
+    cases, review = load_cases(), [dict(r) for r in CR.load_review()]
+    review[0]["cutoff"] = "2026-01-01"
+    with pytest.raises(ValueError, match="R001"):
+        CR.join(cases, review)
+    assert CR.kappa([])["kappa"] is None and CR.kappa([(True, True)] * 3)["kappa"] is None

@@ -34,7 +34,7 @@ one retrieved page contained major post-cutoff leakage ({{lahib_revealed_pct}} r
   `filter_by_published_date`, {{dt_dated}} of {{dt_cases}}.
 - **Finance check** (exploratory; RBI decisions and company results): no dates, {{fin_nodates}} of {{fin_events}}
   on the initial pass, {{fin_nodates_retry}} of {{fin_events}} after the retry; with dates and the filter,
-  {{fin_dated}} of {{fin_events}}. {{sr_fin_dated_after}} of {{sr_fin_searches}} filtered searches returned a result dated after the cutoff; an independent
+  {{fin_dated}} of {{fin_events}} events with a confirmed leak. {{sr_fin_dated_after}} of {{sr_fin_searches}} filtered searches returned a result dated after the cutoff; an independent
   reviewer found {{sr_fin_reviewer_leaks}} page whose current version leaks the outcome (AI-assisted second review).
 - **Check P, full page** (exploratory): of {{p_pages}} pages that passed the date lock, {{p_later}} described a later
   event; most later dates were page furniture ({{p_furniture}} of {{p_flagged}} flagged pages: date bars, sidebars,

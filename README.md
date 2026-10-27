@@ -36,7 +36,7 @@ The Tavily field report (app page "Tavily field report", built by `tools/build_f
 - **Finance check (exploratory, 14 RBI decisions and company results, [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md)).**
   The day-before search with no dates leaked the outcome for 2 of 14 events
   (10 of 14 after the logged archive retry); with dates and the filter,
-  0 of 14. 0 of 14 filtered searches returned a result dated after the cutoff; an independent
+  0 of 14 events with a confirmed leak. 0 of 14 filtered searches returned a result dated after the cutoff; an independent
   reviewer found 1 page whose current version leaks the outcome
   ([`results/timelock34_second_review.json`](results/timelock34_second_review.json)).
 - **Check P, full page (exploratory, [`results/leakcheck_full_page.md`](results/leakcheck_full_page.md)).** Of
