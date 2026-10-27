@@ -15,7 +15,7 @@ month = st.selectbox("Month", months, format_func=month_name,
                      index=months.index("2026-03") if "2026-03" in months else 0)
 if "2026-01" <= month <= "2026-09" and month != "2026-03":
     st.caption("To save credits (cut 2), replay months other than March skipped web price quotes, so they show only the "
-               "government price spine, the official observed series (IBJA, IOCL, PPAC) and announced price "
+               "government food prices, the official observed series (IBJA, IOCL, PPAC) and announced price "
                "changes. March has the full set of web price quotes.")
 man = read_json(f"manifests/{month}.json")
 cols = {"Source": source_column(), "Line": st.column_config.TextColumn("Line", width="large")}
@@ -51,7 +51,7 @@ else:
 
 # ---------- spine ----------
 spine = [r for r in read_csv("data/spine.csv") if r["month"] == month]
-st.subheader("Government price spine (centre monthly averages)")
+st.subheader("Government food prices (centre monthly averages)")
 if spine:
     rows = [{"Item": item_label(r["item"]), "Centre": r["centre"].title(),
              "Average price": f"{float(r['avg_price']):,.2f} {r['unit']}", "Days": r["n_days"]} for r in spine]
@@ -63,7 +63,7 @@ if spine:
     st.caption("Units as printed by DoCA; eggs and milk are labelled Rs./Kg. by the source. The model uses "
                "month-on-month % changes only.")
 else:
-    st.caption("No spine prices for this month.")
+    st.caption("No government food prices for this month.")
 
 # ---------- kept and dropped ----------
 st.subheader("Kept and dropped")

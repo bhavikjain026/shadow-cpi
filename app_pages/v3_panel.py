@@ -6,7 +6,7 @@ from shadow_cpi.live_range import THRESHOLD
 
 from app_pages.common import SEAL_DATE, month_name, pct, read_json
 
-NAMES = {"v3a": "v3a (tier-weighted evidence)", "v3b": "v3b (equal-weight average of trend, spine and v1)"}
+NAMES = {"v3a": "v3a (tier-weighted evidence)", "v3b": "v3b (equal-weight average of trend, government prices and v1)"}
 
 
 def _range(x):
@@ -28,7 +28,7 @@ def v3_beside_v1(month):
                 col.metric(NAMES[m], pct(x["yoy"]))
                 col.markdown(f"80% range: {_range(x)}")
                 if x.get("p_headline_ge_6") is not None:
-                    col.caption(f"P(headline ≥ {THRESHOLD:.1f}%): {x['p_headline_ge_6']:.0%}")
+                    col.caption(f"P(headline ≥ {THRESHOLD:.1f}%): {x['p_headline_ge_6']:.0%} (from a normal-error model)")
             st.caption(f"Ranges {call['range_label']} (split conformal). " +
                        ("Sealed with v1 in one hash bundle (`sealed/" + month + ".bundle.sha256`)." if sealed else
                         "Built, not sealed yet: sealed right after v1."))
@@ -37,7 +37,7 @@ def v3_beside_v1(month):
         if retro:
             with st.expander("Jan–Sep 2026: retrospective, not a test"):
                 st.caption(f"{retro['label'].capitalize()}: v3 was designed after v1's Jan–Sep scores were public, "
-                           "and its ranges are calibrated on these months.")
+                           "and its ranges are calibrated on these same months, so the Jan–Sep hit rate is not a test.")
                 st.dataframe([{"Month": month_name(mm), "Official": pct(r["official"]),
                                **{m: pct(retro["methods"][m]["months"][mm]["pred"]) for m in ("v3a", "v3b")},
                                "v1": pct(retro["v1_c"][mm])} for mm, r in retro["methods"]["v3a"]["months"].items()],

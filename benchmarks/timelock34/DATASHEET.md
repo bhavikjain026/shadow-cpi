@@ -38,7 +38,7 @@ saved request for all 88 search arms, with the same result URLs in the same orde
 ## Labels
 
 Every result URL has one `leak` label, from the experiment's own pre-registered rule, after the logged retry of
-failed Wayback lookups (`results/*_wayback_retry.json`; the first pass is the pre-registered result, the retry only
+failed Wayback lookups (`results/*_wayback_retry.json`; the initial pass is the pre-registered result, the retry only
 recovers lookups that had failed, and left none failed):
 
 | `leak` | Meaning | Date test source label | Finance source label |
@@ -53,7 +53,7 @@ the cutoff and that is on topic (date test: label `P` and the item named in the 
 `/YYYY/MM/DD/` date in the address), `page_date` (explicit published/updated date on the page, date test arm D only),
 `wayback_captures` (capture dates; `null` = lookup failed), `states_outcome` (finance only), and `quote`.
 
-**No page text.** `quote` is at most 25 words: for finance results, the first snippet sentence that matches the
+**No page text.** `quote` is at most 25 words: for finance results, the earliest snippet sentence that matches the
 pre-registered outcome rule; otherwise the page title. It identifies the page; it is not evidence on its own.
 
 ## Scoring
@@ -71,8 +71,8 @@ the two retry files (leak cases, and valid evidence lost = total − kept).
 
 ## Independent second review (AI-assisted, ChatGPT agent)
 
-`second_review_chatgpt.csv` is a second, independent label for every result URL (283 rows; `R001` is the first
-result of the first case in `cases.jsonl`, in that order). It was done by a ChatGPT agent, not by a person, and is
+`second_review_chatgpt.csv` is a second, independent label for every result URL (283 rows; `R001` is the top
+result of the top case in `cases.jsonl`, in that order). It was done by a ChatGPT agent, not by a person, and is
 kept as received: a short quote (at most 14 words, from the page), the date relied on and its source, and a reason.
 `compare_review.py` joins it to our labels (it refuses to run if a row's case or URL differs) and writes
 `results/timelock34_second_review.json`.
@@ -103,7 +103,7 @@ is a post-cutoff page on another topic, which reveals nothing, and 17 more were 
 other way: 3 rows with no date signal after the cutoff were judged LEAK because the page states the result.
 
 **Filtered search, finance:** 0 of 14 filtered searches returned a result dated after the cutoff; an independent
-reviewer found 1 page whose current version leaks the outcome (`R196`, a TCS results preview first published
+reviewer found 1 page whose current version leaks the outcome (`R196`, a TCS results preview originally published
 7 Jul 2026, the day before the 8 Jul cutoff, and updated 9 Jul with a link to the actual result). Search filters by
 date; Extract reads the page as it is today. Our published labels are not changed.
 

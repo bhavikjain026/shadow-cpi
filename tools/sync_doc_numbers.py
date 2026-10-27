@@ -144,7 +144,46 @@ def facts(st, as_of, root=ROOT):
     ff = load("results/timelock34_second_review.json", root)["finance_filtered"]
     f.update(sr_fin_searches=ff["searches"], sr_fin_dated_after=ff["searches_with_result_dated_after_cutoff"],
              sr_fin_reviewer_leaks=ff["reviewer_leak_pages"])
+    sr = load("results/timelock34_second_review.json", root)
+    ex = ff["example"]
+    fin_names = {r["id"]: r["name"] for r in load("results/finance_lookahead.json", root)["rows"]}
+    f.update(sr_rows=sr["rows"], sr_unclear=sr["unclear"], ex_row=ex["row_id"], ex_company=fin_names[ex["case"]],
+             ex_cutoff=day_month(date.fromisoformat(ex["cutoff"])),
+             ex_published=day_month(date.fromisoformat(ex["our_published_date"])),
+             ex_updated=day_month(date.fromisoformat(ex["reviewer_date"])))
     f["leakage_table"] = leakage_table(fr)
+
+    # leaks at three levels. Task and call: results/date_field_test.json and results/finance_lookahead.json (one
+    # search call per task and setting); result: results/field_report.json leak_by_source_type
+    dtr = load("results/date_field_test.json", root)["rows"]
+    fnr = load("results/finance_lookahead.json", root)["rows"]
+
+    def calls(rows, arm, label):
+        sent = [r["arms"][arm] for r in rows if arm in r["arms"]]
+        return len(sent), sum(any(x["label"] == label for x in c["results"]) for c in sent)
+    f["dt_calls_nodates"], f["dt_leak_calls_nodates"] = calls(dtr, "A", "L")
+    f["fin_calls_nodates"], f["fin_leak_calls_nodates"] = calls(fnr, "N", "confirmed")
+    lt = fr["leak_by_source_type"]
+    f.update(lt_results=lt["results"], lt_leaks=lt["leaks"], lt_leaks_dt=lt["leaks_by_arm"]["date test A"],
+             lt_leaks_fin=lt["leaks_by_arm"]["finance N"])
+
+    # what covers "Extract reads the page as it is today": our page-date check (date test arm D), the drift monitor
+    # (v2/radar/drift_2026-10.json via v2.drift), Wayback retries (results/field_report.json)
+    from v2 import drift as DR
+    dta = load("results/date_field_test.json", root)["metrics"]["arms"]
+    f.update(dt_results_filter=dta["C"]["results"], dt_results_pagecheck=dta["D"]["results"],
+             fin_retry_urls=fr["finance"]["retry"]["recovered"])
+    pc = DR.latest(DR.load_state(root / "v2/radar/drift_2026-10.json"))
+    f["drift_phrase"] = (f"no drift run is committed yet, as of {human(as_of)}" if not pc else
+                         f"{pc['changed']} of {pc['checked']} radar pages had changed since they were saved "
+                         f"(run of {pc['ist_date']} IST)")
+
+    # results/custody.json: entries with both a request_id and a response hash
+    cu = load("results/custody.json", root)
+    logged = lambda v: bool(v) and v != cu["not_logged"]                       # noqa: E731
+    f.update(custody_total=len(cu["rows"]),
+             custody_both=sum(any(logged(r.get(f"{s}_request_id")) and logged(r.get(f"{s}_response_sha256"))
+                                  for s in ("search", "extract")) for r in cu["rows"]))
 
     # results/date_field_test.json: undated results per arm
     dm = load("results/date_field_test.json", root)["metrics"]["arms"]
@@ -251,6 +290,18 @@ def facts(st, as_of, root=ROOT):
     f.update(lahib_arxiv=cit["el_lahib_2026"]["arxiv"], lahib_year=cit["el_lahib_2026"]["year"], lahib_pct=f"{cit['el_lahib_2026']['leaked_pct']}%",
              lahib_revealed_pct=f"{cit['el_lahib_2026']['revealed_pct']}%", release_hour=cit["mospi_release"]["time_ist"],
              research_checked=day_month(date.fromisoformat(cit["tavily_research_params"]["checked"][:10])))
+    el = cit["el_lahib_2026"]
+    f.update(lahib_queries=f"{el['queries_min']}–{el['queries_max']}", lahib_urls=el["urls_per_question"])
+    f["related_work"] = "\n".join(f"- **{x['name']}**: {x['what']} ({x['link'] or 'link to be added'})."
+                                  for x in cit["related_work"]["items"])
+
+    # search windows: shadow_cpi/evidence.py (v1 events start this many days before the month), v2/rules.py (cutoff)
+    from shadow_cpi.evidence import EVENT_PRE_DAYS
+    from v2.rules import CUTOFF_DAY
+    f.update(pre_days=EVENT_PRE_DAYS, cutoff_day=f"{CUTOFF_DAY}th")
+    # the one replay month with full web news quotes: the only quote trace the app ships (results/app/tavily_trace_*)
+    (trace,) = sorted((root / "results/app").glob("tavily_trace_*.json"))
+    f["web_quotes_month"] = f"{date.fromisoformat(trace.stem.rsplit('_', 1)[1] + '-01'):%B %Y}"
 
     # examples/timelock_rbi.py: lines of code in the reusable example (blank lines and the docstring not counted)
     src = (root / "examples" / "timelock_rbi.py").read_text(encoding="utf-8")

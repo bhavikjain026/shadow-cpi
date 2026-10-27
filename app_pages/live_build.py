@@ -28,7 +28,7 @@ basket = "tiles" in run
 fast = os.environ.get("SHADOW_CPI_NO_ANIMATION") or st.checkbox("Show the result without the animation")
 pause = 0 if fast else (0.12 if basket else 0.3)
 st.caption(f"{month_name(run['month'])}: evidence published from {run['window'][0]} to the cutoff "
-           f"{run['window'][1]}. Development data under v2/PREREGISTRATION.md (with Amendment A), not a forecast.")
+           f"{run['window'][1]}. Development data under v2/PREREGISTRATION.md (with its logged rule change A), not a forecast.")
 REC = ROOT / "results" / f"replay_{month_name(run['month'])[:3].lower()}.jsonl"
 rec_events = ([json.loads(line) for line in REC.read_text(encoding="utf-8").splitlines() if line.strip()]
               if basket and REC.exists() else [])
@@ -165,7 +165,7 @@ if basket:
         draw_tree(done)
     ev = [cl for c in run["cards"] for cl in c["claims"] if "status" in cl]
     st.markdown(f"**{sum(c['status'] == 'verified' for c in run['item_cards'])} of {len(run['item_cards'])}** "
-                f"spine and official-series items measured · announced price changes: **{len(run['cards'])}** pages "
+                f"government-price and official-series items measured · announced price changes: **{len(run['cards'])}** pages "
                 f"proposed, **{len(ev)}** claims checked, **{sum(cl['status'] == 'verified' for cl in ev)}** verified, "
                 f"**{len(run['moving_events'])}** moving the number.")
     st.markdown(f"Final: **{run['needle']['end']:.3f}%** (v2, development data) · v1 Shadow CPI "
@@ -185,7 +185,7 @@ else:
     for it in run.get("items", []):
         draw_top(it["yoy_after"], None, f"{it['name']} from the {it['source']}" + jump(it))
         st.markdown(f"Milk moves by the **{it['source']}** ({it['detail']}): {it['change'] * 100:+.3f}%. Verified "
-                    "milk events are context only under Amendment A (the spine is milk's source; a city event "
+                    "milk events are context only under logged rule change A (government food prices are milk's source; a city event "
                     "with no statewide confirmation moves nothing).")
 st.caption(f"Credits for this run: {run['credits_spent']} (budget '{run['credits_budget']}'). Each checked claim, "
            "verified or rejected, is in v2/evidence/ledger.jsonl.")

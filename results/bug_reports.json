@@ -1,7 +1,7 @@
 {
  "reports": [
   {
-   "title": "auto_parameters picks a recent time_range when no dates are sent",
+   "title": "auto_parameters picked a recent time_range when no dates were sent (observed in our test)",
    "to": "Tavily",
    "did": "72 searches with auto_parameters: true, a query and max_results only, for months Jan–Sep 2026",
    "happened": "time_range w 57, d 14, m 1; 620 of 659 results dated October 2026, 38 undated",
@@ -19,12 +19,12 @@
    "evidence": "v2/ablation/arm_Td_*.json (plan[].auto_parameters, plan[].dates_kept)"
   },
   {
-   "title": "published_date later than the page's own date",
+   "title": "published_date later than the page's own date (consistent with the documented definition)",
    "to": "Tavily",
    "did": "compared, by code (not a hand check), Tavily's published_date with the page's own published/updated date on the 42 distinct date-test pages that had both (sample: results/date_field_test.json)",
    "happened": "4 had a later published_date (3 by more than 7 days; largest gap 345 days)",
-   "expected": "published_date equal to the page's first-publication date",
-   "fix": "return first-published and last-updated separately",
+   "expected": "nothing different: this is consistent with Tavily's documented definition of published_date (published or last updated, beta)",
+   "fix": "suggestion: separate original-publication and last-modified fields",
    "evidence": "results/date_field_test.json (rows[].arms[].results[].tavily_date, page_date)"
   },
   {
@@ -62,6 +62,15 @@
    "expected": "a number whenever the cited line states one",
    "fix": "a schema-level 'required number when a currency or % is present' hint, or a confidence field",
    "evidence": "v2/ablation/arm_*.json, v2/evidence/events_*.json (cards[].super_reread, claims[].read_by)"
+  },
+  {
+   "title": "Extract reads the page as it is today (suggestion)",
+   "to": "Tavily",
+   "did": "14 finance-check searches with start_date/end_date and filter_by_published_date, then an independent AI-assisted second review of every result page (post-hoc)",
+   "happened": "0 of 14 searches returned a result dated after the cutoff, yet 1 page's current version leaks the outcome: R196 was dated 2026-07-07 (cutoff 2026-07-08) and updated on 2026-07-09",
+   "expected": "a way for a time-locked user to tell that the page Extract returns changed after the cutoff",
+   "fix": "an as-of / crawl-date field for Extract, so time-locked users can tell if a page changed",
+   "evidence": "results/timelock34_second_review.json (finance_filtered.example)"
   }
  ]
 }

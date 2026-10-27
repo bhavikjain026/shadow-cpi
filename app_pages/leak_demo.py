@@ -41,7 +41,7 @@ def case_title(c):
 def result_line(r, test):
     page = human(r["page_date"]) if test == "date" else "not read in this test"
     return (f"{link(r['title'], r['url'])}  \nTavily published_date **{human(r['published_date'])}** · page date {page}"
-            f" · **{r['label']}**" + (f" (first pass: {r['label_first_pass']})"
+            f" · **{r['label']}**" + (f" (initial pass: {r['label_first_pass']})"
                                       if r.get("label_first_pass") and r["label_first_pass"] != r["label"] else ""))
 
 
@@ -83,7 +83,7 @@ def totals(t, n):
                      "Tavily time lock": cell(x["locked"]["first"], n, x["locked"]["first_wilson95"]),
                      "Time lock, after retry": cell(x["locked"]["retry"], n, x["locked"]["retry_wilson95"])})
     st.table(rows)
-    st.caption(f"Files: `{d['source']}`, `{f['source']}`. Wilson 95% intervals in brackets. The first pass is the pre-registered result; the retry only "
+    st.caption(f"Files: `{d['source']}`, `{f['source']}`. Wilson 95% intervals in brackets. The initial pass is the pre-registered result; the retry only "
                "recovered Wayback lookups that had failed on the network (logged). A confirmed leak needs the "
                "Wayback Machine to show the page appeared after the cutoff.")
     st.markdown(f"**The cost of strictness.** The time lock also drops good evidence: the dated search missed "
@@ -113,7 +113,7 @@ def live():
     st.session_state.setdefault("live_runs", 0)
     if go:
         if not q.strip():
-            st.warning("Type a question first.")
+            st.warning("Type a question to start.")
             return
         ok, msg = L.gate(st.session_state["live_runs"], tavily_only=True)
         if not ok:

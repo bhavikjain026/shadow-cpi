@@ -37,7 +37,7 @@ with st.container(border=True):
         cov = call.get("coverage", {})
         if cov:
             st.progress(min(max(cov["observed"], 0.0), 1.0),
-                        text=f"{cov['observed']:.0%} of the basket measured, {cov['carried']:.0%} carried on trend")
+                        text=f"{cov['observed']:.0%} of the basket measured, {cov['carried']:.0%} assumed to follow its recent trend")
         if call.get("contributors"):
             st.dataframe([{"Group": c["name"], "Contribution (percentage points)": f"{c['pp']:+.2f}"}
                           for c in call["contributors"][:3]],
@@ -98,12 +98,12 @@ if au:
     with st.container(border=True):
         st.subheader("Independent audit")
         v = au["verdicts"]
-        st.markdown(f"**{au['events_checked']} events checked** by hand: {v['correct']} correct, {v['partly']} "
-                    f"partly, {v['wrong']} wrong, {v['unclear']} unclear; {au['second_source']} confirmed by a "
-                    "second source.")
+        st.markdown(f"**{au['events_checked']} events checked** (AI-assisted audit; pages then opened in a browser): "
+                    f"{v['correct']} correct, {v['partly']} partly, {v['wrong']} wrong, {v['unclear']} unclear; "
+                    f"{au['second_source']} of {au['events_checked']} confirmed by another outlet (the audit's web search).")
         st.markdown(f"**Fixes made:** {len(au['fixes'])} general rules (retail only, the CPI fuel grade, national "
                     f"vs regional scope, no double counting). Events {au['events_before_fixes']} → "
-                    f"{au['events_after_fixes']}.")
+                    f"{au['events_after_fixes']} (events dropped or merged by the fixes).")
         st.markdown(f"**Recall:** {au['found_directly']} of {au['reference_changes']} known retail price changes "
                     f"found directly; {au['found_incl_official_series']} of {au['reference_changes']} including the "
                     "official series (IOCL LPG, PPAC petrol).")
@@ -131,7 +131,7 @@ def show_run(r, note=""):
         w0, w1 = r["evidence_window"]
         st.caption(f"Evidence window {w0} to {w1} ({month_name(r['month'])}, plus the last {r['pre_days']} days "
                    f"before it for announcements) · replayed from saved results on {r['replayed_on']} · "
-                   f"{r['n_searches']} searches · {r['credits']} credits when first run (0 now).")
+                   f"{r['n_searches']} searches · {r['credits']} credits when originally run (0 now).")
     if r.get("events"):
         st.dataframe([{"Item": item_label(e["item"]), "Source": e["url"], "Place": e.get("place", ""),
                        "Change": f"{e['pct_change']:+.2f}%", "Effective": e["effective_date"],

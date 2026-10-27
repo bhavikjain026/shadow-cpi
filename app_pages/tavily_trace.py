@@ -23,7 +23,7 @@ st.dataframe([{"Stage": f["stage"], "Count": str(f["n"]), "From": f["source"]} f
              hide_index=True, width="stretch")
 used = t["funnel"][-1].get("detail", {})
 if used:
-    kinds = {"spine": "government price spine", "observed": "official observed series (IBJA, IOCL, PPAC)",
+    kinds = {"spine": "government food prices", "observed": "official observed series (IBJA, IOCL, PPAC)",
              "event+trend": "announced price changes"}
     groups = {}
     for code, d in used.items():
@@ -45,7 +45,7 @@ st.caption("Map returned no addresses on the government and PSU sites tried, wit
            "PDFs whose tables are images, so Extract returns only the letterhead.")
 
 # ---------- Amendment E: searches written by Nemotron ----------
-st.subheader("Searches written by Nemotron (v2, Amendment E)")
+st.subheader("Searches written by Nemotron (v2, logged rule change E)")
 st.caption("DEVELOPMENT data. In arms B and C, Nemotron Nano (Super if Nano fails) writes each search as JSON: query, "
            "language, topic, dates, domains and how to use them, number of results. Code checks every parameter "
            "before the call (dates inside the window, allowed values only, at most 20 domains) and logs each "

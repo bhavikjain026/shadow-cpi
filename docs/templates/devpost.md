@@ -12,30 +12,39 @@ move, verifies every quote on the page, and seals India's inflation forecast bef
 
 ## Short description
 <!-- short:start -->
-Shadow CPI is an AI agent that forecasts India's official CPI inflation from the web without looking ahead. It writes
-its own Tavily searches inside a time lock it cannot move, verifies every quote on the page with Tavily Extract and
-NVIDIA Nemotron, lets plain code compute the number, and seals the {{live_month}} nowcast with a SHA-256 fingerprint
-and a git tag before MoSPI publishes on {{release_day}}. We measured Tavily's date filters: with no dates,
-{{dt_nodates}} of {{dt_cases}} replay cases leaked a page that did not exist yet; with start and end dates plus the
-published-date filter, {{dt_dated}} of {{dt_cases}}. In a {{replay_span}} replay it missed by {{mae_c}} percentage points on
-average, against {{mae_trend}} for trend-only; on poll months it was about a tie with economists ({{mae_poll_c}} vs
-{{mae_poll}}).
+Shadow CPI is a Tavily-grounded nowcast of India's official Consumer Price Index (CPI) inflation that tests, rather
+than assumes, Tavily's date controls and measures what they cost. An AI agent writes its own Tavily searches inside a
+time lock it cannot move, verifies every quote on the page with Tavily Extract and NVIDIA Nemotron, lets plain code
+compute the number, and seals the {{live_month}} nowcast with a SHA-256 fingerprint and a git tag before the Ministry
+of Statistics (MoSPI) publishes on {{release_day}}. With no dates, {{dt_nodates}} of {{dt_cases}} replay cases leaked a
+page that did not exist yet; with dates and the published-date filter, {{dt_dated}} of {{dt_cases}}. In a
+{{replay_span}} replay it missed by {{mae_c}} percentage points on average, against {{mae_trend}} for trend-only; on
+poll months it was about a tie with economists ({{mae_poll_c}} vs {{mae_poll}}).
 <!-- short:end -->
 
 ## Inspiration
 India's CPI arrives about {{release_lag}} days after the month ends. Forecasting it from the web means replaying past
 months, and a replay that reads a page published after its cutoff looks better than it could ever be live. El Lahib et
-al. ({{lahib_year}}, arXiv {{lahib_arxiv}}) found that on Google, for {{lahib_pct}} of forecasting questions, at least
-one retrieved page contained major post-cutoff leakage ({{lahib_revealed_pct}} revealed the answer directly). We found no published audit of Tavily's date filters, so we measured it.
+al. ({{lahib_year}}, arXiv {{lahib_arxiv}}) found that {{lahib_pct}} of Google-audited questions had at least one major
+post-cutoff page, after {{lahib_queries}} queries and about {{lahib_urls}} URLs each; our {{dt_nodates}}/{{dt_cases}}
+is per search task, so the rates are not directly comparable. So we built a nowcast that tests, rather than assumes,
+Tavily's date controls and measures what they cost.
+
+## Related work
+{{related_work}}
 
 ## Time-locked search leakage
 - **Date test** (pilot, pre-registered): no dates, {{dt_nodates}} of {{dt_cases}} cases leaked
   ({{dt_nodates_retry}} of {{dt_cases}} after a logged archive retry); `start_date`/`end_date` +
   `filter_by_published_date`, {{dt_dated}} of {{dt_cases}}.
-- **Finance check** (exploratory; RBI decisions and company results): no dates, {{fin_nodates}} of {{fin_events}}
+- **Finance check** (exploratory; Reserve Bank of India (RBI) decisions and company results): no dates, {{fin_nodates}} of {{fin_events}}
   on the initial pass, {{fin_nodates_retry}} of {{fin_events}} after the retry; with dates and the filter,
   {{fin_dated}} of {{fin_events}} events with a confirmed leak. {{sr_fin_dated_after}} of {{sr_fin_searches}} filtered searches returned a result dated after the cutoff; an independent
   reviewer found {{sr_fin_reviewer_leaks}} page whose current version leaks the outcome (AI-assisted second review).
+- **Leaks at three levels, no dates:** task {{dt_nodates}} of {{dt_cases}} (date test) and {{fin_nodates}} of
+  {{fin_events}} (finance, initial pass); call {{dt_leak_calls_nodates}} of {{dt_calls_nodates}} and
+  {{fin_leak_calls_nodates}} of {{fin_calls_nodates}} (one search per task); result (exploratory, counted after
+  scoring) {{lt_leaks}} of {{lt_results}}, all from searches with no date window.
 - **Check P, full page** (exploratory): of {{p_pages}} pages that passed the date lock, {{p_later}} described a later
   event; most later dates were page furniture ({{p_furniture}} of {{p_flagged}} flagged pages: date bars, sidebars,
   related links).
@@ -47,6 +56,18 @@ one retrieved page contained major post-cutoff leakage ({{lahib_revealed_pct}} r
 
 {{leakage_table}}
 
+## Search filters by date; Extract reads the page as it is today
+A page dated before the cutoff can be updated after it, and Extract returns the updated page. Example (AI-assisted
+second review, post-hoc): `{{ex_row}}`, a {{ex_company}} results preview, cutoff {{ex_cutoff}}; Tavily dated it
+{{ex_published}}, and the page was updated on {{ex_updated}} with a link to the actual result. {{sr_fin_dated_after}}
+of {{sr_fin_searches}} filtered searches returned a result dated after the cutoff; an independent reviewer found
+{{sr_fin_reviewer_leaks}} page whose current version leaks the outcome. What covers the gap, partly: our page-date
+check (kept {{dt_results_pagecheck}} of {{dt_results_filter}} filtered results in the date test; valid evidence
+lost: {{dt_lost_pagecheck}} of {{dt_valid_total}} with it, {{dt_lost_filter}} with the filter alone); the drift monitor, which re-reads October radar
+pages daily ({{drift_phrase}}); and Wayback Machine checks, with failed lookups retried and logged
+({{dt_retry_urls}} in the date test, {{fin_retry_urls}} in the finance check; {{sr_unclear}} of {{sr_rows}} second-review rows stayed unclear, partly
+from archive rate limits).
+
 ## Let the model program its filters, inside a time lock it cannot move
 Building on Tavily's dynamic-filtering idea, we let Nemotron write the search fields and tested it on
 {{known_changes}} known price changes: code templates (arm A) found {{arm_a_recall}}, Nemotron-written fields (arms B
@@ -54,12 +75,12 @@ and C) {{arm_b_recall}} and {{arm_c_recall}}, `auto_parameters` (arm T) {{arm_t_
 (templates + model-chosen fields) {{arm_h_recall}}, and T+dates {{arm_td_recall}}. The model's fields were always
 valid ({{bc_fields_valid}} of {{bc_fields}}; {{arm_h_fields_valid}} of {{arm_h_fields}} in arm H), but fixed
 templates found more; the likely cause is source choice (arm H differed from A only in domains and language).
-`auto_parameters` with no dates assumes "now": {{auto_oct}} of {{auto_results}} results came from {{live_month}}.
+Observed in our test, `auto_parameters` with no dates assumed "now": {{auto_oct}} of {{auto_results}} results came from {{live_month}}.
 So the model chooses the query, topic, domains and language; code owns the dates.
 
 ## How it works
-1. **Tavily Search proposes** pages, every call with `start_date`/`end_date` and `filter_by_published_date`; code
-   re-checks each date.
+1. **Tavily Search proposes** pages, every call with `start_date`/`end_date` (the later time-locked searches also send
+   `filter_by_published_date`; v1's frozen search used the dates plus our page-date check); code re-checks each date.
 2. **Tavily Extract verifies the quote:** Nemotron cites a numbered line, and code checks the number is in that exact
    line. A model never writes a quote.
 3. **Plain code computes:** index levels combined with MoSPI's official weights; year-on-year last.
@@ -92,9 +113,12 @@ poll's {{mae_poll}}, about a tie. The {{range_level}} range held in {{inside}} o
 better ({{mae_v2}}).
 
 ## What we found about Tavily (bug reports)
-- `auto_parameters` ignores time-locked intent: {{auto_oct}} of {{auto_results}} results from {{live_month}} on
+- `auto_parameters` did not follow time-locked intent (observed in our test): {{auto_oct}} of {{auto_results}} results from {{live_month}} on
   searches about past months.
-- `published_date` can be later than the page's own date: {{pd_later}} of {{pd_pages}} distinct pages.
+- `published_date` can be later than the page's own date: {{pd_later}} of {{pd_pages}} distinct pages, consistent with
+  Tavily's documented definition (published or last updated, beta). Suggestion: separate original-publication and
+  last-modified fields.
+- Suggestion: an as-of / crawl-date field for Extract, so time-locked users can tell if a page changed.
 - Undated pages are dropped by the filter ({{dt_undated_nodates}} undated results with no dates,
   {{dt_undated_filter}} with the filter).
 - The Research endpoint has no date window (checked in the API reference on {{research_checked}}; not measured).
@@ -104,12 +128,17 @@ better ({{mae_v2}}).
 
 ## Honest limits
 {{cov_low}}–{{cov_high}} of the basket measured each month; recall {{arm_a_recall}} of {{known_changes}}; small
-samples with Wilson intervals; request IDs logged only on later arms; direct non-Tavily sources (MoSPI API, DoCA
-download, Wayback lookups); quote check {{q_verbatim}} verbatim, {{q_paywalled}} paywalled, {{q_not_checked}} not
-checked; a value-of-information score was dropped rather than tuned.
+samples with Wilson intervals; {{custody_both}} of {{custody_total}} custody entries have both a request_id and a
+response hash (later arms only); direct non-Tavily sources (MoSPI API, Department of Consumer Affairs (DoCA) download,
+Wayback lookups); quote check (AI-assisted audit; pages then opened in a browser) {{q_verbatim}} verbatim,
+{{q_paywalled}} paywalled, {{q_not_checked}} not checked; web news quotes ran in full only for {{web_quotes_month}}; searches
+start {{pre_days}} days before the month, and v1's replay ran to month-end while the live seal stops at the
+{{cutoff_day}}; v1 used `start_date`/`end_date` plus our own page-date check, and `filter_by_published_date` came later
+(date test, radar, `timelock/`); an Uttar Pradesh (UP) electricity surcharge that may have been put on hold is left in
+the score; a value-of-information score was dropped rather than tuned.
 A Hindi substring match ('rail' inside 'domestic') turned a Jharkhand power tariff into a 'Bihar rail' event. Our
 manual check caught it; the fix (whole-word matching, state from the page) removed the event, so the October radar
-has {{radar_events_phrase}}. Logged as Amendments `R2`–`R3`, with before and after.
+has {{radar_events_phrase}}. Logged as rule changes `R2`–`R3`, with before and after.
 
 ## Built with
 Python, Streamlit, Tavily (Search, Extract; Map and Crawl trialled), NVIDIA Nemotron on Nebius Token Factory. Tavily

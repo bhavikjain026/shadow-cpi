@@ -11,6 +11,11 @@ if not d:
     st.info("Not built yet: run `python tools/build_custody.py` (offline, 0 credits).")
     st.stop()
 rows = d["rows"]
+logged = lambda v: bool(v) and v != d["not_logged"]                       # noqa: E731
+both = sum(any(logged(r.get(f"{s}_request_id")) and logged(r.get(f"{s}_response_sha256")) for s in ("search", "extract"))
+           for r in rows)
+st.caption(f"{both} of {len(rows)} entries have both a request_id and a response hash; they were logged only for the "
+           "later runs (arms C, T, T+dates, H and the radar), and earlier runs say 'not logged'.")
 sources = sorted({r["source"] for r in rows})
 src = st.selectbox("Source", sources, index=sources.index("radar") if "radar" in sources else 0)
 pick = [r for r in rows if r["source"] == src]

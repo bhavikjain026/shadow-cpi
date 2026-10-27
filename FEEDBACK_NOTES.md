@@ -8,7 +8,7 @@ Flight-recorder ids below are the `id` field of a log line.
 
 ## Nebius Token Factory / Nemotron
 
-**2026-10-20 · Good: JSON-schema output worked first time.** `checks.py` asked the small model for a strict
+**2026-10-20 · Good: JSON-schema output worked on the opening call.** `checks.py` asked the small model for a strict
 JSON-schema answer and got `{"ok": true, "n": 3}`. Evidence: `results/feedback_evidence/checks_report_2026-10-20.txt` line "[PASS] Nemotron JSON output";
 model roles saved in `config/models.json`.
 
@@ -59,17 +59,20 @@ Evidence: flight-recorder id `e2752c0e8610` (tag `check-pdf`); `data/evidence/ib
 `7ffa739997c5`, `4d43b3880b46`, `bb0eedc117c8` (tag `poll-…`, `n_failed: 4`, `n_results: 0`); `data/poll.csv`
 (`evidence_from` column).
 
-**2026-10-20 · Friction: an Extract call where every URL failed was still charged 1 credit.** 14 Extract calls
+**2026-10-20 · Lead to check (not a confirmed report): an Extract call where every URL failed was still charged 1 credit.** 14 Extract calls
 returned `n_results: 0` with all URLs failed but `usage.credits: 1` (Reuters, IBJA holiday dates, IOCL, PPAC
 archive pages, data.gov.in / CEDA / India Data Portal). Evidence: flight-recorder ids `7ffa739997c5`,
 `180135a378bd`, `85b457cc1b31`, `06a34a62869b`, `c39786c1cf2e` (and others with `n_results: 0`, `credits: 1`).
+These calls predate our request-ID logging: neither the flight recorder nor the credit ledger
+(`results/credit_ledger.jsonl`) holds a Tavily request ID for any of them, so Tavily cannot look them up. Treat it as
+a lead to re-test with request IDs logged, not as a confirmed billing report.
 
 **2026-10-20 · Good: small successful Extract calls reported 0 credits.** Several 1-URL Extract calls that
 succeeded reported `usage.credits: 0`. Evidence: flight-recorder ids `e2752c0e8610`, `7778ee7d7b62`, `3230d82cc191`.
 
 **2026-10-20 · Friction: the Consumer Affairs price site does not work with Tavily Extract.** Extract on
 `fcainfoweb.nic.in/Reports/DB/DBprices_W.aspx` failed after 27 s; the logged direct download got the page. (Its
-report menu also has a CAPTCHA, so the spine is downloaded by hand.) Evidence: flight-recorder ids `d33700c7f687`
+report menu also has a CAPTCHA, so the government food prices are downloaded by hand.) Evidence: flight-recorder ids `d33700c7f687`
 (Tavily, `n_failed: 1`, 27,307 ms) and `afa7fe7787a2` (service `direct`).
 
 **2026-10-20 · Friction: JavaScript-rendered data pages return nothing.** Extract failed on the data.gov.in catalog
@@ -143,8 +146,8 @@ in the list, so the May 2026 milk rise could not be checked on the dairy's own s
 back as 607 characters of letterhead with basic and with advanced Extract; the rates themselves are not readable as
 text. The advanced call cost 1 credit. Evidence: flight-recorder ids `a8ce5681fcf2` (basic), `633dd10b693e` (advanced).
 
-**2026-10-22 · Friction: auto_parameters with no dates chose time_range=w.** In our pre-registered arm T
-(`v2/PREREGISTRATION.md`, Amendment F), 72 searches sent only `query`, `auto_parameters: true` and `max_results`.
+**2026-10-22 · Friction (observed in our test): auto_parameters with no dates chose a recent time_range.** In our
+pre-registered arm T (`v2/PREREGISTRATION.md`, logged rule change F), 72 searches sent only `query`, `auto_parameters: true` and `max_results`.
 auto_parameters with no dates chose recent windows, not always "w": `time_range` w 57, d 14, m 1 of 72 searches
 (topic news in 71; advanced depth in 49, basic in 23). 620 of 659 results were dated October 2026, 1 September 2026
 and 38 undated, and 0 of
@@ -194,3 +197,12 @@ search with `start_date`/`end_date`. So a page-type filter would not have stoppe
 Suggestion: say in the Search docs that the date parameters are what keep later articles out of a historical search,
 and consider returning a page-type field (article / live blog / listing) so users can audit results. Evidence:
 `results/field_report.json` (`leak_by_source_type`), `v2/leak_types.py`.
+
+**2026-10-27 · Suggestion: an as-of / crawl-date field for Extract.** Search filters by date; Extract reads the page
+as it is today. In the finance check, filtered searches returned no result dated after the cutoff, yet an independent
+AI-assisted second review (post-hoc) found a page whose current version leaks the outcome: a results preview dated
+before the cutoff and updated after it with a link to the actual result. An as-of or crawl-date field on Extract
+would let time-locked users tell if a page changed. Related: `published_date` later than a page's own date is
+consistent with Tavily's documented definition (published or last updated, beta); separate original-publication and
+last-modified fields would help. Evidence: `results/timelock34_second_review.json` (`finance_filtered`),
+`docs/tavily_bug_reports.md` (reports 3 and 8).

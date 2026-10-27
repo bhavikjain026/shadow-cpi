@@ -8,7 +8,12 @@
     "source": "https://arxiv.org/abs/2602.00758",
     "revealed_pct": 41,
     "quote": "at least one retrieved page contains major post-cutoff leakage for 71% of questions on Google",
-    "checked": "2026-10-26, by the owner, against the arXiv abstract"
+    "checked": "2026-10-26, by the owner, against the arXiv abstract",
+    "queries_min": 10,
+    "queries_max": 20,
+    "urls_per_question": 100,
+    "audit_scope": "Google-audited questions; each question had 10-20 queries and about 100 retrieved URLs",
+    "audit_scope_added": "2026-10-27, from the owner's task card; not re-read offline"
   },
   "mospi_release": {
     "time_ist": "4 pm",
@@ -32,5 +37,32 @@
     "what": "the Tavily Research request body: no date parameter",
     "source": "https://docs.tavily.com (API reference, Research endpoint)",
     "checked": "2026-10-26, by the owner, in the API reference; not measured"
+  },
+  "related_work": {
+    "_note": "One line each in README/Devpost 'Related work'. link null = not checked offline; rendered as 'link to be added'.",
+    "items": [
+      {
+        "name": "El Lahib et al. 2026",
+        "what": "audits post-cutoff leakage in Google and DuckDuckGo retrieval for forecasting questions",
+        "link": "https://arxiv.org/abs/2602.00758",
+        "from": "el_lahib_2026"
+      },
+      {
+        "name": "OracleProto",
+        "what": "uses Tavily's end_date as a leakage barrier for retrieval-based forecasting",
+        "link": null
+      },
+      {
+        "name": "LiveMacroEval",
+        "what": "evaluates live nowcasts of US macroeconomic releases",
+        "link": null
+      },
+      {
+        "name": "Paleka et al.",
+        "what": "pitfalls in evaluating language-model forecasters, including retrieval leakage",
+        "link": null
+      }
+    ],
+    "added": "2026-10-27, from the owner's task card; links not checked offline"
   }
 }

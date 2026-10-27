@@ -229,4 +229,4 @@ def v2_comparison():
                "pre-registered rule. Rule set before scoring: v2 counts as better only with a lower average miss AND "
                f"more than {rc['v1_found']} changes found → "
                + ("met" if rc["v2_better_than_v1"] else "not met: v1 stays the headline") + ". Scored once "
-               "(v2/PREREGISTRATION.md, Amendments A–D).")
+               "(v2/PREREGISTRATION.md, logged rule changes A–D).")

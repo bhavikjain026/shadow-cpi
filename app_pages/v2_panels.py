@@ -39,14 +39,14 @@ def what_tavily_adds(run):
                     width="stretch")
     if adds:
         b = adds["bars"]
-        st.caption(f"Trend only {adds['start']:.3f}%; government spine {b[0]['pp']:+.3f} pp; official series via "
+        st.caption(f"Trend only {adds['start']:.3f}%; government food prices {b[0]['pp']:+.3f} pp; official series via "
                    f"Tavily Extract {b[1]['pp']:+.3f} pp; announced changes via Tavily Search {b[2]['pp']:+.3f} pp; "
                    f"carving measured items out of their groups {b[3]['pp']:+.3f} pp; final {adds['end']:.3f}%. Each "
                    f"step counts against the item's own trend, so evidence equal to that trend adds 0. Official figure "
                    f"{run['official']:.2f}%. v2 on development data ({run['month']}, cutoff {run['cutoff']}).")
     else:
         s = run["stages"]
-        st.caption(f"Spine only {s[0]['yoy']:.3f}% → with official series {s[1]['yoy']:.3f}% → with announced "
+        st.caption(f"Government food prices only {s[0]['yoy']:.3f}% → with official series {s[1]['yoy']:.3f}% → with announced "
                    f"changes {s[2]['yoy']:.3f}%. Official figure {run['official']:.2f}%. v2 on development data "
                    f"({run['month']}, cutoff {run['cutoff']}).")
 
@@ -56,7 +56,7 @@ def time_machine(run, key="tm"):
     tm = run["time_machine"]
     days = [r["date"] for r in tm]
     st.caption(f"**Time machine: {TIME_LABEL}.** Official series use their daily rows up to the chosen day, "
-               "announced price changes count from the day their page was published, and the government spine "
+               "announced price changes count from the day their page was published, and government food prices "
                "(a monthly average with no daily prices) enters only on the cutoff day.")
     day = st.select_slider("Date", options=days, value=days[-1], key=key)
     row = next(r for r in tm if r["date"] == day)

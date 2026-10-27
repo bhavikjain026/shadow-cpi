@@ -15,7 +15,9 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
 - **Only 9 test months** (January to September 2026). The 2024-base series has indices only from January 2025, and 2025 is kept for calibration, so there is no longer history to test on. Nine months is too few to be sure that one method is better than another, and small differences in mean miss may be luck.
 - **The 80% range comes from those same 9 replay misses.** With so few months, the range is itself uncertain.
 - **Replays search today's web with date filters.** Tavily's published date is a best estimate. The code also checks dates written inside pages, and it drops pages that state the official figure for the month. Still, a replay can never perfectly recreate what was on the web at the time.
-- **v1's replay windows ran to each month's last day; a live seal uses evidence up to the 29th, so the replay was slightly easier than live conditions.**
+- **v1's replay windows ran to each month's last day; a live seal uses evidence up to the 29th, so the replay was slightly easier than live conditions.** Both start 10 days before the month, so that announcements made just before a change takes effect are found (`docs/frozen_rules.md`).
+- **v1 used start/end_date plus our own page-date check; filter_by_published_date came later (date test, radar, timelock).** v1's frozen evidence search (`shadow_cpi/evidence.py`, `fetch_pages`) does not send the filter. v1 is frozen, so this is disclosed, not changed.
+- **Search filters by date; Extract reads the page as it is today.** A page dated before the cutoff can be updated after it, and Extract returns the updated page. Our page-date check, the October drift monitor and Wayback Machine checks each cover part of this gap, not all of it; numbers in the README section of the same name.
 - **2025 is calibration only.** The pass-through factors were fitted on 2025, and nothing was tuned on the 2026 test months. That keeps the test fair, but the factors may not hold in a new series.
 
 ## Strong baselines
@@ -31,7 +33,7 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
 ## How much of the basket we actually see
 - Only some items are measured in a given month. The rest of the basket (most services, rents, clothing and so on) is **assumed to follow its recent trend**. The app shows this split every month as the coverage meter. In the replay, 14–21% of the basket was measured each month and the rest followed its trend.
 - **The 80% range is too narrow.** In the replay, the official figure fell inside the leave-one-out 80% range in only 5 of 9 months. With 9 months of misses the range is itself uncertain.
-- **How the October and November range is built (decided after scoring).** Because 5 of 9 is too few, the live-month range is wider and is not the pre-registered one: it is the prediction plus or minus the 80th percentile of the 9 scored misses of (c), ignoring their sign (± 0.284 pp), and never narrower than the pre-registered range. It is symmetric, so it no longer leans upward the way (c)'s misses did (it under-predicted in 7 of 9 months). The change was made after seeing the scores, so the 80% label is a judgement, not a tested property; the scored months keep their original ranges and the 5-of-9 figure. The chance that the headline is 6.0% or more (the RBI's Q3 projection) is read from the same range, assuming the miss is normally distributed. Nine misses cannot check that assumption. Details: `docs/frozen_rules.md`, `docs/after_scoring_changes.md`.
+- **How the October and November range is built (decided after scoring).** Because 5 of 9 is too few, the live-month range is wider and is not the pre-registered one: it is the prediction plus or minus the 80th percentile of the 9 scored misses of (c), ignoring their sign (± 0.284 pp), and never narrower than the pre-registered range. It is symmetric, so it no longer leans upward the way (c)'s misses did ((c) came in below the official figure in 7 of the 9 months; this is a different count from the 7 of 9 months in which (c) called the direction right, `results/score_lock.json` `direction_hits`). The change was made after seeing the scores, so the 80% label is a judgement, not a tested property; the scored months keep their original ranges and the 5-of-9 figure. The chance that the headline is 6.0% or more (the RBI's Q3 projection) is read from the same range, assuming the miss is normally distributed. Nine misses cannot check that assumption. Details: `docs/frozen_rules.md`, `docs/after_scoring_changes.md`.
 - **Government food prices alone did not beat trend.** Food-prices-only (b) missed by 0.225 pp against 0.212 for trend-only; the gain came with the observed gold, silver, LPG and petrol series and the events (c: 0.194 after the audit's bug fixes; 0.185 before).
 - A tracked item moves only its own weight (the carve-out). If a big price change happens in something we don't track, we will miss it.
 
@@ -47,9 +49,11 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
   2026-10-25 by Claude Code: 10 quotes verbatim (9 in the article text, 1 in the page title only), 1 paywalled, 1 not checked (the browser refuses Times of India) (`audit/quote_check.md`). **This differs from
   the 9/1/2 tally reported earlier by Eshan; ours is used everywhere**, with the page date seen for each row. One
   quote is verbatim only in the page's title, not its article text. Eshan audited the 12 verified test-month events
-  by web search (`audit/event_audit.md`, PR #4): 5 correct, 3 partly, 3 wrong, 1 unclear. Confirmed by another
-  outlet: 9 of 12 (audit, other outlets). Confirmed by Tavily's evidence chase: 5 of 12 (before the fixes) and 4 of
-  9 (after them).
+  by web search (`audit/event_audit.md`, PR #4): 5 correct, 3 partly, 3 wrong, 1 unclear. Three different
+  confirmation counts, not to be mixed up: **confirmed by another outlet** (the audit's web search): 9 of the 12
+  events; **confirmed by Tavily's evidence chase, before the fixes**: 5 of the 12; **confirmed by the evidence chase,
+  after the fixes**: 4 of the 9 events left. The 12 became 9 because the fixes below dropped two events and merged two
+  into one.
 - The three "wrong" rows and the double-counted pair led to four general bug fixes
   (`docs/after_scoring_changes.md` §4): two events dropped, two merged into one, one rail event re-weighted to its
   state. After them, 9 events remain and (c)'s mean miss is 0.194 pp (0.185 before).
@@ -57,7 +61,7 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
   - **2026-07-E1 (Arokya milk, Tamil Nadu):** sources disagree on the amount (Rs 3 or Rs 4 per litre) and the date
     (9 Jul in other outlets; the event uses 23 Jul). A single news source can carry details that other reports
     contradict.
-  - **2026-06-E1 (UP 10% electricity surcharge):** announced by UPPCL, but later reports say the regulator put it on
+  - **2026-06-E1 (Uttar Pradesh (UP) 10% electricity surcharge):** announced by UPPCL (UP Power Corporation), but later reports say the regulator put it on
     hold before collection; no official order was found either way. **It is inside the score**: the June prediction
     applies it. News-based events can be reversed after they are announced, and the event layer does not follow
     them up.
@@ -74,5 +78,5 @@ Disclosed only: v1 is frozen and none of these changes a sealed or scored number
 - **The carve-out is not fully clean.** The rest of a group, after a tracked item is taken out, still follows a trend that includes that item's own history.
 - **Seasonality comes from one year.** The seasonal adjustment uses a single 2025 cycle.
 - **v3's weights are judgement calls,** and v3b's inputs overlap (they are not independent of each other).
-- **v3's ranges are retrospective.** They were set on months we had already seen, not tested on new ones.
-- **The Brier score will cover at most two outcomes** (October and November), far too few to judge calibration.
+- **v3's ranges are retrospective.** The ranges are calibrated on the same 9 months, so the Jan-Sep hit rate is not a test; only October and November test them.
+- **The Brier score will cover at most two outcomes** (October and November), far too few to judge calibration. The Brier probabilities are from a normal-error model, an assumption nine misses cannot check.

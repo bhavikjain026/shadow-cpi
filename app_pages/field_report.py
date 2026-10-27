@@ -61,7 +61,7 @@ if lk:
     st.subheader("Time-locked search leakage")
     st.caption("Can a search see the future? Each row replays searches as of a past cutoff with a different date "
                f"setting. All figures {lk['label']}. {lk['columns']}.")
-    st.dataframe([{"Check": x["check"], "Run": x["run"], "Setting": x["setting"] or "—",
+    st.dataframe([{"Check": x["check"], "Run": x["run"].replace("first pass", "initial pass"), "Setting": x["setting"] or "—",
                    "N": x.get("n", "—"),
                    "Leak rate (Wilson 95%)": "—" if x.get("leaks") is None else
                    f"{x['leaks']} of {x['n']} = {pct(x['leak_rate'])} ({wilson(x['wilson95'])})",
@@ -83,7 +83,7 @@ st.dataframe([{"Arm": x["arm"], "Searches written by": x["writer"], "Recall (of 
                "Credits per known change found": f1(x["credits_per_known_change"]),
                "Median latency (s)": f"{x['median_latency_s']:.2f}"} for x in fa["rows"]], hide_index=True,
              width="stretch")
-st.caption(f"Verdict (Amendment F, ±1 known change): top group {', '.join(fa['verdict']['top_group'])}. Latency: "
+st.caption(f"Verdict (pre-registered rule change F, ±1 known change): top group {', '.join(fa['verdict']['top_group'])}. Latency: "
            f"{fa['latency_label']}. Credits per known change found was added after scoring (descriptive).")
 
 # ---------- exploratory ----------
@@ -113,7 +113,7 @@ nd, wd = ap["no_dates"], ap["with_dates"]
 st.markdown(f"- **No dates sent** ({nd['searches']} searches): time_range "
             + ", ".join(f"{k} {v}" for k, v in nd["time_range"].items())
             + f"; {nd['results_dated_oct_2026']} of {nd['results']} results dated October 2026, "
-              f"{nd['results_undated']} undated. A historical month needs explicit dates.")
+              f"{nd['results_undated']} undated. Observed in our test: a historical month needs explicit dates.")
 st.markdown(f"- **Dates sent** ({wd['searches']} searches): auto_parameters still reported time_range "
             + ", ".join(f"{k} {v}" for k, v in wd["time_range"].items())
             + f", yet {wd['inside_window']} of {wd['dated_results']} dated results fell inside the window: the dates "
@@ -122,16 +122,16 @@ st.markdown(f"- **Dates sent** ({wd['searches']} searches): auto_parameters stil
 # ---------- date test ----------
 st.subheader("Date fields test (pilot)")
 dt = r["date_test"]
-st.caption(f"{dt['label']}. Retry: {dt['retry']['recovered']} of {dt['retry']['failed_urls']} failed lookups "
+st.caption(f"{dt['label'].replace('first pass', 'initial pass')}. Retry: {dt['retry']['recovered']} of {dt['retry']['failed_urls']} failed lookups "
            "recovered.")
-st.dataframe([{"Arm": a, "Leak cases, first pass": f"{p['leak_cases']} of {p['cases']} ({wilson(p['wilson95'])})",
+st.dataframe([{"Arm": a, "Leak cases, initial pass": f"{p['leak_cases']} of {p['cases']} ({wilson(p['wilson95'])})",
                "Leak cases, after retry": f"{q['leak_cases']} of {q['cases']} ({wilson(q['wilson95'])})",
-               "Valid lost, first pass": f"{p['valid_lost']} of {p['valid_total']}",
+               "Valid lost, initial pass": f"{p['valid_lost']} of {p['valid_total']}",
                "Valid lost, after retry": f"{q['valid_lost']} of {q['valid_total']}"}
               for a, p, q in ((a, dt["first_pass"]["arms"][a], dt["after_retry"]["arms"][a]) for a in "ABCD")],
              hide_index=True, width="stretch")
 for k, lab in (("mcnemar_A_vs_B", "A (no dates) vs B (dates)"), ("mcnemar_C_vs_D", "C (filter) vs D (+ page date)")):
-    st.caption(f"Exact McNemar, {lab}: p = {dt['first_pass'][k]['p_exact']:.4f} first pass, "
+    st.caption(f"Exact McNemar, {lab}: p = {dt['first_pass'][k]['p_exact']:.4f} initial pass, "
                f"{dt['after_retry'][k]['p_exact']:.4f} after retry.")
 st.caption("Valid evidence lost: Wayback-confirmed pre-cutoff results found by any arm that this arm did not return; "
            "the retry adds newly confirmed pages, so its denominator is larger.")
@@ -168,7 +168,7 @@ fi = r["finance"]
 st.caption(f"{fi['label']}. Replaying the day before 14 scheduled events (RBI decisions, company results): "
            "N = no dates, D = dates + filter_by_published_date.")
 rows = []
-for name, lab in (("first_pass", "first pass"), ("after_retry", "after Wayback retry")):
+for name, lab in (("first_pass", "initial pass"), ("after_retry", "after Wayback retry")):
     for key in ("all_14", "without_C4"):
         m = fi[name][key]
         n, d = m["arms"]["N"], m["arms"]["D"]
@@ -208,6 +208,21 @@ if sr:
                 f"({'before' if ex['our_published_date'] < ex['cutoff'] else 'not before'} the cutoff); the reviewer "
                 f"relied on the {ex['reviewer_date_source']} {ex['reviewer_date']}. Reviewer: _{ex['reviewer_reason']}_ "
                 f"Quote: _{ex['reviewer_quote']}_.")
+    dta = read_json("results/date_field_test.json")
+    pc = r.get("pages_changed")
+    if dta:
+        m = dta["metrics"]["arms"]
+        st.markdown("**What covers the gap, partly.** "
+                    f"Our page-date check reads the date printed on the extracted page: in the date test it kept "
+                    f"{m['D']['results']} of the {m['C']['results']} results the filter let through (valid evidence lost: "
+                    f"{m['D']['valid_lost']} of {m['D']['valid_total']} with it, {m['C']['valid_lost']} with the filter "
+                    "alone). It reads a page's date, not its edit history. The drift monitor re-reads October radar "
+                    "pages daily: " + ("no drift run committed yet" if not pc else
+                                      f"{pc['changed']} of {pc['checked']} changed") + ". Wayback Machine checks "
+                    f"confirm whether a page existed by the cutoff; failed lookups were retried and logged "
+                    f"({r['date_test']['retry']['recovered']} in the date test, {r['finance']['retry']['recovered']} "
+                    f"in the finance check), and {sr['unclear']} of {sr['rows']} second-review rows stayed unclear, "
+                    "partly from archive rate limits.")
 
 # ---------- leaks by source type ----------
 lt = r.get("leak_by_source_type")
@@ -215,7 +230,7 @@ if lt:
     st.subheader("Which pages leak? Leaks by source type")
     st.caption(f"{lt['label']}. {lt['leaks']} leaks among {lt['results']} results from the date test and the finance "
                f"check. Leak = {lt['leak_definition']}. Type from the URL only, by a rule written before counting "
-               f"({lt['rule']}).")
+               f"({lt['rule'].replace('first match wins', 'earliest match wins')}).")
 
     def cell(x):
         return "—" if not x["results"] else f"{x['leaks']} of {x['results']} = {pct(x['rate'])} ({wilson(x['wilson95'])})"
@@ -226,8 +241,27 @@ if lt:
     st.caption("Where the leaks came from: " + ", ".join(f"{k} {v}" for k, v in lt["leaks_by_arm"].items())
                + ". Sources: " + ", ".join(f"`{s}`" for s in lt["sources"]) + ".")
 
+# ---------- leaks at three levels ----------
+dta, fna = read_json("results/date_field_test.json"), read_json("results/finance_lookahead.json")
+if dta and fna and lt:
+    def calls(rows, arm, label):
+        sent = [x["arms"][arm] for x in rows if arm in x["arms"]]
+        return sum(any(y["label"] == label for y in c["results"]) for c in sent), len(sent)
+    dt_l, dt_n = calls(dta["rows"], "A", "L")
+    fn_l, fn_n = calls(fna["rows"], "N", "confirmed")
+    st.subheader("Leaks at three levels, with no dates")
+    st.dataframe([{"Level": "Task (case or event)", "Date test": f"{dt1['A']['leak_cases']} of {dt1['A']['cases']}",
+                   "Finance check": f"{fn1['arms']['N']['confirmed_events']} of {fn1['events']}",
+                   "Source": "results/field_report.json (initial pass)"},
+                  {"Level": "Search call (one per task)", "Date test": f"{dt_l} of {dt_n}", "Finance check": f"{fn_l} of {fn_n}",
+                   "Source": "results/date_field_test.json, results/finance_lookahead.json"},
+                  {"Level": "Result (exploratory, counted after scoring)",
+                   "Date test": str(lt["leaks_by_arm"]["date test A"]), "Finance check": str(lt["leaks_by_arm"]["finance N"]),
+                   "Source": f"leak_by_source_type: {lt['leaks']} of {lt['results']} results across all settings"}],
+                 hide_index=True, width="stretch")
+
 # ---------- radar and cost ----------
-st.subheader("October radar: first runs")
+st.subheader("October radar: runs so far")
 rd = r["radar"]
 st.dataframe([{"Run (UTC)": x["utc"][:16], "Real credits": x["real_credits"], "Searches": x["searches"],
                "Calls with request_id + hash": f"{x['with_provenance']} of {x['calls']}",
@@ -295,7 +329,7 @@ if cv:
                    "Credits per 100 results": f1(x["credits_per_100_results"]),
                    "Results with a published_date": pct(x["dated_share"]),
                    "Median response_time (s)": "—" if x["median_seconds"] is None else f"{x['median_seconds']:.2f}",
-                   "Used by": ", ".join(x["tasks"])} for x in cv["rows"]], hide_index=True, width="stretch")
+                   "Tasks": ", ".join(x["tasks"])} for x in cv["rows"]], hide_index=True, width="stretch")
 
 # ---------- bug reports ----------
 br = read_json("results/bug_reports.json")

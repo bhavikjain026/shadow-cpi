@@ -65,8 +65,10 @@ def build():
     lag, mz, nn = date_lag(), map_zero(), nano_nulls()
     gokul = load("results/prompt_t/dairy_followup_2026-10-21.json")["gokul_adv_chars"]
     nd, wd = fr["no_dates"], fr["with_dates"]
+    ff = load("results/timelock34_second_review.json")["finance_filtered"]
+    ex = ff["example"]
     reports = [
-        {"title": "auto_parameters picks a recent time_range when no dates are sent", "to": "Tavily",
+        {"title": "auto_parameters picked a recent time_range when no dates were sent (observed in our test)", "to": "Tavily",
          "did": f"{nd['searches']} searches with auto_parameters: true, a query and max_results only, for months Jan–Sep 2026",
          "happened": "time_range " + ", ".join(f"{k} {v}" for k, v in nd["time_range"].items())
                      + f"; {nd['results_dated_oct_2026']} of {nd['results']} results dated October 2026, "
@@ -81,13 +83,14 @@ def build():
          "expected": "the echo shows the window actually applied",
          "fix": "echo start_date/end_date (or drop time_range) when the caller sends dates",
          "evidence": "v2/ablation/arm_Td_*.json (plan[].auto_parameters, plan[].dates_kept)"},
-        {"title": "published_date later than the page's own date", "to": "Tavily",
+        {"title": "published_date later than the page's own date (consistent with the documented definition)", "to": "Tavily",
          "did": f"compared, by code (not a hand check), Tavily's published_date with the page's own published/updated date "
                 f"on the {lag['with_both_dates']} distinct date-test pages that had both (sample: results/date_field_test.json)",
          "happened": f"{lag['tavily_later']} had a later published_date ({lag['over_7_days']} by more than 7 days; "
                      f"largest gap {lag['max_days']} days)",
-         "expected": "published_date equal to the page's first-publication date",
-         "fix": "return first-published and last-updated separately",
+         "expected": "nothing different: this is consistent with Tavily's documented definition of published_date "
+                     "(published or last updated, beta)",
+         "fix": "suggestion: separate original-publication and last-modified fields",
          "evidence": "results/date_field_test.json (rows[].arms[].results[].tavily_date, page_date)"},
         {"title": "Map returns 0 results silently", "to": "Tavily",
          "did": f"Map on the {mz['official_sites']} sites of our official crawl list and {mz['dairy_sites']} dairy sites, with and "
@@ -121,6 +124,16 @@ def build():
          "expected": "a number whenever the cited line states one",
          "fix": "a schema-level 'required number when a currency or % is present' hint, or a confidence field",
          "evidence": "v2/ablation/arm_*.json, v2/evidence/events_*.json (cards[].super_reread, claims[].read_by)"},
+        {"title": "Extract reads the page as it is today (suggestion)", "to": "Tavily",
+         "did": f"{ff['searches']} finance-check searches with start_date/end_date and filter_by_published_date, "
+                "then an independent AI-assisted second review of every result page (post-hoc)",
+         "happened": f"{ff['searches_with_result_dated_after_cutoff']} of {ff['searches']} searches returned a result "
+                     f"dated after the cutoff, yet {ff['reviewer_leak_pages']} page's current version leaks the "
+                     f"outcome: {ex['row_id']} was dated {ex['our_published_date']} (cutoff {ex['cutoff']}) and "
+                     f"updated on {ex['reviewer_date']}",
+         "expected": "a way for a time-locked user to tell that the page Extract returns changed after the cutoff",
+         "fix": "an as-of / crawl-date field for Extract, so time-locked users can tell if a page changed",
+         "evidence": "results/timelock34_second_review.json (finance_filtered.example)"},
     ]
     OUT.write_text(json.dumps({"reports": reports}, ensure_ascii=False, indent=1))
     L = ["# Feedback as bug reports", "",

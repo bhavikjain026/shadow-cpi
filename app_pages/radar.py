@@ -62,5 +62,5 @@ if sc:
                    "Recall": "—" if v["recall"] is None else f"{v['recall']:.0%}",
                    "Events": v["events"], "Listed changes found": f"{v['found']} of {sc['counted']}"}
                   for t, v in sc["tiers"].items()], hide_index=True, width="stretch")
-    st.caption("Changes first reported after the freeze are not counted as misses.")
+    st.caption("Changes initially reported after the freeze are not counted as misses.")
 
