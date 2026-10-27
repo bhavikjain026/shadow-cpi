@@ -64,6 +64,18 @@ changes a rule, factor or filter.
 - [ ] `python score.py`: writes `results/archive.csv` with the miss, whether it was inside the range, and the main
       surprise.
 
+## 6. November 2026 seal (Dec 2026): forced model migration
+
+Pre-registered 2026-10-27T13:50:34Z (UTC), `v2/PREREGISTRATION.md` Amendment G:
+"Forced model migration: from 2026-11-09 (IST), calls use Nebius's recommended replacements; prompts, schemas, rules and code are unchanged. The October seal uses the original models. The November seal and any live run during judging use the replacements and say so in their output."
+
+- [ ] The November evidence run and seal call Nebius on or after 2026-11-09 IST, so they use
+      `nvidia/Nemotron-3_5-Lightning` (gatekeeper) and `nvidia/Nemotron-3.5-Super-VL` (line-citing reader). Nothing
+      to switch by hand: `config/models.json` picks by the call date.
+- [ ] Check the sealed file says so: its `model_ids` carries the dated map, and the flight recorder rows for the run
+      show `model_migrated: true`. Say it in the seal's announcement and in the app.
+- [ ] Never edit `config/models.json` or the prompts to "fix" a replacement's answers; a problem is reported, not tuned.
+
 ## Never
 - Never change the prediction, the range or the rules after the seal. A seal is never redone.
 - Never solve or bypass a CAPTCHA in software.

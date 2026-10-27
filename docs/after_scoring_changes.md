@@ -151,3 +151,18 @@ files are kept as `results/*_before_bugfix_2026-10-21T151419.*` and in `results/
 - **When it first counts:** after MoSPI releases October CPI (12 Nov 2026) and the release line is added to
   `data/official_releases.csv`.
 - **Tests:** `tests/test_seal_tools.py::test_brier_from_october_on_only`.
+
+## 7. Forced model migration from 9 Nov 2026 (pre-registered)
+
+- **Date:** 2026-10-27, written 2026-10-27T13:50:34Z (UTC), committed before any code (`v2/PREREGISTRATION.md` Amendment G).
+- **Decided by:** the owner (task card of 27 Oct), because Nebius removes both original models.
+- **Rule:** "Forced model migration: from 2026-11-09 (IST), calls use Nebius's recommended replacements; prompts, schemas, rules and code are unchanged. The October seal uses the original models. The November seal and any live run during judging use the replacements and say so in their output."
+
+| Role | Original ID (calls dated up to 2026-11-08 IST) | Replacement (calls dated from 2026-11-09 IST) |
+|---|---|---|
+| Gatekeeper (`small`) | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` | `nvidia/Nemotron-3_5-Lightning` |
+| Line-citing reader (`mid`) | `nvidia/nemotron-3-super-120b-a12b` | `nvidia/Nemotron-3.5-Super-VL` |
+
+- **What it does not change:** no scored month, `results/score_lock.json`, the October seal or any saved result. Calls
+  dated up to 2026-11-08 IST, and any request already in the cache, still use the original models.
+- Source: Nebius's notice, docs.tokenfactory.nebius.com/model-deprecations-november-2026 (checked 2026-10-27): the two original IDs are removed from Serverless on 9 Nov 2026; requests are not rerouted automatically.

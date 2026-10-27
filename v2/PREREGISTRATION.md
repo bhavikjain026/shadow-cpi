@@ -309,3 +309,26 @@ same budget bug (070fa6e) charged 41 of arm T's 72 searches again although they 
 T's real spend was 56, not 121). The rows stay in the ledger, offset by one correction row (-65,
 `phantom-T-2026-10-22`, `phantom_of` the 41 call ids). `results/v2_ablation.json` arm T `new_credits` 121 → 56;
 `credits` stays 121, because credits per verified event counts every call at its original cost.
+
+## Amendment G: forced model migration (Nebius deprecation)
+
+**Written 2026-10-27T13:50:34Z (UTC), before any code for it existed or any replacement model was called.**
+
+"Forced model migration: from 2026-11-09 (IST), calls use Nebius's recommended replacements; prompts, schemas, rules and code are unchanged. The October seal uses the original models. The November seal and any live run during judging use the replacements and say so in their output."
+
+| Role | Original ID (calls dated up to 2026-11-08 IST) | Replacement (calls dated from 2026-11-09 IST) |
+|---|---|---|
+| Gatekeeper (`small`) | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` | `nvidia/Nemotron-3_5-Lightning` |
+| Line-citing reader (`mid`) | `nvidia/nemotron-3-super-120b-a12b` | `nvidia/Nemotron-3.5-Super-VL` |
+
+How it is applied (built in now; no code change after 30 Oct):
+- `config/models.json` keeps the role IDs and adds the dated map above. `shadow_cpi/nemotron.py` picks the ID by the
+  date of the call in IST (`Asia/Kolkata`), at the moment of the call, and the flight recorder logs the model
+  actually asked with every call (`model`, plus `model_requested` and `model_migrated` when they differ).
+- A cache hit is not a call: if the identical request to the original model is already in the cache, that saved
+  answer is reused (logged as cached, with the original model), so checking an existing seal never asks a replacement
+  model. Only requests that would reach Nebius use the replacement.
+- If a replacement fails the smoke test (27 Oct, at most 4 Nebius calls), we stop and report; we do not pick another
+  model.
+
+Source: Nebius's notice, docs.tokenfactory.nebius.com/model-deprecations-november-2026 (checked 2026-10-27): the two original IDs are removed from Serverless on 9 Nov 2026; requests are not rerouted automatically.
