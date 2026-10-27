@@ -240,3 +240,45 @@ def test_stems_take_endings_but_not_other_words():
 
 def test_old_matcher_paths_unchanged():
     assert RD.R.check.__defaults__[-1] is False and K.kind_of(BOKARO) == "rail"
+
+
+# ---------- Text normalisation (checked 2026-10-27; no amendment needed) ----------
+# verify.norm, used for text and keywords by v2.whole and v2.kinds.has_word, already applies NFKC (canonical
+# composition included) and removes U+200B/200C/200D/FEFF, and every keyword list is already in that form.
+def test_zero_width_non_joiner_does_not_split_a_keyword():
+    line = "ವಿದ್ಯುತ್‌ ದರ ಏರಿಕೆ"
+    assert K.has_word(line, "ವಿದ್ಯುತ್ ದರ") and WH.word("ವಿದ್ಯುತ್ ದರ", norm(line))
+    assert K.has_word("ವಿದ್ಯುತ್ ದರ ಏರಿಕೆ", "ವಿದ್ಯುತ್‌ ದರ")
+
+
+def test_bengali_rra_precomposed_and_decomposed_match():
+    pre, dec = "বাড়ি", "বাড়ি"
+    assert norm(pre) == norm(dec)
+    assert K.has_word(pre, dec) and K.has_word(dec, pre) and WH.word(pre, norm(dec))
+
+
+@pytest.mark.parametrize("longer", ["घरेलू", "ट्रेलर", "ऑस्ट्रेलिया", "ब्रेल"])
+def test_rail_still_not_inside_longer_words(longer):
+    assert not K.has_word(longer, "रेल") and not WH.word("रेल", norm(longer))
+
+
+def test_keyword_lists_are_already_normalised():
+    import unicodedata
+    from shadow_cpi import event_rules as ER
+    bad = []
+
+    def walk(o):
+        if isinstance(o, str):
+            if unicodedata.normalize("NFKC", o) != o or any(c in o for c in "​‌‍﻿"):
+                bad.append(o)
+        elif isinstance(o, dict):
+            for k, v in o.items():
+                walk(k), walk(v)
+        elif isinstance(o, (list, tuple, set, frozenset)):
+            for x in o:
+                walk(x)
+    for mod in (ER, K, R, WH):
+        for n in dir(mod):
+            if n.isupper():
+                walk(getattr(mod, n))
+    assert bad == []
