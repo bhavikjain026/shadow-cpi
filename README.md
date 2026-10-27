@@ -132,7 +132,7 @@ made Hindi pages work. Details: [`FEEDBACK_NOTES.md`](FEEDBACK_NOTES.md).
   miss and whether the official figure was inside the range.
 - **Price Shock Radar** (exploratory, report only; app page "October radar"): announced retail price changes taking
   effect this month, found with Tavily before MoSPI publishes. So far 1 event verified,
-  0 corroborated, 52 of a 150-credit cap. It never changes the sealed call.
+  0 corroborated, 70 of a 150-credit cap. It never changes the sealed call.
 - **Live build** with **Replay a saved run**: watch the number build one verified card at a time. Replays make no
   API call and cost no credits.
 - **Chain of custody:** from any number to its quote, page, page date, Tavily request ID, response hash and seal.
@@ -279,4 +279,4 @@ MIT ([`LICENSE`](LICENSE)). Built for the Nebius × NVIDIA Global AI Hackathon.
 
 Team: [TBD]
 
-Nothing in Shadow CPI existed before 26 Aug: the repository's earliest commit is dated 20 Oct 2026.
+Newly created during the submission period (opened 26 Aug 2026); first commit 20 Oct 2026.

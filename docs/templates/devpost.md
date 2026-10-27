@@ -121,4 +121,4 @@ requested window ({{run_inside}} of {{run_total}}), median latency {{run_latency
 - Code: https://github.com/bhavikjain026/shadow-cpi (MIT licence)
 - Verify a seal: `verify.md`
 - Team: [TBD]
-- Nothing existed before {{hackathon_start}}: the earliest commit is dated {{earliest_commit}}.
+- Newly created during the submission period (opened {{submission_opened}}); first commit {{earliest_commit}}.

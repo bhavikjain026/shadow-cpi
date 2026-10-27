@@ -32,5 +32,11 @@
     "what": "the Tavily Research request body: no date parameter",
     "source": "https://docs.tavily.com (API reference, Research endpoint)",
     "checked": "2026-10-26, by the owner, in the API reference; not measured"
+  },
+  "submission_period": {
+    "opened": "2026-08-26",
+    "what": "the hackathon's submission period opening date (eligibility line)",
+    "source": "v2/PRD.md hackathon checklist (26 Aug); year from the owner's task card",
+    "added": "2026-10-27, from the owner's task card"
   }
 }

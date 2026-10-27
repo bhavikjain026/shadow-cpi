@@ -267,4 +267,4 @@ MIT ([`LICENSE`](LICENSE)). Built for the Nebius × NVIDIA Global AI Hackathon.
 
 Team: [TBD]
 
-Nothing in Shadow CPI existed before {{hackathon_start}}: the repository's earliest commit is dated {{earliest_commit}}.
+Newly created during the submission period (opened {{submission_opened}}); first commit {{earliest_commit}}.
