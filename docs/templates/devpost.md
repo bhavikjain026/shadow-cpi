@@ -78,7 +78,7 @@ and C) {{arm_b_recall}} and {{arm_c_recall}}, `auto_parameters` (arm T) {{arm_t_
 (templates + model-chosen fields) {{arm_h_recall}}, and T+dates {{arm_td_recall}}. The model's fields were always
 valid ({{bc_fields_valid}} of {{bc_fields}}; {{arm_h_fields_valid}} of {{arm_h_fields}} in arm H), but fixed
 templates found more; the likely cause is source choice (arm H differed from A only in domains and language).
-Observed in our test, `auto_parameters` with no dates assumed "now": {{auto_oct}} of {{auto_results}} results came from {{live_month}}.
+Observed in our test, `auto_parameters` with no dates assumed "now": {{auto_oct}} of {{auto_results}} results came from {{live_month}} ({{auto_note}}).
 So the model chooses the query, topic, domains and language; code owns the dates.
 
 ## What we found about Tavily: feedback for the Most Valuable Feedback prize
@@ -90,7 +90,7 @@ Full reports with request IDs: `docs/tavily_bug_reports.md`.
 **Top {{top_n}}**
 1. **`auto_parameters` picks a recent `time_range` for queries about a past month.**
    *Observed:* with no dates, on {{auto_searches}} searches naming a month in {{replay_span}}, it chose recent time
-   ranges; {{auto_oct}} of {{auto_results}} results came from {{live_month}}. *Expected:* a window covering the month
+   ranges; {{auto_oct}} of {{auto_results}} results came from {{live_month}} ({{auto_note}}). *Expected:* a window covering the month
    the query names, or none. *Suggested fix:* return no `time_range` (or that month's window) when the query names a
    past month; document the default. *Evidence:* `v2/ablation/arm_T_*.json`; request IDs in the report.
 2. **With explicit dates, `auto_parameters` still reports a `time_range`.**

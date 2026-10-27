@@ -147,3 +147,19 @@ def test_numbers_come_from_the_results_files(values):
     assert values["mae_c"] == f"{sl['mae']['c']:.3f}" and values["inside"] == str(sl["inside_range"])
     fr = json.loads((ROOT / "results/field_report.json").read_text())
     assert values["dt_nodates"] == str(fr["date_test"]["first_pass"]["arms"]["A"]["leak_cases"])
+
+
+def test_620_of_659_always_carries_its_date():
+    """Every doc that states the auto_parameters count also says when it was measured (read from the arm T files)
+    and, in README and Devpost, what the 27 Oct re-check showed. The video script is hand-typed, so it is checked here."""
+    v = S.facts(ST, date(2026, 10, 27))
+    count = re.compile(r"620 of 659|620/659")
+    assert (v["auto_oct"], v["auto_results"]) == ("620", "659")
+    for doc, tmpl in S.TEMPLATES.items():       # rendered from the template; sync --check ties the file to it
+        paras = [p for p in S.render((ROOT / tmpl).read_text(), v).split("\n\n") if count.search(p)]
+        assert paras, doc
+        assert all(v["auto_note"] in " ".join(p.split()) for p in paras), doc
+        assert sum(len(count.findall(p)) for p in paras) == sum(p.count(v["auto_note"]) for p in paras), doc
+    shots = [l for l in (ROOT / "docs/video_script.md").read_text().splitlines() if count.search(l)]
+    day = " ".join(v["auto_date"].split()[:2])
+    assert shots and all(f"auto_parameters, {day}: 620/659" in l for l in shots)
