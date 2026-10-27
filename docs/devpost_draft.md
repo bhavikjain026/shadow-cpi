@@ -133,4 +133,4 @@ requested window (5,454 of 6,872), median latency 4.0 s.
 - Code: https://github.com/bhavikjain026/shadow-cpi (MIT licence)
 - Verify a seal: `verify.md`
 - Team: [TBD]
-- Nothing existed before 26 Aug: the earliest commit is dated 20 Oct 2026.
+- Newly created during the submission period (opened 26 Aug 2026); first commit 20 Oct 2026.

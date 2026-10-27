@@ -8,8 +8,10 @@
 #   5. python -m v2.radar once, under caffeinate
 #   6. after the radar: page drift (python -m v2.drift) and the radar skeptic (python -m v2.radar_skeptic),
 #      v2/DRIFT_PREREG.md, each under its own cap; a failure there is reported but never undoes the radar step
-#   7. commit the radar, drift and skeptic files and the credit ledger, push
-#   8. a 3-line report in logs/radar_daily_<date>.txt and a macOS notification
+#   7. rebuild the credit receipts and the field report from the ledger (offline, 0 credits), so the receipt test
+#      matches the new ledger rows; a failure restores both files and is reported, never blocks the commit
+#   8. commit the radar, drift and skeptic files, the receipts and the credit ledger, push
+#   9. a 3-line report in logs/radar_daily_<date>.txt and a macOS notification
 set -u
 REPO="/Users/bhavikjain/NVIDIA HACKATHON/shadow-cpi"
 cd "$REPO" || exit 1
@@ -77,10 +79,21 @@ print(f\"{sum(bool(v['challenged']) for v in e.values())} of {len(e)} events cha
   DS=$(( $(side_spent) - before ))
 }
 add_side_files() { for F in v2/radar/drift_2026-10.json v2/radar/skeptic_2026-10.json; do [ -f "$F" ] && git add "$F"; done; }
+# offline, 0 credits: call receipts (append-only) and the field report, from the ledger just updated. Sets RECEIPTS.
+# On failure both files go back to the committed copy, so the tree stays clean for the next run day.
+RECEIPT_FILES=(results/call_receipts.json results/field_report.json)
+rebuild_receipts() {
+  if python tools/build_call_receipts.py && python tools/build_field_report.py; then
+    git add "${RECEIPT_FILES[@]}"; RECEIPTS="receipts rebuilt"
+  else
+    git checkout -- "${RECEIPT_FILES[@]}"; RECEIPTS="receipts rebuild FAILED (files restored)"
+  fi
+}
 
 if [ "$REMAIN" -le 0 ]; then              # no radar run, but drift and skeptic have their own caps
   after_radar
   git add results/credit_ledger.jsonl; add_side_files
+  rebuild_receipts; EXTRA="$EXTRA; $RECEIPTS"
   git commit -m "Drift and skeptic $DAY (radar budget used up): $EXTRA ($DS credits)
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" && git push origin main
@@ -106,6 +119,8 @@ SUMMARY="$SUMMARY; $EXTRA"
 
 git add v2/radar/radar_2026-10.json results/credit_ledger.jsonl
 add_side_files
+rebuild_receipts
+SUMMARY="$SUMMARY; $RECEIPTS"
 git commit -m "Radar 2026-10 daily run $DAY: $SUMMARY ($((AFTER - USED)) radar credits, radar total $AFTER of $CAP; drift+skeptic $DS)
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || report "FAILED: commit ($SUMMARY)" "credits: $((AFTER - USED)) this run, radar $AFTER of $CAP" "next: commit by hand" 1

@@ -280,7 +280,7 @@
  },
  "receipt": {
   "label": "computed by tools/build_field_report.py from the committed results files",
-  "built_from": "results/call_receipts.json (built 2026-10-26)",
+  "built_from": "results/call_receipts.json (built 2026-10-27)",
   "by_endpoint": [
    {
     "endpoint": "/crawl",
@@ -293,12 +293,12 @@
    },
    {
     "endpoint": "/extract",
-    "calls": 774,
-    "credits": 677,
-    "credits_per_call": 0.8746770025839793,
-    "median_latency_s": 0.15000000000000002,
-    "p95_latency_s": 5.205,
-    "with_latency": 774
+    "calls": 790,
+    "credits": 691,
+    "credits_per_call": 0.8746835443037975,
+    "median_latency_s": 0.13,
+    "p95_latency_s": 5.18,
+    "with_latency": 779
    },
    {
     "endpoint": "/map",
@@ -311,12 +311,12 @@
    },
    {
     "endpoint": "/search",
-    "calls": 1024,
-    "credits": 1094,
-    "credits_per_call": 1.068359375,
+    "calls": 1058,
+    "credits": 1128,
+    "credits_per_call": 1.0661625708884688,
     "median_latency_s": 3.58,
-    "p95_latency_s": 6.2355,
-    "with_latency": 1024
+    "p95_latency_s": 6.214499999999999,
+    "with_latency": 1038
    }
   ],
   "by_experiment": [
@@ -411,6 +411,26 @@
     "with_latency": 16
    },
    {
+    "experiment": "lang-date-test",
+    "endpoint": "/extract",
+    "calls": 11,
+    "credits": 10,
+    "credits_per_call": 0.9090909090909091,
+    "median_latency_s": null,
+    "p95_latency_s": null,
+    "with_latency": 0
+   },
+   {
+    "experiment": "lang-date-test",
+    "endpoint": "/search",
+    "calls": 20,
+    "credits": 20,
+    "credits_per_call": 1.0,
+    "median_latency_s": null,
+    "p95_latency_s": null,
+    "with_latency": 0
+   },
+   {
     "experiment": "leakcheck-exact-match",
     "endpoint": "/search",
     "calls": 80,
@@ -503,22 +523,22 @@
    {
     "experiment": "radar-2026-10",
     "endpoint": "/extract",
-    "calls": 24,
-    "credits": 21,
-    "credits_per_call": 0.875,
+    "calls": 29,
+    "credits": 25,
+    "credits_per_call": 0.8620689655172413,
     "median_latency_s": 0.04,
-    "p95_latency_s": 0.975,
-    "with_latency": 24
+    "p95_latency_s": 0.982,
+    "with_latency": 29
    },
    {
     "experiment": "radar-2026-10",
     "endpoint": "/search",
-    "calls": 31,
-    "credits": 31,
+    "calls": 45,
+    "credits": 45,
     "credits_per_call": 1.0,
-    "median_latency_s": 4.03,
-    "p95_latency_s": 5.88,
-    "with_latency": 31
+    "median_latency_s": 4.07,
+    "p95_latency_s": 5.85,
+    "with_latency": 45
    },
    {
     "experiment": "recall-audit",
@@ -818,19 +838,19 @@
     "budgets": [
      "radar-2026-10"
     ],
-    "credits": 52,
+    "credits": 70,
     "verified_quotes": 1,
-    "credits_per_verified_quote": 52.0,
+    "credits_per_verified_quote": 70.0,
     "source": "v2/radar/radar_2026-10.json"
    }
   ],
   "total": {
-   "calls": 1824,
-   "credits": 1780,
-   "credits_per_call": 0.9758771929824561,
+   "calls": 1874,
+   "credits": 1828,
+   "credits_per_call": 0.9754535752401281,
    "median_latency_s": 3.12,
-   "p95_latency_s": 6.0685,
-   "with_latency": 1824
+   "p95_latency_s": 6.058999999999999,
+   "with_latency": 1843
   },
   "reconcile_credits": -82,
   "notes": [
@@ -1633,24 +1653,33 @@
     "searches": 15,
     "complete": true,
     "with_provenance": 25
+   },
+   {
+    "utc": "2026-10-27T04:37:04.893882+00:00",
+    "real_credits": 18,
+    "calls": 19,
+    "searches": 14,
+    "complete": true,
+    "with_provenance": 19
    }
   ],
   "events": 1,
   "corroborated": 0,
   "cap": 150,
   "cap_source": "config/budget.json radar-2026-10",
-  "spent": 52
+  "spent": 70
  },
  "monthly_run_cost": {
   "radar_run_real_credits": [
    27,
-   23
+   23,
+   18
   ],
   "arm_a_per_month_original": 22.77777777777778,
   "arm_a_searches_per_month": 13.0,
   "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits at original cost / 9 months"
  },
- "ledger_rows": 1914,
+ "ledger_rows": 1933,
  "pages_changed": null,
  "leak_by_source_type": {
   "rows": [
