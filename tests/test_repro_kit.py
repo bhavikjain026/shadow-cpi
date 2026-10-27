@@ -249,3 +249,52 @@ def test_runner_keeps_free_usage_reads_out_of_the_ledger():
     rows = R.ledger_rows([{"endpoint": "/usage", "request_id": None, "credits": 0, "response_sha256": "h" * 64},
                           {"endpoint": "/search", "request_id": "r", "credits": 1, "response_sha256": "g" * 64}], "s")
     assert [r["endpoint"] for r in rows] == ["/search"]
+
+
+# ---- re-check of 27 Oct (tools/build_repro_check.py) -----------------------------------------------------------
+
+import build_bug_reports as BR  # noqa: E402
+import build_repro_check as RC  # noqa: E402
+
+
+def test_repro_check_file_is_rebuilt_exactly_from_the_saved_run(tmp_path, monkeypatch):
+    committed = json.loads((ROOT / "results" / "repro_check_2026-10-27.json").read_text())
+    run = json.loads(RC.RUN.read_text())
+    assert committed["tavily_calls_made_for_this_file"] == 0 and committed["date"] == run["date"]
+    for row, x in zip(committed["rows"], run["runs"]):
+        assert row["script"] == f"repro/{x['script']}.py" and row["request_ids"] == [i for i in x["request_ids"] if i]
+        assert all(line in x["output"] for line in row["showed"])               # copied as printed, never retyped
+        assert row["reproduced"] in ("yes", "no", "unclear", "unclear (output not saved)")
+
+
+def test_missing_output_is_marked_unclear_not_reconstructed(tmp_path, monkeypatch):
+    run = json.loads(RC.RUN.read_text())
+    run["date"] = "2099-01-01"
+    run["runs"][4]["output"] = ""
+    p = tmp_path / "run.json"
+    p.write_text(json.dumps(run))
+    monkeypatch.setattr(RC, "ROOT", tmp_path)
+    (tmp_path / "results").mkdir()
+    _, res = RC.build(p)
+    assert res["rows"][4]["reproduced"] == "unclear (output not saved)" and res["rows"][4]["showed"] == []
+
+
+def test_rules_read_the_output_not_a_fixed_answer():
+    assert RC.map_empty("0 urls; failed_results: None\nempty answer; reason-like keys present: []")[0] == "yes"
+    assert RC.map_empty("3 urls; failed_results: None")[0] == "no"
+    assert RC.usage_lag("the search reported 1 credit(s); /usage moved by 1 (account) and 1 (key)")[0] == "no"
+    ok = ("auto_parameters echo: {'time_range': 'w'}\n10 results; published_date by month (None = undated): "
+          "{'2026-03': 1, '2026-10': 9}\nresults dated 2026-03: 1 of 10")
+    assert RC.time_range(ok)[0] == "yes"
+    assert RC.time_range(ok.replace("{'2026-03': 1, '2026-10': 9}", "{None: 10}").replace(": 1 of", ": 0 of"))[0] == "no"
+
+
+def test_doc_has_a_recheck_line_under_every_item_and_the_plain_auto_parameters_note():
+    doc = (ROOT / "docs" / "tavily_bug_reports.md").read_text()
+    check = json.loads((ROOT / "results" / "repro_check_2026-10-27.json").read_text())
+    for row in check["rows"]:
+        assert f"**Re-checked 27 Oct 2026** with [`{row['script']}`]" in doc
+    assert doc.count("**Re-checked") == len(BR.REPRO) == len(check["rows"])
+    nd = json.loads((ROOT / "results" / "field_report.json").read_text())["auto_parameters"]["no_dates"]
+    assert ('returned undated results under topic "finance", so the original effect did not show; the original '
+            f"measurement ({nd['results_dated_oct_2026']} of {nd['results']} results dated October 2026) stands") in doc

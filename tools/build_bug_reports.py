@@ -7,6 +7,7 @@ Each report: what we did, what happened (counts read from committed results file
 fix, and the evidence file. Nothing is typed by hand except the wording.
 """
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -101,6 +102,28 @@ REPRO = {  # Tavily report index -> script in repro/ (each: one request, your ow
     5: "scanned_pdf_extract",
     6: "usage_lag",
 }
+
+REPRO_CHECK = ROOT / "results" / "repro_check_2026-10-27.json"     # tools/build_repro_check.py
+VERDICT = {"yes": "reproduced", "no": "not reproduced today", "unclear": "unclear"}
+
+
+def recheck_lines(report, check, nd):
+    """'Re-checked <date> with repro/<script>: <verdict>' for one report, read from the repro check file."""
+    row = next((x for x in check["rows"] if x["script"] == report["repro"]), None)
+    if row is None:
+        return []
+    from datetime import date
+    d = date.fromisoformat(check["date"])
+    out = [f"- **Re-checked {d.day} {d:%b %Y}** with [`{row['script']}`](../{row['script']}): "
+           f"{VERDICT.get(row['reproduced'], row['reproduced'])} ({row['why']})."]
+    if report["repro"] == "repro/auto_parameters_time_range.py" and row["reproduced"] == "no":
+        echo = next((l for l in row["showed"] if l.startswith("auto_parameters echo")), "")
+        topic = re.search(r"'topic': '([^']+)'", echo)
+        out.append(f"  Today's run returned undated results under topic \"{topic.group(1) if topic else '?'}\", so the "
+                   f"original effect did not show; the original measurement ({nd['results_dated_oct_2026']} of "
+                   f"{nd['results']} results dated October 2026) stands as measured on its date.")
+    return out
+
 
 SECTIONS = (("top", "Top 3"), ("feature", "Feature requests"), ("smaller", "Smaller observations"))
 
@@ -202,6 +225,7 @@ def build():
          "fix": "a schema-level 'required number when a currency or % is present' hint, or a confidence field",
          "evidence": "files `v2/ablation/arm_*.json`, `v2/evidence/events_*.json` (cards[].super_reread, claims[].read_by)"},
     ]
+    check = load(REPRO_CHECK.relative_to(ROOT))
     for i, r in enumerate(reports):
         r["repro"] = f"repro/{REPRO[i]}.py"
     OUT.write_text(json.dumps({"reports": reports, "nebius": nebius}, ensure_ascii=False, indent=1))
@@ -216,7 +240,7 @@ def build():
             n += 1
             L += [f"### {n}. {r['title']}", "", f"- **What we did:** {r['did']}.",
                   f"- **Observed:** {r['happened']}.", f"- **Expected:** {r['expected']}.",
-                  f"- **Suggested fix:** {r['fix']}.", f"- **Evidence:** {r['evidence']}.",
+                  f"- **Suggested fix:** {r['fix']}.", f"- **Evidence:** {r['evidence']}.", *recheck_lines(r, check, nd),
                   f"- **Reproduce it:** [`{r['repro']}`](../{r['repro']}) (your own key, at most 2 credits; see "
                   "[`repro/README.md`](../repro/README.md)).", ""]
     L += ["Nebius / NVIDIA feedback is in the Devpost write-up (`docs/devpost_draft.md`), separate from Tavily.", ""]

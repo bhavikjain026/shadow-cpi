@@ -1,0 +1,113 @@
+{
+ "date": "2026-10-27",
+ "source": "results/repro_run.json",
+ "tavily_calls_made_for_this_file": 0,
+ "note": "Verdicts are read from the saved output of one run each; Tavily's index changes, so a verdict says what showed on this date only. The original measurements stand as measured on their dates.",
+ "rows": [
+  {
+   "script": "repro/auto_parameters_time_range.py",
+   "request_ids": [
+    "8e30c12f-ef75-4c31-ace6-983d491b046c"
+   ],
+   "credits": 2,
+   "showed": [
+    "auto_parameters echo: {'exclude_domains': ['wikipedia.org'], 'topic': 'finance', 'time_range': 'm', 'search_depth': 'advanced'}",
+    "10 results; published_date by month (None = undated): {None: 10}",
+    "results dated 2026-03: 0 of 10"
+   ],
+   "reproduced": "no",
+   "why": "every result came back undated, so the window's effect on result dates could not show",
+   "rule": "Original: auto_parameters picked a recent window, so most results were dated after the month the query names."
+  },
+  {
+   "script": "repro/auto_parameters_echo_dates.py",
+   "request_ids": [
+    "5a769cdf-2c2d-42bb-a8dc-100b29388012"
+   ],
+   "credits": 1,
+   "showed": [
+    "sent window: 2026-03-01 to 2026-03-31",
+    "auto_parameters echo: {'topic': 'finance', 'time_range': 'm', 'search_depth': 'basic'}",
+    "echo shows start_date or end_date: False; echo shows time_range: True"
+   ],
+   "reproduced": "yes",
+   "why": "echo reports time_range and not the dates we sent",
+   "rule": "Original: with our start_date/end_date sent, the echo showed a time_range and no dates."
+  },
+  {
+   "script": "repro/extract_no_asof.py",
+   "request_ids": [
+    "a2e57fe9-b6fe-4bf4-b7ec-f5c003bb5b80"
+   ],
+   "credits": 0,
+   "showed": [
+    "result keys: ['images', 'raw_content', 'title', 'url']",
+    "date-like keys (as-of / crawl date would show here): ['response_time']"
+   ],
+   "reproduced": "yes",
+   "why": "no as-of or crawl-date field returned",
+   "rule": "Original: Extract returns the page as it is now, with no as-of or crawl-date field."
+  },
+  {
+   "script": "repro/published_vs_modified.py",
+   "request_ids": [
+    "ee3145e5-c1ca-491a-b93e-e2f02ba4d1ee"
+   ],
+   "credits": 1,
+   "showed": [
+    "Tue, 07 Jul 2026 00:00:00 GMT  page says: Updated : Jul 09 2026 | 7:34 AMIST  https://www.business-standard.com/markets/news/tcs-q1-result-expectations-previe",
+    "Thu, 09 Jul 2026 03:15:06 GMT  page says: published: Thursday, July 9, 2026, 8:45 [IST]  https://www.goodreturns.in/news/tcs-q1-results-preview-will-tata-groups-behemoth",
+    "Tue, 30 Jun 2026 05:01:39 GMT  page says: published: Tuesday, June 30, 2026, 10:31 [IST]  https://www.goodreturns.in/news/tcs-hcl-wipro-infosys-bleeding-why-it-stocks-are",
+    "Fri, 10 Jul 2026 00:00:00 GMT  page says: Updated : Jul 13 2026 | 8:10 AMIST  https://www.business-standard.com/markets/news/hcl-tech-q1-preview-revenue-growt",
+    "Wed, 08 Jul 2026 00:00:00 GMT  page says: -  https://www.ndtvprofit.com/markets/tcs-q1-results-preview-what-analysts-expect-d"
+   ],
+   "reproduced": "unclear",
+   "why": "the script prints dates side by side; it does not repeat the 42-page comparison",
+   "rule": "Original: compared by code on 42 pages, Tavily's date was later than the page's own date on some. A text match on a handful of results cannot repeat that comparison, so this run is not used to decide it."
+  },
+  {
+   "script": "repro/map_empty.py",
+   "request_ids": [
+    "feb15853-9c17-4aab-9361-b03019c922a6"
+   ],
+   "credits": 0,
+   "showed": [
+    "response keys: ['base_url', 'request_id', 'response_time', 'results', 'usage']",
+    "0 urls; failed_results: None; error: None",
+    "empty answer; reason-like keys present: []"
+   ],
+   "reproduced": "yes",
+   "why": "empty result with no reason field",
+   "rule": "Original: Map returned no URLs and no reason."
+  },
+  {
+   "script": "repro/scanned_pdf_extract.py",
+   "request_ids": [
+    "8df568ab-6d0b-4b9d-959d-eacdae63528f"
+   ],
+   "credits": 0,
+   "showed": [
+    "result keys: ['images', 'raw_content', 'title', 'url']; failed_results: []",
+    "607 characters of text; digits in the text: 24",
+    "a flag for image-only pages is present: False"
+   ],
+   "reproduced": "yes",
+   "why": "607 characters and no image-only flag",
+   "rule": "Original: Extract returned the letterhead (a few hundred characters) and no image-only flag."
+  },
+  {
+   "script": "repro/usage_lag.py",
+   "request_ids": [
+    "13db35fd-290a-4f41-9ada-140bde19837d"
+   ],
+   "credits": 1,
+   "showed": [
+    "/usage (account plan_usage, key usage) before: (1980, 1980); after: (1980, 1980)",
+    "the search reported 1 credit(s); /usage moved by 0 (account) and 0 (key)"
+   ],
+   "reproduced": "yes",
+   "why": "/usage did not move straight after a billed search",
+   "rule": "Original: /usage did not reflect calls that per-call usage had already counted."
+  }
+ ]
+}
