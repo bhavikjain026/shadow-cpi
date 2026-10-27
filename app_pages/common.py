@@ -47,6 +47,11 @@ def lock_table(rows, kind):
     st.table(df.style.apply(lambda _: styles, axis=None).hide(axis="index"), hide_index=True)
 
 
+def inject_style():
+    """app_pages/style.css (display only), added once per run from app.py so every page gets it."""
+    st.html(f"<style>{(ROOT / 'app_pages' / 'style.css').read_text(encoding='utf-8')}</style>")
+
+
 def header(title, intro=None):
     st.title(title)
     if intro:
