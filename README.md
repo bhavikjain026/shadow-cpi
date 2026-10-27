@@ -6,16 +6,33 @@
 **An AI agent that searches the past without cheating: it uses Tavily inside a time lock it cannot move, checks every
 quote on its source page, and seals India's inflation forecast before the government publishes it.**
 
-**The leak, measured (date test, 20 replay cases, pilot).** With no dates, **10 of
-20** cases leaked (Wilson 95% 30–70%); with `start_date`/`end_date` +
-`filter_by_published_date`, **0 of 20** (0–16%). These counts are after a
-logged retry of the 11 archive lookups that had failed; on the initial pass (the pre-registered result, shown as sensitivity) they were
-9 of 20 (26–66%) and 0 of 20 (0–16%).
+| Leaks, measured | No dates | Dates + filter |
+|---|---|---|
+| Date test (20 cases) | **10 of 20** | **0 of 20** (Wilson 0–16%) |
+| Finance check (14 cases, exploratory, different leak rule) | 10 of 14 | 0 of 14 |
 
-*What a leak is.* A case leaks when at least one result the search kept is a confirmed leak, which the
-pre-registration ([`v2/DATE_TEST_PREREG.md`](v2/DATE_TEST_PREREG.md)) defines as: "**Confirmed leak (L):** independent version evidence only: the Wayback Machine CDX API (a logged direct download, the same exception as MoSPI) lists **no capture on or before the cutoff**, its first capture is after the cutoff, **and** Tavily's published date or the date in the address is after the cutoff." The finance
-check uses a different rule, so its counts are reported apart and never added to these
-([`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md), as amended): "**Confirmed leak:** states the outcome **and** Wayback-confirmed (no capture on or before the cutoff, first capture after it, and Tavily's or the address's date after the cutoff)."
+Separate rules; never added together. After the logged archive retry; initial pass in the footnote.
+
+<details>
+<summary>Footnote: what counts as a leak, and the initial pass</summary>
+
+- **Dates + filter** means `start_date`/`end_date` plus `filter_by_published_date`; no dates means neither.
+- **Date test** (pilot, replay cases; [`v2/DATE_TEST_PREREG.md`](v2/DATE_TEST_PREREG.md)). A case leaks when at least
+  one result the search kept is a confirmed leak: "**Confirmed leak (L):** independent version evidence only: the Wayback Machine CDX API (a logged direct download, the same exception as MoSPI) lists **no capture on or before the cutoff**, its first capture is after the cutoff, **and** Tavily's published date or the date in the address is after the cutoff."
+- **Finance check** (exploratory, Reserve Bank of India (RBI) decisions and company results;
+  [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md), as amended). A different rule, so its counts are reported apart:
+  "**Confirmed leak:** states the outcome **and** Wayback-confirmed (no capture on or before the cutoff, first capture after it, and Tavily's or the address's date after the cutoff)."
+- **After the logged archive retry.** The table counts follow a logged retry of the archive lookups that had failed.
+  On the initial pass, 94 finance-check archive lookups (and 11 in the date test) failed
+  for network reasons, so those pages could only be flagged, not confirmed; the retry recovered all of them,
+  which is why the finance count rises from 2 to 10 of 14. Wilson 95% intervals: date
+  test no dates 30–70%, dates + filter 0–16%; finance check no dates
+  45–88%, dates + filter 0–22%.
+- **Initial pass** (the pre-registered result, shown as sensitivity): date test 9 of 20
+  (26–66%) with no dates and 0 of 20 (0–16%) with dates + filter; finance
+  check 2 of 14 and 0 of 14.
+
+</details>
 
 **The cost.** The filter dropped 12 of the date test's 40 pieces of valid evidence
 (initial pass).
