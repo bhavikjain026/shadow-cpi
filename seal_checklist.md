@@ -56,6 +56,10 @@ changes a rule, factor or filter.
 - [ ] Check it from outside, following `verify.md` (download at the tag, recompute the SHA-256; the v3 bundle has
       its own check in §4 there).
 - [ ] Put the SHA-256 into `docs/devpost_draft.md` (`[TBD: from seal]`).
+- [ ] **Copy the October SHA-256 into the Devpost description before submitting** (Devpost locks it at the deadline,
+      30 Oct 10:00 PT). `verify.md` §3 step 4 says how anyone checks it.
+- [ ] Optional: an OpenTimestamps proof of `sealed/2026-10.json` (`ots stamp sealed/2026-10.json`, then commit
+      `sealed/2026-10.json.ots`; `ots upgrade` it a few hours later once anchored). `verify.md` §3 step 5.
 - [ ] Tag `submission-v1.0` before submitting (Prompt 5). After it, prompts, weights, item list, source rules and
       scoring must not change.
 

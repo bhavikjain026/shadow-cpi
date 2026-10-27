@@ -50,8 +50,8 @@ with st.container(border=True):
             st.warning(f"Built but not sealed yet: sealing on {SEAL_DATE:%d %b}.")
     else:
         st.markdown(f"**Sealing on {SEAL_DATE:%d %b}.** The number, its 80% range and P(headline ≥ "
-                    f"{THRESHOLD:.1f}%) appear here once the call is sealed. {THRESHOLD:.1f}% is the RBI's projection "
-                    "for Oct–Dec 2026.")
+                    f"{THRESHOLD:.1f}%) appear here once the call is sealed. {THRESHOLD:.1f}% is the RBI's quarterly "
+                    "projection for Oct–Dec 2026, not a forecast for October.")
         c1, c2 = st.columns(2)
         c1.metric("CPI inflation, year-on-year", f"sealing on {SEAL_DATE:%d %b}")
         c2.metric(f"P(headline ≥ {THRESHOLD:.1f}%)", "with the seal")

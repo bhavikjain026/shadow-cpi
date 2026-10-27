@@ -47,6 +47,14 @@ You can also read the file: `headline_yoy` is the nowcast, `range_low`/`range_hi
    GitHub's own servers record when each branch and tag was pushed; dates written inside git can be set by
    whoever makes the commit, but this push time cannot. Find the push that created the `seal-2026-10` tag and
    check that it is **before** MoSPI's release (12 Nov 2026, 4:00 pm IST = 10:30 UTC for October data).
+4. **The Devpost copy:** the October SHA-256 is copied into the Devpost project description before submission.
+   Devpost locks the description at the submission deadline (30 Oct 2026, 10:00 am Pacific), so the hash shown there
+   was public before MoSPI's release. Compare it, character for character, with the hash you recomputed in step 2.
+5. **Optional, an OpenTimestamps proof:** if `sealed/2026-10.json.ots` exists at the tag, it anchors the file's
+   SHA-256 in a Bitcoin block. With the OpenTimestamps client (`pip install opentimestamps-client`), download both
+   files from the tag and run `ots verify 2026-10.json.ots` next to `2026-10.json`: it prints the block time, which
+   must be before the release. A proof that is still "pending" has not been anchored yet; try again a few hours
+   after the seal. If there is no `.ots` file, rely on checks 2–4.
 
 With git installed you can also check from a copy of the repository:
 
@@ -57,6 +65,10 @@ git for-each-ref refs/tags/seal-2026-10 --format="tag created %(taggerdate:iso-s
 git show seal-2026-10:sealed/2026-10.json > check.json
 sha256sum check.json          # Mac: shasum -a 256 check.json
 ```
+
+**Which models were called:** `models_at_cutoff` in the sealed file names the Nemotron IDs in use on the evidence
+cutoff day (Nebius retires the original IDs on 9 Nov 2026; later seals name the replacements;
+`v2/PREREGISTRATION.md` Amendment G). `model_ids` holds the full dated map.
 
 ## 3b. The experimental v3 bundle (a separate check; v1's check above does not depend on it)
 

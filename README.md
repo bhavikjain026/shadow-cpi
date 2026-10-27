@@ -27,7 +27,7 @@ could ever be live (look-ahead bias).
 
 Shadow CPI is a Tavily-grounded India CPI nowcast that tests, rather than assumes, Tavily's date controls and measures
 what they cost. El Lahib et al. (2026, [arXiv 2602.00758](https://arxiv.org/abs/2602.00758)) found
-that 71% of Google-audited questions had at least one major post-cutoff page, after 10–20 queries
+at least one retrieved page containing major post-cutoff leakage for 71% of Google-audited questions, after 10–20 queries
 and about 100 URLs each; our 9/20 (10/20 after the archive retry) is per search task, so the rates are not directly
 comparable.
 
@@ -48,6 +48,8 @@ The Tavily field report (app page "Tavily field report", built by `tools/build_f
   (10 of 20 after a logged retry of the 11 archive lookups that had failed).
   With `start_date`/`end_date` plus `filter_by_published_date`: 0 of 20
   (0 of 20 after the retry). A leak counts only when the Wayback Machine confirms it.
+  Every case whose label changed after the retry (9 of 34), with the reason:
+  [`docs/retry_reconciliation.md`](docs/retry_reconciliation.md).
 - **Finance check (exploratory, 14 Reserve Bank of India (RBI) decisions and company results, [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md)).**
   The day-before search with no dates leaked the outcome for 2 of 14 events
   (10 of 14 after the logged archive retry); with dates and the filter,
@@ -166,20 +168,26 @@ flowchart LR
 ([`shadow_cpi/nemotron.py`](shadow_cpi/nemotron.py)); calls from the flight recorder
 ([`results/app/flight_recorder.jsonl`](results/app/flight_recorder.jsonl)):
 
-| Model (Token Factory ID) | Job | Calls sent (including cache hits) |
-|---|---|---|
-| Nemotron Nano, `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` | Gatekeeper: "does this page state an Indian price or price change?" (yes/no); English glosses of non-English quotes, for display only | 622 (4,829) |
-| Nemotron Super, `nvidia/nemotron-3-super-120b-a12b` | Reads pages and cites the line for each price and price change; writes the search fields in arms B, C and H | 719 (5,177) |
+| Model (Token Factory ID) | From 9 Nov 2026 (Nebius's replacement) | Job | Calls sent (including cache hits) |
+|---|---|---|---|
+| Nemotron Nano, `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` | `nvidia/Nemotron-3_5-Lightning` | Gatekeeper: "does this page state an Indian price or price change?" (yes/no); English glosses of non-English quotes, for display only | 622 (4,829) |
+| Nemotron Super, `nvidia/nemotron-3-super-120b-a12b` | `nvidia/Nemotron-3.5-Super-VL` | Reads pages and cites the line for each price and price change; writes the search fields in arms B, C and H | 719 (5,177) |
 
-Where Token Factory helped: JSON-schema output worked on the opening call, so every model answer is parsed, not
-guessed; both model sizes sit behind the same endpoint, so the cheap gatekeeper and the careful reader are a
+Nebius retires the original IDs on 9 Nov 2026; from then, calls use Nebius's recommended replacements (pre-registered on 27 Oct). The model is picked by the call date in IST
+([`config/models.json`](config/models.json)) and logged with every call; the October 2026 seal uses the original
+models ([`v2/PREREGISTRATION.md`](v2/PREREGISTRATION.md), Amendment G).
+
+Where Token Factory helped: every call asks for JSON-schema output (`response_format` with a strict schema); if
+Nebius refuses that with an error, the code retries in JSON mode with the schema in the prompt, and from
+27 Oct each such fallback is logged. Schema output worked on the opening call, so every model answer
+is parsed, not guessed; both model sizes sit behind the same endpoint, so the cheap gatekeeper and the careful reader are a
 config change apart ([`config/models.json`](config/models.json)); and citing line numbers instead of copying text
 made Hindi pages work. Details: [`FEEDBACK_NOTES.md`](FEEDBACK_NOTES.md).
 
 ## The product
 
-- **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 27 Oct 2026; MoSPI publishes on 12 Nov at 4 pm
-  IST. Anyone can check the seal: download `sealed/2026-10.json` at tag `seal-2026-10`, recompute its `SHA-256`, and
+- **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 27 Oct 2026; October 2026 CPI is scheduled for 12 Nov at 4 pm
+  IST (MoSPI's next-working-day rule applies). Anyone can check the seal: download `sealed/2026-10.json` at tag `seal-2026-10`, recompute its `SHA-256`, and
   compare it with `sealed/2026-10.sha256` ([`verify.md`](verify.md)). After the release, the Archive page shows the
   miss and whether the official figure was inside the range.
 - **Price Shock Radar** (exploratory, report only; app page "October radar"): announced retail price changes taking
@@ -293,7 +301,11 @@ Written as bug reports in [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports
   radar, `timelock/`). v1 is frozen and was not changed.
 - Recall: the winning search arm found 6 of 29 known price changes.
 - Small samples: pilot and exploratory checks of tens of cases, reported with Wilson intervals; exploratory results
-  are labelled and changed no scored verdict.
+  are labelled and changed no scored verdict. 20 date-test cases and 14 finance events are small,
+  India-focused samples; they show the effect exists and its size here, not Tavily's behaviour in general.
+- Data vintage: MoSPI began publishing the 2024-base series (with its 2025 history) on
+  12 Feb 2026. A real January 2026 nowcast could not have used that history; our January
+  replay did. From February on, the history was public before each nowcast.
 - An audited event that may have been reversed is left in: an Uttar Pradesh (UP) electricity surcharge that later
   reports say the regulator put on hold. It is inside the score ([`docs/honest_limits.md`](docs/honest_limits.md)).
 - Custody: 46 of 110 entries have both a request_id and a response hash; they were logged

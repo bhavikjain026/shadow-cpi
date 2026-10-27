@@ -270,6 +270,13 @@ def facts(st, as_of, root=ROOT):
     nano, sup = roles["small"], roles["mid"]
     f.update(nano_sent=f"{sent[nano]:,}", nano_total=f"{total[nano]:,}", super_sent=f"{sent[sup]:,}",
              super_total=f"{total[sup]:,}")
+    rr = load("results/retry_reconciliation.json", root)          # tools/build_retry_table.py
+    f.update(retry_changed=rr["changed"], retry_cases=rr["cases"])
+    # the forced model migration (v2/PREREGISTRATION.md Amendment G): replacements and dates from the dated map
+    dated = roles["dated"]
+    new = dated["periods"][-1]
+    f.update(nano_new=new["small"], super_new=new["mid"], switch_day=human(date.fromisoformat(new["from"])),
+             migration_registered=day_month(date.fromisoformat(dated["pre_registered"])))
 
     # dates: the seal (app_pages/common.py), MoSPI's release rule (shadow_cpi/polls.py), git history
     seal = seal_date(root)
@@ -295,6 +302,12 @@ def facts(st, as_of, root=ROOT):
     f.update(lahib_arxiv=cit["el_lahib_2026"]["arxiv"], lahib_year=cit["el_lahib_2026"]["year"], lahib_pct=f"{cit['el_lahib_2026']['leaked_pct']}%",
              lahib_revealed_pct=f"{cit['el_lahib_2026']['revealed_pct']}%", release_hour=cit["mospi_release"]["time_ist"],
              research_checked=day_month(date.fromisoformat(cit["tavily_research_params"]["checked"][:10])))
+    base = cit["mospi_2024_base"]                       # data vintage: when the 2024-base history became public
+    pub = date.fromisoformat(base["first_published"])
+    f.update(base_published=human(pub), base_year=base["base_year"], base_history_year=base["history_year"],
+             base_first_month=f"{date(pub.year, pub.month, 1) - timedelta(days=1):%B %Y}",
+             base_first_month_short=f"{date(pub.year, pub.month, 1) - timedelta(days=1):%B}",
+             base_public_from=f"{pub:%B}")
     el = cit["el_lahib_2026"]
     f.update(lahib_queries=f"{el['queries_min']}–{el['queries_max']}", lahib_urls=el["urls_per_question"])
     f["related_work"] = "\n".join(f"- **{x['name']}**: {x['what']} ({x['link'] or 'link to be added'})."

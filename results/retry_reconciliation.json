@@ -1,0 +1,143 @@
+{
+ "note": "cases whose label changed after the logged Wayback retry; the first pass stays the pre-registered result",
+ "source": "results/leak_demo.json + the two retry files",
+ "retry_runs": {
+  "date": {
+   "run_utc": "2026-10-25T13:06:06.535306+00:00",
+   "rule": "only lookups that failed; 3 tries, 5 s apart; same CDX query and labels",
+   "failed_urls": 11,
+   "recovered": 11,
+   "still_failed": 0
+  },
+  "finance": {
+   "run_utc": "2026-10-25T13:11:31.154689+00:00",
+   "rule": "only lookups that failed; 3 tries, 5 s apart; same CDX query and labels",
+   "failed_urls": 94,
+   "recovered": 94,
+   "still_failed": 0
+  }
+ },
+ "changed": 9,
+ "cases": 34,
+ "rows": [
+  {
+   "case": "M7",
+   "test": "date test",
+   "item": "milk",
+   "search": "no time lock",
+   "cutoff": "2026-06-29",
+   "before": "no confirmed leak",
+   "after": "confirmed leak",
+   "reasons": [
+    "https://timesofindia.indiatimes.com/city/pune/milk-procurement-price-goes-up-retail-rate-likely-to-increase/articleshow/134644764.cms: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-02 (cutoff 2026-06-29), so date flag → confirmed leak (Wayback)",
+    "https://timesofindia.indiatimes.com/city/bengaluru/nandini-milk-price-may-go-up-by-5/lt-cms-call-today/articleshow/134491593.cms: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-09-25 (cutoff 2026-06-29), so date flag → confirmed leak (Wayback)"
+   ]
+  },
+  {
+   "case": "R3",
+   "test": "finance check",
+   "item": "RBI",
+   "search": "no time lock",
+   "cutoff": "2026-06-04",
+   "before": "no confirmed leak",
+   "after": "confirmed leak",
+   "reasons": [
+    "https://www.genvest.ai/events/rbi-monetary-policy: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-09 (cutoff 2026-06-04), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)",
+    "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63742: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-07 (cutoff 2026-06-04), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)"
+   ]
+  },
+  {
+   "case": "R4",
+   "test": "finance check",
+   "item": "RBI",
+   "search": "no time lock",
+   "cutoff": "2026-08-04",
+   "before": "no confirmed leak",
+   "after": "confirmed leak",
+   "reasons": [
+    "https://www.thehindu.com/business/rbi-monetary-policy-meeting-decision-on-repo-rate-live-updates-october-7-2026/article71554262.ece: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-07 (cutoff 2026-08-04), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)",
+    "https://timesofindia.indiatimes.com/business/india-business/rbi-mpc-meeting-october-2026-live-updates-governor-sanjay-malhotra-repo-rate-cut-fd-rate-monetary-policy-committee-emi-west-asia-crisis-rbi-news-today/liveblog/134753997.cms: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-07 (cutoff 2026-08-04), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)",
+    "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63742: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-07 (cutoff 2026-08-04), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)"
+   ]
+  },
+  {
+   "case": "R5",
+   "test": "finance check",
+   "item": "RBI",
+   "search": "no time lock",
+   "cutoff": "2026-10-06",
+   "before": "no confirmed leak",
+   "after": "confirmed leak",
+   "reasons": [
+    "https://timesofindia.indiatimes.com/business/india-business/rbi-mpc-meeting-october-2026-live-updates-governor-sanjay-malhotra-repo-rate-cut-fd-rate-monetary-policy-committee-emi-west-asia-crisis-rbi-news-today/liveblog/134753997.cms: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-07 (cutoff 2026-10-06), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)",
+    "https://www.thehindu.com/business/rbi-monetary-policy-meeting-decision-on-repo-rate-live-updates-october-7-2026/article71554262.ece: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-07 (cutoff 2026-10-06), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)"
+   ]
+  },
+  {
+   "case": "C1",
+   "test": "finance check",
+   "item": "TCS",
+   "search": "no time lock",
+   "cutoff": "2026-07-08",
+   "before": "no confirmed leak",
+   "after": "confirmed leak",
+   "reasons": [
+    "https://www.niftytrader.in/markets/tcs-q2-results-fy27-deal-expectations: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-08 (cutoff 2026-07-08), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)",
+    "https://www.tcs.com/content/dam/tcs/investor-relations/financial-statements/2026-27/q2/Presentations/Q2%202026-27%20Fact%20Sheet.pdf: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-12 (cutoff 2026-07-08), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)",
+    "https://www.indiainfoline.com/news/companies/tcs-share-price-jumps-5-46-after-q2-fy27-results-net-profit-rises-4-qoq-to-13884-crore: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-09 (cutoff 2026-07-08), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)"
+   ]
+  },
+  {
+   "case": "C5",
+   "test": "finance check",
+   "item": "Infosys",
+   "search": "no time lock",
+   "cutoff": "2026-07-22",
+   "before": "no confirmed leak",
+   "after": "confirmed leak",
+   "reasons": [
+    "https://www.genvest.ai/results/infosys-q2-fy27: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-12 (cutoff 2026-07-22), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)"
+   ]
+  },
+  {
+   "case": "C6",
+   "test": "finance check",
+   "item": "TCS",
+   "search": "no time lock",
+   "cutoff": "2026-10-07",
+   "before": "no confirmed leak",
+   "after": "confirmed leak",
+   "reasons": [
+    "https://www.forbesindia.com/article/news/tcs-q2-results-marginally-beat-analyst-expectations/2999232/1: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-08 (cutoff 2026-10-07), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)",
+    "https://www.tcs.com/content/dam/tcs/investor-relations/financial-statements/2026-27/q2/Presentations/Q2%202026-27%20Fact%20Sheet.pdf: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-12 (cutoff 2026-10-07), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)"
+   ]
+  },
+  {
+   "case": "C7",
+   "test": "finance check",
+   "item": "HDFC Bank",
+   "search": "no time lock",
+   "cutoff": "2026-10-16",
+   "before": "no confirmed leak",
+   "after": "confirmed leak",
+   "reasons": [
+    "https://www.moneycontrol.com/news/business/earnings/hdfc-bank-q2-results-net-profit-rises-4-7-to-rs-19-510-crore-meets-estimates-nii-up-9-7-14054372.html: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-17 (cutoff 2026-10-16), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)",
+    "https://www.hdfc.bank.in/content/dam/hdfcbankpws/in/en/pdf/about-us/financial-results/2026-2027/quarter-2/q2fy27-earnings-presentation.pdf: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-17 (cutoff 2026-10-16), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)"
+   ]
+  },
+  {
+   "case": "C8",
+   "test": "finance check",
+   "item": "ICICI Bank",
+   "search": "no time lock",
+   "cutoff": "2026-10-16",
+   "before": "no confirmed leak",
+   "after": "confirmed leak",
+   "reasons": [
+    "https://www.moneycontrol.com/news/business/earnings/icici-bank-q2-results-net-profit-rises-20-to-rs-14-843-crore-beats-estimates-nii-up-18-14054374.html: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-17 (cutoff 2026-10-16), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)",
+    "https://www.icici.bank.in/about-us/invest-relations: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2025-10-28 (cutoff 2026-10-16), so unknown → valid (pre-cutoff, Wayback)",
+    "https://www.icici.bank.in/about-us/news-room/2026/performance-review-quarter-ended-september-30-2026: archive lookup failed on the first pass (network); the retry found the first Wayback capture on 2026-10-17 (cutoff 2026-10-16), so snippet leak (not Wayback-confirmed) → confirmed leak (Wayback)"
+   ]
+  }
+ ]
+}

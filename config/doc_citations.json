@@ -21,6 +21,19 @@
     "source": "MoSPI advance release calendar",
     "added": "2026-10-26, from the owner's task card; not re-read offline"
   },
+  "mospi_2024_base": {
+    "first_published": "2026-02-12",
+    "base_year": 2024,
+    "history_year": 2025,
+    "what": "MoSPI first published the 2024-base CPI series, with its 2025 history, on this date",
+    "source": "MoSPI press release of the 2024-base CPI series",
+    "added": "2026-10-27, from the owner's task card; not re-read offline"
+  },
+  "mospi_release_rule": {
+    "what": "a release date that falls on a holiday or weekend moves to the next working day",
+    "source": "MoSPI advance release calendar",
+    "added": "2026-10-27, from the owner's task card"
+  },
   "tavily_research_params": {
     "params": [
       "input",

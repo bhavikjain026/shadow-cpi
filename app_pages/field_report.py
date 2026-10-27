@@ -182,6 +182,17 @@ for name, lab in (("first_pass", "initial pass"), ("after_retry", "after Wayback
                      "Valid evidence lost N / D (finance check)": f"{n['valid_lost']} / {d['valid_lost']} of {n['valid_total']}"})
 st.dataframe(rows, hide_index=True, width="stretch")
 
+# ---------- retry reconciliation ----------
+rr = read_json("results/retry_reconciliation.json")
+if rr:
+    st.subheader("Retry reconciliation: every case whose label changed")
+    st.caption(f"{rr['changed']} of {rr['cases']} cases changed label after the logged Wayback retry, which only "
+               "repeated archive lookups that had failed on the network. The initial pass stays the pre-registered "
+               "result. File: `results/retry_reconciliation.json` (also `docs/retry_reconciliation.md`).")
+    st.dataframe([{"Case": x["case"], "Test": x["test"], "Item": x["item"], "Search": x["search"],
+                   "Before": x["before"], "After": x["after"], "Reason": " · ".join(x["reasons"])}
+                  for x in rr["rows"]], hide_index=True, width="stretch")
+
 # ---------- independent second review ----------
 sr = read_json("results/timelock34_second_review.json")
 if sr:

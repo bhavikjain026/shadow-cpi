@@ -21,7 +21,7 @@ LIVE_MONTH = "2026-10"
 
 # MoSPI CPI releases still to come (data month, scheduled date, likely date, note). Source: audit/dates_check.md.
 RELEASES = [
-    ("2026-10", date(2026, 11, 12), date(2026, 11, 12), "Thu 12 Nov 2026, 4:00 PM IST"),
+    ("2026-10", date(2026, 11, 12), date(2026, 11, 12), "October CPI is scheduled for Thu 12 Nov 2026, 4:00 PM IST (MoSPI's next-working-day rule applies)"),
     ("2026-11", date(2026, 12, 12), date(2026, 12, 14),
      "November data due 12 Dec, a Saturday, so likely Mon 14 Dec under MoSPI's next-working-day rule"),
 ]

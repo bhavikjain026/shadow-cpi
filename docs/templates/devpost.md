@@ -26,8 +26,8 @@ poll months, about a tie with economists ({{mae_poll_c}} vs {{mae_poll}}).
 ## Inspiration
 India's CPI arrives about {{release_lag}} days after the month ends. Forecasting it from the web means replaying past
 months, and a replay that reads a page published after its cutoff looks better than it could ever be live. El Lahib et
-al. ({{lahib_year}}, arXiv {{lahib_arxiv}}) found that {{lahib_pct}} of Google-audited questions had at least one major
-post-cutoff page, after {{lahib_queries}} queries and about {{lahib_urls}} URLs each; our {{dt_nodates}}/{{dt_cases}}
+al. ({{lahib_year}}, arXiv {{lahib_arxiv}}) found at least one retrieved page containing major post-cutoff leakage for
+{{lahib_pct}} of Google-audited questions, after {{lahib_queries}} queries and about {{lahib_urls}} URLs each; our {{dt_nodates}}/{{dt_cases}}
 ({{dt_nodates_retry}}/{{dt_cases}} after the archive retry) is per search task, so the rates are not directly comparable. So we built a nowcast that tests, rather than assumes,
 Tavily's date controls and measures what they cost.
 
@@ -91,14 +91,17 @@ So the model chooses the query, topic, domains and language; code owns the dates
 3. **Plain code computes:** index levels combined with MoSPI's official weights; year-on-year last.
 4. **The seal:** canonical JSON + `SHA-256` + a git tag, before the release.
 
-**NVIDIA Nemotron on Nebius Token Factory:** Nemotron Nano (`nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`) is the yes/no
+**NVIDIA Nemotron on Nebius Token Factory** (required technologies): Nemotron Nano (`nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`; from {{switch_day}}
+`{{nano_new}}`) is the yes/no
 gatekeeper and writes display-only English glosses ({{nano_sent}} calls sent; {{nano_total}} including cache hits).
-Nemotron Super (`nvidia/nemotron-3-super-120b-a12b`) reads pages, cites lines, and writes the search fields in arms B,
-C and H ({{super_sent}} calls sent; {{super_total}} including cache hits). Token Factory helped: JSON-schema output
+Nemotron Super (`nvidia/nemotron-3-super-120b-a12b`; from {{switch_day}} `{{super_new}}`) reads pages, cites lines, and writes the search fields in arms B,
+C and H ({{super_sent}} calls sent; {{super_total}} including cache hits). Nebius retires the original IDs on {{switch_day}}; from then, calls use Nebius's recommended replacements (pre-registered on {{migration_registered}}).
+Token Factory helped: every call asks for JSON-schema output (with a logged JSON-mode fallback), schema output
 worked on the opening call, and both sizes sit behind one OpenAI-compatible endpoint, so roles are a config change.
 
 ## What it does
-- **The {{live_month}} nowcast.** {{seal_status}}. MoSPI publishes on {{release_day}} at {{release_hour}} IST.
+- **The {{live_month}} nowcast.** {{seal_status}}. {{live_month}} CPI is scheduled for {{release_day}} at {{release_hour}} IST (MoSPI's
+  next-working-day rule applies).
   Anyone can recompute the seal's `SHA-256` from the file at tag `seal-2026-10` (`verify.md`).
 - **Price Shock Radar** (exploratory, report only): announced price changes taking effect this month;
   {{radar_events}} verified so far, {{radar_corroborated}} corroborated.
@@ -132,8 +135,13 @@ better ({{mae_v2}}).
 - Scanned PDFs extract only the letterhead.
 
 ## Honest limits
-{{cov_low}}–{{cov_high}} of the basket measured each month; recall {{arm_a_recall}} of {{known_changes}}; small
-samples with Wilson intervals; {{custody_both}} of {{custody_total}} custody entries have both a request_id and a
+{{cov_low}}–{{cov_high}} of the basket measured each month; recall {{arm_a_recall}} of {{known_changes}}; small,
+India-focused samples with Wilson intervals ({{dt_cases}} date-test cases and {{fin_events}} finance events show the effect exists
+and its size here, not Tavily's behaviour in general); data vintage: MoSPI began publishing the {{base_year}}-base series
+(with its {{base_history_year}} history) on {{base_published}}, so a real {{base_first_month}} nowcast could not have used
+that history, while our {{base_first_month_short}} replay did (from {{base_public_from}} on it was public before each
+nowcast); every case whose label changed after the archive retry ({{retry_changed}} of {{retry_cases}}) is listed in
+`docs/retry_reconciliation.md`; {{custody_both}} of {{custody_total}} custody entries have both a request_id and a
 response hash (later arms only); direct non-Tavily sources (MoSPI API, Department of Consumer Affairs (DoCA) download,
 Wayback lookups); quote check (AI-assisted audit; pages then opened in a browser) {{q_verbatim}} verbatim,
 {{q_paywalled}} paywalled, {{q_not_checked}} not checked; web news quotes ran in full only for {{web_quotes_month}}; searches

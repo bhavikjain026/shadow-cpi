@@ -15,7 +15,7 @@ rebuild `results/app/` with `python tools/build_app_data.py`.
 | Home | Headline result: Shadow CPI average miss; number of poll months; Shadow CPI vs poll on those months | 0.194 percentage points; 6; 0.150 vs 0.148 (“about a tie”: within 0.005) | `results/score_lock.json` `mae.c`, `mae_poll_months.c`, `mae_poll_months.poll`; poll months counted in `results/baselines.csv` (`poll_pred` filled) |
 | Home, Replay | Pass/fail rule result | passed | `results/score_lock.json` `go` |
 | Home | Seal date “29 Oct” | 2026-10-29 | `app_pages/common.py` `SEAL_DATE`, from `seal_checklist.md` |
-| Home | Threshold 6.0% (RBI projection, Oct–Dec 2026) | 6.0 | `shadow_cpi/live_range.py` `THRESHOLD`; checked in `audit/dates_check.md` (c) |
+| Home | Threshold 6.0% (the RBI's quarterly projection for Oct–Dec 2026, not a forecast for October) | 6.0 | `shadow_cpi/live_range.py` `THRESHOLD`; checked in `audit/dates_check.md` (c) |
 | Home | Countdown to the official October CPI | Thu 12 Nov 2026, 4:00 PM IST, minus the current time | `app_pages/common.py` `RELEASES`, `RELEASE_HOUR_IST`; checked in `audit/dates_check.md` (a) |
 | Home, Replay | (a) Trend only: mean miss after / before fixes, direction right | 0.212 / 0.212 pp, 8 of 9 | `results/score_lock.json`: `mae`, `history[-1].mae`, `direction_hits` |
 | Home, Replay | (b) Spine only: mean miss after / before fixes, direction right | 0.225 / 0.225 pp, 9 of 9 | `results/score_lock.json`: `mae`, `history[-1].mae`, `direction_hits` |

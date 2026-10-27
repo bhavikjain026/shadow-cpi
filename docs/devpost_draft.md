@@ -27,8 +27,8 @@ poll months, about a tie with economists (0.150 vs 0.148).
 ## Inspiration
 India's CPI arrives about 12 days after the month ends. Forecasting it from the web means replaying past
 months, and a replay that reads a page published after its cutoff looks better than it could ever be live. El Lahib et
-al. (2026, arXiv 2602.00758) found that 71% of Google-audited questions had at least one major
-post-cutoff page, after 10–20 queries and about 100 URLs each; our 9/20
+al. (2026, arXiv 2602.00758) found at least one retrieved page containing major post-cutoff leakage for
+71% of Google-audited questions, after 10–20 queries and about 100 URLs each; our 9/20
 (10/20 after the archive retry) is per search task, so the rates are not directly comparable. So we built a nowcast that tests, rather than assumes,
 Tavily's date controls and measures what they cost.
 
@@ -106,14 +106,17 @@ So the model chooses the query, topic, domains and language; code owns the dates
 3. **Plain code computes:** index levels combined with MoSPI's official weights; year-on-year last.
 4. **The seal:** canonical JSON + `SHA-256` + a git tag, before the release.
 
-**NVIDIA Nemotron on Nebius Token Factory:** Nemotron Nano (`nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`) is the yes/no
+**NVIDIA Nemotron on Nebius Token Factory** (required technologies): Nemotron Nano (`nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`; from 9 Nov 2026
+`nvidia/Nemotron-3_5-Lightning`) is the yes/no
 gatekeeper and writes display-only English glosses (622 calls sent; 4,829 including cache hits).
-Nemotron Super (`nvidia/nemotron-3-super-120b-a12b`) reads pages, cites lines, and writes the search fields in arms B,
-C and H (719 calls sent; 5,177 including cache hits). Token Factory helped: JSON-schema output
+Nemotron Super (`nvidia/nemotron-3-super-120b-a12b`; from 9 Nov 2026 `nvidia/Nemotron-3.5-Super-VL`) reads pages, cites lines, and writes the search fields in arms B,
+C and H (719 calls sent; 5,177 including cache hits). Nebius retires the original IDs on 9 Nov 2026; from then, calls use Nebius's recommended replacements (pre-registered on 27 Oct).
+Token Factory helped: every call asks for JSON-schema output (with a logged JSON-mode fallback), schema output
 worked on the opening call, and both sizes sit behind one OpenAI-compatible endpoint, so roles are a config change.
 
 ## What it does
-- **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 27 Oct 2026. MoSPI publishes on 12 Nov at 4 pm IST.
+- **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 27 Oct 2026. October 2026 CPI is scheduled for 12 Nov at 4 pm IST (MoSPI's
+  next-working-day rule applies).
   Anyone can recompute the seal's `SHA-256` from the file at tag `seal-2026-10` (`verify.md`).
 - **Price Shock Radar** (exploratory, report only): announced price changes taking effect this month;
   1 verified so far, 0 corroborated.
@@ -147,8 +150,13 @@ better (0.206).
 - Scanned PDFs extract only the letterhead.
 
 ## Honest limits
-14%–21% of the basket measured each month; recall 6 of 29; small
-samples with Wilson intervals; 46 of 110 custody entries have both a request_id and a
+14%–21% of the basket measured each month; recall 6 of 29; small,
+India-focused samples with Wilson intervals (20 date-test cases and 14 finance events show the effect exists
+and its size here, not Tavily's behaviour in general); data vintage: MoSPI began publishing the 2024-base series
+(with its 2025 history) on 12 Feb 2026, so a real January 2026 nowcast could not have used
+that history, while our January replay did (from February on it was public before each
+nowcast); every case whose label changed after the archive retry (9 of 34) is listed in
+`docs/retry_reconciliation.md`; 46 of 110 custody entries have both a request_id and a
 response hash (later arms only); direct non-Tavily sources (MoSPI API, Department of Consumer Affairs (DoCA) download,
 Wayback lookups); quote check (AI-assisted audit; pages then opened in a browser) 10 verbatim,
 1 paywalled, 1 not checked; web news quotes ran in full only for March 2026; searches

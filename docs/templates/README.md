@@ -26,7 +26,7 @@ could ever be live (look-ahead bias).
 
 Shadow CPI is a Tavily-grounded India CPI nowcast that tests, rather than assumes, Tavily's date controls and measures
 what they cost. El Lahib et al. ({{lahib_year}}, [arXiv {{lahib_arxiv}}](https://arxiv.org/abs/{{lahib_arxiv}})) found
-that {{lahib_pct}} of Google-audited questions had at least one major post-cutoff page, after {{lahib_queries}} queries
+at least one retrieved page containing major post-cutoff leakage for {{lahib_pct}} of Google-audited questions, after {{lahib_queries}} queries
 and about {{lahib_urls}} URLs each; our {{dt_nodates}}/{{dt_cases}} ({{dt_nodates_retry}}/{{dt_cases}} after the archive retry) is per search task, so the rates are not directly
 comparable.
 
@@ -44,6 +44,8 @@ The Tavily field report (app page "Tavily field report", built by `tools/build_f
   ({{dt_nodates_retry}} of {{dt_cases}} after a logged retry of the {{dt_retry_urls}} archive lookups that had failed).
   With `start_date`/`end_date` plus `filter_by_published_date`: {{dt_dated}} of {{dt_cases}}
   ({{dt_dated_retry}} of {{dt_cases}} after the retry). A leak counts only when the Wayback Machine confirms it.
+  Every case whose label changed after the retry ({{retry_changed}} of {{retry_cases}}), with the reason:
+  [`docs/retry_reconciliation.md`](docs/retry_reconciliation.md).
 - **Finance check (exploratory, {{fin_events}} Reserve Bank of India (RBI) decisions and company results, [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md)).**
   The day-before search with no dates leaked the outcome for {{fin_nodates}} of {{fin_events}} events
   ({{fin_nodates_retry}} of {{fin_events}} after the logged archive retry); with dates and the filter,
@@ -151,20 +153,26 @@ flowchart LR
 ([`shadow_cpi/nemotron.py`](shadow_cpi/nemotron.py)); calls from the flight recorder
 ([`results/app/flight_recorder.jsonl`](results/app/flight_recorder.jsonl)):
 
-| Model (Token Factory ID) | Job | Calls sent (including cache hits) |
-|---|---|---|
-| Nemotron Nano, `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` | Gatekeeper: "does this page state an Indian price or price change?" (yes/no); English glosses of non-English quotes, for display only | {{nano_sent}} ({{nano_total}}) |
-| Nemotron Super, `nvidia/nemotron-3-super-120b-a12b` | Reads pages and cites the line for each price and price change; writes the search fields in arms B, C and H | {{super_sent}} ({{super_total}}) |
+| Model (Token Factory ID) | From {{switch_day}} (Nebius's replacement) | Job | Calls sent (including cache hits) |
+|---|---|---|---|
+| Nemotron Nano, `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` | `{{nano_new}}` | Gatekeeper: "does this page state an Indian price or price change?" (yes/no); English glosses of non-English quotes, for display only | {{nano_sent}} ({{nano_total}}) |
+| Nemotron Super, `nvidia/nemotron-3-super-120b-a12b` | `{{super_new}}` | Reads pages and cites the line for each price and price change; writes the search fields in arms B, C and H | {{super_sent}} ({{super_total}}) |
 
-Where Token Factory helped: JSON-schema output worked on the opening call, so every model answer is parsed, not
-guessed; both model sizes sit behind the same endpoint, so the cheap gatekeeper and the careful reader are a
+Nebius retires the original IDs on {{switch_day}}; from then, calls use Nebius's recommended replacements (pre-registered on {{migration_registered}}). The model is picked by the call date in IST
+([`config/models.json`](config/models.json)) and logged with every call; the {{live_month}} seal uses the original
+models ([`v2/PREREGISTRATION.md`](v2/PREREGISTRATION.md), Amendment G).
+
+Where Token Factory helped: every call asks for JSON-schema output (`response_format` with a strict schema); if
+Nebius refuses that with an error, the code retries in JSON mode with the schema in the prompt, and from
+{{migration_registered}} each such fallback is logged. Schema output worked on the opening call, so every model answer
+is parsed, not guessed; both model sizes sit behind the same endpoint, so the cheap gatekeeper and the careful reader are a
 config change apart ([`config/models.json`](config/models.json)); and citing line numbers instead of copying text
 made Hindi pages work. Details: [`FEEDBACK_NOTES.md`](FEEDBACK_NOTES.md).
 
 ## The product
 
-- **The {{live_month}} nowcast.** {{seal_status}}; MoSPI publishes on {{release_day}} at {{release_hour}}
-  IST. Anyone can check the seal: download `sealed/2026-10.json` at tag `seal-2026-10`, recompute its `SHA-256`, and
+- **The {{live_month}} nowcast.** {{seal_status}}; {{live_month}} CPI is scheduled for {{release_day}} at {{release_hour}}
+  IST (MoSPI's next-working-day rule applies). Anyone can check the seal: download `sealed/2026-10.json` at tag `seal-2026-10`, recompute its `SHA-256`, and
   compare it with `sealed/2026-10.sha256` ([`verify.md`](verify.md)). After the release, the Archive page shows the
   miss and whether the official figure was inside the range.
 - **Price Shock Radar** (exploratory, report only; app page "October radar"): announced retail price changes taking
@@ -278,7 +286,11 @@ Written as bug reports in [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports
   radar, `timelock/`). v1 is frozen and was not changed.
 - Recall: the winning search arm found {{arm_a_recall}} of {{known_changes}} known price changes.
 - Small samples: pilot and exploratory checks of tens of cases, reported with Wilson intervals; exploratory results
-  are labelled and changed no scored verdict.
+  are labelled and changed no scored verdict. {{dt_cases}} date-test cases and {{fin_events}} finance events are small,
+  India-focused samples; they show the effect exists and its size here, not Tavily's behaviour in general.
+- Data vintage: MoSPI began publishing the {{base_year}}-base series (with its {{base_history_year}} history) on
+  {{base_published}}. A real {{base_first_month}} nowcast could not have used that history; our {{base_first_month_short}}
+  replay did. From {{base_public_from}} on, the history was public before each nowcast.
 - An audited event that may have been reversed is left in: an Uttar Pradesh (UP) electricity surcharge that later
   reports say the regulator put on hold. It is inside the score ([`docs/honest_limits.md`](docs/honest_limits.md)).
 - Custody: {{custody_both}} of {{custody_total}} entries have both a request_id and a response hash; they were logged
