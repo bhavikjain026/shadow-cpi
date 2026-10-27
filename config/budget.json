@@ -38,7 +38,9 @@
     "finance-lookahead": 60,
     "leakcheck-full-page": 100,
     "leakcheck-exact-match": 100,
-    "lang-date-test": 80
+    "lang-date-test": 80,
+    "drift-2026-10": 60,
+    "radar-skeptic-2026-10": 40
   },
   "plans": {
     "cut1_events": "milk, lpg, electricity: English + Hindi; mobile, rail, medicine, school_fee, gst: English only (config/items.yaml 'langs')",

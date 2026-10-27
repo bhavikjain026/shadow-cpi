@@ -137,3 +137,17 @@ files are kept as `results/*_before_bugfix_2026-10-21T151419.*` and in `results/
   change, trend expected a rise of 1.4% → −0.067 pp vs. trend", with the caption "Each step is the item's measured
   change minus what its own trend expected." The run files gain only `trend_change` per step (`v2.needle.own_trend`);
   the same hash check passes (`tests/test_needle_jumps.py`).
+
+## 6. New metric: Brier score for P(headline ≥ 6.0%), from October 2026 on
+
+- **Date:** 2026-10-27
+- **Decided by:** the owner (task card of 27 Oct).
+- **What:** `score.py` adds two columns to `results/archive.csv`: the sealed `p_headline_ge_6` and its Brier score,
+  (p − outcome)², where outcome = 1 if the official headline YoY is ≥ 6.0% (`shadow_cpi.live_range.THRESHOLD`,
+  RBI's Q3 projection), else 0. Lower is better: 0 is a perfect call, 0.25 is what p = 0.5 always scores.
+- **Applies from October 2026 on only** (`score.BRIER_FROM = "2026-10"`). This is a **new metric**, not a re-scoring.
+  The scored months Jan–Sep 2026 sealed no probability, and they get no Brier score even if a file carried one. Their
+  scores, `results/score_lock.json` and every seal are unchanged.
+- **When it first counts:** after MoSPI releases October CPI (12 Nov 2026) and the release line is added to
+  `data/official_releases.csv`.
+- **Tests:** `tests/test_seal_tools.py::test_brier_from_october_on_only`.

@@ -184,3 +184,13 @@ returned English sports and car pages, and no Marathi or Tamil result came from 
 Suggestion: when a date filter leaves few matches in the requested `language`, return fewer results rather than
 off-language ones, or say so in the response. Evidence: `results/lang_date_test.md` (table and addendum),
 `results/lang_date_test.json` (every result, request id and response hash).
+
+**2026-10-27 · Suggestion: leaks are ordinary articles, not live blogs or hub pages, so the date window is the fix.**
+Exploratory, 0 credits, from the saved date-test and finance results. Each result's URL was put into one of four
+types by a rule written down before counting (`v2/DRIFT_PREREG.md` part C). Of 340 results, 18 were confirmed leaks.
+By type: article 17 of 283 (6%, Wilson 95% 4–9%), live blog 1 of 18 (6%, 1–26%), hub or tag page 0 of 2, other 0 of
+37. All 18 came from the searches sent without a date window (date test arm A 12, finance arm N 6). None came from a
+search with `start_date`/`end_date`. So a page-type filter would not have stopped them, but the date window did.
+Suggestion: say in the Search docs that the date parameters are what keep later articles out of a historical search,
+and consider returning a page-type field (article / live blog / listing) so users can audit results. Evidence:
+`results/field_report.json` (`leak_by_source_type`), `v2/leak_types.py`.

@@ -20,9 +20,11 @@ sys.path.insert(0, str(ROOT / "tools"))
 from shadow_cpi.budget import load_budget, read_ledger, spent  # noqa: E402
 from v2 import ablation as AB  # noqa: E402
 from v2 import date_test as DT  # noqa: E402
+from v2 import drift as DR  # noqa: E402
 from v2 import finance_lookahead as F  # noqa: E402
 from v2 import kinds as K  # noqa: E402
 from v2 import lang_date_test as LT  # noqa: E402
+from v2 import leak_types as LKT  # noqa: E402
 from v2 import recall as RC  # noqa: E402
 from shadow_cpi.tavily import iso_date  # noqa: E402
 
@@ -382,7 +384,8 @@ def build():
            "exploratory": {"H": exploratory("H", "v2-ablation-H", ref), "Td": exploratory("Td", "v2-ablation-Td", ref)},
            "date_test": date_test(), "lang_date_test": lang_date_test(), "finance": finance(),
            "auto_parameters": auto_parameters(), "radar": radar(),
-           "monthly_run_cost": monthly_run_cost(), "ledger_rows": len(ledger)}
+           "monthly_run_cost": monthly_run_cost(), "ledger_rows": len(ledger),
+           "pages_changed": DR.latest(DR.load_state()), "leak_by_source_type": LKT.table()}
     OUT.write_text(json.dumps(rep, ensure_ascii=False, indent=1, default=float))
     return rep
 

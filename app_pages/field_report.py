@@ -177,6 +177,23 @@ for name, lab in (("first_pass", "first pass"), ("after_retry", "after Wayback r
                      "Valid lost N / D": f"{n['valid_lost']} / {d['valid_lost']} of {n['valid_total']}"})
 st.dataframe(rows, hide_index=True, width="stretch")
 
+# ---------- leaks by source type ----------
+lt = r.get("leak_by_source_type")
+if lt:
+    st.subheader("Which pages leak? Leaks by source type")
+    st.caption(f"{lt['label']}. {lt['leaks']} leaks among {lt['results']} results from the date test and the finance "
+               f"check. Leak = {lt['leak_definition']}. Type from the URL only, by a rule written before counting "
+               f"({lt['rule']}).")
+
+    def cell(x):
+        return "—" if not x["results"] else f"{x['leaks']} of {x['results']} = {pct(x['rate'])} ({wilson(x['wilson95'])})"
+
+    st.dataframe([{"Source type": x["type"], "Leaks / results, pooled (Wilson 95%)": cell(x["pooled"]),
+                   "Date test": cell(x["date test"]), "Finance check": cell(x["finance"])} for x in lt["rows"]],
+                 hide_index=True, width="stretch")
+    st.caption("Where the leaks came from: " + ", ".join(f"{k} {v}" for k, v in lt["leaks_by_arm"].items())
+               + ". Sources: " + ", ".join(f"`{s}`" for s in lt["sources"]) + ".")
+
 # ---------- radar and cost ----------
 st.subheader("October radar: first runs")
 rd = r["radar"]
@@ -185,6 +202,21 @@ st.dataframe([{"Run (UTC)": x["utc"][:16], "Real credits": x["real_credits"], "S
                "Complete": "yes" if x["complete"] else "no"} for x in rd["runs"]], hide_index=True, width="stretch")
 st.caption(f"Strategy {rd['strategy']} · {rd['events']} events, {rd['corroborated']} corroborated · {rd['spent']} of "
            f"{rd['cap']} credits ({rd['cap_source']}).")
+st.markdown("**Pages that changed**")
+pc = r.get("pages_changed")
+if not pc:
+    st.caption("No drift run yet. Once a day until the 29 Oct freeze, every radar page with a cited line is read "
+               "again with Tavily Extract and compared with the saved copy (v2/DRIFT_PREREG.md, part A).")
+else:
+    st.caption(f"{pc['changed']} of {pc['checked']} pages changed since the radar saved them (run of "
+               f"{pc['ist_date']} IST; {pc['failed']} could not be fetched"
+               + ("" if pc["complete"] else f", {pc['not_checked']} not checked: the credit cap stopped the run")
+               + f"). {pc['runs']} run(s), {pc['credits_total']} credits. Page furniture (copyright, cookie lines) "
+                 "and whitespace are ignored. Descriptive only: nothing in the radar changes.")
+    if pc["pages"]:
+        st.dataframe([{"Page": x["url"], "Quote still present": "yes" if x["quote_present"] else "no",
+                       "Number changed": x["number_changed"], "What changed (≤300 characters)": x["diff"]}
+                      for x in pc["pages"]], hide_index=True, width="stretch")
 mc = r["monthly_run_cost"]
 st.markdown(f"**Credits for one full monthly run:** radar run(s) {', '.join(str(x) for x in mc['radar_run_real_credits'])}"
             f" real credits; arm A {mc['arm_a_per_month_original']:.1f} per month at original cost "

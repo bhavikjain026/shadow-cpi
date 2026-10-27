@@ -194,6 +194,25 @@ def test_score_flags_a_tampered_seal_and_never_changes_it(scored):
     assert p.read_bytes() == before
 
 
+def test_brier_from_october_on_only(scored):
+    S.seal("2026-11", {"headline_yoy": 5.9, "range_low": 5.6, "range_high": 6.2, "p_headline_ge_6": 0.3},
+           seal_dir=scored / "sealed")
+    p = scored / "sealed" / "2026-09.json"                  # a September seal that happens to carry a p: not scored
+    S.seal("2026-09", {**json.loads(p.read_text(encoding="utf-8")), "p_headline_ge_6": 0.9},
+           seal_dir=scored / "sealed")
+    (scored / "data" / "official_releases.csv").write_text(
+        "month,official_yoy,release_date,source_url\n2026-09,5.54,2026-10-12,x\n2026-10,6.10,2026-11-12,x\n"
+        "2026-11,6.00,2026-12-14,x\n")
+    lines = []
+    SC.score(root=scored, out=lines.append)
+    a = read_archive(scored)
+    assert a["2026-09"]["brier_ge_6"] == "" and a["2026-09"]["p_headline_ge_6"] == ""
+    assert a[MONTH]["brier_ge_6"] == ""                     # October sealed without a p: nothing to score
+    assert float(a["2026-11"]["brier_ge_6"]) == pytest.approx((0.3 - 1) ** 2)    # 6.00 counts as >= 6.0
+    assert any("Brier 0.490" in l for l in lines)
+    assert SC.brier("2026-10", {"p_headline_ge_6": 0.8}, 5.9) == (0.8, pytest.approx(0.64))
+
+
 def test_official_releases_file_has_headers_only():
     assert (ROOT / "data" / "official_releases.csv").read_text(encoding="utf-8").splitlines() == \
         [",".join(SC.RELEASE_FIELDS)]
