@@ -1,5 +1,8 @@
 # shadow_cpi.pit: time-locked search
 
+The pipeline's wrapper around the standalone [`timelock/`](../../timelock/) module (use that outside Shadow CPI):
+it adds the Flight Recorder, a month-start window and the kept/flagged/leaks split.
+
 Let the model program its filters, inside a time lock it cannot move.
 
 `pit_search(query, cutoff)` always sends `start_date`/`end_date` and `filter_by_published_date=true` (plus

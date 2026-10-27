@@ -2,22 +2,19 @@
 
 Every call sends start_date/end_date and filter_by_published_date=true (and include_usage, via shadow_cpi.tavily),
 keeps Tavily's request_id and the response's SHA-256 (also written to the Flight Recorder by Recorder), and runs
-shadow_cpi.leakcheck.check_result on every result. Tavily's filter is the first lock, our date check the second:
+timelock.check_result on every result. Tavily's filter is the first lock, our date check the second:
   - safe results are kept;
   - undated results are flagged, not trusted (kept apart, never mixed into `kept`);
   - results with any date after the cutoff are dropped as leaks, whatever Tavily's filter let through.
+The lock itself is timelock.timelocked_search (standalone); this wrapper adds the Recorder, the month-start window and
+the kept/flagged/leaks split the pipeline uses.
 """
 from datetime import date
 
-from shadow_cpi.leakcheck import DATE_FLAG, LEAK, SAFE, check_result
-from shadow_cpi.recorder import provenance
+from timelock import DATE_FLAG, LEAK, SAFE, TimeLockError, timelocked_search
 
 # parameters that would move or loosen the window; the lock owns them
 LOCKED = ("start_date", "end_date", "filter_by_published_date", "time_range", "days", "auto_parameters")
-
-
-class TimeLockError(ValueError):
-    """A caller tried to set a parameter the time lock owns."""
 
 
 def window_for(cutoff, start=None):
@@ -45,13 +42,18 @@ def pit_search(query, cutoff, *, start=None, tavily=None, page_dates=None, paren
         from shadow_cpi.tavily import Tavily
         tavily = Tavily()
     s, e = window_for(cutoff, start)
-    resp, call_id = tavily.search(query, start_date=s, end_date=e, filter_by_published_date=True,
-                                  parent=parent, tag=tag, **params)
-    page_dates = page_dates or {}
-    results = [{**r, "pit_label": check_result(r, e, page_date=page_dates.get(r.get("url")))}
-               for r in resp.get("results", [])]
+    call = {}
+
+    class Recorded:                     # timelock's client interface over the recorded Shadow CPI client
+        def search(self, q, **kw):
+            resp, call["id"] = tavily.search(q, parent=parent, tag=tag, **kw)
+            return resp
+
+    found = timelocked_search(Recorded(), query, e, start_date=s, end_date=e, page_dates=page_dates, **params)
+    results = [{**r, "pit_label": r["status"]} for r in found]
     by = {lab: [r for r in results if r["pit_label"] == lab] for lab in (SAFE, DATE_FLAG, LEAK)}
-    return {"query": query, "cutoff": e, "window": [s, e], "call_id": call_id, **provenance(resp),
-            "credits": (resp.get("usage") or {}).get("credits"), "response_time": resp.get("response_time"),
-            "counts": {lab: len(v) for lab, v in by.items()}, "kept": by[SAFE], "flagged": by[DATE_FLAG],
-            "leaks": by[LEAK], "results": results}
+    resp = found.response
+    return {"query": query, "cutoff": e, "window": [s, e], "call_id": call["id"], "request_id": found.request_id,
+            "response_sha256": found.response_sha256, "credits": (resp.get("usage") or {}).get("credits"),
+            "response_time": resp.get("response_time"), "counts": found.counts, "kept": by[SAFE],
+            "flagged": by[DATE_FLAG], "leaks": by[LEAK], "results": results}

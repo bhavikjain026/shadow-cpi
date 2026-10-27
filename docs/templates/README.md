@@ -5,7 +5,13 @@
 **An AI agent that searches the past without cheating: it writes its own Tavily searches inside a time lock it cannot
 move, verifies every quote on the page, and seals India's inflation forecast before the government publishes it.**
 
+**The leak, measured:** with no dates, {{dt_nodates}} of {{dt_cases}} replay cases read a page that did not yet exist at
+the cutoff ({{dt_nodates_retry}} after a logged archive retry); inside the time lock, {{dt_dated}} of {{dt_cases}}.
+
 **Live app:** https://shadow-cpi.streamlit.app · **Demo video:** [TBD] · **Devpost:** [TBD]
+
+**Reusable:** [`timelock/`](timelock/), time-locked search for any question, standard library only
+([{{example_lines}}-line example](#use-it-in-{{example_lines}}-lines)).
 
 ## The problem
 
@@ -121,31 +127,55 @@ made Hindi pages work. Details: [`FEEDBACK_NOTES.md`](FEEDBACK_NOTES.md).
 
 ## Reuse it
 
-- **`shadow_cpi/pit`** ([`shadow_cpi/pit/README.md`](shadow_cpi/pit/README.md)): `pit_search(query, cutoff)` always
-  sends the dates and the filter, refuses any parameter that would move the window, flags undated results, drops
-  anything dated after the cutoff, and keeps Tavily's request ID and the response hash.
-- **Agent skill** [`skills/time-locked-search/SKILL.md`](skills/time-locked-search/SKILL.md): the same rules for any
-  agent that searches the past.
+### Use it in {{example_lines}} lines
+
+[`timelock/`](timelock/) needs no part of the CPI pipeline and no package outside the Python standard library.
+`timelocked_search(client, query, cutoff, **tavily_kwargs)` sends `start_date`/`end_date` and
+`filter_by_published_date=true`, refuses an `end_date` after the cutoff (or `time_range`, `days`,
+`auto_parameters`, or the filter switched off) before any call, and returns Tavily's results, each with
+`published_date`, `page_date` (when the page text was extracted), `status` (`safe` / `date_flag` / `leak`),
+`request_id` and `response_sha256`. A result dated after the cutoff is a `leak` even if Tavily's filter let it through.
 
 ```python
-from shadow_cpi.pit import pit_search
+import sys
+from pathlib import Path
 
-r = pit_search("RBI repo rate decision October 2026", cutoff="2026-10-06",
-               topic="news", max_results=5,                   # the model may set these
-               include_domains=["rbi.org.in", "livemint.com"])
-r["kept"]       # dated on or before the cutoff: read the page before using it
-r["flagged"]    # undated: not trusted
-r["leaks"]      # dated after the cutoff: dropped
-r["counts"], r["request_id"], r["response_sha256"], r["credits"]
-# passing start_date, end_date, time_range, days or auto_parameters raises TimeLockError
+from timelock import Replay, TavilyHTTP, timelocked_search
+
+saved = Path(__file__).resolve().parent.parent / "tests/fixtures/timelock/rbi_2026-10-06_locked.json"
+client = TavilyHTTP() if "--live" in sys.argv else Replay(saved)          # live costs 1 Tavily credit
+results = timelocked_search(client, "RBI monetary policy repo rate decision October 2026", cutoff="2026-10-06",
+                            topic="news", search_depth="basic", max_results=5, include_published_date=True)
+for r in results:
+    print(r["status"], r["published_date"], r["url"])
+print(results.counts, results.request_id, results.response_sha256[:12])
 ```
+
+```bash
+python -m examples.timelock_rbi                              # offline: a saved Tavily response, 0 credits
+TAVILY_API_KEY=... python -m examples.timelock_rbi --live    # live
+```
+
+Offline it replays a real saved response (`tests/fixtures/timelock/`, request ID and hash checked in
+[`tests/test_timelock.py`](tests/test_timelock.py)); `Replay` refuses any other request. Any client with
+`.search(query, **kwargs) -> dict` works, including tavily-python's `TavilyClient`.
+
+- **MCP server** [`mcp/`](mcp/README.md): `timelocked_search` as a tool for Claude Code, Claude Desktop or any MCP
+  client; results after the cutoff come back as domain and date only, never their text or URL.
+- **Benchmark** [`benchmarks/timelock34/`](benchmarks/timelock34/DATASHEET.md): the {{dt_cases}} date-test and
+  {{fin_events}} finance replay cases with every result URL labelled (Wayback-confirmed leak, date flag, unknown) and a
+  scorer for any search function (leak rate with Wilson intervals, valid evidence kept). Labels under CC BY.
+- **`shadow_cpi/pit`** ([`shadow_cpi/pit/README.md`](shadow_cpi/pit/README.md)): the pipeline's wrapper around
+  `timelock/`, adding the Flight Recorder and a month-start window.
+- **Agent skill** [`skills/time-locked-search/SKILL.md`](skills/time-locked-search/SKILL.md): the same rules for any
+  agent that searches the past.
 
 ### For research teams
 
 Designed for research teams that need web evidence without look-ahead bias (event studies, backtests, forecast
 evaluation); not adopted by any team yet. Exports (`python tools/export.py`, columns in
 [`docs/exports_schema.md`](docs/exports_schema.md)), `as_of()`, the seal checks and the leak checker
-([`shadow_cpi/leakcheck.py`](shadow_cpi/leakcheck.py), example in
+([`timelock/check.py`](timelock/check.py), example in
 [`examples/leakcheck_example.py`](examples/leakcheck_example.py)). Research tool, not investment advice.
 
 ## Scoreboard
