@@ -27,15 +27,15 @@ could ever be live (look-ahead bias).
 Shadow CPI is a Tavily-grounded India CPI nowcast that tests, rather than assumes, Tavily's date controls and measures
 what they cost. El Lahib et al. (2026, [arXiv 2602.00758](https://arxiv.org/abs/2602.00758)) found
 that 71% of Google-audited questions had at least one major post-cutoff page, after 10–20 queries
-and about 100 URLs each; our 9/20 is per search task, so the rates are not directly
+and about 100 URLs each; our 9/20 (10/20 after the archive retry) is per search task, so the rates are not directly
 comparable.
 
 ### Related work
 
 - **El Lahib et al. 2026**: audits post-cutoff leakage in Google and DuckDuckGo retrieval for forecasting questions (https://arxiv.org/abs/2602.00758).
-- **OracleProto**: uses Tavily's end_date as a leakage barrier for retrieval-based forecasting (link to be added).
-- **LiveMacroEval**: evaluates live nowcasts of US macroeconomic releases (link to be added).
-- **Paleka et al.**: pitfalls in evaluating language-model forecasters, including retrieval leakage (link to be added).
+- **OracleProto (Ma et al. 2026)**: a reproducible framework for benchmarking LLM forecasting via knowledge cutoffs and temporal masking (https://arxiv.org/abs/2605.03762).
+- **LiveMacroEval (Zhao et al. 2026)**: "Can LLMs Take the Pulse of the Economy?": live LLM nowcasts of 16 US macro indicators (https://arxiv.org/abs/2608.30110).
+- **Paleka et al. 2025**: "Pitfalls in Evaluating Language Model Forecasters" (https://arxiv.org/abs/2506.00723).
 
 ## Time-locked search leakage
 
@@ -50,14 +50,19 @@ The Tavily field report (app page "Tavily field report", built by `tools/build_f
 - **Finance check (exploratory, 14 Reserve Bank of India (RBI) decisions and company results, [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md)).**
   The day-before search with no dates leaked the outcome for 2 of 14 events
   (10 of 14 after the logged archive retry); with dates and the filter,
-  0 of 14 events with a confirmed leak. 0 of 14 filtered searches returned a result dated after the cutoff; an independent
+  0 of 14 events with a confirmed leak (0 of 14 after the retry). 0 of 14 filtered searches returned a result dated after the cutoff; an independent
   reviewer found 1 page whose current version leaks the outcome
   ([`results/timelock34_second_review.json`](results/timelock34_second_review.json)).
-- **Leaks at three levels, with no dates.** Task: 9 of 20 date-test cases and 2
-  of 14 finance events (initial pass). Call: each task sent one search, so 9 of
-  20 and 2 of 14 search calls returned a confirmed leak
-  ([`results/date_field_test.json`](results/date_field_test.json),
-  [`results/finance_lookahead.json`](results/finance_lookahead.json)). Result (exploratory, counted after scoring):
+- **Leaks at three levels.** Task, with no dates: 9 of 20 date-test cases on the initial
+  pass, 10 of 20 after the logged archive retry; 2 of 14 finance
+  events on the initial pass, 10 of 14 after the retry. With dates and the filter:
+  0 of 20 and 0 of 14 on the initial pass, 0 of
+  20 and 0 of 14 after the retry. Call: each task sent one search per setting
+  (20 and 14 calls with no dates), so the call counts equal the task counts:
+  9 of 20 and 2 of 14 on the
+  initial pass ([`results/date_field_test.json`](results/date_field_test.json),
+  [`results/finance_lookahead.json`](results/finance_lookahead.json)), 10 of 20 and
+  10 of 14 after the retry. Result (exploratory, counted after scoring, initial pass):
   18 of 340 results across all settings, 12 in the date test and 6 in
   the finance check, all from searches with no date window (`leak_by_source_type` in
   [`results/field_report.json`](results/field_report.json)).
@@ -176,7 +181,7 @@ made Hindi pages work. Details: [`FEEDBACK_NOTES.md`](FEEDBACK_NOTES.md).
   miss and whether the official figure was inside the range.
 - **Price Shock Radar** (exploratory, report only; app page "October radar"): announced retail price changes taking
   effect this month, found with Tavily before MoSPI publishes. So far 1 event verified,
-  0 corroborated, 52 of a 150-credit cap. It never changes the sealed call.
+  0 corroborated, 70 of a 150-credit cap. It never changes the sealed call.
 - **Live build** with **Replay a saved run**: watch the number build one verified card at a time. Replays make no
   API call and cost no credits.
 - **Chain of custody:** from any number to its quote, page, page date, Tavily request ID, response hash and seal.
@@ -337,4 +342,4 @@ MIT ([`LICENSE`](LICENSE)). Built for the Nebius × NVIDIA Global AI Hackathon.
 
 Team: [TBD]
 
-Nothing in Shadow CPI existed before 26 Aug: the repository's earliest commit is dated 20 Oct 2026.
+Newly created during the submission period (opened 26 Aug 2026); first commit 20 Oct 2026.

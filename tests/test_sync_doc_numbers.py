@@ -13,7 +13,8 @@ ST = {"calls": 1234, "cached": 1, "credits": 900, "spent_before_ledger": 160, "p
       "addon_credits": 3125, "inside": 3, "total": 4, "undated": 0, "median_latency_s": 3.96}
 # names that contain digits but are not numbers
 NAMES = ("SHA-256", "v1", "v2")
-BANNED = (r"\bfirst\b", r"beats economists", r"\bno leaks\b", r"every page through Tavily", r"scores itself",
+BANNED = (r"\bfirst\b(?! commit\b)",                  # "first commit" is the eligibility line
+          r"beats economists", r"\bno leaks\b", r"every page through Tavily", r"scores itself",
           r"\bused by\b", r"\b3 of 10\b")
 
 

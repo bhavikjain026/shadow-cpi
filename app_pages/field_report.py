@@ -249,13 +249,23 @@ if dta and fna and lt:
         return sum(any(y["label"] == label for y in c["results"]) for c in sent), len(sent)
     dt_l, dt_n = calls(dta["rows"], "A", "L")
     fn_l, fn_n = calls(fna["rows"], "N", "confirmed")
-    st.subheader("Leaks at three levels, with no dates")
-    st.dataframe([{"Level": "Task (case or event)", "Date test": f"{dt1['A']['leak_cases']} of {dt1['A']['cases']}",
-                   "Finance check": f"{fn1['arms']['N']['confirmed_events']} of {fn1['events']}",
-                   "Source": "results/field_report.json (initial pass)"},
-                  {"Level": "Search call (one per task)", "Date test": f"{dt_l} of {dt_n}", "Finance check": f"{fn_l} of {fn_n}",
+    st.subheader("Leaks at three levels")
+    st.caption("Initial pass → after the logged archive retry. One search call per task and setting, so call counts "
+               "equal task counts.")
+    st.dataframe([{"Level": "Task (case or event), no dates",
+                   "Date test": f"{dt1['A']['leak_cases']} → {dt2['A']['leak_cases']} of {dt1['A']['cases']}",
+                   "Finance check": f"{fn1['arms']['N']['confirmed_events']} → {fn2['arms']['N']['confirmed_events']} "
+                                    f"of {fn1['events']}",
+                   "Source": "results/field_report.json"},
+                  {"Level": "Task, dates + filter",
+                   "Date test": f"{dt1['C']['leak_cases']} → {dt2['C']['leak_cases']} of {dt1['C']['cases']}",
+                   "Finance check": f"{fn1['arms']['D']['confirmed_events']} → {fn2['arms']['D']['confirmed_events']} "
+                                    f"of {fn1['events']}",
+                   "Source": "results/field_report.json"},
+                  {"Level": "Search call, no dates (initial pass)", "Date test": f"{dt_l} of {dt_n}",
+                   "Finance check": f"{fn_l} of {fn_n}",
                    "Source": "results/date_field_test.json, results/finance_lookahead.json"},
-                  {"Level": "Result (exploratory, counted after scoring)",
+                  {"Level": "Result (exploratory, counted after scoring, initial pass)",
                    "Date test": str(lt["leaks_by_arm"]["date test A"]), "Finance check": str(lt["leaks_by_arm"]["finance N"]),
                    "Source": f"leak_by_source_type: {lt['leaks']} of {lt['results']} results across all settings"}],
                  hide_index=True, width="stretch")

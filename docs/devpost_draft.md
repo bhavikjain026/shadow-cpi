@@ -13,12 +13,12 @@ move, verifies every quote on the page, and seals India's inflation forecast bef
 
 ## Short description
 <!-- short:start -->
-Shadow CPI is a Tavily-grounded nowcast of India's official Consumer Price Index (CPI) inflation that tests, rather
-than assumes, Tavily's date controls and measures what they cost. An AI agent writes its own Tavily searches inside a
-time lock it cannot move, verifies every quote on the page with Tavily Extract and NVIDIA Nemotron, lets plain code
-compute the number, and seals the October 2026 nowcast with a SHA-256 fingerprint and a git tag before the Ministry
+Shadow CPI is a Tavily-grounded nowcast of India's Consumer Price Index (CPI) inflation that tests, rather
+than assumes, Tavily's date controls and measures what they cost. An AI agent writes Tavily searches inside a
+time lock it cannot move, verifies every quote on the page with Tavily Extract and NVIDIA Nemotron, lets code
+compute the number, and seals the October 2026 nowcast with a SHA-256 hash and git tag before the Ministry
 of Statistics (MoSPI) publishes on 12 Nov. With no dates, 9 of 20 replay cases leaked a
-page that did not exist yet; with dates and the published-date filter, 0 of 20. In a
+page that did not exist yet (10 after an archive retry); with dates and the published-date filter, 0 of 20. In a
 Jan–Sep 2026 replay it missed by 0.194 percentage points on average, against 0.212 for trend-only; on
 poll months it was about a tie with economists (0.150 vs 0.148).
 <!-- short:end -->
@@ -28,27 +28,30 @@ India's CPI arrives about 12 days after the month ends. Forecasting it from the 
 months, and a replay that reads a page published after its cutoff looks better than it could ever be live. El Lahib et
 al. (2026, arXiv 2602.00758) found that 71% of Google-audited questions had at least one major
 post-cutoff page, after 10–20 queries and about 100 URLs each; our 9/20
-is per search task, so the rates are not directly comparable. So we built a nowcast that tests, rather than assumes,
+(10/20 after the archive retry) is per search task, so the rates are not directly comparable. So we built a nowcast that tests, rather than assumes,
 Tavily's date controls and measures what they cost.
 
 ## Related work
 - **El Lahib et al. 2026**: audits post-cutoff leakage in Google and DuckDuckGo retrieval for forecasting questions (https://arxiv.org/abs/2602.00758).
-- **OracleProto**: uses Tavily's end_date as a leakage barrier for retrieval-based forecasting (link to be added).
-- **LiveMacroEval**: evaluates live nowcasts of US macroeconomic releases (link to be added).
-- **Paleka et al.**: pitfalls in evaluating language-model forecasters, including retrieval leakage (link to be added).
+- **OracleProto (Ma et al. 2026)**: a reproducible framework for benchmarking LLM forecasting via knowledge cutoffs and temporal masking (https://arxiv.org/abs/2605.03762).
+- **LiveMacroEval (Zhao et al. 2026)**: "Can LLMs Take the Pulse of the Economy?": live LLM nowcasts of 16 US macro indicators (https://arxiv.org/abs/2608.30110).
+- **Paleka et al. 2025**: "Pitfalls in Evaluating Language Model Forecasters" (https://arxiv.org/abs/2506.00723).
 
 ## Time-locked search leakage
 - **Date test** (pilot, pre-registered): no dates, 9 of 20 cases leaked
   (10 of 20 after a logged archive retry); `start_date`/`end_date` +
-  `filter_by_published_date`, 0 of 20.
+  `filter_by_published_date`, 0 of 20 (0 of 20 after the retry).
 - **Finance check** (exploratory; Reserve Bank of India (RBI) decisions and company results): no dates, 2 of 14
   on the initial pass, 10 of 14 after the retry; with dates and the filter,
-  0 of 14 events with a confirmed leak. 0 of 14 filtered searches returned a result dated after the cutoff; an independent
+  0 of 14 events with a confirmed leak (0 of 14 after the retry). 0 of 14 filtered searches returned a result dated after the cutoff; an independent
   reviewer found 1 page whose current version leaks the outcome (AI-assisted second review).
-- **Leaks at three levels, no dates:** task 9 of 20 (date test) and 2 of
-  14 (finance, initial pass); call 9 of 20 and
-  2 of 14 (one search per task); result (exploratory, counted after
-  scoring) 18 of 340, all from searches with no date window.
+- **Leaks at three levels.** Task, no dates (initial pass → after the logged archive retry): date test
+  9 → 10 of 20, finance 2 → 10 of
+  14; with dates and the filter, 0 → 0 of 20 and 0 →
+  0 of 14. Call: one search per task and setting, so the same counts
+  (9 of 20 and 2 of 14 on the
+  initial pass). Result (exploratory, counted after scoring, initial pass): 18 of 340, all from
+  searches with no date window.
 - **Check P, full page** (exploratory): of 132 pages that passed the date lock, 1 described a later
   event; most later dates were page furniture (43 of 71 flagged pages: date bars, sidebars,
   related links).
@@ -165,4 +168,4 @@ requested window (5,454 of 6,872), median latency 4.0 s.
 - Code: https://github.com/bhavikjain026/shadow-cpi (MIT licence)
 - Verify a seal: `verify.md`
 - Team: [TBD]
-- Nothing existed before 26 Aug: the earliest commit is dated 20 Oct 2026.
+- Newly created during the submission period (opened 26 Aug 2026); first commit 20 Oct 2026.

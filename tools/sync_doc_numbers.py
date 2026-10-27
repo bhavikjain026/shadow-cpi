@@ -282,8 +282,12 @@ def facts(st, as_of, root=ROOT):
     f["seal_status"] = (f"Sealed on {day_month(seal)} (tag `{tag}`)" if sealed
                         else f"To be sealed on {day_month(seal)} (tag `{tag}`); not sealed as of {human(as_of)}")
     # the submission period's start, from the hackathon checklist in v2/PRD.md
+    # the submission period's opening date (config/doc_citations.json), checked against the hackathon checklist
     m = re.search(r"If any part existed before (\d+ \w{3}),", (root / "v2/PRD.md").read_text(encoding="utf-8"))
-    f["hackathon_start"] = m.group(1)
+    opened = date.fromisoformat(load("config/doc_citations.json", root)["submission_period"]["opened"])
+    if day_month(opened) != m.group(1):
+        raise SystemExit(f"submission period: config says {human(opened)}, v2/PRD.md says {m.group(1)}")
+    f["submission_opened"] = human(opened)
 
     # config/doc_citations.json: other people's numbers, with their sources
     cit = load("config/doc_citations.json", root)

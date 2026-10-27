@@ -26,7 +26,7 @@ could ever be live (look-ahead bias).
 Shadow CPI is a Tavily-grounded India CPI nowcast that tests, rather than assumes, Tavily's date controls and measures
 what they cost. El Lahib et al. ({{lahib_year}}, [arXiv {{lahib_arxiv}}](https://arxiv.org/abs/{{lahib_arxiv}})) found
 that {{lahib_pct}} of Google-audited questions had at least one major post-cutoff page, after {{lahib_queries}} queries
-and about {{lahib_urls}} URLs each; our {{dt_nodates}}/{{dt_cases}} is per search task, so the rates are not directly
+and about {{lahib_urls}} URLs each; our {{dt_nodates}}/{{dt_cases}} ({{dt_nodates_retry}}/{{dt_cases}} after the archive retry) is per search task, so the rates are not directly
 comparable.
 
 ### Related work
@@ -46,14 +46,19 @@ The Tavily field report (app page "Tavily field report", built by `tools/build_f
 - **Finance check (exploratory, {{fin_events}} Reserve Bank of India (RBI) decisions and company results, [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md)).**
   The day-before search with no dates leaked the outcome for {{fin_nodates}} of {{fin_events}} events
   ({{fin_nodates_retry}} of {{fin_events}} after the logged archive retry); with dates and the filter,
-  {{fin_dated}} of {{fin_events}} events with a confirmed leak. {{sr_fin_dated_after}} of {{sr_fin_searches}} filtered searches returned a result dated after the cutoff; an independent
+  {{fin_dated}} of {{fin_events}} events with a confirmed leak ({{fin_dated_retry}} of {{fin_events}} after the retry). {{sr_fin_dated_after}} of {{sr_fin_searches}} filtered searches returned a result dated after the cutoff; an independent
   reviewer found {{sr_fin_reviewer_leaks}} page whose current version leaks the outcome
   ([`results/timelock34_second_review.json`](results/timelock34_second_review.json)).
-- **Leaks at three levels, with no dates.** Task: {{dt_nodates}} of {{dt_cases}} date-test cases and {{fin_nodates}}
-  of {{fin_events}} finance events (initial pass). Call: each task sent one search, so {{dt_leak_calls_nodates}} of
-  {{dt_calls_nodates}} and {{fin_leak_calls_nodates}} of {{fin_calls_nodates}} search calls returned a confirmed leak
-  ([`results/date_field_test.json`](results/date_field_test.json),
-  [`results/finance_lookahead.json`](results/finance_lookahead.json)). Result (exploratory, counted after scoring):
+- **Leaks at three levels.** Task, with no dates: {{dt_nodates}} of {{dt_cases}} date-test cases on the initial
+  pass, {{dt_nodates_retry}} of {{dt_cases}} after the logged archive retry; {{fin_nodates}} of {{fin_events}} finance
+  events on the initial pass, {{fin_nodates_retry}} of {{fin_events}} after the retry. With dates and the filter:
+  {{dt_dated}} of {{dt_cases}} and {{fin_dated}} of {{fin_events}} on the initial pass, {{dt_dated_retry}} of
+  {{dt_cases}} and {{fin_dated_retry}} of {{fin_events}} after the retry. Call: each task sent one search per setting
+  ({{dt_calls_nodates}} and {{fin_calls_nodates}} calls with no dates), so the call counts equal the task counts:
+  {{dt_leak_calls_nodates}} of {{dt_calls_nodates}} and {{fin_leak_calls_nodates}} of {{fin_calls_nodates}} on the
+  initial pass ([`results/date_field_test.json`](results/date_field_test.json),
+  [`results/finance_lookahead.json`](results/finance_lookahead.json)), {{dt_nodates_retry}} of {{dt_cases}} and
+  {{fin_nodates_retry}} of {{fin_events}} after the retry. Result (exploratory, counted after scoring, initial pass):
   {{lt_leaks}} of {{lt_results}} results across all settings, {{lt_leaks_dt}} in the date test and {{lt_leaks_fin}} in
   the finance check, all from searches with no date window (`leak_by_source_type` in
   [`results/field_report.json`](results/field_report.json)).
@@ -322,4 +327,4 @@ MIT ([`LICENSE`](LICENSE)). Built for the Nebius × NVIDIA Global AI Hackathon.
 
 Team: [TBD]
 
-Nothing in Shadow CPI existed before {{hackathon_start}}: the repository's earliest commit is dated {{earliest_commit}}.
+Newly created during the submission period (opened {{submission_opened}}); first commit {{earliest_commit}}.

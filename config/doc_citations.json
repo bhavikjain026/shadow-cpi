@@ -39,7 +39,7 @@
     "checked": "2026-10-26, by the owner, in the API reference; not measured"
   },
   "related_work": {
-    "_note": "One line each in README/Devpost 'Related work'. link null = not checked offline; rendered as 'link to be added'.",
+    "_note": "One line each in README/Devpost 'Related work'. Descriptions as the owner checked them; nothing beyond that is claimed.",
     "items": [
       {
         "name": "El Lahib et al. 2026",
@@ -48,21 +48,27 @@
         "from": "el_lahib_2026"
       },
       {
-        "name": "OracleProto",
-        "what": "uses Tavily's end_date as a leakage barrier for retrieval-based forecasting",
-        "link": null
+        "name": "OracleProto (Ma et al. 2026)",
+        "what": "a reproducible framework for benchmarking LLM forecasting via knowledge cutoffs and temporal masking",
+        "link": "https://arxiv.org/abs/2605.03762"
       },
       {
-        "name": "LiveMacroEval",
-        "what": "evaluates live nowcasts of US macroeconomic releases",
-        "link": null
+        "name": "LiveMacroEval (Zhao et al. 2026)",
+        "what": "\"Can LLMs Take the Pulse of the Economy?\": live LLM nowcasts of 16 US macro indicators",
+        "link": "https://arxiv.org/abs/2608.30110"
       },
       {
-        "name": "Paleka et al.",
-        "what": "pitfalls in evaluating language-model forecasters, including retrieval leakage",
-        "link": null
+        "name": "Paleka et al. 2025",
+        "what": "\"Pitfalls in Evaluating Language Model Forecasters\"",
+        "link": "https://arxiv.org/abs/2506.00723"
       }
     ],
-    "added": "2026-10-27, from the owner's task card; links not checked offline"
+    "added": "2026-10-27, links and descriptions checked by the owner on 2026-10-27"
+  },
+  "submission_period": {
+    "opened": "2026-08-26",
+    "what": "the hackathon's submission period opening date (eligibility line)",
+    "source": "v2/PRD.md hackathon checklist (26 Aug); year from the owner's task card",
+    "added": "2026-10-27, from the owner's task card"
   }
 }

@@ -12,12 +12,12 @@ move, verifies every quote on the page, and seals India's inflation forecast bef
 
 ## Short description
 <!-- short:start -->
-Shadow CPI is a Tavily-grounded nowcast of India's official Consumer Price Index (CPI) inflation that tests, rather
-than assumes, Tavily's date controls and measures what they cost. An AI agent writes its own Tavily searches inside a
-time lock it cannot move, verifies every quote on the page with Tavily Extract and NVIDIA Nemotron, lets plain code
-compute the number, and seals the {{live_month}} nowcast with a SHA-256 fingerprint and a git tag before the Ministry
+Shadow CPI is a Tavily-grounded nowcast of India's Consumer Price Index (CPI) inflation that tests, rather
+than assumes, Tavily's date controls and measures what they cost. An AI agent writes Tavily searches inside a
+time lock it cannot move, verifies every quote on the page with Tavily Extract and NVIDIA Nemotron, lets code
+compute the number, and seals the {{live_month}} nowcast with a SHA-256 hash and git tag before the Ministry
 of Statistics (MoSPI) publishes on {{release_day}}. With no dates, {{dt_nodates}} of {{dt_cases}} replay cases leaked a
-page that did not exist yet; with dates and the published-date filter, {{dt_dated}} of {{dt_cases}}. In a
+page that did not exist yet ({{dt_nodates_retry}} after an archive retry); with dates and the published-date filter, {{dt_dated}} of {{dt_cases}}. In a
 {{replay_span}} replay it missed by {{mae_c}} percentage points on average, against {{mae_trend}} for trend-only; on
 poll months it was about a tie with economists ({{mae_poll_c}} vs {{mae_poll}}).
 <!-- short:end -->
@@ -27,7 +27,7 @@ India's CPI arrives about {{release_lag}} days after the month ends. Forecasting
 months, and a replay that reads a page published after its cutoff looks better than it could ever be live. El Lahib et
 al. ({{lahib_year}}, arXiv {{lahib_arxiv}}) found that {{lahib_pct}} of Google-audited questions had at least one major
 post-cutoff page, after {{lahib_queries}} queries and about {{lahib_urls}} URLs each; our {{dt_nodates}}/{{dt_cases}}
-is per search task, so the rates are not directly comparable. So we built a nowcast that tests, rather than assumes,
+({{dt_nodates_retry}}/{{dt_cases}} after the archive retry) is per search task, so the rates are not directly comparable. So we built a nowcast that tests, rather than assumes,
 Tavily's date controls and measures what they cost.
 
 ## Related work
@@ -36,15 +36,18 @@ Tavily's date controls and measures what they cost.
 ## Time-locked search leakage
 - **Date test** (pilot, pre-registered): no dates, {{dt_nodates}} of {{dt_cases}} cases leaked
   ({{dt_nodates_retry}} of {{dt_cases}} after a logged archive retry); `start_date`/`end_date` +
-  `filter_by_published_date`, {{dt_dated}} of {{dt_cases}}.
+  `filter_by_published_date`, {{dt_dated}} of {{dt_cases}} ({{dt_dated_retry}} of {{dt_cases}} after the retry).
 - **Finance check** (exploratory; Reserve Bank of India (RBI) decisions and company results): no dates, {{fin_nodates}} of {{fin_events}}
   on the initial pass, {{fin_nodates_retry}} of {{fin_events}} after the retry; with dates and the filter,
-  {{fin_dated}} of {{fin_events}} events with a confirmed leak. {{sr_fin_dated_after}} of {{sr_fin_searches}} filtered searches returned a result dated after the cutoff; an independent
+  {{fin_dated}} of {{fin_events}} events with a confirmed leak ({{fin_dated_retry}} of {{fin_events}} after the retry). {{sr_fin_dated_after}} of {{sr_fin_searches}} filtered searches returned a result dated after the cutoff; an independent
   reviewer found {{sr_fin_reviewer_leaks}} page whose current version leaks the outcome (AI-assisted second review).
-- **Leaks at three levels, no dates:** task {{dt_nodates}} of {{dt_cases}} (date test) and {{fin_nodates}} of
-  {{fin_events}} (finance, initial pass); call {{dt_leak_calls_nodates}} of {{dt_calls_nodates}} and
-  {{fin_leak_calls_nodates}} of {{fin_calls_nodates}} (one search per task); result (exploratory, counted after
-  scoring) {{lt_leaks}} of {{lt_results}}, all from searches with no date window.
+- **Leaks at three levels.** Task, no dates (initial pass → after the logged archive retry): date test
+  {{dt_nodates}} → {{dt_nodates_retry}} of {{dt_cases}}, finance {{fin_nodates}} → {{fin_nodates_retry}} of
+  {{fin_events}}; with dates and the filter, {{dt_dated}} → {{dt_dated_retry}} of {{dt_cases}} and {{fin_dated}} →
+  {{fin_dated_retry}} of {{fin_events}}. Call: one search per task and setting, so the same counts
+  ({{dt_leak_calls_nodates}} of {{dt_calls_nodates}} and {{fin_leak_calls_nodates}} of {{fin_calls_nodates}} on the
+  initial pass). Result (exploratory, counted after scoring, initial pass): {{lt_leaks}} of {{lt_results}}, all from
+  searches with no date window.
 - **Check P, full page** (exploratory): of {{p_pages}} pages that passed the date lock, {{p_later}} described a later
   event; most later dates were page furniture ({{p_furniture}} of {{p_flagged}} flagged pages: date bars, sidebars,
   related links).
@@ -150,4 +153,4 @@ requested window ({{run_inside}} of {{run_total}}), median latency {{run_latency
 - Code: https://github.com/bhavikjain026/shadow-cpi (MIT licence)
 - Verify a seal: `verify.md`
 - Team: [TBD]
-- Nothing existed before {{hackathon_start}}: the earliest commit is dated {{earliest_commit}}.
+- Newly created during the submission period (opened {{submission_opened}}); first commit {{earliest_commit}}.
