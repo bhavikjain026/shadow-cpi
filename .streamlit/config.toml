@@ -1,0 +1,66 @@
+# Display only (aesthetic pass, 27 Oct 2026). Options checked against Streamlit 1.66.0 (requirements.txt).
+# Neutral zinc tokens after shadcn/ui; blue is the one accent (links, focus, selected tab). Red and green stay
+# Streamlit's own, so LEAK / no time lock keep their tint. Fonts: Inter (UI) + JetBrains Mono (numbers, code),
+# both SIL OFL 1.1, served by Google Fonts (THIRD_PARTY_NOTICES.md).
+
+[theme]
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap, sans-serif"
+headingFont = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap, sans-serif"
+codeFont = "'JetBrains Mono':https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap, monospace"
+baseFontSize = 15
+baseRadius = "0.5rem"
+buttonRadius = "0.5rem"
+headingFontSizes = ["2.25rem", "1.625rem", "1.25rem", "1.0625rem", "1rem", "0.9375rem"]
+headingFontWeights = [700, 600, 600, 600, 600, 600]
+metricValueFontSize = "1.875rem"
+metricValueFontWeight = 600
+showWidgetBorder = true
+showSidebarBorder = true
+linkUnderline = true
+
+[theme.light]
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f4f4f5"
+textColor = "#09090b"
+borderColor = "#e4e4e7"
+dataframeBorderColor = "#e4e4e7"
+dataframeHeaderBackgroundColor = "#f4f4f5"
+codeBackgroundColor = "#f4f4f5"
+codeTextColor = "#18181b"
+primaryColor = "#2563eb"
+linkColor = "#1d4ed8"
+# Badges and alerts (LEAK / OK / UNCHECKED, st.error): same hues as Streamlit's, darker text for >= 4.5:1
+redTextColor = "#b91c1c"
+redBackgroundColor = "#fee2e2"
+greenTextColor = "#166534"
+greenBackgroundColor = "#dcfce7"
+grayTextColor = "#3f3f46"
+grayBackgroundColor = "#f4f4f5"
+
+[theme.light.sidebar]
+backgroundColor = "#fafafa"
+secondaryBackgroundColor = "#f4f4f5"
+borderColor = "#e4e4e7"
+
+[theme.dark]
+backgroundColor = "#09090b"
+secondaryBackgroundColor = "#18181b"
+textColor = "#fafafa"
+borderColor = "#27272a"
+dataframeBorderColor = "#27272a"
+dataframeHeaderBackgroundColor = "#18181b"
+codeBackgroundColor = "#18181b"
+codeTextColor = "#e4e4e7"
+primaryColor = "#3b82f6"
+linkColor = "#60a5fa"
+redTextColor = "#fca5a5"
+redBackgroundColor = "#3f1215"
+greenTextColor = "#86efac"
+greenBackgroundColor = "#0b2e1a"
+grayTextColor = "#d4d4d8"
+grayBackgroundColor = "#27272a"
+
+[theme.dark.sidebar]
+backgroundColor = "#0c0c0e"
+secondaryBackgroundColor = "#18181b"
+borderColor = "#27272a"
