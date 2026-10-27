@@ -62,9 +62,7 @@
    "exit_code": 0,
    "credits": 1,
    "request_ids": [
-    null,
-    "13db35fd-290a-4f41-9ada-140bde19837d",
-    null
+    "13db35fd-290a-4f41-9ada-140bde19837d"
    ],
    "output": "GET /usage: request_id None, credits reported 0 (estimate 0, cap 2)\nPOST /search: request_id 13db35fd-290a-4f41-9ada-140bde19837d, credits reported 1 (estimate 1, cap 2)\nGET /usage: request_id None, credits reported 0 (estimate 0, cap 2)\n/usage (account plan_usage, key usage) before: (1980, 1980); after: (1980, 1980)\nthe search reported 1 credit(s); /usage moved by 0 (account) and 0 (key)\n"
   }

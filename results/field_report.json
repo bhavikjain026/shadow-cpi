@@ -317,15 +317,6 @@
     "median_latency_s": 3.58,
     "p95_latency_s": 6.214499999999999,
     "with_latency": 1058
-   },
-   {
-    "endpoint": "/usage",
-    "calls": 2,
-    "credits": 0,
-    "credits_per_call": 0.0,
-    "median_latency_s": null,
-    "p95_latency_s": null,
-    "with_latency": 0
    }
   ],
   "by_experiment": [
@@ -620,16 +611,6 @@
     "with_latency": 0
    },
    {
-    "experiment": "repro-kit",
-    "endpoint": "/usage",
-    "calls": 2,
-    "credits": 0,
-    "credits_per_call": 0.0,
-    "median_latency_s": null,
-    "p95_latency_s": null,
-    "with_latency": 0
-   },
-   {
     "experiment": "skeptic",
     "endpoint": "/search",
     "calls": 27,
@@ -894,9 +875,9 @@
    }
   ],
   "total": {
-   "calls": 1883,
+   "calls": 1881,
    "credits": 1833,
-   "credits_per_call": 0.9734466277217206,
+   "credits_per_call": 0.9744816586921851,
    "median_latency_s": 3.12,
    "p95_latency_s": 6.0635,
    "with_latency": 1874
@@ -1728,7 +1709,7 @@
   "arm_a_searches_per_month": 13.0,
   "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits at original cost / 9 months"
  },
- "ledger_rows": 1942,
+ "ledger_rows": 1940,
  "pages_changed": null,
  "leak_by_source_type": {
   "rows": [

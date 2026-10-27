@@ -243,3 +243,9 @@ def test_the_real_key_is_nowhere_in_the_new_files():
     for p in NEW_FILES + [ROOT / "results" / "repro_run.json", ROOT / "results" / "credit_ledger.jsonl"]:
         if p.is_file():
             assert key not in p.read_text(encoding="utf-8"), p.name
+
+
+def test_runner_keeps_free_usage_reads_out_of_the_ledger():
+    rows = R.ledger_rows([{"endpoint": "/usage", "request_id": None, "credits": 0, "response_sha256": "h" * 64},
+                          {"endpoint": "/search", "request_id": "r", "credits": 1, "response_sha256": "g" * 64}], "s")
+    assert [r["endpoint"] for r in rows] == ["/search"]

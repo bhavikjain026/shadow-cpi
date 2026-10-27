@@ -63,7 +63,8 @@ def ledger_rows(receipts, script, now=None):
     return [{"time": now, "call_id": hashlib.sha256(f"{script}:{r['request_id']}:{r['response_sha256']}".encode()).hexdigest()[:12],
              "endpoint": r["endpoint"], "credits": r["credits"], "real_spent": r["credits"],
              "original_cost": r["credits"], "budgets": [BUDGET], "request_id": r["request_id"],
-             "response_time": r.get("response_time"), "response_sha256": r["response_sha256"]} for r in receipts]
+             "response_time": r.get("response_time"), "response_sha256": r["response_sha256"]}
+            for r in receipts if r["endpoint"] != "/usage"]          # GET /usage is free; the ledger holds billed calls
 
 
 def run_one(script, key):
@@ -100,6 +101,7 @@ def main(live=False, out=print):
             for r in rows:
                 f.write(json.dumps(r) + "\n")
         got = sum(r["credits"] for r in rows)
+        receipts = [r for r in receipts if r["endpoint"] != "/usage"]
         used += got
         runs.append({"script": s, "exit_code": code, "credits": got, "request_ids": [r["request_id"] for r in receipts],
                      "output": text})
