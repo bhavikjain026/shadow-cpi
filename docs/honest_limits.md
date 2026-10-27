@@ -38,6 +38,8 @@ Shadow CPI is an **experimental nowcast**. It is not an official statistic, and 
 ## Models
 - Nemotron only extracts facts and cites a numbered line, and code checks that the number is really in that line. A model can still miss a quote or misread a page. Missed quotes lower coverage; misread ones are caught by the check. Every quote shown in the app passed the word-for-word check.
 
+- **v1's keyword matching is not script-aware** (substring and Python `\b`, which treat Indic vowel signs as word breaks); the October radar uses script-aware whole-word matching from Amendments R2-R3, on text already normalised by `shadow_cpi.verify.norm` (NFKC, zero-width characters removed; checked 2026-10-27).
+
 ## Known gaps in the event layer (2025 recall audit)
 - **National brand hikes may be under-weighted.** In the 2025 audit, Amul's ₹2 nationwide milk hike was caught only through a line about the Gujarat cooperative (GCMMF), so it was weighted as a Gujarat-only change (about 7% of milk spending) instead of an all-India one. A regional event counts as national only when the cited line itself says it is nationwide.
 - **GST rate cuts are a structural miss.** The 22 Sep 2025 GST cuts changed many items by different amounts, with no single price change to apply, so the event layer does not apply them.
