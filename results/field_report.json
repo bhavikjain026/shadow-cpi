@@ -296,9 +296,9 @@
     "calls": 790,
     "credits": 691,
     "credits_per_call": 0.8746835443037975,
-    "median_latency_s": 0.13,
-    "p95_latency_s": 5.18,
-    "with_latency": 779
+    "median_latency_s": 0.15000000000000002,
+    "p95_latency_s": 5.225,
+    "with_latency": 790
    },
    {
     "endpoint": "/map",
@@ -316,7 +316,7 @@
     "credits_per_call": 1.0661625708884688,
     "median_latency_s": 3.58,
     "p95_latency_s": 6.214499999999999,
-    "with_latency": 1038
+    "with_latency": 1058
    }
   ],
   "by_experiment": [
@@ -416,9 +416,9 @@
     "calls": 11,
     "credits": 10,
     "credits_per_call": 0.9090909090909091,
-    "median_latency_s": null,
-    "p95_latency_s": null,
-    "with_latency": 0
+    "median_latency_s": 2.29,
+    "p95_latency_s": 5.660000000000001,
+    "with_latency": 11
    },
    {
     "experiment": "lang-date-test",
@@ -426,9 +426,9 @@
     "calls": 20,
     "credits": 20,
     "credits_per_call": 1.0,
-    "median_latency_s": null,
-    "p95_latency_s": null,
-    "with_latency": 0
+    "median_latency_s": 4.2,
+    "p95_latency_s": 6.3245000000000005,
+    "with_latency": 20
    },
    {
     "experiment": "leakcheck-exact-match",
@@ -849,8 +849,8 @@
    "credits": 1828,
    "credits_per_call": 0.9754535752401281,
    "median_latency_s": 3.12,
-   "p95_latency_s": 6.058999999999999,
-   "with_latency": 1843
+   "p95_latency_s": 6.0635,
+   "with_latency": 1874
   },
   "reconcile_credits": -82,
   "notes": [
