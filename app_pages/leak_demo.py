@@ -116,6 +116,77 @@ def show_case(c):
     search_column(right, LOCKED, LOCKED_NOTE, c["locked"], c["test"])
 
 
+# The app's only JavaScript animation: anime.js (MIT), exact version from cdnjs with its SRI hash (THIRD_PARTY_NOTICES.md).
+ANIME_JS = ("https://cdnjs.cloudflare.com/ajax/libs/animejs/4.5.0/anime.umd.min.js",
+            "sha512-dnhflec5WaXvpVYrt0oWfe0iUyWpjNiZbxkjrhNu9WAWWHLX7VqqyxCZHL7dWCrwj6lN+XGN9FtiWIBgX2b/PA==")
+HERO_HEIGHT = 128          # content is 104 px at 390 px wide and 120 px at 1440 px ("content" sizing left 150 px)
+HERO_FONT ="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=JetBrains+Mono:wght@600&display=swap"
+HERO_HTML = """<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="{font}"><style>
+:root {{ --ink: #09090b; --muted: #52525b; --line: #e4e4e7; }}       /* no color-scheme: it paints an opaque canvas */
+@media (prefers-color-scheme: dark) {{ :root {{ --ink: #fafafa; --muted: #a1a1aa; --line: #27272a; }} }}
+html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 15px/1.4 Inter, sans-serif; }}
+.row {{ display: flex; align-items: stretch; gap: 8px; }}
+.side {{ flex: 1 1 0; min-width: 0; border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }}
+.open {{ background: rgba(255, 75, 75, 0.12); }}                      /* LOCK/OPEN colour meaning, as common.OPEN_CSS */
+.num {{ font: 600 clamp(1.75rem, 7vw, 2.75rem)/1.1 "JetBrains Mono", ui-monospace, monospace;
+        font-variant-numeric: tabular-nums; letter-spacing: -0.03em; white-space: nowrap; }}
+.label {{ color: var(--muted); font-size: 0.875rem; margin-top: 4px; }}
+.arrow {{ align-self: center; color: var(--muted); font-size: 1.25rem; }}
+.sub {{ color: var(--muted); font-size: 0.875rem; margin: 8px 0 0; }}
+</style></head><body>
+<div class="row" role="img" aria-label="{aria}">
+  <div class="side open"><div class="num"><span id="leaked">{open}</span>/{n}</div><div class="label">{open_label}</div></div>
+  <div class="arrow" aria-hidden="true">→</div>
+  <div class="side locked" id="locked"><div class="num">{locked}/{n}</div><div class="label">{locked_label}</div></div>
+</div>
+<p class="sub" id="sub">{sub}</p>
+<script src="{js}" integrity="{sri}" crossorigin="anonymous"></script>
+<script>
+(function () {{
+  // Match the app's theme when the parent page is readable (same origin); else prefers-color-scheme above.
+  try {{
+    var app = window.parent.document.querySelector('[data-testid="stApp"]');
+    var bg = window.parent.getComputedStyle(app).backgroundColor.match(/\\d+/g).map(Number);
+    var dark = (bg[0] * 299 + bg[1] * 587 + bg[2] * 114) / 1000 < 128, r = document.documentElement.style;
+    r.setProperty('--ink', dark ? '#fafafa' : '#09090b');
+    r.setProperty('--muted', dark ? '#a1a1aa' : '#52525b');
+    r.setProperty('--line', dark ? '#27272a' : '#e4e4e7');
+  }} catch (e) {{}}
+  // One count, once. Final values are already in the markup: no script, reduced motion or a blocked CDN shows them.
+  if (!window.anime || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var el = document.getElementById('leaked'), to = Number(el.textContent), o = {{ v: 0 }};
+  var later = [document.getElementById('locked'), document.getElementById('sub')];
+  // Start only on a real frame (a background tab never zeroes the number), and end on the file's values by 2.5 s
+  // whatever the frame rate, so the hero never rests on anything but the results file.
+  requestAnimationFrame(function () {{
+    el.textContent = '0';
+    later.forEach(function (x) {{ x.style.opacity = 0; }});
+    var tl = anime.createTimeline({{ defaults: {{ ease: 'outExpo' }} }})
+      .add(o, {{ v: to, duration: 900, onUpdate: function () {{ el.textContent = Math.round(o.v); }} }})
+      .add(later[0], {{ opacity: [0, 1], translateY: [6, 0], duration: 450 }}, '-=250')
+      .add(later[1], {{ opacity: [0, 1], duration: 450 }}, '-=200');
+    setTimeout(function () {{
+      try {{ tl.pause(); }} catch (e) {{}}
+      el.textContent = to;
+      later.forEach(function (x) {{ x.style.opacity = 1; x.style.transform = 'none'; }});
+    }}, 2500);
+  }});
+}})();
+</script></body></html>"""
+
+
+def hero(t):
+    """The headline 'x/n → y/n' (date test, after retry) from the same totals as summary_line, counted up once."""
+    import html
+    d = t["date"]
+    o, k, n = int(d["open"]["retry"]), int(d["locked"]["retry"]), int(d["cases"])
+    st.iframe(HERO_HTML.format(
+        font=HERO_FONT, js=ANIME_JS[0], sri=ANIME_JS[1], open=o, locked=k, n=n,
+        open_label=html.escape(OPEN), locked_label=html.escape(LOCKED), sub="cases leaked (after retry)",
+        aria=html.escape(f"{OPEN}: {o}/{n} cases leaked (after retry). {LOCKED}: {k}/{n}.")),
+        height=HERO_HEIGHT)
+
+
 def summary_line(t):
     d, s = t["date"], t["strictness"]
     st.markdown(f"**No time lock: {d['open']['retry']}/{d['cases']} cases leaked (after retry). Tavily time lock: "
@@ -212,6 +283,7 @@ data = read_json("results/leak_demo.json")
 if not data:
     st.info("Not built yet: run `python tools/build_leak_demo.py` (offline, 0 credits).")
     st.stop()
+hero(data["totals"])
 summary_line(data["totals"])
 by_id = {c["id"]: c for c in data["cases"]}
 shown = examples(data["cases"])
