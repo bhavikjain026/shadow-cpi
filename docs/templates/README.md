@@ -21,8 +21,10 @@ Separate rules; never added together. After the logged archive retry; initial pa
 - **Finance check** (exploratory, Reserve Bank of India (RBI) decisions and company results;
   [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md), as amended). A different rule, so its counts are reported apart:
   "{{fin_leak_rule}}"
-- **After the logged archive retry.** The table counts follow a logged retry of the archive lookups that had failed
-  ({{dt_retry_urls}} in the date test, {{fin_retry_urls}} in the finance check). Wilson {{wilson}} intervals: date
+- **After the logged archive retry.** The table counts follow a logged retry of the archive lookups that had failed.
+  On the initial pass, {{rr_fin_failed}} finance-check archive lookups (and {{rr_dt_failed}} in the date test) failed
+  for network reasons, so those pages could only be flagged, not confirmed; the retry recovered {{rr_recovered}},
+  which is why the finance count rises from {{fin_nodates}} to {{fin_nodates_retry}} of {{fin_events}}. Wilson {{wilson}} intervals: date
   test no dates {{dt_nodates_retry_w}}, dates + filter {{dt_dated_retry_w}}; finance check no dates
   {{fin_nodates_retry_w}}, dates + filter {{fin_dated_retry_w}}.
 - **Initial pass** (the pre-registered result, shown as sensitivity): date test {{dt_nodates}} of {{dt_cases}}

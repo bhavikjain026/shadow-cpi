@@ -371,6 +371,21 @@ def facts(st, as_of, root=ROOT):
              super_total=f"{total[sup]:,}")
     rr = load("results/retry_reconciliation.json", root)          # tools/build_retry_table.py
     f.update(retry_changed=rr["changed"], retry_cases=rr["cases"])
+    # the archive lookups that failed on the initial pass and the network retry (results/retry_reconciliation.json),
+    # checked against the field report's retry counts and the finance no-dates rise it explains
+    runs = rr["retry_runs"]
+    if (runs["date"]["failed_urls"], runs["finance"]["failed_urls"]) != (fr["date_test"]["retry"]["failed_urls"],
+                                                                         fr["finance"]["retry"]["failed_urls"]):
+        raise SystemExit("results/retry_reconciliation.json retry counts differ from results/field_report.json")
+    fin_rise = sum(r["test"] == "finance check" and r["search"] == "no time lock" and r["after"] == "confirmed leak"
+                   for r in rr["rows"]) - sum(r["test"] == "finance check" and r["search"] == "no time lock"
+                                              and r["before"] == "confirmed leak" for r in rr["rows"])
+    if fin_rise != fn2["arms"]["N"]["confirmed_events"] - fn1["arms"]["N"]["confirmed_events"]:
+        raise SystemExit("results/retry_reconciliation.json finance changes do not explain the no-dates rise")
+    rec = [(x["recovered"], x["failed_urls"]) for x in (runs["date"], runs["finance"])]
+    f.update(rr_dt_failed=runs["date"]["failed_urls"], rr_fin_failed=runs["finance"]["failed_urls"],
+             rr_recovered=("all of them" if all(a == b for a, b in rec) else
+                           f"{sum(a for a, _ in rec)} of {sum(b for _, b in rec)}"))
     # the forced model migration (v2/PREREGISTRATION.md Amendment G): replacements and dates from the dated map
     dated = roles["dated"]
     new = dated["periods"][-1]

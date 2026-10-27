@@ -73,6 +73,11 @@ def test_readme_top_keeps_checks_apart(values):
         assert not re.search(rf"\b{summed} (of|/) {total}\b", out)
     details = top.split("<details>")[1].split("</details>")[0]
     assert values["dt_leak_rule"] in details and values["fin_leak_rule"] in details and "Initial pass" in details
+    rr = S.load("results/retry_reconciliation.json")["retry_runs"]
+    assert (f"On the initial pass, {rr['finance']['failed_urls']} finance-check archive lookups (and "
+            f"{rr['date']['failed_urls']} in the date test) failed") in " ".join(details.split())
+    assert (f"rises from {values['fin_nodates']} to {values['fin_nodates_retry']} of {v['fin_events']}"
+            in " ".join(details.split()))
     assert "The cost." in top and values["ex_row"] in top
 
 
