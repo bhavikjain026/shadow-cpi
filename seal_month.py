@@ -30,6 +30,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+from shadow_cpi import model_map
 from shadow_cpi import official as O
 from shadow_cpi import seal as S
 
@@ -133,6 +134,7 @@ def build_payload(root, month, pred, pred_path, manifest, cutoff, commit, models
                "manifest_sha256": sha256_file(man) if man.exists() else None,
                "code_commit": commit,
                "model_ids": models,
+               "models_at_cutoff": model_map.in_use(cut, models),   # Amendment G: the IDs called on the cutoff day
                "weights_file": WEIGHTS_FILE,
                "weights_file_sha256": sha256_file(weights),
                "evidence_cutoff_utc": cut.isoformat(),

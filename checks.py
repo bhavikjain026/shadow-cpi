@@ -67,7 +67,10 @@ def check_models(nem):
               "mid": pick(nemo, "super-120b", "super", "nano"),  # text model, not the vision (VL) one
               "large": pick(nemo, "ultra", "super")}
     MODELS_FILE.parent.mkdir(parents=True, exist_ok=True)
-    MODELS_FILE.write_text(json.dumps(chosen, indent=2), encoding="utf-8")
+    kept = json.loads(MODELS_FILE.read_text(encoding="utf-8")) if MODELS_FILE.exists() else {}
+    if kept.get("dated"):        # Amendment G: the role keys stay the original IDs; the dated map picks per call
+        chosen.update({r: kept[r] for r in ("small", "mid") if kept.get(r)})
+    MODELS_FILE.write_text(json.dumps({**kept, **chosen}, indent=2), encoding="utf-8")   # keeps the dated map
     report("PASS" if all(chosen.values()) else "WARN", "Model roles saved to config/models.json", json.dumps(chosen))
     return chosen
 

@@ -75,8 +75,13 @@ class Recorder:
         d.mkdir(parents=True, exist_ok=True)
         return d / f"{h}.json"
 
-    def call(self, service, endpoint, body, fn, parent=None, tag=None):
-        """Return (response, call_id). fn() performs the real request if not cached."""
+    def has(self, service, endpoint, body):
+        """True if this exact request is in the cache (a call would be served from it)."""
+        return self.use_cache and self._path(service, request_hash(service, endpoint, body)).exists()
+
+    def call(self, service, endpoint, body, fn, parent=None, tag=None, extra=None):
+        """Return (response, call_id). fn() performs the real request if not cached. `extra` fields go into the
+        flight-recorder line (e.g. the model migration fields)."""
         h = request_hash(service, endpoint, body)
         path = self._path(service, h)
         call_id = uuid.uuid4().hex[:12]
@@ -93,7 +98,7 @@ class Recorder:
         entry = {"id": call_id, "time": datetime.now(timezone.utc).isoformat(), "service": service,
                  "endpoint": endpoint, "params": _summary(body), "cached": cached,
                  "latency_ms": int((time.time() - started) * 1000), "parent": parent, "tag": tag,
-                 "cache_key": h, **_counts(response), **provenance(response)}
+                 "cache_key": h, **(extra or {}), **_counts(response), **provenance(response)}
         self.provenance.append({k: entry[k] for k in ("id", "service", "endpoint", "cached", "request_id",
                                                        "response_sha256")})
         with self.log_file.open("a", encoding="utf-8") as f:

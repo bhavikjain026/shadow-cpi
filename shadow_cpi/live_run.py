@@ -188,7 +188,11 @@ def run_live(tavily_key, nebius_key, now=None, path=STATE_FILE, transport=None, 
     from .recorder import read_log
     calls = [e for e in read_log(rec.log_file) if e["time"] >= now.isoformat()
              and (e.get("tag") or "").startswith("live:")]
+    used = sorted({e["params"].get("model") for e in calls if e["service"] == "nebius" and not e.get("cached")} - {None})
+    migrated = any(e.get("model_migrated") for e in calls if e["service"] == "nebius")
+    note = " (Nebius's recommended replacements: the original models were retired on 9 Nov 2026)" if migrated else ""
     return {"label": f"Live run {now.strftime('%Y-%m-%d %H:%M')} UTC, window {start} to {end}",
+            "models": used, "models_note": note,
             "live": True, "window": [start, end], "stopped": stopped,
             "events": [{"item": e["kind"], "place": e.get("region") or "", "pct_change": e["change"] * 100,
                         "effective_date": e["effective_date"], "line": e.get("quote") or "", "url": e["url"]}

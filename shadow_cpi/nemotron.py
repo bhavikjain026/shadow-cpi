@@ -1,7 +1,9 @@
 """Nemotron on Nebius Token Factory (OpenAI-compatible). The model only EXTRACTS; code decides."""
 import json
 import re
+from datetime import datetime, timezone
 
+from . import model_map
 from .http import ApiError, request_json
 from .recorder import Recorder
 from .settings import NEBIUS_BASE, nebius_key
@@ -46,8 +48,9 @@ EXTRACT_SYSTEM = ("You extract facts from web pages. The page is given as number
 
 
 class Nemotron:
-    def __init__(self, api_key=None, recorder=None, base=NEBIUS_BASE, transport=request_json):
+    def __init__(self, api_key=None, recorder=None, base=NEBIUS_BASE, transport=request_json, clock=None):
         self.api_key = api_key or nebius_key()
+        self.clock = clock or (lambda: datetime.now(timezone.utc))   # the call date picks the model (Amendment G)
         self.rec = recorder or Recorder()
         self.base = base.rstrip("/")
         self.transport = transport
@@ -57,12 +60,22 @@ class Nemotron:
         return sorted(m.get("id", "") for m in resp.get("data", []))
 
     def chat_json(self, model, system, user, schema=None, max_tokens=4000, parent=None, tag=None):
-        body = {"model": model, "temperature": 0, "max_tokens": max_tokens,
-                "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
-                "chat_template_kwargs": {"enable_thinking": False}}
-        if schema:
-            body["response_format"] = {"type": "json_schema",
-                                       "json_schema": {"name": "out", "schema": schema, "strict": True}}
+        """`model` is a role's original ID; the call uses the ID for today's date in IST (config/models.json, Amendment
+        G). A request already cached for the original ID is served from the cache: a cache hit is not a call."""
+        def request(m):
+            b = {"model": m, "temperature": 0, "max_tokens": max_tokens,
+                 "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
+                 "chat_template_kwargs": {"enable_thinking": False}}
+            if schema:
+                b["response_format"] = {"type": "json_schema",
+                                        "json_schema": {"name": "out", "schema": schema, "strict": True}}
+            return b
+
+        use = model_map.resolve(model, self.clock())
+        body = request(model)
+        if use != model and not self.rec.has("nebius", "/chat/completions", body):
+            body = request(use)
+        migration = {"model_requested": model, "model_migrated": body["model"] != model}
 
         def do():
             try:
@@ -77,7 +90,7 @@ class Nemotron:
                                       "\n\nReturn ONLY JSON matching this schema:\n" + json.dumps(schema)}]
                 return self.transport("POST", self.base + "/chat/completions", self.api_key, fb, 180)
 
-        resp, cid = self.rec.call("nebius", "/chat/completions", body, do, parent=parent, tag=tag)
+        resp, cid = self.rec.call("nebius", "/chat/completions", body, do, parent=parent, tag=tag, extra=migration)
         return parse_json(resp["choices"][0]["message"].get("content") or ""), cid
 
     def price_quotes(self, model, page_text, item_hint="", **kw):

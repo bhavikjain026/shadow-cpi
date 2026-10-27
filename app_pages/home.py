@@ -142,7 +142,8 @@ def show_run(r, note=""):
     if r.get("receipt"):
         rc = r["receipt"]
         st.caption(f"Receipt: Tavily calls {rc['tavily_calls']} · credits {rc['credits']} · {rc['seconds']} s · "
-                   f"Nemotron calls {rc['nemotron_calls']}" + (f" · {r['stopped']}" if r.get("stopped") else ""))
+                   f"Nemotron calls {rc['nemotron_calls']}" + (f" · {r['stopped']}" if r.get("stopped") else "")
+                   + (f" · models {', '.join(r['models'])}{r.get('models_note', '')}" if r.get("models") else ""))
 
 
 st.session_state.setdefault("live_runs", 0)

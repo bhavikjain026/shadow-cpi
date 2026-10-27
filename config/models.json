@@ -1,5 +1,15 @@
 {
   "small": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
   "mid": "nvidia/nemotron-3-super-120b-a12b",
-  "large": "nvidia/Nemotron-3-Ultra-550b-a55b"
+  "large": "nvidia/Nemotron-3-Ultra-550b-a55b",
+  "dated": {
+    "_note": "Forced model migration, pre-registered 2026-10-27 (v2/PREREGISTRATION.md Amendment G): Nebius removes the two original IDs from Serverless on 9 Nov 2026 (docs.tokenfactory.nebius.com/model-deprecations-november-2026, checked 2026-10-27). shadow_cpi/model_map.py picks the ID by the call date in IST. The role keys above stay the original IDs; code asks for a role's original ID and gets the one for the call date.",
+    "timezone": "Asia/Kolkata",
+    "periods": [
+      {"from": null, "until": "2026-11-08",
+       "small": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B", "mid": "nvidia/nemotron-3-super-120b-a12b"},
+      {"from": "2026-11-09", "until": null,
+       "small": "nvidia/Nemotron-3_5-Lightning", "mid": "nvidia/Nemotron-3.5-Super-VL"}
+    ]
+  }
 }
