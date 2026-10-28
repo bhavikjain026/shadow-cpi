@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""MCP server exposing timelock's timelocked_search as one tool (stdio). Setup: mcp/README.md.
+"""MCP server exposing timelock's timelocked_search and extract_as_of as two tools (stdio). Setup: mcp/README.md.
 
     pip install -r mcp/requirements.txt
     TAVILY_API_KEY=... python mcp/server.py
     TIMELOCK_REPLAY=tests/fixtures/timelock/rbi_2026-10-06_locked.json python mcp/server.py   # saved response, no key
 
 Only results dated on or before the cutoff reach the model with their URL, title and snippet; undated results and
-leaks come back as domain, dates and status only (a news URL's slug can state the outcome).
+leaks come back as domain, dates and status only (a news URL's slug can state the outcome). extract_as_of returns
+a page's text only as it was on the cutoff (live copy if unchanged, else a Wayback capture), or no text.
 """
 import os
 import sys
@@ -14,7 +15,7 @@ from pathlib import Path
 
 # the repository root, appended (not prepended) so the installed `mcp` package wins over this folder
 sys.path.append(str(Path(__file__).resolve().parents[1]))
-from timelock import SAFE, Replay, TavilyHTTP, timelocked_search  # noqa: E402
+from timelock import SAFE, Replay, TavilyHTTP, extract_as_of, timelocked_search  # noqa: E402
 
 from urllib.parse import urlparse  # noqa: E402
 
@@ -56,10 +57,31 @@ def run(tavily, query, cutoff, *, include_raw_content=False, **params):
             "request_id": results.request_id, "response_sha256": results.response_sha256, "results": shown}
 
 
+def as_of(url: str, cutoff: str, published_date: str | None = None, max_chars: int = 20000) -> dict:
+    """Read the page at `url` as it was on `cutoff` (YYYY-MM-DD). Tavily Extract returns the page as it is now, so
+    if anything suggests it changed after the cutoff (its own date, Tavily's `published_date` from the search that
+    found it, or Wayback captures that differ), the latest Wayback Machine capture on or before the cutoff is returned
+    instead. If there is none, `text` is null and the reason is "no as-of copy": do not use the page. `provenance`
+    says which copy you got (source tavily_live or wayback_asof, capture_time, reason)."""
+    tavily = client()
+    if isinstance(tavily, Replay):
+        raise ValueError("extract_as_of needs a live Tavily key (TIMELOCK_REPLAY holds a saved search only)")
+    return run_as_of(tavily, url, cutoff, published_date=published_date, max_chars=max_chars)
+
+
+def run_as_of(tavily, url, cutoff, *, published_date=None, max_chars=20000, archive=None):
+    """as_of() with an explicit client and archive (tests pass fakes). Text is cut to max_chars."""
+    out = extract_as_of(tavily, url, cutoff, published_date=published_date, archive=archive)
+    text = out["text"]
+    return {**out, "text": text[:max_chars] if text is not None else None,
+            "truncated": text is not None and len(text) > max_chars}
+
+
 def build_server():
     from mcp.server.fastmcp import FastMCP
     server = FastMCP("timelock")
     server.tool(name="timelocked_search")(search)
+    server.tool(name="extract_as_of")(as_of)
     return server
 
 

@@ -221,8 +221,31 @@ Offline it replays a real saved response (`tests/fixtures/timelock/`, request ID
 [`tests/test_timelock.py`](tests/test_timelock.py)); `Replay` refuses any other request. Any client with
 `.search(query, **kwargs) -> dict` works, including tavily-python's `TavilyClient`.
 
-- **MCP server** [`mcp/`](mcp/README.md): `timelocked_search` as a tool for Claude Code, Claude Desktop or any MCP
-  client; results after the cutoff come back as domain and date only, never their text or URL.
+### Read a page as it was on the cutoff
+
+Search dates do not freeze page content: Extract returns a page as it is today, so a page dated before the cutoff
+can carry a link to the result it previewed. `extract_as_of(client, url, cutoff)` extracts the live page and checks
+its change evidence (Tavily's date, the page's own published/updated date, Wayback captures). If the page may have
+changed after the cutoff it returns the latest Wayback capture on or before the cutoff instead, with provenance
+`{source: "tavily_live" | "wayback_asof", capture_time, reason}`; if there is no such capture, it returns no text
+and the reason `no as-of copy`, never the live page. Wayback is a direct download outside Tavily.
+
+```python
+import sys
+
+from timelock import TavilyHTTP, extract_as_of
+
+R196 = ("https://www.business-standard.com/markets/news/tcs-q1-result-expectations-preview-dividend-record-date-"
+        "revenue-seen-flat-wage-hikes-to-weigh-on-margins-126070700096_1.html")
+url, cutoff = (sys.argv[1], sys.argv[2]) if len(sys.argv) > 2 else (R196, "2026-07-08")
+page = extract_as_of(TavilyHTTP(), url, cutoff, published_date="2026-07-07" if url == R196 else None)  # 1 credit
+print(page["provenance"])           # source tavily_live | wayback_asof | None, capture_time, reason
+print(page["evidence"]["changed"], page["request_id"], page["live_sha256"][:12])
+print((page["text"] or "no as-of copy: do not use this page")[:500])
+```
+
+- **MCP server** [`mcp/`](mcp/README.md): `timelocked_search` and `extract_as_of` as tools for Claude Code, Claude
+  Desktop or any MCP client; results after the cutoff come back as domain and date only, never their text or URL.
 - **Benchmark** [`benchmarks/timelock34/`](benchmarks/timelock34/DATASHEET.md): {{tl_cases}} cases,
   {{tl_questions}} distinct questions (two pairs share a question and its searches), from the date test and the
   finance check, with every result URL labelled (Wayback-confirmed leak, date flag, unknown) and a scorer for any

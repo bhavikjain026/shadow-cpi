@@ -184,6 +184,8 @@ def build():
                      f"and updated on {ex['reviewer_date']} with a link to the actual result",
          "expected": "a way for a time-locked user to read, or at least detect, the page as it was on the cutoff",
          "fix": "an as-of / crawl-date field on Extract (the date of the copy returned), or an as_of parameter",
+         "workaround": "`extract_as_of` ([`timelock/asof.py`](../timelock/asof.py)); a native as_of parameter would "
+                       "remove the archive dependency",
          "evidence": f"{ff['reviewer_leak_pages']} of {ff['results']} filtered result pages; {ex['row_id']} from the "
                      f"search with request ID `{ex_rid}` (response SHA-256 `{ex_sha[:16]}…`); file "
                      "`results/timelock34_second_review.json` (finance_filtered.example)"},
@@ -249,7 +251,9 @@ def build():
             n += 1
             L += [f"### {n}. {r['title']}", "", f"- **What we did:** {r['did']}.",
                   f"- **Observed:** {r['happened']}.", f"- **Expected:** {r['expected']}.",
-                  f"- **Suggested fix:** {r['fix']}.", f"- **Evidence:** {r['evidence']}.", *recheck_lines(r, check, nd),
+                  f"- **Suggested fix:** {r['fix']}.", f"- **Evidence:** {r['evidence']}.",
+                  *([f"- **Workaround we ship:** {r['workaround']}."] if r.get("workaround") else []),
+                  *recheck_lines(r, check, nd),
                   f"- **Reproduce it:** [`{r['repro']}`](../{r['repro']}) (your own key, at most 2 credits; see "
                   "[`repro/README.md`](../repro/README.md)).", ""]
     L += ["Nebius / NVIDIA feedback is in the Devpost write-up (`docs/devpost_draft.md`), separate from Tavily.", ""]

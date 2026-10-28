@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 class TavilyHTTP:
-    """Minimal live Tavily client: POST /search with the key from the argument or TAVILY_API_KEY."""
+    """Minimal live Tavily client: POST /search and /extract with the key from the argument or TAVILY_API_KEY."""
 
     def __init__(self, api_key=None, base="https://api.tavily.com", timeout=60):
         self.api_key = api_key or os.environ.get("TAVILY_API_KEY")
@@ -16,8 +16,14 @@ class TavilyHTTP:
         self.base, self.timeout = base.rstrip("/"), timeout
 
     def search(self, query, **params):
-        body = json.dumps({"query": query, "include_usage": True, **params}).encode("utf-8")
-        req = urllib.request.Request(self.base + "/search", data=body, method="POST",
+        return self._post("/search", {"query": query, **params})
+
+    def extract(self, urls, **params):
+        return self._post("/extract", {"urls": list(urls), **params})
+
+    def _post(self, endpoint, body):
+        body = json.dumps({**body, "include_usage": True}).encode("utf-8")
+        req = urllib.request.Request(self.base + endpoint, data=body, method="POST",
                                      headers={"Content-Type": "application/json",
                                               "Authorization": "Bearer " + self.api_key})
         with urllib.request.urlopen(req, timeout=self.timeout) as r:
