@@ -41,6 +41,12 @@ def text(at):
     return "\n".join(str(p) for p in parts)
 
 
+def shown_ids(at):
+    """The recommended examples' IDs, from the 'How these examples were picked' caption."""
+    import re
+    return re.search(r"Cases that qualify: ([A-Z0-9, ]+)", text(at)).group(1).split(", ")
+
+
 # ---------- the saved data ----------
 def test_34_cases_with_both_searches_and_no_key_in_any_body():
     assert sum(c["test"] == "date" for c in DATA["cases"]) == FR["date_test"]["first_pass"]["arms"]["A"]["cases"]
@@ -79,7 +85,8 @@ def test_home_is_the_leak_demo_with_examples_and_totals():
                                  "totals below") in t
     s, d = DATA["totals"]["strictness"], DATA["totals"]["date"]
     assert f"**{s['missed']} of {s['quotes']}**" in t
-    assert len(at.selectbox[0].options) == 1 + len(DATA["cases"])
+    assert list(at.selectbox[0].options) == [f"Recommended examples ({len(shown_ids(at))})",
+                                             f"All {len(DATA['cases'])} cases"]
     leaks = [m.value for m in at.markdown if m.value.startswith(":red-badge[LEAK]")]
     assert len(leaks) >= 3                         # each example highlights its leaking result
     assert "days after the cutoff" in t and "Live mode is off" in t
@@ -90,7 +97,9 @@ def test_home_is_the_leak_demo_with_examples_and_totals():
 def test_picker_shows_one_case():
     at = page()
     cid = DATA["cases"][-1]["id"]
-    at.selectbox[0].set_value(cid).run()
+    at.selectbox[0].set_value(f"All {len(DATA['cases'])} cases").run()
+    assert len(at.selectbox[1].options) == len(DATA["cases"])
+    at.selectbox[1].set_value(cid).run()
     assert not at.exception
     assert sum(cid in h.value for h in at.markdown if h.value.startswith("####")) == 1
 
@@ -226,22 +235,23 @@ def test_default_examples_follow_the_rule_f3_first_r1_out():
     want = [c["id"] for c in DATA["cases"] if any(r["leak"] for r in c["open"]["results"])
             and c["locked"]["results"] and all(r["label"].startswith(ok) for r in c["locked"]["results"])]
     at = page()
-    default = at.selectbox[0].options[0]
-    ids = default.removeprefix("Examples: ").split(", ")
+    ids = shown_ids(at)
+    assert at.selectbox[0].value == f"Recommended examples ({len(ids)})"
     assert ids[0] == "F3" and sorted(ids) == sorted(want) and "R1" not in ids
-    assert any(o.endswith(" · R1") for o in at.selectbox[0].options) and any(o.endswith(" · M7") for o in
-                                                                              at.selectbox[0].options)
-    assert "RBI decision · Feb 2026 · R1" in at.selectbox[0].options      # human label built from the case
-    assert f"Cases that qualify: {', '.join(ids)}" in text(at)
+    assert not any("F3" in o for o in at.selectbox[0].options)            # no case IDs in the dropdown's labels
     if len(ids) > 1:
         assert len(at.tabs) == len(ids)
+    at.selectbox[0].set_value(f"All {len(DATA['cases'])} cases").run()
+    every = at.selectbox[1].options
+    assert any(o.endswith(" · R1") for o in every) and any(o.endswith(" · M7") for o in every)
+    assert "RBI decision · Feb 2026 · R1" in every                         # human label built from the case
 
 
 def test_card_metadata_is_short_and_finance_page_dates_said_once():
     t = text(at := page())
     assert ":gray-badge[Tavily: 21 Sep 2026] :gray-badge[Page: 21 Sep 2026] :gray-badge[Wayback: confirmed leak]" in t
     assert "not read in this test" not in t
-    if any(by.startswith("R") for by in at.selectbox[0].options[0].removeprefix("Examples: ").split(", ")):
+    if any(by.startswith("R") for by in shown_ids(at)):
         assert t.count("Page dates not read in the finance check.") == 1
 
 
@@ -252,3 +262,34 @@ def test_every_result_has_a_text_badge():
     assert rows and all(vals[i - 1].startswith((":red-badge[LEAK]", ":green-badge[OK]", ":gray-badge[UNCHECKED]"))
                         for i in rows)
     assert all(vals[i - 1].startswith(":red-badge[LEAK]") for i in rows if "days after the cutoff" in vals[i])
+
+
+# ---------- first screen: brand header ----------
+def test_brand_header_leads_the_first_screen():
+    from app_pages import common as C
+    at = page()
+    assert [t.value for t in at.title] == [C.BRAND_LINE]                  # the headline is the page's only H1
+    assert C.BRAND_LINE == "Can a search engine keep the past in the past?"
+    assert len(C.TAGLINE.split()) <= 20 and C.TAGLINE in text(at)
+    md = [m.value for m in at.markdown]
+    assert md.index(C.BRAND) < md.index(C.TAGLINE) < md.index("Leak demo")   # wordmark, sub-line, then the eyebrow
+    assert C.PAGE_GUIDES["Leak demo"] in [c.value for c in at.caption]      # one intro line
+    assert "The same past question, searched twice" not in text(at)
+    links = [b.proto.label for b in at.get("link_button")]
+    assert links == ["GitHub"] and at.get("link_button")[0].proto.url == C.GITHUB_URL
+    assert [p.proto.label for p in at.main.get("page_link")][:1] == ["Field Report"]
+
+
+def test_video_button_shows_only_when_its_url_is_set(monkeypatch):
+    from app_pages import common as C
+    monkeypatch.setattr(C, "VIDEO_URL", "https://example.com/video")
+    links = {b.proto.label: b.proto.url for b in page().get("link_button")}
+    assert links == {"GitHub": C.GITHUB_URL, "Watch the video": "https://example.com/video"}
+
+
+def test_sidebar_brand_is_keyed_and_moved_above_the_links_by_css():
+    css = (ROOT / "app_pages" / "style.css").read_text()
+    assert '[data-testid="stLayoutWrapper"]:has(> .st-key-sidebar-brand) { order: -2;' in css
+    assert '[data-testid="stSidebarNav"] { order: -1; }' in css
+    at = page()
+    assert at.sidebar.markdown[0].value == "**Shadow CPI**"

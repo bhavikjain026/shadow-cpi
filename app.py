@@ -39,9 +39,10 @@ pages = {group: [st.Page(f"app_pages/{f}.py", title=t, icon=f":material/{i}:", d
                  for f, t, i, _ in rows] for group, rows in NAV.items()}
 guide = [(pg, row[3]) for group, rows in NAV.items() for pg, row in zip(pages[group], rows)]
 
-with st.sidebar:
-    st.markdown("**Shadow CPI**")
-    st.caption(f"An {NOWCAST_WORDS} of India's next official CPI inflation number. Not an official statistic.")
+with st.sidebar:                # moved above the page links by app_pages/style.css (.st-key-sidebar-brand)
+    with st.container(key="sidebar-brand"):
+        st.markdown("**Shadow CPI**")
+        st.caption(f"An {NOWCAST_WORDS} of India's next official CPI inflation number. Not an official statistic.")
 
 nav = st.navigation(pages)
 with st.sidebar:

@@ -7,7 +7,7 @@ from datetime import date, timedelta
 
 import streamlit as st
 
-from app_pages.common import header, lock_table, read_json
+from app_pages.common import BRAND, BRAND_LINE, GITHUB_URL, TAGLINE, VIDEO_URL, header, lock_table, read_json
 
 OPEN, OPEN_NOTE = "No time lock", "default search, no dates"
 LOCKED, LOCKED_NOTE = "Tavily time lock", "start_date/end_date + filter_by_published_date"
@@ -164,6 +164,9 @@ html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 1
 .row {{ display: flex; align-items: stretch; gap: 8px; }}
 .side {{ flex: 1 1 0; min-width: 0; border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }}
 .open {{ background: rgba(255, 75, 75, 0.12); }}                      /* LOCK/OPEN colour meaning, as common.OPEN_CSS */
+.locked {{ background: rgba(33, 195, 84, 0.12); }}                     /* the same weight, green: the time lock held */
+.cost {{ flex: 0.8 1 0; }}                                             /* neutral and secondary: no tint, smaller */
+.cost .num {{ font-size: clamp(1.25rem, 4.5vw, 1.875rem); color: var(--muted); }}
 .num {{ font: 600 clamp(1.75rem, 7vw, 2.75rem)/1.1 "JetBrains Mono", ui-monospace, monospace;
         font-variant-numeric: tabular-nums; letter-spacing: -0.03em; white-space: nowrap; }}
 .label {{ color: var(--muted); font-size: 0.875rem; margin-top: 4px; }}
@@ -173,6 +176,7 @@ html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 1
 @media (max-width: 520px) {{
   .row {{ gap: 6px; }} .gap {{ width: 2px; }} .side {{ padding: 8px 10px; }}
   .num {{ font-size: 1.375rem; }} .label {{ font-size: 0.75rem; }} .arrow {{ font-size: 1rem; }}
+  .cost .num {{ font-size: 1.0625rem; }}
   .update {{ font-size: 0.75rem; }}
 }}
 </style></head><body>
@@ -321,20 +325,46 @@ def live():
 
 
 
-header("Leak demo", "The same past question, searched twice as of its cutoff: no time lock vs Tavily's time lock.")
+def brand():
+    """The first screen's identity: a small wordmark, the headline as the page's H1, the shortened tagline, and link
+    buttons (Field Report, GitHub, and the video only when common.VIDEO_URL is set)."""
+    with st.container(key="brand"):
+        with st.container(key="wordmark"):
+            st.markdown(BRAND)
+        st.title(BRAND_LINE)
+        st.markdown(TAGLINE)
+        with st.container(key="brand-links", horizontal=True, gap="small", vertical_alignment="center"):
+            st.page_link("app_pages/field_report.py", label="Field Report", icon=":material/science:")
+            st.link_button("GitHub", GITHUB_URL, icon=":material/code:")
+            if VIDEO_URL:
+                st.link_button("Watch the video", VIDEO_URL, icon=":material/play_circle:")
+
+
+def pick_cases(cases, shown):
+    """'Recommended examples (n)' or 'All N cases'; the second opens a picker of every case (its ID in small grey
+    text on the case heading, as before)."""
+    by_id = {c["id"]: c for c in cases}
+    rec, every = f"Recommended examples ({len(shown)})", f"All {len(cases)} cases"
+    mode = st.selectbox("Cases", [rec, every], label_visibility="collapsed")
+    with st.expander("How these examples were picked"):
+        st.caption(f"Default: {EXAMPLES.format(n=len(cases))}. Rule: {EXAMPLE_RULE}. Cases that qualify: "
+                   f"{', '.join(shown)}" + (" (only one qualifies, so one is shown)." if len(shown) == 1 else "."))
+    if mode == rec:
+        return shown
+    return [st.selectbox("Case", list(by_id), format_func=lambda k: f"{case_title(by_id[k])} · {k}")]
+
+
+brand()
+header("Leak demo", eyebrow=True)
 data = read_json("results/leak_demo.json")
 if not data:
     st.info("Not built yet: run `python tools/build_leak_demo.py` (offline, 0 credits).")
     st.stop()
-hero(data["totals"])
+with st.container(key="hero"):          # style.css trims its height on wide screens
+    hero(data["totals"])
 by_id = {c["id"]: c for c in data["cases"]}
 shown = examples(data["cases"])
-choice = st.selectbox("Case", ["Examples: " + ", ".join(shown)] + list(by_id),
-                      format_func=lambda k: k if k.startswith("Examples") else f"{case_title(by_id[k])} · {k}")
-with st.expander("How these examples were picked"):
-    st.caption(f"Default: {EXAMPLES.format(n=len(data['cases']))}. Rule: {EXAMPLE_RULE}. Cases that qualify: "
-               f"{', '.join(shown)}" + (" (only one qualifies, so one is shown)." if len(shown) == 1 else "."))
-cases = shown if choice.startswith("Examples") else [choice]
+cases = pick_cases(data["cases"], shown)
 for tab, cid in zip(st.tabs([f"{case_title(by_id[x])} {case_id(by_id[x])}" for x in cases]) if len(cases) > 1
                     else [st.container()], cases):
     with tab:

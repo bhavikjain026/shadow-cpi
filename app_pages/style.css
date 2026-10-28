@@ -3,6 +3,51 @@
    (.streamlit/config.toml): borders here are currentColor mixes, so they follow whichever theme the viewer picks.
    Rules applied: docs/design_notes.md. */
 
+/* ---------- page frame: ~2rem above the first line (Streamlit's default is 6rem) ----------
+   The top bar goes transparent so it does not cover that space; only its own controls take clicks. */
+[data-testid="stMainBlockContainer"] { padding-top: 2rem; }
+[data-testid="stHeader"] { background: transparent; pointer-events: none; }
+[data-testid="stHeader"] button, [data-testid="stHeader"] a, [data-testid="stToolbar"] { pointer-events: auto; }
+
+/* ---------- sidebar: the app's name and line above the page links ----------
+   st.navigation always draws the links first, so the wrappers between the sidebar and the brand block are
+   flattened (display: contents) and the blocks re-ordered: header, brand, links, then the Page guide. */
+[data-testid="stSidebarContent"]:has(.st-key-sidebar-brand) { display: flex; flex-direction: column; }
+[data-testid="stSidebarUserContent"]:has(.st-key-sidebar-brand),
+[data-testid="stSidebarUserContent"]:has(.st-key-sidebar-brand) > div,
+[data-testid="stSidebarUserContent"]:has(.st-key-sidebar-brand) > div > [data-testid="stVerticalBlock"] { display: contents; }
+[data-testid="stSidebarHeader"] { order: -3; }
+[data-testid="stLayoutWrapper"]:has(> .st-key-sidebar-brand) { order: -2; margin-bottom: 0.75rem; }
+[data-testid="stSidebarNav"] { order: -1; }
+[data-testid="stSidebarUserContent"] [data-testid="stLayoutWrapper"]:not(:has(> .st-key-sidebar-brand)) { margin-top: 1rem; }
+[data-testid="stSidebarContent"]:has(.st-key-sidebar-brand) > :last-child { padding-bottom: 2rem; }
+.st-key-sidebar-brand { gap: 0.25rem; }
+
+/* ---------- Leak demo brand header (keyed containers in app_pages/leak_demo.py brand()) ---------- */
+.st-key-brand { gap: 0.5rem; }
+.st-key-wordmark p { font-weight: 700; font-size: 0.9375rem; letter-spacing: -0.01em; margin: 0; }
+.st-key-brand h1 { padding-top: 0; }
+.st-key-brand [data-testid="stMarkdownContainer"] p { font-size: 1.0625rem; color: color-mix(in srgb, currentColor 72%, transparent); }
+.st-key-brand-links { margin-top: 0.25rem; }
+/* the Field Report page link drawn like the link buttons next to it */
+.st-key-brand-links [data-testid="stPageLink"] a {
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent); border-radius: 0.5rem;
+  padding: 0 0.75rem; text-decoration: none; height: 2.5rem; box-sizing: border-box; display: flex; align-items: center;
+}
+.st-key-brand-links [data-testid="stPageLink"] { margin: 0; }
+/* the hero's iframe has one fixed height (leak_demo.HERO_HEIGHT, sized for two-line labels at phone and mid
+   widths); from 1200 px its content ends by about 163 px, so the gap under it is trimmed */
+@media (min-width: 1200px) {
+  .st-key-hero [data-testid="stIFrame"] { height: 176px !important; }
+  .st-key-hero [data-testid="stElementContainer"] { height: 176px !important; flex-basis: 176px !important; }
+}
+.st-key-brand-links [data-testid="stPageLink"] a:hover { border-color: color-mix(in srgb, currentColor 40%, transparent); }
+/* the page name as a small label above the hero cards (header(..., eyebrow=True)) */
+.st-key-eyebrow p {
+  font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin: 1rem 0 0;
+  color: color-mix(in srgb, currentColor 70%, transparent);
+}
+
 /* ---------- type ---------- */
 [data-testid="stMain"] h1 { letter-spacing: -0.025em; line-height: 1.15; }
 [data-testid="stMain"] h2, [data-testid="stMain"] h3 { letter-spacing: -0.015em; line-height: 1.25; }
@@ -95,7 +140,12 @@
    without this a two-line headline runs under the chip row. */
 [class*="st-key-card-"] [data-testid="stMarkdownContainer"] { margin-bottom: 0; }
 [class*="st-key-card-"] [data-testid="stExpander"] details { border: 0; }
-[class*="st-key-card-"] [data-testid="stExpander"] summary { padding: 2px 0; font-size: 0.875rem; }
+[class*="st-key-card-"] [data-testid="stExpander"] summary { padding: 2px 0; font-size: 0.9375rem; }
+/* card type: headline link >= 15px, chips >= 12px, body >= 14px (root is 15px) */
+[class*="st-key-card-"] [data-testid="stMarkdownContainer"] a { font-size: 1rem; }
+[class*="st-key-card-"] [data-testid="stMarkdownContainer"] span[class] { font-size: max(0.875rem, 12px); }
+[class*="st-key-card-"] [data-testid="stExpander"] summary p,
+[class*="st-key-card-"] [data-testid="stExpander"] [data-testid="stMarkdownContainer"] p { font-size: 0.9375rem; }
 [class*="st-key-card-leak-"] {
   background: rgba(255, 75, 75, 0.06);
   border-left: 3px solid #dc2626 !important;
@@ -130,6 +180,8 @@
 /* ---------- narrow screens: nothing wider than the screen ---------- */
 @media (max-width: 640px) {
   [data-testid="stMain"] h1 { font-size: 1.75rem; }
+  /* the open-sidebar button sits in the top bar: start below it */
+  [data-testid="stMainBlockContainer"] { padding-top: 3.75rem; }
   [data-testid="stMetric"] { padding: 12px; }
   [data-testid="stMarkdownContainer"] { overflow-wrap: anywhere; }
 }

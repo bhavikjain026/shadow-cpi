@@ -16,6 +16,12 @@ ROOT = Path(__file__).resolve().parent.parent
 NOWCAST_WORDS = "experimental nowcast"
 IST = timezone(timedelta(hours=5, minutes=30))
 REPO_URL = "https://github.com/bhavikjain026/shadow-cpi/blob/main"
+GITHUB_URL = "https://github.com/bhavikjain026/shadow-cpi"
+VIDEO_URL = ""             # the demo video's URL; while empty, the Leak demo hides its "Watch the video" button
+BRAND, BRAND_LINE = "Shadow CPI", "Can a search engine keep the past in the past?"
+# the README tagline, shortened to at most 20 words
+TAGLINE = ("An AI agent that searches the past without cheating, checks every quote, and seals India's inflation "
+           "forecast before release.")
 SEAL_DATE = date(2026, 10, 29)                        # seal_checklist.md
 LIVE_MONTH = "2026-10"
 
@@ -80,8 +86,14 @@ def page_guide(entries):
             st.caption(PAGE_GUIDES[key])
 
 
-def header(title, intro=None):
-    st.title(title)
+def header(title, intro=None, *, eyebrow=False):
+    """The page title (H1) with its PAGE_GUIDES purpose line. eyebrow=True shows the title as a small label instead,
+    for a page whose H1 is elsewhere (the Leak demo's brand header)."""
+    if eyebrow:
+        with st.container(key="eyebrow"):
+            st.markdown(title)
+    else:
+        st.title(title)
     if title in PAGE_GUIDES:
         st.caption(PAGE_GUIDES[title])
     if intro:
