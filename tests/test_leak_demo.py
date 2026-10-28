@@ -80,7 +80,8 @@ def test_home_is_the_leak_demo_with_examples_and_totals():
     s, d = DATA["totals"]["strictness"], DATA["totals"]["date"]
     assert f"**{s['missed']} of {s['quotes']}**" in t
     assert len(at.selectbox[0].options) == 1 + len(DATA["cases"])
-    assert len(at.error) >= 3                      # each example highlights its leaking result
+    leaks = [m.value for m in at.markdown if m.value.startswith(":red-badge[LEAK]")]
+    assert len(leaks) >= 3                         # each example highlights its leaking result
     assert "days after the cutoff" in t and "Live mode is off" in t
     table = at.table[0].value
     assert table.iloc[0, 1].startswith(f"{d['open']['first']} of {d['cases']}")
@@ -128,7 +129,10 @@ def test_field_report_starts_with_six_findings():
     at.run()
     assert not at.exception
     df = at.table[0].value
-    assert list(df.columns) == ["Finding", "Number", "File"] and len(df) == 6
+    assert list(df.columns) == ["Finding", "Number"] and len(df) == 6
+    (src,) = [e for e in at.expander if e.label == "Sources"]          # the files, in one expander
+    files = " ".join(m.value for m in src.markdown)
+    assert "results/field_report.json" in files and "results/leakcheck_exact_match.json" in files
 
 
 # ---------- live mode, offline ----------
@@ -182,14 +186,17 @@ def test_web_titles_cannot_inject_markdown():
     assert "![" not in out.replace("\\!\\[", "") and out.endswith("(<https://a.example/x(1)%20y>)")
 
 
-# ---------- ui-polish: summary line, default examples, text badges ----------
-def test_summary_line_at_top_reads_the_results_file():
+# ---------- ui-polish / look: hero row, default examples, text badges ----------
+def test_hero_row_reads_the_results_file_and_is_not_repeated():
     at = page()
     d, s = DATA["totals"]["date"], DATA["totals"]["strictness"]
-    first = at.markdown[0].value
+    (frame,) = at.get("iframe")
+    html = frame.proto.srcdoc
+    assert f"Date test · {d['cases']} past cases" in html
     assert (f"No time lock: {d['open']['retry']}/{d['cases']} cases leaked (after retry). Tavily time lock: "
-            f"{d['locked']['retry']}/{d['cases']}. Cost: {s['missed']} of {s['quotes']} known-good quotes missed."
-            ) in first and "(#all-cases)" in first
+            f"{d['locked']['retry']}/{d['cases']}. Cost: {s['missed']} of {s['quotes']} valid evidence dropped."
+            ) in html                              # the hero's accessible label
+    assert not any(m.value.startswith("**No time lock:") for m in at.markdown)
 
 
 def test_default_examples_follow_the_rule_f3_first_r1_out():
@@ -200,8 +207,9 @@ def test_default_examples_follow_the_rule_f3_first_r1_out():
     default = at.selectbox[0].options[0]
     ids = default.removeprefix("Examples: ").split(", ")
     assert ids[0] == "F3" and sorted(ids) == sorted(want) and "R1" not in ids
-    assert any(o.startswith("R1") for o in at.selectbox[0].options) and any(o.startswith("M7") for o in
-                                                                            at.selectbox[0].options)
+    assert any(o.endswith(" · R1") for o in at.selectbox[0].options) and any(o.endswith(" · M7") for o in
+                                                                              at.selectbox[0].options)
+    assert "RBI decision · Feb 2026 · R1" in at.selectbox[0].options      # human label built from the case
     assert f"Cases that qualify: {', '.join(ids)}" in text(at)
     if len(ids) > 1:
         assert len(at.tabs) == len(ids)
@@ -209,7 +217,7 @@ def test_default_examples_follow_the_rule_f3_first_r1_out():
 
 def test_card_metadata_is_short_and_finance_page_dates_said_once():
     t = text(at := page())
-    assert "Tavily: **21 Sep 2026** · Page: 21 Sep 2026 · Wayback: **confirmed leak**" in t
+    assert ":gray-badge[Tavily: 21 Sep 2026] :gray-badge[Page: 21 Sep 2026] :gray-badge[Wayback: confirmed leak]" in t
     assert "not read in this test" not in t
     if any(by.startswith("R") for by in at.selectbox[0].options[0].removeprefix("Examples: ").split(", ")):
         assert t.count("Page dates not read in the finance check.") == 1
@@ -217,6 +225,8 @@ def test_card_metadata_is_short_and_finance_page_dates_said_once():
 
 def test_every_result_has_a_text_badge():
     at = page()
-    lines = [m.value for m in at.markdown if "Tavily published_date" in m.value] + [e.value for e in at.error]
-    assert lines and all(any(b in x for b in ("[LEAK]", "[OK]", "[UNCHECKED]")) for x in lines)
-    assert all(":red-badge[LEAK]" in e.value for e in at.error)
+    vals = [m.value for m in at.markdown]
+    rows = [i for i, v in enumerate(vals) if v.startswith(":gray-badge[Tavily: ")]      # each card's chip row
+    assert rows and all(vals[i - 1].startswith((":red-badge[LEAK]", ":green-badge[OK]", ":gray-badge[UNCHECKED]"))
+                        for i in rows)
+    assert all(vals[i - 1].startswith(":red-badge[LEAK]") for i in rows if "days after the cutoff" in vals[i])

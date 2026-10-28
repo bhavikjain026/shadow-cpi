@@ -79,7 +79,7 @@ def test_one_ui_font_and_one_mono():
 # ---------- stylesheet ----------
 def test_stylesheet_uses_test_ids_not_hashed_classes():
     assert not re.search(r"st-emotion-cache|\.css-[a-z0-9]+|\.e[a-z0-9]{6,}\b|\.st-[a-z]{2}\b", CSS)
-    assert "data-testid" in CSS and "<script" not in CSS
+    assert "data-testid" in CSS and "<" not in CSS        # a "<" (even in a comment) makes st.html drop the sheet
 
 
 def test_style_is_injected_once_and_takes_no_layout():
@@ -91,11 +91,11 @@ def test_style_is_injected_once_and_takes_no_layout():
 # ---------- the hero ----------
 def test_hero_numbers_come_from_the_results_files():
     _, html = hero_html()
-    d = DATA["totals"]["date"]
+    d, s = DATA["totals"]["date"], DATA["totals"]["strictness"]
     o, k, n = d["open"]["retry"], d["locked"]["retry"], d["cases"]
     assert f'<span id="leaked">{o}</span>/{n}' in html and f">{k}/{n}<" in html
     shown = re.findall(r"<span id=\"leaked\">(\d+)</span>/(\d+)|>(\d+)/(\d+)<", html)
-    assert shown == [(str(o), str(n), "", ""), ("", "", str(k), str(n))]
+    assert shown == [(str(o), str(n), "", ""), ("", "", str(k), str(n)), ("", "", str(s["missed"]), str(s["quotes"]))]
     # the same counts the Field Report reads (results/field_report.json, date test, after the logged retry)
     assert d["source"].startswith("results/field_report.json")
 
