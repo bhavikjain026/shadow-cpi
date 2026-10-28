@@ -13,9 +13,12 @@ cases, the pre-registered initial pass): with no dates, 9 of 20 cases kept a con
 page dated after the cutoff with no archive copy on or before it (Wilson 95% 26–66%;
 10 of 20 after retrying the 11 archive lookups that had failed); with
 `start_date`/`end_date` and `filter_by_published_date`, 0 of 20 (0–16%). The cost: the
-filter dropped 12 of 40 pieces of valid evidence (initial pass). Red card: no time
+filter dropped 12 of 40 pieces of valid evidence (initial pass). Replication
+(pre-registered, 22 new cases, initial pass): no dates 14 of 22, dates + filter
+0 of 22 (0–15%); pilot and replication together, same rule: 0 of
+42 with dates + filter (0–8%). Red card: no time
 lock; green card: Tavily's time lock. App page: Leak demo (home). Source: `results/leak_demo.json`,
-`results/field_report.json`.
+`results/field_report.json`, `results/replication.json`.
 
 ## The four-arm table
 ![Field Report: who should write the search, four arms](2_four_arm_table.png)

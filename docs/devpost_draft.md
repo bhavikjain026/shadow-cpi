@@ -6,7 +6,7 @@
 
 ## Headline
 <!-- headline:start -->
-Pilot, pre-registered: with no dates, 9 of 20 cases kept a confirmed leak; with Tavily's dates and `filter_by_published_date`, 0 of 20. Update: 10 of 20 after retrying the 11 archive lookups that had failed.
+0 of 42 cases with Tavily's dates + filter, across a pilot and a pre-registered replication (Wilson 0–8%); with no dates, 9 of 20 and 14 of 22 leaked.
 Reuse: `timelocked_search`, `extract_as_of`, Colab leak check.
 <!-- headline:end -->
 
@@ -66,6 +66,8 @@ the update):
 | Date test (20 replay cases), cases | start_date + end_date | **0 of 20** (0–16%) | 0 of 20 (0–16%) | 1.00 | 3.4 s |
 | Date test (20 replay cases), cases | + filter_by_published_date | **0 of 20** (0–16%) | 0 of 20 (0–16%) | 1.00 | 3.5 s |
 | Date test (20 replay cases), cases | + our page check | **0 of 20** (0–16%) | 0 of 20 (0–16%) | 0.94 | 3.2 s |
+| Replication (22 new cases, pre-registered), cases | no dates | **14 of 22** (43–80%) | 19 of 22 (67–95%) | 1.00 | 3.6 s |
+| Replication (22 new cases, pre-registered), cases | + filter_by_published_date | **0 of 22** (0–15%) | 0 of 22 (0–15%) | 1.00 | 3.7 s |
 | Finance check (14 scheduled events), events | no dates | **2 of 14** (4–40%) | 10 of 14 (45–88%) | 1.00 | 3.2 s |
 | Finance check (14 scheduled events), events | start_date + end_date + filter_by_published_date | **0 of 14** (0–22%) | 0 of 14 (0–22%) | 1.00 | 1.4 s |
 

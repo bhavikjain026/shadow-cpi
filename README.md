@@ -9,7 +9,10 @@ quote on its source page, and seals India's inflation forecast before the govern
 | Leaks, measured (pre-registered initial pass) | No dates | Dates + filter |
 |---|---|---|
 | Date test (20 cases) | **9 of 20** (Wilson 26–66%) | **0 of 20** (Wilson 0–16%) |
+| Replication (22 new cases, pre-registered) | **14 of 22** (Wilson 43–80%) | **0 of 22** (Wilson 0–15%) |
 | Finance check (14 cases, exploratory, different leak rule) | 2 of 14 (4–40%) | 0 of 14 (0–22%) |
+
+Pilot + replication, date-test rule (pre-registered secondary): dates + filter 0 of 42 (Wilson 0–8%).
 
 Separate rules; never added together. **Update:** date test 10 of 20 with no dates (Wilson
 30–70%) after retrying the 11 archive lookups that had failed, still 0 of
@@ -22,6 +25,16 @@ retry (94 lookups had failed), still 0 of 14 with dates + filter.
 - **Dates + filter** means `start_date`/`end_date` plus `filter_by_published_date`; no dates means neither.
 - **Date test** (pilot, replay cases; [`v2/DATE_TEST_PREREG.md`](v2/DATE_TEST_PREREG.md)). A case leaks when at least
   one result the search kept is a confirmed leak: "**Confirmed leak (L):** independent version evidence only: the Wayback Machine CDX API (a logged direct download, the same exception as MoSPI) lists **no capture on or before the cutoff**, its first capture is after the cutoff, **and** Tavily's published date or the date in the address is after the cutoff."
+- **Replication** (22 new cases, none from the pilot; [`v2/REPLICATION_PREREG.md`](v2/REPLICATION_PREREG.md)).
+  The date test's leak rule and arms (no dates; dates + filter), cutoff the day before each price change, run once
+  ([`results/replication.md`](results/replication.md)). The pooled line adds pilot and replication under the same rule,
+  as pre-registered (secondary).
+- **Cache note on the replication** (logged addendum in `results/replication.md`; descriptive, not pre-registered).
+  Every call goes through our cache, and 4 no-dates answers were served from it, 3 of
+  them the pilot's own response to the same query; the time-locked searches were all fresh. Without the
+  3 cases that reused the pilot's response: no dates 11 of 19
+  (Wilson 36–77%), dates + filter 0 of 19 (0–17%). The
+  pooled no-dates count (23 of 42) includes that reused pilot response.
 - **Finance check** (exploratory, Reserve Bank of India (RBI) decisions and company results;
   [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md), as amended). A different rule, so its counts are reported apart:
   "**Confirmed leak:** states the outcome **and** Wayback-confirmed (no capture on or before the cutoff, first capture after it, and Tavily's or the address's date after the cutoff)."
@@ -99,6 +112,8 @@ the update):
 | Date test (20 replay cases), cases | start_date + end_date | **0 of 20** (0–16%) | 0 of 20 (0–16%) | 1.00 | 3.4 s |
 | Date test (20 replay cases), cases | + filter_by_published_date | **0 of 20** (0–16%) | 0 of 20 (0–16%) | 1.00 | 3.5 s |
 | Date test (20 replay cases), cases | + our page check | **0 of 20** (0–16%) | 0 of 20 (0–16%) | 0.94 | 3.2 s |
+| Replication (22 new cases, pre-registered), cases | no dates | **14 of 22** (43–80%) | 19 of 22 (67–95%) | 1.00 | 3.6 s |
+| Replication (22 new cases, pre-registered), cases | + filter_by_published_date | **0 of 22** (0–15%) | 0 of 22 (0–15%) | 1.00 | 3.7 s |
 | Finance check (14 scheduled events), events | no dates | **2 of 14** (4–40%) | 10 of 14 (45–88%) | 1.00 | 3.2 s |
 | Finance check (14 scheduled events), events | start_date + end_date + filter_by_published_date | **0 of 14** (0–22%) | 0 of 14 (0–22%) | 1.00 | 1.4 s |
 
