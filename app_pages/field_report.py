@@ -157,6 +157,32 @@ if lk:
                     "`filter_by_published_date`, then re-checks every result's date in code: *a model may choose the "
                     "query, topic, domains and language; code owns the dates.* (Fixed templates won the four-arm test.)")
 
+
+def cost_of_correctness(rows):
+    """Three cards, date test only: credits per search and median latency, no dates vs the Tavily time lock (dates +
+    filter_by_published_date), and the valid evidence the time lock lost on each pass. From the leakage rows of
+    results/field_report.json."""
+    dt = {(x["run"], x["setting"]): x for x in rows if x["check"].startswith("Date test")}
+    lock = "+ filter_by_published_date"
+    o1, l1, l2 = dt[("first pass", "no dates")], dt[("first pass", lock)], dt[("after logged retry", lock)]
+    st.subheader("Cost of correctness")
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Credits per search: no dates → time lock", f"{o1['credits_per_call']:.2f} → {l1['credits_per_call']:.2f}",
+              help="Date test, initial pass. The retry re-ran archive lookups only, not searches.")
+    c2.metric("Median latency: no dates → time lock", f"{o1['median_latency_s']:.1f} s → {l1['median_latency_s']:.1f} s",
+              help="Date test, initial pass: Tavily's response_time. The retry sent no new searches.")
+    c3.metric("Valid evidence the time lock lost", f"{l1['valid_total'] - l1['valid_kept']}/{l1['valid_total']}",
+              f"{l2['valid_total'] - l2['valid_kept']}/{l2['valid_total']} after the retry", delta_color="off",
+              delta_arrow="off", help="Date test: pages the Wayback Machine shows existed by the cutoff that name "
+                                      "the item, and that the time-locked search did not return.")
+    st.caption("Date test, pre-registered initial pass; the evidence card also gives the count after the logged "
+               "archive retry, which adds newly confirmed pages, so its denominator is larger. "
+               "Source: `results/field_report.json` (leakage rows).")
+
+
+if lk:
+    cost_of_correctness(lk["rows"])
+
 # ---------- four arms ----------
 st.subheader("Who should write the search? Four arms, pre-registered")
 fa = r["four_arms"]

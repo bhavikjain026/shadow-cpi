@@ -190,6 +190,23 @@ def test_field_report_chart_defaults_to_the_preregistered_initial_pass():
     assert f"no dates {a['leak_cases']} of {a['cases']}" in all_text(at)
 
 
+def test_field_report_cost_of_correctness_reads_the_leakage_rows():
+    rows = json.loads((ROOT / "results" / "field_report.json").read_text())["leakage"]["rows"]
+    dt = {(x["run"], x["setting"]): x for x in rows if x["check"].startswith("Date test")}
+    o, l1, l2 = (dt[("first pass", "no dates")], dt[("first pass", "+ filter_by_published_date")],
+                 dt[("after logged retry", "+ filter_by_published_date")])
+    at = load("field_report")
+    assert "Cost of correctness" in [h.value for h in at.subheader]
+    cards = {m.label: (m.value, m.proto.delta) for m in at.metric}
+    assert cards["Credits per search: no dates → time lock"][0] == f"{o['credits_per_call']:.2f} → {l1['credits_per_call']:.2f}"
+    assert cards["Median latency: no dates → time lock"][0] == f"{o['median_latency_s']:.1f} s → {l1['median_latency_s']:.1f} s"
+    lost = cards["Valid evidence the time lock lost"]
+    assert lost == (f"{l1['valid_total'] - l1['valid_kept']}/{l1['valid_total']}",
+                    f"{l2['valid_total'] - l2['valid_kept']}/{l2['valid_total']} after the retry")
+    assert lost[0] == "12/40" and lost[1].startswith("20/48")
+    assert any("pre-registered initial pass" in c.value for c in at.caption)
+
+
 def test_saved_run_shows_window_replay_date_searches_credits():
     s = json.loads((ROOT / "results" / "app" / "saved_run.json").read_text())
     text = all_text(load("home"))
