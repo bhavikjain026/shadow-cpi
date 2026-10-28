@@ -88,6 +88,11 @@ def test_drift_phrase_reads_the_drift_file():
     run = lambda d, k, c, ok=True: {"ist_date": d, "checked": k, "changed": c, "complete": ok}   # noqa: E731
     one = {"runs": [run("2026-10-27", 12, 2)]}
     assert S.drift_phrase(one, as_of) == "2 of 12 radar pages had changed since they were saved (one run, 27 Oct 2026 IST)"
+    pg = lambda q, n: {"changed": True, "quote_present": q, "number_changed": n}   # noqa: E731
+    fields = {"runs": [{**run("2026-10-28", 62, 3), "pages": [pg(True, "no"), pg(False, "yes"), pg(False, "unknown")]}]}
+    assert S.drift_phrase(fields, as_of) == (
+        "3 of 62 radar pages had changed since they were saved; cited quote still present on 1 of 3; "
+        "cited number changed on 1 of 3 (one run, 28 Oct 2026 IST)")
     many = {"runs": [run("2026-10-27", 12, 2), run("2026-10-28", 10, 1, ok=False), run("2026-10-29", 12, 3)]}
     assert S.drift_phrase(many, as_of) == (
         "3 runs committed (27 Oct 2026 to 29 Oct 2026 IST), 34 page checks, 6 changes found; in the latest run, "

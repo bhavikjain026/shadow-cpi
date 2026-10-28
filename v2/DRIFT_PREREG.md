@@ -93,3 +93,9 @@ radar effect or the radar freeze.
 than once is compared with its latest saved copy and the lines cited from that copy. A URL whose saved copy is
 missing is listed ("no saved copy") and not fetched. A failed call (not charged) stops the drift run as incomplete and
 keeps what was already checked; a failed skeptic call leaves that event to the next run. Nothing else changes.
+
+**Clarification, 2026-10-28T08:05:19Z (UTC), logged bug fix (no drift run since 28 Oct 2026 IST used it).** Rule 6(b)/(c): a cited
+line joined with `[...]` is split at `[...]`, each piece stripped and whitespace-normalised as in rule 4, and the
+quote is present only if **every** piece is a substring of the normalised new text. Number changed is read per piece
+(rule 6c) and combined: yes if any piece is yes, else unknown if any is unknown, else no. The hash comparison and the
+changed count are untouched. Entry 8 of `docs/after_scoring_changes.md`.

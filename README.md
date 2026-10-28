@@ -127,7 +127,7 @@ completely:
   27 of the date test's 40 pieces of valid evidence were lost (12 with the filter
   alone). It reads a page's date, not its edit history.
 - **The drift monitor** re-reads each October radar page with Extract once a day and compares it with the saved copy
-  ([`v2/DRIFT_PREREG.md`](v2/DRIFT_PREREG.md)): 14 of 62 radar pages had changed since they were saved (one run, 28 Oct 2026 IST).
+  ([`v2/DRIFT_PREREG.md`](v2/DRIFT_PREREG.md)): 14 of 62 radar pages had changed since they were saved; cited quote still present on 13 of 14; cited number changed on 0 of 14 (one run, 28 Oct 2026 IST).
 - **The Wayback Machine** shows whether a page existed by the cutoff; a leak counts only when it confirms one. Failed
   lookups were retried and logged (11 in the date test, 94 in the finance check). In
   the post-hoc review, 146 of 283 rows stayed unclear, partly because archive lookups were

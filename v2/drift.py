@@ -55,9 +55,11 @@ def numbers(line):
     return set(re.findall(r"\d+(?:\.\d+)?", (line or "").translate(DEVANAGARI).replace(",", "")))
 
 
-def quote_check(line, new_norm):
-    """(quote still present, number changed: 'yes' | 'no' | 'unknown') for one cited line."""
-    q = re.sub(r"\s+", " ", line or "").strip()
+ELLIPSIS = "[...]"
+
+
+def _piece_check(q, new_norm):
+    """(present, number changed) for one whitespace-normalised piece of a cited line."""
     if q and q in new_norm:
         return True, "no"
     best, ratio = None, 0.0
@@ -68,6 +70,15 @@ def quote_check(line, new_norm):
     if ratio < SIMILAR:
         return False, "unknown"
     return False, "yes" if numbers(best) != numbers(q) else "no"
+
+
+def quote_check(line, new_norm):
+    """(quote still present, number changed: 'yes' | 'no' | 'unknown') for one cited line. A cited line joined with
+    "[...]" is split there and every piece must be present (rule A.6 as clarified 2026-10-28); number changed is read
+    per piece and combined: yes if any piece's is yes, else unknown if any is unknown, else no."""
+    pieces = [re.sub(r"\s+", " ", p).strip() for p in (line or "").split(ELLIPSIS)]
+    pieces = [p for p in pieces if p] or [""]
+    return summarise_quotes([_piece_check(p, new_norm) for p in pieces])
 
 
 def summarise_quotes(checks):

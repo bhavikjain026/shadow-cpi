@@ -166,3 +166,30 @@ files are kept as `results/*_before_bugfix_2026-10-21T151419.*` and in `results/
 - **What it does not change:** no scored month, `results/score_lock.json`, the October seal or any saved result. Calls
   dated up to 2026-11-08 IST, and any request already in the cache, still use the original models.
 - Source: Nebius's notice, docs.tokenfactory.nebius.com/model-deprecations-november-2026 (checked 2026-10-27): the two original IDs are removed from Serverless on 9 Nov 2026; requests are not rerouted automatically.
+
+## 8. Drift monitor: cited lines joined with "[...]" are checked piece by piece (general-rule bug fix)
+
+- **Date:** 2026-10-28
+- **Decided by:** the owner (task card of 28 Oct).
+- **Bug:** `v2/drift.py` searched a cited line that holds several pieces joined with `[...]` as one string. When the
+  pieces sit apart on the page, the joined string is never a substring, so "quote still present" read no and "number
+  changed" was taken from a nearest-line guess, both wrongly.
+- **Rule (general, all pages):** split the cited line at `[...]`, strip each piece, whitespace-normalise as in
+  `v2/DRIFT_PREREG.md` rule 4; the quote is present only if every piece is present. Number changed is read per piece
+  and combined (yes if any piece yes, else unknown if any unknown, else no). Clarification appended to
+  `v2/DRIFT_PREREG.md`. Tests: `tests/test_v2_drift.py::test_cited_pieces_joined_with_ellipsis_are_each_searched_for`.
+- **28 Oct run, recomputed offline (0 credits) from the 13 cached Extract responses (same normalised hashes as the
+  saved run, all 62 pages):**
+
+| Of the 14 pages with a changed hash | Before | After |
+|---|---|---|
+| Cited quote gone | 4 | 1 |
+| Cited quote still present | 10 | 13 |
+| Number changed: yes | 3 | 0 |
+| Number changed: unknown | 1 | 1 |
+| Number changed: no | 10 | 13 |
+
+  The 3 pages that moved were all multi-piece lines whose pieces are far apart; the "before" column reproduces the
+  committed file exactly. The "changed" (hash) count, 14 of 62, is unchanged. `v2/radar/drift_2026-10.json` holds
+  the fixed fields and keeps the old counts under `recomputed_2026-10-28.before`.
+- **What it does not change:** no forecast, seal, score, radar tier or radar effect.

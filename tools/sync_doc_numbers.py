@@ -171,6 +171,10 @@ def drift_phrase(state, as_of):
     last = runs[-1]
     day = lambda r: human(date.fromisoformat(r["ist_date"]))                    # noqa: E731
     latest = f"{last['changed']} of {last['checked']} radar pages had changed since they were saved"
+    ch = [x for x in last.get("pages", []) if x["changed"]]
+    if ch:                                           # from the per-page fields (quote pieces split at "[...]")
+        latest += (f"; cited quote still present on {sum(bool(x['quote_present']) for x in ch)} of {len(ch)}; "
+                   f"cited number changed on {sum(x['number_changed'] == 'yes' for x in ch)} of {len(ch)}")
     incomplete = sum(not r["complete"] for r in runs)
     tail = f"; {incomplete} of the runs stopped incomplete" if incomplete else ""
     if len(runs) == 1:

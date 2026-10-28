@@ -140,3 +140,12 @@ def test_url_saved_twice_keeps_the_latest_copy_and_its_lines():
     new = {**card("u/a", lines=("new line",), found="2026-10-26"), "page_file": "pages/new.txt"}
     b = D.bundle(radar(old, corr=[new]))["u/a"]
     assert (b["page_file"], b["lines"]) == ("pages/new.txt", ["new line"])
+
+
+def test_cited_pieces_joined_with_ellipsis_are_each_searched_for():
+    far = "Header\n" + "filler line\n" * 40 + "Milk up Rs 8 per litre\n" + "more filler\n" * 40 + "from 1 November"
+    line = "Milk up Rs 8 per litre [...] from 1 November"
+    assert D.quote_check(line, D.normalise(far)) == (True, "no")             # far apart, both present
+    assert D.quote_check(line, D.normalise(far.replace("from 1 November", "from the start"))) == (False, "unknown")
+    assert D.quote_check(line, D.normalise(far.replace("Rs 8", "Rs 6"))) == (False, "yes")   # one piece's number moved
+    assert D.quote_check("A  [...]  B", "B\nA") == (True, "no")             # whitespace-normalised, order free

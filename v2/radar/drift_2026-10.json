@@ -292,13 +292,13 @@
      "extract_call": "330469b95687",
      "extract_request_id": "be0bf501-ff95-457f-ad2f-49fb124f8397",
      "extract_response_sha256": "0072319e5d80596ee8b79784c7a56f9cf40d5d6d5959277b151277954e4d3305",
-     "quote_present": false,
-     "number_changed": "yes",
+     "quote_present": true,
+     "number_changed": "no",
      "quotes": [
       {
        "line": "पिछले दो-तीन महीनों में तेल बेचने से होने वाला नुकसान कुछ कम हुआ था, लेकिन अंतरराष्ट्रीय बाजार में कीमतें फिर तेजी से बढ़ने के कारण यह नुकसान दोबारा बढ़ने लगा है। [...] घरेलू एलपीजी के मामले में तेल क",
-       "present": false,
-       "number_changed": "yes"
+       "present": true,
+       "number_changed": "no"
       }
      ],
      "diff": "- [English](https://indianexpress.com/)[தமிழ்](https://tamil.indianexpress.com/)[বাংলা](https://bengali.indianexpress.com/)[മലയാളം](https://malayalam.indianexpress.com/)[ગુજરાતી](https://gujarati.indianexpress.com/)[हिंदी](https://www.jansatta.com/)[मराठी](https://www.loksatta.com/)[Business](https…"
@@ -407,13 +407,13 @@
      "extract_call": "27f807af3a9e",
      "extract_request_id": "196dc641-e0aa-45e8-a586-04378dd0c4d9",
      "extract_response_sha256": "95133c89ab7a2dd40e69c9883d4e4f57fdf09f508d3e08457c9b312f0c2f2d1e",
-     "quote_present": false,
-     "number_changed": "yes",
+     "quote_present": true,
+     "number_changed": "no",
      "quotes": [
       {
        "line": "## দুধের দাম একলাফে ১০ টাকা বৃদ্ধি [...] রাজধানীর মেরাদিয়া বাজার, শান্তিনগর কাঁচাবাজার এবং কারওয়ান বাজারে পাইকারি ও খুচরা বাজার ঘুরে গতকাল বৃহস্পতিবার সবজি, মাছ, মাংস, দুধ, ফল, আটা-ময়দা, চাল, তেল, ডিম",
-       "present": false,
-       "number_changed": "yes"
+       "present": true,
+       "number_changed": "no"
       },
       {
        "line": "রাজধানীর একেক এলাকায় একেক দামে বিক্রি হচ্ছে ডিম। অধিকাংশ বাজারেই ডিমের দাম গত সপ্তাহে ছিল ১৫০ থেকে ১৬০ টাকা। তবে পরিবহন ভাড়া বৃদ্ধির পর তা প্রতি ডজনে ১০ টাকা বেড়ে গেছে।",
@@ -467,18 +467,18 @@
      "extract_call": "9fb84af510e8",
      "extract_request_id": "3ef0dd49-1f18-4023-94c6-86e9607ad751",
      "extract_response_sha256": "f57c053fa413e067346d7d6a01de55eadb1ecd086b48996fe13e3c2e6e735a56",
-     "quote_present": false,
-     "number_changed": "yes",
+     "quote_present": true,
+     "number_changed": "no",
      "quotes": [
       {
        "line": "[...] BENGALURU: Nandini milk is set to become costlier by up to Rs 8 a litre, with the state Cabinet approving the hike on Tuesday but holding back its announcement because of the Model Code of Condu",
-       "present": false,
-       "number_changed": "unknown"
+       "present": true,
+       "number_changed": "no"
       },
       {
        "line": "ad recently sought a hike of Rs 8 to Rs 10 per litre, citing higher costs [...] Amul and Mother Dairy had in May raised milk prices by Rs 2 per litre from May 14, citing rising operational costs and i",
-       "present": false,
-       "number_changed": "yes"
+       "present": true,
+       "number_changed": "no"
       }
      ],
      "diff": "- ##\n+ Edition\n+ IN\n+ * [IN](https://timesofindia.indiatimes.com/?loc=in)\n+ * [US](https://timesofindia.indiatimes.com/us)\n+ * [UK](https://timesofindia.indiatimes.com/uk)\n+ * [GCC](https://timesofindia.indiatimes.com/gcc)\n+ English\n+ * [English](https://timesofindia.indiatimes.com/)\n+ * [हिन्दी](h…"
@@ -757,7 +757,16 @@
      "extract_request_id": "2669bda8-427c-4556-844c-bd117a3aee14",
      "extract_response_sha256": "7c1d3e44562690b950767300d693940599ae504f75166162889b13506cd0550e"
     }
-   ]
+   ],
+   "recomputed_2026-10-28": {
+    "rule": "cited line split at [...], every piece must be present (docs/after_scoring_changes.md #8)",
+    "before": {
+     "changed": 14,
+     "quote_gone": 4,
+     "number_changed": 3,
+     "number_unknown": 1
+    }
+   }
   }
  ]
 }

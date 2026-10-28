@@ -84,7 +84,7 @@ the finance check returned a result dated after the cutoff; that review found 1 
 version leaks the outcome. What covers the gap, partly: our page-date check (kept 26 of
 59 filtered results in the date test; date-test valid evidence lost: 27 of
 40 with it, 12 with the filter alone); the drift monitor, which re-reads October radar
-pages daily (14 of 62 radar pages had changed since they were saved (one run, 28 Oct 2026 IST)); and Wayback Machine checks, with failed lookups retried and logged
+pages daily (14 of 62 radar pages had changed since they were saved; cited quote still present on 13 of 14; cited number changed on 0 of 14 (one run, 28 Oct 2026 IST)); and Wayback Machine checks, with failed lookups retried and logged
 (11 in the date test, 94 in the finance check).
 
 ## Who writes the search: model-written fields vs fixed templates, inside a time lock it cannot move
