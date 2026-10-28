@@ -1,0 +1,40 @@
+{
+ "label": "demo, n=1, not a measurement",
+ "run_utc": "2026-10-28T03:07:46.472901+00:00",
+ "row_id": "R196",
+ "url": "https://www.business-standard.com/markets/news/tcs-q1-result-expectations-preview-dividend-record-date-revenue-seen-flat-wage-hikes-to-weigh-on-margins-126070700096_1.html",
+ "cutoff": "2026-07-08",
+ "tavily_date": "2026-07-07",
+ "marker": "Q1\\s*FY\\s*27\\s+results?\\W+net\\s+profit\\s+rises",
+ "live": {
+  "request_id": "66388bb8-8405-41f1-ac50-555607e3d049",
+  "text_sha256": "0f83c4f393c9c38149518d3978908ffe19dbd49818eade437ca180476bcb95dd",
+  "chars": 13931,
+  "result_link_hits": [
+   "Q1FY27 results: Net profit rises"
+  ]
+ },
+ "as_of": {
+  "provenance": {
+   "source": null,
+   "capture_time": null,
+   "reason": "no as-of copy"
+  },
+  "text_sha256": null,
+  "chars": null,
+  "result_link_hits": null
+ },
+ "evidence": {
+  "tavily_date": "2026-07-07",
+  "page_date": "2026-07-09",
+  "captures": 3,
+  "first_capture": "2026-07-09T12:09:05Z",
+  "last_capture": "2026-09-05T07:19:11Z",
+  "last_capture_on_or_before_cutoff": null,
+  "changed": [
+   "page date 2026-07-09 is after the cutoff"
+  ]
+ },
+ "tavily_credits": 1,
+ "nemotron_calls": 0
+}
