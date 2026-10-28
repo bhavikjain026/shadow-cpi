@@ -331,6 +331,11 @@ def pct(x):
     return "—" if x is None else f"{x:.0%}"
 
 
+def pval(p):
+    """Four decimals, or scientific notation below 0.0001 (so a tiny p never prints as 0.0000)."""
+    return f"{p:.4f}" if p >= 0.0001 else f"{p:.1e}"
+
+
 def headline(m):
     lines = []
     for kind, r in m.items():
@@ -341,7 +346,7 @@ def headline(m):
         verdict = (f"arm C leaked in **{c['leak_cases']} of {c['cases']}** cases" if c["leak_cases"]
                    else f"arm C leaked in **0 of {c['cases']}** cases")
         lines.append(f"- **{RULES[kind]}:** arm A leaked in {a['leak_cases']} of {a['cases']} cases; {verdict}; "
-                     f"exact McNemar p = {r['a_vs_c_mcnemar']['p_exact']:.4f}.")
+                     f"exact McNemar p = {pval(r['a_vs_c_mcnemar']['p_exact'])}.")
         for x in r["c_leaks"]:
             lines.append(f"  - **C leak, {x['case']}** (cutoff {x['cutoff']}): {x['url']} — Tavily date "
                          f"{x['tavily_date']}, first Wayback copy {x['first_capture']}. Quote: \"{x['quote']}\"")
@@ -367,13 +372,13 @@ def report(out):
                      f"| {x['wayback_failed']} | {x['credits']} | {DT.secs(x['median_latency_s'])} |")
         mc = r["a_vs_c_mcnemar"]
         L.append(f"\nA vs C, exact McNemar (paired by case): leaks only in A {mc['A_only']}, only in C "
-                 f"{mc['C_only']}, p = {mc['p_exact']:.4f}.")
+                 f"{mc['C_only']}, p = {pval(mc['p_exact'])}.")
     s = out.get("sensitivity")
     if s and s["cases"]:
         L += ["", f"Sensitivity (pre-registered): the {s['cases']} hand-built reference cases alone: " + "; ".join(
             f"{a} {x['leak_cases']} of {x['cases']} ({pct(x['leak_case_wilson95'][0])}–"
             f"{pct(x['leak_case_wilson95'][1])})" for a, x in s["arms"].items())
-            + f"; exact McNemar p = {s['a_vs_c_mcnemar']['p_exact']:.4f}."]
+            + f"; exact McNemar p = {pval(s['a_vs_c_mcnemar']['p_exact'])}."]
     rt = out.get("retry")
     if rt:
         L += ["", "## Wayback retry of failed lookups (secondary; the first pass above stays primary)", "",
@@ -383,12 +388,14 @@ def report(out):
             if r["cases"]:
                 L.append(f"- {r['rule']}: A {r['arms']['A']['leak_cases']} of {r['cases']}, C "
                          f"{r['arms']['C']['leak_cases']} of {r['cases']}; McNemar p = "
-                         f"{r['a_vs_c_mcnemar']['p_exact']:.4f}.")
+                         f"{pval(r['a_vs_c_mcnemar']['p_exact'])}; valid evidence lost A "
+                         f"{r['arms']['A']['valid_lost']} of {r['arms']['A']['valid_total']}, C "
+                         f"{r['arms']['C']['valid_lost']} of {r['arms']['C']['valid_total']}.")
     L += ["", "## Pilot + replication pooled (secondary; per rule, never added across rules; first passes)", ""]
     for kind, p in out["pooled"].items():
         L.append(f"- {p['rule']}: {p['pilot_cases']} pilot + {p['replication_cases']} replication cases. " + "; ".join(
             f"{a} {x['leak_cases']} of {x['cases']} ({pct(x['wilson95'][0])}–{pct(x['wilson95'][1])})"
-            for a, x in p["arms"].items()) + f"; exact McNemar p = {p['a_vs_c_mcnemar']['p_exact']:.4f}.")
+            for a, x in p["arms"].items()) + f"; exact McNemar p = {pval(p['a_vs_c_mcnemar']['p_exact'])}.")
     if out["skipped"]:
         L += ["", "**Incomplete:** the credit cap stopped some calls (listed in results/replication.json)."]
     return "\n".join(L) + "\n"
