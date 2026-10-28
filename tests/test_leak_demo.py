@@ -1,6 +1,7 @@
 """Leak demo: the saved data (results/leak_demo.json) agrees with the results files, the page shows it with no API
 call, and live mode is off by default and runs only through the credit guard. Live calls use fakes."""
 import json
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -208,7 +209,7 @@ def test_hero_row_reads_the_results_file_and_is_not_repeated():
             f"{d['locked']['first']}/{d['cases']}. Cost: {c['valid_lost']} of {c['valid_total']} valid evidence "
             "dropped (initial pass).") in html     # the hero's accessible label: the pre-registered pass leads
     assert (f'<p class="update" id="update">Update: {d["open"]["retry"]}/{d["cases"]} with no time lock after '
-            f'retrying the {failed} archive lookups that had failed; {d["locked"]["retry"]}/{d["cases"]} with the '
+            f'retrying the {failed} failed Wayback archive lookups; {d["locked"]["retry"]}/{d["cases"]} with the '
             "time lock.</p>") in html
     assert f'<span id="leaked">{d["open"]["first"]}</span>/{d["cases"]}' in html
     assert not any(m.value.startswith("**No time lock:") for m in at.markdown)
@@ -293,3 +294,25 @@ def test_sidebar_brand_is_keyed_and_moved_above_the_links_by_css():
     assert '[data-testid="stSidebarNav"] { order: -1; }' in css
     at = page()
     assert at.sidebar.markdown[0].value == "**Shadow CPI**"
+
+
+def test_use_it_block_matches_the_readme_example():
+    """At most 4 lines; the timelocked_search and extract_as_of calls are the README's, modulo line breaks."""
+    import re
+    src = (ROOT / "app_pages" / "leak_demo.py").read_text()
+    code = re.search(r'USE_IT = """(.*?)"""', src, re.S).group(1)
+    assert len(code.splitlines()) <= 4
+    readme = " ".join((ROOT / "README.md").read_text().split())
+    for call in re.findall(r"(?:timelocked_search|extract_as_of)\(.*\)", code):
+        assert " ".join(call.split()) in readme, call
+    at = page()
+    assert any(c.value == code for c in at.code)
+    links = " ".join(m.value for m in at.markdown)
+    assert "/tree/main/timelock)" in links and "colab-badge.svg" in links
+
+
+def test_tab_labels_are_short():
+    at = page()
+    labels = [t.label for t in at.tabs]
+    assert labels[:2] == ["Petrol hike · May 26 :gray[:small[F3]]", "RBI rate · Apr 26 :gray[:small[R2]]"]
+    assert all(len(re.sub(r":gray\[:small\[\w+\]\]", "", l).strip()) <= 22 for l in labels)

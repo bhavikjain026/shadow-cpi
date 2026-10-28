@@ -9,6 +9,18 @@ import streamlit as st
 
 from app_pages.common import BRAND, BRAND_LINE, GITHUB_URL, TAGLINE, VIDEO_URL, header, lock_table, read_json
 
+AFTER_RETRY = "after retrying the failed Wayback archive lookups"
+# Short tab labels "<item> · <Mon yy>", short enough for a phone (the case heading keeps the full label).
+SHORT = {"fuel": "Petrol hike", "milk": "Milk hike", "electricity": "Power tariff", "lpg": "LPG hike",
+         "bus": "Bus fare", "rbi": "RBI rate"}
+# "Use it": the two calls exactly as in the README's extract_as_of example (tests/test_leak_demo.py checks this).
+USE_IT = """from timelock import TavilyHTTP, extract_as_of, timelocked_search
+client, cutoff = TavilyHTTP(), "2026-10-06"
+results = timelocked_search(client, "RBI monetary policy repo rate decision October 2026", cutoff, topic="news", max_results=3, include_published_date=True)
+for r in results: page = extract_as_of(client, r["url"], cutoff, published_date=r.get("published_date"))"""
+COLAB = ("https://colab.research.google.com/github/bhavikjain026/shadow-cpi/blob/main/notebooks/"
+         "reproduce_leak.ipynb")
+
 OPEN, OPEN_NOTE = "No time lock", "default search, no dates"
 LOCKED, LOCKED_NOTE = "Tavily time lock", "start_date/end_date + filter_by_published_date"
 EXAMPLES = "examples chosen for clarity; all {n} in the picker and the totals below"
@@ -84,6 +96,12 @@ def case_title(c):
     return f"{what}{where} · {date.fromisoformat(c['cutoff']):%b %Y}"
 
 
+def tab_label(c):
+    """'Petrol hike · May 26 F3': a short item name, the cutoff's month, and the case ID in small grey text."""
+    what = SHORT.get(c["kind"], f"{c.get('name', c['kind'])} results")
+    return f"{what} · {date.fromisoformat(c['cutoff']):%b %y} {case_id(c)}"
+
+
 def case_id(c):
     """The case ID as small grey text, after a human label."""
     return f":gray[:small[{c['id']}]]"
@@ -154,7 +172,7 @@ def show_case(c):
     search_column(right, LOCKED, LOCKED_NOTE, c["locked"], c["test"], f"{c['id']}-locked")
 
 
-HERO_HEIGHT = 204          # title row + cards + a two-line update: content 193-198 px at 375-600 px wide
+HERO_HEIGHT = 204          # 641-1199 px pages; style.css sets 176 px from 1200 px and 236 px on phones
 HERO_FONT ="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=JetBrains+Mono:wght@600&display=swap"
 HERO_HTML = """<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="{font}"><style>
 :root {{ --ink: #09090b; --muted: #52525b; --line: #e4e4e7; }}       /* no color-scheme: it paints an opaque canvas */
@@ -173,12 +191,13 @@ html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 1
 .arrow {{ align-self: center; color: var(--muted); font-size: 1.25rem; }}
 .gap {{ width: 8px; }}
 .update {{ color: var(--muted); font-size: 0.8125rem; margin: 6px 0 0; }}
-@media (max-width: 520px) {{
-  .row {{ gap: 6px; }} .gap {{ width: 2px; }} .side {{ padding: 8px 10px; }}
-  .num {{ font-size: 1.375rem; }} .label {{ font-size: 0.75rem; }} .arrow {{ font-size: 1rem; }}
-  .cost .num {{ font-size: 1.0625rem; }}
-  .update {{ font-size: 0.75rem; }}
-}}
+/* phones (page under 641 px, class set by the script below): compact, and the cost card on its own row under
+   9/20 -> 0/20 (.gap becomes a full-width, zero-height line break) */
+html.narrow .row {{ flex-wrap: wrap; gap: 6px; }} html.narrow .gap {{ flex: 0 0 100%; height: 0; }}
+html.narrow .cost {{ flex: 1 1 100%; }} html.narrow .side {{ padding: 8px 10px; }}
+html.narrow .num {{ font-size: 1.375rem; }} html.narrow .label {{ font-size: 0.75rem; }}
+html.narrow .arrow {{ font-size: 1rem; }} html.narrow .cost .num {{ font-size: 1.0625rem; }}
+html.narrow .update {{ font-size: 0.75rem; }}
 </style></head><body>
 <p class="title">{title}</p>
 <div class="row" role="img" aria-label="{aria}">
@@ -191,6 +210,14 @@ html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 1
 <p class="update" id="update">{update}</p>
 <script>
 (function () {{
+  // Phone layout follows the page's width, not this frame's (the sidebar changes the frame's width).
+  try {{
+    var narrow = function () {{
+      document.documentElement.classList.toggle('narrow', window.parent.innerWidth < 641);
+    }};
+    narrow();
+    window.parent.addEventListener('resize', narrow);
+  }} catch (e) {{}}
   // Match the app's theme when the parent page is readable (same origin); else prefers-color-scheme above.
   try {{
     var app = window.parent.document.querySelector('[data-testid="stApp"]');
@@ -226,7 +253,7 @@ def hero(t):
     failed = int(read_json(FIELD_REPORT)["date_test"]["retry"]["failed_urls"])
     missed, quotes = date_test_cost()
     leaked = "cases leaked (pre-registered)"
-    update = (f"Update: {ro}/{n} with no time lock after retrying the {failed} archive lookups that had failed; "
+    update = (f"Update: {ro}/{n} with no time lock after retrying the {failed} failed Wayback archive lookups; "
               f"{rk}/{n} with the time lock.")
     st.iframe(HERO_HTML.format(
         font=HERO_FONT, open=o, locked=k, n=n, missed=missed, quotes=quotes,
@@ -249,9 +276,9 @@ def totals(t, n):
         n = x["cases"]
         rows.append({"Test": label,
                      "No time lock (pre-registered)": cell(x["open"]["first"], n, x["open"]["first_wilson95"]),
-                     "No lock, after retry": cell(x["open"]["retry"], n, x["open"]["retry_wilson95"]),
+                     f"No time lock, {AFTER_RETRY}": cell(x["open"]["retry"], n, x["open"]["retry_wilson95"]),
                      "Tavily time lock (pre-registered)": cell(x["locked"]["first"], n, x["locked"]["first_wilson95"]),
-                     "Time lock, after retry": cell(x["locked"]["retry"], n, x["locked"]["retry_wilson95"])})
+                     f"Time lock, {AFTER_RETRY}": cell(x["locked"]["retry"], n, x["locked"]["retry_wilson95"])})
     lock_table(rows, lambda row, col: "open" if col.startswith("No ") else "lock" if "ime lock" in col else None)
     st.markdown(f"**The cost of strictness.** The time lock also drops good evidence: the dated search missed "
                 f"**{s['missed']} of {s['quotes']}** known-good quotes that the undated search found "
@@ -360,12 +387,18 @@ data = read_json("results/leak_demo.json")
 if not data:
     st.info("Not built yet: run `python tools/build_leak_demo.py` (offline, 0 credits).")
     st.stop()
-with st.container(key="hero"):          # style.css trims its height on wide screens
+with st.container(key="hero"):          # style.css sets its height on wide screens and phones
     hero(data["totals"])
+with st.container(key="use-it"):
+    st.markdown("**Use it**")
+    st.code(USE_IT, language="python", wrap_lines=True)
+    st.markdown(f"[`timelock/`]({GITHUB_URL}/tree/main/timelock) (standard library only) · "
+                f"[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)]({COLAB}) "
+                "reproduce the leak with your own Tavily key")
 by_id = {c["id"]: c for c in data["cases"]}
 shown = examples(data["cases"])
 cases = pick_cases(data["cases"], shown)
-for tab, cid in zip(st.tabs([f"{case_title(by_id[x])} {case_id(by_id[x])}" for x in cases]) if len(cases) > 1
+for tab, cid in zip(st.tabs([tab_label(by_id[x]) for x in cases]) if len(cases) > 1
                     else [st.container()], cases):
     with tab:
         show_case(by_id[cid])

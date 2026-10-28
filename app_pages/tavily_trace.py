@@ -18,6 +18,13 @@ c2.metric("Credits", t["credits"])
 c3.metric("Failures listed", len(t["failures"]))
 st.caption(t["note"])
 
+
+
+def stage(name):
+    """The funnel's stage names as the app says them ("the forecast", not the model's letter)."""
+    return name.replace("the (c) prediction", "the forecast")
+
+
 st.subheader("Funnel: from addresses found to numbers used")
 PER_ROW = 4
 for start in range(0, len(t["funnel"]), PER_ROW):
@@ -26,8 +33,21 @@ for start in range(0, len(t["funnel"]), PER_ROW):
         with col, st.container(border=True, key=f"trace_funnel_step_{i}"):
             st.caption(f"Step {i + 1}")
             st.markdown(f"### {f['n']:,}" if isinstance(f["n"], int) else f"### {f['n']}")
-            st.markdown(f"**{f['stage']}**")
-            st.caption(f"Source: {f['source']}")
+            st.markdown(f"**{stage(f['stage'])}**")
+man = read_json(f"manifests/{MONTH}.json")
+if man and man["counts"]["events_verified"] == 0:
+    drops = sorted(((d["reason"].removeprefix("event: "), d["count"]) for d in man.get("dropped", [])
+                    if d["reason"].startswith("event:")), key=lambda x: -x[1])
+    official = all(not d["source"].startswith("event") for d in t["funnel"][-1].get("detail", {}).values())
+    st.caption(f"Why price events verified is 0: none of the {man['counts']['events_extracted']} candidate events "
+               "passed every check, so none reached the forecast"
+               + ("; its numbers came from the official series listed below" if official else "")
+               + ". Most common reasons a page or event was dropped: "
+               + "; ".join(f"{r} ({n})" for r, n in drops[:4])
+               + f". A page dropped before extraction is counted too, so the reasons do not add up to "
+               f"{man['counts']['events_extracted']}. Source: `manifests/{MONTH}.json` (counts, dropped).")
+with st.expander("Sources"):
+    st.markdown("\n".join(f"- Step {i + 1}, {stage(f['stage'])}: {f['source']}" for i, f in enumerate(t["funnel"])))
 used = t["funnel"][-1].get("detail", {})
 if used:
     kinds = {"spine": "government food prices", "observed": "official observed series (IBJA, IOCL, PPAC)",

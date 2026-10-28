@@ -7,7 +7,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from app_pages.common import header, lock_table, read_json
+from app_pages.common import REPO_URL, header, lock_table, read_json
 
 
 def pct(x):
@@ -31,7 +31,20 @@ def day(d):
 
 
 NO_DATES, TIME_LOCK = "No dates", "Tavily time lock"
-RUNS = {"Pre-registered initial pass": "first pass", "After logged retry": "after logged retry"}   # first = default
+AFTER_RETRY = "after retrying the failed Wayback archive lookups"
+RUNS = {"Pre-registered initial pass": "first pass", AFTER_RETRY[0].upper() + AFTER_RETRY[1:]: "after logged retry"}  # first = default
+
+
+def day_month(d):
+    return f"{date.fromisoformat(d[:10]).day} {date.fromisoformat(d[:10]):%b}"
+
+
+def dark_theme():
+    """True when the viewer's app theme is dark (st.context.theme; light when unknown)."""
+    try:
+        return st.context.theme.type == "dark"
+    except AttributeError:
+        return False
 
 
 def leak_chart(rows):
@@ -44,7 +57,8 @@ def leak_chart(rows):
     data = [{"Check": x["check"].split(" (")[0],
              "Setting": NO_DATES if x["setting"] == "no dates" else TIME_LOCK,
              "Leak rate": x["leak_rate"], "lo": x["wilson95"][0], "hi": x["wilson95"][1],
-             "Count": f"{x['leaks']} of {x['n']}", "Interval": wilson(x["wilson95"])}
+             "Count": f"{x['leaks']} of {x['n']}", "Interval": wilson(x["wilson95"]),
+             "Label": f"{pct(x['leak_rate'])} ({x['leaks']}/{x['n']})", "zero": 0 if x["leaks"] == 0 else None}
             for x in rows if x["run"] == RUNS[run] and x["check"].startswith(("Date test", "Finance check"))
             and (x["setting"] == "no dates" or x["setting"].endswith("filter_by_published_date"))]
     if not data:
@@ -59,10 +73,18 @@ def leak_chart(rows):
     bars = base.mark_bar(cornerRadiusTopLeft=3, cornerRadiusTopRight=3, width={"band": 0.8}).encode(
         y=y, color=alt.Color("Setting:N", sort=order, title=None, legend=alt.Legend(orient="top"),
                              scale=alt.Scale(domain=order, range=["#dc2626", "#2563eb"])), tooltip=tip)
+    # whiskers: zinc 500 is 4.8:1 on white and 4.1:1 on the dark background (>= 3:1 for graphics)
     err = base.mark_rule(strokeWidth=1.5, color="#71717a").encode(y="lo:Q", y2="hi:Q", tooltip=tip)
     caps = base.mark_tick(thickness=1.5, size=10, color="#71717a").encode(y="hi:Q")
-    st.altair_chart((bars + err + caps).properties(height=260), width="stretch")
-    # counts as text in the page theme (chart text marks cannot reach 4.5:1 in both themes)
+    dark = dark_theme()
+    # a zero-height bar draws nothing: a short thick tick on the baseline marks it (blue, >= 3:1 in both themes)
+    zero = base.transform_filter("datum.zero === 0").mark_tick(thickness=3, size=28, color="#60a5fa" if dark
+                                                                else "#2563eb").encode(y="zero:Q", tooltip=tip)
+    # value labels above each whisker, in the page's ink colour (>= 4.5:1 in the theme the viewer has)
+    labels = base.mark_text(dy=-9, fontSize=13, fontWeight=600, color="#fafafa" if dark else "#09090b").encode(
+        y="hi:Q", text="Label:N")
+    st.altair_chart((bars + err + caps + zero + labels).properties(height=280), width="stretch")
+    # counts as text too, for screen readers and copying
     groups = dict.fromkeys(x["Check"] for x in data)
     st.markdown("  \n".join(f"**{g}:** " + " · ".join(
         f"{'no dates' if x['Setting'] == NO_DATES else x['Setting']} {x['Count']} ({x['Interval']})"
@@ -73,15 +95,35 @@ def leak_chart(rows):
 
 
 def r196_timeline(a):
-    """R196 (demo, n=1): Tavily's date, the cutoff, the page date, and what extract_as_of returned, from
-    results/asof_demo_r196.json."""
-    ev, reason = a["evidence"], a["as_of"]["provenance"]["reason"]
-    steps = [("", "Tavily date", day(ev["tavily_date"])), ("cut", "Cutoff", day(a["cutoff"])),
-             ("", "Page edited", day(ev["page_date"])), ("", "extract_as_of", reason or "as-of copy served")]
-    st.markdown(f"**{html.escape(a['row_id'])}: one result up close** · _{a['label']}_")
+    """R196 (demo, n=1) as a numbered chain: Tavily's date, the cutoff, the page's edit, what extract_as_of returned.
+    Dates and outcomes from results/asof_demo_r196.json; the company from the review example it comes from
+    (results/timelock34_second_review.json, results/finance_lookahead.json); the served-copy demo for contrast."""
+    from urllib.parse import urlparse
+    ev, reason, cut = a["evidence"], a["as_of"]["provenance"]["reason"], day_month(a["cutoff"])
+    steps = [("Tavily date", day_month(ev["tavily_date"]),
+              "passes the search filter" if ev["tavily_date"] <= a["cutoff"] else "fails the search filter"),
+             ("Cutoff", cut, "the question is asked as of this day"),
+             ("Page edited", day_month(ev["page_date"]),
+              "now links the actual result, and live Extract returns it" if a["live"].get("result_link_hits")
+              else "after the cutoff"),
+             ("extract_as_of", "refuses the page" if reason == "no as-of copy" else "serves an archive copy",
+              f"no archive copy on/before {cut}" if ev["last_capture_on_or_before_cutoff"] is None
+              else f"archive copy of {day_month(ev['last_capture_on_or_before_cutoff'])}")]
+    st.subheader("Why date filters aren't enough: a page edited after the cutoff")
     st.html('<ol class="r196">' + "".join(
-        f'<li class="{c}"><span class="k">{html.escape(k)}</span><span class="v">{html.escape(v)}</span></li>'
-        for c, k, v in steps) + "</ol>")
+        f'<li class="{"cut" if k == "Cutoff" else ""}"><span class="k">{i} · {html.escape(k)}</span>'
+        f'<span class="v">{html.escape(v)}</span><span class="c">{html.escape(c)}</span></li>'
+        for i, (k, v, c) in enumerate(steps, 1)) + "</ol>")
+    ex = (read_json("results/timelock34_second_review.json") or {}).get("finance_filtered", {}).get("example", {})
+    names = {x["id"]: x["name"] for x in (read_json("results/finance_lookahead.json") or {}).get("rows", [])}
+    what = f"a {names[ex['case']]} results preview" if ex.get("row_id") == a["row_id"] and ex["case"] in names else "the page"
+    line = f"The page: {what} on {urlparse(a['url']).netloc.removeprefix('www.')}, row {a['row_id']} ({a['label']})."
+    served = read_json("results/asof_demo_served.json")
+    if served:
+        line += (f" The other outcome, case {served['case']}: `extract_as_of` served the "
+                 f"{day(served['as_of']['provenance']['capture_time'][:10])} archive copy instead of the live page "
+                 f"([served-copy demo, `results/asof_demo_served.json`]({REPO_URL}/results/asof_demo_served.json)).")
+    st.caption(line)
 
 
 header("Tavily field report", "What we measured about Tavily's search parameters while building Shadow CPI, written "
@@ -105,16 +147,16 @@ em = read_json("results/leakcheck_exact_match.json")
 top = {x["arm"]: x for x in r["four_arms"]["rows"]}[r["four_arms"]["verdict"]["ranking"][0]]
 summary = [
     ("Date test, no time lock: cases with a confirmed leak (Wayback)",
-     f"{dt1['A']['leak_cases']} of {dt1['A']['cases']} ({dt2['A']['leak_cases']} after the logged retry)",
+     f"{dt1['A']['leak_cases']} of {dt1['A']['cases']} ({dt2['A']['leak_cases']} {AFTER_RETRY})",
      "results/field_report.json"),
     ("Date test, Tavily time lock (dates + filter_by_published_date)",
-     f"{dt1['C']['leak_cases']} of {dt1['C']['cases']} ({dt2['C']['leak_cases']} after the retry)",
+     f"{dt1['C']['leak_cases']} of {dt1['C']['cases']} ({dt2['C']['leak_cases']} {AFTER_RETRY})",
      "results/field_report.json"),
     ("Finance check, no time lock: events with a confirmed leak",
-     f"{fn1['arms']['N']['confirmed_events']} of {fn1['events']} ({fn2['arms']['N']['confirmed_events']} after the "
-     "logged retry)", "results/field_report.json"),
+     f"{fn1['arms']['N']['confirmed_events']} of {fn1['events']} ({fn2['arms']['N']['confirmed_events']} {AFTER_RETRY})",
+     "results/field_report.json"),
     ("Finance check, Tavily time lock",
-     f"{fn1['arms']['D']['confirmed_events']} of {fn1['events']} ({fn2['arms']['D']['confirmed_events']} after the retry)",
+     f"{fn1['arms']['D']['confirmed_events']} of {fn1['events']} ({fn2['arms']['D']['confirmed_events']} {AFTER_RETRY})",
      "results/field_report.json"),
     ("Cost of strictness: known-good quotes the dated search missed (check E, exploratory)",
      f"{em['metrics']['shares']['found only without dates']['x']} of {em['metrics']['quotes']}" if em else "—",
@@ -135,7 +177,8 @@ with st.expander("Sources"):
 lk = r.get("leakage")
 if lk:
     st.subheader("Time-locked search leakage")
-    lock_table([{"Check": x["check"], "Run": x["run"].replace("first pass", "initial pass"), "Setting": x["setting"] or "—",
+    lock_table([{"Check": x["check"], "Run": x["run"].replace("first pass", "initial pass").replace(
+                    "after logged retry", AFTER_RETRY), "Setting": x["setting"] or "—",
                 "N": x.get("n", "—"),
                 "Leak rate (Wilson 95%)": "—" if x.get("leaks") is None else
                 f"{x['leaks']} of {x['n']} = {pct(x['leak_rate'])} ({wilson(x['wilson95'])})",
@@ -172,11 +215,11 @@ def cost_of_correctness(rows):
     c2.metric("Median latency: no dates → time lock", f"{o1['median_latency_s']:.1f} s → {l1['median_latency_s']:.1f} s",
               help="Date test, initial pass: Tavily's response_time. The retry sent no new searches.")
     c3.metric("Valid evidence the time lock lost", f"{l1['valid_total'] - l1['valid_kept']}/{l1['valid_total']}",
-              f"{l2['valid_total'] - l2['valid_kept']}/{l2['valid_total']} after the retry", delta_color="off",
+              f"{l2['valid_total'] - l2['valid_kept']}/{l2['valid_total']} {AFTER_RETRY}", delta_color="off",
               delta_arrow="off", help="Date test: pages the Wayback Machine shows existed by the cutoff that name "
                                       "the item, and that the time-locked search did not return.")
-    st.caption("Date test, pre-registered initial pass; the evidence card also gives the count after the logged "
-               "archive retry, which adds newly confirmed pages, so its denominator is larger. "
+    st.caption(f"Date test, pre-registered initial pass; the evidence card also gives the count {AFTER_RETRY}, "
+               "which adds newly confirmed pages, so its denominator is larger. "
                "Source: `results/field_report.json` (leakage rows).")
 
 
@@ -234,14 +277,14 @@ dt = r["date_test"]
 st.caption(f"{dt['label'].replace('first pass', 'initial pass')}. Retry: {dt['retry']['recovered']} of {dt['retry']['failed_urls']} failed lookups "
            "recovered.")
 lock_table([{"Arm": a, "Leak cases, initial pass": f"{p['leak_cases']} of {p['cases']} ({wilson(p['wilson95'])})",
-            "Leak cases, after retry": f"{q['leak_cases']} of {q['cases']} ({wilson(q['wilson95'])})",
+            f"Leak cases, {AFTER_RETRY}": f"{q['leak_cases']} of {q['cases']} ({wilson(q['wilson95'])})",
             "Valid evidence lost (date test), initial pass": f"{p['valid_lost']} of {p['valid_total']}",
-            "Valid evidence lost (date test), after retry": f"{q['valid_lost']} of {q['valid_total']}"}
+            f"Valid evidence lost (date test), {AFTER_RETRY}": f"{q['valid_lost']} of {q['valid_total']}"}
             for a, p, q in ((a, dt["first_pass"]["arms"][a], dt["after_retry"]["arms"][a]) for a in "ABCD")],
            lambda row, col: "open" if row["Arm"] == "A" else "lock" if row["Arm"] in "CD" else None)
 for k, lab in (("mcnemar_A_vs_B", "A (no dates) vs B (dates)"), ("mcnemar_C_vs_D", "C (filter) vs D (+ page date)")):
     st.caption(f"Exact McNemar, {lab}: p = {dt['first_pass'][k]['p_exact']:.4f} initial pass, "
-               f"{dt['after_retry'][k]['p_exact']:.4f} after retry.")
+               f"{dt['after_retry'][k]['p_exact']:.4f} {AFTER_RETRY}.")
 st.caption("Valid evidence lost: Wayback-confirmed pre-cutoff results found by any arm that this arm did not return; "
            "the retry adds newly confirmed pages, so its denominator is larger.")
 
@@ -277,7 +320,7 @@ fi = r["finance"]
 st.caption(f"{fi['label']}. Replaying the day before 14 scheduled events (RBI decisions, company results): "
            "N = no dates, D = dates + filter_by_published_date.")
 rows = []
-for name, lab in (("first_pass", "initial pass"), ("after_retry", "after Wayback retry")):
+for name, lab in (("first_pass", "initial pass"), ("after_retry", AFTER_RETRY)):
     for key in ("all_14", "without_C4"):
         m = fi[name][key]
         n, d = m["arms"]["N"], m["arms"]["D"]
@@ -294,7 +337,7 @@ st.dataframe(rows, hide_index=True, width="stretch")
 rr = read_json("results/retry_reconciliation.json")
 if rr:
     st.subheader("Retry reconciliation: every case whose label changed")
-    st.caption(f"{rr['changed']} of {rr['cases']} cases changed label after the logged Wayback retry, which only "
+    st.caption(f"{rr['changed']} of {rr['cases']} cases changed label {AFTER_RETRY} (logged), which only "
                "repeated archive lookups that had failed on the network. The initial pass stays the pre-registered "
                "result. File: `results/retry_reconciliation.json` (also `docs/retry_reconciliation.md`).")
     st.dataframe([{"Case": x["case"], "Test": x["test"], "Item": x["item"], "Search": x["search"],
@@ -370,7 +413,7 @@ if dta and fna and lt:
     dt_l, dt_n = calls(dta["rows"], "A", "L")
     fn_l, fn_n = calls(fna["rows"], "N", "confirmed")
     st.subheader("Leaks at three levels")
-    st.caption("Initial pass → after the logged archive retry. One search call per task and setting, so call counts "
+    st.caption(f"Initial pass → {AFTER_RETRY}. One search call per task and setting, so call counts "
                "equal task counts.")
     st.dataframe([{"Level": "Task (case or event), no dates",
                    "Date test": f"{dt1['A']['leak_cases']} → {dt2['A']['leak_cases']} of {dt1['A']['cases']}",

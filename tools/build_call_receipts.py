@@ -26,10 +26,10 @@ OUT = ROOT / "results" / "call_receipts.json"
 
 
 def experiments(budgets):
-    """Every experiment a call was charged to: its budgets' top-level names, without per-month or per-day slices of a
-    parent budget (a call charged to 'prompt-t' and 'chase' counts in both, as the ledger's caps count it)."""
+    """Every experiment a call was charged to: its budgets' top-level names, without per-month slices of a parent
+    budget (a call charged to 'prompt-t' and 'chase' counts in both, as the ledger's caps count it)."""
     names = list(dict.fromkeys(b.split("/")[0] for b in budgets))
-    return [n for n in names if not n.endswith(("-month", "-day"))] or names
+    return [n for n in names if not n.endswith("-month")] or names
 
 
 def build(log=LOG_FILE, cache=CACHE_DIR, ledger=None, out=OUT):

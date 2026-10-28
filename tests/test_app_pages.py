@@ -1,6 +1,7 @@
 """Every app page loads with the REAL results files (no sample data), and Home shows numbers from those files.
 No API call is made: 'Run live' is tested with live_run.gate / run_live replaced by fakes."""
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -161,7 +162,17 @@ def test_tavily_trace_page_shows_calls_funnel_failures():
     t = json.loads((ROOT / "results" / "app" / "tavily_trace_2026-03.json").read_text())
     assert str(t["n_calls"]) in [m.value for m in at.metric]
     text = all_text(at)
-    assert all(f["stage"] in text and str(f["n"]) in text for f in t["funnel"])
+    stage = lambda x: x.replace("the (c) prediction", "the forecast")                     # noqa: E731
+    assert all(stage(f["stage"]) in text and str(f["n"]) in text for f in t["funnel"])
+    assert "(c) prediction" not in text and "Annex 5.3d" not in "\n".join(c.value for c in at.main.caption)
+    sources = next(e for e in at.expander if e.label == "Sources")
+    assert "Annex 5.3d" in sources.markdown[0].value and "f00bd45" in sources.markdown[0].value
+    man = json.loads((ROOT / "manifests" / "2026-03.json").read_text())
+    assert man["counts"]["events_verified"] == 0
+    why = next(c.value for c in at.caption if c.value.startswith("Why price events verified is 0"))
+    top = max((d for d in man["dropped"] if d["reason"].startswith("event:")), key=lambda d: d["count"])
+    assert f"none of the {man['counts']['events_extracted']} candidate events" in why
+    assert f"{top['reason'].removeprefix('event: ')} ({top['count']})" in why
     calls, failures = (at.dataframe[i].value for i in range(2))
     assert len(calls) == t["n_calls"] and len(failures) == len(t["failures"])
     assert any("0 addresses" in r for r in failures["Result"]) and any("image" in r for r in failures["Result"])
@@ -184,7 +195,7 @@ def test_field_report_chart_defaults_to_the_preregistered_initial_pass():
     """The Field Report chart opens on the pre-registered initial pass (the primary count); the retry is the update."""
     at = load("field_report")
     radio = at.radio[0]
-    assert list(radio.options) == ["Pre-registered initial pass", "After logged retry"]
+    assert list(radio.options) == ["Pre-registered initial pass", "After retrying the failed Wayback archive lookups"]
     assert radio.value == "Pre-registered initial pass"
     a = json.loads((ROOT / "results" / "field_report.json").read_text())["date_test"]["first_pass"]["arms"]["A"]
     assert f"no dates {a['leak_cases']} of {a['cases']}" in all_text(at)
@@ -202,9 +213,37 @@ def test_field_report_cost_of_correctness_reads_the_leakage_rows():
     assert cards["Median latency: no dates → time lock"][0] == f"{o['median_latency_s']:.1f} s → {l1['median_latency_s']:.1f} s"
     lost = cards["Valid evidence the time lock lost"]
     assert lost == (f"{l1['valid_total'] - l1['valid_kept']}/{l1['valid_total']}",
-                    f"{l2['valid_total'] - l2['valid_kept']}/{l2['valid_total']} after the retry")
+                    f"{l2['valid_total'] - l2['valid_kept']}/{l2['valid_total']} after retrying the failed Wayback "
+                    "archive lookups")
     assert lost[0] == "12/40" and lost[1].startswith("20/48")
     assert any("pre-registered initial pass" in c.value for c in at.caption)
+
+
+def test_field_report_r196_chain_reads_the_demo_files():
+    a = json.loads((ROOT / "results" / "asof_demo_r196.json").read_text())
+    served = json.loads((ROOT / "results" / "asof_demo_served.json").read_text())
+    at = load("field_report")
+    assert "Why date filters aren't enough: a page edited after the cutoff" in [h.value for h in at.subheader]
+    html = next(h.proto.body for h in at.get("html") if 'class="r196"' in h.proto.body)
+    day = lambda d: f"{int(d[8:10])} {__import__('datetime').date.fromisoformat(d[:10]):%b}"    # noqa: E731
+    steps = re.findall(r'<span class="k">(\d) · ([^<]+)</span><span class="v">([^<]+)</span><span class="c">([^<]+)', html)
+    assert steps == [("1", "Tavily date", day(a["evidence"]["tavily_date"]), "passes the search filter"),
+                     ("2", "Cutoff", day(a["cutoff"]), "the question is asked as of this day"),
+                     ("3", "Page edited", day(a["evidence"]["page_date"]),
+                      "now links the actual result, and live Extract returns it"),
+                     ("4", "extract_as_of", "refuses the page", f"no archive copy on/before {day(a['cutoff'])}")]
+    line = next(c.value for c in at.caption if c.value.startswith("The page: "))
+    assert "TCS results preview" in line and f"case {served['case']}" in line and "results/asof_demo_served.json" in line
+
+
+def test_field_report_chart_labels_every_bar_and_marks_zero():
+    src = (ROOT / "app_pages" / "field_report.py").read_text()
+    assert '"Label": f"{pct(x[\'leak_rate\'])} ({x[\'leaks\']}/{x[\'n\']})"' in src
+    assert 'transform_filter("datum.zero === 0")' in src and "mark_text(" in src
+    at = load("field_report")
+    spec = json.loads(at.get("vega_lite_chart")[0].proto.spec)
+    marks = [l["mark"]["type"] if isinstance(l["mark"], dict) else l["mark"] for l in spec["layer"]]
+    assert marks.count("text") == 1 and marks.count("tick") == 2
 
 
 def test_saved_run_shows_window_replay_date_searches_credits():

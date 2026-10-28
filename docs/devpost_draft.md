@@ -259,8 +259,8 @@ Nebius retires the original IDs on 9 Nov 2026; from then, calls use Nebius's rec
 - Python
 - Streamlit
 
-Tavily usage as of 28 Oct 2026: 2,076 calls, 2,023 credits, 79% of dated results
-inside the requested window (5,587 of 7,069), median latency 4.0 s. Third-party notices:
+Tavily usage as of 28 Oct 2026: 2,118 calls, 2,023 credits, 79% of dated results
+inside the requested window (5,646 of 7,128), median latency 4.1 s. Third-party notices:
 `THIRD_PARTY_NOTICES.md`.
 
 ## Try it
