@@ -23,6 +23,7 @@ No page text is written: each result carries a short quote (at most QUOTE_WORDS 
 and, when a page was read, only the SHA-256 of its text.
 """
 import functools
+from html.parser import HTMLParser
 import hashlib
 import json
 import re
@@ -38,8 +39,10 @@ FORMAT = "timelock-trajectory/1"
 QUOTE_WORDS = 25
 NOT_RUN = "not_run"                     # extract status when no extract_fn was given
 SKIPPED = "skipped"                     # extract status for a result the search check already dropped
-NO_ARCHIVE = "no cached archive lookup"
+NO_ARCHIVE = "no cached archive lookup"                              # the CDX capture list was never saved
+NO_DOWNLOAD = "archive copy found but download not cached"           # CDX saved, the capture's page was not
 VERIFIED, NOT_CHECKED = "as-of verified", "not checked"
+QUOTE_NOT_MATCHED = "archived copy found, quote not matched"
 _AUTO = object()
 
 
@@ -118,38 +121,45 @@ class CachedTavily:
 
 class CachedWayback(Wayback):
     """Wayback lookups from the same cache (service 'direct', as tools/asof_demo_r196.py records them). Never fetches.
-    A lookup that was never saved is remembered in `missed`, and the page is marked "not checked (no cached archive
-    lookup)" in the trajectory: a gap in the archive cache is never shown as a page with no archive copy."""
+    A lookup that was never saved is remembered in `missed` with its kind: the capture list (CDX) or one capture's
+    download. The page is then marked "not checked (...)" with that kind: a gap in the archive cache is never shown
+    as a page with no archive copy. `last_html` keeps the last capture's HTML for the quote check."""
 
     def __init__(self, cache):
         super().__init__()
-        self.cache, self.missed = cache, []
+        self.cache, self.missed, self.last_html = cache, [], None
 
     def _get(self, url):
+        kind = NO_ARCHIVE if url.startswith(self.CDX) else NO_DOWNLOAD
         try:
             resp = self.cache.load("direct", "GET", {"url": url})
         except CacheMiss:
-            self.missed.append(url)
-            raise OSError(f"Wayback lookup not in the offline cache: {url}") from None
+            self.missed.append(kind)
+            raise OSError(f"Wayback {kind}: {url}") from None
         if "final_url" not in resp:                 # saved by another tool in another shape: not usable here
-            self.missed.append(url)
+            self.missed.append(kind)
             raise OSError(f"cached Wayback response has no final_url: {url}")
+        if kind == NO_DOWNLOAD:
+            self.last_html = resp["text"]
         return resp["final_url"], resp["text"]
 
 
 def cached_extract_fn(cache):
     """extract_fn for replay: the saved Tavily Extract response, cached Wayback lookups, strict as-of rules, and the
     saved response's own retrieval time as 'now', so the same cache always gives the same trajectory. Adds
-    'not_checked' to the result when an archive lookup it needed was not in the cache."""
+    'not_checked' (which archive entry was missing) when one was not in the cache, and 'archived_html' (used for the
+    quote check, never stored) when a Wayback copy was served."""
     archive = CachedWayback(cache)
 
     def fn(url, cutoff, published_date=None):
         cache.extract([url], extract_depth="basic")             # CacheMiss here if the page was never extracted
         now = datetime.fromisoformat(cache.retrieved_at) if cache.retrieved_at else None
-        archive.missed = []
+        archive.missed, archive.last_html = [], None
         page = extract_as_of(cache, url, cutoff, published_date=published_date, archive=archive, now=now,
                              strict=True)
-        return {**page, "not_checked": NO_ARCHIVE} if archive.missed else page
+        if archive.missed:
+            return {**page, "not_checked": NO_ARCHIVE if NO_ARCHIVE in archive.missed else NO_DOWNLOAD}
+        return {**page, "archived_html": archive.last_html} if page["provenance"]["source"] == WAYBACK else page
     return fn
 
 
@@ -203,15 +213,71 @@ def _extract_record(page):
             "text_sha256": page.get("text_sha256")}
 
 
-def _as_of_quote(text, snippet_quote):
-    """The sentence of the as-of copy sharing the most words with the snippet's quote (None if none shares any)."""
+class _MainText(HTMLParser):
+    """An archived page's main text: nav, header, footer, aside, forms and scripts dropped; links reduced to their
+    text (no addresses)."""
+    SKIP = {"script", "style", "noscript", "template", "svg", "nav", "header", "footer", "aside", "form", "button"}
+    BLOCK = {"p", "br", "div", "li", "h1", "h2", "h3", "h4", "tr", "section", "article"}
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.out, self.skip = [], 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag in self.SKIP:
+            self.skip += 1
+        elif tag in self.BLOCK:
+            self.out.append("\n")
+
+    def handle_endtag(self, tag):
+        if tag in self.SKIP:
+            self.skip = max(0, self.skip - 1)
+        elif tag in self.BLOCK:
+            self.out.append("\n")
+
+    def handle_data(self, data):
+        if not self.skip:
+            self.out.append(data)
+
+
+def main_text(html=None, text=None):
+    """Main text of an archived page: from its HTML when we have it, else from extract_as_of's text with link
+    addresses removed ([text](href) -> text; nav cannot be told apart there)."""
+    if html is not None:
+        p = _MainText()
+        p.feed(html)
+        raw = "".join(p.out)
+    else:
+        raw = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text or "")
+    return "\n".join(" ".join(line.split()) for line in raw.splitlines() if line.strip())
+
+
+def _norm(s):
+    return " ".join((s or "").replace("…", " ").split())
+
+
+def quote_in(quote, main):
+    """True if the stored quote (its "…" dropped) appears word for word in the main text."""
+    q = _norm(quote)
+    return bool(q) and q in _norm(main)
+
+
+def _as_of_quote(main, snippet_quote):
+    """A quote for an archived copy, from its main text only: the snippet's own quote if the copy contains it word for
+    word; else the copy's sentence sharing the most words with it, if that covers at least half of them. None if
+    neither, or if the chosen quote is not found word for word in the main text."""
+    if quote_in(snippet_quote, main):
+        return snippet_quote
     want = set(re.findall(r"\w+", snippet_quote.lower()))
     best, score = None, 0
-    for s in re.split(r"(?<=[.!?।])\s+|\n+", text or ""):
+    for s in re.split(r"(?<=[.!?।])\s+|\n+", main or ""):
         n = len(want & set(re.findall(r"\w+", s.lower())))
         if n > score:
             best, score = s, n
-    return clip(best) if best else None
+    if not best or score * 2 < len(want):
+        return None
+    quote = clip(best)
+    return quote if quote_in(quote, main) else None
 
 
 def _decide(verdict, extract):
@@ -279,10 +345,15 @@ def generate(task, cutoff, search_fn=None, extract_fn=_AUTO, *, client=None, req
                 page = extract_fn(r.get("url"), cut, pub)
                 extract = _extract_record(page)
                 if extract["status"] == WAYBACK:
-                    # the archived copy is the evidence: its own date counts, the later live edit does not
+                    # the archived copy is the evidence: its own date counts, the later live edit does not; it is
+                    # as-of verified only if the stored quote is found word for word in the copy's main text
                     page_date = read_page_date(page.get("text"))[0]
-                    aq = _as_of_quote(page.get("text"), q)
-                    q, qfrom = (aq, "as_of_copy") if aq else (clip(r.get("title")), "title")
+                    aq = _as_of_quote(main_text(page.get("archived_html"), page.get("text")), q)
+                    if aq:
+                        q, qfrom = aq, "as_of_copy"
+                    else:                       # the snippet may be the later text: no quote enters evidence
+                        extract["as_of"] = QUOTE_NOT_MATCHED
+                        q, qfrom = None, "withheld: not found in the as-of copy"
                 else:
                     page_date = r.get("page_date") or extract["live_page_date"]
             verdict = check_result(dated, cut, page_date=page_date)
@@ -295,7 +366,7 @@ def generate(task, cutoff, search_fn=None, extract_fn=_AUTO, *, client=None, req
     leaked = [r["url"] for r in rows if r["decision"] == "kept" and any(d > cut for d in _dates(r))]
     if leaked:                                     # cannot happen through _decide; refuse rather than emit it
         raise AssertionError(f"kept evidence dated after the cutoff {cut}: {leaked}")
-    unchecked = [r["url"] for r in rows if r["decision"] == "kept" and r["as_of"].startswith(NOT_CHECKED)]
+    unchecked = [r["url"] for r in rows if r["decision"] == "kept" and not r["as_of"].startswith(VERIFIED)]
     if require_as_of and unchecked:
         raise AsOfNotChecked(f"{len(unchecked)} kept result(s) not checked as of {cut}: {unchecked}")
 
@@ -304,7 +375,7 @@ def generate(task, cutoff, search_fn=None, extract_fn=_AUTO, *, client=None, req
                 "quote_from": r["quote_from"], "dates": sorted(set(_dates(r))), "as_of": r["as_of"], "why": r["reason"]}
     kept = [r for r in rows if r["decision"] == "kept"]
     verified = [item(r) for r in kept if r["as_of"].startswith(VERIFIED)]
-    not_checked = [item(r) for r in kept if r["as_of"].startswith(NOT_CHECKED)]
+    not_checked = [item(r) for r in kept if not r["as_of"].startswith(VERIFIED)]
     dropped = [{"step": r["step"], "rank": r["rank"], "url": r["url"], "why": r["reason"]}
                for r in rows if r["decision"] == "dropped"]
     traj = {"format": FORMAT, "mode": mode, "require_as_of": require_as_of,

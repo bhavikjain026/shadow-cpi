@@ -39,10 +39,10 @@ One JSON object per trajectory (see `examples/trajectories/*.json`):
 | `mode` | `replay` (cached responses), `live` or `custom` (caller's own search_fn) |
 | `searches[]` | step, query, the parameters sent, the date window, Tavily's `request_id`, `response_sha256`, result count |
 | `results[]` | per result: url, short title, Tavily date, address date, page date, the search_fn's own label (`search_label`, recorded but not trusted), our `verdict` (safe / date_flag / leak), `as_of`, the `extract` record, `decision`, `reason`, a short `quote` and where it came from (`quote_from`) |
-| `results[].as_of` | `as-of verified (tavily_live)` or `as-of verified (wayback_asof)`: a copy of the page as of the cutoff was found. `not checked (no cached archive lookup)`: the Wayback lookup this check needs is not in the cache. Other `not checked (…)` reasons: Wayback lookup failed, Extract returned another address, page not read. `refused: no as-of copy`: the archive was checked and holds no copy from on or before the cutoff. `skipped`: the date check had already dropped the result |
+| `results[].as_of` | `as-of verified (tavily_live)`, or `as-of verified (wayback_asof)` when a Wayback copy from on or before the cutoff was served **and** the stored quote was found word for word in its main text (nav, header, footer and link addresses stripped first). `archived copy found, quote not matched`: a copy was served but the quote is not in its main text; the quote is withheld (`quote` is null), since the snippet may be the later text. `not checked (no cached archive lookup)`: the capture list (CDX) is not in the cache. `not checked (archive copy found but download not cached)`: the capture list is cached and shows a copy, but that copy's download is not. Other `not checked (…)` reasons: Wayback lookup failed, Extract returned another address, page not read. `refused: no as-of copy`: the archive was checked and holds no copy from on or before the cutoff. `skipped`: the date check had already dropped the result |
 | `results[].extract` | the `extract_as_of` record: status, reason, capture time, change signals, the live page's own date, and only the SHA-256 of any page text |
 | `evidence.kept_as_of_verified[]` | kept, with a page copy as of the cutoff: url, quote, every date seen (all on or before the cutoff), `as_of`, why |
-| `evidence.kept_not_checked[]` | kept on dates alone: same fields. **Snippet-level evidence**: the snippet is today's page, not checked as of the cutoff |
+| `evidence.kept_not_checked[]` | kept on dates alone (every kept result that is not as-of verified, including "quote not matched"): same fields. **Snippet-level evidence**: the snippet is today's page, not checked as of the cutoff |
 | `evidence.dropped[]` | url and the reason (leak, date_flag, or archive checked and no copy as of the cutoff) |
 | `counts` | results, kept, kept_as_of_verified, kept_not_checked, dropped, and the verdict counts |
 | `receipt` | `sha256` of the trajectory without the receipt (JSON, sorted keys, no spaces, UTF-8) |
@@ -57,8 +57,9 @@ after the cutoff.
 
 **A page edited after the cutoff.** If the live page states a date after the cutoff but `extract_as_of` finds a
 Wayback copy from on or before it, that copy is served, as in the library. The copy's own date is the one checked,
-and the quote is taken from the copy. The result is kept as as-of verified. If no such copy exists, the result is
-dropped.
+and the quote must come from the copy's main text. The result is as-of verified only if the stored quote is found
+there word for word, after nav, header, footer and link addresses are stripped. Otherwise it is labelled "archived
+copy found, quote not matched" and its quote is withheld. If no copy exists, the result is dropped.
 
 **What "not checked" means.** A result under `kept_not_checked` is *dated* on or before the cutoff, but its snippet
 comes from the page as it is today, so a page edited after the cutoff can still carry later text there.
@@ -100,7 +101,7 @@ replayed from the cache. The replayed response's SHA-256 is checked against the 
 `examples/trajectories/index.json`. The counts below are written by the demo from the files it wrote; none is typed.
 
 <!-- counts:begin (examples/trajectory_demo.py writes this block) -->
-Of the 34 TimeLock-34 cases, 34 have their time-locked search in the cache. Written: E1, M3, T3, R5, C6 (5 trajectories); skipped for missing cached data: none. Across the 5: 19 results, 18 kept, 1 dropped (1 leak, 0 date_flag). **Only 1 of the 18 kept results has a page copy as of the cutoff (as-of verified); the other 17 are snippet-level evidence, not checked as of the cutoff.**
+Of the 34 TimeLock-34 cases, 34 have their time-locked search in the cache. Written: E1, M3, T3, R5, C6 (5 trajectories); skipped for missing cached data: none. Across the 5: 19 results, 18 kept, 1 dropped (1 leak, 0 date_flag). **Only 1 of the 18 kept results has a page copy as of the cutoff (as-of verified); the other 17 are snippet-level evidence, not checked as of the cutoff.** Of those 17: 17 not checked (no cached archive lookup); 0 not checked (archive copy found but download not cached); 0 archived copy found, quote not matched (quote withheld); 0 other.
 <!-- counts:end -->
 
 **In plain words:** in this demo almost none of the kept evidence was checked as of the cutoff. The Wayback lookups

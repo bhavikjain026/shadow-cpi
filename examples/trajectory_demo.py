@@ -18,7 +18,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from timelock.trajectories import CacheMiss, CachedTavily, dumps, generate  # noqa: E402
+from timelock.trajectories import (NO_ARCHIVE, NO_DOWNLOAD, NOT_CHECKED, QUOTE_NOT_MATCHED, CacheMiss,  # noqa: E402
+                                   CachedTavily, dumps, generate)
 
 DOC = ROOT / "docs" / "trajectories.md"
 BEGIN, END = "<!-- counts:begin (examples/trajectory_demo.py writes this block) -->", "<!-- counts:end -->"
@@ -72,13 +73,20 @@ def counts_block(out=OUT):
     c = {k: sum(t["counts"][k] for t in ts) for k in ("results", "kept", "kept_as_of_verified", "kept_not_checked",
                                                      "dropped", "leak", "date_flag")}
     skipped = ", ".join(s["id"] for s in index["skipped"]) or "none"
+    kept_rows = [r for t in ts for r in t["results"] if r["decision"] == "kept"]
+    label = {k: sum(r["as_of"] == v for r in kept_rows) for k, v in (
+        ("lookup", f"{NOT_CHECKED} ({NO_ARCHIVE})"), ("download", f"{NOT_CHECKED} ({NO_DOWNLOAD})"),
+        ("quote", QUOTE_NOT_MATCHED))}
+    other = c["kept_not_checked"] - sum(label.values())
     return (f"{BEGIN}\n"
             f"Of the {index['cases']} TimeLock-34 cases, {index['search_cached']} have their time-locked search in the "
             f"cache. Written: {', '.join(index['written'])} ({len(ts)} trajectories); skipped for missing cached data: "
             f"{skipped}. Across the {len(ts)}: {c['results']} results, {c['kept']} kept, {c['dropped']} dropped "
             f"({c['leak']} leak, {c['date_flag']} date_flag). **Only {c['kept_as_of_verified']} of the {c['kept']} "
             f"kept results has a page copy as of the cutoff (as-of verified); the other {c['kept_not_checked']} are "
-            f"snippet-level evidence, not checked as of the cutoff.**\n{END}")
+            f"snippet-level evidence, not checked as of the cutoff.** Of those {c['kept_not_checked']}: "
+            f"{label['lookup']} not checked ({NO_ARCHIVE}); {label['download']} not checked ({NO_DOWNLOAD}); "
+            f"{label['quote']} {QUOTE_NOT_MATCHED} (quote withheld); {other} other.\n{END}")
 
 
 def with_counts(doc_text, block):
