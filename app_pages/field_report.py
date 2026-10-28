@@ -267,11 +267,12 @@ if lk:
 # ---------- four arms ----------
 st.subheader("Who should write the search? Four arms, pre-registered")
 fa = r["four_arms"]
-table([{"Arm": x["arm"], "Searches written by": x["writer"], "Recall (of 29)": f"{x['recall']} of {x['of']}",
-               "Real new credits": x["real_new_credits"], "Credits (original cost)": x["credits_original"],
-               "Credits per verified event": f1(x["credits_per_verified_event"]),
-               "Credits per known change found": f1(x["credits_per_known_change"]),
-               "Median latency (s)": f"{x['median_latency_s']:.2f}"} for x in fa["rows"]])
+arm_rows = [{"Arm": x["arm"], "Searches written by": x["writer"], "Recall (of 29)": f"{x['recall']} of {x['of']}",
+             "Real new credits": x["real_new_credits"], "Credits (original cost)": x["credits_original"],
+             "Credits per verified event": f1(x["credits_per_verified_event"]),
+             "Credits per known change found": f1(x["credits_per_known_change"]),
+             "Median latency (s)": f"{x['median_latency_s']:.2f}"} for x in fa["rows"]]
+table(arm_rows, show=list(arm_rows[0]))      # every column (the one table exempt from the 5-column default); scrolls on phones
 st.caption(f"Verdict (pre-registered rule change F, ±1 known change): top group {', '.join(fa['verdict']['top_group'])}. Latency: "
            f"{fa['latency_label']}. Credits per known change found was added after scoring (descriptive).")
 

@@ -92,3 +92,19 @@ def test_date_test_no_dates_row_reads_like_the_finance_rows(built):
         ("Finance check", "first pass"), ("Finance check", "after logged retry")]
     dt = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["A"]
     assert (rows[0]["leaks"], rows[0]["n"]) == (dt["leak_cases"], dt["cases"])
+
+
+def test_four_arm_table_shows_every_column_and_others_keep_the_default():
+    from streamlit.testing.v1 import AppTest
+    from app_pages.common import MAX_COLS
+    at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=90)
+    at.run()
+    at.switch_page("app_pages/field_report.py")
+    at.run()
+    assert not at.exception
+    arms = [d for d in at.dataframe if "Searches written by" in d.value.columns]
+    assert len(arms) == 1
+    order = list(arms[0].proto.column_order)
+    assert order == list(arms[0].value.columns) and len(order) == 8
+    others = [d for d in at.dataframe if "Searches written by" not in d.value.columns]
+    assert all(len(d.proto.column_order) <= MAX_COLS for d in others)
