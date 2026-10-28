@@ -127,7 +127,7 @@ completely:
   27 of the date test's 40 pieces of valid evidence were lost (12 with the filter
   alone). It reads a page's date, not its edit history.
 - **The drift monitor** re-reads each October radar page with Extract once a day and compares it with the saved copy
-  ([`v2/DRIFT_PREREG.md`](v2/DRIFT_PREREG.md)): no drift run is committed yet, as of 28 Oct 2026.
+  ([`v2/DRIFT_PREREG.md`](v2/DRIFT_PREREG.md)): 14 of 62 radar pages had changed since they were saved (one run, 28 Oct 2026 IST).
 - **The Wayback Machine** shows whether a page existed by the cutoff; a leak counts only when it confirms one. Failed
   lookups were retried and logged (11 in the date test, 94 in the finance check). In
   the post-hoc review, 146 of 283 rows stayed unclear, partly because archive lookups were
@@ -349,8 +349,8 @@ made Hindi pages work. Details: [`FEEDBACK_NOTES.md`](FEEDBACK_NOTES.md).
   compare it with `sealed/2026-10.sha256` ([`verify.md`](verify.md)). After the release, the Archive page shows the
   miss and whether the official figure was inside the range.
 - **Price Shock Radar** (exploratory, report only; app page "October radar"): announced retail price changes taking
-  effect this month, found with Tavily before MoSPI publishes. So far 1 event verified,
-  0 corroborated, 70 of a 150-credit cap. It never changes the sealed call.
+  effect this month, found with Tavily before MoSPI publishes. So far 3 events verified,
+  0 corroborated, 95 of a 150-credit cap. It never changes the sealed call.
 - **Live build** with **Replay a saved run**: watch the number build one verified card at a time. Replays make no
   API call and cost no credits.
 - **Chain of custody:** from any number to its quote, page, page date, Tavily request ID, response hash and seal.
@@ -402,7 +402,7 @@ Jan–Sep 2026 replay, rules frozen before scoring ([`results/score_lock.json`](
   rather than tune it.
 - A Hindi substring match ('rail' inside 'domestic') turned a Jharkhand power tariff into a 'Bihar rail' event.
   Our manual check caught it; the fix (whole-word matching, state from the page) removed the event, so the October
-  radar has 1 event. Logged as rule changes `R2`–`R3`, with before and after
+  radar has 3 events. Logged as rule changes `R2`–`R3`, with before and after
   ([`v2/RADAR_PREREG.md`](v2/RADAR_PREREG.md)).
 
 More: [`docs/honest_limits.md`](docs/honest_limits.md), [`docs/frozen_rules.md`](docs/frozen_rules.md),
@@ -429,7 +429,7 @@ To run the pipeline, copy `.env.example` to `.env`, add the two keys, and start 
 `python tools/sync_doc_numbers.py` (template: [`docs/templates/README.md`](docs/templates/README.md)).
 
 Tavily usage so far (as of 28 Oct 2026, [`results/tavily_report_card.md`](results/tavily_report_card.md)):
-2,030 calls sent, 1,981 credits used (a 1,000-credit monthly plan plus 3,125
+2,073 calls sent, 2,021 credits used (a 1,000-credit monthly plan plus 3,125
 add-on credits), 79% of dated search results inside the requested window, median latency
 4.0 s.
 

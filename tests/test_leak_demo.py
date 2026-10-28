@@ -189,14 +189,31 @@ def test_web_titles_cannot_inject_markdown():
 # ---------- ui-polish / look: hero row, default examples, text badges ----------
 def test_hero_row_reads_the_results_file_and_is_not_repeated():
     at = page()
-    d, s = DATA["totals"]["date"], DATA["totals"]["strictness"]
+    d = DATA["totals"]["date"]
+    c = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["C"]
     (frame,) = at.get("iframe")
     html = frame.proto.srcdoc
     assert f"Date test · {d['cases']} past cases" in html
     assert (f"No time lock: {d['open']['retry']}/{d['cases']} cases leaked (after retry). Tavily time lock: "
-            f"{d['locked']['retry']}/{d['cases']}. Cost: {s['missed']} of {s['quotes']} valid evidence dropped."
-            ) in html                              # the hero's accessible label
+            f"{d['locked']['retry']}/{d['cases']}. Cost: {c['valid_lost']} of {c['valid_total']} valid evidence "
+            "dropped (initial pass).") in html     # the hero's accessible label
     assert not any(m.value.startswith("**No time lock:") for m in at.markdown)
+
+
+def test_hero_cost_is_the_date_tests_own_field_not_check_e():
+    """The cost card on the date-test row shows the date test's valid evidence dropped (locked arm C, initial pass),
+    not check E's known-good quotes missed."""
+    import re
+    c = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["C"]
+    s = DATA["totals"]["strictness"]
+    (frame,) = page().get("iframe")
+    card = re.search(r'id="cost"><div class="num">(\d+)/(\d+)</div><div class="label">([^<]+)<',
+                     frame.proto.srcdoc)
+    assert card and (int(card[1]), int(card[2])) == (c["valid_lost"], c["valid_total"])
+    assert card[3] == "Cost: valid evidence dropped (initial pass)"
+    if (s["missed"], s["quotes"]) != (c["valid_lost"], c["valid_total"]):
+        assert f"{s['missed']}/{s['quotes']}" not in card[0]
+    assert "C" == __import__("tools.build_leak_demo", fromlist=["TESTS"]).TESTS["date"]["locked"]
 
 
 def test_default_examples_follow_the_rule_f3_first_r1_out():

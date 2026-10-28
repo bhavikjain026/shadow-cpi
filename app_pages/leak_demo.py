@@ -1,7 +1,7 @@
 """Leak demo (the home page): can a web search see the future? Past questions replayed as of a cutoff date, each
 searched with no time lock and with Tavily's time lock. Built only from saved results (results/leak_demo.json, made
 offline by tools/build_leak_demo.py from the date test and the finance check; totals from results/field_report.json
-and results/leakcheck_exact_match.json). The only API calls are the optional live mode, off unless RUN_LIVE_ENABLED."""
+and results/leakcheck_exact_match.json; the hero's cost from results/date_field_test.json). The only API calls are the optional live mode, off unless RUN_LIVE_ENABLED."""
 import re
 from datetime import date, timedelta
 
@@ -220,21 +220,31 @@ html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 1
 </script></body></html>"""
 
 
+DATE_TEST = "results/date_field_test.json"
+DATE_LOCKED_ARM = "C"                         # tools/build_leak_demo.py TESTS["date"]["locked"]
+
+
+def date_test_cost():
+    """The date test's own cost of the time lock, initial pass: valid evidence the locked arm dropped (not check E)."""
+    arm = read_json(DATE_TEST)["metrics"]["arms"][DATE_LOCKED_ARM]
+    return int(arm["valid_lost"]), int(arm["valid_total"])
+
+
 def hero(t):
-    """One titled row (date test, after retry): 'x/n → y/n' cases leaked, then the cost of the time lock (check E),
-    all from the results files, counted up once."""
+    """One titled row (date test): 'x/n → y/n' cases leaked (after retry), then the date test's own cost of the time
+    lock (initial pass), all from the results files, counted up once."""
     import html
-    d, s = t["date"], t["strictness"]
+    d = t["date"]
     o, k, n = int(d["open"]["retry"]), int(d["locked"]["retry"]), int(d["cases"])
-    missed, quotes = int(s["missed"]), int(s["quotes"])
+    missed, quotes = date_test_cost()
     leaked = "cases leaked (after retry)"
     st.iframe(HERO_HTML.format(
         font=HERO_FONT, js=ANIME_JS[0], sri=ANIME_JS[1], open=o, locked=k, n=n, missed=missed, quotes=quotes,
         title=html.escape(f"Date test · {n} past cases"),
         open_label=html.escape(f"{OPEN}: {leaked}"), locked_label=html.escape(f"{LOCKED}: {leaked}"),
-        cost_label="Cost: valid evidence dropped",
+        cost_label="Cost: valid evidence dropped (initial pass)",
         aria=html.escape(f"Date test, {n} past cases. {OPEN}: {o}/{n} {leaked}. {LOCKED}: {k}/{n}. "
-                         f"Cost: {missed} of {quotes} valid evidence dropped.")),
+                         f"Cost: {missed} of {quotes} valid evidence dropped (initial pass).")),
         height=HERO_HEIGHT)
 
 

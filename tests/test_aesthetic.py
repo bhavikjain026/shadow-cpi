@@ -91,11 +91,14 @@ def test_style_is_injected_once_and_takes_no_layout():
 # ---------- the hero ----------
 def test_hero_numbers_come_from_the_results_files():
     _, html = hero_html()
-    d, s = DATA["totals"]["date"], DATA["totals"]["strictness"]
+    d = DATA["totals"]["date"]
+    c = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["C"]
     o, k, n = d["open"]["retry"], d["locked"]["retry"], d["cases"]
     assert f'<span id="leaked">{o}</span>/{n}' in html and f">{k}/{n}<" in html
     shown = re.findall(r"<span id=\"leaked\">(\d+)</span>/(\d+)|>(\d+)/(\d+)<", html)
-    assert shown == [(str(o), str(n), "", ""), ("", "", str(k), str(n)), ("", "", str(s["missed"]), str(s["quotes"]))]
+    # the cost card is the date test's own valid evidence dropped (locked arm C, initial pass), not check E
+    assert shown == [(str(o), str(n), "", ""), ("", "", str(k), str(n)),
+                     ("", "", str(c["valid_lost"]), str(c["valid_total"]))]
     # the same counts the Field Report reads (results/field_report.json, date test, after the logged retry)
     assert d["source"].startswith("results/field_report.json")
 

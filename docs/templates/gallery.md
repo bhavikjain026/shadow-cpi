@@ -7,9 +7,9 @@ Four images for the Devpost gallery (`1600x900` each). The two app shots and bot
 ## The leak table
 ![Field Report: time-locked search leakage](1_leak_table.png)
 
-**Can a search see the future?** Date test (pre-registered pilot, {{dt_cases}} replay cases): with no dates,
-{{dt_nodates_retry}} of {{dt_cases}} cases read a page that did not yet exist at the cutoff (Wilson {{wilson}}
-{{dt_nodates_retry_w}}; {{dt_nodates}} on the initial pass); with `start_date`/`end_date` and
+**Can a search see the future?** Date test (pilot, {{dt_cases}} past cases, counts after a logged archive retry):
+with no dates, {{dt_nodates_retry}} of {{dt_cases}} cases kept a confirmed leak, a page dated after the cutoff with no
+archive copy on or before it (Wilson {{wilson}} {{dt_nodates_retry_w}}; {{dt_nodates}} on the initial pass); with `start_date`/`end_date` and
 `filter_by_published_date`, {{dt_dated_retry}} of {{dt_cases}} ({{dt_dated_retry_w}}). The cost: the filter dropped
 {{dt_lost_filter}} of {{dt_valid_total}} pieces of valid evidence (initial pass). Red rows: no dates; bold rows:
 Tavily's time lock. App page: Field Report. Source: `results/field_report.json`.

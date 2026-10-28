@@ -6,8 +6,8 @@
 
 ## Headline
 <!-- headline:start -->
-Pre-registered pilot, no dates: 10 of 20 replay cases read a page that did not yet exist at the cutoff; with Tavily's dates and `filter_by_published_date`, 0 of 20.
-Reuse `timelocked_search`, `extract_as_of`, or the Colab leak check (your own Tavily key).
+Pilot, after a logged archive retry: no dates, 10 of 20 past cases kept a confirmed leak (page dated after the cutoff, no archive copy before it); Tavily's dates and `filter_by_published_date`, 0 of 20.
+Reuse: `timelocked_search`, `extract_as_of`, Colab leak check.
 <!-- headline:end -->
 
 ## Tagline
@@ -17,9 +17,10 @@ quote on its source page, and seals India's inflation forecast before the govern
 ## Short description
 <!-- short:start -->
 Can a search engine keep the past in the past? We measured Tavily's date controls on 20 replay cases
-(pilot, pre-registered). With no dates, 10 of 20 cases read a page that did not yet exist
-at the cutoff (Wilson 95% 30–70%); with `start_date`/`end_date` and `filter_by_published_date`,
-0 of 20 (0–16%), after a logged archive retry. The cost: the filter dropped
+(pilot; counts after a logged archive retry). With no dates, 10 of 20 cases kept a
+confirmed leak, a page dated after the cutoff with no archive copy before it (Wilson 95%
+30–70%); with `start_date`/`end_date` and `filter_by_published_date`, 0 of
+20 (0–16%). The cost: the filter dropped
 12 of 40 pieces of valid evidence. Search dates do not freeze page content: a page
 dated before the cutoff can be updated after it. Shadow CPI puts this to work: an AI agent searches with Tavily
 inside a time lock, checks each quote against the extracted page with NVIDIA Nemotron on Nebius Token Factory, lets
@@ -28,7 +29,7 @@ code compute India's October 2026 inflation nowcast, and seals it before the Min
 <!-- short:end -->
 
 ## The leak, measured
-- **Main result (date test, a pre-registered pilot; counts after the logged archive retry):** no dates, 10
+- **Main result (date test, a pilot with a pre-registered design; counts after the logged archive retry):** no dates, 10
   of 20 cases leaked (Wilson 95% 30–70%); `start_date`/`end_date` +
   `filter_by_published_date`, 0 of 20 (0–16%). Initial pass (the pre-registered result, shown as sensitivity):
   9 of 20 (26–66%) and 0 of 20 (0–16%); the retry only
@@ -83,7 +84,7 @@ the finance check returned a result dated after the cutoff; that review found 1 
 version leaks the outcome. What covers the gap, partly: our page-date check (kept 26 of
 59 filtered results in the date test; date-test valid evidence lost: 27 of
 40 with it, 12 with the filter alone); the drift monitor, which re-reads October radar
-pages daily (no drift run is committed yet, as of 28 Oct 2026); and Wayback Machine checks, with failed lookups retried and logged
+pages daily (14 of 62 radar pages had changed since they were saved (one run, 28 Oct 2026 IST)); and Wayback Machine checks, with failed lookups retried and logged
 (11 in the date test, 94 in the finance check).
 
 ## Who writes the search: model-written fields vs fixed templates, inside a time lock it cannot move
@@ -205,7 +206,7 @@ worked on the opening call, and both sizes sit behind one OpenAI-compatible endp
   next-working-day rule applies).
   Anyone can recompute the seal's `SHA-256` from the file at tag `seal-2026-10` (`verify.md`).
 - **Price Shock Radar** (exploratory, report only): announced price changes taking effect this month;
-  1 verified so far, 0 corroborated.
+  3 verified so far, 0 corroborated.
 - **Live build** with **Replay a saved run** (no API call, no credits).
 - **Chain of custody** from any number to its quote, page, Tavily request ID, response hash and seal; **`as_of()`**
   shows what was known on a past day.
@@ -240,7 +241,7 @@ start 10 days before the month, and v1's replay ran to month-end while the live 
 the score; a value-of-information score was dropped rather than tuned.
 A Hindi substring match ('rail' inside 'domestic') turned a Jharkhand power tariff into a 'Bihar rail' event. Our
 manual check caught it; the fix (whole-word matching, state from the page) removed the event, so the October radar
-has 1 event. Logged as rule changes `R2`–`R3`, with before and after.
+has 3 events. Logged as rule changes `R2`–`R3`, with before and after.
 Exploratory and post-hoc results are labelled where they appear and changed no scored verdict.
 
 ## Built with
@@ -254,8 +255,8 @@ Nebius retires the original IDs on 9 Nov 2026; from then, calls use Nebius's rec
 - Python
 - Streamlit
 
-Tavily usage as of 28 Oct 2026: 2,030 calls, 1,981 credits, 79% of dated results
-inside the requested window (5,454 of 6,872), median latency 4.0 s. Third-party notices:
+Tavily usage as of 28 Oct 2026: 2,073 calls, 2,021 credits, 79% of dated results
+inside the requested window (5,587 of 7,069), median latency 4.0 s. Third-party notices:
 `THIRD_PARTY_NOTICES.md`.
 
 ## Try it

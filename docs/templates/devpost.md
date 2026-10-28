@@ -5,8 +5,8 @@
 
 ## Headline
 <!-- headline:start -->
-Pre-registered pilot, no dates: {{dt_nodates_retry}} of {{dt_cases}} replay cases read a page that did not yet exist at the cutoff; with Tavily's dates and `filter_by_published_date`, {{dt_dated_retry}} of {{dt_cases}}.
-Reuse `timelocked_search`, `extract_as_of`, or the Colab leak check (your own Tavily key).
+Pilot, after a logged archive retry: no dates, {{dt_nodates_retry}} of {{dt_cases}} past cases kept a confirmed leak (page dated after the cutoff, no archive copy before it); Tavily's dates and `filter_by_published_date`, {{dt_dated_retry}} of {{dt_cases}}.
+Reuse: `timelocked_search`, `extract_as_of`, Colab leak check.
 <!-- headline:end -->
 
 ## Tagline
@@ -16,9 +16,10 @@ quote on its source page, and seals India's inflation forecast before the govern
 ## Short description
 <!-- short:start -->
 Can a search engine keep the past in the past? We measured Tavily's date controls on {{dt_cases}} replay cases
-(pilot, pre-registered). With no dates, {{dt_nodates_retry}} of {{dt_cases}} cases read a page that did not yet exist
-at the cutoff (Wilson {{wilson}} {{dt_nodates_retry_w}}); with `start_date`/`end_date` and `filter_by_published_date`,
-{{dt_dated_retry}} of {{dt_cases}} ({{dt_dated_retry_w}}), after a logged archive retry. The cost: the filter dropped
+(pilot; counts after a logged archive retry). With no dates, {{dt_nodates_retry}} of {{dt_cases}} cases kept a
+confirmed leak, a page dated after the cutoff with no archive copy before it (Wilson {{wilson}}
+{{dt_nodates_retry_w}}); with `start_date`/`end_date` and `filter_by_published_date`, {{dt_dated_retry}} of
+{{dt_cases}} ({{dt_dated_retry_w}}). The cost: the filter dropped
 {{dt_lost_filter}} of {{dt_valid_total}} pieces of valid evidence. Search dates do not freeze page content: a page
 dated before the cutoff can be updated after it. Shadow CPI puts this to work: an AI agent searches with Tavily
 inside a time lock, checks each quote against the extracted page with NVIDIA Nemotron on Nebius Token Factory, lets
@@ -27,7 +28,7 @@ code compute India's {{live_month}} inflation nowcast, and seals it before the M
 <!-- short:end -->
 
 ## The leak, measured
-- **Main result (date test, a pre-registered pilot; counts after the logged archive retry):** no dates, {{dt_nodates_retry}}
+- **Main result (date test, a pilot with a pre-registered design; counts after the logged archive retry):** no dates, {{dt_nodates_retry}}
   of {{dt_cases}} cases leaked (Wilson {{wilson}} {{dt_nodates_retry_w}}); `start_date`/`end_date` +
   `filter_by_published_date`, {{dt_dated_retry}} of {{dt_cases}} ({{dt_dated_retry_w}}). Initial pass (the pre-registered result, shown as sensitivity):
   {{dt_nodates}} of {{dt_cases}} ({{dt_nodates_w}}) and {{dt_dated}} of {{dt_cases}} ({{dt_dated_w}}); the retry only
