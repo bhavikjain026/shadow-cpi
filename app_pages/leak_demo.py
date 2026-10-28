@@ -243,23 +243,24 @@ def interval_chart(t):
     for (name, kind), (k, n) in zip(GROUPS, counts):
         lo, hi = wilson95(k, n)
         rows.append({"Group": name, "kind": kind, "rate": k / n, "lo": lo, "hi": hi,
-                     "label": f"{k}/{n}", "interval": f"{pct(lo)}–{pct(hi)}"})
+                     "label": f"{k}/{n}", "interval": f"{pct(lo)}–{pct(hi)}",
+                     "tip": f"{name} · {k} of {n} leaked · 95% CI {pct(lo)}–{pct(hi)}"})
     ink = "#fafafa" if dark_theme() else "#09090b"
     muted = "#a1a1aa" if dark_theme() else "#52525b"
     base = alt.Chart(pd.DataFrame(rows)).encode(y=alt.Y("Group:N", sort=None, axis=None,
                                                      scale=alt.Scale(paddingInner=0.5, paddingOuter=0.35)))
     x = alt.X("rate:Q", scale=alt.Scale(domain=[0, 1]), title=["Share of cases with post-cutoff results", "(Wilson 95% CI)"],
               axis=alt.Axis(format="%", grid=False, tickCount=5, labelColor=muted, titleColor=ink))
-    tip = ["Group:N", alt.Tooltip("rate:Q", format=".0%", title="Observed"), alt.Tooltip("interval:N", title="95% CI")]
+    tip = alt.Tooltip("tip:N")          # one plain line per row; every layer sets it, so no raw field ever shows
     colour = alt.Color("kind:N", scale=alt.Scale(domain=list(SERIES), range=list(SERIES.values())), legend=None)
-    zero = alt.Chart(pd.DataFrame({"x": [0]})).mark_rule(color=muted).encode(x="x:Q")
+    zero = alt.Chart(pd.DataFrame({"x": [0]})).mark_rule(color=muted).encode(x="x:Q", tooltip=alt.value(None))
     rule = base.mark_rule(strokeWidth=3).encode(x=alt.X("lo:Q", scale=alt.Scale(domain=[0, 1])), x2="hi:Q",
                                                 color=colour, tooltip=tip)
     dot = base.mark_point(filled=True, size=140, opacity=1, clip=False).encode(x=x, color=colour, tooltip=tip)
     name = base.mark_text(align="left", baseline="bottom", dx=8, dy=-10, fontSize=13, fontWeight=600, color=ink).encode(
-        x=alt.value(0), text="Group:N")
+        x=alt.value(0), text="Group:N", tooltip=tip)
     end = base.mark_text(align="left", baseline="middle", dx=10, fontSize=13, color=ink).encode(
-        x="hi:Q", text="label:N")
+        x="hi:Q", text="label:N", tooltip=tip)
     with st.container(border=True, key="interval-chart"):
         altair_chart((zero + rule + dot + name + end).properties(height=300).configure_view(stroke=None),
                         width="stretch")

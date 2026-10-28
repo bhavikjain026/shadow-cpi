@@ -171,3 +171,42 @@ def test_every_altair_chart_goes_through_the_readable_wrapper():
     for f in glob.glob(str(ROOT / "app_pages" / "*.py")):
         src = Path(f).read_text()
         assert not re.search(r"\bst\.altair_chart\(|\w+\.altair_chart\(", src.replace("into.altair_chart", "")), f
+
+
+# ---------- chart tooltips: one plain line per mark, never raw fields or floats ----------
+def chart_tooltips(pg):
+    """Every Altair layer's tooltip encoding and the tooltip strings, from the charts on one page."""
+    import pyarrow as pa
+    at = page_run()
+    at.switch_page(pg)
+    at.run()
+    assert not at.exception
+    out = []
+    for c in at.get("vega_lite_chart"):
+        spec = json.loads(c.proto.spec)
+        tables = [pa.ipc.open_stream(d.data.data).read_all().to_pandas() for d in c.proto.datasets]
+        for layer in spec.get("layer", [spec]):
+            tip = layer.get("encoding", {}).get("tooltip")
+            texts = [str(v) for t in tables if tip and "field" in tip and tip["field"] in t for v in t[tip["field"]]]
+            out.append((tip, texts))
+    return out
+
+
+@pytest.mark.parametrize("pg", ["app_pages/leak_demo.py", "app_pages/field_report.py", "app_pages/home.py",
+                                "app_pages/try_it.py"])
+def test_every_chart_layer_has_a_plain_tooltip(pg):
+    for tip, texts in chart_tooltips(pg):
+        # None would let the renderer list every raw field (e.g. "hi 0.0837987920769"): each layer sets its own
+        assert tip is not None
+        assert tip == {"value": None} or (set(tip) <= {"field", "type"} and tip["type"] == "nominal"), tip
+        assert not [t for t in texts if re.search(r"\d\.\d{4,}", t)], texts
+
+
+def test_leak_demo_tooltip_reads_like_the_cards():
+    from app_pages.common import wilson95
+    pool = json.loads((ROOT / "results" / "replication.json").read_text())["pooled"]["price"]["arms"]["C"]
+    k, n = pool["leak_cases"], pool["cases"]
+    lo, hi = wilson95(k, n)
+    texts = {t for _, ts in chart_tooltips("app_pages/leak_demo.py") for t in ts}
+    assert f"Pooled, time lock · {k} of {n} leaked · 95% CI {lo:.0%}–{hi:.0%}" in texts
+    assert all(" leaked · 95% CI " in t for t in texts)

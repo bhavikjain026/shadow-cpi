@@ -59,7 +59,9 @@ def leak_chart(rows):
              "Setting": NO_DATES if x["setting"] == "no dates" else TIME_LOCK,
              "Leak rate": x["leak_rate"], "lo": x["wilson95"][0], "hi": x["wilson95"][1],
              "Count": f"{x['leaks']} of {x['n']}", "Interval": wilson(x["wilson95"]),
-             "Label": f"{pct(x['leak_rate'])} ({x['leaks']}/{x['n']})", "zero": 0 if x["leaks"] == 0 else None}
+             "Label": f"{pct(x['leak_rate'])} ({x['leaks']}/{x['n']})", "zero": 0 if x["leaks"] == 0 else None,
+             "Tip": f"{x['check'].split(' (')[0]} · {NO_DATES if x['setting'] == 'no dates' else TIME_LOCK} · "
+                    f"{x['leaks']} of {x['n']} leaked · 95% CI {wilson(x['wilson95'])}"}
             for x in rows if x["run"] == RUNS[run] and x["check"].startswith(("Date test", "Replication", "Finance check"))
             and (x["setting"] == "no dates" or x["setting"].endswith("filter_by_published_date"))]
     if not data:
@@ -70,19 +72,19 @@ def leak_chart(rows):
         xOffset=alt.XOffset("Setting:N", sort=order))
     y = alt.Y("Leak rate:Q", title="Leak rate (Wilson 95%)", scale=alt.Scale(domain=[0, 1]),
               axis=alt.Axis(format="%", tickCount=5))
-    tip = ["Check:N", "Setting:N", "Count:N", alt.Tooltip("Leak rate:Q", format=".0%"), "Interval:N"]
+    tip = alt.Tooltip("Tip:N")          # one plain line per bar; every layer sets it, so no raw field ever shows
     bars = base.mark_bar(cornerRadiusTopLeft=3, cornerRadiusTopRight=3, width={"band": 0.8}).encode(
         y=y, color=alt.Color("Setting:N", sort=order, title=None, legend=alt.Legend(orient="top"),
                              scale=alt.Scale(domain=order, range=["#dc2626", "#16a34a"])), tooltip=tip)
     # whiskers: zinc 500 is 4.8:1 on white and 4.1:1 on the dark background (>= 3:1 for graphics)
     err = base.mark_rule(strokeWidth=1.5, color="#71717a").encode(y="lo:Q", y2="hi:Q", tooltip=tip)
-    caps = base.mark_tick(thickness=1.5, size=10, color="#71717a").encode(y="hi:Q")
+    caps = base.mark_tick(thickness=1.5, size=10, color="#71717a").encode(y="hi:Q", tooltip=tip)
     dark = dark_theme()
     # a zero-height bar draws nothing: a short thick tick on the baseline marks it (time-lock green, as on the Leak demo)
     zero = base.transform_filter("datum.zero === 0").mark_tick(thickness=3, size=28, color="#16a34a").encode(y="zero:Q", tooltip=tip)
     # value labels above each whisker, in the page's ink colour (>= 4.5:1 in the theme the viewer has)
     labels = base.mark_text(dy=-9, fontSize=13, fontWeight=600, color="#fafafa" if dark else "#09090b").encode(
-        y="hi:Q", text="Label:N")
+        y="hi:Q", text="Label:N", tooltip=tip)
     altair_chart((bars + err + caps + zero + labels).properties(height=280), width="stretch")
     # counts as text too, for screen readers and copying
     groups = dict.fromkeys(x["Check"] for x in data)

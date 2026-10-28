@@ -20,7 +20,8 @@ def what_tavily_adds(run):
             stages.append({"label": b["label"], "yoy": level})
     else:
         stages = run["stages"]
-    rows = [{"Stage": s["label"], "CPI inflation, year-on-year (%)": s["yoy"], "order": i}
+    rows = [{"Stage": s["label"], "CPI inflation, year-on-year (%)": s["yoy"], "order": i,
+             "Tip": f"{s['label']} · {s['yoy']:.2f}%"}
             for i, s in enumerate(stages)]
     df = pd.DataFrame(rows)
     vals = list(df["CPI inflation, year-on-year (%)"]) + [run["official"], run["v1"]["c"]]
@@ -29,14 +30,16 @@ def what_tavily_adds(run):
     bars = alt.Chart(df).mark_bar(color="#4C8DF6", size=24, clip=True).encode(
         y=alt.Y("Stage:N", sort=list(df["Stage"]), title=None, axis=alt.Axis(labelLimit=340, labelOverlap=False)),
         x=alt.X("CPI inflation, year-on-year (%):Q", scale=x, title=xt),
-        tooltip=["Stage", alt.Tooltip("CPI inflation, year-on-year (%):Q", format=".3f")])
+        tooltip=alt.Tooltip("Tip:N"))
     labels = bars.mark_text(align="left", dx=4, color="#fafafa" if dark_theme() else "#09090b").encode(
         text=alt.Text("CPI inflation, year-on-year (%):Q", format=".2f"))
     marks = pd.DataFrame([{"x": run["official"], "what": f"Official {run['official']:.2f}%"},
                           {"x": run["v1"]["c"], "what": f"v1 Shadow CPI {run['v1']['c']:.2f}%"}])
+    marks["Tip"] = marks["what"]
     rules = alt.Chart(marks).mark_rule(strokeWidth=3, strokeDash=[6, 3]).encode(
         x=alt.X("x:Q", scale=x, title=xt), color=alt.Color("what:N", scale=alt.Scale(range=["#F28E2B", "#a1a1aa" if dark_theme() else "#71717a"]),
-                                                legend=alt.Legend(orient="bottom", title=None)))
+                                                legend=alt.Legend(orient="bottom", title=None)),
+        tooltip=alt.Tooltip("Tip:N"))
     altair_chart((bars + labels + rules).properties(height=210).configure_axisY(labelPadding=6),
                     width="stretch")
     if adds:
