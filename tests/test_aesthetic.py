@@ -140,7 +140,10 @@ def test_provenance_and_how_we_know_on_the_four_pages():
         assert 'class="provenance"' in body, pg
         if rel:
             digest = hashlib.sha256((ROOT / rel).read_bytes()).hexdigest()[:12]
-            assert rel in body and digest in body and f"{fields[rel]} <b>" in body, pg
+            verb = {"built_utc": "built", "built": "built", "scored_at_utc": "scored"}[fields[rel]]
+            assert rel in body and digest in body and f"· {verb} <b>" in body, pg
+            assert f"{fields[rel]} <b>" not in body or fields[rel] == verb, pg                  # never the raw field name
+            assert "UTC" not in body.split("<style>")[0] or "IST" not in body.split("<style>")[0], pg
             assert str((ROOT / rel).stat().st_mtime)[:6] not in body and "modified" not in body, pg   # never a file time
             stored = json.loads((ROOT / rel).read_text())[fields[rel]]
             assert (stored[:10] in body) or fields[rel] == "built_utc", pg

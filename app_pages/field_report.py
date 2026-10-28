@@ -73,14 +73,13 @@ def leak_chart(rows):
     tip = ["Check:N", "Setting:N", "Count:N", alt.Tooltip("Leak rate:Q", format=".0%"), "Interval:N"]
     bars = base.mark_bar(cornerRadiusTopLeft=3, cornerRadiusTopRight=3, width={"band": 0.8}).encode(
         y=y, color=alt.Color("Setting:N", sort=order, title=None, legend=alt.Legend(orient="top"),
-                             scale=alt.Scale(domain=order, range=["#dc2626", "#2563eb"])), tooltip=tip)
+                             scale=alt.Scale(domain=order, range=["#dc2626", "#16a34a"])), tooltip=tip)
     # whiskers: zinc 500 is 4.8:1 on white and 4.1:1 on the dark background (>= 3:1 for graphics)
     err = base.mark_rule(strokeWidth=1.5, color="#71717a").encode(y="lo:Q", y2="hi:Q", tooltip=tip)
     caps = base.mark_tick(thickness=1.5, size=10, color="#71717a").encode(y="hi:Q")
     dark = dark_theme()
-    # a zero-height bar draws nothing: a short thick tick on the baseline marks it (blue, >= 3:1 in both themes)
-    zero = base.transform_filter("datum.zero === 0").mark_tick(thickness=3, size=28, color="#60a5fa" if dark
-                                                                else "#2563eb").encode(y="zero:Q", tooltip=tip)
+    # a zero-height bar draws nothing: a short thick tick on the baseline marks it (time-lock green, as on the Leak demo)
+    zero = base.transform_filter("datum.zero === 0").mark_tick(thickness=3, size=28, color="#16a34a").encode(y="zero:Q", tooltip=tip)
     # value labels above each whisker, in the page's ink colour (>= 4.5:1 in the theme the viewer has)
     labels = base.mark_text(dy=-9, fontSize=13, fontWeight=600, color="#fafafa" if dark else "#09090b").encode(
         y="hi:Q", text="Label:N")

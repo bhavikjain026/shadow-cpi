@@ -120,7 +120,9 @@ def first_screen(page, url, path):
     page.locator('.st-key-interval-chart canvas, .st-key-interval-chart svg').first.wait_for(timeout=60_000)
     page.wait_for_timeout(1500)                                    # web fonts and the theme sync settle
     page.evaluate("window.scrollTo(0, 0)")
-    page.screenshot(path=str(path))
+    # the crop ends just below the Field Report / GitHub button row (full width, no partial code block under it)
+    bottom = page.locator(".st-key-brand-links").bounding_box()
+    page.screenshot(path=str(path), clip={"x": 0, "y": 0, "width": W, "height": int(bottom["y"] + bottom["height"] + 12)})
 
 
 def app_shot(page, url, heading, path):

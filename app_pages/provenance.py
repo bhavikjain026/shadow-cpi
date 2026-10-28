@@ -30,9 +30,13 @@ def generated(rel, field):
     return when.astimezone(IST).strftime("%Y-%m-%d %H:%M IST") if when.tzinfo else when.strftime("%Y-%m-%d %H:%M")
 
 
+# the word shown before the time, per stored field (never the raw field name)
+VERB = {"built_utc": "built", "built": "built", "scored_at_utc": "scored", "sealed_at_utc": "sealed"}
+
+
 def provenance(rel, field=None):
     """A small muted monospace line under a result: 'source results/x.json · sha256 1a2b3c4d5e6f · generated <field>
-    2026-10-26 …'. `field` names the key inside the file that holds its generation time; leave it out (or when the file
+    2026-10-27 00:31 IST' (UTC timestamps converted to IST and labelled IST; a bare date shown as written). `field` names the key inside the file that holds its generation time; leave it out (or when the file
     has none) and only the path and the SHA-256 show."""
     p = path(rel)
     if not p.exists():
@@ -40,7 +44,7 @@ def provenance(rel, field=None):
     line = f'source <b>{rel}</b> · sha256 <b>{_sha(rel, p.stat().st_mtime)}</b>'
     when = generated(rel, field)
     if when:
-        line += f' · {field} <b>{when}</b>'
+        line += f' · {VERB.get(field, "generated")} <b>{when}</b>'
     st.html(f'<p class="provenance">{line}</p>')
 
 

@@ -202,13 +202,15 @@ def test_devpost_opens_with_the_finding_and_the_reuse(values):
 
 
 def test_gallery_images_and_captions():
-    """docs/gallery: four 1600x900 PNGs, each shown in the captions file; the R196 caption matches the asof demo."""
+    """docs/gallery: four 1600 px wide PNGs (1600x900, except the opening screen, cropped just below its button row),
+    each shown in the captions file; the R196 caption matches the asof demo."""
     from PIL import Image
     readme = (ROOT / "docs/gallery/README.md").read_text()
     pngs = sorted((ROOT / "docs/gallery").glob("*.png"))
     assert len(pngs) == 4
     for p in pngs:
-        assert Image.open(p).size == (1600, 900), p.name
+        w, h = Image.open(p).size
+        assert w == 1600 and (h == 900 or (p.name == "1_leak_demo.png" and 600 <= h <= 900)), p.name
         assert f"]({p.name})" in readme, p.name
     demo = S.load("results/asof_demo_r196.json")
     assert f"**{demo['as_of']['provenance']['reason']}**" in readme

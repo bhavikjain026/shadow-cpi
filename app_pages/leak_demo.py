@@ -246,7 +246,8 @@ def interval_chart(t):
                      "label": f"{k}/{n}", "interval": f"{pct(lo)}–{pct(hi)}"})
     ink = "#fafafa" if dark_theme() else "#09090b"
     muted = "#a1a1aa" if dark_theme() else "#52525b"
-    base = alt.Chart(pd.DataFrame(rows)).encode(y=alt.Y("Group:N", sort=None, axis=None))
+    base = alt.Chart(pd.DataFrame(rows)).encode(y=alt.Y("Group:N", sort=None, axis=None,
+                                                     scale=alt.Scale(paddingInner=0.5, paddingOuter=0.35)))
     x = alt.X("rate:Q", scale=alt.Scale(domain=[0, 1]), title=["Share of cases with post-cutoff results", "(Wilson 95% CI)"],
               axis=alt.Axis(format="%", grid=False, tickCount=5, labelColor=muted, titleColor=ink))
     tip = ["Group:N", alt.Tooltip("rate:Q", format=".0%", title="Observed"), alt.Tooltip("interval:N", title="95% CI")]
@@ -255,12 +256,12 @@ def interval_chart(t):
     rule = base.mark_rule(strokeWidth=3).encode(x=alt.X("lo:Q", scale=alt.Scale(domain=[0, 1])), x2="hi:Q",
                                                 color=colour, tooltip=tip)
     dot = base.mark_point(filled=True, size=140, opacity=1, clip=False).encode(x=x, color=colour, tooltip=tip)
-    name = base.mark_text(align="left", baseline="bottom", dx=8, dy=-12, fontSize=13, fontWeight=600, color=ink).encode(
+    name = base.mark_text(align="left", baseline="bottom", dx=8, dy=-10, fontSize=13, fontWeight=600, color=ink).encode(
         x=alt.value(0), text="Group:N")
     end = base.mark_text(align="left", baseline="middle", dx=10, fontSize=13, color=ink).encode(
         x="hi:Q", text="label:N")
     with st.container(border=True, key="interval-chart"):
-        altair_chart((zero + rule + dot + name + end).properties(height=200).configure_view(stroke=None),
+        altair_chart((zero + rule + dot + name + end).properties(height=300).configure_view(stroke=None),
                         width="stretch")
         st.caption("The dots show observed rates and the lines show 95% intervals. A zero count means the true rate "
                    "is plausibly below the upper bound, not that leaks are impossible.")
