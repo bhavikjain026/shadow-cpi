@@ -91,6 +91,9 @@
    Border colours are mid tones that clear 3:1 on both the light and dark backgrounds. */
 [class*="st-key-card-"] { padding: 10px 12px; gap: 6px; }
 [class*="st-key-card-"] [data-testid="stMarkdownContainer"] p { margin-bottom: 0; }
+/* Streamlit pulls each markdown block up by 1rem to cancel the p margin removed above;
+   without this a two-line headline runs under the chip row. */
+[class*="st-key-card-"] [data-testid="stMarkdownContainer"] { margin-bottom: 0; }
 [class*="st-key-card-"] [data-testid="stExpander"] details { border: 0; }
 [class*="st-key-card-"] [data-testid="stExpander"] summary { padding: 2px 0; font-size: 0.875rem; }
 [class*="st-key-card-leak-"] {
