@@ -216,3 +216,24 @@ def test_runs_once_and_only_on_the_frozen_cases(monkeypatch, tmp_path):
     monkeypatch.setattr(R, "CASES", bad)
     with pytest.raises(SystemExit, match="does not match"):
         R.main()
+
+
+def test_addendum_on_the_committed_run_is_computed_not_typed():
+    out = json.loads(R.OUT.read_text())
+    reuse = R.cache_reuse(out)
+    assert sorted((x["case"], x["from_pilot"]) for x in reuse) == [
+        ("RR-F1", True), ("RR-F2", True), ("RR-F4", True), ("VE05", False)]
+    assert next(x for x in reuse if x["case"] == "VE05")["source"] == "RR-L1 arm A"
+    assert {x["source"] for x in reuse if x["from_pilot"]} == {"date test F3 arm A"}
+    assert all(x["arm"] == "A" for x in reuse)                                          # C was all fresh
+    text = "\n".join(R.addendum(out))
+    assert "Not pre-registered, descriptive." in text and "A 11 of 19" in text and "C 0 of 19" in text
+    assert "A 10 of 18" in text and "includes the reused pilot response" in text and "(23 of 42)" in text
+    assert out["metrics"]["price"]["arms"]["A"]["leak_cases"] == 14                     # primary numbers unchanged
+    md = R.OUT.with_suffix(".md").read_text()
+    assert text.strip() in md and "arm A leaked in 14 of 22" in md
+
+
+def test_addendum_is_empty_without_cache_hits():
+    out = json.loads(R.OUT.read_text())
+    assert R.addendum(out, ledger=[]) == []

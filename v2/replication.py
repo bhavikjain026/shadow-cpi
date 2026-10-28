@@ -255,9 +255,11 @@ def wayback_retry(rec, out, sleep=time.sleep):
 
 
 # ---------- metrics ----------
-def metrics(out, kind, only=None):
-    """only: a case-id prefix (the sensitivity subset 'RR-', the 9 hand-built reference cases)."""
-    rows = [r for r in out["rows"] if r["type"] == kind and (only is None or r["id"].startswith(only))]
+def metrics(out, kind, only=None, drop=()):
+    """only: a case-id prefix (the sensitivity subset 'RR-', the 9 hand-built reference cases); drop: case ids left
+    out (descriptive addendum only)."""
+    rows = [r for r in out["rows"] if r["type"] == kind and (only is None or r["id"].startswith(only))
+            and r["id"] not in drop]
     n = len(rows)
     kept = {a: {row["id"]: row["arms"].get(a, {}).get("results", []) for row in rows} for a in ARMS}
     by = {row["id"]: row for row in rows}
@@ -401,6 +403,64 @@ def report(out):
     return "\n".join(L) + "\n"
 
 
+# ---------- addendum (logged 2026-10-28, after the results; descriptive) ----------
+def cache_reuse(out, ledger=None):
+    """Searches served from the Recorder cache in this run (ledger rows charged to 'replication' with 'cached'), each
+    with the earlier response it reused: the pilot's (same request_id as a date-test call) or this run's."""
+    from shadow_cpi.budget import read_ledger
+    led = ledger if ledger is not None else read_ledger()
+    cached = {e["call_id"] for e in led if BUDGET in e["budgets"] and e.get("cached")}
+    pilot = {a["request_id"]: f"date test {row['id']} arm {k}"
+             for row in json.loads(DT.OUT.read_text(encoding="utf-8"))["rows"]
+             for k, a in row["arms"].items() if a.get("request_id")}
+    fresh = {a["request_id"]: f"{row['id']} arm {k}" for row in out["rows"] for k, a in row["arms"].items()
+             if a.get("call") not in cached and a.get("request_id")}
+    reuse = []
+    for row in out["rows"]:
+        for k, a in row["arms"].items():
+            if a.get("call") in cached:
+                rid = a.get("request_id")
+                reuse.append({"case": row["id"], "arm": k, "call": a["call"], "request_id": rid,
+                              "from_pilot": rid in pilot, "source": pilot.get(rid) or fresh.get(rid, "unknown"),
+                              "leak": any(is_leak(row, r) for r in a["results"])})
+    return reuse
+
+
+def addendum(out, ledger=None):
+    reuse = cache_reuse(out, ledger)
+    if not reuse:
+        return []
+    pilot_ids = tuple(x["case"] for x in reuse if x["from_pilot"])
+    all_ids = tuple(x["case"] for x in reuse)
+    fmt = lambda r, a: (f"{r['arms'][a]['leak_cases']} of {r['cases']} ({pct(r['arms'][a]['leak_case_wilson95'][0])}–"  # noqa: E731
+                        f"{pct(r['arms'][a]['leak_case_wilson95'][1])})")
+    L = ["", "## Addendum: cache-served arm-A responses (logged 2026-10-28, after the results; descriptive, offline, "
+             "0 credits; nothing above changes)", "",
+         f"Every outside call goes through the Recorder cache. {len(reuse)} of the 44 searches were served from it, "
+         "all in arm A (no dates: the same query and parameters as an earlier call). Arm C's searches were all fresh.",
+         ""]
+    for x in reuse:
+        L.append(f"- **{x['case']} arm {x['arm']}** reused the response of {x['source']} (request {x['request_id']})"
+                 + ("; that is the pilot's search of 22 Oct" if x["from_pilot"] else "; same run")
+                 + f"; confirmed leak in this case: {'yes' if x['leak'] else 'no'}.")
+    m3, m4 = metrics(out, "price", drop=pilot_ids), metrics(out, "price", drop=all_ids)
+    L += ["", f"**Not pre-registered, descriptive.** Without the {len(pilot_ids)} cases that reused the pilot's "
+              f"response ({', '.join(pilot_ids)}): A {fmt(m3, 'A')}, C {fmt(m3, 'C')}; exact McNemar p = "
+              f"{pval(m3['a_vs_c_mcnemar']['p_exact'])}. Without all {len(all_ids)} cache-served cases: "
+              f"A {fmt(m4, 'A')}, C {fmt(m4, 'C')}; exact McNemar p = {pval(m4['a_vs_c_mcnemar']['p_exact'])}."]
+    reused_pilot = {x["source"] for x in reuse if x["from_pilot"]}
+    leaks, _ = pilot_leaks()["price"]
+    pc = sum(x["leak"] for x in reuse if x["from_pilot"])
+    for src in sorted(reused_pilot):
+        pid = src.split()[2]
+        L += ["", f"**Pooled count:** the pooled arm-A count above ({out['pooled']['price']['arms']['A']['leak_cases']} "
+                  f"of {out['pooled']['price']['arms']['A']['cases']}) includes the reused pilot response: {src} is "
+                  f"{'one of the pilot' + chr(39) + 's confirmed-leak cases' if pid in leaks['A'] else 'a pilot case'}"
+                  f", and the same response counts again in {pc} replication case{'s' if pc != 1 else ''} "
+                  f"({', '.join(pilot_ids)}), with each case's own cutoff."]
+    return L
+
+
 # ---------- plan ----------
 def plan_text(cases, dropped):
     from shadow_cpi.budget import load_budget, spent
@@ -436,7 +496,7 @@ def main():
         return
     if "--report" in sys.argv:                     # offline: rewrite the .md from the saved results (0 credits)
         out = json.loads(OUT.read_text(encoding="utf-8"))
-        OUT.with_suffix(".md").write_text(report(out))
+        OUT.with_suffix(".md").write_text(report(out).rstrip("\n") + "\n" + "\n".join(addendum(out)) + "\n")
         return
     if OUT.exists():
         raise SystemExit(f"{OUT} exists: the replication runs once")

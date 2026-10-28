@@ -28,3 +28,16 @@ Sensitivity (pre-registered): the 9 hand-built reference cases alone: A 7 of 9 (
 
 - date-test rule (v2/DATE_TEST_PREREG.md): 20 pilot + 22 replication cases. A 23 of 42 (40%–69%); C 0 of 42 (0%–8%); exact McNemar p = 2.4e-07.
 - finance rule (v2/FINANCE_PREREG.md): 14 pilot + 0 replication cases. A 2 of 14 (4%–40%); C 0 of 14 (0%–22%); exact McNemar p = 0.5000.
+
+## Addendum: cache-served arm-A responses (logged 2026-10-28, after the results; descriptive, offline, 0 credits; nothing above changes)
+
+Every outside call goes through the Recorder cache. 4 of the 44 searches were served from it, all in arm A (no dates: the same query and parameters as an earlier call). Arm C's searches were all fresh.
+
+- **VE05 arm A** reused the response of RR-L1 arm A (request 9a47ee67-e33d-455f-aaf7-bbe77eca42a4); same run; confirmed leak in this case: yes.
+- **RR-F1 arm A** reused the response of date test F3 arm A (request 100cdaa0-7de1-46d5-b1e8-db0fe10fb1e2); that is the pilot's search of 22 Oct; confirmed leak in this case: yes.
+- **RR-F2 arm A** reused the response of date test F3 arm A (request 100cdaa0-7de1-46d5-b1e8-db0fe10fb1e2); that is the pilot's search of 22 Oct; confirmed leak in this case: yes.
+- **RR-F4 arm A** reused the response of date test F3 arm A (request 100cdaa0-7de1-46d5-b1e8-db0fe10fb1e2); that is the pilot's search of 22 Oct; confirmed leak in this case: yes.
+
+**Not pre-registered, descriptive.** Without the 3 cases that reused the pilot's response (RR-F1, RR-F2, RR-F4): A 11 of 19 (36%–77%), C 0 of 19 (0%–17%); exact McNemar p = 0.0010. Without all 4 cache-served cases: A 10 of 18 (34%–75%), C 0 of 18 (0%–18%); exact McNemar p = 0.0020.
+
+**Pooled count:** the pooled arm-A count above (23 of 42) includes the reused pilot response: date test F3 arm A is one of the pilot's confirmed-leak cases, and the same response counts again in 3 replication cases (RR-F1, RR-F2, RR-F4), with each case's own cutoff.
