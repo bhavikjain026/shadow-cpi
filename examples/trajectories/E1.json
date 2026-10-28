@@ -1,0 +1,180 @@
+{
+ "counts": {
+  "date_flag": 0,
+  "dropped": 0,
+  "kept": 3,
+  "leak": 0,
+  "results": 3,
+  "safe": 3
+ },
+ "cutoff": "2026-04-29",
+ "evidence": {
+  "dropped": [],
+  "kept": [
+   {
+    "as_of_verified": false,
+    "dates": [
+     "2026-04-01"
+    ],
+    "quote": "# UK businesses face rising electricity costs as network charges increase under new price control period.",
+    "rank": 1,
+    "step": 1,
+    "url": "https://www.edie.net/partner-content/uk-businesses-face-rising-electricity-costs-as-network-charges-increase-under-new-price-control-period/",
+    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+   },
+   {
+    "as_of_verified": false,
+    "dates": [
+     "2026-04-06"
+    ],
+    "quote": "# Energy bills forecast to hit almost £2,000 for UK households from this date.",
+    "rank": 2,
+    "step": 1,
+    "url": "https://www.birminghammail.co.uk/news/cost-of-living/energy-bills-forecast-hit-almost-33692661",
+    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+   },
+   {
+    "as_of_verified": false,
+    "dates": [
+     "2026-04-12"
+    ],
+    "quote": "The View From India Looking at World Affairs from the Indian perspective.SEE ALL NEWSLETTERS.",
+    "rank": 3,
+    "step": 1,
+    "url": "https://www.thehindu.com/sci-tech/agriculture/lack-of-funds-wont-hamper-growth-of-agriculture-sector-says-rajnath-singh/article70851063.ece",
+    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+   }
+  ]
+ },
+ "format": "timelock-trajectory/1",
+ "mode": "replay",
+ "receipt": {
+  "algorithm": "sha256",
+  "over": "the trajectory without 'receipt', JSON sorted keys, no spaces",
+  "sha256": "96897ea855b2871a5d826e85a49405244fb3aa71e3205306fab55010999b9317"
+ },
+ "require_as_of": false,
+ "results": [
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "the live page states no published/updated date",
+     "Wayback lookup failed"
+    ],
+    "page_date": null,
+    "reason": "no as-of copy",
+    "request_id": "8f98a608-eac5-4b94-85f1-53a3da219dc6",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": null,
+   "published_date": "2026-04-01",
+   "quote": "# UK businesses face rising electricity costs as network charges increase under new price control period.",
+   "quote_from": "snippet",
+   "rank": 1,
+   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "search_label": "safe",
+   "step": 1,
+   "title": "UK businesses face rising electricity costs as network charges increase under new price control period - edie.net",
+   "url": "https://www.edie.net/partner-content/uk-businesses-face-rising-electricity-costs-as-network-charges-increase-under-new-price-control-period/",
+   "url_date": null,
+   "verdict": "safe"
+  },
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "the live page states no published/updated date",
+     "Wayback lookup failed"
+    ],
+    "page_date": null,
+    "reason": "no as-of copy",
+    "request_id": "8f98a608-eac5-4b94-85f1-53a3da219dc6",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": null,
+   "published_date": "2026-04-06",
+   "quote": "# Energy bills forecast to hit almost £2,000 for UK households from this date.",
+   "quote_from": "snippet",
+   "rank": 2,
+   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "search_label": "safe",
+   "step": 1,
+   "title": "Energy bills forecast to hit almost £2,000 for UK households from this date - Birmingham Live",
+   "url": "https://www.birminghammail.co.uk/news/cost-of-living/energy-bills-forecast-hit-almost-33692661",
+   "url_date": null,
+   "verdict": "safe"
+  },
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "Wayback lookup failed"
+    ],
+    "page_date": "2026-04-12",
+    "reason": "no as-of copy",
+    "request_id": "8f98a608-eac5-4b94-85f1-53a3da219dc6",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": "2026-04-12",
+   "published_date": "2026-04-12",
+   "quote": "The View From India Looking at World Affairs from the Indian perspective.SEE ALL NEWSLETTERS.",
+   "quote_from": "snippet",
+   "rank": 3,
+   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "search_label": "safe",
+   "step": 1,
+   "title": "Lack of funds won’t hamper growth of agriculture sector, says Rajnath Singh - The Hindu",
+   "url": "https://www.thehindu.com/sci-tech/agriculture/lack-of-funds-wont-hamper-growth-of-agriculture-sector-says-rajnath-singh/article70851063.ece",
+   "url_date": null,
+   "verdict": "safe"
+  }
+ ],
+ "searches": [
+  {
+   "n_results": 3,
+   "params": {
+    "end_date": "2026-04-29",
+    "filter_by_published_date": true,
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "include_published_date": true,
+    "max_results": 3,
+    "search_depth": "basic",
+    "start_date": "2026-04-01",
+    "topic": "news"
+   },
+   "query": "electricity tariff hike Madhya Pradesh April 2026",
+   "request_id": "98a19b8a-7065-4f72-9790-2cc7420f7379",
+   "response_sha256": "d9dca9a1fc9576f4f227cea304f57e3aa8d0dbd30f6e5a0eebd8f0523f1a1d63",
+   "step": 1,
+   "window": [
+    "2026-04-01",
+    "2026-04-29"
+   ]
+  }
+ ],
+ "task": {
+  "question": "electricity tariff hike Madhya Pradesh April 2026",
+  "source": "TimeLock-34 E1 (date_test), arm dates_filter"
+ }
+}

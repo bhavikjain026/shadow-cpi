@@ -1,0 +1,233 @@
+{
+ "counts": {
+  "date_flag": 0,
+  "dropped": 1,
+  "kept": 4,
+  "leak": 1,
+  "results": 5,
+  "safe": 4
+ },
+ "cutoff": "2026-10-07",
+ "evidence": {
+  "dropped": [
+   {
+    "rank": 2,
+    "step": 1,
+    "url": "https://upstox.com/news/market-news/stocks/tcs-q2-results-in-focus-five-key-things-investors-need-to-track-in-quarterly-earnings-on-october-8/article-201477",
+    "why": "leak: a date after the cutoff"
+   }
+  ],
+  "kept": [
+   {
+    "as_of_verified": false,
+    "dates": [
+     "2026-10-01"
+    ],
+    "quote": "Kotak expects Infosys to reduce the upper end of its FY27 growth guidance, highlighting the importance of what TCS says about demand and the second…",
+    "rank": 1,
+    "step": 1,
+    "url": "https://www.niftytrader.in/markets/tcs-q2-results-fy27-deal-expectations",
+    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+   },
+   {
+    "as_of_verified": false,
+    "dates": [
+     "2026-09-28"
+    ],
+    "quote": "Leading the pack, Tata Consultancy Services (TCS) is estimated to post a marginal 0.5 per cent sequential constant-currency revenue growth, navigating a muted environment despite…",
+    "rank": 3,
+    "step": 1,
+    "url": "https://enterpriseai.economictimes.indiatimes.com/news/industry/q2-fy27-preview-infosys-tcs-hcl-tech-peers-brace-for-subdued-growth-amid-ai-pressure/134541080",
+    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+   },
+   {
+    "as_of_verified": true,
+    "dates": [
+     "2026-10-06"
+    ],
+    "quote": "Key monitorables in TCS Q2 results include:i) anticipated impact of furloughs in Q3 and possibility of growth uptick and discretionary spending recovery in the second…",
+    "rank": 4,
+    "step": 1,
+    "url": "https://www.business-standard.com/markets/news/tcs-q2-results-earnings-preview-expectation-dividend-announcement-record-date-2026-revenue-growth-pat-126100600110_1.html",
+    "why": "safe by every date; page read as of the cutoff (tavily_live)"
+   },
+   {
+    "as_of_verified": false,
+    "dates": [
+     "2026-09-24"
+    ],
+    "quote": "TCS will be the first among the five IT companies to report its Q2 FY27 results on Oct.",
+    "rank": 5,
+    "step": 1,
+    "url": "https://www.ndtvprofit.com/markets/it-q2-results-fy27-tcs-infosys-hcltech-coforge-tata-technologies-announce-schedule-12089821",
+    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+   }
+  ]
+ },
+ "format": "timelock-trajectory/1",
+ "mode": "replay",
+ "receipt": {
+  "algorithm": "sha256",
+  "over": "the trajectory without 'receipt', JSON sorted keys, no spaces",
+  "sha256": "365ea41e5e6d13a7de3cf7fab2fa224158215dd04ece05b728d8b5a026d34f05"
+ },
+ "require_as_of": false,
+ "results": [
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "the live page states no published/updated date",
+     "Wayback lookup failed"
+    ],
+    "page_date": null,
+    "reason": "no as-of copy",
+    "request_id": "fd7a065f-7cf9-48c9-821b-6dcf21b9d599",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": null,
+   "published_date": "2026-10-01",
+   "quote": "Kotak expects Infosys to reduce the upper end of its FY27 growth guidance, highlighting the importance of what TCS says about demand and the second…",
+   "quote_from": "snippet",
+   "rank": 1,
+   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "search_label": "safe",
+   "step": 1,
+   "title": "TCS Q2 Results FY27: October 8 Date, Revenue, Margin and Porsche Deal Expectations",
+   "url": "https://www.niftytrader.in/markets/tcs-q2-results-fy27-deal-expectations",
+   "url_date": null,
+   "verdict": "safe"
+  },
+  {
+   "decision": "dropped",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "page date 2026-10-08 is after the cutoff",
+     "Wayback lookup failed"
+    ],
+    "page_date": "2026-10-08",
+    "reason": "no as-of copy",
+    "request_id": "fd7a065f-7cf9-48c9-821b-6dcf21b9d599",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": "2026-10-08",
+   "published_date": "2026-10-07",
+   "quote": "Twitter Page",
+   "quote_from": "snippet",
+   "rank": 2,
+   "reason": "leak: a date after the cutoff",
+   "search_label": "safe",
+   "step": 1,
+   "title": "TCS Q2 results in focus: Five key things investors need to track in quarterly earnings on October 8",
+   "url": "https://upstox.com/news/market-news/stocks/tcs-q2-results-in-focus-five-key-things-investors-need-to-track-in-quarterly-earnings-on-october-8/article-201477",
+   "url_date": null,
+   "verdict": "leak"
+  },
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "Wayback lookup failed"
+    ],
+    "page_date": "2026-09-28",
+    "reason": "no as-of copy",
+    "request_id": "fd7a065f-7cf9-48c9-821b-6dcf21b9d599",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": "2026-09-28",
+   "published_date": "2026-09-28",
+   "quote": "Leading the pack, Tata Consultancy Services (TCS) is estimated to post a marginal 0.5 per cent sequential constant-currency revenue growth, navigating a muted environment despite…",
+   "quote_from": "snippet",
+   "rank": 3,
+   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "search_label": "safe",
+   "step": 1,
+   "title": "Q2 FY27 Preview: IT Giants Infosys, TCS, HCL Tech Brace for Subdued Earnings Amid AI Challenges, ETEnterpriseai",
+   "url": "https://enterpriseai.economictimes.indiatimes.com/news/industry/q2-fy27-preview-infosys-tcs-hcl-tech-peers-brace-for-subdued-growth-amid-ai-pressure/134541080",
+   "url_date": null,
+   "verdict": "safe"
+  },
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": "2026-10-26T11:45:29Z",
+    "change_signals": [],
+    "page_date": "2026-10-06",
+    "reason": "no sign the page changed after the cutoff (page date 2026-10-06; 7 Wayback captures, none differing after the cutoff)",
+    "request_id": "7d059387-a1a7-4141-a120-b4d62ecfd71d",
+    "status": "tavily_live",
+    "text_sha256": "672869135704386e851bb4e4b34f42efd393e2b8ccc12a0d61373175f0042aa1"
+   },
+   "page_date": "2026-10-06",
+   "published_date": "2026-10-06",
+   "quote": "Key monitorables in TCS Q2 results include:i) anticipated impact of furloughs in Q3 and possibility of growth uptick and discretionary spending recovery in the second…",
+   "quote_from": "snippet",
+   "rank": 4,
+   "reason": "safe by every date; page read as of the cutoff (tavily_live)",
+   "search_label": "safe",
+   "step": 1,
+   "title": "TCS Q2 preview, dividend: Analysts see modest growth; PAT may rise by 13% | Markets News - Business Standard",
+   "url": "https://www.business-standard.com/markets/news/tcs-q2-results-earnings-preview-expectation-dividend-announcement-record-date-2026-revenue-growth-pat-126100600110_1.html",
+   "url_date": null,
+   "verdict": "safe"
+  },
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "Wayback lookup failed"
+    ],
+    "page_date": "2026-09-24",
+    "reason": "no as-of copy",
+    "request_id": "7d059387-a1a7-4141-a120-b4d62ecfd71d",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": "2026-09-24",
+   "published_date": "2026-09-24",
+   "quote": "TCS will be the first among the five IT companies to report its Q2 FY27 results on Oct.",
+   "quote_from": "snippet",
+   "rank": 5,
+   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "search_label": "safe",
+   "step": 1,
+   "title": "IT Q2 Results FY27: TCS, Infosys, HCLTech, Coforge, Tata Tech Announce Earnings Dates",
+   "url": "https://www.ndtvprofit.com/markets/it-q2-results-fy27-tcs-infosys-hcltech-coforge-tata-technologies-announce-schedule-12089821",
+   "url_date": null,
+   "verdict": "safe"
+  }
+ ],
+ "searches": [
+  {
+   "n_results": 5,
+   "params": {
+    "end_date": "2026-10-07",
+    "filter_by_published_date": true,
+    "include_published_date": true,
+    "max_results": 5,
+    "search_depth": "basic",
+    "start_date": "2026-09-08",
+    "topic": "news"
+   },
+   "query": "TCS Q2 FY27 quarterly results",
+   "request_id": "e9ee3c96-7f31-43d4-b233-de2633c39d4a",
+   "response_sha256": "b116d82addb6fb7bb23a2d9830948539919e0134b5890afe22e3a54869174dc6",
+   "step": 1,
+   "window": [
+    "2026-09-08",
+    "2026-10-07"
+   ]
+  }
+ ],
+ "task": {
+  "question": "TCS Q2 FY27 quarterly results",
+  "source": "TimeLock-34 C6 (finance), arm dates_filter"
+ }
+}

@@ -1,0 +1,180 @@
+{
+ "counts": {
+  "date_flag": 0,
+  "dropped": 0,
+  "kept": 3,
+  "leak": 0,
+  "results": 3,
+  "safe": 3
+ },
+ "cutoff": "2026-06-29",
+ "evidence": {
+  "dropped": [],
+  "kept": [
+   {
+    "as_of_verified": false,
+    "dates": [
+     "2026-06-01"
+    ],
+    "quote": "Several sectors, particularly transport and agriculture, expect a significant impact from the latest fuel price increase that came into effect yesterday (31), with industry representatives…",
+    "rank": 1,
+    "step": 1,
+    "url": "https://hirunews.lk/en/469567/error-error-code400messagerequired-texterrors-messagerequired-textdomainglobalreasonrequired-details-typetype-googleapis-com-google-rpc-badrequestfieldviolations-fieldqdescriptionno-text-queries-provided",
+    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+   },
+   {
+    "as_of_verified": false,
+    "dates": [
+     "2026-06-23"
+    ],
+    "quote": "The Metro-North Railroad is hiking fares 5% on the New Haven line for trips to and from Connecticut — the second big increase in less…",
+    "rank": 2,
+    "step": 1,
+    "url": "https://nypost.com/2026/06/23/us-news/some-metro-north-riders-will-get-slapped-with-another-5-rate-hike-just-as-station-closures-hit/",
+    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+   },
+   {
+    "as_of_verified": false,
+    "dates": [
+     "2026-06-18"
+    ],
+    "quote": "Transportation | Illinois drivers could face higher tolls next year.",
+    "rank": 3,
+    "step": 1,
+    "url": "https://www.chicagotribune.com/2026/06/18/illinois-drivers-higher-tolls/",
+    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+   }
+  ]
+ },
+ "format": "timelock-trajectory/1",
+ "mode": "replay",
+ "receipt": {
+  "algorithm": "sha256",
+  "over": "the trajectory without 'receipt', JSON sorted keys, no spaces",
+  "sha256": "3a73e9c29dcf89421b25e924b5870effa88efa855162f565a5d8e8796ab63038"
+ },
+ "require_as_of": false,
+ "results": [
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "the live page states no published/updated date",
+     "Wayback lookup failed"
+    ],
+    "page_date": null,
+    "reason": "no as-of copy",
+    "request_id": "ecf0e94c-93c8-4dbe-99d0-e5efe4cb491d",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": null,
+   "published_date": "2026-06-01",
+   "quote": "Several sectors, particularly transport and agriculture, expect a significant impact from the latest fuel price increase that came into effect yesterday (31), with industry representatives…",
+   "quote_from": "snippet",
+   "rank": 1,
+   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "search_label": "safe",
+   "step": 1,
+   "title": "Transport, agriculture brace for fuel price impact - Hiru News",
+   "url": "https://hirunews.lk/en/469567/error-error-code400messagerequired-texterrors-messagerequired-textdomainglobalreasonrequired-details-typetype-googleapis-com-google-rpc-badrequestfieldviolations-fieldqdescriptionno-text-queries-provided",
+   "url_date": null,
+   "verdict": "safe"
+  },
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "Wayback lookup failed"
+    ],
+    "page_date": "2026-06-23",
+    "reason": "no as-of copy",
+    "request_id": "77b92a8d-6d9c-47e8-af91-1848eff9b19b",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": "2026-06-23",
+   "published_date": "2026-06-23",
+   "quote": "The Metro-North Railroad is hiking fares 5% on the New Haven line for trips to and from Connecticut — the second big increase in less…",
+   "quote_from": "snippet",
+   "rank": 2,
+   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "search_label": "safe",
+   "step": 1,
+   "title": "Some Metro-North riders will get slapped with another 5% rate hike -- just as station closures hit - nypost.com",
+   "url": "https://nypost.com/2026/06/23/us-news/some-metro-north-riders-will-get-slapped-with-another-5-rate-hike-just-as-station-closures-hit/",
+   "url_date": "2026-06-23",
+   "verdict": "safe"
+  },
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "the live page states no published/updated date",
+     "Wayback lookup failed"
+    ],
+    "page_date": null,
+    "reason": "no as-of copy",
+    "request_id": "77b92a8d-6d9c-47e8-af91-1848eff9b19b",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": null,
+   "published_date": "2026-06-18",
+   "quote": "Transportation | Illinois drivers could face higher tolls next year.",
+   "quote_from": "snippet",
+   "rank": 3,
+   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "search_label": "safe",
+   "step": 1,
+   "title": "Illinois drivers could face higher tolls next year - Chicago Tribune",
+   "url": "https://www.chicagotribune.com/2026/06/18/illinois-drivers-higher-tolls/",
+   "url_date": "2026-06-18",
+   "verdict": "safe"
+  }
+ ],
+ "searches": [
+  {
+   "n_results": 3,
+   "params": {
+    "end_date": "2026-06-29",
+    "filter_by_published_date": true,
+    "include_domains": [
+     "economictimes.indiatimes.com",
+     "m.economictimes.com",
+     "thehindu.com",
+     "indianexpress.com",
+     "hindustantimes.com",
+     "livemint.com",
+     "business-standard.com",
+     "timesofindia.indiatimes.com",
+     "moneycontrol.com",
+     "financialexpress.com",
+     "ndtv.com",
+     "pib.gov.in"
+    ],
+    "include_domains_mode": "prefer",
+    "include_published_date": true,
+    "max_results": 3,
+    "search_depth": "basic",
+    "start_date": "2026-06-01",
+    "topic": "news"
+   },
+   "query": "bus fare hike Odisha June 2026",
+   "request_id": "eab82951-47f2-44b8-9dc8-e1bb3f9238c9",
+   "response_sha256": "e58ae466e2fcdb5e0a980ec9a3fb9da08863806f2a358e2470bdea99c3d0932a",
+   "step": 1,
+   "window": [
+    "2026-06-01",
+    "2026-06-29"
+   ]
+  }
+ ],
+ "task": {
+  "question": "bus fare hike Odisha June 2026",
+  "source": "TimeLock-34 T3 (date_test), arm dates_filter"
+ }
+}

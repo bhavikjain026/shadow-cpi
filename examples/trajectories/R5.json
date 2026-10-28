@@ -1,0 +1,240 @@
+{
+ "counts": {
+  "date_flag": 0,
+  "dropped": 0,
+  "kept": 5,
+  "leak": 0,
+  "results": 5,
+  "safe": 5
+ },
+ "cutoff": "2026-10-06",
+ "evidence": {
+  "dropped": [],
+  "kept": [
+   {
+    "as_of_verified": false,
+    "dates": [
+     "2026-10-05"
+    ],
+    "quote": "Copied",
+    "rank": 1,
+    "step": 1,
+    "url": "https://www.newindianexpress.com/business/2026/Oct/05/october-monetary-policy-meeting-why-a-25-basis-point-rate-hike-is-likely-this-time",
+    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+   },
+   {
+    "as_of_verified": false,
+    "dates": [
+     "2026-10-06"
+    ],
+    "quote": "The RBI’s six-member MPC will meet from October 5 to October 7, 2026, as part of its bi-monthly policy review.",
+    "rank": 2,
+    "step": 1,
+    "url": "https://www.business-standard.com/finance/news/rbi-mpc-october-2026-meeting-when-and-where-to-watch-rate-decision-live-126100600090_1.html",
+    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+   },
+   {
+    "as_of_verified": false,
+    "dates": [
+     "2026-09-18"
+    ],
+    "quote": "Market participants expect the Monetary Policy Committee (MPC) to deliver a 25 basis point rate hike in October 2026, followed by another 25 basis point…",
+    "rank": 3,
+    "step": 1,
+    "url": "https://www.thehindu.com/business/Economy/rbi-may-deliver-two-rate-hikes-by-cy-2026analysts/article71481500.ece",
+    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+   },
+   {
+    "as_of_verified": false,
+    "dates": [
+     "2026-09-16"
+    ],
+    "quote": "\"Overall, this would bring the RBI’s repo rate to 5.75 per cent by end-FY2026/27,” MUFG said in its report, adding that their base case was…",
+    "rank": 4,
+    "step": 1,
+    "url": "https://www.rediff.com/business/report/rbi-monetary-policy-rate-hikes-expected-in-october-and-december-amid-inflation-surge/20260916.htm",
+    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+   },
+   {
+    "as_of_verified": false,
+    "dates": [
+     "2026-09-23"
+    ],
+    "quote": "“Chances for a change in the policy stance and a 25 basis points hike in the repo rate are high in the October 2026 MPC…",
+    "rank": 5,
+    "step": 1,
+    "url": "https://timesofindia.indiatimes.com/business/india-business/your-loan-emi-has-a-washington-problem-how-the-fed-quietly-influences-rbi-rate-decisions/articleshow/134432773.cms",
+    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+   }
+  ]
+ },
+ "format": "timelock-trajectory/1",
+ "mode": "replay",
+ "receipt": {
+  "algorithm": "sha256",
+  "over": "the trajectory without 'receipt', JSON sorted keys, no spaces",
+  "sha256": "edd4c5379f4cb0eb209bfa7b743d68dd5bd98535b036466767630a5a180fcdf8"
+ },
+ "require_as_of": false,
+ "results": [
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "the live page states no published/updated date",
+     "Wayback lookup failed"
+    ],
+    "page_date": null,
+    "reason": "no as-of copy",
+    "request_id": "9bc36c1c-e338-4542-ab56-0ea6befcf002",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": null,
+   "published_date": "2026-10-05",
+   "quote": "Copied",
+   "quote_from": "snippet",
+   "rank": 1,
+   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "search_label": "safe",
+   "step": 1,
+   "title": "October monetary policy meeting: Why a 25-basis-point rate hike is likely this time",
+   "url": "https://www.newindianexpress.com/business/2026/Oct/05/october-monetary-policy-meeting-why-a-25-basis-point-rate-hike-is-likely-this-time",
+   "url_date": null,
+   "verdict": "safe"
+  },
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "Wayback lookup failed"
+    ],
+    "page_date": "2026-10-06",
+    "reason": "no as-of copy",
+    "request_id": "9bc36c1c-e338-4542-ab56-0ea6befcf002",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": "2026-10-06",
+   "published_date": "2026-10-06",
+   "quote": "The RBI’s six-member MPC will meet from October 5 to October 7, 2026, as part of its bi-monthly policy review.",
+   "quote_from": "snippet",
+   "rank": 2,
+   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "search_label": "safe",
+   "step": 1,
+   "title": "RBI MPC October 2026 meeting: When and where to watch rate decision live | Finance News - Business Standard",
+   "url": "https://www.business-standard.com/finance/news/rbi-mpc-october-2026-meeting-when-and-where-to-watch-rate-decision-live-126100600090_1.html",
+   "url_date": null,
+   "verdict": "safe"
+  },
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "Wayback lookup failed"
+    ],
+    "page_date": "2026-09-18",
+    "reason": "no as-of copy",
+    "request_id": "5f757623-a62c-4408-a35b-a91387d16602",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": "2026-09-18",
+   "published_date": "2026-09-18",
+   "quote": "Market participants expect the Monetary Policy Committee (MPC) to deliver a 25 basis point rate hike in October 2026, followed by another 25 basis point…",
+   "quote_from": "snippet",
+   "rank": 3,
+   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "search_label": "safe",
+   "step": 1,
+   "title": "RBI may deliver two rate hikes by CY 2026:Analysts - The Hindu",
+   "url": "https://www.thehindu.com/business/Economy/rbi-may-deliver-two-rate-hikes-by-cy-2026analysts/article71481500.ece",
+   "url_date": null,
+   "verdict": "safe"
+  },
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "the live page states no published/updated date",
+     "Wayback lookup failed"
+    ],
+    "page_date": null,
+    "reason": "no as-of copy",
+    "request_id": "5f757623-a62c-4408-a35b-a91387d16602",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": null,
+   "published_date": "2026-09-16",
+   "quote": "\"Overall, this would bring the RBI’s repo rate to 5.75 per cent by end-FY2026/27,” MUFG said in its report, adding that their base case was…",
+   "quote_from": "snippet",
+   "rank": 4,
+   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "search_label": "safe",
+   "step": 1,
+   "title": "RBI Monetary Policy: Rate Hikes Expected in October and December Amid Inflation Surge - Rediff.com Business",
+   "url": "https://www.rediff.com/business/report/rbi-monetary-policy-rate-hikes-expected-in-october-and-december-amid-inflation-surge/20260916.htm",
+   "url_date": null,
+   "verdict": "safe"
+  },
+  {
+   "decision": "kept",
+   "extract": {
+    "capture_time": null,
+    "change_signals": [
+     "the live page states no published/updated date",
+     "Wayback lookup failed"
+    ],
+    "page_date": null,
+    "reason": "no as-of copy",
+    "request_id": "5f757623-a62c-4408-a35b-a91387d16602",
+    "status": "refused",
+    "text_sha256": null
+   },
+   "page_date": null,
+   "published_date": "2026-09-23",
+   "quote": "“Chances for a change in the policy stance and a 25 basis points hike in the repo rate are high in the October 2026 MPC…",
+   "quote_from": "snippet",
+   "rank": 5,
+   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "search_label": "safe",
+   "step": 1,
+   "title": "Your loan EMI has a Washington problem: How the Fed quietly influences RBI rate decisions - The Times of India",
+   "url": "https://timesofindia.indiatimes.com/business/india-business/your-loan-emi-has-a-washington-problem-how-the-fed-quietly-influences-rbi-rate-decisions/articleshow/134432773.cms",
+   "url_date": null,
+   "verdict": "safe"
+  }
+ ],
+ "searches": [
+  {
+   "n_results": 5,
+   "params": {
+    "end_date": "2026-10-06",
+    "filter_by_published_date": true,
+    "include_published_date": true,
+    "max_results": 5,
+    "search_depth": "basic",
+    "start_date": "2026-09-07",
+    "topic": "news"
+   },
+   "query": "RBI monetary policy repo rate decision October 2026",
+   "request_id": "5e7387cb-67c8-455d-931d-fab9b7523f49",
+   "response_sha256": "f147da6d345b41aff5ab9c49a1802910df93c66478a7a5370ed045a3be78bde2",
+   "step": 1,
+   "window": [
+    "2026-09-07",
+    "2026-10-06"
+   ]
+  }
+ ],
+ "task": {
+  "question": "RBI monetary policy repo rate decision October 2026",
+  "source": "TimeLock-34 R5 (finance), arm dates_filter"
+ }
+}
