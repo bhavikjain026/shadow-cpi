@@ -457,6 +457,19 @@ def facts(st, as_of, root=ROOT):
     (trace,) = sorted((root / "results/app").glob("tavily_trace_*.json"))
     f["web_quotes_month"] = f"{date.fromisoformat(trace.stem.rsplit('_', 1)[1] + '-01'):%B %Y}"
 
+    # results/asof_demo_r196.json and results/asof_demo_served.json: the two extract_as_of demos (one page each)
+    refused, served = load("results/asof_demo_r196.json", root), load("results/asof_demo_served.json", root)
+    assert refused["as_of"]["provenance"]["reason"] == "no as-of copy"
+    assert served["as_of"]["provenance"]["source"] == "wayback_asof"
+    live_dates = served["live"]["post_cutoff_dates"]
+    f.update(asof_refused_row=refused["row_id"], asof_refused_cutoff=day_month(date.fromisoformat(refused["cutoff"])),
+             asof_served_case=served["case"],
+             asof_served_capture=f"{day_month(date.fromisoformat(served['as_of']['provenance']['capture_time'][:10]))} "
+                                 f"{served['as_of']['provenance']['capture_time'][:4]}",
+             asof_served_cutoff=day_month(date.fromisoformat(served["cutoff"])),
+             asof_served_live_n=len(live_dates),
+             asof_served_live_list=", ".join(f"{day_month(date.fromisoformat(d))} {d[:4]}" for d in live_dates))
+
     # examples/timelock_rbi.py: lines of code in the reusable example (blank lines and the docstring not counted)
     src = (root / "examples" / "timelock_rbi.py").read_text(encoding="utf-8")
     doc = ast.parse(src).body[0]                                     # the module docstring

@@ -1,0 +1,61 @@
+{
+ "label": "demo, n=1",
+ "run_utc": "2026-10-28T03:14:43.814388+00:00",
+ "rule": "Positive demo of timelock.extract_as_of: a page whose as-of copy exists (label: demo, n=1). Budget 'asof-demo'\nin config/budget.json (5 Tavily credits, shared with tools/asof_demo_r196.py); no Nemotron call.\n\n    python tools/asof_demo_served.py           # lists the candidates from saved files; sends nothing\n    python tools/asof_demo_served.py --live    # CDX lookups to pick the page, then one extract_as_of (1 credit)\n\nThe page is picked by a rule fixed before any call (committed with this script):\n  1. Cases from benchmarks/timelock34/cases.jsonl (the date test and the finance check), in case-id order: letter,\n     then number (C1..C14, E1..E20); results in their saved order; a URL already seen in an earlier case is skipped.\n  2. Candidate: Tavily's or the page's date is before the cutoff, and the saved Wayback capture dates include one on or\n     before the cutoff and one after it.\n  3. For each candidate in that order, a live Wayback CDX lookup (logged direct download, at most MAX_LOOKUPS): the page\n     is the one where the latest capture on or before the cutoff has a later capture with a different digest.\n  4. extract_as_of runs on that page once. If it does not serve a Wayback copy, the result is saved as it is and no\n     second page is tried.",
+ "cdx_lookups": [
+  {
+   "case": "C6",
+   "url": "https://www.business-standard.com/markets/news/tcs-q2-results-earnings-preview-expectation-dividend-announcement-record-date-2026-revenue-growth-pat-126100600110_1.html",
+   "captures": 7,
+   "passes": false
+  },
+  {
+   "case": "E2",
+   "url": "https://timesofindia.indiatimes.com/city/delhi/power-likely-to-get-costlier-as-aptel-orders-derc-to-start-liquidating-rs-39k-cr-regulatory-assets/articleshow/130399420.cms",
+   "captures": 3,
+   "passes": true
+  }
+ ],
+ "tavily_credits": 0,
+ "nemotron_calls": 0,
+ "case": "E2",
+ "dataset": "date_test",
+ "url": "https://timesofindia.indiatimes.com/city/delhi/power-likely-to-get-costlier-as-aptel-orders-derc-to-start-liquidating-rs-39k-cr-regulatory-assets/articleshow/130399420.cms",
+ "cutoff": "2026-04-29",
+ "tavily_date": "2026-04-25",
+ "saved_page_date": null,
+ "cdx_pre_cutoff_capture": "2026-04-21T03:09:19Z",
+ "cdx_later_different_capture": "2026-05-17T20:48:53Z",
+ "marker": "dates written in the text after the cutoff",
+ "live": {
+  "request_id": "45f79688-59f3-435f-9daa-b5edd10d3f43",
+  "text_sha256": "d8b728e065cfcc51b3cdb169633cc0bec5df546584d099197c28ce825b8c18da",
+  "chars": 64082,
+  "post_cutoff_dates": [
+   "2026-07-01",
+   "2031-03-31"
+  ]
+ },
+ "as_of": {
+  "provenance": {
+   "source": "wayback_asof",
+   "capture_time": "2026-04-21T03:09:19Z",
+   "reason": "may have changed after the cutoff: the live page states no published/updated date; Wayback captures after the cutoff differ from the last one on or before it"
+  },
+  "text_sha256": "13ff2c09442ddb8ebd5928bd7ef8b7c0ed72415999c8995e7f51350271bbf305",
+  "chars": 50073,
+  "post_cutoff_dates": []
+ },
+ "evidence": {
+  "tavily_date": "2026-04-25",
+  "page_date": null,
+  "captures": 3,
+  "first_capture": "2026-04-21T01:59:35Z",
+  "last_capture": "2026-05-17T20:48:53Z",
+  "last_capture_on_or_before_cutoff": "2026-04-21T03:09:19Z",
+  "changed": [
+   "the live page states no published/updated date",
+   "Wayback captures after the cutoff differ from the last one on or before it"
+  ]
+ }
+}

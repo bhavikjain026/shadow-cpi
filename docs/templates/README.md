@@ -230,18 +230,24 @@ changed after the cutoff it returns the latest Wayback capture on or before the 
 `{source: "tavily_live" | "wayback_asof", capture_time, reason}`; if there is no such capture, it returns no text
 and the reason `no as-of copy`, never the live page. Wayback is a direct download outside Tavily.
 
+Two demos (one page each, not a measurement): on {{asof_refused_row}} it refused, because the Wayback Machine holds
+no copy on or before the {{asof_refused_cutoff}} cutoff
+([`results/asof_demo_r196.json`](results/asof_demo_r196.json)). On case {{asof_served_case}}, picked by a rule fixed
+before any call, it served the {{asof_served_capture}} copy, which writes no date after the {{asof_served_cutoff}}
+cutoff, while the live Extract writes {{asof_served_live_n}} dates after it ({{asof_served_live_list}}; a date in
+the text is not always an update)
+([`results/asof_demo_served.json`](results/asof_demo_served.json)).
+
 ```python
-import sys
+from timelock import TavilyHTTP, extract_as_of, timelocked_search
 
-from timelock import TavilyHTTP, extract_as_of
-
-R196 = ("https://www.business-standard.com/markets/news/tcs-q1-result-expectations-preview-dividend-record-date-"
-        "revenue-seen-flat-wage-hikes-to-weigh-on-margins-126070700096_1.html")
-url, cutoff = (sys.argv[1], sys.argv[2]) if len(sys.argv) > 2 else (R196, "2026-07-08")
-page = extract_as_of(TavilyHTTP(), url, cutoff, published_date="2026-07-07" if url == R196 else None)  # 1 credit
-print(page["provenance"])           # source tavily_live | wayback_asof | None, capture_time, reason
-print(page["evidence"]["changed"], page["request_id"], page["live_sha256"][:12])
-print((page["text"] or "no as-of copy: do not use this page")[:500])
+client, cutoff = TavilyHTTP(), "2026-10-06"                     # 1 search credit + 1 Extract credit per page
+results = timelocked_search(client, "RBI monetary policy repo rate decision October 2026", cutoff, topic="news",
+                            max_results=3, include_published_date=True)
+for r in results:
+    page = extract_as_of(client, r["url"], cutoff, published_date=r.get("published_date"))
+    print(r["status"], r["url"], page["provenance"])
+    print((page["text"] or "no as-of copy: do not use this page")[:300])
 ```
 
 - **MCP server** [`mcp/`](mcp/README.md): `timelocked_search` and `extract_as_of` as tools for Claude Code, Claude
