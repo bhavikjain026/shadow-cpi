@@ -123,6 +123,7 @@ def test_sync_renders_with_as_of_label_and_is_idempotent(tmp_path, values):
     (tmp_path / "FEEDBACK_NOTES.md").write_text(S.render_block((ROOT / "FEEDBACK_NOTES.md").read_text(),
                                                                S.BLOCKS["FEEDBACK_NOTES.md"], "stale"))
     assert S.sync(ST, date(2026, 10, 25), root=tmp_path, values=values) == ["README.md", "docs/devpost_draft.md",
+                                                                             "docs/gallery/README.md",
                                                                              "FEEDBACK_NOTES.md"]
     readme = (tmp_path / "README.md").read_text().replace("\n", " ")
     assert "as of 25 Oct 2026" in readme and "1,234 calls sent, 900 credits used" in readme
@@ -155,8 +156,8 @@ def test_620_of_659_always_carries_its_date():
     v = S.facts(ST, date(2026, 10, 27))
     count = re.compile(r"620 of 659|620/659")
     assert (v["auto_oct"], v["auto_results"]) == ("620", "659")
-    for doc, tmpl in S.TEMPLATES.items():       # rendered from the template; sync --check ties the file to it
-        paras = [p for p in S.render((ROOT / tmpl).read_text(), v).split("\n\n") if count.search(p)]
+    for doc in ("README.md", "docs/devpost_draft.md"):     # rendered from the template; sync --check ties the file
+        paras = [p for p in S.render((ROOT / S.TEMPLATES[doc]).read_text(), v).split("\n\n") if count.search(p)]
         assert paras, doc
         assert all(v["auto_note"] in " ".join(p.split()) for p in paras), doc
         assert sum(len(count.findall(p)) for p in paras) == sum(p.count(v["auto_note"]) for p in paras), doc
@@ -166,3 +167,38 @@ def test_620_of_659_always_carries_its_date():
     spoken = datetime.strptime(v["auto_date"], "%d %b %Y")          # the voice-over says it aloud: "22 October"
     voice = [l for l in shots if "six hundred twenty of six hundred fifty-nine" in l]
     assert voice and all(f"when we tested on {spoken.day} {spoken:%B}, six hundred twenty of" in l for l in voice)
+
+
+def test_devpost_opens_with_the_finding_and_the_reuse(values):
+    """The Devpost headline: two lines, at most 40 words, the measured date-test counts and what a Tavily user can reuse."""
+    out = S.render((ROOT / "docs/templates/devpost.md").read_text(), values)
+    lines = re.search(r"<!-- headline:start -->(.*?)<!-- headline:end -->", out, re.S).group(1).strip().splitlines()
+    assert len(lines) == 2 and len(" ".join(lines).split()) <= 40
+    assert f"{values['dt_nodates_retry']} of {values['dt_cases']}" in lines[0]
+    assert f"{values['dt_dated_retry']} of {values['dt_cases']}" in lines[0]
+    assert all(w in lines[1] for w in ("timelocked_search", "extract_as_of", "Colab"))
+
+
+def test_gallery_images_and_captions():
+    """docs/gallery: four 1600x900 PNGs, each shown in the captions file; the R196 caption matches the asof demo."""
+    from PIL import Image
+    readme = (ROOT / "docs/gallery/README.md").read_text()
+    pngs = sorted((ROOT / "docs/gallery").glob("*.png"))
+    assert len(pngs) == 4
+    for p in pngs:
+        assert Image.open(p).size == (1600, 900), p.name
+        assert f"]({p.name})" in readme, p.name
+    demo = S.load("results/asof_demo_r196.json")
+    assert f"**{demo['as_of']['provenance']['reason']}**" in readme
+
+
+def test_video_reuse_shot():
+    """The reuse shot: one sentence of voice-over, at most ten words on screen, and the script still fits 2:50."""
+    rows = [[c.strip() for c in l.strip().strip("|").split("|")]
+            for l in (ROOT / "docs/video_script.md").read_text().splitlines() if re.match(r"\| \d:\d\d-", l)]
+    shot = next(r for r in rows if "extract_as_of" in r[1])
+    assert shot[2] == '"Take the time lock, the as-of reader, or run our leak check with your own Tavily key."'
+    assert all(w in shot[1] for w in ("timelocked_search", "Open in Colab"))
+    assert len(shot[3].strip('"').replace("·", " ").split()) <= 10
+    m, s = rows[-1][0].split("-")[1].split(":")
+    assert int(m) * 60 + int(s) <= 170

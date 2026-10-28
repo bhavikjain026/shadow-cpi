@@ -5,7 +5,10 @@
 > `python tools/sync_doc_numbers.py`; edit `docs/templates/devpost.md`, not this file.
 
 ## Headline
-Can a search engine keep the past in the past? We measured Tavily's date controls.
+<!-- headline:start -->
+Pre-registered pilot, no dates: 10 of 20 replay cases read a page that did not yet exist at the cutoff; with Tavily's dates and `filter_by_published_date`, 0 of 20.
+Reuse `timelocked_search`, `extract_as_of`, or the Colab leak check (your own Tavily key).
+<!-- headline:end -->
 
 ## Tagline
 An AI agent that searches the past without cheating: it uses Tavily inside a time lock it cannot move, checks every
