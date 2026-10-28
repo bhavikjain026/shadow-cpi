@@ -311,12 +311,12 @@
    },
    {
     "endpoint": "/search",
-    "calls": 1081,
-    "credits": 1152,
-    "credits_per_call": 1.0656799259944496,
+    "calls": 1123,
+    "credits": 1194,
+    "credits_per_call": 1.0632235084594834,
     "median_latency_s": 3.58,
-    "p95_latency_s": 6.202,
-    "with_latency": 1077
+    "p95_latency_s": 6.154,
+    "with_latency": 1119
    }
   ],
   "by_experiment": [
@@ -611,6 +611,16 @@
     "with_latency": 186
    },
    {
+    "experiment": "replication",
+    "endpoint": "/search",
+    "calls": 40,
+    "credits": 40,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.67,
+    "p95_latency_s": 5.148000000000001,
+    "with_latency": 40
+   },
+   {
     "experiment": "repro-kit",
     "endpoint": "/extract",
     "calls": 2,
@@ -649,6 +659,16 @@
     "median_latency_s": 2.86,
     "p95_latency_s": 3.6399999999999997,
     "with_latency": 27
+   },
+   {
+    "experiment": "try-it",
+    "endpoint": "/search",
+    "calls": 2,
+    "credits": 2,
+    "credits_per_call": 1.0,
+    "median_latency_s": 2.075,
+    "p95_latency_s": 2.2685,
+    "with_latency": 2
    },
    {
     "experiment": "v2-ablation-B",
@@ -905,12 +925,12 @@
    }
   ],
   "total": {
-   "calls": 1929,
-   "credits": 1876,
-   "credits_per_call": 0.9725246241575947,
-   "median_latency_s": 3.12,
-   "p95_latency_s": 6.049,
-   "with_latency": 1922
+   "calls": 1971,
+   "credits": 1918,
+   "credits_per_call": 0.9731100963977676,
+   "median_latency_s": 3.125,
+   "p95_latency_s": 6.0255,
+   "with_latency": 1964
   },
   "reconcile_credits": -82,
   "notes": [
@@ -1748,7 +1768,7 @@
   "arm_a_searches_per_month": 13.0,
   "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits at original cost / 9 months"
  },
- "ledger_rows": 1990,
+ "ledger_rows": 2036,
  "pages_changed": {
   "ist_date": "2026-10-28",
   "checked": 62,
