@@ -297,4 +297,5 @@ def test_doc_has_a_recheck_line_under_every_item_and_the_plain_auto_parameters_n
     assert doc.count("**Re-checked") == len(BR.REPRO) == len(check["rows"])
     nd = json.loads((ROOT / "results" / "field_report.json").read_text())["auto_parameters"]["no_dates"]
     assert ('returned undated results under topic "finance", so the original effect did not show; the original '
-            f"measurement ({nd['results_dated_oct_2026']} of {nd['results']} results dated October 2026) stands") in doc
+            f"measurement ({nd['results_dated_oct_2026']} of {nd['results']} results dated October 2026; "
+            f"{BR.auto_note()}) stands") in doc

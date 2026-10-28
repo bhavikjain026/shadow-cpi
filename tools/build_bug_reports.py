@@ -28,6 +28,18 @@ def arm_t_date():
                for f in (ROOT / "v2" / "ablation").glob("arm_T_20*.json"))
 
 
+def auto_note():
+    """The qualifier every displayed auto_parameters no-dates count carries: when arm T was measured and what the
+    one-query re-check showed since (README, Devpost, bug reports, Field Report all use this one string)."""
+    from datetime import date
+    ran = arm_t_date()
+    chk = json.loads((ROOT / "results" / "repro_check_2026-10-27.json").read_text(encoding="utf-8"))
+    row = next(r for r in chk["rows"] if r["script"] == "repro/auto_parameters_time_range.py")
+    shown = {"yes": "showed it", "no": "did not show it", "unclear": "was unclear"}[row["reproduced"]]
+    d = date.fromisoformat(chk["date"])
+    return f"measured {ran.day} {ran:%b} {ran.year}; a one-query re-check on {d.day} {d:%b} {d.year} {shown}"
+
+
 def date_lag():
     """Results whose Tavily published_date is later than the page's own published/updated date (date test)."""
     rows = load("results/date_field_test.json")["rows"]
@@ -128,7 +140,7 @@ def recheck_lines(report, check, nd):
         topic = re.search(r"'topic': '([^']+)'", echo)
         out.append(f"  Today's run returned undated results under topic \"{topic.group(1) if topic else '?'}\", so the "
                    f"original effect did not show; the original measurement ({nd['results_dated_oct_2026']} of "
-                   f"{nd['results']} results dated October 2026) stands as measured on its date.")
+                   f"{nd['results']} results dated October 2026; {auto_note()}) stands as measured on its date.")
     return out
 
 
@@ -147,20 +159,19 @@ def build():
     t_ids, td_ids = request_ids("arm_T_*.json"), request_ids("arm_Td_*.json")
     td_n, td_echo_dates = echo_dates("arm_Td_*.json")
     ex_rid, ex_sha = r196_receipt(ex)
-    t_day = arm_t_date()
     tr = lambda d: ", ".join(f"{k} {v}" for k, v in d.items())          # noqa: E731
     reports = [
         {"section": "top", "title": "auto_parameters picks a recent time_range for queries about a past month", "to": "Tavily",
          "did": f"{nd['searches']} searches with auto_parameters: true, a query naming a month in Jan–Sep 2026, and "
                 "max_results only (no dates)",
          "happened": f"auto_parameters chose time_range {tr(nd['time_range'])}; {nd['results_dated_oct_2026']} of "
-                     f"{nd['results']} results were dated October 2026 (measured {t_day.day} {t_day:%b} {t_day.year}) and "
+                     f"{nd['results']} results were dated October 2026 ({auto_note()}) and "
                      f"{nd['results_undated']} were undated",
          "expected": "a time_range that covers the month the query names, or none, with a note that a historical query "
                      "needs start_date/end_date",
          "fix": "when the query names a past month, return no time_range (or that month's window); document the "
                 "default",
-         "evidence": f"{nd['results_dated_oct_2026']} of {nd['results']} results from October 2026, "
+         "evidence": f"{nd['results_dated_oct_2026']} of {nd['results']} results from October 2026 ({auto_note()}), "
                      f"{nd['searches']} searches; {ids_text(*t_ids)}; files `v2/ablation/arm_T_*.json` "
                      "(plan[].auto_parameters, cards[].published)"},
         {"section": "top", "title": "With explicit dates, auto_parameters still reports a time_range", "to": "Tavily",

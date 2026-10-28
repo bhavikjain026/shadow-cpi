@@ -297,12 +297,13 @@ for key, title in (("H", "H: arm A's queries, Nemotron picks topic, domains, mod
                        + ", ".join(f"{k} {v}" for k, v in fv["differs_from_a"].items()) + ".")
 
 # ---------- auto_parameters ----------
+from tools.build_bug_reports import auto_note  # noqa: E402  (the qualifier the README and Devpost use)
 st.subheader("auto_parameters and dates")
 ap = r["auto_parameters"]
 nd, wd = ap["no_dates"], ap["with_dates"]
 st.markdown(f"- **No dates sent** ({nd['searches']} searches): time_range "
             + ", ".join(f"{k} {v}" for k, v in nd["time_range"].items())
-            + f"; {nd['results_dated_oct_2026']} of {nd['results']} results dated October 2026, "
+            + f"; {nd['results_dated_oct_2026']} of {nd['results']} results dated October 2026 ({auto_note()}), "
               f"{nd['results_undated']} undated. Observed in our test: a historical month needs explicit dates.")
 st.markdown(f"- **Dates sent** ({wd['searches']} searches): auto_parameters still reported time_range "
             + ", ".join(f"{k} {v}" for k, v in wd["time_range"].items())

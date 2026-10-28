@@ -5,10 +5,10 @@
    "title": "auto_parameters picks a recent time_range for queries about a past month",
    "to": "Tavily",
    "did": "72 searches with auto_parameters: true, a query naming a month in Jan–Sep 2026, and max_results only (no dates)",
-   "happened": "auto_parameters chose time_range w 57, d 14, m 1; 620 of 659 results were dated October 2026 (measured 22 Oct 2026) and 38 were undated",
+   "happened": "auto_parameters chose time_range w 57, d 14, m 1; 620 of 659 results were dated October 2026 (measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it) and 38 were undated",
    "expected": "a time_range that covers the month the query names, or none, with a note that a historical query needs start_date/end_date",
    "fix": "when the query names a past month, return no time_range (or that month's window); document the default",
-   "evidence": "620 of 659 results from October 2026, 72 searches; Tavily request IDs logged for 31 of 72 searches, e.g. `73a3cac7-ae69-4e16-847d-726c5baec6c3`, `22b874a7-56ab-4d36-b4f6-73c737b18e62`; files `v2/ablation/arm_T_*.json` (plan[].auto_parameters, cards[].published)",
+   "evidence": "620 of 659 results from October 2026 (measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it), 72 searches; Tavily request IDs logged for 31 of 72 searches, e.g. `73a3cac7-ae69-4e16-847d-726c5baec6c3`, `22b874a7-56ab-4d36-b4f6-73c737b18e62`; files `v2/ablation/arm_T_*.json` (plan[].auto_parameters, cards[].published)",
    "repro": "repro/auto_parameters_time_range.py"
   },
   {

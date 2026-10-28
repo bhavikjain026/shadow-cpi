@@ -361,8 +361,9 @@ def facts(st, as_of, root=ROOT):
     chk = load("results/repro_check_2026-10-27.json", root)
     row = next(r for r in chk["rows"] if r["script"] == "repro/auto_parameters_time_range.py")
     shown = {"yes": "showed it", "no": "did not show it", "unclear": "was unclear"}[row["reproduced"]]
-    f.update(auto_date=human(ran), recheck_date=human(date.fromisoformat(chk["date"])),
-             auto_note=f"measured {human(ran)}; a one-query re-check on {human(date.fromisoformat(chk['date']))} {shown}")
+    from build_bug_reports import auto_note
+    f.update(auto_date=human(ran), recheck_date=human(date.fromisoformat(chk["date"])), auto_note=auto_note())
+    assert shown in f["auto_note"]                       # the same re-check verdict as the row read above
     from build_bug_reports import echo_dates
     f.update(autod_searches=ap["with_dates"]["searches"],
              autod_ranges=", ".join(f"{k} {v}" for k, v in ap["with_dates"]["time_range"].items()),

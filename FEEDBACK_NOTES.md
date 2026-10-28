@@ -16,7 +16,7 @@ One row per entry, nothing new: the filed reports come from [`docs/tavily_bug_re
 
 | Priority | Product | What happens | Evidence (file or request ID) | Suggested fix |
 |---|---|---|---|---|
-| Top 3 (report 1) | Tavily | auto_parameters picks a recent time_range for queries about a past month: auto_parameters chose time_range w 57, d 14, m 1; 620 of 659 results were dated October 2026 (measured 22 Oct 2026) and 38 were undated | request ID `73a3cac7-ae69-4e16-847d-726c5baec6c3` | when the query names a past month, return no time_range (or that month's window); document the default |
+| Top 3 (report 1) | Tavily | auto_parameters picks a recent time_range for queries about a past month: auto_parameters chose time_range w 57, d 14, m 1; 620 of 659 results were dated October 2026 (measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it) and 38 were undated | request ID `73a3cac7-ae69-4e16-847d-726c5baec6c3` | when the query names a past month, return no time_range (or that month's window); document the default |
 | Top 3 (report 2) | Tavily | With explicit dates, auto_parameters still reports a time_range: the auto_parameters echo in the response reported time_range w 47, d 8, y 1, and a start_date or end_date in 0 of 56 echoes; yet 532 of 532 dated results fell inside our window, so the dates were applied | request ID `0e8e93b5-57d6-49a7-b1bf-204b2c6f4249` | echo start_date/end_date, or drop time_range from the echo, when the caller sends dates |
 | Top 3 (report 3) | Tavily | Extract has no as-of view, so Search dates do not freeze page content: 0 of 14 searches returned a result dated after the cutoff, yet 1 page's current version leaks the outcome: R196 was dated 2026-07-07 by Tavily (cutoff 2026-07-08) and updated on 2026-07-09 with a link to the actual result | request ID `dce7e851-b012-4dfe-84d4-ea43b27b1bd9` | an as-of / crawl-date field on Extract (the date of the copy returned), or an as_of parameter |
 | Feature request (report 4) | Tavily | Separate original-publication and last-modified dates: 4 had a later published_date (3 by more than 7 days; largest gap 345 days) | `results/date_field_test.json` | return original-publication and last-modified dates as two fields, and let the date filter choose |
@@ -176,7 +176,7 @@ text. The advanced call cost 1 credit. Evidence: flight-recorder ids `a8ce5681fc
 **2026-10-22 · Friction (observed in our test): auto_parameters with no dates chose a recent time_range.** In our
 pre-registered arm T (`v2/PREREGISTRATION.md`, logged rule change F), 72 searches sent only `query`, `auto_parameters: true` and `max_results`.
 auto_parameters with no dates chose recent windows, not always "w": `time_range` w 57, d 14, m 1 of 72 searches
-(topic news in 71; advanced depth in 49, basic in 23). 620 of 659 results were dated October 2026, 1 September 2026
+(topic news in 71; advanced depth in 49, basic in 23). 620 of 659 results were dated October 2026 (measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it), 1 September 2026
 and 38 undated, and 0 of
 29 known Jan–Sep 2026 changes were found. (Corrected 2026-10-22 from "w, news and advanced every time"; counted from
 the arm files.) A historical, time-locked search needs explicit
