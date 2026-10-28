@@ -52,8 +52,30 @@ def inject_style():
     st.html(f"<style>{(ROOT / 'app_pages' / 'style.css').read_text(encoding='utf-8')}</style>")
 
 
+# One-line purpose of each page, keyed by the title the page passes to header() (texts from Kahan's
+# origin/copilot/guide-trace-visuals-20261028, 59bd1c4).
+PAGE_GUIDES = {
+    "Experimental nowcast": "The latest inflation estimate, evidence behind the estimate, and comparisons with economist forecasts.",
+    "Evidence": "The verified price quotes, official price series, and announced changes behind the forecast.",
+    "Chain of custody": "Trace a price from its source page through search records to the forecast seal.",
+    "Leak demo": "Compare searches with and without date limits to see how future information can enter a backtest.",
+    "Tavily trace": "Review Tavily searches, search results, credits, response times, and failures.",
+    "Tavily Flight Recorder": "Review the saved log of outside searches and requests.",
+    "October radar (v2)": "Review announced retail price changes that may affect the October estimate.",
+    "Replay": "Compare past forecasts with official inflation results.",
+    "Live build (v2)": "See how verified price evidence updates the inflation estimate.",
+    "As of a date": "See what price evidence was available on a date you choose.",
+    "Tavily field report": "Read the results of tests on search dates and evidence quality.",
+    "For research teams": "Learn how to use time-locked web evidence in research.",
+    "Archive": "Review saved forecasts and instructions for checking each forecast's fingerprint.",
+    "Reporter brief": "Read a short summary of the forecast for journalists.",
+}
+
+
 def header(title, intro=None):
     st.title(title)
+    if title in PAGE_GUIDES:
+        st.caption(PAGE_GUIDES[title])
     if intro:
         st.caption(intro)
 
