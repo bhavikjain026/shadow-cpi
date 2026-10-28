@@ -59,7 +59,7 @@ def leak_chart(rows):
              "Leak rate": x["leak_rate"], "lo": x["wilson95"][0], "hi": x["wilson95"][1],
              "Count": f"{x['leaks']} of {x['n']}", "Interval": wilson(x["wilson95"]),
              "Label": f"{pct(x['leak_rate'])} ({x['leaks']}/{x['n']})", "zero": 0 if x["leaks"] == 0 else None}
-            for x in rows if x["run"] == RUNS[run] and x["check"].startswith(("Date test", "Finance check"))
+            for x in rows if x["run"] == RUNS[run] and x["check"].startswith(("Date test", "Replication", "Finance check"))
             and (x["setting"] == "no dates" or x["setting"].endswith("filter_by_published_date"))]
     if not data:
         return
@@ -91,7 +91,30 @@ def leak_chart(rows):
         for x in data if x["Check"] == g) for g in groups))
     st.caption(f"{run}; Wilson 95% intervals in brackets. Leak = a result the Wayback Machine shows appeared after "
                "the cutoff. Tavily time lock = start_date + end_date + filter_by_published_date. Each test is its own "
-               "group; nothing is summed.")
+               "group; the bars are never summed. The line below pools the pilot and the replication under the same "
+               "rule, as pre-registered.")
+    pooled_line()
+
+
+def pooled_line():
+    """The pre-registered secondary: pilot + replication pooled under the date-test rule (initial passes), with the
+    cache note from the replication's logged addendum. From results/field_report.json `replication`."""
+    rp = r.get("replication")
+    if not rp:
+        return
+    pl, ca = rp["pooled"], rp["cache"]
+    a, c = pl["arms"]["A"], pl["arms"]["C"]
+    st.markdown(f"**Pilot + replication, date-test rule** (pre-registered secondary, initial passes; "
+                f"{pl['pilot_cases']} + {pl['replication_cases']} cases): Tavily time lock {c['leak_cases']} of "
+                f"{c['cases']} ({wilson(c['wilson95'])}) · no dates {a['leak_cases']} of {a['cases']} "
+                f"({wilson(a['wilson95'])}).")
+    d = ca["without_pilot_reused"]
+    st.caption(f"Cache note (descriptive, not pre-registered): {ca['served']} of the replication's no-dates answers "
+               f"came from our cache, {ca['pilot_reused']} of them the pilot's own response to the same query; the "
+               f"time-locked searches were all fresh. Without those {ca['pilot_reused']} cases: no dates "
+               f"{d['arms']['A']['leak_cases']} of {d['cases']}, time lock {d['arms']['C']['leak_cases']} of "
+               f"{d['cases']}. The pooled no-dates count includes the reused pilot response. Source: "
+               "`results/replication.md`.")
 
 
 def r196_timeline(a):

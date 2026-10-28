@@ -8,7 +8,10 @@ quote on its source page, and seals India's inflation forecast before the govern
 | Leaks, measured (pre-registered initial pass) | No dates | Dates + filter |
 |---|---|---|
 | Date test ({{dt_cases}} cases) | **{{dt_nodates}} of {{dt_cases}}** (Wilson {{dt_nodates_w}}) | **{{dt_dated}} of {{dt_cases}}** (Wilson {{dt_dated_w}}) |
+| Replication ({{rep_cases}} new cases, pre-registered) | **{{rep_nodates}} of {{rep_cases}}** (Wilson {{rep_nodates_w}}) | **{{rep_dated}} of {{rep_cases}}** (Wilson {{rep_dated_w}}) |
 | Finance check ({{fin_events}} cases, exploratory, different leak rule) | {{fin_nodates}} of {{fin_events}} ({{fin_nodates_w}}) | {{fin_dated}} of {{fin_events}} ({{fin_dated_w}}) |
+
+Pilot + replication, date-test rule (pre-registered secondary): dates + filter {{pool_dated}} of {{pool_cases}} (Wilson {{pool_dated_w}}).
 
 Separate rules; never added together. **Update:** date test {{dt_nodates_retry}} of {{dt_cases}} with no dates (Wilson
 {{dt_nodates_retry_w}}) after retrying the {{rr_dt_failed}} archive lookups that had failed, still {{dt_dated_retry}} of
@@ -21,6 +24,16 @@ retry ({{rr_fin_failed}} lookups had failed), still {{fin_dated_retry}} of {{fin
 - **Dates + filter** means `start_date`/`end_date` plus `filter_by_published_date`; no dates means neither.
 - **Date test** (pilot, replay cases; [`v2/DATE_TEST_PREREG.md`](v2/DATE_TEST_PREREG.md)). A case leaks when at least
   one result the search kept is a confirmed leak: "{{dt_leak_rule}}"
+- **Replication** ({{rep_cases}} new cases, none from the pilot; [`v2/REPLICATION_PREREG.md`](v2/REPLICATION_PREREG.md)).
+  The date test's leak rule and arms (no dates; dates + filter), cutoff the day before each price change, run once
+  ([`results/replication.md`](results/replication.md)). The pooled line adds pilot and replication under the same rule,
+  as pre-registered (secondary).
+- **Cache note on the replication** (logged addendum in `results/replication.md`; descriptive, not pre-registered).
+  Every call goes through our cache, and {{rep_cached}} no-dates answers were served from it, {{rep_cached_pilot}} of
+  them the pilot's own response to the same query; the time-locked searches were all fresh. Without the
+  {{rep_cached_pilot}} cases that reused the pilot's response: no dates {{rep_desc_nodates}} of {{rep_desc_cases}}
+  (Wilson {{rep_desc_nodates_w}}), dates + filter {{rep_desc_dated}} of {{rep_desc_cases}} ({{rep_desc_dated_w}}). The
+  pooled no-dates count ({{pool_nodates}} of {{pool_cases}}) includes that reused pilot response.
 - **Finance check** (exploratory, Reserve Bank of India (RBI) decisions and company results;
   [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md), as amended). A different rule, so its counts are reported apart:
   "{{fin_leak_rule}}"

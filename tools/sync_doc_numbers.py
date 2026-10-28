@@ -79,11 +79,11 @@ def leak_count_table(fr):
            "retry (Wilson 95%) | Credits per call | Median latency |", "|---|---|---|---|---|---|"]
     keyed = {}
     for r in fr["leakage"]["rows"]:
-        if r["check"].startswith(("Date test", "Finance check")):
+        if r["check"].startswith(("Date test", "Replication", "Finance check")):
             keyed.setdefault((r["check"], r["setting"]), {})[r["run"]] = r
     for (check, setting), runs in keyed.items():
         a, b = runs["first pass"], runs["after logged retry"]
-        unit = "cases" if check.startswith("Date test") else "events"
+        unit = "events" if check.startswith("Finance check") else "cases"
         lat = "—" if a["median_latency_s"] is None else secs(a["median_latency_s"])
         out.append(f"| {check}, {unit} | {setting} | **{a['leaks']} of {a['n']}** ({wilson(a['wilson95'])}) "
                    f"| {b['leaks']} of {b['n']} ({wilson(b['wilson95'])}) | {credits_per_call(a['credits_per_call'])} "
@@ -223,6 +223,20 @@ def facts(st, as_of, root=ROOT):
     f.update(fin_events=fn1["events"], fin_nodates=fn1["arms"]["N"]["confirmed_events"],
              fin_nodates_retry=fn2["arms"]["N"]["confirmed_events"], fin_dated=fn1["arms"]["D"]["confirmed_events"],
              fin_dated_retry=fn2["arms"]["D"]["confirmed_events"])
+
+    # results/field_report.json: the date test replication (v2/REPLICATION_PREREG.md), its own group; the pooled
+    # pilot + replication count (date-test rule) is the pre-registered secondary; the cache addendum is descriptive
+    rp = fr["replication"]
+    r1, pl, ca = rp["first_pass"]["arms"], rp["pooled"]["arms"], rp["cache"]
+    cd = ca["without_pilot_reused"]
+    f.update(rep_cases=rp["cases"], rep_nodates=r1["A"]["leak_cases"], rep_dated=r1["C"]["leak_cases"],
+             rep_nodates_w=wilson(r1["A"]["wilson95"]), rep_dated_w=wilson(r1["C"]["wilson95"]),
+             pool_cases=pl["C"]["cases"], pool_dated=pl["C"]["leak_cases"], pool_dated_w=wilson(pl["C"]["wilson95"]),
+             pool_nodates=pl["A"]["leak_cases"], pool_nodates_w=wilson(pl["A"]["wilson95"]),
+             rep_cached=ca["served"], rep_cached_pilot=ca["pilot_reused"], rep_desc_cases=cd["cases"],
+             rep_desc_nodates=cd["arms"]["A"]["leak_cases"], rep_desc_dated=cd["arms"]["C"]["leak_cases"],
+             rep_desc_nodates_w=wilson(cd["arms"]["A"]["wilson95"]),
+             rep_desc_dated_w=wilson(cd["arms"]["C"]["wilson95"]))
 
     # results/timelock34_second_review.json: separate, post-hoc AI-assisted review (ChatGPT agent) of the filtered finance search
     ff = load("results/timelock34_second_review.json", root)["finance_filtered"]

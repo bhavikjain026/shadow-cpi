@@ -26,6 +26,7 @@ from v2 import kinds as K  # noqa: E402
 from v2 import lang_date_test as LT  # noqa: E402
 from v2 import leak_types as LKT  # noqa: E402
 from v2 import recall as RC  # noqa: E402
+from v2 import replication as REP  # noqa: E402
 from shadow_cpi.tavily import iso_date  # noqa: E402
 
 OUT = ROOT / "results" / "field_report.json"
@@ -116,6 +117,50 @@ def date_test():
     return {"label": "pilot, 20 cases; first pass is the pre-registered result, the retry only recovers failed "
                      "Wayback lookups", "retry": {k: rt[k] for k in ("failed_urls", "recovered", "still_failed")},
             **passes}
+
+
+def replication():
+    """Date test replication (v2/REPLICATION_PREREG.md; results/replication.json): its own group, never merged into
+    the pilot's. First pass = primary; the pooled pilot + replication count (date-test rule) is the pre-registered
+    secondary; the cache addendum (results/replication.md) is descriptive."""
+    out = load("results/replication.json")
+    arms = lambda m: {a: {"leak_cases": x["leak_cases"], "cases": x["cases"], "wilson95": x["leak_case_wilson95"],  # noqa: E731
+                          "valid_lost": x["valid_lost"], "valid_total": x["valid_total"]} for a, x in m["arms"].items()}
+    m1, m2, hb = out["metrics"]["price"], out["retry"]["metrics"]["price"], out["sensitivity"]
+    reuse = REP.cache_reuse(out)
+    pilot_ids = [x["case"] for x in reuse if x["from_pilot"]]
+    desc = REP.metrics(out, "price", drop=tuple(pilot_ids))
+    return {"label": "replication, pre-registered; first pass is the primary result, the retry only recovers failed "
+                     "Wayback lookups", "cases": m1["cases"],
+            "retry": {k: out["retry"]["log"][k] for k in ("failed_urls", "recovered", "still_failed")},
+            "first_pass": {"arms": arms(m1), "mcnemar_A_vs_C": m1["a_vs_c_mcnemar"]},
+            "after_retry": {"arms": arms(m2), "mcnemar_A_vs_C": m2["a_vs_c_mcnemar"]},
+            "hand_built": {"arms": arms(hb), "mcnemar_A_vs_C": hb["a_vs_c_mcnemar"]},
+            "pooled": out["pooled"]["price"],
+            "cache": {"label": "descriptive, not pre-registered (results/replication.md addendum)",
+                      "served": len(reuse), "arms": sorted({x["arm"] for x in reuse}),
+                      "pilot_reused": len(pilot_ids), "pilot_reused_cases": pilot_ids,
+                      "without_pilot_reused": {"cases": desc["cases"], "arms": arms(desc)}}}
+
+
+def replication_rows():
+    """Leakage rows for the replication: arms A and C, first pass and after the retry, as their own check."""
+    out, rows = load("results/replication.json"), []
+    reuse = REP.cache_reuse(out)
+    for run, m in (("first pass", out["metrics"]["price"]), ("after logged retry", out["retry"]["metrics"]["price"])):
+        for a in "AC":
+            x = m["arms"][a]
+            cav = [f"replication, {m['cases']} new cases, pre-registered; leak = Wayback-confirmed (no capture by the "
+                   "cutoff)"]
+            if a == "A" and reuse:
+                cav.append(f"{len(reuse)} answers served from the cache, "
+                           f"{sum(x['from_pilot'] for x in reuse)} of them the pilot's response")
+            if run == "after logged retry":
+                cav.append("retry only recovers failed Wayback lookups; valid total grows")
+            rows.append(leak_row(f"Replication ({m['cases']} new cases, pre-registered)", run, SETTINGS[a], x["cases"],
+                                 x["leak_cases"], x["valid_total"] - x["valid_lost"], x["valid_total"], x["credits"],
+                                 x["cases"], x["median_latency_s"], "; ".join(cav)))
+    return rows
 
 
 def lang_date_test():
@@ -298,6 +343,7 @@ def leakage_table():
             rows.append(leak_row(f"Date test ({len(o['rows'])} replay cases)", run, SETTINGS[a], x["cases"], x["leak_cases"],
                                  x["valid_total"] - x["valid_lost"], x["valid_total"], x["credits"], calls,
                                  x["median_latency_s"], "; ".join(cav)))
+    rows += replication_rows()
     fo, frt = load("results/finance_lookahead.json"), load("results/finance_lookahead_wayback_retry.json")
     for run, o in (("first pass", fo), ("after logged retry", with_retry(fo, frt, F.label))):
         m = F.metrics(o)
@@ -382,7 +428,7 @@ def build():
     rep = {"built": date.today().isoformat(), "leakage": leakage_table(), "receipt": receipt(),
            "four_arms": four_arms(),
            "exploratory": {"H": exploratory("H", "v2-ablation-H", ref), "Td": exploratory("Td", "v2-ablation-Td", ref)},
-           "date_test": date_test(), "lang_date_test": lang_date_test(), "finance": finance(),
+           "date_test": date_test(), "replication": replication(), "lang_date_test": lang_date_test(), "finance": finance(),
            "auto_parameters": auto_parameters(), "radar": radar(),
            "monthly_run_cost": monthly_run_cost(), "ledger_rows": len(ledger),
            "pages_changed": DR.latest(DR.load_state()), "leak_by_source_type": LKT.table()}

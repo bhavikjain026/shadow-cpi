@@ -172,7 +172,7 @@ def show_case(c):
     search_column(right, LOCKED, LOCKED_NOTE, c["locked"], c["test"], f"{c['id']}-locked")
 
 
-HERO_HEIGHT = 204          # 641-1199 px pages; style.css sets 176 px from 1200 px and 236 px on phones
+HERO_HEIGHT = 226          # 641-1199 px pages; style.css sets 198 px from 1200 px and 274 px on phones
 HERO_FONT ="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=JetBrains+Mono:wght@600&display=swap"
 HERO_HTML = """<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="{font}"><style>
 :root {{ --ink: #09090b; --muted: #52525b; --line: #e4e4e7; }}       /* no color-scheme: it paints an opaque canvas */
@@ -208,6 +208,7 @@ html.narrow .update {{ font-size: 0.75rem; }}
   <div class="side cost" id="cost"><div class="num">{missed}/{quotes}</div><div class="label">{cost_label}</div></div>
 </div>
 <p class="update" id="update">{update}</p>
+<p class="update" id="replication">{replication}</p>
 <script>
 (function () {{
   // Phone layout follows the page's width, not this frame's (the sidebar changes the frame's width).
@@ -234,6 +235,7 @@ html.narrow .update {{ font-size: 0.75rem; }}
 DATE_TEST = "results/date_field_test.json"
 DATE_LOCKED_ARM = "C"                         # tools/build_leak_demo.py TESTS["date"]["locked"]
 FIELD_REPORT = "results/field_report.json"
+REPLICATION = "results/replication.json"
 
 
 def date_test_cost():
@@ -255,14 +257,17 @@ def hero(t):
     leaked = "cases leaked (pre-registered)"
     update = (f"Update: {ro}/{n} with no time lock after retrying the {failed} failed Wayback archive lookups; "
               f"{rk}/{n} with the time lock.")
+    rc = read_json(REPLICATION)["metrics"]["price"]["arms"]["C"]           # pre-registered replication, initial pass
+    replication = f"Replication: {rc['leak_cases']} of {rc['cases']} more cases leaked with the time lock."
     st.iframe(HERO_HTML.format(
         font=HERO_FONT, open=o, locked=k, n=n, missed=missed, quotes=quotes,
         title=html.escape(f"Date test · {n} past cases · pre-registered initial pass"),
         open_label=html.escape(f"{OPEN}: {leaked}"), locked_label=html.escape(f"{LOCKED}: {leaked}"),
         cost_label="Cost: valid evidence dropped (initial pass)", update=html.escape(update),
+        replication=html.escape(replication),
         aria=html.escape(f"Date test, {n} past cases, pre-registered initial pass. {OPEN}: {o}/{n} {leaked}. "
                          f"{LOCKED}: {k}/{n}. Cost: {missed} of {quotes} valid evidence dropped (initial pass). "
-                         f"{update}")),
+                         f"{update} {replication}")),
         height=HERO_HEIGHT)
 
 

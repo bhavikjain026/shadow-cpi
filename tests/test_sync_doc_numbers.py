@@ -1,4 +1,5 @@
 """tools/sync_doc_numbers.py: README and Devpost are rendered from templates that type no number. Offline, no calls."""
+import json
 import re
 import shutil
 from datetime import date, datetime
@@ -184,15 +185,19 @@ def test_620_of_659_always_carries_its_date():
 
 
 def test_devpost_opens_with_the_finding_and_the_reuse(values):
-    """The Devpost headline: two lines, at most 40 words, the measured date-test counts and what a Tavily user can reuse."""
+    """The Devpost headline: two lines, at most 40 words, led by the pooled time-lock count (pilot + pre-registered
+    replication, date-test rule, initial passes), then each no-dates count, then what a Tavily user can reuse."""
     out = S.render((ROOT / "docs/templates/devpost.md").read_text(), values)
     lines = re.search(r"<!-- headline:start -->(.*?)<!-- headline:end -->", out, re.S).group(1).strip().splitlines()
     assert len(lines) == 2 and len(" ".join(lines).split()) <= 40
-    first, update = lines[0].split("Update:")
-    assert "pre-registered" in first
-    assert f"no dates, {values['dt_nodates']} of {values['dt_cases']}" in first
-    assert f"`filter_by_published_date`, {values['dt_dated']} of {values['dt_cases']}" in first
-    assert f"{values['dt_nodates_retry']} of {values['dt_cases']} after retrying" in update
+    rp = json.loads((ROOT / "results/replication.json").read_text())
+    pooled, rep = rp["pooled"]["price"]["arms"], rp["metrics"]["price"]["arms"]
+    lo, hi = pooled["C"]["wilson95"]
+    assert lines[0].startswith(f"{pooled['C']['leak_cases']} of {pooled['C']['cases']} cases with Tavily's dates + "
+                               f"filter, across a pilot and a pre-registered replication (Wilson {lo:.0%}–{hi:.0%}"
+                               .replace("%–", "–"))
+    assert (f"with no dates, {values['dt_nodates']} of {values['dt_cases']} and {rep['A']['leak_cases']} of "
+            f"{rep['A']['cases']} leaked.") in lines[0]
     assert all(w in lines[1] for w in ("timelocked_search", "extract_as_of", "Colab"))
 
 
@@ -268,7 +273,8 @@ def test_python_requirement_line(values):
 
 
 SPOKEN = {**dict(enumerate("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen "
-                           "fifteen sixteen seventeen eighteen nineteen twenty".split())), 40: "forty"}
+                           "fifteen sixteen seventeen eighteen nineteen twenty".split())), 22: "twenty-two",
+          40: "forty"}
 
 
 def test_video_leak_shot_matches_the_results(values):
@@ -280,7 +286,9 @@ def test_video_leak_shot_matches_the_results(values):
     w = {k: SPOKEN[n] for k, n in v.items()}
     assert (f"With no dates, {w['dt_nodates']} of {w['dt_cases']} searches met our confirmed-leak rule; "
             f"{w['dt_nodates_retry']} after we retried {w['rr_dt_failed']} archive lookups that had failed.") in shot
-    assert f"published-date filter: {w['dt_dated']} of {w['dt_cases']}." in shot
+    rep = json.loads((ROOT / "results/replication.json").read_text())["metrics"]["price"]["arms"]["C"]
+    assert (f"published-date filter: {w['dt_dated']} of {w['dt_cases']}, and on {SPOKEN[rep['cases']]} new cases, "
+            f"pre-registered, {SPOKEN[rep['leak_cases']]} again.") in shot     # the replication, initial pass
     assert (f"The cost, on the initial pass: the filter dropped {w['dt_lost_filter']} of {w['dt_valid_total']} "
             "pieces of valid evidence.") in shot
     lo, hi = (values["dt_nodates_w"].replace("–", "-"), values["dt_dated_w"].replace("–", "-"))
@@ -288,3 +296,46 @@ def test_video_leak_shot_matches_the_results(values):
             f'(95%: {lo} → {hi})"') in shot
     assert f'"Update: {v["dt_nodates_retry"]}/{v["dt_cases"]} after retrying {v["rr_dt_failed"]} failed' in shot
     assert f'"Cost: {v["dt_lost_filter"]}/{v["dt_valid_total"]} valid evidence dropped (initial pass)"' in shot
+
+
+def test_honest_limits_leak_bullet_matches_the_results():
+    """docs/honest_limits.md is hand-written: its leak-measurement bullet's numbers are checked against the results."""
+    rp = json.loads((ROOT / "results/replication.json").read_text())
+    dt = json.loads((ROOT / "results/date_field_test.json").read_text())
+    fr = json.loads((ROOT / "results/field_report.json").read_text())["replication"]
+    pl = rp["pooled"]["price"]["arms"]
+    lo, hi = pl["C"]["wilson95"]
+    bullet = next(l for l in (ROOT / "docs/honest_limits.md").read_text().splitlines()
+                  if l.startswith("- **The leak measurements are small and archive-based.**"))
+    assert (f"pilot ({len(dt['rows'])} cases) and its pre-registered replication ({rp['metrics']['price']['cases']} "
+            f"new cases) give {pl['C']['cases']} cases under one rule") in bullet
+    assert (f"with dates + filter, {pl['C']['leak_cases']} of {pl['C']['cases']} kept a confirmed leak, Wilson 95% "
+            f"{lo:.0%}–{hi:.0%}".replace("%–", "–")) in bullet
+    log = rp["retry"]["log"]
+    assert log["still_failed"] == 0 and f"({log['failed_urls']} failed on the replication's initial pass, all " \
+        "recovered by the logged retry)" in bullet
+    ca = fr["cache"]
+    assert (f"{ca['served']} no-dates answers came from our cache, {ca['pilot_reused']} of them the pilot's own "
+            "response") in bullet
+    assert f"pooled no-dates count ({pl['A']['leak_cases']} of {pl['A']['cases']})" in bullet
+
+
+def test_readme_top_has_the_replication_row_pooled_line_and_cache_note(values):
+    """The replication is its own row (initial pass), the pooled line is the pre-registered secondary under the same
+    rule, and the footnote carries the descriptive cache note; all from results files."""
+    out = " ".join(S.render((ROOT / "docs/templates/README.md").read_text(), values).split())
+    top = out.split("## Time-locked search leakage")[0]
+    v = values
+    assert (f"| Replication ({v['rep_cases']} new cases, pre-registered) | **{v['rep_nodates']} of {v['rep_cases']}** "
+            f"(Wilson {v['rep_nodates_w']}) | **{v['rep_dated']} of {v['rep_cases']}** (Wilson {v['rep_dated_w']}) |"
+            in top)
+    assert (f"Pilot + replication, date-test rule (pre-registered secondary): dates + filter {v['pool_dated']} of "
+            f"{v['pool_cases']} (Wilson {v['pool_dated_w']}).") in top
+    details = top.split("<details>")[1].split("</details>")[0]
+    assert "descriptive, not pre-registered" in details and "the time-locked searches were all fresh" in details
+    assert (f"no dates {v['rep_desc_nodates']} of {v['rep_desc_cases']} (Wilson {v['rep_desc_nodates_w']}), dates + "
+            f"filter {v['rep_desc_dated']} of {v['rep_desc_cases']}") in details
+    assert f"pooled no-dates count ({v['pool_nodates']} of {v['pool_cases']}) includes that reused pilot response" in details
+    rp = json.loads((ROOT / "results/replication.json").read_text())
+    assert int(v["rep_nodates"]) == rp["metrics"]["price"]["arms"]["A"]["leak_cases"]
+    assert int(v["pool_dated"]) == rp["pooled"]["price"]["arms"]["C"]["leak_cases"]

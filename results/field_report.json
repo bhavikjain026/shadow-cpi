@@ -140,6 +140,74 @@
     "caveats": "pilot, 20 cases; leak = Wayback-confirmed (no capture by the cutoff); page check adds 11 Extract calls; keeps only pages with an explicit date; retry only recovers failed Wayback lookups; valid total grows"
    },
    {
+    "check": "Replication (22 new cases, pre-registered)",
+    "run": "first pass",
+    "setting": "no dates",
+    "n": 22,
+    "leaks": 14,
+    "leak_rate": 0.6363636363636364,
+    "wilson95": [
+     0.4295170793613564,
+     0.8026679542917857
+    ],
+    "valid_kept": 5,
+    "valid_total": 22,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.5599999999999996,
+    "caveats": "replication, 22 new cases, pre-registered; leak = Wayback-confirmed (no capture by the cutoff); 4 answers served from the cache, 3 of them the pilot's response"
+   },
+   {
+    "check": "Replication (22 new cases, pre-registered)",
+    "run": "first pass",
+    "setting": "+ filter_by_published_date",
+    "n": 22,
+    "leaks": 0,
+    "leak_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.14865487660514556
+    ],
+    "valid_kept": 18,
+    "valid_total": 22,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.67,
+    "caveats": "replication, 22 new cases, pre-registered; leak = Wayback-confirmed (no capture by the cutoff)"
+   },
+   {
+    "check": "Replication (22 new cases, pre-registered)",
+    "run": "after logged retry",
+    "setting": "no dates",
+    "n": 22,
+    "leaks": 19,
+    "leak_rate": 0.8636363636363636,
+    "wilson95": [
+     0.6666501265111675,
+     0.9525099632305449
+    ],
+    "valid_kept": 7,
+    "valid_total": 36,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.5599999999999996,
+    "caveats": "replication, 22 new cases, pre-registered; leak = Wayback-confirmed (no capture by the cutoff); 4 answers served from the cache, 3 of them the pilot's response; retry only recovers failed Wayback lookups; valid total grows"
+   },
+   {
+    "check": "Replication (22 new cases, pre-registered)",
+    "run": "after logged retry",
+    "setting": "+ filter_by_published_date",
+    "n": 22,
+    "leaks": 0,
+    "leak_rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.14865487660514556
+    ],
+    "valid_kept": 31,
+    "valid_total": 36,
+    "credits_per_call": 1.0,
+    "median_latency_s": 3.67,
+    "caveats": "replication, 22 new cases, pre-registered; leak = Wayback-confirmed (no capture by the cutoff); retry only recovers failed Wayback lookups; valid total grows"
+   },
+   {
     "check": "Finance check (14 scheduled events)",
     "run": "first pass",
     "setting": "no dates",
@@ -1212,6 +1280,168 @@
     "only_C": 0,
     "only_D": 0,
     "p_exact": 1.0
+   }
+  }
+ },
+ "replication": {
+  "label": "replication, pre-registered; first pass is the primary result, the retry only recovers failed Wayback lookups",
+  "cases": 22,
+  "retry": {
+   "failed_urls": 30,
+   "recovered": 30,
+   "still_failed": 0
+  },
+  "first_pass": {
+   "arms": {
+    "A": {
+     "leak_cases": 14,
+     "cases": 22,
+     "wilson95": [
+      0.4295170793613564,
+      0.8026679542917857
+     ],
+     "valid_lost": 17,
+     "valid_total": 22
+    },
+    "C": {
+     "leak_cases": 0,
+     "cases": 22,
+     "wilson95": [
+      0.0,
+      0.14865487660514556
+     ],
+     "valid_lost": 4,
+     "valid_total": 22
+    }
+   },
+   "mcnemar_A_vs_C": {
+    "A_only": 14,
+    "C_only": 0,
+    "p_exact": 0.0001220703125
+   }
+  },
+  "after_retry": {
+   "arms": {
+    "A": {
+     "leak_cases": 19,
+     "cases": 22,
+     "wilson95": [
+      0.6666501265111675,
+      0.9525099632305449
+     ],
+     "valid_lost": 29,
+     "valid_total": 36
+    },
+    "C": {
+     "leak_cases": 0,
+     "cases": 22,
+     "wilson95": [
+      0.0,
+      0.14865487660514556
+     ],
+     "valid_lost": 5,
+     "valid_total": 36
+    }
+   },
+   "mcnemar_A_vs_C": {
+    "A_only": 19,
+    "C_only": 0,
+    "p_exact": 3.814697265625e-06
+   }
+  },
+  "hand_built": {
+   "arms": {
+    "A": {
+     "leak_cases": 7,
+     "cases": 9,
+     "wilson95": [
+      0.4525889666922117,
+      0.9367748934594303
+     ],
+     "valid_lost": 7,
+     "valid_total": 9
+    },
+    "C": {
+     "leak_cases": 0,
+     "cases": 9,
+     "wilson95": [
+      0.0,
+      0.299145051727044
+     ],
+     "valid_lost": 2,
+     "valid_total": 9
+    }
+   },
+   "mcnemar_A_vs_C": {
+    "A_only": 7,
+    "C_only": 0,
+    "p_exact": 0.015625
+   }
+  },
+  "pooled": {
+   "rule": "date-test rule (v2/DATE_TEST_PREREG.md)",
+   "pilot_cases": 20,
+   "replication_cases": 22,
+   "arms": {
+    "A": {
+     "leak_cases": 23,
+     "cases": 42,
+     "wilson95": [
+      0.39949118924719623,
+      0.6877660686502409
+     ]
+    },
+    "C": {
+     "leak_cases": 0,
+     "cases": 42,
+     "wilson95": [
+      0.0,
+      0.08379879207691124
+     ]
+    }
+   },
+   "a_vs_c_mcnemar": {
+    "A_only": 23,
+    "C_only": 0,
+    "p_exact": 2.384185791015625e-07
+   }
+  },
+  "cache": {
+   "label": "descriptive, not pre-registered (results/replication.md addendum)",
+   "served": 4,
+   "arms": [
+    "A"
+   ],
+   "pilot_reused": 3,
+   "pilot_reused_cases": [
+    "RR-F1",
+    "RR-F2",
+    "RR-F4"
+   ],
+   "without_pilot_reused": {
+    "cases": 19,
+    "arms": {
+     "A": {
+      "leak_cases": 11,
+      "cases": 19,
+      "wilson95": [
+       0.362759033831258,
+       0.7685810883382846
+      ],
+      "valid_lost": 17,
+      "valid_total": 22
+     },
+     "C": {
+      "leak_cases": 0,
+      "cases": 19,
+      "wilson95": [
+       0.0,
+       0.16817922625956366
+      ],
+      "valid_lost": 4,
+      "valid_total": 22
+     }
+    }
    }
   }
  },

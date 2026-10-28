@@ -5,7 +5,7 @@
 
 ## Headline
 <!-- headline:start -->
-Pilot, pre-registered: with no dates, {{dt_nodates}} of {{dt_cases}} cases kept a confirmed leak; with Tavily's dates and `filter_by_published_date`, {{dt_dated}} of {{dt_cases}}. Update: {{dt_nodates_retry}} of {{dt_cases}} after retrying the {{rr_dt_failed}} archive lookups that had failed.
+{{pool_dated}} of {{pool_cases}} cases with Tavily's dates + filter, across a pilot and a pre-registered replication (Wilson {{pool_dated_w}}); with no dates, {{dt_nodates}} of {{dt_cases}} and {{rep_nodates}} of {{rep_cases}} leaked.
 Reuse: `timelocked_search`, `extract_as_of`, Colab leak check.
 <!-- headline:end -->
 

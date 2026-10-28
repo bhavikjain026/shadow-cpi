@@ -88,6 +88,7 @@ def test_date_test_no_dates_row_reads_like_the_finance_rows(built):
     rows = [r for r in built["leakage"]["rows"] if r["setting"] == "no dates"]
     assert [(r["check"].split(" (")[0], r["run"]) for r in rows] == [
         ("Date test", "first pass"), ("Date test", "after logged retry"),
+        ("Replication", "first pass"), ("Replication", "after logged retry"),     # its own group, never merged
         ("Finance check", "first pass"), ("Finance check", "after logged retry")]
     dt = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["A"]
     assert (rows[0]["leaks"], rows[0]["n"]) == (dt["leak_cases"], dt["cases"])

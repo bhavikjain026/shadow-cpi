@@ -316,3 +316,28 @@ def test_tab_labels_are_short():
     labels = [t.label for t in at.tabs]
     assert labels[:2] == ["Petrol hike · May 26 :gray[:small[F3]]", "RBI rate · Apr 26 :gray[:small[R2]]"]
     assert all(len(re.sub(r":gray\[:small\[\w+\]\]", "", l).strip()) <= 22 for l in labels)
+
+
+def test_hero_replication_line_reads_the_replication_file():
+    """One short line under the update: the pre-registered replication's time-locked count (initial pass)."""
+    c = json.loads((ROOT / "results" / "replication.json").read_text())["metrics"]["price"]["arms"]["C"]
+    (frame,) = page().get("iframe")
+    assert (f'<p class="update" id="replication">Replication: {c["leak_cases"]} of {c["cases"]} more cases leaked '
+            "with the time lock.</p>") in frame.proto.srcdoc
+
+
+def test_field_report_shows_the_replication_group_and_the_pooled_line():
+    at = page()
+    at.switch_page("app_pages/field_report.py")
+    at.run()
+    assert not at.exception
+    rp = json.loads((ROOT / "results" / "field_report.json").read_text())["replication"]
+    a, c = rp["first_pass"]["arms"]["A"], rp["first_pass"]["arms"]["C"]
+    text = " ".join(m.value for m in at.markdown)
+    assert (f"**Replication:** no dates {a['leak_cases']} of {a['cases']}" in text
+            and f"{c['leak_cases']} of {c['cases']}" in text)
+    pl = rp["pooled"]["arms"]["C"]
+    assert "**Pilot + replication, date-test rule** (pre-registered secondary" in text
+    assert f"Tavily time lock {pl['leak_cases']} of {pl['cases']}" in text
+    cap = " ".join(x.value for x in at.caption)
+    assert "Cache note (descriptive, not pre-registered)" in cap and "includes the reused pilot response" in cap

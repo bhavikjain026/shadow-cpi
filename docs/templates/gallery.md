@@ -12,9 +12,12 @@ cases, the pre-registered initial pass): with no dates, {{dt_nodates}} of {{dt_c
 page dated after the cutoff with no archive copy on or before it (Wilson {{wilson}} {{dt_nodates_w}};
 {{dt_nodates_retry}} of {{dt_cases}} after retrying the {{rr_dt_failed}} archive lookups that had failed); with
 `start_date`/`end_date` and `filter_by_published_date`, {{dt_dated}} of {{dt_cases}} ({{dt_dated_w}}). The cost: the
-filter dropped {{dt_lost_filter}} of {{dt_valid_total}} pieces of valid evidence (initial pass). Red card: no time
+filter dropped {{dt_lost_filter}} of {{dt_valid_total}} pieces of valid evidence (initial pass). Replication
+(pre-registered, {{rep_cases}} new cases, initial pass): no dates {{rep_nodates}} of {{rep_cases}}, dates + filter
+{{rep_dated}} of {{rep_cases}} ({{rep_dated_w}}); pilot and replication together, same rule: {{pool_dated}} of
+{{pool_cases}} with dates + filter ({{pool_dated_w}}). Red card: no time
 lock; green card: Tavily's time lock. App page: Leak demo (home). Source: `results/leak_demo.json`,
-`results/field_report.json`.
+`results/field_report.json`, `results/replication.json`.
 
 ## The four-arm table
 ![Field Report: who should write the search, four arms](2_four_arm_table.png)
