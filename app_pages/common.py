@@ -103,9 +103,25 @@ def table(rows, show=None, config=None):
     st.dataframe(df, hide_index=True, width="stretch", column_config=cfg, column_order=order)
 
 
+def altair_chart(chart, into=st, **kwargs):
+    """st.altair_chart with axis, legend and title text set explicitly for the viewer's app theme (Streamlit's default
+    axis grey is 3.7:1 on white). Light: #52525b labels (7.6:1), #09090b titles; dark: #a1a1aa labels, #fafafa titles."""
+    dark = dark_theme()
+    label, ink = ("#a1a1aa", "#fafafa") if dark else ("#52525b", "#09090b")
+    chart = (chart.configure_axis(labelColor=label, titleColor=ink, domainColor=label, tickColor=label)
+             .configure_legend(labelColor=ink, titleColor=ink).configure_title(color=ink))
+    return into.altair_chart(chart, **kwargs)
+
+
+DARK_PRIMARY = ('[data-testid^="stBaseButton-primary"], [data-testid^="stBaseButton-primary"] * { color: #09090b; }')
+
+
 def inject_style():
     """app_pages/style.css (display only), added once per run from app.py so every page gets it."""
-    st.html(f"<style>{(ROOT / 'app_pages' / 'style.css').read_text(encoding='utf-8')}</style>")
+    css = (ROOT / "app_pages" / "style.css").read_text(encoding="utf-8")
+    if dark_theme():        # the dark accent #60a5fa needs dark text (white on it is 2.5:1; #09090b is 7.9:1); follows the
+        css += DARK_PRIMARY  # app's theme setting, not the OS's
+    st.html(f"<style>{css}</style>")
 
 
 # One-line purpose of each page, keyed by the title the page passes to header() (texts from Kahan's

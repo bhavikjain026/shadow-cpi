@@ -128,6 +128,8 @@ def test_update_and_replication_lines_stay():
 def test_provenance_and_how_we_know_on_the_four_pages():
     import hashlib
     at = page_run()
+    fields = {"results/leak_demo.json": "built_utc", "results/field_report.json": "built",
+              "results/score_lock.json": "scored_at_utc", "results/date_field_test.json": "built_utc"}
     for pg, rel in (("app_pages/leak_demo.py", "results/leak_demo.json"),
                     ("app_pages/field_report.py", "results/field_report.json"),
                     ("app_pages/home.py", None), ("app_pages/try_it.py", "results/date_field_test.json")):
@@ -138,7 +140,10 @@ def test_provenance_and_how_we_know_on_the_four_pages():
         assert 'class="provenance"' in body, pg
         if rel:
             digest = hashlib.sha256((ROOT / rel).read_bytes()).hexdigest()[:12]
-            assert rel in body and digest in body and " IST" in body, pg
+            assert rel in body and digest in body and f"{fields[rel]} <b>" in body, pg
+            assert str((ROOT / rel).stat().st_mtime)[:6] not in body and "modified" not in body, pg   # never a file time
+            stored = json.loads((ROOT / rel).read_text())[fields[rel]]
+            assert (stored[:10] in body) or fields[rel] == "built_utc", pg
         if pg in ("app_pages/leak_demo.py", "app_pages/field_report.py"):
             (ex,) = [e for e in at.expander if e.label == "How we know"]
             text = " ".join(m.value for m in ex.markdown)
@@ -149,3 +154,17 @@ def test_card_markdown_blocks_do_not_overlap():
     # Streamlit pulls each markdown block up 1rem; with the card's p margin removed,
     # a two-line headline would run under the chip row unless that pull is reset too.
     assert re.search(r'\[class\*="st-key-card-"\] \[data-testid="stMarkdownContainer"\] \{ margin-bottom: 0; \}', CSS)
+
+
+def test_provenance_without_a_stored_timestamp_shows_only_path_and_hash(monkeypatch):
+    from app_pages import provenance as P
+    assert P.generated("results/leak_demo.json", None) is None and P.generated("results/leak_demo.json", "nope") is None
+    assert P.generated("results/leak_demo.json", "built_utc") == "2026-10-27 00:31 IST"     # 2026-10-26 19:01 UTC
+    assert P.generated("results/field_report.json", "built") == "2026-10-28"
+
+
+def test_every_altair_chart_goes_through_the_readable_wrapper():
+    import glob
+    for f in glob.glob(str(ROOT / "app_pages" / "*.py")):
+        src = Path(f).read_text()
+        assert not re.search(r"\bst\.altair_chart\(|\w+\.altair_chart\(", src.replace("into.altair_chart", "")), f

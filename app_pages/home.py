@@ -25,7 +25,7 @@ if lock:
               f"{lock['mae_poll_months']['c']:.3f} vs {lock['mae_poll_months']['poll']:.3f}",
               help=f"The {poll_months()} months with a published economists' poll")
     st.caption(f"{headline_result(lock)} Source: `results/score_lock.json`.")
-    provenance("results/score_lock.json")
+    provenance("results/score_lock.json", "scored_at_utc")
 st.markdown("**How it works:** Tavily searches the web, with dates locked, for price evidence → Nemotron on Nebius "
             "Token Factory pulls out only quoted, dated prices → plain code turns them into a CPI estimate with a "
             "range, sealed before release.")
@@ -55,7 +55,7 @@ with st.container(border=True):
                                              f"`{stored}` · " + ("PASS" if ok else "FAIL"))
         else:
             st.warning(f"Built but not sealed yet: sealing on {SEAL_DATE:%d %b}.")
-        provenance(f"sealed/{LIVE_MONTH}.json" if sealed else f"results/nowcast_{LIVE_MONTH}.json")
+        provenance(f"sealed/{LIVE_MONTH}.json", "sealed_at_utc") if sealed else provenance(f"results/nowcast_{LIVE_MONTH}.json")
     else:                                      # compact status banner until the seal
         rel = next_release()
         c1, c2, c3 = st.columns(3)

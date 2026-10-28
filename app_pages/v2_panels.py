@@ -4,6 +4,8 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
+from app_pages.common import altair_chart, dark_theme
+
 TIME_LABEL = "retrospective replay: today's pages, filtered by their publish dates"
 
 
@@ -28,14 +30,14 @@ def what_tavily_adds(run):
         y=alt.Y("Stage:N", sort=list(df["Stage"]), title=None, axis=alt.Axis(labelLimit=340, labelOverlap=False)),
         x=alt.X("CPI inflation, year-on-year (%):Q", scale=x, title=xt),
         tooltip=["Stage", alt.Tooltip("CPI inflation, year-on-year (%):Q", format=".3f")])
-    labels = bars.mark_text(align="left", dx=4, color="#DDDDDD").encode(
+    labels = bars.mark_text(align="left", dx=4, color="#fafafa" if dark_theme() else "#09090b").encode(
         text=alt.Text("CPI inflation, year-on-year (%):Q", format=".2f"))
     marks = pd.DataFrame([{"x": run["official"], "what": f"Official {run['official']:.2f}%"},
                           {"x": run["v1"]["c"], "what": f"v1 Shadow CPI {run['v1']['c']:.2f}%"}])
     rules = alt.Chart(marks).mark_rule(strokeWidth=3, strokeDash=[6, 3]).encode(
-        x=alt.X("x:Q", scale=x, title=xt), color=alt.Color("what:N", scale=alt.Scale(range=["#F28E2B", "#9A9A9A"]),
+        x=alt.X("x:Q", scale=x, title=xt), color=alt.Color("what:N", scale=alt.Scale(range=["#F28E2B", "#a1a1aa" if dark_theme() else "#71717a"]),
                                                 legend=alt.Legend(orient="bottom", title=None)))
-    st.altair_chart((bars + labels + rules).properties(height=210).configure_axisY(labelPadding=6),
+    altair_chart((bars + labels + rules).properties(height=210).configure_axisY(labelPadding=6),
                     width="stretch")
     if adds:
         b = adds["bars"]
@@ -72,5 +74,5 @@ def time_machine(run, key="tm"):
         tooltip=["date", alt.Tooltip("yoy:Q", format=".3f"), alt.Tooltip("measured:Q", format=".1%")])
     official = alt.Chart(pd.DataFrame([{"y": run["official"], "what": f"Official {run['official']:.2f}%"}])).mark_rule(
         color="#F28E2B", strokeWidth=3, strokeDash=[6, 3]).encode(y="y:Q", tooltip=["what"])
-    cursor = alt.Chart(pd.DataFrame([{"date": day}])).mark_rule(color="#DDDDDD").encode(x="date:T")
-    st.altair_chart((line + official + cursor).properties(height=260, title="Convergence"), width="stretch")
+    cursor = alt.Chart(pd.DataFrame([{"date": day}])).mark_rule(color="#a1a1aa" if dark_theme() else "#71717a").encode(x="date:T")
+    altair_chart((line + official + cursor).properties(height=260, title="Convergence"), width="stretch")

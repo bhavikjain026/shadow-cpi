@@ -243,8 +243,3 @@ div[class*="st-key-trace_funnel_step_"] { height: 100%; }
 @media (prefers-reduced-motion: reduce) {
   div[class*="st-key-trace_funnel_step_"] { animation: none; }
 }
-
-/* primary buttons: the dark theme's #60a5fa accent needs dark text (white on it is 2.5:1; #09090b is 7.9:1) */
-@media (prefers-color-scheme: dark) {
-  [data-testid^="stBaseButton-primary"], [data-testid^="stBaseButton-primary"] * { color: #09090b; }
-}

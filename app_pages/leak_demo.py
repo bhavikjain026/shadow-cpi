@@ -7,7 +7,7 @@ from datetime import date, timedelta
 
 import streamlit as st
 
-from app_pages.common import (EYEBROW, GITHUB_URL, SUBHEAD, TITLE_CLAIM, VIDEO_URL, dark_theme, lock_table, read_json,
+from app_pages.common import (EYEBROW, altair_chart, GITHUB_URL, SUBHEAD, TITLE_CLAIM, VIDEO_URL, dark_theme, lock_table, read_json,
                               wilson95)
 from app_pages.provenance import how_we_know as how_we_know_box, provenance
 
@@ -260,7 +260,7 @@ def interval_chart(t):
     end = base.mark_text(align="left", baseline="middle", dx=10, fontSize=13, color=ink).encode(
         x="hi:Q", text="label:N")
     with st.container(border=True, key="interval-chart"):
-        st.altair_chart((zero + rule + dot + name + end).properties(height=200).configure_view(stroke=None),
+        altair_chart((zero + rule + dot + name + end).properties(height=200).configure_view(stroke=None),
                         width="stretch")
         st.caption("The dots show observed rates and the lines show 95% intervals. A zero count means the true rate "
                    "is plausibly below the upper bound, not that leaks are impossible.")
@@ -423,7 +423,7 @@ with st.container(key="hero"):
     stat_cards(data["totals"])
 interval_chart(data["totals"])
 update_lines(data["totals"])
-provenance("results/leak_demo.json")
+provenance("results/leak_demo.json", "built_utc")
 links()
 how_we_know(data)
 with st.container(key="use-it"):

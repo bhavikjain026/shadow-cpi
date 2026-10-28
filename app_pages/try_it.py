@@ -77,7 +77,7 @@ def saved_example():
               f"(results/date_field_test.json, built {human(built)}) with {n} results per search and its own "
               f"window ({human(res['locked']['window'][0])} to {human(res['locked']['window'][1])}); "
               "flagged here by the same rule as a live run.")
-    provenance("results/date_field_test.json")
+    provenance("results/date_field_test.json", "built_utc")
 
 
 def colab(msg):

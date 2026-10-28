@@ -10,7 +10,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from app_pages.common import ROOT, clean_line, header, month_name
+from app_pages.common import ROOT, altair_chart, clean_line, header, month_name
 from app_pages.v2_panels import time_machine, what_tavily_adds
 
 header("Live build (v2)", "Shadow CPI v2 builds the number one piece of evidence at a time, under live conditions: "
@@ -78,7 +78,7 @@ def draw_top(value, measured, label):
             x=alt.X("x:Q", scale=scale), tooltip=["what", alt.Tooltip("x:Q", format=".3f")],
             color=alt.Color("what:N", scale=alt.Scale(domain=dom, range=rng),
                             legend=alt.Legend(orient="bottom", title=None, columns=4)))
-        st.altair_chart((base + ticks).properties(height=90), width="stretch")
+        altair_chart((base + ticks).properties(height=90), width="stretch")
 
 
 def pct(x):
@@ -112,7 +112,7 @@ def draw_tree(done):
         color=color, tooltip=["name", alt.Tooltip("weight:Q", format=".2f", title="CPI weight (%)"), "status"])
     text = alt.Chart(df).mark_text(fontSize=10, color="white").encode(x=alt.X("cx:Q", scale=x),
                                                                       y=alt.Y("cy:Q", scale=y), text="label")
-    tree_box.altair_chart((rects + text).properties(height=320, title="The basket by CPI weight"), width="stretch")
+    altair_chart((rects + text).properties(height=320, title="The basket by CPI weight"), into=tree_box, width="stretch")
 
 
 def card_body(card):

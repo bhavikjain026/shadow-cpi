@@ -6,7 +6,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from app_pages.common import (CODES, LABELS, NOWCAST_WORDS, header, month_name, num, pass_fail, pct, poll_direction,
+from app_pages.common import (CODES, altair_chart, LABELS, NOWCAST_WORDS, header, month_name, num, pass_fail, pct, poll_direction,
                               read_csv, read_json, v2_comparison)
 
 _lock = read_json("results/score_lock.json") or {}
@@ -91,7 +91,7 @@ methods = alt.Chart(df[df["Series"] != ACTUAL]).mark_line(
 actual = alt.Chart(df[df["Series"] == ACTUAL]).mark_line(
     strokeWidth=4.5, point=alt.OverlayMarkDef(filled=True, size=110)).encode(x=x, y=y, color=color, tooltip=tip)
 chart = (band_layer + methods + actual).properties(height=340)
-st.altair_chart(chart, width="stretch")
+altair_chart(chart, width="stretch")
 st.caption("Shaded band = 80% range for Shadow CPI.")
 
 # ---------- per-month ----------

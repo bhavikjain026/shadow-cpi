@@ -7,7 +7,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from app_pages.common import REPO_URL, header, lock_table, read_json, table
+from app_pages.common import REPO_URL, altair_chart, header, lock_table, read_json, table
 from app_pages.provenance import how_we_know, provenance
 
 
@@ -84,7 +84,7 @@ def leak_chart(rows):
     # value labels above each whisker, in the page's ink colour (>= 4.5:1 in the theme the viewer has)
     labels = base.mark_text(dy=-9, fontSize=13, fontWeight=600, color="#fafafa" if dark else "#09090b").encode(
         y="hi:Q", text="Label:N")
-    st.altair_chart((bars + err + caps + zero + labels).properties(height=280), width="stretch")
+    altair_chart((bars + err + caps + zero + labels).properties(height=280), width="stretch")
     # counts as text too, for screen readers and copying
     groups = dict.fromkeys(x["Check"] for x in data)
     st.markdown("  \n".join(f"**{g}:** " + " · ".join(
@@ -160,7 +160,7 @@ if not r:
 # ---------- lead: one chart, then one case up close ----------
 if r.get("leakage"):
     leak_chart(r["leakage"]["rows"])
-provenance("results/field_report.json")
+provenance("results/field_report.json", "built")
 rp, dtc = r.get("replication") or {}, r["date_test"]["first_pass"]["arms"]["A"]["cases"]
 how_we_know(
     f"The date test: {dtc} pilot cases and {rp.get('cases', 0)} new cases in the pre-registered replication, a "
