@@ -1,0 +1,763 @@
+{
+ "month": "2026-10",
+ "runs": [
+  {
+   "ist_date": "2026-10-28",
+   "utc": "2026-10-28T04:43:58.368301+00:00",
+   "credits": 12,
+   "complete": true,
+   "urls_in_set": 80,
+   "skipped_fetched_today": 18,
+   "checked": 62,
+   "changed": 14,
+   "failed": [],
+   "not_checked": [],
+   "no_saved_copy": [],
+   "pages": [
+    {
+     "url": "https://www.thehindu.com/news/national/telangana/monthly-electricity-bills-in-telangana-to-become-heavy-from-november-2026-erc-approves-true-up-charges-recovery/article71550236.ece",
+     "changed": false,
+     "saved_sha256": "277860d6f2dacee997a92d86525e8fe5f4f04ea0523fc79add07b1862799bb17",
+     "new_sha256": "277860d6f2dacee997a92d86525e8fe5f4f04ea0523fc79add07b1862799bb17",
+     "extract_call": "2bf56dc86dbc",
+     "extract_request_id": "87e19685-6ff6-4168-8720-3e9b6500f933",
+     "extract_response_sha256": "bb4e37df9ff34758f2ca6de898a8dd8b993f644bb42c459055807f0c31926727"
+    },
+    {
+     "url": "https://www.livemint.com/industry/energy/india-battery-energy-storage-systems-bess-for-wind-solar-power-11791365673898.html",
+     "changed": false,
+     "saved_sha256": "b5e8f83c39a469bdb1f1144509e2dbb165ea769177527e09047bd28cf123df4e",
+     "new_sha256": "b5e8f83c39a469bdb1f1144509e2dbb165ea769177527e09047bd28cf123df4e",
+     "extract_call": "2bf56dc86dbc",
+     "extract_request_id": "87e19685-6ff6-4168-8720-3e9b6500f933",
+     "extract_response_sha256": "bb4e37df9ff34758f2ca6de898a8dd8b993f644bb42c459055807f0c31926727"
+    },
+    {
+     "url": "https://www.dtnext.in/news/tamilnadu/private-dairies-to-hike-milk-curd-prices-from-saturday-aavin-faces-widening-price-gap-in-tamil-nadu",
+     "changed": false,
+     "saved_sha256": "4ee79ff050d2f24d7a42bc3018fa2a5eb29828bb7083eeb314ef6daa2fdbdfea",
+     "new_sha256": "4ee79ff050d2f24d7a42bc3018fa2a5eb29828bb7083eeb314ef6daa2fdbdfea",
+     "extract_call": "2bf56dc86dbc",
+     "extract_request_id": "87e19685-6ff6-4168-8720-3e9b6500f933",
+     "extract_response_sha256": "bb4e37df9ff34758f2ca6de898a8dd8b993f644bb42c459055807f0c31926727"
+    },
+    {
+     "url": "https://www.moneycontrol.com/news/india/karnataka-cabinet-approves-rs-8-per-litre-hike-in-nandini-milk-prices-cm-to-take-final-call-14045919.html",
+     "changed": true,
+     "saved_sha256": "5d377d56d8dc77b1b3121079f284b9af3c97fa889ad4abc8c3535e0fc2e871dc",
+     "new_sha256": "22556115f0c9371ce800d6d94adeece62d957774b2add50583d0ef9c8950b7d8",
+     "extract_call": "2bf56dc86dbc",
+     "extract_request_id": "87e19685-6ff6-4168-8720-3e9b6500f933",
+     "extract_response_sha256": "bb4e37df9ff34758f2ca6de898a8dd8b993f644bb42c459055807f0c31926727",
+     "quote_present": true,
+     "number_changed": "no",
+     "quotes": [
+      {
+       "line": "Karnataka Cabinet approves Rs 8 per litre hike in Nandini milk prices; CM to take final call",
+       "present": true,
+       "number_changed": "no"
+      }
+     ],
+     "diff": "- [English](https://www.moneycontrol.com/ \"English\")\n- * [Hindi](https://hindi.moneycontrol.com \"Hindi\")\n- * [Gujarati](https://gujarati.moneycontrol.com/ \"Gujarati\")\n- [![Loan Offers](https://images.moneycontrol.com/images/common/header/top_search_1808.svg)](https://www.moneycontrolpay.com/ \"Insta…"
+    },
+    {
+     "url": "https://m.economictimes.com/news/new-updates/nandini-milk-price-hike-karnataka-clears-rs-8-per-litre-hike-blue-packet-toned-milk-may-cost-rs-54-ec-nod-awaited/articleshow/134768099.cms",
+     "changed": false,
+     "saved_sha256": "cff2acf016e352359e2c0fd11e66bb4f10e177cc78ac9bbcfb7f9a4262d46538",
+     "new_sha256": "cff2acf016e352359e2c0fd11e66bb4f10e177cc78ac9bbcfb7f9a4262d46538",
+     "extract_call": "2bf56dc86dbc",
+     "extract_request_id": "87e19685-6ff6-4168-8720-3e9b6500f933",
+     "extract_response_sha256": "bb4e37df9ff34758f2ca6de898a8dd8b993f644bb42c459055807f0c31926727"
+    },
+    {
+     "url": "https://timesofindia.indiatimes.com/city/pune/milk-procurement-price-goes-up-retail-rate-likely-to-increase/articleshow/134644764.cms",
+     "changed": false,
+     "saved_sha256": "67c3b0af89cd79bd4cbecd866f95b4198c79819fb01dd7cbd895a48482dd61cd",
+     "new_sha256": "67c3b0af89cd79bd4cbecd866f95b4198c79819fb01dd7cbd895a48482dd61cd",
+     "extract_call": "3cab05a46463",
+     "extract_request_id": "3b75876f-ad2e-4d52-8b93-c757c2c2ccd9",
+     "extract_response_sha256": "dda52e37b54ca01367c7659c7daeee5759b257adbb34cc3479239bd04dc24187"
+    },
+    {
+     "url": "https://wtop.com/transportation/2026/10/metro-proposes-11-fare-increase-triggered-by-inflation-officials-say",
+     "changed": true,
+     "saved_sha256": "d91a3fcc6b664980ba40f5110ef8a9809930d00884d7d04ca6fb1eac4febcfe2",
+     "new_sha256": "792b226580fae498aa4fb202ade78dc5785dd2333182ac017417545838f53e57",
+     "extract_call": "3cab05a46463",
+     "extract_request_id": "3b75876f-ad2e-4d52-8b93-c757c2c2ccd9",
+     "extract_response_sha256": "dda52e37b54ca01367c7659c7daeee5759b257adbb34cc3479239bd04dc24187",
+     "quote_present": true,
+     "number_changed": "no",
+     "quotes": [
+      {
+       "line": "It’s been two years since Metro last increased fees to ride; the transit agency bumped fares by 12.5% in July 2024.",
+       "present": true,
+       "number_changed": "no"
+      },
+      {
+       "line": "According to documents released by the D.C.-area transit agency Monday, the rate hike is driven by inflation and would apply to fares on Metro rail, Metro Bus and Metro Access.",
+       "present": true,
+       "number_changed": "no"
+      }
+     ],
+     "diff": "- [Skip to footer](#footer)\n- [![Cropped WTOP Logo 2026.png](https://wtop.com/wp-content/uploads/2026/08/cropped-WTOP-Logo-2026.png)](https://wtop.com/)\n- * [DC Region](https://wtop.com/local/ \"DC Region\")\n- * + [Virginia](https://wtop.com/local/virginia/ \"Virginia\")\n- + [Maryland](https://wtop.com…"
+    },
+    {
+     "url": "https://www.wlrn.org/business/2026-10-06/miami-dade-county-approves-first-metrorail-and-metrobus-fare-increase-in-13-years",
+     "changed": false,
+     "saved_sha256": "7d4dad34c15e49fb1cb52ea2695c3f11dc233b72afcc82268fad308926cb780f",
+     "new_sha256": "7d4dad34c15e49fb1cb52ea2695c3f11dc233b72afcc82268fad308926cb780f",
+     "extract_call": "3cab05a46463",
+     "extract_request_id": "3b75876f-ad2e-4d52-8b93-c757c2c2ccd9",
+     "extract_response_sha256": "dda52e37b54ca01367c7659c7daeee5759b257adbb34cc3479239bd04dc24187"
+    },
+    {
+     "url": "https://timesofindia.indiatimes.com/business/india-business/lpg-price-hike-19-kg-commercial-cylinder-rises-by-rs-62-50-new-aadhaar-rule-kicks-in-for-domestic-users/articleshow/134607194.cms",
+     "changed": false,
+     "saved_sha256": "e25de0f1524389e5330c6745e3b077d1949a21e197dd7e59be5acc437ea645a8",
+     "new_sha256": "e25de0f1524389e5330c6745e3b077d1949a21e197dd7e59be5acc437ea645a8",
+     "extract_call": "3cab05a46463",
+     "extract_request_id": "3b75876f-ad2e-4d52-8b93-c757c2c2ccd9",
+     "extract_response_sha256": "dda52e37b54ca01367c7659c7daeee5759b257adbb34cc3479239bd04dc24187"
+    },
+    {
+     "url": "https://www.moneycontrol.com/news/india/commercial-lpg-gets-costlier-from-today-october-1-ahead-of-navratri-dussehra-check-latest-city-wise-rates-14042459.html",
+     "changed": true,
+     "saved_sha256": "04e69e432616c64a0cfa135b0142267dcfb792d44c79daa667d98b8f0156834a",
+     "new_sha256": "c3139da3ef745238b6a89dafed1bc051f6eb7511a95b4863da7ad93d49739520",
+     "extract_call": "3cab05a46463",
+     "extract_request_id": "3b75876f-ad2e-4d52-8b93-c757c2c2ccd9",
+     "extract_response_sha256": "dda52e37b54ca01367c7659c7daeee5759b257adbb34cc3479239bd04dc24187",
+     "quote_present": true,
+     "number_changed": "no",
+     "quotes": [
+      {
+       "line": "# Commercial LPG gets costlier from today October 1 ahead of Navratri, Dussehra: Check latest city-wise rates",
+       "present": true,
+       "number_changed": "no"
+      }
+     ],
+     "diff": "- [English](https://www.moneycontrol.com/ \"English\")\n- * [Hindi](https://hindi.moneycontrol.com \"Hindi\")\n- * [Gujarati](https://gujarati.moneycontrol.com/ \"Gujarati\")\n- [![Loan Offers](https://images.moneycontrol.com/images/common/header/top_search_1808.svg)](https://www.moneycontrolpay.com/ \"Insta…"
+    },
+    {
+     "url": "https://timesofindia.indiatimes.com/city/bhubaneswar/commercial-lpg-price-hike-leads-to-fresh-pain-for-biz-outlets/articleshow/134623258.cms",
+     "changed": false,
+     "saved_sha256": "94289f5b3341eaa2b9aa2684e1489ec5dca26774272c1530f437e263cb7a23f1",
+     "new_sha256": "94289f5b3341eaa2b9aa2684e1489ec5dca26774272c1530f437e263cb7a23f1",
+     "extract_call": "876dcc959be0",
+     "extract_request_id": "1ee4b8bf-4f37-494e-8698-57af0f904e66",
+     "extract_response_sha256": "a26467cebfb27c6803cbc824c4cdc73042b1e597a5160b72186c9cc5caf6a1ec"
+    },
+    {
+     "url": "https://info.oregon.aaa.com/pump-prices-ease-in-32-states-including-oregon",
+     "changed": false,
+     "saved_sha256": "d321ce1cb1153325c987fbf92c6d697feb8f5e36278928597ca95651f3cd0174",
+     "new_sha256": "d321ce1cb1153325c987fbf92c6d697feb8f5e36278928597ca95651f3cd0174",
+     "extract_call": "876dcc959be0",
+     "extract_request_id": "1ee4b8bf-4f37-494e-8698-57af0f904e66",
+     "extract_response_sha256": "a26467cebfb27c6803cbc824c4cdc73042b1e597a5160b72186c9cc5caf6a1ec"
+    },
+    {
+     "url": "https://www.amarujala.com/madhya-pradesh/bhopal/mp-power-bills-to-rise-again-4-paise-more-per-unit-surcharge-hiked-for-one-month-2026-09-29",
+     "changed": true,
+     "saved_sha256": "28961856db92f5dfcb1d2a4ae7335df6cb1c935b891a6e4983d0aa3c8e5d06ed",
+     "new_sha256": "4fe82f1b0f9d68c8212230fc5a9cec49ae0d75887e8762ae2158d19bae7e3d9e",
+     "extract_call": "876dcc959be0",
+     "extract_request_id": "1ee4b8bf-4f37-494e-8698-57af0f904e66",
+     "extract_response_sha256": "a26467cebfb27c6803cbc824c4cdc73042b1e597a5160b72186c9cc5caf6a1ec",
+     "quote_present": true,
+     "number_changed": "no",
+     "quotes": [
+      {
+       "line": "Tue, 29 Sep 2026 01:09 PM IST",
+       "present": true,
+       "number_changed": "no"
+      }
+     ],
+     "diff": "- * ['तीन महीने में जांच पूरी करना चुनौती'](/india-news/sit-chief-for-kolkata-stampede-says-completing-the-investigation-in-three-months-is-a-challenge-2026-10-22?src=top-subnav)\n- * [जानें क्या है मुरिया दरबार](/chhattisgarh/muria-darbar-bastar-cg-president-droupadi-will-hear-tribal-communities-pr…"
+    },
+    {
+     "url": "https://www.jagran.com/madhya-pradesh/jabalpur-mp-electricity-bill-hike-fppas-rate-jumps-to-5063-40389438.html",
+     "changed": false,
+     "saved_sha256": "00150e5bdc31b86feeaf04eaa810abf89a0a2154b31d7870e69799061e4fddf0",
+     "new_sha256": "00150e5bdc31b86feeaf04eaa810abf89a0a2154b31d7870e69799061e4fddf0",
+     "extract_call": "876dcc959be0",
+     "extract_request_id": "1ee4b8bf-4f37-494e-8698-57af0f904e66",
+     "extract_response_sha256": "a26467cebfb27c6803cbc824c4cdc73042b1e597a5160b72186c9cc5caf6a1ec"
+    },
+    {
+     "url": "https://www.jagran.com/jharkhand/bokaro-bokaro-electricity-tariff-hike-consumers-face-higher-bills-40387278.html",
+     "changed": false,
+     "saved_sha256": "fd24524b918cde3c3f1e0499d2b234e1310a70f822e5d8d2adf03ffbff718242",
+     "new_sha256": "fd24524b918cde3c3f1e0499d2b234e1310a70f822e5d8d2adf03ffbff718242",
+     "extract_call": "876dcc959be0",
+     "extract_request_id": "1ee4b8bf-4f37-494e-8698-57af0f904e66",
+     "extract_response_sha256": "a26467cebfb27c6803cbc824c4cdc73042b1e597a5160b72186c9cc5caf6a1ec"
+    },
+    {
+     "url": "https://www.jagran.com/madhya-pradesh/indore-indore-milk-price-hike-new-rates-from-oct-1-2l-increase-40390569.html",
+     "changed": false,
+     "saved_sha256": "248c641ac4b9e4dfafec78300e341a9f6ab1e5357e265463707463d18ba1bcc0",
+     "new_sha256": "248c641ac4b9e4dfafec78300e341a9f6ab1e5357e265463707463d18ba1bcc0",
+     "extract_call": "8487e674bbb4",
+     "extract_request_id": "35525da9-4b64-4e50-ac01-09f01aaf08c3",
+     "extract_response_sha256": "26075a77226f3ed28c86140e86166a4bf66cdd040acf67e718bf2bec8e457271"
+    },
+    {
+     "url": "https://navbharattimes.indiatimes.com/state/madhya-pradesh/indore/indore-milk-price-hike-october-1-new-rates-dairy-delivery-rate/articleshow/134590661.cms",
+     "changed": true,
+     "saved_sha256": "0d997cc8465a320fbeae4d23531069115eea14ec731edccf51c693c5a0d96807",
+     "new_sha256": "18d371af8293267adc17b5be086211b04cbed91f54af18dce3e3a78f817f1ad2",
+     "extract_call": "8487e674bbb4",
+     "extract_request_id": "35525da9-4b64-4e50-ac01-09f01aaf08c3",
+     "extract_response_sha256": "26075a77226f3ed28c86140e86166a4bf66cdd040acf67e718bf2bec8e457271",
+     "quote_present": true,
+     "number_changed": "no",
+     "quotes": [
+      {
+       "line": "## Indore Milk Price: इंदौर में 1 अक्टूबर से दूध के दाम बढ़ा दिए गए हैं। अब घर तक पहुंचने वाला दूध 62 रुपए की जगह 65 रुपए प्रति लीटर मिलेगा, जबकि डेयरी या दुकान से खरीदने पर 68 रुपए चुकाने होंगे। दूध ",
+       "present": true,
+       "number_changed": "no"
+      }
+     ],
+     "diff": "+ [![banner](https://static.langimg.com/thumb/msid-135142028,imgsize-58986,width-2000,height-100,resizemode-75/navbharat-times.jpg \"Navbharat Times\")](http://worldspiritualitysummit.com/?utm_source=mastheadg&utm_medium=referral&utm_campaign=wss2026)\n- ### [भागीरथपुरा कांड पर सिंघार के सवाल: 859 दिन…"
+    },
+    {
+     "url": "https://navbharattimes.indiatimes.com/metro/mumbai/development/mumbai-best-bus-ridership-falls-but-revenue-rises-by-nearly-500-crore-rupee/articleshow/134453651.cms",
+     "changed": true,
+     "saved_sha256": "4c979bdebbbae7a25d5725539056bd5e5a5e0755842e53a01166b23b12104759",
+     "new_sha256": "8399302d1fe4108ce6679f325ca04e9a8160adf88e4f122907b91b3077ec86d3",
+     "extract_call": "8487e674bbb4",
+     "extract_request_id": "35525da9-4b64-4e50-ac01-09f01aaf08c3",
+     "extract_response_sha256": "26075a77226f3ed28c86140e86166a4bf66cdd040acf67e718bf2bec8e457271",
+     "quote_present": true,
+     "number_changed": "no",
+     "quotes": [
+      {
+       "line": "मई 2025 में बेस्ट ने बसों का न्यूनतम किराया बढ़ाया था। गैर-एसी बसों का न्यूनतम किराया 5 से बढ़ाकर 10 रुपये और एसी बसों का 6 से बढ़ाकर 12 रुपये किया गया। किराया बढ़ने के बाद रोजाना बसों में सफर करने वा",
+       "present": true,
+       "number_changed": "no"
+      },
+      {
+       "line": "मई 2025 में बेस्ट ने बसों का न्यूनतम किराया बढ़ाया था। गैर-एसी बसों का न्यूनतम किराया 5 से बढ़ाकर 10 रुपये और एसी बसों का 6 से बढ़ाकर 12 रुपये किया गया। किराया बढ़ने के बाद रोजाना बसों में सफर करने वा",
+       "present": true,
+       "number_changed": "no"
+      }
+     ],
+     "diff": "+ [![banner](https://static.langimg.com/thumb/msid-135142028,imgsize-58986,width-2000,height-100,resizemode-75/navbharat-times.jpg \"Navbharat Times\")](http://worldspiritualitysummit.com/?utm_source=mastheadg&utm_medium=referral&utm_campaign=wss2026)\n+ ### [Mumbai Local: कांजुरमार्ग के रीले रूम में …"
+    },
+    {
+     "url": "https://www.jagran.com/news/national-petrol-and-diesel-prices-to-rise-lpg-also-take-a-hit-major-update-40383016.html",
+     "changed": false,
+     "saved_sha256": "14b6099eddd93cc5937c308989369a6b23517fa7718e34f6a00d99be48dade43",
+     "new_sha256": "14b6099eddd93cc5937c308989369a6b23517fa7718e34f6a00d99be48dade43",
+     "extract_call": "8487e674bbb4",
+     "extract_request_id": "35525da9-4b64-4e50-ac01-09f01aaf08c3",
+     "extract_response_sha256": "26075a77226f3ed28c86140e86166a4bf66cdd040acf67e718bf2bec8e457271"
+    },
+    {
+     "url": "https://navbharattimes.indiatimes.com/business/commodity/bangladesh-hike-petrol-diesel-prices-by-up-to-17-percent-cheaper-or-dearer-than-india/articleshow/134379581.cms",
+     "changed": true,
+     "saved_sha256": "bc0d31898ada347aa16f15fc7c2cebdff1fbe4ed84d9942823b48d75206edf56",
+     "new_sha256": "fd4e8db482413a19bddf600204eae7499d96537991ac996ffd613683e2cbda65",
+     "extract_call": "8487e674bbb4",
+     "extract_request_id": "35525da9-4b64-4e50-ac01-09f01aaf08c3",
+     "extract_response_sha256": "26075a77226f3ed28c86140e86166a4bf66cdd040acf67e718bf2bec8e457271",
+     "quote_present": true,
+     "number_changed": "no",
+     "quotes": [
+      {
+       "line": "बांग्लादेश ने पेट्रोल और डीजल की कीमतों में 17.4% तक की बढ़ोतरी की",
+       "present": true,
+       "number_changed": "no"
+      },
+      {
+       "line": "डीजल की कीमत 115 टका से 17.4% बढ़कर 135 टका प्रति लीटर हुई",
+       "present": true,
+       "number_changed": "no"
+      },
+      {
+       "line": "पेट्रोल की कीमत 160 टका पहुंची जबकि केरोसिन 155 टका लीटर हो गया",
+       "present": true,
+       "number_changed": "no"
+      }
+     ],
+     "diff": "+ [![banner](https://static.langimg.com/thumb/msid-134609319,imgsize-58986,width-2000,height-100,resizemode-75/navbharat-times.jpg \"Navbharat Times\")](https://www.toi.money/?utm_source=lang&utm_medium=hindi&utm_campaign=webmasthead)\n- ### [LPG Cylinder Price: सरकार ने नहीं घटाई कीमत, फिर भी ₹600 सस…"
+    },
+    {
+     "url": "https://www.jansatta.com/explained/why-three-indian-oil-companies-are-losing-over-rs-500-crore-daily/4717625",
+     "changed": true,
+     "saved_sha256": "6d7591cf7299a2b479bb5558ebab02c7dc56b83d87d62b52916c943ede245022",
+     "new_sha256": "9b66d548f2c24991b10f8733b6f624ad92d32f092c214f2e8de1976039ab56c1",
+     "extract_call": "330469b95687",
+     "extract_request_id": "be0bf501-ff95-457f-ad2f-49fb124f8397",
+     "extract_response_sha256": "0072319e5d80596ee8b79784c7a56f9cf40d5d6d5959277b151277954e4d3305",
+     "quote_present": false,
+     "number_changed": "yes",
+     "quotes": [
+      {
+       "line": "पिछले दो-तीन महीनों में तेल बेचने से होने वाला नुकसान कुछ कम हुआ था, लेकिन अंतरराष्ट्रीय बाजार में कीमतें फिर तेजी से बढ़ने के कारण यह नुकसान दोबारा बढ़ने लगा है। [...] घरेलू एलपीजी के मामले में तेल क",
+       "present": false,
+       "number_changed": "yes"
+      }
+     ],
+     "diff": "- [English](https://indianexpress.com/)[தமிழ்](https://tamil.indianexpress.com/)[বাংলা](https://bengali.indianexpress.com/)[മലയാളം](https://malayalam.indianexpress.com/)[ગુજરાતી](https://gujarati.indianexpress.com/)[हिंदी](https://www.jansatta.com/)[मराठी](https://www.loksatta.com/)[Business](https…"
+    },
+    {
+     "url": "https://www.aaplamahanagar.com/mahamumbai/palghar/fare-hike-for-regular-buses-reduction-in-ac-bus-fares-in-mira-bhayandar/1020602",
+     "changed": false,
+     "saved_sha256": "ae9719aab538e146b52e45009f0d58c7b3affd0df6c477129c47d166e9917dc6",
+     "new_sha256": "ae9719aab538e146b52e45009f0d58c7b3affd0df6c477129c47d166e9917dc6",
+     "extract_call": "330469b95687",
+     "extract_request_id": "be0bf501-ff95-457f-ad2f-49fb124f8397",
+     "extract_response_sha256": "0072319e5d80596ee8b79784c7a56f9cf40d5d6d5959277b151277954e4d3305"
+    },
+    {
+     "url": "https://senkanal.com/index.php/2026/10/23/under-tvk-rule-electricity-to-cost-rs-35-per-unit-corruption-administrative-failure-or-privatization",
+     "changed": false,
+     "saved_sha256": "aea3c8ddf4c3e2947b184f6dca9f77f1733f5f0545ecd74e32e5c87a4319d0d0",
+     "new_sha256": "aea3c8ddf4c3e2947b184f6dca9f77f1733f5f0545ecd74e32e5c87a4319d0d0",
+     "extract_call": "330469b95687",
+     "extract_request_id": "be0bf501-ff95-457f-ad2f-49fb124f8397",
+     "extract_response_sha256": "0072319e5d80596ee8b79784c7a56f9cf40d5d6d5959277b151277954e4d3305"
+    },
+    {
+     "url": "https://epaper.manasakshi.in/media/2026-10/mana-9.pdf",
+     "changed": false,
+     "saved_sha256": "0e1ccb3824dc4945b2075f9f45616b734fc67c408114206349f2231d7ec27b40",
+     "new_sha256": "0e1ccb3824dc4945b2075f9f45616b734fc67c408114206349f2231d7ec27b40",
+     "extract_call": "330469b95687",
+     "extract_request_id": "be0bf501-ff95-457f-ad2f-49fb124f8397",
+     "extract_response_sha256": "0072319e5d80596ee8b79784c7a56f9cf40d5d6d5959277b151277954e4d3305"
+    },
+    {
+     "url": "https://www.andhrajyothy.com/2026/mukhyaamshalu/abn-andhrajyothy-ap-and-telangana-national-international-breaking-live-updates-of-30th-september-2026-kjr-3665.html",
+     "changed": false,
+     "saved_sha256": "487bd57f8a252c7c425a5436018691a7eeae484dcec889850260244577b47142",
+     "new_sha256": "487bd57f8a252c7c425a5436018691a7eeae484dcec889850260244577b47142",
+     "extract_call": "330469b95687",
+     "extract_request_id": "be0bf501-ff95-457f-ad2f-49fb124f8397",
+     "extract_response_sha256": "0072319e5d80596ee8b79784c7a56f9cf40d5d6d5959277b151277954e4d3305"
+    },
+    {
+     "url": "https://www.dnbnews.in/news/details/1675",
+     "changed": false,
+     "saved_sha256": "acc687bbac763b422743813f7c0093c9d36df9974f1e35a4f387ca8a19448abc",
+     "new_sha256": "acc687bbac763b422743813f7c0093c9d36df9974f1e35a4f387ca8a19448abc",
+     "extract_call": "4c21b3f0dd16",
+     "extract_request_id": "b2f9cd3e-db6a-4142-9989-73266bf551a2",
+     "extract_response_sha256": "40d8398fe8e443673a32642ed9a656bc795808fea9abec7a800e3aac13fc0cc7"
+    },
+    {
+     "url": "https://eedina.com/karnataka-state/consumers-to-face-the-heat-of-price-rise-nandini-milk-and-bus-fares-to-go-up-soon/2026-09-25",
+     "changed": false,
+     "saved_sha256": "d566d3c507ad061c766f5054a8675178722722b1c96bd5008d262de1a0f408a2",
+     "new_sha256": "d566d3c507ad061c766f5054a8675178722722b1c96bd5008d262de1a0f408a2",
+     "extract_call": "4c21b3f0dd16",
+     "extract_request_id": "b2f9cd3e-db6a-4142-9989-73266bf551a2",
+     "extract_response_sha256": "40d8398fe8e443673a32642ed9a656bc795808fea9abec7a800e3aac13fc0cc7"
+    },
+    {
+     "url": "https://www.kannadaprabha.com/politics/2026/Oct/07/another-blow-to-peoples-pockets-r-ashoka-attacks-karnataka-government-over-price-hikes",
+     "changed": false,
+     "saved_sha256": "d00c7d05a660ed49b4cc2e7ce2c898b7e25924fdeb6f05b0a6bff8179f6ccfea",
+     "new_sha256": "d00c7d05a660ed49b4cc2e7ce2c898b7e25924fdeb6f05b0a6bff8179f6ccfea",
+     "extract_call": "4c21b3f0dd16",
+     "extract_request_id": "b2f9cd3e-db6a-4142-9989-73266bf551a2",
+     "extract_response_sha256": "40d8398fe8e443673a32642ed9a656bc795808fea9abec7a800e3aac13fc0cc7"
+    },
+    {
+     "url": "https://www.tbsnews.net/bangla/bangladesh/news-details-543836",
+     "changed": true,
+     "saved_sha256": "0852c58520742c1b957f34d5520ebdd8c00b792cb30eac9ce1ceb9e62c7251c4",
+     "new_sha256": "8e2ade01356d102da890e1d05a273fd0d23aa953a708154a46e217750b9f7f20",
+     "extract_call": "4c21b3f0dd16",
+     "extract_request_id": "b2f9cd3e-db6a-4142-9989-73266bf551a2",
+     "extract_response_sha256": "40d8398fe8e443673a32642ed9a656bc795808fea9abec7a800e3aac13fc0cc7",
+     "quote_present": true,
+     "number_changed": "no",
+     "quotes": [
+      {
+       "line": "সরকারি প্রতিষ্ঠান টিসিবির হিসাবে, গত এক মাসে প্যাকেটজাত আটার দাম ৪ শতাংশ এবং ময়দার দাম ১৭ শতাংশ বেড়েছে।",
+       "present": true,
+       "number_changed": "no"
+      },
+      {
+       "line": "সরকারি প্রতিষ্ঠান টিসিবির হিসাবে, গত এক মাসে প্যাকেটজাত আটার দাম ৪ শতাংশ এবং ময়দার দাম ১৭ শতাংশ বেড়েছে।",
+       "present": true,
+       "number_changed": "no"
+      }
+     ],
+     "diff": "- Thursday\n- October 22, 2026\n+ Wednesday\n+ October 28, 2026\n- **THURSDAY,** OCTOBER 22, 2026\n+ **WEDNESDAY,** OCTOBER 28, 2026\n+ * [সরকারি চাকরির নিয়োগ পরীক্ষার প্রশ্নফাঁস চক্রের সাত সদস্য দুই দিনের রিমান্ডে](/bangla/bangladesh/news-details-556826)\n+ * [বাংলাবাজার: দেশের বইয়ের রাজধানী যেভাবে ছন্দ …"
+    },
+    {
+     "url": "https://citizensvoicebd.com/bangladesh/144395",
+     "changed": false,
+     "saved_sha256": "b97881a9d85fe3278fb76b65e458c04b203597e600411b4b3e35116f732aff6c",
+     "new_sha256": "b97881a9d85fe3278fb76b65e458c04b203597e600411b4b3e35116f732aff6c",
+     "extract_call": "4c21b3f0dd16",
+     "extract_request_id": "b2f9cd3e-db6a-4142-9989-73266bf551a2",
+     "extract_response_sha256": "40d8398fe8e443673a32642ed9a656bc795808fea9abec7a800e3aac13fc0cc7"
+    },
+    {
+     "url": "https://www.ajkerpatrika.com/business/ajpvxoykq0s2c",
+     "changed": true,
+     "saved_sha256": "418d1ff0b43034c83cc99dfede5d5388cc522a36a97dc78b3e33cce50d6d5553",
+     "new_sha256": "0716921fec6c2d708dd4ce3e7ee3c5db5d77bc3365a63668b10c91d9b5d4e12c",
+     "extract_call": "27f807af3a9e",
+     "extract_request_id": "196dc641-e0aa-45e8-a586-04378dd0c4d9",
+     "extract_response_sha256": "95133c89ab7a2dd40e69c9883d4e4f57fdf09f508d3e08457c9b312f0c2f2d1e",
+     "quote_present": false,
+     "number_changed": "yes",
+     "quotes": [
+      {
+       "line": "## দুধের দাম একলাফে ১০ টাকা বৃদ্ধি [...] রাজধানীর মেরাদিয়া বাজার, শান্তিনগর কাঁচাবাজার এবং কারওয়ান বাজারে পাইকারি ও খুচরা বাজার ঘুরে গতকাল বৃহস্পতিবার সবজি, মাছ, মাংস, দুধ, ফল, আটা-ময়দা, চাল, তেল, ডিম",
+       "present": false,
+       "number_changed": "yes"
+      },
+      {
+       "line": "রাজধানীর একেক এলাকায় একেক দামে বিক্রি হচ্ছে ডিম। অধিকাংশ বাজারেই ডিমের দাম গত সপ্তাহে ছিল ১৫০ থেকে ১৬০ টাকা। তবে পরিবহন ভাড়া বৃদ্ধির পর তা প্রতি ডজনে ১০ টাকা বেড়ে গেছে।",
+       "present": true,
+       "number_changed": "no"
+      }
+     ],
+     "diff": "- বৃহস্পতিবার, ২২ অক্টোবর ২০২৬\n+ সোমবার, ২৬ অক্টোবর ২০২৬\n+ #### পাঠকের আগ্রহ\n+ [![‘বিরোধী দলে থাকতেই কবর দিতে বাধা দিচ্ছেন, রাষ্ট্রের ক্ষমতায় গেলে কী করবেন?’](https://images.ajkerpatrika.com/original_images/dr-tasnim-jara-a9eeeb-256x144.webp)\n+ ## ‘বিরোধী দলে থাকতেই কবর দিতে বাধা দিচ্ছেন, রাষ্ট্রের…"
+    },
+    {
+     "url": "https://eisamay.com/bangladesh-news/petrol-diesel-price-surge-in-bangladesh-20-rupees-increases-per-litre/200545771.cms",
+     "changed": false,
+     "saved_sha256": "05f35bf3ced8e1d3363035694c59a87bd1bd14cd49cffc6084f5ff12b7c6f0f1",
+     "new_sha256": "05f35bf3ced8e1d3363035694c59a87bd1bd14cd49cffc6084f5ff12b7c6f0f1",
+     "extract_call": "27f807af3a9e",
+     "extract_request_id": "196dc641-e0aa-45e8-a586-04378dd0c4d9",
+     "extract_response_sha256": "95133c89ab7a2dd40e69c9883d4e4f57fdf09f508d3e08457c9b312f0c2f2d1e"
+    },
+    {
+     "url": "https://peopledaily.digital/business/epra-electricity-charges-how-october-increase-will-hit-kenyan-households-and-businesses",
+     "changed": false,
+     "saved_sha256": "dd249875d311c9e62f78b873312eaee36f99241801e9ac19cc71d1d5e0b04dfd",
+     "new_sha256": "dd249875d311c9e62f78b873312eaee36f99241801e9ac19cc71d1d5e0b04dfd",
+     "extract_call": "27f807af3a9e",
+     "extract_request_id": "196dc641-e0aa-45e8-a586-04378dd0c4d9",
+     "extract_response_sha256": "95133c89ab7a2dd40e69c9883d4e4f57fdf09f508d3e08457c9b312f0c2f2d1e"
+    },
+    {
+     "url": "https://www.counterview.net/2026/10/buy-high-sell-low-who-pays-for-madhya.html",
+     "changed": false,
+     "saved_sha256": "9933ec4110b5c744b07a949dbe46b0ab92db60a9c55c8df405f95a0e0f18d4fa",
+     "new_sha256": "9933ec4110b5c744b07a949dbe46b0ab92db60a9c55c8df405f95a0e0f18d4fa",
+     "extract_call": "27f807af3a9e",
+     "extract_request_id": "196dc641-e0aa-45e8-a586-04378dd0c4d9",
+     "extract_response_sha256": "95133c89ab7a2dd40e69c9883d4e4f57fdf09f508d3e08457c9b312f0c2f2d1e"
+    },
+    {
+     "url": "https://newsinfo.inquirer.net/2329980/lawmaker-warns-power-companies-vs-sharp-electricity-rate-increases",
+     "changed": false,
+     "saved_sha256": "32f58555aeac425cb6aa68fd9c7d42f456f65d9bff378dca74bc9c4ea30628a2",
+     "new_sha256": "32f58555aeac425cb6aa68fd9c7d42f456f65d9bff378dca74bc9c4ea30628a2",
+     "extract_call": "27f807af3a9e",
+     "extract_request_id": "196dc641-e0aa-45e8-a586-04378dd0c4d9",
+     "extract_response_sha256": "95133c89ab7a2dd40e69c9883d4e4f57fdf09f508d3e08457c9b312f0c2f2d1e"
+    },
+    {
+     "url": "https://timesofindia.indiatimes.com/city/bengaluru/nandini-milk-price-hike-likely-from-nov-1-karnataka-cabinet-clears-8/litre-increase/articleshow/134743310.cms",
+     "changed": true,
+     "saved_sha256": "524a4c492a8bd73326a586860f79b1ca6592f5ed1aad0b3fbb757e599bcd6c16",
+     "new_sha256": "5727ffee67cedb5a954afbadc8255fd45f2c67016a4719bc6b6d772afd159e7f",
+     "extract_call": "9fb84af510e8",
+     "extract_request_id": "3ef0dd49-1f18-4023-94c6-86e9607ad751",
+     "extract_response_sha256": "f57c053fa413e067346d7d6a01de55eadb1ecd086b48996fe13e3c2e6e735a56",
+     "quote_present": false,
+     "number_changed": "yes",
+     "quotes": [
+      {
+       "line": "[...] BENGALURU: Nandini milk is set to become costlier by up to Rs 8 a litre, with the state Cabinet approving the hike on Tuesday but holding back its announcement because of the Model Code of Condu",
+       "present": false,
+       "number_changed": "unknown"
+      },
+      {
+       "line": "ad recently sought a hike of Rs 8 to Rs 10 per litre, citing higher costs [...] Amul and Mother Dairy had in May raised milk prices by Rs 2 per litre from May 14, citing rising operational costs and i",
+       "present": false,
+       "number_changed": "yes"
+      }
+     ],
+     "diff": "- ##\n+ Edition\n+ IN\n+ * [IN](https://timesofindia.indiatimes.com/?loc=in)\n+ * [US](https://timesofindia.indiatimes.com/us)\n+ * [UK](https://timesofindia.indiatimes.com/uk)\n+ * [GCC](https://timesofindia.indiatimes.com/gcc)\n+ English\n+ * [English](https://timesofindia.indiatimes.com/)\n+ * [हिन्दी](h…"
+    },
+    {
+     "url": "https://www.ndtvprofit.com/business/nandini-milk-price-hike-milk-could-get-rs-8-litre-costlier-in-karnataka-from-nov-1-12147629",
+     "changed": false,
+     "saved_sha256": "3e5c342a36d2e45db8aec036d083d59db161336b21024412bfab4870e0ba0259",
+     "new_sha256": "3e5c342a36d2e45db8aec036d083d59db161336b21024412bfab4870e0ba0259",
+     "extract_call": "9fb84af510e8",
+     "extract_request_id": "3ef0dd49-1f18-4023-94c6-86e9607ad751",
+     "extract_response_sha256": "f57c053fa413e067346d7d6a01de55eadb1ecd086b48996fe13e3c2e6e735a56"
+    },
+    {
+     "url": "https://timesofindia.indiatimes.com/city/bengaluru/nandini-milk-price-may-go-up-by-5/lt-cms-call-today/articleshow/134491593.cms",
+     "changed": false,
+     "saved_sha256": "0407fffeeeaf8e408c1e3f19b85821dd6255d7b982928bfaf50043a9ed7e0aa0",
+     "new_sha256": "0407fffeeeaf8e408c1e3f19b85821dd6255d7b982928bfaf50043a9ed7e0aa0",
+     "extract_call": "9fb84af510e8",
+     "extract_request_id": "3ef0dd49-1f18-4023-94c6-86e9607ad751",
+     "extract_response_sha256": "f57c053fa413e067346d7d6a01de55eadb1ecd086b48996fe13e3c2e6e735a56"
+    },
+    {
+     "url": "https://dairynews.today/news/karnataka_milk_unions_demand_8_price_increase_and_higher_incentives_5751839.html",
+     "changed": true,
+     "saved_sha256": "3861ac7890e5f34de81378e2a546ceb3990cba9e04d3139aac8e23fbef00c9c5",
+     "new_sha256": "1e5ac409bd3609f388b3bfe6dd72fc9eacf9e3344f087dc447b41871eef477e1",
+     "extract_call": "9fb84af510e8",
+     "extract_request_id": "3ef0dd49-1f18-4023-94c6-86e9607ad751",
+     "extract_response_sha256": "f57c053fa413e067346d7d6a01de55eadb1ecd086b48996fe13e3c2e6e735a56",
+     "quote_present": false,
+     "number_changed": "unknown",
+     "quotes": [
+      {
+       "line": "Directors from Karnataka’s 16 district milk unions have given the state government three days to raise the retail price of milk by ₹8 per litre and increase the producer incentive from ₹5 to ₹8.",
+       "present": false,
+       "number_changed": "unknown"
+      }
+     ],
+     "diff": "- [![](/upload/rk/9fd/wzffevtaz2ndj4qvuz04o3lrqne60qgl/default.jpg)](mailto:sales@idrinksuperfood.com)\n+ ![](https://mc.yandex.ru/watch/87723118)\n+ ![](/upload/rk/9fd/wzffevtaz2ndj4qvuz04o3lrqne60qgl/default.jpg)\n- [India](/news/?region=5206) 21.09.2026\n- [Subscribe to weekly digest](/subscribe/)\n-…"
+    },
+    {
+     "url": "https://en.prothomalo.com/bangladesh/wocxu43obv",
+     "changed": false,
+     "saved_sha256": "b542c5295cafe3bfaede69d86c0ffbffc7e8f81c321f78c8be2ee08d61cd6d98",
+     "new_sha256": "b542c5295cafe3bfaede69d86c0ffbffc7e8f81c321f78c8be2ee08d61cd6d98",
+     "extract_call": "9fb84af510e8",
+     "extract_request_id": "3ef0dd49-1f18-4023-94c6-86e9607ad751",
+     "extract_response_sha256": "f57c053fa413e067346d7d6a01de55eadb1ecd086b48996fe13e3c2e6e735a56"
+    },
+    {
+     "url": "https://www.abplive.com/business/spot-electricity-price-hike-amid-high-demand-and-lack-of-supply-of-coal-know-the-details-3198645",
+     "changed": false,
+     "saved_sha256": "2e88a93e6c89c6c111020249ed05e99feb637f19a5d0f51252641d1d00a685ac",
+     "new_sha256": "2e88a93e6c89c6c111020249ed05e99feb637f19a5d0f51252641d1d00a685ac",
+     "extract_call": "3945889943e9",
+     "extract_request_id": "a5fa5d73-d16b-4310-b666-0f1b5b81b376",
+     "extract_response_sha256": "37f8e9cf6909ee925aea3fa08459d96b1a5a2001a3a4a9491c5af68155a07d16"
+    },
+    {
+     "url": "https://www.prabhatkhabar.com/state/jharkhand/bokaro/bokaro-residents-prepare-higher-electricity-bills-october-2026",
+     "changed": false,
+     "saved_sha256": "f3d0bce1af91550a9c78011707e444903486821b7cbfb1563f332ea6c942c040",
+     "new_sha256": "f3d0bce1af91550a9c78011707e444903486821b7cbfb1563f332ea6c942c040",
+     "extract_call": "3945889943e9",
+     "extract_request_id": "a5fa5d73-d16b-4310-b666-0f1b5b81b376",
+     "extract_response_sha256": "37f8e9cf6909ee925aea3fa08459d96b1a5a2001a3a4a9491c5af68155a07d16"
+    },
+    {
+     "url": "https://www.jpost.com/business-and-innovation/all-news/article-911265",
+     "changed": true,
+     "saved_sha256": "b2b2763de8f2038acedd6550b7ed989721b03670f1d0035ae6b670edd861c152",
+     "new_sha256": "59ea46c66c9d7308b1a5f3765b1dfc8e66859d733b57c66d4235ad2bba142653",
+     "extract_call": "3945889943e9",
+     "extract_request_id": "a5fa5d73-d16b-4310-b666-0f1b5b81b376",
+     "extract_response_sha256": "37f8e9cf6909ee925aea3fa08459d96b1a5a2001a3a4a9491c5af68155a07d16",
+     "quote_present": true,
+     "number_changed": "no",
+     "quotes": [
+      {
+       "line": "A 100-gram bar of Elite milk chocolate, which cost an average of NIS 5.21 in neighborhood stores in September 2022, sold for NIS 9.26 in August 2026 – an increase of nearly 78%.",
+       "present": true,
+       "number_changed": "no"
+      },
+      {
+       "line": "The price of 700 grams of Materna Stage 3 in neighborhood stores rose from NIS 52.63 to NIS 60.43, a nearly 15% increase, after having dropped by 0.7% in the previous four years.",
+       "present": true,
+       "number_changed": "no"
+      },
+      {
+       "line": "On Shufersal Online, the basket price rose by NIS 247, after having increased by just NIS 1 over the previous four years for the exact same products.",
+       "present": true,
+       "number_changed": "no"
+      }
+     ],
+     "diff": "- ![The Jerusalem Post - Israel News](/assets/jp-logo.png \"The Jerusalem Post - Israel News\")\n- ![Dairy products in a supermarket, March 2026.](https://images.jpost.com/image/upload/f_auto,fl_lossy/q_auto/c_fill,g_faces:center,h_720,w_1280/741373 \"Dairy products in a supermarket, March 2026.\")\n+ [F…"
+    },
+    {
+     "url": "https://www.axios.com/2026/10/20/egg-prices-drop-inflation",
+     "changed": false,
+     "saved_sha256": "a5e017dcd0514edb617925232afe9ed5ecddf1844696e9a54ef357ffd405b49c",
+     "new_sha256": "a5e017dcd0514edb617925232afe9ed5ecddf1844696e9a54ef357ffd405b49c",
+     "extract_call": "3945889943e9",
+     "extract_request_id": "a5fa5d73-d16b-4310-b666-0f1b5b81b376",
+     "extract_response_sha256": "37f8e9cf6909ee925aea3fa08459d96b1a5a2001a3a4a9491c5af68155a07d16"
+    },
+    {
+     "url": "https://hindi.news18.com/news/business/latest-lpg-price-hike-commercial-cylinder-price-rises-by-62-50-on-october-1-check-new-lpg-rates-10876311.html",
+     "changed": false,
+     "saved_sha256": "5c773ffa14f3ff73c8b59dc3c8f6b5e23cf595fd9b4700bbcf9fdb15c8c3e35d",
+     "new_sha256": "5c773ffa14f3ff73c8b59dc3c8f6b5e23cf595fd9b4700bbcf9fdb15c8c3e35d",
+     "extract_call": "3945889943e9",
+     "extract_request_id": "a5fa5d73-d16b-4310-b666-0f1b5b81b376",
+     "extract_response_sha256": "37f8e9cf6909ee925aea3fa08459d96b1a5a2001a3a4a9491c5af68155a07d16"
+    },
+    {
+     "url": "https://www.dinamalar.com/archive/2026-Sep/26",
+     "changed": false,
+     "saved_sha256": "96d377c82c86385696d96dabf14f9f8e18cd4b2bc449013065724557c040076f",
+     "new_sha256": "96d377c82c86385696d96dabf14f9f8e18cd4b2bc449013065724557c040076f",
+     "extract_call": "3a614392b303",
+     "extract_request_id": "b78da963-59c9-4d77-81bf-6e01e98ec912",
+     "extract_response_sha256": "f6f9b27f867fa0281ec9bbc44dfd7948afd5a9e3efe6c847d061e35d81e5a643"
+    },
+    {
+     "url": "https://teluguvelugutv.com/news/details/5253",
+     "changed": false,
+     "saved_sha256": "b79af31aaddfb1b36594754a75d879a260aff52e9f7b3de7e02de83006cb2ec6",
+     "new_sha256": "b79af31aaddfb1b36594754a75d879a260aff52e9f7b3de7e02de83006cb2ec6",
+     "extract_call": "3a614392b303",
+     "extract_request_id": "b78da963-59c9-4d77-81bf-6e01e98ec912",
+     "extract_response_sha256": "f6f9b27f867fa0281ec9bbc44dfd7948afd5a9e3efe6c847d061e35d81e5a643"
+    },
+    {
+     "url": "https://www.dailyamardesh.com/amar-desh-special/special-report/amdqzju8yumds",
+     "changed": false,
+     "saved_sha256": "21dbce7b68e1b90c9daa5949a6487b59cc67ba0de4b34f33c2e0df2386c004e9",
+     "new_sha256": "21dbce7b68e1b90c9daa5949a6487b59cc67ba0de4b34f33c2e0df2386c004e9",
+     "extract_call": "3a614392b303",
+     "extract_request_id": "b78da963-59c9-4d77-81bf-6e01e98ec912",
+     "extract_response_sha256": "f6f9b27f867fa0281ec9bbc44dfd7948afd5a9e3efe6c847d061e35d81e5a643"
+    },
+    {
+     "url": "https://www.eia.gov/electricity/monthly/update/print-version.php",
+     "changed": false,
+     "saved_sha256": "2a63a1090fc621cb4c0c4211529e5b325c3ba44c5d5db0549cc6a3c1bfc80161",
+     "new_sha256": "2a63a1090fc621cb4c0c4211529e5b325c3ba44c5d5db0549cc6a3c1bfc80161",
+     "extract_call": "3a614392b303",
+     "extract_request_id": "b78da963-59c9-4d77-81bf-6e01e98ec912",
+     "extract_response_sha256": "f6f9b27f867fa0281ec9bbc44dfd7948afd5a9e3efe6c847d061e35d81e5a643"
+    },
+    {
+     "url": "https://timesofindia.indiatimes.com/city/chennai/tnpdcl-gets-nod-to-buy-600mw-solar-power-with-battery-storage-at-3-12-per-unit/amp_articleshow/135196181.cms",
+     "changed": false,
+     "saved_sha256": "abd8e7e4143882432fde5da19d96831b7a66ce829f69f57c054d02c0ea570d0f",
+     "new_sha256": "abd8e7e4143882432fde5da19d96831b7a66ce829f69f57c054d02c0ea570d0f",
+     "extract_call": "3a614392b303",
+     "extract_request_id": "b78da963-59c9-4d77-81bf-6e01e98ec912",
+     "extract_response_sha256": "f6f9b27f867fa0281ec9bbc44dfd7948afd5a9e3efe6c847d061e35d81e5a643"
+    },
+    {
+     "url": "https://www.business-standard.com/industry/agriculture/milk-prices-flush-season-feed-fodder-costs-paneer-demand-diwali-2026-126092201297_1.html",
+     "changed": false,
+     "saved_sha256": "39a76026879c2e4b9c2a124edd3e76c72984e9699e9e73587d3cacb7e63162e7",
+     "new_sha256": "39a76026879c2e4b9c2a124edd3e76c72984e9699e9e73587d3cacb7e63162e7",
+     "extract_call": "3a15a75b89e5",
+     "extract_request_id": "918be758-0bb0-4590-aa4b-f0b7f7c136b1",
+     "extract_response_sha256": "6c504871cb6088049c3e98c91c4a0a4f772e40948b96203ac4dc71377a8557bf"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/karnataka/milk-price-in-karnataka-may-go-up-by-8-but-only-after-legislative-council-polls/article71552764.ece",
+     "changed": false,
+     "saved_sha256": "95ece1ae869bb7f717f91d37fa48fd6358a57b2a2a0b8e39636119653783d6ae",
+     "new_sha256": "95ece1ae869bb7f717f91d37fa48fd6358a57b2a2a0b8e39636119653783d6ae",
+     "extract_call": "3a15a75b89e5",
+     "extract_request_id": "918be758-0bb0-4590-aa4b-f0b7f7c136b1",
+     "extract_response_sha256": "6c504871cb6088049c3e98c91c4a0a4f772e40948b96203ac4dc71377a8557bf"
+    },
+    {
+     "url": "https://indianexpress.com/article/india/commercial-lpg-cylinder-price-hike-october-1-festive-season-domestic-rates-unchanged-10901628",
+     "changed": false,
+     "saved_sha256": "144ab725922f2ea3781044352b771e5b0839dc652ae208c56a2bf66ab26a5b37",
+     "new_sha256": "144ab725922f2ea3781044352b771e5b0839dc652ae208c56a2bf66ab26a5b37",
+     "extract_call": "3a15a75b89e5",
+     "extract_request_id": "918be758-0bb0-4590-aa4b-f0b7f7c136b1",
+     "extract_response_sha256": "6c504871cb6088049c3e98c91c4a0a4f772e40948b96203ac4dc71377a8557bf"
+    },
+    {
+     "url": "https://www.nbcnews.com/business/economy/us-economy-iran-war-five-charts-rcna598412",
+     "changed": false,
+     "saved_sha256": "12362e42cbee6f0ab2a577a3cf8f8a796890fbb05102498b94a13d70c75d0955",
+     "new_sha256": "12362e42cbee6f0ab2a577a3cf8f8a796890fbb05102498b94a13d70c75d0955",
+     "extract_call": "3a15a75b89e5",
+     "extract_request_id": "918be758-0bb0-4590-aa4b-f0b7f7c136b1",
+     "extract_response_sha256": "6c504871cb6088049c3e98c91c4a0a4f772e40948b96203ac4dc71377a8557bf"
+    },
+    {
+     "url": "https://www.amarujala.com/madhya-pradesh/ujjain/another-inflation-blow-milk-prices-hiked-by-4litre-in-ujjain-to-cost-66-now-ujjain-news-c-1-1-noi1228-4792609-2026-10-03",
+     "changed": false,
+     "saved_sha256": "8ea21da7fd80635ef75a1f448ab9ed678b2cbb37d0bfe97719907d9f10aab4ea",
+     "new_sha256": "8ea21da7fd80635ef75a1f448ab9ed678b2cbb37d0bfe97719907d9f10aab4ea",
+     "extract_call": "3a15a75b89e5",
+     "extract_request_id": "918be758-0bb0-4590-aa4b-f0b7f7c136b1",
+     "extract_response_sha256": "6c504871cb6088049c3e98c91c4a0a4f772e40948b96203ac4dc71377a8557bf"
+    },
+    {
+     "url": "https://www.indiatv.in/paisa/business/milk-to-cost-rs-8-more-starting-november-1-in-karnataka-common-man-to-face-another-major-blow-from-inflation-2026-10-06-1247313",
+     "changed": false,
+     "saved_sha256": "7cf4937747da3adf0165d1917c1e8645f812c9fb17ddb303a949e7e2218a26e8",
+     "new_sha256": "7cf4937747da3adf0165d1917c1e8645f812c9fb17ddb303a949e7e2218a26e8",
+     "extract_call": "c3dd135694fb",
+     "extract_request_id": "e184317e-ecf0-4a67-9860-4a825fa247cc",
+     "extract_response_sha256": "975550ccbf1e97d45a117c9a82a59a5397c577db593ea0c767e5f8ba709fe24c"
+    },
+    {
+     "url": "https://www.prabhatkhabar.com/business/indore-milk-price-hike-row-sellers-agree-to-65-farmers-demand-70",
+     "changed": false,
+     "saved_sha256": "0e6baa7ac42e5c1f87e0c0651b1baf088634d99c909e474b070d2c19feb01dde",
+     "new_sha256": "0e6baa7ac42e5c1f87e0c0651b1baf088634d99c909e474b070d2c19feb01dde",
+     "extract_call": "c3dd135694fb",
+     "extract_request_id": "e184317e-ecf0-4a67-9860-4a825fa247cc",
+     "extract_response_sha256": "975550ccbf1e97d45a117c9a82a59a5397c577db593ea0c767e5f8ba709fe24c"
+    },
+    {
+     "url": "https://wausaupilotandreview.com/2026/10/25/council-briefs-downtown-snow-billing-street-assessments-and-lead-line-funding-on-wausau-agenda/",
+     "changed": true,
+     "saved_sha256": "4ba086d6aff8a47c3852607d4797bde41614112a150f23d01652fa72d417e1a7",
+     "new_sha256": "ba80e894c7720e15209cb0661121afc1605a6e852f2311256ee14624963e2895",
+     "extract_call": "c3dd135694fb",
+     "extract_request_id": "e184317e-ecf0-4a67-9860-4a825fa247cc",
+     "extract_response_sha256": "975550ccbf1e97d45a117c9a82a59a5397c577db593ea0c767e5f8ba709fe24c",
+     "quote_present": true,
+     "number_changed": "no",
+     "quotes": [
+      {
+       "line": "Pet licenses: A consent item sets the 2027 license for a spayed or neutered dog or cat at $25, up from $23, with a $10 discount for microchipped pets, up from $8.",
+       "present": true,
+       "number_changed": "no"
+      }
+     ],
+     "diff": "- ![Wausau weather for Monday and Tuesday](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDUwIiB2aWV3Qm94PSIwIDAgNjAwIDQ1MCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6I2NmZDRkYjtmaWxsLW9wYWNpdHk6IDAuMTsiLz48L3N2Zz4=)\n- ##…"
+    },
+    {
+     "url": "https://timesofindia.indiatimes.com/city/bengaluru/nandini-milk-set-to-cost-rs-8-more-from-nov-1/articleshow/134749841.cms",
+     "changed": false,
+     "saved_sha256": "a82ab40e148db90b6f4de1f634183c778a520e2b6b75e198feba44e05a10487e",
+     "new_sha256": "a82ab40e148db90b6f4de1f634183c778a520e2b6b75e198feba44e05a10487e",
+     "extract_call": "c3dd135694fb",
+     "extract_request_id": "e184317e-ecf0-4a67-9860-4a825fa247cc",
+     "extract_response_sha256": "975550ccbf1e97d45a117c9a82a59a5397c577db593ea0c767e5f8ba709fe24c"
+    },
+    {
+     "url": "https://www.thehindu.com/news/national/madhya-pradesh/after-full-implementation-of-bns-cases-from-fir-to-supreme-court-will-be-disposed-of-in-3-years-shah/article71540332.ece",
+     "changed": false,
+     "saved_sha256": "0297ebbd6408e4f5ab451f6027b09a15ac69edc1812c77ad83825431cd80434d",
+     "new_sha256": "0297ebbd6408e4f5ab451f6027b09a15ac69edc1812c77ad83825431cd80434d",
+     "extract_call": "c3dd135694fb",
+     "extract_request_id": "e184317e-ecf0-4a67-9860-4a825fa247cc",
+     "extract_response_sha256": "975550ccbf1e97d45a117c9a82a59a5397c577db593ea0c767e5f8ba709fe24c"
+    },
+    {
+     "url": "https://www.bhaskarenglish.in/local/mp/indore/news/indore-milk-price-hike-farmers-protest-supply-disruption-139202436.html",
+     "changed": false,
+     "saved_sha256": "1e032ec9eb705e53656a8cc2f6dd99efd8d14c53dbec7c3f6764ead4ba318b9c",
+     "new_sha256": "1e032ec9eb705e53656a8cc2f6dd99efd8d14c53dbec7c3f6764ead4ba318b9c",
+     "extract_call": "b3671538c65e",
+     "extract_request_id": "2669bda8-427c-4556-844c-bd117a3aee14",
+     "extract_response_sha256": "7c1d3e44562690b950767300d693940599ae504f75166162889b13506cd0550e"
+    },
+    {
+     "url": "https://www.etvbharat.com/en/state/gujarat-dairy-boom-faces-challenge-as-cattle-feed-costs-soar-enn26100806526",
+     "changed": false,
+     "saved_sha256": "cbc5b1b32063a42748ad640f2a0287d70aa0d78676cc3b646cbcc11bda5ffb57",
+     "new_sha256": "cbc5b1b32063a42748ad640f2a0287d70aa0d78676cc3b646cbcc11bda5ffb57",
+     "extract_call": "b3671538c65e",
+     "extract_request_id": "2669bda8-427c-4556-844c-bd117a3aee14",
+     "extract_response_sha256": "7c1d3e44562690b950767300d693940599ae504f75166162889b13506cd0550e"
+    }
+   ]
+  }
+ ]
+}

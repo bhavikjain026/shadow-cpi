@@ -293,12 +293,12 @@
    },
    {
     "endpoint": "/extract",
-    "calls": 794,
-    "credits": 692,
-    "credits_per_call": 0.871536523929471,
-    "median_latency_s": 0.135,
-    "p95_latency_s": 5.214999999999999,
-    "with_latency": 792
+    "calls": 818,
+    "credits": 713,
+    "credits_per_call": 0.871638141809291,
+    "median_latency_s": 0.11,
+    "p95_latency_s": 5.194999999999999,
+    "with_latency": 816
    },
    {
     "endpoint": "/map",
@@ -311,12 +311,12 @@
    },
    {
     "endpoint": "/search",
-    "calls": 1062,
-    "credits": 1133,
-    "credits_per_call": 1.066854990583804,
+    "calls": 1081,
+    "credits": 1152,
+    "credits_per_call": 1.0656799259944496,
     "median_latency_s": 3.58,
-    "p95_latency_s": 6.214499999999999,
-    "with_latency": 1058
+    "p95_latency_s": 6.202,
+    "with_latency": 1077
    }
   ],
   "by_experiment": [
@@ -379,6 +379,16 @@
     "median_latency_s": 3.56,
     "p95_latency_s": 4.906499999999999,
     "with_latency": 54
+   },
+   {
+    "experiment": "drift-2026-10",
+    "endpoint": "/extract",
+    "calls": 13,
+    "credits": 12,
+    "credits_per_call": 0.9230769230769231,
+    "median_latency_s": 0.03,
+    "p95_latency_s": 3.45,
+    "with_latency": 13
    },
    {
     "experiment": "finance-lookahead",
@@ -533,22 +543,32 @@
    {
     "experiment": "radar-2026-10",
     "endpoint": "/extract",
-    "calls": 29,
-    "credits": 25,
-    "credits_per_call": 0.8620689655172413,
-    "median_latency_s": 0.04,
-    "p95_latency_s": 0.982,
-    "with_latency": 29
+    "calls": 40,
+    "credits": 34,
+    "credits_per_call": 0.85,
+    "median_latency_s": 0.035,
+    "p95_latency_s": 1.0065,
+    "with_latency": 40
    },
    {
     "experiment": "radar-2026-10",
     "endpoint": "/search",
-    "calls": 45,
-    "credits": 45,
+    "calls": 61,
+    "credits": 61,
     "credits_per_call": 1.0,
-    "median_latency_s": 4.07,
-    "p95_latency_s": 5.85,
-    "with_latency": 45
+    "median_latency_s": 4.03,
+    "p95_latency_s": 5.73,
+    "with_latency": 61
+   },
+   {
+    "experiment": "radar-skeptic-2026-10",
+    "endpoint": "/search",
+    "calls": 3,
+    "credits": 3,
+    "credits_per_call": 1.0,
+    "median_latency_s": 1.18,
+    "p95_latency_s": 3.0789999999999997,
+    "with_latency": 3
    },
    {
     "experiment": "recall-audit",
@@ -878,19 +898,19 @@
     "budgets": [
      "radar-2026-10"
     ],
-    "credits": 70,
-    "verified_quotes": 1,
-    "credits_per_verified_quote": 70.0,
+    "credits": 95,
+    "verified_quotes": 3,
+    "credits_per_verified_quote": 31.666666666666668,
     "source": "v2/radar/radar_2026-10.json"
    }
   ],
   "total": {
-   "calls": 1883,
-   "credits": 1834,
-   "credits_per_call": 0.9739776951672863,
+   "calls": 1926,
+   "credits": 1874,
+   "credits_per_call": 0.9730010384215991,
    "median_latency_s": 3.12,
-   "p95_latency_s": 6.0625,
-   "with_latency": 1876
+   "p95_latency_s": 6.051,
+   "with_latency": 1919
   },
   "reconcile_credits": -82,
   "notes": [
@@ -1701,26 +1721,131 @@
     "searches": 14,
     "complete": true,
     "with_provenance": 19
+   },
+   {
+    "utc": "2026-10-28T04:37:06.497864+00:00",
+    "real_credits": 25,
+    "calls": 27,
+    "searches": 16,
+    "complete": true,
+    "with_provenance": 27
    }
   ],
-  "events": 1,
+  "events": 3,
   "corroborated": 0,
   "cap": 150,
   "cap_source": "config/budget.json radar-2026-10",
-  "spent": 70
+  "spent": 95
  },
  "monthly_run_cost": {
   "radar_run_real_credits": [
    27,
    23,
-   18
+   18,
+   25
   ],
   "arm_a_per_month_original": 22.77777777777778,
   "arm_a_searches_per_month": 13.0,
   "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits at original cost / 9 months"
  },
- "ledger_rows": 1944,
- "pages_changed": null,
+ "ledger_rows": 1987,
+ "pages_changed": {
+  "ist_date": "2026-10-28",
+  "checked": 62,
+  "changed": 14,
+  "failed": 0,
+  "not_checked": 0,
+  "complete": true,
+  "credits": 12,
+  "runs": 1,
+  "credits_total": 12,
+  "pages": [
+   {
+    "url": "https://www.moneycontrol.com/news/india/karnataka-cabinet-approves-rs-8-per-litre-hike-in-nandini-milk-prices-cm-to-take-final-call-14045919.html",
+    "quote_present": true,
+    "number_changed": "no",
+    "diff": "- [English](https://www.moneycontrol.com/ \"English\")\n- * [Hindi](https://hindi.moneycontrol.com \"Hindi\")\n- * [Gujarati](https://gujarati.moneycontrol.com/ \"Gujarati\")\n- [![Loan Offers](https://images.moneycontrol.com/images/common/header/top_search_1808.svg)](https://www.moneycontrolpay.com/ \"Insta…"
+   },
+   {
+    "url": "https://wtop.com/transportation/2026/10/metro-proposes-11-fare-increase-triggered-by-inflation-officials-say",
+    "quote_present": true,
+    "number_changed": "no",
+    "diff": "- [Skip to footer](#footer)\n- [![Cropped WTOP Logo 2026.png](https://wtop.com/wp-content/uploads/2026/08/cropped-WTOP-Logo-2026.png)](https://wtop.com/)\n- * [DC Region](https://wtop.com/local/ \"DC Region\")\n- * + [Virginia](https://wtop.com/local/virginia/ \"Virginia\")\n- + [Maryland](https://wtop.com…"
+   },
+   {
+    "url": "https://www.moneycontrol.com/news/india/commercial-lpg-gets-costlier-from-today-october-1-ahead-of-navratri-dussehra-check-latest-city-wise-rates-14042459.html",
+    "quote_present": true,
+    "number_changed": "no",
+    "diff": "- [English](https://www.moneycontrol.com/ \"English\")\n- * [Hindi](https://hindi.moneycontrol.com \"Hindi\")\n- * [Gujarati](https://gujarati.moneycontrol.com/ \"Gujarati\")\n- [![Loan Offers](https://images.moneycontrol.com/images/common/header/top_search_1808.svg)](https://www.moneycontrolpay.com/ \"Insta…"
+   },
+   {
+    "url": "https://www.amarujala.com/madhya-pradesh/bhopal/mp-power-bills-to-rise-again-4-paise-more-per-unit-surcharge-hiked-for-one-month-2026-09-29",
+    "quote_present": true,
+    "number_changed": "no",
+    "diff": "- * ['तीन महीने में जांच पूरी करना चुनौती'](/india-news/sit-chief-for-kolkata-stampede-says-completing-the-investigation-in-three-months-is-a-challenge-2026-10-22?src=top-subnav)\n- * [जानें क्या है मुरिया दरबार](/chhattisgarh/muria-darbar-bastar-cg-president-droupadi-will-hear-tribal-communities-pr…"
+   },
+   {
+    "url": "https://navbharattimes.indiatimes.com/state/madhya-pradesh/indore/indore-milk-price-hike-october-1-new-rates-dairy-delivery-rate/articleshow/134590661.cms",
+    "quote_present": true,
+    "number_changed": "no",
+    "diff": "+ [![banner](https://static.langimg.com/thumb/msid-135142028,imgsize-58986,width-2000,height-100,resizemode-75/navbharat-times.jpg \"Navbharat Times\")](http://worldspiritualitysummit.com/?utm_source=mastheadg&utm_medium=referral&utm_campaign=wss2026)\n- ### [भागीरथपुरा कांड पर सिंघार के सवाल: 859 दिन…"
+   },
+   {
+    "url": "https://navbharattimes.indiatimes.com/metro/mumbai/development/mumbai-best-bus-ridership-falls-but-revenue-rises-by-nearly-500-crore-rupee/articleshow/134453651.cms",
+    "quote_present": true,
+    "number_changed": "no",
+    "diff": "+ [![banner](https://static.langimg.com/thumb/msid-135142028,imgsize-58986,width-2000,height-100,resizemode-75/navbharat-times.jpg \"Navbharat Times\")](http://worldspiritualitysummit.com/?utm_source=mastheadg&utm_medium=referral&utm_campaign=wss2026)\n+ ### [Mumbai Local: कांजुरमार्ग के रीले रूम में …"
+   },
+   {
+    "url": "https://navbharattimes.indiatimes.com/business/commodity/bangladesh-hike-petrol-diesel-prices-by-up-to-17-percent-cheaper-or-dearer-than-india/articleshow/134379581.cms",
+    "quote_present": true,
+    "number_changed": "no",
+    "diff": "+ [![banner](https://static.langimg.com/thumb/msid-134609319,imgsize-58986,width-2000,height-100,resizemode-75/navbharat-times.jpg \"Navbharat Times\")](https://www.toi.money/?utm_source=lang&utm_medium=hindi&utm_campaign=webmasthead)\n- ### [LPG Cylinder Price: सरकार ने नहीं घटाई कीमत, फिर भी ₹600 सस…"
+   },
+   {
+    "url": "https://www.jansatta.com/explained/why-three-indian-oil-companies-are-losing-over-rs-500-crore-daily/4717625",
+    "quote_present": false,
+    "number_changed": "yes",
+    "diff": "- [English](https://indianexpress.com/)[தமிழ்](https://tamil.indianexpress.com/)[বাংলা](https://bengali.indianexpress.com/)[മലയാളം](https://malayalam.indianexpress.com/)[ગુજરાતી](https://gujarati.indianexpress.com/)[हिंदी](https://www.jansatta.com/)[मराठी](https://www.loksatta.com/)[Business](https…"
+   },
+   {
+    "url": "https://www.tbsnews.net/bangla/bangladesh/news-details-543836",
+    "quote_present": true,
+    "number_changed": "no",
+    "diff": "- Thursday\n- October 22, 2026\n+ Wednesday\n+ October 28, 2026\n- **THURSDAY,** OCTOBER 22, 2026\n+ **WEDNESDAY,** OCTOBER 28, 2026\n+ * [সরকারি চাকরির নিয়োগ পরীক্ষার প্রশ্নফাঁস চক্রের সাত সদস্য দুই দিনের রিমান্ডে](/bangla/bangladesh/news-details-556826)\n+ * [বাংলাবাজার: দেশের বইয়ের রাজধানী যেভাবে ছন্দ …"
+   },
+   {
+    "url": "https://www.ajkerpatrika.com/business/ajpvxoykq0s2c",
+    "quote_present": false,
+    "number_changed": "yes",
+    "diff": "- বৃহস্পতিবার, ২২ অক্টোবর ২০২৬\n+ সোমবার, ২৬ অক্টোবর ২০২৬\n+ #### পাঠকের আগ্রহ\n+ [![‘বিরোধী দলে থাকতেই কবর দিতে বাধা দিচ্ছেন, রাষ্ট্রের ক্ষমতায় গেলে কী করবেন?’](https://images.ajkerpatrika.com/original_images/dr-tasnim-jara-a9eeeb-256x144.webp)\n+ ## ‘বিরোধী দলে থাকতেই কবর দিতে বাধা দিচ্ছেন, রাষ্ট্রের…"
+   },
+   {
+    "url": "https://timesofindia.indiatimes.com/city/bengaluru/nandini-milk-price-hike-likely-from-nov-1-karnataka-cabinet-clears-8/litre-increase/articleshow/134743310.cms",
+    "quote_present": false,
+    "number_changed": "yes",
+    "diff": "- ##\n+ Edition\n+ IN\n+ * [IN](https://timesofindia.indiatimes.com/?loc=in)\n+ * [US](https://timesofindia.indiatimes.com/us)\n+ * [UK](https://timesofindia.indiatimes.com/uk)\n+ * [GCC](https://timesofindia.indiatimes.com/gcc)\n+ English\n+ * [English](https://timesofindia.indiatimes.com/)\n+ * [हिन्दी](h…"
+   },
+   {
+    "url": "https://dairynews.today/news/karnataka_milk_unions_demand_8_price_increase_and_higher_incentives_5751839.html",
+    "quote_present": false,
+    "number_changed": "unknown",
+    "diff": "- [![](/upload/rk/9fd/wzffevtaz2ndj4qvuz04o3lrqne60qgl/default.jpg)](mailto:sales@idrinksuperfood.com)\n+ ![](https://mc.yandex.ru/watch/87723118)\n+ ![](/upload/rk/9fd/wzffevtaz2ndj4qvuz04o3lrqne60qgl/default.jpg)\n- [India](/news/?region=5206) 21.09.2026\n- [Subscribe to weekly digest](/subscribe/)\n-…"
+   },
+   {
+    "url": "https://www.jpost.com/business-and-innovation/all-news/article-911265",
+    "quote_present": true,
+    "number_changed": "no",
+    "diff": "- ![The Jerusalem Post - Israel News](/assets/jp-logo.png \"The Jerusalem Post - Israel News\")\n- ![Dairy products in a supermarket, March 2026.](https://images.jpost.com/image/upload/f_auto,fl_lossy/q_auto/c_fill,g_faces:center,h_720,w_1280/741373 \"Dairy products in a supermarket, March 2026.\")\n+ [F…"
+   },
+   {
+    "url": "https://wausaupilotandreview.com/2026/10/25/council-briefs-downtown-snow-billing-street-assessments-and-lead-line-funding-on-wausau-agenda/",
+    "quote_present": true,
+    "number_changed": "no",
+    "diff": "- ![Wausau weather for Monday and Tuesday](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDUwIiB2aWV3Qm94PSIwIDAgNjAwIDQ1MCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6I2NmZDRkYjtmaWxsLW9wYWNpdHk6IDAuMTsiLz48L3N2Zz4=)\n- ##…"
+   }
+  ]
+ },
  "leak_by_source_type": {
   "rows": [
    {

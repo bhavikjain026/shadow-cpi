@@ -1,0 +1,89 @@
+{
+ "month": "2026-10",
+ "events": {
+  "milk|2026-10-01|madhya pradesh": {
+   "event": "milk|2026-10-01|madhya pradesh",
+   "lang": "hi",
+   "query": "मध्य प्रदेश में दूध मूल्य वृद्धि 4.8% रद्द या स्थगित समाचार",
+   "model_tries": [
+    {
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "call": "0ee350bcdf40",
+     "query": "मध्य प्रदेश में दूध मूल्य वृद्धि 4.8% रद्द या स्थगित समाचार"
+    }
+   ],
+   "challenged": [],
+   "status": "not challenged",
+   "search_call": "8f845a9541e8",
+   "credits": 1,
+   "results": 6,
+   "kept": 3,
+   "dropped": 3,
+   "window": [
+    "2026-09-21",
+    "2026-10-29"
+   ],
+   "search_request_id": "5cfabcc9-1052-493d-a555-b956c1a5aed1",
+   "search_response_sha256": "93792f868885401ae14c37b19c321f104262bd3f264fbb888c41591fc644a163",
+   "utc": "2026-10-28T04:44:36.754456+00:00"
+  },
+  "diesel|2026-10-27|nct of delhi": {
+   "event": "diesel|2026-10-27|nct of delhi",
+   "lang": "hi",
+   "query": "दिल्ली में 27 अक्टूबर 2026 से डीजल कीमतों में कोई बदलाव नहीं करने का समाचार",
+   "model_tries": [
+    {
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "call": "6b8506cdb620",
+     "query": "दिल्ली में 27 अक्टूबर 2026 से डीजल कीमतों में कोई बदलाव नहीं करने का समाचार"
+    }
+   ],
+   "challenged": [],
+   "status": "not challenged",
+   "search_call": "2737d7437f4c",
+   "credits": 1,
+   "results": 10,
+   "kept": 9,
+   "dropped": 1,
+   "window": [
+    "2026-09-21",
+    "2026-10-29"
+   ],
+   "search_request_id": "2a105289-0665-4fc8-bb33-794ae1d3a26c",
+   "search_response_sha256": "6f6f7cf607ec242378e6829d61d85dcb9ba86484e95a598dc06822ddc4842dd7",
+   "utc": "2026-10-28T04:44:36.754456+00:00"
+  },
+  "lpg|2026-10-27|nct of delhi": {
+   "event": "lpg|2026-10-27|nct of delhi",
+   "lang": "hi",
+   "query": "एलपीजी मूल्य वृद्धि वापस ली गई या स्थगित",
+   "model_tries": [
+    {
+     "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+     "call": "ecebe6cd2ba4",
+     "query": "एलपीजी मूल्य वृद्धि वापस ली गई या स्थगित"
+    }
+   ],
+   "challenged": [],
+   "status": "not challenged",
+   "search_call": "b52bbbe579c5",
+   "credits": 1,
+   "results": 7,
+   "kept": 7,
+   "dropped": 0,
+   "window": [
+    "2026-09-21",
+    "2026-10-29"
+   ],
+   "search_request_id": "e854d905-1d25-4e56-b43a-422a91693d96",
+   "search_response_sha256": "eae4e4e4893806bf43aa182f327ff3cf344586cc1fb3512fac2bfa2554cd2648",
+   "utc": "2026-10-28T04:44:36.754456+00:00"
+  }
+ },
+ "runs": [
+  {
+   "utc": "2026-10-28T04:44:36.754456+00:00",
+   "complete": true
+  }
+ ]
+}
