@@ -158,7 +158,13 @@ def app_shot(page, url, heading, path):
     # Streamlit headings keep room for its (hidden) toolbar above them; shrink it so the previous section is off-frame
     h.evaluate("el => { el.style.scrollMarginTop = '28px'; el.scrollIntoView({block: 'start'}); }")
     page.wait_for_timeout(800)
-    page.screenshot(path=str(path))
+    # crop from just above the heading to just below the verdict line under the table (no earlier section above it,
+    # no Exploratory arms or auto_parameters below it)
+    top = h.bounding_box()
+    verdict = page.get_by_text("Verdict (pre-registered", exact=False).first.bounding_box()
+    y0 = max(0, int(top["y"] - 12))
+    y1 = int(verdict["y"] + verdict["height"] + 12)
+    page.screenshot(path=str(path), clip={"x": 0, "y": y0, "width": W, "height": y1 - y0})
 
 
 def main(argv):

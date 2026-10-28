@@ -1,6 +1,7 @@
 # Gallery
 
-Four images for the Devpost gallery (`1600x900` each). The two app shots and both diagrams are drawn by
+Four images for the Devpost gallery, all `1600` px wide: the two diagrams are `1600x900`; the two app shots are
+cropped to their content, so they are shorter. The two app shots and both diagrams are drawn by
 `python tools/build_gallery.py --app <app URL>`; these captions are filled from the results files by
 `python tools/sync_doc_numbers.py` (edit `docs/templates/gallery.md`, not this file).
 
