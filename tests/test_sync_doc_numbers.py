@@ -139,7 +139,7 @@ def test_sync_renders_with_as_of_label_and_is_idempotent(tmp_path, values):
                                                                S.BLOCKS["FEEDBACK_NOTES.md"], "stale"))
     assert S.sync(ST, date(2026, 10, 25), root=tmp_path, values=values) == ["README.md", "docs/devpost_draft.md",
                                                                              "docs/gallery/README.md",
-                                                                             "FEEDBACK_NOTES.md"]
+                                                                             "docs/judge_faq.md", "FEEDBACK_NOTES.md"]
     readme = (tmp_path / "README.md").read_text().replace("\n", " ")
     assert "as of 25 Oct 2026" in readme and "1,234 calls sent, 900 credits used" in readme
     assert "75% of dated" in readme and "median latency 4.0 s" in readme
@@ -342,3 +342,17 @@ def test_readme_top_has_the_replication_row_pooled_line_and_cache_note(values):
     rp = json.loads((ROOT / "results/replication.json").read_text())
     assert int(v["rep_nodates"]) == rp["metrics"]["price"]["arms"]["A"]["leak_cases"]
     assert int(v["pool_dated"]) == rp["pooled"]["price"]["arms"]["C"]["leak_cases"]
+
+
+def test_judge_faq_is_short_answers_from_results_and_linked_from_readme(values):
+    out = S.render((ROOT / "docs/templates/judge_faq.md").read_text(), values)
+    qa = re.split(r"^## ", out, flags=re.M)[1:]
+    assert len(qa) == 10
+    for block in qa:
+        question, _, answer = block.partition("\n")
+        sentences = re.split(r"(?<=[.?!])\s+(?=[A-Z`])", " ".join(answer.split()))
+        assert len(sentences) <= 3, f"{question}: {len(sentences)} sentences"
+    flat = " ".join(out.split())
+    assert f"{values['pool_dated']} of {values['pool_cases']} cases kept a confirmed leak" in flat
+    assert f"{values['mae_poll_c']} percentage points and the poll by {values['mae_poll']}" in flat
+    assert "docs/judge_faq.md" in (ROOT / "docs/templates/README.md").read_text()

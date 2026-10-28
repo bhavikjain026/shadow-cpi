@@ -406,6 +406,8 @@ Jan–Sep 2026 replay, pre-registered, with one disclosed post-scoring correctio
 
 ## Honest limits
 
+Short answers to the hardest questions: [`docs/judge_faq.md`](docs/judge_faq.md). Full list: [`docs/honest_limits.md`](docs/honest_limits.md).
+
 - Coverage: 14%–21% of the CPI basket is measured each month; the rest is assumed to follow its trend.
 - Web news quotes ran in full only for March 2026; the other replay months used official price lists, government
   food prices and announced price-change events.
