@@ -45,6 +45,15 @@ def test_snapshot_becomes_the_last_whole_utc_day_before_it(snap, cutoff):
     assert map_params({"query": "q", "contents": {"crawledBeforeDate": snap}})[1] == cutoff
 
 
+def test_date_objects_and_none_values():
+    from datetime import date, datetime, timezone
+    c = Fake({"results": []})
+    exa_style_search(c, query="q", numResults=None, includeDomains=None, startPublishedDate=date(2026, 10, 1),
+                     contents={"snapshotAsOf": datetime(2026, 10, 7, tzinfo=timezone.utc)})
+    assert c.sent == [{"query": "q", "start_date": "2026-10-01", "end_date": "2026-10-06",
+                       "filter_by_published_date": True}]
+
+
 def test_end_published_date_is_the_cutoff_when_there_is_no_snapshot():
     c = Fake({"results": []})
     exa_style_search(c, query="q", endPublishedDate="2026-10-07T00:00:00Z")
@@ -63,8 +72,12 @@ def test_unsupported_parameters_are_refused_before_any_call(params):
     with pytest.raises(UnsupportedParameterError) as e:
         exa_style_search(c, **{**base, **params})
     assert c.sent == []
-    name = next(iter(params))
-    assert (name in str(e.value)) or ("contents" in str(e.value))
+    name, value = next(iter(params.items()))
+    if isinstance(value, dict):
+        named = [f"contents.{k}" for k in value if k != "snapshotAsOf"]
+        assert all(n in str(e.value).split(" (supported")[0] for n in named) or "not both" in str(e.value)
+    else:
+        assert name in str(e.value).split(" (supported")[0] or "contents must be" in str(e.value)
 
 
 @pytest.mark.parametrize("params", [

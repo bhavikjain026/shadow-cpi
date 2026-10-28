@@ -6,7 +6,7 @@ Parameter names checked on 2026-10-28 against Exa's official /search reference, 
     query                     -> query
     contents.snapshotAsOf     -> cutoff ("newest stored version of each page as of this instant"; ISO date-time
                                  or date-only = midnight UTC)
-    contents.crawledBeforeDate-> cutoff (documented as a deprecated alias of snapshotAsOf)
+    contents.crawledBeforeDate -> cutoff (documented as a deprecated alias of snapshotAsOf)
     startPublishedDate        -> start_date ("published date after this")
     endPublishedDate          -> end_date ("published date before this"); the cutoff when there is no snapshotAsOf
     includeDomains            -> include_domains
@@ -34,27 +34,33 @@ class UnsupportedParameterError(TimeLockError):
 
 
 def _utc_day(name, value):
-    """The UTC calendar day of an ISO 8601 date or date-time (a trailing Z is read as UTC, a naive time as UTC)."""
-    text = str(value).strip()
-    try:
-        if "T" not in text:
-            return date.fromisoformat(text), False
-        dt = datetime.fromisoformat(text[:-1] + "+00:00" if text.endswith(("Z", "z")) else text)
-    except ValueError:
-        raise TimeLockError(f"{name} must be an ISO 8601 date or date-time, got {value!r}") from None
+    """The UTC calendar day of an ISO 8601 date or date-time, or a date/datetime object (a trailing Z or a naive
+    time is read as UTC)."""
+    if isinstance(value, datetime):
+        dt = value
+    elif isinstance(value, date):
+        return value
+    else:
+        text = str(value).strip()
+        try:
+            if "T" not in text:
+                return date.fromisoformat(text)
+            dt = datetime.fromisoformat(text[:-1] + "+00:00" if text.endswith(("Z", "z")) else text)
+        except ValueError:
+            raise TimeLockError(f"{name} must be an ISO 8601 date or date-time, got {value!r}") from None
     if dt.tzinfo is not None:
         dt = dt.astimezone(timezone.utc)
-    return dt.date(), True
+    return dt.date()
 
 
 def _before(name, value):
     """Last whole UTC day strictly before an exclusive Exa instant."""
-    return (_utc_day(name, value)[0] - timedelta(days=1)).isoformat()
+    return (_utc_day(name, value) - timedelta(days=1)).isoformat()
 
 
 def map_params(params):
     """(query, cutoff, tavily_kwargs) from Exa-style parameters. Raises before any call."""
-    params = dict(params)
+    params = {k: v for k, v in params.items() if v is not None}         # None means "not set", as in Exa's SDKs
     contents = params.pop("contents", None) or {}
     if not isinstance(contents, dict):
         raise UnsupportedParameterError(f"contents must be an object, got {type(contents).__name__}")
@@ -64,14 +70,14 @@ def map_params(params):
         raise UnsupportedParameterError(
             f"not supported by the Tavily time lock adapter: {', '.join(bad)} (supported: {', '.join(TOP_LEVEL)}, "
             f"contents.snapshotAsOf, contents.crawledBeforeDate)")
-    if len([k for k in SNAPSHOT if contents.get(k) is not None]) > 1:
+    if sum(contents.get(k) is not None for k in SNAPSHOT) > 1:
         raise UnsupportedParameterError("pass contents.snapshotAsOf or contents.crawledBeforeDate, not both")
     if not params.get("query"):
         raise TimeLockError("query is required")
     snap = next((contents[k] for k in SNAPSHOT if contents.get(k) is not None), None)
     kw = {TOP_LEVEL[k]: v for k, v in params.items() if k not in ("query", "startPublishedDate", "endPublishedDate")}
     if params.get("startPublishedDate") is not None:
-        kw["start_date"] = _utc_day("startPublishedDate", params["startPublishedDate"])[0].isoformat()
+        kw["start_date"] = _utc_day("startPublishedDate", params["startPublishedDate"]).isoformat()
     end = params.get("endPublishedDate")
     if end is not None:
         kw["end_date"] = _before("endPublishedDate", end)
