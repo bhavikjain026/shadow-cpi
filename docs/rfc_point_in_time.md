@@ -1,6 +1,7 @@
 # RFC: point-in-time retrieval for the Tavily API
 
-Status: proposal, written as feedback to the Tavily team. Docs only; no Tavily credits were spent writing it.
+Status: draft proposal, written as feedback to the Tavily team; not yet sent. Docs only; no Tavily credits were
+spent writing it.
 Tavily docs and changelog checked on 2026-10-28.
 
 ## Why this, and why now
@@ -18,16 +19,22 @@ Shadow CPI is a small, concrete instance of that problem. We replay past months 
 forecast each one using only what the web said before a cutoff date. If retrieval can see past the cutoff, the
 forecast is contaminated and the score means nothing.
 
-**The short version: it works today if you set it right.** `start_date` / `end_date` with
-`filter_by_published_date: true` kept post-cutoff pages out of every arm we tested that used them (see
+**The short version: it works today if you set it right, with one gap.** What the filter did: with `start_date` /
+`end_date` and `filter_by_published_date: true`, 0 of 42 date-test cases (pilot + pre-registered replication) kept a
+confirmed leak, where "confirmed" means the Wayback Machine has no copy of the page on or before the cutoff
+(Wilson 95% interval and the per-arm tables in [`results/replication.md`](../results/replication.md); also
 [`results/date_field_test.md`](../results/date_field_test.md),
 [`results/finance_lookahead.md`](../results/finance_lookahead.md) and
-[`results/lang_date_test.md`](../results/lang_date_test.md)). What it took to get there is a small library,
+[`results/lang_date_test.md`](../results/lang_date_test.md)). What it can't do: the filter works on the page's
+date, not its text, so a page dated before the cutoff and edited after it still passes. Case R196 is exactly that: a
+page Tavily dated the day before the cutoff, updated after it with a link to the outcome, returned by a filtered
+search (item 3 in [`docs/tavily_bug_reports.md`](tavily_bug_reports.md)). What it took to get there is a small library,
 [`timelock/`](../timelock/__init__.py), that wraps Search and Extract with date checks, an archive fallback and
 response hashes. Each proposal below is one piece of that library that could move into the API, so that every
 caller gets it by default instead of rebuilding it.
 
 All five proposals are additive: a caller who sends none of the new parameters gets exactly today's behaviour.
+Dates in the JSON examples are made up (year 2099); real cases are only cited by link.
 
 ## Summary
 
@@ -63,7 +70,7 @@ date words, and an undated-by-our-reader page is not the same as an undated page
 ```json
 {
   "url": "https://example.com/news/2026/07/rate-decision",
-  "published_date": "2026-07-07",
+  "published_date": "2099-01-10",
   "published_date_confidence": "high",
   "date_source": "meta"
 }
@@ -110,8 +117,8 @@ Request:
 ```json
 {
   "query": "RBI repo rate decision",
-  "start_date": "2026-06-08",
-  "end_date": "2026-07-07",
+  "start_date": "2099-01-01",
+  "end_date": "2099-01-14",
   "filter_by_published_date": true,
   "date_filter_field": "original"
 }
@@ -122,9 +129,9 @@ Response, per result:
 ```json
 {
   "url": "https://example.com/policy/repo-rate",
-  "published_date": "2026-07-09",
-  "published_date_original": "2026-07-07",
-  "last_modified": "2026-07-09"
+  "published_date": "2099-01-20",
+  "published_date_original": "2099-01-10",
+  "last_modified": "2099-01-20"
 }
 ```
 
@@ -159,8 +166,9 @@ an archive) currently has to turn the filter off and lose the date window too.
 
 **Evidence from this repo.**
 - The "Undated" columns in [`results/finance_lookahead.md`](../results/finance_lookahead.md) and
-  [`results/date_field_test.md`](../results/date_field_test.md): undated results appear in the arms without the
-  filter and not in the arms with it, as documented.
+  [`results/date_field_test.md`](../results/date_field_test.md): undated results appear only in the arms that send
+  no date fields at all; arms with start/end dates (with or without the filter) returned none, which fits the
+  documented filter behaviour but also shows the dates alone affect undated results, a point the docs don't make.
 - The undated share across all our searches, in [`results/tavily_report_card.md`](../results/tavily_report_card.md)
   ("Search results inside the requested date window").
 - [`docs/tavily_bug_reports.md`](tavily_bug_reports.md), item 1: undated results among the `auto_parameters`
@@ -173,8 +181,8 @@ Request:
 ```json
 {
   "query": "Amul milk price revision",
-  "start_date": "2026-05-01",
-  "end_date": "2026-05-31",
+  "start_date": "2099-02-01",
+  "end_date": "2099-02-28",
   "filter_by_published_date": true,
   "undated": "flag"
 }
@@ -186,7 +194,7 @@ Response:
 {
   "undated": { "policy": "flag", "count": 2 },
   "results": [
-    { "url": "https://example.com/a", "published_date": "2026-05-12", "date_flag": null },
+    { "url": "https://example.com/a", "published_date": "2099-02-12", "date_flag": null },
     { "url": "https://example.com/b", "published_date": null, "date_flag": "undated" }
   ]
 }
@@ -215,10 +223,10 @@ That is the `"flag"` policy, built on the caller's side.
 works on the page's date; the text comes from whenever Tavily last fetched it. So a page dated before the cutoff can
 arrive with text added after it, and the response gives no way to see that.
 
-Tavily already exposes the cache age on one side. The October 2026 changelog entry "Content freshness for Search"
-([docs.tavily.com/changelog](https://docs.tavily.com/changelog), checked 2026-10-28) adds `max_age_hours`, which
-"sets the maximum age in hours of Tavily's cached copy of each result", accepting `1` to `720`, `0` to always fetch
-live, or `-1` to never fetch live. That bounds the copy from *below* (no older than N hours), which is the right tool
+Tavily already exposes the cache age on one side. The October 2026 changelog entry on content freshness for Search
+([docs.tavily.com/changelog](https://docs.tavily.com/changelog), checked 28 Oct 2026) adds `max_age_hours`, a
+limit on how old Tavily's cached copy of each result may be, in hours, with settings to always fetch live or never
+fetch live (paraphrased; see the entry for the exact values). That bounds the copy from *below* (no older than N hours), which is the right tool
 for prices and live scores. A point-in-time caller needs the opposite bound: no *newer* than a date.
 
 **Evidence from this repo.**
@@ -236,10 +244,10 @@ Request (Search, and the same field on Extract):
 ```json
 {
   "query": "IOCL LPG cylinder price",
-  "start_date": "2026-06-01",
-  "end_date": "2026-06-30",
+  "start_date": "2099-03-01",
+  "end_date": "2099-03-31",
   "filter_by_published_date": true,
-  "content_as_of": "2026-06-30"
+  "content_as_of": "2099-03-31"
 }
 ```
 
@@ -248,8 +256,8 @@ Response, per result:
 ```json
 {
   "url": "https://example.com/lpg-price",
-  "published_date": "2026-06-14",
-  "fetched_at": "2026-06-28T04:12:09Z",
+  "published_date": "2099-03-14",
+  "fetched_at": "2099-03-28T04:00:00Z",
   "content": "..."
 }
 ```
@@ -263,9 +271,10 @@ Response, per result:
 means today's behaviour. `max_age_hours` keeps its meaning; when both are sent, `max_age_hours` would be measured back
 from `content_as_of` instead of from now, which should be stated in the docs.
 
-**What timelock does today.** Nothing in the response tells us when the copy was fetched, so timelock records when
-*it* made the call ([`timelock/asof.py`](../timelock/asof.py) stamps `capture_time` for a live copy with the call
-time) and decides from outside evidence whether the live text is the cutoff's text: the page's own dates and the
+**What timelock does today.** Nothing in the response tells us when the copy was fetched. For Search, timelock
+records no time at all ([`timelock/search.py`](../timelock/search.py) keeps `request_id` and `response_sha256`
+only). For Extract, [`timelock/asof.py`](../timelock/asof.py) stamps `capture_time` for a live copy with the time of
+our own call, and decides from outside evidence whether the live text is the cutoff's text: the page's own dates and the
 Wayback Machine's capture list. When those disagree or are missing, it refuses the live copy rather than guess.
 
 ---
@@ -290,8 +299,10 @@ Wayback Machine's capture list. When those disagree or are missing, it refuses t
   ([`results/asof_demo_served.json`](../results/asof_demo_served.json)).
 - Receipts we keep ourselves: `response_sha256` on every search ([`timelock/search.py`](../timelock/search.py)),
   per-call records in [`results/call_receipts.json`](../results/call_receipts.json), and the chain of custody in
-  [`results/custody.json`](../results/custody.json). These are self-attested: they prove we did not change a
-  response after saving it, not that Tavily sent it.
+  [`results/custody.json`](../results/custody.json). They are incomplete: custody.json's own note says request
+  IDs and response hashes were logged only from Amendment F on, and earlier runs are marked "not logged". And they
+  are self-attested: they show we did not change a response after saving it, not that Tavily sent it. A receipt
+  Tavily issues with every response would close both gaps.
 
 **Proposed fields.**
 
@@ -300,7 +311,7 @@ Request (Extract; the same two fields on Search would apply per result):
 ```json
 {
   "urls": ["https://example.com/policy/repo-rate"],
-  "as_of": "2026-07-07",
+  "as_of": "2099-01-14",
   "receipt": true
 }
 ```
@@ -314,7 +325,7 @@ Response:
       "url": "https://example.com/policy/repo-rate",
       "raw_content": "...",
       "as_of_source": "tavily_archive",
-      "capture_time": "2026-07-05T11:40:02Z"
+      "capture_time": "2099-01-12T08:00:00Z"
     }
   ],
   "failed_results": [
@@ -324,7 +335,7 @@ Response:
   "receipt": {
     "alg": "ed25519",
     "key_id": "tavily-receipts-2026",
-    "issued_at": "2026-10-28T17:40:11Z",
+    "issued_at": "2099-06-01T12:00:00Z",
     "request_sha256": "…",
     "response_sha256": "…",
     "signature": "…"
