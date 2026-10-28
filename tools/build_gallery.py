@@ -109,15 +109,15 @@ def render(page, markup, path):
 
 
 def first_screen(page, url, path):
-    """The default page as a visitor first sees it: brand header, then the hero (9/20 -> 0/20 on the pre-registered
-    initial pass). Sidebar and toolbar hidden, as in the other app shot."""
+    """The default page as a visitor first sees it: eyebrow, claim, subhead, the three result cards and the interval
+    chart (pre-registered initial pass). Sidebar and toolbar hidden, as in the other app shot."""
     sys.path.insert(0, str(ROOT))
     from app_pages.common import BRAND_LINE
     page.goto(url.rstrip("/") + "/", wait_until="networkidle")
     page.add_style_tag(content=HIDE_CHROME)
     page.get_by_role("heading", name=BRAND_LINE, exact=True).wait_for(timeout=60_000)
-    hero = page.frame_locator('.st-key-hero iframe').locator("#update")
-    hero.wait_for(timeout=60_000)                                  # the hero's last line has drawn
+    page.locator('.st-key-hero [data-testid="stMetric"]').nth(2).wait_for(timeout=60_000)   # the third card has drawn
+    page.locator('.st-key-interval-chart canvas, .st-key-interval-chart svg').first.wait_for(timeout=60_000)
     page.wait_for_timeout(1500)                                    # web fonts and the theme sync settle
     page.evaluate("window.scrollTo(0, 0)")
     page.screenshot(path=str(path))

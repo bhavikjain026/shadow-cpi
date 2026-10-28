@@ -7,7 +7,9 @@ from datetime import date, timedelta
 
 import streamlit as st
 
-from app_pages.common import BRAND, BRAND_LINE, GITHUB_URL, TAGLINE, VIDEO_URL, header, lock_table, read_json
+from app_pages.common import (EYEBROW, GITHUB_URL, SUBHEAD, TITLE_CLAIM, VIDEO_URL, dark_theme, lock_table, read_json,
+                              wilson95)
+from app_pages.provenance import how_we_know as how_we_know_box, provenance
 
 AFTER_RETRY = "after retrying the failed Wayback archive lookups"
 # Short tab labels "<item> · <Mon yy>", short enough for a phone (the case heading keeps the full label).
@@ -172,66 +174,6 @@ def show_case(c):
     search_column(right, LOCKED, LOCKED_NOTE, c["locked"], c["test"], f"{c['id']}-locked")
 
 
-HERO_HEIGHT = 226          # 641-1199 px pages; style.css sets 198 px from 1200 px and 274 px on phones
-HERO_FONT ="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=JetBrains+Mono:wght@600&display=swap"
-HERO_HTML = """<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="{font}"><style>
-:root {{ --ink: #09090b; --muted: #52525b; --line: #e4e4e7; }}       /* no color-scheme: it paints an opaque canvas */
-@media (prefers-color-scheme: dark) {{ :root {{ --ink: #fafafa; --muted: #a1a1aa; --line: #27272a; }} }}
-html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 15px/1.4 Inter, sans-serif; }}
-.title {{ font-weight: 600; font-size: 0.9375rem; margin: 0 0 8px; }}
-.row {{ display: flex; align-items: stretch; gap: 8px; }}
-.side {{ flex: 1 1 0; min-width: 0; border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }}
-.open {{ background: rgba(255, 75, 75, 0.12); }}                      /* LOCK/OPEN colour meaning, as common.OPEN_CSS */
-.locked {{ background: rgba(33, 195, 84, 0.12); }}                     /* the same weight, green: the time lock held */
-.cost {{ flex: 0.8 1 0; }}                                             /* neutral and secondary: no tint, smaller */
-.cost .num {{ font-size: clamp(1.25rem, 4.5vw, 1.875rem); color: var(--muted); }}
-.num {{ font: 600 clamp(1.75rem, 7vw, 2.75rem)/1.1 "JetBrains Mono", ui-monospace, monospace;
-        font-variant-numeric: tabular-nums; letter-spacing: -0.03em; white-space: nowrap; }}
-.label {{ color: var(--muted); font-size: 0.875rem; margin-top: 4px; }}
-.arrow {{ align-self: center; color: var(--muted); font-size: 1.25rem; }}
-.gap {{ width: 8px; }}
-.update {{ color: var(--muted); font-size: 0.8125rem; margin: 6px 0 0; }}
-/* phones (page under 641 px, class set by the script below): compact, and the cost card on its own row under
-   9/20 -> 0/20 (.gap becomes a full-width, zero-height line break) */
-html.narrow .row {{ flex-wrap: wrap; gap: 6px; }} html.narrow .gap {{ flex: 0 0 100%; height: 0; }}
-html.narrow .cost {{ flex: 1 1 100%; }} html.narrow .side {{ padding: 8px 10px; }}
-html.narrow .num {{ font-size: 1.375rem; }} html.narrow .label {{ font-size: 0.75rem; }}
-html.narrow .arrow {{ font-size: 1rem; }} html.narrow .cost .num {{ font-size: 1.0625rem; }}
-html.narrow .update {{ font-size: 0.75rem; }}
-</style></head><body>
-<p class="title">{title}</p>
-<div class="row" role="img" aria-label="{aria}">
-  <div class="side open"><div class="num"><span id="leaked">{open}</span>/{n}</div><div class="label">{open_label}</div></div>
-  <div class="arrow" aria-hidden="true">→</div>
-  <div class="side locked" id="locked"><div class="num">{locked}/{n}</div><div class="label">{locked_label}</div></div>
-  <div class="gap" aria-hidden="true"></div>
-  <div class="side cost" id="cost"><div class="num">{missed}/{quotes}</div><div class="label">{cost_label}</div></div>
-</div>
-<p class="update" id="update">{update}</p>
-<p class="update" id="replication">{replication}</p>
-<script>
-(function () {{
-  // Phone layout follows the page's width, not this frame's (the sidebar changes the frame's width).
-  try {{
-    var narrow = function () {{
-      document.documentElement.classList.toggle('narrow', window.parent.innerWidth < 641);
-    }};
-    narrow();
-    window.parent.addEventListener('resize', narrow);
-  }} catch (e) {{}}
-  // Match the app's theme when the parent page is readable (same origin); else prefers-color-scheme above.
-  try {{
-    var app = window.parent.document.querySelector('[data-testid="stApp"]');
-    var bg = window.parent.getComputedStyle(app).backgroundColor.match(/\\d+/g).map(Number);
-    var dark = (bg[0] * 299 + bg[1] * 587 + bg[2] * 114) / 1000 < 128, r = document.documentElement.style;
-    r.setProperty('--ink', dark ? '#fafafa' : '#09090b');
-    r.setProperty('--muted', dark ? '#a1a1aa' : '#52525b');
-    r.setProperty('--line', dark ? '#27272a' : '#e4e4e7');
-  }} catch (e) {{}}
-}})();
-</script></body></html>"""
-
-
 DATE_TEST = "results/date_field_test.json"
 DATE_LOCKED_ARM = "C"                         # tools/build_leak_demo.py TESTS["date"]["locked"]
 FIELD_REPORT = "results/field_report.json"
@@ -244,31 +186,115 @@ def date_test_cost():
     return int(arm["valid_lost"]), int(arm["valid_total"])
 
 
-def hero(t):
-    """One titled row (date test): 'x/n → y/n' cases leaked on the pre-registered initial pass (the primary result),
-    then the date test's own cost of the time lock (initial pass), then one line with the update after the logged
-    archive retry, all from the results files. The markup is the final state: no count, no hidden start state."""
-    import html
+def stat_cards(t):
+    """The opening screen's three bordered cards, every value read from a results file: (a) no dates, pilot and
+    replication shown separately, the pooled count in the caption as the pre-registered secondary; (b) dates + time
+    lock, pilot and replication pooled, with its Wilson 95% interval computed here; (c) the cost of correctness, the
+    date test's own valid evidence dropped (initial pass; never check E). The pre-registered initial pass leads."""
     d = t["date"]
-    o, k, n = int(d["open"]["first"]), int(d["locked"]["first"]), int(d["cases"])
-    ro, rk = int(d["open"]["retry"]), int(d["locked"]["retry"])
+    o, n = int(d["open"]["first"]), int(d["cases"])
+    rep = read_json(REPLICATION)
+    rc = rep["metrics"]["price"]["arms"]["A"]
+    pool = rep["pooled"]["price"]["arms"]
+    lost, valid = date_test_cost()
+    pk, pn = int(pool["C"]["leak_cases"]), int(pool["C"]["cases"])
+    lo, hi = wilson95(pk, pn)
+    a, b, c = st.columns(3)
+    with a:
+        st.metric(":red[No dates]: cases that leaked", f"{o}/{n} · {rc['leak_cases']}/{rc['cases']}",
+                  delta=f"Pilot · replication. Pooled {pool['A']['leak_cases']} of {pool['A']['cases']} "
+                        "(pre-registered secondary).",
+                  delta_color="off", delta_arrow="off", border=True,
+                  help="Cases where the plain search, with no date limits, returned a page the Wayback Machine shows "
+                       "appeared after the cutoff. Pre-registered initial pass: the pilot, then the replication of new "
+                       "cases. The pooled count adds them under the same rule; it counts one cached pilot answer "
+                       "twice (see How we know).")
+    with b:
+        st.metric(":green[Dates + time lock]: cases that leaked", f"{pk} of {pn}",
+                  delta=f"Wilson 95% interval {pct(lo)}–{pct(hi)}. Pilot and replication pooled.",
+                  delta_color="off", delta_arrow="off", border=True,
+                  help="Cases where the search with start_date, end_date and filter_by_published_date still returned a "
+                       "confirmed leak. Date test only; the finance check is never added to it. A zero count means "
+                       "the true rate is plausibly below the upper bound, not that leaks are impossible.")
+    with c:
+        st.metric("Cost of correctness", f"{lost} of {valid}",
+                  delta="Valid evidence the date filter dropped (initial pass).",
+                  delta_color="off", delta_arrow="off", border=True,
+                  help="Of the valid results the plain search found in the date test, how many the dated search did "
+                       "not return. This is the date test's own pre-registered initial pass, separate from the "
+                       "exploratory exact-match check.")
+
+
+GROUPS = (("Pilot, no dates", "open"), ("Replication, no dates", "open"), ("Pooled, time lock", "lock"))
+SERIES = {"open": "#dc2626", "lock": "#16a34a"}       # >= 3:1 against both page backgrounds; every row is also named
+
+
+def interval_chart(t):
+    """One row per group: a dot at the observed leak rate and a rule for the Wilson 95% interval (computed here from
+    the counts in results/leak_demo.json and results/replication.json), the count at the end of each row."""
+    import altair as alt
+    import pandas as pd
+    d = t["date"]
+    rep = read_json(REPLICATION)
+    counts = ((d["open"]["first"], d["cases"]),
+              (rep["metrics"]["price"]["arms"]["A"]["leak_cases"], rep["metrics"]["price"]["arms"]["A"]["cases"]),
+              (rep["pooled"]["price"]["arms"]["C"]["leak_cases"], rep["pooled"]["price"]["arms"]["C"]["cases"]))
+    rows = []
+    for (name, kind), (k, n) in zip(GROUPS, counts):
+        lo, hi = wilson95(k, n)
+        rows.append({"Group": name, "kind": kind, "rate": k / n, "lo": lo, "hi": hi,
+                     "label": f"{k}/{n}", "interval": f"{pct(lo)}–{pct(hi)}"})
+    ink = "#fafafa" if dark_theme() else "#09090b"
+    muted = "#a1a1aa" if dark_theme() else "#52525b"
+    base = alt.Chart(pd.DataFrame(rows)).encode(y=alt.Y("Group:N", sort=None, axis=None))
+    x = alt.X("rate:Q", scale=alt.Scale(domain=[0, 1]), title=["Share of cases with post-cutoff results", "(Wilson 95% CI)"],
+              axis=alt.Axis(format="%", grid=False, tickCount=5, labelColor=muted, titleColor=ink))
+    tip = ["Group:N", alt.Tooltip("rate:Q", format=".0%", title="Observed"), alt.Tooltip("interval:N", title="95% CI")]
+    colour = alt.Color("kind:N", scale=alt.Scale(domain=list(SERIES), range=list(SERIES.values())), legend=None)
+    zero = alt.Chart(pd.DataFrame({"x": [0]})).mark_rule(color=muted).encode(x="x:Q")
+    rule = base.mark_rule(strokeWidth=3).encode(x=alt.X("lo:Q", scale=alt.Scale(domain=[0, 1])), x2="hi:Q",
+                                                color=colour, tooltip=tip)
+    dot = base.mark_point(filled=True, size=140, opacity=1, clip=False).encode(x=x, color=colour, tooltip=tip)
+    name = base.mark_text(align="left", baseline="bottom", dx=8, dy=-12, fontSize=13, fontWeight=600, color=ink).encode(
+        x=alt.value(0), text="Group:N")
+    end = base.mark_text(align="left", baseline="middle", dx=10, fontSize=13, color=ink).encode(
+        x="hi:Q", text="label:N")
+    with st.container(border=True, key="interval-chart"):
+        st.altair_chart((zero + rule + dot + name + end).properties(height=200).configure_view(stroke=None),
+                        width="stretch")
+        st.caption("The dots show observed rates and the lines show 95% intervals. A zero count means the true rate "
+                   "is plausibly below the upper bound, not that leaks are impossible.")
+
+
+def how_we_know(data):
+    """The three-part 'How we know' box; counts from the results files, wording from docs/honest_limits.md."""
+    t = data["totals"]
+    rep = read_json(REPLICATION)["pooled"]["price"]
+    how_we_know_box(
+        f"Past questions, each with a cutoff date: {t['date']['cases']} in the pilot, {rep['replication_cases']} new "
+        f"ones in the pre-registered replication (the date test), and {t['finance']['cases']} finance events checked "
+        "separately. Each question was searched twice, once with no date limits and once with Tavily's time lock, "
+        "and every request and result is saved in `results/leak_demo.json`.",
+        "A result counts as a leak only when the Wayback Machine shows the page appeared after the cutoff. The "
+        "pre-registered initial pass is the primary result; the retry only recovered archive lookups that had failed "
+        "on the network, so it is shown as an update. Intervals are Wilson 95%. Date-test and finance counts are "
+        "reported separately and never added together.",
+        "The samples are small, so a rate near zero is not a proven zero. The Wayback Machine is our ground truth, and "
+        "a page it never archived can only be flagged, not confirmed. Tavily's published dates are estimates. The "
+        "time lock is enforced in code (`timelock/`), not by trusting the search engine's dates alone. The pooled "
+        "no-dates count includes one cached pilot answer twice. The R196 and E2 examples are single demonstrations "
+        "(a single case each), not measurements.")
+
+
+def update_lines(t):
+    """The update after the logged archive retry, and the replication's time-locked count (initial pass)."""
+    d = t["date"]
+    n = int(d["cases"])
     failed = int(read_json(FIELD_REPORT)["date_test"]["retry"]["failed_urls"])
-    missed, quotes = date_test_cost()
-    leaked = "cases leaked (pre-registered)"
-    update = (f"Update: {ro}/{n} with no time lock after retrying the {failed} failed Wayback archive lookups; "
-              f"{rk}/{n} with the time lock.")
-    rc = read_json(REPLICATION)["metrics"]["price"]["arms"]["C"]           # pre-registered replication, initial pass
-    replication = f"Replication: {rc['leak_cases']} of {rc['cases']} more cases leaked with the time lock."
-    st.iframe(HERO_HTML.format(
-        font=HERO_FONT, open=o, locked=k, n=n, missed=missed, quotes=quotes,
-        title=html.escape(f"Date test · {n} past cases · pre-registered initial pass"),
-        open_label=html.escape(f"{OPEN}: {leaked}"), locked_label=html.escape(f"{LOCKED}: {leaked}"),
-        cost_label="Cost: valid evidence dropped (initial pass)", update=html.escape(update),
-        replication=html.escape(replication),
-        aria=html.escape(f"Date test, {n} past cases, pre-registered initial pass. {OPEN}: {o}/{n} {leaked}. "
-                         f"{LOCKED}: {k}/{n}. Cost: {missed} of {quotes} valid evidence dropped (initial pass). "
-                         f"{update} {replication}")),
-        height=HERO_HEIGHT)
+    rc = read_json(REPLICATION)["metrics"]["price"]["arms"]["C"]
+    st.caption(f"Update: {int(d['open']['retry'])}/{n} with no time lock after retrying the {failed} failed Wayback "
+               f"archive lookups; {int(d['locked']['retry'])}/{n} with the time lock.")
+    st.caption(f"Replication: {rc['leak_cases']} of {rc['cases']} more cases leaked with the time lock.")
 
 
 def totals(t, n):
@@ -294,7 +320,7 @@ def totals(t, n):
 
 
 def method(data, d, f, s):
-    note = data["labels_note"]
+    note = data["labels_note"].replace("first-pass", "initial-pass")        # outward wording: initial pass
     with st.expander("Method, intervals and source files"):
         st.markdown(f"- **Labels:** {note}. Badges: LEAK = confirmed leak (Wayback), OK = confirmed before the "
                     "cutoff (Wayback), UNCHECKED = no archive confirmation either way.\n"
@@ -358,18 +384,20 @@ def live():
 
 
 def brand():
-    """The first screen's identity: a small wordmark, the headline as the page's H1, the shortened tagline, and link
-    buttons (Field Report, GitHub, and the video only when common.VIDEO_URL is set)."""
+    """The opening screen's identity: a small uppercase eyebrow, the claim as the page's H1, a one-sentence subhead."""
     with st.container(key="brand"):
-        with st.container(key="wordmark"):
-            st.markdown(BRAND)
-        st.title(BRAND_LINE)
-        st.markdown(TAGLINE)
-        with st.container(key="brand-links", horizontal=True, gap="small", vertical_alignment="center"):
-            st.page_link("app_pages/field_report.py", label="Field Report", icon=":material/science:")
-            st.link_button("GitHub", GITHUB_URL, icon=":material/code:")
-            if VIDEO_URL:
-                st.link_button("Watch the video", VIDEO_URL, icon=":material/play_circle:")
+        with st.container(key="eyebrow"):
+            st.markdown(EYEBROW)
+        st.title(TITLE_CLAIM)
+        st.markdown(SUBHEAD)
+
+
+def links():
+    with st.container(key="brand-links", horizontal=True, gap="small", vertical_alignment="center"):
+        st.page_link("app_pages/field_report.py", label="Field Report", icon=":material/science:")
+        st.link_button("GitHub", GITHUB_URL, icon=":material/code:")
+        if VIDEO_URL:
+            st.link_button("Watch the video", VIDEO_URL, icon=":material/play_circle:")
 
 
 def pick_cases(cases, shown):
@@ -387,13 +415,17 @@ def pick_cases(cases, shown):
 
 
 brand()
-header("Leak demo", eyebrow=True)
 data = read_json("results/leak_demo.json")
 if not data:
     st.info("Not built yet: run `python tools/build_leak_demo.py` (offline, 0 credits).")
     st.stop()
-with st.container(key="hero"):          # style.css sets its height on wide screens and phones
-    hero(data["totals"])
+with st.container(key="hero"):
+    stat_cards(data["totals"])
+interval_chart(data["totals"])
+update_lines(data["totals"])
+provenance("results/leak_demo.json")
+links()
+how_we_know(data)
 with st.container(key="use-it"):
     st.markdown("**Use it**")
     st.code(USE_IT, language="python", wrap_lines=True)

@@ -401,7 +401,7 @@ def test_every_page_has_a_purpose_line():
     titles = set()
     for f in (ROOT / "app_pages").glob("*.py"):
         titles.update(re.findall(r'^header\("([^"]+)"', f.read_text(encoding="utf-8"), re.M))
-    assert titles == set(PAGE_GUIDES) and len(titles) == 15
+    assert titles | {"Leak demo"} == set(PAGE_GUIDES) and len(titles) == 14   # Leak demo opens with brand(), no header()
     at = load("leak_demo")
     assert PAGE_GUIDES["Leak demo"] in [c.value for c in at.caption]
 

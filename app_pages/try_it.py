@@ -7,6 +7,7 @@ from datetime import date, datetime, timedelta, timezone
 import streamlit as st
 
 from app_pages.common import header, read_json
+from app_pages.provenance import provenance
 from shadow_cpi import try_it as T
 
 OPEN, OPEN_NOTE = "No time lock", "plain Tavily search, no dates"
@@ -76,6 +77,7 @@ def saved_example():
               f"(results/date_field_test.json, built {human(built)}) with {n} results per search and its own "
               f"window ({human(res['locked']['window'][0])} to {human(res['locked']['window'][1])}); "
               "flagged here by the same rule as a live run.")
+    provenance("results/date_field_test.json")
 
 
 def colab(msg):

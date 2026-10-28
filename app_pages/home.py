@@ -8,9 +8,10 @@ from shadow_cpi.live_range import THRESHOLD
 
 from app_pages.common import (CODES, LABELS, LIVE_MONTH, NOWCAST_WORDS, REPO_URL, SEAL_DATE, clean_line,
                               countdown_text, header, headline_result, item_label, month_name, next_release,
-                              pass_fail, pct, poll_direction, poll_months, read_json, seal_status, source_column,
+                              pass_fail, pct, poll_direction, poll_months, read_json, seal_status, table,
                               v2_comparison)
 from app_pages.v2_panels import what_tavily_adds
+from app_pages.provenance import provenance
 from app_pages.v3_panel import v3_beside_v1
 
 header("Experimental nowcast", f"Shadow CPI: an {NOWCAST_WORDS} of India's next official CPI inflation number "
@@ -24,6 +25,7 @@ if lock:
               f"{lock['mae_poll_months']['c']:.3f} vs {lock['mae_poll_months']['poll']:.3f}",
               help=f"The {poll_months()} months with a published economists' poll")
     st.caption(f"{headline_result(lock)} Source: `results/score_lock.json`.")
+    provenance("results/score_lock.json")
 st.markdown("**How it works:** Tavily searches the web, with dates locked, for price evidence → Nemotron on Nebius "
             "Token Factory pulls out only quoted, dated prices → plain code turns them into a CPI estimate with a "
             "range, sealed before release.")
@@ -45,15 +47,15 @@ with st.container(border=True):
             st.progress(min(max(cov["observed"], 0.0), 1.0),
                         text=f"{cov['observed']:.0%} of the basket measured, {cov['carried']:.0%} assumed to follow its recent trend")
         if call.get("contributors"):
-            st.dataframe([{"Group": c["name"], "Contribution (percentage points)": f"{c['pp']:+.2f}"}
-                          for c in call["contributors"][:3]],
-                         hide_index=True, width="stretch")
+            table([{"Group": c["name"], "Contribution (percentage points)": f"{c['pp']:+.2f}"}
+                          for c in call["contributors"][:3]])
         if sealed:
             stored, _, ok = seal_status(LIVE_MONTH)
             (st.success if ok else st.error)(f"Sealed {sealed.get('sealed_at_utc', '')[:16]} UTC · SHA-256 "
                                              f"`{stored}` · " + ("PASS" if ok else "FAIL"))
         else:
             st.warning(f"Built but not sealed yet: sealing on {SEAL_DATE:%d %b}.")
+        provenance(f"sealed/{LIVE_MONTH}.json" if sealed else f"results/nowcast_{LIVE_MONTH}.json")
     else:                                      # compact status banner until the seal
         rel = next_release()
         c1, c2, c3 = st.columns(3)
@@ -91,7 +93,7 @@ if lock:
                  f"{lock['mae_poll_months']['poll']:.3f}",
                  "Before fixes": f"{before['mae_poll_months']['poll']:.3f}" if before else "—",
                  "Direction right": poll_direction()})
-    st.dataframe(rows, hide_index=True, width="stretch")
+    table(rows)
     st.markdown(f"**{pass_fail(lock)}.** Actual inside the 80% range in {lock['inside_range']} of 9 months.")
     st.caption("Codes: " + ", ".join(f"{LABELS[k]} = {CODES[k]}" for k in ("c", "a", "b", "c_strict", "B1"))
                + f". On the poll's months, Shadow CPI missed by {lock['mae_poll_months']['c']:.3f} pp. Scored once, "
@@ -143,10 +145,9 @@ def show_run(r, note=""):
                    f"before it for announcements) · replayed from saved results on {r['replayed_on']} · "
                    f"{r['n_searches']} searches · {r['credits']} credits when originally run (0 now).")
     if r.get("events"):
-        st.dataframe([{"Item": item_label(e["item"]), "Source": e["url"], "Place": e.get("place", ""),
+        table([{"Item": item_label(e["item"]), "Source": e["url"], "Place": e.get("place", ""),
                        "Change": f"{e['pct_change']:+.2f}%", "Effective": e["effective_date"],
-                       "Exact line": clean_line(e["line"])} for e in r["events"]],
-                     hide_index=True, width="stretch", column_config={"Source": source_column()})
+                       "Exact line": clean_line(e["line"])} for e in r["events"]], show=["Item", "Source", "Change", "Effective", "Exact line"])
     else:
         st.caption("No verified price events in this scan.")
     if r.get("receipt"):

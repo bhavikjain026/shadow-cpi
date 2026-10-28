@@ -42,6 +42,13 @@ def text(at):
     return "\n".join(str(p) for p in parts)
 
 
+def text_without(at):
+    """Captions, titles, headings and alerts (the text we write); result headlines are a third party's."""
+    parts = [c.value for c in at.caption] + [t.value for t in at.title] + [h.value for h in at.subheader]
+    parts += [e.value for e in at.error] + [i.value for i in at.info] + [w.value for w in at.warning]
+    return "\n".join(str(p) for p in parts) + "\n"
+
+
 def shown_ids(at):
     """The recommended examples' IDs, from the 'How these examples were picked' caption."""
     import re
@@ -82,7 +89,7 @@ def test_three_examples_each_leak_open_and_none_locked():
 def test_home_is_the_leak_demo_with_examples_and_totals():
     at = page()
     t = text(at)
-    assert "Leak demo" in t and (f"examples chosen for clarity; all {len(DATA['cases'])} in the picker and the "
+    assert (f"examples chosen for clarity; all {len(DATA['cases'])} in the picker and the "
                                  "totals below") in t
     s, d = DATA["totals"]["strictness"], DATA["totals"]["date"]
     assert f"**{s['missed']} of {s['quotes']}**" in t
@@ -197,37 +204,14 @@ def test_web_titles_cannot_inject_markdown():
 
 
 # ---------- ui-polish / look: hero row, default examples, text badges ----------
-def test_hero_row_reads_the_results_file_and_is_not_repeated():
-    at = page()
-    d = DATA["totals"]["date"]
-    c = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["C"]
-    (frame,) = at.get("iframe")
-    html = frame.proto.srcdoc
-    failed = json.loads((ROOT / "results" / "field_report.json").read_text())["date_test"]["retry"]["failed_urls"]
-    assert f"Date test · {d['cases']} past cases · pre-registered initial pass" in html
-    assert (f"No time lock: {d['open']['first']}/{d['cases']} cases leaked (pre-registered). Tavily time lock: "
-            f"{d['locked']['first']}/{d['cases']}. Cost: {c['valid_lost']} of {c['valid_total']} valid evidence "
-            "dropped (initial pass).") in html     # the hero's accessible label: the pre-registered pass leads
-    assert (f'<p class="update" id="update">Update: {d["open"]["retry"]}/{d["cases"]} with no time lock after '
-            f'retrying the {failed} failed Wayback archive lookups; {d["locked"]["retry"]}/{d["cases"]} with the '
-            "time lock.</p>") in html
-    assert f'<span id="leaked">{d["open"]["first"]}</span>/{d["cases"]}' in html
-    assert not any(m.value.startswith("**No time lock:") for m in at.markdown)
-
-
-def test_hero_cost_is_the_date_tests_own_field_not_check_e():
-    """The cost card on the date-test row shows the date test's valid evidence dropped (locked arm C, initial pass),
-    not check E's known-good quotes missed."""
-    import re
+def test_cost_card_is_the_date_tests_own_field_not_check_e():
+    """Card (c) shows the date test's valid evidence dropped (locked arm C, initial pass), not check E's known-good
+    quotes missed (those stay in the totals section)."""
     c = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["C"]
     s = DATA["totals"]["strictness"]
-    (frame,) = page().get("iframe")
-    card = re.search(r'id="cost"><div class="num">(\d+)/(\d+)</div><div class="label">([^<]+)<',
-                     frame.proto.srcdoc)
-    assert card and (int(card[1]), int(card[2])) == (c["valid_lost"], c["valid_total"])
-    assert card[3] == "Cost: valid evidence dropped (initial pass)"
-    if (s["missed"], s["quotes"]) != (c["valid_lost"], c["valid_total"]):
-        assert f"{s['missed']}/{s['quotes']}" not in card[0]
+    cost = page().metric[2]
+    assert cost.label == "Cost of correctness" and cost.value == f"{c['valid_lost']} of {c['valid_total']}"
+    assert "initial pass" in cost.delta and "check E" not in cost.delta
     assert "C" == __import__("tools.build_leak_demo", fromlist=["TESTS"]).TESTS["date"]["locked"]
 
 
@@ -269,13 +253,17 @@ def test_every_result_has_a_text_badge():
 def test_brand_header_leads_the_first_screen():
     from app_pages import common as C
     at = page()
-    assert [t.value for t in at.title] == [C.BRAND_LINE]                  # the headline is the page's only H1
-    assert C.BRAND_LINE == "Can a search engine keep the past in the past?"
-    assert len(C.TAGLINE.split()) <= 20 and C.TAGLINE in text(at)
+    assert [t.value for t in at.title] == [C.TITLE_CLAIM] == [C.BRAND_LINE]   # the claim is the page's only H1
     md = [m.value for m in at.markdown]
-    assert md.index(C.BRAND) < md.index(C.TAGLINE) < md.index("Leak demo")   # wordmark, sub-line, then the eyebrow
-    assert C.PAGE_GUIDES["Leak demo"] in [c.value for c in at.caption]      # one intro line
-    assert "The same past question, searched twice" not in text(at)
+    assert md.index(C.EYEBROW) < md.index(C.SUBHEAD)                          # eyebrow, H1, subhead, then the cards
+    assert C.EYEBROW == "Nebius x NVIDIA Global AI Hackathon · Built on Tavily"
+    assert len(C.SUBHEAD.split(". ")) == 1 and len(at.metric) == 3 and all(m.help for m in at.metric)
+    banned = ("first", "beats economists", "no leaks", "scores itself", "used by", "sensitivity", "eliminates",
+              "guarantees", "fixed it in every case", "every page through Tavily")
+    ours = "\n".join(m.value for m in at.markdown if not m.value.startswith(":"))     # not third-party headlines
+    shown = (text_without(at) + ours + " " + " ".join(m.help for m in at.metric)).lower()
+    assert not [b for b in banned if re.search(rf"\b{re.escape(b)}\b", shown)]
+    assert "0 of 34" not in shown and "20 of 34" not in shown
     links = [b.proto.label for b in at.get("link_button")]
     assert links == ["GitHub"] and at.get("link_button")[0].proto.url == C.GITHUB_URL
     assert [p.proto.label for p in at.main.get("page_link")][:1] == ["Field Report"]
@@ -318,12 +306,11 @@ def test_tab_labels_are_short():
     assert all(len(re.sub(r":gray\[:small\[\w+\]\]", "", l).strip()) <= 22 for l in labels)
 
 
-def test_hero_replication_line_reads_the_replication_file():
+def test_replication_line_reads_the_replication_file():
     """One short line under the update: the pre-registered replication's time-locked count (initial pass)."""
     c = json.loads((ROOT / "results" / "replication.json").read_text())["metrics"]["price"]["arms"]["C"]
-    (frame,) = page().get("iframe")
-    assert (f'<p class="update" id="replication">Replication: {c["leak_cases"]} of {c["cases"]} more cases leaked '
-            "with the time lock.</p>") in frame.proto.srcdoc
+    assert (f"Replication: {c['leak_cases']} of {c['cases']} more cases leaked with the time lock."
+            in [x.value for x in page().caption])
 
 
 def test_field_report_shows_the_replication_group_and_the_pooled_line():

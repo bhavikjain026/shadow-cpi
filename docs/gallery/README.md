@@ -6,9 +6,9 @@ Four images for the Devpost gallery (`1600x900` each). The two app shots and bot
 `python tools/sync_doc_numbers.py` (edit `docs/templates/gallery.md`, not this file).
 
 ## The opening screen
-![Leak demo, the app's opening screen: no time lock vs Tavily's time lock, date test](1_leak_demo.png)
+![Leak demo, the app's opening screen: the headline claim, three result cards and the interval chart](1_leak_demo.png)
 
-**Can a search engine keep the past in the past?** The app's opening screen. Date test (pilot, 20 past
+**Ask a search engine about the past, and it can answer with the future.** The app's opening screen. Date test (pilot, 20 past
 cases, the pre-registered initial pass): with no dates, 9 of 20 cases kept a confirmed leak, a
 page dated after the cutoff with no archive copy on or before it (Wilson 95% 26–66%;
 10 of 20 after retrying the 11 archive lookups that had failed); with
@@ -16,8 +16,8 @@ page dated after the cutoff with no archive copy on or before it (Wilson 95% 26�
 filter dropped 12 of 40 pieces of valid evidence (initial pass). Replication
 (pre-registered, 22 new cases, initial pass): no dates 14 of 22, dates + filter
 0 of 22 (0–15%); pilot and replication together, same rule: 0 of
-42 with dates + filter (0–8%). Red card: no time
-lock; green card: Tavily's time lock. App page: Leak demo (home). Source: `results/leak_demo.json`,
+42 with dates + filter (0–8%). Three cards (no dates, dates + time lock,
+cost of correctness) and a dot-and-interval chart of the same counts. App page: Leak demo (home). Source: `results/leak_demo.json`,
 `results/field_report.json`, `results/replication.json`.
 
 ## The four-arm table

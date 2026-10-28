@@ -38,16 +38,6 @@
   padding: 0 0.75rem; text-decoration: none; height: 2.5rem; box-sizing: border-box; display: flex; align-items: center;
 }
 .st-key-brand-links [data-testid="stPageLink"] { margin: 0; }
-/* the hero's iframe has one fixed height (leak_demo.HERO_HEIGHT, for 641-1199 px pages, content 185-225 px);
-   from 1200 px its content ends by about 185 px, and on phones the cost card takes its own row (199-267 px) */
-@media (max-width: 640px) {
-  .st-key-hero [data-testid="stIFrame"] { height: 274px !important; }
-  .st-key-hero [data-testid="stElementContainer"] { height: 274px !important; flex-basis: 274px !important; }
-}
-@media (min-width: 1200px) {
-  .st-key-hero [data-testid="stIFrame"] { height: 198px !important; }
-  .st-key-hero [data-testid="stElementContainer"] { height: 198px !important; flex-basis: 198px !important; }
-}
 .st-key-brand-links [data-testid="stPageLink"] a:hover { border-color: color-mix(in srgb, currentColor 40%, transparent); }
 /* Leak demo "Use it": compact code in the text colour (the light theme's syntax colours fall to 2.1-3.4:1) */
 .st-key-use-it { gap: 0.5rem; }
@@ -55,12 +45,12 @@
 .st-key-use-it [data-testid="stCode"] code span { color: inherit !important; }
 /* the page name as a small label above the hero cards (header(..., eyebrow=True)) */
 .st-key-eyebrow p {
-  font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin: 1rem 0 0;
+  font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin: 0;
   color: color-mix(in srgb, currentColor 70%, transparent);
 }
 
 /* ---------- type ---------- */
-[data-testid="stMain"] h1 { letter-spacing: -0.025em; line-height: 1.15; }
+[data-testid="stMain"] h1 { letter-spacing: -0.025em; line-height: 1.15; text-wrap: balance; }
 [data-testid="stMain"] h2, [data-testid="stMain"] h3 { letter-spacing: -0.015em; line-height: 1.25; }
 [data-testid="stMain"] h4, [data-testid="stMain"] h5 { letter-spacing: -0.01em; line-height: 1.3; }
 [data-testid="stHeading"] { padding-top: 8px; }                    /* more space above a heading than below */
@@ -93,7 +83,21 @@
   letter-spacing: -0.02em;
   overflow-wrap: anywhere;
 }
-[data-testid="stMetricLabel"] { opacity: 0.85; }
+[data-testid="stMetricValue"], [data-testid="stMetricValue"] * { font-variant-numeric: tabular-nums; }
+[data-testid="stMetricLabel"] { opacity: 1; }
+/* the card's note under the value (st.metric delta, colour off): readable grey, wraps, never clipped */
+[data-testid="stMetricDelta"] { color: color-mix(in srgb, currentColor 72%, transparent); font-size: 0.8125rem; }
+/* Leak demo cards: equal height side by side; stacked in order (a), (b), (c) on phones by st.columns itself */
+.st-key-hero [data-testid="stColumn"] [data-testid="stVerticalBlock"] [data-testid="stMetric"] {
+  box-sizing: border-box; padding: 16px;
+  border: 1px solid color-mix(in srgb, currentColor 22%, transparent); border-radius: 0.5rem;
+}
+@media (min-width: 641px) {
+  .st-key-hero [data-testid="stColumn"] [data-testid="stVerticalBlock"] [data-testid="stMetric"] { height: 100%; }
+}
+.st-key-hero [data-testid="stMetricDelta"] { background: transparent; padding: 0; }
+.st-key-hero [data-testid="stMetricValue"] { font-size: 1.75rem; }
+.st-key-hero [data-testid="stMetricLabel"] p { font-size: 0.875rem; }
 /* long deltas (Live build) wrap instead of being cut off with an ellipsis */
 [data-testid="stMetricDelta"] [data-testid="stMarkdownContainer"],
 [data-testid="stMetricDelta"] p { white-space: normal; overflow: visible; text-overflow: clip; }
@@ -126,6 +130,15 @@
 [data-testid="stExpander"] details { border-radius: 0.5rem; }
 [data-testid="stExpander"] summary { font-weight: 500; transition: background-color 160ms ease-out; }
 [data-testid="stExpander"] summary:hover { background: color-mix(in srgb, currentColor 4%, transparent); }
+
+/* ---------- provenance footer (app_pages/provenance.py): small, muted, monospace ---------- */
+[data-testid="stHtml"] p.provenance {
+  margin: 0.25rem 0 0.5rem; font: 400 0.75rem/1.5 "JetBrains Mono", ui-monospace, monospace; overflow-wrap: anywhere;
+  color: color-mix(in srgb, currentColor 66%, transparent);
+}
+[data-testid="stHtml"] p.provenance b { font-weight: 500; color: inherit; }
+/* the interval chart's frame */
+.st-key-interval-chart { gap: 0.25rem; }
 
 /* ---------- code ---------- */
 /* JSON viewer: its syntax colours fall to 3.2-3.7:1 on the light theme; full ink keeps 4.5:1 in both themes */
@@ -210,7 +223,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-testid="stMetric"], [data-testid="stExpander"] summary { transition: none; }
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 
 /* Tavily trace funnel: step cards slide in one after another (transform only, so they are fully visible in any static capture) (stagger 0.07s, total under 1s). */
@@ -229,4 +242,9 @@ div[class*="st-key-trace_funnel_step_7"] { animation-delay: 0.49s; }
 div[class*="st-key-trace_funnel_step_"] { height: 100%; }
 @media (prefers-reduced-motion: reduce) {
   div[class*="st-key-trace_funnel_step_"] { animation: none; }
+}
+
+/* primary buttons: the dark theme's #60a5fa accent needs dark text (white on it is 2.5:1; #09090b is 7.9:1) */
+@media (prefers-color-scheme: dark) {
+  [data-testid^="stBaseButton-primary"], [data-testid^="stBaseButton-primary"] * { color: #09090b; }
 }

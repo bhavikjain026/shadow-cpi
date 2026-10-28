@@ -18,7 +18,11 @@ IST = timezone(timedelta(hours=5, minutes=30))
 REPO_URL = "https://github.com/bhavikjain026/shadow-cpi/blob/main"
 GITHUB_URL = "https://github.com/bhavikjain026/shadow-cpi"
 VIDEO_URL = ""             # the demo video's URL; while empty, the Leak demo hides its "Watch the video" button
-BRAND, BRAND_LINE = "Shadow CPI", "Can a search engine keep the past in the past?"
+BRAND = "Shadow CPI"
+EYEBROW = "Nebius x NVIDIA Global AI Hackathon · Built on Tavily"
+TITLE_CLAIM = BRAND_LINE = "Ask a search engine about the past, and it can answer with the future."
+SUBHEAD = ("Shadow CPI replays past questions as of a cutoff date, searches each with and without Tavily's time lock, "
+           "and counts the results that were published after the cutoff.")
 # the README tagline, shortened to at most 20 words
 TAGLINE = ("An AI agent that searches the past without cheating, checks every quote, and seals India's inflation "
            "forecast before release.")
@@ -38,6 +42,17 @@ def path(rel):
     return ROOT / rel
 
 
+def wilson95(k, n, z=1.959964):
+    """Wilson score interval (low, high) for k of n, as shares; the same formula and z as v2/date_test.wilson."""
+    if not n:
+        return None, None
+    p = k / n
+    d = 1 + z * z / n
+    centre = (p + z * z / (2 * n)) / d
+    half = z * ((p * (1 - p) / n + z * z / (4 * n * n)) ** 0.5) / d
+    return max(0.0, centre - half), min(1.0, centre + half)
+
+
 # Time-lock tables: time-locked cells bold, no-lock cells tinted (works in light and dark themes).
 LOCK_CSS, OPEN_CSS = "font-weight: 700", "background-color: rgba(255, 75, 75, 0.12)"
 
@@ -51,6 +66,41 @@ def lock_table(rows, kind):
     styles = pd.DataFrame([[css.get(kind(rows[i], c), "") for c in df.columns] for i in range(len(rows))],
                           index=df.index, columns=df.columns)
     st.table(df.style.apply(lambda _: styles, axis=None).hide(axis="index"), hide_index=True)
+
+
+def dark_theme():
+    """True when the viewer's app theme is dark (st.context.theme; light when unknown)."""
+    try:
+        return st.context.theme.type == "dark"
+    except AttributeError:
+        return False
+
+
+MAX_COLS = 5                  # columns a table shows by default, so it reads at 390 px; the rest sit under the column menu
+
+
+def table(rows, show=None, config=None):
+    """st.dataframe(hide_index=True) with typed columns: whole numbers and floats as NumberColumn, ISO dates as
+    DateColumn, web addresses as LinkColumn (the short domain). At most MAX_COLS columns show by default (`show` names
+    them; else the first MAX_COLS); the rest stay one click away in the column menu. Values are not changed."""
+    import re
+    import pandas as pd
+    df = pd.DataFrame(rows)
+    cfg = {}
+    for col in df.columns:
+        vals = [v for v in df[col] if v is not None and v == v and v != ""]
+        if not vals:
+            continue
+        if all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in vals):
+            cfg[col] = st.column_config.NumberColumn(col)
+        elif all(isinstance(v, str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", v) for v in vals):
+            df[col] = [date.fromisoformat(v) if isinstance(v, str) and v else None for v in df[col]]
+            cfg[col] = st.column_config.DateColumn(col, format="D MMM YYYY")
+        elif all(isinstance(v, str) and v.startswith(("http://", "https://")) for v in vals):
+            cfg[col] = source_column(col)
+    cfg.update(config or {})
+    order = list(show) if show else list(df.columns)[:MAX_COLS]
+    st.dataframe(df, hide_index=True, width="stretch", column_config=cfg, column_order=order)
 
 
 def inject_style():
@@ -102,9 +152,15 @@ def header(title, intro=None, *, eyebrow=False):
 
 
 # ---------- loaders (each returns None / [] when the file does not exist yet) ----------
+@st.cache_data(show_spinner=False)
+def _load_json(rel, mtime):
+    """Parsed results file, cached per file version (mtime); each caller gets its own copy."""
+    return json.loads(path(rel).read_text(encoding="utf-8"))
+
+
 def read_json(rel):
     p = path(rel)
-    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
+    return _load_json(rel, p.stat().st_mtime) if p.exists() else None
 
 
 def read_csv(rel):

@@ -1,6 +1,5 @@
 """Aesthetic pass (display only): the theme uses only options this Streamlit supports, text colours pass 4.5:1, the
-stylesheet avoids hashed class names, and the Leak demo hero shows the results file's numbers with one pinned,
-non-looping animation that respects prefers-reduced-motion."""
+stylesheet avoids hashed class names, and the Leak demo cards show the results files' numbers as static text."""
 import json
 import re
 import tomllib
@@ -43,13 +42,11 @@ def contrast(a, b):
     return (max(x, y) + 0.05) / (min(x, y) + 0.05)
 
 
-def hero_html():
+def page_run():
     at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=60)
     at.run()
     assert not at.exception, [e.value for e in at.exception]
-    frames = at.get("iframe")
-    assert len(frames) == 1
-    return at, frames[0].proto.srcdoc
+    return at
 
 
 # ---------- theme ----------
@@ -83,44 +80,69 @@ def test_stylesheet_uses_test_ids_not_hashed_classes():
 
 
 def test_style_is_injected_once_and_takes_no_layout():
-    at, _ = hero_html()
-    styles = at.get("html")
-    assert len(styles) == 1 and styles[0].proto.body.startswith("<style>")
+    styles = page_run().get("html")
+    assert sum(s.proto.body.startswith("<style>") for s in styles) == 1
 
 
-# ---------- the hero ----------
-def test_hero_numbers_come_from_the_results_files():
-    _, html = hero_html()
+def test_reduced_motion_rule_and_viewer_toolbar():
+    assert "prefers-reduced-motion: reduce" in CSS and "animation: none !important" in CSS
+    assert THEME["client"]["toolbarMode"] == "viewer"
+    assert THEME["theme"]["light"]["primaryColor"] == "#1d4ed8" and THEME["theme"]["dark"]["primaryColor"] == "#60a5fa"
+
+
+# ---------- the opening cards ----------
+def test_cards_numbers_come_from_the_results_files():
+    at = page_run()
     d = DATA["totals"]["date"]
+    rep = json.loads((ROOT / "results" / "replication.json").read_text())
+    ra, pool = rep["metrics"]["price"]["arms"]["A"], rep["pooled"]["price"]["arms"]
     c = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["C"]
-    o, k, n = d["open"]["first"], d["locked"]["first"], d["cases"]     # the pre-registered initial pass leads
-    assert f'<span id="leaked">{o}</span>/{n}' in html and f">{k}/{n}<" in html
-    shown = re.findall(r"<span id=\"leaked\">(\d+)</span>/(\d+)|>(\d+)/(\d+)<", html)
-    # the cost card is the date test's own valid evidence dropped (locked arm C, initial pass), not check E
-    assert shown == [(str(o), str(n), "", ""), ("", "", str(k), str(n)),
-                     ("", "", str(c["valid_lost"]), str(c["valid_total"]))]
-    # the same counts the Field Report reads (results/field_report.json, date test, pre-registered initial pass)
+    vals = [m.value for m in at.metric]
+    # the pre-registered initial pass leads: pilot and replication shown separately, the pooled lock count, the cost
+    assert vals == [f"{d['open']['first']}/{d['cases']} · {ra['leak_cases']}/{ra['cases']}",
+                    f"{pool['C']['leak_cases']} of {pool['C']['cases']}", f"{c['valid_lost']} of {c['valid_total']}"]
     assert d["source"].startswith("results/field_report.json")
+    deltas = [m.delta for m in at.metric]
+    assert f"Pooled {pool['A']['leak_cases']} of {pool['A']['cases']} (pre-registered secondary)" in deltas[0]
+    from app_pages.common import wilson95
+    lo, hi = wilson95(pool["C"]["leak_cases"], pool["C"]["cases"])
+    assert f"Wilson 95% interval {lo:.0%}–{hi:.0%}" in deltas[1]
+    # the computed interval agrees with the one the results file stores
+    assert round(hi, 6) == round(pool["C"]["wilson95"][1], 6)
 
 
-def test_hero_markup_is_the_final_state_with_no_count_or_hidden_start():
-    _, html = hero_html()
-    d = DATA["totals"]["date"]
-    c = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["C"]
-    n = d["cases"]
-    for text in (f'{d["open"]["first"]}</span>/{n}', f'{d["locked"]["first"]}/{n}', f'{c["valid_lost"]}/{c["valid_total"]}',
-                 f'Update: {d["open"]["retry"]}/{n}',
-                 "No time lock", "Tavily time lock", "Cost: valid evidence dropped"):
-        assert text in html
-    assert "anime" not in html and "<script src" not in html and "createTimeline" not in html
-    assert not re.search(r"opacity\s*[:=]\s*0\b|display\s*:\s*none|visibility\s*:\s*hidden|animation|\bv:\s*0", html)
-
-
-def test_no_script_anywhere_else_in_the_app():
+def test_markup_has_no_animation_or_script_anywhere():
     files = [ROOT / "app.py", *sorted((ROOT / "app_pages").glob("*.py"))]
-    hits = {f.name: len(re.findall(r"<script|components\.html|st\.iframe|components\.v1", f.read_text()))
+    hits = {f.name: len(re.findall(r"<script|components\.html|st\.iframe|components\.v1|anime", f.read_text()))
             for f in files}
-    assert {k: v for k, v in hits.items() if v} == {"leak_demo.py": 2}   # the theme-sync <script> + one st.iframe, in HERO
+    assert {k: v for k, v in hits.items() if v} == {}
+
+
+def test_update_and_replication_lines_stay():
+    d = DATA["totals"]["date"]
+    caps = [c.value for c in page_run().caption]
+    assert any(c.startswith(f"Update: {d['open']['retry']}/{d['cases']} with no time lock after retrying") for c in caps)
+    assert any(c.startswith("Replication: ") and c.endswith("more cases leaked with the time lock.") for c in caps)
+
+
+def test_provenance_and_how_we_know_on_the_four_pages():
+    import hashlib
+    at = page_run()
+    for pg, rel in (("app_pages/leak_demo.py", "results/leak_demo.json"),
+                    ("app_pages/field_report.py", "results/field_report.json"),
+                    ("app_pages/home.py", None), ("app_pages/try_it.py", "results/date_field_test.json")):
+        at.switch_page(pg)
+        at.run()
+        assert not at.exception
+        body = " ".join(h.proto.body for h in at.get("html"))
+        assert 'class="provenance"' in body, pg
+        if rel:
+            digest = hashlib.sha256((ROOT / rel).read_bytes()).hexdigest()[:12]
+            assert rel in body and digest in body and " IST" in body, pg
+        if pg in ("app_pages/leak_demo.py", "app_pages/field_report.py"):
+            (ex,) = [e for e in at.expander if e.label == "How we know"]
+            text = " ".join(m.value for m in ex.markdown)
+            assert all(k in text for k in ("**Data.**", "**Analysis.**", "**Assumptions and limitations.**"))
 
 
 def test_card_markdown_blocks_do_not_overlap():
