@@ -56,6 +56,51 @@ def header(title, intro=None):
     st.title(title)
     if intro:
         st.caption(intro)
+    render_page_guide(title)
+
+
+PAGE_GUIDES = {
+    "Experimental nowcast": "The latest inflation estimate, evidence behind the estimate, and comparisons with economist forecasts.",
+    "Evidence": "The verified price quotes, official price series, and announced changes behind the forecast.",
+    "Chain of custody": "Trace a price from its source page through search records to the forecast seal.",
+    "Leak demo": "Compare searches with and without date limits to see how future information can enter a backtest.",
+    "Tavily trace": "Review Tavily searches, search results, credits, response times, and failures.",
+    "Tavily Flight Recorder": "Review the saved log of outside searches and requests.",
+    "October radar (v2)": "Review announced retail price changes that may affect the October estimate.",
+    "Replay": "Compare past forecasts with official inflation results.",
+    "Live build (v2)": "See how verified price evidence updates the inflation estimate.",
+    "As of a date": "See what price evidence was available on a date you choose.",
+    "Tavily field report": "Read the results of tests on search dates and evidence quality.",
+    "For research teams": "Learn how to use time-locked web evidence in research.",
+    "Archive": "Review saved forecasts and instructions for checking each forecast's fingerprint.",
+    "Reporter brief": "Read a short summary of the forecast for journalists.",
+}
+
+PAGE_LINKS = [
+    ("October forecast", "app_pages/home.py"),
+    ("Evidence", "app_pages/evidence.py"),
+    ("Radar", "app_pages/radar.py"),
+    ("Tavily trace", "app_pages/tavily_trace.py"),
+    ("Flight Recorder", "app_pages/flight_recorder.py"),
+    ("Leak demo", "app_pages/leak_demo.py"),
+    ("Chain of custody", "app_pages/custody.py"),
+    ("Live build", "app_pages/live_build.py"),
+    ("As of a date", "app_pages/as_of.py"),
+    ("Field Report", "app_pages/field_report.py"),
+    ("Replay", "app_pages/replay.py"),
+    ("For research teams", "app_pages/research.py"),
+    ("Archive", "app_pages/archive.py"),
+    ("Reporter brief", "app_pages/brief.py"),
+]
+
+
+def render_page_guide(title):
+    with st.container(key="page_guide_panel"):
+        with st.expander("📑 Page guide", expanded=True):
+            st.markdown(f"**About this tab**  \n{PAGE_GUIDES.get(title, 'Explore this Shadow CPI page.')}")
+            with st.expander("All pages", expanded=False):
+                for label, page in PAGE_LINKS:
+                    st.page_link(page, label=label)
 
 
 # ---------- loaders (each returns None / [] when the file does not exist yet) ----------

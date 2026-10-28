@@ -19,9 +19,20 @@ c3.metric("Failures listed", len(t["failures"]))
 st.caption(t["note"])
 
 st.subheader("Funnel: from addresses found to numbers used")
-st.dataframe([{"Stage": f["stage"], "Count": str(f["n"]), "From": f["source"]} for f in t["funnel"]],
-             hide_index=True, width="stretch")
-used = t["funnel"][-1].get("detail", {})
+funnel = t.get("funnel", [])
+if funnel:
+    cols = st.columns(len(funnel))
+    for idx, f in enumerate(funnel):
+        with cols[idx]:
+            with st.container(key=f"trace_funnel_step_{idx}", border=True):
+                st.markdown(f"**Step {idx + 1}**")
+                count = f["n"]
+                display_count = f"{count:,}" if isinstance(count, int) else count
+                st.markdown(f"### {display_count}")
+                st.markdown(f"**{f['stage']}**")
+                st.caption(f"Source: {f['source']}")
+
+used = funnel[-1].get("detail", {}) if funnel else {}
 if used:
     kinds = {"spine": "government food prices", "observed": "official observed series (IBJA, IOCL, PPAC)",
              "event+trend": "announced price changes"}

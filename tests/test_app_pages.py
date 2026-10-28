@@ -160,8 +160,10 @@ def test_tavily_trace_page_shows_calls_funnel_failures():
     at = load("tavily_trace")
     t = json.loads((ROOT / "results" / "app" / "tavily_trace_2026-03.json").read_text())
     assert str(t["n_calls"]) in [m.value for m in at.metric]
-    funnel, calls, failures = (at.dataframe[i].value for i in range(3))
-    assert len(funnel) == len(t["funnel"]) and len(calls) == t["n_calls"] and len(failures) == len(t["failures"])
+    text = all_text(at)
+    assert all(f["stage"] in text and str(f["n"]) in text for f in t["funnel"])
+    calls, failures = (at.dataframe[i].value for i in range(2))
+    assert len(calls) == t["n_calls"] and len(failures) == len(t["failures"])
     assert any("0 addresses" in r for r in failures["Result"]) and any("image" in r for r in failures["Result"])
 
 
