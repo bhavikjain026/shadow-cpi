@@ -186,10 +186,11 @@ def drift_phrase(state, as_of):
 
 
 def feedback_summary_rows(br):
-    """Summary-table rows for the filed reports (results/bug_reports.json, the source of docs/tavily_bug_reports.md):
-    section as priority, what happened, the first request ID or file in the evidence, and the suggested fix."""
+    """Summary-table rows for the field notes (results/bug_reports.json, the source of docs/tavily_bug_reports.md):
+    section and tag as priority, what happened, the first request ID or file in the evidence, and the suggested
+    change."""
     from build_bug_reports import SECTIONS
-    label = {"top": "Top 3", "feature": "Feature request", "smaller": "Smaller observation"}
+    label = {"feature": "Feature request", "observation": "Observation"}
     assert set(label) == {k for k, _ in SECTIONS}
     out = []
     for n, r in enumerate(sorted(br["reports"], key=lambda r: [k for k, _ in SECTIONS].index(r["section"])), 1):
@@ -197,9 +198,52 @@ def feedback_summary_rows(br):
         files = [x for x in re.findall(r"`([^`]+)`", r["evidence"]) if "/" in x]
         ev = f"request ID `{ids[0]}`" if ids else f"`{files[0]}`"
         cell = lambda s: s.replace("|", "\\|")                                  # noqa: E731
-        out.append(f"| {label[r['section']]} (report {n}) | {r['to']} | {cell(r['title'])}: {cell(r['happened'])} "
+        out.append(f"| {label[r['section']]}, {r['tag']} (note {n}) | {r['to']} | {cell(r['title'])}: {cell(r['happened'])} "
                    f"| {ev} | {cell(r['fix'])} |")
     return "\n".join(out)
+
+
+def tavily_docs_table(td, f):
+    """'What Tavily's docs say vs what we measured': one row per field, the API reference quoted verbatim and linked
+    (config/doc_citations.json tavily_docs), our measurement beside it from the facts already read (f)."""
+    q, s, e = td["quotes"], td["search_url"], td["extract_url"]
+    say = lambda k, url=s: f"[\"{q[k]}\"]({url})"                              # noqa: E731
+    rows = [
+        ("`start_date` / `end_date`", f"{say('start_date')}; {say('dates_undated')}",
+         f"Dates select which pages, not which version. `{f['ex_row']}`: dated {f['ex_published']}, before its "
+         f"{f['ex_cutoff']} cutoff, updated {f['ex_updated']}; Extract returns the updated page. Dates with the "
+         f"filter off (arm B): {f['dt_datesonly']} of {f['dt_cases']} detected (Wilson {f['dt_datesonly_w']})"),
+        ("`filter_by_published_date`", say("filter_by_published_date"),
+         f"Dates + filter: {f['dt_dated']} of {f['dt_cases']} detected (Wilson {f['dt_dated_w']}); replication "
+         f"{f['rep_dated']} of {f['rep_cases']} detected ({f['rep_dated_w']}). Measured cost of the strict setting: "
+         f"{f['dt_lost_filter']} of {f['dt_valid_total']} pieces of valid evidence dropped (initial pass); undated "
+         f"results {f['dt_undated_filter']} with the filter, {f['dt_undated_nodates']} of {f['dt_results_nodates']} "
+         f"with no dates"),
+        ("The docs' alternative: `include_published_date` without the filter", say("filter_alternative"),
+         f"Our arm B is that setting (dates, `include_published_date` on, filter off): {f['dt_datesonly']} of "
+         f"{f['dt_cases']} detected ({f['dt_datesonly_w']}), {f['dt_undated_datesonly']} undated of "
+         f"{f['dt_results_datesonly']} results, {f['dt_lost_dates']} of {f['dt_valid_total']} pieces of valid "
+         f"evidence lost (filter on: {f['dt_lost_filter']})"),
+        ("`published_date`", say("published_date"),
+         f"Later than the page's own date on {f['pd_later']} of {f['pd_pages']} distinct date-test pages: "
+         f"documented behaviour (feature request: separate the two dates)"),
+        ("`time_range`", say("time_range"),
+         f"`auto_parameters` with no dates chose recent time ranges for past months: {f['auto_oct']} of "
+         f"{f['auto_results']} results from {f['live_month']} ({f['auto_note']}). Consistent with \"back from the "
+         f"current date\"; a past month needs `start_date`/`end_date`"),
+        ("`max_age_hours`", say("max_age_hours"),
+         "Not sent in our runs. It bounds how fresh Tavily's cached copy is, not which date the copy reflects "
+         f"(freshness, not as-of); the [Extract reference]({e}) lists no date, cache or crawl-time field. "
+         f"`extract_as_of` fills that gap (demo, n={f['asof_n']}: `{f['asof_refused_row']}` refused, no archive copy before the "
+         f"{f['asof_refused_cutoff']} cutoff)"),
+        ("`language` vs `filter_by_language`", f"{say('language')}; {say('filter_by_language')}",
+         f"We sent `language` without `filter_by_language` (boost only) on {f['lang_cases']} cases: with dates + "
+         f"filter {f['lang_dated']} of {f['lang_cases']} detected ({f['lang_dated_w']}); Tamil still returned English "
+         "pages (post-hoc), as boost-only allows. `filter_by_language` was not tested"),
+    ]
+    out = ["| Field | Tavily's docs say (quoted, checked " + day_month(date.fromisoformat(td["checked"][:10])) + ") "
+           "| What we measured |", "|---|---|---|"]
+    return "\n".join(out + [f"| {a} | {b} | {c} |" for a, b, c in rows])
 
 
 def facts(st, as_of, root=ROOT):
@@ -360,7 +404,7 @@ def facts(st, as_of, root=ROOT):
     ran = arm_t_date()
     chk = load("results/repro_check_2026-10-27.json", root)
     row = next(r for r in chk["rows"] if r["script"] == "repro/auto_parameters_time_range.py")
-    shown = {"yes": "showed it", "no": "did not show it", "unclear": "was unclear"}[row["reproduced"]]
+    shown = {"yes": "reproduced on", "no": "not reproduced on", "unclear": "unclear on"}[row["reproduced"]]
     from build_bug_reports import auto_note
     f.update(auto_date=human(ran), recheck_date=human(date.fromisoformat(chk["date"])), auto_note=auto_note())
     assert shown in f["auto_note"]                       # the same re-check verdict as the row read above
@@ -381,7 +425,7 @@ def facts(st, as_of, root=ROOT):
     # results/bug_reports.json builders (tools/build_bug_reports.py, same code)
     lag, mz = date_lag(), map_zero()
     br = load("results/bug_reports.json", root)
-    f["top_n"] = sum(r["section"] == "top" for r in br["reports"])
+    f["feature_n"] = sum(r["section"] == "feature" for r in br["reports"])
     f["feedback_summary_rows"] = feedback_summary_rows(br)
     f.update(pd_later=lag["tavily_later"], pd_pages=lag["with_both_dates"],
              map_official_empty=len(mz["official_silent_empty"]), map_official=mz["official_sites"],
@@ -516,6 +560,39 @@ def facts(st, as_of, root=ROOT):
     # Python: the minimum from pyproject.toml, the version the suite ran on from results/python_env.json
     req = re.search(r'^requires-python = ">=(\d+\.\d+)"', (root / "pyproject.toml").read_text(), re.M)
     f.update(python_min=req.group(1), python_tested=load("results/python_env.json", root)["python"])
+
+    # results/posthoc_stats.json (tools/build_posthoc_stats.py): post-hoc, not pre-registered
+    ph = load("results/posthoc_stats.json", root)
+    mc, z = ph["mcnemar"], ph["pooled_zero"]
+    f.update(mcn_dt_p=f"{mc['date_test']['p_exact']:.2g}", mcn_rep_p=f"{mc['replication']['p_exact']:.2g}",
+             mcn_fin_p=f"{mc['finance']['p_exact']:.2g}", mcn_pool_p=f"{mc['pooled']['p_exact']:.2g}",
+             pool_r3=f"{z['rule_of_three_upper']:.1%}", pool_exact1s=f"{z['exact_one_sided_95_upper']:.1%}",
+             posthoc_label=ph["label"])
+    # date test arm B: dates sent, filter off, include_published_date on (results/field_report.json)
+    f.update(dt_datesonly=dt1["B"]["leak_cases"], dt_datesonly_w=wilson(dt1["B"]["wilson95"]),
+             dt_undated_datesonly=dm["B"]["undated"], dt_results_datesonly=dm["B"]["results"])
+    # results/lang_date_test.json: language set, filter_by_language not sent
+    lm = load("results/lang_date_test.json", root)["metrics"]["arms"]
+    f.update(lang_cases=lm["C"]["cases"], lang_dated=lm["C"]["leak_cases"],
+             lang_dated_w=wilson(lm["C"]["leak_case_wilson95"]), lang_nodates=lm["A"]["leak_cases"])
+    f["asof_n"] = len([ad["row_id"]])                                      # the demo reads one page
+    f["tavily_docs_table"] = tavily_docs_table(cit["tavily_docs"], f)
+    f.update(tavily_search_url=cit["tavily_docs"]["search_url"], tavily_extract_url=cit["tavily_docs"]["extract_url"])
+    # config/doc_citations.json nemotron_cutoffs: as stated in NVIDIA's model cards
+    nc = {m["id"]: m for m in cit["nemotron_cutoffs"]["models"]}
+    month = lambda s: f"{date.fromisoformat(s[:7] + '-01'):%B %Y}"            # noqa: E731
+    f.update(nano_post=human(date.fromisoformat(nc[nano]["posttraining"])), nano_pre=human(date.fromisoformat(
+             nc[nano]["pretraining"])), super_post=month(nc[sup]["posttraining"]), super_pre=month(nc[sup]["pretraining"]),
+             cutoffs_checked=human(date.fromisoformat(cit["nemotron_cutoffs"]["checked"][:10])),
+             nano_card=nc[nano]["card"], super_card=nc[sup]["card"])
+    f["new_models_cutoff"] = "; ".join(f"`{m}`: {nc[m]['note']}" for m in (f["nano_new"], f["super_new"]))
+    # config/budget.json plans["try-it"]: the Try it page's limits; config/doc_citations.json schedule
+    ti = load("config/budget.json", root)["plans"]["try-it"]
+    f.update(tryit_run=ti["per_run"], tryit_day=ti["per_day"], tryit_session=ti["per_session"],
+             tryit_cache=ti["cache_hours"])
+    sc = cit["schedule"]
+    f.update(nov_seal=day_month(date.fromisoformat(sc["november_seal_planned"])), judged_tag=sc["judged_tag"])
+    f["related_position"] = cit["related_work"]["position"]
 
     # run-dependent Tavily counts (tools/prompt_t.py run_stats), labelled as of a date
     f.update(as_of=human(as_of), run_calls=f"{st['calls']:,}", run_credits=f"{st['credits']:,}",

@@ -71,10 +71,10 @@ def test_readme_top_keeps_checks_apart(values):
                                      "rr_dt_failed")}
     assert "| Leaks, measured (pre-registered initial pass) |" in top
     assert (f"| Date test ({v['dt_cases']} cases) | **{v['dt_nodates']} of {v['dt_cases']}** "
-            f"(Wilson {values['dt_nodates_w']}) | **{v['dt_dated']} of {v['dt_cases']}** (Wilson {values['dt_dated_w']}) |"
+            f"(Wilson {values['dt_nodates_w']}) | **{v['dt_dated']} of {v['dt_cases']} detected** (Wilson {values['dt_dated_w']}) |"
             in top)
     assert (f"| {v['fin_nodates']} of {v['fin_events']} ({values['fin_nodates_w']}) | {v['fin_dated']} of "
-            f"{v['fin_events']} ({values['fin_dated_w']}) |" in top)
+            f"{v['fin_events']} detected ({values['fin_dated_w']}) |" in top)
     assert (f"{v['dt_nodates_retry']} of {v['dt_cases']} with no dates (Wilson {values['dt_nodates_retry_w']}) after "
             f"retrying the {v['rr_dt_failed']} archive lookups that had failed") in " ".join(top.split())
     total = v["dt_cases"] + v["fin_events"]
@@ -181,7 +181,7 @@ def test_620_of_659_always_carries_its_date():
     assert shots and all(f"auto_parameters, {day}: 620/659" in l for l in shots)
     spoken = datetime.strptime(v["auto_date"], "%d %b %Y")          # the voice-over says it aloud: "22 October"
     voice = [l for l in shots if "six hundred twenty of six hundred fifty-nine" in l]
-    assert voice and all(f"when we tested on {spoken.day} {spoken:%B}, six hundred twenty of" in l for l in voice)
+    assert voice and all(f"observed once, on {spoken.day} {spoken:%B}, six hundred twenty of" in l for l in voice)
 
 
 def test_devpost_opens_with_the_finding_and_the_reuse(values):
@@ -193,7 +193,7 @@ def test_devpost_opens_with_the_finding_and_the_reuse(values):
     rp = json.loads((ROOT / "results/replication.json").read_text())
     pooled, rep = rp["pooled"]["price"]["arms"], rp["metrics"]["price"]["arms"]
     lo, hi = pooled["C"]["wilson95"]
-    assert lines[0].startswith(f"{pooled['C']['leak_cases']} of {pooled['C']['cases']} cases with Tavily's dates + "
+    assert lines[0].startswith(f"{pooled['C']['leak_cases']} of {pooled['C']['cases']} cases detected leaking with Tavily's dates + "
                                f"filter, across a pilot and a pre-registered replication (Wilson {lo:.0%}–{hi:.0%}"
                                .replace("%–", "–"))
     assert (f"with no dates, {values['dt_nodates']} of {values['dt_cases']} and {rep['A']['leak_cases']} of "
@@ -290,15 +290,16 @@ def test_video_leak_shot_matches_the_results(values):
     assert (f"With no dates, {w['dt_nodates']} of {w['dt_cases']} searches met our confirmed-leak rule; "
             f"{w['dt_nodates_retry']} after we retried {w['rr_dt_failed']} archive lookups that had failed.") in shot
     rep = json.loads((ROOT / "results/replication.json").read_text())["metrics"]["price"]["arms"]["C"]
-    assert (f"published-date filter: {w['dt_dated']} of {w['dt_cases']}, and on {SPOKEN[rep['cases']]} new cases, "
-            f"pre-registered, {SPOKEN[rep['leak_cases']]} again.") in shot     # the replication, initial pass
-    assert (f"The cost, on the initial pass: the filter dropped {w['dt_lost_filter']} of {w['dt_valid_total']} "
-            "pieces of valid evidence.") in shot
+    assert (f"published-date filter: {w['dt_dated']} detected of {w['dt_cases']}, and on {SPOKEN[rep['cases']]} new "
+            f"cases, pre-registered, {SPOKEN[rep['leak_cases']]} detected again.") in shot     # the replication
+    assert (f"The measured cost of that strict setting, on the initial pass: the filter dropped {w['dt_lost_filter']} "
+            f"of {w['dt_valid_total']} pieces of valid evidence.") in shot
     lo, hi = (values["dt_nodates_w"].replace("–", "-"), values["dt_dated_w"].replace("–", "-"))
-    assert (f'"{v["dt_nodates"]}/{v["dt_cases"]} → {v["dt_dated"]}/{v["dt_cases"]}, pre-registered '
+    assert (f'"{v["dt_nodates"]}/{v["dt_cases"]} → {v["dt_dated"]}/{v["dt_cases"]} detected, pre-registered '
             f'(95%: {lo} → {hi})"') in shot
     assert f'"Update: {v["dt_nodates_retry"]}/{v["dt_cases"]} after retrying {v["rr_dt_failed"]} failed' in shot
-    assert f'"Cost: {v["dt_lost_filter"]}/{v["dt_valid_total"]} valid evidence dropped (initial pass)"' in shot
+    assert (f'"Measured cost of strict mode: {v["dt_lost_filter"]}/{v["dt_valid_total"]} valid evidence dropped '
+            '(initial pass)"') in shot
 
 
 def test_honest_limits_leak_bullet_matches_the_results():
@@ -330,10 +331,10 @@ def test_readme_top_has_the_replication_row_pooled_line_and_cache_note(values):
     top = out.split("## Time-locked search leakage")[0]
     v = values
     assert (f"| Replication ({v['rep_cases']} new cases, pre-registered) | **{v['rep_nodates']} of {v['rep_cases']}** "
-            f"(Wilson {v['rep_nodates_w']}) | **{v['rep_dated']} of {v['rep_cases']}** (Wilson {v['rep_dated_w']}) |"
+            f"(Wilson {v['rep_nodates_w']}) | **{v['rep_dated']} of {v['rep_cases']} detected** (Wilson {v['rep_dated_w']}) |"
             in top)
     assert (f"Pilot + replication, date-test rule (pre-registered secondary): dates + filter {v['pool_dated']} of "
-            f"{v['pool_cases']} (Wilson {v['pool_dated_w']}).") in top
+            f"{v['pool_cases']} detected (Wilson {v['pool_dated_w']};") in " ".join(top.split())
     details = top.split("<details>")[1].split("</details>")[0]
     assert "descriptive, not pre-registered" in details and "the time-locked searches were all fresh" in details
     assert (f"no dates {v['rep_desc_nodates']} of {v['rep_desc_cases']} (Wilson {v['rep_desc_nodates_w']}), dates + "

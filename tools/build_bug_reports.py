@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Feedback as bug reports: results/bug_reports.json and docs/tavily_bug_reports.md (0 credits, no API call).
+"""Tavily field notes / repro kit: results/bug_reports.json and docs/tavily_bug_reports.md (0 credits, no API call).
 
     python tools/build_bug_reports.py
 
-Each report: what we did, what happened (counts read from committed results files), what we expected, a suggested
-fix, and the evidence file. Nothing is typed by hand except the wording.
+Each note: what we did, what happened (counts read from committed results files), what we expected, a suggested
+change, and the evidence file, tagged "documented behaviour", "doc gap" or "unexplained" against Tavily's API reference
+(config/doc_citations.json tavily_docs). Nothing is typed by hand except the wording. (The file names keep "bug_reports"
+so links and the app keep working; nothing in them is called a bug.)
 """
 import json
 import re
@@ -29,15 +31,15 @@ def arm_t_date():
 
 
 def auto_note():
-    """The qualifier every displayed auto_parameters no-dates count carries: when arm T was measured and what the
-    one-query re-check showed since (README, Devpost, bug reports, Field Report all use this one string)."""
+    """The qualifier every displayed auto_parameters no-dates count carries: when arm T was observed and what the
+    one-query re-check showed since (README, Devpost, field notes, Field Report all use this one string)."""
     from datetime import date
     ran = arm_t_date()
     chk = json.loads((ROOT / "results" / "repro_check_2026-10-27.json").read_text(encoding="utf-8"))
     row = next(r for r in chk["rows"] if r["script"] == "repro/auto_parameters_time_range.py")
-    shown = {"yes": "showed it", "no": "did not show it", "unclear": "was unclear"}[row["reproduced"]]
+    shown = {"yes": "reproduced on", "no": "not reproduced on", "unclear": "unclear on a re-check on"}[row["reproduced"]]
     d = date.fromisoformat(chk["date"])
-    return f"measured {ran.day} {ran:%b} {ran.year}; a one-query re-check on {d.day} {d:%b} {d.year} {shown}"
+    return f"observed once on {ran.day} {ran:%b} {ran.year}, {shown} {d.day} {d:%b} {d.year}"
 
 
 def date_lag():
@@ -144,7 +146,8 @@ def recheck_lines(report, check, nd):
     return out
 
 
-SECTIONS = (("top", "Top 3"), ("feature", "Feature requests"), ("smaller", "Smaller observations"))
+SECTIONS = (("feature", "Feature requests"), ("observation", "Observations"))
+TAGS = ("documented behaviour", "doc gap", "unexplained")
 
 
 def build():
@@ -161,20 +164,23 @@ def build():
     ex_rid, ex_sha = r196_receipt(ex)
     tr = lambda d: ", ".join(f"{k} {v}" for k, v in d.items())          # noqa: E731
     reports = [
-        {"section": "top", "title": "auto_parameters picks a recent time_range for queries about a past month", "to": "Tavily",
+        {"section": "observation", "tag": "unexplained",
+         "title": "auto_parameters picked a recent time_range for queries about a past month", "to": "Tavily",
          "did": f"{nd['searches']} searches with auto_parameters: true, a query naming a month in Jan–Sep 2026, and "
                 "max_results only (no dates)",
          "happened": f"auto_parameters chose time_range {tr(nd['time_range'])}; {nd['results_dated_oct_2026']} of "
                      f"{nd['results']} results were dated October 2026 ({auto_note()}) and "
                      f"{nd['results_undated']} were undated",
-         "expected": "a time_range that covers the month the query names, or none, with a note that a historical query "
-                     "needs start_date/end_date",
+         "expected": "a time_range that covers the month the query names, or none (time_range is documented as "
+                     "counting back from the current date, so a recent one cannot cover a past month), with a note "
+                     "that a historical query needs start_date/end_date",
          "fix": "when the query names a past month, return no time_range (or that month's window); document the "
                 "default",
          "evidence": f"{nd['results_dated_oct_2026']} of {nd['results']} results from October 2026 ({auto_note()}), "
                      f"{nd['searches']} searches; {ids_text(*t_ids)}; files `v2/ablation/arm_T_*.json` "
                      "(plan[].auto_parameters, cards[].published)"},
-        {"section": "top", "title": "With explicit dates, auto_parameters still reports a time_range", "to": "Tavily",
+        {"section": "observation", "tag": "doc gap",
+         "title": "With explicit dates, the auto_parameters echo still reports a time_range", "to": "Tavily",
          "did": f"{wd['searches']} searches with auto_parameters: true plus our start_date/end_date (arm T+dates, "
                 "exploratory)",
          "happened": f"the auto_parameters echo in the response reported time_range {tr(wd['time_range'])}, and a start_date or "
@@ -185,7 +191,8 @@ def build():
          "evidence": f"{wd['inside_window']} of {wd['dated_results']} dated results inside the window, "
                      f"{wd['searches']} searches; {ids_text(*td_ids)}; files `v2/ablation/arm_Td_*.json` "
                      "(plan[].auto_parameters, plan[].dates_kept)"},
-        {"section": "top", "title": "Extract has no as-of view, so Search dates do not freeze page content", "to": "Tavily",
+        {"section": "feature", "tag": "documented behaviour",
+         "title": "An as-of / crawl-timestamp field: date filters select which pages, not which version", "to": "Tavily",
          "did": f"{ff['searches']} finance-check searches with start_date/end_date and filter_by_published_date, then a "
                 "separate, post-hoc AI-assisted review (ChatGPT agent) of every result page "
                 f"({sr['unclear']} of {sr['rows']} rows stayed unclear)",
@@ -193,14 +200,18 @@ def build():
                      f"dated after the cutoff, yet {ff['reviewer_leak_pages']} page's current version leaks the "
                      f"outcome: {ex['row_id']} was dated {ex['our_published_date']} by Tavily (cutoff {ex['cutoff']}) "
                      f"and updated on {ex['reviewer_date']} with a link to the actual result",
-         "expected": "a way for a time-locked user to read, or at least detect, the page as it was on the cutoff",
-         "fix": "an as-of / crawl-date field on Extract (the date of the copy returned), or an as_of parameter",
-         "workaround": "`extract_as_of` ([`timelock/asof.py`](../timelock/asof.py)); a native as_of parameter would "
-                       "remove the archive dependency",
+         "expected": "nothing different: start_date/end_date select pages by their publish or last-updated date, "
+                     "and Extract's reference lists no date or cache field, so the version returned is today's. "
+                     "max_age_hours bounds how fresh a cached copy is, not which date it reflects (freshness, not as-of)",
+         "fix": "an as-of / crawl-timestamp field on Extract and Search results (when the copy returned was fetched), "
+                "or an as_of parameter",
+         "workaround": "`extract_as_of` ([`timelock/asof.py`](../timelock/asof.py)) fills that gap (demo, n=1); a "
+                       "native as-of field would remove the archive dependency",
          "evidence": f"{ff['reviewer_leak_pages']} of {ff['results']} filtered result pages; {ex['row_id']} from the "
                      f"search with request ID `{ex_rid}` (response SHA-256 `{ex_sha[:16]}…`); file "
                      "`results/timelock34_second_review.json` (finance_filtered.example)"},
-        {"section": "feature", "title": "Separate original-publication and last-modified dates", "to": "Tavily",
+        {"section": "feature", "tag": "documented behaviour",
+         "title": "Separate original-publication and last-modified dates", "to": "Tavily",
          "did": f"compared, by code, Tavily's published_date with the page's own published/updated date on the "
                 f"{lag['with_both_dates']} distinct date-test pages that had both",
          "happened": f"{lag['tavily_later']} had a later published_date ({lag['over_7_days']} by more than 7 days; "
@@ -210,7 +221,7 @@ def build():
          "fix": "return original-publication and last-modified dates as two fields, and let the date filter choose",
          "evidence": f"{lag['tavily_later']} of {lag['with_both_dates']} pages; file `results/date_field_test.json` "
                      "(rows[].arms[].results[].tavily_date, page_date)"},
-        {"section": "smaller", "title": "Map returns empty results silently", "to": "Tavily",
+        {"section": "observation", "tag": "unexplained", "title": "Map returns empty results silently", "to": "Tavily",
          "did": f"Map on the {mz['official_sites']} sites of our official crawl list and {mz['dairy_sites']} dairy sites, "
                 "with and without instructions",
          "happened": f"empty results with no failed_results and no error on {len(mz['official_silent_empty'])} sites of "
@@ -222,14 +233,14 @@ def build():
          "fix": "a reason field on empty Map/Crawl responses",
          "evidence": "files `results/prompt_t/official_crawl_2026-10.json`, `dairy_map_2026-10-21.json`, "
                      "`map_noinstr.json`"},
-        {"section": "smaller", "title": "One scanned PDF: Extract returned the letterhead but not the image-only rates",
-         "to": "Tavily",
+        {"section": "observation", "tag": "doc gap",
+         "title": "One scanned PDF: Extract returned the letterhead but not the image-only rates", "to": "Tavily",
          "did": "Extract (basic and advanced) on one scanned dairy rate-list PDF (Gokul)",
          "happened": f"{gokul} characters of letterhead; the rates are an image and did not come back",
          "expected": "OCR of image-only PDF pages, or a flag that the text layer is empty",
          "fix": "an ocr option, or an 'image_only' flag on the result",
          "evidence": "file `results/prompt_t/dairy_followup_2026-10-21.json` (gokul_adv_chars)"},
-        {"section": "smaller", "title": "/usage lags per-call usage", "to": "Tavily",
+        {"section": "observation", "tag": "doc gap", "title": "/usage lags per-call usage", "to": "Tavily",
          "did": "compared GET /usage with the per-call include_usage credits the same day",
          "happened": f"/usage reported plan_usage {usage['tavily_usage_endpoint_response']['account']['plan_usage']} "
                      f"while per-call include_usage credits added up to {usage['flight_recorder_credits_include_usage']}",
@@ -251,18 +262,23 @@ def build():
     for i, r in enumerate(reports):
         r["repro"] = f"repro/{REPRO[i]}.py"
     OUT.write_text(json.dumps({"reports": reports, "nebius": nebius}, ensure_ascii=False, indent=1))
-    L = ["# Tavily feedback", "",
+    assert all(r["tag"] in TAGS for r in reports)
+    L = ["# Tavily field notes / repro kit", "",
          "Generated by `python tools/build_bug_reports.py` from committed results files (counts are read, not typed). "
-         "The top 3 lead; each has what we observed, what we expected, a suggested fix, and evidence (counts and Tavily "
-         "request IDs, so the calls can be looked up).", ""]
+         "Each note has what we did, what we observed, what we expected, a suggested change, evidence (counts and "
+         "Tavily request IDs, so the calls can be looked up) and a one-request repro script. Each is tagged against "
+         "Tavily's API reference: **documented behaviour** (the docs say this happens; a feature request, not a fault), "
+         "**doc gap** (the docs do not say either way) or **unexplained** (not what the docs describe, and not yet "
+         "reproduced or explained). What the docs say, quoted, next to what we measured: the README section \"What "
+         "Tavily's docs say vs what we measured\".", ""]
     n = 0
     for key, head in SECTIONS:
         L += [f"## {head}", ""]
         for r in (r for r in reports if r["section"] == key):
             n += 1
-            L += [f"### {n}. {r['title']}", "", f"- **What we did:** {r['did']}.",
+            L += [f"### {n}. {r['title']}", "", f"- **Tag:** {r['tag']}.", f"- **What we did:** {r['did']}.",
                   f"- **Observed:** {r['happened']}.", f"- **Expected:** {r['expected']}.",
-                  f"- **Suggested fix:** {r['fix']}.", f"- **Evidence:** {r['evidence']}.",
+                  f"- **Suggested change:** {r['fix']}.", f"- **Evidence:** {r['evidence']}.",
                   *([f"- **Workaround we ship:** {r['workaround']}."] if r.get("workaround") else []),
                   *recheck_lines(r, check, nd),
                   f"- **Reproduce it:** [`{r['repro']}`](../{r['repro']}) (your own key, at most 2 credits; see "

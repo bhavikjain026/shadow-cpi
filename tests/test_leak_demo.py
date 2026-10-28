@@ -309,7 +309,7 @@ def test_tab_labels_are_short():
 def test_replication_line_reads_the_replication_file():
     """One short line under the update: the pre-registered replication's time-locked count (initial pass)."""
     c = json.loads((ROOT / "results" / "replication.json").read_text())["metrics"]["price"]["arms"]["C"]
-    assert (f"Replication: {c['leak_cases']} of {c['cases']} more cases leaked with the time lock."
+    assert (f"Replication: {c['leak_cases']} of {c['cases']} more cases detected leaking with the time lock."
             in [x.value for x in page().caption])
 
 

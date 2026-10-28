@@ -57,7 +57,7 @@ its 72 searches Tavily chose:
 | general | m (past month) | basic | 1 |
 
 So every search was limited to the days before the run (22 Oct 2026). Of 659 results, 620 were dated October 2026
-(measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it),
+(observed once on 22 Oct 2026, not reproduced on 27 Oct 2026),
 1 September 2026 and 38 had no date; every dated one was after the month's cutoff, and the verifier rejected them
 all (trace: `arm_T_2026-01.json`, "rail fare hike news India": 10 results dated 16–22 Oct 2026 — Japanese and
 Dutch rail fares, a Telangana Dasara bus fare piece — each "published … after the cutoff 2026-01-29"). 0 of 29 is
@@ -65,4 +65,4 @@ the pre-registered result. The exploratory arm T+dates sends the same queries wi
 
 **Correction (logged; no number changed).** The ablation notes said auto_parameters chose "`time_range: \"w\"`,
 topic news and advanced depth for every search". The arm files show recent windows, not always "w": w 57, d 14, m 1
-of 72 searches (49 advanced, 23 basic); 620 of 659 results were dated October 2026 (measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it) and 38 undated. The note is now computed from the arm files.
+of 72 searches (49 advanced, 23 basic); 620 of 659 results were dated October 2026 (observed once on 22 Oct 2026, not reproduced on 27 Oct 2026) and 38 undated. The note is now computed from the arm files.

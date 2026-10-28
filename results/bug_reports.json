@@ -1,19 +1,21 @@
 {
  "reports": [
   {
-   "section": "top",
-   "title": "auto_parameters picks a recent time_range for queries about a past month",
+   "section": "observation",
+   "tag": "unexplained",
+   "title": "auto_parameters picked a recent time_range for queries about a past month",
    "to": "Tavily",
    "did": "72 searches with auto_parameters: true, a query naming a month in Jan–Sep 2026, and max_results only (no dates)",
-   "happened": "auto_parameters chose time_range w 57, d 14, m 1; 620 of 659 results were dated October 2026 (measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it) and 38 were undated",
-   "expected": "a time_range that covers the month the query names, or none, with a note that a historical query needs start_date/end_date",
+   "happened": "auto_parameters chose time_range w 57, d 14, m 1; 620 of 659 results were dated October 2026 (observed once on 22 Oct 2026, not reproduced on 27 Oct 2026) and 38 were undated",
+   "expected": "a time_range that covers the month the query names, or none (time_range is documented as counting back from the current date, so a recent one cannot cover a past month), with a note that a historical query needs start_date/end_date",
    "fix": "when the query names a past month, return no time_range (or that month's window); document the default",
-   "evidence": "620 of 659 results from October 2026 (measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it), 72 searches; Tavily request IDs logged for 31 of 72 searches, e.g. `73a3cac7-ae69-4e16-847d-726c5baec6c3`, `22b874a7-56ab-4d36-b4f6-73c737b18e62`; files `v2/ablation/arm_T_*.json` (plan[].auto_parameters, cards[].published)",
+   "evidence": "620 of 659 results from October 2026 (observed once on 22 Oct 2026, not reproduced on 27 Oct 2026), 72 searches; Tavily request IDs logged for 31 of 72 searches, e.g. `73a3cac7-ae69-4e16-847d-726c5baec6c3`, `22b874a7-56ab-4d36-b4f6-73c737b18e62`; files `v2/ablation/arm_T_*.json` (plan[].auto_parameters, cards[].published)",
    "repro": "repro/auto_parameters_time_range.py"
   },
   {
-   "section": "top",
-   "title": "With explicit dates, auto_parameters still reports a time_range",
+   "section": "observation",
+   "tag": "doc gap",
+   "title": "With explicit dates, the auto_parameters echo still reports a time_range",
    "to": "Tavily",
    "did": "56 searches with auto_parameters: true plus our start_date/end_date (arm T+dates, exploratory)",
    "happened": "the auto_parameters echo in the response reported time_range w 47, d 8, y 1, and a start_date or end_date in 0 of 56 echoes; yet 532 of 532 dated results fell inside our window, so the dates were applied",
@@ -23,19 +25,21 @@
    "repro": "repro/auto_parameters_echo_dates.py"
   },
   {
-   "section": "top",
-   "title": "Extract has no as-of view, so Search dates do not freeze page content",
+   "section": "feature",
+   "tag": "documented behaviour",
+   "title": "An as-of / crawl-timestamp field: date filters select which pages, not which version",
    "to": "Tavily",
    "did": "14 finance-check searches with start_date/end_date and filter_by_published_date, then a separate, post-hoc AI-assisted review (ChatGPT agent) of every result page (146 of 283 rows stayed unclear)",
    "happened": "0 of 14 searches returned a result dated after the cutoff, yet 1 page's current version leaks the outcome: R196 was dated 2026-07-07 by Tavily (cutoff 2026-07-08) and updated on 2026-07-09 with a link to the actual result",
-   "expected": "a way for a time-locked user to read, or at least detect, the page as it was on the cutoff",
-   "fix": "an as-of / crawl-date field on Extract (the date of the copy returned), or an as_of parameter",
-   "workaround": "`extract_as_of` ([`timelock/asof.py`](../timelock/asof.py)); a native as_of parameter would remove the archive dependency",
+   "expected": "nothing different: start_date/end_date select pages by their publish or last-updated date, and Extract's reference lists no date or cache field, so the version returned is today's. max_age_hours bounds how fresh a cached copy is, not which date it reflects (freshness, not as-of)",
+   "fix": "an as-of / crawl-timestamp field on Extract and Search results (when the copy returned was fetched), or an as_of parameter",
+   "workaround": "`extract_as_of` ([`timelock/asof.py`](../timelock/asof.py)) fills that gap (demo, n=1); a native as-of field would remove the archive dependency",
    "evidence": "1 of 67 filtered result pages; R196 from the search with request ID `dce7e851-b012-4dfe-84d4-ea43b27b1bd9` (response SHA-256 `a509b8bc8a346701…`); file `results/timelock34_second_review.json` (finance_filtered.example)",
    "repro": "repro/extract_no_asof.py"
   },
   {
    "section": "feature",
+   "tag": "documented behaviour",
    "title": "Separate original-publication and last-modified dates",
    "to": "Tavily",
    "did": "compared, by code, Tavily's published_date with the page's own published/updated date on the 42 distinct date-test pages that had both",
@@ -46,7 +50,8 @@
    "repro": "repro/published_vs_modified.py"
   },
   {
-   "section": "smaller",
+   "section": "observation",
+   "tag": "unexplained",
    "title": "Map returns empty results silently",
    "to": "Tavily",
    "did": "Map on the 5 sites of our official crawl list and 7 dairy sites, with and without instructions",
@@ -57,7 +62,8 @@
    "repro": "repro/map_empty.py"
   },
   {
-   "section": "smaller",
+   "section": "observation",
+   "tag": "doc gap",
    "title": "One scanned PDF: Extract returned the letterhead but not the image-only rates",
    "to": "Tavily",
    "did": "Extract (basic and advanced) on one scanned dairy rate-list PDF (Gokul)",
@@ -68,7 +74,8 @@
    "repro": "repro/scanned_pdf_extract.py"
   },
   {
-   "section": "smaller",
+   "section": "observation",
+   "tag": "doc gap",
    "title": "/usage lags per-call usage",
    "to": "Tavily",
    "did": "compared GET /usage with the per-call include_usage credits the same day",

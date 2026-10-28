@@ -1,8 +1,9 @@
 ## Summary
 
-One row per entry, nothing new: the filed reports come from [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports.md)
-(rows filled from [`results/bug_reports.json`](results/bug_reports.json), the file those reports are built from);
-"Not filed" rows are dated entries below that have no bug report. Details and dates are in the entries.
+One row per entry, nothing new: the filed notes come from [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports.md),
+the Tavily field notes / repro kit (rows filled from [`results/bug_reports.json`](results/bug_reports.json), the file
+those notes are built from), each tagged "documented behaviour", "doc gap" or "unexplained" against Tavily's docs;
+"Not filed" rows are dated entries below that have no field note. Details and dates are in the entries.
 
 | Priority | Product | What happens | Evidence (file or request ID) | Suggested fix |
 |---|---|---|---|---|

@@ -100,7 +100,7 @@ def test_cards_numbers_come_from_the_results_files():
     vals = [m.value for m in at.metric]
     # the pre-registered initial pass leads: pilot and replication shown separately, the pooled lock count, the cost
     assert vals == [f"{d['open']['first']}/{d['cases']} · {ra['leak_cases']}/{ra['cases']}",
-                    f"{pool['C']['leak_cases']} of {pool['C']['cases']}", f"{c['valid_lost']} of {c['valid_total']}"]
+                    f"{pool['C']['leak_cases']} of {pool['C']['cases']} detected", f"{c['valid_lost']} of {c['valid_total']}"]
     assert d["source"].startswith("results/field_report.json")
     deltas = [m.delta for m in at.metric]
     assert f"Pooled {pool['A']['leak_cases']} of {pool['A']['cases']} (pre-registered secondary)" in deltas[0]
@@ -122,7 +122,7 @@ def test_update_and_replication_lines_stay():
     d = DATA["totals"]["date"]
     caps = [c.value for c in page_run().caption]
     assert any(c.startswith(f"Update: {d['open']['retry']}/{d['cases']} with no time lock after retrying") for c in caps)
-    assert any(c.startswith("Replication: ") and c.endswith("more cases leaked with the time lock.") for c in caps)
+    assert any(c.startswith("Replication: ") and c.endswith("more cases detected leaking with the time lock.") for c in caps)
 
 
 def test_provenance_and_how_we_know_on_the_four_pages():
@@ -208,5 +208,5 @@ def test_leak_demo_tooltip_reads_like_the_cards():
     k, n = pool["leak_cases"], pool["cases"]
     lo, hi = wilson95(k, n)
     texts = {t for _, ts in chart_tooltips("app_pages/leak_demo.py") for t in ts}
-    assert f"Pooled, time lock · {k} of {n} leaked · 95% CI {lo:.0%}–{hi:.0%}" in texts
-    assert all(" leaked · 95% CI " in t for t in texts)
+    assert f"Pooled, time lock · {k} of {n} detected leaking · 95% CI {lo:.0%}–{hi:.0%}" in texts
+    assert all(" detected leaking · 95% CI " in t for t in texts)

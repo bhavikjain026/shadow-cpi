@@ -1,0 +1,88 @@
+{
+ "label": "post-hoc, not pre-registered",
+ "mcnemar": {
+  "date_test": {
+   "rule": "date-test rule (v2/DATE_TEST_PREREG.md)",
+   "no_dates": "A",
+   "dated": "C",
+   "cases": 20,
+   "leaks_A": 9,
+   "leaks_C": 0,
+   "only_A": 9,
+   "only_C": 0,
+   "p_exact": 0.00390625
+  },
+  "replication": {
+   "rule": "date-test rule (v2/DATE_TEST_PREREG.md)",
+   "no_dates": "A",
+   "dated": "C",
+   "cases": 22,
+   "leaks_A": 14,
+   "leaks_C": 0,
+   "only_A": 14,
+   "only_C": 0,
+   "p_exact": 0.0001220703125
+  },
+  "finance": {
+   "rule": "finance rule (v2/FINANCE_PREREG.md, as amended)",
+   "no_dates": "N",
+   "dated": "D",
+   "cases": 14,
+   "leaks_N": 2,
+   "leaks_D": 0,
+   "only_N": 2,
+   "only_D": 0,
+   "p_exact": 0.5
+  },
+  "pooled": {
+   "rule": "date-test rule; pilot + replication",
+   "no_dates": "A",
+   "dated": "C",
+   "cases": 42,
+   "leaks_A": 23,
+   "leaks_C": 0,
+   "only_A": 23,
+   "only_C": 0,
+   "p_exact": 2.384185791015625e-07
+  }
+ },
+ "pooled_zero": {
+  "leaks": 0,
+  "cases": 42,
+  "rule_of_three_upper": 0.07142857142857142,
+  "exact_one_sided_95_upper": 0.06884260784039486,
+  "wilson95": [
+   0.0,
+   0.08379879207691124
+  ]
+ },
+ "cache_excluded_replication": {
+  "source": "results/replication.md addendum (logged 2026-10-28), reused",
+  "label": "descriptive, not pre-registered (results/replication.md addendum)",
+  "served": 4,
+  "pilot_reused": 3,
+  "cases": 19,
+  "arms": {
+   "A": {
+    "leak_cases": 11,
+    "cases": 19,
+    "wilson95": [
+     0.362759033831258,
+     0.7685810883382846
+    ],
+    "valid_lost": 17,
+    "valid_total": 22
+   },
+   "C": {
+    "leak_cases": 0,
+    "cases": 19,
+    "wilson95": [
+     0.0,
+     0.16817922625956366
+    ],
+    "valid_lost": 4,
+    "valid_total": 22
+   }
+  }
+ }
+}

@@ -1,5 +1,5 @@
 """House rule: every displayed mention of the auto_parameters no-dates count (results dated October 2026 of all results,
-arm T) carries the qualifier "measured <date>; a one-query re-check on <date> did not show it", worded by
+arm T) carries the qualifier "observed once on <date>, not reproduced on <date>", worded by
 tools/build_bug_reports.auto_note() from the arm T files and the 27 Oct re-check. Checks the app pages, the docs and
 templates (rendered), and the generated bug reports. Results artifacts (results/*.md) are not displayed docs."""
 import json
@@ -33,13 +33,14 @@ def missing(text):
 
 
 def test_the_note_is_the_one_the_readme_uses():
-    assert NOTE == "measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it"
+    assert NOTE == "observed once on 22 Oct 2026, not reproduced on 27 Oct 2026"
     assert NOTE in (ROOT / "README.md").read_text() and NOTE in (ROOT / "docs/devpost_draft.md").read_text()
 
 
 def test_every_doc_mention_carries_the_note():
     files = subprocess.run(["git", "ls-files", "*.md"], cwd=ROOT, capture_output=True, text=True).stdout.split()
-    files = [f for f in files if not f.startswith(("results/", "tests/", "logs/", "cache/"))]
+    # docs/claim_changes_*.md logs quote the old wording on purpose (old -> new)
+    files = [f for f in files if not f.startswith(("results/", "tests/", "logs/", "cache/", "docs/claim_changes_"))]
     bad = {f: m for f in files if (m := missing((ROOT / f).read_text(encoding="utf-8")))}
     assert bad == {}
 
@@ -62,7 +63,7 @@ def test_bug_reports_json_carries_the_note():
 
 def test_video_voice_over_says_the_recheck():
     lines = [l for l in (ROOT / "docs/video_script.md").read_text().splitlines() if SPOKEN in l]
-    assert lines and all("a one-query re-check on 27 October did not show it" in l for l in lines)
+    assert lines and all("observed once, on 22 October" in l and "not reproduced on 27 October" in l for l in lines)
 
 
 def test_field_report_page_carries_the_note(monkeypatch):

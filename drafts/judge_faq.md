@@ -36,7 +36,10 @@ We can't prove it perfectly, and `docs/honest_limits.md` says so. What we do:
   - `nvidia/nemotron-3-super-120b-a12b` (extraction): pre-training data to June 2025, post-training data to
     February 2026 (huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16, "Data Freshness"). That
     post-training cutoff overlaps our first two test months (January and February 2026). It does not reach the
-    numbers: the model can only point to a line on the page, and code checks the number is in that line.
+    numbers: the model can only point to a line on the page, and code checks the number is in that line. It can
+    still shape which line or search the model picks, so the replay is not leakage-free against model memory; the
+    sealed forward forecasts are the clean evidence. Nebius's replacement models (from 9 Nov) have no public model
+    card stating a cutoff (checked 29 Oct 2026).
   - The large model in `config/models.json` was never called.
 - All rules were frozen and committed before scoring (`docs/frozen_rules.md`, `docs/preregistration.md`), and
   scoring ran once (`results/score_lock.json`).

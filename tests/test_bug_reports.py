@@ -17,13 +17,17 @@ def test_reports_have_all_parts_and_cover_the_asked_topics():
         assert t in titles
 
 
-def test_top_three_first_then_feature_requests_then_smaller():
+def test_field_notes_are_tagged_feature_requests_then_observations():
     reps = json.loads(BR.OUT.read_text())["reports"]
-    assert [r["section"] for r in reps] == ["top"] * 3 + ["feature"] + ["smaller"] * 3
-    top = [r["title"] for r in reps[:3]]
-    assert "past month" in top[0] and "explicit dates" in top[1] and "as-of" in top[2]
+    assert [r["section"] for r in reps] == ["observation"] * 2 + ["feature"] * 2 + ["observation"] * 3
+    assert [r["tag"] for r in reps] == ["unexplained", "doc gap", "documented behaviour", "documented behaviour",
+                                       "unexplained", "doc gap", "doc gap"]
+    t = [r["title"] for r in reps[:3]]
+    assert "past month" in t[0] and "explicit dates" in t[1] and "as-of" in t[2]
     doc = BR.DOC.read_text()
-    assert doc.index("## Top 3") < doc.index("## Feature requests") < doc.index("## Smaller observations")
+    assert doc.startswith("# Tavily field notes / repro kit")
+    assert doc.index("## Feature requests") < doc.index("## Observations")
+    assert "bug" not in doc.lower().replace("bug_reports", "")
     assert all(r["to"] == "Tavily" for r in reps)
 
 

@@ -10,19 +10,20 @@ Flight-recorder ids below are the `id` field of a log line.
 
 ## Summary
 
-One row per entry, nothing new: the filed reports come from [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports.md)
-(rows filled from [`results/bug_reports.json`](results/bug_reports.json), the file those reports are built from);
-"Not filed" rows are dated entries below that have no bug report. Details and dates are in the entries.
+One row per entry, nothing new: the filed notes come from [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports.md),
+the Tavily field notes / repro kit (rows filled from [`results/bug_reports.json`](results/bug_reports.json), the file
+those notes are built from), each tagged "documented behaviour", "doc gap" or "unexplained" against Tavily's docs;
+"Not filed" rows are dated entries below that have no field note. Details and dates are in the entries.
 
 | Priority | Product | What happens | Evidence (file or request ID) | Suggested fix |
 |---|---|---|---|---|
-| Top 3 (report 1) | Tavily | auto_parameters picks a recent time_range for queries about a past month: auto_parameters chose time_range w 57, d 14, m 1; 620 of 659 results were dated October 2026 (measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it) and 38 were undated | request ID `73a3cac7-ae69-4e16-847d-726c5baec6c3` | when the query names a past month, return no time_range (or that month's window); document the default |
-| Top 3 (report 2) | Tavily | With explicit dates, auto_parameters still reports a time_range: the auto_parameters echo in the response reported time_range w 47, d 8, y 1, and a start_date or end_date in 0 of 56 echoes; yet 532 of 532 dated results fell inside our window, so the dates were applied | request ID `0e8e93b5-57d6-49a7-b1bf-204b2c6f4249` | echo start_date/end_date, or drop time_range from the echo, when the caller sends dates |
-| Top 3 (report 3) | Tavily | Extract has no as-of view, so Search dates do not freeze page content: 0 of 14 searches returned a result dated after the cutoff, yet 1 page's current version leaks the outcome: R196 was dated 2026-07-07 by Tavily (cutoff 2026-07-08) and updated on 2026-07-09 with a link to the actual result | request ID `dce7e851-b012-4dfe-84d4-ea43b27b1bd9` | an as-of / crawl-date field on Extract (the date of the copy returned), or an as_of parameter |
-| Feature request (report 4) | Tavily | Separate original-publication and last-modified dates: 4 had a later published_date (3 by more than 7 days; largest gap 345 days) | `results/date_field_test.json` | return original-publication and last-modified dates as two fields, and let the date filter choose |
-| Smaller observation (report 5) | Tavily | Map returns empty results silently: empty results with no failed_results and no error on 5 sites of the official crawl list (merc, derc, uperc, iocl, amul) and 3 dairy sites (aavin, nandini-kmf, sanchi-indore (MPCDF union)); without instructions also empty on merc, derc, uperc, iocl; a bad start URL did get a clear error (sanchi-mpcdf) | `results/prompt_t/official_crawl_2026-10.json` | a reason field on empty Map/Crawl responses |
-| Smaller observation (report 6) | Tavily | One scanned PDF: Extract returned the letterhead but not the image-only rates: 607 characters of letterhead; the rates are an image and did not come back | `results/prompt_t/dairy_followup_2026-10-21.json` | an ocr option, or an 'image_only' flag on the result |
-| Smaller observation (report 7) | Tavily | /usage lags per-call usage: /usage reported plan_usage 6 while per-call include_usage credits added up to 226 | `results/feedback_evidence/tavily_usage_2026-10-20.json` | update /usage within minutes, or document the lag |
+| Feature request, documented behaviour (note 1) | Tavily | An as-of / crawl-timestamp field: date filters select which pages, not which version: 0 of 14 searches returned a result dated after the cutoff, yet 1 page's current version leaks the outcome: R196 was dated 2026-07-07 by Tavily (cutoff 2026-07-08) and updated on 2026-07-09 with a link to the actual result | request ID `dce7e851-b012-4dfe-84d4-ea43b27b1bd9` | an as-of / crawl-timestamp field on Extract and Search results (when the copy returned was fetched), or an as_of parameter |
+| Feature request, documented behaviour (note 2) | Tavily | Separate original-publication and last-modified dates: 4 had a later published_date (3 by more than 7 days; largest gap 345 days) | `results/date_field_test.json` | return original-publication and last-modified dates as two fields, and let the date filter choose |
+| Observation, unexplained (note 3) | Tavily | auto_parameters picked a recent time_range for queries about a past month: auto_parameters chose time_range w 57, d 14, m 1; 620 of 659 results were dated October 2026 (observed once on 22 Oct 2026, not reproduced on 27 Oct 2026) and 38 were undated | request ID `73a3cac7-ae69-4e16-847d-726c5baec6c3` | when the query names a past month, return no time_range (or that month's window); document the default |
+| Observation, doc gap (note 4) | Tavily | With explicit dates, the auto_parameters echo still reports a time_range: the auto_parameters echo in the response reported time_range w 47, d 8, y 1, and a start_date or end_date in 0 of 56 echoes; yet 532 of 532 dated results fell inside our window, so the dates were applied | request ID `0e8e93b5-57d6-49a7-b1bf-204b2c6f4249` | echo start_date/end_date, or drop time_range from the echo, when the caller sends dates |
+| Observation, unexplained (note 5) | Tavily | Map returns empty results silently: empty results with no failed_results and no error on 5 sites of the official crawl list (merc, derc, uperc, iocl, amul) and 3 dairy sites (aavin, nandini-kmf, sanchi-indore (MPCDF union)); without instructions also empty on merc, derc, uperc, iocl; a bad start URL did get a clear error (sanchi-mpcdf) | `results/prompt_t/official_crawl_2026-10.json` | a reason field on empty Map/Crawl responses |
+| Observation, doc gap (note 6) | Tavily | One scanned PDF: Extract returned the letterhead but not the image-only rates: 607 characters of letterhead; the rates are an image and did not come back | `results/prompt_t/dairy_followup_2026-10-21.json` | an ocr option, or an 'image_only' flag on the result |
+| Observation, doc gap (note 7) | Tavily | /usage lags per-call usage: /usage reported plan_usage 6 while per-call include_usage credits added up to 226 | `results/feedback_evidence/tavily_usage_2026-10-20.json` | update /usage within minutes, or document the lag |
 | Not filed | Tavily | Research: the request body has no date window, so it cannot be time-locked (checked in the API reference, not measured) | `config/doc_citations.json` (`tavily_research_params`) | accept the same `start_date`/`end_date` as Search |
 | Not filed | Tavily | Search with `language` and the date filter: the dates held, but in Marathi and Tamil fewer results named the item, and Tamil returned English pages (post-hoc) | `results/lang_date_test.json` | when few matches remain in the requested language, return fewer results or say so |
 | Not filed | Tavily | Search: confirmed leaks were ordinary articles, and all came from searches sent without a date window (exploratory) | `results/field_report.json` (`leak_by_source_type`) | say in the Search docs that the date parameters keep later articles out; consider a page-type field |
@@ -176,7 +177,7 @@ text. The advanced call cost 1 credit. Evidence: flight-recorder ids `a8ce5681fc
 **2026-10-22 · Friction (observed in our test): auto_parameters with no dates chose a recent time_range.** In our
 pre-registered arm T (`v2/PREREGISTRATION.md`, logged rule change F), 72 searches sent only `query`, `auto_parameters: true` and `max_results`.
 auto_parameters with no dates chose recent windows, not always "w": `time_range` w 57, d 14, m 1 of 72 searches
-(topic news in 71; advanced depth in 49, basic in 23). 620 of 659 results were dated October 2026 (measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it), 1 September 2026
+(topic news in 71; advanced depth in 49, basic in 23). 620 of 659 results were dated October 2026 (observed once on 22 Oct 2026, not reproduced on 27 Oct 2026), 1 September 2026
 and 38 undated, and 0 of
 29 known Jan–Sep 2026 changes were found. (Corrected 2026-10-22 from "w, news and advanced every time"; counted from
 the arm files.) A historical, time-locked search needs explicit
@@ -232,4 +233,4 @@ before the cutoff and updated after it with a link to the actual result. An as-o
 would let time-locked users tell if a page changed. Related: `published_date` later than a page's own date is
 consistent with Tavily's documented definition (published or last updated, beta); separate original-publication and
 last-modified fields would help. Evidence: `results/timelock34_second_review.json` (`finance_filtered`),
-`docs/tavily_bug_reports.md` (reports 3 and 8).
+`docs/tavily_bug_reports.md` (feature requests 1 and 2).

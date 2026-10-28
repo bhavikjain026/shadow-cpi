@@ -61,7 +61,7 @@ def leak_chart(rows):
              "Count": f"{x['leaks']} of {x['n']}", "Interval": wilson(x["wilson95"]),
              "Label": f"{pct(x['leak_rate'])} ({x['leaks']}/{x['n']})", "zero": 0 if x["leaks"] == 0 else None,
              "Tip": f"{x['check'].split(' (')[0]} · {NO_DATES if x['setting'] == 'no dates' else TIME_LOCK} · "
-                    f"{x['leaks']} of {x['n']} leaked · 95% CI {wilson(x['wilson95'])}"}
+                    f"{x['leaks']} of {x['n']} detected leaking · 95% CI {wilson(x['wilson95'])}"}
             for x in rows if x["run"] == RUNS[run] and x["check"].startswith(("Date test", "Replication", "Finance check"))
             and (x["setting"] == "no dates" or x["setting"].endswith("filter_by_published_date"))]
     if not data:
@@ -541,13 +541,14 @@ if cv:
                    "Median response_time (s)": "—" if x["median_seconds"] is None else f"{x['median_seconds']:.2f}",
                    "Tasks": ", ".join(x["tasks"])} for x in cv["rows"]])
 
-# ---------- bug reports ----------
+# ---------- field notes ----------
 br = read_json("results/bug_reports.json")
 if br:
-    st.subheader("Feedback as bug reports")
-    st.caption("Counts read from the committed results files (`results/bug_reports.json`, also `docs/tavily_bug_reports.md`).")
+    st.subheader("Tavily field notes / repro kit")
+    st.caption("Counts read from the committed results files (`results/bug_reports.json`, also `docs/tavily_bug_reports.md`). "
+               "Each note is tagged against Tavily's docs: documented behaviour, doc gap or unexplained.")
     for b in br["reports"]:
-        with st.expander(f"{b['title']} · to {b['to']}"):
+        with st.expander(f"{b['title']} · {b.get('tag', 'untagged')} · to {b['to']}"):
             st.markdown(f"- **What we did:** {b['did']}.\n- **What happened:** {b['happened']}.\n"
-                        f"- **What we expected:** {b['expected']}.\n- **Suggested fix:** {b['fix']}.\n"
+                        f"- **What we expected:** {b['expected']}.\n- **Suggested change:** {b['fix']}.\n"
                         f"- **Evidence:** `{b['evidence']}`.")

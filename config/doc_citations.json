@@ -56,9 +56,10 @@
     "items": [
       {
         "name": "El Lahib et al. 2026",
-        "what": "audits post-cutoff leakage in Google and DuckDuckGo retrieval for forecasting questions",
+        "what": "\"Temporal Leakage in Search-Engine Date-Filtered Web Retrieval: A Retrospective Forecasting Case Study\": audits post-cutoff leakage in Google and DuckDuckGo date-filtered retrieval for forecasting questions",
         "link": "https://arxiv.org/abs/2602.00758",
-        "from": "el_lahib_2026"
+        "from": "el_lahib_2026",
+        "verified": "2026-10-29, arXiv abstract page opened (authors El Lahib, Xia, Li, Wang, Pi)"
       },
       {
         "name": "OracleProto (Ma et al. 2026)",
@@ -71,12 +72,20 @@
         "link": "https://arxiv.org/abs/2608.30110"
       },
       {
-        "name": "Paleka et al. 2025",
-        "what": "\"Pitfalls in Evaluating Language Model Forecasters\"",
-        "link": "https://arxiv.org/abs/2506.00723"
+        "name": "Paleka, Goel, Geiping and Tramèr 2025",
+        "what": "\"Pitfalls in Evaluating Language Model Forecasters\": temporal leakage as a reason to distrust forecasting evaluations",
+        "link": "https://arxiv.org/abs/2506.00723",
+        "verified": "2026-10-29, arXiv abstract page opened"
+      },
+      {
+        "name": "Zhang and Stadie 2026",
+        "what": "\"Temporal Leakage in LLM Backtesting: Measurement, Validation, and Adjusted Scores\": leakage from model memory, measured against a known training cutoff and a matched clean control",
+        "link": "https://arxiv.org/abs/2608.02985",
+        "verified": "2026-10-29, arXiv abstract page opened"
       }
     ],
-    "added": "2026-10-27, links and descriptions checked by the owner on 2026-10-27"
+    "added": "2026-10-27, links and descriptions checked by the owner on 2026-10-27",
+    "position": "Shadow CPI is a pre-registered measurement of an agent-native search API's date controls, plus a shipped fix for the gap it found (time-locked search and an as-of page reader)."
   },
   "submission_period": {
     "opened": "2026-08-26",
@@ -93,5 +102,62 @@
     },
     "source": "Nebius Token Factory docs, \"Model Deprecations: November 2026\", https://docs.tokenfactory.nebius.com/model-deprecations-november-2026",
     "checked": "2026-10-27, by the owner"
+  },
+  "tavily_docs": {
+    "_note": "Verbatim quotes from Tavily's API reference (OpenAPI descriptions), read in the markdown export of each page. Short quotes only; each links to its page.",
+    "checked": "2026-10-29, by Claude Code, from the .md export of each page",
+    "search_url": "https://docs.tavily.com/documentation/api-reference/endpoint/search",
+    "extract_url": "https://docs.tavily.com/documentation/api-reference/endpoint/extract",
+    "quotes": {
+      "start_date": "Will return all results after the specified start date based on publish date or last updated date.",
+      "end_date": "Will return all results before the specified end date based on publish date or last updated date.",
+      "dates_undated": "By default, results with no detectable published date are not removed",
+      "filter_by_published_date": "Results with no detectable published date are also removed.",
+      "filter_alternative": "leave this `false` and set `include_published_date: true` together with a date range instead.",
+      "published_date": "Tavily's best estimate of when the source was published or last updated.",
+      "time_range": "The time range back from the current date to filter results",
+      "max_age_hours": "The maximum age in hours of Tavily's cached copy of each result.",
+      "language": "Boost search results in a specific language.",
+      "filter_by_language": "Strictly filter out search results that don't match the `language` parameter, instead of only boosting them in ranking."
+    },
+    "extract_date_fields": false,
+    "extract_note": "the Extract reference lists no date, cache-age or crawl-time field in its request or response (checked 2026-10-29)"
+  },
+  "nemotron_cutoffs": {
+    "_note": "Training-data cutoffs as stated in NVIDIA's official Hugging Face model cards; quoted, not inferred.",
+    "checked": "2026-10-29, by Claude Code",
+    "models": [
+      {
+        "id": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+        "card": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+        "pretraining": "2025-06-25",
+        "posttraining": "2025-11-28",
+        "quote": "The post-training data has a cutoff date of November 28, 2025."
+      },
+      {
+        "id": "nvidia/nemotron-3-super-120b-a12b",
+        "card": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+        "pretraining": "2025-06",
+        "posttraining": "2026-02",
+        "quote": "The post-training data has a cutoff date of February 2026."
+      },
+      {
+        "id": "nvidia/Nemotron-3_5-Lightning",
+        "card": null,
+        "note": "not published (no public model card found)"
+      },
+      {
+        "id": "nvidia/Nemotron-3.5-Super-VL",
+        "card": null,
+        "note": "not published (no public model card found)"
+      }
+    ]
+  },
+  "schedule": {
+    "november_seal_planned": "2026-12-01",
+    "judged_tag": "submission-v1.0",
+    "what": "the November seal's planned date (about) and the git tag of the judged version",
+    "source": "owner's task card, 2026-10-29; seal_checklist.md and config/budget.json still say the November full run is at sealing on 10 Dec, to be reconciled",
+    "added": "2026-10-29"
   }
 }

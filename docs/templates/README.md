@@ -9,16 +9,19 @@ In the forecast pipeline, NVIDIA Nemotron on Nebius Token Factory screens pages 
 
 | Leaks, measured (pre-registered initial pass) | No dates | Dates + filter |
 |---|---|---|
-| Date test ({{dt_cases}} cases) | **{{dt_nodates}} of {{dt_cases}}** (Wilson {{dt_nodates_w}}) | **{{dt_dated}} of {{dt_cases}}** (Wilson {{dt_dated_w}}) |
-| Replication ({{rep_cases}} new cases, pre-registered) | **{{rep_nodates}} of {{rep_cases}}** (Wilson {{rep_nodates_w}}) | **{{rep_dated}} of {{rep_cases}}** (Wilson {{rep_dated_w}}) |
-| Finance check ({{fin_events}} cases, exploratory, different leak rule) | {{fin_nodates}} of {{fin_events}} ({{fin_nodates_w}}) | {{fin_dated}} of {{fin_events}} ({{fin_dated_w}}) |
+| Date test ({{dt_cases}} cases) | **{{dt_nodates}} of {{dt_cases}}** (Wilson {{dt_nodates_w}}) | **{{dt_dated}} of {{dt_cases}} detected** (Wilson {{dt_dated_w}}) |
+| Replication ({{rep_cases}} new cases, pre-registered) | **{{rep_nodates}} of {{rep_cases}}** (Wilson {{rep_nodates_w}}) | **{{rep_dated}} of {{rep_cases}} detected** (Wilson {{rep_dated_w}}) |
+| Finance check ({{fin_events}} cases, exploratory, different leak rule) | {{fin_nodates}} of {{fin_events}} ({{fin_nodates_w}}) | {{fin_dated}} of {{fin_events}} detected ({{fin_dated_w}}) |
 
-Pilot + replication, date-test rule (pre-registered secondary): dates + filter {{pool_dated}} of {{pool_cases}} (Wilson {{pool_dated_w}}).
+Pilot + replication, date-test rule (pre-registered secondary): dates + filter {{pool_dated}} of {{pool_cases}} detected (Wilson {{pool_dated_w}};
+post-hoc rule of three: below {{pool_r3}}). No-dates counts are lower bounds: a leak counts only when the Wayback
+Machine confirms it, and a page the archive never captured is not counted (absence from Wayback is not proof the page
+did not exist).
 
 Separate rules; never added together. **Update:** date test {{dt_nodates_retry}} of {{dt_cases}} with no dates (Wilson
 {{dt_nodates_retry_w}}) after retrying the {{rr_dt_failed}} archive lookups that had failed, still {{dt_dated_retry}} of
-{{dt_cases}} with dates + filter; finance check {{fin_nodates_retry}} of {{fin_events}} ({{fin_nodates_retry_w}}) after the
-retry ({{rr_fin_failed}} lookups had failed), still {{fin_dated_retry}} of {{fin_events}} with dates + filter.
+{{dt_cases}} detected with dates + filter; finance check {{fin_nodates_retry}} of {{fin_events}} ({{fin_nodates_retry_w}}) after the
+retry ({{rr_fin_failed}} lookups had failed), still {{fin_dated_retry}} of {{fin_events}} detected with dates + filter.
 
 <details>
 <summary>Footnote: what counts as a leak, and the update after the archive retry</summary>
@@ -46,15 +49,24 @@ retry ({{rr_fin_failed}} lookups had failed), still {{fin_dated_retry}} of {{fin
   which is why the finance count rises from {{fin_nodates}} to {{fin_nodates_retry}} of {{fin_events}}. Wilson {{wilson}} intervals
   after the retry: date test no dates {{dt_nodates_retry_w}}, dates + filter {{dt_dated_retry_w}}; finance check no
   dates {{fin_nodates_retry_w}}, dates + filter {{fin_dated_retry_w}}.
+- **Statistics ({{posthoc_label}}; [`results/posthoc_stats.md`](results/posthoc_stats.md)).** Exact McNemar, no
+  dates vs dates + filter, paired by case on the initial pass: date test p = {{mcn_dt_p}}, replication p =
+  {{mcn_rep_p}}, finance check p = {{mcn_fin_p}}, pooled p = {{mcn_pool_p}}. For the pooled {{pool_dated}} of
+  {{pool_cases}} detected, the rule of three puts the leak rate below {{pool_r3}} with about {{wilson}} confidence (exact
+  one-sided bound {{pool_exact1s}}). Without the cache-served replication responses: no dates {{rep_desc_nodates}} of
+  {{rep_desc_cases}}, dates + filter {{rep_desc_dated}} of {{rep_desc_cases}} detected (the logged addendum, reused).
 
 </details>
 
-**The cost.** The filter dropped {{dt_lost_filter}} of the date test's {{dt_valid_total}} pieces of valid evidence
-(initial pass; {{dt_lost_filter_retry}} of {{dt_valid_total_retry}} after the retry).
+**The cost.** The measured cost of the strict setting: the filter dropped {{dt_lost_filter}} of the date test's
+{{dt_valid_total}} pieces of valid evidence (initial pass; {{dt_lost_filter_retry}} of {{dt_valid_total_retry}} after
+the retry).
 
-**Search dates do not freeze page content.** Tavily dated `{{ex_row}}`, a {{ex_company}} results preview, {{ex_published}},
-before its {{ex_cutoff}} cutoff; the page was updated on {{ex_updated}} with a link to the actual result, and Extract
-returns the updated page ([details](#search-dates-do-not-freeze-page-content)).
+**Date filters select which pages, not which version.** Tavily dated `{{ex_row}}`, a {{ex_company}} results preview,
+{{ex_published}}, before its {{ex_cutoff}} cutoff; the page was updated on {{ex_updated}} with a link to the actual
+result, and Extract returns the updated page. `max_age_hours` controls freshness, not as-of; `extract_as_of` fills that
+gap (demo, n={{asof_n}}) ([details](#search-dates-do-not-freeze-page-content)). What Tavily's own docs say about each field,
+next to what we measured: [below](#what-tavilys-docs-say-vs-what-we-measured).
 
 **Reuse it:** [`timelock/`](timelock/) (time-locked search, standard library only,
 [{{example_lines}}-line example](#use-it-in-{{example_lines}}-lines)) · [`mcp/`](mcp/README.md) (the same as an MCP
@@ -80,7 +92,7 @@ rule and its own count; date-test and finance counts are never added together.
 
 - **Date test (pilot, {{dt_cases}} replay cases, [`v2/DATE_TEST_PREREG.md`](v2/DATE_TEST_PREREG.md)).** Rule quoted
   above. Pre-registered initial pass: no dates {{dt_nodates}} of {{dt_cases}} ({{dt_nodates_w}}), dates + filter
-  {{dt_dated}} of {{dt_cases}} ({{dt_dated_w}}). Update: {{dt_nodates_retry}} of {{dt_cases}} and {{dt_dated_retry}}
+  {{dt_dated}} of {{dt_cases}} detected ({{dt_dated_w}}). Update: {{dt_nodates_retry}} of {{dt_cases}} and {{dt_dated_retry}}
   of {{dt_cases}} after retrying the {{rr_dt_failed}} archive lookups that had failed. Every case whose label changed
   after the retry ({{retry_changed}} of {{retry_cases}}, both checks), with the reason:
   [`docs/retry_reconciliation.md`](docs/retry_reconciliation.md).
@@ -88,7 +100,7 @@ rule and its own count; date-test and finance counts are never added together.
   [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md)).** Rule quoted above (it also needs the title or snippet to state
   the outcome). The day-before search with no dates leaked the outcome for {{fin_nodates}} of {{fin_events}}
   events on the pre-registered initial pass (Wilson {{wilson}} {{fin_nodates_w}}); with dates and the filter,
-  {{fin_dated}} of {{fin_events}} ({{fin_dated_w}}). Update: {{fin_nodates_retry}} of {{fin_events}}
+  {{fin_dated}} of {{fin_events}} detected ({{fin_dated_w}}). Update: {{fin_nodates_retry}} of {{fin_events}}
   ({{fin_nodates_retry_w}}) and {{fin_dated_retry}} of {{fin_events}} ({{fin_dated_retry_w}}) after the retry
   ({{rr_fin_failed}} lookups had failed).
 - **Tasks and calls.** Each task sent one search per setting, so call counts equal task counts
@@ -121,10 +133,20 @@ retry). Check E's misses are filter misses, not back-dating: {{e_missed_later}} 
 
 Small samples: every rate in the field report carries a Wilson interval ({{wilson}}).
 
+## What Tavily's docs say vs what we measured
+
+Each row quotes Tavily's API reference ([Search]({{tavily_search_url}}), [Extract]({{tavily_extract_url}})) and puts
+our measurement next to it. Most of what we found is documented behaviour; the field notes below tag each item
+"documented behaviour", "doc gap" or "unexplained".
+
+{{tavily_docs_table}}
+
 ## Search dates do not freeze page content
 
-Tavily's date filter works on a page's date; Extract returns the page as it is when we call it. A page dated before
-the cutoff can be updated after it, and the filter cannot see that. Example (from a separate, post-hoc AI-assisted
+Date filters select which pages, not which version: Tavily's date filter works on a page's publish or last-updated
+date, and Extract returns the page as it is when we call it. A page dated before the cutoff can be updated after it,
+and the filter cannot see that. `max_age_hours` bounds how fresh Tavily's cached copy is (freshness, not as-of), and
+the Extract reference lists no date field. `extract_as_of` fills that gap (demo, n={{asof_n}}, below). Example (from a separate, post-hoc AI-assisted
 review (ChatGPT agent); {{sr_unclear}} of {{sr_rows}} rows stayed unclear): `{{ex_row}}`, a {{ex_company}} results
 preview in the finance check, cutoff {{ex_cutoff}}. Tavily dated it {{ex_published}}, before the cutoff; the page
 was updated on {{ex_updated}} with a link to the actual result. In the finance check, {{sr_fin_dated_after}} of
@@ -160,49 +182,52 @@ Tavily's dynamic filtering lets a model choose its own search fields. We built o
 
 - **The fields were always valid.** Every field the model wrote was a proper Tavily parameter, dates included:
   {{bc_fields_valid}} of {{bc_fields}} searches in arms B and C, {{arm_h_fields_valid}} of {{arm_h_fields}} in arm H.
-- **Fixed templates still found more.** The likely cause is source choice: arm H differed from arm A only in
-  `include_domains` ({{arm_h_diff_domains}} searches) and `language` ({{arm_h_diff_language}}).
-- **`auto_parameters` with no dates assumed "now" (observed in our test).** On {{auto_searches}} searches about past months it picked recent
-  time ranges, and {{auto_oct}} of {{auto_results}} results were from {{live_month}} ({{auto_note}}). With our dates added,
+- **Fixed templates still found more.** This is a result about query planning (what Nemotron chose to search for),
+  not about Tavily: the same Tavily endpoint answered every arm. The likely cause is source choice: arm H differed
+  from arm A only in `include_domains` ({{arm_h_diff_domains}} searches) and `language` ({{arm_h_diff_language}}).
+- **`auto_parameters` with no dates reached for the present (an observation).** On {{auto_searches}} searches about
+  past months it picked recent time ranges, and {{auto_oct}} of {{auto_results}} results were from {{live_month}}
+  ({{auto_note}}); Tavily documents `time_range` as counting back from the current date. With our dates added,
   {{autod_inside}} of {{autod_dated}} dated results fell inside the window.
 
 So the time lock lives in code: the model may choose the query, topic, domains and language; code owns the dates.
 
-## What we found about Tavily
+## Tavily field notes / repro kit
 
 Publishing these measurements was approved by <who, role> on <date> (<link>).
 Screenshot: [`docs/permission_2026-10-27.png`](docs/permission_2026-10-27.png).
 
-Full write-up with observed / expected / suggested fix / evidence (counts and Tavily request IDs):
-[`docs/tavily_bug_reports.md`](docs/tavily_bug_reports.md), built from [`results/bug_reports.json`](results/bug_reports.json).
+Full notes with observed / expected / suggested change / evidence (counts and Tavily request IDs) and a one-request
+repro script each: [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports.md), built from
+[`results/bug_reports.json`](results/bug_reports.json). Each is tagged against Tavily's docs: **documented behaviour**,
+**doc gap** or **unexplained**.
 
-**Top {{top_n}}**
+**Feature requests ({{feature_n}})**
 
-1. **`auto_parameters` picks a recent `time_range` for queries about a past month.** With no dates, on
-   {{auto_searches}} searches naming a month in {{replay_span}}, {{auto_oct}} of {{auto_results}} results came from
-   {{live_month}} ({{auto_note}}).
-2. **With explicit dates, `auto_parameters` still reports a `time_range`.** On {{autod_searches}} searches with our
-   `start_date`/`end_date`, the echo said `time_range` {{autod_ranges}} and held a start or end date in
-   {{autod_echo_dates}} of them, while {{autod_inside}} of {{autod_dated}} dated results fell inside our window: the
-   dates were applied, the echo does not say so.
-3. **Extract has no as-of view, so Search dates do not freeze page content.** `{{ex_row}}` (above): dated before the
-   cutoff, updated after it. Suggestion: an as-of / crawl-date field on Extract.
+- **An as-of / crawl-timestamp field** (documented behaviour). Date filters select which pages, not which version:
+  `{{ex_row}}` (above) was dated before the cutoff and updated after it, and Extract returns today's copy.
+  `max_age_hours` controls freshness, not as-of. `extract_as_of` fills that gap (demo, n={{asof_n}}); a field saying when the
+  returned copy was fetched would let any time-locked user check it.
+- **Separate original-publication and last-modified dates** (documented behaviour). `published_date` was later than
+  the page's own date on {{pd_later}} of {{pd_pages}} distinct date-test pages, as Tavily's documented definition
+  (published or last updated, beta) allows.
 
-**Feature requests**
+**Observations**
 
-- **Separate original-publication and last-modified dates.** `published_date` was later than the page's own date on
-  {{pd_later}} of {{pd_pages}} distinct date-test pages, consistent with Tavily's documented definition (published or
-  last updated, beta).
-
-**Smaller observations**
-
-- **Map's silent empty answer:** {{map_official_empty}} of {{map_official}} official crawl-list sites (state
-  electricity regulators, IOCL, Amul) and {{map_dairy_empty}} of {{map_dairy}} dairy sites, with no error or
+- **`auto_parameters` picked a recent `time_range` for queries about a past month** (unexplained;
+  {{auto_note}}). With no dates, on {{auto_searches}} searches naming a month in {{replay_span}}, {{auto_oct}} of
+  {{auto_results}} results came from {{live_month}}.
+- **With explicit dates, the `auto_parameters` echo still reports a `time_range`** (doc gap). On {{autod_searches}}
+  searches with our `start_date`/`end_date`, the echo said `time_range` {{autod_ranges}} and held a start or end date
+  in {{autod_echo_dates}} of them, while {{autod_inside}} of {{autod_dated}} dated results fell inside our window: the
+  dates were applied, the echo does not say so.
+- **Map's silent empty answer** (unexplained): {{map_official_empty}} of {{map_official}} official crawl-list sites
+  (state electricity regulators, IOCL, Amul) and {{map_dairy_empty}} of {{map_dairy}} dairy sites, with no error or
   `failed_results`.
-- **One scanned PDF:** on one scanned dairy rate-list PDF, Extract returned the letterhead but not the image-only
-  rates.
-- **`/usage` lag:** `/usage` reported {{usage_endpoint}} credits used while per-call `include_usage` added up to
-  {{usage_per_call}} the same day.
+- **One scanned PDF** (doc gap): on one scanned dairy rate-list PDF, Extract returned the letterhead but not the
+  image-only rates.
+- **`/usage` lag** (doc gap): `/usage` reported {{usage_endpoint}} credits used while per-call `include_usage` added
+  up to {{usage_per_call}} the same day.
 
 Also measured: the filter drops undated pages ({{dt_undated_nodates}} of {{dt_results_nodates}} results undated with
 no dates, {{dt_undated_filter}} with the filter), and the Research endpoint has no date window (checked in the API
@@ -314,6 +339,8 @@ comparable.
 
 ### Related work
 
+{{related_position}} Related studies, each checked on its arXiv page:
+
 {{related_work}}
 
 ## How it works
@@ -336,8 +363,13 @@ flowchart LR
 4. **The seal.** Canonical JSON, its `SHA-256`, and a git tag. We publish the prediction's SHA-256 and a Git tag
    before release, so anyone can verify the file they have.
 
-**NVIDIA Nemotron on Nebius Token Factory.** Two models, one OpenAI-compatible endpoint
-([`shadow_cpi/nemotron.py`](shadow_cpi/nemotron.py)); calls from the flight recorder
+## How we use NVIDIA Nemotron on Nebius Token Factory
+
+Nano screens pages, Super cites the exact line, code checks the number. Nemotron Nano answers one yes/no question
+per page ("does this page state an Indian price or price change?"); Nemotron Super reads the page as numbered lines
+and returns the line number for each price; code copies that line from the Extract output and keeps the claim only
+if the number is in it. A model never writes a quote, a number, a range or a weight. Two models, one
+OpenAI-compatible endpoint ([`shadow_cpi/nemotron.py`](shadow_cpi/nemotron.py)); calls from the flight recorder
 ([`results/app/flight_recorder.jsonl`](results/app/flight_recorder.jsonl)):
 
 | Model (Token Factory ID) | From {{switch_day}} (Nebius's replacement) | Job | Calls sent (including cache hits) |
@@ -345,16 +377,17 @@ flowchart LR
 | Nemotron Nano, `{{nano_id}}` | `{{nano_new}}` | Gatekeeper: "does this page state an Indian price or price change?" (yes/no); English glosses of non-English quotes, for display only | {{nano_sent}} ({{nano_total}}) |
 | Nemotron Super, `{{super_id}}` | `{{super_new}}` | Reads pages and cites the line for each price and price change; writes the search fields in arms B, C and H | {{super_sent}} ({{super_total}}) |
 
-Nebius retires the original IDs on {{switch_day}}; from then, calls use Nebius's recommended replacements (pre-registered on {{migration_registered}}). The model is picked by the call date in IST
-([`config/models.json`](config/models.json)) and logged with every call; the {{live_month}} seal uses the original
-models ([`v2/PREREGISTRATION.md`](v2/PREREGISTRATION.md), Amendment G).
+**The dated model switch on {{switch_day}}.** Nebius retires the original IDs on {{switch_day}}; from then, calls
+use Nebius's recommended replacements (pre-registered on {{migration_registered}}). The model is picked by the call
+date in IST ([`config/models.json`](config/models.json)) and logged with every call; the {{live_month}} seal uses the
+original models ([`v2/PREREGISTRATION.md`](v2/PREREGISTRATION.md), Amendment G).
 
-Where Token Factory helped: every call asks for JSON-schema output (`response_format` with a strict schema); if
-Nebius refuses that with an error, the code retries in JSON mode with the schema in the prompt, and from
-{{migration_registered}} each such fallback is logged. Schema output worked on the opening call, so every model answer
-is parsed, not guessed; both model sizes sit behind the same endpoint, so the cheap gatekeeper and the careful reader are a
-config change apart ([`config/models.json`](config/models.json)); and citing line numbers instead of copying text
-made Hindi pages work. Details: [`FEEDBACK_NOTES.md`](FEEDBACK_NOTES.md).
+**Where Token Factory helped** (each from a dated entry in [`FEEDBACK_NOTES.md`](FEEDBACK_NOTES.md)): JSON-schema
+output worked on the opening call, so every model answer is parsed, not guessed; the `/models` list served both
+model sizes behind the one endpoint, so the cheap gatekeeper and the careful reader are picked by name in
+[`config/models.json`](config/models.json); and having Super cite line numbers instead of copying text made Hindi
+pages work. The same notes log what needed work (a gatekeeper "no" on a page with rupee prices, a timeout and a
+connection reset that stopped long runs, mixed model naming).
 
 ## The product
 
@@ -397,6 +430,16 @@ made Hindi pages work. Details: [`FEEDBACK_NOTES.md`](FEEDBACK_NOTES.md).
 - v1 used `start_date`/`end_date` plus our own page-date check; `filter_by_published_date` came later (date test,
   radar, `timelock/`). v1 is frozen and was not changed.
 - Recall: the winning search arm found {{arm_a_recall}} of {{known_changes}} known price changes.
+- **Model memory.** The time lock controls what the search returns, not what the models already know. NVIDIA's
+  model cards (checked {{cutoffs_checked}}) give Nemotron Nano a pre-training cutoff of {{nano_pre}} and a
+  post-training cutoff of {{nano_post}}; Nemotron Super a pre-training cutoff of {{super_pre}} and a post-training
+  cutoff of {{super_post}}, inside the {{replay_span}} replay; for the replacement models: {{new_models_cutoff}}. The replay is therefore not
+  leakage-free against model memory: a model can cite a line it would not have picked without knowing the outcome,
+  even though code checks that the number is on the page. The sealed forward forecasts are the clean evidence.
+- **Leak counts.** Every zero is reported as zero detected, with its Wilson interval; no-dates counts are lower bounds, because a
+  leak counts only when the Wayback Machine confirms it and absence from Wayback is not proof a page did not exist.
+  McNemar tests and the rule-of-three bound are {{posthoc_label}}
+  ([`results/posthoc_stats.md`](results/posthoc_stats.md)).
 - Small samples: pilot and exploratory checks of tens of cases, reported with Wilson intervals; exploratory results
   are labelled and changed no scored verdict. {{dt_cases}} date-test cases and {{fin_events}} finance events are small,
   India-focused samples; they show the effect exists and its size here, not Tavily's behaviour in general.

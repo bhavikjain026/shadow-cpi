@@ -208,9 +208,10 @@ def stat_cards(t):
                   help="Cases where the plain search, with no date limits, returned a page the Wayback Machine shows "
                        "appeared after the cutoff. Pre-registered initial pass: the pilot, then the replication of new "
                        "cases. The pooled count adds them under the same rule; it counts one cached pilot answer "
-                       "twice (see How we know).")
+                       "twice (see How we know). These counts are lower bounds: a page the Wayback Machine never "
+                       "captured cannot be confirmed, and absence from Wayback is not proof it did not exist.")
     with b:
-        st.metric(":green[Dates + time lock]: cases that leaked", f"{pk} of {pn}",
+        st.metric(":green[Dates + time lock]: cases that leaked", f"{pk} of {pn} detected",
                   delta=f"Wilson 95% interval {pct(lo)}–{pct(hi)}. Pilot and replication pooled.",
                   delta_color="off", delta_arrow="off", border=True,
                   help="Cases where the search with start_date, end_date and filter_by_published_date still returned a "
@@ -218,7 +219,7 @@ def stat_cards(t):
                        "the true rate is plausibly below the upper bound, not that leaks are impossible.")
     with c:
         st.metric("Cost of correctness", f"{lost} of {valid}",
-                  delta="Valid evidence the date filter dropped (initial pass).",
+                  delta="Measured cost of the strict setting: valid evidence the date filter dropped (initial pass).",
                   delta_color="off", delta_arrow="off", border=True,
                   help="Of the valid results the plain search found in the date test, how many the dated search did "
                        "not return. This is the date test's own pre-registered initial pass, separate from the "
@@ -244,7 +245,7 @@ def interval_chart(t):
         lo, hi = wilson95(k, n)
         rows.append({"Group": name, "kind": kind, "rate": k / n, "lo": lo, "hi": hi,
                      "label": f"{k}/{n}", "interval": f"{pct(lo)}–{pct(hi)}",
-                     "tip": f"{name} · {k} of {n} leaked · 95% CI {pct(lo)}–{pct(hi)}"})
+                     "tip": f"{name} · {k} of {n} detected leaking · 95% CI {pct(lo)}–{pct(hi)}"})
     ink = "#fafafa" if dark_theme() else "#09090b"
     muted = "#a1a1aa" if dark_theme() else "#52525b"
     base = alt.Chart(pd.DataFrame(rows)).encode(y=alt.Y("Group:N", sort=None, axis=None,
@@ -296,7 +297,7 @@ def update_lines(t):
     rc = read_json(REPLICATION)["metrics"]["price"]["arms"]["C"]
     st.caption(f"Update: {int(d['open']['retry'])}/{n} with no time lock after retrying the {failed} failed Wayback "
                f"archive lookups; {int(d['locked']['retry'])}/{n} with the time lock.")
-    st.caption(f"Replication: {rc['leak_cases']} of {rc['cases']} more cases leaked with the time lock.")
+    st.caption(f"Replication: {rc['leak_cases']} of {rc['cases']} more cases detected leaking with the time lock.")
 
 
 def totals(t, n):

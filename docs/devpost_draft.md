@@ -6,7 +6,7 @@
 
 ## Headline
 <!-- headline:start -->
-0 of 42 cases with Tavily's dates + filter, across a pilot and a pre-registered replication (Wilson 0–8%); with no dates, 9 of 20 and 14 of 22 leaked.
+0 of 42 cases detected leaking with Tavily's dates + filter, across a pilot and a pre-registered replication (Wilson 0–8%); with no dates, 9 of 20 and 14 of 22 leaked.
 Reuse: `timelocked_search`, `extract_as_of`, Colab leak check.
 <!-- headline:end -->
 
@@ -22,9 +22,8 @@ Can a search engine keep the past in the past? We measured Tavily's date control
 (pilot, pre-registered). With no dates, 9 of 20 cases kept a confirmed leak, a page dated after
 the cutoff with no archive copy before it (Wilson 95% 26–66%; 10 of 20
 after retrying 11 failed archive lookups); with `start_date`/`end_date` and
-`filter_by_published_date`, 0 of 20 (0–16%). The cost: the filter dropped
-12 of 40 pieces of valid evidence (initial pass). Search dates do not freeze page content:
-pages change after the cutoff. Shadow CPI puts this to work: an AI agent searches with Tavily
+`filter_by_published_date`, 0 of 20 detected (0–16%). The cost: the filter dropped
+12 of 40 pieces of valid evidence (initial pass). Dates select pages, not versions. Shadow CPI puts this to work: an AI agent searches with Tavily
 inside a time lock, checks each quote against the extracted page with NVIDIA Nemotron on Nebius Token Factory, lets
 code compute India's October 2026 inflation nowcast, and seals it before the Ministry of Statistics publishes on
 12 Nov.
@@ -33,25 +32,32 @@ code compute India's October 2026 inflation nowcast, and seals it before the Min
 ## The leak, measured
 - **Main result (date test, a pilot; the pre-registered initial pass):** no dates, 9 of 20
   cases leaked (Wilson 95% 26–66%); `start_date`/`end_date` + `filter_by_published_date`,
-  0 of 20 (0–16%). Update: 10 of 20
-  (30–70%) and 0 of 20 (0–16%) after retrying the
+  0 of 20 detected (0–16%). Update: 10 of 20
+  (30–70%) and 0 of 20 detected (0–16%) after retrying the
   11 archive lookups that had failed; the retry only re-ran those lookups, with the same labelling rules.
 - **What a leak is.** A case leaks when at least one result the search kept is a confirmed leak, which
   `v2/DATE_TEST_PREREG.md` defines as: "**Confirmed leak (L):** independent version evidence only: the Wayback Machine CDX API (a logged direct download, the same exception as MoSPI) lists **no capture on or before the cutoff**, its first capture is after the cutoff, **and** Tavily's published date or the date in the address is after the cutoff." The finance check's rule differs
   (`v2/FINANCE_PREREG.md`, as amended): "**Confirmed leak:** states the outcome **and** Wayback-confirmed (no capture on or before the cutoff, first capture after it, and Tavily's or the address's date after the cutoff)." Its counts are reported apart and never added to the
-  date test's.
-- **The cost:** the filter dropped 12 of the date test's 40 pieces of valid evidence
+  date test's. No-dates counts are lower bounds: a page the Wayback Machine never captured cannot be confirmed
+  (absence from Wayback is not proof the page did not exist).
+- **Replication and statistics:** 14 of 22 with no dates, 0 of 22
+  detected with dates + filter (pre-registered); pooled 0 of 42 detected, rule of three below
+  7.1%; exact McNemar p = 0.0039 (date test), 0.00012 (replication), 2.4e-07 (pooled)
+  (post-hoc, not pre-registered, `results/posthoc_stats.md`). Without the cache-served replication responses: 11
+  of 19 and 0 of 19 detected (the logged addendum).
+- **The cost (the measured cost of the strict setting):** the filter dropped 12 of the date test's 40 pieces of valid evidence
   (initial pass; 20 of 48 after the retry).
-- **Search dates do not freeze page content.** Tavily dated `R196`, a TCS results preview,
-  7 Jul, before its 8 Jul cutoff; the page was updated on 9 Jul with a link to the actual
-  result, and Extract returns the updated page.
+- **Date filters select which pages, not which version.** Tavily dated `R196`, a TCS results
+  preview, 7 Jul, before its 8 Jul cutoff; the page was updated on 9 Jul with a link to the
+  actual result, and Extract returns the updated page. `max_age_hours` controls freshness, not as-of;
+  `extract_as_of` fills that gap (demo, n=1).
 - **Reuse:** `timelock/`, `mcp/`, `benchmarks/timelock34/`.
 
 ## Time-locked search leakage
 - **Finance check** (exploratory; Reserve Bank of India (RBI) decisions and company results, its own rule above):
   no dates, 2 of 14 events on the pre-registered initial pass (Wilson 95%
-  4–40%); with dates and the filter, 0 of 14 (0–22%). Update:
-  10 of 14 (45–88%) and 0 of 14
+  4–40%); with dates and the filter, 0 of 14 detected (0–22%). Update:
+  10 of 14 (45–88%) and 0 of 14 detected
   (0–22%) after the retry (94 lookups had failed).
 - **Check P, full page** (exploratory): of 132 pages that passed the date lock, 1 described a later
   event; most later dates were page furniture (43 of 71 flagged pages: date bars, sidebars,
@@ -81,8 +87,23 @@ the update):
 | Finance check (exploratory) | valid evidence: pages Wayback shows existed by the cutoff that name the RBI or the company | 10 of 11 | 1 |
 | Check E (exploratory, `exact_match`) | known-good quotes re-found by the dated search | 25 of 40 | 8 found only without dates; 7 by neither |
 
+## What Tavily's docs say vs what we measured
+Tavily's API reference, quoted and linked, next to our measurement. Most of what we found is documented behaviour.
+
+| Field | Tavily's docs say (quoted, checked 29 Oct) | What we measured |
+|---|---|---|
+| `start_date` / `end_date` | ["Will return all results after the specified start date based on publish date or last updated date."](https://docs.tavily.com/documentation/api-reference/endpoint/search); ["By default, results with no detectable published date are not removed"](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Dates select which pages, not which version. `R196`: dated 7 Jul, before its 8 Jul cutoff, updated 9 Jul; Extract returns the updated page. Dates with the filter off (arm B): 0 of 20 detected (Wilson 0–16%) |
+| `filter_by_published_date` | ["Results with no detectable published date are also removed."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Dates + filter: 0 of 20 detected (Wilson 0–16%); replication 0 of 22 detected (0–15%). Measured cost of the strict setting: 12 of 40 pieces of valid evidence dropped (initial pass); undated results 0 with the filter, 8 of 60 with no dates |
+| The docs' alternative: `include_published_date` without the filter | ["leave this `false` and set `include_published_date: true` together with a date range instead."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Our arm B is that setting (dates, `include_published_date` on, filter off): 0 of 20 detected (0–16%), 0 undated of 58 results, 19 of 40 pieces of valid evidence lost (filter on: 12) |
+| `published_date` | ["Tavily's best estimate of when the source was published or last updated."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Later than the page's own date on 4 of 42 distinct date-test pages: documented behaviour (feature request: separate the two dates) |
+| `time_range` | ["The time range back from the current date to filter results"](https://docs.tavily.com/documentation/api-reference/endpoint/search) | `auto_parameters` with no dates chose recent time ranges for past months: 620 of 659 results from October 2026 (observed once on 22 Oct 2026, not reproduced on 27 Oct 2026). Consistent with "back from the current date"; a past month needs `start_date`/`end_date` |
+| `max_age_hours` | ["The maximum age in hours of Tavily's cached copy of each result."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Not sent in our runs. It bounds how fresh Tavily's cached copy is, not which date the copy reflects (freshness, not as-of); the [Extract reference](https://docs.tavily.com/documentation/api-reference/endpoint/extract) lists no date, cache or crawl-time field. `extract_as_of` fills that gap (demo, n=1: `R196` refused, no archive copy before the 8 Jul cutoff) |
+| `language` vs `filter_by_language` | ["Boost search results in a specific language."](https://docs.tavily.com/documentation/api-reference/endpoint/search); ["Strictly filter out search results that don't match the `language` parameter, instead of only boosting them in ranking."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | We sent `language` without `filter_by_language` (boost only) on 12 cases: with dates + filter 0 of 12 detected (0–24%); Tamil still returned English pages (post-hoc), as boost-only allows. `filter_by_language` was not tested |
+
 ## Search dates do not freeze page content
-A page dated before the cutoff can be updated after it, and Extract returns the updated page. Example (a separate,
+Date filters select which pages, not which version: a page dated before the cutoff can be updated after it, and
+Extract returns the updated page. `max_age_hours` controls freshness, not as-of; `extract_as_of` fills that gap
+(demo, n=1). Example (a separate,
 post-hoc AI-assisted review (ChatGPT agent); 146 of 283 rows stayed unclear): `R196`, a
 TCS results preview, cutoff 8 Jul; Tavily dated it 7 Jul, and the page was updated on
 9 Jul with a link to the actual result. 0 of 14 filtered searches in
@@ -100,44 +121,41 @@ Building on Tavily's dynamic-filtering idea, we let Nemotron write the search fi
 and C) 2 and 2, `auto_parameters` (arm T) 0; exploratory arm H
 (templates + model-chosen fields) 4, and T+dates 2. The model's fields were always
 valid (189 of 189; 468 of 468 in arm H), but fixed
-templates found more; the likely cause is source choice (arm H differed from A only in domains and language).
-Observed in our test, `auto_parameters` with no dates assumed "now": 620 of 659 results came from October 2026 (measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it).
+templates found more. That is a result about query planning (what Nemotron chose to search for), not about
+Tavily, which answered every arm; the likely cause is source choice (arm H differed from A only in domains and
+language). An observation: `auto_parameters` with no dates reached for the present, 620 of 659
+results from October 2026 (observed once on 22 Oct 2026, not reproduced on 27 Oct 2026); Tavily documents `time_range` as counting back from the current date.
 So the model chooses the query, topic, domains and language; code owns the dates.
 
-## What we found about Tavily: feedback for the Most Valuable Feedback prize
+## Tavily field notes / repro kit: feedback for the Most Valuable Feedback prize
 Publishing these measurements was approved by <who, role> on <date> (<link>). Screenshot:
 `docs/permission_2026-10-27.png`.
 
-Full reports with request IDs: `docs/tavily_bug_reports.md`.
+Full notes with request IDs and a one-request repro script each: `docs/tavily_bug_reports.md`. Each is tagged against
+Tavily's docs: documented behaviour, doc gap or unexplained.
 
-**Top 3**
-1. **`auto_parameters` picks a recent `time_range` for queries about a past month.**
-   *Observed:* with no dates, on 72 searches naming a month in Jan–Sep 2026, it chose recent time
-   ranges; 620 of 659 results came from October 2026 (measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it). *Expected:* a window covering the month
-   the query names, or none. *Suggested fix:* return no `time_range` (or that month's window) when the query names a
-   past month; document the default. *Evidence:* `v2/ablation/arm_T_*.json`; request IDs in the report.
-2. **With explicit dates, `auto_parameters` still reports a `time_range`.**
-   *Observed:* on 56 searches with our `start_date`/`end_date`, the echo said `time_range`
-   w 47, d 8, y 1 and held a start or end date in 0 of them, while 532 of
-   532 dated results fell inside our window. *Expected:* the echo shows the window applied. *Suggested
-   fix:* echo `start_date`/`end_date`, or drop `time_range`, when dates are sent. *Evidence:*
-   `v2/ablation/arm_Td_*.json`; request IDs in the report.
-3. **Extract has no as-of view, so Search dates do not freeze page content.**
-   *Observed:* `R196` (above). *Expected:* a way to read, or at least detect, the page as it was on the cutoff.
-   *Suggested fix:* an as-of / crawl-date field on Extract. *Evidence:* `results/timelock34_second_review.json`; the
-   search's request ID is in the report.
+**Feature requests (2)**
+1. **An as-of / crawl-timestamp field** (documented behaviour). Date filters select which pages, not which version:
+   `R196` (above) was dated before the cutoff and updated after it, and Extract returns today's copy;
+   `max_age_hours` controls freshness, not as-of. `extract_as_of` fills that gap (demo, n=1). *Evidence:*
+   `results/timelock34_second_review.json`; the search's request ID is in the notes.
+2. **Separate original-publication and last-modified dates** (documented behaviour): `published_date` was later
+   than the page's own date on 4 of 42 distinct date-test pages, as the documented definition
+   (published or last updated, beta) allows.
 
-**Feature requests**
-- Separate original-publication and last-modified dates: `published_date` was later than the page's own date on
-  4 of 42 distinct date-test pages, consistent with Tavily's documented definition (published or
-  last updated, beta).
-
-**Smaller observations**
-- Map's silent empty answer on 5 of 5 official crawl-list sites and
+**Observations**
+- **`auto_parameters` picked a recent `time_range` for queries about a past month** (unexplained; observed once on 22 Oct 2026, not reproduced on 27 Oct 2026):
+  with no dates, on 72 searches naming a month in Jan–Sep 2026, 620 of 659
+  results came from October 2026. *Evidence:* `v2/ablation/arm_T_*.json`; request IDs in the notes.
+- **With explicit dates, the `auto_parameters` echo still reports a `time_range`** (doc gap): on 56
+  searches with our `start_date`/`end_date`, the echo said `time_range` w 47, d 8, y 1 and held a start or end date
+  in 0 of them, while 532 of 532 dated results fell inside our window.
+  *Suggested change:* echo `start_date`/`end_date` when dates are sent. *Evidence:* `v2/ablation/arm_Td_*.json`.
+- Map's silent empty answer (unexplained) on 5 of 5 official crawl-list sites and
   3 of 7 dairy sites (no error, no `failed_results`).
-- On one scanned dairy rate-list PDF, Extract returned the letterhead but not the image-only rates.
-- `/usage` lag: 6 credits on `/usage` against 226 from per-call `include_usage`, the
-  same day.
+- On one scanned dairy rate-list PDF, Extract returned the letterhead but not the image-only rates (doc gap).
+- `/usage` lag (doc gap): 6 credits on `/usage` against 226 from per-call
+  `include_usage`, the same day.
 
 ## Feedback for Nebius and NVIDIA (Token Factory, Nemotron Nano, Nemotron Super)
 **What each was used for.** *Nebius Token Factory* (`api.tokenfactory.nebius.com`): the one OpenAI-compatible endpoint for every
@@ -187,10 +205,13 @@ on the pre-registered initial pass (10/20 after the logged archive retry) is per
 Tavily's date controls and measures what they cost.
 
 ## Related work
-- **El Lahib et al. 2026**: audits post-cutoff leakage in Google and DuckDuckGo retrieval for forecasting questions (https://arxiv.org/abs/2602.00758).
+Shadow CPI is a pre-registered measurement of an agent-native search API's date controls, plus a shipped fix for the gap it found (time-locked search and an as-of page reader). Related studies, each checked on its arXiv page:
+
+- **El Lahib et al. 2026**: "Temporal Leakage in Search-Engine Date-Filtered Web Retrieval: A Retrospective Forecasting Case Study": audits post-cutoff leakage in Google and DuckDuckGo date-filtered retrieval for forecasting questions (https://arxiv.org/abs/2602.00758).
 - **OracleProto (Ma et al. 2026)**: a reproducible framework for benchmarking LLM forecasting via knowledge cutoffs and temporal masking (https://arxiv.org/abs/2605.03762).
 - **LiveMacroEval (Zhao et al. 2026)**: "Can LLMs Take the Pulse of the Economy?": live LLM nowcasts of 16 US macro indicators (https://arxiv.org/abs/2608.30110).
-- **Paleka et al. 2025**: "Pitfalls in Evaluating Language Model Forecasters" (https://arxiv.org/abs/2506.00723).
+- **Paleka, Goel, Geiping and Tramèr 2025**: "Pitfalls in Evaluating Language Model Forecasters": temporal leakage as a reason to distrust forecasting evaluations (https://arxiv.org/abs/2506.00723).
+- **Zhang and Stadie 2026**: "Temporal Leakage in LLM Backtesting: Measurement, Validation, and Adjusted Scores": leakage from model memory, measured against a known training cutoff and a matched clean control (https://arxiv.org/abs/2608.02985).
 
 ## How it works
 1. **Tavily Search proposes** pages, every call with `start_date`/`end_date` (the later time-locked searches also send
@@ -201,12 +222,14 @@ Tavily's date controls and measures what they cost.
 4. **The seal:** canonical JSON + `SHA-256` + a git tag. We publish the prediction's SHA-256 and a Git tag before
    release, so anyone can verify the file they have.
 
-**NVIDIA Nemotron on Nebius Token Factory:** Nemotron Nano (`nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`; from 9 Nov 2026 `nvidia/Nemotron-3_5-Lightning`) is the yes/no
+**How we use NVIDIA Nemotron on Nebius Token Factory:** Nano screens pages, Super cites the exact line, code checks
+the number. Nemotron Nano (`nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`; from 9 Nov 2026 `nvidia/Nemotron-3_5-Lightning`) is the yes/no
 gatekeeper and writes display-only English glosses (622 calls sent; 4,829 including cache hits).
 Nemotron Super (`nvidia/nemotron-3-super-120b-a12b`; from 9 Nov 2026 `nvidia/Nemotron-3.5-Super-VL`) reads pages, cites lines, and writes the search fields in arms B,
 C and H (719 calls sent; 5,177 including cache hits). Nebius retires the original IDs on 9 Nov 2026; from then, calls use Nebius's recommended replacements (pre-registered on 27 Oct).
-Token Factory helped: every call asks for JSON-schema output (with a logged JSON-mode fallback); schema output
-worked on the opening call, and both sizes sit behind one OpenAI-compatible endpoint, so roles are a config change.
+Where Token Factory helped (dated entries in `FEEDBACK_NOTES.md`): JSON-schema output worked on the opening call;
+the `/models` list served both sizes behind one OpenAI-compatible endpoint, so roles are picked by name in config; and
+having Super cite line numbers instead of copying text made Hindi pages work.
 
 ## What it does
 - **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 28 Oct 2026. October 2026 CPI is scheduled for 12 Nov at 4 pm IST (MoSPI's
@@ -251,6 +274,12 @@ A Hindi substring match ('rail' inside 'domestic') turned a Jharkhand power tari
 manual check caught it; the fix (whole-word matching, state from the page) removed the event, so the October radar
 has 3 events. Logged as rule changes `R2`–`R3`, with before and after.
 Exploratory and post-hoc results are labelled where they appear and changed no scored verdict.
+**Model memory:** the time lock controls what search returns, not what the models know. NVIDIA's model cards
+(checked 29 Oct 2026): Nemotron Nano pre-training 25 Jun 2025, post-training 28 Nov 2025; Nemotron Super
+pre-training June 2025, post-training February 2026, inside the Jan–Sep 2026 replay; replacement models:
+`nvidia/Nemotron-3_5-Lightning`: not published (no public model card found); `nvidia/Nemotron-3.5-Super-VL`: not published (no public model card found). So the replay is not leakage-free against model memory; the sealed forward forecasts are the
+clean evidence. Every zero is reported as zero detected, with its Wilson interval, and no-dates counts are lower bounds (absence
+from Wayback is not proof a page did not exist).
 
 ## Built with
 - Nebius Token Factory
@@ -266,6 +295,24 @@ Nebius retires the original IDs on 9 Nov 2026; from then, calls use Nebius's rec
 Tavily usage as of 28 Oct 2026: 2,118 calls, 2,065 credits, 79% of dated results
 inside the requested window (5,646 of 7,128), median latency 4.1 s. Third-party notices:
 `THIRD_PARTY_NOTICES.md`.
+
+## Testing instructions
+1. **One minute, no key:** open the app's Leak demo (the opening screen: saved results, no API call), then the Field
+   Report page for the full tables. Nothing is spent.
+2. **Try it page, live on our credits:** ask a question with a cutoff; each run is two basic Tavily searches
+   (2 credits), at most 3 runs per visit and 25 credits a day for the page. A
+   repeat of the same question and cutoff within 24 hours is answered from that cached run for free. With
+   no key the page shows a saved example; at the cap it says so and points to the Colab notebook.
+3. **With your own Tavily key:** the Colab notebook (`notebooks/reproduce_leak.ipynb`, badge in the README) re-runs
+   the leak check, and `repro/` holds one-request scripts for each field note. **Locally:** `pip install -r
+   requirements-app.txt`, `streamlit run app.py` (no keys needed), `python -m pytest -q` (no keys, no credits).
+
+## After the deadline
+- **12 Nov, 4 pm IST:** MoSPI publishes October 2026 CPI; we score the sealed nowcast against
+  it with `score.py`, and the Archive page shows the miss and whether the figure was inside the range.
+- **9 Nov 2026:** the dated model switch; calls from that day use Nebius's replacement models, logged per call.
+- **About 1 Dec:** the November seal, made with the replacement models and saying so.
+- The judged version is the git tag `submission-v1.0`; anything committed later is labelled with its date.
 
 ## Try it
 - App: https://shadow-cpi.streamlit.app
