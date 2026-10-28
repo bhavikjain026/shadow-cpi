@@ -1,5 +1,5 @@
 """Leak demo (the home page): can a web search see the future? Past questions replayed as of a cutoff date, each
-searched with no time lock and with Tavily's time lock. Built only from saved results (results/leak_demo.json, made
+searched with no time lock and with the time lock (Tavily date filters). Built only from saved results (results/leak_demo.json, made
 offline by tools/build_leak_demo.py from the date test and the finance check; totals from results/field_report.json
 and results/leakcheck_exact_match.json; the hero's cost from results/date_field_test.json). The only API calls are the optional live mode, off unless RUN_LIVE_ENABLED."""
 import re
@@ -24,7 +24,7 @@ COLAB = ("https://colab.research.google.com/github/bhavikjain026/shadow-cpi/blob
          "reproduce_leak.ipynb")
 
 OPEN, OPEN_NOTE = "No time lock", "default search, no dates"
-LOCKED, LOCKED_NOTE = "Tavily time lock", "start_date/end_date + filter_by_published_date"
+LOCKED, LOCKED_NOTE = "Time lock (Tavily date filters)", "start_date/end_date + filter_by_published_date"
 EXAMPLES = "examples chosen for clarity; all {n} in the picker and the totals below"
 FIRST = "F3"                                  # petrol (date test) leads
 EXAMPLE_RULE = ("a Wayback-confirmed leak with no time lock, and every time-locked result confirmed before the "
@@ -211,7 +211,7 @@ def stat_cards(t):
                        "twice (see How we know). These counts are lower bounds: a page the Wayback Machine never "
                        "captured cannot be confirmed, and absence from Wayback is not proof it did not exist.")
     with b:
-        st.metric(":green[Dates + time lock]: cases that leaked", f"{pk} of {pn} detected",
+        st.metric(":green[Time lock (Tavily date filters)]: cases that leaked", f"{pk} of {pn} detected",
                   delta=f"Wilson 95% interval {pct(lo)}–{pct(hi)}. Pilot and replication pooled.",
                   delta_color="off", delta_arrow="off", border=True,
                   help="Cases where the search with start_date, end_date and filter_by_published_date still returned a "
@@ -276,7 +276,7 @@ def how_we_know(data):
     how_we_know_box(
         f"Past questions, each with a cutoff date: {t['date']['cases']} in the pilot, {rep['replication_cases']} new "
         f"ones in the pre-registered replication (the date test), and {t['finance']['cases']} finance events checked "
-        "separately. Each question was searched twice, once with no date limits and once with Tavily's time lock, "
+        "separately. Each question was searched twice, once with no date limits and once with the time lock (Tavily date filters), "
         "and every request and result is saved in `results/leak_demo.json`.",
         "A result counts as a leak only when the Wayback Machine shows the page appeared after the cutoff. The "
         "pre-registered initial pass is the primary result; the retry only recovered archive lookups that had failed "
@@ -311,8 +311,8 @@ def totals(t, n):
         rows.append({"Test": label,
                      "No time lock (pre-registered)": cell(x["open"]["first"], n, x["open"]["first_wilson95"]),
                      f"No time lock, {AFTER_RETRY}": cell(x["open"]["retry"], n, x["open"]["retry_wilson95"]),
-                     "Tavily time lock (pre-registered)": cell(x["locked"]["first"], n, x["locked"]["first_wilson95"]),
-                     f"Time lock, {AFTER_RETRY}": cell(x["locked"]["retry"], n, x["locked"]["retry_wilson95"])})
+                     "Time lock (Tavily date filters), pre-registered": cell(x["locked"]["first"], n, x["locked"]["first_wilson95"]),
+                     f"Time lock (Tavily date filters), {AFTER_RETRY}": cell(x["locked"]["retry"], n, x["locked"]["retry_wilson95"])})
     lock_table(rows, lambda row, col: "open" if col.startswith("No ") else "lock" if "ime lock" in col else None)
     st.markdown(f"**The cost of strictness.** The time lock also drops good evidence: the dated search missed "
                 f"**{s['missed']} of {s['quotes']}** known-good quotes that the undated search found "

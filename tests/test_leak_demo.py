@@ -325,6 +325,6 @@ def test_field_report_shows_the_replication_group_and_the_pooled_line():
             and f"{c['leak_cases']} of {c['cases']}" in text)
     pl = rp["pooled"]["arms"]["C"]
     assert "**Pilot + replication, date-test rule** (pre-registered secondary" in text
-    assert f"Tavily time lock {pl['leak_cases']} of {pl['cases']}" in text
+    assert f"Time lock (Tavily date filters) {pl['leak_cases']} of {pl['cases']}" in text
     cap = " ".join(x.value for x in at.caption)
     assert "Cache note (descriptive, not pre-registered)" in cap and "includes the reused pilot response" in cap

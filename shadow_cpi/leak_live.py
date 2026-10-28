@@ -1,4 +1,4 @@
-"""Leak demo, live mode: one question, one cutoff, two Tavily searches (no time lock; Tavily's time lock), results
+"""Leak demo, live mode: one question, one cutoff, two Tavily searches (no time lock; the time lock, Tavily date filters), results
 labelled only "date flag" or "safe". No Nemotron, no Wayback, so never "leak": a live date flag is a date signal,
 not a confirmed leak.
 
@@ -20,7 +20,7 @@ MAX_QUESTION = 200
 
 
 def params(cutoff, locked):
-    """The two request bodies (minus the query): no time lock, and Tavily's time lock."""
+    """The two request bodies (minus the query): no time lock, and the time lock (Tavily date filters)."""
     if not locked:
         return {**BASE, "filter_by_published_date": False}
     start = (date.fromisoformat(cutoff) - timedelta(days=WINDOW_DAYS)).isoformat()

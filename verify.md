@@ -4,6 +4,8 @@ Before MoSPI publishes a month's CPI, Shadow CPI locks its experimental nowcast 
 `sealed/<month>.json`, and publishes that file's fingerprint (its SHA-256) in `sealed/<month>.sha256`.
 If even one character of the file changed later, the fingerprint would no longer match.
 The git tag `seal-<month>` and GitHub's own push record show **when** it was locked.
+The seal proves when the forecast was committed, not what was read before it: the time lock (Tavily date filters,
+re-checked in code) and `extract_as_of` address the evidence.
 
 Below, October 2026 is the example. For another month, change `2026-10` everywhere.
 

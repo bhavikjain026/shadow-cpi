@@ -11,7 +11,7 @@ from app_pages.provenance import provenance
 from shadow_cpi import try_it as T
 
 OPEN, OPEN_NOTE = "No time lock", "plain Tavily search, no dates"
-LOCKED, LOCKED_NOTE = "Time lock", "timelocked_search: the 30 days ending on the cutoff, published-date filter on"
+LOCKED, LOCKED_NOTE = "Time lock (Tavily date filters)", "timelocked_search: the 30 days ending on the cutoff, published-date filter on"
 SAVED_LOCKED_NOTE = "the date test's window and Tavily's published-date filter"
 FLAG_TEXT = {T.YES: "after cutoff: **yes**", T.NO: "after cutoff: no", T.UNDATED: "after cutoff: undated"}
 HONEST = ("These are date flags from Tavily's published_date, not Wayback-confirmed leaks: a page can carry a wrong "

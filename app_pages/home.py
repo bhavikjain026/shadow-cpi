@@ -79,7 +79,9 @@ with st.expander("How to check the seal yourself"):
                 f"(Linux) or `Get-FileHash {LIVE_MONTH}.json -Algorithm SHA256` (Windows).\n"
                 f"3. Same code as in the .sha256 file → PASS; different → FAIL. The git tag `seal-{LIVE_MONTH}` and "
                 f"GitHub's push record show when it was locked.")
-    st.caption("Full steps: verify.md in the repository. Before the seal the links open once the tag exists.")
+    st.caption("The seal proves when the forecast was committed, not what was read before it; the time lock and "
+               "extract_as_of address the evidence. Full steps: verify.md in the repository. Before the seal the links "
+               "open once the tag exists.")
 v3_beside_v1(LIVE_MONTH)
 
 # ---------- replay scoreboard ----------

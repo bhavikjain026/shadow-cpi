@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "results" / "retry_reconciliation.json"
 DOC = ROOT / "docs" / "retry_reconciliation.md"
 RETRY = {"date": "results/date_field_test_wayback_retry.json", "finance": "results/finance_lookahead_wayback_retry.json"}
-SIDES = {"open": "no time lock", "locked": "Tavily time lock"}
+SIDES = {"open": "no time lock", "locked": "time lock (tavily date filters)"}
 LEAK = "confirmed leak (Wayback)"
 
 

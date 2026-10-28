@@ -4,7 +4,7 @@
     python tools/build_leak_demo.py
 
 For each of the 34 cases (20 date test, 14 finance), two searches: no time lock (date test arm A, finance arm N) and
-Tavily's time lock (start_date/end_date + filter_by_published_date: date test arm C, finance arm D). Per search:
+the time lock, Tavily date filters (start_date/end_date + filter_by_published_date: date test arm C, finance arm D). Per search:
 the exact request body, read from the local response cache through the flight recorder's call id and checked against
 the response SHA-256 saved in the results file (the API key travels in a header and is never in the body); credits,
 latency and Tavily's request id; per result Tavily's published_date, the page date and the existing label after the

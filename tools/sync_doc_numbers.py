@@ -85,6 +85,9 @@ def leak_count_table(fr):
         a, b = runs["first pass"], runs["after logged retry"]
         unit = "events" if check.startswith("Finance check") else "cases"
         lat = "—" if a["median_latency_s"] is None else secs(a["median_latency_s"])
+        if setting.startswith("+ "):                     # cumulative arms: name every field sent
+            setting = "start_date + end_date " + setting if "filter" in setting else \
+                "start_date + end_date + filter_by_published_date " + setting
         out.append(f"| {check}, {unit} | {setting} | **{a['leaks']} of {a['n']}** ({wilson(a['wilson95'])}) "
                    f"| {b['leaks']} of {b['n']} ({wilson(b['wilson95'])}) | {credits_per_call(a['credits_per_call'])} "
                    f"| {lat} |")
@@ -599,7 +602,10 @@ def facts(st, as_of, root=ROOT):
              plan_limit=f"{st['plan_limit']:,}", addon_credits=f"{st['addon_credits']:,}",
              run_inside_pct=pct(st["inside"] / st["total"]), run_inside=f"{st['inside']:,}",
              run_total=f"{st['total']:,}", run_latency=secs(st["median_latency_s"]))
-    return {k: str(v) for k, v in f.items()}
+    f = {k: str(v) for k, v in f.items()}
+    # the five-question feedback block (Devpost and the FEEDBACK_NOTES summary), rendered from the values above
+    f["feedback_five"] = render((root / "docs/templates/feedback_five.md").read_text(encoding="utf-8"), f).rstrip("\n")
+    return f
 
 
 def render(template, values):

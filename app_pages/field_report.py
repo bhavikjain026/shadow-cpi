@@ -31,7 +31,7 @@ def day(d):
     return f"{date.fromisoformat(d).day} {date.fromisoformat(d):%b %Y}" if d else "none"
 
 
-NO_DATES, TIME_LOCK = "No dates", "Tavily time lock"
+NO_DATES, TIME_LOCK = "No dates", "Time lock (Tavily date filters)"
 AFTER_RETRY = "after retrying the failed Wayback archive lookups"
 RUNS = {"Pre-registered initial pass": "first pass", AFTER_RETRY[0].upper() + AFTER_RETRY[1:]: "after logged retry"}  # first = default
 
@@ -49,7 +49,7 @@ def dark_theme():
 
 
 def leak_chart(rows):
-    """Leak rate, no dates vs Tavily time lock (dates + filter_by_published_date), the date test and the finance check
+    """Leak rate, no dates vs the time lock (Tavily date filters: dates + filter_by_published_date), the date test and the finance check
     as separate groups (never summed), Wilson 95% intervals as error bars. Every value from the leakage rows of
     results/field_report.json."""
     run = st.radio("Run", list(RUNS), horizontal=True, label_visibility="collapsed",
@@ -92,7 +92,7 @@ def leak_chart(rows):
         f"{'no dates' if x['Setting'] == NO_DATES else x['Setting']} {x['Count']} ({x['Interval']})"
         for x in data if x["Check"] == g) for g in groups))
     st.caption(f"{run}; Wilson 95% intervals in brackets. Leak = a result the Wayback Machine shows appeared after "
-               "the cutoff. Tavily time lock = start_date + end_date + filter_by_published_date. Each test is its own "
+               "the cutoff. Time lock (Tavily date filters) = start_date + end_date + filter_by_published_date. Each test is its own "
                "group; the bars are never summed. The line below pools the pilot and the replication under the same "
                "rule, as pre-registered.")
     pooled_line()
@@ -107,7 +107,7 @@ def pooled_line():
     pl, ca = rp["pooled"], rp["cache"]
     a, c = pl["arms"]["A"], pl["arms"]["C"]
     st.markdown(f"**Pilot + replication, date-test rule** (pre-registered secondary, initial passes; "
-                f"{pl['pilot_cases']} + {pl['replication_cases']} cases): Tavily time lock {c['leak_cases']} of "
+                f"{pl['pilot_cases']} + {pl['replication_cases']} cases): Time lock (Tavily date filters) {c['leak_cases']} of "
                 f"{c['cases']} ({wilson(c['wilson95'])}) · no dates {a['leak_cases']} of {a['cases']} "
                 f"({wilson(a['wilson95'])}).")
     d = ca["without_pilot_reused"]
@@ -189,13 +189,13 @@ summary = [
     ("Date test, no time lock: cases with a confirmed leak (Wayback)",
      f"{dt1['A']['leak_cases']} of {dt1['A']['cases']} ({dt2['A']['leak_cases']} {AFTER_RETRY})",
      "results/field_report.json"),
-    ("Date test, Tavily time lock (dates + filter_by_published_date)",
+    ("Date test, Time lock (Tavily date filters): dates + filter_by_published_date",
      f"{dt1['C']['leak_cases']} of {dt1['C']['cases']} ({dt2['C']['leak_cases']} {AFTER_RETRY})",
      "results/field_report.json"),
     ("Finance check, no time lock: events with a confirmed leak",
      f"{fn1['arms']['N']['confirmed_events']} of {fn1['events']} ({fn2['arms']['N']['confirmed_events']} {AFTER_RETRY})",
      "results/field_report.json"),
-    ("Finance check, Tavily time lock",
+    ("Finance check, Time lock (Tavily date filters)",
      f"{fn1['arms']['D']['confirmed_events']} of {fn1['events']} ({fn2['arms']['D']['confirmed_events']} {AFTER_RETRY})",
      "results/field_report.json"),
     ("Cost of strictness: known-good quotes the dated search missed (check E, exploratory)",
@@ -234,7 +234,7 @@ if lk:
     with st.expander("Method, intervals and source files"):
         st.markdown(f"Built {r['built']} from the committed results files · source: `results/field_report.json`. "
                     "Can a search see the future? Each row replays searches as of a past cutoff with a different date "
-                    f"setting. All figures {lk['label']}. {lk['columns']}. Bold = Tavily time lock "
+                    f"setting. All figures {lk['label']}. {lk['columns']}. Bold = Time lock (Tavily date filters) "
                     "(filter_by_published_date); tinted = no dates.")
         st.markdown("Our own wrapper, `shadow_cpi.pit.pit_search`, always sends the date window and "
                     "`filter_by_published_date`, then re-checks every result's date in code: *a model may choose the "
@@ -242,7 +242,7 @@ if lk:
 
 
 def cost_of_correctness(rows):
-    """Three cards, date test only: credits per search and median latency, no dates vs the Tavily time lock (dates +
+    """Three cards, date test only: credits per search and median latency, no dates vs the time lock (Tavily date filters: dates +
     filter_by_published_date), and the valid evidence the time lock lost on each pass. From the leakage rows of
     results/field_report.json."""
     dt = {(x["run"], x["setting"]): x for x in rows if x["check"].startswith("Date test")}

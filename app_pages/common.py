@@ -21,7 +21,7 @@ VIDEO_URL = ""             # the demo video's URL; while empty, the Leak demo hi
 BRAND = "Shadow CPI"
 EYEBROW = "Nebius x NVIDIA Global AI Hackathon · Built on Tavily"
 TITLE_CLAIM = BRAND_LINE = "Ask a search engine about the past, and it can answer with the future."
-SUBHEAD = ("Shadow CPI replays past questions as of a cutoff date, searches each with and without Tavily's time lock, "
+SUBHEAD = ("Shadow CPI replays past questions as of a cutoff date, searches each with and without the time lock (Tavily date filters), "
            "and counts the results that were published after the cutoff.")
 # the README tagline, shortened to at most 20 words
 TAGLINE = ("An AI agent that searches the past without cheating, checks every quote, and seals India's inflation "

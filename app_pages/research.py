@@ -1,4 +1,4 @@
-"""For research teams / Beyond CPI: how to use the exports, as_of() and seal checks without look-ahead bias, and the
+"""For research teams / Beyond CPI: how to use the exports, as_of() and seal checks (which show when a forecast was committed) without look-ahead bias, and the
 finance check as a second domain. Numbers are read from results/field_report.json; no API call."""
 import streamlit as st
 

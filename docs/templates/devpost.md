@@ -34,6 +34,9 @@ code compute India's {{live_month}} inflation nowcast, and seals it before the M
   {{dt_dated}} of {{dt_cases}} detected ({{dt_dated_w}}). Update: {{dt_nodates_retry}} of {{dt_cases}}
   ({{dt_nodates_retry_w}}) and {{dt_dated_retry}} of {{dt_cases}} detected ({{dt_dated_retry_w}}) after retrying the
   {{rr_dt_failed}} archive lookups that had failed; the retry only re-ran those lookups, with the same labelling rules.
+- **Dates or filter?** Explicit date windows already gave {{dt_datesonly}} of {{dt_cases}} detected (`start_date`/`end_date` only,
+  Wilson {{dt_datesonly_w}}); the filter additionally drops undated pages (the dates-only search returned
+  {{dt_undated_datesonly}} undated of {{dt_results_datesonly}} results here).
 - **What a leak is.** A case leaks when at least one result the search kept is a confirmed leak, which
   `v2/DATE_TEST_PREREG.md` defines as: "{{dt_leak_rule}}" The finance check's rule differs
   (`v2/FINANCE_PREREG.md`, as amended): "{{fin_leak_rule}}" Its counts are reported apart and never added to the
@@ -135,44 +138,8 @@ Tavily's docs: documented behaviour, doc gap or unexplained.
 - `/usage` lag (doc gap): {{usage_endpoint}} credits on `/usage` against {{usage_per_call}} from per-call
   `include_usage`, the same day.
 
-## Feedback for Nebius and NVIDIA (Token Factory, Nemotron Nano, Nemotron Super)
-**What each was used for.** *Nebius Token Factory* (`{{nebius_host}}`): the one OpenAI-compatible endpoint for every
-model call, through `shadow_cpi/nemotron.py`. *Nemotron Nano* (`{{nano_id}}`): the yes/no gatekeeper ("does this page
-state an Indian price or price change?") and display-only English glosses ({{nano_sent}} calls sent). *Nemotron
-Super* (`{{super_id}}`): reads each page as numbered lines and cites the line for every price and price change;
-writes the search fields in arms B, C and H ({{super_sent}} calls sent).
-
-**What worked well.**
-- JSON-schema output worked on the opening call (`checks.py`, "[PASS] Nemotron JSON output"), so every answer is
-  parsed, not guessed. Every call sends `response_format` with a strict schema; a refusal falls back to JSON mode
-  with the schema in the prompt (logged from {{migration_registered}}). Both of Nebius's replacement models accepted the
-  same schema request in a smoke test on {{migration_registered}} (`results/model_migration_smoke.json`).
-- One endpoint for both sizes: the cheap gatekeeper and the careful reader are a config change apart
-  (`config/models.json`).
-- Citing line numbers instead of copying text made Hindi pages work: the model returns a line number, code copies
-  that line from the Extract output and checks the number is in it.
-
-**What needs work.**
-- Nano returned no number on pages where Super, re-reading the same page, found one: Super re-read
-  {{nano_null_rereads}} pages and found a verified number on {{nano_null_found}}. A schema hint ("a number is required
-  when the line has a currency or %"), or a confidence field, would help.
-- Nano, as gatekeeper, said "no" to a page that plainly listed rupee prices (a Delhi vegetable-price page); we added
-  a code backstop so a page with a visible rupee price is never skipped.
-- Super sometimes labelled the item from the page's context rather than the cited line, and took the low end of a
-  price range; code now requires the item name in the cited line.
-- Reliability: one read timeout and one connection reset each stopped a long run; our client now retries timeouts.
-  The `/models` list mixes naming styles (case, `3.5` vs `3_5`), and a vision model sits next to the text models, so
-  picking by name needs care.
-- Billing onboarding was confusing: the free trial, a separate promo balance and the 'paid usage after trial' switch
-  were hard to tell apart, and with a card saved we couldn't be sure the card wouldn't be charged, so we kept paid
-  usage off.
-
-**Onboarding, from zero to hello world.** Put the key in `.env`, point any OpenAI-compatible client at the endpoint,
-call `/models`, then one chat completion with a JSON schema: that is `checks.py`, and it passed on the opening call.
-The step that took care was choosing model IDs from the `/models` list.
-
-**Would we build with them again?** Yes: one endpoint with a small and a large model, strict JSON-schema output, and
-line-number citing let code, not the model, decide every number. We would ask for the fixes above.
+## Feedback by product: Nebius Token Factory, Nemotron Nano, Nemotron Super (and Tavily, separately)
+{{feedback_five}}
 
 ## Inspiration
 India's CPI arrives about {{release_lag}} days after the month ends. Forecasting it from the web means replaying past
@@ -194,7 +161,8 @@ Tavily's date controls and measures what they cost.
    and checks the number is in it. A model never writes a quote.
 3. **Plain code computes:** index levels combined with MoSPI's official weights; year-on-year last.
 4. **The seal:** canonical JSON + `SHA-256` + a git tag. We publish the prediction's SHA-256 and a Git tag before
-   release, so anyone can verify the file they have.
+   release, so anyone can verify the file they have. The seal proves when the forecast was
+   committed, not what was read before it; the time lock and `extract_as_of` address the evidence.
 
 **How we use NVIDIA Nemotron on Nebius Token Factory:** Nano screens pages, Super cites the exact line, code checks
 the number. Nemotron Nano (`{{nano_id}}`; from {{switch_day}} `{{nano_new}}`) is the yes/no

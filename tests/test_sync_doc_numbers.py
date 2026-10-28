@@ -38,7 +38,7 @@ def values():
     return S.facts(ST, date(2026, 10, 25))
 
 
-ALL_TEMPLATES = [*S.TEMPLATES.values(), *S.BLOCKS.values()]
+ALL_TEMPLATES = [*S.TEMPLATES.values(), *S.BLOCKS.values(), "docs/templates/feedback_five.md"]
 
 
 @pytest.mark.parametrize("tmpl", ALL_TEMPLATES)

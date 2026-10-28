@@ -1,5 +1,9 @@
 ## Summary
 
+{{feedback_five}}
+
+**All entries**
+
 One row per entry, nothing new: the filed notes come from [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports.md),
 the Tavily field notes / repro kit (rows filled from [`results/bug_reports.json`](results/bug_reports.json), the file
 those notes are built from), each tagged "documented behaviour", "doc gap" or "unexplained" against Tavily's docs;

@@ -16,12 +16,19 @@ In the forecast pipeline, NVIDIA Nemotron on Nebius Token Factory screens pages 
 Pilot + replication, date-test rule (pre-registered secondary): dates + filter {{pool_dated}} of {{pool_cases}} detected (Wilson {{pool_dated_w}};
 post-hoc rule of three: below {{pool_r3}}). No-dates counts are lower bounds: a leak counts only when the Wayback
 Machine confirms it, and a page the archive never captured is not counted (absence from Wayback is not proof the page
-did not exist).
+did not exist). Explicit date windows already gave {{dt_datesonly}} of {{dt_cases}} detected (`start_date`/`end_date` only,
+Wilson {{dt_datesonly_w}}); the filter additionally drops undated pages (the dates-only search returned
+{{dt_undated_datesonly}} undated of {{dt_results_datesonly}} results here).
 
 Separate rules; never added together. **Update:** date test {{dt_nodates_retry}} of {{dt_cases}} with no dates (Wilson
 {{dt_nodates_retry_w}}) after retrying the {{rr_dt_failed}} archive lookups that had failed, still {{dt_dated_retry}} of
 {{dt_cases}} detected with dates + filter; finance check {{fin_nodates_retry}} of {{fin_events}} ({{fin_nodates_retry_w}}) after the
 retry ({{rr_fin_failed}} lookups had failed), still {{fin_dated_retry}} of {{fin_events}} detected with dates + filter.
+
+| | |
+|---|---|
+| [![Leak demo, the app's opening screen: three result cards and the interval chart](docs/gallery/1_leak_demo.png)](docs/gallery/README.md#the-opening-screen) | [![Field Report: who should write the search, four arms](docs/gallery/2_four_arm_table.png)](docs/gallery/README.md) |
+| [![The {{asof_row}} timeline: Tavily date, cutoff, page edited, extract_as_of refuses](docs/gallery/3_r196_timeline.png)](docs/gallery/README.md) | [![The pipeline: Tavily search, time lock, Extract, Nemotron quote check, seal](docs/gallery/4_flow.png)](docs/gallery/README.md) |
 
 <details>
 <summary>Footnote: what counts as a leak, and the update after the archive retry</summary>
@@ -361,7 +368,8 @@ flowchart LR
 3. **Plain code computes.** Index levels combined with MoSPI's official weights, year-on-year last. A model never
    picks a number, a range or a weight.
 4. **The seal.** Canonical JSON, its `SHA-256`, and a git tag. We publish the prediction's SHA-256 and a Git tag
-   before release, so anyone can verify the file they have.
+   before release, so anyone can verify the file they have. The seal proves when the forecast was
+   committed, not what was read before it; the time lock and `extract_as_of` address the evidence.
 
 ## How we use NVIDIA Nemotron on Nebius Token Factory
 
@@ -393,7 +401,8 @@ connection reset that stopped long runs, mixed model naming).
 
 - **The {{live_month}} nowcast.** {{seal_status}}; {{live_month}} CPI is scheduled for {{release_day}} at {{release_hour}}
   IST (MoSPI's next-working-day rule applies). Anyone can check the seal: download `sealed/2026-10.json` at tag `seal-2026-10`, recompute its `SHA-256`, and
-  compare it with `sealed/2026-10.sha256` ([`verify.md`](verify.md)). After the release, the Archive page shows the
+  compare it with `sealed/2026-10.sha256` ([`verify.md`](verify.md)). The seal shows when the forecast was committed;
+  what the evidence could have seen is the time lock's job. After the release, the Archive page shows the
   miss and whether the official figure was inside the range.
 - **Price Shock Radar** (exploratory, report only; app page "October radar"): announced retail price changes taking
   effect this month, found with Tavily before MoSPI publishes. So far {{radar_events_phrase}} verified,
