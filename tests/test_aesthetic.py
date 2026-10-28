@@ -93,13 +93,13 @@ def test_hero_numbers_come_from_the_results_files():
     _, html = hero_html()
     d = DATA["totals"]["date"]
     c = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["C"]
-    o, k, n = d["open"]["retry"], d["locked"]["retry"], d["cases"]
+    o, k, n = d["open"]["first"], d["locked"]["first"], d["cases"]     # the pre-registered initial pass leads
     assert f'<span id="leaked">{o}</span>/{n}' in html and f">{k}/{n}<" in html
     shown = re.findall(r"<span id=\"leaked\">(\d+)</span>/(\d+)|>(\d+)/(\d+)<", html)
     # the cost card is the date test's own valid evidence dropped (locked arm C, initial pass), not check E
     assert shown == [(str(o), str(n), "", ""), ("", "", str(k), str(n)),
                      ("", "", str(c["valid_lost"]), str(c["valid_total"]))]
-    # the same counts the Field Report reads (results/field_report.json, date test, after the logged retry)
+    # the same counts the Field Report reads (results/field_report.json, date test, pre-registered initial pass)
     assert d["source"].startswith("results/field_report.json")
 
 
@@ -108,7 +108,8 @@ def test_hero_markup_is_the_final_state_with_no_count_or_hidden_start():
     d = DATA["totals"]["date"]
     c = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["C"]
     n = d["cases"]
-    for text in (f'{d["open"]["retry"]}</span>/{n}', f'{d["locked"]["retry"]}/{n}', f'{c["valid_lost"]}/{c["valid_total"]}',
+    for text in (f'{d["open"]["first"]}</span>/{n}', f'{d["locked"]["first"]}/{n}', f'{c["valid_lost"]}/{c["valid_total"]}',
+                 f'Update: {d["open"]["retry"]}/{n}',
                  "No time lock", "Tavily time lock", "Cost: valid evidence dropped"):
         assert text in html
     assert "anime" not in html and "<script src" not in html and "createTimeline" not in html

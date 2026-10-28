@@ -5,15 +5,18 @@
 **An AI agent that searches the past without cheating: it uses Tavily inside a time lock it cannot move, checks every
 quote on its source page, and seals India's inflation forecast before the government publishes it.**
 
-| Leaks, measured | No dates | Dates + filter |
+| Leaks, measured (pre-registered initial pass) | No dates | Dates + filter |
 |---|---|---|
-| Date test ({{dt_cases}} cases) | **{{dt_nodates_retry}} of {{dt_cases}}** | **{{dt_dated_retry}} of {{dt_cases}}** (Wilson {{dt_dated_retry_w}}) |
-| Finance check ({{fin_events}} cases, exploratory, different leak rule) | {{fin_nodates_retry}} of {{fin_events}} | {{fin_dated_retry}} of {{fin_events}} |
+| Date test ({{dt_cases}} cases) | **{{dt_nodates}} of {{dt_cases}}** (Wilson {{dt_nodates_w}}) | **{{dt_dated}} of {{dt_cases}}** (Wilson {{dt_dated_w}}) |
+| Finance check ({{fin_events}} cases, exploratory, different leak rule) | {{fin_nodates}} of {{fin_events}} ({{fin_nodates_w}}) | {{fin_dated}} of {{fin_events}} ({{fin_dated_w}}) |
 
-Separate rules; never added together. After the logged archive retry; initial pass in the footnote.
+Separate rules; never added together. **Update:** date test {{dt_nodates_retry}} of {{dt_cases}} with no dates (Wilson
+{{dt_nodates_retry_w}}) after retrying the {{rr_dt_failed}} archive lookups that had failed, still {{dt_dated_retry}} of
+{{dt_cases}} with dates + filter; finance check {{fin_nodates_retry}} of {{fin_events}} ({{fin_nodates_retry_w}}) after the
+retry ({{rr_fin_failed}} lookups had failed), still {{fin_dated_retry}} of {{fin_events}} with dates + filter.
 
 <details>
-<summary>Footnote: what counts as a leak, and the initial pass</summary>
+<summary>Footnote: what counts as a leak, and the update after the archive retry</summary>
 
 - **Dates + filter** means `start_date`/`end_date` plus `filter_by_published_date`; no dates means neither.
 - **Date test** (pilot, replay cases; [`v2/DATE_TEST_PREREG.md`](v2/DATE_TEST_PREREG.md)). A case leaks when at least
@@ -21,20 +24,18 @@ Separate rules; never added together. After the logged archive retry; initial pa
 - **Finance check** (exploratory, Reserve Bank of India (RBI) decisions and company results;
   [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md), as amended). A different rule, so its counts are reported apart:
   "{{fin_leak_rule}}"
-- **After the logged archive retry.** The table counts follow a logged retry of the archive lookups that had failed.
-  On the initial pass, {{rr_fin_failed}} finance-check archive lookups (and {{rr_dt_failed}} in the date test) failed
+- **Initial pass** (the table): the pre-registered result and the primary count.
+- **The update, after the logged archive retry.** A logged retry re-ran only the archive lookups that had failed, with
+  the same labelling rules. On the initial pass, {{rr_fin_failed}} finance-check archive lookups (and {{rr_dt_failed}} in the date test) failed
   for network reasons, so those pages could only be flagged, not confirmed; the retry recovered {{rr_recovered}},
-  which is why the finance count rises from {{fin_nodates}} to {{fin_nodates_retry}} of {{fin_events}}. Wilson {{wilson}} intervals: date
-  test no dates {{dt_nodates_retry_w}}, dates + filter {{dt_dated_retry_w}}; finance check no dates
-  {{fin_nodates_retry_w}}, dates + filter {{fin_dated_retry_w}}.
-- **Initial pass** (the pre-registered result, shown as sensitivity): date test {{dt_nodates}} of {{dt_cases}}
-  ({{dt_nodates_w}}) with no dates and {{dt_dated}} of {{dt_cases}} ({{dt_dated_w}}) with dates + filter; finance
-  check {{fin_nodates}} of {{fin_events}} and {{fin_dated}} of {{fin_events}}.
+  which is why the finance count rises from {{fin_nodates}} to {{fin_nodates_retry}} of {{fin_events}}. Wilson {{wilson}} intervals
+  after the retry: date test no dates {{dt_nodates_retry_w}}, dates + filter {{dt_dated_retry_w}}; finance check no
+  dates {{fin_nodates_retry_w}}, dates + filter {{fin_dated_retry_w}}.
 
 </details>
 
 **The cost.** The filter dropped {{dt_lost_filter}} of the date test's {{dt_valid_total}} pieces of valid evidence
-(initial pass).
+(initial pass; {{dt_lost_filter_retry}} of {{dt_valid_total_retry}} after the retry).
 
 **Search dates do not freeze page content.** Tavily dated `{{ex_row}}`, a {{ex_company}} results preview, {{ex_published}},
 before its {{ex_cutoff}} cutoff; the page was updated on {{ex_updated}} with a link to the actual result, and Extract
@@ -63,15 +64,18 @@ The Tavily field report (app page "Tavily field report", built by `tools/build_f
 rule and its own count; date-test and finance counts are never added together.
 
 - **Date test (pilot, {{dt_cases}} replay cases, [`v2/DATE_TEST_PREREG.md`](v2/DATE_TEST_PREREG.md)).** Rule quoted
-  above. After the logged archive retry: no dates {{dt_nodates_retry}} of {{dt_cases}}, dates + filter
-  {{dt_dated_retry}} of {{dt_cases}}; initial pass {{dt_nodates}} and {{dt_dated}}. Every case whose label changed
+  above. Pre-registered initial pass: no dates {{dt_nodates}} of {{dt_cases}} ({{dt_nodates_w}}), dates + filter
+  {{dt_dated}} of {{dt_cases}} ({{dt_dated_w}}). Update: {{dt_nodates_retry}} of {{dt_cases}} and {{dt_dated_retry}}
+  of {{dt_cases}} after retrying the {{rr_dt_failed}} archive lookups that had failed. Every case whose label changed
   after the retry ({{retry_changed}} of {{retry_cases}}, both checks), with the reason:
   [`docs/retry_reconciliation.md`](docs/retry_reconciliation.md).
 - **Finance check (exploratory, {{fin_events}} Reserve Bank of India (RBI) decisions and company results,
   [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md)).** Rule quoted above (it also needs the title or snippet to state
-  the outcome). The day-before search with no dates leaked the outcome for {{fin_nodates_retry}} of {{fin_events}}
-  events after the logged archive retry (Wilson {{wilson}} {{fin_nodates_retry_w}}; initial pass {{fin_nodates}}); with
-  dates and the filter, {{fin_dated_retry}} of {{fin_events}} ({{fin_dated_retry_w}}; initial pass {{fin_dated}}).
+  the outcome). The day-before search with no dates leaked the outcome for {{fin_nodates}} of {{fin_events}}
+  events on the pre-registered initial pass (Wilson {{wilson}} {{fin_nodates_w}}); with dates and the filter,
+  {{fin_dated}} of {{fin_events}} ({{fin_dated_w}}). Update: {{fin_nodates_retry}} of {{fin_events}}
+  ({{fin_nodates_retry_w}}) and {{fin_dated_retry}} of {{fin_events}} ({{fin_dated_retry_w}}) after the retry
+  ({{rr_fin_failed}} lookups had failed).
 - **Tasks and calls.** Each task sent one search per setting, so call counts equal task counts
   ({{dt_leak_calls_nodates}} of {{dt_calls_nodates}} date-test calls and {{fin_leak_calls_nodates}} of
   {{fin_calls_nodates}} finance calls with no dates leaked on the initial pass;
@@ -79,12 +83,14 @@ rule and its own count; date-test and finance counts are never added together.
   [`results/finance_lookahead.json`](results/finance_lookahead.json)).
 - **Check P, full page (exploratory, [`results/leakcheck_full_page.md`](results/leakcheck_full_page.md)).** Of
   {{p_pages}} pages that passed the date lock (Tavily's filter, or our own date check), {{p_later}} described an event
-  after the cutoff. {{p_flagged}} pages held a later date somewhere in the text, but mostly as page furniture:
-  {{p_furniture}} in date bars, sidebars and related links, {{p_benign}} benign, {{p_unclear}} unclear.
+  after the cutoff. {{p_flagged}} pages held a later date somewhere in the text, mostly as page furniture; each has
+  one outcome: {{p_later}} later content (the page just counted), {{p_furniture}} in date bars, sidebars and related
+  links, {{p_benign}} benign, {{p_unclear}} unclear.
 - **Receipt.** Credits and latency per setting are in the table; every call is in the flight recorder and the
   credit ledger.
 
-**Leak counts** (case level; after the logged archive retry is the main count, the initial pass is the sensitivity):
+**Leak counts** (case level; the pre-registered initial pass is the primary count, after the logged archive retry is
+the update):
 
 {{leak_count_table}}
 
@@ -93,7 +99,8 @@ rule and its own count; date-test and finance counts are never added together.
 {{evidence_kept_table}}
 
 With our extra page-date check added to the filter, {{dt_lost_pagecheck}} of the date test's {{dt_valid_total}}
-pieces of valid evidence were lost. Check E's misses are filter misses, not back-dating: {{e_missed_later}} of
+pieces of valid evidence were lost (initial pass; {{dt_lost_pagecheck_retry}} of {{dt_valid_total_retry}} after the
+retry). Check E's misses are filter misses, not back-dating: {{e_missed_later}} of
 {{e_missed}} have a Tavily `published_date` after the cutoff ({{e_missed_earlier}} on or before it,
 {{e_missed_undated}} undated; [`results/leakcheck_exact_match.md`](results/leakcheck_exact_match.md)).
 
@@ -113,7 +120,7 @@ completely:
 - **Our page-date check** reads the date printed on the extracted page and drops anything after the cutoff. In the
   date test it kept {{dt_results_pagecheck}} of the {{dt_results_filter}} results the filter let through; with it,
   {{dt_lost_pagecheck}} of the date test's {{dt_valid_total}} pieces of valid evidence were lost ({{dt_lost_filter}} with the filter
-  alone). It reads a page's date, not its edit history.
+  alone; initial pass). It reads a page's date, not its edit history.
 - **The drift monitor** re-reads each October radar page with Extract once a day and compares it with the saved copy
   ([`v2/DRIFT_PREREG.md`](v2/DRIFT_PREREG.md)): {{drift_phrase}}.
 - **The Wayback Machine** shows whether a page existed by the cutoff; a leak counts only when it confirms one. Failed
@@ -228,7 +235,11 @@ can carry a link to the result it previewed. `extract_as_of(client, url, cutoff)
 its change evidence (Tavily's date, the page's own published/updated date, Wayback captures). If the page may have
 changed after the cutoff it returns the latest Wayback capture on or before the cutoff instead, with provenance
 `{source: "tavily_live" | "wayback_asof", capture_time, reason}`; if there is no such capture, it returns no text
-and the reason `no as-of copy`, never the live page. Wayback is a direct download outside Tavily.
+and the reason `no as-of copy`, never the live page. When nothing suggests a change but the Wayback Machine holds no
+capture on or before the cutoff, the live page comes back labelled `unverified: no archive copy before the cutoff`;
+pass `strict=True` to refuse it instead. If Extract answers for a different address (compared ignoring the scheme and
+a trailing slash), it returns no text and the reason `url mismatch`, never another page's text. Wayback is a direct
+download outside Tavily.
 
 Two demos (one page each, not a measurement): on {{asof_refused_row}} it refused, because the Wayback Machine holds
 no copy on or before the {{asof_refused_cutoff}} cutoff
@@ -280,7 +291,7 @@ could ever be live (look-ahead bias).
 Shadow CPI is a Tavily-grounded India CPI nowcast that tests, rather than assumes, Tavily's date controls and measures
 what they cost. El Lahib et al. ({{lahib_year}}, [arXiv {{lahib_arxiv}}](https://arxiv.org/abs/{{lahib_arxiv}})) found
 at least one retrieved page containing major post-cutoff leakage for {{lahib_pct}} of Google-audited questions, after {{lahib_queries}} queries
-and about {{lahib_urls}} URLs each; our {{dt_nodates_retry}}/{{dt_cases}} after the logged archive retry ({{dt_nodates}}/{{dt_cases}} on the initial pass) is per search task, so the rates are not directly
+and about {{lahib_urls}} URLs each; our {{dt_nodates}}/{{dt_cases}} on the pre-registered initial pass ({{dt_nodates_retry}}/{{dt_cases}} after the logged archive retry) is per search task, so the rates are not directly
 comparable.
 
 ### Related work
@@ -344,7 +355,8 @@ made Hindi pages work. Details: [`FEEDBACK_NOTES.md`](FEEDBACK_NOTES.md).
 
 ## Scoreboard
 
-{{replay_span}} replay, rules frozen before scoring ([`results/score_lock.json`](results/score_lock.json),
+{{replay_span}} replay, pre-registered, with one disclosed post-scoring correction ({{mae_c_before}} → {{mae_c}})
+([`results/score_lock.json`](results/score_lock.json),
 [`results/scoreboard.md`](results/scoreboard.md)); mean absolute miss in percentage points:
 
 | Method | Mean miss |
@@ -394,6 +406,8 @@ More: [`docs/honest_limits.md`](docs/honest_limits.md), [`docs/frozen_rules.md`]
 [`docs/after_scoring_changes.md`](docs/after_scoring_changes.md).
 
 ## Run it locally
+
+Python {{python_min}}+ (tested on {{python_tested}}).
 
 ```bash
 pip install -r requirements-app.txt

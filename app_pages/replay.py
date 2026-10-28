@@ -9,9 +9,13 @@ import streamlit as st
 from app_pages.common import (CODES, LABELS, NOWCAST_WORDS, header, month_name, num, pass_fail, pct, poll_direction,
                               read_csv, read_json, v2_comparison)
 
+_lock = read_json("results/score_lock.json") or {}
+_fix = (f" ({_lock['history'][-1]['mae']['c']:.3f} → {_lock['mae']['c']:.3f})"
+        if _lock.get("history") and _lock.get("mae") else "")
 header("Replay", f"How the {NOWCAST_WORDS} would have done in January-September 2026, using only evidence "
-                 "available before each month's cutoff. Rules were frozen before scoring. After scoring we made only "
-                 "logged bug fixes, found by an independent audit, and we show the scores before and after.")
+                 "available before each month's cutoff. Rules were pre-registered, with one disclosed post-scoring "
+                 f"correction{_fix}: a logged bug fix found by an independent audit; we show the scores before and "
+                 "after.")
 
 replay = read_csv("results/replay.csv")
 base = {r["month"]: r for r in read_csv("results/baselines.csv")}

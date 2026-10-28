@@ -72,10 +72,11 @@ def wilson(w):
 
 
 def leak_count_table(fr):
-    """Case-level leak counts (results/field_report.json leakage rows): after the logged archive retry first, the
-    initial pass as sensitivity, each with its Wilson 95% interval. Date test and finance check stay in separate rows."""
-    out = ["| Check (unit) | Setting | Leak cases, after the logged archive retry (Wilson 95%) | Initial pass "
-           "(sensitivity; Wilson 95%) | Credits per call | Median latency |", "|---|---|---|---|---|---|"]
+    """Case-level leak counts (results/field_report.json leakage rows): the pre-registered initial pass first (the
+    primary result), then the update after the logged archive retry, each with its Wilson 95% interval. Date test and
+    finance check stay in separate rows."""
+    out = ["| Check (unit) | Setting | Leak cases, pre-registered initial pass (Wilson 95%) | After the logged archive "
+           "retry (Wilson 95%) | Credits per call | Median latency |", "|---|---|---|---|---|---|"]
     keyed = {}
     for r in fr["leakage"]["rows"]:
         if r["check"].startswith(("Date test", "Finance check")):
@@ -84,8 +85,8 @@ def leak_count_table(fr):
         a, b = runs["first pass"], runs["after logged retry"]
         unit = "cases" if check.startswith("Date test") else "events"
         lat = "—" if a["median_latency_s"] is None else secs(a["median_latency_s"])
-        out.append(f"| {check}, {unit} | {setting} | **{b['leaks']} of {b['n']}** ({wilson(b['wilson95'])}) "
-                   f"| {a['leaks']} of {a['n']} ({wilson(a['wilson95'])}) | {credits_per_call(a['credits_per_call'])} "
+        out.append(f"| {check}, {unit} | {setting} | **{a['leaks']} of {a['n']}** ({wilson(a['wilson95'])}) "
+                   f"| {b['leaks']} of {b['n']} ({wilson(b['wilson95'])}) | {credits_per_call(a['credits_per_call'])} "
                    f"| {lat} |")
     return "\n".join(out)
 
@@ -216,7 +217,8 @@ def facts(st, as_of, root=ROOT):
              dt_retry_urls=fr["date_test"]["retry"]["recovered"],
              dt_valid_total=dt1["A"]["valid_total"], dt_lost_nodates=dt1["A"]["valid_lost"],
              dt_lost_dates=dt1["B"]["valid_lost"], dt_lost_filter=dt1["C"]["valid_lost"],
-             dt_lost_pagecheck=dt1["D"]["valid_lost"])
+             dt_lost_pagecheck=dt1["D"]["valid_lost"], dt_valid_total_retry=dt2["A"]["valid_total"],
+             dt_lost_filter_retry=dt2["C"]["valid_lost"], dt_lost_pagecheck_retry=dt2["D"]["valid_lost"])
     fn1, fn2 = fr["finance"]["first_pass"]["all_14"], fr["finance"]["after_retry"]["all_14"]
     f.update(fin_events=fn1["events"], fin_nodates=fn1["arms"]["N"]["confirmed_events"],
              fin_nodates_retry=fn2["arms"]["N"]["confirmed_events"], fin_dated=fn1["arms"]["D"]["confirmed_events"],
@@ -246,6 +248,8 @@ def facts(st, as_of, root=ROOT):
     # Wilson 95% intervals for the headline counts (results/field_report.json)
     f.update(dt_nodates_w=wilson(dt1["A"]["wilson95"]), dt_nodates_retry_w=wilson(dt2["A"]["wilson95"]),
              dt_dated_w=wilson(dt1["C"]["wilson95"]), dt_dated_retry_w=wilson(dt2["C"]["wilson95"]),
+             fin_nodates_w=wilson(fn1["arms"]["N"]["confirmed_wilson95"]),
+             fin_dated_w=wilson(fn1["arms"]["D"]["confirmed_wilson95"]),
              fin_nodates_retry_w=wilson(fn2["arms"]["N"]["confirmed_wilson95"]),
              fin_dated_retry_w=wilson(fn2["arms"]["D"]["confirmed_wilson95"]))
     # the pre-registered leak rules, quoted (v2/DATE_TEST_PREREG.md; v2/FINANCE_PREREG.md Amendment 1 (e))
@@ -299,6 +303,10 @@ def facts(st, as_of, root=ROOT):
              p_flagged=sum(m["flagged"] for m in pm),
              p_furniture=sum(m["outcomes"]["sidebar or related links"] for m in pm),
              p_benign=sum(m["outcomes"]["benign"] for m in pm), p_unclear=sum(m["outcomes"]["unclear"] for m in pm))
+    # every flagged page has exactly one outcome, and the later-content pages are the "later content" outcome
+    if (sum(m["outcomes"]["later content"] for m in pm) != f["p_later"]
+            or f["p_flagged"] != f["p_later"] + f["p_furniture"] + f["p_benign"] + f["p_unclear"]):
+        raise SystemExit("results/leakcheck_full_page.json: flagged pages do not split into the four outcomes")
 
     # results/leakcheck_exact_match.json: check E (exploratory)
     em = load("results/leakcheck_exact_match.json", root)
@@ -374,6 +382,8 @@ def facts(st, as_of, root=ROOT):
     f["replay_span"] = f"{lo:%b}–{hi:%b %Y}" if lo.year == hi.year else f"{lo:%b %Y}–{hi:%b %Y}"
     lvl = re.search(r"percentile\(\[abs\(v\) for v in vals\], (0\.\d+)\)", (root / "shadow_cpi/live_range.py").read_text())
     f["range_level"] = pct(float(lvl.group(1)))                       # shadow_cpi/live_range.py
+    # the one disclosed post-scoring correction: the score before the logged bug fix is the lock's history entry
+    f.update(mae_c_before=pp(sl["history"][-1]["mae"]["c"]))
     f.update(mae_c=pp(sl["mae"]["c"]), mae_trend=pp(sl["mae"]["a"]), mae_b1=pp(sl["mae"]["B1"]),
              mae_poll_c=pp(sl["mae_poll_months"]["c"]), mae_poll=pp(sl["mae_poll_months"]["poll"]),
              poll_months=sum(1 for r in replay if r["poll_pred"]), inside=sl["inside_range"], months=len(replay),
@@ -487,6 +497,10 @@ def facts(st, as_of, root=ROOT):
     src = (root / "examples" / "timelock_rbi.py").read_text(encoding="utf-8")
     doc = ast.parse(src).body[0]                                     # the module docstring
     f["example_lines"] = sum(1 for line in src.splitlines()[doc.end_lineno:] if line.strip())
+
+    # Python: the minimum from pyproject.toml, the version the suite ran on from results/python_env.json
+    req = re.search(r'^requires-python = ">=(\d+\.\d+)"', (root / "pyproject.toml").read_text(), re.M)
+    f.update(python_min=req.group(1), python_tested=load("results/python_env.json", root)["python"])
 
     # run-dependent Tavily counts (tools/prompt_t.py run_stats), labelled as of a date
     f.update(as_of=human(as_of), run_calls=f"{st['calls']:,}", run_credits=f"{st['credits']:,}",

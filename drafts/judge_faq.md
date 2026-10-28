@@ -43,10 +43,12 @@ We can't prove it perfectly, and `docs/honest_limits.md` says so. What we do:
 
 ## 4. Did you tune on the test months?
 
-No. Pass-through factors and rule changes were calibrated on 2025 only, and the rules were frozen before any test
-month was scored (`docs/frozen_rules.md`). Amendment 1 was made before scoring and applies general scope rules
-(domestic LPG only, retail only), not month-specific fixes. Everything changed after scoring is listed in
-`docs/after_scoring_changes.md`, with dates and commits. None of it changes a scored number. One example: the 80%
+No. Pass-through factors and rule changes were calibrated on 2025 only, and the rules were pre-registered before any
+test month was scored (`docs/frozen_rules.md`), with one disclosed post-scoring correction (0.185 → 0.194, a logged
+bug fix found by the independent audit; `results/score_lock.json`). Amendment 1 was made before scoring and applies
+general scope rules (domestic LPG only, retail only), not month-specific fixes. Everything changed after scoring is
+listed in `docs/after_scoring_changes.md`, with dates and commits; apart from that correction, none of it changes a
+scored number. One example: the 80%
 range for the live months was widened because it held the official figure in only 5 of 9 replay months.
 
 An independent event audit (`audit/event_audit.md`, PR bhavikjain026/shadow-cpi#4) checked the 12 replay events:

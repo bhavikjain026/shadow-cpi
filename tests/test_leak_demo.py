@@ -193,10 +193,15 @@ def test_hero_row_reads_the_results_file_and_is_not_repeated():
     c = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["C"]
     (frame,) = at.get("iframe")
     html = frame.proto.srcdoc
-    assert f"Date test · {d['cases']} past cases" in html
-    assert (f"No time lock: {d['open']['retry']}/{d['cases']} cases leaked (after retry). Tavily time lock: "
-            f"{d['locked']['retry']}/{d['cases']}. Cost: {c['valid_lost']} of {c['valid_total']} valid evidence "
-            "dropped (initial pass).") in html     # the hero's accessible label
+    failed = json.loads((ROOT / "results" / "field_report.json").read_text())["date_test"]["retry"]["failed_urls"]
+    assert f"Date test · {d['cases']} past cases · pre-registered initial pass" in html
+    assert (f"No time lock: {d['open']['first']}/{d['cases']} cases leaked (pre-registered). Tavily time lock: "
+            f"{d['locked']['first']}/{d['cases']}. Cost: {c['valid_lost']} of {c['valid_total']} valid evidence "
+            "dropped (initial pass).") in html     # the hero's accessible label: the pre-registered pass leads
+    assert (f'<p class="update" id="update">Update: {d["open"]["retry"]}/{d["cases"]} with no time lock after '
+            f'retrying the {failed} archive lookups that had failed; {d["locked"]["retry"]}/{d["cases"]} with the '
+            "time lock.</p>") in html
+    assert f'<span id="leaked">{d["open"]["first"]}</span>/{d["cases"]}' in html
     assert not any(m.value.startswith("**No time lock:") for m in at.markdown)
 
 

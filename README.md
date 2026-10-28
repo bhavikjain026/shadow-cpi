@@ -6,15 +6,18 @@
 **An AI agent that searches the past without cheating: it uses Tavily inside a time lock it cannot move, checks every
 quote on its source page, and seals India's inflation forecast before the government publishes it.**
 
-| Leaks, measured | No dates | Dates + filter |
+| Leaks, measured (pre-registered initial pass) | No dates | Dates + filter |
 |---|---|---|
-| Date test (20 cases) | **10 of 20** | **0 of 20** (Wilson 0–16%) |
-| Finance check (14 cases, exploratory, different leak rule) | 10 of 14 | 0 of 14 |
+| Date test (20 cases) | **9 of 20** (Wilson 26–66%) | **0 of 20** (Wilson 0–16%) |
+| Finance check (14 cases, exploratory, different leak rule) | 2 of 14 (4–40%) | 0 of 14 (0–22%) |
 
-Separate rules; never added together. After the logged archive retry; initial pass in the footnote.
+Separate rules; never added together. **Update:** date test 10 of 20 with no dates (Wilson
+30–70%) after retrying the 11 archive lookups that had failed, still 0 of
+20 with dates + filter; finance check 10 of 14 (45–88%) after the
+retry (94 lookups had failed), still 0 of 14 with dates + filter.
 
 <details>
-<summary>Footnote: what counts as a leak, and the initial pass</summary>
+<summary>Footnote: what counts as a leak, and the update after the archive retry</summary>
 
 - **Dates + filter** means `start_date`/`end_date` plus `filter_by_published_date`; no dates means neither.
 - **Date test** (pilot, replay cases; [`v2/DATE_TEST_PREREG.md`](v2/DATE_TEST_PREREG.md)). A case leaks when at least
@@ -22,20 +25,18 @@ Separate rules; never added together. After the logged archive retry; initial pa
 - **Finance check** (exploratory, Reserve Bank of India (RBI) decisions and company results;
   [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md), as amended). A different rule, so its counts are reported apart:
   "**Confirmed leak:** states the outcome **and** Wayback-confirmed (no capture on or before the cutoff, first capture after it, and Tavily's or the address's date after the cutoff)."
-- **After the logged archive retry.** The table counts follow a logged retry of the archive lookups that had failed.
-  On the initial pass, 94 finance-check archive lookups (and 11 in the date test) failed
+- **Initial pass** (the table): the pre-registered result and the primary count.
+- **The update, after the logged archive retry.** A logged retry re-ran only the archive lookups that had failed, with
+  the same labelling rules. On the initial pass, 94 finance-check archive lookups (and 11 in the date test) failed
   for network reasons, so those pages could only be flagged, not confirmed; the retry recovered all of them,
-  which is why the finance count rises from 2 to 10 of 14. Wilson 95% intervals: date
-  test no dates 30–70%, dates + filter 0–16%; finance check no dates
-  45–88%, dates + filter 0–22%.
-- **Initial pass** (the pre-registered result, shown as sensitivity): date test 9 of 20
-  (26–66%) with no dates and 0 of 20 (0–16%) with dates + filter; finance
-  check 2 of 14 and 0 of 14.
+  which is why the finance count rises from 2 to 10 of 14. Wilson 95% intervals
+  after the retry: date test no dates 30–70%, dates + filter 0–16%; finance check no
+  dates 45–88%, dates + filter 0–22%.
 
 </details>
 
 **The cost.** The filter dropped 12 of the date test's 40 pieces of valid evidence
-(initial pass).
+(initial pass; 20 of 48 after the retry).
 
 **Search dates do not freeze page content.** Tavily dated `R196`, a TCS results preview, 7 Jul,
 before its 8 Jul cutoff; the page was updated on 9 Jul with a link to the actual result, and Extract
@@ -64,15 +65,18 @@ The Tavily field report (app page "Tavily field report", built by `tools/build_f
 rule and its own count; date-test and finance counts are never added together.
 
 - **Date test (pilot, 20 replay cases, [`v2/DATE_TEST_PREREG.md`](v2/DATE_TEST_PREREG.md)).** Rule quoted
-  above. After the logged archive retry: no dates 10 of 20, dates + filter
-  0 of 20; initial pass 9 and 0. Every case whose label changed
+  above. Pre-registered initial pass: no dates 9 of 20 (26–66%), dates + filter
+  0 of 20 (0–16%). Update: 10 of 20 and 0
+  of 20 after retrying the 11 archive lookups that had failed. Every case whose label changed
   after the retry (9 of 34, both checks), with the reason:
   [`docs/retry_reconciliation.md`](docs/retry_reconciliation.md).
 - **Finance check (exploratory, 14 Reserve Bank of India (RBI) decisions and company results,
   [`v2/FINANCE_PREREG.md`](v2/FINANCE_PREREG.md)).** Rule quoted above (it also needs the title or snippet to state
-  the outcome). The day-before search with no dates leaked the outcome for 10 of 14
-  events after the logged archive retry (Wilson 95% 45–88%; initial pass 2); with
-  dates and the filter, 0 of 14 (0–22%; initial pass 0).
+  the outcome). The day-before search with no dates leaked the outcome for 2 of 14
+  events on the pre-registered initial pass (Wilson 95% 4–40%); with dates and the filter,
+  0 of 14 (0–22%). Update: 10 of 14
+  (45–88%) and 0 of 14 (0–22%) after the retry
+  (94 lookups had failed).
 - **Tasks and calls.** Each task sent one search per setting, so call counts equal task counts
   (9 of 20 date-test calls and 2 of
   14 finance calls with no dates leaked on the initial pass;
@@ -80,20 +84,22 @@ rule and its own count; date-test and finance counts are never added together.
   [`results/finance_lookahead.json`](results/finance_lookahead.json)).
 - **Check P, full page (exploratory, [`results/leakcheck_full_page.md`](results/leakcheck_full_page.md)).** Of
   132 pages that passed the date lock (Tavily's filter, or our own date check), 1 described an event
-  after the cutoff. 71 pages held a later date somewhere in the text, but mostly as page furniture:
-  43 in date bars, sidebars and related links, 21 benign, 6 unclear.
+  after the cutoff. 71 pages held a later date somewhere in the text, mostly as page furniture; each has
+  one outcome: 1 later content (the page just counted), 43 in date bars, sidebars and related
+  links, 21 benign, 6 unclear.
 - **Receipt.** Credits and latency per setting are in the table; every call is in the flight recorder and the
   credit ledger.
 
-**Leak counts** (case level; after the logged archive retry is the main count, the initial pass is the sensitivity):
+**Leak counts** (case level; the pre-registered initial pass is the primary count, after the logged archive retry is
+the update):
 
-| Check (unit) | Setting | Leak cases, after the logged archive retry (Wilson 95%) | Initial pass (sensitivity; Wilson 95%) | Credits per call | Median latency |
+| Check (unit) | Setting | Leak cases, pre-registered initial pass (Wilson 95%) | After the logged archive retry (Wilson 95%) | Credits per call | Median latency |
 |---|---|---|---|---|---|
-| Date test (20 replay cases), cases | no dates | **10 of 20** (30–70%) | 9 of 20 (26–66%) | 1.00 | 3.8 s |
+| Date test (20 replay cases), cases | no dates | **9 of 20** (26–66%) | 10 of 20 (30–70%) | 1.00 | 3.8 s |
 | Date test (20 replay cases), cases | start_date + end_date | **0 of 20** (0–16%) | 0 of 20 (0–16%) | 1.00 | 3.4 s |
 | Date test (20 replay cases), cases | + filter_by_published_date | **0 of 20** (0–16%) | 0 of 20 (0–16%) | 1.00 | 3.5 s |
 | Date test (20 replay cases), cases | + our page check | **0 of 20** (0–16%) | 0 of 20 (0–16%) | 0.94 | 3.2 s |
-| Finance check (14 scheduled events), events | no dates | **10 of 14** (45–88%) | 2 of 14 (4–40%) | 1.00 | 3.2 s |
+| Finance check (14 scheduled events), events | no dates | **2 of 14** (4–40%) | 10 of 14 (45–88%) | 1.00 | 3.2 s |
 | Finance check (14 scheduled events), events | start_date + end_date + filter_by_published_date | **0 of 14** (0–22%) | 0 of 14 (0–22%) | 1.00 | 1.4 s |
 
 **Valid evidence kept** (initial pass; each check has its own denominator):
@@ -105,7 +111,8 @@ rule and its own count; date-test and finance counts are never added together.
 | Check E (exploratory, `exact_match`) | known-good quotes re-found by the dated search | 25 of 40 | 8 found only without dates; 7 by neither |
 
 With our extra page-date check added to the filter, 27 of the date test's 40
-pieces of valid evidence were lost. Check E's misses are filter misses, not back-dating: 0 of
+pieces of valid evidence were lost (initial pass; 35 of 48 after the
+retry). Check E's misses are filter misses, not back-dating: 0 of
 8 have a Tavily `published_date` after the cutoff (6 on or before it,
 2 undated; [`results/leakcheck_exact_match.md`](results/leakcheck_exact_match.md)).
 
@@ -125,7 +132,7 @@ completely:
 - **Our page-date check** reads the date printed on the extracted page and drops anything after the cutoff. In the
   date test it kept 26 of the 59 results the filter let through; with it,
   27 of the date test's 40 pieces of valid evidence were lost (12 with the filter
-  alone). It reads a page's date, not its edit history.
+  alone; initial pass). It reads a page's date, not its edit history.
 - **The drift monitor** re-reads each October radar page with Extract once a day and compares it with the saved copy
   ([`v2/DRIFT_PREREG.md`](v2/DRIFT_PREREG.md)): 14 of 62 radar pages had changed since they were saved; cited quote still present on 13 of 14; cited number changed on 0 of 14 (one run, 28 Oct 2026 IST).
 - **The Wayback Machine** shows whether a page existed by the cutoff; a leak counts only when it confirms one. Failed
@@ -240,7 +247,11 @@ can carry a link to the result it previewed. `extract_as_of(client, url, cutoff)
 its change evidence (Tavily's date, the page's own published/updated date, Wayback captures). If the page may have
 changed after the cutoff it returns the latest Wayback capture on or before the cutoff instead, with provenance
 `{source: "tavily_live" | "wayback_asof", capture_time, reason}`; if there is no such capture, it returns no text
-and the reason `no as-of copy`, never the live page. Wayback is a direct download outside Tavily.
+and the reason `no as-of copy`, never the live page. When nothing suggests a change but the Wayback Machine holds no
+capture on or before the cutoff, the live page comes back labelled `unverified: no archive copy before the cutoff`;
+pass `strict=True` to refuse it instead. If Extract answers for a different address (compared ignoring the scheme and
+a trailing slash), it returns no text and the reason `url mismatch`, never another page's text. Wayback is a direct
+download outside Tavily.
 
 Two demos (one page each, not a measurement): on R196 it refused, because the Wayback Machine holds
 no copy on or before the 8 Jul cutoff
@@ -292,7 +303,7 @@ could ever be live (look-ahead bias).
 Shadow CPI is a Tavily-grounded India CPI nowcast that tests, rather than assumes, Tavily's date controls and measures
 what they cost. El Lahib et al. (2026, [arXiv 2602.00758](https://arxiv.org/abs/2602.00758)) found
 at least one retrieved page containing major post-cutoff leakage for 71% of Google-audited questions, after 10–20 queries
-and about 100 URLs each; our 10/20 after the logged archive retry (9/20 on the initial pass) is per search task, so the rates are not directly
+and about 100 URLs each; our 9/20 on the pre-registered initial pass (10/20 after the logged archive retry) is per search task, so the rates are not directly
 comparable.
 
 ### Related work
@@ -359,7 +370,8 @@ made Hindi pages work. Details: [`FEEDBACK_NOTES.md`](FEEDBACK_NOTES.md).
 
 ## Scoreboard
 
-Jan–Sep 2026 replay, rules frozen before scoring ([`results/score_lock.json`](results/score_lock.json),
+Jan–Sep 2026 replay, pre-registered, with one disclosed post-scoring correction (0.185 → 0.194)
+([`results/score_lock.json`](results/score_lock.json),
 [`results/scoreboard.md`](results/scoreboard.md)); mean absolute miss in percentage points:
 
 | Method | Mean miss |
@@ -410,6 +422,8 @@ More: [`docs/honest_limits.md`](docs/honest_limits.md), [`docs/frozen_rules.md`]
 
 ## Run it locally
 
+Python 3.10+ (tested on 3.14.7).
+
 ```bash
 pip install -r requirements-app.txt
 ```
@@ -429,7 +443,7 @@ To run the pipeline, copy `.env.example` to `.env`, add the two keys, and start 
 `python tools/sync_doc_numbers.py` (template: [`docs/templates/README.md`](docs/templates/README.md)).
 
 Tavily usage so far (as of 28 Oct 2026, [`results/tavily_report_card.md`](results/tavily_report_card.md)):
-2,073 calls sent, 2,021 credits used (a 1,000-credit monthly plan plus 3,125
+2,076 calls sent, 2,023 credits used (a 1,000-credit monthly plan plus 3,125
 add-on credits), 79% of dated search results inside the requested window, median latency
 4.0 s.
 

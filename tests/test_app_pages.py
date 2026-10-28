@@ -174,8 +174,20 @@ def test_replay_scoreboard_matches_score_lock():
                                                                    for k in ("c", "a", "b", "c_strict", "B1")]
     text = all_text(at)
     assert "never used to tune anything" not in text
-    assert ("Rules were frozen before scoring. After scoring we made only logged bug fixes, found by an independent "
-            "audit, and we show the scores before and after.") in text
+    assert (f"Rules were pre-registered, with one disclosed post-scoring correction "
+            f"({LOCK['history'][-1]['mae']['c']:.3f} → {LOCK['mae']['c']:.3f}): a logged bug fix found by an "
+            "independent audit; we show the scores before and after.") in text
+    assert "frozen before scoring" not in text
+
+
+def test_field_report_chart_defaults_to_the_preregistered_initial_pass():
+    """The Field Report chart opens on the pre-registered initial pass (the primary count); the retry is the update."""
+    at = load("field_report")
+    radio = at.radio[0]
+    assert list(radio.options) == ["Pre-registered initial pass", "After logged retry"]
+    assert radio.value == "Pre-registered initial pass"
+    a = json.loads((ROOT / "results" / "field_report.json").read_text())["date_test"]["first_pass"]["arms"]["A"]
+    assert f"no dates {a['leak_cases']} of {a['cases']}" in all_text(at)
 
 
 def test_saved_run_shows_window_replay_date_searches_credits():

@@ -6,7 +6,7 @@
 
 ## Headline
 <!-- headline:start -->
-Pilot, after a logged archive retry: no dates, 10 of 20 past cases kept a confirmed leak (page dated after the cutoff, no archive copy before it); Tavily's dates and `filter_by_published_date`, 0 of 20.
+Pilot, pre-registered: with no dates, 9 of 20 cases kept a confirmed leak; with Tavily's dates and `filter_by_published_date`, 0 of 20. Update: 10 of 20 after retrying the 11 archive lookups that had failed.
 Reuse: `timelocked_search`, `extract_as_of`, Colab leak check.
 <!-- headline:end -->
 
@@ -17,29 +17,29 @@ quote on its source page, and seals India's inflation forecast before the govern
 ## Short description
 <!-- short:start -->
 Can a search engine keep the past in the past? We measured Tavily's date controls on 20 replay cases
-(pilot; counts after a logged archive retry). With no dates, 10 of 20 cases kept a
-confirmed leak, a page dated after the cutoff with no archive copy before it (Wilson 95%
-30–70%); with `start_date`/`end_date` and `filter_by_published_date`, 0 of
-20 (0–16%). The cost: the filter dropped
-12 of 40 pieces of valid evidence. Search dates do not freeze page content: a page
-dated before the cutoff can be updated after it. Shadow CPI puts this to work: an AI agent searches with Tavily
+(pilot, pre-registered). With no dates, 9 of 20 cases kept a confirmed leak, a page dated after
+the cutoff with no archive copy before it (Wilson 95% 26–66%; 10 of 20
+after retrying 11 failed archive lookups); with `start_date`/`end_date` and
+`filter_by_published_date`, 0 of 20 (0–16%). The cost: the filter dropped
+12 of 40 pieces of valid evidence (initial pass). Search dates do not freeze page content:
+pages change after the cutoff. Shadow CPI puts this to work: an AI agent searches with Tavily
 inside a time lock, checks each quote against the extracted page with NVIDIA Nemotron on Nebius Token Factory, lets
 code compute India's October 2026 inflation nowcast, and seals it before the Ministry of Statistics publishes on
 12 Nov.
 <!-- short:end -->
 
 ## The leak, measured
-- **Main result (date test, a pilot with a pre-registered design; counts after the logged archive retry):** no dates, 10
-  of 20 cases leaked (Wilson 95% 30–70%); `start_date`/`end_date` +
-  `filter_by_published_date`, 0 of 20 (0–16%). Initial pass (the pre-registered result, shown as sensitivity):
-  9 of 20 (26–66%) and 0 of 20 (0–16%); the retry only
-  re-ran the 11 archive lookups that had failed.
+- **Main result (date test, a pilot; the pre-registered initial pass):** no dates, 9 of 20
+  cases leaked (Wilson 95% 26–66%); `start_date`/`end_date` + `filter_by_published_date`,
+  0 of 20 (0–16%). Update: 10 of 20
+  (30–70%) and 0 of 20 (0–16%) after retrying the
+  11 archive lookups that had failed; the retry only re-ran those lookups, with the same labelling rules.
 - **What a leak is.** A case leaks when at least one result the search kept is a confirmed leak, which
   `v2/DATE_TEST_PREREG.md` defines as: "**Confirmed leak (L):** independent version evidence only: the Wayback Machine CDX API (a logged direct download, the same exception as MoSPI) lists **no capture on or before the cutoff**, its first capture is after the cutoff, **and** Tavily's published date or the date in the address is after the cutoff." The finance check's rule differs
   (`v2/FINANCE_PREREG.md`, as amended): "**Confirmed leak:** states the outcome **and** Wayback-confirmed (no capture on or before the cutoff, first capture after it, and Tavily's or the address's date after the cutoff)." Its counts are reported apart and never added to the
   date test's.
 - **The cost:** the filter dropped 12 of the date test's 40 pieces of valid evidence
-  (initial pass).
+  (initial pass; 20 of 48 after the retry).
 - **Search dates do not freeze page content.** Tavily dated `R196`, a TCS results preview,
   7 Jul, before its 8 Jul cutoff; the page was updated on 9 Jul with a link to the actual
   result, and Extract returns the updated page.
@@ -47,24 +47,26 @@ code compute India's October 2026 inflation nowcast, and seals it before the Min
 
 ## Time-locked search leakage
 - **Finance check** (exploratory; Reserve Bank of India (RBI) decisions and company results, its own rule above):
-  no dates, 10 of 14 events after the retry (Wilson 95% 45–88%;
-  initial pass 2); with dates and the filter, 0 of 14
-  (0–22%; initial pass 0).
+  no dates, 2 of 14 events on the pre-registered initial pass (Wilson 95%
+  4–40%); with dates and the filter, 0 of 14 (0–22%). Update:
+  10 of 14 (45–88%) and 0 of 14
+  (0–22%) after the retry (94 lookups had failed).
 - **Check P, full page** (exploratory): of 132 pages that passed the date lock, 1 described a later
   event; most later dates were page furniture (43 of 71 flagged pages: date bars, sidebars,
   related links).
 - **Check E** (exploratory, `exact_match`): its misses are filter misses, not back-dating (0 of
   8 have a later `published_date`).
 
-**Leak counts** (case level; after the logged archive retry is the main count, the initial pass is the sensitivity):
+**Leak counts** (case level; the pre-registered initial pass is the primary count, after the logged archive retry is
+the update):
 
-| Check (unit) | Setting | Leak cases, after the logged archive retry (Wilson 95%) | Initial pass (sensitivity; Wilson 95%) | Credits per call | Median latency |
+| Check (unit) | Setting | Leak cases, pre-registered initial pass (Wilson 95%) | After the logged archive retry (Wilson 95%) | Credits per call | Median latency |
 |---|---|---|---|---|---|
-| Date test (20 replay cases), cases | no dates | **10 of 20** (30–70%) | 9 of 20 (26–66%) | 1.00 | 3.8 s |
+| Date test (20 replay cases), cases | no dates | **9 of 20** (26–66%) | 10 of 20 (30–70%) | 1.00 | 3.8 s |
 | Date test (20 replay cases), cases | start_date + end_date | **0 of 20** (0–16%) | 0 of 20 (0–16%) | 1.00 | 3.4 s |
 | Date test (20 replay cases), cases | + filter_by_published_date | **0 of 20** (0–16%) | 0 of 20 (0–16%) | 1.00 | 3.5 s |
 | Date test (20 replay cases), cases | + our page check | **0 of 20** (0–16%) | 0 of 20 (0–16%) | 0.94 | 3.2 s |
-| Finance check (14 scheduled events), events | no dates | **10 of 14** (45–88%) | 2 of 14 (4–40%) | 1.00 | 3.2 s |
+| Finance check (14 scheduled events), events | no dates | **2 of 14** (4–40%) | 10 of 14 (45–88%) | 1.00 | 3.2 s |
 | Finance check (14 scheduled events), events | start_date + end_date + filter_by_published_date | **0 of 14** (0–22%) | 0 of 14 (0–22%) | 1.00 | 1.4 s |
 
 **Valid evidence kept** (initial pass; each check has its own denominator):
@@ -83,7 +85,8 @@ TCS results preview, cutoff 8 Jul; Tavily dated it 7 Jul, and the page was updat
 the finance check returned a result dated after the cutoff; that review found 1 page whose current
 version leaks the outcome. What covers the gap, partly: our page-date check (kept 26 of
 59 filtered results in the date test; date-test valid evidence lost: 27 of
-40 with it, 12 with the filter alone); the drift monitor, which re-reads October radar
+40 with it (initial pass), 12 with the filter alone; after the retry
+35 and 20 of 48); the drift monitor, which re-reads October radar
 pages daily (14 of 62 radar pages had changed since they were saved; cited quote still present on 13 of 14; cited number changed on 0 of 14 (one run, 28 Oct 2026 IST)); and Wayback Machine checks, with failed lookups retried and logged
 (11 in the date test, 94 in the finance check).
 
@@ -175,8 +178,8 @@ line-number citing let code, not the model, decide every number. We would ask fo
 India's CPI arrives about 12 days after the month ends. Forecasting it from the web means replaying past
 months, and a replay that reads a page published after its cutoff looks better than it could ever be live. El Lahib et
 al. (2026, arXiv 2602.00758) found at least one retrieved page containing major post-cutoff leakage for
-71% of Google-audited questions, after 10–20 queries and about 100 URLs each; our 10/20
-after the logged archive retry (9/20 on the initial pass) is per search task, so the rates are not directly comparable. So we built a nowcast that tests, rather than assumes,
+71% of Google-audited questions, after 10–20 queries and about 100 URLs each; our 9/20
+on the pre-registered initial pass (10/20 after the logged archive retry) is per search task, so the rates are not directly comparable. So we built a nowcast that tests, rather than assumes,
 Tavily's date controls and measures what they cost.
 
 ## Related work
@@ -219,7 +222,8 @@ research teams:** designed for event studies and backtests that must not see the
 investment advice.
 
 ## Scoreboard
-Jan–Sep 2026 replay, rules frozen before scoring (`results/score_lock.json`): Shadow CPI v1 0.194 pp mean miss,
+Jan–Sep 2026 replay, pre-registered, with one disclosed post-scoring correction (0.185 → 0.194;
+`results/score_lock.json`): Shadow CPI v1 0.194 pp mean miss,
 trend only 0.212, repeat-last-month 0.468. On the 6 poll months: 0.150 vs the
 poll's 0.148, about a tie. The 80% range held in 5 of 9 months. v2 was not
 better (0.206).
@@ -255,7 +259,7 @@ Nebius retires the original IDs on 9 Nov 2026; from then, calls use Nebius's rec
 - Python
 - Streamlit
 
-Tavily usage as of 28 Oct 2026: 2,073 calls, 2,021 credits, 79% of dated results
+Tavily usage as of 28 Oct 2026: 2,076 calls, 2,023 credits, 79% of dated results
 inside the requested window (5,587 of 7,069), median latency 4.0 s. Third-party notices:
 `THIRD_PARTY_NOTICES.md`.
 

@@ -31,7 +31,7 @@ def day(d):
 
 
 NO_DATES, TIME_LOCK = "No dates", "Tavily time lock"
-RUNS = {"After logged retry": "after logged retry", "Initial pass": "first pass"}
+RUNS = {"Pre-registered initial pass": "first pass", "After logged retry": "after logged retry"}   # first = default
 
 
 def leak_chart(rows):
@@ -39,8 +39,8 @@ def leak_chart(rows):
     as separate groups (never summed), Wilson 95% intervals as error bars. Every value from the leakage rows of
     results/field_report.json."""
     run = st.radio("Run", list(RUNS), horizontal=True, label_visibility="collapsed",
-                   help="The initial pass is the pre-registered result; the retry only recovered Wayback lookups that "
-                        "had failed on the network (logged).")
+                   help="The initial pass is the pre-registered result and the primary count; the retry, an update, "
+                        "only recovered Wayback lookups that had failed on the network (logged).")
     data = [{"Check": x["check"].split(" (")[0],
              "Setting": NO_DATES if x["setting"] == "no dates" else TIME_LOCK,
              "Leak rate": x["leak_rate"], "lo": x["wilson95"][0], "hi": x["wilson95"][1],

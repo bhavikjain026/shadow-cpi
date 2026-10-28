@@ -8,11 +8,12 @@ Four images for the Devpost gallery (`1600x900` each). The two app shots and bot
 ## The leak table
 ![Field Report: time-locked search leakage](1_leak_table.png)
 
-**Can a search see the future?** Date test (pilot, 20 past cases, counts after a logged archive retry):
-with no dates, 10 of 20 cases kept a confirmed leak, a page dated after the cutoff with no
-archive copy on or before it (Wilson 95% 30–70%; 9 on the initial pass); with `start_date`/`end_date` and
-`filter_by_published_date`, 0 of 20 (0–16%). The cost: the filter dropped
-12 of 40 pieces of valid evidence (initial pass). Red rows: no dates; bold rows:
+**Can a search see the future?** Date test (pilot, 20 past cases, the pre-registered initial pass):
+with no dates, 9 of 20 cases kept a confirmed leak, a page dated after the cutoff with no
+archive copy on or before it (Wilson 95% 26–66%; 10 of 20 after retrying
+the 11 archive lookups that had failed); with `start_date`/`end_date` and `filter_by_published_date`,
+0 of 20 (0–16%). The cost: the filter dropped 12 of 40
+pieces of valid evidence (initial pass). Red rows: no dates; bold rows:
 Tavily's time lock. App page: Field Report. Source: `results/field_report.json`.
 
 ## The four-arm table

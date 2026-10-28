@@ -5,7 +5,7 @@
 
 ## Headline
 <!-- headline:start -->
-Pilot, after a logged archive retry: no dates, {{dt_nodates_retry}} of {{dt_cases}} past cases kept a confirmed leak (page dated after the cutoff, no archive copy before it); Tavily's dates and `filter_by_published_date`, {{dt_dated_retry}} of {{dt_cases}}.
+Pilot, pre-registered: with no dates, {{dt_nodates}} of {{dt_cases}} cases kept a confirmed leak; with Tavily's dates and `filter_by_published_date`, {{dt_dated}} of {{dt_cases}}. Update: {{dt_nodates_retry}} of {{dt_cases}} after retrying the {{rr_dt_failed}} archive lookups that had failed.
 Reuse: `timelocked_search`, `extract_as_of`, Colab leak check.
 <!-- headline:end -->
 
@@ -16,29 +16,29 @@ quote on its source page, and seals India's inflation forecast before the govern
 ## Short description
 <!-- short:start -->
 Can a search engine keep the past in the past? We measured Tavily's date controls on {{dt_cases}} replay cases
-(pilot; counts after a logged archive retry). With no dates, {{dt_nodates_retry}} of {{dt_cases}} cases kept a
-confirmed leak, a page dated after the cutoff with no archive copy before it (Wilson {{wilson}}
-{{dt_nodates_retry_w}}); with `start_date`/`end_date` and `filter_by_published_date`, {{dt_dated_retry}} of
-{{dt_cases}} ({{dt_dated_retry_w}}). The cost: the filter dropped
-{{dt_lost_filter}} of {{dt_valid_total}} pieces of valid evidence. Search dates do not freeze page content: a page
-dated before the cutoff can be updated after it. Shadow CPI puts this to work: an AI agent searches with Tavily
+(pilot, pre-registered). With no dates, {{dt_nodates}} of {{dt_cases}} cases kept a confirmed leak, a page dated after
+the cutoff with no archive copy before it (Wilson {{wilson}} {{dt_nodates_w}}; {{dt_nodates_retry}} of {{dt_cases}}
+after retrying {{rr_dt_failed}} failed archive lookups); with `start_date`/`end_date` and
+`filter_by_published_date`, {{dt_dated}} of {{dt_cases}} ({{dt_dated_w}}). The cost: the filter dropped
+{{dt_lost_filter}} of {{dt_valid_total}} pieces of valid evidence (initial pass). Search dates do not freeze page content:
+pages change after the cutoff. Shadow CPI puts this to work: an AI agent searches with Tavily
 inside a time lock, checks each quote against the extracted page with NVIDIA Nemotron on Nebius Token Factory, lets
 code compute India's {{live_month}} inflation nowcast, and seals it before the Ministry of Statistics publishes on
 {{release_day}}.
 <!-- short:end -->
 
 ## The leak, measured
-- **Main result (date test, a pilot with a pre-registered design; counts after the logged archive retry):** no dates, {{dt_nodates_retry}}
-  of {{dt_cases}} cases leaked (Wilson {{wilson}} {{dt_nodates_retry_w}}); `start_date`/`end_date` +
-  `filter_by_published_date`, {{dt_dated_retry}} of {{dt_cases}} ({{dt_dated_retry_w}}). Initial pass (the pre-registered result, shown as sensitivity):
-  {{dt_nodates}} of {{dt_cases}} ({{dt_nodates_w}}) and {{dt_dated}} of {{dt_cases}} ({{dt_dated_w}}); the retry only
-  re-ran the {{dt_retry_urls}} archive lookups that had failed.
+- **Main result (date test, a pilot; the pre-registered initial pass):** no dates, {{dt_nodates}} of {{dt_cases}}
+  cases leaked (Wilson {{wilson}} {{dt_nodates_w}}); `start_date`/`end_date` + `filter_by_published_date`,
+  {{dt_dated}} of {{dt_cases}} ({{dt_dated_w}}). Update: {{dt_nodates_retry}} of {{dt_cases}}
+  ({{dt_nodates_retry_w}}) and {{dt_dated_retry}} of {{dt_cases}} ({{dt_dated_retry_w}}) after retrying the
+  {{rr_dt_failed}} archive lookups that had failed; the retry only re-ran those lookups, with the same labelling rules.
 - **What a leak is.** A case leaks when at least one result the search kept is a confirmed leak, which
   `v2/DATE_TEST_PREREG.md` defines as: "{{dt_leak_rule}}" The finance check's rule differs
   (`v2/FINANCE_PREREG.md`, as amended): "{{fin_leak_rule}}" Its counts are reported apart and never added to the
   date test's.
 - **The cost:** the filter dropped {{dt_lost_filter}} of the date test's {{dt_valid_total}} pieces of valid evidence
-  (initial pass).
+  (initial pass; {{dt_lost_filter_retry}} of {{dt_valid_total_retry}} after the retry).
 - **Search dates do not freeze page content.** Tavily dated `{{ex_row}}`, a {{ex_company}} results preview,
   {{ex_published}}, before its {{ex_cutoff}} cutoff; the page was updated on {{ex_updated}} with a link to the actual
   result, and Extract returns the updated page.
@@ -46,16 +46,18 @@ code compute India's {{live_month}} inflation nowcast, and seals it before the M
 
 ## Time-locked search leakage
 - **Finance check** (exploratory; Reserve Bank of India (RBI) decisions and company results, its own rule above):
-  no dates, {{fin_nodates_retry}} of {{fin_events}} events after the retry (Wilson {{wilson}} {{fin_nodates_retry_w}};
-  initial pass {{fin_nodates}}); with dates and the filter, {{fin_dated_retry}} of {{fin_events}}
-  ({{fin_dated_retry_w}}; initial pass {{fin_dated}}).
+  no dates, {{fin_nodates}} of {{fin_events}} events on the pre-registered initial pass (Wilson {{wilson}}
+  {{fin_nodates_w}}); with dates and the filter, {{fin_dated}} of {{fin_events}} ({{fin_dated_w}}). Update:
+  {{fin_nodates_retry}} of {{fin_events}} ({{fin_nodates_retry_w}}) and {{fin_dated_retry}} of {{fin_events}}
+  ({{fin_dated_retry_w}}) after the retry ({{rr_fin_failed}} lookups had failed).
 - **Check P, full page** (exploratory): of {{p_pages}} pages that passed the date lock, {{p_later}} described a later
   event; most later dates were page furniture ({{p_furniture}} of {{p_flagged}} flagged pages: date bars, sidebars,
   related links).
 - **Check E** (exploratory, `exact_match`): its misses are filter misses, not back-dating ({{e_missed_later}} of
   {{e_missed}} have a later `published_date`).
 
-**Leak counts** (case level; after the logged archive retry is the main count, the initial pass is the sensitivity):
+**Leak counts** (case level; the pre-registered initial pass is the primary count, after the logged archive retry is
+the update):
 
 {{leak_count_table}}
 
@@ -71,7 +73,8 @@ post-hoc AI-assisted review (ChatGPT agent); {{sr_unclear}} of {{sr_rows}} rows 
 the finance check returned a result dated after the cutoff; that review found {{sr_fin_reviewer_leaks}} page whose current
 version leaks the outcome. What covers the gap, partly: our page-date check (kept {{dt_results_pagecheck}} of
 {{dt_results_filter}} filtered results in the date test; date-test valid evidence lost: {{dt_lost_pagecheck}} of
-{{dt_valid_total}} with it, {{dt_lost_filter}} with the filter alone); the drift monitor, which re-reads October radar
+{{dt_valid_total}} with it (initial pass), {{dt_lost_filter}} with the filter alone; after the retry
+{{dt_lost_pagecheck_retry}} and {{dt_lost_filter_retry}} of {{dt_valid_total_retry}}); the drift monitor, which re-reads October radar
 pages daily ({{drift_phrase}}); and Wayback Machine checks, with failed lookups retried and logged
 ({{dt_retry_urls}} in the date test, {{fin_retry_urls}} in the finance check).
 
@@ -163,8 +166,8 @@ line-number citing let code, not the model, decide every number. We would ask fo
 India's CPI arrives about {{release_lag}} days after the month ends. Forecasting it from the web means replaying past
 months, and a replay that reads a page published after its cutoff looks better than it could ever be live. El Lahib et
 al. ({{lahib_year}}, arXiv {{lahib_arxiv}}) found at least one retrieved page containing major post-cutoff leakage for
-{{lahib_pct}} of Google-audited questions, after {{lahib_queries}} queries and about {{lahib_urls}} URLs each; our {{dt_nodates_retry}}/{{dt_cases}}
-after the logged archive retry ({{dt_nodates}}/{{dt_cases}} on the initial pass) is per search task, so the rates are not directly comparable. So we built a nowcast that tests, rather than assumes,
+{{lahib_pct}} of Google-audited questions, after {{lahib_queries}} queries and about {{lahib_urls}} URLs each; our {{dt_nodates}}/{{dt_cases}}
+on the pre-registered initial pass ({{dt_nodates_retry}}/{{dt_cases}} after the logged archive retry) is per search task, so the rates are not directly comparable. So we built a nowcast that tests, rather than assumes,
 Tavily's date controls and measures what they cost.
 
 ## Related work
@@ -204,7 +207,8 @@ research teams:** designed for event studies and backtests that must not see the
 investment advice.
 
 ## Scoreboard
-{{replay_span}} replay, rules frozen before scoring (`results/score_lock.json`): Shadow CPI v1 {{mae_c}} pp mean miss,
+{{replay_span}} replay, pre-registered, with one disclosed post-scoring correction ({{mae_c_before}} → {{mae_c}};
+`results/score_lock.json`): Shadow CPI v1 {{mae_c}} pp mean miss,
 trend only {{mae_trend}}, repeat-last-month {{mae_b1}}. On the {{poll_months}} poll months: {{mae_poll_c}} vs the
 poll's {{mae_poll}}, about a tie. The {{range_level}} range held in {{inside}} of {{months}} months. v2 was not
 better ({{mae_v2}}).

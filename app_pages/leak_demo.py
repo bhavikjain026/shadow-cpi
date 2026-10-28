@@ -154,7 +154,7 @@ def show_case(c):
     search_column(right, LOCKED, LOCKED_NOTE, c["locked"], c["test"], f"{c['id']}-locked")
 
 
-HERO_HEIGHT = 150          # title row + cards: measured at 390 px and 1440 px wide ("content" sizing left extra space)
+HERO_HEIGHT = 204          # title row + cards + a two-line update: content 193-198 px at 375-600 px wide
 HERO_FONT ="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=JetBrains+Mono:wght@600&display=swap"
 HERO_HTML = """<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="{font}"><style>
 :root {{ --ink: #09090b; --muted: #52525b; --line: #e4e4e7; }}       /* no color-scheme: it paints an opaque canvas */
@@ -169,9 +169,11 @@ html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 1
 .label {{ color: var(--muted); font-size: 0.875rem; margin-top: 4px; }}
 .arrow {{ align-self: center; color: var(--muted); font-size: 1.25rem; }}
 .gap {{ width: 8px; }}
+.update {{ color: var(--muted); font-size: 0.8125rem; margin: 6px 0 0; }}
 @media (max-width: 520px) {{
   .row {{ gap: 6px; }} .gap {{ width: 2px; }} .side {{ padding: 8px 10px; }}
   .num {{ font-size: 1.375rem; }} .label {{ font-size: 0.75rem; }} .arrow {{ font-size: 1rem; }}
+  .update {{ font-size: 0.75rem; }}
 }}
 </style></head><body>
 <p class="title">{title}</p>
@@ -182,6 +184,7 @@ html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 1
   <div class="gap" aria-hidden="true"></div>
   <div class="side cost" id="cost"><div class="num">{missed}/{quotes}</div><div class="label">{cost_label}</div></div>
 </div>
+<p class="update" id="update">{update}</p>
 <script>
 (function () {{
   // Match the app's theme when the parent page is readable (same origin); else prefers-color-scheme above.
@@ -199,6 +202,7 @@ html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 1
 
 DATE_TEST = "results/date_field_test.json"
 DATE_LOCKED_ARM = "C"                         # tools/build_leak_demo.py TESTS["date"]["locked"]
+FIELD_REPORT = "results/field_report.json"
 
 
 def date_test_cost():
@@ -208,20 +212,26 @@ def date_test_cost():
 
 
 def hero(t):
-    """One titled row (date test): 'x/n → y/n' cases leaked (after retry), then the date test's own cost of the time
-    lock (initial pass), all from the results files. The markup is the final state: no count, no hidden start state."""
+    """One titled row (date test): 'x/n → y/n' cases leaked on the pre-registered initial pass (the primary result),
+    then the date test's own cost of the time lock (initial pass), then one line with the update after the logged
+    archive retry, all from the results files. The markup is the final state: no count, no hidden start state."""
     import html
     d = t["date"]
-    o, k, n = int(d["open"]["retry"]), int(d["locked"]["retry"]), int(d["cases"])
+    o, k, n = int(d["open"]["first"]), int(d["locked"]["first"]), int(d["cases"])
+    ro, rk = int(d["open"]["retry"]), int(d["locked"]["retry"])
+    failed = int(read_json(FIELD_REPORT)["date_test"]["retry"]["failed_urls"])
     missed, quotes = date_test_cost()
-    leaked = "cases leaked (after retry)"
+    leaked = "cases leaked (pre-registered)"
+    update = (f"Update: {ro}/{n} with no time lock after retrying the {failed} archive lookups that had failed; "
+              f"{rk}/{n} with the time lock.")
     st.iframe(HERO_HTML.format(
         font=HERO_FONT, open=o, locked=k, n=n, missed=missed, quotes=quotes,
-        title=html.escape(f"Date test · {n} past cases"),
+        title=html.escape(f"Date test · {n} past cases · pre-registered initial pass"),
         open_label=html.escape(f"{OPEN}: {leaked}"), locked_label=html.escape(f"{LOCKED}: {leaked}"),
-        cost_label="Cost: valid evidence dropped (initial pass)",
-        aria=html.escape(f"Date test, {n} past cases. {OPEN}: {o}/{n} {leaked}. {LOCKED}: {k}/{n}. "
-                         f"Cost: {missed} of {quotes} valid evidence dropped (initial pass).")),
+        cost_label="Cost: valid evidence dropped (initial pass)", update=html.escape(update),
+        aria=html.escape(f"Date test, {n} past cases, pre-registered initial pass. {OPEN}: {o}/{n} {leaked}. "
+                         f"{LOCKED}: {k}/{n}. Cost: {missed} of {quotes} valid evidence dropped (initial pass). "
+                         f"{update}")),
         height=HERO_HEIGHT)
 
 
@@ -233,9 +243,10 @@ def totals(t, n):
     rows = []
     for label, x in (("Date test (cases with a confirmed leak)", d), ("Finance check (events with a confirmed leak)", f)):
         n = x["cases"]
-        rows.append({"Test": label, "No time lock": cell(x["open"]["first"], n, x["open"]["first_wilson95"]),
+        rows.append({"Test": label,
+                     "No time lock (pre-registered)": cell(x["open"]["first"], n, x["open"]["first_wilson95"]),
                      "No lock, after retry": cell(x["open"]["retry"], n, x["open"]["retry_wilson95"]),
-                     "Tavily time lock": cell(x["locked"]["first"], n, x["locked"]["first_wilson95"]),
+                     "Tavily time lock (pre-registered)": cell(x["locked"]["first"], n, x["locked"]["first_wilson95"]),
                      "Time lock, after retry": cell(x["locked"]["retry"], n, x["locked"]["retry_wilson95"])})
     lock_table(rows, lambda row, col: "open" if col.startswith("No ") else "lock" if "ime lock" in col else None)
     st.markdown(f"**The cost of strictness.** The time lock also drops good evidence: the dated search missed "

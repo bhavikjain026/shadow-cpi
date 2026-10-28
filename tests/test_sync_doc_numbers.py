@@ -61,15 +61,24 @@ def test_every_key_resolves(values):
 
 
 def test_readme_top_keeps_checks_apart(values):
-    """The headline table: date test and finance check in separate rows, never summed, initial pass in a footnote."""
+    """The headline table: the pre-registered initial pass is the primary count, date test and finance check in
+    separate rows, never summed (on either pass); the update after the archive retry follows, explained in a footnote."""
     out = S.render((ROOT / "docs/templates/README.md").read_text(), values)
     top = out.split("## Time-locked search leakage")[0]
-    v = {k: int(values[k]) for k in ("dt_cases", "fin_events", "dt_dated_retry", "fin_dated_retry",
-                                     "dt_nodates_retry", "fin_nodates_retry")}
-    assert f"| Date test ({v['dt_cases']} cases) | **{v['dt_nodates_retry']} of {v['dt_cases']}** |" in top
-    assert f"| {v['fin_dated_retry']} of {v['fin_events']} |" in top
+    v = {k: int(values[k]) for k in ("dt_cases", "fin_events", "dt_nodates", "dt_dated", "fin_nodates", "fin_dated",
+                                     "dt_dated_retry", "fin_dated_retry", "dt_nodates_retry", "fin_nodates_retry",
+                                     "rr_dt_failed")}
+    assert "| Leaks, measured (pre-registered initial pass) |" in top
+    assert (f"| Date test ({v['dt_cases']} cases) | **{v['dt_nodates']} of {v['dt_cases']}** "
+            f"(Wilson {values['dt_nodates_w']}) | **{v['dt_dated']} of {v['dt_cases']}** (Wilson {values['dt_dated_w']}) |"
+            in top)
+    assert (f"| {v['fin_nodates']} of {v['fin_events']} ({values['fin_nodates_w']}) | {v['fin_dated']} of "
+            f"{v['fin_events']} ({values['fin_dated_w']}) |" in top)
+    assert (f"{v['dt_nodates_retry']} of {v['dt_cases']} with no dates (Wilson {values['dt_nodates_retry_w']}) after "
+            f"retrying the {v['rr_dt_failed']} archive lookups that had failed") in " ".join(top.split())
     total = v["dt_cases"] + v["fin_events"]
-    for summed in (v["dt_dated_retry"] + v["fin_dated_retry"], v["dt_nodates_retry"] + v["fin_nodates_retry"]):
+    for summed in (v["dt_dated"] + v["fin_dated"], v["dt_nodates"] + v["fin_nodates"],
+                   v["dt_dated_retry"] + v["fin_dated_retry"], v["dt_nodates_retry"] + v["fin_nodates_retry"]):
         assert not re.search(rf"\b{summed} (of|/) {total}\b", out)
     details = top.split("<details>")[1].split("</details>")[0]
     assert values["dt_leak_rule"] in details and values["fin_leak_rule"] in details and "Initial pass" in details
@@ -179,8 +188,11 @@ def test_devpost_opens_with_the_finding_and_the_reuse(values):
     out = S.render((ROOT / "docs/templates/devpost.md").read_text(), values)
     lines = re.search(r"<!-- headline:start -->(.*?)<!-- headline:end -->", out, re.S).group(1).strip().splitlines()
     assert len(lines) == 2 and len(" ".join(lines).split()) <= 40
-    assert f"{values['dt_nodates_retry']} of {values['dt_cases']}" in lines[0]
-    assert f"{values['dt_dated_retry']} of {values['dt_cases']}" in lines[0]
+    first, update = lines[0].split("Update:")
+    assert "pre-registered" in first
+    assert f"no dates, {values['dt_nodates']} of {values['dt_cases']}" in first
+    assert f"`filter_by_published_date`, {values['dt_dated']} of {values['dt_cases']}" in first
+    assert f"{values['dt_nodates_retry']} of {values['dt_cases']} after retrying" in update
     assert all(w in lines[1] for w in ("timelocked_search", "extract_as_of", "Colab"))
 
 
@@ -207,3 +219,72 @@ def test_video_reuse_shot():
     assert len(shot[3].strip('"').replace("·", " ").split()) <= 10
     m, s = rows[-1][0].split("-")[1].split(":")
     assert int(m) * 60 + int(s) <= 170
+
+
+def test_no_doc_calls_the_preregistered_result_a_sensitivity():
+    """The pre-registered initial pass is the primary result everywhere; nothing labels it a sensitivity."""
+    docs = [*S.TEMPLATES, *S.TEMPLATES.values(), "docs/video_script.md", "tools/sync_doc_numbers.py",
+            "app_pages/leak_demo.py", "app_pages/field_report.py"]
+    hits = [d for d in docs if re.search(r"sensitivity", (ROOT / d).read_text(), re.I)]
+    assert hits == []
+
+
+def test_check_p_flagged_pages_split_exactly(values):
+    """README: the flagged pages are stated as the sum of their four outcomes, later content included."""
+    n = {k: int(values[k]) for k in ("p_flagged", "p_later", "p_furniture", "p_benign", "p_unclear")}
+    assert n["p_flagged"] == n["p_later"] + n["p_furniture"] + n["p_benign"] + n["p_unclear"]
+    out = " ".join(S.render((ROOT / "docs/templates/README.md").read_text(), values).split())
+    assert (f"{n['p_flagged']} pages held a later date somewhere in the text, mostly as page furniture; each has one "
+            f"outcome: {n['p_later']} later content (the page just counted), {n['p_furniture']} in date bars, sidebars "
+            f"and related links, {n['p_benign']} benign, {n['p_unclear']} unclear.") in out
+
+
+def test_replay_score_names_its_post_scoring_correction(values):
+    import json
+    sl = json.loads((ROOT / "results/score_lock.json").read_text())
+    assert values["mae_c_before"] == f"{sl['history'][-1]['mae']['c']:.3f}" != values["mae_c"]
+    phrase = (f"pre-registered, with one disclosed post-scoring correction ({values['mae_c_before']} → "
+              f"{values['mae_c']}")
+    for tmpl in ("docs/templates/README.md", "docs/templates/devpost.md"):
+        out = " ".join(S.render((ROOT / tmpl).read_text(), values).split())
+        assert phrase in out and "frozen before scoring" not in out, tmpl
+
+
+def test_valid_evidence_lost_always_says_which_pass(values):
+    """Every 'x of 40' valid-evidence count names the initial pass (the after-retry total differs)."""
+    for tmpl in [*S.TEMPLATES.values()]:
+        out = " ".join(S.render((ROOT / tmpl).read_text(), values).split())
+        for k in ("dt_lost_filter", "dt_lost_pagecheck"):
+            for m in re.finditer(rf"\b{values[k]} of (the date test's )?{values['dt_valid_total']}\b", out):
+                assert "initial pass" in out[m.start():m.end() + 160], (tmpl, out[m.start():m.end() + 160])
+
+
+def test_python_requirement_line(values):
+    import json
+    assert values["python_min"] == "3.10"
+    assert values["python_tested"] == json.loads((ROOT / "results/python_env.json").read_text())["python"]
+    out = S.render((ROOT / "docs/templates/README.md").read_text(), values)
+    assert f"Python {values['python_min']}+ (tested on {values['python_tested']})." in out
+
+
+SPOKEN = {**dict(enumerate("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen "
+                           "fifteen sixteen seventeen eighteen nineteen twenty".split())), 40: "forty"}
+
+
+def test_video_leak_shot_matches_the_results(values):
+    """The video script is hand-typed: its leak shot leads with the pre-registered initial pass, gives the retry as
+    the update, and labels the valid-evidence cost with its pass; every count matches the results files."""
+    v = {k: int(values[k]) for k in ("dt_cases", "dt_nodates", "dt_dated", "dt_nodates_retry", "rr_dt_failed",
+                                     "dt_lost_filter", "dt_valid_total")}
+    shot = next(l for l in (ROOT / "docs/video_script.md").read_text().splitlines() if "Field Report leak table" in l)
+    w = {k: SPOKEN[n] for k, n in v.items()}
+    assert (f"With no dates, {w['dt_nodates']} of {w['dt_cases']} searches met our confirmed-leak rule; "
+            f"{w['dt_nodates_retry']} after we retried {w['rr_dt_failed']} archive lookups that had failed.") in shot
+    assert f"published-date filter: {w['dt_dated']} of {w['dt_cases']}." in shot
+    assert (f"The cost, on the initial pass: the filter dropped {w['dt_lost_filter']} of {w['dt_valid_total']} "
+            "pieces of valid evidence.") in shot
+    lo, hi = (values["dt_nodates_w"].replace("–", "-"), values["dt_dated_w"].replace("–", "-"))
+    assert (f'"{v["dt_nodates"]}/{v["dt_cases"]} → {v["dt_dated"]}/{v["dt_cases"]}, pre-registered '
+            f'(95%: {lo} → {hi})"') in shot
+    assert f'"Update: {v["dt_nodates_retry"]}/{v["dt_cases"]} after retrying {v["rr_dt_failed"]} failed' in shot
+    assert f'"Cost: {v["dt_lost_filter"]}/{v["dt_valid_total"]} valid evidence dropped (initial pass)"' in shot
