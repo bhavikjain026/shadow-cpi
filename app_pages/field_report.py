@@ -1,5 +1,10 @@
 """Tavily field report: what we measured about Tavily's search parameters, for Tavily's engineers. Every number is read
 from results/field_report.json (built offline by tools/build_field_report.py from the committed results files)."""
+import html
+from datetime import date
+
+import altair as alt
+import pandas as pd
 import streamlit as st
 
 from app_pages.common import header, lock_table, read_json
@@ -21,12 +26,77 @@ def wilson(w):
     return f"{pct(w[0])}–{pct(w[1])}" if w and w[0] is not None else "—"
 
 
+def day(d):
+    return f"{date.fromisoformat(d).day} {date.fromisoformat(d):%b %Y}" if d else "none"
+
+
+NO_DATES, TIME_LOCK = "No dates", "Tavily time lock"
+RUNS = {"After logged retry": "after logged retry", "Initial pass": "first pass"}
+
+
+def leak_chart(rows):
+    """Leak rate, no dates vs Tavily time lock (dates + filter_by_published_date), the date test and the finance check
+    as separate groups (never summed), Wilson 95% intervals as error bars. Every value from the leakage rows of
+    results/field_report.json."""
+    run = st.radio("Run", list(RUNS), horizontal=True, label_visibility="collapsed",
+                   help="The initial pass is the pre-registered result; the retry only recovered Wayback lookups that "
+                        "had failed on the network (logged).")
+    data = [{"Check": x["check"].split(" (")[0],
+             "Setting": NO_DATES if x["setting"] == "no dates" else TIME_LOCK,
+             "Leak rate": x["leak_rate"], "lo": x["wilson95"][0], "hi": x["wilson95"][1],
+             "Count": f"{x['leaks']} of {x['n']}", "Interval": wilson(x["wilson95"])}
+            for x in rows if x["run"] == RUNS[run] and x["check"].startswith(("Date test", "Finance check"))
+            and (x["setting"] == "no dates" or x["setting"].endswith("filter_by_published_date"))]
+    if not data:
+        return
+    order = [NO_DATES, TIME_LOCK]
+    base = alt.Chart(pd.DataFrame(data)).encode(
+        x=alt.X("Check:N", title=None, sort=None, axis=alt.Axis(labelAngle=0, labelFontSize=13, ticks=False)),
+        xOffset=alt.XOffset("Setting:N", sort=order))
+    y = alt.Y("Leak rate:Q", title="Leak rate (Wilson 95%)", scale=alt.Scale(domain=[0, 1]),
+              axis=alt.Axis(format="%", tickCount=5))
+    tip = ["Check:N", "Setting:N", "Count:N", alt.Tooltip("Leak rate:Q", format=".0%"), "Interval:N"]
+    bars = base.mark_bar(cornerRadiusTopLeft=3, cornerRadiusTopRight=3, width={"band": 0.8}).encode(
+        y=y, color=alt.Color("Setting:N", sort=order, title=None, legend=alt.Legend(orient="top"),
+                             scale=alt.Scale(domain=order, range=["#dc2626", "#2563eb"])), tooltip=tip)
+    err = base.mark_rule(strokeWidth=1.5, color="#71717a").encode(y="lo:Q", y2="hi:Q", tooltip=tip)
+    caps = base.mark_tick(thickness=1.5, size=10, color="#71717a").encode(y="hi:Q")
+    st.altair_chart((bars + err + caps).properties(height=260), width="stretch")
+    # counts as text in the page theme (chart text marks cannot reach 4.5:1 in both themes)
+    groups = dict.fromkeys(x["Check"] for x in data)
+    st.markdown("  \n".join(f"**{g}:** " + " · ".join(
+        f"{'no dates' if x['Setting'] == NO_DATES else x['Setting']} {x['Count']} ({x['Interval']})"
+        for x in data if x["Check"] == g) for g in groups))
+    st.caption(f"{run}; Wilson 95% intervals in brackets. Leak = a result the Wayback Machine shows appeared after "
+               "the cutoff. Tavily time lock = start_date + end_date + filter_by_published_date. Each test is its own "
+               "group; nothing is summed.")
+
+
+def r196_timeline(a):
+    """R196 (demo, n=1): Tavily's date, the cutoff, the page date, and what extract_as_of returned, from
+    results/asof_demo_r196.json."""
+    ev, reason = a["evidence"], a["as_of"]["provenance"]["reason"]
+    steps = [("", "Tavily date", day(ev["tavily_date"])), ("cut", "Cutoff", day(a["cutoff"])),
+             ("", "Page edited", day(ev["page_date"])), ("", "extract_as_of", reason or "as-of copy served")]
+    st.markdown(f"**{html.escape(a['row_id'])}: one result up close** · _{a['label']}_")
+    st.html('<ol class="r196">' + "".join(
+        f'<li class="{c}"><span class="k">{html.escape(k)}</span><span class="v">{html.escape(v)}</span></li>'
+        for c, k, v in steps) + "</ol>")
+
+
 header("Tavily field report", "What we measured about Tavily's search parameters while building Shadow CPI, written "
                               "for Tavily's engineers. Development data (Jan–Sep 2026); exploratory parts are labelled.")
 r = read_json("results/field_report.json")
 if not r:
     st.info("Not built yet: run `python tools/build_field_report.py` (offline, 0 credits).")
     st.stop()
+
+# ---------- lead: one chart, then one case up close ----------
+if r.get("leakage"):
+    leak_chart(r["leakage"]["rows"])
+r196 = read_json("results/asof_demo_r196.json")
+if r196:
+    r196_timeline(r196)
 
 # ---------- summary (six findings, each read from its file) ----------
 dt1, dt2 = r["date_test"]["first_pass"]["arms"], r["date_test"]["after_retry"]["arms"]
@@ -52,9 +122,14 @@ summary = [
     (f"Who should write the searches: best arm ({top['writer']})", f"{top['recall']} of {top['of']} known changes",
      "results/field_report.json"),
 ]
-lock_table([{"Finding": a, "Number": b, "File": c} for a, b, c in summary],
-           lambda row, col: None if col == "File" else "open" if "no time lock" in row["Finding"]
+lock_table([{"Finding": a, "Number": b} for a, b, _ in summary],
+           lambda row, col: "open" if "no time lock" in row["Finding"]
            else "lock" if "time lock" in row["Finding"] else None)
+with st.expander("Sources"):
+    files = [("Chart above", "results/field_report.json")] + ([("R196 timeline", "results/asof_demo_r196.json")]
+                                                               if r196 else [])
+    st.markdown("\n".join(f"- {a}: `{c}`" for a, _, c in summary) + "\n"
+                + "\n".join(f"- {a}: `{c}`" for a, c in files))
 
 # ---------- time-locked search leakage (first block) ----------
 lk = r.get("leakage")

@@ -2,6 +2,7 @@
 searched with no time lock and with Tavily's time lock. Built only from saved results (results/leak_demo.json, made
 offline by tools/build_leak_demo.py from the date test and the finance check; totals from results/field_report.json
 and results/leakcheck_exact_match.json). The only API calls are the optional live mode, off unless RUN_LIVE_ENABLED."""
+import re
 from datetime import date, timedelta
 
 import streamlit as st
@@ -16,6 +17,9 @@ EXAMPLE_RULE = ("a Wayback-confirmed leak with no time lock, and every time-lock
                 "cutoff (no UNCHECKED)")
 UNCHECKED_HELP = "no archive check was made for this result"
 OK_LABELS = ("confirmed pre-cutoff", "valid")
+# Human case labels "<item> · <month year>", built from each case's kind, query and cutoff (display only).
+ITEMS = {"fuel": "Petrol price hike", "milk": "Milk price hike", "electricity": "Electricity tariff hike",
+         "lpg": "LPG price hike", "bus": "Bus fare hike", "rbi": "RBI decision"}
 
 
 def pct(x):
@@ -68,7 +72,25 @@ def badge_help(r):
 
 
 def case_title(c):
-    return f"{c['id']} · {c['test_name']} · {c['name']} · cutoff {human(c['cutoff'])} · “{c['query']}”"
+    """'Milk price hike, Kerala · Jun 2026': the item, its place when the query names one (not 'India'), and the
+    cutoff's month."""
+    if c["kind"] in ITEMS:
+        what = ITEMS[c["kind"]]
+    else:                                           # company results: 'TCS Q1 results'
+        q = re.search(r"\b(Q\d) FY\d+", c["query"])
+        what = f"{c['name']} {q.group(1)} results" if q else f"{c['name']} results"
+    m = re.search(r"\bhike (.+?) [A-Z][a-z]+ \d{4}$", c["query"])
+    where = f", {m.group(1)}" if m and m.group(1) != "India" else ""
+    return f"{what}{where} · {date.fromisoformat(c['cutoff']):%b %Y}"
+
+
+def case_id(c):
+    """The case ID as small grey text, after a human label."""
+    return f":gray[:small[{c['id']}]]"
+
+
+def chip(text, colour="gray"):
+    return f":{colour}-badge[{text.replace('[', '(').replace(']', ')')}]"
 
 
 def wayback(label):
@@ -76,12 +98,32 @@ def wayback(label):
     return label.replace(" (Wayback)", "").replace(", Wayback)", ")")
 
 
-def result_line(r, test):
-    page = f" · Page: {human(r['page_date'])}" if test == "date" else ""
-    first = (f" (initial pass: {wayback(r['label_first_pass'])})"
-             if r.get("label_first_pass") and r["label_first_pass"] != r["label"] else "")
-    return (f"{badge(r)} {link(r['title'], r['url'])}  \nTavily: **{human(r['published_date'])}**{page} · "
-            f"Wayback: **{wayback(r['label'])}**{first}")
+def chips(r, test):
+    """One row of small chips: Tavily date · Page date (date test only) · Wayback verdict, then any note."""
+    row = [chip(f"Tavily: {human(r['published_date'])}")]
+    if test == "date":
+        row.append(chip(f"Page: {human(r['page_date'])}"))
+    row.append(chip(f"Wayback: {wayback(r['label'])}"))
+    if r.get("leak"):
+        row.append(chip(f"Published {r['days_after_cutoff']} days after the cutoff", "red"))
+    if r.get("label_first_pass") and r["label_first_pass"] != r["label"]:
+        row.append(chip(f"Initial pass: {wayback(r['label_first_pass'])}"))
+    return " ".join(row)
+
+
+def card_kind(r):
+    return "leak" if r.get("leak") else "ok" if r["label"].startswith(OK_LABELS) else "unchecked"
+
+
+def result_card(r, test, key):
+    """A compact result card: badge + headline link, a chip row, the excerpt behind 'Show excerpt'. LEAK / OK cards get
+    a subtle tint and a 3px left border (app_pages/style.css, .st-key-card-leak / -ok)."""
+    with st.container(border=True, key=f"card-{card_kind(r)}-{key}"):
+        st.markdown(f"{badge(r)} {link(r['title'], r['url'])}", help=badge_help(r))
+        st.markdown(chips(r, test))
+        if r.get("quote"):
+            with st.expander("Show excerpt"):
+                st.markdown(f"> {r['quote']}")
 
 
 def column_head(title, note):
@@ -89,17 +131,13 @@ def column_head(title, note):
     st.caption(note)
 
 
-def search_column(col, title, note, s, test):
+def search_column(col, title, note, s, test, key):
     with col:
         column_head(title, note)
         if not s["results"]:
             st.caption("No results.")
-        for r in s["results"]:
-            if r.get("leak"):
-                st.error(result_line(r, test) + f"  \nPublished **{r['days_after_cutoff']} days after the cutoff**."
-                         + (f"  \n> {r['quote']}" if r.get("quote") else ""))
-            else:
-                st.markdown(result_line(r, test), help=badge_help(r))
+        for i, r in enumerate(s["results"]):
+            result_card(r, test, f"{key}-{i}")
         with st.expander("Request sent, credits, latency"):
             st.json(s["request"], expanded=True)
             st.caption(f"The API key travels in a request header and is never part of the body. Credits "
@@ -108,23 +146,24 @@ def search_column(col, title, note, s, test):
 
 
 def show_case(c):
-    st.markdown(f"#### {case_title(c)}")
-    if c["test"] == "finance":
-        st.caption("Page dates not read in the finance check.")
+    st.markdown(f"#### {case_title(c)} {case_id(c)}")
+    st.caption(f"{c['test_name'].capitalize()} · cutoff {human(c['cutoff'])} · query “{c['query']}”"
+               + (" · Page dates not read in the finance check." if c["test"] == "finance" else ""))
     left, right = st.columns(2)
-    search_column(left, OPEN, OPEN_NOTE, c["open"], c["test"])
-    search_column(right, LOCKED, LOCKED_NOTE, c["locked"], c["test"])
+    search_column(left, OPEN, OPEN_NOTE, c["open"], c["test"], f"{c['id']}-open")
+    search_column(right, LOCKED, LOCKED_NOTE, c["locked"], c["test"], f"{c['id']}-locked")
 
 
 # The app's only JavaScript animation: anime.js (MIT), exact version from cdnjs with its SRI hash (THIRD_PARTY_NOTICES.md).
 ANIME_JS = ("https://cdnjs.cloudflare.com/ajax/libs/animejs/4.5.0/anime.umd.min.js",
             "sha512-dnhflec5WaXvpVYrt0oWfe0iUyWpjNiZbxkjrhNu9WAWWHLX7VqqyxCZHL7dWCrwj6lN+XGN9FtiWIBgX2b/PA==")
-HERO_HEIGHT = 128          # content is 104 px at 390 px wide and 120 px at 1440 px ("content" sizing left 150 px)
+HERO_HEIGHT = 150          # title row + cards: measured at 390 px and 1440 px wide ("content" sizing left extra space)
 HERO_FONT ="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=JetBrains+Mono:wght@600&display=swap"
 HERO_HTML = """<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="{font}"><style>
 :root {{ --ink: #09090b; --muted: #52525b; --line: #e4e4e7; }}       /* no color-scheme: it paints an opaque canvas */
 @media (prefers-color-scheme: dark) {{ :root {{ --ink: #fafafa; --muted: #a1a1aa; --line: #27272a; }} }}
 html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 15px/1.4 Inter, sans-serif; }}
+.title {{ font-weight: 600; font-size: 0.9375rem; margin: 0 0 8px; }}
 .row {{ display: flex; align-items: stretch; gap: 8px; }}
 .side {{ flex: 1 1 0; min-width: 0; border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }}
 .open {{ background: rgba(255, 75, 75, 0.12); }}                      /* LOCK/OPEN colour meaning, as common.OPEN_CSS */
@@ -132,14 +171,20 @@ html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 1
         font-variant-numeric: tabular-nums; letter-spacing: -0.03em; white-space: nowrap; }}
 .label {{ color: var(--muted); font-size: 0.875rem; margin-top: 4px; }}
 .arrow {{ align-self: center; color: var(--muted); font-size: 1.25rem; }}
-.sub {{ color: var(--muted); font-size: 0.875rem; margin: 8px 0 0; }}
+.gap {{ width: 8px; }}
+@media (max-width: 520px) {{
+  .row {{ gap: 6px; }} .gap {{ width: 2px; }} .side {{ padding: 8px 10px; }}
+  .num {{ font-size: 1.375rem; }} .label {{ font-size: 0.75rem; }} .arrow {{ font-size: 1rem; }}
+}}
 </style></head><body>
+<p class="title">{title}</p>
 <div class="row" role="img" aria-label="{aria}">
   <div class="side open"><div class="num"><span id="leaked">{open}</span>/{n}</div><div class="label">{open_label}</div></div>
   <div class="arrow" aria-hidden="true">→</div>
   <div class="side locked" id="locked"><div class="num">{locked}/{n}</div><div class="label">{locked_label}</div></div>
+  <div class="gap" aria-hidden="true"></div>
+  <div class="side cost" id="cost"><div class="num">{missed}/{quotes}</div><div class="label">{cost_label}</div></div>
 </div>
-<p class="sub" id="sub">{sub}</p>
 <script src="{js}" integrity="{sri}" crossorigin="anonymous"></script>
 <script>
 (function () {{
@@ -155,7 +200,7 @@ html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 1
   // One count, once. Final values are already in the markup: no script, reduced motion or a blocked CDN shows them.
   if (!window.anime || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var el = document.getElementById('leaked'), to = Number(el.textContent), o = {{ v: 0 }};
-  var later = [document.getElementById('locked'), document.getElementById('sub')];
+  var later = [document.getElementById('locked'), document.getElementById('cost')];
   // Start only on a real frame (a background tab never zeroes the number), and end on the file's values by 2.5 s
   // whatever the frame rate, so the hero never rests on anything but the results file.
   requestAnimationFrame(function () {{
@@ -164,7 +209,7 @@ html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 1
     var tl = anime.createTimeline({{ defaults: {{ ease: 'outExpo' }} }})
       .add(o, {{ v: to, duration: 900, onUpdate: function () {{ el.textContent = Math.round(o.v); }} }})
       .add(later[0], {{ opacity: [0, 1], translateY: [6, 0], duration: 450 }}, '-=250')
-      .add(later[1], {{ opacity: [0, 1], duration: 450 }}, '-=200');
+      .add(later[1], {{ opacity: [0, 1], translateY: [6, 0], duration: 450 }}, '-=200');
     setTimeout(function () {{
       try {{ tl.pause(); }} catch (e) {{}}
       el.textContent = to;
@@ -176,22 +221,21 @@ html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 1
 
 
 def hero(t):
-    """The headline 'x/n → y/n' (date test, after retry) from the same totals as summary_line, counted up once."""
+    """One titled row (date test, after retry): 'x/n → y/n' cases leaked, then the cost of the time lock (check E),
+    all from the results files, counted up once."""
     import html
-    d = t["date"]
-    o, k, n = int(d["open"]["retry"]), int(d["locked"]["retry"]), int(d["cases"])
-    st.iframe(HERO_HTML.format(
-        font=HERO_FONT, js=ANIME_JS[0], sri=ANIME_JS[1], open=o, locked=k, n=n,
-        open_label=html.escape(OPEN), locked_label=html.escape(LOCKED), sub="cases leaked (after retry)",
-        aria=html.escape(f"{OPEN}: {o}/{n} cases leaked (after retry). {LOCKED}: {k}/{n}.")),
-        height=HERO_HEIGHT)
-
-
-def summary_line(t):
     d, s = t["date"], t["strictness"]
-    st.markdown(f"**No time lock: {d['open']['retry']}/{d['cases']} cases leaked (after retry). Tavily time lock: "
-                f"{d['locked']['retry']}/{d['cases']}. Cost: {s['missed']} of {s['quotes']} known-good quotes "
-                f"missed.** [Totals below](#all-cases)")
+    o, k, n = int(d["open"]["retry"]), int(d["locked"]["retry"]), int(d["cases"])
+    missed, quotes = int(s["missed"]), int(s["quotes"])
+    leaked = "cases leaked (after retry)"
+    st.iframe(HERO_HTML.format(
+        font=HERO_FONT, js=ANIME_JS[0], sri=ANIME_JS[1], open=o, locked=k, n=n, missed=missed, quotes=quotes,
+        title=html.escape(f"Date test · {n} past cases"),
+        open_label=html.escape(f"{OPEN}: {leaked}"), locked_label=html.escape(f"{LOCKED}: {leaked}"),
+        cost_label="Cost: valid evidence dropped",
+        aria=html.escape(f"Date test, {n} past cases. {OPEN}: {o}/{n} {leaked}. {LOCKED}: {k}/{n}. "
+                         f"Cost: {missed} of {quotes} valid evidence dropped.")),
+        height=HERO_HEIGHT)
 
 
 def totals(t, n):
@@ -210,7 +254,8 @@ def totals(t, n):
     st.markdown(f"**The cost of strictness.** The time lock also drops good evidence: the dated search missed "
                 f"**{s['missed']} of {s['quotes']}** known-good quotes that the undated search found "
                 f"({wilson(s['wilson95'])}, Wilson 95%).")
-    st.page_link("app_pages/field_report.py", label="Field Report: every measurement, with its file", icon="🧪")
+    st.page_link("app_pages/field_report.py", label="Field Report: every measurement, with its file",
+                 icon=":material/science:")
     return d, f, s
 
 
@@ -284,15 +329,15 @@ if not data:
     st.info("Not built yet: run `python tools/build_leak_demo.py` (offline, 0 credits).")
     st.stop()
 hero(data["totals"])
-summary_line(data["totals"])
 by_id = {c["id"]: c for c in data["cases"]}
 shown = examples(data["cases"])
 choice = st.selectbox("Case", ["Examples: " + ", ".join(shown)] + list(by_id),
-                      format_func=lambda k: k if k.startswith("Examples") else case_title(by_id[k]))
-st.caption(f"Default: {EXAMPLES.format(n=len(data['cases']))}. Rule: {EXAMPLE_RULE}. Cases that qualify: "
-           f"{', '.join(shown)}" + (" (only one qualifies, so one is shown)." if len(shown) == 1 else "."))
+                      format_func=lambda k: k if k.startswith("Examples") else f"{case_title(by_id[k])} · {k}")
+with st.expander("How these examples were picked"):
+    st.caption(f"Default: {EXAMPLES.format(n=len(data['cases']))}. Rule: {EXAMPLE_RULE}. Cases that qualify: "
+               f"{', '.join(shown)}" + (" (only one qualifies, so one is shown)." if len(shown) == 1 else "."))
 cases = shown if choice.startswith("Examples") else [choice]
-for tab, cid in zip(st.tabs([case_title(by_id[x]).split(" · “")[0] for x in cases]) if len(cases) > 1
+for tab, cid in zip(st.tabs([f"{case_title(by_id[x])} {case_id(by_id[x])}" for x in cases]) if len(cases) > 1
                     else [st.container()], cases):
     with tab:
         show_case(by_id[cid])

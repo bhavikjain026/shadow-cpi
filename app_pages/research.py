@@ -19,8 +19,8 @@ Shadow CPI locks every search to a date window, re-checks each page's date, and 
 - **Leak checker:** `shadow_cpi.leakcheck.check_result(result, cutoff)` → safe / date_flag / leak (undated pages are
   flagged, not dropped).
 """)
-st.page_link("app_pages/as_of.py", label="As of a date", icon="🗓️")
-st.page_link("app_pages/custody.py", label="Chain of custody", icon="🔗")
+st.page_link("app_pages/as_of.py", label="As of a date", icon=":material/event:")
+st.page_link("app_pages/custody.py", label="Chain of custody", icon=":material/link:")
 
 st.subheader("Beyond CPI: a second domain")
 r = read_json("results/field_report.json")
@@ -37,5 +37,5 @@ if r:
                 f"- **Confirmed leaks** (the same, and the Wayback Machine shows the page appeared after the cutoff), "
                 f"after a network retry of failed lookups: N {an['confirmed_events']}, D {ad['confirmed_events']} of "
                 f"{a['events']}.\n\nDesigned for event studies and backtests that must not see the outcome early.")
-    st.page_link("app_pages/field_report.py", label="Full numbers: Tavily field report", icon="🧪")
+    st.page_link("app_pages/field_report.py", label="Full numbers: Tavily field report", icon=":material/science:")
 st.caption("Research tool, not investment advice.")

@@ -28,7 +28,7 @@ st.markdown("**How it works:** Tavily searches the web, with dates locked, for p
             "Token Factory pulls out only quoted, dated prices → plain code turns them into a CPI estimate with a "
             "range, sealed before release.")
 st.page_link("app_pages/field_report.py", label="Tavily field report",
-             icon="🧪")
+             icon=":material/science:")
 
 # ---------- the October call ----------
 sealed = read_json(f"sealed/{LIVE_MONTH}.json")

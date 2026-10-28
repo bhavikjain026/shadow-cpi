@@ -54,7 +54,7 @@ st.caption("Skeptic: one model-written Tavily search per event, inside the radar
            "was withdrawn, rolled back, stayed or postponed. Code picks the quote. A flag only: it never changes "
            "tiers or effects (v2/DRIFT_PREREG.md, part B).")
 st.page_link("app_pages/custody.py", label="Chain of custody for each number: quote → page → request_id → hash → seal",
-             icon="🔗")
+             icon=":material/link:")
 sc = read_json("results/radar_2026-10_score.json")
 if sc:
     st.subheader("Score")
