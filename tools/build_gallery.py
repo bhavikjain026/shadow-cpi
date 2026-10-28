@@ -121,7 +121,7 @@ def flow_html():
 .arrow {{ font-size: 48px; color: #8c959f; padding: 0 14px; }}
 </style></head><body>
 <h1>From search to seal</h1>
-<div class="sub">The model reads and cites; code owns the dates and every number</div>
+<div class="sub">The model reads and cites; code owns the dates and checks each cited number</div>
 <div class="row">{boxes}</div>
 <div class="foot">Shadow CPI pipeline (docs/pipeline.md)</div>
 </body></html>"""
