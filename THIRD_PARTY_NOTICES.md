@@ -54,3 +54,26 @@ logged, the Tavily request ID). They identify the evidence; they are not republi
 benchmark keeps at most 25 words per page, and the post-hoc AI-assisted review's quotes at most 14 words. Page texts
 saved at fetch time stay local and are not committed (`v2/evidence/pages/` is git-ignored); the ledger keeps each
 page's SHA-256. URLs, titles and quotes belong to their publishers.
+
+## Third-party web content
+
+Some committed files under `results/` and `v2/` contain excerpts of public web pages. The excerpts were returned by
+Tavily or archived by the Wayback Machine, and they are kept only so the published measurements can be checked.
+Copyright in that content stays with the publishers. To ask for removal, open an issue in this repository and name
+the file and the page.
+
+This is the exception to the Quotes paragraph above: the full page texts under `v2/evidence/pages/` stay local, but
+the files below hold longer excerpts than the short attributed quotes.
+
+| Files | What they hold |
+|---|---|
+| `results/date_field_test.json` | page text from the date-field test |
+| `results/finance_lookahead.json` | page text from the finance look-ahead check |
+| `results/lang_date_test.json` | page text from the language and date test |
+| `results/recall_reference_search.json` | search results from the recall reference check |
+| `results/leakcheck_full_page.json` | full-page text from the leak check |
+| `v2/evidence/` | evidence runs, with page excerpts and the quotes cited from them |
+| `v2/radar/` | radar and drift runs, with page excerpts |
+
+Contact details that appear in those excerpts (for example a shop's customer-service email or phone number) are the
+publishers' own, copied from their pages; they are not ours.

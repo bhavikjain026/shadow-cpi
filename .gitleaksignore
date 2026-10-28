@@ -1,0 +1,18 @@
+# Reviewed 2026-10-28: full-history gitleaks scan (--all) found 15 hits, all false positives.
+# The generic-api-key rule matched a field name followed by a hash, not a credential.
+# Format: <commit>:<file>:<rule>:<line>. Fingerprints below cover the pre-publication scan.
+64260b0ea3649433c2821a86e0c6dd04fd6c9efa:v2/ablation/arm_Td_2026-07.json:generic-api-key:2113
+64260b0ea3649433c2821a86e0c6dd04fd6c9efa:v2/ablation/arm_Td_2026-07.json:generic-api-key:3096
+8b75a0707eb990c4ceb3ee641f535ff4b43b0308:data/sample/logs/flight_recorder.jsonl:generic-api-key:1
+8b75a0707eb990c4ceb3ee641f535ff4b43b0308:data/sample/logs/flight_recorder.jsonl:generic-api-key:2
+8b75a0707eb990c4ceb3ee641f535ff4b43b0308:data/sample/logs/flight_recorder.jsonl:generic-api-key:3
+8b75a0707eb990c4ceb3ee641f535ff4b43b0308:data/sample/logs/flight_recorder.jsonl:generic-api-key:4
+8b75a0707eb990c4ceb3ee641f535ff4b43b0308:data/sample/logs/flight_recorder.jsonl:generic-api-key:5
+8b75a0707eb990c4ceb3ee641f535ff4b43b0308:data/sample/logs/flight_recorder.jsonl:generic-api-key:6
+8b75a0707eb990c4ceb3ee641f535ff4b43b0308:data/sample/logs/flight_recorder.jsonl:generic-api-key:7
+8b75a0707eb990c4ceb3ee641f535ff4b43b0308:data/sample/logs/flight_recorder.jsonl:generic-api-key:8
+8b75a0707eb990c4ceb3ee641f535ff4b43b0308:data/sample/logs/flight_recorder.jsonl:generic-api-key:9
+8b75a0707eb990c4ceb3ee641f535ff4b43b0308:data/sample/logs/flight_recorder.jsonl:generic-api-key:10
+8b75a0707eb990c4ceb3ee641f535ff4b43b0308:data/sample/logs/flight_recorder.jsonl:generic-api-key:11
+8b75a0707eb990c4ceb3ee641f535ff4b43b0308:data/sample/logs/flight_recorder.jsonl:generic-api-key:12
+8b75a0707eb990c4ceb3ee641f535ff4b43b0308:data/sample/logs/flight_recorder.jsonl:generic-api-key:13
