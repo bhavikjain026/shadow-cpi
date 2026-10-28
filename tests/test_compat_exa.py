@@ -95,6 +95,17 @@ def test_a_cutoff_is_always_enforced(params):
     assert c.sent == []
 
 
+def test_end_published_date_after_the_snapshot_says_how_to_fix_it():
+    c = Fake(LOCKED)
+    with pytest.raises(TimeLockError) as e:
+        exa_style_search(c, query="q", endPublishedDate="2026-10-09", contents={"snapshotAsOf": "2026-10-07"})
+    assert str(e.value) == ("endPublishedDate (2026-10-09) is after the snapshot date (2026-10-07); set it on or "
+                            "before 2026-10-07, or drop it.")
+    assert c.sent == []
+    exa_style_search(c, query="q", endPublishedDate="2026-10-07T15:00:00Z", contents={"snapshotAsOf": "2026-10-07"})
+    assert c.sent[0]["end_date"] == "2026-10-06"                                    # same UTC day is on or before
+
+
 def test_every_call_carries_the_window_and_the_filter():
     for params in ({"query": "q", "contents": {"snapshotAsOf": "2026-10-07"}},
                    {"query": "q", "endPublishedDate": "2026-10-07", "numResults": 3},

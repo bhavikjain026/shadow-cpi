@@ -83,6 +83,9 @@ def map_params(params):
         kw["end_date"] = _before("endPublishedDate", end)
     if snap is not None:
         cutoff = _before("contents.snapshotAsOf", snap)
+        if end is not None and kw["end_date"] > cutoff:
+            raise TimeLockError(f"endPublishedDate ({end}) is after the snapshot date ({snap}); set it on or before "
+                                f"{snap}, or drop it.")
     elif end is not None:
         cutoff = kw["end_date"]
     else:
