@@ -108,3 +108,35 @@ def test_as_of_tool_on_fakes(monkeypatch):
     monkeypatch.setenv("TIMELOCK_REPLAY", str(FIX / "rbi_2026-10-06_locked.json"))
     with pytest.raises(ValueError, match="live Tavily key"):
         server.as_of(URL, CUT)
+
+
+@pytest.mark.parametrize("call,code,field", [
+    (lambda s: s.search(Q, "06/10/2026"), "invalid_date", "cutoff"),
+    (lambda s: s.search(Q, "20261006"), "invalid_date", "cutoff"),
+    (lambda s: s.search(Q, "2026-02-30"), "invalid_date", "cutoff"),
+    (lambda s: s.search(Q, CUT, start_date="last week"), "invalid_date", "start_date"),
+    (lambda s: s.search(Q, CUT, end_date="2026-10-07"), "end_date_after_cutoff", "end_date"),
+    (lambda s: s.search(Q, CUT, start_date="2026-10-02", end_date="2026-10-01"), "start_date_after_end_date",
+     "start_date"),
+    (lambda s: s.as_of("https://x.example/a", "yesterday"), "invalid_date", "cutoff"),
+    (lambda s: s.check_leaks("[]", "2026-13-01"), "invalid_date", "cutoff"),
+])
+def test_bad_dates_come_back_as_a_structured_error_and_no_call_is_made(monkeypatch, call, code, field):
+    server = load_server()
+    monkeypatch.setattr(server, "client", lambda: pytest.fail("a refused call must not reach the client"))
+    out = call(server)
+    assert set(out) == {"error"} and out["error"]["code"] == code and out["error"]["field"] == field
+    assert out["error"]["message"]
+    if code == "invalid_date":
+        assert out["error"]["expected"] == "YYYY-MM-DD"
+    json.dumps(out)
+
+
+def test_tool_descriptions_say_what_is_refused_and_why():
+    server = load_server()
+    for text in (server.search.__doc__, server.as_of.__doc__, server.check_leaks.__doc__):
+        assert "Refused" in text or "Nothing is refused" in text
+    doc = server.search.__doc__
+    for phrase in ("end_date_after_cutoff", "invalid_date", "time_range", "auto_parameters", "slug", "UTC"):
+        assert phrase in doc
+    assert "no as-of copy" in server.as_of.__doc__ and "status 200" in server.as_of.__doc__

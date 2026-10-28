@@ -2,7 +2,13 @@
 import json
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
+
+# Tavily groups usage by project when a call carries X-Project-ID. Checked 2026-10-29: the cache/flight-recorder key
+# (recorder.request_hash) is built from service, endpoint and request body only, never from headers, so this header
+# cannot change a cache hit or a recorded hash. Sent to api.tavily.com only; not by the standalone timelock package.
+PROJECT_HEADERS = {"api.tavily.com": {"X-Project-ID": "shadow-cpi"}}
 
 
 class ApiError(Exception):
@@ -16,6 +22,7 @@ def request_json(method, url, token=None, body=None, timeout=120, retries=3):
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
     if token:
         headers["Authorization"] = "Bearer " + token
+    headers.update(PROJECT_HEADERS.get(urllib.parse.urlsplit(url).hostname or "", {}))
     for attempt in range(retries + 1):
         req = urllib.request.Request(url, data=data, method=method, headers=headers)
         try:

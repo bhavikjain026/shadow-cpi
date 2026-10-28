@@ -19,6 +19,34 @@ results. Results dated on or before the cutoff (`safe`) include title and snippe
 results dated after the cutoff (`leak`) come back as domain, dates and status only: the agent knows they exist but
 never reads their text or their URL (a news URL's slug often states the outcome).
 
+## What each tool refuses, and why
+
+The same text is each tool's description, so the model sees it too.
+
+| Tool | Refused | Why |
+|---|---|---|
+| `timelocked_search` | A cutoff, `start_date` or `end_date` that is not `YYYY-MM-DD`; an `end_date` after the cutoff; a `start_date` after the `end_date`. Returns a structured error and makes no search | The window may be narrowed, never moved past the cutoff |
+| `timelocked_search` | `time_range`, `days`, `auto_parameters` and switching the date filter off are not offered | They set their own window |
+| `timelocked_search` | Results dated after the cutoff (`leak`) and results with no date (`date_flag`) come back as domain, dates and status only: no title, URL or text | A news URL's slug often states the outcome; an undated page cannot be trusted |
+| `extract_as_of` | The live page, whenever anything says it changed after the cutoff (`text` is null, reason `no as-of copy`); a Wayback capture that is not status 200 or is dated after the cutoff; Extract text for another address (`url mismatch`); a bad cutoff | Extract returns today's page, which can contain the future |
+| `check_leaks` | Nothing is hidden or fetched; a bad cutoff, or `results_json` that is not a list of results, is an error | It only labels results you already have |
+
+The cutoff day is inside the window, and a result counts by the UTC date of its `published_date` (cutoffs are plain
+dates). Tavily's reference says only "before the specified end date", so the server sends `end_date` equal to the cutoff
+and does not rely on whether Tavily keeps that day; our own check decides. A page published after 18:30 UTC on the
+cutoff day is already the next day in IST but is labelled safe: use the day before as the cutoff if that matters.
+
+A refusal comes back as ordinary tool output (`isError` false) so the model can read it and correct the call:
+
+```json
+{"error": {"code": "end_date_after_cutoff", "message": "end_date 2026-10-07 is after the cutoff 2026-10-06", "field": "end_date"}}
+{"error": {"code": "invalid_date", "message": "cutoff must be an ISO date (YYYY-MM-DD), got '06/10/2026'", "field": "cutoff", "expected": "YYYY-MM-DD", "got": "06/10/2026"}}
+```
+
+Codes: `invalid_date`, `end_date_after_cutoff`, `start_date_after_end_date`, `refused_parameter`,
+`filter_cannot_be_disabled`. A missing key or a network failure is still a normal tool error. A Wayback copy's
+`provenance` also carries `capture_timestamp` and `capture_digest` of the capture used.
+
 ## 1. Install and check it (tested)
 
 These exact steps were run on 28 Oct 2026 (macOS, Python 3.14.7, `mcp` 1.30.0), from the repository root. The venv
@@ -68,6 +96,34 @@ credits, set `TIMELOCK_REPLAY` to a saved response instead (it answers only the 
 
 The client setups below were not run as part of that check. Use absolute paths; `/path/to/shadow-cpi` stands for
 your clone, and `/path/to/shadow-cpi/.venv/bin/python` is the venv's Python, which has `mcp` installed.
+
+## Copy-paste client config
+
+Replace `/path/to/shadow-cpi` with your clone (run `pwd` in it) and `your-key` with a Tavily key. Use absolute paths.
+Both snippets assume the venv from step 1. For a trial with no key and no credits, swap the `TAVILY_API_KEY` line for
+`"TIMELOCK_REPLAY": "/path/to/shadow-cpi/tests/fixtures/timelock/rbi_2026-10-06_locked.json"`.
+
+**Claude Desktop**: add to `claude_desktop_config.json` (Settings → Developer → Edit Config), then restart:
+
+```json
+{
+  "mcpServers": {
+    "timelock": {
+      "command": "/path/to/shadow-cpi/.venv/bin/python",
+      "args": ["/path/to/shadow-cpi/mcp/server.py"],
+      "env": {"TAVILY_API_KEY": "your-key"}
+    }
+  }
+}
+```
+
+**Claude Code**: one command (the key goes into your local Claude Code config; do not use `--scope project` with a real key, it would write the key into a `.mcp.json` in the repository):
+
+```bash
+claude mcp add-json timelock '{"command":"/path/to/shadow-cpi/.venv/bin/python","args":["/path/to/shadow-cpi/mcp/server.py"],"env":{"TAVILY_API_KEY":"your-key"}}'
+```
+
+These two snippets are the same server entry as sections 2a and 2b below, which add the details.
 
 ## 2a. Claude Code
 

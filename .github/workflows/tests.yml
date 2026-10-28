@@ -1,0 +1,43 @@
+# Runs the offline test suite (fake Tavily and Nemotron clients, saved responses): no secrets, no API calls, no credits.
+# Tests that need git-ignored local files (the Tavily cache, .env, the official weights workbook) skip themselves.
+# The badge in README.md points at this workflow's runs on main.
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: |
+            requirements-app.txt
+            mcp/requirements.txt
+
+      - name: Install (the app's pinned packages, pytest, and the MCP package for the MCP server tests)
+        run: python -m pip install --quiet -r requirements-app.txt -r mcp/requirements.txt
+
+      - name: Run the tests (no keys are set, so nothing can reach Tavily or Nebius)
+        run: python -m pytest -q

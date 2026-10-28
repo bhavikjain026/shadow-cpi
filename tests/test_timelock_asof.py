@@ -175,3 +175,50 @@ def test_timelock_stays_standard_library_only():
     mods = {(n.module or "").split(".")[0] for n in ast.walk(src) if isinstance(n, ast.ImportFrom)} | \
            {a.name.split(".")[0] for n in ast.walk(src) if isinstance(n, ast.Import) for a in n.names}
     assert mods <= {"hashlib", "json", "re", "urllib", "datetime", "html", "timelock"}
+
+
+def test_wayback_copy_provenance_carries_capture_timestamp_and_digest():
+    wb = FakeWayback([("20260707101500", "DIGEST-A"), ("20260709080000", "B")], {"20260707101500": OLD_HTML})
+    out = extract_as_of(FakeTavily(LIVE_CHANGED), URL, CUT, published_date="2026-07-07", archive=wb, now=NOW)
+    prov = out["provenance"]
+    assert prov["capture_timestamp"] == "20260707101500" and prov["capture_digest"] == "DIGEST-A"
+    assert prov["capture_time"] == "2026-07-07T10:15:00Z"
+    assert wb.asked == ["https://web.archive.org/web/20260707101500id_/" + URL]    # the capture named in provenance
+
+
+def test_only_status_200_captures_on_or_before_the_cutoff_are_used():
+    class Cdx(Wayback):
+        def __init__(self, body):
+            super().__init__()
+            self.body, self.asked = body, []
+
+        def _get(self, address):
+            self.asked.append(address)
+            return address, self.body
+
+    rows = ('[["timestamp","digest","statuscode"],["20260706090000","R","301"],["20260707101500","A","200"],'
+            '["20260707180000","E","503"],["20260709080000","B","200"]]')
+    wb = Cdx(rows)
+    assert wb.captures(URL) == [("20260707101500", "A"), ("20260709080000", "B")]
+    assert "fl=timestamp%2Cdigest%2Cstatuscode" in wb.cdx_url(URL) and "statuscode%3A200" in wb.cdx_url(URL)
+    out = extract_as_of(FakeTavily(LIVE_CHANGED), URL, CUT, archive=FakeWayback(wb.captures(URL), {
+        "20260707101500": OLD_HTML, "20260707180000": "<p>Service Unavailable</p>"}), now=NOW)
+    assert out["provenance"]["capture_digest"] == "A" and "Service Unavailable" not in out["text"]
+
+
+def test_no_200_capture_before_the_cutoff_means_no_copy():
+    class Cdx(Wayback):
+        def _get(self, address):
+            return address, '[["timestamp","digest","statuscode"],["20260707101500","R","302"],["20260709080000","B","200"]]'
+
+    caps = Cdx().captures(URL)
+    out = extract_as_of(FakeTavily(LIVE_CHANGED), URL, CUT, archive=FakeWayback(caps, {"20260707101500": OLD_HTML}),
+                        now=NOW)
+    assert out["text"] is None and out["provenance"]["reason"] == NO_COPY
+
+
+def test_a_capture_served_that_is_not_a_listed_200_capture_before_the_cutoff_is_refused():
+    wb = FakeWayback([("20260707101500", "A"), ("20260709080000", "B")], {"20260707120000": OLD_HTML},
+                     redirect="20260707120000")                 # Wayback answered with a capture we never listed
+    out = extract_as_of(FakeTavily(LIVE_CHANGED), URL, CUT, archive=wb, now=NOW)
+    assert out["text"] is None and out["provenance"]["reason"] == NO_COPY

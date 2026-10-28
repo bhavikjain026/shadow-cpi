@@ -18,17 +18,24 @@ and the reason "url mismatch"; another page's text is never used. If no signal s
 Machine holds no capture on or before the cutoff, nothing confirms the live copy is the cutoff's: it is returned with
 the reason "unverified: no archive copy before the cutoff", and with strict=True it is refused ("no as-of copy").
 
-Provenance: {"source": "tavily_live" | "wayback_asof" | None, "capture_time": ISO UTC or None, "reason": ...}.
+Only status-200 captures count: the capture list is asked for with statuscode:200 and each row's status is checked
+again in code, so a redirect, a 404 or a 5xx capture is never "the page on the cutoff". The capture used must also
+be dated on or before the cutoff, and the capture Wayback actually served must be one of those listed captures.
+
+Provenance: {"source": "tavily_live" | "wayback_asof" | None, "capture_time": ISO UTC or None, "reason": ...}. For
+"wayback_asof" it also holds "capture_timestamp" (Wayback's 14-digit timestamp, the one in the archive address) and
+"capture_digest" (the CDX digest of that capture, as listed: Wayback's SHA-1 of the archived response).
 """
 import hashlib
 import json
 import re
 import urllib.parse
 import urllib.request
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 from html.parser import HTMLParser
 
 from timelock.dates import iso_date, page_date as read_page_date
+from timelock.search import iso_day
 
 LIVE, WAYBACK = "tavily_live", "wayback_asof"
 NO_COPY = "no as-of copy"
@@ -41,11 +48,7 @@ def text_sha256(text):
     return hashlib.sha256((text or "").encode("utf-8")).hexdigest()
 
 
-def _iso(name, value):
-    try:
-        return date.fromisoformat(str(value)).isoformat()
-    except ValueError:
-        raise ValueError(f"{name} must be an ISO date (YYYY-MM-DD), got {value!r}") from None
+_iso = iso_day                                  # TimeLockError (a ValueError) for anything but YYYY-MM-DD
 
 
 def _ts_date(ts):
@@ -109,17 +112,22 @@ class Wayback:
             return r.geturl(), r.read().decode("utf-8", "replace")
 
     def cdx_url(self, url):
-        return self.CDX + "?" + urllib.parse.urlencode({"url": url, "output": "json", "fl": "timestamp,digest",
+        return self.CDX + "?" + urllib.parse.urlencode({"url": url, "output": "json", "fl": "timestamp,digest,statuscode",
                                                         "filter": "statuscode:200"})
 
     def captures(self, url):
-        """[(timestamp, digest), ...] oldest to newest, or None if the lookup failed."""
+        """[(timestamp, digest), ...] oldest to newest, status-200 captures only, or None if the lookup failed. The
+        CDX query filters on statuscode:200; the status column is checked here too (a capture whose status is not
+        200 is dropped), so a changed or ignored server-side filter cannot let a redirect or error capture in."""
         try:
             _, body = self._get(self.cdx_url(url))
             rows = json.loads(body or "[]")
         except (OSError, ValueError):
             return None
-        return sorted((r[0], r[1] if len(r) > 1 else "") for r in rows[1:] if r and len(r[0]) >= 8)
+        head = rows[0] if rows and isinstance(rows[0], list) else []
+        status = head.index("statuscode") if "statuscode" in head else None
+        return sorted((r[0], r[1] if len(r) > 1 else "") for r in rows[1:]
+                      if r and len(r[0]) >= 8 and (status is None or (len(r) > status and str(r[status]) == "200")))
 
     def fetch(self, url, timestamp):
         """(served timestamp, page text) for one capture, or None. The served timestamp is read from the final
@@ -193,9 +201,10 @@ def extract_as_of(client, url, cutoff, *, published_date=None, archive=None, now
     out = {"url": url, "cutoff": cut, "evidence": evidence, "request_id": resp.get("request_id"),
            "live_sha256": text_sha256(live)}
 
-    def done(text, source, capture_time, reason):
+    def done(text, source, capture_time, reason, capture=None):
+        extra = {"capture_timestamp": capture[0], "capture_digest": capture[1]} if capture else {}
         return {**out, "text": text, "text_sha256": text_sha256(text) if text is not None else None,
-                "provenance": {"source": source, "capture_time": capture_time, "reason": reason}}
+                "provenance": {"source": source, "capture_time": capture_time, "reason": reason, **extra}}
 
     if not signals and not before:                 # nothing says it changed, but no archive copy confirms it
         return done(None, None, None, NO_COPY) if strict else done(live, LIVE, taken, UNVERIFIED)
@@ -205,6 +214,8 @@ def extract_as_of(client, url, cutoff, *, published_date=None, archive=None, now
     if not before:
         return done(None, None, None, NO_COPY)
     served = archive.fetch(url, before[-1])
-    if not served or not served[0] or _ts_date(served[0]) > cut or not served[1]:
+    listed = {t: d for t, d in captures if _ts_date(t) <= cut}      # status-200 captures on or before the cutoff
+    if not served or served[0] not in listed or not served[1]:       # also refuses a capture after the cutoff
         return done(None, None, None, NO_COPY)
-    return done(served[1], WAYBACK, _ts_time(served[0]), "may have changed after the cutoff: " + "; ".join(signals))
+    return done(served[1], WAYBACK, _ts_time(served[0]), "may have changed after the cutoff: " + "; ".join(signals),
+                (served[0], listed[served[0]]))
