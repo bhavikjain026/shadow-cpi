@@ -82,9 +82,25 @@ def test_registered_with_fastmcp(monkeypatch):
             monkeypatch.setitem(sys.modules, m, types.ModuleType(m))
         monkeypatch.setitem(sys.modules, "mcp.server.fastmcp", fake)
         server.build_server()
-        assert reg == {"name": "timelock", "timelocked_search": server.search}
+        assert reg == {"name": "timelock", "timelocked_search": server.search, "extract_as_of": server.as_of}
     else:
         assert server.build_server() is not None
     params = inspect.signature(server.search).parameters
     assert list(params)[:2] == ["query", "cutoff"] and all(p.annotation is not inspect._empty
                                                            for p in params.values())
+    params = inspect.signature(server.as_of).parameters
+    assert list(params)[:2] == ["url", "cutoff"] and all(p.annotation is not inspect._empty for p in params.values())
+
+
+def test_as_of_tool_on_fakes(monkeypatch):
+    from tests.test_timelock_asof import CUT, LIVE_CHANGED, OLD_HTML, URL, FakeTavily, FakeWayback
+    server = load_server()
+    wb = FakeWayback([("20260707101500", "A"), ("20260709080000", "B")], {"20260707101500": OLD_HTML})
+    out = server.run_as_of(FakeTavily(LIVE_CHANGED), URL, CUT, max_chars=10, archive=wb)
+    assert out["provenance"]["source"] == "wayback_asof" and out["text"] == "TCS Q1 pre" and out["truncated"]
+    refused = server.run_as_of(FakeTavily(LIVE_CHANGED), URL, CUT, archive=FakeWayback([("20260709080000", "B")]))
+    assert refused["text"] is None and refused["provenance"]["reason"] == "no as-of copy"
+    json.dumps(out)
+    monkeypatch.setenv("TIMELOCK_REPLAY", str(FIX / "rbi_2026-10-06_locked.json"))
+    with pytest.raises(ValueError, match="live Tavily key"):
+        server.as_of(URL, CUT)
