@@ -1,11 +1,16 @@
 # timelock MCP server
 
-Two tools for any MCP client. `timelocked_search(query, cutoff, ...)`: a Tavily search that cannot see past the
+Three tools for any MCP client. `timelocked_search(query, cutoff, ...)`: a Tavily search that cannot see past the
 cutoff. `extract_as_of(url, cutoff, published_date=None)`: the page's text as it was on the cutoff (the live Extract if
 nothing suggests it changed since, else the latest Wayback capture on or before the cutoff), or no text and the reason
 "no as-of copy". With no capture on or before the cutoff to confirm an unchanged page, the live text comes back
 labelled "unverified: no archive copy before the cutoff" (`strict=true` refuses it); an Extract answer for another
-address is refused as "url mismatch". It needs a live key (1 credit per call) and downloads from the Wayback Machine directly. It wraps [`timelock/`](../timelock/) (the date window is sent to Tavily with `filter_by_published_date`, then
+address is refused as "url mismatch". It needs a live key (1 credit per call) and downloads from the Wayback Machine directly.
+`check_leaks(results_json, cutoff)`: audits results you already have, from any search tool (a JSON list of results, or a
+whole response with a `results` list; each may carry `url`, `published_date`, `page_date`). It makes no API call and
+costs no credit. It returns `counts` (safe / date_flag / leak), how many results are `undated`, the `leaks` with the
+dates seen, and `re_read`: the URLs of every leak and undated result, to read with `extract_as_of` rather than trust
+their current text. It uses the same date check as the search (`timelock/check.py`). The tools wrap [`timelock/`](../timelock/) (the date window is sent to Tavily with `filter_by_published_date`, then
 every result is checked again in code). For the search, the agent picks the query, topic, domains and result count; the cutoff is
 fixed by the task, and an `end_date` after it is refused.
 

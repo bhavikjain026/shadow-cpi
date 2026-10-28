@@ -9,5 +9,8 @@ description = "Time-locked Tavily search: a search that cannot see past a cutoff
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
 
+[project.optional-dependencies]
+langchain = ["langchain-core>=0.3"]                       # only for timelock/langchain.py
+
 [tool.setuptools]
 packages = ["timelock"]

@@ -228,6 +228,9 @@ Offline it replays a real saved response (`tests/fixtures/timelock/`, request ID
 [`tests/test_timelock.py`](tests/test_timelock.py)); `Replay` refuses any other request. Any client with
 `.search(query, **kwargs) -> dict` works, including tavily-python's `TavilyClient`.
 
+- **LangChain:** `TimeLockedTavilySearch(cutoff=...)` in [`timelock/langchain.py`](timelock/langchain.py) is a drop-in search tool for an agent's tool list with a fixed cutoff, `time_range`/`days`/`auto_parameters` refused and only `safe` results returned (`pip install ".[langchain]"`; [short example](examples/langchain_timelock.py)).
+- **MCP `check_leaks(results_json, cutoff)`:** audits results from any search tool with no API call: counts safe / undated / after-cutoff and lists the URLs to re-read with `extract_as_of` ([`mcp/`](mcp/README.md)).
+
 ### Read a page as it was on the cutoff
 
 Search dates do not freeze page content: Extract returns a page as it is today, so a page dated before the cutoff

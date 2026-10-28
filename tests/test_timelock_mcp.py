@@ -82,7 +82,8 @@ def test_registered_with_fastmcp(monkeypatch):
             monkeypatch.setitem(sys.modules, m, types.ModuleType(m))
         monkeypatch.setitem(sys.modules, "mcp.server.fastmcp", fake)
         server.build_server()
-        assert reg == {"name": "timelock", "timelocked_search": server.search, "extract_as_of": server.as_of}
+        assert reg == {"name": "timelock", "timelocked_search": server.search, "extract_as_of": server.as_of,
+                       "check_leaks": server.check_leaks}
     else:
         assert server.build_server() is not None
     params = inspect.signature(server.search).parameters
@@ -90,6 +91,9 @@ def test_registered_with_fastmcp(monkeypatch):
                                                            for p in params.values())
     params = inspect.signature(server.as_of).parameters
     assert list(params)[:2] == ["url", "cutoff"] and all(p.annotation is not inspect._empty for p in params.values())
+    params = inspect.signature(server.check_leaks).parameters
+    assert list(params) == ["results_json", "cutoff"] and all(p.annotation is not inspect._empty
+                                                              for p in params.values())
 
 
 def test_as_of_tool_on_fakes(monkeypatch):

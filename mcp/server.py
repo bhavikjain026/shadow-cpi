@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""MCP server exposing timelock's timelocked_search and extract_as_of as two tools (stdio). Setup: mcp/README.md.
+"""MCP server exposing timelock's timelocked_search, extract_as_of and check_leaks as three tools (stdio). Setup: mcp/README.md.
 
     pip install -r mcp/requirements.txt
     TAVILY_API_KEY=... python mcp/server.py
@@ -8,14 +8,17 @@
 Only results dated on or before the cutoff reach the model with their URL, title and snippet; undated results and
 leaks come back as domain, dates and status only (a news URL's slug can state the outcome). extract_as_of returns
 a page's text only as it was on the cutoff (live copy if unchanged, else a Wayback capture), or no text.
+check_leaks audits results you already have (any search tool's output): no API call, no credit.
 """
+import json
 import os
 import sys
 from pathlib import Path
 
 # the repository root, appended (not prepended) so the installed `mcp` package wins over this folder
 sys.path.append(str(Path(__file__).resolve().parents[1]))
-from timelock import SAFE, Replay, TavilyHTTP, extract_as_of, timelocked_search  # noqa: E402
+from timelock import (DATE_FLAG, LEAK, SAFE, Replay, TavilyHTTP, check_result, extract_as_of,  # noqa: E402
+                      iso_date, timelocked_search, url_date, window)
 
 from urllib.parse import urlparse  # noqa: E402
 
@@ -81,11 +84,45 @@ def run_as_of(tavily, url, cutoff, *, published_date=None, max_chars=20000, arch
             "truncated": text is not None and len(text) > max_chars}
 
 
+def check_leaks(results_json: str, cutoff: str) -> dict:
+    """Audit search results for look-ahead against `cutoff` (YYYY-MM-DD). `results_json` is the JSON of a list of
+    results or of a whole search response with a "results" list; each result may carry url, published_date and
+    page_date. No API call. Returns counts (safe / date_flag / leak), how many results are `undated`, the `leaks`
+    (dated after the cutoff, with the dates seen) and `re_read`: the URLs of every leak and undated result, to read
+    with extract_as_of (1 credit each) instead of trusting their current text. A safe result is only dated on or before
+    the cutoff; it may still have been edited since, which extract_as_of also catches."""
+    cut = window(cutoff)[1]
+    try:
+        data = json.loads(results_json)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"results_json is not valid JSON: {e}") from None
+    items = data.get("results") if isinstance(data, dict) else data
+    if not isinstance(items, list) or not all(isinstance(r, dict) for r in items):
+        raise ValueError('results_json must be a list of result objects or an object with a "results" list')
+    counts, leaks, re_read, undated = {SAFE: 0, DATE_FLAG: 0, LEAK: 0}, [], [], 0
+    for r in items:
+        page = iso_date(r.get("page_date")) or None
+        status = check_result(r, cut, page_date=page)
+        counts[status] += 1
+        if status == SAFE:
+            continue
+        if status == DATE_FLAG:
+            undated += 1
+        else:
+            leaks.append({"url": r.get("url"), "status": status, "published_date": iso_date(r.get("published_date")) or None,
+                          "url_date": url_date(r.get("url")), "page_date": page})
+        if r.get("url") and r["url"] not in re_read:
+            re_read.append(r["url"])
+    return {"cutoff": cut, "checked": len(items), "counts": counts, "undated": undated, "leaks": leaks,
+            "re_read": re_read}
+
+
 def build_server():
     from mcp.server.fastmcp import FastMCP
     server = FastMCP("timelock")
     server.tool(name="timelocked_search")(search)
     server.tool(name="extract_as_of")(as_of)
+    server.tool(name="check_leaks")(check_leaks)
     return server
 
 
