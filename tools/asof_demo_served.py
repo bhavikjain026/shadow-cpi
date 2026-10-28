@@ -89,7 +89,7 @@ def post_cutoff_dates(text, cutoff):
 
 
 def pick(archive, cands, max_lookups=MAX_LOOKUPS):
-    """The first candidate passing rule 3, its CDX evidence, and the lookups made."""
+    """The earliest candidate (rule order) passing rule 3, its CDX evidence, and the lookups made."""
     tried = []
     for c, r in cands[:max_lookups]:
         caps = archive.captures(r["url"])

@@ -293,12 +293,12 @@
    },
    {
     "endpoint": "/extract",
-    "calls": 793,
+    "calls": 794,
     "credits": 692,
-    "credits_per_call": 0.8726355611601513,
-    "median_latency_s": 0.14,
-    "p95_latency_s": 5.220000000000001,
-    "with_latency": 791
+    "credits_per_call": 0.871536523929471,
+    "median_latency_s": 0.135,
+    "p95_latency_s": 5.214999999999999,
+    "with_latency": 792
    },
    {
     "endpoint": "/map",
@@ -323,12 +323,12 @@
    {
     "experiment": "asof-demo",
     "endpoint": "/extract",
-    "calls": 1,
+    "calls": 2,
     "credits": 1,
-    "credits_per_call": 1.0,
-    "median_latency_s": 0.01,
-    "p95_latency_s": 0.01,
-    "with_latency": 1
+    "credits_per_call": 0.5,
+    "median_latency_s": 0.015,
+    "p95_latency_s": 0.0195,
+    "with_latency": 2
    },
    {
     "experiment": "backup-check",
@@ -885,12 +885,12 @@
    }
   ],
   "total": {
-   "calls": 1882,
+   "calls": 1883,
    "credits": 1834,
-   "credits_per_call": 0.9744952178533475,
+   "credits_per_call": 0.9739776951672863,
    "median_latency_s": 3.12,
-   "p95_latency_s": 6.063,
-   "with_latency": 1875
+   "p95_latency_s": 6.0625,
+   "with_latency": 1876
   },
   "reconcile_credits": -82,
   "notes": [
@@ -1719,7 +1719,7 @@
   "arm_a_searches_per_month": 13.0,
   "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits at original cost / 9 months"
  },
- "ledger_rows": 1942,
+ "ledger_rows": 1944,
  "pages_changed": null,
  "leak_by_source_type": {
   "rows": [
