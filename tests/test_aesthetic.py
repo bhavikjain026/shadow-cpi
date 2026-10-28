@@ -117,3 +117,9 @@ def test_no_script_anywhere_else_in_the_app():
     hits = {f.name: len(re.findall(r"<script|components\.html|st\.iframe|components\.v1", f.read_text()))
             for f in files}
     assert {k: v for k, v in hits.items() if v} == {"leak_demo.py": 3}   # two <script> tags + one st.iframe, in HERO
+
+
+def test_card_markdown_blocks_do_not_overlap():
+    # Streamlit pulls each markdown block up 1rem; with the card's p margin removed,
+    # a two-line headline would run under the chip row unless that pull is reset too.
+    assert re.search(r'\[class\*="st-key-card-"\] \[data-testid="stMarkdownContainer"\] \{ margin-bottom: 0; \}', CSS)
