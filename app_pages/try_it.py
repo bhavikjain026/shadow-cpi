@@ -116,11 +116,14 @@ if go:
         st.session_state["try_it_result"] = None
         if str(e).startswith(("Type a question", "Pick a cutoff", "The cutoff")):
             st.warning(str(e))
-        else:
+        else:                                    # a cap, the key or the balance: the saved example, never a bare error
             colab(str(e))
+            saved_example()
     except Exception as e:                       # never raise to the page; the key is never part of the message
         st.session_state["try_it_result"] = None
-        st.info(f"The search could not finish ({type(e).__name__}). Please try again later.")
+        st.info(f"The search could not finish ({type(e).__name__}). Please try again later. Below is a saved example "
+                "of what a run looks like.")
+        saved_example()
 out = st.session_state.get("try_it_result")
 if out:
     res, hit = out

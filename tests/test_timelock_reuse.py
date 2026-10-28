@@ -114,5 +114,5 @@ def test_check_leaks_uses_a_page_date_and_rejects_bad_input():
     for bad in ("not json", '"text"', "[1, 2]", '{"results": 5}'):
         with pytest.raises(ValueError):
             server.check_leaks(bad, CUT)
-    with pytest.raises(TimeLockError):
-        server.check_leaks("[]", "06/10/2026")
+    bad_date = server.check_leaks("[]", "06/10/2026")          # a bad date is a structured error, not an exception
+    assert bad_date["error"]["code"] == "invalid_date" and bad_date["error"]["field"] == "cutoff"

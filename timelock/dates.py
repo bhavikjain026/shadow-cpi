@@ -1,19 +1,29 @@
 """Date signals for one search result, as ISO 'YYYY-MM-DD' (standard library only)."""
 import re
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from email.utils import parsedate_to_datetime
 
 
 def iso_date(s):
-    """Tavily's published_date as 'YYYY-MM-DD', or '' if missing/unreadable.
-    Accepts ISO ('2026-03-24...') and the news format ('Tue, 24 Mar 2026 14:00:00 GMT')."""
+    """Tavily's published_date as the UTC calendar date 'YYYY-MM-DD', or '' if missing/unreadable.
+    Accepts ISO ('2026-03-24...') and the news format ('Tue, 24 Mar 2026 14:00:00 GMT'). A timestamp that carries a
+    UTC offset ('2026-03-24T01:00:00+05:30', '... +0530') is converted to UTC first, so cutoffs (IST dates) are always
+    compared with the UTC date of the publication; a bare date, or a timestamp with no offset, is taken as UTC."""
     s = (s or "").strip()
     if re.match(r"\d{4}-\d{2}-\d{2}", s):
+        m = re.match(r"\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?\s*(Z|[+-]\d{2}:?\d{2})$", s)
+        if m and m[1] != "Z":
+            try:
+                return datetime.fromisoformat(s.replace(" ", "T").replace(m[1], m[1][:3] + ":" + m[1][-2:])
+                                              ).astimezone(timezone.utc).date().isoformat()
+            except ValueError:
+                pass
         return s[:10]
     try:
-        return parsedate_to_datetime(s).date().isoformat()
+        dt = parsedate_to_datetime(s)
     except (TypeError, ValueError, IndexError):
         return ""
+    return (dt.astimezone(timezone.utc) if dt.tzinfo else dt).date().isoformat()
 
 
 def url_date(url):

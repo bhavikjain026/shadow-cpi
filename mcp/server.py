@@ -10,6 +10,7 @@ leaks come back as domain, dates and status only (a news URL's slug can state th
 a page's text only as it was on the cutoff (live copy if unchanged, else a Wayback capture), or no text.
 check_leaks audits results you already have (any search tool's output): no API call, no credit.
 """
+import functools
 import json
 import os
 import sys
@@ -17,8 +18,8 @@ from pathlib import Path
 
 # the repository root, appended (not prepended) so the installed `mcp` package wins over this folder
 sys.path.append(str(Path(__file__).resolve().parents[1]))
-from timelock import (DATE_FLAG, LEAK, SAFE, Replay, TavilyHTTP, check_result, extract_as_of,  # noqa: E402
-                      iso_date, timelocked_search, url_date, window)
+from timelock import (DATE_FLAG, LEAK, SAFE, Replay, TavilyHTTP, TimeLockError, check_result,  # noqa: E402
+                      extract_as_of, iso_date, timelocked_search, url_date, window)
 
 from urllib.parse import urlparse  # noqa: E402
 
@@ -26,22 +27,44 @@ from urllib.parse import urlparse  # noqa: E402
 SHOWN_IF_NOT_SAFE = ("published_date", "url_date", "page_date", "status")
 
 
+def structured_errors(tool):
+    """A refusal by the time lock (a date that is not YYYY-MM-DD, an end_date after the cutoff, ...) comes back as
+    {"error": {"code", "message", "field", ...}} instead of an exception, so the model can read it and correct the
+    call. Other failures (no key, a network error) still raise."""
+    @functools.wraps(tool)
+    def wrapper(*args, **kwargs):
+        try:
+            return tool(*args, **kwargs)
+        except TimeLockError as e:
+            return e.to_dict()
+    return wrapper
+
+
 def client():
     replay = os.environ.get("TIMELOCK_REPLAY")
     return Replay(replay) if replay else TavilyHTTP()
 
 
+@structured_errors
 def search(query: str, cutoff: str, topic: str = "general", max_results: int = 5,
            include_domains: list[str] | None = None, exclude_domains: list[str] | None = None,
            start_date: str | None = None, end_date: str | None = None, search_depth: str = "basic",
            include_raw_content: bool = False) -> dict:
     """Search the web as it was on `cutoff` (YYYY-MM-DD): nothing published after it. The cutoff is a date the
-    user or task sets; do not move it to get more results. start_date/end_date may narrow the window, never extend
-    it past the cutoff. Each result has a status: safe (dated on or before the cutoff; title and snippet included),
-    date_flag (undated: not trusted) or leak (dated after the cutoff); those two come back as domain, dates and status
-    only. A snippet is a
-    pointer, not evidence: read the page before quoting it. include_raw_content=True also checks each page's own
+    user or task sets; do not move it to get more results. The cutoff day itself is inside the window; a result
+    counts by the UTC date of its published_date.
+
+    Refused (returns {"error": {"code", "message", "field"}} and makes no search): a cutoff, start_date or end_date
+    that is not YYYY-MM-DD (invalid_date); an end_date after the cutoff (end_date_after_cutoff: the window may be
+    narrowed, never extended); a start_date after the end_date (start_date_after_end_date). The server never sends
+    time_range, days or auto_parameters (they would set their own window) and the published-date filter is always on.
+
+    Withheld from what you read: each result has a status. safe (dated on or before the cutoff) comes with title,
+    URL and snippet. date_flag (no date anywhere: cannot be trusted) and leak (dated after the cutoff) come back as
+    domain, dates and status only, because a news URL's slug often states the outcome. A snippet is a pointer, not
+    evidence: read the page (extract_as_of) before quoting it. include_raw_content=True also checks each page's own
     published/updated date (page text is not returned)."""
+    window(cutoff, start_date, end_date)                # refuse bad dates before a client (or a key) is needed
     return run(client(), query, cutoff, topic=topic, max_results=max_results, include_domains=include_domains,
                exclude_domains=exclude_domains, start_date=start_date, end_date=end_date, search_depth=search_depth,
                include_raw_content=include_raw_content)
@@ -60,6 +83,7 @@ def run(tavily, query, cutoff, *, include_raw_content=False, **params):
             "request_id": results.request_id, "response_sha256": results.response_sha256, "results": shown}
 
 
+@structured_errors
 def as_of(url: str, cutoff: str, published_date: str | None = None, max_chars: int = 20000,
           strict: bool = False) -> dict:
     """Read the page at `url` as it was on `cutoff` (YYYY-MM-DD). Tavily Extract returns the page as it is now, so
@@ -69,7 +93,13 @@ def as_of(url: str, cutoff: str, published_date: str | None = None, max_chars: i
     suggests a change but no capture on or before the cutoff confirms it, the live page comes back with the reason
     "unverified: no archive copy before the cutoff" (strict=true refuses it instead). If Extract answers for another
     address, `text` is null and the reason is "url mismatch". `provenance` says which copy you got (source
-    tavily_live or wayback_asof, capture_time, reason)."""
+    tavily_live or wayback_asof, capture_time, reason; for a Wayback copy also capture_timestamp and capture_digest).
+
+    Refused: a cutoff that is not YYYY-MM-DD (returns {"error": {"code": "invalid_date", ...}}); the live page
+    whenever anything suggests it changed after the cutoff (text is null, reason "no as-of copy", because it would
+    show you the future); a Wayback capture that is not status 200 or is dated after the cutoff; Extract text for
+    another address ("url mismatch"). Needs a live Tavily key (1 credit)."""
+    window(cutoff)                                      # refuse a bad cutoff before a client (or a key) is needed
     tavily = client()
     if isinstance(tavily, Replay):
         raise ValueError("extract_as_of needs a live Tavily key (TIMELOCK_REPLAY holds a saved search only)")
@@ -84,13 +114,17 @@ def run_as_of(tavily, url, cutoff, *, published_date=None, max_chars=20000, arch
             "truncated": text is not None and len(text) > max_chars}
 
 
+@structured_errors
 def check_leaks(results_json: str, cutoff: str) -> dict:
     """Audit search results for look-ahead against `cutoff` (YYYY-MM-DD). `results_json` is the JSON of a list of
     results or of a whole search response with a "results" list; each result may carry url, published_date and
     page_date. No API call. Returns counts (safe / date_flag / leak), how many results are `undated`, the `leaks`
     (dated after the cutoff, with the dates seen) and `re_read`: the URLs of every leak and undated result, to read
     with extract_as_of (1 credit each) instead of trusting their current text. A safe result is only dated on or before
-    the cutoff; it may still have been edited since, which extract_as_of also catches."""
+    the cutoff; it may still have been edited since, which extract_as_of also catches. A cutoff that is not
+    YYYY-MM-DD returns {"error": {"code": "invalid_date", ...}}; results_json that is not a JSON list of results (or
+    an object with a "results" list) is an error. Nothing is refused otherwise: this tool only labels, it never
+    hides a result or fetches anything."""
     cut = window(cutoff)[1]
     try:
         data = json.loads(results_json)
