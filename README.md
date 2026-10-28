@@ -127,7 +127,7 @@ completely:
   27 of the date test's 40 pieces of valid evidence were lost (12 with the filter
   alone). It reads a page's date, not its edit history.
 - **The drift monitor** re-reads each October radar page with Extract once a day and compares it with the saved copy
-  ([`v2/DRIFT_PREREG.md`](v2/DRIFT_PREREG.md)): no drift run is committed yet, as of 27 Oct 2026.
+  ([`v2/DRIFT_PREREG.md`](v2/DRIFT_PREREG.md)): no drift run is committed yet, as of 28 Oct 2026.
 - **The Wayback Machine** shows whether a page existed by the cutoff; a leak counts only when it confirms one. Failed
   lookups were retried and logged (11 in the date test, 94 in the finance check). In
   the post-hoc review, 146 of 283 rows stayed unclear, partly because archive lookups were
@@ -315,7 +315,7 @@ made Hindi pages work. Details: [`FEEDBACK_NOTES.md`](FEEDBACK_NOTES.md).
 
 ## The product
 
-- **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 27 Oct 2026; October 2026 CPI is scheduled for 12 Nov at 4 pm
+- **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 28 Oct 2026; October 2026 CPI is scheduled for 12 Nov at 4 pm
   IST (MoSPI's next-working-day rule applies). Anyone can check the seal: download `sealed/2026-10.json` at tag `seal-2026-10`, recompute its `SHA-256`, and
   compare it with `sealed/2026-10.sha256` ([`verify.md`](verify.md)). After the release, the Archive page shows the
   miss and whether the official figure was inside the range.
@@ -399,7 +399,7 @@ To run the pipeline, copy `.env.example` to `.env`, add the two keys, and start 
 [`docs/deploy.md`](docs/deploy.md). Every number in this README is filled from the results files by
 `python tools/sync_doc_numbers.py` (template: [`docs/templates/README.md`](docs/templates/README.md)).
 
-Tavily usage so far (as of 27 Oct 2026, [`results/tavily_report_card.md`](results/tavily_report_card.md)):
+Tavily usage so far (as of 28 Oct 2026, [`results/tavily_report_card.md`](results/tavily_report_card.md)):
 2,028 calls sent, 1,980 credits used (a 1,000-credit monthly plan plus 3,125
 add-on credits), 79% of dated search results inside the requested window, median latency
 4.0 s.

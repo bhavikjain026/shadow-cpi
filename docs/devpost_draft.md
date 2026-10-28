@@ -80,7 +80,7 @@ the finance check returned a result dated after the cutoff; that review found 1 
 version leaks the outcome. What covers the gap, partly: our page-date check (kept 26 of
 59 filtered results in the date test; date-test valid evidence lost: 27 of
 40 with it, 12 with the filter alone); the drift monitor, which re-reads October radar
-pages daily (no drift run is committed yet, as of 27 Oct 2026); and Wayback Machine checks, with failed lookups retried and logged
+pages daily (no drift run is committed yet, as of 28 Oct 2026); and Wayback Machine checks, with failed lookups retried and logged
 (11 in the date test, 94 in the finance check).
 
 ## Who writes the search: model-written fields vs fixed templates, inside a time lock it cannot move
@@ -198,7 +198,7 @@ Token Factory helped: every call asks for JSON-schema output (with a logged JSON
 worked on the opening call, and both sizes sit behind one OpenAI-compatible endpoint, so roles are a config change.
 
 ## What it does
-- **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 27 Oct 2026. October 2026 CPI is scheduled for 12 Nov at 4 pm IST (MoSPI's
+- **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 28 Oct 2026. October 2026 CPI is scheduled for 12 Nov at 4 pm IST (MoSPI's
   next-working-day rule applies).
   Anyone can recompute the seal's `SHA-256` from the file at tag `seal-2026-10` (`verify.md`).
 - **Price Shock Radar** (exploratory, report only): announced price changes taking effect this month;
@@ -251,7 +251,7 @@ Nebius retires the original IDs on 9 Nov 2026; from then, calls use Nebius's rec
 - Python
 - Streamlit
 
-Tavily usage as of 27 Oct 2026: 2,028 calls, 1,980 credits, 79% of dated results
+Tavily usage as of 28 Oct 2026: 2,028 calls, 1,980 credits, 79% of dated results
 inside the requested window (5,454 of 6,872), median latency 4.0 s. Third-party notices:
 `THIRD_PARTY_NOTICES.md`.
 
