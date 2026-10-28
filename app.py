@@ -2,8 +2,9 @@
 
 Run:  streamlit run app.py
 It reads the results files in this repository (docs/app_numbers.md). The only API calls are the capped "Run live"
-button on October forecast and the Leak demo's live mode (both off unless RUN_LIVE_ENABLED), with keys from the
-environment (SCPI_TAVILY_API_KEY, SCPI_NEBIUS_API_KEY).
+button on October forecast and the Leak demo's live mode (both off unless RUN_LIVE_ENABLED), and "Try it: search the
+past" (on whenever the Tavily key is set; its own credit caps, shadow_cpi/try_it.py), with keys from the environment
+(SCPI_TAVILY_API_KEY, SCPI_NEBIUS_API_KEY).
 """
 import sys
 from pathlib import Path
@@ -21,6 +22,7 @@ inject_style()
 NAV = {"": [
     ("leak_demo", "Leak demo", "visibility", "Leak demo"),
     ("field_report", "Field Report", "science", "Tavily field report"),
+    ("try_it", "Try it: search the past", "travel_explore", "Try it: search the past"),
     ("home", "October forecast", "trending_up", "Experimental nowcast"),
     ("radar", "Radar", "radar", "October radar (v2)"),
 ], "More": [

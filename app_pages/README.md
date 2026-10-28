@@ -14,11 +14,17 @@ The only API calls are the capped "Run live" button on Home (`shadow_cpi/live_ru
 is set; then 3 per visitor session, 8 per day for the app, none below a 100-credit ledger floor, and none unless
 Tavily's GET /usage (checked before every run) reports at least 150 credits left. Keys from the environment only.
 
+"Try it: search the past" (`app_pages/try_it.py`, `shadow_cpi/try_it.py`) runs a visitor's question twice (plain
+search; `timelocked_search`) on the Tavily key whenever it is set, under its own caps in `config/budget.json`
+(`plans["try-it"]`, caps `try-it` and `try-it-day`) and the account floors of `plans.app_live`. With no key it shows a
+saved example (one Leak demo case).
+
 | Page | File(s) |
 | --- | --- |
 | Home | `sealed/2026-10.json` (or `results/nowcast_2026-10.json`), `results/score_lock.json`, `results/scoreboard.md`, `results/app/audit_summary.json`, `results/app/saved_run.json` |
 | Evidence | `manifests/<month>.json`, `data/spine.csv` |
 | Replay | `results/score_lock.json`, `results/scoreboard.md`, `results/replay.csv`, `results/baselines.csv`, `results/tavily_attribution.csv` |
+| Try it: search the past | live searches; saved example from `results/leak_demo.json`, `results/date_field_test.json` |
 | Tavily trace (March) | `results/app/tavily_trace_2026-03.json` |
 | Tavily Flight Recorder | `results/app/flight_recorder.jsonl`, `results/tavily_report_card.md` |
 | Archive | `sealed/<month>.json` + `.sha256`, `data/official_releases.csv` |

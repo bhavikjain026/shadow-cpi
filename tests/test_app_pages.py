@@ -9,7 +9,7 @@ pytest.importorskip("streamlit")
 from streamlit.testing.v1 import AppTest  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ["leak_demo", "home", "evidence", "replay", "live_build", "radar", "field_report", "custody", "as_of", "research", "tavily_trace", "flight_recorder", "archive",
+PAGES = ["leak_demo", "try_it", "home", "evidence", "replay", "live_build", "radar", "field_report", "custody", "as_of", "research", "tavily_trace", "flight_recorder", "archive",
          "brief"]
 LOCK = json.loads((ROOT / "results" / "score_lock.json").read_text())
 AUDIT = json.loads((ROOT / "results" / "app" / "audit_summary.json").read_text())
@@ -362,12 +362,12 @@ def test_every_page_has_a_purpose_line():
     titles = set()
     for f in (ROOT / "app_pages").glob("*.py"):
         titles.update(re.findall(r'^header\("([^"]+)"', f.read_text(encoding="utf-8"), re.M))
-    assert titles == set(PAGE_GUIDES) and len(titles) == 14
+    assert titles == set(PAGE_GUIDES) and len(titles) == 15
     at = load("leak_demo")
     assert PAGE_GUIDES["Leak demo"] in [c.value for c in at.caption]
 
 
-def test_sidebar_page_guide_lists_all_14_pages_with_link_and_description():
+def test_sidebar_page_guide_lists_all_15_pages_with_link_and_description():
     from app_pages.common import PAGE_GUIDES
     at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=60)
     at.run()
@@ -376,10 +376,11 @@ def test_sidebar_page_guide_lists_all_14_pages_with_link_and_description():
     assert len(guide) == 1 and not guide[0].proto.expanded
     assert guide[0].proto.icon == ":material/menu_book:"
     captions = [c.value for c in guide[0].caption]
-    assert captions == list(dict.fromkeys(captions)) and len(captions) == 14 and set(captions) == set(PAGE_GUIDES.values())
+    assert captions == list(dict.fromkeys(captions)) and len(captions) == 15 and set(captions) == set(PAGE_GUIDES.values())
     kids = list(guide[0].children.values())
     links = [k for k in kids if k.type == "page_link"]
-    assert len(links) == 14 and all(k.proto.page_script_hash or k.proto.page for k in links)
-    assert [k.type for k in kids] == ["page_link", "caption"] * 14                  # each link followed by its line
-    assert [k.proto.label for k in links][:4] == ["Leak demo", "Field Report", "October forecast", "Radar"]   # nav order
+    assert len(links) == 15 and all(k.proto.page_script_hash or k.proto.page for k in links)
+    assert [k.type for k in kids] == ["page_link", "caption"] * 15                  # each link followed by its line
+    assert [k.proto.label for k in links][:5] == ["Leak demo", "Field Report", "Try it: search the past",
+                                              "October forecast", "Radar"]   # nav order
     assert not [e for e in at.main.expander if e.label == "Page guide"]            # no second copy in the main area

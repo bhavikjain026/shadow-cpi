@@ -44,7 +44,9 @@
     "demo-live": 10,
     "repro-kit": 20,
     "asof-demo": 5,
-    "replication": 200
+    "replication": 200,
+    "try-it": 600,
+    "try-it-day": 25
   },
   "plans": {
     "cut1_events": "milk, lpg, electricity: English + Hindi; mobile, rail, medicine, school_fee, gst: English only (config/items.yaml 'langs')",
@@ -87,6 +89,14 @@
       "credit_floor": 400,
       "usage_floor": 400,
       "_note": "App 'Run live' button (owner, 2026-10-21; per_day lowered from 15 to 8 and usage_floor added on 2026-10-21): off unless RUN_LIVE_ENABLED is set; 3 runs per visitor session, 8 per UTC day for the whole app, disabled when the ledger balance minus one scan's cap would fall below credit_floor, or when Tavily's GET /usage reports fewer than usage_floor credits left, fails, or returns no limit. Each scan is also capped by 'run-now-scan' (8) and all scans by 'run-now' (120). Hard reserve raised to 400 for both floors on 2026-10-25 (owner, tavily-prize-build item 9)."
+    },
+    "try-it": {
+      "per_run": 2,
+      "per_day": 25,
+      "lifetime": 600,
+      "per_session": 3,
+      "cache_hours": 24,
+      "_note": "App page 'Try it: search the past' (owner task card, 2026-10-28): two basic searches per run (plain + timelocked_search). per_day and lifetime are credits for this page, counted in a process-wide store (shadow_cpi.try_it.Store, seeded from the ledger's try-it rows) and also enforced per call by shadow_cpi.budget through caps 'try-it' and 'try-it-day/<UTC day>'. per_session counts runs that spend credits; an identical (question, cutoff) within cache_hours is served from the store for free. The account floors of plans.app_live (credit_floor, usage_floor) apply too."
     },
     "cut6_november": {
       "interim_event_scans": 2,

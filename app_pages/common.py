@@ -2,7 +2,7 @@
 
 Every number the app shows is read from a results file in this repository (results/, manifests/, sealed/, data/,
 audit/); docs/app_numbers.md lists each one and its file. The pages make no API call except the capped "Run live"
-button on Home (shadow_cpi/live_run.py).
+button on Home (shadow_cpi/live_run.py), the Leak demo's live mode and Try it (shadow_cpi/try_it.py).
 """
 import csv
 import hashlib
@@ -72,6 +72,7 @@ PAGE_GUIDES = {
     "Live build (v2)": "See how verified price evidence updates the inflation estimate.",
     "As of a date": "See what price evidence was available on a date you choose.",
     "Tavily field report": "Read the results of tests on search dates and evidence quality.",
+    "Try it: search the past": "Ask your own question and compare a search with and without a time lock.",
     "For research teams": "Learn how to use time-locked web evidence in research.",
     "Archive": "Review saved forecasts and instructions for checking each forecast's fingerprint.",
     "Reporter brief": "Read a short summary of the forecast for journalists.",
