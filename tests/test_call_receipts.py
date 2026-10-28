@@ -52,3 +52,9 @@ def test_radar_daily_rebuilds_receipts_before_every_commit():
     adds = [m.start() for m in re.finditer(r"^\s*(?:.*; )?add_side_files$", sh, re.M)]
     assert len(commits) == len(calls) == len(adds) == 2
     assert all(a < c < g for a, c, g in zip(adds, calls, commits))   # after the files are staged, before commit
+
+
+def test_per_day_and_per_month_slices_count_under_their_parent():
+    assert BCR.experiments(["try-it", "try-it-day/2026-10-28"]) == ["try-it"]
+    assert BCR.experiments(["replay-layers", "replay-layers-month/2026-01", "fuel-gap"]) == ["replay-layers", "fuel-gap"]
+    assert BCR.experiments(["replication"]) == ["replication"]
