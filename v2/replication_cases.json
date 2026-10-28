@@ -1,0 +1,1359 @@
+{
+ "seed": 20261028,
+ "made_utc": "2026-10-28T13:47:08.420833+00:00",
+ "eligible": 22,
+ "cases": [
+  {
+   "id": "VE01",
+   "type": "price",
+   "source": "v2/ablation/arm_A_2026-01.json",
+   "kind": "fuel",
+   "states": [],
+   "event_date": "2026-01-01",
+   "month": "2026-01",
+   "cutoff": "2025-12-31",
+   "query": "petrol diesel price hike India January 2026",
+   "url": "https://www.aajtak.in/business/utility/story/rule-change-from-1st-january-2026-lpg-cylinder-to-car-price-hike-atf-rate-cut-tutc-dskc-2427756-2026-01-01"
+  },
+  {
+   "id": "VE02",
+   "type": "price",
+   "source": "v2/ablation/arm_B_2026-01.json",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi"
+   ],
+   "event_date": "2026-01-01",
+   "month": "2026-01",
+   "cutoff": "2025-12-31",
+   "query": "LPG cylinder price hike Delhi January 2026",
+   "url": "https://www.aajtak.in/business/utility/story/rule-change-from-1st-january-2026-lpg-cylinder-to-car-price-hike-atf-rate-cut-tutc-dskc-2427756-2026-01-01"
+  },
+  {
+   "id": "VE03",
+   "type": "price",
+   "source": "v2/ablation/arm_Td_2026-02.json",
+   "kind": "lpg",
+   "states": [
+    "maharashtra"
+   ],
+   "event_date": "2026-02-01",
+   "month": "2026-02",
+   "cutoff": "2026-01-31",
+   "query": "LPG cylinder price hike Maharashtra February 2026",
+   "url": "https://navbharattimes.indiatimes.com/business/commodity/budget-2026-lpg-19-kg-cylinder-becomes-costlier-second-consecutive-month-know-new-prices-in-four-metros/articleshow/127830474.cms"
+  },
+  {
+   "id": "VE04",
+   "type": "price",
+   "source": "v2/ablation/arm_A_2026-02.json",
+   "kind": "metro",
+   "states": [
+    "karnataka",
+    "nct of delhi"
+   ],
+   "event_date": "2026-02-09",
+   "month": "2026-02",
+   "cutoff": "2026-02-08",
+   "query": "metro fare hike Karnataka, Delhi February 2026",
+   "url": "https://www.moneycontrol.com/news/india/why-bengaluru-metro-is-enforcing-annual-fare-hikes-while-delhi-resists-despite-similar-panel-recommendations-13813986.html"
+  },
+  {
+   "id": "RR-T1",
+   "type": "price",
+   "source": "v2/recall_reference.json",
+   "kind": "rail",
+   "states": [
+    "tamil nadu"
+   ],
+   "event_date": "2026-02-21",
+   "month": "2026-02",
+   "cutoff": "2026-02-20",
+   "query": "rail fare hike Tamil Nadu February 2026",
+   "ref": "T1"
+  },
+  {
+   "id": "RR-M1",
+   "type": "price",
+   "source": "v2/recall_reference.json",
+   "kind": "milk",
+   "states": [
+    "maharashtra"
+   ],
+   "event_date": "2026-02-28",
+   "month": "2026-02",
+   "cutoff": "2026-02-27",
+   "query": "milk price hike Maharashtra February 2026",
+   "ref": "M1"
+  },
+  {
+   "id": "RR-L1",
+   "type": "price",
+   "source": "v2/recall_reference.json",
+   "kind": "lpg",
+   "states": [],
+   "event_date": "2026-03-07",
+   "month": "2026-03",
+   "cutoff": "2026-03-06",
+   "query": "LPG cylinder price hike India March 2026",
+   "ref": "L1"
+  },
+  {
+   "id": "VE05",
+   "type": "price",
+   "source": "v2/ablation/arm_C_2026-03.json",
+   "kind": "lpg",
+   "states": [],
+   "event_date": "2026-03-20",
+   "month": "2026-03",
+   "cutoff": "2026-03-19",
+   "query": "LPG cylinder price hike India March 2026",
+   "url": "https://www.indiatv.in/paisa/business/premium-petrol-in-india-becomes-costlier-by-up-to-rs-2-35-from-march-20-2026-2026-03-20-1205441"
+  },
+  {
+   "id": "RR-E3",
+   "type": "price",
+   "source": "v2/recall_reference.json",
+   "kind": "electricity",
+   "states": [
+    "punjab"
+   ],
+   "event_date": "2026-04-01",
+   "month": "2026-04",
+   "cutoff": "2026-03-31",
+   "query": "electricity tariff hike Punjab April 2026",
+   "ref": "E3"
+  },
+  {
+   "id": "RR-T2",
+   "type": "price",
+   "source": "v2/recall_reference.json",
+   "kind": "bus",
+   "states": [
+    "maharashtra"
+   ],
+   "event_date": "2026-04-15",
+   "month": "2026-04",
+   "cutoff": "2026-04-14",
+   "query": "bus fare hike Maharashtra April 2026",
+   "ref": "T2"
+  },
+  {
+   "id": "VE06",
+   "type": "price",
+   "source": "v2/ablation/arm_Td_2026-05.json",
+   "kind": "rail",
+   "states": [],
+   "event_date": "2026-05-04",
+   "month": "2026-05",
+   "cutoff": "2026-05-03",
+   "query": "rail fare hike India May 2026",
+   "url": "https://www.amny.com/news/path-train-fare-increases-takes-effect-monday"
+  },
+  {
+   "id": "RR-F1",
+   "type": "price",
+   "source": "v2/recall_reference.json",
+   "kind": "fuel",
+   "states": [],
+   "event_date": "2026-05-15",
+   "month": "2026-05",
+   "cutoff": "2026-05-14",
+   "query": "petrol diesel price hike India May 2026",
+   "ref": "F1"
+  },
+  {
+   "id": "RR-F2",
+   "type": "price",
+   "source": "v2/recall_reference.json",
+   "kind": "fuel",
+   "states": [],
+   "event_date": "2026-05-19",
+   "month": "2026-05",
+   "cutoff": "2026-05-18",
+   "query": "petrol diesel price hike India May 2026",
+   "ref": "F2"
+  },
+  {
+   "id": "RR-F4",
+   "type": "price",
+   "source": "v2/recall_reference.json",
+   "kind": "fuel",
+   "states": [],
+   "event_date": "2026-05-25",
+   "month": "2026-05",
+   "cutoff": "2026-05-24",
+   "query": "petrol diesel price hike India May 2026",
+   "ref": "F4"
+  },
+  {
+   "id": "VE07",
+   "type": "price",
+   "source": "v2/ablation/arm_H_2026-06.json",
+   "kind": "bus",
+   "states": [
+    "madhya pradesh",
+    "nct of delhi",
+    "uttar pradesh"
+   ],
+   "event_date": "2026-06-12",
+   "month": "2026-06",
+   "cutoff": "2026-06-11",
+   "query": "bus fare hike Madhya Pradesh, Delhi, Uttar Pradesh June 2026",
+   "url": "https://www.livehindustan.com/ncr/11-city-buses-to-run-in-noida-greater-noida-cm-yogi-adityanath-to-flag-them-off-know-route-and-fare-201781238429634.html"
+  },
+  {
+   "id": "VE08",
+   "type": "price",
+   "source": "v2/ablation/arm_A_2026-07.json",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi"
+   ],
+   "event_date": "2026-07-01",
+   "month": "2026-07",
+   "cutoff": "2026-06-30",
+   "query": "LPG cylinder price hike Delhi July 2026",
+   "url": "https://www.aajtak.in/business/utility/story/lpg-price-cut-petrol-diesel-cheaper-atf-rate-these-four-good-news-on-1st-july-tutc-dskc-2591452-2026-07-01"
+  },
+  {
+   "id": "VE09",
+   "type": "price",
+   "source": "v2/ablation/arm_A_2026-07.json",
+   "kind": "bus",
+   "states": [
+    "maharashtra"
+   ],
+   "event_date": "2026-07-17",
+   "month": "2026-07",
+   "cutoff": "2026-07-16",
+   "query": "bus fare hike Maharashtra July 2026",
+   "url": "https://indianexpress.com/article/cities/mumbai/msrtc-hikes-bus-fares-temporary-seasonal-surcharge-10791673"
+  },
+  {
+   "id": "VE10",
+   "type": "price",
+   "source": "v2/ablation/arm_H_2026-07.json",
+   "kind": "milk",
+   "states": [
+    "karnataka"
+   ],
+   "event_date": "2026-07-24",
+   "month": "2026-07",
+   "cutoff": "2026-07-23",
+   "query": "milk price hike Karnataka July 2026",
+   "url": "https://timesofindia.indiatimes.com/city/bengaluru/kmf-hikes-prices-of-nandini-ghee-butter/articleshow/132587315.cms"
+  },
+  {
+   "id": "VE11",
+   "type": "price",
+   "source": "v2/ablation/arm_H_2026-08.json",
+   "kind": "bus",
+   "states": [
+    "madhya pradesh"
+   ],
+   "event_date": "2026-08-05",
+   "month": "2026-08",
+   "cutoff": "2026-08-04",
+   "query": "bus fare hike Madhya Pradesh August 2026",
+   "url": "https://www.abplive.com/states/madhya-pradesh/madhya-pradesh-bus-fare-hike-new-rates-per-kilometer-fare-increased-to-2-rupees-3171047"
+  },
+  {
+   "id": "RR-M10",
+   "type": "price",
+   "source": "v2/recall_reference.json",
+   "kind": "milk",
+   "states": [
+    "maharashtra"
+   ],
+   "event_date": "2026-08-11",
+   "month": "2026-08",
+   "cutoff": "2026-08-10",
+   "query": "milk price hike Maharashtra August 2026",
+   "ref": "M10"
+  },
+  {
+   "id": "VE12",
+   "type": "price",
+   "source": "v2/ablation/arm_A_2026-09.json",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi"
+   ],
+   "event_date": "2026-09-01",
+   "month": "2026-09",
+   "cutoff": "2026-08-31",
+   "query": "LPG cylinder price hike Delhi September 2026",
+   "url": "https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01"
+  },
+  {
+   "id": "VE13",
+   "type": "price",
+   "source": "v2/ablation/arm_B_2026-09.json",
+   "kind": "rail",
+   "states": [
+    "maharashtra"
+   ],
+   "event_date": "2026-09-01",
+   "month": "2026-09",
+   "cutoff": "2026-08-31",
+   "query": "rail fare hike Maharashtra September 2026",
+   "url": "https://www.jansatta.com/national/milk-price-hiked-by-rs-9-shock-for-mumbaikars-lpg-cylinder-prices-rise-across-india-adding-to-inflation-burden/4684122"
+  }
+ ],
+ "dropped": [
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "M2",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "M3",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "M4",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "M5",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "M6",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "M7",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "M8",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "M9",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "M11",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "M12",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "L2",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "F3",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "E1",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "E2",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "E4",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "E5",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "E6",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "E7",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "E8",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/recall_reference.json",
+   "ref": "T3",
+   "why": "pilot / timelock34 case"
+  },
+  {
+   "source": "v2/ablation/arm_H_2026-01.json",
+   "url": "https://www.aajtak.in/business/utility/story/rule-change-from-1st-january-2026-lpg-cylinder-to-car-price-hike-atf-rate-cut-tutc-dskc-2427756-2026-01-01",
+   "kind": "fuel",
+   "states": [],
+   "date": "2026-01-01",
+   "month": "2026-01",
+   "region": "India",
+   "why": "same event as v2/ablation/arm_A_2026-01.json 2026-01-01 https://www.aajtak.in/business/utility/story/rule-change-from-1st-january-2026-lpg-cylinder-to-car-price-hike-atf-rate-cut-tutc-dskc-2427756-2026-01-01"
+  },
+  {
+   "source": "v2/evidence/events_2026-01.json",
+   "url": "https://www.aajtak.in/business/utility/story/rule-change-from-1st-january-2026-lpg-cylinder-to-car-price-hike-atf-rate-cut-tutc-dskc-2427756-2026-01-01",
+   "kind": "fuel",
+   "states": [],
+   "date": "2026-01-01",
+   "month": "2026-01",
+   "region": "India",
+   "why": "same event as v2/ablation/arm_A_2026-01.json 2026-01-01 https://www.aajtak.in/business/utility/story/rule-change-from-1st-january-2026-lpg-cylinder-to-car-price-hike-atf-rate-cut-tutc-dskc-2427756-2026-01-01"
+  },
+  {
+   "source": "v2/ablation/arm_Td_2026-02.json",
+   "url": "https://navbharattimes.indiatimes.com/business/commodity/budget-2026-lpg-19-kg-cylinder-becomes-costlier-second-consecutive-month-know-new-prices-in-four-metros/articleshow/127830474.cms",
+   "kind": "lpg",
+   "states": [
+    "maharashtra",
+    "tamil nadu"
+   ],
+   "date": "2026-02-01",
+   "month": "2026-02",
+   "region": "Chennai",
+   "why": "same event as v2/ablation/arm_Td_2026-02.json 2026-02-01 https://navbharattimes.indiatimes.com/business/commodity/budget-2026-lpg-19-kg-cylinder-becomes-costlier-second-consecutive-month-know-new-prices-in-four-metros/articleshow/127830474.cms"
+  },
+  {
+   "source": "v2/ablation/arm_Td_2026-02.json",
+   "url": "https://navbharattimes.indiatimes.com/business/commodity/budget-2026-lpg-19-kg-cylinder-becomes-costlier-second-consecutive-month-know-new-prices-in-four-metros/articleshow/127830474.cms",
+   "kind": "lpg",
+   "states": [
+    "maharashtra",
+    "west bengal"
+   ],
+   "date": "2026-02-01",
+   "month": "2026-02",
+   "region": "Kolkata",
+   "why": "same event as v2/ablation/arm_Td_2026-02.json 2026-02-01 https://navbharattimes.indiatimes.com/business/commodity/budget-2026-lpg-19-kg-cylinder-becomes-costlier-second-consecutive-month-know-new-prices-in-four-metros/articleshow/127830474.cms"
+  },
+  {
+   "source": "v2/ablation/arm_B_2026-02.json",
+   "url": "https://swarajyamag.com/news-brief/bengaluru-metro-introduces-annual-fare-revision-limits-yearly-hikes-to-5-per-cent-from-february-2026",
+   "kind": "metro",
+   "states": [
+    "karnataka"
+   ],
+   "date": "2026-02-09",
+   "month": "2026-02",
+   "region": "India",
+   "why": "same event as v2/ablation/arm_A_2026-02.json 2026-02-09 https://www.moneycontrol.com/news/india/why-bengaluru-metro-is-enforcing-annual-fare-hikes-while-delhi-resists-despite-similar-panel-recommendations-13813986.html"
+  },
+  {
+   "source": "v2/ablation/arm_B_2026-02.json",
+   "url": "https://www.moneycontrol.com/news/india/why-bengaluru-metro-is-enforcing-annual-fare-hikes-while-delhi-resists-despite-similar-panel-recommendations-13813986.html",
+   "kind": "metro",
+   "states": [
+    "karnataka",
+    "nct of delhi"
+   ],
+   "date": "2026-02-09",
+   "month": "2026-02",
+   "region": "India",
+   "why": "same event as v2/ablation/arm_A_2026-02.json 2026-02-09 https://www.moneycontrol.com/news/india/why-bengaluru-metro-is-enforcing-annual-fare-hikes-while-delhi-resists-despite-similar-panel-recommendations-13813986.html"
+  },
+  {
+   "source": "v2/ablation/arm_C_2026-02.json",
+   "url": "https://www.deccanherald.com/india/karnataka/bengaluru/pay-rs-1-5-more-for-bengaluru-metro-rides-from-february-9-3886552",
+   "kind": "metro",
+   "states": [
+    "karnataka"
+   ],
+   "date": "2026-02-09",
+   "month": "2026-02",
+   "region": "India/Bengaluru/Karnataka",
+   "why": "same event as v2/ablation/arm_A_2026-02.json 2026-02-09 https://www.moneycontrol.com/news/india/why-bengaluru-metro-is-enforcing-annual-fare-hikes-while-delhi-resists-despite-similar-panel-recommendations-13813986.html"
+  },
+  {
+   "source": "v2/evidence/events_2026-02.json",
+   "url": "https://www.moneycontrol.com/news/india/why-bengaluru-metro-is-enforcing-annual-fare-hikes-while-delhi-resists-despite-similar-panel-recommendations-13813986.html",
+   "kind": "metro",
+   "states": [
+    "karnataka",
+    "nct of delhi"
+   ],
+   "date": "2026-02-09",
+   "month": "2026-02",
+   "region": "India",
+   "why": "same event as v2/ablation/arm_A_2026-02.json 2026-02-09 https://www.moneycontrol.com/news/india/why-bengaluru-metro-is-enforcing-annual-fare-hikes-while-delhi-resists-despite-similar-panel-recommendations-13813986.html"
+  },
+  {
+   "source": "v2/ablation/arm_B_2026-02.json",
+   "url": "https://timesofindia.indiatimes.com/city/mumbai/gokul-raises-price-of-buffalo-milk-by-rs-2-per-litre/articleshow/128640277.cms",
+   "kind": "milk",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-02-21",
+   "month": "2026-02",
+   "region": "Mumbai",
+   "why": "same event as recall reference M1"
+  },
+  {
+   "source": "v2/ablation/arm_H_2026-02.json",
+   "url": "https://timesofindia.indiatimes.com/city/mumbai/gokul-raises-price-of-buffalo-milk-by-rs-2-per-litre/articleshow/128640277.cms",
+   "kind": "milk",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-02-21",
+   "month": "2026-02",
+   "region": "Mumbai",
+   "why": "same event as recall reference M1"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-03.json",
+   "url": "https://www.siasat.com/domestic-lpg-cylinder-prices-hiked-know-rates-in-hyderabad-other-cities-3426480",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi",
+    "telangana"
+   ],
+   "date": "2026-03-08",
+   "month": "2026-03",
+   "region": "Delhi",
+   "why": "same event as recall reference L1"
+  },
+  {
+   "source": "v2/evidence/events_2026-03.json",
+   "url": "https://www.siasat.com/domestic-lpg-cylinder-prices-hiked-know-rates-in-hyderabad-other-cities-3426480",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi",
+    "telangana"
+   ],
+   "date": "2026-03-08",
+   "month": "2026-03",
+   "region": "Delhi",
+   "why": "same event as recall reference L1"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-04.json",
+   "url": "https://energy.economictimes.indiatimes.com/news/power/power-tariff-increase-approved-jharkhands-electricity-rates-see-6-12-hike-consumers-face-higher-bills-starting-april-1/129819394",
+   "kind": "electricity",
+   "states": [
+    "jharkhand"
+   ],
+   "date": "2026-04-01",
+   "month": "2026-04",
+   "region": "Jharkhand",
+   "why": "same event as recall reference E4"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-04.json",
+   "url": "https://www.aajtak.in/madhya-pradesh/story/mp-electricity-tariff-hike-new-rates-april-1-power-bill-increase-lcla-rptc-2507841-2026-03-27",
+   "kind": "electricity",
+   "states": [
+    "madhya pradesh"
+   ],
+   "date": "2026-04-01",
+   "month": "2026-04",
+   "region": "Madhya Pradesh",
+   "why": "same event as recall reference E1"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-04.json",
+   "url": "https://www.bhaskar.com/local/mp/jabalpur/news/mp-new-electricity-tariff-rates-lt-consumers-minimum-charges-removed-ev-charging-discount-137539609.html",
+   "kind": "electricity",
+   "states": [
+    "madhya pradesh"
+   ],
+   "date": "2026-04-01",
+   "month": "2026-04",
+   "region": "Madhya Pradesh",
+   "why": "same event as recall reference E1"
+  },
+  {
+   "source": "v2/ablation/arm_H_2026-04.json",
+   "url": "https://www.aajtak.in/madhya-pradesh/story/mp-electricity-tariff-hike-new-rates-april-1-power-bill-increase-lcla-rptc-2507841-2026-03-27",
+   "kind": "electricity",
+   "states": [
+    "madhya pradesh"
+   ],
+   "date": "2026-04-01",
+   "month": "2026-04",
+   "region": "Madhya Pradesh",
+   "why": "same event as recall reference E1"
+  },
+  {
+   "source": "v2/ablation/arm_H_2026-04.json",
+   "url": "https://www.bhaskar.com/local/mp/jabalpur/news/mp-new-electricity-tariff-rates-lt-consumers-minimum-charges-removed-ev-charging-discount-137539609.html",
+   "kind": "electricity",
+   "states": [
+    "madhya pradesh"
+   ],
+   "date": "2026-04-01",
+   "month": "2026-04",
+   "region": "Madhya Pradesh",
+   "why": "same event as recall reference E1"
+  },
+  {
+   "source": "v2/evidence/events_2026-04.json",
+   "url": "https://energy.economictimes.indiatimes.com/news/power/power-tariff-increase-approved-jharkhands-electricity-rates-see-6-12-hike-consumers-face-higher-bills-starting-april-1/129819394",
+   "kind": "electricity",
+   "states": [
+    "jharkhand"
+   ],
+   "date": "2026-04-01",
+   "month": "2026-04",
+   "region": "Jharkhand",
+   "why": "same event as recall reference E4"
+  },
+  {
+   "source": "v2/evidence/events_2026-04.json",
+   "url": "https://www.aajtak.in/madhya-pradesh/story/mp-electricity-tariff-hike-new-rates-april-1-power-bill-increase-lcla-rptc-2507841-2026-03-27",
+   "kind": "electricity",
+   "states": [
+    "madhya pradesh"
+   ],
+   "date": "2026-04-01",
+   "month": "2026-04",
+   "region": "Madhya Pradesh",
+   "why": "same event as recall reference E1"
+  },
+  {
+   "source": "v2/evidence/events_2026-04.json",
+   "url": "https://www.bhaskar.com/local/mp/jabalpur/news/mp-new-electricity-tariff-rates-lt-consumers-minimum-charges-removed-ev-charging-discount-137539609.html",
+   "kind": "electricity",
+   "states": [
+    "madhya pradesh"
+   ],
+   "date": "2026-04-01",
+   "month": "2026-04",
+   "region": "Madhya Pradesh",
+   "why": "same event as recall reference E1"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-04.json",
+   "url": "https://www.amarujala.com/madhya-pradesh/indore/indore-milk-prices-will-increase-by-rs-3-per-litre-in-indore-from-april-1-along-with-a-home-delivery-service-2026-03-31",
+   "kind": "milk",
+   "states": [
+    "madhya pradesh"
+   ],
+   "date": "2026-04-01",
+   "month": "2026-04",
+   "region": "Indore",
+   "why": "same event as recall reference M2"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-04.json",
+   "url": "https://www.etvbharat.com/hi/state/dhar-milk-prices-hike-by-4-rs-milk-rate-64-rupees-per-liter-madhya-pradesh-news-mps26033002737",
+   "kind": "milk",
+   "states": [
+    "madhya pradesh"
+   ],
+   "date": "2026-04-01",
+   "month": "2026-04",
+   "region": "Dhar",
+   "why": "same event as recall reference M2"
+  },
+  {
+   "source": "v2/evidence/events_2026-04.json",
+   "url": "https://www.amarujala.com/madhya-pradesh/indore/indore-milk-prices-will-increase-by-rs-3-per-litre-in-indore-from-april-1-along-with-a-home-delivery-service-2026-03-31",
+   "kind": "milk",
+   "states": [
+    "madhya pradesh"
+   ],
+   "date": "2026-04-01",
+   "month": "2026-04",
+   "region": "Indore",
+   "why": "same event as recall reference M2"
+  },
+  {
+   "source": "v2/evidence/events_2026-04.json",
+   "url": "https://www.etvbharat.com/hi/state/dhar-milk-prices-hike-by-4-rs-milk-rate-64-rupees-per-liter-madhya-pradesh-news-mps26033002737",
+   "kind": "milk",
+   "states": [
+    "madhya pradesh"
+   ],
+   "date": "2026-04-01",
+   "month": "2026-04",
+   "region": "Dhar",
+   "why": "same event as recall reference M2"
+  },
+  {
+   "source": "v2/ablation/arm_B_2026-04.json",
+   "url": "https://navbharattimes.indiatimes.com/metro/mumbai/development/maharashtra-bus-travel-expensive-msrtc-bus-passenger-fare-hike-and-cleanliness-charge-hits-travelers-financially/articleshow/130325621.cms",
+   "kind": "bus",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-04-15",
+   "month": "2026-04",
+   "region": "Maharashtra",
+   "why": "same event as recall reference T2"
+  },
+  {
+   "source": "v2/ablation/arm_H_2026-04.json",
+   "url": "https://navbharattimes.indiatimes.com/metro/mumbai/development/maharashtra-bus-travel-expensive-msrtc-bus-passenger-fare-hike-and-cleanliness-charge-hits-travelers-financially/articleshow/130325621.cms",
+   "kind": "bus",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-04-15",
+   "month": "2026-04",
+   "region": "Maharashtra",
+   "why": "same event as recall reference T2"
+  },
+  {
+   "source": "v2/ablation/arm_Td_2026-04.json",
+   "url": "https://navbharattimes.indiatimes.com/metro/mumbai/development/maharashtra-bus-travel-expensive-msrtc-bus-passenger-fare-hike-and-cleanliness-charge-hits-travelers-financially/articleshow/130325621.cms",
+   "kind": "bus",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-04-15",
+   "month": "2026-04",
+   "region": "Maharashtra",
+   "why": "same event as recall reference T2"
+  },
+  {
+   "source": "v2/ablation/arm_Td_2026-04.json",
+   "url": "https://www.amarujala.com/photo-gallery/technology/tech-diary/telecom-tariff-hike-india-airtel-jio-vi-prepaid-plan-changes-hindi-2026-04-21",
+   "kind": "bus",
+   "states": [],
+   "date": "2026-04-21",
+   "month": "2026-04",
+   "region": "India",
+   "why": "same event as recall reference T2"
+  },
+  {
+   "source": "v2/ablation/arm_Td_2026-05.json",
+   "url": "https://www.amny.com/news/path-train-fare-increases-takes-effect-monday",
+   "kind": "rail",
+   "states": [],
+   "date": "2026-05-04",
+   "month": "2026-05",
+   "region": "India",
+   "why": "same event as v2/ablation/arm_Td_2026-05.json 2026-05-04 https://www.amny.com/news/path-train-fare-increases-takes-effect-monday"
+  },
+  {
+   "source": "v2/ablation/arm_Td_2026-05.json",
+   "url": "https://www.6sqft.com/nj-transit-cuts-world-cup-train-fare-to-metlife-by-30",
+   "kind": "rail",
+   "states": [],
+   "date": "2026-05-11",
+   "month": "2026-05",
+   "region": "India",
+   "why": "same event as v2/ablation/arm_Td_2026-05.json 2026-05-04 https://www.amny.com/news/path-train-fare-increases-takes-effect-monday"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-05.json",
+   "url": "https://ndtv.in/india/amul-milk-becomes-2-per-liter-more-expensive-11490163",
+   "kind": "milk",
+   "states": [],
+   "date": "2026-05-14",
+   "month": "2026-05",
+   "region": "India",
+   "why": "same event as recall reference M3"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-05.json",
+   "url": "https://www.moneycontrol.com/news/business/amul-raises-milk-prices-by-rs-2-per-litre-across-key-variants-from-may-14-13918166.html",
+   "kind": "milk",
+   "states": [],
+   "date": "2026-05-14",
+   "month": "2026-05",
+   "region": "India",
+   "why": "same event as recall reference M3"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-05.json",
+   "url": "https://www.moneycontrol.com/news/business/amul-raises-milk-prices-by-rs-2-per-litre-across-key-variants-from-may-14-13918166.html",
+   "kind": "milk",
+   "states": [],
+   "date": "2026-05-14",
+   "month": "2026-05",
+   "region": "India",
+   "why": "same event as recall reference M3"
+  },
+  {
+   "source": "v2/ablation/arm_C_2026-05.json",
+   "url": "https://www.amarujala.com/india-news/milk-price-after-amul-mother-dairy-also-increased-price-of-milk-know-when-new-prices-will-be-applicable-2026-05-14",
+   "kind": "milk",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-05-14",
+   "month": "2026-05",
+   "region": "Delhi-NCR",
+   "why": "same event as recall reference M3"
+  },
+  {
+   "source": "v2/ablation/arm_C_2026-05.json",
+   "url": "https://www.amarujala.com/india-news/milk-price-after-amul-mother-dairy-also-increased-price-of-milk-know-when-new-prices-will-be-applicable-2026-05-14",
+   "kind": "milk",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-05-14",
+   "month": "2026-05",
+   "region": "Delhi-NCR",
+   "why": "same event as recall reference M3"
+  },
+  {
+   "source": "v2/ablation/arm_C_2026-05.json",
+   "url": "https://www.amarujala.com/india-news/milk-price-after-amul-mother-dairy-also-increased-price-of-milk-know-when-new-prices-will-be-applicable-2026-05-14",
+   "kind": "milk",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-05-14",
+   "month": "2026-05",
+   "region": "Delhi-NCR",
+   "why": "same event as recall reference M3"
+  },
+  {
+   "source": "v2/evidence/events_2026-05.json",
+   "url": "https://ndtv.in/india/amul-milk-becomes-2-per-liter-more-expensive-11490163",
+   "kind": "milk",
+   "states": [],
+   "date": "2026-05-14",
+   "month": "2026-05",
+   "region": "India",
+   "why": "same event as recall reference M3"
+  },
+  {
+   "source": "v2/evidence/events_2026-05.json",
+   "url": "https://www.moneycontrol.com/news/business/amul-raises-milk-prices-by-rs-2-per-litre-across-key-variants-from-may-14-13918166.html",
+   "kind": "milk",
+   "states": [],
+   "date": "2026-05-14",
+   "month": "2026-05",
+   "region": "India",
+   "why": "same event as recall reference M3"
+  },
+  {
+   "source": "v2/evidence/events_2026-05.json",
+   "url": "https://www.moneycontrol.com/news/business/amul-raises-milk-prices-by-rs-2-per-litre-across-key-variants-from-may-14-13918166.html",
+   "kind": "milk",
+   "states": [],
+   "date": "2026-05-14",
+   "month": "2026-05",
+   "region": "India",
+   "why": "same event as recall reference M3"
+  },
+  {
+   "source": "v2/ablation/arm_Td_2026-05.json",
+   "url": "https://www.jagran.com/news/national-petrol-diesel-price-hike-90-paise-increase-second-time-this-week-40244908.html",
+   "kind": "fuel",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-05-26",
+   "month": "2026-05",
+   "region": "National capital (Delhi)",
+   "why": "same event as recall reference F2"
+  },
+  {
+   "source": "v2/ablation/arm_Td_2026-05.json",
+   "url": "https://www.jagran.com/news/national-petrol-diesel-price-hike-90-paise-increase-second-time-this-week-40244908.html",
+   "kind": "fuel",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-05-26",
+   "month": "2026-05",
+   "region": "National capital (Delhi)",
+   "why": "same event as recall reference F2"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-05.json",
+   "url": "https://money.rediff.com/news/market/petrol-diesel-prices-hike-after-elections/47075220260515",
+   "kind": "fuel",
+   "states": [
+    "maharashtra",
+    "nct of delhi"
+   ],
+   "date": "2026-05-29",
+   "month": "2026-05",
+   "region": "national capital",
+   "why": "same event as recall reference F3"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-05.json",
+   "url": "https://money.rediff.com/news/market/petrol-diesel-prices-hike-after-elections/47075220260515",
+   "kind": "fuel",
+   "states": [
+    "maharashtra",
+    "nct of delhi"
+   ],
+   "date": "2026-05-29",
+   "month": "2026-05",
+   "region": "national capital",
+   "why": "same event as recall reference F3"
+  },
+  {
+   "source": "v2/evidence/events_2026-05.json",
+   "url": "https://money.rediff.com/news/market/petrol-diesel-prices-hike-after-elections/47075220260515",
+   "kind": "fuel",
+   "states": [
+    "maharashtra",
+    "nct of delhi"
+   ],
+   "date": "2026-05-29",
+   "month": "2026-05",
+   "region": "national capital",
+   "why": "same event as recall reference F3"
+  },
+  {
+   "source": "v2/evidence/events_2026-05.json",
+   "url": "https://money.rediff.com/news/market/petrol-diesel-prices-hike-after-elections/47075220260515",
+   "kind": "fuel",
+   "states": [
+    "maharashtra",
+    "nct of delhi"
+   ],
+   "date": "2026-05-29",
+   "month": "2026-05",
+   "region": "national capital",
+   "why": "same event as recall reference F3"
+  },
+  {
+   "source": "v2/ablation/arm_Td_2026-06.json",
+   "url": "https://ndtv.in/business-news/lpg-prices-hike-19-kg-commercial-gas-cylinder-prices-hiked-5-kg-ftl-cylinder-is-costlier-now-know-14-point-2-kg-domestic-lpg-cylinder-prices-11573204",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-06-01",
+   "month": "2026-06",
+   "region": "Delhi",
+   "why": "same event as recall reference L2"
+  },
+  {
+   "source": "v2/ablation/arm_Td_2026-06.json",
+   "url": "https://www.livehindustan.com/business/lpg-price-today-no-change-in-gas-cylinder-rates-check-lates-updates-here-201780717791073.html",
+   "kind": "lpg",
+   "states": [],
+   "date": "2026-06-01",
+   "month": "2026-06",
+   "region": "India",
+   "why": "same event as recall reference L2"
+  },
+  {
+   "source": "v2/ablation/arm_B_2026-06.json",
+   "url": "https://www.ndtv.com/india-news/domestic-lpg-prices-raised-by-rs-29-second-hike-since-us-iran-war-started-cylinders-to-now-cost-rs-942-11601794",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-06-07",
+   "month": "2026-06",
+   "region": "India",
+   "why": "same event as recall reference L2"
+  },
+  {
+   "source": "v2/ablation/arm_C_2026-06.json",
+   "url": "https://www.ndtv.com/india-news/domestic-lpg-prices-raised-by-rs-29-second-hike-since-us-iran-war-started-cylinders-to-now-cost-rs-942-11601794",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-06-07",
+   "month": "2026-06",
+   "region": "India",
+   "why": "same event as recall reference L2"
+  },
+  {
+   "source": "v2/ablation/arm_H_2026-07.json",
+   "url": "https://www.aajtak.in/business/utility/story/lpg-price-cut-petrol-diesel-cheaper-atf-rate-these-four-good-news-on-1st-july-tutc-dskc-2591452-2026-07-01",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-07-01",
+   "month": "2026-07",
+   "region": "Delhi",
+   "why": "same event as v2/ablation/arm_A_2026-07.json 2026-07-01 https://www.aajtak.in/business/utility/story/lpg-price-cut-petrol-diesel-cheaper-atf-rate-these-four-good-news-on-1st-july-tutc-dskc-2591452-2026-07-01"
+  },
+  {
+   "source": "v2/evidence/events_2026-07.json",
+   "url": "https://www.aajtak.in/business/utility/story/lpg-price-cut-petrol-diesel-cheaper-atf-rate-these-four-good-news-on-1st-july-tutc-dskc-2591452-2026-07-01",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-07-01",
+   "month": "2026-07",
+   "region": "Delhi",
+   "why": "same event as v2/ablation/arm_A_2026-07.json 2026-07-01 https://www.aajtak.in/business/utility/story/lpg-price-cut-petrol-diesel-cheaper-atf-rate-these-four-good-news-on-1st-july-tutc-dskc-2591452-2026-07-01"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-07.json",
+   "url": "https://www.ndtv.com/india-news/maharashtra-state-transport-bus-fares-to-be-hiked-by-13-5-from-tomorrow-11785653",
+   "kind": "bus",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-07-17",
+   "month": "2026-07",
+   "region": "Maharashtra",
+   "why": "same event as v2/ablation/arm_A_2026-07.json 2026-07-17 https://indianexpress.com/article/cities/mumbai/msrtc-hikes-bus-fares-temporary-seasonal-surcharge-10791673"
+  },
+  {
+   "source": "v2/evidence/events_2026-07.json",
+   "url": "https://indianexpress.com/article/cities/mumbai/msrtc-hikes-bus-fares-temporary-seasonal-surcharge-10791673",
+   "kind": "bus",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-07-17",
+   "month": "2026-07",
+   "region": "India",
+   "why": "same event as v2/ablation/arm_A_2026-07.json 2026-07-17 https://indianexpress.com/article/cities/mumbai/msrtc-hikes-bus-fares-temporary-seasonal-surcharge-10791673"
+  },
+  {
+   "source": "v2/evidence/events_2026-07.json",
+   "url": "https://www.ndtv.com/india-news/maharashtra-state-transport-bus-fares-to-be-hiked-by-13-5-from-tomorrow-11785653",
+   "kind": "bus",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-07-17",
+   "month": "2026-07",
+   "region": "Maharashtra",
+   "why": "same event as v2/ablation/arm_A_2026-07.json 2026-07-17 https://indianexpress.com/article/cities/mumbai/msrtc-hikes-bus-fares-temporary-seasonal-surcharge-10791673"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-07.json",
+   "url": "https://www.livemint.com/news/india/msrtc-ticket-prices-up-maharashtra-clears-bus-fare-hike-from-18-july-here-is-how-much-more-you-will-pay-11784303743567.html",
+   "kind": "bus",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-07-18",
+   "month": "2026-07",
+   "region": "Maharashtra, India",
+   "why": "same event as v2/ablation/arm_A_2026-07.json 2026-07-17 https://indianexpress.com/article/cities/mumbai/msrtc-hikes-bus-fares-temporary-seasonal-surcharge-10791673"
+  },
+  {
+   "source": "v2/evidence/events_2026-07.json",
+   "url": "https://www.livemint.com/news/india/msrtc-ticket-prices-up-maharashtra-clears-bus-fare-hike-from-18-july-here-is-how-much-more-you-will-pay-11784303743567.html",
+   "kind": "bus",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-07-18",
+   "month": "2026-07",
+   "region": "Maharashtra, India",
+   "why": "same event as v2/ablation/arm_A_2026-07.json 2026-07-17 https://indianexpress.com/article/cities/mumbai/msrtc-hikes-bus-fares-temporary-seasonal-surcharge-10791673"
+  },
+  {
+   "source": "v2/ablation/arm_H_2026-07.json",
+   "url": "https://timesofindia.indiatimes.com/city/bengaluru/kmf-hikes-prices-of-nandini-ghee-butter/articleshow/132587315.cms",
+   "kind": "milk",
+   "states": [
+    "karnataka"
+   ],
+   "date": "2026-07-24",
+   "month": "2026-07",
+   "region": "India",
+   "why": "same event as v2/ablation/arm_H_2026-07.json 2026-07-24 https://timesofindia.indiatimes.com/city/bengaluru/kmf-hikes-prices-of-nandini-ghee-butter/articleshow/132587315.cms"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-08.json",
+   "url": "https://www.jagran.com/maharashtra/mumbai-maharashtra-milk-price-hike-milk-to-cost-2-more-from-august-11-see-new-rate-list-40334543.html",
+   "kind": "milk",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-08-11",
+   "month": "2026-08",
+   "region": "Maharashtra",
+   "why": "same event as recall reference M10"
+  },
+  {
+   "source": "v2/ablation/arm_A_2026-08.json",
+   "url": "https://www.jagran.com/maharashtra/mumbai-maharashtra-milk-price-hike-milk-to-cost-2-more-from-august-11-see-new-rate-list-40334543.html",
+   "kind": "milk",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-08-11",
+   "month": "2026-08",
+   "region": "Maharashtra",
+   "why": "same event as recall reference M10"
+  },
+  {
+   "source": "v2/ablation/arm_H_2026-08.json",
+   "url": "https://www.jagran.com/maharashtra/mumbai-maharashtra-milk-price-hike-milk-to-cost-2-more-from-august-11-see-new-rate-list-40334543.html",
+   "kind": "milk",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-08-11",
+   "month": "2026-08",
+   "region": "Maharashtra",
+   "why": "same event as recall reference M10"
+  },
+  {
+   "source": "v2/ablation/arm_H_2026-08.json",
+   "url": "https://www.jagran.com/maharashtra/mumbai-maharashtra-milk-price-hike-milk-to-cost-2-more-from-august-11-see-new-rate-list-40334543.html",
+   "kind": "milk",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-08-11",
+   "month": "2026-08",
+   "region": "Maharashtra",
+   "why": "same event as recall reference M10"
+  },
+  {
+   "source": "v2/evidence/events_2026-08.json",
+   "url": "https://www.jagran.com/maharashtra/mumbai-maharashtra-milk-price-hike-milk-to-cost-2-more-from-august-11-see-new-rate-list-40334543.html",
+   "kind": "milk",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-08-11",
+   "month": "2026-08",
+   "region": "Maharashtra",
+   "why": "same event as recall reference M10"
+  },
+  {
+   "source": "v2/evidence/events_2026-08.json",
+   "url": "https://www.jagran.com/maharashtra/mumbai-maharashtra-milk-price-hike-milk-to-cost-2-more-from-august-11-see-new-rate-list-40334543.html",
+   "kind": "milk",
+   "states": [
+    "maharashtra"
+   ],
+   "date": "2026-08-11",
+   "month": "2026-08",
+   "region": "Maharashtra",
+   "why": "same event as recall reference M10"
+  },
+  {
+   "source": "v2/ablation/arm_H_2026-09.json",
+   "url": "https://freepresskashmir.news/2026/08/25/why-jks-power-tariff-is-rising-the-politics-promises-and-numbers-behind-the-6-83-hike",
+   "kind": "electricity",
+   "states": [
+    "jammu and kashmir",
+    "ladakh"
+   ],
+   "date": "2026-09-01",
+   "month": "2026-09",
+   "region": "Jammu and Kashmir and Ladakh",
+   "why": "same event as recall reference E8"
+  },
+  {
+   "source": "v2/ablation/arm_H_2026-09.json",
+   "url": "https://risingkashmir.com/top-stories/jk-power-bills-rise-6-83-percent-from-september-1-12419444",
+   "kind": "electricity",
+   "states": [
+    "jammu and kashmir"
+   ],
+   "date": "2026-09-01",
+   "month": "2026-09",
+   "region": "Jammu & Kashmir",
+   "why": "same event as recall reference E8"
+  },
+  {
+   "source": "v2/ablation/arm_H_2026-09.json",
+   "url": "https://www.deccanchronicle.com/nation/omar-abdullah-defends-power-tariff-hike-amid-rising-political-tempers-in-jk-1981879",
+   "kind": "electricity",
+   "states": [
+    "jammu and kashmir",
+    "ladakh"
+   ],
+   "date": "2026-09-01",
+   "month": "2026-09",
+   "region": "Jammu and Kashmir and Ladakh",
+   "why": "same event as recall reference E8"
+  },
+  {
+   "source": "v2/ablation/arm_B_2026-09.json",
+   "url": "https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-09-01",
+   "month": "2026-09",
+   "region": "India",
+   "why": "same event as v2/ablation/arm_A_2026-09.json 2026-09-01 https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01"
+  },
+  {
+   "source": "v2/ablation/arm_B_2026-09.json",
+   "url": "https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-09-01",
+   "month": "2026-09",
+   "region": "All India",
+   "why": "same event as v2/ablation/arm_A_2026-09.json 2026-09-01 https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01"
+  },
+  {
+   "source": "v2/ablation/arm_C_2026-09.json",
+   "url": "https://ndtv.in/business-news/lpg-price-hike-9-rupees-50-paise-1-september-2026-lpg-gas-cylinder-price-check-rates-in-delhi-mumbai-chennai-kolkata-and-other-cities-11984381",
+   "kind": "lpg",
+   "states": [
+    "maharashtra",
+    "nct of delhi",
+    "tamil nadu",
+    "uttar pradesh",
+    "west bengal"
+   ],
+   "date": "2026-09-01",
+   "month": "2026-09",
+   "region": "Noida",
+   "why": "same event as v2/ablation/arm_A_2026-09.json 2026-09-01 https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01"
+  },
+  {
+   "source": "v2/ablation/arm_C_2026-09.json",
+   "url": "https://ndtv.in/business-news/lpg-price-hike-9-rupees-50-paise-1-september-2026-lpg-gas-cylinder-price-check-rates-in-delhi-mumbai-chennai-kolkata-and-other-cities-11984381",
+   "kind": "lpg",
+   "states": [
+    "maharashtra",
+    "nct of delhi",
+    "tamil nadu",
+    "west bengal"
+   ],
+   "date": "2026-09-01",
+   "month": "2026-09",
+   "region": "Kolkata",
+   "why": "same event as v2/ablation/arm_A_2026-09.json 2026-09-01 https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01"
+  },
+  {
+   "source": "v2/ablation/arm_C_2026-09.json",
+   "url": "https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-09-01",
+   "month": "2026-09",
+   "region": "India",
+   "why": "same event as v2/ablation/arm_A_2026-09.json 2026-09-01 https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01"
+  },
+  {
+   "source": "v2/ablation/arm_C_2026-09.json",
+   "url": "https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-09-01",
+   "month": "2026-09",
+   "region": "All India",
+   "why": "same event as v2/ablation/arm_A_2026-09.json 2026-09-01 https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01"
+  },
+  {
+   "source": "v2/ablation/arm_H_2026-09.json",
+   "url": "https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-09-01",
+   "month": "2026-09",
+   "region": "All India",
+   "why": "same event as v2/ablation/arm_A_2026-09.json 2026-09-01 https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01"
+  },
+  {
+   "source": "v2/evidence/events_2026-09.json",
+   "url": "https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01",
+   "kind": "lpg",
+   "states": [
+    "nct of delhi"
+   ],
+   "date": "2026-09-01",
+   "month": "2026-09",
+   "region": "All India",
+   "why": "same event as v2/ablation/arm_A_2026-09.json 2026-09-01 https://www.aajtak.in/business/news/story/lpg-cylinder-price-hike-delhi-to-patan-check-new-rates-tutd-dskc-2633829-2026-09-01"
+  },
+  {
+   "source": "v2/finance_lookahead.py EVENTS",
+   "ref": "R1",
+   "why": "timelock34 case"
+  },
+  {
+   "source": "v2/finance_lookahead.py EVENTS",
+   "ref": "R2",
+   "why": "timelock34 case"
+  },
+  {
+   "source": "v2/finance_lookahead.py EVENTS",
+   "ref": "R3",
+   "why": "timelock34 case"
+  },
+  {
+   "source": "v2/finance_lookahead.py EVENTS",
+   "ref": "R4",
+   "why": "timelock34 case"
+  },
+  {
+   "source": "v2/finance_lookahead.py EVENTS",
+   "ref": "R5",
+   "why": "timelock34 case"
+  },
+  {
+   "source": "v2/finance_lookahead.py EVENTS",
+   "ref": "C1",
+   "why": "timelock34 case"
+  },
+  {
+   "source": "v2/finance_lookahead.py EVENTS",
+   "ref": "C2",
+   "why": "timelock34 case"
+  },
+  {
+   "source": "v2/finance_lookahead.py EVENTS",
+   "ref": "C3",
+   "why": "timelock34 case"
+  },
+  {
+   "source": "v2/finance_lookahead.py EVENTS",
+   "ref": "C4",
+   "why": "timelock34 case"
+  },
+  {
+   "source": "v2/finance_lookahead.py EVENTS",
+   "ref": "C5",
+   "why": "timelock34 case"
+  },
+  {
+   "source": "v2/finance_lookahead.py EVENTS",
+   "ref": "C6",
+   "why": "timelock34 case"
+  },
+  {
+   "source": "v2/finance_lookahead.py EVENTS",
+   "ref": "C7",
+   "why": "timelock34 case"
+  },
+  {
+   "source": "v2/finance_lookahead.py EVENTS",
+   "ref": "C8",
+   "why": "timelock34 case"
+  },
+  {
+   "source": "v2/finance_lookahead.py EVENTS",
+   "ref": "C9",
+   "why": "timelock34 case"
+  }
+ ]
+}
