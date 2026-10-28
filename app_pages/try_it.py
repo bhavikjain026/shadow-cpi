@@ -11,6 +11,7 @@ from shadow_cpi import try_it as T
 
 OPEN, OPEN_NOTE = "No time lock", "plain Tavily search, no dates"
 LOCKED, LOCKED_NOTE = "Time lock", "timelocked_search: the 30 days ending on the cutoff, published-date filter on"
+SAVED_LOCKED_NOTE = "the date test's window and Tavily's published-date filter"
 FLAG_TEXT = {T.YES: "after cutoff: **yes**", T.NO: "after cutoff: no", T.UNDATED: "after cutoff: undated"}
 HONEST = ("These are date flags from Tavily's published_date, not Wayback-confirmed leaks: a page can carry a wrong "
           "date, and an undated page could be from any time. For the measured result, with every page checked "
@@ -59,7 +60,7 @@ def show(res, note=""):
     with left:
         column(OPEN, OPEN_NOTE, res["open"])
     with right:
-        column(LOCKED, LOCKED_NOTE, res["locked"])
+        column(LOCKED, SAVED_LOCKED_NOTE if res["source"] == "saved" else LOCKED_NOTE, res["locked"])
     st.caption(HONEST)
     st.page_link("app_pages/field_report.py", label="Field Report: the measured result", icon=":material/science:")
 
