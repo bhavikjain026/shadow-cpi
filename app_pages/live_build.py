@@ -10,7 +10,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from app_pages.common import ROOT, altair_chart, clean_line, header, month_name
+from app_pages.common import ROOT, altair_chart, chart_table, clean_line, header, month_name
 from app_pages.v2_panels import time_machine, what_tavily_adds
 
 header("Live build (v2)", "Shadow CPI v2 builds the number one piece of evidence at a time, under live conditions: "
@@ -79,6 +79,7 @@ def draw_top(value, measured, label):
             color=alt.Color("what:N", scale=alt.Scale(domain=dom, range=rng),
                             legend=alt.Legend(orient="bottom", title=None, columns=4)))
         altair_chart((base + ticks).properties(height=90), width="stretch")
+        st.caption(" · ".join(f"{m['what']} {m['x']:.3f}%" for m in marks))
 
 
 def pct(x):
@@ -104,7 +105,7 @@ def draw_tree(done):
     df = pd.DataFrame([{**t, "status": "measured" if t["code"] in done else "on trend",
                         "label": t["name"][:18] if (t["x1"] - t["x0"]) * (t["y1"] - t["y0"]) > 60 else "",
                         "cx": (t["x0"] + t["x1"]) / 2, "cy": (t["y0"] + t["y1"]) / 2} for t in run["tiles"]])
-    color = alt.Color("status:N", scale=alt.Scale(domain=["measured", "on trend"], range=["#2CA58D", "#5A5A5A"]),
+    color = alt.Color("status:N", scale=alt.Scale(domain=["measured", "on trend"], range=["#0f766e", "#5A5A5A"]),
                       legend=alt.Legend(orient="bottom", title=None))
     x, y = alt.Scale(domain=[0, 100], nice=False), alt.Scale(domain=[60, 0], nice=False)
     rects = alt.Chart(df).mark_rect(stroke="#111111", strokeWidth=1).encode(
@@ -112,7 +113,10 @@ def draw_tree(done):
         color=color, tooltip=["name", alt.Tooltip("weight:Q", format=".2f", title="CPI weight (%)"), "status"])
     text = alt.Chart(df).mark_text(fontSize=10, color="white").encode(x=alt.X("cx:Q", scale=x),
                                                                       y=alt.Y("cy:Q", scale=y), text="label")
-    altair_chart((rects + text).properties(height=320, title="The basket by CPI weight"), into=tree_box, width="stretch")
+    with tree_box.container():                    # st.empty holds one element: the chart and its table go in one container
+        altair_chart((rects + text).properties(height=320, title="The basket by CPI weight"), width="stretch")
+        chart_table([{"Group": t["name"], "CPI weight (%)": f"{t['weight']:.2f}", "Status": t["status"]}
+                     for t in df.sort_values("weight", ascending=False).to_dict("records")])
 
 
 def card_body(card):

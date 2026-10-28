@@ -207,8 +207,10 @@
 [data-testid="stMultiSelectTagsContainer"] > [role="group"], [data-testid="stMultiSelectTagsContainer"] > [role="group"] > span { background-color: #2563eb !important; }
 
 /* ---------- focus ---------- */
-[data-testid="stMain"] a:focus-visible, [data-testid="stTab"]:focus-visible, [data-testid="stExpander"] summary:focus-visible {
-  outline: 2px solid #3b82f6;
+/* every focusable control, main area and sidebar: #3b82f6 is 3.7:1 on white and 5.4:1 on #09090b (>= 3:1) */
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, textarea:focus-visible,
+[role="tab"]:focus-visible, [role="radio"]:focus-visible, [role="slider"]:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid #3b82f6 !important;
   outline-offset: 2px;
   border-radius: 0.25rem;
 }
@@ -243,3 +245,11 @@ div[class*="st-key-trace_funnel_step_"] { height: 100%; }
 @media (prefers-reduced-motion: reduce) {
   div[class*="st-key-trace_funnel_step_"] { animation: none; }
 }
+
+/* ---------- the mark + wordmark (common.brand_row), the verdict card, the footer ---------- */
+.st-key-brand-row { margin-bottom: -0.25rem; }
+.st-key-brand-row [data-testid="stMarkdownContainer"] p { font-size: 1.0625rem; letter-spacing: -0.01em; margin: 0; }
+/* the verdict: a 3px accent rule on the left (amber, a graphic: 3.2:1 on white, 6.3:1 on the dark background) */
+.st-key-verdict { border-left: 3px solid #d97706 !important; }
+.st-key-verdict h4 { padding-top: 0; }
+.st-key-a11y-footer { margin-top: 1.5rem; }

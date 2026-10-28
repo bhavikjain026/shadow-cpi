@@ -10,7 +10,7 @@ pytest.importorskip("streamlit")
 from streamlit.testing.v1 import AppTest  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ["leak_demo", "try_it", "home", "evidence", "replay", "live_build", "radar", "field_report", "custody", "as_of", "research", "tavily_trace", "flight_recorder", "archive",
+PAGES = ["try_it", "leak_demo", "use_it", "home", "evidence", "replay", "live_build", "radar", "field_report", "custody", "as_of", "research", "tavily_trace", "flight_recorder", "archive",
          "brief"]
 LOCK = json.loads((ROOT / "results" / "score_lock.json").read_text())
 AUDIT = json.loads((ROOT / "results" / "app" / "audit_summary.json").read_text())
@@ -29,7 +29,7 @@ def load(page, session=None):
     for k, v in (session or {}).items():
         at.session_state[k] = v
     at.run()
-    if page != "leak_demo":                         # the default page
+    if page != "try_it":                            # the default page: Search the past
         at.switch_page(f"app_pages/{page}.py")
         at.run()
     assert not at.exception, [e.value for e in at.exception]
@@ -401,25 +401,27 @@ def test_every_page_has_a_purpose_line():
     titles = set()
     for f in (ROOT / "app_pages").glob("*.py"):
         titles.update(re.findall(r'^header\("([^"]+)"', f.read_text(encoding="utf-8"), re.M))
-    assert titles | {"Leak demo"} == set(PAGE_GUIDES) and len(titles) == 14   # Leak demo opens with brand(), no header()
+    # Search the past opens with the brand row and the claim as its H1, no header()
+    assert titles | {"Search the past"} == set(PAGE_GUIDES) and len(titles) == 15
     at = load("leak_demo")
-    assert PAGE_GUIDES["Leak demo"] in [c.value for c in at.caption]
+    assert PAGE_GUIDES["Leak results"] in [c.value for c in at.caption]
 
 
-def test_sidebar_page_guide_lists_all_15_pages_with_link_and_description():
+def test_sidebar_shows_four_pages_and_the_rest_under_a_collapsed_more():
     from app_pages.common import PAGE_GUIDES
     at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=60)
     at.run()
     assert not at.exception, [e.value for e in at.exception]
-    guide = [e for e in at.sidebar.expander if e.label == "Page guide"]
-    assert len(guide) == 1 and not guide[0].proto.expanded
-    assert guide[0].proto.icon == ":material/menu_book:"
-    captions = [c.value for c in guide[0].caption]
-    assert captions == list(dict.fromkeys(captions)) and len(captions) == 15 and set(captions) == set(PAGE_GUIDES.values())
-    kids = list(guide[0].children.values())
-    links = [k for k in kids if k.type == "page_link"]
-    assert len(links) == 15 and all(k.proto.page_script_hash or k.proto.page for k in links)
-    assert [k.type for k in kids] == ["page_link", "caption"] * 15                  # each link followed by its line
-    assert [k.proto.label for k in links][:5] == ["Leak demo", "Field Report", "Try it: search the past",
-                                              "October forecast", "Radar"]   # nav order
-    assert not [e for e in at.main.expander if e.label == "Page guide"]            # no second copy in the main area
+    top = [k.proto.label for k in at.sidebar.get("page_link") if k not in at.sidebar.expander[0].get("page_link")]
+    assert top == ["Search the past", "Leak results", "October forecast", "Use it"]
+    more = [e for e in at.sidebar.expander if e.label == "More"]
+    assert len(more) == 1 and not more[0].proto.expanded
+    kids = list(more[0].children.values())
+    assert [k.type for k in kids] == ["page_link", "caption"] * 12                  # each link followed by its line
+    links = [k.proto.label for k in kids if k.type == "page_link"]
+    assert links[:2] == ["Field Report", "Radar"] and len(set(links)) == 12
+    captions = [k.value for k in kids if k.type == "caption"]
+    assert len(set(captions)) == 12 and set(captions) < set(PAGE_GUIDES.values())
+    pages = {p.stem for p in (ROOT / "app_pages").glob("*.py")} - {"__init__", "common", "hero", "provenance",
+                                                                  "v2_panels", "v3_panel"}
+    assert len(pages) == 4 + 12                                                       # no page left out or deleted

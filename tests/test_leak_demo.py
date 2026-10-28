@@ -31,6 +31,8 @@ def page(session=None):
     for k, v in (session or {}).items():
         at.session_state[k] = v
     at.run()
+    at.switch_page("app_pages/leak_demo.py")       # Leak results; the default page is Search the past
+    at.run()
     assert not at.exception, [e.value for e in at.exception]
     return at
 
@@ -98,7 +100,7 @@ def test_home_is_the_leak_demo_with_examples_and_totals():
     leaks = [m.value for m in at.markdown if m.value.startswith(":red-badge[LEAK]")]
     assert len(leaks) >= 3                         # each example highlights its leaking result
     assert "days after the cutoff" in t and "Live mode is off" in t
-    table = at.table[0].value
+    table = at.table[-1].value                        # the totals table (the chart's own table comes first)
     assert table.iloc[0, 1].startswith(f"{d['open']['first']} of {d['cases']}")
 
 
@@ -250,23 +252,45 @@ def test_every_result_has_a_text_badge():
 
 
 # ---------- first screen: brand header ----------
+BANNED = ("first", "beats economists", "no leaks", "scores itself", "used by", "sensitivity", "eliminates",
+          "guarantees", "fixed it in every case", "every page through Tavily")
+
+
+def landing():
+    at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=60)
+    at.run()
+    assert not at.exception, [e.value for e in at.exception]
+    return at
+
+
 def test_brand_header_leads_the_first_screen():
+    """Search the past opens: the mark beside the wordmark, the hackathon line, the page name, the claim as the only
+    H1, the subhead, then the action; the three hero cards come after it."""
+    from app_pages import common as C
+    at = landing()
+    assert [t.value for t in at.title] == [C.TITLE_CLAIM] == [C.BRAND_LINE]
+    md = [m.value for m in at.main.markdown]
+    assert md.index("**Shadow CPI**") < md.index("Search the past") < md.index(C.SUBHEAD)
+    assert C.EYEBROW in [c.value for c in at.caption]
+    assert len(at.main.get("image")) == 1                                            # the mark
+    assert len(C.SUBHEAD.split(". ")) == 1 and len(at.metric) == 3 and all(m.help for m in at.metric)
+    for case in (0, 1):                                                            # both saved examples
+        at.radio[0].set_value(at.radio[0].options[case]).run()
+        ours = "\n".join(m.value for m in at.markdown if not m.value.startswith(":"))  # not third-party headlines
+        shown = (text_without(at) + ours + " " + " ".join(m.help for m in at.metric)).lower()
+        assert not [b for b in BANNED if re.search(rf"\b{re.escape(b)}\b", shown)]
+        assert "0 of 34" not in shown and "20 of 34" not in shown
+
+
+def test_leak_results_header_and_links():
     from app_pages import common as C
     at = page()
-    assert [t.value for t in at.title] == [C.TITLE_CLAIM] == [C.BRAND_LINE]   # the claim is the page's only H1
-    md = [m.value for m in at.markdown]
-    assert md.index(C.EYEBROW) < md.index(C.SUBHEAD)                          # eyebrow, H1, subhead, then the cards
-    assert C.EYEBROW == "Nebius x NVIDIA Global AI Hackathon · Built on Tavily"
-    assert len(C.SUBHEAD.split(". ")) == 1 and len(at.metric) == 3 and all(m.help for m in at.metric)
-    banned = ("first", "beats economists", "no leaks", "scores itself", "used by", "sensitivity", "eliminates",
-              "guarantees", "fixed it in every case", "every page through Tavily")
-    ours = "\n".join(m.value for m in at.markdown if not m.value.startswith(":"))     # not third-party headlines
-    shown = (text_without(at) + ours + " " + " ".join(m.help for m in at.metric)).lower()
-    assert not [b for b in banned if re.search(rf"\b{re.escape(b)}\b", shown)]
-    assert "0 of 34" not in shown and "20 of 34" not in shown
+    assert [t.value for t in at.title] == ["Leak results"]
     links = [b.proto.label for b in at.get("link_button")]
     assert links == ["GitHub"] and at.get("link_button")[0].proto.url == C.GITHUB_URL
     assert [p.proto.label for p in at.main.get("page_link")][:1] == ["Field Report"]
+    ours = "\n".join(m.value for m in at.markdown if not m.value.startswith(":"))
+    assert not [b for b in BANNED if re.search(rf"\b{re.escape(b)}\b", (text_without(at) + ours).lower())]
 
 
 def test_video_button_shows_only_when_its_url_is_set(monkeypatch):
@@ -287,13 +311,15 @@ def test_sidebar_brand_is_keyed_and_moved_above_the_links_by_css():
 def test_use_it_block_matches_the_readme_example():
     """At most 4 lines; the timelocked_search and extract_as_of calls are the README's, modulo line breaks."""
     import re
-    src = (ROOT / "app_pages" / "leak_demo.py").read_text()
+    src = (ROOT / "app_pages" / "use_it.py").read_text()
     code = re.search(r'USE_IT = """(.*?)"""', src, re.S).group(1)
     assert len(code.splitlines()) <= 4
     readme = " ".join((ROOT / "README.md").read_text().split())
     for call in re.findall(r"(?:timelocked_search|extract_as_of)\(.*\)", code):
         assert " ".join(call.split()) in readme, call
     at = page()
+    at.switch_page("app_pages/use_it.py")
+    at.run()
     assert any(c.value == code for c in at.code)
     links = " ".join(m.value for m in at.markdown)
     assert "/tree/main/timelock)" in links and "colab-badge.svg" in links

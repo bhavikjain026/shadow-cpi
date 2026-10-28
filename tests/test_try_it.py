@@ -252,11 +252,12 @@ def app_env(monkeypatch):
         monkeypatch.delenv(k, raising=False)
 
 
-def page():
+def page(own=False):
+    """Search the past, the default page; own=True picks "Your own question (live)" (shown only with a key)."""
     at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=60)
     at.run()
-    at.switch_page("app_pages/try_it.py")
-    at.run()
+    if own:
+        at.radio[0].set_value("Your own question (live)").run()
     assert not at.exception, [e.value for e in at.exception]
     return at
 
@@ -271,11 +272,44 @@ def test_page_without_key_explains_and_shows_the_saved_example(app_env, monkeypa
     monkeypatch.setattr(T, "setting", lambda name: None)
     at = page()
     t = text(at)
-    assert "Try it: search the past" in t and "there is no Tavily key" in t
-    assert "Saved example, not a live run: Leak demo case F3" in t
-    assert "No time lock: 1 of 3 results dated after the cutoff · Time lock: 0 of 3" in t
-    assert "not Wayback-confirmed leaks" in t
+    assert "Search the past" in t and "there is no Tavily key" in t
+    assert "Saved example, not a live run: Leak results case F3" in t             # preselected
+    assert "No time lock: 1 of 3 results confirmed (Wayback) as published after the cutoff · Time lock: 0 of 3" in t
+    assert "Wayback: confirmed leak (Wayback)" in t and "Nothing knowable" not in t
     assert not at.button and not at.text_input                  # no form without a key
+    assert at.radio[0].options == [o for o in at.radio[0].options if "Your own question" not in o]
+
+
+def test_thin_evidence_example_says_so_plainly(app_env, monkeypatch):
+    """C5: the time lock returned 5 results and the Wayback Machine confirmed none of them before the cutoff."""
+    monkeypatch.setattr(T, "setting", lambda name: None)
+    at = page()
+    thin = next(o for o in at.radio[0].options if "(thin evidence)" in o)
+    at.radio[0].set_value(thin).run()
+    t = text(at)
+    assert "Saved example, not a live run: Leak results case C5" in t
+    assert ("None of the 5 time-locked results was confirmed as published before the cutoff (no archive record "
+            "either way), so none counts as evidence. Nothing knowable before 22 Jul 2026; we don't guess.") in t
+    order = []                                                     # main-area text in page order
+
+    def walk(node):
+        for c in getattr(node, "children", {}).values():
+            if c.type in ("markdown", "warning"):
+                order.append(c.value)
+            walk(c)
+    walk(at.main)
+    at_ = lambda s: next(i for i, v in enumerate(order) if s in v)            # noqa: E731
+    assert at_("Time lock: 0 of 5") < at_("Nothing knowable") < at_("**No time lock**")         # verdict on top
+
+
+def test_verdict_on_a_live_run_with_nothing_dated_before_the_cutoff():
+    res = {"source": "live", "cutoff": "2026-05-29",
+           "open": {"results": [{"after": T.YES}]}, "locked": {"results": [{"after": T.UNDATED}]}}
+    head, thin = T.verdict(res)
+    assert head == "No time lock: 1 of 1 results dated after the cutoff · Time lock: 0 of 1"
+    assert thin.endswith("Nothing knowable before 29 May 2026; we don't guess.")
+    res["locked"]["results"] = [{"after": T.NO}]
+    assert T.verdict(res)[1] is None
 
 
 def test_page_runs_both_searches_and_shows_two_columns(app_env, monkeypatch):
@@ -287,7 +321,7 @@ def test_page_runs_both_searches_and_shows_two_columns(app_env, monkeypatch):
         return go(q, cut.isoformat(), runs, ledger=Path("/nonexistent/ledger.jsonl"))
 
     monkeypatch.setattr(T, "run", fake_run)
-    at = page()
+    at = page(own=True)
     at.text_input[0].set_value("petrol diesel price hike India May 2026")
     at.date_input[0].set_value(date(2026, 5, 29))
     at.button[0].click()
@@ -308,7 +342,7 @@ def test_page_cap_shows_a_polite_message_and_the_colab_link(app_env, monkeypatch
         raise T.Refused("Today's 25 search credits for this page are used up (resets at 00:00 UTC).")
 
     monkeypatch.setattr(T, "run", refuse)
-    at = page()
+    at = page(own=True)
     at.text_input[0].set_value("anything")
     at.button[0].click()
     at.run()

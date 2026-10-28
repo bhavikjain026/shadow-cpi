@@ -217,17 +217,54 @@ def run(question, cutoff, session_runs, *, key=None, st_store=None, now=None, cf
     return res, False
 
 
+# Saved examples on the opening screen (results/leak_demo.json): F3, a leak the time lock kept out; C5, thin evidence
+# (the time lock returned results, none of them Wayback-confirmed as published before the cutoff).
+SAVED_CASES = ("F3", "C5")
+CONFIRMED_PRE = ("confirmed pre-cutoff", "valid")           # leak_demo.json labels for a Wayback-confirmed pre-cutoff page
+
+
 def example(leak_demo, date_test_built=None, case_id="F3"):
-    """The saved example shown when there is no key: one Leak demo case (results/leak_demo.json), recorded by the
-    date test, flagged by the same rule as a live run."""
+    """A saved example: one Leak demo case (results/leak_demo.json), flagged by the same rule as a live run, each row
+    also carrying the case's Wayback label, its confirmed-leak flag and its excerpt."""
     c = next((c for c in (leak_demo or {}).get("cases", []) if c["id"] == case_id), None)
     if not c:
         return None
-    res = {"question": c["query"], "cutoff": c["cutoff"], "utc": date_test_built, "source": "saved", "case": case_id}
+    res = {"question": c["query"], "cutoff": c["cutoff"], "utc": date_test_built, "source": "saved", "case": case_id,
+           "test": c["test"], "test_name": c.get("test_name")}
     for side in ("open", "locked"):
         req = c[side]["request"]
-        res[side] = {"results": _rows(c[side]["results"], c["cutoff"]), "credits": c[side].get("credits"),
-                     "request_id": c[side].get("request_id"), "max_results": req.get("max_results")}
+        rows = _rows(c[side]["results"], c["cutoff"])
+        for row, r in zip(rows, c[side]["results"]):
+            row.update(wayback=r.get("label"), leak=bool(r.get("leak")), quote=r.get("quote"))
+        res[side] = {"results": rows, "credits": c[side].get("credits"), "request": req,
+                     "request_id": c[side].get("request_id"), "max_results": req.get("max_results"),
+                     "latency_s": c[side].get("latency_s")}
         if side == "locked":
             res[side]["window"] = [req.get("start_date"), req.get("end_date")]
     return res
+
+
+def _day(d):
+    d = date.fromisoformat(d[:10])
+    return f"{d.day} {d:%b %Y}"
+
+
+def verdict(res):
+    """The answer that sits at the top of the opening screen: (headline, thin) where thin is None or the plain
+    statement that the time lock returned no usable pre-cutoff evidence. Saved examples are judged by their Wayback
+    labels (a confirmed leak; a page confirmed published before the cutoff); live runs by Tavily's published_date."""
+    o, k = res["open"]["results"], res["locked"]["results"]
+    if res.get("source") == "saved":
+        usable = sum((r.get("wayback") or "").startswith(CONFIRMED_PRE) for r in k)
+        head = (f"No time lock: {sum(r['leak'] for r in o)} of {len(o)} results confirmed (Wayback) as published after "
+                f"the cutoff · Time lock: {sum(r['leak'] for r in k)} of {len(k)}")
+        why = (f"None of the {len(k)} time-locked results was confirmed as published before the cutoff (no archive "
+               "record either way), so none counts as evidence.")
+    else:
+        usable = sum(r["after"] == NO for r in k)
+        head = summary(res)
+        why = (f"None of the {len(k)} time-locked results is dated on or before the cutoff." if k
+               else "The time-locked search returned no results.")
+    if usable:
+        return head, None
+    return head, f"{why} Nothing knowable before {_day(res['cutoff'])}; we don't guess."

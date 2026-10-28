@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Shadow CPI: a lock on a calendar">
+  <rect x="3" y="6" width="26" height="23" rx="4" fill="none" stroke="#d97706" stroke-width="2.5"/>
+  <path d="M3 12.5h26" stroke="#d97706" stroke-width="2.5"/>
+  <path d="M10 3.5v5M22 3.5v5" stroke="#d97706" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M13 19v-1.8a3 3 0 0 1 6 0V19" fill="none" stroke="#d97706" stroke-width="2"/>
+  <rect x="11" y="19" width="10" height="7" rx="1.5" fill="#d97706"/>
+</svg>

@@ -1,4 +1,4 @@
-"""Leak demo (the home page): can a web search see the future? Past questions replayed as of a cutoff date, each
+"""Leak results: can a web search see the future? Past questions replayed as of a cutoff date, each
 searched with no time lock and with Tavily's time lock. Built only from saved results (results/leak_demo.json, made
 offline by tools/build_leak_demo.py from the date test and the finance check; totals from results/field_report.json
 and results/leakcheck_exact_match.json; the hero's cost from results/date_field_test.json). The only API calls are the optional live mode, off unless RUN_LIVE_ENABLED."""
@@ -7,22 +7,15 @@ from datetime import date, timedelta
 
 import streamlit as st
 
-from app_pages.common import (EYEBROW, altair_chart, GITHUB_URL, SUBHEAD, TITLE_CLAIM, VIDEO_URL, dark_theme, lock_table, read_json,
-                              wilson95)
+from app_pages.common import (altair_chart, chart_table, GITHUB_URL, VIDEO_URL, dark_theme, header, learned_bullets, lock_table,
+                              read_json, wilson95)
+from app_pages.hero import FIELD_REPORT, REPLICATION, stat_cards
 from app_pages.provenance import how_we_know as how_we_know_box, provenance
 
 AFTER_RETRY = "after retrying the failed Wayback archive lookups"
 # Short tab labels "<item> · <Mon yy>", short enough for a phone (the case heading keeps the full label).
 SHORT = {"fuel": "Petrol hike", "milk": "Milk hike", "electricity": "Power tariff", "lpg": "LPG hike",
          "bus": "Bus fare", "rbi": "RBI rate"}
-# "Use it": the two calls exactly as in the README's extract_as_of example (tests/test_leak_demo.py checks this).
-USE_IT = """from timelock import TavilyHTTP, extract_as_of, timelocked_search
-client, cutoff = TavilyHTTP(), "2026-10-06"
-results = timelocked_search(client, "RBI monetary policy repo rate decision October 2026", cutoff, topic="news", max_results=3, include_published_date=True)
-for r in results: page = extract_as_of(client, r["url"], cutoff, published_date=r.get("published_date"))"""
-COLAB = ("https://colab.research.google.com/github/bhavikjain026/shadow-cpi/blob/main/notebooks/"
-         "reproduce_leak.ipynb")
-
 OPEN, OPEN_NOTE = "No time lock", "default search, no dates"
 LOCKED, LOCKED_NOTE = "Tavily time lock", "start_date/end_date + filter_by_published_date"
 EXAMPLES = "examples chosen for clarity; all {n} in the picker and the totals below"
@@ -174,57 +167,6 @@ def show_case(c):
     search_column(right, LOCKED, LOCKED_NOTE, c["locked"], c["test"], f"{c['id']}-locked")
 
 
-DATE_TEST = "results/date_field_test.json"
-DATE_LOCKED_ARM = "C"                         # tools/build_leak_demo.py TESTS["date"]["locked"]
-FIELD_REPORT = "results/field_report.json"
-REPLICATION = "results/replication.json"
-
-
-def date_test_cost():
-    """The date test's own cost of the time lock, initial pass: valid evidence the locked arm dropped (not check E)."""
-    arm = read_json(DATE_TEST)["metrics"]["arms"][DATE_LOCKED_ARM]
-    return int(arm["valid_lost"]), int(arm["valid_total"])
-
-
-def stat_cards(t):
-    """The opening screen's three bordered cards, every value read from a results file: (a) no dates, pilot and
-    replication shown separately, the pooled count in the caption as the pre-registered secondary; (b) dates + time
-    lock, pilot and replication pooled, with its Wilson 95% interval computed here; (c) the cost of correctness, the
-    date test's own valid evidence dropped (initial pass; never check E). The pre-registered initial pass leads."""
-    d = t["date"]
-    o, n = int(d["open"]["first"]), int(d["cases"])
-    rep = read_json(REPLICATION)
-    rc = rep["metrics"]["price"]["arms"]["A"]
-    pool = rep["pooled"]["price"]["arms"]
-    lost, valid = date_test_cost()
-    pk, pn = int(pool["C"]["leak_cases"]), int(pool["C"]["cases"])
-    lo, hi = wilson95(pk, pn)
-    a, b, c = st.columns(3)
-    with a:
-        st.metric(":red[No dates]: cases that leaked", f"{o}/{n} · {rc['leak_cases']}/{rc['cases']}",
-                  delta=f"Pilot · replication. Pooled {pool['A']['leak_cases']} of {pool['A']['cases']} "
-                        "(pre-registered secondary).",
-                  delta_color="off", delta_arrow="off", border=True,
-                  help="Cases where the plain search, with no date limits, returned a page the Wayback Machine shows "
-                       "appeared after the cutoff. Pre-registered initial pass: the pilot, then the replication of new "
-                       "cases. The pooled count adds them under the same rule; it counts one cached pilot answer "
-                       "twice (see How we know).")
-    with b:
-        st.metric(":green[Dates + time lock]: cases that leaked", f"{pk} of {pn}",
-                  delta=f"Wilson 95% interval {pct(lo)}–{pct(hi)}. Pilot and replication pooled.",
-                  delta_color="off", delta_arrow="off", border=True,
-                  help="Cases where the search with start_date, end_date and filter_by_published_date still returned a "
-                       "confirmed leak. Date test only; the finance check is never added to it. A zero count means "
-                       "the true rate is plausibly below the upper bound, not that leaks are impossible.")
-    with c:
-        st.metric("Cost of correctness", f"{lost} of {valid}",
-                  delta="Valid evidence the date filter dropped (initial pass).",
-                  delta_color="off", delta_arrow="off", border=True,
-                  help="Of the valid results the plain search found in the date test, how many the dated search did "
-                       "not return. This is the date test's own pre-registered initial pass, separate from the "
-                       "exploratory exact-match check.")
-
-
 GROUPS = (("Pilot, no dates", "open"), ("Replication, no dates", "open"), ("Pooled, time lock", "lock"))
 SERIES = {"open": "#dc2626", "lock": "#16a34a"}       # >= 3:1 against both page backgrounds; every row is also named
 
@@ -266,6 +208,8 @@ def interval_chart(t):
                         width="stretch")
         st.caption("The dots show observed rates and the lines show 95% intervals. A zero count means the true rate "
                    "is plausibly below the upper bound, not that leaks are impossible.")
+    chart_table([{"Group": r["Group"], "Cases with post-cutoff results": r["label"], "Share": pct(r["rate"]),
+                  "Wilson 95% interval": r["interval"]} for r in rows])
 
 
 def how_we_know(data):
@@ -385,15 +329,6 @@ def live():
 
 
 
-def brand():
-    """The opening screen's identity: a small uppercase eyebrow, the claim as the page's H1, a one-sentence subhead."""
-    with st.container(key="brand"):
-        with st.container(key="eyebrow"):
-            st.markdown(EYEBROW)
-        st.title(TITLE_CLAIM)
-        st.markdown(SUBHEAD)
-
-
 def links():
     with st.container(key="brand-links", horizontal=True, gap="small", vertical_alignment="center"):
         st.page_link("app_pages/field_report.py", label="Field Report", icon=":material/science:")
@@ -416,7 +351,7 @@ def pick_cases(cases, shown):
     return [st.selectbox("Case", list(by_id), format_func=lambda k: f"{case_title(by_id[k])} · {k}")]
 
 
-brand()
+header("Leak results")
 data = read_json("results/leak_demo.json")
 if not data:
     st.info("Not built yet: run `python tools/build_leak_demo.py` (offline, 0 credits).")
@@ -429,12 +364,10 @@ provenance("results/leak_demo.json", "built_utc")
 links()
 st.caption("In the forecast pipeline, NVIDIA Nemotron on Nebius Token Factory screens pages and cites quotes; code checks each cited number on the page.")
 how_we_know(data)
-with st.container(key="use-it"):
-    st.markdown("**Use it**")
-    st.code(USE_IT, language="python", wrap_lines=True)
-    st.markdown(f"[`timelock/`]({GITHUB_URL}/tree/main/timelock) (standard library only) · "
-                f"[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)]({COLAB}) "
-                "reproduce the leak with your own Tavily key")
+with st.container(key="learned"):
+    st.subheader("What we learned that outsiders wouldn't know", anchor="what-we-learned")
+    st.markdown("\n".join(f"- {b}" for b in learned_bullets()))
+st.page_link("app_pages/use_it.py", label="Use it: the time lock in your own code", icon=":material/code:")
 by_id = {c["id"]: c for c in data["cases"]}
 shown = examples(data["cases"])
 cases = pick_cases(data["cases"], shown)

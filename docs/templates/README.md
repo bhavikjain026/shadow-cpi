@@ -72,6 +72,19 @@ tool) · [`benchmarks/timelock34/`](benchmarks/timelock34/DATASHEET.md) (the lab
 > - Model roles: [`config/models.json`](config/models.json). Nebius retires the original IDs on {{switch_day}}; from then, calls use Nebius's recommended replacements (pre-registered on {{migration_registered}}).
 > - **Tavily API** endpoints used: {{tavily_endpoints}} (and `/usage` for the balance)
 
+## What we learned that outsiders wouldn't know
+
+- **Date filters don't freeze page content.** Case `{{asof_row}}`: Tavily dated the page {{asof_tavily}}, before the
+  {{asof_cutoff}} cutoff, so it passed the filter; the page was edited on {{asof_page}} to link the actual result
+  ({{asof_label}}). [More below](#search-dates-do-not-freeze-page-content).
+- **Dates are Tavily's estimates.** `published_date` is Tavily's estimate, not the page's history, so a leak counts
+  only when the Wayback Machine confirms the page appeared after the cutoff.
+- **Strictness costs valid evidence.** The time lock dropped {{dt_lost_filter}} of {{dt_valid_total}} pieces of valid
+  evidence in the date test (initial pass).
+- **Fixed templates beat model-written searches, so code owns the dates.** Templates found {{arm_a_recall}} of
+  {{known_changes}} known price changes; Nemotron-written searches found {{arm_b_recall}} of {{known_changes}}.
+  [More below](#who-writes-the-search-model-written-fields-vs-fixed-templates-inside-a-time-lock-it-cannot-move).
+
 ## Time-locked search leakage
 
 The Tavily field report (app page "Tavily field report", built by `tools/build_field_report.py` into
@@ -449,6 +462,16 @@ Tavily usage so far (as of {{as_of}}, [`results/tavily_report_card.md`](results/
 {{run_calls}} calls sent, {{run_credits}} credits used (a {{plan_limit}}-credit monthly plan plus {{addon_credits}}
 add-on credits), {{run_inside_pct}} of dated search results inside the requested window, median latency
 {{run_latency}}.
+
+## Who we showed it to
+
+<!-- Fill in before submitting: who saw the app, what they tried, and what changed because of it. -->
+
+| Who (role, not name unless they agree) | What they tried | What they said | What we changed |
+|---|---|---|---|
+| [TBD] | [TBD] | [TBD] | [TBD] |
+| [TBD] | [TBD] | [TBD] | [TBD] |
+| [TBD] | [TBD] | [TBD] | [TBD] |
 
 ## Licence, team, and when it was built
 

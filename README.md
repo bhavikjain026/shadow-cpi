@@ -73,6 +73,19 @@ tool) · [`benchmarks/timelock34/`](benchmarks/timelock34/DATASHEET.md) (the lab
 > - Model roles: [`config/models.json`](config/models.json). Nebius retires the original IDs on 9 Nov 2026; from then, calls use Nebius's recommended replacements (pre-registered on 27 Oct).
 > - **Tavily API** endpoints used: `/search`, `/extract`, `/map`, `/crawl` (and `/usage` for the balance)
 
+## What we learned that outsiders wouldn't know
+
+- **Date filters don't freeze page content.** Case `R196`: Tavily dated the page 7 Jul, before the
+  8 Jul cutoff, so it passed the filter; the page was edited on 9 Jul to link the actual result
+  (demo, n=1, not a measurement). [More below](#search-dates-do-not-freeze-page-content).
+- **Dates are Tavily's estimates.** `published_date` is Tavily's estimate, not the page's history, so a leak counts
+  only when the Wayback Machine confirms the page appeared after the cutoff.
+- **Strictness costs valid evidence.** The time lock dropped 12 of 40 pieces of valid
+  evidence in the date test (initial pass).
+- **Fixed templates beat model-written searches, so code owns the dates.** Templates found 6 of
+  29 known price changes; Nemotron-written searches found 2 of 29.
+  [More below](#who-writes-the-search-model-written-fields-vs-fixed-templates-inside-a-time-lock-it-cannot-move).
+
 ## Time-locked search leakage
 
 The Tavily field report (app page "Tavily field report", built by `tools/build_field_report.py` into
@@ -466,6 +479,16 @@ Tavily usage so far (as of 28 Oct 2026, [`results/tavily_report_card.md`](result
 2,118 calls sent, 2,065 credits used (a 1,000-credit monthly plan plus 3,125
 add-on credits), 79% of dated search results inside the requested window, median latency
 4.1 s.
+
+## Who we showed it to
+
+<!-- Fill in before submitting: who saw the app, what they tried, and what changed because of it. -->
+
+| Who (role, not name unless they agree) | What they tried | What they said | What we changed |
+|---|---|---|---|
+| [TBD] | [TBD] | [TBD] | [TBD] |
+| [TBD] | [TBD] | [TBD] | [TBD] |
+| [TBD] | [TBD] | [TBD] | [TBD] |
 
 ## Licence, team, and when it was built
 

@@ -45,6 +45,8 @@ def contrast(a, b):
 def page_run():
     at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=60)
     at.run()
+    at.switch_page("app_pages/leak_demo.py")       # Leak results; the default page is Search the past
+    at.run()
     assert not at.exception, [e.value for e in at.exception]
     return at
 
@@ -87,7 +89,8 @@ def test_style_is_injected_once_and_takes_no_layout():
 def test_reduced_motion_rule_and_viewer_toolbar():
     assert "prefers-reduced-motion: reduce" in CSS and "animation: none !important" in CSS
     assert THEME["client"]["toolbarMode"] == "viewer"
-    assert THEME["theme"]["light"]["primaryColor"] == "#1d4ed8" and THEME["theme"]["dark"]["primaryColor"] == "#60a5fa"
+    # the amber accent (28 Oct 2026): white on #b45309 is 5.0:1; #09090b on #fbbf24 is 11.6:1
+    assert THEME["theme"]["light"]["primaryColor"] == "#b45309" and THEME["theme"]["dark"]["primaryColor"] == "#fbbf24"
 
 
 # ---------- the opening cards ----------
@@ -132,7 +135,7 @@ def test_provenance_and_how_we_know_on_the_four_pages():
               "results/score_lock.json": "scored_at_utc", "results/date_field_test.json": "built_utc"}
     for pg, rel in (("app_pages/leak_demo.py", "results/leak_demo.json"),
                     ("app_pages/field_report.py", "results/field_report.json"),
-                    ("app_pages/home.py", None), ("app_pages/try_it.py", "results/date_field_test.json")):
+                    ("app_pages/home.py", None), ("app_pages/try_it.py", "results/leak_demo.json")):
         at.switch_page(pg)
         at.run()
         assert not at.exception

@@ -26,6 +26,11 @@ SUBHEAD = ("Shadow CPI replays past questions as of a cutoff date, searches each
 # the README tagline, shortened to at most 20 words
 TAGLINE = ("An AI agent that searches the past without cheating, checks every quote, and seals India's inflation "
            "forecast before release.")
+# The app's own mark (a lock on a calendar) and accent: amber. The mark's #d97706 is a graphic (3.2:1 on white, 6.3:1
+# on #09090b, both above the 3:1 for graphics); text in the accent uses ACCENT_TEXT (light #b45309 5.0:1, dark
+# #fbbf24 11.6:1).
+MARK_PATH = "app_pages/static/mark.svg"
+ACCENT_TEXT = {"light": "#b45309", "dark": "#fbbf24"}
 SEAL_DATE = date(2026, 10, 29)                        # seal_checklist.md
 LIVE_MONTH = "2026-10"
 
@@ -113,13 +118,21 @@ def altair_chart(chart, into=st, **kwargs):
     return into.altair_chart(chart, **kwargs)
 
 
+def chart_table(rows, label="Chart as a table"):
+    """A chart's numbers as text: an HTML table (st.table, read by screen readers, unlike the canvas st.dataframe)
+    behind an expander under the chart. `rows` are the chart's own values, already formatted for display."""
+    import pandas as pd
+    with st.expander(label, icon=":material/table:"):
+        st.table(pd.DataFrame(rows), hide_index=True)
+
+
 DARK_PRIMARY = ('[data-testid^="stBaseButton-primary"], [data-testid^="stBaseButton-primary"] * { color: #09090b; }')
 
 
 def inject_style():
     """app_pages/style.css (display only), added once per run from app.py so every page gets it."""
     css = (ROOT / "app_pages" / "style.css").read_text(encoding="utf-8")
-    if dark_theme():        # the dark accent #60a5fa needs dark text (white on it is 2.5:1; #09090b is 7.9:1); follows the
+    if dark_theme():        # the dark accent #fbbf24 needs dark text (white on it is 1.8:1; #09090b is 11.6:1); follows the
         css += DARK_PRIMARY  # app's theme setting, not the OS's
     st.html(f"<style>{css}</style>")
 
@@ -130,7 +143,9 @@ PAGE_GUIDES = {
     "Experimental nowcast": "The latest inflation estimate, evidence behind the estimate, and comparisons with economist forecasts.",
     "Evidence": "The verified price quotes, official price series, and announced changes behind the forecast.",
     "Chain of custody": "Trace a price from its source page through search records to the forecast seal.",
-    "Leak demo": "Compare searches with and without date limits to see how future information can enter a backtest.",
+    "Search the past": "Ask a question as of a cutoff date and compare a plain search with a time-locked one.",
+    "Leak results": "Compare searches with and without date limits to see how future information can enter a backtest.",
+    "Use it": "Add the time lock to your own code, notebook or agent.",
     "Tavily trace": "Review Tavily searches, search results, credits, response times, and failures.",
     "Tavily Flight Recorder": "Review the saved log of outside searches and requests.",
     "October radar (v2)": "Review announced retail price changes that may affect the October estimate.",
@@ -138,19 +153,75 @@ PAGE_GUIDES = {
     "Live build (v2)": "See how verified price evidence updates the inflation estimate.",
     "As of a date": "See what price evidence was available on a date you choose.",
     "Tavily field report": "Read the results of tests on search dates and evidence quality.",
-    "Try it: search the past": "Ask your own question and compare a search with and without a time lock.",
     "For research teams": "Learn how to use time-locked web evidence in research.",
     "Archive": "Review saved forecasts and instructions for checking each forecast's fingerprint.",
     "Reporter brief": "Read a short summary of the forecast for journalists.",
 }
 
 
-def page_guide(entries):
-    """Sidebar expander under the navigation: each (st.Page, header title) in nav order, a link and its PAGE_GUIDES line."""
-    with st.expander("Page guide", icon=":material/menu_book:", expanded=False):
+def more_links(entries):
+    """The sidebar's collapsed "More" group: each (st.Page, header title) in order, a link and its PAGE_GUIDES line."""
+    with st.expander("More", icon=":material/menu_book:", expanded=False):
         for page, key in entries:
             st.page_link(page)
             st.caption(PAGE_GUIDES[key])
+
+
+def brand_row():
+    """The mark (app_pages/static/mark.svg) beside the wordmark: the app's identity line on the landing page. st.image,
+    since st.html strips SVG; the image is decorative and the wordmark carries the name."""
+    with st.container(key="brand-row", horizontal=True, vertical_alignment="center", gap="small"):
+        st.image(str(ROOT / MARK_PATH), width=28)
+        st.markdown(f"**{BRAND}**")
+        st.caption(EYEBROW)
+
+
+def a11y_line():
+    """The footer on every page (app.py), worded from results/accessibility_check.json (tools/a11y_audit.py): only
+    what that check measured. None while the file is missing."""
+    ax = (read_json("results/accessibility_check.json") or {}).get("summary")
+    if not ax:
+        return None
+    d = date.fromisoformat(ax["checked_ist"])
+    keys = "every page works with the keyboard alone, with a visible focus ring" if not ax["keyboard_stops_without_ring"] \
+        else f"{ax['keyboard_stops_without_ring']} keyboard stops still lack a visible focus ring"
+    return (f"Accessibility, checked {d.day} {d:%b %Y} on all {ax['pages']} pages in light and dark themes: text contrast "
+            f"{ax['min_contrast']:g}:1 or more at {ax['widths_px'][0]} px and {ax['widths_px'][1]} px wide "
+            f"({ax['below_min']} of {ax['text_elements']:,} text elements below it); {keys}; every chart has its "
+            "numbers in text beside it.")
+
+
+def learned_bullets():
+    """'What we learned that outsiders wouldn't know': four findings, every number read from a results file
+    (results/asof_demo_r196.json, results/date_field_test.json, results/field_report.json). The README carries the
+    same four (tests/test_search_the_past.py checks they agree)."""
+    r196 = read_json("results/asof_demo_r196.json") or {}
+    arm = ((read_json("results/date_field_test.json") or {}).get("metrics", {}).get("arms", {}).get("C", {}))
+    rows = {x["arm"]: x for x in ((read_json("results/field_report.json") or {}).get("four_arms", {}).get("rows", []))}
+    out = []
+    if r196:
+        ev = r196.get("evidence", {})
+        out.append(f"**Date filters don't freeze page content.** Case {r196['row_id']}: Tavily dated the page "
+                   f"{day_month(r196['tavily_date'])}, before the {day_month(r196['cutoff'])} cutoff, so it passed "
+                   f"the filter; the page was edited on {day_month(ev['page_date'])} to link the actual result "
+                   f"({r196['label']}).")
+    out.append("**Dates are Tavily's estimates.** `published_date` is Tavily's estimate, not the page's history, so a "
+               "leak counts only when the Wayback Machine confirms the page appeared after the cutoff.")
+    if arm:
+        out.append(f"**Strictness costs valid evidence.** The time lock dropped {arm['valid_lost']} of "
+                   f"{arm['valid_total']} pieces of valid evidence in the date test (initial pass).")
+    if "A" in rows and "B" in rows:
+        a, b = rows["A"], rows["B"]
+        out.append(f"**Fixed templates beat model-written searches, so code owns the dates.** Templates found "
+                   f"{a['recall']} of {a['of']} known price changes; Nemotron-written searches found {b['recall']} "
+                   f"of {b['of']}.")
+    return out
+
+
+def day_month(d):
+    """'2026-07-08' -> '8 Jul'."""
+    d = date.fromisoformat(d[:10])
+    return f"{d.day} {d:%b}"
 
 
 def header(title, intro=None, *, eyebrow=False):

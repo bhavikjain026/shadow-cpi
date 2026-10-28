@@ -4,7 +4,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from app_pages.common import altair_chart, dark_theme
+from app_pages.common import altair_chart, chart_table, dark_theme
 
 TIME_LABEL = "retrospective replay: today's pages, filtered by their publish dates"
 
@@ -79,3 +79,6 @@ def time_machine(run, key="tm"):
         color="#F28E2B", strokeWidth=3, strokeDash=[6, 3]).encode(y="y:Q", tooltip=["what"])
     cursor = alt.Chart(pd.DataFrame([{"date": day}])).mark_rule(color="#a1a1aa" if dark_theme() else "#71717a").encode(x="date:T")
     altair_chart((line + official + cursor).properties(height=260, title="Convergence"), width="stretch")
+    st.caption(f"Official figure {run['official']:.2f}%.")
+    chart_table([{"Date": r["date"], "CPI inflation, year-on-year": f"{r['yoy']:.3f}%",
+                  "Basket measured from evidence": f"{r['measured']:.1%}"} for r in tm])

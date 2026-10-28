@@ -1,5 +1,6 @@
 # Display only (aesthetic pass, 27 Oct 2026; UI polish 28 Oct 2026). Options checked against Streamlit 1.66.0 (requirements.txt).
-# Neutral zinc tokens after shadcn/ui; blue is the one accent (primary buttons, links, focus, selected tab). Red and
+# Neutral zinc tokens after shadcn/ui. Accent: amber (primary buttons, selected tab, the mark; 28 Oct 2026); links
+# stay blue. Red and
 # green are set below (the same hues as Streamlit's, darker text for >= 4.5:1) and mark only LEAK / no time lock and OK /
 # time lock, always with a text label. toolbarMode "viewer" hides the developer menu. Fonts: Inter (UI) + JetBrains Mono (numbers, code),
 # both SIL OFL 1.1, served by Google Fonts (THIRD_PARTY_NOTICES.md).
@@ -31,7 +32,7 @@ dataframeBorderColor = "#e4e4e7"
 dataframeHeaderBackgroundColor = "#f4f4f5"
 codeBackgroundColor = "#f4f4f5"
 codeTextColor = "#18181b"
-primaryColor = "#1d4ed8"
+primaryColor = "#b45309"                  # white on it 5.0:1
 linkColor = "#1d4ed8"
 # Badges and alerts (LEAK / OK / UNCHECKED, st.error): same hues as Streamlit's, darker text for >= 4.5:1
 redTextColor = "#b91c1c"
@@ -55,7 +56,7 @@ dataframeBorderColor = "#27272a"
 dataframeHeaderBackgroundColor = "#18181b"
 codeBackgroundColor = "#18181b"
 codeTextColor = "#e4e4e7"
-primaryColor = "#60a5fa"
+primaryColor = "#fbbf24"                  # #09090b on it 11.6:1 (common.DARK_PRIMARY)
 linkColor = "#60a5fa"
 redTextColor = "#fca5a5"
 redBackgroundColor = "#3f1215"
