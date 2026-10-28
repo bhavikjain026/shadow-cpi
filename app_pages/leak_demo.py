@@ -154,9 +154,6 @@ def show_case(c):
     search_column(right, LOCKED, LOCKED_NOTE, c["locked"], c["test"], f"{c['id']}-locked")
 
 
-# The app's only JavaScript animation: anime.js (MIT), exact version from cdnjs with its SRI hash (THIRD_PARTY_NOTICES.md).
-ANIME_JS = ("https://cdnjs.cloudflare.com/ajax/libs/animejs/4.5.0/anime.umd.min.js",
-            "sha512-dnhflec5WaXvpVYrt0oWfe0iUyWpjNiZbxkjrhNu9WAWWHLX7VqqyxCZHL7dWCrwj6lN+XGN9FtiWIBgX2b/PA==")
 HERO_HEIGHT = 150          # title row + cards: measured at 390 px and 1440 px wide ("content" sizing left extra space)
 HERO_FONT ="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=JetBrains+Mono:wght@600&display=swap"
 HERO_HTML = """<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="{font}"><style>
@@ -185,7 +182,6 @@ html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 1
   <div class="gap" aria-hidden="true"></div>
   <div class="side cost" id="cost"><div class="num">{missed}/{quotes}</div><div class="label">{cost_label}</div></div>
 </div>
-<script src="{js}" integrity="{sri}" crossorigin="anonymous"></script>
 <script>
 (function () {{
   // Match the app's theme when the parent page is readable (same origin); else prefers-color-scheme above.
@@ -197,25 +193,6 @@ html, body {{ margin: 0; background: transparent; color: var(--ink); font: 500 1
     r.setProperty('--muted', dark ? '#a1a1aa' : '#52525b');
     r.setProperty('--line', dark ? '#27272a' : '#e4e4e7');
   }} catch (e) {{}}
-  // One count, once. Final values are already in the markup: no script, reduced motion or a blocked CDN shows them.
-  if (!window.anime || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var el = document.getElementById('leaked'), to = Number(el.textContent), o = {{ v: 0 }};
-  var later = [document.getElementById('locked'), document.getElementById('cost')];
-  // Start only on a real frame (a background tab never zeroes the number), and end on the file's values by 2.5 s
-  // whatever the frame rate, so the hero never rests on anything but the results file.
-  requestAnimationFrame(function () {{
-    el.textContent = '0';
-    later.forEach(function (x) {{ x.style.opacity = 0; }});
-    var tl = anime.createTimeline({{ defaults: {{ ease: 'outExpo' }} }})
-      .add(o, {{ v: to, duration: 900, onUpdate: function () {{ el.textContent = Math.round(o.v); }} }})
-      .add(later[0], {{ opacity: [0, 1], translateY: [6, 0], duration: 450 }}, '-=250')
-      .add(later[1], {{ opacity: [0, 1], translateY: [6, 0], duration: 450 }}, '-=200');
-    setTimeout(function () {{
-      try {{ tl.pause(); }} catch (e) {{}}
-      el.textContent = to;
-      later.forEach(function (x) {{ x.style.opacity = 1; x.style.transform = 'none'; }});
-    }}, 2500);
-  }});
 }})();
 </script></body></html>"""
 
@@ -232,14 +209,14 @@ def date_test_cost():
 
 def hero(t):
     """One titled row (date test): 'x/n → y/n' cases leaked (after retry), then the date test's own cost of the time
-    lock (initial pass), all from the results files, counted up once."""
+    lock (initial pass), all from the results files. The markup is the final state: no count, no hidden start state."""
     import html
     d = t["date"]
     o, k, n = int(d["open"]["retry"]), int(d["locked"]["retry"]), int(d["cases"])
     missed, quotes = date_test_cost()
     leaked = "cases leaked (after retry)"
     st.iframe(HERO_HTML.format(
-        font=HERO_FONT, js=ANIME_JS[0], sri=ANIME_JS[1], open=o, locked=k, n=n, missed=missed, quotes=quotes,
+        font=HERO_FONT, open=o, locked=k, n=n, missed=missed, quotes=quotes,
         title=html.escape(f"Date test · {n} past cases"),
         open_label=html.escape(f"{OPEN}: {leaked}"), locked_label=html.escape(f"{LOCKED}: {leaked}"),
         cost_label="Cost: valid evidence dropped (initial pass)",

@@ -72,6 +72,14 @@ PAGE_GUIDES = {
 }
 
 
+def page_guide(entries):
+    """Sidebar expander under the navigation: each (st.Page, header title) in nav order, a link and its PAGE_GUIDES line."""
+    with st.expander("Page guide", icon=":material/menu_book:", expanded=False):
+        for page, key in entries:
+            st.page_link(page)
+            st.caption(PAGE_GUIDES[key])
+
+
 def header(title, intro=None):
     st.title(title)
     if title in PAGE_GUIDES:

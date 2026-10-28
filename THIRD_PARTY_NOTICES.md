@@ -24,7 +24,6 @@ Loaded by the viewer's browser, not installed or vendored (no build step):
 
 | Asset | Used for | Licence | Served from |
 |---|---|---|---|
-| anime.js 4.5.0 (Julian Garnier) | the Leak demo headline count, the app's only JavaScript animation (`app_pages/leak_demo.py`) | MIT | cdnjs, exact version with its SRI hash |
 | Inter (Rasmus Andersson) | interface text (`.streamlit/config.toml`) | SIL Open Font License 1.1 | Google Fonts |
 | JetBrains Mono (JetBrains) | numbers and code (`.streamlit/config.toml`, `app_pages/style.css`) | SIL Open Font License 1.1 | Google Fonts |
 

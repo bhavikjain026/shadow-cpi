@@ -4,7 +4,7 @@ Sources (SKILL.md + at most one referenced file each, read 2026-10-27 IST; repos
 - impeccable: github.com/pbakaus/impeccable @ d34c87e (owner Paul Bakaus, Apache-2.0): SKILL.md + reference/craft-floor.md
 - taste-skill: github.com/Leonxlnx/taste-skill @ 12af471 (MIT): skills/taste-skill/SKILL.md
 - ui-ux-pro-max: github.com/nextlevelbuilder/ui-ux-pro-max-skill @ 28b3b8d (MIT): .claude/skills/ui-ux-pro-max/SKILL.md
-Nothing installed, nothing vendored. Design references (shadcn/ui zinc tokens; Magic UI number ticker) recreated in plain CSS/one anime.js call.
+Nothing installed, nothing vendored. Design references (shadcn/ui zinc tokens; Magic UI number ticker) recreated in plain CSS (the headline count-up was removed: the hero renders its final state).
 
 ## Checklist (data/finance dashboard = impeccable "Operate" mode: precision and restraint over expression)
 1. Refinement preserves: keep every label, number, layout and copy; only type, colour, borders, spacing change. (impeccable)

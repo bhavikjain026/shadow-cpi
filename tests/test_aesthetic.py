@@ -103,20 +103,23 @@ def test_hero_numbers_come_from_the_results_files():
     assert d["source"].startswith("results/field_report.json")
 
 
-def test_hero_has_one_pinned_animation_that_never_loops_and_respects_reduced_motion():
+def test_hero_markup_is_the_final_state_with_no_count_or_hidden_start():
     _, html = hero_html()
-    srcs = re.findall(r'<script src="([^"]+)" integrity="(sha512-[A-Za-z0-9+/=]+)" crossorigin="anonymous">', html)
-    assert len(srcs) == 1 and re.fullmatch(r"https://cdnjs\.cloudflare\.com/ajax/libs/animejs/\d+\.\d+\.\d+/anime\.umd\.min\.js",
-                                           srcs[0][0])
-    assert "prefers-reduced-motion: reduce" in html and "loop" not in html and "alternate" not in html
-    assert html.count("createTimeline(") == 1 and "setInterval" not in html
+    d = DATA["totals"]["date"]
+    c = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["C"]
+    n = d["cases"]
+    for text in (f'{d["open"]["retry"]}</span>/{n}', f'{d["locked"]["retry"]}/{n}', f'{c["valid_lost"]}/{c["valid_total"]}',
+                 "No time lock", "Tavily time lock", "Cost: valid evidence dropped"):
+        assert text in html
+    assert "anime" not in html and "<script src" not in html and "createTimeline" not in html
+    assert not re.search(r"opacity\s*[:=]\s*0\b|display\s*:\s*none|visibility\s*:\s*hidden|animation|\bv:\s*0", html)
 
 
 def test_no_script_anywhere_else_in_the_app():
     files = [ROOT / "app.py", *sorted((ROOT / "app_pages").glob("*.py"))]
     hits = {f.name: len(re.findall(r"<script|components\.html|st\.iframe|components\.v1", f.read_text()))
             for f in files}
-    assert {k: v for k, v in hits.items() if v} == {"leak_demo.py": 3}   # two <script> tags + one st.iframe, in HERO
+    assert {k: v for k, v in hits.items() if v} == {"leak_demo.py": 2}   # the theme-sync <script> + one st.iframe, in HERO
 
 
 def test_card_markdown_blocks_do_not_overlap():
