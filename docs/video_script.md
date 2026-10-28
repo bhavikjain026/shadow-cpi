@@ -1,4 +1,4 @@
-# Shadow CPI demo: 2:45, about 370 words at 130-140 wpm
+# Shadow CPI demo: 2:45, about 375 words at 130-140 wpm
 Screen recordings only; no slides.
 
 | Time | On screen | Voice-over | On-screen text |
@@ -9,7 +9,8 @@ Screen recordings only; no slides.
 | 0:55-1:20 | Field Report: the four-arm table | "Should the model write its own search filters? Nemotron wrote valid Tavily fields every time, but fixed templates found three times as many real price changes, six versus two of twenty-nine. And auto-parameters, with no dates, reached for the present: when we tested on 22 October, six hundred twenty of six hundred fifty-nine results came from October. So the model may choose words and sources; code owns the dates." | "Valid fields 189/189 · Templates 6 vs 2 of 29 · auto_parameters, 22 Oct: 620/659 from Oct" |
 | 1:20-1:50 | Terminal: tools/demo_live.py running live (endpoint host and model IDs visible, never keys), then the October forecast metrics row | "Here it is end to end, live: Tavily finds a dated price, Nemotron Nano on Nebius Token Factory screens the page, Nemotron Super cites the exact line, and plain code checks the number. Replaying January to September with rules frozen in advance, we missed by 0.194 points, better than trend at 0.212, and about level with economists' polls." | "Live: Tavily → Nemotron Nano → Super (Nebius Token Factory)" · "0.194 vs trend 0.212 · poll months: 0.150 vs 0.148" |
 | 1:50-2:05 | October forecast: the seal banner and "How to check the seal yourself" | "October's estimate is sealed on the twenty-ninth: we publish its SHA-256 and a Git tag before the twelfth of November release, so anyone can check it." | "Sealed 29 Oct · scheduled release 12 Nov, 4 pm IST" |
-| 2:05-2:30 | README: the 10-line timelock example, then mcp/ and the benchmark | "Everything is reusable: a ten-line time-locked search in plain Python, an MCP tool for any agent, and TimeLock-34: thirty-four labelled replay cases to test a search setup for leaks. And our findings for Tavily's team are written as bug reports, with request IDs." | "timelock/ · MCP tool · TimeLock-34 (34 cases, 32 questions)" |
+| 2:05-2:15 | README: the `timelocked_search` example, then the `extract_as_of` example, then the "Open in Colab" badge (hover it) | "Take the time lock, the as-of reader, or run our leak check with your own Tavily key." | "timelocked_search · extract_as_of · Open in Colab" |
+| 2:15-2:30 | README: mcp/ and the benchmark, then docs/tavily_bug_reports.md | "Both come as an MCP tool for any agent, with TimeLock-34: thirty-four labelled replay cases to test a search setup for leaks. Our findings for Tavily's team are bug reports, with request IDs." | "MCP tool · TimeLock-34 (34 cases, 32 questions)" |
 | 2:30-2:45 | Leak demo again, then the app URL | "Search can filter the past. Pages keep changing. Shadow CPI measures the gap, and seals its forecast before the answer exists." | "shadow-cpi.streamlit.app · github.com/bhavikjain026/shadow-cpi" |
 
 ## Recording notes
