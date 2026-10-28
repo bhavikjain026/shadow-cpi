@@ -21,7 +21,7 @@ never reads their text or their URL (a news URL's slug often states the outcome)
 
 ## 1. Install and check it (tested)
 
-These exact steps were run on 27 Oct 2026 (macOS, Python 3.14.7, `mcp` 1.30.0), from the repository root. The venv
+These exact steps were run on 28 Oct 2026 (macOS, Python 3.14.7, `mcp` 1.30.0), from the repository root. The venv
 keeps `mcp` out of the project's own requirements (`.venv/` is git-ignored):
 
 ```bash
@@ -36,7 +36,7 @@ calls `timelocked_search` once. Output of that run:
 
 ```text
 server: timelock 1.30.0
-tools: ['timelocked_search']
+tools: ['timelocked_search', 'extract_as_of', 'check_leaks']
 isError: False
 {
  "cutoff": "2026-10-06",
