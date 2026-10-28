@@ -6,7 +6,7 @@
 **An AI agent that searches the past without cheating: it uses Tavily inside a time lock it cannot move, checks every
 quote on its source page, and seals India's inflation forecast before the government publishes it.**
 
-Pages are screened and quotes cited by NVIDIA Nemotron (Nano and Super) on Nebius Token Factory; code checks every number.
+In the forecast pipeline, NVIDIA Nemotron on Nebius Token Factory screens pages and cites quotes; code checks each cited number on the page.
 
 | Leaks, measured (pre-registered initial pass) | No dates | Dates + filter |
 |---|---|---|

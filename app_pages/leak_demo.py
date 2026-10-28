@@ -426,7 +426,7 @@ interval_chart(data["totals"])
 update_lines(data["totals"])
 provenance("results/leak_demo.json", "built_utc")
 links()
-st.caption("Pages screened and quotes cited by NVIDIA Nemotron on Nebius Token Factory; code checks every number.")
+st.caption("In the forecast pipeline, NVIDIA Nemotron on Nebius Token Factory screens pages and cites quotes; code checks each cited number on the page.")
 how_we_know(data)
 with st.container(key="use-it"):
     st.markdown("**Use it**")
