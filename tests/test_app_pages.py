@@ -160,8 +160,10 @@ def test_tavily_trace_page_shows_calls_funnel_failures():
     at = load("tavily_trace")
     t = json.loads((ROOT / "results" / "app" / "tavily_trace_2026-03.json").read_text())
     assert str(t["n_calls"]) in [m.value for m in at.metric]
-    funnel, calls, failures = (at.dataframe[i].value for i in range(3))
-    assert len(funnel) == len(t["funnel"]) and len(calls) == t["n_calls"] and len(failures) == len(t["failures"])
+    text = all_text(at)
+    assert all(f["stage"] in text and str(f["n"]) in text for f in t["funnel"])
+    calls, failures = (at.dataframe[i].value for i in range(2))
+    assert len(calls) == t["n_calls"] and len(failures) == len(t["failures"])
     assert any("0 addresses" in r for r in failures["Result"]) and any("image" in r for r in failures["Result"])
 
 
@@ -323,3 +325,14 @@ def test_home_shows_v3_beside_v1_labelled_experimental():
     assert subs.index(next(s for s in subs if s.startswith("Experimental v3"))) == v1_at + 1   # right under v1
     assert any(e.label == "Jan–Sep 2026: retrospective, not a test" for e in at.expander)
     assert "v3/PREREG.md" in " ".join(c.value for c in at.caption) or "v3/PREREG.md" in text
+
+
+def test_every_page_has_a_purpose_line():
+    import re
+    from app_pages.common import PAGE_GUIDES
+    titles = set()
+    for f in (ROOT / "app_pages").glob("*.py"):
+        titles.update(re.findall(r'^header\("([^"]+)"', f.read_text(encoding="utf-8"), re.M))
+    assert titles == set(PAGE_GUIDES) and len(titles) == 14
+    at = load("leak_demo")
+    assert PAGE_GUIDES["Leak demo"] in [c.value for c in at.caption]

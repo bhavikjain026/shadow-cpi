@@ -134,3 +134,21 @@
 @media (prefers-reduced-motion: reduce) {
   [data-testid="stMetric"], [data-testid="stExpander"] summary { transition: none; }
 }
+
+/* Tavily trace funnel: step cards slide in one after another (transform only, so they are fully visible in any static capture) (stagger 0.07s, total under 1s). */
+@keyframes trace-funnel-in { from { transform: translateY(6px); } to { transform: none; } }
+div[class*="st-key-trace_funnel_step_"] { animation: trace-funnel-in 0.3s ease-out both; }
+div[class*="st-key-trace_funnel_step_1"] { animation-delay: 0.07s; }
+div[class*="st-key-trace_funnel_step_2"] { animation-delay: 0.14s; }
+div[class*="st-key-trace_funnel_step_3"] { animation-delay: 0.21s; }
+div[class*="st-key-trace_funnel_step_4"] { animation-delay: 0.28s; }
+div[class*="st-key-trace_funnel_step_5"] { animation-delay: 0.35s; }
+div[class*="st-key-trace_funnel_step_6"] { animation-delay: 0.42s; }
+div[class*="st-key-trace_funnel_step_7"] { animation-delay: 0.49s; }
+[data-testid="stHorizontalBlock"]:has([class*="st-key-trace_funnel_step_"]) { align-items: stretch; }
+[data-testid="stColumn"]:has([class*="st-key-trace_funnel_step_"]) > div,
+[data-testid="stColumn"]:has([class*="st-key-trace_funnel_step_"]) [data-testid="stLayoutWrapper"],
+div[class*="st-key-trace_funnel_step_"] { height: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  div[class*="st-key-trace_funnel_step_"] { animation: none; }
+}
