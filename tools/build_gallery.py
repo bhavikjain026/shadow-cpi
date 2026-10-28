@@ -79,21 +79,45 @@ capture is {day_month(ev['first_capture'])}, after the cutoff, so it refuses rat
 </body></html>"""
 
 
+# The quote-check box of the flow diagram. docs/templates/gallery.md's caption repeats these words, and
+# tests/test_gallery_flow.py checks that the box names Nemotron and Nebius. No model IDs: they change on 9 Nov.
+QUOTE_CHECK_TITLE = "Quote check"
+QUOTE_CHECK_MODEL = "Nemotron on Nebius Token Factory: Nano screens the page, Super cites the exact line"
+QUOTE_CHECK_CODE = "code checks the number on the page"
+QUOTE_CHECK_LABEL = "Nebius Token Factory"
+
+
+def flow_steps():
+    return [("Tavily search", "dated results"), ("Time lock", "dates sent; code re-checks each date"),
+            ("Extract", "the page as numbered lines"), (QUOTE_CHECK_TITLE, QUOTE_CHECK_MODEL),
+            ("Seal", "SHA-256 + git tag before release")]
+
+
 def flow_html():
-    steps = [("Tavily search", "dated results"), ("Time lock", "dates sent; code re-checks each date"),
-             ("Extract", "the page as numbered lines"), ("Quote check on page", "cited line must hold the number"),
-             ("Seal", "SHA-256 + git tag before release")]
-    boxes = "".join(
-        f'<div class="step{" lock" if t == "Time lock" else ""}"><div class="t">{html.escape(t)}</div><div class="d">{html.escape(d)}</div></div>'
-        + ('<div class="arrow">→</div>' if i < len(steps) - 1 else "") for i, (t, d) in enumerate(steps))
+    steps = flow_steps()
+
+    def box(t, d):
+        if t == QUOTE_CHECK_TITLE:
+            return (f'<div class="step wide"><div class="tag">{html.escape(QUOTE_CHECK_LABEL)}</div>'
+                    f'<div class="t">{html.escape(t)}</div><div class="d">{html.escape(d)}</div>'
+                    f'<div class="d code">{html.escape(QUOTE_CHECK_CODE)}</div></div>')
+        return (f'<div class="step{" lock" if t == "Time lock" else ""}"><div class="t">{html.escape(t)}</div>'
+                f'<div class="d">{html.escape(d)}</div></div>')
+
+    boxes = "".join(box(t, d) + ('<div class="arrow">→</div>' if i < len(steps) - 1 else "")
+                    for i, (t, d) in enumerate(steps))
     return f"""<html><head><style>{STYLE}
-.row {{ position: absolute; left: 96px; right: 96px; top: 330px; display: flex; align-items: center; }}
-.step {{ flex: 1; height: 230px; border: 3px solid #1f6feb; border-radius: 16px; padding: 28px 20px;
+.row {{ position: absolute; left: 96px; right: 96px; top: 305px; display: flex; align-items: center; }}
+.step {{ flex: 1; height: 280px; border: 3px solid #1f6feb; border-radius: 16px; padding: 28px 16px;
          display: flex; flex-direction: column; justify-content: center; text-align: center; background: #f6f8fa; }}
+.wide {{ flex: 1.9; border-color: #76b900; }}
+.tag {{ align-self: center; font-size: 16px; font-weight: 700; color: #3f6212; background: #ecfccb;
+        border-radius: 8px; padding: 3px 10px; margin-bottom: 10px; }}
+.code {{ font-weight: 700; color: #1b1f24; margin-top: 10px; }}
 .lock {{ border-color: #1b1f24; background: #1b1f24; color: #fff; }}
 .lock .d {{ color: #d0d7de; }}
 .t {{ font-size: 32px; font-weight: 700; }}
-.d {{ font-size: 22px; color: #57606a; margin-top: 14px; line-height: 1.3; }}
+.d {{ font-size: 21px; color: #57606a; margin-top: 14px; line-height: 1.3; }}
 .arrow {{ font-size: 48px; color: #8c959f; padding: 0 14px; }}
 </style></head><body>
 <h1>From search to seal</h1>

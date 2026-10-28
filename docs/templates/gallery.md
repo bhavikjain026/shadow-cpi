@@ -38,8 +38,9 @@ returns **{{asof_reason}}** instead of today's text. A {{asof_label}} ({{asof_cr
 `results/asof_demo_r196.json`.
 
 ## From search to seal
-![Flow: Tavily search, time lock, Extract, quote check on page, seal](4_flow.png)
+![Flow: Tavily search, time lock, Extract, quote check by Nemotron on Nebius Token Factory with a code check on the number, seal](4_flow.png)
 
 **The pipeline.** Tavily Search proposes dated pages; the time lock sends the dates and code re-checks each one;
-Extract returns the page as numbered lines; Nemotron cites a line and code checks the number is in it; the
+Extract returns the page as numbered lines; the quote-check box reads "Nemotron on Nebius Token Factory: Nano screens
+the page, Super cites the exact line", with "code checks the number on the page" under it; the
 forecast is sealed with its SHA-256 and a git tag before the official release. Details: `docs/pipeline.md`.

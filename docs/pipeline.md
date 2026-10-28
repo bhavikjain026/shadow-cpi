@@ -26,7 +26,7 @@ flowchart TD
 
     DIRECT["Logged direct download<br/>(fallback, counted in the report card)"]
 
-    subgraph NEM["Nemotron: extracts only"]
+    subgraph NEM["Nemotron on Nebius Token Factory: extracts only"]
         N_GATE["Small model: gatekeeper<br/>'does this page state an Indian price<br/>or an announced price change?'"]
         N_EXTRACT["Mid model: price quotes + price events<br/>cites a numbered line, never writes a quote"]
     end

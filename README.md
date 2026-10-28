@@ -6,6 +6,8 @@
 **An AI agent that searches the past without cheating: it uses Tavily inside a time lock it cannot move, checks every
 quote on its source page, and seals India's inflation forecast before the government publishes it.**
 
+Pages are screened and quotes cited by NVIDIA Nemotron (Nano and Super) on Nebius Token Factory; code checks every number.
+
 | Leaks, measured (pre-registered initial pass) | No dates | Dates + filter |
 |---|---|---|
 | Date test (20 cases) | **9 of 20** (Wilson 26–66%) | **0 of 20** (Wilson 0–16%) |
@@ -336,7 +338,7 @@ comparable.
 ```mermaid
 flowchart LR
     S["Tavily Search<br/>proposes pages, dates locked"] --> X["Tavily Extract<br/>reads the page"]
-    X --> N["Nemotron cites a numbered line;<br/>code checks the number is in it"]
+    X --> N["Nemotron on Nebius Token Factory:<br/>Nano screens the page, Super cites a numbered line;<br/>code checks the number is in it"]
     N --> C["Plain code computes<br/>(index levels x official weights)"]
     C --> SEAL["Seal: canonical JSON +<br/>SHA-256 + git tag"]
 ```
