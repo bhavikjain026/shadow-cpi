@@ -2,7 +2,7 @@
 
 `timelock/trajectories.py` turns the time lock into a small generator of research trajectories: the task, the cutoff,
 every search the agent made, what the look-ahead check said about each result, what the as-of page check said about
-each page, which results were kept as evidence and why the rest were dropped. A SHA-256 "retrieval receipt" seals
+each page, which results were kept (as-of verified or not checked) as evidence and why the rest were dropped. A SHA-256 "retrieval receipt" seals
 the whole record. It costs 0 Tavily credits and 0 Nemotron calls when replayed from the cache.
 
 **Not measured: we have not trained or evaluated any model on these.**
@@ -25,6 +25,8 @@ learns to find the answer instead of reasoning towards it, and an evaluation sco
 Our own measurements show how often this happens with ordinary search settings (TimeLock-34,
 `benchmarks/timelock34/`). The time lock is the guard: every search is limited to the window ending on the cutoff,
 every result is checked against every date we can see, and nothing dated after the cutoff can enter the kept evidence.
+Kept evidence is reported in two groups, as-of verified and not checked, because a date alone does not prove a page's
+text is from before the cutoff.
 
 ## Format (`timelock-trajectory/1`)
 
@@ -36,25 +38,32 @@ One JSON object per trajectory (see `examples/trajectories/*.json`):
 | `cutoff` | ISO date; nothing after it may be used |
 | `mode` | `replay` (cached responses), `live` or `custom` (caller's own search_fn) |
 | `searches[]` | step, query, the parameters sent, the date window, Tavily's `request_id`, `response_sha256`, result count |
-| `results[]` | per result: url, short title, Tavily date, address date, page date, the search_fn's own label (`search_label`, recorded but not trusted), our `verdict` (safe / date_flag / leak), the `extract` record, `decision`, `reason`, a short `quote` |
-| `results[].extract` | the `extract_as_of` status for the page: `tavily_live` / `wayback_asof` (a copy as of the cutoff) or `refused` with the reason, the change signals, the page's own date, and only the SHA-256 of any page text. `skipped` when the search check had already dropped the result; `not_run` with no extract_fn |
-| `evidence.kept[]` | url, quote, every date seen (all on or before the cutoff), `as_of_verified`, why kept |
-| `evidence.dropped[]` | url and the reason (leak, date_flag, or no as-of copy when `require_as_of` is on) |
-| `counts` | results, kept, dropped, and the verdict counts |
+| `results[]` | per result: url, short title, Tavily date, address date, page date, the search_fn's own label (`search_label`, recorded but not trusted), our `verdict` (safe / date_flag / leak), `as_of`, the `extract` record, `decision`, `reason`, a short `quote` and where it came from (`quote_from`) |
+| `results[].as_of` | `as-of verified (tavily_live)` or `as-of verified (wayback_asof)`: a copy of the page as of the cutoff was found. `not checked (no cached archive lookup)`: the Wayback lookup this check needs is not in the cache. Other `not checked (…)` reasons: Wayback lookup failed, Extract returned another address, page not read. `refused: no as-of copy`: the archive was checked and holds no copy from on or before the cutoff. `skipped`: the date check had already dropped the result |
+| `results[].extract` | the `extract_as_of` record: status, reason, capture time, change signals, the live page's own date, and only the SHA-256 of any page text |
+| `evidence.kept_as_of_verified[]` | kept, with a page copy as of the cutoff: url, quote, every date seen (all on or before the cutoff), `as_of`, why |
+| `evidence.kept_not_checked[]` | kept on dates alone: same fields. **Snippet-level evidence**: the snippet is today's page, not checked as of the cutoff |
+| `evidence.dropped[]` | url and the reason (leak, date_flag, or archive checked and no copy as of the cutoff) |
+| `counts` | results, kept, kept_as_of_verified, kept_not_checked, dropped, and the verdict counts |
 | `receipt` | `sha256` of the trajectory without the receipt (JSON, sorted keys, no spaces, UTF-8) |
 
-No page text is stored: quotes are at most 25 words of the snippet (else the title), as in `exports/evidence.csv`.
+No page text is stored. Quotes are at most 25 words: from the as-of copy when one was served, else the first sentence
+of the snippet, else the title, as in `exports/evidence.csv`.
 
 **The keep rule.** A result is kept only if `timelock.check_result` says *safe* for every date it can see: Tavily's
-date, a date in the address, and the page's own date as read by `extract_as_of`. The check is run again inside
-`generate()` on every result, whatever the search function said, and a final check refuses to return a trajectory
-whose kept evidence carries a date after the cutoff.
+date, a date in the address, and the page's own date. The check is run again inside `generate()` on every result,
+whatever the search function said. A final check refuses to return a trajectory whose kept evidence carries a date
+after the cutoff.
 
-**What "kept" does not promise.** A kept result is *dated* on or before the cutoff. Its snippet comes from the page as
-it is today, so a page that was edited after the cutoff can still carry later text. `as_of_verified` says whether a
-copy of the page as of the cutoff was found. `generate(..., require_as_of=True)` drops every result without one. In
-the five demo trajectories almost no page is verified (see below), so with `require_as_of=True` almost nothing would
-be kept.
+**A page edited after the cutoff.** If the live page states a date after the cutoff but `extract_as_of` finds a
+Wayback copy from on or before it, that copy is served, as in the library. The copy's own date is the one checked,
+and the quote is taken from the copy. The result is kept as as-of verified. If no such copy exists, the result is
+dropped.
+
+**What "not checked" means.** A result under `kept_not_checked` is *dated* on or before the cutoff, but its snippet
+comes from the page as it is today, so a page edited after the cutoff can still carry later text there.
+`generate(..., require_as_of=True)` raises `AsOfNotChecked` instead of returning a trajectory with any such result.
+It does not drop them quietly.
 
 ## Use it
 
@@ -67,14 +76,16 @@ traj = generate(task, "2026-10-06", client=CachedTavily("cache"))   # replay: 0 
 assert verify_receipt(traj)
 ```
 
-- **Offline by default.** With no `client` and no `search_fn`, `generate()` refuses. `live=True` makes a live
-  `TavilyHTTP` client (costs credits: one search per step, one Extract per safe result, plus Wayback lookups).
+- **Replay only in this version.** `generate()` takes a `CachedTavily` client (any other client raises `TypeError`)
+  or the caller's own `search_fn`. No path in it calls Tavily or the Wayback Machine. A live mode would have to run
+  through the repository's Recorder and budget caps (`shadow_cpi.budget.Budgeted`, `config/budget.json`). It is not
+  built: adding a budget for it needs the owner's agreement.
 - **Replays fail loudly.** `CachedTavily` serves only the exact request that was saved (Recorder cache key) and raises
   `CacheMiss` otherwise. For a single-page Extract it also serves that page's result out of a saved multi-page Extract
-  call with the same other parameters (the date test extracted pages in batches); the record keeps that call's
-  `request_id`.
-- **Wayback offline.** A Wayback lookup that is not in the cache counts as a failed lookup. `extract_as_of` then
-  refuses the page ("no as-of copy"), and the refusal is written into the trajectory. Nothing is fetched to fill the gap.
+  call with the same other parameters (the date test extracted pages in batches; the earliest saved copy is used). The
+  record keeps that call's `request_id`.
+- **Wayback offline.** A Wayback lookup that is not in the cache is never fetched and never shown as "no archive
+  copy". The result is marked `not checked (no cached archive lookup)` and, if kept, goes under `kept_not_checked`.
 
 ## The demo: five TimeLock-34 cases, replayed
 
@@ -85,12 +96,18 @@ python examples/trajectory_demo.py --cache ../shadow-cpi/cache --check  # exit 1
 
 Each case's time-locked search (the `dates_filter` arm: Tavily's date filter on, window ending on the cutoff) is
 replayed from the cache. The replayed response's SHA-256 is checked against the case's own receipt in
-`benchmarks/timelock34/cases.jsonl`. A case without cached data is skipped and named. All 34 cases had their search
-cached; the five written were E1, M3, T3, R5 and C6. In C6 (TCS Q2 FY27 results, cutoff 2026-10-07), one result
-carries Tavily's date 2026-10-07 but states its own date as 2026-10-08. It is dropped as a leak, which the search
-filter alone would have let through. Only 1 of the 18 kept results has a page copy as of the cutoff (counted from
-`examples/trajectories/*.json` on 2026-10-28). The Wayback lookups for the others were never saved in the form
-`extract_as_of` reads, so they are refused offline.
+`benchmarks/timelock34/cases.jsonl`. A case without cached data is skipped and named in
+`examples/trajectories/index.json`. The counts below are written by the demo from the files it wrote; none is typed.
+
+<!-- counts:begin (examples/trajectory_demo.py writes this block) -->
+Of the 34 TimeLock-34 cases, 34 have their time-locked search in the cache. Written: E1, M3, T3, R5, C6 (5 trajectories); skipped for missing cached data: none. Across the 5: 19 results, 18 kept, 1 dropped (1 leak, 0 date_flag). **Only 1 of the 18 kept results has a page copy as of the cutoff (as-of verified); the other 17 are snippet-level evidence, not checked as of the cutoff.**
+<!-- counts:end -->
+
+**In plain words:** in this demo almost none of the kept evidence was checked as of the cutoff. The Wayback lookups
+for those pages were never saved in the form `extract_as_of` reads, so the kept results are snippet-level evidence
+dated on or before the cutoff, not pages verified as of it. In C6 (TCS Q2 FY27 results, cutoff 2026-10-07), one
+result carries Tavily's date 2026-10-07 but states its own date as 2026-10-08. It is dropped as a leak, which
+Tavily's date filter alone would have let through.
 
 ## Plugging in a Nemotron agent on Token Factory (described, not run)
 

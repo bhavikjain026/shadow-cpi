@@ -3,6 +3,8 @@
   "date_flag": 0,
   "dropped": 0,
   "kept": 3,
+  "kept_as_of_verified": 0,
+  "kept_not_checked": 3,
   "leak": 0,
   "results": 3,
   "safe": 3
@@ -10,40 +12,44 @@
  "cutoff": "2026-05-29",
  "evidence": {
   "dropped": [],
-  "kept": [
+  "kept_as_of_verified": [],
+  "kept_not_checked": [
    {
-    "as_of_verified": false,
+    "as_of": "not checked (no cached archive lookup)",
     "dates": [
      "2026-05-13"
     ],
     "quote": "The Hindu Bureau",
+    "quote_from": "snippet",
     "rank": 1,
     "step": 1,
     "url": "https://www.thehindu.com/news/national/amul-hikes-milk-prices-by-2-per-litre-across-india-effective-may-14/article70974685.ece",
-    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+    "why": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only"
    },
    {
-    "as_of_verified": false,
+    "as_of": "not checked (no cached archive lookup)",
     "dates": [
      "2026-05-13",
      "2026-05-25"
     ],
     "quote": "Features",
+    "quote_from": "snippet",
     "rank": 2,
     "step": 1,
     "url": "https://www.deccanherald.com/india/amul-mother-dairy-hikes-milk-prices-by-rs-2litre-across-india-effective-may-14-4001607",
-    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+    "why": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only"
    },
    {
-    "as_of_verified": false,
+    "as_of": "not checked (no cached archive lookup)",
     "dates": [
      "2026-05-13"
     ],
     "quote": "mint",
+    "quote_from": "snippet",
     "rank": 3,
     "step": 1,
     "url": "https://www.livemint.com/news/india/amul-hikes-milk-prices-by-2-per-litre-across-india-due-to-rising-input-costs-effective-may-14-11778680706339.html",
-    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+    "why": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only"
    }
   ]
  },
@@ -52,20 +58,22 @@
  "receipt": {
   "algorithm": "sha256",
   "over": "the trajectory without 'receipt', JSON sorted keys, no spaces",
-  "sha256": "3691559889e15830ae47b4d0857c3914df50a59088f10733e1c8ae0c32ec599d"
+  "sha256": "3fc4c78a04cd0e9fa55474d29f8250c02f5b48922a2d543a54c12ef6eae09146"
  },
  "require_as_of": false,
  "results": [
   {
+   "as_of": "not checked (no cached archive lookup)",
    "decision": "kept",
    "extract": {
+    "as_of": "not checked (no cached archive lookup)",
     "capture_time": null,
     "change_signals": [
      "Wayback lookup failed"
     ],
-    "page_date": "2026-05-13",
+    "live_page_date": "2026-05-13",
     "reason": "no as-of copy",
-    "request_id": "d276d01b-24ba-434a-9a2c-59b9412e75d6",
+    "request_id": "6854a4fc-90f6-402a-a116-03d08a788408",
     "status": "refused",
     "text_sha256": null
    },
@@ -74,7 +82,7 @@
    "quote": "The Hindu Bureau",
    "quote_from": "snippet",
    "rank": 1,
-   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "reason": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only",
    "search_label": "safe",
    "step": 1,
    "title": "Amul, Mother Dairy hike milk prices by ₹2 per litre across India from May 14 - The Hindu",
@@ -83,13 +91,15 @@
    "verdict": "safe"
   },
   {
+   "as_of": "not checked (no cached archive lookup)",
    "decision": "kept",
    "extract": {
+    "as_of": "not checked (no cached archive lookup)",
     "capture_time": null,
     "change_signals": [
      "Wayback lookup failed"
     ],
-    "page_date": "2026-05-13",
+    "live_page_date": "2026-05-13",
     "reason": "no as-of copy",
     "request_id": "3c66b970-8ad4-421e-b734-b391d8342e3f",
     "status": "refused",
@@ -100,7 +110,7 @@
    "quote": "Features",
    "quote_from": "snippet",
    "rank": 2,
-   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "reason": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only",
    "search_label": "safe",
    "step": 1,
    "title": "Amul, Mother Dairy hikes milk prices by Rs 2/litre across India, effective May 14",
@@ -109,15 +119,17 @@
    "verdict": "safe"
   },
   {
+   "as_of": "not checked (no cached archive lookup)",
    "decision": "kept",
    "extract": {
+    "as_of": "not checked (no cached archive lookup)",
     "capture_time": null,
     "change_signals": [
      "Wayback lookup failed"
     ],
-    "page_date": "2026-05-13",
+    "live_page_date": "2026-05-13",
     "reason": "no as-of copy",
-    "request_id": "3c66b970-8ad4-421e-b734-b391d8342e3f",
+    "request_id": "43def71d-d3dd-4e31-a14c-14bf1c4f4469",
     "status": "refused",
     "text_sha256": null
    },
@@ -126,7 +138,7 @@
    "quote": "mint",
    "quote_from": "snippet",
    "rank": 3,
-   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "reason": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only",
    "search_label": "safe",
    "step": 1,
    "title": "Amul, Mother Dairy hike milk prices by ₹2 per litre across India, effective May 14 | Today News",

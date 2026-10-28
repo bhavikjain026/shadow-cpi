@@ -6,13 +6,17 @@ and which results were kept as evidence, sealed with a SHA-256 "retrieval receip
                     "2026-10-06", client=CachedTavily("cache"))        # replay only: 0 credits, no network
     traj["evidence"]["kept"], traj["receipt"]["sha256"]
 
-Offline by default: with no client and no search_fn, generate() refuses rather than call Tavily; pass live=True for a
-live TavilyHTTP client. CachedTavily serves saved responses from a Recorder cache (cache/<service>/<request hash>.json)
-and raises CacheMiss when a request was never saved: a replay never quietly makes a live call or skips a step.
+Replay only in this version: generate() takes a CachedTavily client (or the caller's own search_fn) and has no path
+that calls Tavily or the Wayback Machine. CachedTavily serves saved responses from a Recorder cache
+(cache/<service>/<request hash>.json) and raises CacheMiss when a request was never saved: a replay never quietly makes
+a live call or skips a step. A live run belongs behind the repository's Recorder and budget caps (shadow_cpi.budget).
 
 A result is kept only if code's own look-ahead check (timelock.check_result) says "safe" for every date it can see:
 Tavily's date, a date in the address, and the page's own date read by extract_as_of. Undated (date_flag) and
-post-cutoff (leak) results are dropped with the reason. The search_fn's own labels are recorded but never trusted, and
+post-cutoff (leak) results are dropped with the reason. A page edited after the cutoff is kept when extract_as_of
+serves a Wayback copy from on or before it; the quote then comes from that copy. Kept evidence is split: "as-of
+verified" (a page copy as of the cutoff) and "not checked" (dates safe, but no as-of copy could be checked: snippet
+level only). The search_fn's own labels are recorded but never trusted, and
 a last check refuses to return a trajectory whose kept evidence carries any date after the cutoff.
 
 No page text is written: each result carries a short quote (at most QUOTE_WORDS words of the snippet, else the title)
@@ -25,21 +29,26 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-from timelock.asof import LIVE, WAYBACK, Wayback, extract_as_of
+from timelock.asof import URL_MISMATCH, WAYBACK, Wayback, extract_as_of
 from timelock.check import DATE_FLAG, LEAK, SAFE, check_result
-from timelock.clients import TavilyHTTP
-from timelock.dates import iso_date, url_date
+from timelock.dates import iso_date, page_date as read_page_date, url_date
 from timelock.search import _iso, timelocked_search
 
 FORMAT = "timelock-trajectory/1"
 QUOTE_WORDS = 25
 NOT_RUN = "not_run"                     # extract status when no extract_fn was given
 SKIPPED = "skipped"                     # extract status for a result the search check already dropped
+NO_ARCHIVE = "no cached archive lookup"
+VERIFIED, NOT_CHECKED = "as-of verified", "not checked"
 _AUTO = object()
 
 
 class CacheMiss(LookupError):
     """A replay asked for a response that was never saved. Never caught here: a replay with a gap fails loudly."""
+
+
+class AsOfNotChecked(RuntimeError):
+    """require_as_of=True and a result's page could not be checked as of the cutoff."""
 
 
 def request_hash(service, endpoint, body):
@@ -55,6 +64,7 @@ class CachedTavily:
     def __init__(self, cache_dir):
         self.cache_dir = Path(cache_dir)
         self.retrieved_at = None                    # retrieved_at of the last response served (ISO UTC)
+        self._index = None                          # multi-url /extract calls by (url, other params), built once
 
     def load(self, service, endpoint, body):
         path = self.cache_dir / service / f"{request_hash(service, endpoint, body)}.json"
@@ -88,61 +98,59 @@ class CachedTavily:
                                                                                                  ["urls"])}
         raise CacheMiss(f"no saved tavily /extract response for {url!r} in {self.cache_dir}")
 
-    @functools.lru_cache(maxsize=None)
     def _batches(self):
-        """{(url, other params as JSON): [cache files]} over every saved multi-url /extract call."""
-        out = {}
+        """{(url, other params as JSON): [cache files, earliest retrieval first]} over every saved multi-url
+        /extract call; the earliest copy is the one served, so the choice does not depend on file names."""
+        if self._index is not None:
+            return self._index
+        out, when = {}, {}
         for path in sorted((self.cache_dir / "tavily").glob("*.json")):
             saved = json.loads(path.read_text(encoding="utf-8"))
             req = saved.get("request") or {}
             if saved.get("endpoint") == "/extract" and len(req.get("urls") or []) > 1:
                 rest = json.dumps({k: v for k, v in req.items() if k != "urls"}, sort_keys=True)
+                when[path] = saved.get("retrieved_at") or ""
                 for u in req["urls"]:
                     out.setdefault((u, rest), []).append(path)
-        return out
+        self._index = {k: sorted(v, key=lambda p: (when[p], p.name)) for k, v in out.items()}
+        return self._index
 
 
 class CachedWayback(Wayback):
-    """Wayback lookups from the same cache (service 'direct', as tools/asof_demo_r196.py records them). A lookup that
-    was never saved reads as a failed lookup (extract_as_of then refuses the page: "no as-of copy"), so the refusal is
-    recorded in the trajectory instead of fetched live; `missing="raise"` turns it into a CacheMiss instead."""
+    """Wayback lookups from the same cache (service 'direct', as tools/asof_demo_r196.py records them). Never fetches.
+    A lookup that was never saved is remembered in `missed`, and the page is marked "not checked (no cached archive
+    lookup)" in the trajectory: a gap in the archive cache is never shown as a page with no archive copy."""
 
-    def __init__(self, cache, missing="refuse"):
+    def __init__(self, cache):
         super().__init__()
-        self.cache, self.missing = cache, missing
+        self.cache, self.missed = cache, []
 
     def _get(self, url):
         try:
             resp = self.cache.load("direct", "GET", {"url": url})
         except CacheMiss:
-            if self.missing == "raise":
-                raise
+            self.missed.append(url)
             raise OSError(f"Wayback lookup not in the offline cache: {url}") from None
         if "final_url" not in resp:                 # saved by another tool in another shape: not usable here
+            self.missed.append(url)
             raise OSError(f"cached Wayback response has no final_url: {url}")
         return resp["final_url"], resp["text"]
 
 
-def cached_extract_fn(cache, **wayback_kw):
+def cached_extract_fn(cache):
     """extract_fn for replay: the saved Tavily Extract response, cached Wayback lookups, strict as-of rules, and the
-    saved response's own retrieval time as 'now', so the same cache always gives the same trajectory."""
-    archive = CachedWayback(cache, **wayback_kw)
+    saved response's own retrieval time as 'now', so the same cache always gives the same trajectory. Adds
+    'not_checked' to the result when an archive lookup it needed was not in the cache."""
+    archive = CachedWayback(cache)
 
     def fn(url, cutoff, published_date=None):
         cache.extract([url], extract_depth="basic")             # CacheMiss here if the page was never extracted
         now = datetime.fromisoformat(cache.retrieved_at) if cache.retrieved_at else None
-        return extract_as_of(cache, url, cutoff, published_date=published_date, archive=archive, now=now,
+        archive.missed = []
+        page = extract_as_of(cache, url, cutoff, published_date=published_date, archive=archive, now=now,
                              strict=True)
+        return {**page, "not_checked": NO_ARCHIVE} if archive.missed else page
     return fn
-
-
-def live_extract_fn(client, **kw):
-    """extract_fn for live mode: extract_as_of with strict=True (Tavily Extract + Wayback; costs credits)."""
-    return functools.partial(_live_extract, client, kw)
-
-
-def _live_extract(client, kw, url, cutoff, published_date=None):
-    return extract_as_of(client, url, cutoff, published_date=published_date, strict=True, **kw)
 
 
 def clip(text, n=QUOTE_WORDS):
@@ -178,53 +186,73 @@ def _task(task):
 def _extract_record(page):
     prov = page.get("provenance") or {}
     ev = page.get("evidence") or {}
-    return {"status": prov.get("source") or "refused", "reason": prov.get("reason"),
-            "capture_time": prov.get("capture_time"), "page_date": ev.get("page_date"),
+    source = prov.get("source")
+    if source:
+        as_of = f"{VERIFIED} ({source})"
+    elif page.get("not_checked"):
+        as_of = f"{NOT_CHECKED} ({page['not_checked']})"
+    elif prov.get("reason") == URL_MISMATCH:
+        as_of = f"{NOT_CHECKED} (Extract returned another address)"
+    elif ev.get("captures") is None:
+        as_of = f"{NOT_CHECKED} (Wayback lookup failed)"
+    else:
+        as_of = f"refused: {prov.get('reason')}"              # archive checked: no copy on or before the cutoff
+    return {"status": source or "refused", "as_of": as_of, "reason": prov.get("reason"),
+            "capture_time": prov.get("capture_time"), "live_page_date": ev.get("page_date"),
             "change_signals": ev.get("changed"), "request_id": page.get("request_id"),
             "text_sha256": page.get("text_sha256")}
 
 
-def _decide(verdict, extract, require_as_of=False):
+def _as_of_quote(text, snippet_quote):
+    """The sentence of the as-of copy sharing the most words with the snippet's quote (None if none shares any)."""
+    want = set(re.findall(r"\w+", snippet_quote.lower()))
+    best, score = None, 0
+    for s in re.split(r"(?<=[.!?।])\s+|\n+", text or ""):
+        n = len(want & set(re.findall(r"\w+", s.lower())))
+        if n > score:
+            best, score = s, n
+    return clip(best) if best else None
+
+
+def _decide(verdict, extract):
     if verdict == LEAK:
         return "dropped", "leak: a date after the cutoff"
     if verdict == DATE_FLAG:
         return "dropped", "date_flag: no date we can check"
-    if require_as_of and extract["status"] not in (LIVE, WAYBACK):
-        return "dropped", f"safe by every date, but no page copy as of the cutoff ({extract.get('reason') or 'not read'})"
-    if extract["status"] == "refused":
-        return "kept", f"safe by every date; page text refused ({extract['reason']}), snippet quote only"
-    if extract["status"] == NOT_RUN:
-        return "kept", "safe by every date; page not read (no extract_fn)"
-    return "kept", f"safe by every date; page read as of the cutoff ({extract['status']})"
+    if extract["as_of"].startswith("refused"):
+        return "dropped", f"dates safe, but the page may have changed and no copy as of the cutoff exists ({extract['reason']})"
+    if extract["as_of"].startswith(VERIFIED):
+        return "kept", f"safe by every date; page read as of the cutoff ({extract['status']})"
+    return "kept", f"safe by every date; {extract['as_of']}: snippet-level evidence only"
 
 
 def _dates(row):
     return [d for d in (row["published_date"], row["url_date"], row["page_date"]) if d]
 
 
-def generate(task, cutoff, search_fn=None, extract_fn=_AUTO, *, client=None, live=False, require_as_of=False):
-    """One trajectory (a JSON-ready dict) for `task` under `cutoff` (ISO date).
+def generate(task, cutoff, search_fn=None, extract_fn=_AUTO, *, client=None, require_as_of=False):
+    """One trajectory (a JSON-ready dict) for `task` under `cutoff` (ISO date). Replay only in this version.
 
     task: a question string, or {'question': ..., 'searches': [{'query': ..., **tavily params}, ...]}.
-    search_fn(query, cutoff, **params) -> list of Tavily results with 'request_id' / 'response_sha256' (a
-      timelock.Results); defaults to timelocked_search on `client`. With no client: refused unless live=True.
+    client: a CachedTavily. search_fn(query, cutoff, **params) -> list of Tavily results with 'request_id' /
+      'response_sha256' (a timelock.Results); defaults to timelocked_search on `client`. A caller's own search_fn is
+      the caller's to log; its labels are recorded but never trusted.
     extract_fn(url, cutoff, published_date) -> an extract_as_of dict, run only on results the search check called
-      safe; defaults to cached_extract_fn for a CachedTavily client, live_extract_fn for a live one; None = not run.
-    require_as_of: also drop safe results whose page could not be read as of the cutoff. Off by default: a kept
-      result is then dated on or before the cutoff, but its snippet comes from today's page unless as_of_verified.
+      safe; defaults to cached_extract_fn(client); None = pages not read (every kept result "not checked").
+    require_as_of: raise AsOfNotChecked if any result that passed the date check could not be checked as of the
+      cutoff. Off by default: such results are kept under "not checked".
     Raises CacheMiss (replay gap) and TimeLockError (a search tried to leave the window) without catching them."""
     cut = _iso("cutoff", cutoff)
     task = _task(task)
+    if client is not None and not isinstance(client, CachedTavily):
+        raise TypeError("replay only in this version: client must be a CachedTavily (no live calls from here)")
     if search_fn is None:
         if client is None:
-            if not live:
-                raise ValueError("offline by default: pass client=CachedTavily(cache_dir), a search_fn, or live=True")
-            client = TavilyHTTP()
+            raise ValueError("replay only: pass client=CachedTavily(cache_dir) or your own search_fn")
         search_fn = functools.partial(timelocked_search, client)
     if extract_fn is _AUTO:
-        extract_fn = (cached_extract_fn(client) if isinstance(client, CachedTavily) else
-                      live_extract_fn(client) if client is not None else None)
-    mode = "replay" if isinstance(client, CachedTavily) else "live" if client is not None else "custom"
+        extract_fn = cached_extract_fn(client) if client is not None else None
+    mode = "replay" if client is not None else "custom"
 
     searches, rows = [], []
     for step, spec in enumerate(task["searches"], 1):
@@ -238,31 +266,53 @@ def generate(task, cutoff, search_fn=None, extract_fn=_AUTO, *, client=None, liv
                          "n_results": len(res)})
         for rank, r in enumerate(res, 1):
             pub = iso_date(r.get("published_date")) or None
-            first = check_result({**r, "published_date": pub}, cut, page_date=r.get("page_date"))
-            extract = {"status": SKIPPED if first != SAFE else NOT_RUN}
-            if first == SAFE and extract_fn is not None:
-                extract = _extract_record(extract_fn(r.get("url"), cut, pub))
-            page_date = r.get("page_date") or extract.get("page_date")
-            verdict = check_result({**r, "published_date": pub}, cut, page_date=page_date)
-            decision, why = _decide(verdict, extract, require_as_of)
+            dated = {**r, "published_date": pub}
+            first = check_result(dated, cut, page_date=r.get("page_date"))
             q, qfrom = short_quote(r)
+            if first != SAFE:
+                extract = {"status": SKIPPED, "as_of": "skipped (dropped by the date check)"}
+                page_date = r.get("page_date")
+            elif extract_fn is None:
+                extract = {"status": NOT_RUN, "as_of": f"{NOT_CHECKED} (page not read)"}
+                page_date = r.get("page_date")
+            else:
+                page = extract_fn(r.get("url"), cut, pub)
+                extract = _extract_record(page)
+                if extract["status"] == WAYBACK:
+                    # the archived copy is the evidence: its own date counts, the later live edit does not
+                    page_date = read_page_date(page.get("text"))[0]
+                    aq = _as_of_quote(page.get("text"), q)
+                    q, qfrom = (aq, "as_of_copy") if aq else (clip(r.get("title")), "title")
+                else:
+                    page_date = r.get("page_date") or extract["live_page_date"]
+            verdict = check_result(dated, cut, page_date=page_date)
+            decision, why = _decide(verdict, extract)
             rows.append({"step": step, "rank": rank, "url": r.get("url"), "title": clip(r.get("title")),
                          "published_date": pub, "url_date": url_date(r.get("url")), "page_date": page_date,
-                         "search_label": r.get("status"), "verdict": verdict, "extract": extract,
-                         "decision": decision, "reason": why, "quote": q, "quote_from": qfrom})
+                         "search_label": r.get("status"), "verdict": verdict, "as_of": extract["as_of"],
+                         "extract": extract, "decision": decision, "reason": why, "quote": q, "quote_from": qfrom})
 
     leaked = [r["url"] for r in rows if r["decision"] == "kept" and any(d > cut for d in _dates(r))]
     if leaked:                                     # cannot happen through _decide; refuse rather than emit it
         raise AssertionError(f"kept evidence dated after the cutoff {cut}: {leaked}")
-    kept = [{"step": r["step"], "rank": r["rank"], "url": r["url"], "quote": r["quote"],
-             "dates": sorted(set(_dates(r))), "as_of_verified": r["extract"]["status"] in (LIVE, WAYBACK),
-             "why": r["reason"]} for r in rows if r["decision"] == "kept"]
+    unchecked = [r["url"] for r in rows if r["decision"] == "kept" and r["as_of"].startswith(NOT_CHECKED)]
+    if require_as_of and unchecked:
+        raise AsOfNotChecked(f"{len(unchecked)} kept result(s) not checked as of {cut}: {unchecked}")
+
+    def item(r):
+        return {"step": r["step"], "rank": r["rank"], "url": r["url"], "quote": r["quote"],
+                "quote_from": r["quote_from"], "dates": sorted(set(_dates(r))), "as_of": r["as_of"], "why": r["reason"]}
+    kept = [r for r in rows if r["decision"] == "kept"]
+    verified = [item(r) for r in kept if r["as_of"].startswith(VERIFIED)]
+    not_checked = [item(r) for r in kept if r["as_of"].startswith(NOT_CHECKED)]
     dropped = [{"step": r["step"], "rank": r["rank"], "url": r["url"], "why": r["reason"]}
                for r in rows if r["decision"] == "dropped"]
-    traj = {"format": FORMAT, "mode": mode, "require_as_of": require_as_of, "task": {k: v for k, v in task.items() if k != "searches"},
-            "cutoff": cut, "searches": searches, "results": rows,
-            "evidence": {"kept": kept, "dropped": dropped},
-            "counts": {"results": len(rows), "kept": len(kept), "dropped": len(dropped),
+    traj = {"format": FORMAT, "mode": mode, "require_as_of": require_as_of,
+            "task": {k: v for k, v in task.items() if k != "searches"}, "cutoff": cut,
+            "searches": searches, "results": rows,
+            "evidence": {"kept_as_of_verified": verified, "kept_not_checked": not_checked, "dropped": dropped},
+            "counts": {"results": len(rows), "kept": len(kept), "kept_as_of_verified": len(verified),
+                       "kept_not_checked": len(not_checked), "dropped": len(dropped),
                        **{lab: sum(r["verdict"] == lab for r in rows) for lab in (SAFE, DATE_FLAG, LEAK)}}}
     traj["receipt"] = {"algorithm": "sha256", "over": "the trajectory without 'receipt', JSON sorted keys, no spaces",
                        "sha256": receipt_sha256(traj)}

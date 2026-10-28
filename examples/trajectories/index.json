@@ -1,0 +1,14 @@
+{
+ "arm": "dates_filter",
+ "benchmark": "benchmarks/timelock34/cases.jsonl",
+ "cases": 34,
+ "search_cached": 34,
+ "skipped": [],
+ "written": [
+  "E1",
+  "M3",
+  "T3",
+  "R5",
+  "C6"
+ ]
+}

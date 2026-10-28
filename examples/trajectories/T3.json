@@ -3,6 +3,8 @@
   "date_flag": 0,
   "dropped": 0,
   "kept": 3,
+  "kept_as_of_verified": 0,
+  "kept_not_checked": 3,
   "leak": 0,
   "results": 3,
   "safe": 3
@@ -10,39 +12,43 @@
  "cutoff": "2026-06-29",
  "evidence": {
   "dropped": [],
-  "kept": [
+  "kept_as_of_verified": [],
+  "kept_not_checked": [
    {
-    "as_of_verified": false,
+    "as_of": "not checked (no cached archive lookup)",
     "dates": [
      "2026-06-01"
     ],
     "quote": "Several sectors, particularly transport and agriculture, expect a significant impact from the latest fuel price increase that came into effect yesterday (31), with industry representatives…",
+    "quote_from": "snippet",
     "rank": 1,
     "step": 1,
     "url": "https://hirunews.lk/en/469567/error-error-code400messagerequired-texterrors-messagerequired-textdomainglobalreasonrequired-details-typetype-googleapis-com-google-rpc-badrequestfieldviolations-fieldqdescriptionno-text-queries-provided",
-    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+    "why": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only"
    },
    {
-    "as_of_verified": false,
+    "as_of": "not checked (no cached archive lookup)",
     "dates": [
      "2026-06-23"
     ],
     "quote": "The Metro-North Railroad is hiking fares 5% on the New Haven line for trips to and from Connecticut — the second big increase in less…",
+    "quote_from": "snippet",
     "rank": 2,
     "step": 1,
     "url": "https://nypost.com/2026/06/23/us-news/some-metro-north-riders-will-get-slapped-with-another-5-rate-hike-just-as-station-closures-hit/",
-    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+    "why": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only"
    },
    {
-    "as_of_verified": false,
+    "as_of": "not checked (no cached archive lookup)",
     "dates": [
      "2026-06-18"
     ],
     "quote": "Transportation | Illinois drivers could face higher tolls next year.",
+    "quote_from": "snippet",
     "rank": 3,
     "step": 1,
     "url": "https://www.chicagotribune.com/2026/06/18/illinois-drivers-higher-tolls/",
-    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+    "why": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only"
    }
   ]
  },
@@ -51,19 +57,21 @@
  "receipt": {
   "algorithm": "sha256",
   "over": "the trajectory without 'receipt', JSON sorted keys, no spaces",
-  "sha256": "3a73e9c29dcf89421b25e924b5870effa88efa855162f565a5d8e8796ab63038"
+  "sha256": "c0d39aa84f4ffb2f8a09e4121c589df377225914643ba43b7a5771340ea71097"
  },
  "require_as_of": false,
  "results": [
   {
+   "as_of": "not checked (no cached archive lookup)",
    "decision": "kept",
    "extract": {
+    "as_of": "not checked (no cached archive lookup)",
     "capture_time": null,
     "change_signals": [
      "the live page states no published/updated date",
      "Wayback lookup failed"
     ],
-    "page_date": null,
+    "live_page_date": null,
     "reason": "no as-of copy",
     "request_id": "ecf0e94c-93c8-4dbe-99d0-e5efe4cb491d",
     "status": "refused",
@@ -74,7 +82,7 @@
    "quote": "Several sectors, particularly transport and agriculture, expect a significant impact from the latest fuel price increase that came into effect yesterday (31), with industry representatives…",
    "quote_from": "snippet",
    "rank": 1,
-   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "reason": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only",
    "search_label": "safe",
    "step": 1,
    "title": "Transport, agriculture brace for fuel price impact - Hiru News",
@@ -83,24 +91,27 @@
    "verdict": "safe"
   },
   {
+   "as_of": "not checked (no cached archive lookup)",
    "decision": "kept",
    "extract": {
+    "as_of": "not checked (no cached archive lookup)",
     "capture_time": null,
     "change_signals": [
+     "the live page states no published/updated date",
      "Wayback lookup failed"
     ],
-    "page_date": "2026-06-23",
+    "live_page_date": null,
     "reason": "no as-of copy",
-    "request_id": "77b92a8d-6d9c-47e8-af91-1848eff9b19b",
+    "request_id": "f987a114-db98-417f-9899-ca18827c1724",
     "status": "refused",
     "text_sha256": null
    },
-   "page_date": "2026-06-23",
+   "page_date": null,
    "published_date": "2026-06-23",
    "quote": "The Metro-North Railroad is hiking fares 5% on the New Haven line for trips to and from Connecticut — the second big increase in less…",
    "quote_from": "snippet",
    "rank": 2,
-   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "reason": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only",
    "search_label": "safe",
    "step": 1,
    "title": "Some Metro-North riders will get slapped with another 5% rate hike -- just as station closures hit - nypost.com",
@@ -109,16 +120,18 @@
    "verdict": "safe"
   },
   {
+   "as_of": "not checked (no cached archive lookup)",
    "decision": "kept",
    "extract": {
+    "as_of": "not checked (no cached archive lookup)",
     "capture_time": null,
     "change_signals": [
      "the live page states no published/updated date",
      "Wayback lookup failed"
     ],
-    "page_date": null,
+    "live_page_date": null,
     "reason": "no as-of copy",
-    "request_id": "77b92a8d-6d9c-47e8-af91-1848eff9b19b",
+    "request_id": "06eb7fd5-d0b1-4e5c-b09c-c3af5a062086",
     "status": "refused",
     "text_sha256": null
    },
@@ -127,7 +140,7 @@
    "quote": "Transportation | Illinois drivers could face higher tolls next year.",
    "quote_from": "snippet",
    "rank": 3,
-   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "reason": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only",
    "search_label": "safe",
    "step": 1,
    "title": "Illinois drivers could face higher tolls next year - Chicago Tribune",

@@ -3,6 +3,8 @@
   "date_flag": 0,
   "dropped": 0,
   "kept": 3,
+  "kept_as_of_verified": 0,
+  "kept_not_checked": 3,
   "leak": 0,
   "results": 3,
   "safe": 3
@@ -10,39 +12,43 @@
  "cutoff": "2026-04-29",
  "evidence": {
   "dropped": [],
-  "kept": [
+  "kept_as_of_verified": [],
+  "kept_not_checked": [
    {
-    "as_of_verified": false,
+    "as_of": "not checked (no cached archive lookup)",
     "dates": [
      "2026-04-01"
     ],
     "quote": "# UK businesses face rising electricity costs as network charges increase under new price control period.",
+    "quote_from": "snippet",
     "rank": 1,
     "step": 1,
     "url": "https://www.edie.net/partner-content/uk-businesses-face-rising-electricity-costs-as-network-charges-increase-under-new-price-control-period/",
-    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+    "why": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only"
    },
    {
-    "as_of_verified": false,
+    "as_of": "not checked (no cached archive lookup)",
     "dates": [
      "2026-04-06"
     ],
     "quote": "# Energy bills forecast to hit almost £2,000 for UK households from this date.",
+    "quote_from": "snippet",
     "rank": 2,
     "step": 1,
     "url": "https://www.birminghammail.co.uk/news/cost-of-living/energy-bills-forecast-hit-almost-33692661",
-    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+    "why": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only"
    },
    {
-    "as_of_verified": false,
+    "as_of": "not checked (no cached archive lookup)",
     "dates": [
      "2026-04-12"
     ],
     "quote": "The View From India Looking at World Affairs from the Indian perspective.SEE ALL NEWSLETTERS.",
+    "quote_from": "snippet",
     "rank": 3,
     "step": 1,
     "url": "https://www.thehindu.com/sci-tech/agriculture/lack-of-funds-wont-hamper-growth-of-agriculture-sector-says-rajnath-singh/article70851063.ece",
-    "why": "safe by every date; page text refused (no as-of copy), snippet quote only"
+    "why": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only"
    }
   ]
  },
@@ -51,19 +57,21 @@
  "receipt": {
   "algorithm": "sha256",
   "over": "the trajectory without 'receipt', JSON sorted keys, no spaces",
-  "sha256": "96897ea855b2871a5d826e85a49405244fb3aa71e3205306fab55010999b9317"
+  "sha256": "fbf40a9908acae4c260553bfbf788704e5f8e8edb3a7ceb2ae4234ef271391ea"
  },
  "require_as_of": false,
  "results": [
   {
+   "as_of": "not checked (no cached archive lookup)",
    "decision": "kept",
    "extract": {
+    "as_of": "not checked (no cached archive lookup)",
     "capture_time": null,
     "change_signals": [
      "the live page states no published/updated date",
      "Wayback lookup failed"
     ],
-    "page_date": null,
+    "live_page_date": null,
     "reason": "no as-of copy",
     "request_id": "8f98a608-eac5-4b94-85f1-53a3da219dc6",
     "status": "refused",
@@ -74,7 +82,7 @@
    "quote": "# UK businesses face rising electricity costs as network charges increase under new price control period.",
    "quote_from": "snippet",
    "rank": 1,
-   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "reason": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only",
    "search_label": "safe",
    "step": 1,
    "title": "UK businesses face rising electricity costs as network charges increase under new price control period - edie.net",
@@ -83,14 +91,16 @@
    "verdict": "safe"
   },
   {
+   "as_of": "not checked (no cached archive lookup)",
    "decision": "kept",
    "extract": {
+    "as_of": "not checked (no cached archive lookup)",
     "capture_time": null,
     "change_signals": [
      "the live page states no published/updated date",
      "Wayback lookup failed"
     ],
-    "page_date": null,
+    "live_page_date": null,
     "reason": "no as-of copy",
     "request_id": "8f98a608-eac5-4b94-85f1-53a3da219dc6",
     "status": "refused",
@@ -101,7 +111,7 @@
    "quote": "# Energy bills forecast to hit almost £2,000 for UK households from this date.",
    "quote_from": "snippet",
    "rank": 2,
-   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "reason": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only",
    "search_label": "safe",
    "step": 1,
    "title": "Energy bills forecast to hit almost £2,000 for UK households from this date - Birmingham Live",
@@ -110,13 +120,15 @@
    "verdict": "safe"
   },
   {
+   "as_of": "not checked (no cached archive lookup)",
    "decision": "kept",
    "extract": {
+    "as_of": "not checked (no cached archive lookup)",
     "capture_time": null,
     "change_signals": [
      "Wayback lookup failed"
     ],
-    "page_date": "2026-04-12",
+    "live_page_date": "2026-04-12",
     "reason": "no as-of copy",
     "request_id": "8f98a608-eac5-4b94-85f1-53a3da219dc6",
     "status": "refused",
@@ -127,7 +139,7 @@
    "quote": "The View From India Looking at World Affairs from the Indian perspective.SEE ALL NEWSLETTERS.",
    "quote_from": "snippet",
    "rank": 3,
-   "reason": "safe by every date; page text refused (no as-of copy), snippet quote only",
+   "reason": "safe by every date; not checked (no cached archive lookup): snippet-level evidence only",
    "search_label": "safe",
    "step": 1,
    "title": "Lack of funds won’t hamper growth of agriculture sector, says Rajnath Singh - The Hindu",
