@@ -12,6 +12,12 @@ used only when every signal says the page has not changed since the cutoff; othe
 or before the cutoff is downloaded and returned. With no such capture the result has no text and the reason
 "no as-of copy": it never falls back to the live page.
 
+Two edge cases. If Extract returns results but none is for the requested URL (compared after canonicalisation: the
+scheme is ignored, so http and https match, and one trailing slash on the path is dropped), the result has no text
+and the reason "url mismatch"; another page's text is never used. If no signal says the page changed but the Wayback
+Machine holds no capture on or before the cutoff, nothing confirms the live copy is the cutoff's: it is returned with
+the reason "unverified: no archive copy before the cutoff", and with strict=True it is refused ("no as-of copy").
+
 Provenance: {"source": "tavily_live" | "wayback_asof" | None, "capture_time": ISO UTC or None, "reason": ...}.
 """
 import hashlib
@@ -26,6 +32,8 @@ from timelock.dates import iso_date, page_date as read_page_date
 
 LIVE, WAYBACK = "tavily_live", "wayback_asof"
 NO_COPY = "no as-of copy"
+URL_MISMATCH = "url mismatch"
+UNVERIFIED = "unverified: no archive copy before the cutoff"
 UA = "Mozilla/5.0 (timelock as-of research)"
 
 
@@ -124,6 +132,13 @@ class Wayback:
         return (m[1] if m else None), html_text(body)
 
 
+def canonical_url(url):
+    """The address compared with Extract's result URLs: scheme dropped, one trailing slash on the path dropped."""
+    p = urllib.parse.urlsplit(url or "")
+    path = p.path[:-1] if p.path.endswith("/") else p.path
+    return urllib.parse.urlunsplit(("", p.netloc, path, p.query, p.fragment))
+
+
 def change_signals(cutoff, tavily_date, page_date, captures):
     """Reasons the page may have changed after the cutoff ([] = none). Unknown counts as a reason: the live copy is
     used only on positive evidence that it is the cutoff's copy."""
@@ -144,21 +159,27 @@ def change_signals(cutoff, tavily_date, page_date, captures):
     return why
 
 
-def extract_as_of(client, url, cutoff, *, published_date=None, archive=None, now=None, **extract_kwargs):
+def extract_as_of(client, url, cutoff, *, published_date=None, archive=None, now=None, strict=False,
+                  **extract_kwargs):
     """The page at `url` as it was on `cutoff` (ISO date), or no text. Returns a dict: url, cutoff, text (None when
     refused), provenance {source, capture_time, reason}, evidence (dates, captures, change signals), request_id and
     live_sha256 of the Extract call, text_sha256 of the text returned.
 
     `client` is anything with .extract(urls, **kwargs) -> dict (timelock.TavilyHTTP, tavily-python's TavilyClient).
     `published_date` is Tavily's date for the page from the search that found it, if any. `archive` defaults to a
-    Wayback(); tests pass a fake. The live text is never returned when the page may have changed."""
+    Wayback(); tests pass a fake. The live text is never returned when the page may have changed. `strict=True` also
+    refuses the live text when no Wayback capture on or before the cutoff confirms it (reason "unverified: ...")."""
     cut = _iso("cutoff", cutoff)
     archive = archive or Wayback()
     taken = (now or datetime.now(timezone.utc)).strftime("%Y-%m-%dT%H:%M:%SZ")
     resp = client.extract([url], **{"extract_depth": "basic", **extract_kwargs})
     results = resp.get("results") or []
-    got = next((r for r in results if r.get("url") == url), results[0] if results else {})
-    live = got.get("raw_content") or ""
+    got = next((r for r in results if canonical_url(r.get("url")) == canonical_url(url)), None)
+    if results and got is None:                    # Extract answered for another address: never use its text
+        return {"url": url, "cutoff": cut, "evidence": {"extract_urls": [r.get("url") for r in results]},
+                "request_id": resp.get("request_id"), "live_sha256": None, "text": None, "text_sha256": None,
+                "provenance": {"source": None, "capture_time": None, "reason": URL_MISMATCH}}
+    live = (got or {}).get("raw_content") or ""
     pd = read_page_date(live)[0]
     captures = archive.captures(url)
     td = iso_date(published_date) or None
@@ -176,6 +197,8 @@ def extract_as_of(client, url, cutoff, *, published_date=None, archive=None, now
         return {**out, "text": text, "text_sha256": text_sha256(text) if text is not None else None,
                 "provenance": {"source": source, "capture_time": capture_time, "reason": reason}}
 
+    if not signals and not before:                 # nothing says it changed, but no archive copy confirms it
+        return done(None, None, None, NO_COPY) if strict else done(live, LIVE, taken, UNVERIFIED)
     if not signals:
         return done(live, LIVE, taken, f"no sign the page changed after the cutoff (page date {pd}; "
                                        f"{len(captures)} Wayback captures, none differing after the cutoff)")

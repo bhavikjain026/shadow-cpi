@@ -1,0 +1,6 @@
+{
+  "python": "3.14.7",
+  "recorded": "2026-10-28",
+  "how": "platform.python_version() of the project venv (.venv) that ran the full test suite (python -m pytest -q)",
+  "requires_python_source": "pyproject.toml requires-python (3.10+: mcp/server.py uses X | None annotations)"
+}

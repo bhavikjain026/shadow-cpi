@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pytest
 
-from timelock import LIVE, NO_COPY, WAYBACK, extract_as_of
-from timelock.asof import Wayback, change_signals, html_text
+from timelock import LIVE, NO_COPY, UNVERIFIED, URL_MISMATCH, WAYBACK, extract_as_of
+from timelock.asof import Wayback, canonical_url, change_signals, html_text
 
 ROOT = Path(__file__).resolve().parent.parent
 URL = "https://news.example/tcs-q1-preview.html"
@@ -18,12 +18,13 @@ OLD_HTML = "<html><script>x()</script><p>TCS Q1 preview.</p><p>Revenue seen <a h
 
 
 class FakeTavily:
-    def __init__(self, text):
-        self.text, self.sent = text, []
+    def __init__(self, text, answer_url=None):
+        self.text, self.sent, self.answer_url = text, [], answer_url
 
     def extract(self, urls, **params):
         self.sent.append((urls, params))
-        return {"request_id": "req-1", "results": [{"url": urls[0], "raw_content": self.text}], "failed_results": []}
+        return {"request_id": "req-1", "results": [{"url": self.answer_url or urls[0], "raw_content": self.text}],
+                "failed_results": []}
 
 
 class FakeWayback(Wayback):
@@ -82,6 +83,52 @@ def test_wayback_serving_a_later_capture_is_refused():
                      redirect="20260709080000")
     out = extract_as_of(FakeTavily(LIVE_CHANGED), URL, CUT, archive=wb, now=NOW)
     assert out["text"] is None and out["provenance"]["reason"] == NO_COPY
+
+
+def test_extract_result_for_another_url_is_refused_never_used():
+    """Extract answered, but for a different page: no text, reason "url mismatch", and no archive lookup made."""
+    wb = FakeWayback([("20260707101500", "A")], {"20260707101500": OLD_HTML})
+    out = extract_as_of(FakeTavily(LIVE_SAME, answer_url="https://news.example/other-story.html"), URL, CUT,
+                        published_date="2026-07-07", archive=wb, now=NOW)
+    assert out["text"] is None and out["text_sha256"] is None
+    assert out["provenance"] == {"source": None, "capture_time": None, "reason": URL_MISMATCH}
+    assert out["evidence"]["extract_urls"] == ["https://news.example/other-story.html"]
+    assert "Revenue seen flat" not in repr(out) and wb.asked == []
+
+
+@pytest.mark.parametrize("answer", ["http://news.example/tcs-q1-preview.html", URL + "/"])
+def test_scheme_and_trailing_slash_still_match(answer):
+    wb = FakeWayback([("20260707101500", "A"), ("20260720000000", "A")])
+    out = extract_as_of(FakeTavily(LIVE_SAME, answer_url=answer), URL, CUT, published_date="2026-07-07", archive=wb,
+                        now=NOW)
+    assert out["provenance"]["source"] == LIVE and out["text"] == LIVE_SAME
+
+
+def test_canonical_url():
+    assert canonical_url("https://a.example/x/") == canonical_url("http://a.example/x") == "//a.example/x"
+    assert canonical_url("https://a.example/x?q=1") != canonical_url("https://a.example/y?q=1")
+
+
+@pytest.mark.parametrize("caps", [[], [("20260720000000", "A"), ("20260801000000", "A")]])
+def test_no_pre_cutoff_capture_and_no_change_signal_is_unverified(caps):
+    """Nothing says the page changed, but no capture on or before the cutoff confirms it: the live copy comes back
+    labelled unverified; strict=True refuses it."""
+    out = extract_as_of(FakeTavily(LIVE_SAME), URL, CUT, published_date="2026-07-07", archive=FakeWayback(caps),
+                        now=NOW)
+    assert out["evidence"]["changed"] == [] and out["evidence"]["last_capture_on_or_before_cutoff"] is None
+    assert out["text"] == LIVE_SAME
+    assert out["provenance"] == {"source": LIVE, "capture_time": "2026-10-28T03:00:00Z", "reason": UNVERIFIED}
+    assert UNVERIFIED == "unverified: no archive copy before the cutoff"
+    strict = extract_as_of(FakeTavily(LIVE_SAME), URL, CUT, published_date="2026-07-07", archive=FakeWayback(caps),
+                           now=NOW, strict=True)
+    assert strict["text"] is None and strict["provenance"] == {"source": None, "capture_time": None, "reason": NO_COPY}
+    assert "Revenue seen flat" not in repr(strict)
+
+
+def test_strict_keeps_a_confirmed_live_copy():
+    wb = FakeWayback([("20260707101500", "A"), ("20260720000000", "A")])
+    out = extract_as_of(FakeTavily(LIVE_SAME), URL, CUT, published_date="2026-07-07", archive=wb, now=NOW, strict=True)
+    assert out["provenance"]["source"] == LIVE and out["provenance"]["reason"].startswith("no sign the page changed")
 
 
 @pytest.mark.parametrize("td,pd,caps,expect", [

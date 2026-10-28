@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "timelock"
 version = "0.1.0"
 description = "Time-locked Tavily search: a search that cannot see past a cutoff date. Standard library only."
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = { file = "LICENSE" }
 
 [tool.setuptools]

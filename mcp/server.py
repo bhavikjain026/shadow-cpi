@@ -57,21 +57,25 @@ def run(tavily, query, cutoff, *, include_raw_content=False, **params):
             "request_id": results.request_id, "response_sha256": results.response_sha256, "results": shown}
 
 
-def as_of(url: str, cutoff: str, published_date: str | None = None, max_chars: int = 20000) -> dict:
+def as_of(url: str, cutoff: str, published_date: str | None = None, max_chars: int = 20000,
+          strict: bool = False) -> dict:
     """Read the page at `url` as it was on `cutoff` (YYYY-MM-DD). Tavily Extract returns the page as it is now, so
     if anything suggests it changed after the cutoff (its own date, Tavily's `published_date` from the search that
     found it, or Wayback captures that differ), the latest Wayback Machine capture on or before the cutoff is returned
-    instead. If there is none, `text` is null and the reason is "no as-of copy": do not use the page. `provenance`
-    says which copy you got (source tavily_live or wayback_asof, capture_time, reason)."""
+    instead. If there is none, `text` is null and the reason is "no as-of copy": do not use the page. If nothing
+    suggests a change but no capture on or before the cutoff confirms it, the live page comes back with the reason
+    "unverified: no archive copy before the cutoff" (strict=true refuses it instead). If Extract answers for another
+    address, `text` is null and the reason is "url mismatch". `provenance` says which copy you got (source
+    tavily_live or wayback_asof, capture_time, reason)."""
     tavily = client()
     if isinstance(tavily, Replay):
         raise ValueError("extract_as_of needs a live Tavily key (TIMELOCK_REPLAY holds a saved search only)")
-    return run_as_of(tavily, url, cutoff, published_date=published_date, max_chars=max_chars)
+    return run_as_of(tavily, url, cutoff, published_date=published_date, max_chars=max_chars, strict=strict)
 
 
-def run_as_of(tavily, url, cutoff, *, published_date=None, max_chars=20000, archive=None):
+def run_as_of(tavily, url, cutoff, *, published_date=None, max_chars=20000, archive=None, strict=False):
     """as_of() with an explicit client and archive (tests pass fakes). Text is cut to max_chars."""
-    out = extract_as_of(tavily, url, cutoff, published_date=published_date, archive=archive)
+    out = extract_as_of(tavily, url, cutoff, published_date=published_date, archive=archive, strict=strict)
     text = out["text"]
     return {**out, "text": text[:max_chars] if text is not None else None,
             "truncated": text is not None and len(text) > max_chars}
