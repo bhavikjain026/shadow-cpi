@@ -28,6 +28,32 @@ def test_build_adds_simple_mean_only_with_all_zones(tmp_path):
     assert len(mean) == 1 and mean[0]["avg_price"] == pytest.approx(30.0) and mean[0]["item"] == "onion"
 
 
+
+def _onion(month_label, price):
+    rows = "".join(f"<tr><td>{z}</td><td>{price}</td></tr>" for z in S.ZONES)
+    return (f"Prices of <b> Onion </b> Unit: (Rs./Kg.)<table><tr><th>Zone</th><th>{month_label}</th></tr>{rows}"
+            "</table>")
+
+
+def test_superseded_month_is_skipped_only_in_the_named_file(tmp_path):
+    raw = tmp_path / "raw"
+    raw.mkdir()
+    (raw / "old.html").write_text(_onion("Oct 2026", 30), encoding="utf-8")     # partial month, earlier fetch
+    (raw / "new.html").write_text(_onion("Oct 2026", 32), encoding="utf-8")     # same month, later fetch
+    with pytest.raises(ValueError):
+        S.build(raw, tmp_path / "a.csv", superseded={})                         # disagreeing overlap: refused
+    out = S.build(raw, tmp_path / "b.csv", superseded={"old.html": {"2026-10": "partial"}})
+    assert {r["avg_price"] for r in out if r["centre"] != S.ALL_INDIA} == {32.0}
+    (raw / "other.html").write_text(_onion("Oct 2026", 31), encoding="utf-8")   # any other overlap must still agree
+    with pytest.raises(ValueError):
+        S.build(raw, tmp_path / "c.csv", superseded={"old.html": {"2026-10": "partial"}})
+
+
+def test_superseded_names_only_the_21_oct_files_and_october():
+    assert S.SUPERSEDED.keys() == {"2026AB.html", "2025H2-2026fill.html"}
+    assert all(set(v) == {"2026-10"} for v in S.SUPERSEDED.values())
+
+
 def ev(**kw):
     base = {"kind": "electricity", "region": "Uttar Pradesh", "seller_or_authority": "UPPCL",
             "effective_date": "2026-06-01", "change": 0.10, "change_prorated": 0.10, "cpi_code": "04.5.1.0.2.01",

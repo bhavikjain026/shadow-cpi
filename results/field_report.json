@@ -293,12 +293,12 @@
    },
    {
     "endpoint": "/extract",
-    "calls": 818,
-    "credits": 713,
-    "credits_per_call": 0.871638141809291,
+    "calls": 821,
+    "credits": 715,
+    "credits_per_call": 0.8708891595615104,
     "median_latency_s": 0.11,
-    "p95_latency_s": 5.194999999999999,
-    "with_latency": 816
+    "p95_latency_s": 5.18,
+    "with_latency": 819
    },
    {
     "endpoint": "/map",
@@ -423,12 +423,12 @@
    {
     "experiment": "ibja-iocl",
     "endpoint": "/extract",
-    "calls": 16,
-    "credits": 9,
-    "credits_per_call": 0.5625,
-    "median_latency_s": 2.25,
-    "p95_latency_s": 6.109999999999999,
-    "with_latency": 16
+    "calls": 19,
+    "credits": 11,
+    "credits_per_call": 0.5789473684210527,
+    "median_latency_s": 2.23,
+    "p95_latency_s": 5.324,
+    "with_latency": 19
    },
    {
     "experiment": "lang-date-test",
@@ -905,12 +905,12 @@
    }
   ],
   "total": {
-   "calls": 1926,
-   "credits": 1874,
-   "credits_per_call": 0.9730010384215991,
+   "calls": 1929,
+   "credits": 1876,
+   "credits_per_call": 0.9725246241575947,
    "median_latency_s": 3.12,
-   "p95_latency_s": 6.051,
-   "with_latency": 1919
+   "p95_latency_s": 6.049,
+   "with_latency": 1922
   },
   "reconcile_credits": -82,
   "notes": [
@@ -1748,7 +1748,7 @@
   "arm_a_searches_per_month": 13.0,
   "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits at original cost / 9 months"
  },
- "ledger_rows": 1987,
+ "ledger_rows": 1990,
  "pages_changed": {
   "ist_date": "2026-10-28",
   "checked": 62,
@@ -1804,8 +1804,8 @@
    },
    {
     "url": "https://www.jansatta.com/explained/why-three-indian-oil-companies-are-losing-over-rs-500-crore-daily/4717625",
-    "quote_present": false,
-    "number_changed": "yes",
+    "quote_present": true,
+    "number_changed": "no",
     "diff": "- [English](https://indianexpress.com/)[தமிழ்](https://tamil.indianexpress.com/)[বাংলা](https://bengali.indianexpress.com/)[മലയാളം](https://malayalam.indianexpress.com/)[ગુજરાતી](https://gujarati.indianexpress.com/)[हिंदी](https://www.jansatta.com/)[मराठी](https://www.loksatta.com/)[Business](https…"
    },
    {
@@ -1816,14 +1816,14 @@
    },
    {
     "url": "https://www.ajkerpatrika.com/business/ajpvxoykq0s2c",
-    "quote_present": false,
-    "number_changed": "yes",
+    "quote_present": true,
+    "number_changed": "no",
     "diff": "- বৃহস্পতিবার, ২২ অক্টোবর ২০২৬\n+ সোমবার, ২৬ অক্টোবর ২০২৬\n+ #### পাঠকের আগ্রহ\n+ [![‘বিরোধী দলে থাকতেই কবর দিতে বাধা দিচ্ছেন, রাষ্ট্রের ক্ষমতায় গেলে কী করবেন?’](https://images.ajkerpatrika.com/original_images/dr-tasnim-jara-a9eeeb-256x144.webp)\n+ ## ‘বিরোধী দলে থাকতেই কবর দিতে বাধা দিচ্ছেন, রাষ্ট্রের…"
    },
    {
     "url": "https://timesofindia.indiatimes.com/city/bengaluru/nandini-milk-price-hike-likely-from-nov-1-karnataka-cabinet-clears-8/litre-increase/articleshow/134743310.cms",
-    "quote_present": false,
-    "number_changed": "yes",
+    "quote_present": true,
+    "number_changed": "no",
     "diff": "- ##\n+ Edition\n+ IN\n+ * [IN](https://timesofindia.indiatimes.com/?loc=in)\n+ * [US](https://timesofindia.indiatimes.com/us)\n+ * [UK](https://timesofindia.indiatimes.com/uk)\n+ * [GCC](https://timesofindia.indiatimes.com/gcc)\n+ English\n+ * [English](https://timesofindia.indiatimes.com/)\n+ * [हिन्दी](h…"
    },
    {

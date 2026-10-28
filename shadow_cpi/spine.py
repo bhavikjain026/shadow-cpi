@@ -30,6 +30,14 @@ ITEM = {"Rice": "rice", "Atta (Wheat)": "atta", "Tur/Arhar Dal": "tur dal", "Gra
         "Mustard Oil (Packed)": "mustard oil", "Soya Oil (Packed)": "soya oil", "Sunflower Oil (Packed)": "sunflower oil",
         "Palm Oil (Packed)": "palm oil", "Vanaspati (Packed)": "vanaspati", "Potato": "potato", "Onion": "onion",
         "Tomato": "tomato"}
+# Months that were partial when a file was fetched and have since been re-fetched from the same report: their values
+# in that file are skipped (the file itself is kept untouched). A data-vintage fix, not a rule change: seal_checklist.md
+# §1 ("October is a partial month (data up to the fetch date)"); docs/after_scoring_changes.md §9.
+SUPERSEDED = {
+    "2026AB.html": {"2026-10": "partial October at the 2026-10-21 fetch; replaced by 2026A/2026B, fetched 2026-10-28"},
+    "2025H2-2026fill.html": {"2026-10": "partial October at the 2026-10-21 fetch; replaced by 2026A/2026B, fetched "
+                                        "2026-10-28"},
+}
 OILS = ("groundnut oil", "mustard oil", "soya oil", "sunflower oil", "palm oil", "vanaspati")
 
 _BLOCK = re.compile(r"Prices of(?:&nbsp;|\s)*<b>\s*(.*?)\s*</b>.*?Unit:\s*\(([^)]*)\)(.*?)</table>", re.S | re.I)
@@ -60,10 +68,13 @@ def parse_report(text):
     return out
 
 
-def build(raw_dir=RAW, out=SPINE_CSV):
-    """Parse every saved report into data/spine.csv. Overlapping months must agree (else refuse)."""
+def build(raw_dir=RAW, out=SPINE_CSV, superseded=None):
+    """Parse every saved report into data/spine.csv. Overlapping months must agree (else refuse), except the months
+    listed for a file in SUPERSEDED, which are skipped in that file."""
+    superseded = SUPERSEDED if superseded is None else superseded
     prices, units = {}, {}
     for f in sorted(Path(raw_dir).glob("*.html")):
+        skip = superseded.get(f.name, {})
         for name, unit, zones in parse_report(f.read_text(encoding="utf-8", errors="replace")):
             item = ITEM.get(name)
             if not item:
@@ -71,6 +82,8 @@ def build(raw_dir=RAW, out=SPINE_CSV):
             units[item] = unit
             for zone, series in zones.items():
                 for month, p in series.items():
+                    if month in skip:
+                        continue
                     key = (month, item, zone)
                     if key in prices and abs(prices[key] - p) > 1e-9:
                         raise ValueError(f"{key}: {prices[key]} in one file, {p} in {f.name}")

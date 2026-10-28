@@ -193,3 +193,43 @@ files are kept as `results/*_before_bugfix_2026-10-21T151419.*` and in `results/
   committed file exactly. The "changed" (hash) count, 14 of 62, is unchanged. `v2/radar/drift_2026-10.json` holds
   the fixed fields and keeps the old counts under `recomputed_2026-10-28.before`.
 - **What it does not change:** no forecast, seal, score, radar tier or radar effect.
+
+## 9. October spine: the partial month is replaced by a later fetch (data-vintage fix, not a rule change)
+
+- **Date:** 2026-10-28
+- **Decided by:** the owner (seal-prep task card of 28 Oct).
+- **Why:** `seal_checklist.md` §1 asks for a new DoCA fetch for Jan–Oct 2026 before the seal, because "October is a
+  partial month (data up to the fetch date)". The 21 Oct files (`2026AB.html`, `2025H2-2026fill.html`) hold October
+  month-to-date as of 21 Oct; today's fetch (`2026A.html` + `2026B.html`, all 19 commodities, Jan–Oct 2026, saved
+  **2026-10-28 12:23 UTC**, `data/official/doca/raw/fetch_summary.json`) holds it as of 28 Oct. `spine.build()`
+  refuses any overlap that disagrees, so it refused October (89 cells).
+- **Change:** `shadow_cpi/spine.py` `SUPERSEDED` names the two 21 Oct files and month 2026-10 only, with the reason;
+  `build()` skips those months in those files. The raw files are untouched. Every other overlap must still agree
+  exactly (it does: Jan–Sep 2026 in the new files equals the old files cell for cell). Tests:
+  `tests/test_spine.py::test_superseded_month_is_skipped_only_in_the_named_file`,
+  `::test_superseded_names_only_the_21_oct_files_and_october`.
+- **Jan–Sep unchanged:** every one of the 981 existing `data/spine.csv` rows for 2026-01..2026-09 is byte-identical;
+  SHA-256 of those rows without masoor dal is `81d79d258034038b…` before and after. Dec 2024 – Dec 2025 is
+  byte-identical too. Rebuilt from cache, all 9 scored months reproduce their scored (c) and (b) numbers exactly
+  (`results/replay_predictions.json`); `results/score_lock.json` is untouched.
+- **Masoor dal (new rows only):** the new fetch returned 4 more zones of masoor dal for Jan–Oct 2026 (the 21 Oct
+  fetch had 1), so 50 rows are added (4 zones + the all-India mean, 10 months). Masoor dal is not in
+  `SPINE_FOODS`; no model, factor or rule reads it. Only the app's Evidence page, which lists the spine rows for a
+  month, shows it.
+- **October before → after** (all-India simple mean of 5 zones, Rs.; and the Oct-vs-Sep change the model uses,
+  geometric mean over zones):
+
+| Spine food | Oct price, 21 Oct fetch | Oct price, 28 Oct fetch | Change used, before | Change used, after |
+|---|---|---|---|---|
+| Onion | 53.58 | 53.53 | +0.258% | +0.166% |
+| Tomato | 42.77 | 42.32 | +6.833% | +5.605% |
+| Potato | 22.36 | 22.37 | −0.684% | −0.680% |
+| Tur dal | 128.94 | 129.95 | +3.192% | +4.005% |
+| Edible oils (6 packed oils pooled) | – | – | +0.640% | +0.800% |
+| Rice (spine-use rule: carried on trend) | 46.49 | 46.69 | +1.240% | +1.601% |
+| Atta | 41.10 | 41.11 | +0.415% | +0.453% |
+| Milk | 62.18 | 62.22 | +0.184% | +0.246% |
+| Eggs | 84.51 | 84.60 | −0.030% | +0.078% |
+
+- **What it does not change:** no rule, factor, filter, scored month or replay score. October is still a partial
+  month (DoCA data up to 28 Oct, the evidence cutoff day).
