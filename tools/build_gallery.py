@@ -5,7 +5,8 @@
     python tools/build_gallery.py --app http://localhost:8541
     python tools/build_gallery.py                     # the two diagrams only
 
-Two shots of the app's Field Report (the leak table, the four-arm table) and two diagrams drawn from the results files:
+Two shots of the app (the Leak demo's first screen, the Field Report's four-arm table) and two diagrams drawn from
+the results files:
 the R196 timeline (results/asof_demo_r196.json) and the pipeline flow. Captions live in docs/gallery/README.md, rendered
 from docs/templates/gallery.md by tools/sync_doc_numbers.py. Needs Playwright with Chromium (dev only, not in
 requirements.txt: the deployed app does not use it).
@@ -19,9 +20,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "docs" / "gallery"
 W, H = 1600, 900
+# The Leak demo's first screen (the default page, at the top) -> PNG
+FIRST_SCREEN = "1_leak_demo.png"
 # Field Report section heading -> PNG (the heading is scrolled to the top; the sidebar and toolbar are hidden)
-APP_SHOTS = {"Time-locked search leakage": "1_leak_table.png",
-             "Who should write the search? Four arms, pre-registered": "2_four_arm_table.png"}
+APP_SHOTS = {"Who should write the search? Four arms, pre-registered": "2_four_arm_table.png"}
 HIDE_CHROME = ('[data-testid="stSidebar"],[data-testid="stSidebarCollapsedControl"],header,'
                '[data-testid="stToolbar"],[data-testid="stDecoration"]{display:none!important}')
 
@@ -106,6 +108,21 @@ def render(page, markup, path):
     page.screenshot(path=str(path), clip={"x": 0, "y": 0, "width": W, "height": H})
 
 
+def first_screen(page, url, path):
+    """The default page as a visitor first sees it: brand header, then the hero (9/20 -> 0/20 on the pre-registered
+    initial pass). Sidebar and toolbar hidden, as in the other app shot."""
+    sys.path.insert(0, str(ROOT))
+    from app_pages.common import BRAND_LINE
+    page.goto(url.rstrip("/") + "/", wait_until="networkidle")
+    page.add_style_tag(content=HIDE_CHROME)
+    page.get_by_role("heading", name=BRAND_LINE, exact=True).wait_for(timeout=60_000)
+    hero = page.frame_locator('.st-key-hero iframe').locator("#update")
+    hero.wait_for(timeout=60_000)                                  # the hero's last line has drawn
+    page.wait_for_timeout(1500)                                    # web fonts and the theme sync settle
+    page.evaluate("window.scrollTo(0, 0)")
+    page.screenshot(path=str(path))
+
+
 def app_shot(page, url, heading, path):
     page.goto(f"{url.rstrip('/')}/field_report", wait_until="networkidle")
     page.add_style_tag(content=HIDE_CHROME)
@@ -129,6 +146,7 @@ def main(argv):
         render(page, flow_html(), OUT / "4_flow.png")
         if "--app" in argv:
             url = argv[argv.index("--app") + 1]
+            first_screen(page, url, OUT / FIRST_SCREEN)
             for heading, name in APP_SHOTS.items():
                 app_shot(page, url, heading, OUT / name)
         browser.close()

@@ -4,16 +4,17 @@ Four images for the Devpost gallery (`1600x900` each). The two app shots and bot
 `python tools/build_gallery.py --app <app URL>`; these captions are filled from the results files by
 `python tools/sync_doc_numbers.py` (edit `docs/templates/gallery.md`, not this file).
 
-## The leak table
-![Field Report: time-locked search leakage](1_leak_table.png)
+## The opening screen
+![Leak demo, the app's opening screen: no time lock vs Tavily's time lock, date test](1_leak_demo.png)
 
-**Can a search see the future?** Date test (pilot, {{dt_cases}} past cases, the pre-registered initial pass):
-with no dates, {{dt_nodates}} of {{dt_cases}} cases kept a confirmed leak, a page dated after the cutoff with no
-archive copy on or before it (Wilson {{wilson}} {{dt_nodates_w}}; {{dt_nodates_retry}} of {{dt_cases}} after retrying
-the {{rr_dt_failed}} archive lookups that had failed); with `start_date`/`end_date` and `filter_by_published_date`,
-{{dt_dated}} of {{dt_cases}} ({{dt_dated_w}}). The cost: the filter dropped {{dt_lost_filter}} of {{dt_valid_total}}
-pieces of valid evidence (initial pass). Red rows: no dates; bold rows:
-Tavily's time lock. App page: Field Report. Source: `results/field_report.json`.
+**Can a search engine keep the past in the past?** The app's opening screen. Date test (pilot, {{dt_cases}} past
+cases, the pre-registered initial pass): with no dates, {{dt_nodates}} of {{dt_cases}} cases kept a confirmed leak, a
+page dated after the cutoff with no archive copy on or before it (Wilson {{wilson}} {{dt_nodates_w}};
+{{dt_nodates_retry}} of {{dt_cases}} after retrying the {{rr_dt_failed}} archive lookups that had failed); with
+`start_date`/`end_date` and `filter_by_published_date`, {{dt_dated}} of {{dt_cases}} ({{dt_dated_w}}). The cost: the
+filter dropped {{dt_lost_filter}} of {{dt_valid_total}} pieces of valid evidence (initial pass). Red card: no time
+lock; green card: Tavily's time lock. App page: Leak demo (home). Source: `results/leak_demo.json`,
+`results/field_report.json`.
 
 ## The four-arm table
 ![Field Report: who should write the search, four arms](2_four_arm_table.png)
