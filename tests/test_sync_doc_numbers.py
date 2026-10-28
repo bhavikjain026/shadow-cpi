@@ -1,7 +1,7 @@
 """tools/sync_doc_numbers.py: README and Devpost are rendered from templates that type no number. Offline, no calls."""
 import re
 import shutil
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 import pytest
@@ -163,3 +163,6 @@ def test_620_of_659_always_carries_its_date():
     shots = [l for l in (ROOT / "docs/video_script.md").read_text().splitlines() if count.search(l)]
     day = " ".join(v["auto_date"].split()[:2])
     assert shots and all(f"auto_parameters, {day}: 620/659" in l for l in shots)
+    spoken = datetime.strptime(v["auto_date"], "%d %b %Y")          # the voice-over says it aloud: "22 October"
+    voice = [l for l in shots if "six hundred twenty of six hundred fifty-nine" in l]
+    assert voice and all(f"when we tested on {spoken.day} {spoken:%B}, six hundred twenty of" in l for l in voice)

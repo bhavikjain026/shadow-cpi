@@ -21,6 +21,13 @@ def load(p):
     return json.loads((ROOT / p).read_text(encoding="utf-8"))
 
 
+def arm_t_date():
+    """When arm T was measured: the latest finished_utc among its files (the one date every doc quotes)."""
+    from datetime import date
+    return max(date.fromisoformat(json.loads(f.read_text(encoding="utf-8"))["finished_utc"][:10])
+               for f in (ROOT / "v2" / "ablation").glob("arm_T_20*.json"))
+
+
 def date_lag():
     """Results whose Tavily published_date is later than the page's own published/updated date (date test)."""
     rows = load("results/date_field_test.json")["rows"]
@@ -140,13 +147,15 @@ def build():
     t_ids, td_ids = request_ids("arm_T_*.json"), request_ids("arm_Td_*.json")
     td_n, td_echo_dates = echo_dates("arm_Td_*.json")
     ex_rid, ex_sha = r196_receipt(ex)
+    t_day = arm_t_date()
     tr = lambda d: ", ".join(f"{k} {v}" for k, v in d.items())          # noqa: E731
     reports = [
         {"section": "top", "title": "auto_parameters picks a recent time_range for queries about a past month", "to": "Tavily",
          "did": f"{nd['searches']} searches with auto_parameters: true, a query naming a month in Jan–Sep 2026, and "
                 "max_results only (no dates)",
          "happened": f"auto_parameters chose time_range {tr(nd['time_range'])}; {nd['results_dated_oct_2026']} of "
-                     f"{nd['results']} results were dated October 2026 and {nd['results_undated']} were undated",
+                     f"{nd['results']} results were dated October 2026 (measured {t_day.day} {t_day:%b} {t_day.year}) and "
+                     f"{nd['results_undated']} were undated",
          "expected": "a time_range that covers the month the query names, or none, with a note that a historical query "
                      "needs start_date/end_date",
          "fix": "when the query names a past month, return no time_range (or that month's window); document the "

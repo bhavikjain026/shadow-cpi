@@ -321,8 +321,8 @@ def facts(st, as_of, root=ROOT):
              auto_oct=ap["no_dates"]["results_dated_oct_2026"], auto_undated=ap["no_dates"]["results_undated"],
              autod_inside=ap["with_dates"]["inside_window"], autod_dated=ap["with_dates"]["dated_results"])
     # when arm T was measured (its files' finished_utc) and what the one-query re-check showed since
-    ran = max(date.fromisoformat(load(str(p.relative_to(root)), root)["finished_utc"][:10])
-              for p in (root / "v2/ablation").glob("arm_T_20*.json"))
+    from build_bug_reports import arm_t_date
+    ran = arm_t_date()
     chk = load("results/repro_check_2026-10-27.json", root)
     row = next(r for r in chk["rows"] if r["script"] == "repro/auto_parameters_time_range.py")
     shown = {"yes": "showed it", "no": "did not show it", "unclear": "was unclear"}[row["reproduced"]]
