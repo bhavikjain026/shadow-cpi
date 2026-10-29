@@ -361,12 +361,12 @@
    },
    {
     "endpoint": "/extract",
-    "calls": 884,
-    "credits": 771,
-    "credits_per_call": 0.8721719457013575,
-    "median_latency_s": 0.16,
-    "p95_latency_s": 5.068500000000001,
-    "with_latency": 882
+    "calls": 886,
+    "credits": 772,
+    "credits_per_call": 0.871331828442438,
+    "median_latency_s": 0.165,
+    "p95_latency_s": 5.0655,
+    "with_latency": 884
    },
    {
     "endpoint": "/map",
@@ -379,12 +379,12 @@
    },
    {
     "endpoint": "/search",
-    "calls": 1178,
-    "credits": 1249,
-    "credits_per_call": 1.0602716468590832,
-    "median_latency_s": 3.585,
-    "p95_latency_s": 6.093500000000001,
-    "with_latency": 1174
+    "calls": 1179,
+    "credits": 1250,
+    "credits_per_call": 1.0602205258693809,
+    "median_latency_s": 3.58,
+    "p95_latency_s": 6.092999999999999,
+    "with_latency": 1175
    }
   ],
   "by_experiment": [
@@ -447,6 +447,26 @@
     "median_latency_s": 3.56,
     "p95_latency_s": 4.906499999999999,
     "with_latency": 54
+   },
+   {
+    "experiment": "demo-live",
+    "endpoint": "/extract",
+    "calls": 2,
+    "credits": 1,
+    "credits_per_call": 0.5,
+    "median_latency_s": 1.085,
+    "p95_latency_s": 1.1795,
+    "with_latency": 2
+   },
+   {
+    "experiment": "demo-live",
+    "endpoint": "/search",
+    "calls": 1,
+    "credits": 1,
+    "credits_per_call": 1.0,
+    "median_latency_s": 1.0,
+    "p95_latency_s": 1.0,
+    "with_latency": 1
    },
    {
     "experiment": "drift-2026-10",
@@ -1013,12 +1033,12 @@
    }
   ],
   "total": {
-   "calls": 2089,
-   "credits": 2029,
-   "credits_per_call": 0.971278123504069,
+   "calls": 2092,
+   "credits": 2031,
+   "credits_per_call": 0.9708413001912046,
    "median_latency_s": 3.12,
-   "p95_latency_s": 5.939500000000001,
-   "with_latency": 2082
+   "p95_latency_s": 5.938000000000001,
+   "with_latency": 2085
   },
   "reconcile_credits": -82,
   "notes": [
@@ -2027,7 +2047,7 @@
   "arm_a_searches_per_month": 13.0,
   "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits at original cost / 9 months"
  },
- "ledger_rows": 2226,
+ "ledger_rows": 2229,
  "pages_changed": {
   "ist_date": "2026-10-29",
   "checked": 80,

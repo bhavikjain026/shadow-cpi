@@ -2087,5 +2087,8 @@
 {"call_id": "a47eb85179c9", "time": "2026-10-29T04:44:02.869738+00:00", "endpoint": "/extract", "experiments": ["drift-2026-10"], "credits": 1, "response_time": 0.03, "request_id": "1a0b5f82-6f9d-4488-850f-90de1efd9937"},
 {"call_id": "3fbd960dfbff", "time": "2026-10-29T04:44:04.864853+00:00", "endpoint": "/extract", "experiments": ["drift-2026-10"], "credits": 1, "response_time": 0.03, "request_id": "4c6ca1c5-a3ae-4e84-a84d-fcff52da3650"},
 {"call_id": "4502efc66dde", "time": "2026-10-29T04:44:06.456138+00:00", "endpoint": "/extract", "experiments": ["drift-2026-10"], "credits": 1, "response_time": 0.02, "request_id": "0027a5ec-3a2d-4abe-ad6e-8e1d7f494bc5"},
-{"call_id": "f635e1c4f426", "time": "2026-10-29T04:44:08.780751+00:00", "endpoint": "/extract", "experiments": ["drift-2026-10"], "credits": 1, "response_time": 0.03, "request_id": "e1869075-c8e0-4bb1-b75c-8f901a91b1d8"}
+{"call_id": "f635e1c4f426", "time": "2026-10-29T04:44:08.780751+00:00", "endpoint": "/extract", "experiments": ["drift-2026-10"], "credits": 1, "response_time": 0.03, "request_id": "e1869075-c8e0-4bb1-b75c-8f901a91b1d8"},
+{"call_id": "ea9234a83d0d", "time": "2026-10-29T06:57:48.841486+00:00", "endpoint": "/search", "experiments": ["demo-live"], "credits": 1, "response_time": 1.0, "request_id": "cb85a278-e01d-44ef-a52c-87ae89a07fa4"},
+{"call_id": "7e4dcb17ecba", "time": "2026-10-29T06:57:50.893817+00:00", "endpoint": "/extract", "experiments": ["demo-live"], "credits": 1, "response_time": 0.98, "request_id": "f451ae03-c539-4fe0-8c45-f0321034d657"},
+{"call_id": "b316eb01a30f", "time": "2026-10-29T06:57:55.637354+00:00", "endpoint": "/extract", "experiments": ["demo-live"], "credits": 0, "response_time": 1.19, "request_id": "8fd7549a-02e1-4439-aef6-ef473b3856ad"}
 ]}
