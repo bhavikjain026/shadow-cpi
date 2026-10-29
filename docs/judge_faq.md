@@ -48,7 +48,7 @@ and why the drift monitor re-reads pages, though none of them covers the gap com
 
 ## What was the `auto_parameters` claim?
 
-On 72 searches about past months with no dates, 620 of 659 results came from October 2026 (measured 22 Oct 2026; a one-query re-check on 27 Oct 2026 did not show it). The report therefore says "observed", not
+On 72 searches about past months with no dates, 620 of 659 results came from October 2026 (observed once on 22 Oct 2026, not reproduced on 27 Oct 2026). The report therefore says "observed", not
 "reproduced". With our dates added,
 532 of 532 dated results fell inside the window, though the echo still reports a `time_range`.
 
