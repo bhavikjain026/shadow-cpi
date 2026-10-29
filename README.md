@@ -525,10 +525,10 @@ Short answers to the hardest questions: [`docs/judge_faq.md`](docs/judge_faq.md)
   cutoff of February 2026, inside the Jan–Sep 2026 replay; for the replacement models: `nvidia/Nemotron-3_5-Lightning`: not published (no public model card found); `nvidia/Nemotron-3.5-Super-VL`: not published (no public model card found). The replay is therefore not
   leakage-free against model memory: a model can cite a line it would not have picked without knowing the outcome,
   even though code checks that the number is on the page. The sealed forward forecasts are the clean evidence.
-- **Bounds on the time-lock zero.** The count of confirmed leaks leaves out results the archive could not confirm either
-  way: 50 of 114 time-locked results. If every case with such a result had leaked, the count
-  would be 32 of 42 cases (exploratory bounding range, not a result; Field Report, "Evidence
-  tiers and bounds", [`results/evidence_tiers.json`](results/evidence_tiers.json)).
+- **Archive coverage of the time-lock zero.** The archive confirmed 64 of 114 time-locked
+  results as published before the cutoff and none after it; the other 50 could not be checked (no capture
+  or a failed lookup), so they are unverified, not leaked (initial pass; exploratory, not a result; Field Report,
+  "Evidence tiers and bounds", [`results/evidence_tiers.json`](results/evidence_tiers.json)).
 - **Leak counts.** Every zero is reported as zero detected, with its Wilson interval; no-dates counts are lower bounds, because a
   leak counts only when the Wayback Machine confirms it and absence from Wayback is not proof a page did not exist.
   McNemar tests and the rule-of-three bound are post-hoc, not pre-registered

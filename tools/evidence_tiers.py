@@ -18,10 +18,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from v2.date_test import wilson  # noqa: E402
+from v2.date_test import label, url_date, wilson  # noqa: E402
 
 OUT = ROOT / "results" / "evidence_tiers.json"
 SOURCES = (("pilot", "results/date_field_test.json"), ("replication", "results/replication.json"))
+# where each test's logged Wayback retry (recovered captures per URL) is saved; True = nested under ["retry"]["log"]
+RETRY = {"pilot": ("results/date_field_test_wayback_retry.json", False), "replication": ("results/replication.json", True)}
 ARMS = ("A", "C")
 LABEL = ("exploratory, added after scoring; a bounding range, not a new result; cannot change any headline")
 TIER = {"P": "archived", "L": "leak", "F": "unknown", "U": "unknown"}
@@ -67,24 +69,48 @@ def load(rel, root=ROOT):
     return json.loads((Path(root) / rel).read_text(encoding="utf-8"))
 
 
+def retried(res, cutoff, recovered):
+    """The same result after the logged Wayback retry: a failed lookup (captures None) takes the captures the retry
+    recovered for its URL and is relabelled by the headline rule; every other result is untouched."""
+    if res["captures"] is not None or res["url"] not in recovered:
+        return res
+    caps = recovered[res["url"]]
+    return {**res, "captures": caps, "label": label(cutoff, caps, res["tavily_date"], url_date(res["url"]), res.get("page_date"))}
+
+
+def arm_block(per_arm):
+    by_source = {s: {**counts([r for c in cases for r in c]), **case_bounds(cases)} for s, cases in per_arm.items()}
+    pooled = [c for cases in per_arm.values() for c in cases]
+    return {"pooled": {**counts([r for c in pooled for r in c]), **case_bounds(pooled)}, "by_source": by_source}
+
+
 def build(root=ROOT):
     per = {a: {} for a in ARMS}
+    after = {a: {} for a in ARMS}
     for name, rel in SOURCES:
-        for row in load(rel, root)["rows"]:
+        data = load(rel, root)
+        log = load(RETRY[name][0], root)
+        recovered = (log["retry"]["log"] if RETRY[name][1] else log)["recovered_captures"]
+        for row in data["rows"]:
             for a in ARMS:
-                per[a].setdefault(name, []).append(row["arms"][a]["results"])
-    arms = {}
-    for a in ARMS:
-        by_source = {s: {**counts([r for c in cases for r in c]), **case_bounds(cases)} for s, cases in per[a].items()}
-        pooled = [c for cases in per[a].values() for c in cases]
-        arms[a] = {"pooled": {**counts([r for c in pooled for r in c]), **case_bounds(pooled)}, "by_source": by_source}
+                rs = row["arms"][a]["results"]
+                per[a].setdefault(name, []).append(rs)
+                after[a].setdefault(name, []).append([retried(r, row["cutoff"], recovered) for r in rs])
+    arms = {a: {**arm_block(per[a]), "after_retry": arm_block(after[a])} for a in ARMS}
     headline = load("results/replication.json", root)["pooled"]["price"]["arms"]
+    retry_head = {"pilot": load(RETRY["pilot"][0], root)["after"]["arms"],
+                  "replication": load("results/replication.json", root)["retry"]["metrics"]["price"]["arms"]}
+    for a in ARMS:      # the after-retry best case must reproduce the retry files' own leak counts
+        for name in retry_head:
+            if arms[a]["after_retry"]["by_source"][name]["best_case"]["k"] != retry_head[name][a]["leak_cases"]:
+                raise SystemExit(f"arm {a} {name}: after-retry best case differs from the retry file's leak count")
     for a in ARMS:      # the best case IS the headline count: refuse to write if they ever differ
         if arms[a]["pooled"]["best_case"]["k"] != headline[a]["leak_cases"] or arms[a]["pooled"]["best_case"]["n"] != headline[a]["cases"]:
             raise SystemExit(f"arm {a}: best case differs from the headline pooled count")
     return {"label": LABEL, "pass": "initial pass (results as saved, before the logged Wayback retry)",
             "rule": "labels as stored by v2/date_test.label; Unknown = labels F and U",
-            "sources": [rel for _, rel in SOURCES] + ["results/replication.json (pooled headline, for the check)"],
+            "after_retry_pass": "after retry (failed archive lookups re-run and logged; same rule; the initial pass stays primary)",
+            "sources": [rel for _, rel in SOURCES] + [v[0] for v in RETRY.values() if v[0] not in dict(SOURCES).values()] + ["results/replication.json (pooled headline, for the check)"],
             "arms": arms}
 
 

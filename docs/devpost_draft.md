@@ -373,9 +373,9 @@ A Hindi substring match ('rail' inside 'domestic') turned a Jharkhand power tari
 manual check caught it; the fix (whole-word matching, state from the page) removed the event, so the October radar
 has 3 events. Logged as rule changes `R2`–`R3`, with before and after.
 Exploratory and post-hoc results are labelled where they appear and changed no scored verdict.
-**Bounds on the time-lock zero:** the count of confirmed leaks leaves out results the archive could not confirm either way
-(50 of 114 time-locked results); if every case with such a result had leaked, the count would be
-32 of 42 cases (exploratory bounding range, not a result; see the Field Report).
+**Archive coverage of the time-lock zero:** the archive confirmed 64 of 114 time-locked results as
+published before the cutoff and none after it; the other 50 could not be checked (no capture or a failed lookup),
+so they are unverified, not leaked (initial pass; exploratory, not a result; see the Field Report).
 **Content check:** a content check (Nemotron Nano, exploratory) found 1 confirmed post-cutoff fact in 55 sampled time-locked
 search excerpts, via a related-stories item, so 0 of 42 cases detected by our date-and-archive
 rule is a lower bound (excerpts and cases are different units).

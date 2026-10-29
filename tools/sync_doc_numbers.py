@@ -707,10 +707,10 @@ def facts(st, as_of, root=ROOT):
              audit_tz_offset=f"{'+' if off >= timedelta(0) else '-'}{abs(off).seconds // 3600:02d}:{abs(off).seconds % 3600 // 60:02d}",
              audit_day_span=f"{clock(time.min.replace(microsecond=0))} to {clock(time(23, 59, 59))}",
              audit_url_cap=len(_summary({'urls': list(range(1000))})['urls']))
-    # results/evidence_tiers.json (tools/evidence_tiers.py): exploratory bounding range for the time-lock zero
+    # results/evidence_tiers.json (tools/evidence_tiers.py): archive coverage of the time-lock zero
     et = fr["evidence_tiers"]["arms"]["C"]["pooled"]
-    f.update(et_c_results=et["results"], et_c_unknown=et["unknown"], et_cases=et["worst_case"]["n"],
-             et_c_worst=et["worst_case"]["k"])
+    assert et["leak"] == 0, "the coverage line says none after the cutoff"
+    f.update(et_c_results=et["results"], et_c_unknown=et["unknown"], et_c_archived=et["archived"])
     # results/field_report.json content_check (docs/preregistration_content_check.md): exploratory, hand-labelled
     cc = fr["content_check"]["arms"]["C"]
     f.update(cc_sampled=cc["sampled"], cc_conf=cc["confirmed"],

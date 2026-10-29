@@ -541,20 +541,32 @@ with st.expander("Details for experts: finance check, retries, second review and
                    "the cutoff; **Leak** = confirmed from after the cutoff; **Unknown** = not confirmed either way (the lookup "
                    "failed, there is no capture, or a capture has no second date to back it). Undated results are counted within the tiers.")
         names = {"A": NO_DATES, "C": TIME_LOCK}
-        table([{"Setting": names[a], "Results": x["results"], "Archived": x["archived"], "Leak": x["leak"],
-                "Unknown": x["unknown"], "Unknown: lookup failed": x["unknown_lookup_failed"],
-                "Unknown: no capture": x["unknown_no_capture"], "Undated": x["undated"]}
-               for a, x in ((a, et["arms"][a]["pooled"]) for a in ("A", "C"))])
+
+        def tiers(key):
+            return table([{"Setting": names[a], "Results": x["results"], "Archived": x["archived"], "Leak": x["leak"],
+                           "Unknown": x["unknown"], "Unknown: lookup failed": x["unknown_lookup_failed"],
+                           "Unknown: no capture": x["unknown_no_capture"], "Undated": x["undated"]}
+                          for a, x in ((a, key(et["arms"][a])) for a in ("A", "C"))])
 
         def kn(b):
             return f"{b['k']} of {b['n']} = {pct(b['k'] / b['n'])} ({pct(b['wilson95'][0])}–{pct(b['wilson95'][1])})"
-        table([{"Setting": names[a], "Best case: cases with a confirmed leak (the headline count, Wilson 95%)": kn(x["best_case"]),
-                "Worst case: confirmed leak or any Unknown result (Wilson 95%)": kn(x["worst_case"])}
-               for a, x in ((a, et["arms"][a]["pooled"]) for a in ("A", "C"))])
-        st.caption("The best case is the headline count; the worst case treats every case with a result we could not check as a leak. "
-                   "The truth lies between them, so the range shows how much the headline depends on archive coverage. "
-                   "A bounding range, not a new result. Sources: " + ", ".join(f"`{s}`" for s in et["sources"][:2])
-                   + ", `results/evidence_tiers.json`.")
+
+        def bounds(key):
+            return table([{"Setting": names[a], "Best case: cases with a confirmed leak (the headline count, Wilson 95%)": kn(x["best_case"]),
+                           "Worst case: confirmed leak or any Unknown result (Wilson 95%)": kn(x["worst_case"])}
+                          for a, x in ((a, key(et["arms"][a])) for a in ("A", "C"))])
+
+        st.markdown("**Coverage, initial pass**")
+        tiers(lambda x: x["pooled"])
+        st.caption("The worst case assumes every unverified result leaked. That is a mathematical bound, not an estimate: these results "
+                   "were dated before the cutoff by Tavily and passed the filter; the archive just has no copy to confirm them.")
+        bounds(lambda x: x["pooled"])
+        st.markdown("**Coverage, after retry** (the failed archive lookups re-run and logged; the initial pass stays primary)")
+        tiers(lambda x: x["after_retry"]["pooled"])
+        bounds(lambda x: x["after_retry"]["pooled"])
+        st.caption("Unknown means the archive couldn't confirm the date either way; it is unverified, not leaked. "
+                   "The best case is the headline count. A bounding range, not a new result. Sources: "
+                   + ", ".join(f"`{s}`" for s in et["sources"]) + ", `results/evidence_tiers.json`.")
 
 with st.expander("Details for experts: radar runs, credit receipt and cost by search setting"):
     # ---------- radar and cost ----------

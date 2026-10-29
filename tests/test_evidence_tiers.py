@@ -63,3 +63,36 @@ def test_saved_file_matches_a_fresh_build(built):
 def test_field_report_carries_the_block_and_label():
     fr = json.loads((ROOT / "results/field_report.json").read_text())["evidence_tiers"]
     assert fr["label"].startswith("exploratory, added after scoring") and "not a new result" in fr["label"]
+
+
+def test_after_retry_tiers_sum_keep_the_leak_floor_and_only_resolve_failed_lookups(built):
+    for a in ("A", "C"):
+        x, y = built["arms"][a]["pooled"], built["arms"][a]["after_retry"]["pooled"]
+        assert y["archived"] + y["leak"] + y["unknown"] == y["results"] == x["results"]
+        assert y["unknown_lookup_failed"] == 0 and y["leak"] >= x["leak"] and y["archived"] >= x["archived"]
+        assert y["best_case"]["k"] <= y["worst_case"]["k"] <= x["worst_case"]["k"]
+
+
+def test_retried_changes_only_failed_lookups():
+    ok = {"url": "https://x.test/a", "captures": ["2026-01-01"], "tavily_date": "2026-01-01", "label": "P"}
+    failed = {**ok, "captures": None, "label": "U"}
+    rec = {"https://x.test/a": ["2026-01-01"]}
+    assert ET.retried(ok, "2026-02-01", rec) is ok
+    assert ET.retried(failed, "2026-02-01", rec)["label"] == "P"
+    assert ET.retried(failed, "2026-02-01", {}) is failed
+
+
+def test_page_block_leads_with_coverage_and_carries_the_bound_caption():
+    src = (ROOT / "app_pages/field_report.py").read_text()
+    assert src.index("**Coverage, initial pass**") < src.index("The worst case assumes every unverified result leaked.")
+    assert "That is a mathematical bound, not an estimate" in src and "**Coverage, after retry**" in src
+    assert "it is unverified, not leaked" in src
+
+
+def test_readme_and_devpost_carry_the_coverage_line_from_the_json_and_no_worst_case_count():
+    c = json.loads((ROOT / "results/evidence_tiers.json").read_text())["arms"]["C"]["pooled"]
+    line = (f"confirmed {c['archived']} of {c['results']} time-locked results as published before the cutoff and none after it")
+    for f in ("README.md", "docs/devpost_draft.md"):
+        text = " ".join((ROOT / f).read_text().split())
+        assert line in text and f"the other {c['unknown']} could not be checked" in text
+        assert f"{c['worst_case']['k']} of {c['worst_case']['n']} cases" not in text

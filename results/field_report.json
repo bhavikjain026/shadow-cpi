@@ -2360,9 +2360,11 @@
   "label": "exploratory, added after scoring; a bounding range, not a new result; cannot change any headline",
   "pass": "initial pass (results as saved, before the logged Wayback retry)",
   "rule": "labels as stored by v2/date_test.label; Unknown = labels F and U",
+  "after_retry_pass": "after retry (failed archive lookups re-run and logged; same rule; the initial pass stays primary)",
   "sources": [
    "results/date_field_test.json",
    "results/replication.json",
+   "results/date_field_test_wayback_retry.json",
    "results/replication.json (pooled headline, for the check)"
   ],
   "arms": {
@@ -2449,6 +2451,91 @@
        ]
       }
      }
+    },
+    "after_retry": {
+     "pooled": {
+      "results": 126,
+      "archived": 16,
+      "leak": 48,
+      "unknown": 62,
+      "unknown_lookup_failed": 0,
+      "unknown_no_capture": 60,
+      "unknown_capture_unconfirmed": 2,
+      "unknown_with_date_flag": 31,
+      "undated": 18,
+      "best_case": {
+       "k": 29,
+       "n": 42,
+       "wilson95": [
+        0.5397400594207429,
+        0.8092889721690051
+       ]
+      },
+      "worst_case": {
+       "k": 42,
+       "n": 42,
+       "wilson95": [
+        0.9162012079230888,
+        1.0
+       ]
+      }
+     },
+     "by_source": {
+      "pilot": {
+       "results": 60,
+       "archived": 9,
+       "leak": 14,
+       "unknown": 37,
+       "unknown_lookup_failed": 0,
+       "unknown_no_capture": 36,
+       "unknown_capture_unconfirmed": 1,
+       "unknown_with_date_flag": 18,
+       "undated": 8,
+       "best_case": {
+        "k": 10,
+        "n": 20,
+        "wilson95": [
+         0.2992980068701797,
+         0.7007019931298203
+        ]
+       },
+       "worst_case": {
+        "k": 20,
+        "n": 20,
+        "wilson95": [
+         0.8388748398148705,
+         1.0
+        ]
+       }
+      },
+      "replication": {
+       "results": 66,
+       "archived": 7,
+       "leak": 34,
+       "unknown": 25,
+       "unknown_lookup_failed": 0,
+       "unknown_no_capture": 24,
+       "unknown_capture_unconfirmed": 1,
+       "unknown_with_date_flag": 13,
+       "undated": 10,
+       "best_case": {
+        "k": 19,
+        "n": 22,
+        "wilson95": [
+         0.6666501265111675,
+         0.9525099632305449
+        ]
+       },
+       "worst_case": {
+        "k": 22,
+        "n": 22,
+        "wilson95": [
+         0.8513451233948545,
+         1.0
+        ]
+       }
+      }
+     }
     }
    },
    "C": {
@@ -2532,6 +2619,91 @@
         0.47318597580088406,
         0.836394069069972
        ]
+      }
+     }
+    },
+    "after_retry": {
+     "pooled": {
+      "results": 114,
+      "archived": 77,
+      "leak": 0,
+      "unknown": 37,
+      "unknown_lookup_failed": 0,
+      "unknown_no_capture": 37,
+      "unknown_capture_unconfirmed": 0,
+      "unknown_with_date_flag": 0,
+      "undated": 0,
+      "best_case": {
+       "k": 0,
+       "n": 42,
+       "wilson95": [
+        0.0,
+        0.08379879207691124
+       ]
+      },
+      "worst_case": {
+       "k": 29,
+       "n": 42,
+       "wilson95": [
+        0.5397400594207429,
+        0.8092889721690051
+       ]
+      }
+     },
+     "by_source": {
+      "pilot": {
+       "results": 59,
+       "archived": 38,
+       "leak": 0,
+       "unknown": 21,
+       "unknown_lookup_failed": 0,
+       "unknown_no_capture": 21,
+       "unknown_capture_unconfirmed": 0,
+       "unknown_with_date_flag": 0,
+       "undated": 0,
+       "best_case": {
+        "k": 0,
+        "n": 20,
+        "wilson95": [
+         0.0,
+         0.16112516018512965
+        ]
+       },
+       "worst_case": {
+        "k": 17,
+        "n": 20,
+        "wilson95": [
+         0.6395811333571357,
+         0.9476312545132735
+        ]
+       }
+      },
+      "replication": {
+       "results": 55,
+       "archived": 39,
+       "leak": 0,
+       "unknown": 16,
+       "unknown_lookup_failed": 0,
+       "unknown_no_capture": 16,
+       "unknown_capture_unconfirmed": 0,
+       "unknown_with_date_flag": 0,
+       "undated": 0,
+       "best_case": {
+        "k": 0,
+        "n": 22,
+        "wilson95": [
+         0.0,
+         0.14865487660514556
+        ]
+       },
+       "worst_case": {
+        "k": 12,
+        "n": 22,
+        "wilson95": [
+         0.34659795182499575,
+         0.7307970593927182
+        ]
+       }
       }
      }
     }
