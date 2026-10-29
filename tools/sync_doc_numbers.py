@@ -20,7 +20,7 @@ import json
 import re
 import subprocess
 import sys
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -510,6 +510,15 @@ def facts(st, as_of, root=ROOT):
     sealed = (root / "sealed" / f"{month}.sha256").exists()       # committed by seal_month.py, unlike a local tag
     f["seal_status"] = (f"Sealed on {day_month(seal)} (tag `{tag}`)" if sealed
                         else f"To be sealed on {day_month(seal)} (tag `{tag}`); not sealed as of {human(as_of)}")
+    # the seal itself: sealed/<month>.sha256 and sealed/<month>.json, written by seal_month.py
+    if sealed:
+        sj = load(f"sealed/{month}.json", root)
+        at = datetime.fromisoformat(sj["sealed_at_utc"]).astimezone(timezone(timedelta(hours=5, minutes=30)))
+        f.update(seal_sha256=(root / "sealed" / f"{month}.sha256").read_text(encoding="utf-8").split()[0],
+                 sealed_at=f"{day_month(at.date())} {at.year}, {at:%H:%M} IST", seal_headline=f"{sj['headline_yoy']:.3f}%",
+                 seal_range=f"{sj['range_low']:.3f}\u2013{sj['range_high']:.3f}%",
+                 seal_range_level=f"{sj['range_level']:.0%}", seal_p_ge6=f"{sj['p_headline_ge_6']:.2f}",
+                 seal_threshold=re.search(r"threshold (\d+(?:\.\d+)?%)", sj["range"]["p_method"]).group(1))
     # the submission period's start, from the hackathon checklist in v2/PRD.md
     # the submission period's opening date (config/doc_citations.json), checked against the hackathon checklist
     m = re.search(r"If any part existed before (\d+ \w{3}),", (root / "v2/PRD.md").read_text(encoding="utf-8"))

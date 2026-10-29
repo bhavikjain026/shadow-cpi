@@ -343,3 +343,13 @@ def test_readme_top_has_the_replication_row_pooled_line_and_cache_note(values):
     rp = json.loads((ROOT / "results/replication.json").read_text())
     assert int(v["rep_nodates"]) == rp["metrics"]["price"]["arms"]["A"]["leak_cases"]
     assert int(v["pool_dated"]) == rp["pooled"]["price"]["arms"]["C"]["leak_cases"]
+
+
+def test_rendered_seal_hash_is_the_sealed_file_and_no_tbd_remains(values):
+    sealed = (ROOT / "sealed/2026-10.sha256").read_text().split()[0]
+    assert values["seal_sha256"] == sealed
+    for rendered in S.TEMPLATES:
+        text = (ROOT / rendered).read_text()
+        assert "[TBD: from seal]" not in text
+    for rendered in ("README.md", "docs/devpost_draft.md"):
+        assert sealed in (ROOT / rendered).read_text()

@@ -188,7 +188,7 @@ completely:
   27 of the date test's 40 pieces of valid evidence were lost (12 with the filter
   alone; initial pass). It reads a page's date, not its edit history.
 - **The drift monitor** re-reads each October radar page with Extract once a day and compares it with the saved copy
-  ([`v2/DRIFT_PREREG.md`](v2/DRIFT_PREREG.md)): 14 of 62 radar pages had changed since they were saved; cited quote still present on 13 of 14; cited number changed on 0 of 14 (one run, 28 Oct 2026 IST).
+  ([`v2/DRIFT_PREREG.md`](v2/DRIFT_PREREG.md)): 2 runs committed (28 Oct 2026 to 29 Oct 2026 IST), 142 page checks, 31 changes found; in the latest run, 17 of 80 radar pages had changed since they were saved; cited quote still present on 16 of 17; cited number changed on 0 of 17.
 - **The Wayback Machine** shows whether a page existed by the cutoff; a leak counts only when it confirms one. Failed
   lookups were retried and logged (11 in the date test, 94 in the finance check). In
   the post-hoc review, 146 of 283 rows stayed unclear, partly because archive lookups were
@@ -425,14 +425,17 @@ connection reset that stopped long runs, mixed model naming).
 
 ## The product
 
-- **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 28 Oct 2026; October 2026 CPI is scheduled for 12 Nov at 4 pm
+- **The October 2026 nowcast.** Sealed on 29 Oct (tag `seal-2026-10`); October 2026 CPI is scheduled for 12 Nov at 4 pm
   IST (MoSPI's next-working-day rule applies). Anyone can check the seal: download `sealed/2026-10.json` at tag `seal-2026-10`, recompute its `SHA-256`, and
-  compare it with `sealed/2026-10.sha256` ([`verify.md`](verify.md)). The seal shows when the forecast was committed;
+  compare it with `sealed/2026-10.sha256` ([`verify.md`](verify.md)). Sealed 29 Oct 2026, 09:32 IST: headline 6.090% year on year,
+  80% range 5.806–6.373%, P(≥6.0%) 0.66; `SHA-256` `2d1dbc1dbb825e19b03d3f2dc5d555b25d3f1f81a5142d5effcbbb26732f0de7`.
+  The `v3` bundle was not sealed for October: its build check counted the radar's 29 Oct data files (`v2/radar/*.json`) as code changes; per `v3/PREREG.md §6`, `v1` stands alone. The check will be fixed (data vs code) before November.
+  The seal shows when the forecast was committed;
   what the evidence could have seen is the time lock's job. After the release, the Archive page shows the
   miss and whether the official figure was inside the range.
 - **Price Shock Radar** (exploratory, report only; app page "October radar"): announced retail price changes taking
   effect this month, found with Tavily before MoSPI publishes. So far 3 events verified,
-  0 corroborated, 95 of a 150-credit cap. It never changes the sealed call.
+  0 corroborated, 119 of a 150-credit cap. It never changes the sealed call.
 - **Live build** with **Replay a saved run**: watch the number build one verified card at a time. Replays make no
   API call and cost no credits.
 - **Chain of custody:** from any number to its quote, page, page date, Tavily request ID, response hash and seal.
@@ -523,10 +526,10 @@ To run the pipeline, copy `.env.example` to `.env`, add the two keys, and start 
 [`docs/deploy.md`](docs/deploy.md). Every number in this README is filled from the results files by
 `python tools/sync_doc_numbers.py` (template: [`docs/templates/README.md`](docs/templates/README.md)).
 
-Tavily usage so far (as of 28 Oct 2026, [`results/tavily_report_card.md`](results/tavily_report_card.md)):
-2,118 calls sent, 2,065 credits used (a 1,000-credit monthly plan plus 3,125
-add-on credits), 79% of dated search results inside the requested window, median latency
-4.1 s.
+Tavily usage so far (as of 29 Oct 2026, [`results/tavily_report_card.md`](results/tavily_report_card.md)):
+2,236 calls sent, 2,176 credits used (a 1,000-credit monthly plan plus 3,125
+add-on credits), 80% of dated search results inside the requested window, median latency
+4.0 s.
 
 ## Licence, team, and when it was built
 

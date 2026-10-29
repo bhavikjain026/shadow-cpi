@@ -115,7 +115,7 @@ version leaks the outcome. What covers the gap, partly: our page-date check (kep
 59 filtered results in the date test; date-test valid evidence lost: 27 of
 40 with it (initial pass), 12 with the filter alone; after the retry
 35 and 20 of 48); the drift monitor, which re-reads October radar
-pages daily (14 of 62 radar pages had changed since they were saved; cited quote still present on 13 of 14; cited number changed on 0 of 14 (one run, 28 Oct 2026 IST)); and Wayback Machine checks, with failed lookups retried and logged
+pages daily (2 runs committed (28 Oct 2026 to 29 Oct 2026 IST), 142 page checks, 31 changes found; in the latest run, 17 of 80 radar pages had changed since they were saved; cited quote still present on 16 of 17; cited number changed on 0 of 17); and Wayback Machine checks, with failed lookups retried and logged
 (11 in the date test, 94 in the finance check).
 
 ## Who writes the search: model-written fields vs fixed templates, inside a time lock it cannot move
@@ -259,9 +259,10 @@ the `/models` list served both sizes behind one OpenAI-compatible endpoint, so r
 having Super cite line numbers instead of copying text made Hindi pages work.
 
 ## What it does
-- **The October 2026 nowcast.** To be sealed on 29 Oct (tag `seal-2026-10`); not sealed as of 28 Oct 2026. October 2026 CPI is scheduled for 12 Nov at 4 pm IST (MoSPI's
+- **The October 2026 nowcast.** Sealed on 29 Oct (tag `seal-2026-10`). October 2026 CPI is scheduled for 12 Nov at 4 pm IST (MoSPI's
   next-working-day rule applies).
-  Anyone can recompute the seal's `SHA-256` from the file at tag `seal-2026-10` (`verify.md`).
+  Sealed 29 Oct 2026, 09:32 IST: headline 6.090% year on year, 80% range 5.806–6.373%, P(≥6.0%) 0.66.
+  Anyone can recompute the seal's `SHA-256` (`2d1dbc1dbb825e19b03d3f2dc5d555b25d3f1f81a5142d5effcbbb26732f0de7`) from the file at tag `seal-2026-10` (`verify.md`).
 - **Price Shock Radar** (exploratory, report only): announced price changes taking effect this month;
   3 verified so far, 0 corroborated.
 - **Live build** with **Replay a saved run** (no API call, no credits).
@@ -319,8 +320,8 @@ Nebius retires the original IDs on 9 Nov 2026; from then, calls use Nebius's rec
 - Python
 - Streamlit
 
-Tavily usage as of 28 Oct 2026: 2,118 calls, 2,065 credits, 79% of dated results
-inside the requested window (5,646 of 7,128), median latency 4.1 s. Third-party notices:
+Tavily usage as of 29 Oct 2026: 2,236 calls, 2,176 credits, 80% of dated results
+inside the requested window (6,064 of 7,545), median latency 4.0 s. Third-party notices:
 `THIRD_PARTY_NOTICES.md`.
 
 ## Testing instructions

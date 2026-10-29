@@ -401,7 +401,10 @@ connection reset that stopped long runs, mixed model naming).
 
 - **The {{live_month}} nowcast.** {{seal_status}}; {{live_month}} CPI is scheduled for {{release_day}} at {{release_hour}}
   IST (MoSPI's next-working-day rule applies). Anyone can check the seal: download `sealed/2026-10.json` at tag `seal-2026-10`, recompute its `SHA-256`, and
-  compare it with `sealed/2026-10.sha256` ([`verify.md`](verify.md)). The seal shows when the forecast was committed;
+  compare it with `sealed/2026-10.sha256` ([`verify.md`](verify.md)). Sealed {{sealed_at}}: headline {{seal_headline}} year on year,
+  {{seal_range_level}} range {{seal_range}}, P(≥{{seal_threshold}}) {{seal_p_ge6}}; `SHA-256` `{{seal_sha256}}`.
+  The `v3` bundle was not sealed for October: its build check counted the radar's {{seal_day}} data files (`v2/radar/*.json`) as code changes; per `v3/PREREG.md §6`, `v1` stands alone. The check will be fixed (data vs code) before November.
+  The seal shows when the forecast was committed;
   what the evidence could have seen is the time lock's job. After the release, the Archive page shows the
   miss and whether the official figure was inside the range.
 - **Price Shock Radar** (exploratory, report only; app page "October radar"): announced retail price changes taking

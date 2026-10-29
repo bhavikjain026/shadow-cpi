@@ -176,7 +176,8 @@ having Super cite line numbers instead of copying text made Hindi pages work.
 ## What it does
 - **The {{live_month}} nowcast.** {{seal_status}}. {{live_month}} CPI is scheduled for {{release_day}} at {{release_hour}} IST (MoSPI's
   next-working-day rule applies).
-  Anyone can recompute the seal's `SHA-256` from the file at tag `seal-2026-10` (`verify.md`).
+  Sealed {{sealed_at}}: headline {{seal_headline}} year on year, {{seal_range_level}} range {{seal_range}}, P(≥{{seal_threshold}}) {{seal_p_ge6}}.
+  Anyone can recompute the seal's `SHA-256` (`{{seal_sha256}}`) from the file at tag `seal-2026-10` (`verify.md`).
 - **Price Shock Radar** (exploratory, report only): announced price changes taking effect this month;
   {{radar_events}} verified so far, {{radar_corroborated}} corroborated.
 - **Live build** with **Replay a saved run** (no API call, no credits).
