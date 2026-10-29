@@ -1,0 +1,2563 @@
+{
+ "prereg": "docs/preregistration_content_check.md",
+ "seed": 20261029,
+ "per_arm": 55,
+ "cap": 120,
+ "nebius_calls_used": 104,
+ "incomplete": false,
+ "counts": {
+  "C": {
+   "saved_units": 114,
+   "checked": 55,
+   "flagged": 4,
+   "yes_dropped_quote_check": 0,
+   "not_checked_no_excerpt": 0,
+   "not_checked_cap": 0,
+   "not_checked_error": 0,
+   "not_sampled": 59
+  },
+  "A": {
+   "saved_units": 126,
+   "checked": 55,
+   "flagged": 8,
+   "yes_dropped_quote_check": 0,
+   "not_checked_no_excerpt": 0,
+   "not_checked_cap": 0,
+   "not_checked_error": 0,
+   "not_sampled": 71
+  }
+ },
+ "rows": [
+  {
+   "source": "replication",
+   "case": "RR-F4",
+   "arm": "C",
+   "url": "https://www.statista.com/chart/36017/fuel-price-changes-in-different-countries-since-the-start-of-iran-war",
+   "cutoff": "2026-05-24",
+   "question": "petrol diesel price hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "a668b2c99ff4",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-c6553dcb-b398-4640-8ebf-b20f56c1863f",
+    "response_sha256": "c490d9cba295f4c836549dca24007a854baea8e3202271ee10d5559b1103f3fa"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-F2",
+   "arm": "A",
+   "url": "https://www.middleeasteye.net/live-blog/live-blog-update/india-raises-fuel-prices-fourth-time-may",
+   "cutoff": "2026-05-18",
+   "question": "petrol diesel price hike India May 2026",
+   "status": "checked",
+   "flagged": true,
+   "sentence": "India’s state-owned fuel retailers have increased petrol and diesel prices for the fourth time this month as they seek to recover losses caused by higher crude oil costs linked to the US-Israel war on Iran and disruptions to energy supplies. [...] Diesel prices were raised by 2.71 rupees per litre, while petrol prices increased by 2.61 rupees per litre, dealers said.",
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "yes",
+    "sentence": "India’s state-owned fuel retailers have increased petrol and diesel prices for the fourth time this month as they seek to recover losses caused by higher crude oil costs linked to the US-Israel war on Iran and disruptions to energy supplies. [...] Diesel prices were raised by 2.71 rupees per litre, while petrol prices increased by 2.61 rupees per litre, dealers said."
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "d051988561de",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-31d31ed2-560e-4bca-b418-a01285f2d005",
+    "response_sha256": "ab95c5342dbfe053bf52a33bc4742945e365020a326c5f8b8029f6fb90fd7d63"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "T3",
+   "arm": "C",
+   "url": "https://hirunews.lk/en/469567/error-error-code400messagerequired-texterrors-messagerequired-textdomainglobalreasonrequired-details-typetype-googleapis-com-google-rpc-badrequestfieldviolations-fieldqdescriptionno-text-queries-provided",
+   "cutoff": "2026-06-29",
+   "question": "bus fare hike Odisha June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "095ca27d7c17",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-7c47b9d9-e9fd-4c4c-baaf-59fe2089c420",
+    "response_sha256": "862b1d5ef3c896b3a9781938545d9796a2e4ee00ed707bfe802779e3419fdb20"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M9",
+   "arm": "A",
+   "url": "https://www.dtnext.in/news/tamilnadu/private-brands-hike-milk-curd-prices-2nd-in-7-months",
+   "cutoff": "2026-07-29",
+   "question": "milk price hike Tamil Nadu July 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "6f4b5986f8fd",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-cdca0447-2cc2-410c-8a0f-44edc2e1fc88",
+    "response_sha256": "dc718b6085c16802efe561476d4c7bed74ec8346b22ae35c63074017f0d5ac6b"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M11",
+   "arm": "C",
+   "url": "https://www.newindianexpress.com/states/karnataka/2026/Sep/23/karnataka-milk-unions-meet-cm-seek-price-hike-of-rs-8-10-per-litre",
+   "cutoff": "2026-09-29",
+   "question": "milk price hike Tamil Nadu September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "27d7338cf622",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-8ea8b18e-e8a6-400f-904b-b72edfabc8cb",
+    "response_sha256": "591319fbe301b06b76ef106d2697f442f6664037ba97312298ea35c7fc3ce01f"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M11",
+   "arm": "A",
+   "url": "https://www.dtnext.in/news/tamilnadu/private-dairies-to-hike-milk-curd-prices-from-saturday-aavin-faces-widening-price-gap-in-tamil-nadu",
+   "cutoff": "2026-09-29",
+   "question": "milk price hike Tamil Nadu September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "29c23d8952c5",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-e677eb1a-1696-4fd2-95fe-dbd96ba58ef5",
+    "response_sha256": "34cc17be14ca447a3458a992e0e0772d48d72049fc04d481715fc07de97f6f51"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE01",
+   "arm": "C",
+   "url": "https://www.carandbike.com/news/listed-car-manufacturers-that-will-hike-prices-from-january-2026-3219201",
+   "cutoff": "2025-12-31",
+   "question": "petrol diesel price hike India January 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "1ff53f7172c3",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-62e3aa5f-060d-42bc-a15b-5605dfda4407",
+    "response_sha256": "564e5a6c9d5d4844f6533a37c101b77b66b0f24d85b6ccd2ef33d8cdaa0de174"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-T1",
+   "arm": "A",
+   "url": "https://timesofindia.indiatimes.com/business/india-business/global-freight-costs-surge-130-as-middle-east-tensions-continue-to-rattle-shipping-routes-report/articleshow/135045167.cms",
+   "cutoff": "2026-02-20",
+   "question": "rail fare hike Tamil Nadu February 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "e79e31c2b09a",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-cfc62c4a-bb97-402a-b24d-c3f9321b1512",
+    "response_sha256": "bd8defdfbed7038e317d242603812d4f18008f2ee39c696fc8a240240924c737"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M6",
+   "arm": "C",
+   "url": "https://thenewsmill.com/2026/05/regional-agriculture-conference-of-five-states-to-focus-on-food-security-and-farmers-welfare/",
+   "cutoff": "2026-05-29",
+   "question": "milk price hike Bihar, Jharkhand May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "8b5aa00c3a1e",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-d5f5992e-b0f8-41da-bb14-b9b82f49afdd",
+    "response_sha256": "9e75aff99b421ee72f6e540052e37ee0aaa3fa5b22e9058317ac352af35c13f7"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M5",
+   "arm": "A",
+   "url": "https://www.instagram.com/reel/DekmcwYzLq0",
+   "cutoff": "2026-05-29",
+   "question": "milk price hike Maharashtra May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "c75490589f8e",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-d7270244-e4c0-4bd6-9946-68d5aba5ec7e",
+    "response_sha256": "01f0c8ad361246c78818fd334ca941c1810b7836873af35cf6602fd09993e978"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "T3",
+   "arm": "C",
+   "url": "https://www.chicagotribune.com/2026/06/18/illinois-drivers-higher-tolls/",
+   "cutoff": "2026-06-29",
+   "question": "bus fare hike Odisha June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "47d94faa65ee",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-d11bc755-766b-44e9-ae65-a09482afa55a",
+    "response_sha256": "41499da5048b0b0dcd454da8505e6a7ebcd1164e0ef4bcc4195b2fa4cbb04b75"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "T3",
+   "arm": "A",
+   "url": "https://sanatanprabhat.org/english/186313.html",
+   "cutoff": "2026-06-29",
+   "question": "bus fare hike Odisha June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "e65c5fd211ae",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-b713d13e-a4cf-4b20-a437-a0a324732a52",
+    "response_sha256": "dd8bdef3e8c385e8d9d1b61fd411bcdf37385ce5a4bdda9229993aae9d012223"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M3",
+   "arm": "C",
+   "url": "https://www.livemint.com/news/india/amul-hikes-milk-prices-by-2-per-litre-across-india-due-to-rising-input-costs-effective-may-14-11778680706339.html",
+   "cutoff": "2026-05-29",
+   "question": "milk price hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "b7ff70ee1604",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-1bf4a329-123f-417c-a977-bcb36899e6ef",
+    "response_sha256": "df95fb5345b8aeb21c9ca0f626a5313b3f278b0ceca309d962f996695a7d1015"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M3",
+   "arm": "A",
+   "url": "https://brindafoods.com/blog/milk-price-hike-october-2026-cattle-feed-cost-india",
+   "cutoff": "2026-05-29",
+   "question": "milk price hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "2042629c5f64",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-36535013-a824-4468-9dfb-3fb2be53c85b",
+    "response_sha256": "bb7f4e56264b32bc5f42e8004fb61ffb2f121b1b8dbe8334159d7335e3a68c2e"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "L2",
+   "arm": "C",
+   "url": "https://apnews.com/article/indonesia-students-protest-economic-pressures-fc758948bc547075d62bcf80d8a7e827",
+   "cutoff": "2026-06-29",
+   "question": "LPG cylinder price hike India June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "ce34fef942ce",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-18bd71b1-4045-4742-9a58-a736b02ccb10",
+    "response_sha256": "fcd99550ab855ae6f921629d5dc6f31835f1e26aba8e4c2dad0ae839d9c42f0d"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "F3",
+   "arm": "A",
+   "url": "https://www.middleeasteye.net/live-blog/live-blog-update/india-raises-fuel-prices-fourth-time-may",
+   "cutoff": "2026-05-29",
+   "question": "petrol diesel price hike India May 2026",
+   "status": "checked",
+   "flagged": true,
+   "sentence": "India’s state-owned fuel retailers have increased petrol and diesel prices for the fourth time this month as they seek to recover losses caused by higher crude oil costs linked to the US-Israel war on Iran and disruptions to energy supplies. [...] Diesel prices were raised by 2.71 rupees per litre, while petrol prices increased by 2.61 rupees per litre, dealers said.",
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "yes",
+    "sentence": "India’s state-owned fuel retailers have increased petrol and diesel prices for the fourth time this month as they seek to recover losses caused by higher crude oil costs linked to the US-Israel war on Iran and disruptions to energy supplies. [...] Diesel prices were raised by 2.71 rupees per litre, while petrol prices increased by 2.61 rupees per litre, dealers said."
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "d571511276ff",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-c5a74db2-7367-4fcc-a542-e8ecdb2d589b",
+    "response_sha256": "b0856d669c37691092a76d7e5cde913bd34e3574f3ed7ce4ed5bed6f18c0424c"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE06",
+   "arm": "C",
+   "url": "https://asia.nikkei.com/business/travel-leisure/all-you-can-ride-japan-rail-pass-price-to-go-up-in-october",
+   "cutoff": "2026-05-03",
+   "question": "rail fare hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "27bc9ed60a42",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-b2043576-e758-4e40-81ef-753858ee234b",
+    "response_sha256": "3c1163f363563642a23efef6911297aa42fb0922bd2d5a398aeb566b4243ca21"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE02",
+   "arm": "A",
+   "url": "https://www.ndtv.com/video/commercial-lpg-cylinder-prices-hiked-from-october-1-domestic-rates-unchanged-1167188",
+   "cutoff": "2025-12-31",
+   "question": "LPG cylinder price hike Delhi January 2026",
+   "status": "checked",
+   "flagged": true,
+   "sentence": "In Delhi, the price of a 19-kg commercial LPG cylinder has risen by Rs 62.50 to Rs 2,810. The cylinder was priced at Rs 2,747.50 in September, according to",
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "yes",
+    "sentence": "In Delhi, the price of a 19-kg commercial LPG cylinder has risen by Rs 62.50 to Rs 2,810. The cylinder was priced at Rs 2,747.50 in September, according to"
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "79830d5f1b6f",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-ab391483-a606-4f60-9863-3d25beca7665",
+    "response_sha256": "235a4b3d5f9481fe24aac385ba8a4a42c5bbf6408d4ceabc293d8b38c71f05b0"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE03",
+   "arm": "C",
+   "url": "https://www.oilandgas360.com/tag/u-s-oil-blockade/",
+   "cutoff": "2026-01-31",
+   "question": "LPG cylinder price hike Maharashtra February 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "b90e95c4cd36",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-41016768-246c-4423-b6e0-48a443a4e4b1",
+    "response_sha256": "bdb25292c3ba8e10982fc7fd838adddb24fbf25ec43bc55c9b1d07e6b0174e38"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE01",
+   "arm": "A",
+   "url": "https://timesofindia.indiatimes.com/business/india-business/nayara-hikes-petrol-by-rs-5-diesel-by-rs-3-amid-pressure-from-rising-oil-prices/articleshow/134655720.cms",
+   "cutoff": "2025-12-31",
+   "question": "petrol diesel price hike India January 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "1af1df52ac6d",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-5254c4e5-e715-434a-bfca-3263c1b1deb5",
+    "response_sha256": "5652e0f80b710a175d5222a26f63a21d7497dd540acc7499d89f7b5ef362c734"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE12",
+   "arm": "C",
+   "url": "https://www.bhaskarenglish.in/business/news/lpg-cylinder-ekyc-deadline-subsidy-loss-new-rules-2026-138741429.html",
+   "cutoff": "2026-08-31",
+   "question": "LPG cylinder price hike Delhi September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "4f42dc00e61a",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-f910ad09-a4e4-4d02-9006-84e78dc1df68",
+    "response_sha256": "3e2576d226e72efff1cd53bc7d289ebfef58f012c21132ce8869ff8bf6e46159"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE12",
+   "arm": "A",
+   "url": "https://avi-go.com/news/articles/7d35c840ccd106cb0e13f218255bd246",
+   "cutoff": "2026-08-31",
+   "question": "LPG cylinder price hike Delhi September 2026",
+   "status": "checked",
+   "flagged": true,
+   "sentence": "India's oil marketing companies raised the price of commercial liquefied petroleum gas by ₹62.50 to ₹2,810 per 19-kg cylinder, effective October 1, 2026.",
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "yes",
+    "sentence": "India's oil marketing companies raised the price of commercial liquefied petroleum gas by ₹62.50 to ₹2,810 per 19-kg cylinder, effective October 1, 2026."
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "c6e2e65ddfb8",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-7dff2c55-00ae-40c8-b634-e88ff357caea",
+    "response_sha256": "c7104de11ba5a3a681fc0ea01586d2fd9281906c99048fa10273e10c7ba929eb"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE04",
+   "arm": "C",
+   "url": "https://www.deccanherald.com/india/karnataka/bengaluru/pay-rs-1-5-more-for-bengaluru-metro-rides-from-february-9-3886552",
+   "cutoff": "2026-02-08",
+   "question": "metro fare hike Karnataka, Delhi February 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "d39d3cb6bbfb",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-0172680d-132f-4fe5-85ee-c22b6a683609",
+    "response_sha256": "015a917916c15f1f8d62171d0f02bbc6ff358ca66e3445d5c95c65b0ac70b88a"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE01",
+   "arm": "A",
+   "url": "https://timesofindia.indiatimes.com/business/india-business/timeline-of-petrol-diesel-price-hike-how-rates-have-risen-by-rs-7-5-litre-in-just-11-days-which-cities-have-highest-retail-rates/articleshow/131303369.cms",
+   "cutoff": "2025-12-31",
+   "question": "petrol diesel price hike India January 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "537af97f5b9a",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-f9a7a6f0-80d7-4457-8e7b-f28c7cc94127",
+    "response_sha256": "276ee36aab348d116ca5035b75c7de778ba21a7b89c7978e3f6e5fce6684fa83"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M9",
+   "arm": "C",
+   "url": "https://www.newindianexpress.com/states/tamil-nadu/2026/Jul/09/aavin-to-cut-down-sugar-content-to-10-plain-lassi-to-turn-healthier-in-tn",
+   "cutoff": "2026-07-29",
+   "question": "milk price hike Tamil Nadu July 2026",
+   "status": "checked",
+   "flagged": true,
+   "sentence": "21 Sep 2026\n\n###### CM Vijay announces another Rs. 3/litre hike in Aavin milk procurement price; total hike reaches Rs. 6",
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "yes",
+    "sentence": "21 Sep 2026\n\n###### CM Vijay announces another Rs. 3/litre hike in Aavin milk procurement price; total hike reaches Rs. 6"
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "79ef98e014ee",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-dbd1e3c9-ba7f-4533-9853-6051a523195f",
+    "response_sha256": "845de2a85e33e33fefc5ed19ee07367889c7a3046c68aa46b2f5470b967cb93c"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M9",
+   "arm": "A",
+   "url": "https://m.thewire.in/article/agriculture/rice-milk-sugar-coriander-sunflower-oil-all-these-prices-hit-new-highs-in-four-southern-states",
+   "cutoff": "2026-07-29",
+   "question": "milk price hike Tamil Nadu July 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "2d6c7dd43f67",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-773cc61a-e2d4-4938-b6d8-19c86b7ab4bf",
+    "response_sha256": "8816a7e067f06aaf881b2b637bcd6ac55699068c11a6bab4b60a42708bb02b1b"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E5",
+   "arm": "C",
+   "url": "https://www.ceew.in/publications/how-big-is-india-residential-rooftop-solar-maintenance-market",
+   "cutoff": "2026-06-29",
+   "question": "electricity tariff hike Uttar Pradesh June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "3c037af722b3",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-9c9b9837-4537-44ae-8ea4-f93b59d6b5f6",
+    "response_sha256": "1fe2b5ead4c68e504279100522acf7c22ddd2067a951b402a1b9f0d4e48b5f1c"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E5",
+   "arm": "A",
+   "url": "https://mercomindia.com/tamil-nadu-hikes-fy-2026-electricity-tariffs-by-3-16",
+   "cutoff": "2026-06-29",
+   "question": "electricity tariff hike Uttar Pradesh June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "2badff6f2654",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-fc072da7-2b49-464b-861b-c9227c79d2e6",
+    "response_sha256": "df6a0a053fe33baf8695a06a70f6a42f2b84c6e3f298c8bfb0b863bd723ed904"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M2",
+   "arm": "C",
+   "url": "https://www.thehindu.com/sci-tech/agriculture/lack-of-funds-wont-hamper-growth-of-agriculture-sector-says-rajnath-singh/article70851063.ece",
+   "cutoff": "2026-04-29",
+   "question": "milk price hike Madhya Pradesh April 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "5de50bd8c679",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-3e0dc121-4f98-4680-85c0-d9888f63e59c",
+    "response_sha256": "7dd786b33b51b82f781ab2ecee9a2cc5b96fcafaa2de94efe788ec7e3dddf251"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE05",
+   "arm": "A",
+   "url": "https://www.goodreturns.in/news/gas-cylinder-prices-change-from-may-1-biggest-ever-hike-19kg-lpg-cylinder-prices-by-rs-993-to-1-147-1505673.html",
+   "cutoff": "2026-03-19",
+   "question": "LPG cylinder price hike India March 2026",
+   "status": "checked",
+   "flagged": true,
+   "sentence": "In Delhi, 19Kg LPG prices have surged by Rs 1,331 from March 1 to May 1, 2026.",
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "yes",
+    "sentence": "In Delhi, 19Kg LPG prices have surged by Rs 1,331 from March 1 to May 1, 2026."
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "5f6e98a9993c",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-917effaf-9fe0-495f-8451-9ff91f5729ca",
+    "response_sha256": "be321915080ad2b6e6c3fed8f033a38ee038b0d80ee8cdf54e632b5fa147da7f"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE05",
+   "arm": "C",
+   "url": "https://m.economictimes.com/news/new-updates/14-kg-lpg-cylinder-price-delhi-mumbai-bengaluru-today-check-city-wise-prices-and-hike-update/articleshow/129370918.cms",
+   "cutoff": "2026-03-19",
+   "question": "LPG cylinder price hike India March 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "10016a2f99d9",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-893fe3f9-9216-4e58-89c4-6ad3158b163c",
+    "response_sha256": "b7ee409a9e0904db3dc6765a8d3f18b2e69af6a0d0641257ad15a7551b6fece9"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M2",
+   "arm": "A",
+   "url": "https://www.careratings.com/upload/CompanyFiles/PR/202610141035_Sabarkantha_District_CoOperative_Milk_Producers_Union_Limited.pdf",
+   "cutoff": "2026-04-29",
+   "question": "milk price hike Madhya Pradesh April 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "5dd5799addd8",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-4a0965a8-98c2-4edb-96e3-a793cba74169",
+    "response_sha256": "621f0db7aef9f654ad3de73ad8b6e65fefccaf53cfb390b86602759a5ea52def"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M2",
+   "arm": "C",
+   "url": "https://www.global-agriculture.com/mechanization-technology/tractor-price-hikes-to-offset-gst-benefit-for-indian-farmers/",
+   "cutoff": "2026-04-29",
+   "question": "milk price hike Madhya Pradesh April 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "96ed4f170957",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-05d5d399-6e93-418a-b9a8-793ea25d0c72",
+    "response_sha256": "eb9e61d97b4fa77741906c6df39cd47cdf2c1e7c0adedd5f734cb2e47a249db8"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE01",
+   "arm": "A",
+   "url": "https://www.thehindu.com/news/national/petrol-diesel-price-hike-fuel-rise-may-19-2026/article70996398.ece",
+   "cutoff": "2025-12-31",
+   "question": "petrol diesel price hike India January 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "94add26e0b2b",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-abf06dd4-84cc-435d-854a-8384a9b01faf",
+    "response_sha256": "b1c8182a98ab3b4ceda8cff8413e1e7e62919d53e743c8f93dadc980d6c0804b"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E8",
+   "arm": "C",
+   "url": "https://thekashmirhorizon.com/2026/09/27/fertilizer-wholesalers-meet-2026-held-at-jammu-director-agriculture-inaugurates-the-event/",
+   "cutoff": "2026-09-29",
+   "question": "electricity tariff hike Jammu and Kashmir September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "7160da7281b4",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-f8741da7-78b5-4e07-a818-9e1f96fb5ed3",
+    "response_sha256": "7260e1689c5c484fc0871aadcd5c3443d3cd91ff63ce99c2b4651100b25bac59"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M2",
+   "arm": "A",
+   "url": "https://dhanashreecropsolutions.com/en/news/chilli-acreage-set-to-rebound-during-2026-27-season-on-higher-prices-low-carry-forward-stocks",
+   "cutoff": "2026-04-29",
+   "question": "milk price hike Madhya Pradesh April 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "f1e0cb697f16",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-f09d09cb-9042-41b0-8eb7-0877a8329e6b",
+    "response_sha256": "1b449830528ba7509d359fbecdffd01a918ec0cd10866eb05a5ae2648e64ab3f"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE09",
+   "arm": "C",
+   "url": "https://nypost.com/2026/06/23/us-news/some-metro-north-riders-will-get-slapped-with-another-5-rate-hike-just-as-station-closures-hit/",
+   "cutoff": "2026-07-16",
+   "question": "bus fare hike Maharashtra July 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "6645f5675cad",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-6096fea1-cae5-406f-8be5-74fc41f711be",
+    "response_sha256": "2be0a0596f8fb4b2a3498b2ecbaef0fe2c75ce5d81ca8b486ac9dc5bd0cae939"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E8",
+   "arm": "A",
+   "url": "https://government.economictimes.indiatimes.com/news/economy/jk-power-tariff-hike-expected-to-raise-251-crore-government-tells-assembly/134411073",
+   "cutoff": "2026-09-29",
+   "question": "electricity tariff hike Jammu and Kashmir September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "bc9c0ea85cb9",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-4a310d77-ac79-4081-88d3-be65572ca13f",
+    "response_sha256": "66b34f0ad101a8d56aad7414503cf093b9975e4eae46d6cf783eaa12cf54806d"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE02",
+   "arm": "C",
+   "url": "https://www.moneycontrol.com/news/business/personal-finance/new-year-new-rules-key-banking-salary-and-tax-changes-kicking-in-from-january-1-2026-13746779.html",
+   "cutoff": "2025-12-31",
+   "question": "LPG cylinder price hike Delhi January 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "8bfe0d721020",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-50a76870-891e-41d2-a4e5-df778553be5f",
+    "response_sha256": "84ccbd322ed2a0f1a7077eb111c9aa6d0ec12b26d62e5b32bb056a1a86d3aaaa"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE09",
+   "arm": "A",
+   "url": "https://www.thestatesman.com/india/msrtc-cancels-proposed-15-bus-fare-hike-ahead-of-diwali-1503651748.html",
+   "cutoff": "2026-07-16",
+   "question": "bus fare hike Maharashtra July 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "4219d0f6ea4d",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-9f34c079-203a-4219-b817-b2b2cd00dbc1",
+    "response_sha256": "2082b49f0e7da50a566ec15b8439ba3dd9d3dcc97c2fb767b52143300a324571"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M12",
+   "arm": "C",
+   "url": "https://news24online.com/india/milk-gets-costlier-mumbai-milk-prices-rise-by-rs-9-per-litre-from-september-1-check-latest-rates-in-delhi-noida-tamil-nadu-kolkata-bengaluru-other-cities/914204",
+   "cutoff": "2026-09-29",
+   "question": "milk price hike Tamil Nadu September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "61ddcfc57f62",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-bc9bc799-2b17-414f-a413-362aefd51470",
+    "response_sha256": "2cd6907e1fefda4c161b36fab51358670d7f38abf62d97bc96e06827806e3dd9"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-T2",
+   "arm": "A",
+   "url": "https://www.facebook.com/thestatesman1875/posts/the-maharashtra-state-road-transport-corporation-msrtc-on-thursday-scrapped-its-/1568399671993453",
+   "cutoff": "2026-04-14",
+   "question": "bus fare hike Maharashtra April 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "c03520b171c1",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-a1a9addf-1afb-4dab-8171-f6d60831f64b",
+    "response_sha256": "ac6dd65cb6ef1ad437dc468b4a8e0f74d09c09d556bf606f537387441a6e2af0"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-F2",
+   "arm": "C",
+   "url": "https://www.bloomberg.com/news/articles/2026-05-13/india-s-rbi-governor-sees-fuel-price-hike-if-oil-stays-high",
+   "cutoff": "2026-05-18",
+   "question": "petrol diesel price hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "09b323babe1d",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-af91166a-1390-450b-99d6-b5ce43383b63",
+    "response_sha256": "5ad386ee3d068f40b9466c0936e1d561f2503c7c33788d497532a4fcaeb62490"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M11",
+   "arm": "A",
+   "url": "https://www.newindianexpress.com/states/karnataka/2026/Sep/27/milk-price-hike-after-cabinet-discussion-says-cm-shivakumar",
+   "cutoff": "2026-09-29",
+   "question": "milk price hike Tamil Nadu September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "859c7da89a9d",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-40d6b671-03ab-4972-a041-bb5a426b6275",
+    "response_sha256": "5aacef1b5961300cfc5125977b1b84ef0db624bb2b89df3c0ad7ad221b8fe8d6"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E8",
+   "arm": "C",
+   "url": "https://decrypt.co/378306/wall-street-fed-rate-hike-bitcoin-bonds-trump",
+   "cutoff": "2026-09-29",
+   "question": "electricity tariff hike Jammu and Kashmir September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "9fd25f3d5d86",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-ecc1512e-289a-445c-87fe-05945765cdf2",
+    "response_sha256": "8d6c4dc1842802718a8188c2b00795f5cc7ef82fc4441b47f0ea61390c4447ff"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-F1",
+   "arm": "A",
+   "url": "https://www.hindustantimes.com/business/petrol-prices-rise-fuel-diesel-oil-saudi-arabia-houthis-yemen-strait-of-hormuz-us-iran-war-bab-el-mandab-strait-101789954220919.html",
+   "cutoff": "2026-05-14",
+   "question": "petrol diesel price hike India May 2026",
+   "status": "checked",
+   "flagged": true,
+   "sentence": "State-run OMCs raised petrol and diesel rates by ₹7.35 per litre and ₹7.53 respectively in May 2026 after their daily losses mounted to ₹1,000 crore.",
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "yes",
+    "sentence": "State-run OMCs raised petrol and diesel rates by ₹7.35 per litre and ₹7.53 respectively in May 2026 after their daily losses mounted to ₹1,000 crore."
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "c7e82ce317c3",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-1f266549-5d5c-4067-b0c6-f7ec6704e44a",
+    "response_sha256": "fcc2bed9568935b4572b83b62050b5dc458d302c0baec4974462acddce4be6d1"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M2",
+   "arm": "C",
+   "url": "https://english.punjabkesari.com/india/rajnath-singh-cm-mohan-yadav-to-inaugurate-national-agricultural-fair-in-raisen-today/amp/",
+   "cutoff": "2026-04-29",
+   "question": "milk price hike Madhya Pradesh April 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "566d61946c18",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-779e61b1-ba84-4ab0-af4c-1e32070dd290",
+    "response_sha256": "17df1a0d5c368e7f3b894161ff7e35456526dc75491e432f8fd3775f56515336"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E7",
+   "arm": "A",
+   "url": "https://itif.org/publications/2026/10/13/2026-us-india-subnational-innovation-competitiveness-index",
+   "cutoff": "2026-07-29",
+   "question": "electricity tariff hike Chhattisgarh July 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "465676e74083",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-6f7c80cc-3617-4f0e-9363-c34b2bf9f2c5",
+    "response_sha256": "32e0d5cfb973badaa5d5e3e637cb796583a6176de119a07bc57fe71dc7591805"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M6",
+   "arm": "C",
+   "url": "https://www.reuters.com/world/india/india-announces-second-fuel-price-hike-week-local-media-reports-2026-05-19/",
+   "cutoff": "2026-05-29",
+   "question": "milk price hike Bihar, Jharkhand May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "9fd9f8997b7d",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-77f988fd-97e9-450f-9006-fa3452035df1",
+    "response_sha256": "67bcf9579aea16d44be7f07d90b6de525838bc6bf72c7ecb7427a978387c292d"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M12",
+   "arm": "A",
+   "url": "https://www.newindianexpress.com/states/karnataka/2026/Sep/27/milk-price-hike-after-cabinet-discussion-says-cm-shivakumar",
+   "cutoff": "2026-09-29",
+   "question": "milk price hike Tamil Nadu September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "34d291479844",
+    "cached": true,
+    "nebius_response_id": null,
+    "response_sha256": "5aacef1b5961300cfc5125977b1b84ef0db624bb2b89df3c0ad7ad221b8fe8d6"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-M10",
+   "arm": "C",
+   "url": "https://m.economictimes.com/news/india/milk-prices-to-rise-by-rs-2/litre-in-maharashtra-from-august-11/articleshow/133061816.cms",
+   "cutoff": "2026-08-10",
+   "question": "milk price hike Maharashtra August 2026",
+   "status": "checked",
+   "flagged": true,
+   "sentence": "Milk prices in Maharashtra will rise by two rupees per litre starting Tuesday. This price increase affects both cow and buffalo milk across the state.",
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "yes",
+    "sentence": "Milk prices in Maharashtra will rise by two rupees per litre starting Tuesday. This price increase affects both cow and buffalo milk across the state."
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "5270f5320181",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-425e0bc1-a579-44b8-9f38-066227ee5738",
+    "response_sha256": "52bcfc2cee079c36dd024fd6571b2b42c7a827703ae1ab35239b6e5a8dd5f416"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M6",
+   "arm": "A",
+   "url": "https://www.facebook.com/themeghalayanexpress/posts/meghalaya-recorded-a-consumer-inflation-rate-of-359-in-september-2026-lower-than/122211746078462402",
+   "cutoff": "2026-05-29",
+   "question": "milk price hike Bihar, Jharkhand May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "f3fb2165c011",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-1c639733-33ac-4f1c-8ab4-79a59e659f17",
+    "response_sha256": "bc9be960d0d53a35e379d9d9428885571608dc314ad75316a6601f035c04e3ad"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E6",
+   "arm": "C",
+   "url": "https://www.livemint.com/money/personal-finance/electricity-bills-to-go-up-in-delhi-brpl-bypl-and-tpddl-fppa-derc-11781346118174.html",
+   "cutoff": "2026-06-29",
+   "question": "electricity tariff hike Delhi June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "978d0750e25b",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-cd78ee6c-3a8b-4414-b4fd-9263fe94dff4",
+    "response_sha256": "4be5c57bf7ccc14626faaba18ce06de34bc229b494b9997048241db3c208a1fb"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-L1",
+   "arm": "A",
+   "url": "https://www.ndtv.com/video/commercial-lpg-cylinder-prices-hiked-from-october-1-domestic-rates-unchanged-1167188",
+   "cutoff": "2026-03-06",
+   "question": "LPG cylinder price hike India March 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "7ef0c30a10bd",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-b5e7e364-f9e7-45ec-bb33-674494e5ac54",
+    "response_sha256": "e954c78f1d53b98bf21480cfc0f33913cc034e60b5795bab6ee55dd163ba9224"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M12",
+   "arm": "C",
+   "url": "https://www.newindianexpress.com/states/karnataka/2026/Sep/23/karnataka-milk-unions-meet-cm-seek-price-hike-of-rs-8-10-per-litre",
+   "cutoff": "2026-09-29",
+   "question": "milk price hike Tamil Nadu September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "b7d311be58ac",
+    "cached": true,
+    "nebius_response_id": null,
+    "response_sha256": "591319fbe301b06b76ef106d2697f442f6664037ba97312298ea35c7fc3ce01f"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E6",
+   "arm": "A",
+   "url": "https://www.ndtv.com/delhi-news/explained-why-some-in-delhi-may-have-to-pay-higher-electricity-bills-from-june-11631259",
+   "cutoff": "2026-06-29",
+   "question": "electricity tariff hike Delhi June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "2c12656110be",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-a7b5cfc9-f1b1-410e-84f9-71d7f4e8e96a",
+    "response_sha256": "c5d589e996f581b04f358e3ce23e4cd8220b902141d54de00fc1e8735cc25180"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E5",
+   "arm": "C",
+   "url": "https://thebikejunction.com/news/ola-electric-recorded-sales-15139-units-may-2026",
+   "cutoff": "2026-06-29",
+   "question": "electricity tariff hike Uttar Pradesh June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "e89d7b087678",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-1a888aca-d8b9-4612-ac93-8c288a47f566",
+    "response_sha256": "527043a4ddb1615f1de681ad010761050ff9e531ae333756f629b80db5f18de5"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M12",
+   "arm": "A",
+   "url": "https://www.dtnext.in/news/tamilnadu/private-dairies-to-hike-milk-curd-prices-from-saturday-aavin-faces-widening-price-gap-in-tamil-nadu",
+   "cutoff": "2026-09-29",
+   "question": "milk price hike Tamil Nadu September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "c61ef6998753",
+    "cached": true,
+    "nebius_response_id": null,
+    "response_sha256": "34cc17be14ca447a3458a992e0e0772d48d72049fc04d481715fc07de97f6f51"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M4",
+   "arm": "C",
+   "url": "https://www.bhaskarenglish.in/local/mp/bhopal/news/sanchi-milk-price-hike-mp-may-15-137933205.html",
+   "cutoff": "2026-05-29",
+   "question": "milk price hike Madhya Pradesh May 2026",
+   "status": "checked",
+   "flagged": true,
+   "sentence": "Sanchi has raised milk prices by ₹2 per litre,",
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "yes",
+    "sentence": "Sanchi has raised milk prices by ₹2 per litre,"
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "bb718e354a8b",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-41c096e6-47ad-42e0-99ce-daac0413344d",
+    "response_sha256": "37c431906808603e7c9f93ec2849eb8ed57444b4c7ebf59d0a7c13f6da767ecd"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E5",
+   "arm": "A",
+   "url": "https://itif.org/publications/2026/10/13/2026-us-india-subnational-innovation-competitiveness-index",
+   "cutoff": "2026-06-29",
+   "question": "electricity tariff hike Uttar Pradesh June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "b2425b7f97e6",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-9ff32421-e6e1-455e-a3f3-4d401ffce494",
+    "response_sha256": "d0f3bc46e27178b47b7b5b6d156073f1d65973d4f7508ba89dca56bc724d30f1"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE12",
+   "arm": "C",
+   "url": "https://www.sanskritiias.com/current-affairs/commercial-lpg-price-hike-and-its-impact",
+   "cutoff": "2026-08-31",
+   "question": "LPG cylinder price hike Delhi September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "edddb175b0ba",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-0634e5f3-4e41-4ff8-a5a6-6f835641ef70",
+    "response_sha256": "7dcb5eb78485c2c426b72f1098028410e385eac69fc86da8157e31da3442c592"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M4",
+   "arm": "A",
+   "url": "https://www.thehindu.com/news/national/madhya-pradesh/after-full-implementation-of-bns-cases-from-fir-to-supreme-court-will-be-disposed-of-in-3-years-shah/article71540332.ece",
+   "cutoff": "2026-05-29",
+   "question": "milk price hike Madhya Pradesh May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "b5396834459c",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-63ca212a-4db2-4656-b148-8d72be6e081d",
+    "response_sha256": "1106e64fe64c012f24dcc98be7077655e079620f5b0cfce4631513440955391a"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M3",
+   "arm": "C",
+   "url": "https://www.deccanherald.com/india/amul-mother-dairy-hikes-milk-prices-by-rs-2litre-across-india-effective-may-14-4001607",
+   "cutoff": "2026-05-29",
+   "question": "milk price hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "bddfef4a6151",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-e026ae49-d253-4a1e-81b6-b0d8af41489d",
+    "response_sha256": "9990b4a31d8b5fff040073f4ce986d85170ca2967e289dfb6bc33a025c308db7"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE12",
+   "arm": "A",
+   "url": "https://www.thehindu.com/business/Industry/atf-prices-increased-by-around-16-from-121-per-litre-to-137-per-litre/article71531663.ece",
+   "cutoff": "2026-08-31",
+   "question": "LPG cylinder price hike Delhi September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "7debe4e46cd3",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-b235e57a-99f2-4309-bb90-9c3cfba090c5",
+    "response_sha256": "7e46e929ae37f83ec98cb4a98b7c7fb8f8cb78b71f2600581d22c14ac9333e36"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "L2",
+   "arm": "C",
+   "url": "https://www.reuters.com/world/asia-pacific/students-hold-heading-bankrupt-indonesia-protests-against-prabowos-policies-2026-06-12/",
+   "cutoff": "2026-06-29",
+   "question": "LPG cylinder price hike India June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "5d2526d651a3",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-889dd65c-824d-4cf7-a766-ac15f6ed8b5a",
+    "response_sha256": "556bdcce8ecb79c0ddff74964796d3789150756f040057737271653e12b3d65a"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M2",
+   "arm": "A",
+   "url": "https://www.instagram.com/reel/DeCZOtwRCmu",
+   "cutoff": "2026-04-29",
+   "question": "milk price hike Madhya Pradesh April 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "e3cdf3a7510a",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-608ac12a-1028-4b09-baa8-c2b862f7483a",
+    "response_sha256": "8870ed1afe1994c86787f2f87070c7a8892e48f9df68721d5141c64d036a1aab"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE13",
+   "arm": "C",
+   "url": "https://m.economictimes.com/news/india/onion-prices-rise-nearly-50-govt-to-run-kanda-express-from-today/articleshow/133450544.cms",
+   "cutoff": "2026-08-31",
+   "question": "rail fare hike Maharashtra September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "1cee68348ff5",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-a93eb21d-c6a4-4d39-90f9-669a3fd1c7bd",
+    "response_sha256": "10ae3abd2fffcf3f3d7116932c432eb9ca1a0bc9d29b11e255cb1ec51781dc64"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "L2",
+   "arm": "A",
+   "url": "https://www.indiatoday.in/business/story/commercial-lpg-cylinder-price-hiked-in-delhi-domestic-lpg-rates-unchanged-2920031-2026-06-01",
+   "cutoff": "2026-06-29",
+   "question": "LPG cylinder price hike India June 2026",
+   "status": "checked",
+   "flagged": true,
+   "sentence": "The price of 19 kg commercial LPG cylinders has been increased by Rs 42 in Delhi, taking the retail price to Rs 3,113.5 per cylinder with effect from June 1, according to sources.",
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "yes",
+    "sentence": "The price of 19 kg commercial LPG cylinders has been increased by Rs 42 in Delhi, taking the retail price to Rs 3,113.5 per cylinder with effect from June 1, according to sources."
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "b7f7636b195c",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-f2797282-5229-4198-a85b-1ff3bf97fa67",
+    "response_sha256": "f9887b49c7a766666cc17929b5b2303f38f79bd99dd2d764b66a37f807a585f8"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M8",
+   "arm": "C",
+   "url": "https://www.cnbctv18.com/market/commodities/amul-not-looking-at-another-milk-price-hike-says-june-sales-strong-on-ice-cream-beverages-19937301.htm",
+   "cutoff": "2026-07-29",
+   "question": "milk price hike Tamil Nadu July 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "1dc4720bd9d0",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-f120a107-a01d-4cfa-818f-d428af4fa08e",
+    "response_sha256": "ba805d471d2142b128b52b555ce0bd2d3fd60da5295a7935f5c6520655a3ebde"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE13",
+   "arm": "A",
+   "url": "https://www.jagranjosh.com/general-knowledge/indian-railways-launches-5-new-wildlife-safari-packages-for-winter-holidays-1820013234-1",
+   "cutoff": "2026-08-31",
+   "question": "rail fare hike Maharashtra September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "531336e81c0a",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-42be8b34-be19-41e6-bbcf-90c7af028847",
+    "response_sha256": "5cd5aeb79ba2c75d856d10ba5078f27eb75fdcb87fcc63462b302190cea97976"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE02",
+   "arm": "C",
+   "url": "https://www.livemint.com/news/india/delhi-ncr-gas-prices-igl-cuts-piped-cooking-gas-prices-effective-january-2026-details-here-11767186654356.html",
+   "cutoff": "2025-12-31",
+   "question": "LPG cylinder price hike Delhi January 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "5cafdf324f96",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-99aeb10b-26d5-4b99-95ac-f2239090f936",
+    "response_sha256": "e5bb029d912e389d7d88c50927a93c2be5c77e120f388d2b9d946e361da88200"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M7",
+   "arm": "A",
+   "url": "https://timesofindia.indiatimes.com/city/pune/milk-procurement-price-goes-up-retail-rate-likely-to-increase/articleshow/134644764.cms",
+   "cutoff": "2026-06-29",
+   "question": "milk price hike Kerala June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "1fb6939eef35",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-b1b761c4-b90d-401b-a61a-75844581c0bd",
+    "response_sha256": "e2dab75aee2c3d8e757e24943631047c70dfd847142a3a4308749e1b82724fa8"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-T1",
+   "arm": "C",
+   "url": "https://timesofindia.indiatimes.com/city/bengaluru/bengaluru-metro-fare-hike-showdown-bjp-mp-tejasvi-surya-detained/articleshow/128096758.cms",
+   "cutoff": "2026-02-20",
+   "question": "rail fare hike Tamil Nadu February 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "b1708ee131da",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-2aa1edda-6109-411e-8eea-691e1f42b1ef",
+    "response_sha256": "64c1a6829f598a7037c7a23db87ada85a22ea86f0f04c51b3fad0f8398cab3a5"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE11",
+   "arm": "A",
+   "url": "https://sanatanprabhat.org/english/186313.html",
+   "cutoff": "2026-08-04",
+   "question": "bus fare hike Madhya Pradesh August 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "30a2ae2ea84d",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-ff57bafc-a7d4-4b77-936a-499ff156588d",
+    "response_sha256": "dcdd9e3363dd939b39c725341053d985c90e902daf4a294145afca7321ad8976"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-F4",
+   "arm": "C",
+   "url": "https://timesofindia.indiatimes.com/business/india-business/petrol-diesel-price-hikes-how-indias-fuel-price-rise-compares-to-us-china-pakistan-uae-other-economies/articleshow/131195579.cms",
+   "cutoff": "2026-05-24",
+   "question": "petrol diesel price hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "885200622de2",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-8e08e844-0677-429f-ae8a-d1c694f77c7a",
+    "response_sha256": "047ba7ee36c9803d539a6879dd1e90ff715af0b43499929f3cb94715161d70a5"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE08",
+   "arm": "A",
+   "url": "https://www.goodreturns.in/personal-finance/lpg-cylinder-prices-hiked-from-june-7-check-lpg-prices-city-wise-how-to-book-indane-bharatgas-hp-gas-1513679.html",
+   "cutoff": "2026-06-30",
+   "question": "LPG cylinder price hike Delhi July 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "d78808c9001a",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-5d6ee17a-afee-42fa-8d43-d3c32ede7aa0",
+    "response_sha256": "39ad7f9e1fd68ba528072ebf38555086c08b45aab1666ae8989b1b71a288dc0b"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE11",
+   "arm": "C",
+   "url": "https://www.bbc.co.uk/news/articles/cz64l78n5vpo",
+   "cutoff": "2026-08-04",
+   "question": "bus fare hike Madhya Pradesh August 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "e091f75406e1",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-e6e3055d-2648-4214-b722-fd4f64646a83",
+    "response_sha256": "92fb07f97484cf0433ff49c6c7c249d4e30238a5d8682d066c18580b90da2657"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-F2",
+   "arm": "A",
+   "url": "https://asianews.network/from-us-to-pakistan-fuel-prices-surged-globally-while-india-held-the-line",
+   "cutoff": "2026-05-18",
+   "question": "petrol diesel price hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "5e5fbc4131bf",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-9f611ae7-6d54-434b-928b-29c3edb8eb7f",
+    "response_sha256": "63dbff010b3c50b956785ebd5aac17f85e2916e97e40f1b392f837d9542d12df"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E7",
+   "arm": "C",
+   "url": "https://countercurrents.org/2026/07/airtel-jios-proposed-tariff-increases-are-unjust",
+   "cutoff": "2026-07-29",
+   "question": "electricity tariff hike Chhattisgarh July 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "e6068057d6b0",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-944ab733-20f4-4763-8860-3c624225c2a5",
+    "response_sha256": "dd653751246684edd213f33cf81a7b71aa5383df3bbd220958e37a5e435f2b2c"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE06",
+   "arm": "A",
+   "url": "https://www.bts.gov/newsroom/transportation-consumer-price-index-may-2026",
+   "cutoff": "2026-05-03",
+   "question": "rail fare hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "2d8fb4b7740a",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-5399aeb3-54a5-4ff8-8e61-52ff01298fc7",
+    "response_sha256": "27aad5decaba7b56e7f3fb50cef2c3022823d4a3eeec053ebdb233d690ee6e9d"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E6",
+   "arm": "C",
+   "url": "https://www.etvbharat.com/en/state/delhi-power-bills-set-to-rise-as-derc-approves-up-to-18-percent-ppac-hike-enn26061302677",
+   "cutoff": "2026-06-29",
+   "question": "electricity tariff hike Delhi June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "1a86f8a0544c",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-fcc476ef-2d50-4c4d-8cfa-18965eebfc5c",
+    "response_sha256": "afd83e901465bdfaa4ad51d877e84b43c6c8ed447419d581db5e4a1524f522cc"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E7",
+   "arm": "A",
+   "url": "https://assets.bbhub.io/professional/sites/44/BNEF-India-Transition-Factbook-2026.pdf",
+   "cutoff": "2026-07-29",
+   "question": "electricity tariff hike Chhattisgarh July 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "b9b88ff203cf",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-306a92d7-03de-4a67-b6b8-0a4685c22981",
+    "response_sha256": "1b16f8f9424177efafc343a003e02b972f721441fa644643e27e3440cae29ad6"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE11",
+   "arm": "C",
+   "url": "https://www.bbc.com/news/articles/cz64l78n5vpo",
+   "cutoff": "2026-08-04",
+   "question": "bus fare hike Madhya Pradesh August 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "1053f5cc8121",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-c8159833-a403-4da1-9d4c-00424bf4522d",
+    "response_sha256": "e9f0fb28e171ab405d52156d80fcb6632607d7f6d42a63a252319b3402f12782"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E6",
+   "arm": "A",
+   "url": "https://www.livemint.com/money/personal-finance/electricity-bills-to-go-up-in-delhi-brpl-bypl-and-tpddl-fppa-derc-11781346118174.html",
+   "cutoff": "2026-06-29",
+   "question": "electricity tariff hike Delhi June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "74b5ed9e3dbe",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-0afaf175-b537-479b-858c-1868c221920a",
+    "response_sha256": "1f43e0bd824f04bc16e69fb993d12bb98570cd8566d063888b7f9786f94185d1"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M4",
+   "arm": "C",
+   "url": "https://timesofindia.indiatimes.com/city/mumbai/amul-mother-dairy-raise-milk-price-by-rs-2-per-litre/articleshow/131070031.cms",
+   "cutoff": "2026-05-29",
+   "question": "milk price hike Madhya Pradesh May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "afac060d4201",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-b9133f60-b6e2-45d8-8140-b2e5c64fad77",
+    "response_sha256": "4499cee5db21a5bd30f753788ba2a32c33d423768d4d4d421f4ad6992165317e"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE11",
+   "arm": "A",
+   "url": "https://www.facebook.com/ngakuimiws/videos/for-how-many-days-its-going-to-be-lastsenapati-to-imphal-bus-service-begin-today/2597341607396949",
+   "cutoff": "2026-08-04",
+   "question": "bus fare hike Madhya Pradesh August 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "1e6dba58e78c",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-cc927c17-1eb3-4b6c-b5f1-3f9a4ecf1b48",
+    "response_sha256": "959244bc1e21023a8c1e6fd74fa72deb964e58f19bc1015024b052485d819fcd"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE10",
+   "arm": "C",
+   "url": "https://www.dtnext.in/news/tamilnadu/milk-shortage-looms-in-tamil-nadu-as-private-dairies-set-to-hike-prices-by-rs-4litre",
+   "cutoff": "2026-07-23",
+   "question": "milk price hike Karnataka July 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "5a3defea4522",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-28cb8d08-b18d-4fc4-a0ba-7cbb774a2e6b",
+    "response_sha256": "160459426a311b42c9192e344eb525961ebbaadce08776574c9b36eaaa246f32"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M4",
+   "arm": "A",
+   "url": "https://frontline.thehindu.com/the-nation/agriculture/india-dairy-sector-solar-power-cold-chain/article71519117.ece",
+   "cutoff": "2026-05-29",
+   "question": "milk price hike Madhya Pradesh May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "61b591f28b50",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-fb0b9af6-fa4f-44d8-b8a8-5a83b4e3c41d",
+    "response_sha256": "3a3183df4f2dbbc3449daa1ac529e2a28f11aa3ee19d16889236e441e354b17a"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M11",
+   "arm": "C",
+   "url": "https://www.india.com/news/india/milk-price-hike-joseph-vijay-tamil-nadu-increase-in-procurement-price-milk-prices-cross-rs-100-in-mumbai-milk-products-dairy-8514275",
+   "cutoff": "2026-09-29",
+   "question": "milk price hike Tamil Nadu September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "f7a8a92a8a36",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-c481236a-a8d5-4f9e-8d73-6c28198ad548",
+    "response_sha256": "50a90ad4ce512c40c284d857e41de06dfbb19e082f33cfb55b0c6c71d06882ee"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE04",
+   "arm": "A",
+   "url": "https://www.deccanherald.com/india/karnataka/bengaluru/pay-rs-1-5-more-for-bengaluru-metro-rides-from-february-9-3886552",
+   "cutoff": "2026-02-08",
+   "question": "metro fare hike Karnataka, Delhi February 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "7835f9b4da4d",
+    "cached": true,
+    "nebius_response_id": null,
+    "response_sha256": "015a917916c15f1f8d62171d0f02bbc6ff358ca66e3445d5c95c65b0ac70b88a"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-F1",
+   "arm": "C",
+   "url": "https://www.statista.com/chart/36017/fuel-price-changes-in-different-countries-since-the-start-of-iran-war",
+   "cutoff": "2026-05-14",
+   "question": "petrol diesel price hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "be33d6c1e230",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-9b5012bd-3ebd-4767-88b9-a4e4bbc4bf83",
+    "response_sha256": "8b640751d0ada5f9d9f11703a6eb81273f59238ff8fe0c5cb5c65c620842f478"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M11",
+   "arm": "A",
+   "url": "https://brindafoods.com/blog/milk-price-hike-october-2026-cattle-feed-cost-india",
+   "cutoff": "2026-09-29",
+   "question": "milk price hike Tamil Nadu September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "329a32ec3c1c",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-df2dd534-e883-4cd4-8906-fe97ac35aace",
+    "response_sha256": "47ce25fa3d1f0ff616c9bf69dbcadb081dc508d1595c86d068d50a5c9687a5a0"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M3",
+   "arm": "C",
+   "url": "https://www.thehindu.com/news/national/amul-hikes-milk-prices-by-2-per-litre-across-india-effective-may-14/article70974685.ece",
+   "cutoff": "2026-05-29",
+   "question": "milk price hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "c50a6a12c3e2",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-f85d15d6-3b66-4231-b6e9-6bc62b80a6dd",
+    "response_sha256": "5011764e7ddfd2477b3e04cf784d4e33335a6c832efe75d17dda642060bb2cad"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-E3",
+   "arm": "A",
+   "url": "https://www.riotimesonline.com/south-africa-eskom-tariff-hearing-nersa-2026",
+   "cutoff": "2026-03-31",
+   "question": "electricity tariff hike Punjab April 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "c7953d724247",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-c324084b-d7d9-4e10-8d24-b542e1534477",
+    "response_sha256": "9daef27e7530e646d0e7e0eb7511f931d8a0e792aee48c8854f8eecb9250bc2d"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M9",
+   "arm": "C",
+   "url": "https://www.cnbctv18.com/market/commodities/amul-not-looking-at-another-milk-price-hike-says-june-sales-strong-on-ice-cream-beverages-19937301.htm",
+   "cutoff": "2026-07-29",
+   "question": "milk price hike Tamil Nadu July 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "288703bdc891",
+    "cached": true,
+    "nebius_response_id": null,
+    "response_sha256": "ba805d471d2142b128b52b555ce0bd2d3fd60da5295a7935f5c6520655a3ebde"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M3",
+   "arm": "A",
+   "url": "https://www.instagram.com/reel/DekmcwYzLq0",
+   "cutoff": "2026-05-29",
+   "question": "milk price hike India May 2026",
+   "status": "checked",
+   "flagged": true,
+   "sentence": "The price of standardized milk will increase from 34 rupees to 35 rupees, while the price of whole milk will go up from 39 rupees to 40 rupees.",
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "yes",
+    "sentence": "The price of standardized milk will increase from 34 rupees to 35 rupees, while the price of whole milk will go up from 39 rupees to 40 rupees."
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "ee16c3afa8b6",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-2bccd65b-6b75-40c9-b7a9-db7203d1fd1e",
+    "response_sha256": "d733ad6c383a95b5f68f5d9b33387b072137a07f1d5bfdef707771796eb653d6"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E7",
+   "arm": "C",
+   "url": "https://www.orfonline.org/research/energy-news-monitor-volume-xxii-issue-48",
+   "cutoff": "2026-07-29",
+   "question": "electricity tariff hike Chhattisgarh July 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "992cf71a0a8d",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-068b7e87-efc3-469e-a1c4-4de227b7bea5",
+    "response_sha256": "ee70ee3c2c11a0a89c7aee56b9923c55a38bed825786271d0561c3f2e6acdd9d"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M8",
+   "arm": "A",
+   "url": "https://www.dtnext.in/news/tamilnadu/private-brands-hike-milk-curd-prices-2nd-in-7-months",
+   "cutoff": "2026-07-29",
+   "question": "milk price hike Tamil Nadu July 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "e05d5019b777",
+    "cached": true,
+    "nebius_response_id": null,
+    "response_sha256": "dc718b6085c16802efe561476d4c7bed74ec8346b22ae35c63074017f0d5ac6b"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE05",
+   "arm": "C",
+   "url": "https://timesofindia.indiatimes.com/india/cooking-gas-price-up-by-rs-60-a-cylinder/articleshow/129237027.cms",
+   "cutoff": "2026-03-19",
+   "question": "LPG cylinder price hike India March 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "ed26046a0005",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-b02c168b-202d-4bdd-b4fb-8ae9596898ff",
+    "response_sha256": "05635cf2394d4e69c367a3989b97e3c878c2fa33c24c47cd06fab49561172dc5"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "E7",
+   "arm": "A",
+   "url": "https://issuu.com/solarquarter/docs/rei_-_technology_showcase_special_sep-oct_2026_",
+   "cutoff": "2026-07-29",
+   "question": "electricity tariff hike Chhattisgarh July 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "6f4938722aad",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-b61790f9-baab-433b-ad99-a18447e76462",
+    "response_sha256": "f3038338e72324e2483ef6848b0776b3221afc70735f03abb3371116d566e795"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE07",
+   "arm": "C",
+   "url": "https://timesofindia.indiatimes.com/city/delhi/dispute-over-money-accused-in-delhi-bus-gang-rape-case-tell-cops-what-we-know-so-far/articleshow/131106134.cms",
+   "cutoff": "2026-06-11",
+   "question": "bus fare hike Madhya Pradesh, Delhi, Uttar Pradesh June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "0b8538042594",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-46539739-1326-4c6f-83c8-be9f2087a99f",
+    "response_sha256": "99d003b3c75ce03a8cb33366667608bb2d10c53f1ba0486fbae66537d5a81a8d"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE06",
+   "arm": "A",
+   "url": "https://m.economictimes.com/industry/transportation/railways/indian-railways-offers-discounted-round-trip-parcel-fare-ahead-of-festive-rush/articleshow/135048950.cms",
+   "cutoff": "2026-05-03",
+   "question": "rail fare hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "bd35ac1e415e",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-77765fea-306e-4b51-86c2-e09658b004ba",
+    "response_sha256": "408365da47b718006eaabfb506606153fdc04c4d77ede97584e86318c1d75e32"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-F2",
+   "arm": "C",
+   "url": "https://www.aljazeera.com/economy/2026/5/15/india-hikes-fuel-prices-as-iran-crisis-bites",
+   "cutoff": "2026-05-18",
+   "question": "petrol diesel price hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "3797b29f8f70",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-b77ba914-d4ec-4309-9389-50f5716c07ea",
+    "response_sha256": "001eb3bba7cc20152a5d24275c01c913caa568aea2a6b6a74e31687bdb501393"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-F4",
+   "arm": "A",
+   "url": "https://asianews.network/from-us-to-pakistan-fuel-prices-surged-globally-while-india-held-the-line",
+   "cutoff": "2026-05-24",
+   "question": "petrol diesel price hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "827a5b877e1d",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-acd80f35-e65d-4871-a42a-f0cfe487b2fc",
+    "response_sha256": "337ab12518dfbff7d6e6426813d6ee366c861a4ffd37b67502101e28397b4fc3"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-F1",
+   "arm": "C",
+   "url": "https://m.economictimes.com/industry/energy/oil-gas/petrol-diesel-price-hike-in-india-imf-warning-crude-oil-iran-war-impact-fuel-hike-coming-soon-why-international-monetary-fund-says-it-must/articleshow/130848379.cms",
+   "cutoff": "2026-05-14",
+   "question": "petrol diesel price hike India May 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "51acb59f5fb9",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-cf0593d6-b18d-4266-b051-206b6b6802cb",
+    "response_sha256": "e8251591e545f154a35e312b22cd4235f843aa016397ce12d8eb6eccc9039ad3"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE07",
+   "arm": "A",
+   "url": "https://timesofindia.indiatimes.com/city/pune/pune-bus-operators-report-surge-in-diwali-bookings-as-airfares-soar-trains-go-full/articleshow/135197089.cms",
+   "cutoff": "2026-06-11",
+   "question": "bus fare hike Madhya Pradesh, Delhi, Uttar Pradesh June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "8d29e24b1cbd",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-46a4c0de-8e0c-46d6-8af7-4a6e6f64a196",
+    "response_sha256": "510becea46fd669c3f8656798f89be0483dbb9210fd4db67ecd2687b7d73d4ba"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "M4",
+   "arm": "C",
+   "url": "https://timesofindia.indiatimes.com/city/indore/sanchi-to-hike-milk-prices-by-rs-2/litre-across-mp-from-may-15/articleshow/131076074.cms",
+   "cutoff": "2026-05-29",
+   "question": "milk price hike Madhya Pradesh May 2026",
+   "status": "checked",
+   "flagged": true,
+   "sentence": "Sanchi to raise toned and gold milk prices by Rs 2/litre across Madhya Pradesh from May 15, citing higher procurement, transport costs and summer supply",
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "yes",
+    "sentence": "Sanchi to raise toned and gold milk prices by Rs 2/litre across Madhya Pradesh from May 15, citing higher procurement, transport costs and summer supply"
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "30f10e1be071",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-87917c48-c22e-4db8-9f5d-e98864f8774f",
+    "response_sha256": "db80af0b83d699d9f79b2a551368db0a4c5b23e0c13b0a0f0e16087af76edb20"
+   }
+  },
+  {
+   "source": "pilot",
+   "case": "T3",
+   "arm": "A",
+   "url": "https://m.economictimes.com/news/new-updates/cyclone-arnab-coming-schools-shut-across-odisha-andhra-pradesh-on-high-alert-as-bay-of-bengal-depression-inches-closer-heavy-rain-75-kmph-winds-likely/articleshow/134425730.cms",
+   "cutoff": "2026-06-29",
+   "question": "bus fare hike Odisha June 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "5096e3ab4beb",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-605cca89-45fa-4fcd-9581-f1077db901e6",
+    "response_sha256": "d939b454764f1e280dd4d3b984bc517635e355e28b60742ae8679848588939e9"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "VE13",
+   "arm": "C",
+   "url": "https://m.economictimes.com/news/india/milk-prices-to-rise-by-rs-2/litre-in-maharashtra-from-august-11/articleshow/133061816.cms",
+   "cutoff": "2026-08-31",
+   "question": "rail fare hike Maharashtra September 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "67d3c37a380e",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-0532322d-6d2a-4857-8c60-7005086d4551",
+    "response_sha256": "1fac518d50087335f71de3896758aa3384df173ec8b5a9b65d45c2bac6c77e18"
+   }
+  },
+  {
+   "source": "replication",
+   "case": "RR-E3",
+   "arm": "A",
+   "url": "https://www.bbc.com/news/articles/cwz0zvj4m1myo",
+   "cutoff": "2026-03-31",
+   "question": "electricity tariff hike Punjab April 2026",
+   "status": "checked",
+   "flagged": false,
+   "sentence": null,
+   "dropped_reason": null,
+   "raw_answer": {
+    "answer": "no",
+    "sentence": null
+   },
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "receipt": {
+    "call_id": "d1e21b064978",
+    "cached": false,
+    "nebius_response_id": "chatcmpl-9f152809-c754-4655-8dc8-5b699def56b3",
+    "response_sha256": "200d7de90f6fb6713feedf204ebdd91191b357f8610cb6031c4cd084587fbc65"
+   }
+  }
+ ],
+ "built_utc": "2026-10-29T11:23:30+00:00"
+}
