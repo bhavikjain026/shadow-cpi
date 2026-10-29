@@ -552,6 +552,14 @@ Short answers to the hardest questions: [`docs/judge_faq.md`](docs/judge_faq.md)
 More: [`docs/honest_limits.md`](docs/honest_limits.md), [`docs/frozen_rules.md`](docs/frozen_rules.md),
 [`docs/after_scoring_changes.md`](docs/after_scoring_changes.md).
 
+## Tamper-evident call log
+
+`tools/audit_log.py <date>` turns that day's `results/credit_ledger.jsonl` and flight recorder into `results/audit_log/<date>.jsonl`: one entry per API call (time, service, endpoint, request id, query or URLs, status, credits, response SHA-256), each carrying `prev_hash` and an `entry_hash` over its canonical JSON. The final hash goes in `<date>.head`, and that file is timestamped with [OpenTimestamps](https://opentimestamps.org) (`<date>.head.ots`). `python tools/verify_audit_log.py results/audit_log/<date>.jsonl` recomputes the chain and reports OK or the first broken entry.
+
+**What it proves:** once the head is stamped, the log of our calls has not been altered since: editing, reordering or deleting any entry breaks the chain, and the stamp pins the head to a Bitcoin block time. The `.ots` files are *pending* until `ots upgrade <file>.ots` is run after the calendar commits to a block (hours); run that later and commit the result.
+
+**What it does not prove:** the log is built after the fact each day from our own ledger and recorder, not at call time, so it cannot show those files were honest before the build. It records response hashes, not page text, so it does not prove what any page said. It holds metadata only (no page text, no keys).
+
 ## Run it locally
 
 Python 3.12 or newer (CI runs 3.12 and 3.14; the local suite last ran on 3.14.7).
