@@ -19,12 +19,21 @@ from pathlib import Path
 # the repository root, appended (not prepended) so the installed `mcp` package wins over this folder
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 from timelock import (DATE_FLAG, LEAK, SAFE, Replay, TavilyHTTP, TimeLockError, check_result,  # noqa: E402
-                      extract_as_of, iso_date, timelocked_search, url_date, window)
+                      extract_as_of, iso_date, own_request_ids, report_leaks, timelocked_search, url_date, window)
 
 from urllib.parse import urlparse  # noqa: E402
 
 # what a date_flag or leak result keeps: no text and no full URL (news slugs often state the outcome)
 SHOWN_IF_NOT_SAFE = ("published_date", "url_date", "page_date", "status")
+
+# request_ids this server's own searches made; with the optional ledger file (TIMELOCK_LEDGER, e.g.
+# results/call_receipts.json) they are the only requests report_to_tavily may send feedback about
+OWN_REQUEST_IDS = set()
+
+
+def known_request_ids():
+    path = os.environ.get("TIMELOCK_LEDGER")
+    return OWN_REQUEST_IDS | (own_request_ids(path) if path else set())
 
 
 def structured_errors(tool):
@@ -76,6 +85,8 @@ def run(tavily, query, cutoff, *, include_raw_content=False, **params):
     if include_raw_content:
         kw["include_raw_content"] = True
     results = timelocked_search(tavily, query, cutoff, include_published_date=True, **kw)
+    if results.request_id:
+        OWN_REQUEST_IDS.add(results.request_id)
     shown = [{k: v for k, v in r.items() if k != "raw_content"} if r["status"] == SAFE else
              {"domain": urlparse(r.get("url") or "").netloc, **{k: r.get(k) for k in SHOWN_IF_NOT_SAFE}}
              for r in results]
@@ -115,7 +126,7 @@ def run_as_of(tavily, url, cutoff, *, published_date=None, max_chars=20000, arch
 
 
 @structured_errors
-def check_leaks(results_json: str, cutoff: str) -> dict:
+def check_leaks(results_json: str, cutoff: str, report_to_tavily: bool = False) -> dict:
     """Audit search results for look-ahead against `cutoff` (YYYY-MM-DD). `results_json` is the JSON of a list of
     results or of a whole search response with a "results" list; each result may carry url, published_date and
     page_date. No API call. Returns counts (safe / date_flag / leak), how many results are `undated`, the `leaks`
@@ -124,7 +135,12 @@ def check_leaks(results_json: str, cutoff: str) -> dict:
     the cutoff; it may still have been edited since, which extract_as_of also catches. A cutoff that is not
     YYYY-MM-DD returns {"error": {"code": "invalid_date", ...}}; results_json that is not a JSON list of results (or
     an object with a "results" list) is an error. Nothing is refused otherwise: this tool only labels, it never
-    hides a result or fetches anything."""
+    hides a result or fetches anything.
+
+    report_to_tavily (default false, optional): when true, also sends Tavily feedback (POST /feedback, free, in beta)
+    for each result labelled leak, but only for requests this server made (or listed in the TIMELOCK_LEDGER file);
+    the request_id comes from the response or from each result. The outcome is under "feedback". Needs TAVILY_API_KEY.
+    Leave it false unless the user asks for it: it sends the leaking result's URL and the reason to Tavily."""
     cut = window(cutoff)[1]
     try:
         data = json.loads(results_json)
@@ -147,8 +163,23 @@ def check_leaks(results_json: str, cutoff: str) -> dict:
                           "url_date": url_date(r.get("url")), "page_date": page})
         if r.get("url") and r["url"] not in re_read:
             re_read.append(r["url"])
-    return {"cutoff": cut, "checked": len(items), "counts": counts, "undated": undated, "leaks": leaks,
-            "re_read": re_read}
+    out = {"cutoff": cut, "checked": len(items), "counts": counts, "undated": undated, "leaks": leaks,
+           "re_read": re_read}
+    if report_to_tavily:
+        out["feedback"] = send_leak_feedback(data, items, cut)
+    return out
+
+
+def send_leak_feedback(data, items, cutoff, **kw):
+    """Feedback for the leaks, grouped by request_id (the response's, else each result's)."""
+    top = data.get("request_id") if isinstance(data, dict) else None
+    groups = {}
+    for r in items:
+        groups.setdefault(r.get("request_id") or top, []).append(r)
+    own, sent = known_request_ids(), []
+    for rid, rs in groups.items():
+        sent += report_leaks(rs, cutoff, rid, own_request_ids=own, dry_run=False, **kw)
+    return sent
 
 
 def build_server():
