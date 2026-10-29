@@ -2355,5 +2355,187 @@
    "results/content_check_labels.json",
    "docs/preregistration_content_check.md"
   ]
+ },
+ "evidence_tiers": {
+  "label": "exploratory, added after scoring; a sensitivity range, not a new result; cannot change any headline",
+  "pass": "initial pass (results as saved, before the logged Wayback retry)",
+  "rule": "labels as stored by v2/date_test.label; Unknown = labels F and U",
+  "sources": [
+   "results/date_field_test.json",
+   "results/replication.json",
+   "results/replication.json (pooled headline, for the check)"
+  ],
+  "arms": {
+   "A": {
+    "pooled": {
+     "results": 126,
+     "archived": 11,
+     "leak": 41,
+     "unknown": 74,
+     "unknown_lookup_failed": 25,
+     "unknown_no_capture": 48,
+     "unknown_capture_unconfirmed": 1,
+     "unknown_with_date_flag": 39,
+     "undated": 18,
+     "best_case": {
+      "k": 23,
+      "n": 42,
+      "wilson95": [
+       0.39949118924719623,
+       0.6877660686502409
+      ]
+     },
+     "worst_case": {
+      "k": 42,
+      "n": 42,
+      "wilson95": [
+       0.9162012079230888,
+       1.0
+      ]
+     }
+    },
+    "by_source": {
+     "pilot": {
+      "results": 60,
+      "archived": 6,
+      "leak": 12,
+      "unknown": 42,
+      "unknown_lookup_failed": 9,
+      "unknown_no_capture": 32,
+      "unknown_capture_unconfirmed": 1,
+      "unknown_with_date_flag": 20,
+      "undated": 8,
+      "best_case": {
+       "k": 9,
+       "n": 20,
+       "wilson95": [
+        0.25819785703764037,
+        0.6579146589808726
+       ]
+      },
+      "worst_case": {
+       "k": 20,
+       "n": 20,
+       "wilson95": [
+        0.8388748398148705,
+        1.0
+       ]
+      }
+     },
+     "replication": {
+      "results": 66,
+      "archived": 5,
+      "leak": 29,
+      "unknown": 32,
+      "unknown_lookup_failed": 16,
+      "unknown_no_capture": 16,
+      "unknown_capture_unconfirmed": 0,
+      "unknown_with_date_flag": 19,
+      "undated": 10,
+      "best_case": {
+       "k": 14,
+       "n": 22,
+       "wilson95": [
+        0.4295170793613564,
+        0.8026679542917857
+       ]
+      },
+      "worst_case": {
+       "k": 22,
+       "n": 22,
+       "wilson95": [
+        0.8513451233948545,
+        1.0
+       ]
+      }
+     }
+    }
+   },
+   "C": {
+    "pooled": {
+     "results": 114,
+     "archived": 64,
+     "leak": 0,
+     "unknown": 50,
+     "unknown_lookup_failed": 17,
+     "unknown_no_capture": 33,
+     "unknown_capture_unconfirmed": 0,
+     "unknown_with_date_flag": 0,
+     "undated": 0,
+     "best_case": {
+      "k": 0,
+      "n": 42,
+      "wilson95": [
+       0.0,
+       0.08379879207691124
+      ]
+     },
+     "worst_case": {
+      "k": 32,
+      "n": 42,
+      "wilson95": [
+       0.6147245600667561,
+       0.8651903583691474
+      ]
+     }
+    },
+    "by_source": {
+     "pilot": {
+      "results": 59,
+      "archived": 38,
+      "leak": 0,
+      "unknown": 21,
+      "unknown_lookup_failed": 0,
+      "unknown_no_capture": 21,
+      "unknown_capture_unconfirmed": 0,
+      "unknown_with_date_flag": 0,
+      "undated": 0,
+      "best_case": {
+       "k": 0,
+       "n": 20,
+       "wilson95": [
+        0.0,
+        0.16112516018512965
+       ]
+      },
+      "worst_case": {
+       "k": 17,
+       "n": 20,
+       "wilson95": [
+        0.6395811333571357,
+        0.9476312545132735
+       ]
+      }
+     },
+     "replication": {
+      "results": 55,
+      "archived": 26,
+      "leak": 0,
+      "unknown": 29,
+      "unknown_lookup_failed": 17,
+      "unknown_no_capture": 12,
+      "unknown_capture_unconfirmed": 0,
+      "unknown_with_date_flag": 0,
+      "undated": 0,
+      "best_case": {
+       "k": 0,
+       "n": 22,
+       "wilson95": [
+        0.0,
+        0.14865487660514556
+       ]
+      },
+      "worst_case": {
+       "k": 15,
+       "n": 22,
+       "wilson95": [
+        0.47318597580088406,
+        0.836394069069972
+       ]
+      }
+     }
+    }
+   }
+  }
  }
 }

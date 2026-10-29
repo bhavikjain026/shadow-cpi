@@ -344,7 +344,7 @@ having Super cite line numbers instead of copying text made Hindi pages work.
 `timelock/` (time-locked search, standard library only), `mcp/` (the same as an MCP tool), the benchmark
 `benchmarks/timelock34/` (34 cases, 32 distinct questions (two pairs share a question and its
 searches); new URLs a search returns are unlabelled until reviewed and are never counted as safe), `shadow_cpi/pit` (`pit_search(query, cutoff)`) and the agent skill `skills/time-locked-search/SKILL.md`. **For
-research teams:** designed for event studies and backtests that must not see the outcome early; research tool, not
+research teams:** Shadow CPI doesn't claim to solve temporal leakage. It makes retrieval-based backtests auditable: dates are enforced in code, every retrieval is logged and timestamped, results come with their uncertainty, and live forecasts are sealed before the official release. Research tool, not
 investment advice.
 
 ## Scoreboard
@@ -373,6 +373,9 @@ A Hindi substring match ('rail' inside 'domestic') turned a Jharkhand power tari
 manual check caught it; the fix (whole-word matching, state from the page) removed the event, so the October radar
 has 3 events. Logged as rule changes `R2`–`R3`, with before and after.
 Exploratory and post-hoc results are labelled where they appear and changed no scored verdict.
+**Bounds on the time-lock zero:** the count of confirmed leaks leaves out results the archive could not confirm either way
+(50 of 114 time-locked results); if every case with such a result had leaked, the count would be
+32 of 42 cases (exploratory sensitivity range, not a result; see the Field Report).
 **Content check:** a content check (Nemotron Nano, exploratory) found 1 confirmed post-cutoff fact in 55 sampled time-locked
 search excerpts, via a related-stories item, so 0 of 42 cases detected by our date-and-archive
 rule is a lower bound (excerpts and cases are different units).

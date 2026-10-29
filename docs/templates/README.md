@@ -353,8 +353,7 @@ for r in results:
 
 ### For research teams
 
-Designed for research teams that need web evidence without look-ahead bias (event studies, backtests, forecast
-evaluation); not adopted by any team yet. Exports (`python tools/export.py`, columns in
+Shadow CPI doesn't claim to solve temporal leakage. It makes retrieval-based backtests auditable: dates are enforced in code, every retrieval is logged and timestamped, results come with their uncertainty, and live forecasts are sealed before the official release. Not adopted by any team yet. Exports (`python tools/export.py`, columns in
 [`docs/exports_schema.md`](docs/exports_schema.md)), `as_of()`, the seal checks and the leak checker
 ([`timelock/check.py`](timelock/check.py), example in
 [`examples/leakcheck_example.py`](examples/leakcheck_example.py)). Research tool, not investment advice.
@@ -489,6 +488,10 @@ Short answers to the hardest questions: [`docs/judge_faq.md`](docs/judge_faq.md)
   cutoff of {{super_post}}, inside the {{replay_span}} replay; for the replacement models: {{new_models_cutoff}}. The replay is therefore not
   leakage-free against model memory: a model can cite a line it would not have picked without knowing the outcome,
   even though code checks that the number is on the page. The sealed forward forecasts are the clean evidence.
+- **Bounds on the time-lock zero.** The count of confirmed leaks leaves out results the archive could not confirm either
+  way: {{et_c_unknown}} of {{et_c_results}} time-locked results. If every case with such a result had leaked, the count
+  would be {{et_c_worst}} of {{et_cases}} cases (exploratory sensitivity range, not a result; Field Report, "Evidence
+  tiers and bounds", [`results/evidence_tiers.json`](results/evidence_tiers.json)).
 - **Leak counts.** Every zero is reported as zero detected, with its Wilson interval; no-dates counts are lower bounds, because a
   leak counts only when the Wayback Machine confirms it and absence from Wayback is not proof a page did not exist.
   McNemar tests and the rule-of-three bound are {{posthoc_label}}

@@ -479,7 +479,8 @@ def build():
            "date_test": date_test(), "replication": replication(), "lang_date_test": lang_date_test(), "finance": finance(),
            "auto_parameters": auto_parameters(), "radar": radar(),
            "monthly_run_cost": monthly_run_cost(), "ledger_rows": len(ledger),
-           "pages_changed": DR.latest(DR.load_state()), "leak_by_source_type": LKT.table(), "content_check": content_check()}
+           "pages_changed": DR.latest(DR.load_state()), "leak_by_source_type": LKT.table(), "content_check": content_check(),
+           "evidence_tiers": load("results/evidence_tiers.json") if (ROOT / "results" / "evidence_tiers.json").exists() else None}
     OUT.write_text(json.dumps(rep, ensure_ascii=False, indent=1, default=float))
     return rep
 

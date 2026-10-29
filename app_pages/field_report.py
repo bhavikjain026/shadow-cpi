@@ -531,6 +531,31 @@ with st.expander("Details for experts: finance check, retries, second review and
                    "Counts are of sampled excerpts, not leak rates for all searches, and change no headline. "
                    "Sources: " + ", ".join(f"`{s}`" for s in cc["sources"]) + ".")
 
+    # ---------- evidence tiers and bounds (exploratory) ----------
+    et = r.get("evidence_tiers")
+    if et:
+        st.subheader("Evidence tiers and bounds (exploratory)")
+        lead("How much of the evidence could we actually check against the archive, and what if every result we couldn't check had leaked?")
+        st.caption(f"{et['label'].capitalize()}. Date test (pilot) and replication pooled, {et['pass']}; labels as stored under the "
+                   "headline rule, which this block does not change. **Archived** = the Wayback Machine has a copy from on or before "
+                   "the cutoff; **Leak** = confirmed from after the cutoff; **Unknown** = not confirmed either way (the lookup "
+                   "failed, there is no capture, or a capture has no second date to back it). Undated results are counted within the tiers.")
+        names = {"A": NO_DATES, "C": TIME_LOCK}
+        table([{"Setting": names[a], "Results": x["results"], "Archived": x["archived"], "Leak": x["leak"],
+                "Unknown": x["unknown"], "Unknown: lookup failed": x["unknown_lookup_failed"],
+                "Unknown: no capture": x["unknown_no_capture"], "Undated": x["undated"]}
+               for a, x in ((a, et["arms"][a]["pooled"]) for a in ("A", "C"))])
+
+        def kn(b):
+            return f"{b['k']} of {b['n']} = {pct(b['k'] / b['n'])} ({pct(b['wilson95'][0])}–{pct(b['wilson95'][1])})"
+        table([{"Setting": names[a], "Best case: cases with a confirmed leak (the headline count, Wilson 95%)": kn(x["best_case"]),
+                "Worst case: confirmed leak or any Unknown result (Wilson 95%)": kn(x["worst_case"])}
+               for a, x in ((a, et["arms"][a]["pooled"]) for a in ("A", "C"))])
+        st.caption("The best case is the headline count; the worst case treats every case with a result we could not check as a leak. "
+                   "The truth lies between them, so the range shows how much the headline depends on archive coverage. "
+                   "A sensitivity range, not a new result. Sources: " + ", ".join(f"`{s}`" for s in et["sources"][:2])
+                   + ", `results/evidence_tiers.json`.")
+
 with st.expander("Details for experts: radar runs, credit receipt and cost by search setting"):
     # ---------- radar and cost ----------
     st.subheader("October radar: runs so far")
