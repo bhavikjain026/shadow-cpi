@@ -272,7 +272,10 @@ def test_python_requirement_line(values):
     assert values["python_min"] == "3.10"
     assert values["python_tested"] == json.loads((ROOT / "results/python_env.json").read_text())["python"]
     out = S.render((ROOT / "docs/templates/README.md").read_text(), values)
-    assert f"Python {values['python_min']}+ (tested on {values['python_tested']})." in out
+    # the README states only the versions CI runs (.github/workflows/tests.yml), not the looser packaging minimum
+    assert (f"Python {values['python_ci_min']} or newer (CI runs {values['python_ci']}; the local suite last ran on "
+            f"{values['python_tested']}).") in out
+    assert values["python_ci_min"] == "3.12" and values["python_ci"] == "3.12 and 3.14"
 
 
 SPOKEN = {**dict(enumerate("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen "
@@ -367,3 +370,17 @@ def test_judge_faq_is_short_answers_from_results_and_linked_from_readme(values):
     assert f"{values['pool_dated']} of {values['pool_cases']} cases kept a confirmed leak" in flat
     assert f"{values['mae_poll_c']} percentage points and the poll by {values['mae_poll']}" in flat
     assert "docs/judge_faq.md" in (ROOT / "docs/templates/README.md").read_text()
+
+
+def test_devpost_tavily_attribution_and_scope_claims_read_the_files():
+    """The Tavily-contribution sentence is the sealed file's tavily_attribution; the 'every web page' claim is gone;
+    the accessibility paragraph reads docs/contrast_check.json."""
+    sj = json.loads((ROOT / "sealed/2026-10.json").read_text())["tavily_attribution"]
+    text = " ".join((ROOT / "docs/devpost_draft.md").read_text().split())
+    assert (f"with Tavily evidence the sealed October 2026 estimate is {sj['pred_with_tavily']:.3f}%; without it, "
+            f"{sj['pred_without_tavily']:.3f}%.") in text
+    assert "every web page that enters the system" not in text and "service `direct`" in text
+    cc = json.loads((ROOT / "docs/contrast_check.json").read_text())
+    assert f"{cc['below_threshold']} elements below the threshold" in text and cc["ratio"] == 4.5
+    assert "Zero leaks" not in (ROOT / "docs/judge_faq.md").read_text()
+    assert "## How does the forecast compare with economists' polls?" in (ROOT / "docs/judge_faq.md").read_text()

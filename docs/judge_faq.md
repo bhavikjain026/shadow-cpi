@@ -15,7 +15,7 @@ latest Wayback copy on or before the cutoff (or nothing), at the price of one mo
 
 ## 42 cases is small?
 
-Yes. Zero leaks in 42 cases gives a Wilson 95% interval of 0–8%, and the rule of three puts the upper bound near
+Yes. 0 of 42 detected (Wilson 95% 0–8%), and the rule of three puts the upper bound near
 7%, so a leak rate of a few percent is not ruled out. The count is a pre-registered pilot (20 cases) plus a
 pre-registered replication (22 new cases) under one rule; both are India-focused, so they show the effect and its size
 here, not Tavily's behaviour in general.
@@ -59,7 +59,7 @@ pipeline limits the exposure (the model only extracts quotes, and code checks th
 but the clean test is a sealed forward forecast: the October 2026 nowcast is sealed (SHA-256 and git tag) before MoSPI's 12 Nov release, so
 nothing about the outcome can be known when it is written; the README gives the seal's status.
 
-## Did you beat the economists?
+## How does the forecast compare with economists' polls?
 
 No; about a tie. On the 6 months with a dated economists' poll, our nowcast missed by 0.150 percentage points
 and the poll by 0.148. Over all 9 test months it missed by 0.194, and the 80% range held the official figure

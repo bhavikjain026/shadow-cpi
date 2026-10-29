@@ -500,8 +500,16 @@ More: [`docs/honest_limits.md`](docs/honest_limits.md), [`docs/frozen_rules.md`]
 
 ## Run it locally
 
-Python {{python_min}}+ (tested on {{python_tested}}).
+Python {{python_ci_min}} or newer (CI runs {{python_ci}}; the local suite last ran on {{python_tested}}).
 
+```bash
+git clone https://github.com/bhavikjain026/shadow-cpi.git
+cd shadow-cpi
+```
+```bash
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+```
 ```bash
 pip install -r requirements-app.txt
 ```

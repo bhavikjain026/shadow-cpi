@@ -4,6 +4,10 @@
 > Track: **Best Apps and Agents**. Bonus: Best Use of Tavily. Every number below is filled from the results files by
 > `python tools/sync_doc_numbers.py`; edit `docs/templates/devpost.md`, not this file.
 
+## Subtitle
+We measured when web search leaks the future into AI backtests on Tavily, and shipped a time lock that detected
+0 of 42 leaking cases.
+
 ## Headline
 <!-- headline:start -->
 0 of 42 cases detected leaking with Tavily's dates + filter, across a pilot and a pre-registered replication (Wilson 0–8%); with no dates, 9 of 20 and 14 of 22 leaked.
@@ -89,6 +93,18 @@ the update):
 | Date test (pilot) | valid evidence: pages Wayback shows existed by the cutoff that name the item | 28 of 40 | 12 |
 | Finance check (exploratory) | valid evidence: pages Wayback shows existed by the cutoff that name the RBI or the company | 10 of 11 | 1 |
 | Check E (exploratory, `exact_match`) | known-good quotes re-found by the dated search | 25 of 40 | 8 found only without dates; 7 by neither |
+
+## What we learned that you wouldn't know
+- **Date filters select which pages, not which version of a page.** Tavily dated `R196`, a TCS results
+  preview, 7 Jul, before its 8 Jul cutoff; the page was updated on 9 Jul and Extract returns
+  the updated page. This is one demonstrated case (`R196`, n=1), not a rate; `extract_as_of` serves the latest
+  Wayback copy on or before the cutoff, or nothing.
+- **`max_age_hours` controls cache freshness, not as-of.** Tavily's reference describes it as "The maximum age in hours of Tavily's cached copy of each result.", so it
+  bounds how old the cached copy is and says nothing about which date the copy reflects.
+- **Explicit dates alone already gave the same count.** `start_date`/`end_date` without the filter gave
+  0 of 20 detected (Wilson 0–16%). The filter additionally removes results with no
+  detectable date, as Tavily documents; on this sample that changed little, because the dates-only search returned
+  0 undated of 58 results, and what the filter costs is counted above.
 
 ## What Tavily's docs say vs what we measured
 Tavily's API reference, quoted and linked, next to our measurement. Most of what we found is documented behaviour.
@@ -207,8 +223,11 @@ entries below) or `results/feedback_evidence/`, plus Nebius's own retirement not
 
 **Tavily** (separate from Nebius and NVIDIA; the field notes are in `docs/tavily_bug_reports.md`)
 
-- *What we used it for:* every web page that enters the system: Search with dates, Extract, Map and Crawl
-  (endpoints used: `/search`, `/extract`, `/map`, `/crawl`).
+- *What we used it for:* the news and price pages the evidence pipeline reads go through Tavily: Search with dates,
+  Extract, Map and Crawl (endpoints used: `/search`, `/extract`, `/map`, `/crawl`). The exceptions are fetched directly and logged as
+  service `direct` in the Flight Recorder: the official data (the MoSPI API and the Department of Consumer Affairs
+  download), Wayback lookups, and the pages Tavily could not fetch, which `extract_or_download` retries as a direct,
+  logged download.
 - *What worked well:* dated news searches stayed inside the requested month in English and Hindi on the opening
   checks; the date fields held in Hindi, Marathi and Tamil; Extract read the MoSPI press-release PDF and IBJA's daily
   bullion PDFs; Crawl read DERC's tariff-order table; empty Map/Crawl calls were not charged, and a bad start address
@@ -221,6 +240,15 @@ entries below) or `results/feedback_evidence/`, plus Nebius's own retirement not
   on the opening run.
 - *Would we build with it again?* Yes: explicit date windows are what kept later articles out of a historical
   search, and the date fields held in every language we tried.
+
+## Accessibility
+Every app page is checked in a real browser by `tools/check_contrast.py` (Chromium through Playwright): 15
+pages, at 1440 and 390 px wide, in the light and the dark theme, measuring every visible text element against its
+background for at least 4.5:1 (large text 3.0:1) and checking for horizontal overflow. Last run
+29 Oct 2026: 0 elements below the threshold and 0 pages with overflow
+(`docs/contrast_check.json`). It does not read text drawn inside charts or inside closed expanders. The theme's own
+colour pairs are also tested at 4.5:1 without a browser (`tests/test_aesthetic.py`), and animation is switched
+off under `prefers-reduced-motion` (`tests/test_aesthetic.py::test_reduced_motion_rule_and_viewer_toolbar`).
 
 ## Inspiration
 India's CPI arrives about 12 days after the month ends. Forecasting it from the web means replaying past
@@ -249,11 +277,17 @@ Shadow CPI is a pre-registered measurement of an agent-native search API's date 
    release, so anyone can verify the file they have. The seal proves when the forecast was
    committed, not what was read before it; the time lock and `extract_as_of` address the evidence.
 
-**How we use NVIDIA Nemotron on Nebius Token Factory:** Nano screens pages, Super cites the exact line, code checks
-the number. Nemotron Nano (`nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`; from 9 Nov 2026 `nvidia/Nemotron-3_5-Lightning`) is the yes/no
-gatekeeper and writes display-only English glosses (622 calls sent; 4,829 including cache hits).
-Nemotron Super (`nvidia/nemotron-3-super-120b-a12b`; from 9 Nov 2026 `nvidia/Nemotron-3.5-Super-VL`) reads pages, cites lines, and writes the search fields in arms B,
-C and H (719 calls sent; 5,177 including cache hits). Nebius retires the original IDs on 9 Nov 2026; from then, calls use Nebius's recommended replacements (pre-registered on 27 Oct).
+**How we use NVIDIA Nemotron on Nebius Token Factory:** a model reads and cites; code decides every number.
+- **Nemotron Nano** (`nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`; from 9 Nov 2026 `nvidia/Nemotron-3_5-Lightning`) is the yes/no gatekeeper: it screens each page for
+  whether it is worth reading, and writes display-only English glosses. 622 calls sent (4,829
+  including cache hits), median latency 1.3 s per call sent (`results/app/flight_recorder.jsonl`).
+- **Nemotron Super** (`nvidia/nemotron-3-super-120b-a12b`; from 9 Nov 2026 `nvidia/Nemotron-3.5-Super-VL`) reads the screened pages, cites the exact
+  numbered line for each price or price change, and writes the search fields in arms B, C and H. 719 calls sent
+  (5,177 including cache hits), median latency 2.3 s per call sent (same file).
+- **Code** copies the cited line from Tavily's Extract output and checks that the number is in it; a model never writes
+  a quote or chooses a number. The flight recorder does not log token counts, so none are reported.
+
+Nebius retires the original IDs on 9 Nov 2026; from then, calls use Nebius's recommended replacements (pre-registered on 27 Oct).
 Where Token Factory helped (dated entries in `FEEDBACK_NOTES.md`): JSON-schema output worked on the opening call;
 the `/models` list served both sizes behind one OpenAI-compatible endpoint, so roles are picked by name in config; and
 having Super cite line numbers instead of copying text made Hindi pages work.
@@ -263,6 +297,10 @@ having Super cite line numbers instead of copying text made Hindi pages work.
   next-working-day rule applies).
   Sealed 29 Oct 2026, 09:32 IST: headline 6.090% year on year, 80% range 5.806–6.373%, P(≥6.0%) 0.66.
   Anyone can recompute the seal's `SHA-256` (`2d1dbc1dbb825e19b03d3f2dc5d555b25d3f1f81a5142d5effcbbb26732f0de7`) from the file at tag `seal-2026-10` (`verify.md`).
+- **What Tavily added to the sealed estimate** (`tavily_attribution` in `sealed/2026-10.json`: the same code run with
+  government price series only, against the full run with Tavily's evidence): with Tavily evidence the sealed
+  October 2026 estimate is 6.090%; without it, 6.202%. The 12 Nov release will show
+  whether it helped.
 - **Price Shock Radar** (exploratory, report only): announced price changes taking effect this month;
   3 verified so far, 0 corroborated.
 - **Live build** with **Replay a saved run** (no API call, no credits).

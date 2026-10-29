@@ -14,7 +14,7 @@ latest Wayback copy on or before the cutoff (or nothing), at the price of one mo
 
 ## {{pool_cases}} cases is small?
 
-Yes. Zero leaks in {{pool_cases}} cases gives a Wilson {{wilson}} interval of {{pool_dated_w}}, and the rule of three puts the upper bound near
+Yes. {{pool_dated}} of {{pool_cases}} detected (Wilson {{wilson}} {{pool_dated_w}}), and the rule of three puts the upper bound near
 {{pool_rule3}}, so a leak rate of a few percent is not ruled out. The count is a pre-registered pilot ({{dt_cases}} cases) plus a
 pre-registered replication ({{rep_cases}} new cases) under one rule; both are India-focused, so they show the effect and its size
 here, not Tavily's behaviour in general.
@@ -58,7 +58,7 @@ pipeline limits the exposure (the model only extracts quotes, and code checks th
 but the clean test is a sealed forward forecast: the {{live_month}} nowcast is sealed (SHA-256 and git tag) before MoSPI's {{release_day}} release, so
 nothing about the outcome can be known when it is written; the README gives the seal's status.
 
-## Did you beat the economists?
+## How does the forecast compare with economists' polls?
 
 No; about a tie. On the {{poll_months}} months with a dated economists' poll, our nowcast missed by {{mae_poll_c}} percentage points
 and the poll by {{mae_poll}}. Over all {{months}} test months it missed by {{mae_c}}, and the {{range_level}} range held the official figure

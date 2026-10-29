@@ -56,8 +56,11 @@ entries below) or `results/feedback_evidence/`, plus Nebius's own retirement not
 
 **Tavily** (separate from Nebius and NVIDIA; the field notes are in `docs/tavily_bug_reports.md`)
 
-- *What we used it for:* every web page that enters the system: Search with dates, Extract, Map and Crawl
-  (endpoints used: `/search`, `/extract`, `/map`, `/crawl`).
+- *What we used it for:* the news and price pages the evidence pipeline reads go through Tavily: Search with dates,
+  Extract, Map and Crawl (endpoints used: `/search`, `/extract`, `/map`, `/crawl`). The exceptions are fetched directly and logged as
+  service `direct` in the Flight Recorder: the official data (the MoSPI API and the Department of Consumer Affairs
+  download), Wayback lookups, and the pages Tavily could not fetch, which `extract_or_download` retries as a direct,
+  logged download.
 - *What worked well:* dated news searches stayed inside the requested month in English and Hindi on the opening
   checks; the date fields held in Hindi, Marathi and Tamil; Extract read the MoSPI press-release PDF and IBJA's daily
   bullion PDFs; Crawl read DERC's tariff-order table; empty Map/Crawl calls were not charged, and a bad start address

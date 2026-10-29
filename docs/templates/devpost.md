@@ -3,6 +3,10 @@
 > Track: **Best Apps and Agents**. Bonus: Best Use of Tavily. Every number below is filled from the results files by
 > `python tools/sync_doc_numbers.py`; edit `docs/templates/devpost.md`, not this file.
 
+## Subtitle
+We measured when web search leaks the future into AI backtests on Tavily, and shipped a time lock that detected
+{{pool_dated}} of {{pool_cases}} leaking cases.
+
 ## Headline
 <!-- headline:start -->
 {{pool_dated}} of {{pool_cases}} cases detected leaking with Tavily's dates + filter, across a pilot and a pre-registered replication (Wilson {{pool_dated_w}}); with no dates, {{dt_nodates}} of {{dt_cases}} and {{rep_nodates}} of {{rep_cases}} leaked.
@@ -76,6 +80,18 @@ the update):
 
 {{evidence_kept_table}}
 
+## What we learned that you wouldn't know
+- **Date filters select which pages, not which version of a page.** Tavily dated `{{ex_row}}`, a {{ex_company}} results
+  preview, {{ex_published}}, before its {{ex_cutoff}} cutoff; the page was updated on {{ex_updated}} and Extract returns
+  the updated page. This is one demonstrated case (`{{ex_row}}`, n={{asof_n}}), not a rate; `extract_as_of` serves the latest
+  Wayback copy on or before the cutoff, or nothing.
+- **`max_age_hours` controls cache freshness, not as-of.** Tavily's reference describes it as "{{max_age_quote}}", so it
+  bounds how old the cached copy is and says nothing about which date the copy reflects.
+- **Explicit dates alone already gave the same count.** `start_date`/`end_date` without the filter gave
+  {{dt_datesonly}} of {{dt_cases}} detected (Wilson {{dt_datesonly_w}}). The filter additionally removes results with no
+  detectable date, as Tavily documents; on this sample that changed little, because the dates-only search returned
+  {{dt_undated_datesonly}} undated of {{dt_results_datesonly}} results, and what the filter costs is counted above.
+
 ## What Tavily's docs say vs what we measured
 Tavily's API reference, quoted and linked, next to our measurement. Most of what we found is documented behaviour.
 
@@ -141,6 +157,15 @@ Tavily's docs: documented behaviour, doc gap or unexplained.
 ## Feedback by product: Nebius Token Factory, Nemotron Nano, Nemotron Super (and Tavily, separately)
 {{feedback_five}}
 
+## Accessibility
+Every app page is checked in a real browser by `tools/check_contrast.py` (Chromium through Playwright): {{a11y_pages}}
+pages, at {{a11y_widths}} px wide, in the light and the dark theme, measuring every visible text element against its
+background for at least {{a11y_ratio}} (large text {{a11y_large_ratio}}) and checking for horizontal overflow. Last run
+{{a11y_checked}}: {{a11y_below}} elements below the threshold and {{a11y_overflow}} pages with overflow
+(`docs/contrast_check.json`). It does not read text drawn inside charts or inside closed expanders. The theme's own
+colour pairs are also tested at {{a11y_ratio}} without a browser (`tests/test_aesthetic.py`), and animation is switched
+off under `prefers-reduced-motion` (`tests/test_aesthetic.py::test_reduced_motion_rule_and_viewer_toolbar`).
+
 ## Inspiration
 India's CPI arrives about {{release_lag}} days after the month ends. Forecasting it from the web means replaying past
 months, and a replay that reads a page published after its cutoff looks better than it could ever be live. El Lahib et
@@ -164,11 +189,17 @@ Tavily's date controls and measures what they cost.
    release, so anyone can verify the file they have. The seal proves when the forecast was
    committed, not what was read before it; the time lock and `extract_as_of` address the evidence.
 
-**How we use NVIDIA Nemotron on Nebius Token Factory:** Nano screens pages, Super cites the exact line, code checks
-the number. Nemotron Nano (`{{nano_id}}`; from {{switch_day}} `{{nano_new}}`) is the yes/no
-gatekeeper and writes display-only English glosses ({{nano_sent}} calls sent; {{nano_total}} including cache hits).
-Nemotron Super (`{{super_id}}`; from {{switch_day}} `{{super_new}}`) reads pages, cites lines, and writes the search fields in arms B,
-C and H ({{super_sent}} calls sent; {{super_total}} including cache hits). Nebius retires the original IDs on {{switch_day}}; from then, calls use Nebius's recommended replacements (pre-registered on {{migration_registered}}).
+**How we use NVIDIA Nemotron on Nebius Token Factory:** a model reads and cites; code decides every number.
+- **Nemotron Nano** (`{{nano_id}}`; from {{switch_day}} `{{nano_new}}`) is the yes/no gatekeeper: it screens each page for
+  whether it is worth reading, and writes display-only English glosses. {{nano_sent}} calls sent ({{nano_total}}
+  including cache hits), median latency {{nano_latency}} per call sent (`results/app/flight_recorder.jsonl`).
+- **Nemotron Super** (`{{super_id}}`; from {{switch_day}} `{{super_new}}`) reads the screened pages, cites the exact
+  numbered line for each price or price change, and writes the search fields in arms B, C and H. {{super_sent}} calls sent
+  ({{super_total}} including cache hits), median latency {{super_latency}} per call sent (same file).
+- **Code** copies the cited line from Tavily's Extract output and checks that the number is in it; a model never writes
+  a quote or chooses a number. The flight recorder does not log token counts, so none are reported.
+
+Nebius retires the original IDs on {{switch_day}}; from then, calls use Nebius's recommended replacements (pre-registered on {{migration_registered}}).
 Where Token Factory helped (dated entries in `FEEDBACK_NOTES.md`): JSON-schema output worked on the opening call;
 the `/models` list served both sizes behind one OpenAI-compatible endpoint, so roles are picked by name in config; and
 having Super cite line numbers instead of copying text made Hindi pages work.
@@ -178,6 +209,10 @@ having Super cite line numbers instead of copying text made Hindi pages work.
   next-working-day rule applies).
   Sealed {{sealed_at}}: headline {{seal_headline}} year on year, {{seal_range_level}} range {{seal_range}}, P(≥{{seal_threshold}}) {{seal_p_ge6}}.
   Anyone can recompute the seal's `SHA-256` (`{{seal_sha256}}`) from the file at tag `seal-2026-10` (`verify.md`).
+- **What Tavily added to the sealed estimate** (`tavily_attribution` in `sealed/2026-10.json`: the same code run with
+  government price series only, against the full run with Tavily's evidence): with Tavily evidence the sealed
+  {{live_month}} estimate is {{seal_attr_with}}; without it, {{seal_attr_without}}. The {{release_day}} release will show
+  whether it helped.
 - **Price Shock Radar** (exploratory, report only): announced price changes taking effect this month;
   {{radar_events}} verified so far, {{radar_corroborated}} corroborated.
 - **Live build** with **Replay a saved run** (no API call, no credits).

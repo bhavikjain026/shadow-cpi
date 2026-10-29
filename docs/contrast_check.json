@@ -1,0 +1,108 @@
+{
+ "tool": "tools/check_contrast.py",
+ "checked_utc": "2026-10-29T06:36:54Z",
+ "widths": [
+  1440,
+  390
+ ],
+ "schemes": [
+  "light",
+  "dark"
+ ],
+ "ratio": 4.5,
+ "large_ratio": 3.0,
+ "pages": [
+  {
+   "path": "(leak demo)",
+   "checked": 2120,
+   "below_threshold": 0,
+   "overflow": false
+  },
+  {
+   "path": "field_report",
+   "checked": 2344,
+   "below_threshold": 0,
+   "overflow": false
+  },
+  {
+   "path": "try_it",
+   "checked": 156,
+   "below_threshold": 0,
+   "overflow": false
+  },
+  {
+   "path": "home",
+   "checked": 646,
+   "below_threshold": 0,
+   "overflow": false
+  },
+  {
+   "path": "radar",
+   "checked": 216,
+   "below_threshold": 0,
+   "overflow": false
+  },
+  {
+   "path": "evidence",
+   "checked": 698,
+   "below_threshold": 0,
+   "overflow": false
+  },
+  {
+   "path": "replay",
+   "checked": 532,
+   "below_threshold": 0,
+   "overflow": false
+  },
+  {
+   "path": "live_build",
+   "checked": 646,
+   "below_threshold": 0,
+   "overflow": false
+  },
+  {
+   "path": "custody",
+   "checked": 100,
+   "below_threshold": 0,
+   "overflow": false
+  },
+  {
+   "path": "as_of",
+   "checked": 104,
+   "below_threshold": 0,
+   "overflow": false
+  },
+  {
+   "path": "research",
+   "checked": 152,
+   "below_threshold": 0,
+   "overflow": false
+  },
+  {
+   "path": "tavily_trace",
+   "checked": 876,
+   "below_threshold": 0,
+   "overflow": false
+  },
+  {
+   "path": "flight_recorder",
+   "checked": 852,
+   "below_threshold": 0,
+   "overflow": false
+  },
+  {
+   "path": "archive",
+   "checked": 9376,
+   "below_threshold": 0,
+   "overflow": false
+  },
+  {
+   "path": "brief",
+   "checked": 156,
+   "below_threshold": 0,
+   "overflow": false
+  }
+ ],
+ "below_threshold": 0,
+ "overflow_pages": 0
+}

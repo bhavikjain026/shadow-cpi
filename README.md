@@ -526,8 +526,16 @@ More: [`docs/honest_limits.md`](docs/honest_limits.md), [`docs/frozen_rules.md`]
 
 ## Run it locally
 
-Python 3.10+ (tested on 3.14.7).
+Python 3.12 or newer (CI runs 3.12 and 3.14; the local suite last ran on 3.14.7).
 
+```bash
+git clone https://github.com/bhavikjain026/shadow-cpi.git
+cd shadow-cpi
+```
+```bash
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+```
 ```bash
 pip install -r requirements-app.txt
 ```

@@ -142,6 +142,18 @@ def nemotron_calls(root=ROOT):
     return sent, total
 
 
+def nemotron_latency(root=ROOT):
+    """Median latency (seconds) of the Token Factory calls actually sent (not cache hits), per model, from the flight
+    recorder snapshot. Token counts are not logged, so none are reported."""
+    import statistics
+    lat = {}
+    for line in (root / "results/app/flight_recorder.jsonl").read_text(encoding="utf-8").splitlines():
+        e = json.loads(line)
+        if e.get("service") == "nebius" and not e.get("cached") and e.get("latency_ms") is not None:
+            lat.setdefault(e["params"].get("model"), []).append(e["latency_ms"] / 1000)
+    return {m: statistics.median(v) for m, v in lat.items()}
+
+
 def quote_tally(root=ROOT):
     """'Our tally: 10 verbatim (...), 1 paywalled, 0 unreachable, 1 not checked' from audit/quote_check.md."""
     s = (root / "audit/quote_check.md").read_text(encoding="utf-8")
@@ -464,6 +476,8 @@ def facts(st, as_of, root=ROOT):
     nano, sup = roles["small"], roles["mid"]
     f.update(nano_sent=f"{sent[nano]:,}", nano_total=f"{total[nano]:,}", super_sent=f"{sent[sup]:,}",
              super_total=f"{total[sup]:,}")
+    lat = nemotron_latency(root)
+    f.update(nano_latency=secs(lat[nano]), super_latency=secs(lat[sup]))
     rr = load("results/retry_reconciliation.json", root)          # tools/build_retry_table.py
     f.update(retry_changed=rr["changed"], retry_cases=rr["cases"])
     # the archive lookups that failed on the initial pass and the network retry (results/retry_reconciliation.json),
@@ -520,6 +534,8 @@ def facts(st, as_of, root=ROOT):
                  sealed_at=f"{day_month(at.date())} {at.year}, {at:%H:%M} IST", seal_headline=f"{sj['headline_yoy']:.3f}%",
                  seal_range=f"{sj['range_low']:.3f}\u2013{sj['range_high']:.3f}%",
                  seal_range_level=f"{sj['range_level']:.0%}", seal_p_ge6=f"{sj['p_headline_ge_6']:.2f}",
+                 seal_attr_with=f"{sj['tavily_attribution']['pred_with_tavily']:.3f}%",
+                 seal_attr_without=f"{sj['tavily_attribution']['pred_without_tavily']:.3f}%",
                  seal_threshold=re.search(r"threshold (\d+(?:\.\d+)?%)", sj["range"]["p_method"]).group(1))
     # the submission period's start, from the hackathon checklist in v2/PRD.md
     # the submission period's opening date (config/doc_citations.json), checked against the hackathon checklist
@@ -574,6 +590,17 @@ def facts(st, as_of, root=ROOT):
     # Python: the minimum from pyproject.toml, the version the suite ran on from results/python_env.json
     req = re.search(r'^requires-python = ">=(\d+\.\d+)"', (root / "pyproject.toml").read_text(), re.M)
     f.update(python_min=req.group(1), python_tested=load("results/python_env.json", root)["python"])
+    ci = re.search(r"python-version:\s*\[([^\]]+)\]", (root / ".github/workflows/tests.yml").read_text())
+    versions = sorted((v.strip(' "\'') for v in ci.group(1).split(",")), key=lambda v: tuple(map(int, v.split("."))))
+    f.update(python_ci_min=versions[0], python_ci=" and ".join(versions))        # the versions CI actually runs
+    # the real-browser contrast check (tools/check_contrast.py), as last written to docs/contrast_check.json
+    cc = load("docs/contrast_check.json", root)
+    f.update(a11y_ratio=f"{cc['ratio']}:1", a11y_large_ratio=f"{cc['large_ratio']}:1",
+             a11y_widths=" and ".join(str(w) for w in cc["widths"]), a11y_pages=len(cc["pages"]),
+             a11y_below=cc["below_threshold"], a11y_overflow=cc["overflow_pages"],
+             a11y_checked=human(date.fromisoformat(cc["checked_utc"][:10])))
+    tdq = load("config/doc_citations.json", root)["tavily_docs"]
+    f.update(max_age_quote=tdq["quotes"]["max_age_hours"])
 
     # results/posthoc_stats.json (tools/build_posthoc_stats.py): post-hoc, not pre-registered
     ph = load("results/posthoc_stats.json", root)

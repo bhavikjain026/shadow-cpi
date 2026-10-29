@@ -176,9 +176,18 @@ def show_case(c, slot="", heading=True):
     search_column(right, LOCKED, LOCKED_NOTE, c["locked"], c["test"], f"{slot}{c['id']}-locked")
 
 
-PLAIN_WORDS = ("1. We asked a search engine questions as if it were a past date.  \n"
-               "2. Without dates, it often returned pages written after that date: the future leaks in.  \n"
-               "3. With dates and a filter, we found none, but it also dropped some good pages.")
+
+
+def plain_words():
+    """The plain-words box: the time-locked count is the pooled date-test count from results/replication.json."""
+    c = read_json(REPLICATION)["pooled"]["price"]["arms"]["C"]
+    k = int(c["leak_cases"])
+    found = "none" if k == 0 else str(k)
+    return ("1. We asked a search engine questions as if it were a past date.  \n"
+            "2. Without dates, it often returned pages written after that date: the future leaks in.  \n"
+            f"3. With dates and a filter, we detected {found} in {int(c['cases'])} cases, but it also dropped some good pages.")
+
+
 CASE_CAPTION = ("Left: a normal search returned a page published {days} days after the date we asked about. "
                 "Right: with the time lock, every result is from before it.")
 CARD_CAPTIONS = ("searches that returned a page from after the date asked about", "same searches with dates and a filter",
@@ -437,7 +446,7 @@ if not data:
     st.stop()
 by_id = {c["id"]: c for c in data["cases"]}
 with st.container(border=True, key="plain-words"):
-    st.markdown(PLAIN_WORDS)
+    st.markdown(plain_words())
 st.subheader("See one real case")
 f3 = by_id[FIRST]
 st.caption(CASE_CAPTION.format(days=next(r["days_after_cutoff"] for r in f3["open"]["results"] if r["leak"])))
