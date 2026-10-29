@@ -702,6 +702,13 @@ if br:
     st.subheader("Tavily field notes / repro kit")
     st.caption("Counts read from the committed results files (`results/bug_reports.json`, also `docs/tavily_bug_reports.md`). "
                "Each note is tagged against Tavily's docs: documented behaviour, doc gap or unexplained.")
+    if br.get("recheck"):
+        rc = br["recheck"]
+        st.caption(f"Re-checked {rc['date_human']} with the repro scripts (`{rc['file']}`): {rc['tally']}.")
+    if br.get("feature_requests"):
+        st.markdown("**Feature requests**")
+        for i, r in enumerate(br["feature_requests"], 1):
+            st.markdown(f"{i}. **{r['title']}.** {r['text']} Evidence: " + ", ".join(f"`{e}`" for e in r["evidence"]) + ".")
     for b in br["reports"]:
         with st.expander(f"{b['title']} · {b.get('tag', 'untagged')} · to {b['to']}"):
             st.markdown(f"- **What we did:** {b['did']}.\n- **What happened:** {b['happened']}.\n"

@@ -4,6 +4,8 @@
 > Prize focus: Best Use of Tavily. Also entering: Best Apps & Agents track. Every number below is filled from the results files by
 > `python tools/sync_doc_numbers.py`; edit `docs/templates/devpost.md`, not this file.
 
+**Demo video:** [TBD]
+
 ## Subtitle
 Time-locked web evidence for AI backtests on Tavily: we measured how the future leaks in, shipped a fix under which we
 detected 0 of 42 leaking cases, and use it to seal a monthly India inflation forecast.
@@ -179,14 +181,15 @@ feature requests): `docs/field_report_for_tavily.md` (PDF next to it).
 Full notes with request IDs and a one-request repro script each: `docs/tavily_bug_reports.md`. Each is tagged against
 Tavily's docs: documented behaviour, doc gap or unexplained.
 
-**Feature requests (2)**
-1. **An as-of / crawl-timestamp field** (documented behaviour). Date filters select which pages, not which version:
-   `R196` (above) was dated before the cutoff and updated after it, and Extract returns today's copy;
-   `max_age_hours` controls freshness, not as-of. `extract_as_of` fills that gap (demo, n=1). *Evidence:*
-   `results/timelock34_second_review.json`; the search's request ID is in the notes.
-2. **Separate original-publication and last-modified dates** (documented behaviour): `published_date` was later
-   than the page's own date on 4 of 42 distinct date-test pages, as the documented definition
-   (published or last updated, beta) allows.
+Re-check of 27 Oct 2026 with the repro scripts (`results/repro_check_2026-10-27.json`): 5 of 7 reproduced, 1 did not, 1 unclear.
+
+**Feature requests (3)**
+
+1. **Say where `published_date` comes from and how confident it is.** The documented definition is published or last updated (beta). It was later than the page's own date on 4 of 42 distinct date-test pages, and a caller cannot tell which kind of date a result carries. Suggested: a source field (page metadata, sitemap, initial crawl) and a confidence value; with a source field, the two separate dates in note 2 follow. Evidence: `results/date_field_test.json`.
+2. **An as-of / snapshot mode for Extract and Search excerpts.** Return the copy as it was on a given date, or at least the crawl time of the copy returned. Dates select pages, not versions: `R196` was dated 7 Jul, before its 8 Jul cutoff, and updated on 9 Jul with a link to the actual result; Extract returns the updated page, and `max_age_hours` bounds cache age, not a date. Evidence: `results/timelock34_second_review.json`, `results/asof_demo_r196.json`.
+3. **Date parameters on `/research`.** The request body has no date parameter (checked 29 Oct in the API reference), so a research call cannot be time-locked the way Search can; we do not use it for dated work for that reason. Not measured. Evidence: `config/doc_citations.json`.
+
+`extract_as_of` fills the as-of gap in our own code (demo, n=1).
 
 **Observations**
 - **`auto_parameters` picked a recent `time_range` for queries about a past month** (unexplained; observed once on 22 Oct 2026, not reproduced on 27 Oct 2026):

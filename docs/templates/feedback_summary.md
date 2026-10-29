@@ -9,6 +9,8 @@ the Tavily field notes / repro kit (rows filled from [`results/bug_reports.json`
 those notes are built from), each tagged "documented behaviour", "doc gap" or "unexplained" against Tavily's docs;
 "Not filed" rows are dated entries below that have no field note. Details and dates are in the entries.
 
+Re-check of {{recheck_date}} with the repro scripts (`{{recheck_file}}`): {{recheck_tally}}. The notes carry {{feature_n}} feature requests.
+
 | Priority | Product | What happens | Evidence (file or request ID) | Suggested fix |
 |---|---|---|---|---|
 {{feedback_summary_rows}}

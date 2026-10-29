@@ -3,6 +3,8 @@
 > Prize focus: Best Use of Tavily. Also entering: Best Apps & Agents track. Every number below is filled from the results files by
 > `python tools/sync_doc_numbers.py`; edit `docs/templates/devpost.md`, not this file.
 
+**Demo video:** [TBD]
+
 ## Subtitle
 Time-locked web evidence for AI backtests on Tavily: we measured how the future leaks in, shipped a fix under which we
 detected {{pool_dated}} of {{pool_cases}} leaking cases, and use it to seal a monthly India inflation forecast.
@@ -146,14 +148,13 @@ feature requests): `docs/field_report_for_tavily.md` (PDF next to it).
 Full notes with request IDs and a one-request repro script each: `docs/tavily_bug_reports.md`. Each is tagged against
 Tavily's docs: documented behaviour, doc gap or unexplained.
 
+Re-check of {{recheck_date}} with the repro scripts (`{{recheck_file}}`): {{recheck_tally}}.
+
 **Feature requests ({{feature_n}})**
-1. **An as-of / crawl-timestamp field** (documented behaviour). Date filters select which pages, not which version:
-   `{{ex_row}}` (above) was dated before the cutoff and updated after it, and Extract returns today's copy;
-   `max_age_hours` controls freshness, not as-of. `extract_as_of` fills that gap (demo, n={{asof_n}}). *Evidence:*
-   `results/timelock34_second_review.json`; the search's request ID is in the notes.
-2. **Separate original-publication and last-modified dates** (documented behaviour): `published_date` was later
-   than the page's own date on {{pd_later}} of {{pd_pages}} distinct date-test pages, as the documented definition
-   (published or last updated, beta) allows.
+
+{{feature_list}}
+
+`extract_as_of` fills the as-of gap in our own code (demo, n={{asof_n}}).
 
 **Observations**
 - **`auto_parameters` picked a recent `time_range` for queries about a past month** (unexplained; {{auto_note}}):

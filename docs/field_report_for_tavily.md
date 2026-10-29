@@ -16,7 +16,7 @@ Conflict of interest: this hackathon is hosted by Nebius, which owns Tavily; see
 3. **Which version of the page existed on the cutoff date?** Nobody answers this. `R196` (TCS results preview) was dated 7 Jul, before its 8 Jul cutoff, and updated on 9 Jul with a link to the actual result; Extract returns the updated page. The content check found the same thing inside a page that passed the filter: a related-stories item dated after the cutoff (`results/content_check_labels.json`). `extract_as_of` fills the gap from archives in our code (demo, n=1; `results/asof_demo_r196.json`).
 
 ## Field notes
-Each note has observed / expected / suggested change, request IDs and a one-request repro script: `docs/tavily_bug_reports.md`. Verdicts say what showed on the re-check date only; the original measurements stand as measured.
+Each note has observed / expected / suggested change, request IDs and a one-request repro script: `docs/tavily_bug_reports.md`. Re-check of 27 Oct 2026 (`results/repro_check_2026-10-27.json`): 5 of 7 reproduced, 1 did not, 1 unclear. Verdicts say what showed on that date only; the original measurements stand as measured.
 
 | # | Note | Tag against the docs | Re-checked 27 Oct 2026 | Repro script |
 |---|---|---|---|---|
@@ -29,9 +29,9 @@ Each note has observed / expected / suggested change, request IDs and a one-requ
 | 7 | /usage lags per-call usage | doc gap | reproduced | `repro/usage_lag.py` |
 
 ## Three feature requests
-1. **Say where `published_date` comes from and how confident it is.** The documented definition is published or last updated (beta). It was later than the page's own date on 4 of 42 distinct pages, and a caller cannot tell which kind of date a result carries. Suggested: a source field (page metadata, sitemap, initial crawl) and a confidence value. Evidence: `results/date_field_test.json`.
-2. **An as-of / snapshot mode for Extract and Search excerpts.** Return the copy as it was on a given date, or at least the crawl time of the copy returned. Dates select pages, not versions, and `max_age_hours` does not reflect a date. Evidence: `results/timelock34_second_review.json` (`R196`; request ID in `docs/tavily_bug_reports.md`) and `results/asof_demo_r196.json`.
-3. **Date parameters on `/research`.** The request body has no date parameter (checked 29 Oct in the API reference), so a research call cannot be time-locked the way Search can; we do not use it for dated work for that reason. Evidence: the parameter list recorded in `config/doc_citations.json` (`tavily_research_params`). Not measured.
+1. **Say where `published_date` comes from and how confident it is.** The documented definition is published or last updated (beta). It was later than the page's own date on 4 of 42 distinct date-test pages, and a caller cannot tell which kind of date a result carries. Suggested: a source field (page metadata, sitemap, initial crawl) and a confidence value; with a source field, the two separate dates in note 2 follow. Evidence: `results/date_field_test.json`.
+2. **An as-of / snapshot mode for Extract and Search excerpts.** Return the copy as it was on a given date, or at least the crawl time of the copy returned. Dates select pages, not versions: `R196` was dated 7 Jul, before its 8 Jul cutoff, and updated on 9 Jul with a link to the actual result; Extract returns the updated page, and `max_age_hours` bounds cache age, not a date. Evidence: `results/timelock34_second_review.json`, `results/asof_demo_r196.json`.
+3. **Date parameters on `/research`.** The request body has no date parameter (checked 29 Oct in the API reference), so a research call cannot be time-locked the way Search can; we do not use it for dated work for that reason. Not measured. Evidence: `config/doc_citations.json`.
 
 ## Reproduce
 `repro/README.md`: one request per note, your own key, at most a few credits each. Every API call is logged in a hash-chained log (`results/audit_log/`).

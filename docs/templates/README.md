@@ -213,15 +213,13 @@ repro script each: [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports.md), b
 [`results/bug_reports.json`](results/bug_reports.json). Each is tagged against Tavily's docs: **documented behaviour**,
 **doc gap** or **unexplained**.
 
+Re-check of {{recheck_date}} with the repro scripts (`{{recheck_file}}`): {{recheck_tally}}.
+
 **Feature requests ({{feature_n}})**
 
-- **An as-of / crawl-timestamp field** (documented behaviour). Date filters select which pages, not which version:
-  `{{ex_row}}` (above) was dated before the cutoff and updated after it, and Extract returns today's copy.
-  `max_age_hours` controls freshness, not as-of. `extract_as_of` fills that gap (demo, n={{asof_n}}); a field saying when the
-  returned copy was fetched would let any time-locked user check it.
-- **Separate original-publication and last-modified dates** (documented behaviour). `published_date` was later than
-  the page's own date on {{pd_later}} of {{pd_pages}} distinct date-test pages, as Tavily's documented definition
-  (published or last updated, beta) allows.
+{{feature_list}}
+
+`extract_as_of` fills the as-of gap in our own code (demo, n={{asof_n}}).
 
 **Observations**
 

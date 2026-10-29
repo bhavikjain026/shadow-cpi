@@ -102,5 +102,39 @@
    "fix": "a schema-level 'required number when a currency or % is present' hint, or a confidence field",
    "evidence": "files `v2/ablation/arm_*.json`, `v2/evidence/events_*.json` (cards[].super_reread, claims[].read_by)"
   }
- ]
+ ],
+ "feature_requests": [
+  {
+   "title": "Say where `published_date` comes from and how confident it is",
+   "text": "The documented definition is published or last updated (beta). It was later than the page's own date on 4 of 42 distinct date-test pages, and a caller cannot tell which kind of date a result carries. Suggested: a source field (page metadata, sitemap, initial crawl) and a confidence value; with a source field, the two separate dates in note 2 follow.",
+   "evidence": [
+    "results/date_field_test.json"
+   ]
+  },
+  {
+   "title": "An as-of / snapshot mode for Extract and Search excerpts",
+   "text": "Return the copy as it was on a given date, or at least the crawl time of the copy returned. Dates select pages, not versions: `R196` was dated 7 Jul, before its 8 Jul cutoff, and updated on 9 Jul with a link to the actual result; Extract returns the updated page, and `max_age_hours` bounds cache age, not a date.",
+   "evidence": [
+    "results/timelock34_second_review.json",
+    "results/asof_demo_r196.json"
+   ]
+  },
+  {
+   "title": "Date parameters on `/research`",
+   "text": "The request body has no date parameter (checked 29 Oct in the API reference), so a research call cannot be time-locked the way Search can; we do not use it for dated work for that reason. Not measured.",
+   "evidence": [
+    "config/doc_citations.json"
+   ]
+  }
+ ],
+ "recheck": {
+  "date": "2026-10-27",
+  "file": "results/repro_check_2026-10-27.json",
+  "notes": 7,
+  "reproduced": 5,
+  "not_reproduced": 1,
+  "unclear": 1,
+  "tally": "5 of 7 reproduced, 1 did not, 1 unclear",
+  "date_human": "27 Oct 2026"
+ }
 }

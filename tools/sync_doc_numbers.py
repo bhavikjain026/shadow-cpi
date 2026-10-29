@@ -207,7 +207,7 @@ def feedback_summary_rows(br):
     section and tag as priority, what happened, the first request ID or file in the evidence, and the suggested
     change."""
     from build_bug_reports import SECTIONS
-    label = {"feature": "Feature request", "observation": "Observation"}
+    label = {"feature": "Field note", "observation": "Observation"}
     assert set(label) == {k for k, _ in SECTIONS}
     out = []
     for n, r in enumerate(sorted(br["reports"], key=lambda r: [k for k, _ in SECTIONS].index(r["section"])), 1):
@@ -548,7 +548,11 @@ def facts(st, as_of, root=ROOT):
     # results/bug_reports.json builders (tools/build_bug_reports.py, same code)
     lag, mz = date_lag(), map_zero()
     br = load("results/bug_reports.json", root)
-    f["feature_n"] = sum(r["section"] == "feature" for r in br["reports"])
+    from build_bug_reports import feature_list_md
+    f["feature_n"] = len(br["feature_requests"])
+    f["feature_list"] = feature_list_md(br["feature_requests"])
+    f.update(recheck_tally=br["recheck"]["tally"], recheck_file=br["recheck"]["file"])
+    assert br["recheck"]["date"] == chk["date"]
     f["feedback_summary_rows"] = feedback_summary_rows(br)
     f["fr_notes_table"] = field_notes_table(br, chk)
     f.update(pd_later=lag["tavily_later"], pd_pages=lag["with_both_dates"],
