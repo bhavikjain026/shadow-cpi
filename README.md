@@ -30,8 +30,8 @@ retry (94 lookups had failed), still 0 of 14 detected with dates + filter.
 
 | | |
 |---|---|
-| [![Leak demo, the app's opening screen: three result cards and the interval chart](docs/gallery/1_leak_demo.png)](docs/gallery/README.md#the-opening-screen) | [![Field Report: who should write the search, four arms](docs/gallery/2_four_arm_table.png)](docs/gallery/README.md) |
-| [![The R196 timeline: Tavily date, cutoff, page edited, extract_as_of refuses](docs/gallery/3_r196_timeline.png)](docs/gallery/README.md) | [![The pipeline: Tavily search, time lock, Extract, Nemotron quote check, seal](docs/gallery/4_flow.png)](docs/gallery/README.md) |
+| [![The Leak demo's opening screen: the headline claim, a three-line plain-words box, one real petrol case with a normal search on the left (one result marked LEAK) and the time-locked search on the right (every result marked OK), and three result cards: leaks without dates, leaks with the time lock, and the cost of correctness.](docs/gallery/1_leak_demo.png)](docs/gallery/README.md#the-opening-screen) | [![Field Report table comparing four ways of writing the searches (arms A, B, C and T): who writes the search, how many of the 29 known price changes each found, credits spent and median latency.](docs/gallery/2_four_arm_table.png)](docs/gallery/README.md) |
+| [![Timeline for R196: Tavily's date for the page, the cutoff, and the page edited after the cutoff; extract_as_of refuses to return today's page because the archive has no copy from before the cutoff.](docs/gallery/3_r196_timeline.png)](docs/gallery/README.md) | [![Flow diagram: Tavily Search inside the time lock, Tavily Extract, a quote check by Nemotron on Nebius Token Factory with a code check on the number, then the seal.](docs/gallery/4_flow.png)](docs/gallery/README.md) |
 
 <details>
 <summary>Footnote: what counts as a leak, and the update after the archive retry</summary>
@@ -263,6 +263,24 @@ repro script each: [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports.md), b
 Also measured: the filter drops undated pages (8 of 60 results undated with
 no dates, 0 with the filter), and the Research endpoint has no date window (checked in the API
 reference on 26 Oct; not measured).
+
+## Tavily integration map
+
+Every Tavily endpoint and parameter we use or refuse, what we do with it and why; each row is checked against the code
+in `tests/test_sync_doc_numbers.py`.
+
+| Endpoint / parameter | How we use it | Why |
+|---|---|---|
+| `start_date` / `end_date` (Search) | Every time-locked search sends a window that ends on the cutoff; an `end_date` after the cutoff is refused. | The first lock: Tavily only returns pages dated inside the window. |
+| `filter_by_published_date` (Search) | Always on inside the time lock; it cannot be switched off there. The date test also ran it off, to measure it. | Also removes results with no detectable date; we measured what that costs. |
+| `include_published_date` (Search) | Set on the Try it page, the Leak demo's live mode and the MCP search tool, so each result carries Tavily's date; code then re-checks every date and labels the result safe, date flag or leak. | A date is Tavily's estimate, so code does not take it on trust. |
+| `/extract` | Reads each page the pipeline cites. The model returns a line number; code copies that line from the Extract output and checks the number is in it. `extract_as_of` pairs it with Wayback. | Extract returns the page as it is today, so a page edited after the cutoff needs the archive copy. |
+| `/map` and `/crawl` | Look for the pages that hold official price lists and tariff orders. | Official sources publish lists, not news. Map returned nothing on several government and dairy sites (a field note). |
+| `include_usage` | Sent on every call, by the app's client and by the standalone `timelock` client, and the credits are written to the call log and the credit ledger. | To cap spend per run and report credits per result. |
+| `X-Project-ID: shadow-cpi` (header) | Sent on calls to api.tavily.com from the app's HTTP layer. The standalone `timelock` package and the MCP server do not send it, and it is not part of any cache key. | Tavily groups usage by project. |
+| MCP tools (`mcp/server.py`) | `search` (the time-locked search), `as_of` (`extract_as_of`) and `check_leaks` (labels results you already have, no Tavily call). They reach Tavily through `timelock.TavilyHTTP` with your own key. | The same lock for any agent. |
+| We refuse: `time_range`, `days`, `auto_parameters` | The time lock raises an error before any call if a request carries one of them, or switches the filter off. | They set their own window. `auto_parameters` with no dates reached for the present: 620 of 659 results for past-month queries came from October 2026 (observed once on 22 Oct 2026, not reproduced on 27 Oct 2026). |
+| Direct download (outside Tavily) | Official data is fetched directly and logged as service `direct`: the MoSPI API, and the Department of Consumer Affairs price pages, some saved by hand because they sit behind a captcha. `extract_or_download` falls back to a direct download when Extract cannot fetch a page; it is called from one place, the DoCA check in `checks.py`. | Some government sites block Extract. These downloads do not go through Tavily's date filter; the exact-line number check still applies, and every call is logged. |
 
 ## Reuse it
 

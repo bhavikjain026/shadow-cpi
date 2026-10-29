@@ -361,7 +361,7 @@ def test_rendered_seal_hash_is_the_sealed_file_and_no_tbd_remains(values):
 def test_judge_faq_is_short_answers_from_results_and_linked_from_readme(values):
     out = S.render((ROOT / "docs/templates/judge_faq.md").read_text(), values)
     qa = re.split(r"^## ", out, flags=re.M)[1:]
-    assert len(qa) == 10
+    assert len(qa) == 11
     for block in qa:
         question, _, answer = block.partition("\n")
         sentences = re.split(r"(?<=[.?!])\s+(?=[A-Z`])", " ".join(answer.split()))
@@ -384,3 +384,40 @@ def test_devpost_tavily_attribution_and_scope_claims_read_the_files():
     assert f"{cc['below_threshold']} elements below the threshold" in text and cc["ratio"] == 4.5
     assert "Zero leaks" not in (ROOT / "docs/judge_faq.md").read_text()
     assert "## How does the forecast compare with economists' polls?" in (ROOT / "docs/judge_faq.md").read_text()
+
+
+def test_tavily_integration_map_rows_match_the_code(values):
+    """Each row of the map names text that must exist in the file it is about; the refused list is the code's own."""
+    for name, how, why, checks in S.tavily_map_rows({**values, "refused_params": ["time_range", "days", "auto_parameters"]}):
+        assert name and how and why and checks, name
+        for rel, needle in checks:
+            assert needle in (ROOT / rel).read_text(encoding="utf-8"), f"{name}: {needle!r} not in {rel}"
+    import ast
+    tree = ast.parse((ROOT / "timelock/search.py").read_text())
+    refused = next(ast.literal_eval(n.value) for n in tree.body if isinstance(n, ast.Assign)
+                   and getattr(n.targets[0], "id", "") == "REFUSED")
+    assert refused == ("time_range", "days", "auto_parameters")
+    assert all(f"`{x}`" in S.tavily_map_rows({**values, "refused_params": list(refused)})[-2][0] for x in refused)
+    for rel in ("README.md", "docs/devpost_draft.md"):
+        text = (ROOT / rel).read_text()
+        assert "Tavily integration map" in text and "We refuse: `time_range`, `days`, `auto_parameters`" in text
+        assert "Direct download (outside Tavily)" in text
+
+
+def test_every_image_in_the_docs_has_alt_text():
+    """Every image has alt text; the gallery PNGs have a real description (at least eight words)."""
+    for rel in ("README.md", "docs/devpost_draft.md", "docs/gallery/README.md"):
+        for m in re.finditer(r"!\[([^\]]*)\]\(([^)]*)\)", (ROOT / rel).read_text()):
+            alt, target = m.group(1).strip(), m.group(2)
+            assert alt, f"{rel}: image without alt text: {target}"
+            if target.endswith(".png") and "gallery" in rel + target:
+                assert len(alt.split()) >= 8, f"{rel}: thin alt text for {target}: {alt!r}"
+
+
+def test_best_practices_quote_and_the_third_question_are_in_learned_and_faq():
+    quote = ("Date filters choose pages by when they were published. max_age_hours sets how recently Tavily must have "
+             "fetched each page")
+    for rel in ("docs/devpost_draft.md", "docs/judge_faq.md"):
+        text = " ".join((ROOT / rel).read_text().split())
+        assert quote in text and "We have not tested `max_age_hours`" in text or "we have not tested `max_age_hours`" in text
+        assert "which version of the page existed as of the date" in text or "which version existed as of the date" in text

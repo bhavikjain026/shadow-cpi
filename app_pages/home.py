@@ -20,8 +20,8 @@ lock = read_json("results/score_lock.json")
 sealed = read_json(f"sealed/{LIVE_MONTH}.json")
 call = sealed or read_json(f"results/nowcast_{LIVE_MONTH}.json")
 plain_box([f"This is our estimate of India's official inflation rate for {month_name(LIVE_MONTH)}, made before the government publishes it.",
-           "It is locked with a fingerprint (a \"seal\") so nobody can change it afterwards, and you can check the "
-           "fingerprint yourself.",
+           "It is locked with a fingerprint (a \"seal\"): if anyone changed it afterwards, the fingerprint would no longer "
+           "match, and you can check it yourself.",
            "Read the sentence below for the number and its range; the replay of past months and the technical "
            "detail follow."])
 release = next((sched for month, sched, _, _ in RELEASES if month == LIVE_MONTH), None)

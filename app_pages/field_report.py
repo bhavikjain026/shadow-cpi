@@ -159,7 +159,7 @@ if not r:
     st.stop()
 
 plain_box(["We tested whether a search engine can see the future when asked about a past date, and whether date limits fix it.",
-           "Without date limits, some searches returned pages published after the date; with dates and a filter we found none, but some good pages were dropped.",
+           "Without date limits, some searches returned pages published after the date; with dates and a filter we detected none, but some good pages were dropped.",
            "Start with the chart, then the six findings under it; the rest is evidence for experts."])
 
 # ---------- lead: one chart, then one case up close ----------

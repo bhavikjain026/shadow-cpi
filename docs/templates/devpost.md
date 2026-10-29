@@ -4,8 +4,14 @@
 > `python tools/sync_doc_numbers.py`; edit `docs/templates/devpost.md`, not this file.
 
 ## Subtitle
-We measured when web search leaks the future into AI backtests on Tavily, and shipped a time lock that detected
-{{pool_dated}} of {{pool_cases}} leaking cases.
+Time-locked web evidence for AI backtests on Tavily: we measured how the future leaks in, shipped a fix under which we
+detected {{pool_dated}} of {{pool_cases}} leaking cases, and use it to seal a monthly India inflation forecast.
+
+Shadow CPI is one product: web evidence you can trust as of a date. **Tavily Search** (with `start_date`/`end_date` and
+`filter_by_published_date`) finds pages inside the time lock, and **Tavily Extract** reads each page. **NVIDIA Nemotron
+Nano** is the yes/no gatekeeper that screens pages, and **NVIDIA Nemotron Super** cites the exact numbered line for each
+price; both run on **Nebius Token Factory**. Code checks each number on the page, computes the CPI estimate, and seals it
+before the government publishes.
 
 ## Headline
 <!-- headline:start -->
@@ -80,13 +86,21 @@ the update):
 
 {{evidence_kept_table}}
 
+## Tavily integration map
+Every Tavily endpoint and parameter we use or refuse, what we do with it and why; each row is checked against the code in
+`tests/test_sync_doc_numbers.py`.
+
+{{tavily_map_table}}
+
 ## What we learned that you wouldn't know
 - **Date filters select which pages, not which version of a page.** Tavily dated `{{ex_row}}`, a {{ex_company}} results
   preview, {{ex_published}}, before its {{ex_cutoff}} cutoff; the page was updated on {{ex_updated}} and Extract returns
   the updated page. This is one demonstrated case (`{{ex_row}}`, n={{asof_n}}), not a rate; `extract_as_of` serves the latest
   Wayback copy on or before the cutoff, or nothing.
-- **`max_age_hours` controls cache freshness, not as-of.** Tavily's reference describes it as "{{max_age_quote}}", so it
-  bounds how old the cached copy is and says nothing about which date the copy reflects.
+- **Three questions, and Tavily answers two.** Tavily's best-practices page ([docs.tavily.com](https://docs.tavily.com/documentation/best-practices/best-practices-search), "By content freshness") says: "Date filters choose pages by when they were published. max_age_hours sets how recently Tavily must have fetched each page". Those are two questions: when a page was published, and
+  how recently Tavily fetched it (the reference describes `max_age_hours` as "{{max_age_quote}}"). The third is which
+  version of the page existed as of the date, and that is what we measured (`{{ex_row}}`, a demonstration, n={{asof_n}});
+  `extract_as_of` answers it from an archive copy or refuses. We have not tested `max_age_hours`.
 - **Explicit dates alone already gave the same count.** `start_date`/`end_date` without the filter gave
   {{dt_datesonly}} of {{dt_cases}} detected (Wilson {{dt_datesonly_w}}). The filter additionally removes results with no
   detectable date, as Tavily documents; on this sample that changed little, because the dates-only search returned
@@ -156,6 +170,13 @@ Tavily's docs: documented behaviour, doc gap or unexplained.
 
 ## Feedback by product: Nebius Token Factory, Nemotron Nano, Nemotron Super (and Tavily, separately)
 {{feedback_five}}
+
+## Gallery
+Alt text for the four images uploaded with this entry:
+1. `1_leak_demo.png`: {{alt_leak_demo}}
+2. `2_four_arm_table.png`: {{alt_four_arm}}
+3. `3_r196_timeline.png`: {{alt_timeline}}
+4. `4_flow.png`: {{alt_flow}}
 
 ## Accessibility
 Every app page is checked in a real browser by `tools/check_contrast.py` (Chromium through Playwright): {{a11y_pages}}

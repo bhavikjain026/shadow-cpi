@@ -6,7 +6,7 @@ cropped to their content, so they are shorter. The two app shots and both diagra
 `python tools/sync_doc_numbers.py` (edit `docs/templates/gallery.md`, not this file).
 
 ## The opening screen
-![Leak demo, the app's opening screen: the headline claim, a plain-words box, one real case and the three result cards](1_leak_demo.png)
+![{{alt_leak_demo}}](1_leak_demo.png)
 
 **Ask a search engine about the past, and it can answer with the future.** The app's opening screen. Date test (pilot, {{dt_cases}} past
 cases, the pre-registered initial pass): with no dates, {{dt_nodates}} of {{dt_cases}} cases kept a confirmed leak, a
@@ -22,7 +22,7 @@ cost of correctness), with the dot-and-interval chart of the same counts just be
 `results/field_report.json`, `results/replication.json`.
 
 ## The four-arm table
-![Field Report: who should write the search, four arms](2_four_arm_table.png)
+![{{alt_four_arm}}](2_four_arm_table.png)
 
 **Who should write the search?** On {{known_changes}} known price changes, fixed code templates (arm A) found
 {{arm_a_recall}}; Nemotron-written fields (arms B and C) {{arm_b_recall}} and {{arm_c_recall}}; Tavily
@@ -31,7 +31,7 @@ cost of correctness), with the dot-and-interval chart of the same counts just be
 Pre-registered. App page: Field Report. Source: `results/field_report.json`, `results/v2_ablation.json`.
 
 ## {{asof_row}}: a search date does not freeze the page
-![{{asof_row}} timeline: Tavily date, cutoff, page edited, extract_as_of refuses](3_r196_timeline.png)
+![{{alt_timeline}}](3_r196_timeline.png)
 
 **{{asof_row}}**, a {{ex_company}} results preview: Tavily dated it {{asof_tavily}}, the cutoff was {{asof_cutoff}},
 and the page was edited {{asof_page}} with a link to the actual result, so Extract today returns the edited page.
@@ -40,7 +40,7 @@ returns **{{asof_reason}}** instead of today's text. A {{asof_label}} ({{asof_cr
 `results/asof_demo_r196.json`.
 
 ## From search to seal
-![Flow: Tavily search, time lock, Extract, quote check by Nemotron on Nebius Token Factory with a code check on the number, seal](4_flow.png)
+![{{alt_flow}}](4_flow.png)
 
 **The pipeline.** Tavily Search proposes dated pages; the time lock sends the dates and code re-checks each one;
 Extract returns the page as numbered lines; the quote-check box reads "Nemotron on Nebius Token Factory: Nano screens

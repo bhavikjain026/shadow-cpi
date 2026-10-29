@@ -20,6 +20,9 @@ Yes. 0 of 42 detected (Wilson 95% 0–8%), and the rule of three puts the upper 
 pre-registered replication (22 new cases) under one rule; both are India-focused, so they show the effect and its size
 here, not Tavily's behaviour in general.
 
+## Doesn't `max_age_hours` solve the stale-page problem?
+Tavily's best-practices page ([docs.tavily.com](https://docs.tavily.com/documentation/best-practices/best-practices-search), "By content freshness") says: "Date filters choose pages by when they were published. max_age_hours sets how recently Tavily must have fetched each page". That covers two questions, when a page was published and how recently Tavily fetched it, and the one we measured is a third: which version existed as of the date (`R196`, a demonstration, n=1), which `extract_as_of` answers or refuses; we have not tested `max_age_hours`.
+
 ## Why Wayback as ground truth, and what can it not prove?
 
 It is the only independent record of whether a page existed by the cutoff, so a leak counts only when the Wayback

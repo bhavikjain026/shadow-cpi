@@ -219,6 +219,85 @@ def feedback_summary_rows(br):
     return "\n".join(out)
 
 
+# The Tavily integration map. Each row: (endpoint or parameter, how we use it, why, [(file, text that must be in it)]).
+# tests/test_sync_doc_numbers.py checks every (file, text) pair, so a row cannot outlive the code it describes.
+def tavily_map_rows(f):
+    refused = ", ".join(f"`{x}`" for x in f["refused_params"])
+    return [
+        ("`start_date` / `end_date` (Search)",
+         "Every time-locked search sends a window that ends on the cutoff; an `end_date` after the cutoff is refused.",
+         "The first lock: Tavily only returns pages dated inside the window.",
+         [("timelock/search.py", "end_date"), ("shadow_cpi/leak_live.py", "start_date")]),
+        ("`filter_by_published_date` (Search)",
+         "Always on inside the time lock; it cannot be switched off there. The date test also ran it off, to measure it.",
+         "Also removes results with no detectable date; we measured what that costs.",
+         [("timelock/search.py", "filter_by_published_date"), ("v2/date_test.py", "filter_by_published_date")]),
+        ("`include_published_date` (Search)",
+         "Set on the Try it page, the Leak demo's live mode and the MCP search tool, so each result carries Tavily's "
+         "date; code then re-checks every date and labels the result safe, date flag or leak.",
+         "A date is Tavily's estimate, so code does not take it on trust.",
+         [("shadow_cpi/try_it.py", "include_published_date"), ("mcp/server.py", "include_published_date")]),
+        ("`/extract`",
+         "Reads each page the pipeline cites. The model returns a line number; code copies that line from the Extract "
+         "output and checks the number is in it. `extract_as_of` pairs it with Wayback.",
+         "Extract returns the page as it is today, so a page edited after the cutoff needs the archive copy.",
+         [("shadow_cpi/tavily.py", "/extract"), ("timelock/asof.py", "def extract_as_of")]),
+        ("`/map` and `/crawl`",
+         "Look for the pages that hold official price lists and tariff orders.",
+         "Official sources publish lists, not news. Map returned nothing on several government and dairy sites (a field note).",
+         [("shadow_cpi/tavily.py", "/map"), ("shadow_cpi/tavily.py", "/crawl")]),
+        ("`include_usage`",
+         "Sent on every call, by the app's client and by the standalone `timelock` client, and the credits are written to the "
+         "call log and the credit ledger.",
+         "To cap spend per run and report credits per result.",
+         [("shadow_cpi/tavily.py", "include_usage"), ("timelock/clients.py", "include_usage")]),
+        ("`X-Project-ID: shadow-cpi` (header)",
+         "Sent on calls to api.tavily.com from the app's HTTP layer. The standalone `timelock` package and the MCP server do "
+         "not send it, and it is not part of any cache key.",
+         "Tavily groups usage by project.",
+         [("shadow_cpi/http.py", "X-Project-ID"), ("tests/test_project_header.py", "cache_key")]),
+        ("MCP tools (`mcp/server.py`)",
+         "`search` (the time-locked search), `as_of` (`extract_as_of`) and `check_leaks` (labels results you already have, "
+         "no Tavily call). They reach Tavily through `timelock.TavilyHTTP` with your own key.",
+         "The same lock for any agent.",
+         [("mcp/server.py", "def search"), ("mcp/server.py", "def as_of"), ("mcp/server.py", "def check_leaks")]),
+        (f"We refuse: {refused}",
+         "The time lock raises an error before any call if a request carries one of them, or switches the filter off.",
+         f"They set their own window. `auto_parameters` with no dates reached for the present: {f['auto_oct']} of "
+         f"{f['auto_results']} results for past-month queries came from {f['live_month']} ({f['auto_note']}).",
+         [("timelock/search.py", "REFUSED")]),
+        ("Direct download (outside Tavily)",
+         "Official data is fetched directly and logged as service `direct`: the MoSPI API, and the Department of Consumer "
+         "Affairs price pages, some saved by hand because they sit behind a captcha. `extract_or_download` falls back to a "
+         "direct download when Extract cannot fetch a page; it is called from one place, the DoCA check in `checks.py`.",
+         "Some government sites block Extract. These downloads do not go through Tavily's date filter; the exact-line "
+         "number check still applies, and every call is logged.",
+         [("shadow_cpi/tavily.py", "def extract_or_download"), ("checks.py", "extract_or_download")]),
+    ]
+
+
+def tavily_map_table(f):
+    out = ["| Endpoint / parameter | How we use it | Why |", "|---|---|---|"]
+    out += [f"| {a} | {b} | {c} |" for a, b, c, _ in tavily_map_rows(f)]
+    return "\n".join(out)
+
+
+ALT = {   # alt text for the four gallery images, shared by the README, the gallery page and the Devpost draft
+    "alt_leak_demo": "The Leak demo's opening screen: the headline claim, a three-line plain-words box, one real petrol "
+                     "case with a normal search on the left (one result marked LEAK) and the time-locked search on the "
+                     "right (every result marked OK), and three result cards: leaks without dates, leaks with the time "
+                     "lock, and the cost of correctness.",
+    "alt_four_arm": "Field Report table comparing four ways of writing the searches (arms A, B, C and T): who writes the "
+                    "search, how many of the {known_changes} known price changes each found, credits spent and median "
+                    "latency.",
+    "alt_timeline": "Timeline for {asof_row}: Tavily's date for the page, the cutoff, and the page edited after the "
+                    "cutoff; extract_as_of refuses to return today's page because the archive has no copy from before "
+                    "the cutoff.",
+    "alt_flow": "Flow diagram: Tavily Search inside the time lock, Tavily Extract, a quote check by Nemotron on Nebius "
+                "Token Factory with a code check on the number, then the seal.",
+}
+
+
 def tavily_docs_table(td, f):
     """'What Tavily's docs say vs what we measured': one row per field, the API reference quoted verbatim and linked
     (config/doc_citations.json tavily_docs), our measurement beside it from the facts already read (f)."""
@@ -618,6 +697,10 @@ def facts(st, as_of, root=ROOT):
              lang_dated_w=wilson(lm["C"]["leak_case_wilson95"]), lang_nodates=lm["A"]["leak_cases"])
     f["asof_n"] = len([ad["row_id"]])                                      # the demo reads one page
     f["tavily_docs_table"] = tavily_docs_table(cit["tavily_docs"], f)
+    f["refused_params"] = re.search(r"^REFUSED = \(([^)]*)\)", (root / "timelock/search.py").read_text(), re.M
+                                    ).group(1).replace('"', "").replace(" ", "").rstrip(",").split(",")
+    f["tavily_map_table"] = tavily_map_table(f)
+    f.update({k: v.format(**f) for k, v in ALT.items()})
     f.update(tavily_search_url=cit["tavily_docs"]["search_url"], tavily_extract_url=cit["tavily_docs"]["extract_url"])
     # config/doc_citations.json nemotron_cutoffs: as stated in NVIDIA's model cards
     nc = {m["id"]: m for m in cit["nemotron_cutoffs"]["models"]}

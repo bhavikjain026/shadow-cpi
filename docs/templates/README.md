@@ -29,8 +29,8 @@ retry ({{rr_fin_failed}} lookups had failed), still {{fin_dated_retry}} of {{fin
 
 | | |
 |---|---|
-| [![Leak demo, the app's opening screen: three result cards and the interval chart](docs/gallery/1_leak_demo.png)](docs/gallery/README.md#the-opening-screen) | [![Field Report: who should write the search, four arms](docs/gallery/2_four_arm_table.png)](docs/gallery/README.md) |
-| [![The {{asof_row}} timeline: Tavily date, cutoff, page edited, extract_as_of refuses](docs/gallery/3_r196_timeline.png)](docs/gallery/README.md) | [![The pipeline: Tavily search, time lock, Extract, Nemotron quote check, seal](docs/gallery/4_flow.png)](docs/gallery/README.md) |
+| [![{{alt_leak_demo}}](docs/gallery/1_leak_demo.png)](docs/gallery/README.md#the-opening-screen) | [![{{alt_four_arm}}](docs/gallery/2_four_arm_table.png)](docs/gallery/README.md) |
+| [![{{alt_timeline}}](docs/gallery/3_r196_timeline.png)](docs/gallery/README.md) | [![{{alt_flow}}](docs/gallery/4_flow.png)](docs/gallery/README.md) |
 
 <details>
 <summary>Footnote: what counts as a leak, and the update after the archive retry</summary>
@@ -241,6 +241,13 @@ repro script each: [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports.md), b
 Also measured: the filter drops undated pages ({{dt_undated_nodates}} of {{dt_results_nodates}} results undated with
 no dates, {{dt_undated_filter}} with the filter), and the Research endpoint has no date window (checked in the API
 reference on {{research_checked}}; not measured).
+
+## Tavily integration map
+
+Every Tavily endpoint and parameter we use or refuse, what we do with it and why; each row is checked against the code
+in `tests/test_sync_doc_numbers.py`.
+
+{{tavily_map_table}}
 
 ## Reuse it
 

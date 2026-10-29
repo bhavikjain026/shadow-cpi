@@ -7,7 +7,7 @@ cropped to their content, so they are shorter. The two app shots and both diagra
 `python tools/sync_doc_numbers.py` (edit `docs/templates/gallery.md`, not this file).
 
 ## The opening screen
-![Leak demo, the app's opening screen: the headline claim, a plain-words box, one real case and the three result cards](1_leak_demo.png)
+![The Leak demo's opening screen: the headline claim, a three-line plain-words box, one real petrol case with a normal search on the left (one result marked LEAK) and the time-locked search on the right (every result marked OK), and three result cards: leaks without dates, leaks with the time lock, and the cost of correctness.](1_leak_demo.png)
 
 **Ask a search engine about the past, and it can answer with the future.** The app's opening screen. Date test (pilot, 20 past
 cases, the pre-registered initial pass): with no dates, 9 of 20 cases kept a confirmed leak, a
@@ -23,7 +23,7 @@ cost of correctness), with the dot-and-interval chart of the same counts just be
 `results/field_report.json`, `results/replication.json`.
 
 ## The four-arm table
-![Field Report: who should write the search, four arms](2_four_arm_table.png)
+![Field Report table comparing four ways of writing the searches (arms A, B, C and T): who writes the search, how many of the 29 known price changes each found, credits spent and median latency.](2_four_arm_table.png)
 
 **Who should write the search?** On 29 known price changes, fixed code templates (arm A) found
 6; Nemotron-written fields (arms B and C) 2 and 2; Tavily
@@ -32,7 +32,7 @@ cost of correctness), with the dot-and-interval chart of the same counts just be
 Pre-registered. App page: Field Report. Source: `results/field_report.json`, `results/v2_ablation.json`.
 
 ## R196: a search date does not freeze the page
-![R196 timeline: Tavily date, cutoff, page edited, extract_as_of refuses](3_r196_timeline.png)
+![Timeline for R196: Tavily's date for the page, the cutoff, and the page edited after the cutoff; extract_as_of refuses to return today's page because the archive has no copy from before the cutoff.](3_r196_timeline.png)
 
 **R196**, a TCS results preview: Tavily dated it 7 Jul, the cutoff was 8 Jul,
 and the page was edited 9 Jul with a link to the actual result, so Extract today returns the edited page.
@@ -41,7 +41,7 @@ returns **no as-of copy** instead of today's text. A demo, n=1, not a measuremen
 `results/asof_demo_r196.json`.
 
 ## From search to seal
-![Flow: Tavily search, time lock, Extract, quote check by Nemotron on Nebius Token Factory with a code check on the number, seal](4_flow.png)
+![Flow diagram: Tavily Search inside the time lock, Tavily Extract, a quote check by Nemotron on Nebius Token Factory with a code check on the number, then the seal.](4_flow.png)
 
 **The pipeline.** Tavily Search proposes dated pages; the time lock sends the dates and code re-checks each one;
 Extract returns the page as numbered lines; the quote-check box reads "Nemotron on Nebius Token Factory: Nano screens
