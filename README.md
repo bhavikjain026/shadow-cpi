@@ -559,13 +559,13 @@ More: [`docs/honest_limits.md`](docs/honest_limits.md), [`docs/frozen_rules.md`]
 
 ## Tamper-evident call log
 
-`tools/audit_log.py <date>` turns that day's `results/credit_ledger.jsonl` and flight recorder into `results/audit_log/<date>.jsonl`: one entry per API call (time, service, endpoint, request id, query or URLs, status, credits, response SHA-256), each carrying `prev_hash` and an `entry_hash` over its canonical JSON. The final hash goes in `<date>.head`, and that file is timestamped with [OpenTimestamps](https://opentimestamps.org) (`<date>.head.ots`). `python tools/verify_audit_log.py results/audit_log/<date>.jsonl` recomputes the chain and reports OK or the first broken entry.
+`tools/audit_log.py <date>` turns that day's `results/credit_ledger.jsonl` and flight recorder into `results/audit_log/<date>.jsonl`: one entry per API call (time, service, endpoint, request id, query or URLs, status, credits, response SHA-256), each carrying `prev_hash` and an `entry_hash` over its canonical JSON. The final hash goes in `<date>.head`, and that file is timestamped with [OpenTimestamps](https://opentimestamps.org) (`<date>.head.ots`). `python tools/verify_audit_log.py results/audit_log/<date>.jsonl` recomputes the chain and reports OK or the earliest broken entry.
 
 Day logs are built after the day ends (IST) and stamped with OpenTimestamps; run tools/verify_audit_log.py to check.
 
 A "day" is an IST calendar day (Asia/Kolkata, UTC+05:30, 00:00:00 to 23:59:59), whatever time zone the machine is in. The builder refuses a day that has not ended; `--partial` writes an unstamped, uncommitted `<date>.partial.jsonl` for a look at a day in progress. Questions typed by visitors on the Try it page are logged as `visitor query` plus the SHA-256 of the text; our own pipeline queries stay readable. Nothing is capped or truncated: an entry exists for every recorder call in the day.
 
-An earlier test stamp of 2026-10-28 (head 7e20c15d…, 2758 entries) used a UTC day; it was superseded by the IST-day log (head 0c90b3da…, 2688 entries) the same afternoon. Only the IST-day logs are current. The recorder keeps at most the first 20 URLs per extract call, so the log lists no more than that per call.
+An earlier test stamp of 2026-10-28 (head 7e20c15d…, 2758 entries) used a UTC day; it was superseded by the IST-day log (head 0c90b3da…, 2688 entries) the same afternoon. Only the IST-day logs are current. The recorder keeps at most 20 URLs per extract call, so the log lists no more than that per call.
 
 To stamp or check the `.ots` proofs: `pip install -r requirements-dev.txt` (the chain check needs nothing beyond the standard library).
 
