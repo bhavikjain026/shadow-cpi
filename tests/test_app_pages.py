@@ -426,3 +426,24 @@ def test_sidebar_page_guide_lists_all_15_pages_with_link_and_description():
     assert [k.proto.label for k in links][:5] == ["Leak demo", "Field Report", "Try it: search the past",
                                               "October forecast", "Radar"]   # nav order
     assert not [e for e in at.main.expander if e.label == "Page guide"]            # no second copy in the main area
+
+
+@pytest.mark.parametrize("page", PAGES)
+def test_no_page_renders_a_bare_none(page):
+    """A bare expression statement (a conditional that calls a function, say) is printed by Streamlit's magic; its
+    None is drawn as the code text `None`. No page may render a text element that is only None."""
+    at = load(page)
+    texts = [m.value for m in at.markdown] + [c.value for c in at.caption] + [t.value for t in at.text]
+    assert [t for t in texts if str(t).strip().strip("`") in ("None", "null")] == []
+
+
+def test_pages_have_no_bare_expression_statements():
+    """The same fault, found in the source: only calls and docstrings may stand alone as a statement."""
+    import ast
+    bad = []
+    for f in sorted((ROOT / "app_pages").glob("*.py")) + [ROOT / "app.py"]:
+        for n in ast.walk(ast.parse(f.read_text())):
+            if (isinstance(n, ast.Expr) and not isinstance(n.value, (ast.Call, ast.Await, ast.Yield, ast.YieldFrom))
+                    and not (isinstance(n.value, ast.Constant) and isinstance(n.value.value, str))):
+                bad.append(f"{f.name}:{n.lineno}")
+    assert bad == []

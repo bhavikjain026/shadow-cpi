@@ -75,7 +75,10 @@ with st.container(border=True):
             lead("The three groups of goods and services that add most to the estimate, in percentage points of inflation.")
             table([{"Group": c["name"], "Contribution (percentage points)": f"{c['pp']:+.2f}"}
                           for c in call["contributors"][:3]])
-        provenance(f"sealed/{LIVE_MONTH}.json", "sealed_at_utc") if sealed else provenance(f"results/nowcast_{LIVE_MONTH}.json")
+        if sealed:                             # a statement, not a bare conditional: Streamlit would print its None
+            provenance(f"sealed/{LIVE_MONTH}.json", "sealed_at_utc")
+        else:
+            provenance(f"results/nowcast_{LIVE_MONTH}.json")
     else:                                      # compact status banner until the seal
         rel = next_release()
         c1, c2, c3 = st.columns(3)
