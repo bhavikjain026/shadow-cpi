@@ -25,7 +25,7 @@ NAV = {"": [
     ("try_it", "Try it: search the past", "travel_explore", "Try it: search the past"),
     ("home", "October forecast", "trending_up", "Experimental nowcast"),
     ("radar", "Radar", "radar", "October radar (v2)"),
-], "More": [
+], "Audit trail (for experts)": [
     ("evidence", "Evidence", "receipt_long", "Evidence"),
     ("replay", "Replay", "replay", "Replay"),
     ("live_build", "Live build (v2)", "construction", "Live build (v2)"),
