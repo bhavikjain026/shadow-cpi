@@ -462,6 +462,17 @@ connection reset that stopped long runs, mixed model naming).
 Short answers to the hardest questions: [`docs/judge_faq.md`](docs/judge_faq.md). Full list: [`docs/honest_limits.md`](docs/honest_limits.md).
 
 - Coverage: {{cov_low}}–{{cov_high}} of the CPI basket is measured each month; the rest is assumed to follow its trend.
+- Why {{dt_cases}} date-test cases and {{fin_events}} finance events: the pre-registration files say only this
+  (quoted verbatim). `v2/DATE_TEST_PREREG.md`:
+  > {{prereg_date_cases}}
+  >
+  > {{prereg_date_deviation}}
+
+  `v2/FINANCE_PREREG.md`, in the amendment that fixed the event list before any search:
+  > {{prereg_fin_count}}
+
+  Neither file says why these sizes were chosen beyond that, and no power calculation is recorded, so both are small
+  pilots; every count carries a Wilson interval.
 - Web news quotes ran in full only for {{web_quotes_month}}; the other replay months used official price lists, government
   food prices and announced price-change events.
 - Windows: searches start {{pre_days}} days before the month (announcements). v1's replay ran to each month's last day;

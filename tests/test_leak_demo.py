@@ -97,7 +97,7 @@ def test_home_is_the_leak_demo_with_examples_and_totals():
                                              f"All {len(DATA['cases'])} cases"]
     leaks = [m.value for m in at.markdown if m.value.startswith(":red-badge[LEAK]")]
     assert len(leaks) >= 3                         # each example highlights its leaking result
-    assert "days after the cutoff" in t and "Live mode is off" in t
+    assert "days after the cutoff" in t and "Everything above is saved results. For a live search" in t
     table = at.table[0].value
     assert table.iloc[0, 1].startswith(f"{d['open']['first']} of {d['cases']}")
 
@@ -337,3 +337,16 @@ def test_field_report_shows_the_replication_group_and_the_pooled_line():
     assert f"Time lock (Tavily date filters) {pl['leak_cases']} of {pl['cases']}" in text
     cap = " ".join(x.value for x in at.caption)
     assert "Cache note (descriptive, not pre-registered)" in cap and "includes the reused pilot response" in cap
+
+
+def test_benchmark_table_has_the_replication_row_apart_and_the_live_line_points_to_try_it():
+    at = page()
+    assert f"Pilot and finance check (the {len(DATA['cases'])}-case benchmark)" in [h.value for h in at.subheader]
+    rp = json.loads((ROOT / "results/replication.json").read_text())
+    a, c = rp["metrics"]["price"]["arms"]["A"], rp["metrics"]["price"]["arms"]["C"]
+    df = at.table[0].value
+    assert len(df) == 3 and df.iloc[2, 0].startswith("Replication (date-test rule")        # a row of its own
+    assert df.iloc[2, 1].startswith(f"{a['leak_cases']} of {a['cases']}")
+    assert df.iloc[2, 3].startswith(f"{c['leak_cases']} of {c['cases']}")
+    assert df.iloc[0, 1].startswith(f"{DATA['totals']['date']['open']['first']} of {DATA['totals']['date']['cases']}")
+    assert any(p.proto.page.endswith("try_it.py") or "try_it" in str(p.proto.page) for p in at.main.get("page_link"))

@@ -324,7 +324,7 @@ def update_lines(t):
 
 def totals(t, n):
     d, f, s = t["date"], t["finance"], t["strictness"]
-    st.subheader(f"All {n} cases", anchor="all-cases")
+    st.subheader(f"Pilot and finance check (the {n}-case benchmark)", anchor="all-cases")
     def cell(x, n, w):
         return f"{x} of {n} ({wilson(w)})"
     rows = []
@@ -335,7 +335,16 @@ def totals(t, n):
                      f"No time lock, {AFTER_RETRY}": cell(x["open"]["retry"], n, x["open"]["retry_wilson95"]),
                      "Time lock (Tavily date filters), pre-registered": cell(x["locked"]["first"], n, x["locked"]["first_wilson95"]),
                      f"Time lock (Tavily date filters), {AFTER_RETRY}": cell(x["locked"]["retry"], n, x["locked"]["retry_wilson95"])})
+    rep = read_json(REPLICATION)["retry"]["metrics"]["price"]["arms"]       # after the retry; initial pass below
+    rp = read_json(REPLICATION)["metrics"]["price"]
+    ra, rc, ia, ic = rep["A"], rep["C"], rp["arms"]["A"], rp["arms"]["C"]
+    rows.append({"Test": f"Replication (date-test rule, {rp['cases']} new cases, pre-registered; reported apart)",
+                 "No time lock (pre-registered)": cell(ia["leak_cases"], ia["cases"], ia["leak_case_wilson95"]),
+                 f"No time lock, {AFTER_RETRY}": cell(ra["leak_cases"], ra["cases"], ra["leak_case_wilson95"]),
+                 "Time lock (Tavily date filters), pre-registered": cell(ic["leak_cases"], ic["cases"], ic["leak_case_wilson95"]),
+                 f"Time lock (Tavily date filters), {AFTER_RETRY}": cell(rc["leak_cases"], rc["cases"], rc["leak_case_wilson95"])})
     lock_table(rows, lambda row, col: "open" if col.startswith("No ") else "lock" if "ime lock" in col else None)
+    st.caption("Each row is its own group: the date test, the finance check and the replication are never added together.")
     st.markdown(f"**The cost of strictness.** The time lock also drops good evidence: the dated search missed "
                 f"**{s['missed']} of {s['quotes']}** known-good quotes that the undated search found "
                 f"({wilson(s['wilson95'])}, Wilson 95%).")
@@ -362,8 +371,9 @@ def live():
     from shadow_cpi import live_run as L
     st.subheader("Try it live")
     if not L.enabled():
-        st.caption("Live mode is off on this copy of the app (it opens only when RUN_LIVE_ENABLED is set). "
-                   "Everything above is saved results.")
+        st.caption("Everything above is saved results. For a live search with your own question and date, use Try it: "
+                   "search the past.")
+        st.page_link("app_pages/try_it.py", label="Try it: search the past", icon=":material/travel_explore:")
         return
     st.caption(f"Type a question and pick a cutoff: we run both searches ({LL.BASE['search_depth']}, "
                f"{LL.BASE['max_results']} results) and label each result "

@@ -499,6 +499,17 @@ Jan–Sep 2026 replay, pre-registered, with one disclosed post-scoring correctio
 Short answers to the hardest questions: [`docs/judge_faq.md`](docs/judge_faq.md). Full list: [`docs/honest_limits.md`](docs/honest_limits.md).
 
 - Coverage: 14%–21% of the CPI basket is measured each month; the rest is assumed to follow its trend.
+- Why 20 date-test cases and 14 finance events: the pre-registration files say only this
+  (quoted verbatim). `v2/DATE_TEST_PREREG.md`:
+  > **20 query-cutoff cases** sampled from `audit/missed_events.md` (transcribed in `v2/recall_reference.json`), a list built by hand search, independent of Tavily. Random seed **20261022** (`random.Random(20261022)`).
+  >
+  > **Deviation from "4 per month over 5 months", logged:** the reference has only three months with 4 or more changes (April 6, May 8, June 5; July and September have 3 each). So: 4 drawn from each of April, May and June, all 3 of July and of September, and 2 more drawn from the remaining April–June changes, all with the same seed.
+
+  `v2/FINANCE_PREREG.md`, in the amendment that fixed the event list before any search:
+  > **(d) Final event count: 14** (5 RBI decisions, 9 company results), at least 12. With 14 events the Wilson 95% interval is still wide (0 of 14 → 0–22%; 7 of 14 → 27–73%); this is a small check, not a precise estimate.
+
+  Neither file says why these sizes were chosen beyond that, and no power calculation is recorded, so both are small
+  pilots; every count carries a Wilson interval.
 - Web news quotes ran in full only for March 2026; the other replay months used official price lists, government
   food prices and announced price-change events.
 - Windows: searches start 10 days before the month (announcements). v1's replay ran to each month's last day;

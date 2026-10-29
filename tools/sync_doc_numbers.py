@@ -221,6 +221,19 @@ def feedback_summary_rows(br):
 
 # The Tavily integration map. Each row: (endpoint or parameter, how we use it, why, [(file, text that must be in it)]).
 # tests/test_sync_doc_numbers.py checks every (file, text) pair, so a row cannot outlive the code it describes.
+def prereg_quote(rel, start, root=ROOT):
+    """A paragraph of a pre-registration file, verbatim: the line that starts with `start` plus its indented
+    continuation lines (a Markdown bullet) or following lines up to the blank line."""
+    lines = (root / rel).read_text(encoding="utf-8").splitlines()
+    i = next(k for k, l in enumerate(lines) if l.startswith(start))
+    out = [lines[i]]
+    for l in lines[i + 1:]:
+        if not l.strip() or l.startswith("- "):
+            break
+        out.append(l)
+    return " ".join(" ".join(x.split()) for x in out)
+
+
 def tavily_map_rows(f):
     refused = ", ".join(f"`{x}`" for x in f["refused_params"])
     return [
@@ -700,6 +713,9 @@ def facts(st, as_of, root=ROOT):
     f["refused_params"] = re.search(r"^REFUSED = \(([^)]*)\)", (root / "timelock/search.py").read_text(), re.M
                                     ).group(1).replace('"', "").replace(" ", "").rstrip(",").split(",")
     f["tavily_map_table"] = tavily_map_table(f)
+    f.update(prereg_date_cases=prereg_quote("v2/DATE_TEST_PREREG.md", "- **20 query-cutoff cases**").lstrip("- "),
+             prereg_date_deviation=prereg_quote("v2/DATE_TEST_PREREG.md", "- **Deviation from").lstrip("- "),
+             prereg_fin_count=prereg_quote("v2/FINANCE_PREREG.md", "**(d) Final event count"))
     f.update({k: v.format(**f) for k, v in ALT.items()})
     f.update(tavily_search_url=cit["tavily_docs"]["search_url"], tavily_extract_url=cit["tavily_docs"]["extract_url"])
     # config/doc_citations.json nemotron_cutoffs: as stated in NVIDIA's model cards
