@@ -2042,5 +2042,8 @@
 {"call_id": "7c75ceb0092b", "time": "2026-10-29T03:40:08.240997+00:00", "endpoint": "/search", "experiments": ["live-month"], "credits": 1, "response_time": 2.73, "request_id": "46f46d42-2c84-4cd6-9c3a-aa6c13fd7f47"},
 {"call_id": "a588c68a4bd8", "time": "2026-10-29T03:40:10.102887+00:00", "endpoint": "/extract", "experiments": ["live-month"], "credits": 1, "response_time": 0.77, "request_id": "a7b0374b-26f3-49a3-9ecc-2448aa401c0b"},
 {"call_id": "b0f6c04e48e0", "time": "2026-10-29T03:40:28.749507+00:00", "endpoint": "/search", "experiments": ["live-month"], "credits": 1, "response_time": 3.12, "request_id": "04640404-b96f-472d-912d-0d9c2f636809"},
-{"call_id": "d56ce3097656", "time": "2026-10-29T03:40:31.453262+00:00", "endpoint": "/extract", "experiments": ["live-month"], "credits": 1, "response_time": 1.7, "request_id": "c2d346c2-1687-4d34-b3be-4fc602a54b79"}
+{"call_id": "d56ce3097656", "time": "2026-10-29T03:40:31.453262+00:00", "endpoint": "/extract", "experiments": ["live-month"], "credits": 1, "response_time": 1.7, "request_id": "c2d346c2-1687-4d34-b3be-4fc602a54b79"},
+{"call_id": "f7acdc6cf9e4", "time": "2026-10-29T03:55:36.543722+00:00", "endpoint": "/search", "experiments": ["skeptic"], "credits": 1, "response_time": 1.33, "request_id": "36641cdd-d5f3-4995-99d0-5bf200211faa"},
+{"call_id": "4211719a161f", "time": "2026-10-29T03:55:40.355899+00:00", "endpoint": "/search", "experiments": ["skeptic"], "credits": 1, "response_time": 2.14, "request_id": "58544596-2ac6-49e7-b214-c2154952193f"},
+{"call_id": "35b66360335a", "time": "2026-10-29T03:55:44.423547+00:00", "endpoint": "/search", "experiments": ["skeptic"], "credits": 1, "response_time": 1.56, "request_id": "8aaac8c1-8c77-4e8c-977a-8bbb20b947ba"}
 ]}

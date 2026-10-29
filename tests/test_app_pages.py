@@ -58,7 +58,10 @@ def test_home_call_slot_scoreboard_and_audit():
     text = all_text(at)
     assert "Experimental nowcast" in text
     if not (ROOT / "sealed" / "2026-10.json").exists():
-        assert "sealing on 29 Oct" in [m.value for m in at.metric]
+        if (ROOT / "results" / "nowcast_2026-10.json").exists():           # built, not sealed yet
+            assert "Built but not sealed yet: sealing on 29 Oct." in [w.value for w in at.warning]
+        else:
+            assert "sealing on 29 Oct" in [m.value for m in at.metric]
     assert "P(headline ≥ 6.0%)" in text
     assert "Official October 2026 CPI in" in text and "Thu 12 Nov 2026, 4:00 PM IST" in text
     board = next(d.value for d in at.dataframe if "Average miss (percentage points)" in d.value.columns)

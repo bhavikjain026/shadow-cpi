@@ -379,12 +379,12 @@
    },
    {
     "endpoint": "/search",
-    "calls": 1159,
-    "credits": 1230,
-    "credits_per_call": 1.0612597066436584,
-    "median_latency_s": 3.59,
+    "calls": 1162,
+    "credits": 1233,
+    "credits_per_call": 1.0611015490533562,
+    "median_latency_s": 3.585,
     "p95_latency_s": 6.1,
-    "with_latency": 1155
+    "with_latency": 1158
    }
   ],
   "by_experiment": [
@@ -741,12 +741,12 @@
    {
     "experiment": "skeptic",
     "endpoint": "/search",
-    "calls": 27,
-    "credits": 27,
+    "calls": 30,
+    "credits": 30,
     "credits_per_call": 1.0,
-    "median_latency_s": 2.86,
+    "median_latency_s": 2.715,
     "p95_latency_s": 3.6399999999999997,
-    "with_latency": 27
+    "with_latency": 30
    },
    {
     "experiment": "try-it",
@@ -1013,12 +1013,12 @@
    }
   ],
   "total": {
-   "calls": 2044,
-   "credits": 1986,
-   "credits_per_call": 0.9716242661448141,
+   "calls": 2047,
+   "credits": 1989,
+   "credits_per_call": 0.9716658524670249,
    "median_latency_s": 3.12,
-   "p95_latency_s": 5.982000000000001,
-   "with_latency": 2037
+   "p95_latency_s": 5.9805,
+   "with_latency": 2040
   },
   "reconcile_credits": -82,
   "notes": [
@@ -2018,7 +2018,7 @@
   "arm_a_searches_per_month": 13.0,
   "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits at original cost / 9 months"
  },
- "ledger_rows": 2144,
+ "ledger_rows": 2184,
  "pages_changed": {
   "ist_date": "2026-10-28",
   "checked": 62,
