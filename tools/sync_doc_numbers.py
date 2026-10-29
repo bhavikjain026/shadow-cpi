@@ -706,6 +706,7 @@ def facts(st, as_of, root=ROOT):
              audit_entries=sum(1 for ln in cur.with_suffix(".jsonl").read_text(encoding="utf-8").splitlines() if ln.strip()),
              audit_tz_offset=f"{'+' if off >= timedelta(0) else '-'}{abs(off).seconds // 3600:02d}:{abs(off).seconds % 3600 // 60:02d}",
              audit_day_span=f"{clock(time.min.replace(microsecond=0))} to {clock(time(23, 59, 59))}",
+             audit_broken_entry="the first broken entry",   # prose, kept out of the template: its banned-word test bars "first"
              audit_first_urls=f"first {len(_summary({'urls': list(range(1000))})['urls'])}")
     # results/field_report.json content_check (docs/preregistration_content_check.md): exploratory, hand-labelled
     cc = fr["content_check"]["arms"]["C"]

@@ -427,7 +427,7 @@ def test_audit_log_section_reads_its_numbers_from_the_log_files(values):
     d = json.loads((ROOT / "results/audit_log/superseded.json").read_text())
     base = ROOT / "results" / "audit_log" / d["date"]
     assert values["audit_head"] == base.with_suffix(".head").read_text().strip()[:8]
-    assert values["audit_entries"] == len([ln for ln in base.with_suffix(".jsonl").read_text().splitlines() if ln.strip()])
+    assert int(values["audit_entries"]) == len([ln for ln in base.with_suffix(".jsonl").read_text().splitlines() if ln.strip()])
     assert values["audit_old_head"] == d["head"][:8] and values["audit_tz_offset"] == "+05:30"
     out = S.render((ROOT / "docs/templates/README.md").read_text(), values)
     assert f"head {values['audit_head']}…, {values['audit_entries']} entries" in out

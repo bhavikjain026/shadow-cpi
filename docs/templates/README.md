@@ -522,7 +522,7 @@ More: [`docs/honest_limits.md`](docs/honest_limits.md), [`docs/frozen_rules.md`]
 
 ## Tamper-evident call log
 
-`tools/audit_log.py <date>` turns that day's `results/credit_ledger.jsonl` and flight recorder into `results/audit_log/<date>.jsonl`: one entry per API call (time, service, endpoint, request id, query or URLs, status, credits, response SHA-256), each carrying `prev_hash` and an `entry_hash` over its canonical JSON. The final hash goes in `<date>.head`, and that file is timestamped with [OpenTimestamps](https://opentimestamps.org) (`<date>.head.ots`). `python tools/verify_audit_log.py results/audit_log/<date>.jsonl` recomputes the chain and reports OK or the first broken entry.
+`tools/audit_log.py <date>` turns that day's `results/credit_ledger.jsonl` and flight recorder into `results/audit_log/<date>.jsonl`: one entry per API call (time, service, endpoint, request id, query or URLs, status, credits, response SHA-256), each carrying `prev_hash` and an `entry_hash` over its canonical JSON. The final hash goes in `<date>.head`, and that file is timestamped with [OpenTimestamps](https://opentimestamps.org) (`<date>.head.ots`). `python tools/verify_audit_log.py results/audit_log/<date>.jsonl` recomputes the chain and reports OK or {{audit_broken_entry}}.
 
 Day logs are built after the day ends (IST) and stamped with OpenTimestamps; run tools/verify_audit_log.py to check.
 
