@@ -176,7 +176,9 @@ def extract_as_of(client, url, cutoff, *, published_date=None, archive=None, now
     `client` is anything with .extract(urls, **kwargs) -> dict (timelock.TavilyHTTP, tavily-python's TavilyClient).
     `published_date` is Tavily's date for the page from the search that found it, if any. `archive` defaults to a
     Wayback(); tests pass a fake. The live text is never returned when the page may have changed. `strict=True` also
-    refuses the live text when no Wayback capture on or before the cutoff confirms it (reason "unverified: ...")."""
+    refuses the live text when no Wayback capture on or before the cutoff confirms it (reason "unverified: ...").
+    A cutoff date means the end of that day in UTC: results dated on or before it (in UTC) pass; for IST, a page published 00:00–05:30 IST on the next day still counts as the cutoff day, so pass the previous day if you need a strict IST cutoff. Wayback capture timestamps are UTC, so
+    a capture counts by its UTC date."""
     cut = _iso("cutoff", cutoff)
     archive = archive or Wayback()
     taken = (now or datetime.now(timezone.utc)).strftime("%Y-%m-%dT%H:%M:%SZ")

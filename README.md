@@ -281,6 +281,7 @@ pip install "git+https://github.com/bhavikjain026/shadow-cpi@submission-v1.0"
 `auto_parameters`, or the filter switched off) before any call, and returns Tavily's results, each with
 `published_date`, `page_date` (when the page text was extracted), `status` (`safe` / `date_flag` / `leak`),
 `request_id` and `response_sha256`. A result dated after the cutoff is a `leak` even if Tavily's filter let it through.
+A cutoff date means the end of that day in UTC: results dated on or before it (in UTC) pass; for IST, a page published `00:00–05:30` IST on the next day still counts as the cutoff day, so pass the previous day if you need a strict IST cutoff.
 
 The cutoff day is inside the window. `end_date` is sent as the cutoff itself, never the day after (Tavily's reference
 says only "before the specified end date", so we do not rely on it keeping that day; at worst we lose cutoff-day pages),

@@ -110,6 +110,7 @@ def timelocked_search(client, query, cutoff, *, page_dates=None, **tavily_kwargs
     start_date/end_date to narrow the window, ...). An end_date after the cutoff, filter_by_published_date other
     than True, time_range, days or auto_parameters raises TimeLockError before any call. The cutoff day itself is
     inside the window (see the module docstring).
+    A cutoff date means the end of that day in UTC: results dated on or before it (in UTC) pass; for IST, a page published 00:00–05:30 IST on the next day still counts as the cutoff day, so pass the previous day if you need a strict IST cutoff.
     `page_dates` is an optional {url: ISO date} read from the page another way; it wins over the extracted one."""
     cut = _iso("cutoff", cutoff)
     bad = sorted(k for k in tavily_kwargs if k in REFUSED)

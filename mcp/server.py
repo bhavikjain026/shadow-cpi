@@ -52,7 +52,7 @@ def search(query: str, cutoff: str, topic: str = "general", max_results: int = 5
            include_raw_content: bool = False) -> dict:
     """Search the web as it was on `cutoff` (YYYY-MM-DD): nothing published after it. The cutoff is a date the
     user or task sets; do not move it to get more results. The cutoff day itself is inside the window; a result
-    counts by the UTC date of its published_date.
+    counts by the UTC date of its published_date. A cutoff date means the end of that day in UTC: results dated on or before it (in UTC) pass; for IST, a page published 00:00–05:30 IST on the next day still counts as the cutoff day, so pass the previous day if you need a strict IST cutoff.
 
     Refused (returns {"error": {"code", "message", "field"}} and makes no search): a cutoff, start_date or end_date
     that is not YYYY-MM-DD (invalid_date); an end_date after the cutoff (end_date_after_cutoff: the window may be
@@ -86,7 +86,7 @@ def run(tavily, query, cutoff, *, include_raw_content=False, **params):
 @structured_errors
 def as_of(url: str, cutoff: str, published_date: str | None = None, max_chars: int = 20000,
           strict: bool = False) -> dict:
-    """Read the page at `url` as it was on `cutoff` (YYYY-MM-DD). Tavily Extract returns the page as it is now, so
+    """Read the page at `url` as it was on `cutoff` (YYYY-MM-DD). A cutoff date means the end of that day in UTC: results dated on or before it (in UTC) pass; for IST, a page published 00:00–05:30 IST on the next day still counts as the cutoff day, so pass the previous day if you need a strict IST cutoff. Tavily Extract returns the page as it is now, so
     if anything suggests it changed after the cutoff (its own date, Tavily's `published_date` from the search that
     found it, or Wayback captures that differ), the latest Wayback Machine capture on or before the cutoff is returned
     instead. If there is none, `text` is null and the reason is "no as-of copy": do not use the page. If nothing
