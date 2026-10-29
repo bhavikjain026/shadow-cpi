@@ -568,6 +568,56 @@ with st.expander("Details for experts: finance check, retries, second review and
                    "The best case is the headline count. A bounding range, not a new result. Sources: "
                    + ", ".join(f"`{s}`" for s in et["sources"]) + ", `results/evidence_tiers.json`.")
 
+ea_ = r.get("exploratory_analyses")
+if ea_:
+    with st.expander("Exploratory analyses"):
+        lead("Three questions asked of the saved data after scoring: why the date filter dropped good evidence, how "
+             "strong the no-dates vs time-lock difference is, and whether the evidence leans towards price rises.")
+        fd, ps, asy = ea_["filter_drops"], ea_["paired_stats"], ea_["evidence_asymmetry"]
+        st.caption(f"{fd['label'].capitalize()}. No search, no model call, no credits; every figure is read from the saved results.")
+
+        st.subheader("Why the filter dropped valid evidence")
+        c = fd["counts"]
+        st.markdown(f"In the date test pilot ({fd['pass']}), the time lock did not return {fd['dropped']} of {fd['valid_total']} valid "
+                    f"evidence items. By the saved date fields: no detectable date {c['a']}; Tavily date after the cutoff though the "
+                    f"archive holds an earlier copy {c['b']}; Tavily date after the cutoff because the page was edited {c['c']}; "
+                    f"other {c['d']} ({fd['d_split']['before_window_start']} dated before the window start, "
+                    f"{fd['d_split']['inside_window_not_returned']} dated inside the window and not returned by the dated search).")
+        table([{"Case": x["case"], "Class": x["class"], "Tavily date": x["tavily_date"] or "none",
+                "Earliest archive copy": x["earliest_archive_copy"] or "none", "Why": x["reason"]} for x in fd["items"]])
+        st.caption(f"Class rules: " + " ".join(f"({k}) {v}." for k, v in fd["rules"].items()) + f" Source: `{fd['source']}`.")
+
+        st.subheader("Paired statistics")
+        table([{"Study": k, "Cases": s["cases"], "Leaks, no dates": s["leaks_no_dates"],
+                "Leaks, time lock": s["leaks_time_lock"], "Only no dates": s["only_no_dates"],
+                "Only time lock": s["only_time_lock"], "Exact McNemar p (two-sided)": f"{s['p_exact_two_sided']:.2g}"}
+               for k, s in ps["studies"].items()])
+        z = ps["zero"]
+        if z:
+            st.caption(f"The time lock's {z['leaks']} of {z['cases']}: rule-of-three upper bound {pct1(z['rule_of_three_upper'])} "
+                       f"(exact one-sided 95% bound {pct1(z['exact_one_sided_95_upper'])}; Wilson 95% {wilson(z['wilson95'])}). "
+                       f"Pairs are by case, {ps['pass']}. Sources: " + ", ".join(f"`{x}`" for x in ps["sources"]) + ".")
+
+        st.subheader("Evidence asymmetry")
+        e, ev2 = asy["events_replay"], asy["events_v2_announced"]
+        on = asy["official_item_months"]
+        st.markdown(f"Across the scored months, the evidence behind the replay held {e['item_months']} item-month price changes: "
+                    f"{e['rise']} rises, {e['fall']} falls, {e['flat']} flat. Announced-price events alone: "
+                    f"{e['by_layer']['announced']['rise']} rises, {e['by_layer']['announced']['fall']} falls "
+                    f"(the v2 scorer moved {ev2['rise']} rise and {ev2['fall']} fall item-months). Official item-months: "
+                    f"{on['rise']} rises, {on['fall']} falls, {on['flat']} flat.")
+        so = asy["share_of_official"]
+        names_ = {"all_official_items": "Any verified event, every official item",
+                  "items_with_any_evidence": "Any verified event, only items that ever had evidence",
+                  "all_official_items_announced_only": "Announced events only, every official item"}
+        table([{"Scope": names_[k], "Official falls with an event": f"{v['fall']['with_event']} of {v['fall']['of']} = {pct1(v['fall']['share'])}",
+                "Official rises with an event": f"{v['rise']['with_event']} of {v['rise']['of']} = {pct1(v['rise']['share'])}"}
+               for k, v in so.items()])
+        st.caption("A verified event is an item-month with a signed change in the scored evidence; the official sign is the item's index "
+                   "against the month before; a zero change is neither. Measured items (government prices, observed series) are checked "
+                   "every month, so the top two rows reflect that coverage more than news. Sources: "
+                   + ", ".join(f"`{x}`" for x in asy["sources"]) + ".")
+
 with st.expander("Details for experts: radar runs, credit receipt and cost by search setting"):
     # ---------- radar and cost ----------
     st.subheader("October radar: runs so far")

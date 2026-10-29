@@ -533,6 +533,12 @@ Short answers to the hardest questions: [`docs/judge_faq.md`](docs/judge_faq.md)
   leak counts only when the Wayback Machine confirms it and absence from Wayback is not proof a page did not exist.
   McNemar tests and the rule-of-three bound are post-hoc, not pre-registered
   ([`results/posthoc_stats.md`](results/posthoc_stats.md)).
+- **Filter drops.** The time lock's date filter did not return 12 of the 40 valid items in the
+  pilot; for 10 of them the saved date fields do not explain it (exploratory, added after scoring; changes no headline;
+  [`results/filter_drops.json`](results/filter_drops.json)).
+- **Announced prices: rises only.** The announced-price layer verified 5 rises and 0 falls over
+  the scored months, too few to call a pattern, so falls in official item prices are covered only by the measured
+  layer (exploratory, added after scoring; changes no headline; [`results/evidence_asymmetry.json`](results/evidence_asymmetry.json)).
 - **Content check.** A content check (Nemotron Nano, exploratory) found 1 confirmed post-cutoff fact in 55 sampled
   time-locked search excerpts, via a related-stories item, so 0 of 42 cases detected by our
   date-and-archive rule is a lower bound. Excerpts and cases are different units: the 42 cases are the pilot

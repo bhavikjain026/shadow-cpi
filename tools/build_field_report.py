@@ -470,6 +470,15 @@ def content_check():
                         "docs/preregistration_content_check.md"]}
 
 
+def exploratory_analyses():
+    """Three offline analyses added after scoring (tools/build_filter_drops.py, build_paired_stats.py,
+    build_evidence_asymmetry.py). None until all three result files are committed."""
+    names = ("filter_drops", "paired_stats", "evidence_asymmetry")
+    if not all((ROOT / "results" / f"{n}.json").exists() for n in names):
+        return None
+    return {n: load(f"results/{n}.json") for n in names}
+
+
 def build():
     ref = json.loads(RC.REFERENCE.read_text(encoding="utf-8"))["changes"]
     ledger = read_ledger()
@@ -480,6 +489,7 @@ def build():
            "auto_parameters": auto_parameters(), "radar": radar(),
            "monthly_run_cost": monthly_run_cost(), "ledger_rows": len(ledger),
            "pages_changed": DR.latest(DR.load_state()), "leak_by_source_type": LKT.table(), "content_check": content_check(),
+           "exploratory_analyses": exploratory_analyses(),
            "evidence_tiers": load("results/evidence_tiers.json") if (ROOT / "results" / "evidence_tiers.json").exists() else None}
     OUT.write_text(json.dumps(rep, ensure_ascii=False, indent=1, default=float))
     return rep

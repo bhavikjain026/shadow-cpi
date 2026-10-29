@@ -503,3 +503,13 @@ def test_leak_demo_caption_and_box_and_the_two_new_captions():
     assert any(x.value.startswith("This compares who writes the search (query planning)") for x in fr.caption)
     ev = load("evidence")
     assert any(x.value == "Showing the selected month; October's live events are on Radar." for x in ev.caption)
+
+
+def test_field_report_has_a_closed_exploratory_analyses_block_that_reads_the_results():
+    at = load("field_report")
+    assert not at.exception
+    ex = [e for e in at.expander if e.label == "Exploratory analyses"]
+    assert len(ex) == 1
+    fd = json.loads((ROOT / "results" / "filter_drops.json").read_text())
+    shown = " ".join(m.value for m in ex[0].markdown) + " ".join(c.value for c in ex[0].caption)
+    assert f"{fd['dropped']} of {fd['valid_total']}" in shown and fd["label"].capitalize() in shown

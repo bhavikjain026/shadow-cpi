@@ -1,0 +1,104 @@
+{
+ "label": "exploratory, added after scoring; changes no headline",
+ "pass": "initial pass",
+ "no_dates": "arm A",
+ "time_lock": "arm C",
+ "sources": [
+  "results/date_field_test.json",
+  "results/replication.json"
+ ],
+ "studies": {
+  "pilot": {
+   "cases": 20,
+   "leaks_no_dates": 9,
+   "leaks_time_lock": 0,
+   "both": 0,
+   "only_no_dates": 9,
+   "only_time_lock": 0,
+   "only_no_dates_cases": [
+    "E2",
+    "E4",
+    "E5",
+    "E7",
+    "F3",
+    "M4",
+    "M8",
+    "M9",
+    "T3"
+   ],
+   "only_time_lock_cases": [],
+   "p_exact_two_sided": 0.00390625
+  },
+  "replication": {
+   "cases": 22,
+   "leaks_no_dates": 14,
+   "leaks_time_lock": 0,
+   "both": 0,
+   "only_no_dates": 14,
+   "only_time_lock": 0,
+   "only_no_dates_cases": [
+    "RR-E3",
+    "RR-F1",
+    "RR-F2",
+    "RR-F4",
+    "RR-L1",
+    "RR-M1",
+    "RR-T1",
+    "VE01",
+    "VE02",
+    "VE03",
+    "VE04",
+    "VE05",
+    "VE12",
+    "VE13"
+   ],
+   "only_time_lock_cases": [],
+   "p_exact_two_sided": 0.0001220703125
+  },
+  "pooled": {
+   "cases": 42,
+   "leaks_no_dates": 23,
+   "leaks_time_lock": 0,
+   "both": 0,
+   "only_no_dates": 23,
+   "only_time_lock": 0,
+   "only_no_dates_cases": [
+    "E2",
+    "E4",
+    "E5",
+    "E7",
+    "F3",
+    "M4",
+    "M8",
+    "M9",
+    "RR-E3",
+    "RR-F1",
+    "RR-F2",
+    "RR-F4",
+    "RR-L1",
+    "RR-M1",
+    "RR-T1",
+    "T3",
+    "VE01",
+    "VE02",
+    "VE03",
+    "VE04",
+    "VE05",
+    "VE12",
+    "VE13"
+   ],
+   "only_time_lock_cases": [],
+   "p_exact_two_sided": 2.384185791015625e-07
+  }
+ },
+ "zero": {
+  "leaks": 0,
+  "cases": 42,
+  "rule_of_three_upper": 0.07142857142857142,
+  "exact_one_sided_95_upper": 0.06884260784039486,
+  "wilson95": [
+   0.0,
+   0.08379879207691124
+  ]
+ }
+}

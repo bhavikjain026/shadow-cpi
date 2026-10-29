@@ -1,0 +1,166 @@
+{
+ "label": "exploratory, added after scoring; changes no headline",
+ "months": [
+  "2026-01",
+  "2026-02",
+  "2026-03",
+  "2026-04",
+  "2026-05",
+  "2026-06",
+  "2026-07",
+  "2026-08",
+  "2026-09"
+ ],
+ "sources": [
+  "results/replay_predictions.json (arm c evidence)",
+  "results/v2_score_lock.json (moving_events)",
+  "data/cpi_tidy.csv"
+ ],
+ "events_replay": {
+  "item_months": 108,
+  "rise": 67,
+  "fall": 32,
+  "flat": 9,
+  "by_layer": {
+   "measured": {
+    "rise": 62,
+    "fall": 32,
+    "flat": 9
+   },
+   "announced": {
+    "rise": 5,
+    "fall": 0,
+    "flat": 0
+   }
+  }
+ },
+ "events_v2_announced": {
+  "item_months": 3,
+  "rise": 3,
+  "fall": 0,
+  "flat": 0
+ },
+ "by_item": {
+  "01.1.1.2.1.01": {
+   "name": "Wheat atta",
+   "rise": 6,
+   "fall": 3
+  },
+  "01.1.4.1.1.01": {
+   "name": "Milk: liquid",
+   "rise": 9
+  },
+  "01.1.4.8.1.01": {
+   "name": "Eggs",
+   "rise": 4,
+   "fall": 5
+  },
+  "01.1.5.1": {
+   "name": "01.1.5.1",
+   "rise": 9
+  },
+  "01.1.7.2.1.01": {
+   "name": "Tomato",
+   "fall": 5,
+   "rise": 4
+  },
+  "01.1.7.4.1.01": {
+   "name": "Onion",
+   "rise": 6,
+   "fall": 3
+  },
+  "01.1.7.5.1.01": {
+   "name": "Potato",
+   "fall": 5,
+   "rise": 4
+  },
+  "01.1.7.6.1.01": {
+   "name": "Arhar, tur",
+   "rise": 8,
+   "fall": 1
+  },
+  "04.5.1.0.2.01": {
+   "name": "Electricity charges",
+   "rise": 3
+  },
+  "04.5.2.2.1.01": {
+   "name": "LPG cylinder and piped natural gas",
+   "flat": 7,
+   "rise": 2
+  },
+  "07.2.2.2.1.01": {
+   "name": "Petrol",
+   "rise": 3,
+   "flat": 2
+  },
+  "07.3.1.1.2.01": {
+   "name": "Rail fare",
+   "rise": 1
+  },
+  "13.2.1.1.1.01": {
+   "name": "Gold /diamond /platinum jewellery",
+   "rise": 4,
+   "fall": 5
+  },
+  "13.2.1.1.1.02": {
+   "name": "Silver jewellery",
+   "rise": 4,
+   "fall": 5
+  }
+ },
+ "official_item_months": {
+  "rise": 2607,
+  "fall": 482,
+  "flat": 133
+ },
+ "covered_items": 14,
+ "share_of_official": {
+  "all_official_items": {
+   "fall": {
+    "with_event": 33,
+    "of": 482,
+    "share": 0.06846473029045644
+   },
+   "rise": {
+    "with_event": 62,
+    "of": 2607,
+    "share": 0.023782125047947834
+   }
+  },
+  "items_with_any_evidence": {
+   "fall": {
+    "with_event": 33,
+    "of": 35,
+    "share": 0.9428571428571428
+   },
+   "rise": {
+    "with_event": 62,
+    "of": 67,
+    "share": 0.9253731343283582
+   }
+  },
+  "all_official_items_announced_only": {
+   "fall": {
+    "with_event": 1,
+    "of": 482,
+    "share": 0.002074688796680498
+   },
+   "rise": {
+    "with_event": 3,
+    "of": 2607,
+    "share": 0.0011507479861910242
+   }
+  }
+ },
+ "event_vs_official_sign": {
+  "fall -> fall": 27,
+  "fall -> rise": 5,
+  "flat -> fall": 2,
+  "flat -> flat": 1,
+  "flat -> rise": 6,
+  "rise -> fall": 4,
+  "rise -> flat": 3,
+  "rise -> not published": 9,
+  "rise -> rise": 51
+ }
+}

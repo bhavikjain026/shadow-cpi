@@ -2356,6 +2356,472 @@
    "docs/preregistration_content_check.md"
   ]
  },
+ "exploratory_analyses": {
+  "filter_drops": {
+   "label": "exploratory, added after scoring; changes no headline",
+   "source": "results/date_field_test.json",
+   "pass": "initial pass (pre-registered run, before the Wayback retry)",
+   "arm": "C",
+   "dropped": 12,
+   "valid_total": 40,
+   "rules": {
+    "a": "no detectable date: Tavily, the address and the page all give none",
+    "b": "Tavily's date is after the cutoff although the archive holds a copy from on or before it, and the saved page shows no later edit",
+    "c": "Tavily's date is after the cutoff and the page itself shows a later edit date",
+    "d": "other: the saved dates do not put the item outside what the filter keeps (reason given per item)"
+   },
+   "counts": {
+    "a": 0,
+    "b": 2,
+    "c": 0,
+    "d": 10
+   },
+   "d_split": {
+    "before_window_start": 2,
+    "inside_window_not_returned": 8
+   },
+   "items": [
+    {
+     "case": "E1",
+     "url": "https://energy.economictimes.indiatimes.com/news/power/industrial-belts-urge-govt-to-cut-vat-on-fuel-after-hike-in-power-tariff/129861524",
+     "returned_by_arm": "A",
+     "cutoff": "2026-04-29",
+     "window_start": "2026-04-01",
+     "tavily_date": "2026-03-28",
+     "best_date": "2026-03-28",
+     "address_date": null,
+     "page_date": null,
+     "earliest_archive_copy": "2026-04-15",
+     "class": "d",
+     "reason": "Tavily dates it 2026-03-28, before the window start 2026-04-01: outside the filter's lower bound"
+    },
+    {
+     "case": "E1",
+     "url": "https://www.thehansindia.com/andhra-pradesh/ap-chambers-hails-tariff-stability-calls-for-net-metering-reform-1059937",
+     "returned_by_arm": "A",
+     "cutoff": "2026-04-29",
+     "window_start": "2026-04-01",
+     "tavily_date": "2026-03-27",
+     "best_date": "2026-03-27",
+     "address_date": null,
+     "page_date": null,
+     "earliest_archive_copy": "2026-03-28",
+     "class": "d",
+     "reason": "Tavily dates it 2026-03-27, before the window start 2026-04-01: outside the filter's lower bound"
+    },
+    {
+     "case": "E2",
+     "url": "https://mercomindia.com/tamil-nadu-hikes-fy-2026-electricity-tariffs-by-3-16",
+     "returned_by_arm": "A",
+     "cutoff": "2026-04-29",
+     "window_start": "2026-04-01",
+     "tavily_date": "2026-09-17",
+     "best_date": "2026-09-17",
+     "address_date": null,
+     "page_date": null,
+     "earliest_archive_copy": "2025-07-08",
+     "class": "b",
+     "reason": "Tavily dates it 2026-09-17, after 2026-04-29; earliest archive copy 2025-07-08 is on or before it; the page shows no later edit date"
+    },
+    {
+     "case": "E4",
+     "url": "https://timesofindia.indiatimes.com/city/ranchi/jharkhand-power-tariff-hike-2026-27-dvc-consumers-face-40-increase/articleshow/129951733.cms",
+     "returned_by_arm": "B",
+     "cutoff": "2026-04-29",
+     "window_start": "2026-04-01",
+     "tavily_date": "2026-04-25",
+     "best_date": "2026-04-25",
+     "address_date": null,
+     "page_date": null,
+     "earliest_archive_copy": "2026-04-01",
+     "class": "d",
+     "reason": "Tavily dates it 2026-04-25, inside 2026-04-01 to 2026-04-29: the date fields would keep it; the dated search returned a different set, and the saved fields do not say why"
+    },
+    {
+     "case": "E4",
+     "url": "https://www.orfonline.org/research/energy-news-monitor-volume-xxii-issue-38",
+     "returned_by_arm": "B",
+     "cutoff": "2026-04-29",
+     "window_start": "2026-04-01",
+     "tavily_date": "2026-04-29",
+     "best_date": "2026-04-29",
+     "address_date": null,
+     "page_date": "2026-04-29",
+     "earliest_archive_copy": "2026-04-29",
+     "class": "d",
+     "reason": "Tavily dates it 2026-04-29, inside 2026-04-01 to 2026-04-29: the date fields would keep it; the dated search returned a different set, and the saved fields do not say why"
+    },
+    {
+     "case": "M2",
+     "url": "https://www.ndtv.com/india-news/11-000-litres-of-milk-poured-in-narmada-river-sparks-faith-vs-logic-debate-11334229",
+     "returned_by_arm": "B",
+     "cutoff": "2026-04-29",
+     "window_start": "2026-04-01",
+     "tavily_date": "2026-04-09",
+     "best_date": "2026-04-09",
+     "address_date": null,
+     "page_date": null,
+     "earliest_archive_copy": "2026-04-09",
+     "class": "d",
+     "reason": "Tavily dates it 2026-04-09, inside 2026-04-01 to 2026-04-29: the date fields would keep it; the dated search returned a different set, and the saved fields do not say why"
+    },
+    {
+     "case": "F3",
+     "url": "https://www.middleeasteye.net/live-blog/live-blog-update/india-raises-fuel-prices-fourth-time-may",
+     "returned_by_arm": "A",
+     "cutoff": "2026-05-29",
+     "window_start": "2026-05-01",
+     "tavily_date": "2026-05-25",
+     "best_date": "2026-05-25",
+     "address_date": null,
+     "page_date": null,
+     "earliest_archive_copy": "2026-05-26",
+     "class": "d",
+     "reason": "Tavily dates it 2026-05-25, inside 2026-05-01 to 2026-05-29: the date fields would keep it; the dated search returned a different set, and the saved fields do not say why"
+    },
+    {
+     "case": "M3",
+     "url": "https://www.indiatoday.in/business/story/amul-hikes-milk-prices-by-rs-2-per-litre-nationwide-from-may-14-2911254-2026-05-13",
+     "returned_by_arm": "B",
+     "cutoff": "2026-05-29",
+     "window_start": "2026-05-01",
+     "tavily_date": "2026-05-13",
+     "best_date": "2026-05-13",
+     "address_date": null,
+     "page_date": "2026-05-13",
+     "earliest_archive_copy": "2026-05-13",
+     "class": "d",
+     "reason": "Tavily dates it 2026-05-13, inside 2026-05-01 to 2026-05-29: the date fields would keep it; the dated search returned a different set, and the saved fields do not say why"
+    },
+    {
+     "case": "M4",
+     "url": "https://timesofindia.indiatimes.com/city/bhopal/mp-pushes-solar-beyond-sunset-with-battery-and-hydro-backed-storage/articleshow/131101814.cms",
+     "returned_by_arm": "B",
+     "cutoff": "2026-05-29",
+     "window_start": "2026-05-01",
+     "tavily_date": "2026-05-14",
+     "best_date": "2026-05-14",
+     "address_date": null,
+     "page_date": null,
+     "earliest_archive_copy": "2026-05-15",
+     "class": "d",
+     "reason": "Tavily dates it 2026-05-14, inside 2026-05-01 to 2026-05-29: the date fields would keep it; the dated search returned a different set, and the saved fields do not say why"
+    },
+    {
+     "case": "E5",
+     "url": "https://mercomindia.com/tamil-nadu-hikes-fy-2026-electricity-tariffs-by-3-16",
+     "returned_by_arm": "A",
+     "cutoff": "2026-06-29",
+     "window_start": "2026-06-01",
+     "tavily_date": "2026-09-17",
+     "best_date": "2026-09-17",
+     "address_date": null,
+     "page_date": null,
+     "earliest_archive_copy": "2025-07-08",
+     "class": "b",
+     "reason": "Tavily dates it 2026-09-17, after 2026-06-29; earliest archive copy 2025-07-08 is on or before it; the page shows no later edit date"
+    },
+    {
+     "case": "E7",
+     "url": "https://www.nhpr.org/nh-news/2026-07-20/electricity-prices-increases-nh-energy-utility",
+     "returned_by_arm": "B",
+     "cutoff": "2026-07-29",
+     "window_start": "2026-07-01",
+     "tavily_date": "2026-07-20",
+     "best_date": "2026-07-20",
+     "address_date": "2026-07-20",
+     "page_date": "2026-07-20",
+     "earliest_archive_copy": "2026-07-20",
+     "class": "d",
+     "reason": "Tavily dates it 2026-07-20, inside 2026-07-01 to 2026-07-29: the date fields would keep it; the dated search returned a different set, and the saved fields do not say why"
+    },
+    {
+     "case": "E7",
+     "url": "https://www.cosmeticsbusiness.com/donald-trump-imposes-sweeping-us-tariff-hike-2026",
+     "returned_by_arm": "B",
+     "cutoff": "2026-07-29",
+     "window_start": "2026-07-01",
+     "tavily_date": "2026-07-27",
+     "best_date": "2026-07-27",
+     "address_date": null,
+     "page_date": null,
+     "earliest_archive_copy": "2026-07-29",
+     "class": "d",
+     "reason": "Tavily dates it 2026-07-27, inside 2026-07-01 to 2026-07-29: the date fields would keep it; the dated search returned a different set, and the saved fields do not say why"
+    }
+   ]
+  },
+  "paired_stats": {
+   "label": "exploratory, added after scoring; changes no headline",
+   "pass": "initial pass",
+   "no_dates": "arm A",
+   "time_lock": "arm C",
+   "sources": [
+    "results/date_field_test.json",
+    "results/replication.json"
+   ],
+   "studies": {
+    "pilot": {
+     "cases": 20,
+     "leaks_no_dates": 9,
+     "leaks_time_lock": 0,
+     "both": 0,
+     "only_no_dates": 9,
+     "only_time_lock": 0,
+     "only_no_dates_cases": [
+      "E2",
+      "E4",
+      "E5",
+      "E7",
+      "F3",
+      "M4",
+      "M8",
+      "M9",
+      "T3"
+     ],
+     "only_time_lock_cases": [],
+     "p_exact_two_sided": 0.00390625
+    },
+    "replication": {
+     "cases": 22,
+     "leaks_no_dates": 14,
+     "leaks_time_lock": 0,
+     "both": 0,
+     "only_no_dates": 14,
+     "only_time_lock": 0,
+     "only_no_dates_cases": [
+      "RR-E3",
+      "RR-F1",
+      "RR-F2",
+      "RR-F4",
+      "RR-L1",
+      "RR-M1",
+      "RR-T1",
+      "VE01",
+      "VE02",
+      "VE03",
+      "VE04",
+      "VE05",
+      "VE12",
+      "VE13"
+     ],
+     "only_time_lock_cases": [],
+     "p_exact_two_sided": 0.0001220703125
+    },
+    "pooled": {
+     "cases": 42,
+     "leaks_no_dates": 23,
+     "leaks_time_lock": 0,
+     "both": 0,
+     "only_no_dates": 23,
+     "only_time_lock": 0,
+     "only_no_dates_cases": [
+      "E2",
+      "E4",
+      "E5",
+      "E7",
+      "F3",
+      "M4",
+      "M8",
+      "M9",
+      "RR-E3",
+      "RR-F1",
+      "RR-F2",
+      "RR-F4",
+      "RR-L1",
+      "RR-M1",
+      "RR-T1",
+      "T3",
+      "VE01",
+      "VE02",
+      "VE03",
+      "VE04",
+      "VE05",
+      "VE12",
+      "VE13"
+     ],
+     "only_time_lock_cases": [],
+     "p_exact_two_sided": 2.384185791015625e-07
+    }
+   },
+   "zero": {
+    "leaks": 0,
+    "cases": 42,
+    "rule_of_three_upper": 0.07142857142857142,
+    "exact_one_sided_95_upper": 0.06884260784039486,
+    "wilson95": [
+     0.0,
+     0.08379879207691124
+    ]
+   }
+  },
+  "evidence_asymmetry": {
+   "label": "exploratory, added after scoring; changes no headline",
+   "months": [
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09"
+   ],
+   "sources": [
+    "results/replay_predictions.json (arm c evidence)",
+    "results/v2_score_lock.json (moving_events)",
+    "data/cpi_tidy.csv"
+   ],
+   "events_replay": {
+    "item_months": 108,
+    "rise": 67,
+    "fall": 32,
+    "flat": 9,
+    "by_layer": {
+     "measured": {
+      "rise": 62,
+      "fall": 32,
+      "flat": 9
+     },
+     "announced": {
+      "rise": 5,
+      "fall": 0,
+      "flat": 0
+     }
+    }
+   },
+   "events_v2_announced": {
+    "item_months": 3,
+    "rise": 3,
+    "fall": 0,
+    "flat": 0
+   },
+   "by_item": {
+    "01.1.1.2.1.01": {
+     "name": "Wheat atta",
+     "rise": 6,
+     "fall": 3
+    },
+    "01.1.4.1.1.01": {
+     "name": "Milk: liquid",
+     "rise": 9
+    },
+    "01.1.4.8.1.01": {
+     "name": "Eggs",
+     "rise": 4,
+     "fall": 5
+    },
+    "01.1.5.1": {
+     "name": "01.1.5.1",
+     "rise": 9
+    },
+    "01.1.7.2.1.01": {
+     "name": "Tomato",
+     "fall": 5,
+     "rise": 4
+    },
+    "01.1.7.4.1.01": {
+     "name": "Onion",
+     "rise": 6,
+     "fall": 3
+    },
+    "01.1.7.5.1.01": {
+     "name": "Potato",
+     "fall": 5,
+     "rise": 4
+    },
+    "01.1.7.6.1.01": {
+     "name": "Arhar, tur",
+     "rise": 8,
+     "fall": 1
+    },
+    "04.5.1.0.2.01": {
+     "name": "Electricity charges",
+     "rise": 3
+    },
+    "04.5.2.2.1.01": {
+     "name": "LPG cylinder and piped natural gas",
+     "flat": 7,
+     "rise": 2
+    },
+    "07.2.2.2.1.01": {
+     "name": "Petrol",
+     "rise": 3,
+     "flat": 2
+    },
+    "07.3.1.1.2.01": {
+     "name": "Rail fare",
+     "rise": 1
+    },
+    "13.2.1.1.1.01": {
+     "name": "Gold /diamond /platinum jewellery",
+     "rise": 4,
+     "fall": 5
+    },
+    "13.2.1.1.1.02": {
+     "name": "Silver jewellery",
+     "rise": 4,
+     "fall": 5
+    }
+   },
+   "official_item_months": {
+    "rise": 2607,
+    "fall": 482,
+    "flat": 133
+   },
+   "covered_items": 14,
+   "share_of_official": {
+    "all_official_items": {
+     "fall": {
+      "with_event": 33,
+      "of": 482,
+      "share": 0.06846473029045644
+     },
+     "rise": {
+      "with_event": 62,
+      "of": 2607,
+      "share": 0.023782125047947834
+     }
+    },
+    "items_with_any_evidence": {
+     "fall": {
+      "with_event": 33,
+      "of": 35,
+      "share": 0.9428571428571428
+     },
+     "rise": {
+      "with_event": 62,
+      "of": 67,
+      "share": 0.9253731343283582
+     }
+    },
+    "all_official_items_announced_only": {
+     "fall": {
+      "with_event": 1,
+      "of": 482,
+      "share": 0.002074688796680498
+     },
+     "rise": {
+      "with_event": 3,
+      "of": 2607,
+      "share": 0.0011507479861910242
+     }
+    }
+   },
+   "event_vs_official_sign": {
+    "fall -> fall": 27,
+    "fall -> rise": 5,
+    "flat -> fall": 2,
+    "flat -> flat": 1,
+    "flat -> rise": 6,
+    "rise -> fall": 4,
+    "rise -> flat": 3,
+    "rise -> not published": 9,
+    "rise -> rise": 51
+   }
+  }
+ },
  "evidence_tiers": {
   "label": "exploratory, added after scoring; a bounding range, not a new result; cannot change any headline",
   "pass": "initial pass (results as saved, before the logged Wayback retry)",

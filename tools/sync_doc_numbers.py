@@ -722,6 +722,13 @@ def facts(st, as_of, root=ROOT):
              mcn_fin_p=f"{mc['finance']['p_exact']:.2g}", mcn_pool_p=f"{mc['pooled']['p_exact']:.2g}",
              pool_r3=f"{z['rule_of_three_upper']:.1%}", pool_exact1s=f"{z['exact_one_sided_95_upper']:.1%}",
              posthoc_label=ph["label"])
+    # results/filter_drops.json, results/evidence_asymmetry.json: exploratory, added after scoring
+    fd, ea = load("results/filter_drops.json", root), load("results/evidence_asymmetry.json", root)
+    ann = ea["share_of_official"]["all_official_items_announced_only"]
+    f.update(fd_dropped=fd["dropped"], fd_total=fd["valid_total"], fd_not_date=fd["counts"]["d"],
+             fd_label=fd["label"], ea_ann_rise=ea["events_replay"]["by_layer"]["announced"]["rise"],
+             ea_ann_fall=ea["events_replay"]["by_layer"]["announced"]["fall"],
+             ea_fall_share=f"{ann['fall']['share']:.1%}", ea_rise_share=f"{ann['rise']['share']:.1%}")
     # date test arm B: dates sent, filter off, include_published_date on (results/field_report.json)
     f.update(dt_datesonly=dt1["B"]["leak_cases"], dt_datesonly_w=wilson(dt1["B"]["wilson95"]),
              dt_undated_datesonly=dm["B"]["undated"], dt_results_datesonly=dm["B"]["results"])
