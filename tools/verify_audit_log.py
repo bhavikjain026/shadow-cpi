@@ -43,7 +43,8 @@ def check_ots(log_path):
         return "no .ots file"
     exe = shutil.which("ots") or str(Path(sys.executable).parent / "ots")
     if not Path(exe).exists():
-        return ".ots present but `ots` client not installed; not checked"
+        return (".ots present but the `ots` client is not installed, so the timestamp was NOT checked "
+                "(chain check above still ran). Install it: pip install -r requirements-dev.txt")
     r = subprocess.run([exe, "verify", str(ots)], capture_output=True, text=True)
     out = (r.stdout + r.stderr).strip().splitlines()
     return "ots verify: " + (out[-1] if out else f"exit {r.returncode}")

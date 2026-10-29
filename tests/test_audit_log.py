@@ -175,3 +175,13 @@ def test_committed_log_has_no_visitor_text():
         e = json.loads(line)
         if e["query_sha256"]:
             assert e["query"] == "visitor query"
+
+
+def test_missing_ots_prints_hint(tmp_path, monkeypatch, capsys):
+    log = _synthetic(tmp_path)
+    log.with_suffix(".head.ots").write_bytes(b"x")
+    monkeypatch.setattr(vfy.shutil, "which", lambda _: None)
+    monkeypatch.setattr(vfy.sys, "executable", str(tmp_path / "nopython"))
+    assert vfy.main([str(log)]) == 0
+    out = capsys.readouterr().out
+    assert "OK:" in out and "requirements-dev.txt" in out

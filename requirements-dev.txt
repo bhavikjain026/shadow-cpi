@@ -1,0 +1,3 @@
+# Dev/optional tools (not the app runtime; requirements.txt is what Streamlit installs).
+# opentimestamps-client: stamping and checking the audit-log heads (tools/verify_audit_log.py).
+opentimestamps-client==0.8.0

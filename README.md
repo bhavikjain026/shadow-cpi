@@ -560,6 +560,10 @@ Day logs are built after the day ends (IST) and stamped with OpenTimestamps; run
 
 A "day" is an IST calendar day (Asia/Kolkata, UTC+05:30, 00:00:00 to 23:59:59), whatever time zone the machine is in. The builder refuses a day that has not ended; `--partial` writes an unstamped, uncommitted `<date>.partial.jsonl` for a look at a day in progress. Questions typed by visitors on the Try it page are logged as `visitor query` plus the SHA-256 of the text; our own pipeline queries stay readable. Nothing is capped or truncated: an entry exists for every recorder call in the day.
 
+An earlier test stamp of 2026-10-28 (head 7e20c15d…, 2758 entries) used a UTC day; it was superseded by the IST-day log (head 0c90b3da…, 2688 entries) the same afternoon. Only the IST-day logs are current. The recorder keeps at most the first 20 URLs per extract call, so the log lists no more than that per call.
+
+To stamp or check the `.ots` proofs: `pip install -r requirements-dev.txt` (the chain check needs nothing beyond the standard library).
+
 **What it proves:** once the head is stamped, the log of our calls has not been altered since: editing, reordering or deleting any entry breaks the chain, and the stamp pins the head to a Bitcoin block time. The `.ots` files are *pending* until `ots upgrade <file>.ots` is run after the calendar commits to a block (hours); run that later and commit the result.
 
 **What it does not prove:** the log is built after the fact each day from our own ledger and recorder, not at call time, so it cannot show those files were honest before the build. It records response hashes, not page text, so it does not prove what any page said. It holds metadata only (no page text, no keys).
