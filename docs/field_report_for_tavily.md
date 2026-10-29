@@ -2,7 +2,7 @@
 # Field report for Tavily's engineers
 
 Shadow CPI, built for the Best Use of Tavily prize. Numbers read from the committed results files by
-`python tools/sync_doc_numbers.py` (as of 29 Oct 2026); edit `docs/templates/field_report_for_tavily.md`, not this file.
+`python tools/sync_doc_numbers.py` (as of 30 Oct 2026); edit `docs/templates/field_report_for_tavily.md`, not this file.
 Conflict of interest: this hackathon is hosted by Nebius, which owns Tavily; see the README.
 
 ## The headline measurement

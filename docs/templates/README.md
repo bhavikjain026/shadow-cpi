@@ -80,7 +80,7 @@ next to what we measured: [below](#what-tavilys-docs-say-vs-what-we-measured).
 [{{example_lines}}-line example](#use-it-in-{{example_lines}}-lines)) · [`mcp/`](mcp/README.md) (the same as an MCP
 tool) · [`benchmarks/timelock34/`](benchmarks/timelock34/DATASHEET.md) (the labelled benchmark and scorer) · [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bhavikjain026/shadow-cpi/blob/main/notebooks/reproduce_leak.ipynb) reproduce the leak with your own Tavily key ([`repro/`](repro/README.md) for the Tavily items).
 
-**Live app:** https://shadow-cpi.streamlit.app · **Demo video:** [TBD] · **Devpost:** [TBD]
+**Live app:** https://shadow-cpi.streamlit.app · **Demo video:** [TBD] · **Devpost:** https://devpost.com/software/shadow-cpi
 
 > **Required technologies**
 >
@@ -202,7 +202,7 @@ So the time lock lives in code: the model may choose the query, topic, domains a
 
 ## Tavily field notes / repro kit
 
-**Conflict of interest.** This hackathon is hosted by Nebius, which owns Tavily. Tavily permitted publishing these measurements on [TBD: date] ([TBD: link]); the permission was not conditioned on the results.
+**Conflict of interest.** This hackathon is hosted by Nebius, which owns Tavily. No one on the team works for Nebius, NVIDIA or Tavily, and the measurements are reported as found.
 
 **For Tavily's team:** a two-page field report with the headline measurement, the three questions, the field notes and
 three feature requests: [`docs/field_report_for_tavily.md`](docs/field_report_for_tavily.md)

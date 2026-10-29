@@ -140,7 +140,7 @@ results from {{live_month}} ({{auto_note}}); Tavily documents `time_range` as co
 So the model chooses the query, topic, domains and language; code owns the dates.
 
 ## Tavily field notes / repro kit: feedback for the Most Valuable Feedback prize
-**Conflict of interest.** This hackathon is hosted by Nebius, which owns Tavily. Tavily permitted publishing these measurements on [TBD: date] ([TBD: link]); the permission was not conditioned on the results.
+**Conflict of interest.** This hackathon is hosted by Nebius, which owns Tavily. No one on the team works for Nebius, NVIDIA or Tavily, and the measurements are reported as found.
 
 **For Tavily's team:** a two-page field report (headline measurement, the three questions, the field notes, three
 feature requests): `docs/field_report_for_tavily.md` (PDF next to it).

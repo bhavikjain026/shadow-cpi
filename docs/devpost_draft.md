@@ -173,7 +173,7 @@ results from October 2026 (observed once on 22 Oct 2026, not reproduced on 27 Oc
 So the model chooses the query, topic, domains and language; code owns the dates.
 
 ## Tavily field notes / repro kit: feedback for the Most Valuable Feedback prize
-**Conflict of interest.** This hackathon is hosted by Nebius, which owns Tavily. Tavily permitted publishing these measurements on [TBD: date] ([TBD: link]); the permission was not conditioned on the results.
+**Conflict of interest.** This hackathon is hosted by Nebius, which owns Tavily. No one on the team works for Nebius, NVIDIA or Tavily, and the measurements are reported as found.
 
 **For Tavily's team:** a two-page field report (headline measurement, the three questions, the field notes, three
 feature requests): `docs/field_report_for_tavily.md` (PDF next to it).
@@ -402,7 +402,7 @@ Nebius retires the original IDs on 9 Nov 2026; from then, calls use Nebius's rec
 - Python
 - Streamlit
 
-Tavily usage as of 29 Oct 2026: 2,239 calls, 2,178 credits, 80% of dated results
+Tavily usage as of 30 Oct 2026: 2,239 calls, 2,178 credits, 80% of dated results
 inside the requested window (6,069 of 7,550), median latency 4.0 s. Third-party notices:
 `THIRD_PARTY_NOTICES.md`.
 
