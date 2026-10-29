@@ -1,15 +1,19 @@
 """Optional report-back to Tavily: tell Tavily which results our date check flagged (standard library only).
 
-Tavily's feedback endpoint (https://docs.tavily.com/documentation/api-reference/endpoint/feedback, in beta when this
-was written): POST https://api.tavily.com/feedback with a Bearer key; at least one of `request_id` / `session_id`;
-per-result notes go in `urls_scores` (each item needs `id` or `url`; `comment` up to 2000 characters). It costs no
-credits. Because the request shape may still change, a failed send is returned, never raised.
+Tavily's feedback endpoint (https://docs.tavily.com/documentation/api-reference/endpoint/feedback): "Beta. This
+endpoint is in beta: the request shape may still change", `POST https://api.tavily.com/feedback` with a Bearer key.
+`request_id` and `session_id` are both optional in the schema, but a request with neither is a 400. Per-result notes
+go in `urls_scores` (each item needs `id` or `url`; `comment` up to 2000 characters). "Submitting feedback is free
+-- it does not consume API credits." Tavily asks that a failure be treated as non-fatal, so a failed send is
+returned, never raised.
 
-    payload = build_feedback(request_id, result, "published 2026-05-02, after the cutoff 2026-04-29")
+    payload = build_feedback(request_id, result, "published 2026-05-02, after the requested end_date 2026-04-29")
     send_feedback(request_id, result, reason)                                  # dry run: returns the payload
     send_feedback(request_id, result, reason, dry_run=False, own_request_ids=ids)   # one POST, own requests only
 
-Off by default everywhere: dry_run=True here, report_to_tavily=False on the MCP check_leaks tool.
+Only results from our own requests that sent an end_date are reported (report_leaks): a search with no date filter
+is a control, and its leaks are not a fault of Tavily's filter. Off by default everywhere: dry_run=True here,
+report_to_tavily=False on the MCP check_leaks tool.
 """
 import json
 import os
@@ -25,8 +29,8 @@ COMMENT_MAX = 2000                  # urls_scores[].comment limit in Tavily's re
 
 
 def build_feedback(request_id, result, reason):
-    """The /feedback body for one result of one request. No score is sent: Tavily's reference does not define a
-    scale for agent_score, so the note is the reason in `comment`. The result is identified by its `id` when it has
+    """The /feedback body for one result of one request. No score is sent: Tavily's reference defines no scale
+    for agent_score (its examples use 1 and -1), so the note is the reason in `comment`. The result is identified by its `id` when it has
     one, else its `url`."""
     if not request_id:
         raise ValueError("request_id is required")
@@ -39,7 +43,7 @@ def build_feedback(request_id, result, reason):
 def reason_for(result, cutoff, *, end_date=None, captures=None):
     """One sentence saying what our check saw: the dates found and the cutoff. `end_date` is the end_date the request
     sent, if any (the sentence then says it was after the requested end_date; without one it says the request sent
-    none). `captures` (Wayback capture dates, if the caller looked) adds the archive finding."""
+    none, and report_leaks does not send such a note). `captures` (Wayback capture dates, if the caller looked) adds the archive finding."""
     seen = [f"{name} {d}" for name, d in (("published_date", iso_date(result.get("published_date"))),
                                           ("url date", url_date(result.get("url"))),
                                           ("page date", iso_date(result.get("page_date")))) if d]
@@ -59,6 +63,14 @@ def own_request_ids(path):
     data = json.loads(Path(path).read_text(encoding="utf-8"))
     rows = data["rows"] if isinstance(data, dict) else data
     return {r["request_id"] if isinstance(r, dict) else r for r in rows if (r["request_id"] if isinstance(r, dict) else r)}
+
+
+def own_end_dates(path):
+    """{request_id: end_date} for ledger rows that record the end_date the request sent (rows without one map to
+    None, so report_leaks skips them). results/call_receipts.json records none."""
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    rows = data["rows"] if isinstance(data, dict) else data
+    return {r["request_id"]: r.get("end_date") for r in rows if isinstance(r, dict) and r.get("request_id")}
 
 
 def _post(payload, api_key, timeout=30):
@@ -89,15 +101,18 @@ def send_feedback(request_id, result, reason, *, dry_run=True, own_request_ids=N
 
 def report_leaks(results, cutoff, request_id, *, own_request_ids=None, dry_run=True, end_date=None, **send_kw):
     """Feedback for each result our check labels `leak` (undated results are not reported) in one request's
-    results. Returns a list of send_feedback outcomes. A request_id not in `own_request_ids` is skipped even when
-    dry_run is on, so a dry run shows exactly what a real send would do."""
+    results. Returns a list of send_feedback outcomes. Skipped, not sent (also on a dry run, so it shows exactly what
+    a real send would do): a request_id not in `own_request_ids` ("not_our_request"), and a request that sent no
+    `end_date` ("no_end_date": an undated control search; its leaks are not a fault of the date filter)."""
     out = []
     for r in results:
         if check_result(r, cutoff, page_date=iso_date(r.get("page_date")) or None) != LEAK:
             continue
         if not request_id or request_id not in (own_request_ids or ()):
             out.append({"sent": False, "skipped": "not_our_request", "url": r.get("url")})
-            continue
-        out.append(send_feedback(request_id, r, reason_for(r, cutoff, end_date=end_date), dry_run=dry_run,
-                                 own_request_ids=own_request_ids, **send_kw))
+        elif not end_date:
+            out.append({"sent": False, "skipped": "no_end_date", "url": r.get("url")})
+        else:
+            out.append(send_feedback(request_id, r, reason_for(r, cutoff, end_date=end_date), dry_run=dry_run,
+                                     own_request_ids=own_request_ids, **send_kw))
     return out

@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from timelock import build_feedback, own_request_ids, reason_for, report_leaks, send_feedback
+from timelock import build_feedback, own_end_dates, own_request_ids, reason_for, report_leaks, send_feedback
 
 ROOT = Path(__file__).resolve().parent.parent
 CUT, RID = "2026-04-29", "req-own-1"
@@ -76,11 +76,29 @@ def test_failures_are_returned_not_raised(monkeypatch):
     assert out["sent"] is False and out["error"].startswith("OSError")
 
 
-def test_report_leaks_covers_only_flagged_results_of_own_requests():
-    out = report_leaks([SAFE, LEAK, {"url": "https://example.org/undated"}], CUT, RID, own_request_ids={RID})
+def test_report_leaks_covers_only_flagged_results_of_own_dated_requests():
+    out = report_leaks([SAFE, LEAK, {"url": "https://example.org/undated"}], CUT, RID, own_request_ids={RID},
+                       end_date=CUT)
     assert len(out) == 1 and out[0]["payload"]["urls_scores"][0]["url"] == LEAK["url"]      # dry run by default
-    foreign = report_leaks([LEAK], CUT, "not-ours", own_request_ids={RID})
+    assert out[0]["payload"]["urls_scores"][0]["comment"].endswith(f"after the requested end_date {CUT}")
+    foreign = report_leaks([LEAK], CUT, "not-ours", own_request_ids={RID}, end_date=CUT)
     assert foreign == [{"sent": False, "skipped": "not_our_request", "url": LEAK["url"]}]
+
+
+def test_report_leaks_skips_requests_that_sent_no_end_date_even_on_a_real_send():
+    post = Post()
+    for end in (None, ""):
+        out = report_leaks([LEAK], CUT, RID, own_request_ids={RID}, end_date=end, dry_run=False, api_key="k",
+                           post=post)
+        assert out == [{"sent": False, "skipped": "no_end_date", "url": LEAK["url"]}]
+    assert post.calls == []
+
+
+def test_a_ledger_without_end_dates_never_reports(tmp_path):
+    f = tmp_path / "l.json"
+    f.write_text(json.dumps({"rows": [{"request_id": "a", "end_date": CUT}, {"request_id": "b"}]}))
+    assert own_end_dates(f) == {"a": CUT, "b": None}
+    assert set(own_end_dates(ROOT / "results" / "call_receipts.json").values()) == {None}   # records no end_date
 
 
 def test_own_request_ids_reads_the_receipts_file(tmp_path):
@@ -96,7 +114,7 @@ def test_mcp_check_leaks_sends_nothing_without_the_flag(monkeypatch):
     post = Post()
     monkeypatch.setattr("timelock.feedback._post", post)
     monkeypatch.setenv("TAVILY_API_KEY", "k")
-    server.OWN_REQUEST_IDS.add(RID)
+    server.OWN_REQUESTS[RID] = CUT
     body = json.dumps({"request_id": RID, "results": [LEAK, SAFE]})
     out = server.check_leaks(body, CUT)
     assert "feedback" not in out and out["counts"]["leak"] == 1 and post.calls == []
@@ -108,11 +126,14 @@ def test_mcp_check_leaks_with_flag_reports_leaks_of_own_requests_only(monkeypatc
     post = Post()
     monkeypatch.setattr(server, "report_leaks", lambda rs, c, rid, **kw: report_leaks(
         rs, c, rid, post=post, api_key="k", **kw))
-    server.OWN_REQUEST_IDS.add(RID)
+    server.OWN_REQUESTS[RID] = CUT
+    server.OWN_REQUESTS["control"] = None                                  # an undated control search of ours
     out = server.check_leaks(json.dumps({"request_id": RID, "results": [LEAK, SAFE]}), CUT, report_to_tavily=True)
     assert [f["sent"] for f in out["feedback"]] == [True] and len(post.calls) == 1
     assert post.calls[0][0]["request_id"] == RID
     foreign = server.check_leaks(json.dumps({"request_id": "not-ours", "results": [LEAK]}), CUT, report_to_tavily=True)
     assert foreign["feedback"][0]["skipped"] == "not_our_request" and len(post.calls) == 1
+    control = server.check_leaks(json.dumps({"request_id": "control", "results": [LEAK]}), CUT, report_to_tavily=True)
+    assert control["feedback"][0]["skipped"] == "no_end_date" and len(post.calls) == 1
     none = server.check_leaks(json.dumps([LEAK]), CUT, report_to_tavily=True)          # no request_id at all
     assert none["feedback"][0]["skipped"] == "not_our_request" and len(post.calls) == 1
