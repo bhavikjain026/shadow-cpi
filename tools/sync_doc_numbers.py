@@ -20,7 +20,7 @@ import json
 import re
 import subprocess
 import sys
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -694,6 +694,19 @@ def facts(st, as_of, root=ROOT):
     tdq = load("config/doc_citations.json", root)["tavily_docs"]
     f.update(max_age_quote=tdq["quotes"]["max_age_hours"])
 
+    # results/audit_log/<date>.jsonl and .head (tools/audit_log.py), plus the one superseded stamp in superseded.json
+    from audit_log import IST
+    from shadow_cpi.recorder import _summary
+    old = load("results/audit_log/superseded.json", root)
+    cur = root / "results" / "audit_log" / old["date"]
+    off = IST.utcoffset(None)
+    clock = lambda t: t.isoformat()  # noqa: E731
+    f.update(audit_old_date=old["date"], audit_old_head=old["head"][:8], audit_old_entries=old["entries"],
+             audit_old_basis=old["day_basis"], audit_head=cur.with_suffix(".head").read_text().strip()[:8],
+             audit_entries=sum(1 for ln in cur.with_suffix(".jsonl").read_text(encoding="utf-8").splitlines() if ln.strip()),
+             audit_tz_offset=f"{'+' if off >= timedelta(0) else '-'}{abs(off).seconds // 3600:02d}:{abs(off).seconds % 3600 // 60:02d}",
+             audit_day_span=f"{clock(time.min.replace(microsecond=0))} to {clock(time(23, 59, 59))}",
+             audit_first_urls=f"first {len(_summary({'urls': list(range(1000))})['urls'])}")
     # results/field_report.json content_check (docs/preregistration_content_check.md): exploratory, hand-labelled
     cc = fr["content_check"]["arms"]["C"]
     f.update(cc_sampled=cc["sampled"], cc_conf=cc["confirmed"],

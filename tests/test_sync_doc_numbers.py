@@ -421,3 +421,13 @@ def test_best_practices_quote_and_the_third_question_are_in_learned_and_faq():
         text = " ".join((ROOT / rel).read_text().split())
         assert quote in text and "We have not tested `max_age_hours`" in text or "we have not tested `max_age_hours`" in text
         assert "which version of the page existed as of the date" in text or "which version existed as of the date" in text
+
+
+def test_audit_log_section_reads_its_numbers_from_the_log_files(values):
+    d = json.loads((ROOT / "results/audit_log/superseded.json").read_text())
+    base = ROOT / "results" / "audit_log" / d["date"]
+    assert values["audit_head"] == base.with_suffix(".head").read_text().strip()[:8]
+    assert values["audit_entries"] == len([ln for ln in base.with_suffix(".jsonl").read_text().splitlines() if ln.strip()])
+    assert values["audit_old_head"] == d["head"][:8] and values["audit_tz_offset"] == "+05:30"
+    out = S.render((ROOT / "docs/templates/README.md").read_text(), values)
+    assert f"head {values['audit_head']}…, {values['audit_entries']} entries" in out

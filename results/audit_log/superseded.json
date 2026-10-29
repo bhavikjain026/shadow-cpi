@@ -1,0 +1,8 @@
+{
+ "_note": "The one earlier stamp that no longer has a log file. Values copied from commit 13f13ee (results/audit_log/2026-10-28.head and its line count); read by tools/sync_doc_numbers.py for the README's tamper-evident call log section.",
+ "date": "2026-10-28",
+ "head": "7e20c15dbe5f08d3c9314f087ad52d0ebd142e3265558b8360edec80dfb2a0cd",
+ "entries": 2758,
+ "day_basis": "UTC",
+ "superseded_by": "the IST-day log of the same date (results/audit_log/2026-10-28.jsonl)"
+}
