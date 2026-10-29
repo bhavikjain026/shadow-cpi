@@ -361,12 +361,12 @@
    },
    {
     "endpoint": "/extract",
-    "calls": 858,
-    "credits": 747,
-    "credits_per_call": 0.8706293706293706,
-    "median_latency_s": 0.215,
-    "p95_latency_s": 5.194999999999999,
-    "with_latency": 856
+    "calls": 884,
+    "credits": 771,
+    "credits_per_call": 0.8721719457013575,
+    "median_latency_s": 0.16,
+    "p95_latency_s": 5.068500000000001,
+    "with_latency": 882
    },
    {
     "endpoint": "/map",
@@ -379,12 +379,12 @@
    },
    {
     "endpoint": "/search",
-    "calls": 1162,
-    "credits": 1233,
-    "credits_per_call": 1.0611015490533562,
+    "calls": 1178,
+    "credits": 1249,
+    "credits_per_call": 1.0602716468590832,
     "median_latency_s": 3.585,
-    "p95_latency_s": 6.1,
-    "with_latency": 1158
+    "p95_latency_s": 6.093500000000001,
+    "with_latency": 1174
    }
   ],
   "by_experiment": [
@@ -451,12 +451,12 @@
    {
     "experiment": "drift-2026-10",
     "endpoint": "/extract",
-    "calls": 13,
-    "credits": 12,
-    "credits_per_call": 0.9230769230769231,
+    "calls": 29,
+    "credits": 28,
+    "credits_per_call": 0.9655172413793104,
     "median_latency_s": 0.03,
-    "p95_latency_s": 3.45,
-    "with_latency": 13
+    "p95_latency_s": 2.258,
+    "with_latency": 29
    },
    {
     "experiment": "finance-lookahead",
@@ -631,22 +631,22 @@
    {
     "experiment": "radar-2026-10",
     "endpoint": "/extract",
-    "calls": 40,
-    "credits": 34,
-    "credits_per_call": 0.85,
-    "median_latency_s": 0.035,
-    "p95_latency_s": 1.0065,
-    "with_latency": 40
+    "calls": 50,
+    "credits": 42,
+    "credits_per_call": 0.84,
+    "median_latency_s": 0.03,
+    "p95_latency_s": 1.2570000000000001,
+    "with_latency": 50
    },
    {
     "experiment": "radar-2026-10",
     "endpoint": "/search",
-    "calls": 61,
-    "credits": 61,
+    "calls": 77,
+    "credits": 77,
     "credits_per_call": 1.0,
-    "median_latency_s": 4.03,
-    "p95_latency_s": 5.73,
-    "with_latency": 61
+    "median_latency_s": 3.91,
+    "p95_latency_s": 5.76,
+    "with_latency": 77
    },
    {
     "experiment": "radar-skeptic-2026-10",
@@ -1006,19 +1006,19 @@
     "budgets": [
      "radar-2026-10"
     ],
-    "credits": 95,
+    "credits": 119,
     "verified_quotes": 3,
-    "credits_per_verified_quote": 31.666666666666668,
+    "credits_per_verified_quote": 39.666666666666664,
     "source": "v2/radar/radar_2026-10.json"
    }
   ],
   "total": {
-   "calls": 2047,
-   "credits": 1989,
-   "credits_per_call": 0.9716658524670249,
+   "calls": 2089,
+   "credits": 2029,
+   "credits_per_call": 0.971278123504069,
    "median_latency_s": 3.12,
-   "p95_latency_s": 5.9805,
-   "with_latency": 2040
+   "p95_latency_s": 5.939500000000001,
+   "with_latency": 2082
   },
   "reconcile_credits": -82,
   "notes": [
@@ -1999,36 +1999,45 @@
     "searches": 16,
     "complete": true,
     "with_provenance": 27
+   },
+   {
+    "utc": "2026-10-29T04:37:02.793371+00:00",
+    "real_credits": 24,
+    "calls": 26,
+    "searches": 16,
+    "complete": true,
+    "with_provenance": 26
    }
   ],
   "events": 3,
   "corroborated": 0,
   "cap": 150,
   "cap_source": "config/budget.json radar-2026-10",
-  "spent": 95
+  "spent": 119
  },
  "monthly_run_cost": {
   "radar_run_real_credits": [
    27,
    23,
    18,
-   25
+   25,
+   24
   ],
   "arm_a_per_month_original": 22.77777777777778,
   "arm_a_searches_per_month": 13.0,
   "note": "one radar run = 13 fixed searches + page reads + corroboration; arm A per month = its credits at original cost / 9 months"
  },
- "ledger_rows": 2184,
+ "ledger_rows": 2226,
  "pages_changed": {
-  "ist_date": "2026-10-28",
-  "checked": 62,
-  "changed": 14,
+  "ist_date": "2026-10-29",
+  "checked": 80,
+  "changed": 17,
   "failed": 0,
   "not_checked": 0,
   "complete": true,
-  "credits": 12,
-  "runs": 1,
-  "credits_total": 12,
+  "credits": 16,
+  "runs": 2,
+  "credits_total": 28,
   "pages": [
    {
     "url": "https://www.moneycontrol.com/news/india/karnataka-cabinet-approves-rs-8-per-litre-hike-in-nandini-milk-prices-cm-to-take-final-call-14045919.html",
@@ -2040,7 +2049,7 @@
     "url": "https://wtop.com/transportation/2026/10/metro-proposes-11-fare-increase-triggered-by-inflation-officials-say",
     "quote_present": true,
     "number_changed": "no",
-    "diff": "- [Skip to footer](#footer)\n- [![Cropped WTOP Logo 2026.png](https://wtop.com/wp-content/uploads/2026/08/cropped-WTOP-Logo-2026.png)](https://wtop.com/)\n- * [DC Region](https://wtop.com/local/ \"DC Region\")\n- * + [Virginia](https://wtop.com/local/virginia/ \"Virginia\")\n- + [Maryland](https://wtop.com…"
+    "diff": "- ![Amazon explains shift in position on future data center developments in Northern Va.](https://wtop.com/wp-content/uploads/2026/10/data-centers-1-640x360.jpg)\n- #### [Amazon explains shift in position on future data center developments in Northern Va.](https://wtop.com/virginia/2026/10/amazon-ex…"
    },
    {
     "url": "https://www.moneycontrol.com/news/india/commercial-lpg-gets-costlier-from-today-october-1-ahead-of-navratri-dussehra-check-latest-city-wise-rates-14042459.html",
@@ -2076,7 +2085,7 @@
     "url": "https://www.jansatta.com/explained/why-three-indian-oil-companies-are-losing-over-rs-500-crore-daily/4717625",
     "quote_present": true,
     "number_changed": "no",
-    "diff": "- [English](https://indianexpress.com/)[தமிழ்](https://tamil.indianexpress.com/)[বাংলা](https://bengali.indianexpress.com/)[മലയാളം](https://malayalam.indianexpress.com/)[ગુજરાતી](https://gujarati.indianexpress.com/)[हिंदी](https://www.jansatta.com/)[मराठी](https://www.loksatta.com/)[Business](https…"
+    "diff": "- ##### कोलकाता भगदड़ में कम से कम 19 लोगों की मौतः ऐसे हादसों को रोकने के लिए क्या किया जा सकता है? EXPLAINED](https://www.jansatta.com/explained/kolkata-stampede-19-dead-crowd-management/4752661/)\n+ ##### उत्तर प्रदेश में सख्ती, खाने में नहीं मिला सकते कोई भी रंग, हो सकती हैं गंभीर बीमारियां । EX…"
    },
    {
     "url": "https://www.tbsnews.net/bangla/bangladesh/news-details-543836",
@@ -2097,10 +2106,16 @@
     "diff": "- ##\n+ Edition\n+ IN\n+ * [IN](https://timesofindia.indiatimes.com/?loc=in)\n+ * [US](https://timesofindia.indiatimes.com/us)\n+ * [UK](https://timesofindia.indiatimes.com/uk)\n+ * [GCC](https://timesofindia.indiatimes.com/gcc)\n+ English\n+ * [English](https://timesofindia.indiatimes.com/)\n+ * [हिन्दी](h…"
    },
    {
+    "url": "https://timesofindia.indiatimes.com/city/bengaluru/nandini-milk-price-may-go-up-by-5/lt-cms-call-today/articleshow/134491593.cms",
+    "quote_present": true,
+    "number_changed": "no",
+    "diff": "- Edition\n- IN\n- * [IN](https://timesofindia.indiatimes.com/?loc=in)\n- * [US](https://timesofindia.indiatimes.com/us)\n- * [GCC](https://timesofindia.indiatimes.com/gcc)\n- English\n- * [English](https://timesofindia.indiatimes.com/)\n- * [हिन्दी](https://navbharattimes.indiatimes.com/)\n- * [मराठी](htt…"
+   },
+   {
     "url": "https://dairynews.today/news/karnataka_milk_unions_demand_8_price_increase_and_higher_incentives_5751839.html",
-    "quote_present": false,
-    "number_changed": "unknown",
-    "diff": "- [![](/upload/rk/9fd/wzffevtaz2ndj4qvuz04o3lrqne60qgl/default.jpg)](mailto:sales@idrinksuperfood.com)\n+ ![](https://mc.yandex.ru/watch/87723118)\n+ ![](/upload/rk/9fd/wzffevtaz2ndj4qvuz04o3lrqne60qgl/default.jpg)\n- [India](/news/?region=5206) 21.09.2026\n- [Subscribe to weekly digest](/subscribe/)\n-…"
+    "quote_present": true,
+    "number_changed": "no",
+    "diff": "- 830\n+ 860\n- [Follow us in Telegram](https://t.me/dairynewstoday)\n- [Follow us in Instagram](https://www.instagram.com/dairynews.today?igsh=MWlncWN4bzJiNHM4eA==)\n- [Follow us in LinkedIn](https://www.linkedin.com/company/99085508/)\n+ [Follow us on Telegram](https://t.me/dairynewstoday)\n+ [Follow u…"
    },
    {
     "url": "https://www.jpost.com/business-and-innovation/all-news/article-911265",
@@ -2113,6 +2128,18 @@
     "quote_present": true,
     "number_changed": "no",
     "diff": "- ![Wausau weather for Monday and Tuesday](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNDUwIiB2aWV3Qm94PSIwIDAgNjAwIDQ1MCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6I2NmZDRkYjtmaWxsLW9wYWNpdHk6IDAuMTsiLz48L3N2Zz4=)\n- ##…"
+   },
+   {
+    "url": "https://www.etvbharat.com/hi/state/indore-milk-prices-rise-01-october-separate-charges-home-delivery-indications-further-hikes-later-mps26093006169",
+    "quote_present": false,
+    "number_changed": "unknown",
+    "diff": "+ TAGGED:"
+   },
+   {
+    "url": "https://udayavani.com/state-news/hike-in-milk-and-bus-ticket-prices-decision-likely-in-cabinet-meeting-today-847742?lang=kn",
+    "quote_present": true,
+    "number_changed": "no",
+    "diff": "- ಧಾರವಾಡOct 28, 2026, 7:25 AM ISTOct 28, 2026, 7:25 AM IST\n- # 1 ಎಕರೆಯಲ್ಲಿ 41 ತಳಿ ಸಿರಿಧಾನ್ಯ ಬೆಳೆದ ರೈತ!\n- ## ಉತ್ತರ ಕರ್ನಾಟಕದ 4 ಕಡೆ ನಡೆದ ಪ್ರಯೋಗದಲ್ಲಿ ಒಂದು ಕಡೆ ಯಶಸ್ವಿ । ಬೆಳಗಾವಿ ರೈತನ ಸಾಧನೆ । ಕೇಂದ್ರದ ಯೋಜನೆಯಡಿ ಬಿತ್ತನೆ\n- ![1 ಎಕರೆಯಲ್ಲಿ 41 ತಳಿ ಸಿರಿಧಾನ್ಯ ಬೆಳೆದ ರೈತ!](/_next/image?url=https%3A%2F%2Fd3jde0c4xcko0…"
    }
   ]
  },
