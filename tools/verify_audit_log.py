@@ -1,6 +1,7 @@
 """Verify a daily audit log hash chain (and its OpenTimestamps proof, if any).
 
     python tools/verify_audit_log.py results/audit_log/2026-10-28.jsonl
+Days are IST calendar days (Asia/Kolkata, 00:00-23:59:59); see audit_log.py.
 Exit 0 on OK, 1 on a broken chain or head mismatch.
 """
 import json

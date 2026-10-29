@@ -16,3 +16,4 @@ data/official/doca/raw/.go/
 
 # v2 page texts saved at fetch time (news articles: kept local; the ledger keeps each page's SHA-256)
 v2/evidence/pages/
+results/audit_log/*.partial.*

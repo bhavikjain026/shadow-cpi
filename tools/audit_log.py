@@ -4,18 +4,30 @@ Reads results/credit_ledger.jsonl (credits, request ids, response hashes) and,
 when present, logs/flight_recorder.jsonl (every call incl. cached/failed ones).
 Writes results/audit_log/<date>.jsonl, a hash chain, and <date>.head.
 
-Entries carry metadata only: no page text, no prompts, no keys.
+Day boundary: a "day" is an IST calendar day (Asia/Kolkata, UTC+05:30, no DST),
+00:00:00 to 23:59:59 IST. Call times are stored in UTC and assigned to a day by
+converting to IST. The builder refuses a day that has not ended in IST; with
+--partial it writes <date>.partial.jsonl/.partial.head instead, which are never
+stamped or committed (gitignored).
 
-    python tools/audit_log.py 2026-10-28 [--root DIR] [--recorder PATH]
+Entries carry metadata only: no page text, no prompts, no keys. A visitor-entered
+question (the Try it page) is logged as "visitor query" plus the SHA-256 of its
+text; our own pipeline queries stay readable. No cap or truncation is applied.
+
+    python tools/audit_log.py 2026-10-28 [--partial] [--root DIR] [--recorder PATH]
 """
 import argparse
 import hashlib
 import json
 import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 GENESIS = "0" * 64
-FIELDS = ("time", "service", "endpoint", "request_id", "query", "urls",
+IST = timezone(timedelta(hours=5, minutes=30), "IST")  # Asia/Kolkata; India has no DST
+VISITOR_TAG_PREFIXES = ("live:try it",)  # calls whose query text a visitor typed
+VISITOR_QUERY = "visitor query"
+FIELDS = ("time", "service", "endpoint", "request_id", "query", "query_sha256", "urls",
           "status", "cached", "credits", "response_sha256")
 
 
@@ -29,6 +41,19 @@ def entry_hash(entry):
     return hashlib.sha256(canonical(body).encode()).hexdigest()
 
 
+def ist_day(timestamp):
+    """The IST calendar date (YYYY-MM-DD) of an ISO-8601 timestamp (UTC if naive)."""
+    t = datetime.fromisoformat(timestamp)
+    if t.tzinfo is None:
+        t = t.replace(tzinfo=timezone.utc)
+    return t.astimezone(IST).date().isoformat()
+
+
+def day_has_ended(day, now=None):
+    end = datetime.fromisoformat(day).replace(tzinfo=IST) + timedelta(days=1)
+    return (now or datetime.now(timezone.utc)) >= end
+
+
 def _read(path, day):
     if not path or not Path(path).exists():
         return []
@@ -36,9 +61,16 @@ def _read(path, day):
     for line in Path(path).read_text().splitlines():
         if line.strip():
             d = json.loads(line)
-            if str(d.get("time", "")).startswith(day):
+            if ist_day(d["time"]) == day:
                 out.append(d)
     return out
+
+
+def _query(rec, params):
+    q = params.get("query")
+    if q is not None and str(rec.get("tag") or "").startswith(VISITOR_TAG_PREFIXES):
+        return VISITOR_QUERY, hashlib.sha256(str(q).encode()).hexdigest()
+    return q, None
 
 
 def _status(rec):
@@ -57,11 +89,12 @@ def build_entries(day, ledger_path, recorder_path):
         seen.add(r["id"])
         p = r.get("params") or {}
         led = ledger.get(r["id"], {})
+        query, query_sha = _query(r, p)
         credits = led.get("credits", r.get("credits"))
         rows.append({
             "time": r["time"], "service": r["service"], "endpoint": r["endpoint"],
             "request_id": led.get("request_id") or r.get("request_id"),
-            "query": p.get("query"),
+            "query": query, "query_sha256": query_sha,
             "urls": p.get("urls") or ([p["url"]] if p.get("url") else None),
             "status": _status(r), "cached": bool(r.get("cached")),
             "credits": credits,
@@ -72,7 +105,8 @@ def build_entries(day, ledger_path, recorder_path):
             continue
         rows.append({
             "time": led["time"], "service": "tavily", "endpoint": led["endpoint"],
-            "request_id": led.get("request_id"), "query": None, "urls": None,
+            "request_id": led.get("request_id"), "query": None, "query_sha256": None,
+            "urls": None,
             "status": "unrecorded", "cached": False, "credits": led.get("credits"),
             "response_sha256": led.get("response_sha256"),
         })
@@ -91,24 +125,30 @@ def chain(rows):
     return out, prev
 
 
-def build(day, root=".", recorder=None):
+def build(day, root=".", recorder=None, partial=False, now=None):
+    if not partial and not day_has_ended(day, now):
+        raise SystemExit(f"refusing to build {day}: that IST day has not ended yet "
+                         "(use --partial for an unstamped <date>.partial.jsonl)")
     root = Path(root)
     rec = Path(recorder) if recorder else root / "logs" / "flight_recorder.jsonl"
     entries, head = chain(build_entries(day, root / "results" / "credit_ledger.jsonl", rec))
     outdir = root / "results" / "audit_log"
     outdir.mkdir(parents=True, exist_ok=True)
-    (outdir / f"{day}.jsonl").write_text("".join(canonical(e) + "\n" for e in entries))
-    (outdir / f"{day}.head").write_text(head + "\n")
+    stem = f"{day}.partial" if partial else day
+    (outdir / f"{stem}.jsonl").write_text("".join(canonical(e) + "\n" for e in entries))
+    (outdir / f"{stem}.head").write_text(head + "\n")
     return len(entries), head
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("day")
+    ap.add_argument("--partial", action="store_true",
+                    help="allow a day still in progress; writes <date>.partial.jsonl, never stamp or commit it")
     ap.add_argument("--root", default=str(Path(__file__).resolve().parent.parent))
     ap.add_argument("--recorder")
     a = ap.parse_args(argv)
-    n, head = build(a.day, a.root, a.recorder)
+    n, head = build(a.day, a.root, a.recorder, a.partial)
     print(f"{a.day}: {n} entries, head {head}")
 
 
