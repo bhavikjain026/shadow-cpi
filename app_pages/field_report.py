@@ -7,7 +7,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from app_pages.common import REPO_URL, altair_chart, header, lock_table, read_json, table
+from app_pages.common import REPO_URL, altair_chart, header, lead, lock_table, plain_box, read_json, table
 from app_pages.provenance import how_we_know, provenance
 
 
@@ -158,28 +158,18 @@ if not r:
     st.info("Not built yet: run `python tools/build_field_report.py` (offline, 0 credits).")
     st.stop()
 
+plain_box(["We tested whether a search engine can see the future when asked about a past date, and whether date limits fix it.",
+           "Without date limits, some searches returned pages published after the date; with dates and a filter we found none, but some good pages were dropped.",
+           "Start with the chart, then the six findings under it; the rest is evidence for experts."])
+
 # ---------- lead: one chart, then one case up close ----------
+r196 = read_json("results/asof_demo_r196.json")
+lead("**The main result.** Each bar is the share of past questions where a search returned a page from after the date asked about. Red is a normal search, green is the time lock; the thin line is the likely range, because the samples are small.")
 if r.get("leakage"):
     leak_chart(r["leakage"]["rows"])
-provenance("results/field_report.json", "built")
-rp, dtc = r.get("replication") or {}, r["date_test"]["first_pass"]["arms"]["A"]["cases"]
-how_we_know(
-    f"The date test: {dtc} pilot cases and {rp.get('cases', 0)} new cases in the pre-registered replication, a "
-    f"finance look-ahead check of {r['finance']['first_pass']['all_14']['events']} events, and the four-arm search "
-    "comparison. Every count on this page is read from `results/field_report.json`, built offline from the "
-    "committed results files.",
-    "A result is a leak only when the Wayback Machine shows the page appeared after the cutoff. The pre-registered "
-    "initial pass is the primary figure; the retry, shown as an update, only recovered archive lookups that had "
-    "failed on the network. Intervals are Wilson 95%. The date test and the finance check are separate groups and "
-    "are never summed.",
-    "The samples are small, and a zero count means the true rate is plausibly below the upper bound, not that leaks "
-    "cannot happen. The Wayback Machine is the ground truth, and a page it never archived can only be flagged. "
-    "Tavily's published dates are estimates. The time lock is enforced in code (`timelock/`). The R196 and E2 "
-    "examples are single demonstrations, not measurements.")
-r196 = read_json("results/asof_demo_r196.json")
-if r196:
-    r196_timeline(r196)
+st.caption("Plain meanings: **leak** = a search result for a past date that was actually published after it; **Wayback** = the Internet Archive's Wayback Machine, which keeps dated copies of web pages and is our proof of when a page appeared; **pre-registered** = the rule was written down before we ran the test; **initial pass** = the original count under that rule; **update** = the same count after we retried archive lookups that had failed on the network; **arm** = one way of writing the searches; **Wilson interval** = the likely range for a rate measured on a small sample; **time lock** = date filters plus a check in code.")
 
+lead("**The six findings.** One line per test: read the number at the end of each row; rows for a normal search are tinted, rows for the time lock are bold.")
 # ---------- summary (six findings, each read from its file) ----------
 dt1, dt2 = r["date_test"]["first_pass"]["arms"], r["date_test"]["after_retry"]["arms"]
 fn1, fn2 = r["finance"]["first_pass"]["all_14"], r["finance"]["after_retry"]["all_14"]
@@ -213,10 +203,30 @@ with st.expander("Sources"):
     st.markdown("\n".join(f"- {a}: `{c}`" for a, _, c in summary) + "\n"
                 + "\n".join(f"- {a}: `{c}`" for a, c in files))
 
+provenance("results/field_report.json", "built")
+rp, dtc = r.get("replication") or {}, r["date_test"]["first_pass"]["arms"]["A"]["cases"]
+how_we_know(
+    f"The date test: {dtc} pilot cases and {rp.get('cases', 0)} new cases in the pre-registered replication, a "
+    f"finance look-ahead check of {r['finance']['first_pass']['all_14']['events']} events, and the four-arm search "
+    "comparison. Every count on this page is read from `results/field_report.json`, built offline from the "
+    "committed results files.",
+    "A result is a leak only when the Wayback Machine shows the page appeared after the cutoff. The pre-registered "
+    "initial pass is the primary figure; the retry, shown as an update, only recovered archive lookups that had "
+    "failed on the network. Intervals are Wilson 95%. The date test and the finance check are separate groups and "
+    "are never summed.",
+    "The samples are small, and a zero count means the true rate is plausibly below the upper bound, not that leaks "
+    "cannot happen. The Wayback Machine is the ground truth, and a page it never archived can only be flagged. "
+    "Tavily's published dates are estimates. The time lock is enforced in code (`timelock/`). The R196 and E2 "
+    "examples are single demonstrations, not measurements.")
+if r196:
+    r196_timeline(r196)
+
+
 # ---------- time-locked search leakage (first block) ----------
 lk = r.get("leakage")
 if lk:
     st.subheader("Time-locked search leakage")
+    lead("Each row replays searches as of a past date. Read across: how many returned a page from after that date, and how many good pages were kept.")
     lock_table([{"Check": x["check"], "Run": x["run"].replace("first pass", "initial pass").replace(
                     "after logged retry", AFTER_RETRY), "Setting": x["setting"] or "—",
                 "N": x.get("n", "—"),
@@ -249,6 +259,7 @@ def cost_of_correctness(rows):
     lock = "+ filter_by_published_date"
     o1, l1, l2 = dt[("first pass", "no dates")], dt[("first pass", lock)], dt[("after logged retry", lock)]
     st.subheader("Cost of correctness")
+    lead("The three cards show what the time lock costs: credits, speed, and good pages it dropped.")
     c1, c2, c3 = st.columns(3)
     c1.metric("Credits per search: no dates → time lock", f"{o1['credits_per_call']:.2f} → {l1['credits_per_call']:.2f}",
               help="Date test, initial pass. The retry re-ran archive lookups only, not searches.")
@@ -268,6 +279,7 @@ if lk:
 
 # ---------- four arms ----------
 st.subheader("Who should write the search? Four arms, pre-registered")
+lead("Four ways of writing the searches (arms) compared on how many of 29 known price changes each found. More found is better; credits and speed show the price.")
 fa = r["four_arms"]
 arm_rows = [{"Arm": x["arm"], "Searches written by": x["writer"], "Recall (of 29)": f"{x['recall']} of {x['of']}",
              "Real new credits": x["real_new_credits"], "Credits (original cost)": x["credits_original"],
@@ -278,268 +290,284 @@ table(arm_rows, show=list(arm_rows[0]))      # every column (the one table exemp
 st.caption(f"Verdict (pre-registered rule change F, ±1 known change): top group {', '.join(fa['verdict']['top_group'])}. Latency: "
            f"{fa['latency_label']}. Credits per known change found was added after scoring (descriptive).")
 
-# ---------- exploratory ----------
-st.subheader("Exploratory arms")
-for key, title in (("H", "H: arm A's queries, Nemotron picks topic, domains, mode and language"),
-                   ("Td", "T+dates: Tavily auto_parameters plus our date window")):
-    x = r["exploratory"][key]
-    with st.container(border=True):
-        st.markdown(f"**{title}** · _{x['label']}_")
-        lf = x["like_for_like"]
-        c1, c2, c3 = st.columns(3)
-        c1.metric(f"Recall, {lf['months']} complete months", f"{lf['recall']} vs A {lf['arm_a_recall']}",
-                  help=f"{lf['known_changes_in_them']} of the 29 known changes fall in these months")
-        c2.metric("Real credits", x["real_credits"])
-        c3.metric("Credits per known change found", f1(x["credits_per_known_change_real"]))
-        if x["incomplete_months"]:
-            st.caption(f"Incomplete (the cap stopped them): {', '.join(x['incomplete_months'])}.")
-        if "fields_valid" in x:
-            fv = x["fields_valid"]
-            st.caption(f"Fields valid {fv['valid']} of {fv['of']}; valid fields that differ from arm A: "
-                       + ", ".join(f"{k} {v}" for k, v in fv["differs_from_a"].items()) + ".")
+with st.expander("Details for experts: extra arms, auto_parameters, date fields and languages"):
+    # ---------- exploratory ----------
+    st.subheader("Exploratory arms")
+    lead("Two extra ways of writing searches, tried after the main comparison. Treat them as extras, not results.")
+    for key, title in (("H", "H: arm A's queries, Nemotron picks topic, domains, mode and language"),
+                       ("Td", "T+dates: Tavily auto_parameters plus our date window")):
+        x = r["exploratory"][key]
+        with st.container(border=True):
+            st.markdown(f"**{title}** · _{x['label']}_")
+            lf = x["like_for_like"]
+            c1, c2, c3 = st.columns(3)
+            c1.metric(f"Recall, {lf['months']} complete months", f"{lf['recall']} vs A {lf['arm_a_recall']}",
+                      help=f"{lf['known_changes_in_them']} of the 29 known changes fall in these months")
+            c2.metric("Real credits", x["real_credits"])
+            c3.metric("Credits per known change found", f1(x["credits_per_known_change_real"]))
+            if x["incomplete_months"]:
+                st.caption(f"Incomplete (the cap stopped them): {', '.join(x['incomplete_months'])}.")
+            if "fields_valid" in x:
+                fv = x["fields_valid"]
+                st.caption(f"Fields valid {fv['valid']} of {fv['of']}; valid fields that differ from arm A: "
+                           + ", ".join(f"{k} {v}" for k, v in fv["differs_from_a"].items()) + ".")
 
-# ---------- auto_parameters ----------
-from tools.build_bug_reports import auto_note  # noqa: E402  (the qualifier the README and Devpost use)
-st.subheader("auto_parameters and dates")
-ap = r["auto_parameters"]
-nd, wd = ap["no_dates"], ap["with_dates"]
-st.markdown(f"- **No dates sent** ({nd['searches']} searches): time_range "
-            + ", ".join(f"{k} {v}" for k, v in nd["time_range"].items())
-            + f"; {nd['results_dated_oct_2026']} of {nd['results']} results dated October 2026 ({auto_note()}), "
-              f"{nd['results_undated']} undated. Observed in our test: a historical month needs explicit dates.")
-st.markdown(f"- **Dates sent** ({wd['searches']} searches): auto_parameters still reported time_range "
-            + ", ".join(f"{k} {v}" for k, v in wd["time_range"].items())
-            + f", yet {wd['inside_window']} of {wd['dated_results']} dated results fell inside the window: the dates "
-              "seem to win, but the logged time_range says otherwise.")
+    # ---------- auto_parameters ----------
+    from tools.build_bug_reports import auto_note  # noqa: E402  (the qualifier the README and Devpost use)
+    st.subheader("auto_parameters and dates")
+    lead("Tavily can choose its own date range (auto_parameters). This checks what it did when we sent no dates and when we did.")
+    ap = r["auto_parameters"]
+    nd, wd = ap["no_dates"], ap["with_dates"]
+    st.markdown(f"- **No dates sent** ({nd['searches']} searches): time_range "
+                + ", ".join(f"{k} {v}" for k, v in nd["time_range"].items())
+                + f"; {nd['results_dated_oct_2026']} of {nd['results']} results dated October 2026 ({auto_note()}), "
+                  f"{nd['results_undated']} undated. Observed in our test: a historical month needs explicit dates.")
+    st.markdown(f"- **Dates sent** ({wd['searches']} searches): auto_parameters still reported time_range "
+                + ", ".join(f"{k} {v}" for k, v in wd["time_range"].items())
+                + f", yet {wd['inside_window']} of {wd['dated_results']} dated results fell inside the window: the dates "
+                  "seem to win, but the logged time_range says otherwise.")
 
-# ---------- date test ----------
-st.subheader("Date fields test (pilot)")
-dt = r["date_test"]
-st.caption(f"{dt['label'].replace('first pass', 'initial pass')}. Retry: {dt['retry']['recovered']} of {dt['retry']['failed_urls']} failed lookups "
-           "recovered.")
-lock_table([{"Arm": a, "Leak cases, initial pass": f"{p['leak_cases']} of {p['cases']} ({wilson(p['wilson95'])})",
-            f"Leak cases, {AFTER_RETRY}": f"{q['leak_cases']} of {q['cases']} ({wilson(q['wilson95'])})",
-            "Valid evidence lost (date test), initial pass": f"{p['valid_lost']} of {p['valid_total']}",
-            f"Valid evidence lost (date test), {AFTER_RETRY}": f"{q['valid_lost']} of {q['valid_total']}"}
-            for a, p, q in ((a, dt["first_pass"]["arms"][a], dt["after_retry"]["arms"][a]) for a in "ABCD")],
-           lambda row, col: "open" if row["Arm"] == "A" else "lock" if row["Arm"] in "CD" else None)
-for k, lab in (("mcnemar_A_vs_B", "A (no dates) vs B (dates)"), ("mcnemar_C_vs_D", "C (filter) vs D (+ page date)")):
-    st.caption(f"Exact McNemar, {lab}: p = {dt['first_pass'][k]['p_exact']:.4f} initial pass, "
-               f"{dt['after_retry'][k]['p_exact']:.4f} {AFTER_RETRY}.")
-st.caption("Valid evidence lost: Wayback-confirmed pre-cutoff results found by any arm that this arm did not return; "
-           "the retry adds newly confirmed pages, so its denominator is larger.")
+    # ---------- date test ----------
+    st.subheader("Date fields test (pilot)")
+    lead("The main test: one row per way of searching, with how many past questions returned a confirmed leak.")
+    dt = r["date_test"]
+    st.caption(f"{dt['label'].replace('first pass', 'initial pass')}. Retry: {dt['retry']['recovered']} of {dt['retry']['failed_urls']} failed lookups "
+               "recovered.")
+    lock_table([{"Arm": a, "Leak cases, initial pass": f"{p['leak_cases']} of {p['cases']} ({wilson(p['wilson95'])})",
+                f"Leak cases, {AFTER_RETRY}": f"{q['leak_cases']} of {q['cases']} ({wilson(q['wilson95'])})",
+                "Valid evidence lost (date test), initial pass": f"{p['valid_lost']} of {p['valid_total']}",
+                f"Valid evidence lost (date test), {AFTER_RETRY}": f"{q['valid_lost']} of {q['valid_total']}"}
+                for a, p, q in ((a, dt["first_pass"]["arms"][a], dt["after_retry"]["arms"][a]) for a in "ABCD")],
+               lambda row, col: "open" if row["Arm"] == "A" else "lock" if row["Arm"] in "CD" else None)
+    for k, lab in (("mcnemar_A_vs_B", "A (no dates) vs B (dates)"), ("mcnemar_C_vs_D", "C (filter) vs D (+ page date)")):
+        st.caption(f"Exact McNemar, {lab}: p = {dt['first_pass'][k]['p_exact']:.4f} initial pass, "
+                   f"{dt['after_retry'][k]['p_exact']:.4f} {AFTER_RETRY}.")
+    st.caption("Valid evidence lost: Wayback-confirmed pre-cutoff results found by any arm that this arm did not return; "
+               "the retry adds newly confirmed pages, so its denominator is larger.")
 
-# ---------- language date test ----------
-ld = r.get("lang_date_test")
-if ld:
-    st.subheader("Date fields by language (pilot)")
-    st.caption(f"{ld['label']}. A = no dates, C = dates + filter_by_published_date, D = C + our page-date check "
-               "(it reads English and Hindi date words only).")
-    by = {**ld["by_lang"], "English (date test)": ld["english"]}
-    table([{"Language": name, "Cases": s["A"]["cases"],
-                   "Leak cases A / C / D": " / ".join(str(s[a]["leak_cases"]) for a in "ACD"),
-                   "Undated A": f"{s['A']['undated']} of {s['A']['results']}",
-                   "Undated C": f"{s['C']['undated']} of {s['C']['results']} ({pct(s['C']['undated_share'])})",
-                   "C dated outside window": s["C"]["outside_window"],
-                   "Valid evidence lost C / D (language test)": f"{s['C']['valid_lost']} / {s['D']['valid_lost']} of {s['C']['valid_total']}",
-                   "C with no readable page date": f"{s['C']['no_page_date']} of {s['C']['results']}"}
-                  for name, s in by.items()])
-    pw = ld["paired_with_english"]
-    st.caption(f"Paired with English on {len(pw['ids'])} shared cases, exact McNemar: "
-               + "; ".join(f"{a} p = {pw[a]['p_exact']:.3f}" for a in "ACD") + ". "
-               + ("Differs from English: " + "; ".join(ld["differs_from_english"]) + "."
-                  if ld["differs_from_english"] else "No pre-registered difference from English."))
-    rel = ld["relevance_post_hoc"]
-    st.markdown("**Post-hoc, not pre-registered:** with the date filter on, how many results still named the item "
-                "(arm A → arm C): " + "; ".join(f"{name} {v['A']['on_topic']} of {v['A']['results']} → "
-                                                f"{v['C']['on_topic']} of {v['C']['results']}" for name, v in rel.items())
-                + ". The dates held in every language; relevance fell further in Marathi and Tamil. A lead, 12 cases.")
+    # ---------- language date test ----------
+    ld = r.get("lang_date_test")
+    if ld:
+        st.subheader("Date fields by language (pilot)")
+        lead("The same test in other languages, one row per language.")
+        st.caption(f"{ld['label']}. A = no dates, C = dates + filter_by_published_date, D = C + our page-date check "
+                   "(it reads English and Hindi date words only).")
+        by = {**ld["by_lang"], "English (date test)": ld["english"]}
+        table([{"Language": name, "Cases": s["A"]["cases"],
+                       "Leak cases A / C / D": " / ".join(str(s[a]["leak_cases"]) for a in "ACD"),
+                       "Undated A": f"{s['A']['undated']} of {s['A']['results']}",
+                       "Undated C": f"{s['C']['undated']} of {s['C']['results']} ({pct(s['C']['undated_share'])})",
+                       "C dated outside window": s["C"]["outside_window"],
+                       "Valid evidence lost C / D (language test)": f"{s['C']['valid_lost']} / {s['D']['valid_lost']} of {s['C']['valid_total']}",
+                       "C with no readable page date": f"{s['C']['no_page_date']} of {s['C']['results']}"}
+                      for name, s in by.items()])
+        pw = ld["paired_with_english"]
+        st.caption(f"Paired with English on {len(pw['ids'])} shared cases, exact McNemar: "
+                   + "; ".join(f"{a} p = {pw[a]['p_exact']:.3f}" for a in "ACD") + ". "
+                   + ("Differs from English: " + "; ".join(ld["differs_from_english"]) + "."
+                      if ld["differs_from_english"] else "No pre-registered difference from English."))
+        rel = ld["relevance_post_hoc"]
+        st.markdown("**Post-hoc, not pre-registered:** with the date filter on, how many results still named the item "
+                    "(arm A → arm C): " + "; ".join(f"{name} {v['A']['on_topic']} of {v['A']['results']} → "
+                                                    f"{v['C']['on_topic']} of {v['C']['results']}" for name, v in rel.items())
+                    + ". The dates held in every language; relevance fell further in Marathi and Tamil. A lead, 12 cases.")
 
-# ---------- finance ----------
-st.subheader("Second domain: finance look-ahead check")
-fi = r["finance"]
-st.caption(f"{fi['label']}. Replaying the day before 14 scheduled events (RBI decisions, company results): "
-           "N = no dates, D = dates + filter_by_published_date.")
-rows = []
-for name, lab in (("first_pass", "initial pass"), ("after_retry", AFTER_RETRY)):
-    for key in ("all_14", "without_C4"):
-        m = fi[name][key]
-        n, d = m["arms"]["N"], m["arms"]["D"]
-        rows.append({"Run": lab, "Events": m["events"],
-                     "Confirmed leaks N vs D": f"{n['confirmed_events']} vs {d['confirmed_events']}",
-                     "Wilson 95% (N)": wilson(n["confirmed_wilson95"]),
-                     "McNemar p": f"{m['mcnemar_confirmed']['p_exact']:.4f}",
-                     "Snippet leaks N, RBI own month [loose]": f"{n['snippet_own_month_events']} "
-                                                               f"[{n['snippet_loose_events']}]",
-                     "Valid evidence lost N / D (finance check)": f"{n['valid_lost']} / {d['valid_lost']} of {n['valid_total']}"})
-table(rows)
+with st.expander("Details for experts: finance check, retries, second review and leak breakdowns"):
+    # ---------- finance ----------
+    st.subheader("Second domain: finance look-ahead check")
+    lead("A second kind of question: the day before 14 scheduled events, did a search already show the result?")
+    fi = r["finance"]
+    st.caption(f"{fi['label']}. Replaying the day before 14 scheduled events (RBI decisions, company results): "
+               "N = no dates, D = dates + filter_by_published_date.")
+    rows = []
+    for name, lab in (("first_pass", "initial pass"), ("after_retry", AFTER_RETRY)):
+        for key in ("all_14", "without_C4"):
+            m = fi[name][key]
+            n, d = m["arms"]["N"], m["arms"]["D"]
+            rows.append({"Run": lab, "Events": m["events"],
+                         "Confirmed leaks N vs D": f"{n['confirmed_events']} vs {d['confirmed_events']}",
+                         "Wilson 95% (N)": wilson(n["confirmed_wilson95"]),
+                         "McNemar p": f"{m['mcnemar_confirmed']['p_exact']:.4f}",
+                         "Snippet leaks N, RBI own month [loose]": f"{n['snippet_own_month_events']} "
+                                                                   f"[{n['snippet_loose_events']}]",
+                         "Valid evidence lost N / D (finance check)": f"{n['valid_lost']} / {d['valid_lost']} of {n['valid_total']}"})
+    table(rows)
 
-# ---------- retry reconciliation ----------
-rr = read_json("results/retry_reconciliation.json")
-if rr:
-    st.subheader("Retry reconciliation: every case whose label changed")
-    st.caption(f"{rr['changed']} of {rr['cases']} cases changed label {AFTER_RETRY} (logged), which only "
-               "repeated archive lookups that had failed on the network. The initial pass stays the pre-registered "
-               "result. File: `results/retry_reconciliation.json` (also `docs/retry_reconciliation.md`).")
-    table([{"Case": x["case"], "Test": x["test"], "Item": x["item"], "Search": x["search"],
-                   "Before": x["before"], "After": x["after"], "Reason": " · ".join(x["reasons"])}
-                  for x in rr["rows"]], show=["Case", "Item", "Before", "After", "Reason"])
+    # ---------- retry reconciliation ----------
+    rr = read_json("results/retry_reconciliation.json")
+    if rr:
+        st.subheader("Retry reconciliation: every case whose label changed")
+        lead("Every case whose label changed after we retried failed archive lookups, before and after.")
+        st.caption(f"{rr['changed']} of {rr['cases']} cases changed label {AFTER_RETRY} (logged), which only "
+                   "repeated archive lookups that had failed on the network. The initial pass stays the pre-registered "
+                   "result. File: `results/retry_reconciliation.json` (also `docs/retry_reconciliation.md`).")
+        table([{"Case": x["case"], "Test": x["test"], "Item": x["item"], "Search": x["search"],
+                       "Before": x["before"], "After": x["after"], "Reason": " · ".join(x["reasons"])}
+                      for x in rr["rows"]], show=["Case", "Item", "Before", "After", "Reason"])
 
-# ---------- post-hoc second review (AI-assisted) ----------
-sr = read_json("results/timelock34_second_review.json")
-if sr:
-    st.subheader("Second review (separate, post-hoc, AI-assisted: ChatGPT agent)")
-    st.caption(f"Every result URL in the timelock34 benchmark labelled again in a separate, post-hoc AI-assisted "
-               f"review (ChatGPT agent); {sr['unclear']} of {sr['rows']} rows stayed unclear. Our leak: {sr['leak_definitions']['ours']}. The reviewer's leak: "
-               f"{sr['leak_definitions']['reviewer']}. Source: `results/timelock34_second_review.json`.")
-    st.markdown(f"The reviewer decided **{sr['decided']} of {sr['rows']}** rows (LEAK or SAFE); {sr['unclear']} are "
-                "UNCLEAR, because the live page would not open and archive lookups were rate-limited.")
-    ag = sr["agreement"]
-    table([{"Our leak =": lab, "Rows": ag[k]["rows"], "Agreement": pct1(ag[k]["agreement"]),
-                   "Cohen's kappa": "—" if ag[k]["kappa"] is None else f"{ag[k]['kappa']:.2f}"}
-                  for k, lab in (("confirmed_or_date_flag", "confirmed or date_flag"), ("confirmed", "confirmed only"))])
-    table([{"Set": t["dataset"].replace("_", " "), "Setting": t["setting"], "Cases": t["cases"],
-                   "Cases with a leak: reviewer": t["reviewer_leak"], "Ours (confirmed)": t["ours_confirmed"],
-                   "Ours (confirmed or date_flag)": t["ours_confirmed_or_date_flag"]} for t in sr["tasks"]])
-    ff, ex = sr["finance_filtered"], sr["finance_filtered"]["example"]
-    st.markdown(f"**Search filters by date; Extract reads the page as it is today.** "
-                f"{ff['searches_with_result_dated_after_cutoff']} of {ff['searches']} filtered searches returned a "
-                f"result dated after the cutoff; the post-hoc review found {ff['reviewer_leak_pages']} page whose "
-                f"current version leaks the outcome. Example `{ex['row_id']}` ({ex['case']}, cutoff {ex['cutoff']}): "
-                f"Tavily's published date {ex['our_published_date']} "
-                f"({'before' if ex['our_published_date'] < ex['cutoff'] else 'not before'} the cutoff); the reviewer "
-                f"relied on the {ex['reviewer_date_source']} {ex['reviewer_date']}. Reviewer: _{ex['reviewer_reason']}_ "
-                f"Quote: _{ex['reviewer_quote']}_.")
-    dta = read_json("results/date_field_test.json")
+    # ---------- post-hoc second review (AI-assisted) ----------
+    sr = read_json("results/timelock34_second_review.json")
+    if sr:
+        st.subheader("Second review (separate, post-hoc, AI-assisted: ChatGPT agent)")
+        lead("A second, separate AI labelling of the same results, to see whether our leak labels hold up.")
+        st.caption(f"Every result URL in the timelock34 benchmark labelled again in a separate, post-hoc AI-assisted "
+                   f"review (ChatGPT agent); {sr['unclear']} of {sr['rows']} rows stayed unclear. Our leak: {sr['leak_definitions']['ours']}. The reviewer's leak: "
+                   f"{sr['leak_definitions']['reviewer']}. Source: `results/timelock34_second_review.json`.")
+        st.markdown(f"The reviewer decided **{sr['decided']} of {sr['rows']}** rows (LEAK or SAFE); {sr['unclear']} are "
+                    "UNCLEAR, because the live page would not open and archive lookups were rate-limited.")
+        ag = sr["agreement"]
+        table([{"Our leak =": lab, "Rows": ag[k]["rows"], "Agreement": pct1(ag[k]["agreement"]),
+                       "Cohen's kappa": "—" if ag[k]["kappa"] is None else f"{ag[k]['kappa']:.2f}"}
+                      for k, lab in (("confirmed_or_date_flag", "confirmed or date_flag"), ("confirmed", "confirmed only"))])
+        table([{"Set": t["dataset"].replace("_", " "), "Setting": t["setting"], "Cases": t["cases"],
+                       "Cases with a leak: reviewer": t["reviewer_leak"], "Ours (confirmed)": t["ours_confirmed"],
+                       "Ours (confirmed or date_flag)": t["ours_confirmed_or_date_flag"]} for t in sr["tasks"]])
+        ff, ex = sr["finance_filtered"], sr["finance_filtered"]["example"]
+        st.markdown(f"**Search filters by date; Extract reads the page as it is today.** "
+                    f"{ff['searches_with_result_dated_after_cutoff']} of {ff['searches']} filtered searches returned a "
+                    f"result dated after the cutoff; the post-hoc review found {ff['reviewer_leak_pages']} page whose "
+                    f"current version leaks the outcome. Example `{ex['row_id']}` ({ex['case']}, cutoff {ex['cutoff']}): "
+                    f"Tavily's published date {ex['our_published_date']} "
+                    f"({'before' if ex['our_published_date'] < ex['cutoff'] else 'not before'} the cutoff); the reviewer "
+                    f"relied on the {ex['reviewer_date_source']} {ex['reviewer_date']}. Reviewer: _{ex['reviewer_reason']}_ "
+                    f"Quote: _{ex['reviewer_quote']}_.")
+        dta = read_json("results/date_field_test.json")
+        pc = r.get("pages_changed")
+        if dta:
+            m = dta["metrics"]["arms"]
+            st.markdown("**What covers the gap, partly.** "
+                        f"Our page-date check reads the date printed on the extracted page: in the date test it kept "
+                        f"{m['D']['results']} of the {m['C']['results']} results the filter let through (date-test valid evidence lost: "
+                        f"{m['D']['valid_lost']} of {m['D']['valid_total']} with it, {m['C']['valid_lost']} with the filter "
+                        "alone). It reads a page's date, not its edit history. The drift monitor re-reads October radar "
+                        "pages daily: " + ("no drift run committed yet" if not pc else
+                                          f"{pc['changed']} of {pc['checked']} changed") + ". Wayback Machine checks "
+                        f"confirm whether a page existed by the cutoff; failed lookups were retried and logged "
+                        f"({r['date_test']['retry']['recovered']} in the date test, {r['finance']['retry']['recovered']} "
+                        f"in the finance check), and {sr['unclear']} of {sr['rows']} second-review rows stayed unclear, "
+                        "partly from archive rate limits.")
+
+    # ---------- leaks by source type ----------
+    lt = r.get("leak_by_source_type")
+    if lt:
+        st.subheader("Which pages leak? Leaks by source type")
+        lead("Which kinds of websites the leaking pages came from.")
+        st.caption(f"{lt['label']}. {lt['leaks']} leaks among {lt['results']} returned result rows, pooled across settings, "
+                   f"exploratory (date test and finance check each by its own rule). Leak = {lt['leak_definition']}. Type from the URL only, by a rule written before counting "
+                   f"({lt['rule'].replace('first match wins', 'earliest match wins')}).")
+
+        def cell(x):
+            return "—" if not x["results"] else f"{x['leaks']} of {x['results']} = {pct(x['rate'])} ({wilson(x['wilson95'])})"
+
+        table([{"Source type": x["type"], "Leaks / results, pooled (Wilson 95%)": cell(x["pooled"]),
+                       "Date test": cell(x["date test"]), "Finance check": cell(x["finance"])} for x in lt["rows"]])
+        st.caption("Where the leaks came from: " + ", ".join(f"{k} {v}" for k, v in lt["leaks_by_arm"].items())
+                   + ". Sources: " + ", ".join(f"`{s}`" for s in lt["sources"]) + ".")
+
+    # ---------- leaks at three levels ----------
+    dta, fna = read_json("results/date_field_test.json"), read_json("results/finance_lookahead.json")
+    if dta and fna and lt:
+        def calls(rows, arm, label):
+            sent = [x["arms"][arm] for x in rows if arm in x["arms"]]
+            return sum(any(y["label"] == label for y in c["results"]) for c in sent), len(sent)
+        dt_l, dt_n = calls(dta["rows"], "A", "L")
+        fn_l, fn_n = calls(fna["rows"], "N", "confirmed")
+        st.subheader("Leaks at three levels")
+        lead("The same leak counts taken three ways: per question, per search and per result.")
+        st.caption(f"Initial pass → {AFTER_RETRY}. One search call per task and setting, so call counts "
+                   "equal task counts.")
+        table([{"Level": "Task (case or event), no dates",
+                       "Date test": f"{dt1['A']['leak_cases']} → {dt2['A']['leak_cases']} of {dt1['A']['cases']}",
+                       "Finance check": f"{fn1['arms']['N']['confirmed_events']} → {fn2['arms']['N']['confirmed_events']} "
+                                        f"of {fn1['events']}",
+                       "Source": "results/field_report.json"},
+                      {"Level": "Task, dates + filter",
+                       "Date test": f"{dt1['C']['leak_cases']} → {dt2['C']['leak_cases']} of {dt1['C']['cases']}",
+                       "Finance check": f"{fn1['arms']['D']['confirmed_events']} → {fn2['arms']['D']['confirmed_events']} "
+                                        f"of {fn1['events']}",
+                       "Source": "results/field_report.json"},
+                      {"Level": "Search call, no dates (initial pass)", "Date test": f"{dt_l} of {dt_n}",
+                       "Finance check": f"{fn_l} of {fn_n}",
+                       "Source": "results/date_field_test.json, results/finance_lookahead.json"},
+                      {"Level": "Result (exploratory, counted after scoring, initial pass)",
+                       "Date test": str(lt["leaks_by_arm"]["date test A"]), "Finance check": str(lt["leaks_by_arm"]["finance N"]),
+                       "Source": f"leak_by_source_type: {lt['leaks']} of {lt['results']} returned result rows, pooled "
+                                 "across settings, exploratory"}])
+
+with st.expander("Details for experts: radar runs, credit receipt and cost by search setting"):
+    # ---------- radar and cost ----------
+    st.subheader("October radar: runs so far")
+    lead("Daily runs of the October price-change radar, and what each cost.")
+    rd = r["radar"]
+    table([{"Run (UTC)": x["utc"][:16], "Real credits": x["real_credits"], "Searches": x["searches"],
+                   "Calls with request_id + hash": f"{x['with_provenance']} of {x['calls']}",
+                   "Complete": "yes" if x["complete"] else "no"} for x in rd["runs"]])
+    st.caption(f"Strategy {rd['strategy']} · {rd['events']} events, {rd['corroborated']} corroborated · {rd['spent']} of "
+               f"{rd['cap']} credits ({rd['cap_source']}).")
+    st.markdown("**Pages that changed**")
     pc = r.get("pages_changed")
-    if dta:
-        m = dta["metrics"]["arms"]
-        st.markdown("**What covers the gap, partly.** "
-                    f"Our page-date check reads the date printed on the extracted page: in the date test it kept "
-                    f"{m['D']['results']} of the {m['C']['results']} results the filter let through (date-test valid evidence lost: "
-                    f"{m['D']['valid_lost']} of {m['D']['valid_total']} with it, {m['C']['valid_lost']} with the filter "
-                    "alone). It reads a page's date, not its edit history. The drift monitor re-reads October radar "
-                    "pages daily: " + ("no drift run committed yet" if not pc else
-                                      f"{pc['changed']} of {pc['checked']} changed") + ". Wayback Machine checks "
-                    f"confirm whether a page existed by the cutoff; failed lookups were retried and logged "
-                    f"({r['date_test']['retry']['recovered']} in the date test, {r['finance']['retry']['recovered']} "
-                    f"in the finance check), and {sr['unclear']} of {sr['rows']} second-review rows stayed unclear, "
-                    "partly from archive rate limits.")
+    if not pc:
+        st.caption("No drift run yet. Once a day until the 29 Oct freeze, every radar page with a cited line is read "
+                   "again with Tavily Extract and compared with the saved copy (v2/DRIFT_PREREG.md, part A).")
+    else:
+        st.caption(f"{pc['changed']} of {pc['checked']} pages changed since the radar saved them (run of "
+                   f"{pc['ist_date']} IST; {pc['failed']} could not be fetched"
+                   + ("" if pc["complete"] else f", {pc['not_checked']} not checked: the credit cap stopped the run")
+                   + f"). {pc['runs']} run(s), {pc['credits_total']} credits. Page furniture (copyright, cookie lines) "
+                     "and whitespace are ignored. Descriptive only: nothing in the radar changes.")
+        if pc["pages"]:
+            table([{"Page": x["url"], "Quote still present": "yes" if x["quote_present"] else "no",
+                           "Number changed": x["number_changed"], "What changed (≤300 characters)": x["diff"]}
+                          for x in pc["pages"]])
+    mc = r["monthly_run_cost"]
+    st.markdown(f"**Credits for one full monthly run:** radar run(s) {', '.join(str(x) for x in mc['radar_run_real_credits'])}"
+                f" real credits; arm A {mc['arm_a_per_month_original']:.1f} per month at original cost "
+                f"({mc['arm_a_searches_per_month']:.0f} searches). _{mc['note']}._")
 
-# ---------- leaks by source type ----------
-lt = r.get("leak_by_source_type")
-if lt:
-    st.subheader("Which pages leak? Leaks by source type")
-    st.caption(f"{lt['label']}. {lt['leaks']} leaks among {lt['results']} returned result rows, pooled across settings, "
-               f"exploratory (date test and finance check each by its own rule). Leak = {lt['leak_definition']}. Type from the URL only, by a rule written before counting "
-               f"({lt['rule'].replace('first match wins', 'earliest match wins')}).")
+    # ---------- credit and speed receipt ----------
+    rc = r.get("receipt")
+    if rc:
+        st.subheader("Credit and speed receipt")
+        lead("What the work cost in Tavily credits and how fast it ran.")
+        t = rc["total"]
+        st.caption(f"All figures {rc['label']} · {rc['built_from']} · {t['calls']} real calls, {t['credits']} credits "
+                   f"(account reconcile rows {rc['reconcile_credits']:+d}, not in these rows).")
 
-    def cell(x):
-        return "—" if not x["results"] else f"{x['leaks']} of {x['results']} = {pct(x['rate'])} ({wilson(x['wilson95'])})"
+        def receipt_rows(rows, first):
+            return [{**({first: x[first.lower()]} if first != "Experiment" else
+                        {"Experiment": x["experiment"], "Endpoint": x["endpoint"]}),
+                     "Calls": x["calls"], "Credits": x["credits"], "Credits per call": f"{x['credits_per_call']:.2f}",
+                     "Median latency (s)": f"{x['median_latency_s']:.2f}" if x["median_latency_s"] is not None else "—",
+                     "p95 latency (s)": f"{x['p95_latency_s']:.2f}" if x["p95_latency_s"] is not None else "—"}
+                    for x in rows]
 
-    table([{"Source type": x["type"], "Leaks / results, pooled (Wilson 95%)": cell(x["pooled"]),
-                   "Date test": cell(x["date test"]), "Finance check": cell(x["finance"])} for x in lt["rows"]])
-    st.caption("Where the leaks came from: " + ", ".join(f"{k} {v}" for k, v in lt["leaks_by_arm"].items())
-               + ". Sources: " + ", ".join(f"`{s}`" for s in lt["sources"]) + ".")
+        st.markdown("**By endpoint**")
+        table(receipt_rows(rc["by_endpoint"], "Endpoint"))
+        st.markdown("**Credits per verified quote** (a quote counts once code has found the number in the exact line "
+                    "on the page)")
+        table([{"Run": x["what"], "Budgets": ", ".join(x["budgets"]), "Credits": x["credits"],
+                       "Verified quotes": x["verified_quotes"], "Credits per verified quote":
+                       f1(x["credits_per_verified_quote"]), "Source": x["source"]} for x in rc["per_verified_quote"]])
+        with st.container():
+            st.markdown("**By experiment and endpoint**")
+            table(receipt_rows(rc["by_experiment"], "Experiment"))
+        for n in rc["notes"]:
+            st.caption(n)
 
-# ---------- leaks at three levels ----------
-dta, fna = read_json("results/date_field_test.json"), read_json("results/finance_lookahead.json")
-if dta and fna and lt:
-    def calls(rows, arm, label):
-        sent = [x["arms"][arm] for x in rows if arm in x["arms"]]
-        return sum(any(y["label"] == label for y in c["results"]) for c in sent), len(sent)
-    dt_l, dt_n = calls(dta["rows"], "A", "L")
-    fn_l, fn_n = calls(fna["rows"], "N", "confirmed")
-    st.subheader("Leaks at three levels")
-    st.caption(f"Initial pass → {AFTER_RETRY}. One search call per task and setting, so call counts "
-               "equal task counts.")
-    table([{"Level": "Task (case or event), no dates",
-                   "Date test": f"{dt1['A']['leak_cases']} → {dt2['A']['leak_cases']} of {dt1['A']['cases']}",
-                   "Finance check": f"{fn1['arms']['N']['confirmed_events']} → {fn2['arms']['N']['confirmed_events']} "
-                                    f"of {fn1['events']}",
-                   "Source": "results/field_report.json"},
-                  {"Level": "Task, dates + filter",
-                   "Date test": f"{dt1['C']['leak_cases']} → {dt2['C']['leak_cases']} of {dt1['C']['cases']}",
-                   "Finance check": f"{fn1['arms']['D']['confirmed_events']} → {fn2['arms']['D']['confirmed_events']} "
-                                    f"of {fn1['events']}",
-                   "Source": "results/field_report.json"},
-                  {"Level": "Search call, no dates (initial pass)", "Date test": f"{dt_l} of {dt_n}",
-                   "Finance check": f"{fn_l} of {fn_n}",
-                   "Source": "results/date_field_test.json, results/finance_lookahead.json"},
-                  {"Level": "Result (exploratory, counted after scoring, initial pass)",
-                   "Date test": str(lt["leaks_by_arm"]["date test A"]), "Finance check": str(lt["leaks_by_arm"]["finance N"]),
-                   "Source": f"leak_by_source_type: {lt['leaks']} of {lt['results']} returned result rows, pooled "
-                             "across settings, exploratory"}])
-
-# ---------- radar and cost ----------
-st.subheader("October radar: runs so far")
-rd = r["radar"]
-table([{"Run (UTC)": x["utc"][:16], "Real credits": x["real_credits"], "Searches": x["searches"],
-               "Calls with request_id + hash": f"{x['with_provenance']} of {x['calls']}",
-               "Complete": "yes" if x["complete"] else "no"} for x in rd["runs"]])
-st.caption(f"Strategy {rd['strategy']} · {rd['events']} events, {rd['corroborated']} corroborated · {rd['spent']} of "
-           f"{rd['cap']} credits ({rd['cap_source']}).")
-st.markdown("**Pages that changed**")
-pc = r.get("pages_changed")
-if not pc:
-    st.caption("No drift run yet. Once a day until the 29 Oct freeze, every radar page with a cited line is read "
-               "again with Tavily Extract and compared with the saved copy (v2/DRIFT_PREREG.md, part A).")
-else:
-    st.caption(f"{pc['changed']} of {pc['checked']} pages changed since the radar saved them (run of "
-               f"{pc['ist_date']} IST; {pc['failed']} could not be fetched"
-               + ("" if pc["complete"] else f", {pc['not_checked']} not checked: the credit cap stopped the run")
-               + f"). {pc['runs']} run(s), {pc['credits_total']} credits. Page furniture (copyright, cookie lines) "
-                 "and whitespace are ignored. Descriptive only: nothing in the radar changes.")
-    if pc["pages"]:
-        table([{"Page": x["url"], "Quote still present": "yes" if x["quote_present"] else "no",
-                       "Number changed": x["number_changed"], "What changed (≤300 characters)": x["diff"]}
-                      for x in pc["pages"]])
-mc = r["monthly_run_cost"]
-st.markdown(f"**Credits for one full monthly run:** radar run(s) {', '.join(str(x) for x in mc['radar_run_real_credits'])}"
-            f" real credits; arm A {mc['arm_a_per_month_original']:.1f} per month at original cost "
-            f"({mc['arm_a_searches_per_month']:.0f} searches). _{mc['note']}._")
-
-# ---------- credit and speed receipt ----------
-rc = r.get("receipt")
-if rc:
-    st.subheader("Credit and speed receipt")
-    t = rc["total"]
-    st.caption(f"All figures {rc['label']} · {rc['built_from']} · {t['calls']} real calls, {t['credits']} credits "
-               f"(account reconcile rows {rc['reconcile_credits']:+d}, not in these rows).")
-
-    def receipt_rows(rows, first):
-        return [{**({first: x[first.lower()]} if first != "Experiment" else
-                    {"Experiment": x["experiment"], "Endpoint": x["endpoint"]}),
-                 "Calls": x["calls"], "Credits": x["credits"], "Credits per call": f"{x['credits_per_call']:.2f}",
-                 "Median latency (s)": f"{x['median_latency_s']:.2f}" if x["median_latency_s"] is not None else "—",
-                 "p95 latency (s)": f"{x['p95_latency_s']:.2f}" if x["p95_latency_s"] is not None else "—"}
-                for x in rows]
-
-    st.markdown("**By endpoint**")
-    table(receipt_rows(rc["by_endpoint"], "Endpoint"))
-    st.markdown("**Credits per verified quote** (a quote counts once code has found the number in the exact line "
-                "on the page)")
-    table([{"Run": x["what"], "Budgets": ", ".join(x["budgets"]), "Credits": x["credits"],
-                   "Verified quotes": x["verified_quotes"], "Credits per verified quote":
-                   f1(x["credits_per_verified_quote"]), "Source": x["source"]} for x in rc["per_verified_quote"]])
-    with st.expander("By experiment and endpoint"):
-        table(receipt_rows(rc["by_experiment"], "Experiment"))
-    for n in rc["notes"]:
-        st.caption(n)
-
-# ---------- cost vs results by search setting ----------
-cv = read_json("results/cost_vs_results.json")
-if cv:
-    st.subheader("Cost vs results: search depth and max_results")
-    st.caption(f"Built {cv['built']} from saved runs, {cv['credits_spent_building']} credits · {cv['note']} "
-               "Source: `results/cost_vs_results.json`.")
-    table([{"search_depth": x["search_depth"], "max_results": x["max_results"], "Real calls": x["calls"],
-                   "Credits": x["credits"], "Credits per call": f"{x['credits_per_call']:.2f}",
-                   "Results per call": f1(x["results_per_call"]), "Filled (of max_results)": pct(x["fill_rate"]),
-                   "Credits per 100 results": f1(x["credits_per_100_results"]),
-                   "Results with a published_date": pct(x["dated_share"]),
-                   "Median response_time (s)": "—" if x["median_seconds"] is None else f"{x['median_seconds']:.2f}",
-                   "Tasks": ", ".join(x["tasks"])} for x in cv["rows"]])
+    # ---------- cost vs results by search setting ----------
+    cv = read_json("results/cost_vs_results.json")
+    if cv:
+        st.subheader("Cost vs results: search depth and max_results")
+        lead("Whether deeper searches or more results found more.")
+        st.caption(f"Built {cv['built']} from saved runs, {cv['credits_spent_building']} credits · {cv['note']} "
+                   "Source: `results/cost_vs_results.json`.")
+        table([{"search_depth": x["search_depth"], "max_results": x["max_results"], "Real calls": x["calls"],
+                       "Credits": x["credits"], "Credits per call": f"{x['credits_per_call']:.2f}",
+                       "Results per call": f1(x["results_per_call"]), "Filled (of max_results)": pct(x["fill_rate"]),
+                       "Credits per 100 results": f1(x["credits_per_100_results"]),
+                       "Results with a published_date": pct(x["dated_share"]),
+                       "Median response_time (s)": "—" if x["median_seconds"] is None else f"{x['median_seconds']:.2f}",
+                       "Tasks": ", ".join(x["tasks"])} for x in cv["rows"]])
 
 # ---------- field notes ----------
 br = read_json("results/bug_reports.json")

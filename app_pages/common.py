@@ -153,6 +153,18 @@ def page_guide(entries):
             st.caption(PAGE_GUIDES[key])
 
 
+def plain_box(lines, key="plain-words"):
+    """A bordered box of two or three short plain-words lines (no jargon), numbered, right under a page's title."""
+    with st.container(border=True, key=key):
+        st.markdown("  \n".join(f"{i}. {line}" for i, line in enumerate(lines, 1)))
+
+
+def lead(text):
+    """One plain lead-in line above a chart or table: what it shows and how to read it. The technical caption stays
+    below the chart or table."""
+    st.markdown(text)
+
+
 def header(title, intro=None, *, eyebrow=False):
     """The page title (H1) with its PAGE_GUIDES purpose line. eyebrow=True shows the title as a small label instead,
     for a page whose H1 is elsewhere (the Leak demo's brand header)."""
