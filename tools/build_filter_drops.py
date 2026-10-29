@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Why the time lock's date filter (arm C) did not return 12 of the 40 valid evidence items in the date test pilot
+"""Why the time-locked search (arm C) did not return some of the valid evidence items in the date test pilot
 (initial pass): results/filter_drops.json. Exploratory, added after scoring; changes no headline. 0 credits, offline.
 
     python tools/build_filter_drops.py
 
 A valid item is a result some arm returned that the archive shows existed on or before the cutoff and that is on
-topic (v2.date_test.metrics). A dropped item is a valid item arm C did not return for its case. Each is sorted into one
+topic (v2.date_test.metrics). A missed item is a valid item arm C did not return for its case. Each is sorted into one
 class from the date fields saved with it; the class rules are in RULES below and read only the saved fields.
 """
 import json
@@ -66,14 +66,16 @@ def build(path=ROOT / SOURCE):
                           "earliest_archive_copy": (r["captures"] or [None])[0], "class": cls, "reason": why})
     m = out["metrics"]["arms"]["C"]
     if (len(items), m["valid_total"]) != (m["valid_lost"], sum(1 for _ in _valid(out))):
-        raise SystemExit("dropped items differ from the committed valid_lost / valid_total for arm C")
+        raise SystemExit("items not returned differ from the committed valid_lost / valid_total for arm C")
     counts = {k: sum(x["class"] == k for x in items) for k in RULES}
+    split = {"excluded_for_their_dates": counts["a"] + counts["b"] + counts["c"],
+             "before_window_start": sum(x["class"] == "d" and x["tavily_date"] < x["window_start"] for x in items),
+             "inside_window": sum(x["class"] == "d" and x["tavily_date"] >= x["window_start"] for x in items)}
+    sentence = (f"Only {split['excluded_for_their_dates']} of the {len(items)} were excluded for their dates; "
+                f"{split['before_window_start']} fell just before our window start; the other {split['inside_window']} were "
+                "dated inside the window, so the difference is mostly which results the dated search returned, not the filter.")
     return {"label": LABEL, "source": SOURCE, "pass": "initial pass (pre-registered run, before the Wayback retry)",
-            "arm": "C", "dropped": len(items), "valid_total": m["valid_total"], "rules": RULES, "counts": counts,
-            "d_split": {"before_window_start": sum(x["class"] == "d" and x["tavily_date"] < x["window_start"]
-                                                   for x in items),
-                        "inside_window_not_returned": sum(x["class"] == "d" and x["tavily_date"] >= x["window_start"]
-                                                          for x in items)},
+            "arm": "C", "not_returned": len(items), "valid_total": m["valid_total"], "rules": RULES, "counts": counts, "split": split, "plain_sentence": sentence,
             "items": items}
 
 
@@ -85,4 +87,4 @@ def _valid(out):
 if __name__ == "__main__":
     res = build()
     OUT.write_text(json.dumps(res, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"{LABEL}: {res['dropped']} of {res['valid_total']} dropped; classes {res['counts']} -> {OUT.relative_to(ROOT)}")
+    print(f"{LABEL}: {res['not_returned']} of {res['valid_total']} not returned; classes {res['counts']} -> {OUT.relative_to(ROOT)}")

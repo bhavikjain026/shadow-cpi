@@ -214,7 +214,7 @@ def test_field_report_cost_of_correctness_reads_the_leakage_rows():
     cards = {m.label: (m.value, m.proto.delta) for m in at.metric}
     assert cards["Credits per search: no dates → time lock"][0] == f"{o['credits_per_call']:.2f} → {l1['credits_per_call']:.2f}"
     assert cards["Median latency: no dates → time lock"][0] == f"{o['median_latency_s']:.1f} s → {l1['median_latency_s']:.1f} s"
-    lost = cards["Valid evidence the time lock lost"]
+    lost = cards["Valid evidence the time-locked search didn't return"]
     assert lost == (f"{l1['valid_total'] - l1['valid_kept']}/{l1['valid_total']}",
                     f"{l2['valid_total'] - l2['valid_kept']}/{l2['valid_total']} after retrying the failed Wayback "
                     "archive lookups")
@@ -512,4 +512,4 @@ def test_field_report_has_a_closed_exploratory_analyses_block_that_reads_the_res
     assert len(ex) == 1
     fd = json.loads((ROOT / "results" / "filter_drops.json").read_text())
     shown = " ".join(m.value for m in ex[0].markdown) + " ".join(c.value for c in ex[0].caption)
-    assert f"{fd['dropped']} of {fd['valid_total']}" in shown and fd["label"].capitalize() in shown
+    assert f"{fd['not_returned']} of {fd['valid_total']}" in shown and fd["label"].capitalize() in shown

@@ -67,8 +67,8 @@ retry (94 lookups had failed), still 0 of 14 detected with dates + filter.
 
 </details>
 
-**The cost.** The measured cost of the strict setting: the filter dropped 12 of the date test's
-40 pieces of valid evidence (initial pass; 20 of 48 after
+**The cost.** The measured cost of the strict setting: the time-locked search didn't return 12 of the date test's
+40 pieces of valid evidence that the plain search found (initial pass; 20 of 48 after
 the retry).
 
 **Date filters select which pages, not which version.** Tavily dated `R196`, a TCS results preview,
@@ -147,8 +147,8 @@ the update):
 | Finance check (exploratory) | valid evidence: pages Wayback shows existed by the cutoff that name the RBI or the company | 10 of 11 | 1 |
 | Check E (exploratory, `exact_match`) | known-good quotes re-found by the dated search | 25 of 40 | 8 found only without dates; 7 by neither |
 
-With our extra page-date check added to the filter, 27 of the date test's 40
-pieces of valid evidence were lost (initial pass; 35 of 48 after the
+With our extra page-date check added to the filter, the search didn't return 27 of the date test's 40
+pieces of valid evidence that the plain search found (initial pass; 35 of 48 after the
 retry). Check E's misses are filter misses, not back-dating: 0 of
 8 have a Tavily `published_date` after the cutoff (6 on or before it,
 2 undated; [`results/leakcheck_exact_match.md`](results/leakcheck_exact_match.md)).
@@ -164,8 +164,8 @@ our measurement next to it. Most of what we found is documented behaviour; the f
 | Field | Tavily's docs say (quoted, checked 29 Oct) | What we measured |
 |---|---|---|
 | `start_date` / `end_date` | ["Will return all results after the specified start date based on publish date or last updated date."](https://docs.tavily.com/documentation/api-reference/endpoint/search); ["By default, results with no detectable published date are not removed"](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Dates select which pages, not which version. `R196`: dated 7 Jul, before its 8 Jul cutoff, updated 9 Jul; Extract returns the updated page. Dates with the filter off (arm B): 0 of 20 detected (Wilson 0–16%) |
-| `filter_by_published_date` | ["Results with no detectable published date are also removed."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Dates + filter: 0 of 20 detected (Wilson 0–16%); replication 0 of 22 detected (0–15%). Measured cost of the strict setting: 12 of 40 pieces of valid evidence dropped (initial pass); undated results 0 with the filter, 8 of 60 with no dates |
-| The docs' alternative: `include_published_date` without the filter | ["leave this `false` and set `include_published_date: true` together with a date range instead."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Our arm B is that setting (dates, `include_published_date` on, filter off): 0 of 20 detected (0–16%), 0 undated of 58 results, 19 of 40 pieces of valid evidence lost (filter on: 12) |
+| `filter_by_published_date` | ["Results with no detectable published date are also removed."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Dates + filter: 0 of 20 detected (Wilson 0–16%); replication 0 of 22 detected (0–15%). Measured cost of the strict setting: 12 of 40 pieces of valid evidence the plain search found that the time-locked search didn't return (initial pass); undated results 0 with the filter, 8 of 60 with no dates |
+| The docs' alternative: `include_published_date` without the filter | ["leave this `false` and set `include_published_date: true` together with a date range instead."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Our arm B is that setting (dates, `include_published_date` on, filter off): 0 of 20 detected (0–16%), 0 undated of 58 results, 19 of 40 pieces of valid evidence not returned (filter on: 12) |
 | `published_date` | ["Tavily's best estimate of when the source was published or last updated."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Later than the page's own date on 4 of 42 distinct date-test pages: documented behaviour (feature request: separate the two dates) |
 | `time_range` | ["The time range back from the current date to filter results"](https://docs.tavily.com/documentation/api-reference/endpoint/search) | `auto_parameters` with no dates chose recent time ranges for past months: 620 of 659 results from October 2026 (observed once on 22 Oct 2026, not reproduced on 27 Oct 2026). Consistent with "back from the current date"; a past month needs `start_date`/`end_date` |
 | `max_age_hours` | ["The maximum age in hours of Tavily's cached copy of each result."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Not sent in our runs. It bounds how fresh Tavily's cached copy is, not which date the copy reflects (freshness, not as-of); the [Extract reference](https://docs.tavily.com/documentation/api-reference/endpoint/extract) lists no date, cache or crawl-time field. `extract_as_of` fills that gap (demo, n=1: `R196` refused, no archive copy before the 8 Jul cutoff) |
@@ -186,7 +186,7 @@ completely:
 
 - **Our page-date check** reads the date printed on the extracted page and drops anything after the cutoff. In the
   date test it kept 26 of the 59 results the filter let through; with it,
-  27 of the date test's 40 pieces of valid evidence were lost (12 with the filter
+  the search didn't return 27 of the date test's 40 pieces of valid evidence that the plain search found (12 with the filter
   alone; initial pass). It reads a page's date, not its edit history.
 - **The drift monitor** re-reads each October radar page with Extract once a day and compares it with the saved copy
   ([`v2/DRIFT_PREREG.md`](v2/DRIFT_PREREG.md)): 2 runs committed (28 Oct 2026 to 29 Oct 2026 IST), 142 page checks, 31 changes found; in the latest run, 17 of 80 radar pages had changed since they were saved; cited quote still present on 16 of 17; cited number changed on 0 of 17.
@@ -533,8 +533,8 @@ Short answers to the hardest questions: [`docs/judge_faq.md`](docs/judge_faq.md)
   leak counts only when the Wayback Machine confirms it and absence from Wayback is not proof a page did not exist.
   McNemar tests and the rule-of-three bound are post-hoc, not pre-registered
   ([`results/posthoc_stats.md`](results/posthoc_stats.md)).
-- **Filter drops.** The time lock's date filter did not return 12 of the 40 valid items in the
-  pilot; for 10 of them the saved date fields do not explain it (exploratory, added after scoring; changes no headline;
+- **Good pages the time-locked search didn't return.** In the pilot it did not return 12 of the 40 pieces of
+  valid evidence that the plain search found (initial pass). Only 2 of the 12 were excluded for their dates; 2 fell just before our window start; the other 8 were dated inside the window, so the difference is mostly which results the dated search returned, not the filter. (exploratory, added after scoring; changes no headline;
   [`results/filter_drops.json`](results/filter_drops.json)).
 - **Announced prices: rises only.** The announced-price layer verified 5 rises and 0 falls over
   the scored months, too few to call a pattern, so falls in official item prices are covered only by the measured

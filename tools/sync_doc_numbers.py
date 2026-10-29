@@ -324,14 +324,14 @@ def tavily_docs_table(td, f):
         ("`filter_by_published_date`", say("filter_by_published_date"),
          f"Dates + filter: {f['dt_dated']} of {f['dt_cases']} detected (Wilson {f['dt_dated_w']}); replication "
          f"{f['rep_dated']} of {f['rep_cases']} detected ({f['rep_dated_w']}). Measured cost of the strict setting: "
-         f"{f['dt_lost_filter']} of {f['dt_valid_total']} pieces of valid evidence dropped (initial pass); undated "
+         f"{f['dt_lost_filter']} of {f['dt_valid_total']} pieces of valid evidence the plain search found that the time-locked search didn't return (initial pass); undated "
          f"results {f['dt_undated_filter']} with the filter, {f['dt_undated_nodates']} of {f['dt_results_nodates']} "
          f"with no dates"),
         ("The docs' alternative: `include_published_date` without the filter", say("filter_alternative"),
          f"Our arm B is that setting (dates, `include_published_date` on, filter off): {f['dt_datesonly']} of "
          f"{f['dt_cases']} detected ({f['dt_datesonly_w']}), {f['dt_undated_datesonly']} undated of "
          f"{f['dt_results_datesonly']} results, {f['dt_lost_dates']} of {f['dt_valid_total']} pieces of valid "
-         f"evidence lost (filter on: {f['dt_lost_filter']})"),
+         f"evidence not returned (filter on: {f['dt_lost_filter']})"),
         ("`published_date`", say("published_date"),
          f"Later than the page's own date on {f['pd_later']} of {f['pd_pages']} distinct date-test pages: "
          f"documented behaviour (feature request: separate the two dates)"),
@@ -725,7 +725,7 @@ def facts(st, as_of, root=ROOT):
     # results/filter_drops.json, results/evidence_asymmetry.json: exploratory, added after scoring
     fd, ea = load("results/filter_drops.json", root), load("results/evidence_asymmetry.json", root)
     ann = ea["share_of_official"]["all_official_items_announced_only"]
-    f.update(fd_dropped=fd["dropped"], fd_total=fd["valid_total"], fd_not_date=fd["counts"]["d"],
+    f.update(fd_missed=fd["not_returned"], fd_total=fd["valid_total"], fd_sentence=fd["plain_sentence"],
              fd_label=fd["label"], ea_ann_rise=ea["events_replay"]["by_layer"]["announced"]["rise"],
              ea_ann_fall=ea["events_replay"]["by_layer"]["announced"]["fall"],
              ea_fall_share=f"{ann['fall']['share']:.1%}", ea_rise_share=f"{ann['rise']['share']:.1%}")

@@ -205,7 +205,7 @@ def test_web_titles_cannot_inject_markdown():
 
 # ---------- ui-polish / look: hero row, default examples, text badges ----------
 def test_cost_card_is_the_date_tests_own_field_not_check_e():
-    """Card (c) shows the date test's valid evidence dropped (locked arm C, initial pass), not check E's known-good
+    """Card (c) shows the date test's valid evidence not returned (locked arm C, initial pass), not check E's known-good
     quotes missed (those stay in the totals section)."""
     c = json.loads((ROOT / "results" / "date_field_test.json").read_text())["metrics"]["arms"]["C"]
     s = DATA["totals"]["strictness"]

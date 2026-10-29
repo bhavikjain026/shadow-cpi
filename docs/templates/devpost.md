@@ -30,8 +30,8 @@ Can a search engine keep the past in the past? We measured Tavily's date control
 (pilot, pre-registered). With no dates, {{dt_nodates}} of {{dt_cases}} cases kept a confirmed leak, a page dated after
 the cutoff with no archive copy before it (Wilson {{wilson}} {{dt_nodates_w}}; {{dt_nodates_retry}} of {{dt_cases}}
 after retrying {{rr_dt_failed}} failed archive lookups); with `start_date`/`end_date` and
-`filter_by_published_date`, {{dt_dated}} of {{dt_cases}} detected ({{dt_dated_w}}). The cost: the filter dropped
-{{dt_lost_filter}} of {{dt_valid_total}} pieces of valid evidence (initial pass). Dates select pages, not versions. Shadow CPI puts this to work: an AI agent searches with Tavily
+`filter_by_published_date`, {{dt_dated}} of {{dt_cases}} detected ({{dt_dated_w}}). The cost: the time-locked search didn't return
+{{dt_lost_filter}} of {{dt_valid_total}} pieces of valid evidence that the plain search found (initial pass). Shadow CPI puts this to work: an AI agent searches with Tavily
 inside a time lock, checks each quote against the extracted page with NVIDIA Nemotron on Nebius Token Factory, lets
 code compute India's {{live_month}} inflation nowcast, and seals it before the Ministry of Statistics publishes on
 {{release_day}}.
@@ -56,8 +56,8 @@ code compute India's {{live_month}} inflation nowcast, and seals it before the M
   {{pool_r3}}; exact McNemar p = {{mcn_dt_p}} (date test), {{mcn_rep_p}} (replication), {{mcn_pool_p}} (pooled)
   ({{posthoc_label}}, `results/posthoc_stats.md`). Without the cache-served replication responses: {{rep_desc_nodates}}
   of {{rep_desc_cases}} and {{rep_desc_dated}} of {{rep_desc_cases}} detected (the logged addendum).
-- **The cost (the measured cost of the strict setting):** the filter dropped {{dt_lost_filter}} of the date test's {{dt_valid_total}} pieces of valid evidence
-  (initial pass; {{dt_lost_filter_retry}} of {{dt_valid_total_retry}} after the retry).
+- **The cost (the measured cost of the strict setting):** the time-locked search didn't return {{dt_lost_filter}} of the date test's {{dt_valid_total}} pieces of valid evidence
+  that the plain search found (initial pass; {{dt_lost_filter_retry}} of {{dt_valid_total_retry}} after the retry).
 - **Date filters select which pages, not which version.** Tavily dated `{{ex_row}}`, a {{ex_company}} results
   preview, {{ex_published}}, before its {{ex_cutoff}} cutoff; the page was updated on {{ex_updated}} with a link to the
   actual result, and Extract returns the updated page. `max_age_hours` controls freshness, not as-of;
@@ -119,7 +119,7 @@ post-hoc AI-assisted review (ChatGPT agent); {{sr_unclear}} of {{sr_rows}} rows 
 {{ex_updated}} with a link to the actual result. {{sr_fin_dated_after}} of {{sr_fin_searches}} filtered searches in
 the finance check returned a result dated after the cutoff; that review found {{sr_fin_reviewer_leaks}} page whose current
 version leaks the outcome. What covers the gap, partly: our page-date check (kept {{dt_results_pagecheck}} of
-{{dt_results_filter}} filtered results in the date test; date-test valid evidence lost: {{dt_lost_pagecheck}} of
+{{dt_results_filter}} filtered results in the date test; date-test valid evidence not returned: {{dt_lost_pagecheck}} of
 {{dt_valid_total}} with it (initial pass), {{dt_lost_filter}} with the filter alone; after the retry
 {{dt_lost_pagecheck_retry}} and {{dt_lost_filter_retry}} of {{dt_valid_total_retry}}); the drift monitor, which re-reads October radar
 pages daily ({{drift_phrase}}); and Wayback Machine checks, with failed lookups retried and logged

@@ -3,7 +3,7 @@
  "source": "results/date_field_test.json",
  "pass": "initial pass (pre-registered run, before the Wayback retry)",
  "arm": "C",
- "dropped": 12,
+ "not_returned": 12,
  "valid_total": 40,
  "rules": {
   "a": "no detectable date: Tavily, the address and the page all give none",
@@ -17,10 +17,12 @@
   "c": 0,
   "d": 10
  },
- "d_split": {
+ "split": {
+  "excluded_for_their_dates": 2,
   "before_window_start": 2,
-  "inside_window_not_returned": 8
+  "inside_window": 8
  },
+ "plain_sentence": "Only 2 of the 12 were excluded for their dates; 2 fell just before our window start; the other 8 were dated inside the window, so the difference is mostly which results the dated search returned, not the filter.",
  "items": [
   {
    "case": "E1",

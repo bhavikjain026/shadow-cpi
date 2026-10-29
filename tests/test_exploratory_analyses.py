@@ -43,9 +43,12 @@ def test_class_d_splits_before_window_and_inside_window():
 
 def test_filter_drops_match_the_committed_pilot_counts():
     res, m = FD.build(), load("results/date_field_test.json")["metrics"]["arms"]["C"]
-    assert (res["dropped"], res["valid_total"]) == (m["valid_lost"], m["valid_total"])
-    assert sum(res["counts"].values()) == res["dropped"] == len(res["items"])
-    assert res["d_split"]["before_window_start"] + res["d_split"]["inside_window_not_returned"] == res["counts"]["d"]
+    assert (res["not_returned"], res["valid_total"]) == (m["valid_lost"], m["valid_total"])
+    assert sum(res["counts"].values()) == res["not_returned"] == len(res["items"])
+    sp = res["split"]
+    assert sp["before_window_start"] + sp["inside_window"] == res["counts"]["d"]
+    assert sp["excluded_for_their_dates"] + sp["before_window_start"] + sp["inside_window"] == res["not_returned"]
+    assert res["plain_sentence"].startswith(f"Only {sp['excluded_for_their_dates']} of the {res['not_returned']} were excluded")
     assert res["label"].startswith("exploratory, added after scoring")
 
 

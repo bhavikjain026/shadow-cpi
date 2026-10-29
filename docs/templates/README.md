@@ -66,8 +66,8 @@ retry ({{rr_fin_failed}} lookups had failed), still {{fin_dated_retry}} of {{fin
 
 </details>
 
-**The cost.** The measured cost of the strict setting: the filter dropped {{dt_lost_filter}} of the date test's
-{{dt_valid_total}} pieces of valid evidence (initial pass; {{dt_lost_filter_retry}} of {{dt_valid_total_retry}} after
+**The cost.** The measured cost of the strict setting: the time-locked search didn't return {{dt_lost_filter}} of the date test's
+{{dt_valid_total}} pieces of valid evidence that the plain search found (initial pass; {{dt_lost_filter_retry}} of {{dt_valid_total_retry}} after
 the retry).
 
 **Date filters select which pages, not which version.** Tavily dated `{{ex_row}}`, a {{ex_company}} results preview,
@@ -133,8 +133,8 @@ the update):
 
 {{evidence_kept_table}}
 
-With our extra page-date check added to the filter, {{dt_lost_pagecheck}} of the date test's {{dt_valid_total}}
-pieces of valid evidence were lost (initial pass; {{dt_lost_pagecheck_retry}} of {{dt_valid_total_retry}} after the
+With our extra page-date check added to the filter, the search didn't return {{dt_lost_pagecheck}} of the date test's {{dt_valid_total}}
+pieces of valid evidence that the plain search found (initial pass; {{dt_lost_pagecheck_retry}} of {{dt_valid_total_retry}} after the
 retry). Check E's misses are filter misses, not back-dating: {{e_missed_later}} of
 {{e_missed}} have a Tavily `published_date` after the cutoff ({{e_missed_earlier}} on or before it,
 {{e_missed_undated}} undated; [`results/leakcheck_exact_match.md`](results/leakcheck_exact_match.md)).
@@ -164,7 +164,7 @@ completely:
 
 - **Our page-date check** reads the date printed on the extracted page and drops anything after the cutoff. In the
   date test it kept {{dt_results_pagecheck}} of the {{dt_results_filter}} results the filter let through; with it,
-  {{dt_lost_pagecheck}} of the date test's {{dt_valid_total}} pieces of valid evidence were lost ({{dt_lost_filter}} with the filter
+  the search didn't return {{dt_lost_pagecheck}} of the date test's {{dt_valid_total}} pieces of valid evidence that the plain search found ({{dt_lost_filter}} with the filter
   alone; initial pass). It reads a page's date, not its edit history.
 - **The drift monitor** re-reads each October radar page with Extract once a day and compares it with the saved copy
   ([`v2/DRIFT_PREREG.md`](v2/DRIFT_PREREG.md)): {{drift_phrase}}.
@@ -496,8 +496,8 @@ Short answers to the hardest questions: [`docs/judge_faq.md`](docs/judge_faq.md)
   leak counts only when the Wayback Machine confirms it and absence from Wayback is not proof a page did not exist.
   McNemar tests and the rule-of-three bound are {{posthoc_label}}
   ([`results/posthoc_stats.md`](results/posthoc_stats.md)).
-- **Filter drops.** The time lock's date filter did not return {{fd_dropped}} of the {{fd_total}} valid items in the
-  pilot; for {{fd_not_date}} of them the saved date fields do not explain it ({{fd_label}};
+- **Good pages the time-locked search didn't return.** In the pilot it did not return {{fd_missed}} of the {{fd_total}} pieces of
+  valid evidence that the plain search found (initial pass). {{fd_sentence}} ({{fd_label}};
   [`results/filter_drops.json`](results/filter_drops.json)).
 - **Announced prices: rises only.** The announced-price layer verified {{ea_ann_rise}} rises and {{ea_ann_fall}} falls over
   the scored months, too few to call a pattern, so falls in official item prices are covered only by the measured

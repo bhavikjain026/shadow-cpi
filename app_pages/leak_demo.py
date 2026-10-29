@@ -187,14 +187,14 @@ def plain_words():
     return ("1. We asked a search engine questions as if it were a past date.  \n"
             "2. Without dates, it often returned pages written after that date: the future leaks in.  \n"
             f"3. With dates and a filter, we detected {found} in {int(c['cases'])} cases (95% interval "
-            f"{lo:.0%}–{hi:.0%}), but it also dropped some good pages.".replace("%–", "–"))
+            f"{lo:.0%}–{hi:.0%}), but it also missed some good pages.".replace("%–", "–"))
 
 
 CASE_CAPTION = ("Left: a normal search returned a page published {days} days after the date we asked about. "
                 "Right: with the time lock, every result was dated before it{confirmed}.")
 CONFIRMED = " (and Wayback confirmed it)"          # only when every right-hand result is labelled confirmed pre-cutoff
 CARD_CAPTIONS = ("searches that returned a page from after the date asked about", "same searches with dates and a filter",
-                 "good pages the filter threw away")
+                 "good pages the time-locked search didn't return")
 CHART_LEAD = "**How sure are we?** Dots are what we saw; lines show the likely range, because the samples are small."
 DEVELOPERS = "For developers: add the time lock to your own Tavily calls"
 
@@ -205,7 +205,7 @@ REPLICATION = "results/replication.json"
 
 
 def date_test_cost():
-    """The date test's own cost of the time lock, initial pass: valid evidence the locked arm dropped (not check E)."""
+    """The date test's own cost of the time lock, initial pass: valid evidence the locked arm did not return (not check E)."""
     arm = read_json(DATE_TEST)["metrics"]["arms"][DATE_LOCKED_ARM]
     return int(arm["valid_lost"]), int(arm["valid_total"])
 
@@ -214,7 +214,7 @@ def stat_cards(t):
     """The opening screen's three bordered cards, every value read from a results file: (a) no dates, pilot and
     replication shown separately, the pooled count in the caption as the pre-registered secondary; (b) dates + time
     lock, pilot and replication pooled, with its Wilson 95% interval computed here; (c) the cost of correctness, the
-    date test's own valid evidence dropped (initial pass; never check E). The pre-registered initial pass leads."""
+    date test's own valid evidence the locked arm did not return (initial pass; never check E). The pre-registered initial pass leads."""
     d = t["date"]
     o, n = int(d["open"]["first"]), int(d["cases"])
     rep = read_json(REPLICATION)
@@ -243,7 +243,7 @@ def stat_cards(t):
                        "the true rate is plausibly below the upper bound, not that leaks are impossible.")
     with c:
         st.metric("Cost of correctness", f"{lost} of {valid}",
-                  delta=f"{CARD_CAPTIONS[2].capitalize()}. Measured cost of the strict setting: valid evidence the date filter dropped (initial pass).",
+                  delta=f"{CARD_CAPTIONS[2].capitalize()}. Measured cost of the strict setting (initial pass).",
                   delta_color="off", delta_arrow="off", border=True,
                   help="Of the valid results the plain search found in the date test, how many the dated search did "
                        "not return. This is the date test's own pre-registered initial pass, separate from the "

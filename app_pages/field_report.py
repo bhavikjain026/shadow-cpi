@@ -159,7 +159,7 @@ if not r:
     st.stop()
 
 plain_box(["We tested whether a search engine can see the future when asked about a past date, and whether date limits fix it.",
-           "Without date limits, some searches returned pages published after the date; with dates and a filter we detected none, but some good pages were dropped.",
+           "Without date limits, some searches returned pages published after the date; with dates and a filter we detected none, but it also missed some good pages.",
            "Start with the chart, then the six findings under it; the rest is evidence for experts."])
 
 # ---------- lead: one chart, then one case up close ----------
@@ -259,25 +259,28 @@ if lk:
 
 def cost_of_correctness(rows):
     """Three cards, date test only: credits per search and median latency, no dates vs the time lock (Tavily date filters: dates +
-    filter_by_published_date), and the valid evidence the time lock lost on each pass. From the leakage rows of
+    filter_by_published_date), and the valid evidence the time-locked search did not return on each pass. From the leakage rows of
     results/field_report.json."""
     dt = {(x["run"], x["setting"]): x for x in rows if x["check"].startswith("Date test")}
     lock = "+ filter_by_published_date"
     o1, l1, l2 = dt[("first pass", "no dates")], dt[("first pass", lock)], dt[("after logged retry", lock)]
     st.subheader("Cost of correctness")
-    lead("The three cards show what the time lock costs: credits, speed, and good pages it dropped.")
+    lead("The three cards show what the time lock costs: credits, speed, and good pages the time-locked search didn't return.")
     c1, c2, c3 = st.columns(3)
     c1.metric("Credits per search: no dates → time lock", f"{o1['credits_per_call']:.2f} → {l1['credits_per_call']:.2f}",
               help="Date test, initial pass. The retry re-ran archive lookups only, not searches.")
     c2.metric("Median latency: no dates → time lock", f"{o1['median_latency_s']:.1f} s → {l1['median_latency_s']:.1f} s",
               help="Date test, initial pass: Tavily's response_time. The retry sent no new searches.")
-    c3.metric("Valid evidence the time lock lost", f"{l1['valid_total'] - l1['valid_kept']}/{l1['valid_total']}",
+    c3.metric("Valid evidence the time-locked search didn't return", f"{l1['valid_total'] - l1['valid_kept']}/{l1['valid_total']}",
               f"{l2['valid_total'] - l2['valid_kept']}/{l2['valid_total']} {AFTER_RETRY}", delta_color="off",
               delta_arrow="off", help="Date test: pages the Wayback Machine shows existed by the cutoff that name "
                                       "the item, and that the time-locked search did not return.")
     st.caption(f"Date test, pre-registered initial pass; the evidence card also gives the count {AFTER_RETRY}, "
                "which adds newly confirmed pages, so its denominator is larger. "
                "Source: `results/field_report.json` (leakage rows).")
+    fd = (r.get("exploratory_analyses") or {}).get("filter_drops")
+    if fd:
+        st.caption(f"{fd['plain_sentence']} ({fd['label']}; `results/filter_drops.json`.)")
 
 
 if lk:
@@ -571,18 +574,18 @@ with st.expander("Details for experts: finance check, retries, second review and
 ea_ = r.get("exploratory_analyses")
 if ea_:
     with st.expander("Exploratory analyses"):
-        lead("Three questions asked of the saved data after scoring: why the date filter dropped good evidence, how "
+        lead("Three questions asked of the saved data after scoring: why the time-locked search did not return some good evidence, how "
              "strong the no-dates vs time-lock difference is, and whether the evidence leans towards price rises.")
         fd, ps, asy = ea_["filter_drops"], ea_["paired_stats"], ea_["evidence_asymmetry"]
         st.caption(f"{fd['label'].capitalize()}. No search, no model call, no credits; every figure is read from the saved results.")
 
-        st.subheader("Why the filter dropped valid evidence")
+        st.subheader("Valid evidence the time-locked search didn't return")
         c = fd["counts"]
-        st.markdown(f"In the date test pilot ({fd['pass']}), the time lock did not return {fd['dropped']} of {fd['valid_total']} valid "
+        st.markdown(f"In the date test pilot ({fd['pass']}), the time-locked search did not return {fd['not_returned']} of {fd['valid_total']} valid "
                     f"evidence items. By the saved date fields: no detectable date {c['a']}; Tavily date after the cutoff though the "
                     f"archive holds an earlier copy {c['b']}; Tavily date after the cutoff because the page was edited {c['c']}; "
-                    f"other {c['d']} ({fd['d_split']['before_window_start']} dated before the window start, "
-                    f"{fd['d_split']['inside_window_not_returned']} dated inside the window and not returned by the dated search).")
+                    f"other {c['d']} ({fd['split']['before_window_start']} dated before the window start, "
+                    f"{fd['split']['inside_window']} dated inside the window and not returned by the dated search). {fd['plain_sentence']}")
         table([{"Case": x["case"], "Class": x["class"], "Tavily date": x["tavily_date"] or "none",
                 "Earliest archive copy": x["earliest_archive_copy"] or "none", "Why": x["reason"]} for x in fd["items"]])
         st.caption(f"Class rules: " + " ".join(f"({k}) {v}." for k, v in fd["rules"].items()) + f" Source: `{fd['source']}`.")

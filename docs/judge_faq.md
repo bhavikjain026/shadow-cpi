@@ -39,10 +39,10 @@ is consistent with Tavily's documented definition (published or last updated, be
 last-modified dates. Each item in [`tavily_bug_reports.md`](tavily_bug_reports.md) states what we observed and what we expected, with request IDs,
 and the date-semantics item is framed as a feature request, not a defect.
 
-## What about the filter dropping valid evidence?
+## What about valid evidence the time-locked search misses?
 
-It does, and we report the cost: the filter dropped 12 of the date test's 40 pieces of valid evidence on the
-initial pass (20 of 48 after the archive retry). Adding our own page-date check lost 27 of 40 on the initial
+It does, and we report the cost: the time-locked search didn't return 12 of the date test's 40 pieces of valid evidence that the plain search found, on the
+initial pass (20 of 48 after the archive retry). With our own page-date check added, the search didn't return 27 of 40 on the initial
 pass. Whether that trade is worth it depends on how costly a leak is for your backtest.
 
 ## Dates are estimates. Can a wrong date pass the filter?

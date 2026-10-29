@@ -31,8 +31,8 @@ Can a search engine keep the past in the past? We measured Tavily's date control
 (pilot, pre-registered). With no dates, 9 of 20 cases kept a confirmed leak, a page dated after
 the cutoff with no archive copy before it (Wilson 95% 26–66%; 10 of 20
 after retrying 11 failed archive lookups); with `start_date`/`end_date` and
-`filter_by_published_date`, 0 of 20 detected (0–16%). The cost: the filter dropped
-12 of 40 pieces of valid evidence (initial pass). Dates select pages, not versions. Shadow CPI puts this to work: an AI agent searches with Tavily
+`filter_by_published_date`, 0 of 20 detected (0–16%). The cost: the time-locked search didn't return
+12 of 40 pieces of valid evidence that the plain search found (initial pass). Shadow CPI puts this to work: an AI agent searches with Tavily
 inside a time lock, checks each quote against the extracted page with NVIDIA Nemotron on Nebius Token Factory, lets
 code compute India's October 2026 inflation nowcast, and seals it before the Ministry of Statistics publishes on
 12 Nov.
@@ -57,8 +57,8 @@ code compute India's October 2026 inflation nowcast, and seals it before the Min
   7.1%; exact McNemar p = 0.0039 (date test), 0.00012 (replication), 2.4e-07 (pooled)
   (post-hoc, not pre-registered, `results/posthoc_stats.md`). Without the cache-served replication responses: 11
   of 19 and 0 of 19 detected (the logged addendum).
-- **The cost (the measured cost of the strict setting):** the filter dropped 12 of the date test's 40 pieces of valid evidence
-  (initial pass; 20 of 48 after the retry).
+- **The cost (the measured cost of the strict setting):** the time-locked search didn't return 12 of the date test's 40 pieces of valid evidence
+  that the plain search found (initial pass; 20 of 48 after the retry).
 - **Date filters select which pages, not which version.** Tavily dated `R196`, a TCS results
   preview, 7 Jul, before its 8 Jul cutoff; the page was updated on 9 Jul with a link to the
   actual result, and Extract returns the updated page. `max_age_hours` controls freshness, not as-of;
@@ -136,8 +136,8 @@ Tavily's API reference, quoted and linked, next to our measurement. Most of what
 | Field | Tavily's docs say (quoted, checked 29 Oct) | What we measured |
 |---|---|---|
 | `start_date` / `end_date` | ["Will return all results after the specified start date based on publish date or last updated date."](https://docs.tavily.com/documentation/api-reference/endpoint/search); ["By default, results with no detectable published date are not removed"](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Dates select which pages, not which version. `R196`: dated 7 Jul, before its 8 Jul cutoff, updated 9 Jul; Extract returns the updated page. Dates with the filter off (arm B): 0 of 20 detected (Wilson 0–16%) |
-| `filter_by_published_date` | ["Results with no detectable published date are also removed."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Dates + filter: 0 of 20 detected (Wilson 0–16%); replication 0 of 22 detected (0–15%). Measured cost of the strict setting: 12 of 40 pieces of valid evidence dropped (initial pass); undated results 0 with the filter, 8 of 60 with no dates |
-| The docs' alternative: `include_published_date` without the filter | ["leave this `false` and set `include_published_date: true` together with a date range instead."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Our arm B is that setting (dates, `include_published_date` on, filter off): 0 of 20 detected (0–16%), 0 undated of 58 results, 19 of 40 pieces of valid evidence lost (filter on: 12) |
+| `filter_by_published_date` | ["Results with no detectable published date are also removed."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Dates + filter: 0 of 20 detected (Wilson 0–16%); replication 0 of 22 detected (0–15%). Measured cost of the strict setting: 12 of 40 pieces of valid evidence the plain search found that the time-locked search didn't return (initial pass); undated results 0 with the filter, 8 of 60 with no dates |
+| The docs' alternative: `include_published_date` without the filter | ["leave this `false` and set `include_published_date: true` together with a date range instead."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Our arm B is that setting (dates, `include_published_date` on, filter off): 0 of 20 detected (0–16%), 0 undated of 58 results, 19 of 40 pieces of valid evidence not returned (filter on: 12) |
 | `published_date` | ["Tavily's best estimate of when the source was published or last updated."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Later than the page's own date on 4 of 42 distinct date-test pages: documented behaviour (feature request: separate the two dates) |
 | `time_range` | ["The time range back from the current date to filter results"](https://docs.tavily.com/documentation/api-reference/endpoint/search) | `auto_parameters` with no dates chose recent time ranges for past months: 620 of 659 results from October 2026 (observed once on 22 Oct 2026, not reproduced on 27 Oct 2026). Consistent with "back from the current date"; a past month needs `start_date`/`end_date` |
 | `max_age_hours` | ["The maximum age in hours of Tavily's cached copy of each result."](https://docs.tavily.com/documentation/api-reference/endpoint/search) | Not sent in our runs. It bounds how fresh Tavily's cached copy is, not which date the copy reflects (freshness, not as-of); the [Extract reference](https://docs.tavily.com/documentation/api-reference/endpoint/extract) lists no date, cache or crawl-time field. `extract_as_of` fills that gap (demo, n=1: `R196` refused, no archive copy before the 8 Jul cutoff) |
@@ -152,7 +152,7 @@ TCS results preview, cutoff 8 Jul; Tavily dated it 7 Jul, and the page was updat
 9 Jul with a link to the actual result. 0 of 14 filtered searches in
 the finance check returned a result dated after the cutoff; that review found 1 page whose current
 version leaks the outcome. What covers the gap, partly: our page-date check (kept 26 of
-59 filtered results in the date test; date-test valid evidence lost: 27 of
+59 filtered results in the date test; date-test valid evidence not returned: 27 of
 40 with it (initial pass), 12 with the filter alone; after the retry
 35 and 20 of 48); the drift monitor, which re-reads October radar
 pages daily (2 runs committed (28 Oct 2026 to 29 Oct 2026 IST), 142 page checks, 31 changes found; in the latest run, 17 of 80 radar pages had changed since they were saved; cited quote still present on 16 of 17; cited number changed on 0 of 17); and Wayback Machine checks, with failed lookups retried and logged

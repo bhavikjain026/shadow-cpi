@@ -295,13 +295,13 @@ def test_video_leak_shot_matches_the_results(values):
     rep = json.loads((ROOT / "results/replication.json").read_text())["metrics"]["price"]["arms"]["C"]
     assert (f"published-date filter: {w['dt_dated']} detected of {w['dt_cases']}, and on {SPOKEN[rep['cases']]} new "
             f"cases, pre-registered, {SPOKEN[rep['leak_cases']]} detected again.") in shot     # the replication
-    assert (f"The measured cost of that strict setting, on the initial pass: the filter dropped {w['dt_lost_filter']} "
-            f"of {w['dt_valid_total']} pieces of valid evidence.") in shot
+    assert (f"The measured cost of that strict setting, on the initial pass: the time-locked search didn't return "
+            f"{w['dt_lost_filter']} of {w['dt_valid_total']} pieces of valid evidence that the plain search found.") in shot
     lo, hi = (values["dt_nodates_w"].replace("–", "-"), values["dt_dated_w"].replace("–", "-"))
     assert (f'"{v["dt_nodates"]}/{v["dt_cases"]} → {v["dt_dated"]}/{v["dt_cases"]} detected, pre-registered '
             f'(95%: {lo} → {hi})"') in shot
     assert f'"Update: {v["dt_nodates_retry"]}/{v["dt_cases"]} after retrying {v["rr_dt_failed"]} failed' in shot
-    assert (f'"Measured cost of strict mode: {v["dt_lost_filter"]}/{v["dt_valid_total"]} valid evidence dropped '
+    assert (f'"Measured cost of strict mode: {v["dt_lost_filter"]}/{v["dt_valid_total"]} good pages the time-locked search didn\'t return '
             '(initial pass)"') in shot
 
 
