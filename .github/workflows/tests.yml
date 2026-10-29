@@ -26,6 +26,8 @@ jobs:
         python-version: ["3.12", "3.14"]
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # the doc tools read the repository's first commit date; a shallow clone hides it
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
