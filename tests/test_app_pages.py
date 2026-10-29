@@ -447,3 +447,59 @@ def test_pages_have_no_bare_expression_statements():
                     and not (isinstance(n.value, ast.Constant) and isinstance(n.value.value, str))):
                 bad.append(f"{f.name}:{n.lineno}")
     assert bad == []
+
+
+# ---------- review fixes ----------
+def test_v3_panel_never_says_sealed_unless_the_bundle_files_and_the_tag_exist(monkeypatch, tmp_path):
+    from app_pages import v3_panel as V
+    from app_pages import common as C
+    (tmp_path / "sealed").mkdir()
+    monkeypatch.setattr(C, "ROOT", tmp_path)
+    monkeypatch.setattr(V, "_tag_exists", lambda tag: False)
+    assert V.v3_sealed("2026-10") is False
+    (tmp_path / "sealed/2026-10.v3.json").write_text("{}")
+    (tmp_path / "sealed/2026-10.bundle.sha256").write_text("x")
+    assert V.v3_sealed("2026-10") is False                       # files but no tag
+    monkeypatch.setattr(V, "_tag_exists", lambda tag: tag == "seal-2026-10-bundle")
+    assert V.v3_sealed("2026-10") is True
+    (tmp_path / "sealed/2026-10.v3.json").unlink()
+    assert V.v3_sealed("2026-10") is False                       # tag but no v3 file
+
+
+def test_home_v3_panel_says_it_was_not_sealed_for_october():
+    from app_pages import v3_panel as V
+    assert not (ROOT / "sealed/2026-10.v3.json").exists()        # the real state this test describes
+    at = load("home")
+    text = all_text(at) + " " + " ".join(c.value for c in at.caption)
+    assert V.NOT_SEALED in text
+    assert "sealed right after v1" not in text and "Sealed with v1 in one hash bundle" not in text
+    assert "docs/after_scoring_changes.md" in text
+
+
+def test_tagline_is_the_same_in_the_app_and_both_templates():
+    from app_pages import common as C
+    for rel in ("docs/templates/README.md", "docs/templates/devpost.md", "README.md", "docs/devpost_draft.md"):
+        text = " ".join((ROOT / rel).read_text().split())
+        assert C.TAGLINE in text, rel
+        assert "searches the past without cheating" not in text, rel
+    assert "Prize focus: Best Use of Tavily. Also entering: Best Apps & Agents track." in (
+        ROOT / "docs/devpost_draft.md").read_text()
+    assert "The judged version will be the git tag" in (ROOT / "docs/devpost_draft.md").read_text()
+
+
+def test_leak_demo_caption_and_box_and_the_two_new_captions():
+    at = load("leak_demo")
+    text = " ".join(c.value for c in at.caption) + " " + " ".join(m.value for m in at.markdown)
+    leak = json.loads((ROOT / "results/leak_demo.json").read_text())
+    f3 = next(c for c in leak["cases"] if c["id"] == "F3")
+    all_ok = all(r["label"].startswith(("confirmed pre-cutoff", "valid")) for r in f3["locked"]["results"])
+    assert ("every result was dated before it (and Wayback confirmed it)." in text) == all_ok
+    assert "every result was dated before it" in text and "every result is from before it" not in text
+    c = json.loads((ROOT / "results/replication.json").read_text())["pooled"]["price"]["arms"]["C"]
+    from app_pages.common import wilson95
+    lo, hi = wilson95(c["leak_cases"], c["cases"])
+    assert f"we detected none in {c['cases']} cases (95% interval {lo:.0%}–{hi:.0%})".replace("%–", "–") in text
+    fr = load("field_report")
+    assert any(x.value.startswith("This compares who writes the search (query planning)") for x in fr.caption)
+    ev = load("evidence")
+    assert any(x.value == "Showing the selected month; October's live events are on Radar." for x in ev.caption)

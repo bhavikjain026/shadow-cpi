@@ -4,8 +4,7 @@
 
 ## Can a search engine keep the past in the past? We measured Tavily's date controls.
 
-**An AI agent that searches the past without cheating: it uses Tavily inside a time lock it cannot move, checks every
-quote on its source page, and seals India's inflation forecast before the government publishes it.**
+**Time-locked web evidence for AI on Tavily: date-bounded search, as-of reading from archives (or a refusal), and code-checked citations, used to seal India's monthly inflation estimate.**
 
 In the forecast pipeline, NVIDIA Nemotron on Nebius Token Factory screens pages and cites quotes; code checks each cited number on the page.
 

@@ -183,13 +183,16 @@ def plain_words():
     c = read_json(REPLICATION)["pooled"]["price"]["arms"]["C"]
     k = int(c["leak_cases"])
     found = "none" if k == 0 else str(k)
+    lo, hi = wilson95(k, int(c["cases"]))
     return ("1. We asked a search engine questions as if it were a past date.  \n"
             "2. Without dates, it often returned pages written after that date: the future leaks in.  \n"
-            f"3. With dates and a filter, we detected {found} in {int(c['cases'])} cases, but it also dropped some good pages.")
+            f"3. With dates and a filter, we detected {found} in {int(c['cases'])} cases (95% interval "
+            f"{lo:.0%}–{hi:.0%}), but it also dropped some good pages.".replace("%–", "–"))
 
 
 CASE_CAPTION = ("Left: a normal search returned a page published {days} days after the date we asked about. "
-                "Right: with the time lock, every result is from before it.")
+                "Right: with the time lock, every result was dated before it{confirmed}.")
+CONFIRMED = " (and Wayback confirmed it)"          # only when every right-hand result is labelled confirmed pre-cutoff
 CARD_CAPTIONS = ("searches that returned a page from after the date asked about", "same searches with dates and a filter",
                  "good pages the filter threw away")
 CHART_LEAD = "**How sure are we?** Dots are what we saw; lines show the likely range, because the samples are small."
@@ -459,7 +462,9 @@ with st.container(border=True, key="plain-words"):
     st.markdown(plain_words())
 st.subheader("See one real case")
 f3 = by_id[FIRST]
-st.caption(CASE_CAPTION.format(days=next(r["days_after_cutoff"] for r in f3["open"]["results"] if r["leak"])))
+st.caption(CASE_CAPTION.format(days=next(r["days_after_cutoff"] for r in f3["open"]["results"] if r["leak"]),
+                               confirmed=CONFIRMED if all(r["label"].startswith(OK_LABELS) for r in f3["locked"]["results"])
+                               else ""))
 show_case(f3, slot="top-", heading=False)
 with st.container(key="hero"):
     stat_cards(data["totals"])

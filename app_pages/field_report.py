@@ -289,6 +289,8 @@ arm_rows = [{"Arm": x["arm"], "Searches written by": x["writer"], "Recall (of 29
 table(arm_rows, show=list(arm_rows[0]))      # every column (the one table exempt from the 5-column default); scrolls on phones
 st.caption(f"Verdict (pre-registered rule change F, ±1 known change): top group {', '.join(fa['verdict']['top_group'])}. Latency: "
            f"{fa['latency_label']}. Credits per known change found was added after scoring (descriptive).")
+st.caption("This compares who writes the search (query planning), on the same Tavily endpoint; it is not a result "
+           "about Tavily.")
 
 with st.expander("Details for experts: extra arms, auto_parameters, date fields and languages"):
     # ---------- exploratory ----------

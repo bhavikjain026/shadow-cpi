@@ -13,6 +13,7 @@ if not months:
     st.stop()
 month = st.selectbox("Month", months, format_func=month_name,
                      index=months.index("2026-03") if "2026-03" in months else 0)
+st.caption("Showing the selected month; October's live events are on Radar.")
 if "2026-01" <= month <= "2026-09" and month != "2026-03":
     st.caption("To save credits (cut 2), replay months other than March skipped web price quotes, so they show only the "
                "government food prices, the official observed series (IBJA, IOCL, PPAC) and announced price "

@@ -23,9 +23,8 @@ EYEBROW = "Nebius x NVIDIA Global AI Hackathon · Built on Tavily"
 TITLE_CLAIM = BRAND_LINE = "Ask a search engine about the past, and it can answer with the future."
 SUBHEAD = ("Shadow CPI replays past questions as of a cutoff date, searches each with and without the time lock (Tavily date filters), "
            "and counts the results that were published after the cutoff.")
-# the README tagline, shortened to at most 20 words
-TAGLINE = ("An AI agent that searches the past without cheating, checks every quote, and seals India's inflation "
-           "forecast before release.")
+# the README / Devpost tagline (not drawn in the app header; the header's own lines are EYEBROW, TITLE_CLAIM, SUBHEAD)
+TAGLINE = ("Time-locked web evidence for AI on Tavily: date-bounded search, as-of reading from archives (or a refusal), and code-checked citations, used to seal India's monthly inflation estimate.")
 SEAL_DATE = date(2026, 10, 29)                        # seal_checklist.md
 LIVE_MONTH = "2026-10"
 

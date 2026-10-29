@@ -1,6 +1,6 @@
 # Shadow CPI: Devpost write-up
 
-> Track: **Best Apps and Agents**. Bonus: Best Use of Tavily. Every number below is filled from the results files by
+> Prize focus: Best Use of Tavily. Also entering: Best Apps & Agents track. Every number below is filled from the results files by
 > `python tools/sync_doc_numbers.py`; edit `docs/templates/devpost.md`, not this file.
 
 ## Subtitle
@@ -20,8 +20,7 @@ Reuse: `timelocked_search`, `extract_as_of`, Colab leak check.
 <!-- headline:end -->
 
 ## Tagline
-An AI agent that searches the past without cheating: it uses Tavily inside a time lock it cannot move, checks every
-quote on its source page, and seals India's inflation forecast before the government publishes it.
+Time-locked web evidence for AI on Tavily: date-bounded search, as-of reading from archives (or a refusal), and code-checked citations, used to seal India's monthly inflation estimate.
 
 In the forecast pipeline, NVIDIA Nemotron on Nebius Token Factory screens pages and cites quotes; code checks each cited number on the page.
 
@@ -311,7 +310,7 @@ inside the requested window ({{run_inside}} of {{run_total}}), median latency {{
   it with `score.py`, and the Archive page shows the miss and whether the figure was inside the range.
 - **{{switch_day}}:** the dated model switch; calls from that day use Nebius's replacement models, logged per call.
 - **About {{nov_seal}}:** the November seal, made with the replacement models and saying so.
-- The judged version is the git tag `{{judged_tag}}`; anything committed later is labelled with its date.
+- The judged version will be the git tag `{{judged_tag}}` (created on submission day); anything committed later is labelled with its date.
 
 ## Try it
 - App: https://shadow-cpi.streamlit.app

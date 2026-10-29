@@ -1,6 +1,6 @@
 {
  "tool": "tools/check_contrast.py",
- "checked_utc": "2026-10-29T06:36:54Z",
+ "checked_utc": "2026-10-29T08:12:13Z",
  "widths": [
   1440,
   390
@@ -14,13 +14,13 @@
  "pages": [
   {
    "path": "(leak demo)",
-   "checked": 2120,
+   "checked": 2152,
    "below_threshold": 0,
    "overflow": false
   },
   {
    "path": "field_report",
-   "checked": 2344,
+   "checked": 2348,
    "below_threshold": 0,
    "overflow": false
   },
@@ -32,7 +32,7 @@
   },
   {
    "path": "home",
-   "checked": 646,
+   "checked": 654,
    "below_threshold": 0,
    "overflow": false
   },
@@ -44,7 +44,7 @@
   },
   {
    "path": "evidence",
-   "checked": 698,
+   "checked": 702,
    "below_threshold": 0,
    "overflow": false
   },
@@ -56,7 +56,7 @@
   },
   {
    "path": "live_build",
-   "checked": 646,
+   "checked": 651,
    "below_threshold": 0,
    "overflow": false
   },
@@ -80,7 +80,7 @@
   },
   {
    "path": "tavily_trace",
-   "checked": 876,
+   "checked": 898,
    "below_threshold": 0,
    "overflow": false
   },
