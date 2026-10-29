@@ -2357,7 +2357,7 @@
   ]
  },
  "evidence_tiers": {
-  "label": "exploratory, added after scoring; a sensitivity range, not a new result; cannot change any headline",
+  "label": "exploratory, added after scoring; a bounding range, not a new result; cannot change any headline",
   "pass": "initial pass (results as saved, before the logged Wayback retry)",
   "rule": "labels as stored by v2/date_test.label; Unknown = labels F and U",
   "sources": [

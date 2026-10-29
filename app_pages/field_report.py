@@ -553,7 +553,7 @@ with st.expander("Details for experts: finance check, retries, second review and
                for a, x in ((a, et["arms"][a]["pooled"]) for a in ("A", "C"))])
         st.caption("The best case is the headline count; the worst case treats every case with a result we could not check as a leak. "
                    "The truth lies between them, so the range shows how much the headline depends on archive coverage. "
-                   "A sensitivity range, not a new result. Sources: " + ", ".join(f"`{s}`" for s in et["sources"][:2])
+                   "A bounding range, not a new result. Sources: " + ", ".join(f"`{s}`" for s in et["sources"][:2])
                    + ", `results/evidence_tiers.json`.")
 
 with st.expander("Details for experts: radar runs, credit receipt and cost by search setting"):

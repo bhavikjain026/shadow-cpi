@@ -10,7 +10,7 @@ is put in one tier by the headline's own label (v2/date_test.label, as stored in
   Unknown  = F or U  not confirmed either way: lookup failed, no capture, or a date flag with no capture
 Undated results (no Tavily date) are counted alongside; they sit in the tiers as well.
 Bounds at case level: best case = cases with a confirmed leak (the headline count), worst case = cases with a
-confirmed leak OR any Unknown result. A sensitivity range, not a new result: no headline changes.
+confirmed leak OR any Unknown result. A bounding range, not a new result: no headline changes.
 """
 import json
 import sys
@@ -23,7 +23,7 @@ from v2.date_test import wilson  # noqa: E402
 OUT = ROOT / "results" / "evidence_tiers.json"
 SOURCES = (("pilot", "results/date_field_test.json"), ("replication", "results/replication.json"))
 ARMS = ("A", "C")
-LABEL = ("exploratory, added after scoring; a sensitivity range, not a new result; cannot change any headline")
+LABEL = ("exploratory, added after scoring; a bounding range, not a new result; cannot change any headline")
 TIER = {"P": "archived", "L": "leak", "F": "unknown", "U": "unknown"}
 
 

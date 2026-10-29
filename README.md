@@ -527,7 +527,7 @@ Short answers to the hardest questions: [`docs/judge_faq.md`](docs/judge_faq.md)
   even though code checks that the number is on the page. The sealed forward forecasts are the clean evidence.
 - **Bounds on the time-lock zero.** The count of confirmed leaks leaves out results the archive could not confirm either
   way: 50 of 114 time-locked results. If every case with such a result had leaked, the count
-  would be 32 of 42 cases (exploratory sensitivity range, not a result; Field Report, "Evidence
+  would be 32 of 42 cases (exploratory bounding range, not a result; Field Report, "Evidence
   tiers and bounds", [`results/evidence_tiers.json`](results/evidence_tiers.json)).
 - **Leak counts.** Every zero is reported as zero detected, with its Wilson interval; no-dates counts are lower bounds, because a
   leak counts only when the Wayback Machine confirms it and absence from Wayback is not proof a page did not exist.
