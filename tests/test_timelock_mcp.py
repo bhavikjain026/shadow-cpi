@@ -92,7 +92,7 @@ def test_registered_with_fastmcp(monkeypatch):
     params = inspect.signature(server.as_of).parameters
     assert list(params)[:2] == ["url", "cutoff"] and all(p.annotation is not inspect._empty for p in params.values())
     params = inspect.signature(server.check_leaks).parameters
-    assert list(params) == ["results_json", "cutoff"] and all(p.annotation is not inspect._empty
+    assert list(params) == ["results_json", "cutoff", "report_to_tavily"] and all(p.annotation is not inspect._empty
                                                               for p in params.values())
 
 

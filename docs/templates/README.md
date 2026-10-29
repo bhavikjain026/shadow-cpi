@@ -301,6 +301,10 @@ Offline it replays a real saved response (`tests/fixtures/timelock/`, request ID
 - **LangChain:** `TimeLockedTavilySearch(cutoff=...)` in [`timelock/langchain.py`](timelock/langchain.py) is a drop-in search tool for an agent's tool list with a fixed cutoff, `time_range`/`days`/`auto_parameters` refused and only `safe` results returned (`pip install ".[langchain]"`; [short example](examples/langchain_timelock.py)).
 - **MCP `check_leaks(results_json, cutoff)`:** audits results from any search tool with no API call: counts safe / undated / after-cutoff and lists the URLs to re-read with `extract_as_of` ([`mcp/`](mcp/README.md)).
 
+### Report back to Tavily (optional, off by default)
+
+Tavily has a free feedback endpoint (`POST https://api.tavily.com/feedback`, in beta; [reference](https://docs.tavily.com/documentation/api-reference/endpoint/feedback)). `check_leaks(..., report_to_tavily=True)` on the MCP server sends one note per result our date check labelled `leak`, keyed by the search's `request_id`, and only for requests this server made itself (or ids listed in the file named by `TIMELOCK_LEDGER`, for example `results/call_receipts.json`). It needs `TAVILY_API_KEY` and sends the leaking result's URL and the dates we saw, so leave it off unless you want that. In code, `timelock.send_feedback(...)` is a dry run unless you pass `dry_run=False`; it returns the payload and sends nothing. A failed send is returned, not raised, because the endpoint may change. A request that sent no `end_date` (an unfiltered search) is reported as such, so the note does not blame Tavily's filter.
+
 ### Read a page as it was on the cutoff
 
 Search dates do not freeze page content: Extract returns a page as it is today, so a page dated before the cutoff

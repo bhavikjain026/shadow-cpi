@@ -10,7 +10,7 @@ address is refused as "url mismatch". It needs a live key (1 credit per call) an
 whole response with a `results` list; each may carry `url`, `published_date`, `page_date`). It makes no API call and
 costs no credit. It returns `counts` (safe / date_flag / leak), how many results are `undated`, the `leaks` with the
 dates seen, and `re_read`: the URLs of every leak and undated result, to read with `extract_as_of` rather than trust
-their current text. It uses the same date check as the search (`timelock/check.py`). The tools wrap [`timelock/`](../timelock/) (the date window is sent to Tavily with `filter_by_published_date`, then
+their current text. It uses the same date check as the search (`timelock/check.py`). Optional `report_to_tavily=true` (default false) also sends Tavily's free feedback endpoint a note per leak, for requests this server made (or listed in `TIMELOCK_LEDGER`) only; see the repository README. The tools wrap [`timelock/`](../timelock/) (the date window is sent to Tavily with `filter_by_published_date`, then
 every result is checked again in code). For the search, the agent picks the query, topic, domains and result count; the cutoff is
 fixed by the task, and an `end_date` after it is refused.
 
