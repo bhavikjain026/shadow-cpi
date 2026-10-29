@@ -71,7 +71,8 @@ def test_check_e_dates_are_read_from_the_saved_undated_responses():
 
 
 def test_receipt_credits_match_the_ledger(built):
-    from shadow_cpi.budget import spent
+    from build_call_receipts import experiments
+    from shadow_cpi.budget import read_ledger, spent
     rc = built["receipt"]
     for x in rc["per_verified_quote"]:
         assert x["credits"] == sum(spent(b) for b in x["budgets"])
@@ -81,7 +82,10 @@ def test_receipt_credits_match_the_ledger(built):
     exp = {x["experiment"]: 0 for x in rc["by_experiment"]}
     for x in rc["by_experiment"]:
         exp[x["experiment"]] += x["credits"]
-    assert all(c == spent(e) for e, c in exp.items() if e != "reconcile")
+    # per-month and per-day slices (live-month/<month>, try-it-day/<day>) count as the receipts tool counts them
+    ledger = read_ledger()
+    assert all(c == sum(r["credits"] for r in ledger if e in experiments(r["budgets"]))
+               for e, c in exp.items() if e != "reconcile")
 
 
 def test_date_test_no_dates_row_reads_like_the_finance_rows(built):

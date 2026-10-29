@@ -233,3 +233,7 @@ files are kept as `results/*_before_bugfix_2026-10-21T151419.*` and in `results/
 
 - **What it does not change:** no rule, factor, filter, scored month or replay score. October is still a partial
   month (DoCA data up to 28 Oct, the evidence cutoff day).
+
+## 10. Seal-day note: `run_evidence.py` rewrites `config/passthrough.json` (29 Oct 2026)
+
+`run_evidence.py` rewrites `config/passthrough.json` (drops `use_spine`/`_food_rule`); restored from git before the build; to fix after submission, before the November run. Factor values were identical; the restored file is byte-identical to the committed (frozen) one.

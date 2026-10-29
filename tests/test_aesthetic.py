@@ -163,7 +163,7 @@ def test_provenance_without_a_stored_timestamp_shows_only_path_and_hash(monkeypa
     from app_pages import provenance as P
     assert P.generated("results/leak_demo.json", None) is None and P.generated("results/leak_demo.json", "nope") is None
     assert P.generated("results/leak_demo.json", "built_utc") == "2026-10-27 00:31 IST"     # 2026-10-26 19:01 UTC
-    assert P.generated("results/field_report.json", "built") == "2026-10-28"
+    assert P.generated("results/field_report.json", "built") == FR["built"]          # a bare date, shown as written
 
 
 def test_every_altair_chart_goes_through_the_readable_wrapper():
