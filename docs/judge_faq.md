@@ -27,7 +27,7 @@ Machine confirms one. Absence from the archive is not non-existence: pages it ne
 can fail, so the no-dates counts are lower bounds. The logged retry shows it: 11 failed lookups, and recovering them moved the date
 test's no-dates count from 9 to 10 of 20.
 
-## Is this a Tavily bug?
+## Is Tavily doing something wrong?
 
 Mostly no. `published_date` was later than the page's own date on 4 of 42 distinct date-test pages, which
 is consistent with Tavily's documented definition (published or last updated, beta); we ask only for separate original and
