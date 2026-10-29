@@ -2332,6 +2332,17 @@
     "not_checked": 0
    }
   },
+  "time_locked_confirmed": [
+   {
+    "case": "M9",
+    "url": "https://www.newindianexpress.com/states/tamil-nadu/2026/Jul/09/aavin-to-cut-down-sugar-content-to-10-plain-lassi-to-turn-healthier-in-tn",
+    "cutoff": "2026-07-29",
+    "tavily_date": "2026-07-24",
+    "address_date": "2026-07-09",
+    "sentence_date": "2026-09-21",
+    "sentence": "21 Sep 2026\n\n###### CM Vijay announces another Rs. 3/litre hike in Aavin milk procurement price; total hike reaches Rs. 6"
+   }
+  ],
   "labeller": "team (cross-checked with two AI annotators)",
   "labelled": "2026-10-29",
   "nebius_calls": 104,

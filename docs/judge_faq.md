@@ -18,7 +18,9 @@ latest Wayback copy on or before the cutoff (or nothing), at the price of one mo
 Yes. 0 of 42 detected (Wilson 95% 0–8%), and the rule of three puts the upper bound near
 7%, so a leak rate of a few percent is not ruled out. The count is a pre-registered pilot (20 cases) plus a
 pre-registered replication (22 new cases) under one rule; both are India-focused, so they show the effect and its size
-here, not Tavily's behaviour in general.
+here, not Tavily's behaviour in general; a content check (Nemotron Nano, exploratory) found 1 confirmed post-cutoff fact in 55
+sampled time-locked search excerpts, via a related-stories item, so 0 of 42 cases detected by our
+date-and-archive rule is a lower bound (cases and excerpts are different units).
 
 ## Doesn't `max_age_hours` solve the stale-page problem?
 Tavily's best-practices page ([docs.tavily.com](https://docs.tavily.com/documentation/best-practices/best-practices-search), "By content freshness") says: "Date filters choose pages by when they were published. max_age_hours sets how recently Tavily must have fetched each page". That covers two questions, when a page was published and how recently Tavily fetched it, and the one we measured is a third: which version existed as of the date (`R196`, a demonstration, n=1), which `extract_as_of` answers or refuses; we have not tested `max_age_hours`.

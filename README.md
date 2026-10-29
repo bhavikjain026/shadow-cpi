@@ -526,6 +526,11 @@ Short answers to the hardest questions: [`docs/judge_faq.md`](docs/judge_faq.md)
   leak counts only when the Wayback Machine confirms it and absence from Wayback is not proof a page did not exist.
   McNemar tests and the rule-of-three bound are post-hoc, not pre-registered
   ([`results/posthoc_stats.md`](results/posthoc_stats.md)).
+- **Content check.** A content check (Nemotron Nano, exploratory) found 1 confirmed post-cutoff fact in 55 sampled
+  time-locked search excerpts, via a related-stories item, so 0 of 42 cases detected by our
+  date-and-archive rule is a lower bound. Excerpts and cases are different units: the 42 cases are the pilot
+  plus the replication; the 55 excerpts are a sample of their saved search results
+  (`docs/preregistration_content_check.md`, `results/content_check.json`).
 - Small samples: pilot and exploratory checks of tens of cases, reported with Wilson intervals; exploratory results
   are labelled and changed no scored verdict. 20 date-test cases and 14 finance events are small,
   India-focused samples; they show the effect exists and its size here, not Tavily's behaviour in general.

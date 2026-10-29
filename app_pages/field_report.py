@@ -197,6 +197,12 @@ summary = [
 lock_table([{"Finding": a, "Number": b} for a, b, _ in summary],
            lambda row, col: "open" if "no time lock" in row["Finding"]
            else "lock" if "time lock" in row["Finding"] else None)
+cc0 = r.get("content_check")
+if cc0:
+    tl0 = cc0["arms"]["C"]
+    st.markdown(f"A second check by NVIDIA Nemotron read the content of {tl0['sampled']} sampled time-locked excerpts and "
+                f"found {tl0['confirmed']} with a fact from after the cutoff (confirmed by hand); details under "
+                "'Details for experts'.")
 with st.expander("Sources"):
     files = [("Chart above", "results/field_report.json")] + ([("R196 timeline", "results/asof_demo_r196.json")]
                                                                if r196 else [])
@@ -515,6 +521,11 @@ with st.expander("Details for experts: finance check, retries, second review and
                                                          f"({pct1(a['wilson95'][0])}–{pct1(a['wilson95'][1])})",
                     "Not checked": a["not_checked"], "Not sampled": a["not_sampled"]}
         table([row(TIME_LOCK, tl), row(NO_DATES, nd)])
+        for x in cc["time_locked_confirmed"]:
+            st.markdown(f"{'The one confirmed time-locked item' if len(cc['time_locked_confirmed']) == 1 else 'A confirmed time-locked item'}: "
+                        f"a page dated {day(x['address_date'])} (by the date in its address; Tavily dates it {day(x['tavily_date'])}), "
+                        f"before the {day(x['cutoff'])} cutoff, whose returned search excerpt already included a related-stories item "
+                        f"dated {day(x['sentence_date'])}. A correct date doesn't guarantee the stored text is from that date.")
         st.caption("Limits: a small model reading search snippets, not whole pages; a sample of each arm, not the saved set; "
                    "a confirmed item shows later content in a returned excerpt, not that the search ranked it for its date. "
                    "Counts are of sampled excerpts, not leak rates for all searches, and change no headline. "

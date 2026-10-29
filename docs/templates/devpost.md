@@ -216,6 +216,8 @@ Tavily's date controls and measures what they cost.
 - **Nemotron Super** (`{{super_id}}`; from {{switch_day}} `{{super_new}}`) reads the screened pages, cites the exact
   numbered line for each price or price change, and writes the search fields in arms B, C and H. {{super_sent}} calls sent
   ({{super_total}} including cache hits), median latency {{super_latency}} per call sent (same file).
+- **Nemotron Nano also runs a content-level leak check:** it caught a post-cutoff fact that passed the date filter
+  ({{cc_conf}} of {{cc_sampled}} sampled excerpts, confirmed by hand; it also raised false alarms, so a person reviews every flag).
 - **Code** copies the cited line from Tavily's Extract output and checks that the number is in it; a model never writes
   a quote or chooses a number. The flight recorder does not log token counts, so none are reported.
 
@@ -272,6 +274,9 @@ A Hindi substring match ('rail' inside 'domestic') turned a Jharkhand power tari
 manual check caught it; the fix (whole-word matching, state from the page) removed the event, so the October radar
 has {{radar_events_phrase}}. Logged as rule changes `R2`–`R3`, with before and after.
 Exploratory and post-hoc results are labelled where they appear and changed no scored verdict.
+**Content check:** a content check (Nemotron Nano, exploratory) found {{cc_facts}} in {{cc_sampled}} sampled time-locked
+search excerpts, via a related-stories item, so {{pool_dated}} of {{pool_cases}} cases detected by our date-and-archive
+rule is a lower bound (excerpts and cases are different units).
 **Model memory:** the time lock controls what search returns, not what the models know. NVIDIA's model cards
 (checked {{cutoffs_checked}}): Nemotron Nano pre-training {{nano_pre}}, post-training {{nano_post}}; Nemotron Super
 pre-training {{super_pre}}, post-training {{super_post}}, inside the {{replay_span}} replay; replacement models:

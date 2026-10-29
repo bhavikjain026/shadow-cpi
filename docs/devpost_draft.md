@@ -315,6 +315,8 @@ Shadow CPI is a pre-registered measurement of an agent-native search API's date 
 - **Nemotron Super** (`nvidia/nemotron-3-super-120b-a12b`; from 9 Nov 2026 `nvidia/Nemotron-3.5-Super-VL`) reads the screened pages, cites the exact
   numbered line for each price or price change, and writes the search fields in arms B, C and H. 719 calls sent
   (5,177 including cache hits), median latency 2.3 s per call sent (same file).
+- **Nemotron Nano also runs a content-level leak check:** it caught a post-cutoff fact that passed the date filter
+  (1 of 55 sampled excerpts, confirmed by hand; it also raised false alarms, so a person reviews every flag).
 - **Code** copies the cited line from Tavily's Extract output and checks that the number is in it; a model never writes
   a quote or chooses a number. The flight recorder does not log token counts, so none are reported.
 
@@ -371,6 +373,9 @@ A Hindi substring match ('rail' inside 'domestic') turned a Jharkhand power tari
 manual check caught it; the fix (whole-word matching, state from the page) removed the event, so the October radar
 has 3 events. Logged as rule changes `R2`–`R3`, with before and after.
 Exploratory and post-hoc results are labelled where they appear and changed no scored verdict.
+**Content check:** a content check (Nemotron Nano, exploratory) found 1 confirmed post-cutoff fact in 55 sampled time-locked
+search excerpts, via a related-stories item, so 0 of 42 cases detected by our date-and-archive
+rule is a lower bound (excerpts and cases are different units).
 **Model memory:** the time lock controls what search returns, not what the models know. NVIDIA's model cards
 (checked 29 Oct 2026): Nemotron Nano pre-training 25 Jun 2025, post-training 28 Nov 2025; Nemotron Super
 pre-training June 2025, post-training February 2026, inside the Jan–Sep 2026 replay; replacement models:
