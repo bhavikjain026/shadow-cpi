@@ -153,3 +153,34 @@ def test_identical_requests_are_sent_once(tmp_path):
     nem, t = harness(tmp_path, lambda b: reply("no"))
     out = C.run(nem, t, [unit(1), {**unit(1), "arm": "A"}], per_arm=5)
     assert t.attempts == 1 and len(out["rows"]) == 2
+
+
+# ---- hand labels and the Field Report section -----------------------------------------------------------------
+
+def _load(rel):
+    return json.loads((ROOT / rel).read_text(encoding="utf-8"))
+
+
+def test_every_flagged_row_has_exactly_one_label_and_no_extra():
+    res, lab = _load("results/content_check.json"), _load("results/content_check_labels.json")
+    key = lambda x: (x["arm"], x["source"], x["case"], x["url"])  # noqa: E731
+    flagged = sorted(key(r) for r in res["rows"] if r["flagged"])
+    assert flagged == sorted(key(x) for x in lab["labels"])
+    assert {x["label"] for x in lab["labels"]} <= {"true positive", "false positive"}
+    assert lab["labeller"] == "team (cross-checked with two AI annotators)"
+
+
+def test_field_report_section_counts_come_from_the_two_files():
+    sys.path.insert(0, str(ROOT / "tools"))
+    import build_field_report as FR
+    cc = FR.content_check()
+    res, lab = _load("results/content_check.json"), _load("results/content_check_labels.json")
+    for arm, a in cc["arms"].items():
+        flagged = [x for x in res["rows"] if x["arm"] == arm and x["flagged"]]
+        true = [x for x in lab["labels"] if x["arm"] == arm and x["label"] == "true positive"]
+        assert (a["flagged"], a["confirmed"]) == (len(flagged), len(true))
+        assert a["false_positives"] == len(flagged) - len(true)
+        assert a["sampled"] == len([x for x in res["rows"] if x["arm"] == arm])
+        lo, hi = a["wilson95"]
+        assert 0 <= lo <= a["confirmed"] / a["sampled"] <= hi <= 1
+    assert cc["nebius_calls"] == res["nebius_calls_used"] <= C.CAP

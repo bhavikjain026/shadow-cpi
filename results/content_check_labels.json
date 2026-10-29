@@ -1,0 +1,105 @@
+{
+ "labeller": "team (cross-checked with two AI annotators)",
+ "labelled": "2026-10-29",
+ "method": "Each flagged item was read by the team against its page and cutoff, cross-checked by two independent AI annotators; disagreements were resolved by the team. Labels were made after the run and change no count in content_check.json.",
+ "prereg": "docs/preregistration_content_check.md",
+ "check": "results/content_check.json",
+ "labels": [
+  {
+   "arm": "A",
+   "source": "replication",
+   "case": "RR-F2",
+   "url": "https://www.middleeasteye.net/live-blog/live-blog-update/india-raises-fuel-prices-fourth-time-may",
+   "label": "true positive",
+   "note": null
+  },
+  {
+   "arm": "A",
+   "source": "pilot",
+   "case": "F3",
+   "url": "https://www.middleeasteye.net/live-blog/live-blog-update/india-raises-fuel-prices-fourth-time-may",
+   "label": "false positive",
+   "note": "same 25 May item as RR-F2, before this case's 29 May cutoff"
+  },
+  {
+   "arm": "A",
+   "source": "replication",
+   "case": "VE02",
+   "url": "https://www.ndtv.com/video/commercial-lpg-cylinder-prices-hiked-from-october-1-domestic-rates-unchanged-1167188",
+   "label": "true positive",
+   "note": null
+  },
+  {
+   "arm": "A",
+   "source": "replication",
+   "case": "VE12",
+   "url": "https://avi-go.com/news/articles/7d35c840ccd106cb0e13f218255bd246",
+   "label": "true positive",
+   "note": null
+  },
+  {
+   "arm": "C",
+   "source": "pilot",
+   "case": "M9",
+   "url": "https://www.newindianexpress.com/states/tamil-nadu/2026/Jul/09/aavin-to-cut-down-sugar-content-to-10-plain-lassi-to-turn-healthier-in-tn",
+   "label": "true positive",
+   "note": "related-stories sidebar item dated 21 Sep 2026, after the 29 Jul cutoff, on a page that passed the date filter"
+  },
+  {
+   "arm": "A",
+   "source": "replication",
+   "case": "VE05",
+   "url": "https://www.goodreturns.in/news/gas-cylinder-prices-change-from-may-1-biggest-ever-hike-19kg-lpg-cylinder-prices-by-rs-993-to-1-147-1505673.html",
+   "label": "true positive",
+   "note": null
+  },
+  {
+   "arm": "A",
+   "source": "replication",
+   "case": "RR-F1",
+   "url": "https://www.hindustantimes.com/business/petrol-prices-rise-fuel-diesel-oil-saudi-arabia-houthis-yemen-strait-of-hormuz-us-iran-war-bab-el-mandab-strait-101789954220919.html",
+   "label": "true positive",
+   "note": null
+  },
+  {
+   "arm": "C",
+   "source": "replication",
+   "case": "RR-M10",
+   "url": "https://m.economictimes.com/news/india/milk-prices-to-rise-by-rs-2/litre-in-maharashtra-from-august-11/articleshow/133061816.cms",
+   "label": "false positive",
+   "note": "article dated 9 Aug, before the 10 Aug cutoff"
+  },
+  {
+   "arm": "C",
+   "source": "pilot",
+   "case": "M4",
+   "url": "https://www.bhaskarenglish.in/local/mp/bhopal/news/sanchi-milk-price-hike-mp-may-15-137933205.html",
+   "label": "false positive",
+   "note": "hike announced 14 May, effective 15 May, before the cutoff"
+  },
+  {
+   "arm": "A",
+   "source": "pilot",
+   "case": "L2",
+   "url": "https://www.indiatoday.in/business/story/commercial-lpg-cylinder-price-hiked-in-delhi-domestic-lpg-rates-unchanged-2920031-2026-06-01",
+   "label": "false positive",
+   "note": null
+  },
+  {
+   "arm": "A",
+   "source": "pilot",
+   "case": "M3",
+   "url": "https://www.instagram.com/reel/DekmcwYzLq0",
+   "label": "true positive",
+   "note": "matched to a dated report: Deccan Chronicle, 16 Oct 2026, same prices (Rs 34 to 35, Rs 39 to 40); the reel itself is undated"
+  },
+  {
+   "arm": "C",
+   "source": "pilot",
+   "case": "M4",
+   "url": "https://timesofindia.indiatimes.com/city/indore/sanchi-to-hike-milk-prices-by-rs-2/litre-across-mp-from-may-15/articleshow/131076074.cms",
+   "label": "false positive",
+   "note": "hike announced 14 May, effective 15 May, before the cutoff"
+  }
+ ]
+}

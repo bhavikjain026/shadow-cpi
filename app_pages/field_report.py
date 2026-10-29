@@ -496,6 +496,30 @@ with st.expander("Details for experts: finance check, retries, second review and
                        "Source": f"leak_by_source_type: {lt['leaks']} of {lt['results']} returned result rows, pooled "
                                  "across settings, exploratory"}])
 
+    # ---------- content check (exploratory) ----------
+    cc = r.get("content_check")
+    if cc:
+        st.subheader("Content check (exploratory)")
+        lead("The same saved search results, read for what they say rather than for their dates.")
+        tl, nd = cc["arms"]["C"], cc["arms"]["A"]
+        st.caption(f"{cc['label'].capitalize()}. Nemotron Nano ({', '.join(f'`{m}`' for m in cc['model'])}) was asked, per saved "
+                   "excerpt, whether it states or clearly implies the outcome or any fact from after the cutoff, and to quote "
+                   "the sentence; code kept a flag only if the quoted sentence is really in the excerpt. A sample of each arm "
+                   f"was checked (at most {cc['cap']} Nebius calls; {cc['nebius_calls']} used; 0 Tavily credits). Every flag was then labelled "
+                   f"by hand: {cc['labeller']}. Pre-registered before the run in `docs/preregistration_content_check.md`.")
+
+        def row(name, a):
+            return {"Setting": name, "Sampled": a["sampled"], "Flagged by the model": a["flagged"],
+                    "Confirmed by hand": a["confirmed"], "False positives": a["false_positives"],
+                    "Confirmed of sampled (Wilson 95%)": f"{a['confirmed']} of {a['sampled']} = {pct1(a['confirmed'] / a['sampled'])} "
+                                                         f"({pct1(a['wilson95'][0])}–{pct1(a['wilson95'][1])})",
+                    "Not checked": a["not_checked"], "Not sampled": a["not_sampled"]}
+        table([row(TIME_LOCK, tl), row(NO_DATES, nd)])
+        st.caption("Limits: a small model reading search snippets, not whole pages; a sample of each arm, not the saved set; "
+                   "a confirmed item shows later content in a returned excerpt, not that the search ranked it for its date. "
+                   "Counts are of sampled excerpts, not leak rates for all searches, and change no headline. "
+                   "Sources: " + ", ".join(f"`{s}`" for s in cc["sources"]) + ".")
+
 with st.expander("Details for experts: radar runs, credit receipt and cost by search setting"):
     # ---------- radar and cost ----------
     st.subheader("October radar: runs so far")

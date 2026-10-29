@@ -2299,5 +2299,50 @@
    "results/date_field_test.json",
    "results/finance_lookahead.json"
   ]
+ },
+ "content_check": {
+  "label": "exploratory, added after scoring; cannot change any headline",
+  "arms": {
+   "C": {
+    "sampled": 55,
+    "checked": 55,
+    "flagged": 4,
+    "confirmed": 1,
+    "false_positives": 3,
+    "wilson95": [
+     0.0032167804192709745,
+     0.0960577615848674
+    ],
+    "saved_units": 114,
+    "not_sampled": 59,
+    "not_checked": 0
+   },
+   "A": {
+    "sampled": 55,
+    "checked": 55,
+    "flagged": 8,
+    "confirmed": 6,
+    "false_positives": 2,
+    "wilson95": [
+     0.05096724971003366,
+     0.21825549191596536
+    ],
+    "saved_units": 126,
+    "not_sampled": 71,
+    "not_checked": 0
+   }
+  },
+  "labeller": "team (cross-checked with two AI annotators)",
+  "labelled": "2026-10-29",
+  "nebius_calls": 104,
+  "model": [
+   "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+  ],
+  "cap": 120,
+  "sources": [
+   "results/content_check.json",
+   "results/content_check_labels.json",
+   "docs/preregistration_content_check.md"
+  ]
  }
 }

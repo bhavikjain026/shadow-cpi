@@ -422,6 +422,30 @@ def receipt():
                       "cache hits and phantom rows (cache hits charged by an old budget bug) are left out"]}
 
 
+def content_check():
+    """Exploratory Nemotron content check (docs/preregistration_content_check.md) with the hand labels. None until both
+    files are committed. Confirmed = flagged and labelled true positive; N = units sampled for that arm."""
+    run, lab = ROOT / "results" / "content_check.json", ROOT / "results" / "content_check_labels.json"
+    if not (run.exists() and lab.exists()):
+        return None
+    res, labels = load("results/content_check.json"), load("results/content_check_labels.json")
+    key = lambda x: (x["arm"], x["source"], x["case"], x["url"])  # noqa: E731
+    given = {key(x): x for x in labels["labels"]}
+    arms = {}
+    for arm, c in res["counts"].items():
+        sampled = [x for x in res["rows"] if x["arm"] == arm]
+        confirmed = sum(given[key(x)]["label"] == "true positive" for x in sampled if x["flagged"])
+        arms[arm] = {"sampled": len(sampled), "checked": c["checked"], "flagged": c["flagged"], "confirmed": confirmed,
+                     "false_positives": c["flagged"] - confirmed, "wilson95": DT.wilson(confirmed, len(sampled)),
+                     "saved_units": c["saved_units"], "not_sampled": c["not_sampled"],
+                     "not_checked": c["not_checked_no_excerpt"] + c["not_checked_cap"] + c["not_checked_error"]}
+    return {"label": "exploratory, added after scoring; cannot change any headline", "arms": arms,
+            "labeller": labels["labeller"], "labelled": labels["labelled"], "nebius_calls": res["nebius_calls_used"],
+            "model": sorted({x["model"] for x in res["rows"] if "model" in x}), "cap": res["cap"],
+            "sources": ["results/content_check.json", "results/content_check_labels.json",
+                        "docs/preregistration_content_check.md"]}
+
+
 def build():
     ref = json.loads(RC.REFERENCE.read_text(encoding="utf-8"))["changes"]
     ledger = read_ledger()
@@ -431,7 +455,7 @@ def build():
            "date_test": date_test(), "replication": replication(), "lang_date_test": lang_date_test(), "finance": finance(),
            "auto_parameters": auto_parameters(), "radar": radar(),
            "monthly_run_cost": monthly_run_cost(), "ledger_rows": len(ledger),
-           "pages_changed": DR.latest(DR.load_state()), "leak_by_source_type": LKT.table()}
+           "pages_changed": DR.latest(DR.load_state()), "leak_by_source_type": LKT.table(), "content_check": content_check()}
     OUT.write_text(json.dumps(rep, ensure_ascii=False, indent=1, default=float))
     return rep
 
