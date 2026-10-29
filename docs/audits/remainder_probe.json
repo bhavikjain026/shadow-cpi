@@ -1,0 +1,129 @@
+[
+ {
+  "month": "2026-02",
+  "item": "rail",
+  "eff": "2026-02-21",
+  "share": 0.286,
+  "pct": 5.96,
+  "weight": 0.0971,
+  "applied_t": 0.165,
+  "remainder_pct": 0.414,
+  "ev_t": {
+   "change": 0.00814527780946375,
+   "source": "event+trend"
+  },
+  "t1_in_scope": true,
+  "t_item_pred": 0.00814527780946375,
+  "off_t": 0.0,
+  "off_t1": 0.0,
+  "t1_evidence": null,
+  "t1_yoy_base": 3.087127840317927,
+  "t1_yoy_with_rem": 3.0891822927609613,
+  "delta_pp": 0.0020544524430343714,
+  "actual_t1": null
+ },
+ {
+  "month": "2026-05",
+  "item": "milk",
+  "eff": "2026-05-14",
+  "share": 0.581,
+  "pct": 3.3,
+  "weight": 1.0,
+  "applied_t": 1.918,
+  "remainder_pct": 1.385,
+  "ev_t": {
+   "change": 0.0053231568711074526,
+   "source": "spine"
+  },
+  "t1_in_scope": true,
+  "t_item_pred": 0.0053231568711074526,
+  "off_t": 0.8191256310124739,
+  "off_t1": 1.1431270666036886,
+  "t1_evidence": {
+   "change": 0.006261970675021768,
+   "source": "spine"
+  },
+  "t1_yoy_base": 4.181248296811679,
+  "t1_yoy_with_rem": 4.181248296811679,
+  "delta_pp": 0.0,
+  "actual_t1": null
+ },
+ {
+  "month": "2026-05",
+  "item": "fuel",
+  "eff": "2026-05-15",
+  "share": 0.548,
+  "pct": 3.29,
+  "weight": 1.0,
+  "applied_t": 1.806,
+  "remainder_pct": 1.487,
+  "ev_t": {
+   "change": 0.01816111159451094,
+   "source": "event+trend"
+  },
+  "t1_in_scope": true,
+  "t_item_pred": 0.01816111159451094,
+  "off_t": 3.0542759863809277,
+  "off_t1": 4.295015061704399,
+  "t1_evidence": {
+   "change": 0.04449217551396134,
+   "source": "observed"
+  },
+  "t1_yoy_base": 4.181248296811679,
+  "t1_yoy_with_rem": 4.181248296811679,
+  "delta_pp": 0.0,
+  "actual_t1": null
+ },
+ {
+  "month": "2026-07",
+  "item": "milk",
+  "eff": "2026-07-23",
+  "share": 0.29,
+  "pct": 4.88,
+  "weight": 0.0462,
+  "applied_t": 0.065,
+  "remainder_pct": 0.16,
+  "ev_t": {
+   "change": 0.0030173162242747666,
+   "source": "spine"
+  },
+  "t1_in_scope": true,
+  "t_item_pred": 0.0030173162242747666,
+  "off_t": 0.43900616476741927,
+  "off_t1": 0.2975913698502586,
+  "t1_evidence": {
+   "change": 0.0008295970560149035,
+   "source": "spine"
+  },
+  "t1_yoy_base": 4.9432537902416085,
+  "t1_yoy_with_rem": 4.9432537902416085,
+  "delta_pp": 0.0,
+  "actual_t1": null
+ },
+ {
+  "month": "2026-08",
+  "item": "milk",
+  "eff": "2026-08-11",
+  "share": 0.677,
+  "pct": 3.24,
+  "weight": 0.0767,
+  "applied_t": 0.168,
+  "remainder_pct": 0.08,
+  "ev_t": {
+   "change": 0.0008295970560149035,
+   "source": "spine"
+  },
+  "t1_in_scope": true,
+  "t_item_pred": 0.0008295970560149035,
+  "off_t": 0.2975913698502586,
+  "off_t1": 0.5099675475197074,
+  "t1_evidence": {
+   "change": 0.003881020517870971,
+   "source": "spine"
+  },
+  "t1_yoy_base": 5.804446983658651,
+  "t1_yoy_with_rem": 5.804446983658651,
+  "delta_pp": 0.0,
+  "actual_t1": null
+ }
+]

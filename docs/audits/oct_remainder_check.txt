@@ -1,0 +1,1 @@
+Oct 2026 events with share<1 in EVENT_ITEMS: none (only event: milk, MP, 2026-10-01, share 1.0, not in EVENT_ITEMS). Dropped-remainder effect on Nov headline: 0.000 pp. Source: shadow-cpi/manifests/2026-10.json

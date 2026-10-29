@@ -224,8 +224,11 @@ So the time lock lives in code: the model may choose the query, topic, domains a
 
 ## Tavily field notes / repro kit
 
-Publishing these measurements was approved by <who, role> on <date> (<link>).
-Screenshot: [`docs/permission_2026-10-27.png`](docs/permission_2026-10-27.png).
+**Conflict of interest.** This hackathon is hosted by Nebius, which owns Tavily. Tavily permitted publishing these measurements on [TBD: date] ([TBD: link]); the permission was not conditioned on the results.
+
+**For Tavily's team:** a two-page field report with the headline measurement, the three questions, the field notes and
+three feature requests: [`docs/field_report_for_tavily.md`](docs/field_report_for_tavily.md)
+([PDF](docs/field_report_for_tavily.pdf)).
 
 Full notes with observed / expected / suggested change / evidence (counts and Tavily request IDs) and a one-request
 repro script each: [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports.md), built from
@@ -261,7 +264,7 @@ repro script each: [`docs/tavily_bug_reports.md`](docs/tavily_bug_reports.md), b
 
 Also measured: the filter drops undated pages (8 of 60 results undated with
 no dates, 0 with the filter), and the Research endpoint has no date window (checked in the API
-reference on 26 Oct; not measured).
+reference on 29 Oct; not measured).
 
 ## Tavily integration map
 

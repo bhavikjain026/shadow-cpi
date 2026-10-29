@@ -139,7 +139,8 @@ def test_sync_renders_with_as_of_label_and_is_idempotent(tmp_path, values):
                                                                S.BLOCKS["FEEDBACK_NOTES.md"], "stale"))
     assert S.sync(ST, date(2026, 10, 25), root=tmp_path, values=values) == ["README.md", "docs/devpost_draft.md",
                                                                              "docs/gallery/README.md",
-                                                                             "docs/judge_faq.md", "FEEDBACK_NOTES.md"]
+                                                                             "docs/judge_faq.md", "docs/field_report_for_tavily.md",
+                                                                             "FEEDBACK_NOTES.md"]
     readme = (tmp_path / "README.md").read_text().replace("\n", " ")
     assert "as of 25 Oct 2026" in readme and "1,234 calls sent, 900 credits used" in readme
     assert "75% of dated" in readme and "median latency 4.0 s" in readme

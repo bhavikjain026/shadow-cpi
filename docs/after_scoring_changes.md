@@ -241,3 +241,9 @@ files are kept as `results/*_before_bugfix_2026-10-21T151419.*` and in `results/
 ## 11. v3 bundle not sealed for October (29 Oct 2026)
 
 The `v3` bundle was not sealed for October: its build check counted the radar's 29 Oct data files (`v2/radar/*.json`) as code changes; per `v3/PREREG.md §6`, `v1` stands alone. The check will be fixed (data vs code) before November. No `v3` rerun; nothing under `sealed/`, `results/nowcast_2026-10.json`, `config/` or any scored file was touched. The sealed v1 forecast is tag `seal-2026-10`.
+
+## 12. Known gap: the unapplied share of mid-month events is not carried into the next month (29 Oct 2026)
+
+The unapplied share of mid-month events is not carried into the next month; effect on scored months under 0.01 pp and 0.000 pp for October (`docs/audits/remainder_probe.json`, `docs/audits/oct_remainder_check.txt`); fix to be pre-registered for the November run.
+
+Nothing was changed: no rule, factor, scored month, replay score or sealed file. The probe re-ran the scored function on the scored months with the remainder added; the largest change in any scored month's headline is 0.002 pp (rail, February). October has no event with a share below one, so the effect there is 0.000 pp.

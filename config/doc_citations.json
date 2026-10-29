@@ -49,7 +49,7 @@
     "date_param": false,
     "what": "the Tavily Research request body: no date parameter",
     "source": "https://docs.tavily.com (API reference, Research endpoint)",
-    "checked": "2026-10-26, by the owner, in the API reference; not measured"
+    "checked": "2026-10-29, re-read in the API reference by Claude Code (parameter list unchanged from the owner's read on 2026-10-26); not measured"
   },
   "related_work": {
     "_note": "One line each in README/Devpost 'Related work'. Descriptions as the owner checked them; nothing beyond that is claimed.",
