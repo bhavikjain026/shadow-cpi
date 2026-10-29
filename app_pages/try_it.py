@@ -6,7 +6,7 @@ from datetime import date, datetime, timedelta, timezone
 
 import streamlit as st
 
-from app_pages.common import header, read_json
+from app_pages.common import header, lead, plain_box, read_json
 from app_pages.provenance import provenance
 from shadow_cpi import try_it as T
 
@@ -16,7 +16,7 @@ SAVED_LOCKED_NOTE = "the date test's window and Tavily's published-date filter"
 FLAG_TEXT = {T.YES: "after cutoff: **yes**", T.NO: "after cutoff: no", T.UNDATED: "after cutoff: undated"}
 HONEST = ("These are date flags from Tavily's published_date, not Wayback-confirmed leaks: a page can carry a wrong "
           "date, and an undated page could be from any time. For the measured result, with every page checked "
-          "against the Wayback Machine, see the Field Report.")
+          "against the Wayback Machine (the Internet Archive's dated copies of web pages), see the Field Report.")
 
 
 def human(d):
@@ -57,6 +57,8 @@ def show(res, note=""):
     if note:
         st.caption(note)
     st.markdown(f"**{T.summary(res)}**")
+    lead("Left is a normal search, right is the same search through the time lock. Read each result's date against "
+         "your cutoff: yellow means it is dated after it, green means before, blue means no date.")
     left, right = st.columns(2)
     with left:
         column(OPEN, OPEN_NOTE, res["open"])
@@ -86,9 +88,10 @@ def colab(msg):
 
 
 header("Try it: search the past")
-st.markdown("Ask a question about the past and pick a cutoff date. We run the same question twice: once as a plain "
-            "search, once through the time lock. Each result shows the date Tavily gives it and whether that date "
-            "is after your cutoff.")
+plain_box(["Type a question and a past date; see what a normal search returns vs the time-locked one.",
+           "Each result shows its date. \"After cutoff: yes\" means that search showed you something from after your date: "
+           "the future leaked in.",
+           "Runs are free for you, with daily limits."])
 lim = T.limits()
 if not T.tavily_key():
     st.info("Live search is switched off on this copy of the app: there is no Tavily key. Below is a saved example "
