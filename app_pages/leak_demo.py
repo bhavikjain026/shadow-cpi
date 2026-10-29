@@ -165,14 +165,26 @@ def search_column(col, title, note, s, test, key):
                        f"`{s['request_id']}`")
 
 
-def show_case(c):
-    st.markdown(f"#### {case_title(c)} {case_id(c)}")
+def show_case(c, slot="", heading=True):
+    """One case, both searches side by side. `slot` keeps widget keys unique when a case shows twice."""
+    if heading:
+        st.markdown(f"#### {case_title(c)} {case_id(c)}")
     st.caption(f"{c['test_name'].capitalize()} · cutoff {human(c['cutoff'])} · query “{c['query']}”"
                + (" · Page dates not read in the finance check." if c["test"] == "finance" else ""))
     left, right = st.columns(2)
-    search_column(left, OPEN, OPEN_NOTE, c["open"], c["test"], f"{c['id']}-open")
-    search_column(right, LOCKED, LOCKED_NOTE, c["locked"], c["test"], f"{c['id']}-locked")
+    search_column(left, OPEN, OPEN_NOTE, c["open"], c["test"], f"{slot}{c['id']}-open")
+    search_column(right, LOCKED, LOCKED_NOTE, c["locked"], c["test"], f"{slot}{c['id']}-locked")
 
+
+PLAIN_WORDS = ("1. We asked a search engine questions as if it were a past date.  \n"
+               "2. Without dates, it often returned pages written after that date: the future leaks in.  \n"
+               "3. With dates and a filter, we found none, but it also dropped some good pages.")
+CASE_CAPTION = ("Left: a normal search returned a page published {days} days after the date we asked about. "
+                "Right: with the time lock, every result is from before it.")
+CARD_CAPTIONS = ("searches that returned a page from after the date asked about", "same searches with dates and a filter",
+                 "good pages the filter threw away")
+CHART_LEAD = "**How sure are we?** Dots are what we saw; lines show the likely range, because the samples are small."
+DEVELOPERS = "For developers: add the time lock to your own Tavily calls"
 
 DATE_TEST = "results/date_field_test.json"
 DATE_LOCKED_ARM = "C"                         # tools/build_leak_demo.py TESTS["date"]["locked"]
@@ -202,7 +214,7 @@ def stat_cards(t):
     a, b, c = st.columns(3)
     with a:
         st.metric(":red[No dates]: cases that leaked", f"{o}/{n} · {rc['leak_cases']}/{rc['cases']}",
-                  delta=f"Pilot · replication. Pooled {pool['A']['leak_cases']} of {pool['A']['cases']} "
+                  delta=f"{CARD_CAPTIONS[0].capitalize()}. Pilot · replication. Pooled {pool['A']['leak_cases']} of {pool['A']['cases']} "
                         "(pre-registered secondary).",
                   delta_color="off", delta_arrow="off", border=True,
                   help="Cases where the plain search, with no date limits, returned a page the Wayback Machine shows "
@@ -212,14 +224,14 @@ def stat_cards(t):
                        "captured cannot be confirmed, and absence from Wayback is not proof it did not exist.")
     with b:
         st.metric(":green[Time lock (Tavily date filters)]: cases that leaked", f"{pk} of {pn} detected",
-                  delta=f"Wilson 95% interval {pct(lo)}–{pct(hi)}. Pilot and replication pooled.",
+                  delta=f"{CARD_CAPTIONS[1].capitalize()}. Wilson 95% interval {pct(lo)}–{pct(hi)}. Pilot and replication pooled.",
                   delta_color="off", delta_arrow="off", border=True,
                   help="Cases where the search with start_date, end_date and filter_by_published_date still returned a "
                        "confirmed leak. Date test only; the finance check is never added to it. A zero count means "
                        "the true rate is plausibly below the upper bound, not that leaks are impossible.")
     with c:
         st.metric("Cost of correctness", f"{lost} of {valid}",
-                  delta="Measured cost of the strict setting: valid evidence the date filter dropped (initial pass).",
+                  delta=f"{CARD_CAPTIONS[2].capitalize()}. Measured cost of the strict setting: valid evidence the date filter dropped (initial pass).",
                   delta_color="off", delta_arrow="off", border=True,
                   help="Of the valid results the plain search found in the date test, how many the dated search did "
                        "not return. This is the date test's own pre-registered initial pass, separate from the "
@@ -262,6 +274,7 @@ def interval_chart(t):
         x=alt.value(0), text="Group:N", tooltip=tip)
     end = base.mark_text(align="left", baseline="middle", dx=10, fontSize=13, color=ink).encode(
         x="hi:Q", text="label:N", tooltip=tip)
+    st.markdown(CHART_LEAD)
     with st.container(border=True, key="interval-chart"):
         altair_chart((zero + rule + dot + name + end).properties(height=300).configure_view(stroke=None),
                         width="stretch")
@@ -413,7 +426,7 @@ def pick_cases(cases, shown):
         st.caption(f"Default: {EXAMPLES.format(n=len(cases))}. Rule: {EXAMPLE_RULE}. Cases that qualify: "
                    f"{', '.join(shown)}" + (" (only one qualifies, so one is shown)." if len(shown) == 1 else "."))
     if mode == rec:
-        return shown
+        return [x for x in shown if x != FIRST] or shown
     return [st.selectbox("Case", list(by_id), format_func=lambda k: f"{case_title(by_id[k])} · {k}")]
 
 
@@ -422,6 +435,13 @@ data = read_json("results/leak_demo.json")
 if not data:
     st.info("Not built yet: run `python tools/build_leak_demo.py` (offline, 0 credits).")
     st.stop()
+by_id = {c["id"]: c for c in data["cases"]}
+with st.container(border=True, key="plain-words"):
+    st.markdown(PLAIN_WORDS)
+st.subheader("See one real case")
+f3 = by_id[FIRST]
+st.caption(CASE_CAPTION.format(days=next(r["days_after_cutoff"] for r in f3["open"]["results"] if r["leak"])))
+show_case(f3, slot="top-", heading=False)
 with st.container(key="hero"):
     stat_cards(data["totals"])
 interval_chart(data["totals"])
@@ -431,12 +451,11 @@ links()
 st.caption("In the forecast pipeline, NVIDIA Nemotron on Nebius Token Factory screens pages and cites quotes; code checks each cited number on the page.")
 how_we_know(data)
 with st.container(key="use-it"):
-    st.markdown("**Use it**")
+    st.markdown(f"**{DEVELOPERS}**")
     st.code(USE_IT, language="python", wrap_lines=True)
     st.markdown(f"[`timelock/`]({GITHUB_URL}/tree/main/timelock) (standard library only) · "
                 f"[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)]({COLAB}) "
                 "reproduce the leak with your own Tavily key")
-by_id = {c["id"]: c for c in data["cases"]}
 shown = examples(data["cases"])
 cases = pick_cases(data["cases"], shown)
 for tab, cid in zip(st.tabs([tab_label(by_id[x]) for x in cases]) if len(cases) > 1

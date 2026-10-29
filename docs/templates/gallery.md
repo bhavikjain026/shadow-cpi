@@ -6,7 +6,7 @@ cropped to their content, so they are shorter. The two app shots and both diagra
 `python tools/sync_doc_numbers.py` (edit `docs/templates/gallery.md`, not this file).
 
 ## The opening screen
-![Leak demo, the app's opening screen: the headline claim, three result cards and the interval chart](1_leak_demo.png)
+![Leak demo, the app's opening screen: the headline claim, a plain-words box, one real case and the three result cards](1_leak_demo.png)
 
 **Ask a search engine about the past, and it can answer with the future.** The app's opening screen. Date test (pilot, {{dt_cases}} past
 cases, the pre-registered initial pass): with no dates, {{dt_nodates}} of {{dt_cases}} cases kept a confirmed leak, a
@@ -18,7 +18,7 @@ filter dropped {{dt_lost_filter}} of {{dt_valid_total}} pieces of valid evidence
 (pre-registered, {{rep_cases}} new cases, initial pass): no dates {{rep_nodates}} of {{rep_cases}}, dates + filter
 {{rep_dated}} of {{rep_cases}} detected ({{rep_dated_w}}); pilot and replication together, same rule: {{pool_dated}} of
 {{pool_cases}} detected with dates + filter ({{pool_dated_w}}). Three cards (no dates, time lock (Tavily date filters),
-cost of correctness) and a dot-and-interval chart of the same counts. App page: Leak demo (home). Source: `results/leak_demo.json`,
+cost of correctness), with the dot-and-interval chart of the same counts just below. App page: Leak demo (home). Source: `results/leak_demo.json`,
 `results/field_report.json`, `results/replication.json`.
 
 ## The four-arm table

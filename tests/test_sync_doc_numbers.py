@@ -202,7 +202,7 @@ def test_devpost_opens_with_the_finding_and_the_reuse(values):
 
 
 def test_gallery_images_and_captions():
-    """docs/gallery: four 1600 px wide PNGs (1600x900, except the two app shots, cropped: the opening screen just below its button row, the four-arm table just below its verdict line),
+    """docs/gallery: four 1600 px wide PNGs (1600x900, except the two app shots, cropped: the opening screen just below its three cards, the four-arm table just below its verdict line),
     each shown in the captions file; the R196 caption matches the asof demo."""
     from PIL import Image
     readme = (ROOT / "docs/gallery/README.md").read_text()
@@ -210,7 +210,7 @@ def test_gallery_images_and_captions():
     assert len(pngs) == 4
     for p in pngs:
         w, h = Image.open(p).size
-        assert w == 1600 and (h == 900 or (p.name == "1_leak_demo.png" and 600 <= h <= 900)
+        assert w == 1600 and (h == 900 or (p.name == "1_leak_demo.png" and 600 <= h <= 1100)
                              or (p.name == "2_four_arm_table.png" and 250 <= h <= 400)), p.name
         assert f"]({p.name})" in readme, p.name
     demo = S.load("results/asof_demo_r196.json")

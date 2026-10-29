@@ -224,8 +224,7 @@ def test_default_examples_follow_the_rule_f3_first_r1_out():
     assert at.selectbox[0].value == f"Recommended examples ({len(ids)})"
     assert ids[0] == "F3" and sorted(ids) == sorted(want) and "R1" not in ids
     assert not any("F3" in o for o in at.selectbox[0].options)            # no case IDs in the dropdown's labels
-    if len(ids) > 1:
-        assert len(at.tabs) == len(ids)
+    assert len(at.tabs) == (len(ids) - 1 if len(ids) > 2 else 0)           # F3 is the case shown above the cards
     at.selectbox[0].set_value(f"All {len(DATA['cases'])} cases").run()
     every = at.selectbox[1].options
     assert any(o.endswith(" · R1") for o in every) and any(o.endswith(" · M7") for o in every)
@@ -300,9 +299,19 @@ def test_use_it_block_matches_the_readme_example():
 
 
 def test_tab_labels_are_short():
-    at = page()
-    labels = [t.label for t in at.tabs]
-    assert labels[:2] == ["Petrol hike · May 26 :gray[:small[F3]]", "RBI rate · Apr 26 :gray[:small[R2]]"]
+    """tab_label() read from the page source (the page runs on import): short item, month, small grey case ID."""
+    import ast
+    from datetime import date
+    src = (ROOT / "app_pages" / "leak_demo.py").read_text()
+    tree = ast.parse(src)
+    ns = {"date": date}
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and getattr(node.targets[0], "id", "") == "SHORT" or (
+                isinstance(node, ast.FunctionDef) and node.name in ("tab_label", "case_id")):
+            exec(compile(ast.Module([node], []), "leak_demo", "exec"), ns)
+    by_id = {c["id"]: c for c in DATA["cases"]}
+    labels = [ns["tab_label"](by_id[i]) for i in ("F3", "R2")]
+    assert labels == ["Petrol hike · May 26 :gray[:small[F3]]", "RBI rate · Apr 26 :gray[:small[R2]]"]
     assert all(len(re.sub(r":gray\[:small\[\w+\]\]", "", l).strip()) <= 22 for l in labels)
 
 

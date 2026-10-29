@@ -133,19 +133,23 @@ def render(page, markup, path):
 
 
 def first_screen(page, url, path):
-    """The default page as a visitor first sees it: eyebrow, claim, subhead, the three result cards and the interval
-    chart (pre-registered initial pass). Sidebar and toolbar hidden, as in the other app shot."""
+    """The default page as a visitor first sees it: eyebrow, claim, subhead, the plain-words box, one real case and the
+    three result cards with their captions. Sidebar and toolbar hidden, as in the other app shot."""
     sys.path.insert(0, str(ROOT))
     from app_pages.common import BRAND_LINE
     page.goto(url.rstrip("/") + "/", wait_until="networkidle")
     page.add_style_tag(content=HIDE_CHROME)
     page.get_by_role("heading", name=BRAND_LINE, exact=True).wait_for(timeout=60_000)
     page.locator('.st-key-hero [data-testid="stMetric"]').nth(2).wait_for(timeout=60_000)   # the third card has drawn
-    page.locator('.st-key-interval-chart canvas, .st-key-interval-chart svg').first.wait_for(timeout=60_000)
     page.wait_for_timeout(1500)                                    # web fonts and the theme sync settle
     page.evaluate("window.scrollTo(0, 0)")
-    # the crop ends just below the Field Report / GitHub button row (full width, no partial code block under it)
-    bottom = page.locator(".st-key-brand-links").bounding_box()
+    # the crop ends just below the three cards and their captions (the chart and the rest follow below). Streamlit
+    # scrolls inside its own container, so the viewport is made tall enough to hold the whole crop.
+    bottom = page.locator(".st-key-hero").bounding_box()
+    height = int(bottom["y"] + bottom["height"] + 12)
+    page.set_viewport_size({"width": W, "height": height})
+    page.wait_for_timeout(1500)
+    bottom = page.locator(".st-key-hero").bounding_box()
     page.screenshot(path=str(path), clip={"x": 0, "y": 0, "width": W, "height": int(bottom["y"] + bottom["height"] + 12)})
 
 
