@@ -505,7 +505,7 @@ with st.expander("Details for experts: finance check, retries, second review and
         st.caption(f"{cc['label'].capitalize()}. Nemotron Nano ({', '.join(f'`{m}`' for m in cc['model'])}) was asked, per saved "
                    "excerpt, whether it states or clearly implies the outcome or any fact from after the cutoff, and to quote "
                    "the sentence; code kept a flag only if the quoted sentence is really in the excerpt. A sample of each arm "
-                   f"was checked (at most {cc['cap']} Nebius calls; {cc['nebius_calls']} used; 0 Tavily credits). Every flag was then labelled "
+                   f"was checked (at most {cc['cap']} Nebius calls; {cc['nebius_calls']} used; no Tavily credits). Every flag was then labelled "
                    f"by hand: {cc['labeller']}. Pre-registered before the run in `docs/preregistration_content_check.md`.")
 
         def row(name, a):
