@@ -694,6 +694,10 @@ def facts(st, as_of, root=ROOT):
     tdq = load("config/doc_citations.json", root)["tavily_docs"]
     f.update(max_age_quote=tdq["quotes"]["max_age_hours"])
 
+    # results/field_report.json content_check (docs/preregistration_content_check.md): exploratory, hand-labelled
+    cc = fr["content_check"]["arms"]["C"]
+    f.update(cc_sampled=cc["sampled"], cc_conf=cc["confirmed"],
+             cc_facts=f"{cc['confirmed']} confirmed post-cutoff fact{'' if cc['confirmed'] == 1 else 's'}")
     # results/posthoc_stats.json (tools/build_posthoc_stats.py): post-hoc, not pre-registered
     ph = load("results/posthoc_stats.json", root)
     mc, z = ph["mcnemar"], ph["pooled_zero"]

@@ -8,6 +8,7 @@ so the page never types a number. Exploratory parts are labelled as such; nothin
 """
 import copy
 import json
+import re
 import statistics
 import sys
 from collections import Counter
@@ -422,6 +423,28 @@ def receipt():
                       "cache hits and phantom rows (cache hits charged by an old budget bug) are left out"]}
 
 
+MONTHS = {m: i for i, m in enumerate(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], 1)}
+
+
+def _time_locked_confirmed(res, given):
+    """Each confirmed arm C item: the dates the files hold (address date, Tavily's date, the date inside the quoted
+    sentence, the cutoff), so the page can say how a later fact got into a returned search excerpt."""
+    src = {"pilot": load("results/date_field_test.json"), "replication": load("results/replication.json")}
+    out = []
+    for x in res["rows"]:
+        if x["arm"] != "C" or not x["flagged"] or given[("C", x["source"], x["case"], x["url"])]["label"] != "true positive":
+            continue
+        row = next(r for r in src[x["source"]]["rows"] if r["id"] == x["case"])
+        hit = next(h for h in row["arms"]["C"]["results"] if h["url"] == x["url"])
+        u = re.search(r"/(\d{4})/([A-Z][a-z]{2})/(\d{2})(?:/|$)", x["url"])
+        q = re.search(r"\b(\d{1,2}) ([A-Z][a-z]{2}) (\d{4})\b", x["sentence"] or "")
+        iso = lambda m: date(int(m[0]), MONTHS[m[1]], int(m[2])).isoformat() if m else None  # noqa: E731
+        out.append({"case": x["case"], "url": x["url"], "cutoff": x["cutoff"], "tavily_date": hit.get("tavily_date"),
+                    "address_date": iso(u.groups() if u else None),
+                    "sentence_date": iso((q[3], q[2], q[1]) if q else None), "sentence": x["sentence"]})
+    return out
+
+
 def content_check():
     """Exploratory Nemotron content check (docs/preregistration_content_check.md) with the hand labels. None until both
     files are committed. Confirmed = flagged and labelled true positive; N = units sampled for that arm."""
@@ -440,6 +463,7 @@ def content_check():
                      "saved_units": c["saved_units"], "not_sampled": c["not_sampled"],
                      "not_checked": c["not_checked_no_excerpt"] + c["not_checked_cap"] + c["not_checked_error"]}
     return {"label": "exploratory, added after scoring; cannot change any headline", "arms": arms,
+            "time_locked_confirmed": _time_locked_confirmed(res, given),
             "labeller": labels["labeller"], "labelled": labels["labelled"], "nebius_calls": res["nebius_calls_used"],
             "model": sorted({x["model"] for x in res["rows"] if "model" in x}), "cap": res["cap"],
             "sources": ["results/content_check.json", "results/content_check_labels.json",

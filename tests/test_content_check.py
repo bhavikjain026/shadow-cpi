@@ -184,3 +184,15 @@ def test_field_report_section_counts_come_from_the_two_files():
         lo, hi = a["wilson95"]
         assert 0 <= lo <= a["confirmed"] / a["sampled"] <= hi <= 1
     assert cc["nebius_calls"] == res["nebius_calls_used"] <= C.CAP
+
+
+def test_mechanism_dates_come_from_the_files_and_precede_or_follow_the_cutoff():
+    sys.path.insert(0, str(ROOT / "tools"))
+    import build_field_report as FR
+    items = FR.content_check()["time_locked_confirmed"]
+    lab = _load("results/content_check_labels.json")
+    assert len(items) == len([x for x in lab["labels"] if x["arm"] == "C" and x["label"] == "true positive"])
+    for x in items:
+        assert x["address_date"] <= x["cutoff"] and x["tavily_date"] <= x["cutoff"] < x["sentence_date"]
+    note = next(x["note"] for x in lab["labels"] if x["arm"] == "C" and x["label"] == "true positive")
+    assert "related-stories" in note        # the README, Devpost and FAQ lines say "via a related-stories item"
