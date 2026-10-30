@@ -4,7 +4,7 @@
 > Prize focus: Best Use of Tavily. Also entering: Best Apps & Agents track. Every number below is filled from the results files by
 > `python tools/sync_doc_numbers.py`; edit `docs/templates/devpost.md`, not this file.
 
-**Demo video:** [TBD]
+**Demo video:** https://youtu.be/w-ZtDyeV2zY
 
 ## Subtitle
 Time-locked web evidence for AI backtests on Tavily: we measured how the future leaks in, shipped a fix under which we
