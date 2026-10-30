@@ -428,5 +428,5 @@ inside the requested window (6,069 of 7,550), median latency 4.0 s. Third-party 
 - App: https://shadow-cpi.streamlit.app
 - Code: https://github.com/bhavikjain026/shadow-cpi (MIT licence)
 - Verify a seal: `verify.md`
-- Team: [TBD]
+- Team: Bhavik Jain, Kahan Dadbhawala and Arjun Aditya
 - Newly created during the submission period (opened 26 Aug 2026); first commit 20 Oct 2026.

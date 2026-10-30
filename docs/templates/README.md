@@ -590,6 +590,6 @@ add-on credits), {{run_inside_pct}} of dated search results inside the requested
 MIT ([`LICENSE`](LICENSE)). Third-party libraries, data sources and quoted excerpts:
 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md). Built for the Nebius × NVIDIA Global AI Hackathon.
 
-Team: [TBD]
+Team: Bhavik Jain, Kahan Dadbhawala and Arjun Aditya
 
 Newly created during the submission period (opened {{submission_opened}}); first commit {{earliest_commit}}.
