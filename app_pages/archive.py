@@ -13,6 +13,7 @@ if not months:
     st.stop()
 
 official = {r["month"]: r for r in read_csv("data/official_releases.csv")}
+scored = {r["month"]: r for r in read_csv("results/archive.csv")}       # written by score.py / tools/score_october.py
 for m in months:
     s = read_json(f"sealed/{m}.json")
     stored, actual, ok = seal_status(m)
@@ -25,6 +26,14 @@ for m in months:
     st.markdown(f"Range {pct(s['range_low'])} to {pct(s['range_high'])}"
                 + (f" · official inside range: **{'yes' if s['range_low'] <= off <= s['range_high'] else 'no'}**"
                    if off is not None else ""))
+    row = scored.get(m, {})
+    if off is not None and row.get("brier_ge_6", "") != "":
+        p_seal, bs = float(row["p_headline_ge_6"]), float(row["brier_ge_6"])
+        st.markdown(f"Sealed P(headline ≥ 6.0%): **{p_seal:.2f}**; the official figure is "
+                    f"{'at or above' if off >= 6.0 else 'below'} 6.0%, so the Brier score is **{bs:.3f}** "
+                    "(0 is perfect; always saying 50% scores 0.250).")
+    if off is not None and row.get("main_surprise") and not row["main_surprise"].startswith("waiting"):
+        st.caption(f"Main surprise: {row['main_surprise']}")
     st.markdown(f"SHA-256 `{stored}` · check: **{'PASS' if ok else 'FAIL'}**")
     st.markdown(f"Git tag `{s.get('git_tag', 'seal-' + m)}` · sealed `{s.get('sealed_at_utc', '—')}` UTC · "
                 f"evidence cutoff `{s.get('evidence_cutoff_utc', '—')}`")

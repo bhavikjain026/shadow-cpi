@@ -216,3 +216,60 @@ def test_brier_from_october_on_only(scored):
 def test_official_releases_file_has_headers_only():
     assert (ROOT / "data" / "official_releases.csv").read_text(encoding="utf-8").splitlines() == \
         [",".join(SC.RELEASE_FIELDS)]
+
+
+# ---------- tools/score_october.py: scored on a made-up value in a scratch copy only ----------
+def _october_copy(tmp_path):
+    import shutil
+    root = Path(__file__).resolve().parent.parent
+    for d in ("sealed", "data"):
+        shutil.copytree(root / d, tmp_path / d, ignore=shutil.ignore_patterns("dry-run", "raw", "doca"))
+    (tmp_path / "data" / "official_releases.csv").write_text("month,official_yoy,release_date,source_url\n")
+    return root, tmp_path
+
+
+def _hashes(root):
+    import hashlib
+    return {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in [root / "sealed/2026-10.json", root / "sealed/2026-10.sha256", root / "data/official_releases.csv"]}
+
+
+def test_score_october_made_up_value_inside_range_and_above_six(tmp_path, capsys):
+    import importlib.util
+    root, copy = _october_copy(tmp_path)
+    spec = importlib.util.spec_from_file_location("score_october", root / "tools" / "score_october.py")
+    SO = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(SO)
+    before = _hashes(root)
+    sealed = json.loads((root / "sealed/2026-10.json").read_text())
+    assert SO.main(["6.12", "--root", str(copy)]) == 0                  # a made-up October figure
+    out = capsys.readouterr().out
+    row = {r["month"]: r for r in csv.DictReader((copy / "results" / "archive.csv").open())}["2026-10"]
+    assert float(row["miss_pp"]) == pytest.approx(sealed["headline_yoy"] - 6.12)
+    assert row["inside_range"] == "yes" and row["seal_check"] == "PASS"
+    assert float(row["brier_ge_6"]) == pytest.approx((sealed["p_headline_ge_6"] - 1.0) ** 2)   # 6.12 >= 6.0
+    assert "inside the range" in out and "Brier score is 0.1" in out
+    assert _hashes(root) == before                                           # the real repository was not touched
+    with pytest.raises(SystemExit):                                          # a second value needs --replace
+        SO.main(["5.70", "--root", str(copy)])
+    assert SO.main(["5.70", "--root", str(copy), "--replace"]) == 0
+    row = {r["month"]: r for r in csv.DictReader((copy / "results" / "archive.csv").open())}["2026-10"]
+    assert float(row["brier_ge_6"]) == pytest.approx(sealed["p_headline_ge_6"] ** 2)             # 5.70 < 6.0
+
+
+def test_score_october_dry_run_writes_nothing_and_a_tampered_seal_is_refused(tmp_path, capsys):
+    import importlib.util
+    root, copy = _october_copy(tmp_path)
+    spec = importlib.util.spec_from_file_location("score_october", root / "tools" / "score_october.py")
+    SO = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(SO)
+    assert SO.main(["7.50", "--root", str(copy), "--dry-run"]) == 0
+    assert "outside the range" in capsys.readouterr().out and "dry run" in capsys.readouterr().out + "dry run"
+    assert not (copy / "results" / "archive.csv").exists()
+    assert (copy / "data" / "official_releases.csv").read_text().strip().count("\n") == 0       # header only
+    p = copy / "sealed" / "2026-10.json"
+    p.write_text(p.read_text().replace("6.08", "6.09"))
+    with pytest.raises(SystemExit):
+        SO.main(["6.00", "--root", str(copy)])
+    with pytest.raises(SystemExit):
+        SO.main(["600", "--root", str(copy), "--dry-run"])                                      # not a plausible figure

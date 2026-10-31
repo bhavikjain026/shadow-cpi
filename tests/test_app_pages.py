@@ -513,3 +513,30 @@ def test_field_report_has_a_closed_exploratory_analyses_block_that_reads_the_res
     fd = json.loads((ROOT / "results" / "filter_drops.json").read_text())
     shown = " ".join(m.value for m in ex[0].markdown) + " ".join(c.value for c in ex[0].caption)
     assert f"{fd['not_returned']} of {fd['valid_total']}" in shown and fd["label"].capitalize() in shown
+
+
+def test_archive_page_shows_the_miss_range_and_brier_for_a_made_up_october_figure(monkeypatch, tmp_path):
+    """A scratch copy of sealed/ and data/ with a made-up official figure, scored by tools/score_october.py."""
+    import importlib.util
+    import shutil
+    from app_pages import common as C
+    for d in ("sealed", "data"):
+        shutil.copytree(ROOT / d, tmp_path / d, ignore=shutil.ignore_patterns("dry-run", "raw", "doca"))
+    (tmp_path / "data" / "official_releases.csv").write_text("month,official_yoy,release_date,source_url\n")
+    spec = importlib.util.spec_from_file_location("score_october", ROOT / "tools" / "score_october.py")
+    SO = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(SO)
+    sealed = json.loads((ROOT / "sealed/2026-10.json").read_text())
+    monkeypatch.setattr(C, "ROOT", tmp_path)
+    before = AppTest.from_file(str(ROOT / "app_pages" / "archive.py"), default_timeout=60)
+    before.run()
+    assert not before.exception and "not released yet" in " ".join(str(m.value) for m in before.metric)
+    assert not any("Brier" in m.value for m in before.markdown)
+    SO.main(["6.12", "--root", str(tmp_path)])
+    at = AppTest.from_file(str(ROOT / "app_pages" / "archive.py"), default_timeout=60)
+    at.run()
+    assert not at.exception, [e.value for e in at.exception]
+    text = " ".join(m.value for m in at.markdown)
+    bs = (sealed["p_headline_ge_6"] - 1.0) ** 2
+    assert f"Brier score is **{bs:.3f}**" in text and "official inside range: **yes**" in text
+    assert any(f"{sealed['headline_yoy'] - 6.12:+.2f}" in str(m.delta) for m in at.metric)
