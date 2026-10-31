@@ -333,6 +333,7 @@ How it is applied (built in now; no code change after 30 Oct):
 
 Source: Nebius's notice, docs.tokenfactory.nebius.com/model-deprecations-november-2026 (checked 2026-10-27): the two original IDs are removed from Serverless on 9 Nov 2026; requests are not rerouted automatically.
 
+Source copy (added 2026-10-31, after the amendment; the amendment's text above is unchanged): `docs/sources/nebius_model_deprecations_november_2026.html`, retrieved 2026-10-31T16:32:14Z (UTC), SHA-256 `afeaeff3972f17d067a090cd3b0bd59c346f3b21ef9a6eba0fe46ebfb13a1ed0` (details in `docs/sources/nebius_model_deprecations_november_2026.md`).
 ## Amendment H: a replacement-model reply with no parseable JSON skips that page (2026-10-31)
 
 **Written 2026-10-31T11:42:46Z (UTC), before any code for it existed or was used.**
