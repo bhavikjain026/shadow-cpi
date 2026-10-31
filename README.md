@@ -619,7 +619,7 @@ To run the pipeline, copy `.env.example` to `.env`, add the two keys, and start 
 [`docs/deploy.md`](docs/deploy.md). Every number in this README is filled from the results files by
 `python tools/sync_doc_numbers.py` (template: [`docs/templates/README.md`](docs/templates/README.md)).
 
-Tavily usage so far (as of 30 Oct 2026, [`results/tavily_report_card.md`](results/tavily_report_card.md)):
+Tavily usage so far (as of 31 Oct 2026, [`results/tavily_report_card.md`](results/tavily_report_card.md)):
 2,239 calls sent, 2,178 credits used (a 1,000-credit monthly plan plus 3,125
 add-on credits), 80% of dated search results inside the requested window, median latency
 4.0 s.
