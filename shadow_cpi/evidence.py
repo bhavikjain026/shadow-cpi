@@ -19,6 +19,7 @@ from pathlib import Path
 from statistics import median
 
 from . import cpi_math as M
+from .nemotron import ExtractionFailed
 from .recorder import read_log, request_hash
 from .settings import ROOT, models
 from .tavily import best_date
@@ -104,6 +105,14 @@ def page_date(result, month):
 
 
 RUPEE_PRICE = re.compile(r"(₹|rs\.?|inr|rupees?|रुपये|रुपए|रु\.?)\s?\d|\d\s?(rupees?|रुपये|रुपए)", re.I)
+
+
+def extraction_failed(stats, drop, url, e):
+    """Amendment H: a replacement model's reply had no parseable JSON; the page is skipped, counted and logged."""
+    drop("extraction_failed (replacement model reply had no parseable JSON)")
+    stats.setdefault("failed_sources", []).append({
+        "url": url, "via": f"Nemotron {e.model}",
+        "reason": f"extraction_failed: {e} (finish_reason {e.finish_reason}; call {e.call_id})"})
 
 
 def gatekeeper(nem, text, tag=None, parent=None):
@@ -299,7 +308,12 @@ def fetch_pages(tav, nem, query, lang, start, end, job, stats, drop, seen):
             stats["leak_drops"] += 1
             stats["leak_examples"].append({"url": r["url"], "line": leak[:300]})
             continue
-        if not gatekeeper(nem, text, tag=f"{job} gatekeeper", parent=eid):
+        try:
+            passed = gatekeeper(nem, text, tag=f"{job} gatekeeper", parent=eid)
+        except ExtractionFailed as e:
+            extraction_failed(stats, drop, r["url"], e)
+            continue
+        if not passed:
             drop("gatekeeper: no Indian price on page")
             continue
         stats["pages_kept"] = stats.get("pages_kept", 0) + 1
@@ -325,7 +339,11 @@ def collect_quotes(tav, nem, month, items, langs=("en", "hi")):
             for r, d, src, text, eid in fetch_pages(tav, nem, cfg["queries"][lang], lang, start, end, job, stats,
                                                     drop, seen):
                 st["pages_passed_gate"] += 1
-                quotes, _ = nem.price_quotes(mid, text, item, tag=f"{job} quotes", parent=eid)
+                try:
+                    quotes, _ = nem.price_quotes(mid, text, item, tag=f"{job} quotes", parent=eid)
+                except ExtractionFailed as e:
+                    extraction_failed(stats, drop, r["url"], e)
+                    continue
                 for qq in quotes:
                     st["quotes"] += 1
                     st["verified"] += bool(qq.get("verified"))
@@ -451,7 +469,11 @@ def collect_events(tav, nem, month, events, langs=("en", "hi"), pre_days=EVENT_P
             for start, end in windows:
                 for r, d, src, text, eid in fetch_pages(tav, nem, cfg["queries"][lang], lang, start, end, job,
                                                         stats, drop, seen):
-                    evs, _ = nem.price_events(mid, text, tag=f"{job} events", parent=eid)
+                    try:
+                        evs, _ = nem.price_events(mid, text, tag=f"{job} events", parent=eid)
+                    except ExtractionFailed as e:
+                        extraction_failed(stats, drop, r["url"], e)
+                        continue
                     for ev in evs:
                         k, why = judge_event({**ev, "_url": r["url"], "_page_date": d, "_kind": kind,
                                               "_context": line_context(text, ev.get("line"))}, month, cfg)

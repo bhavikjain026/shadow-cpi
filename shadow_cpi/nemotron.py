@@ -47,6 +47,15 @@ EXTRACT_SYSTEM = ("You extract facts from web pages. The page is given as number
                   "stated, use null. Do not guess or calculate.")
 
 
+class ExtractionFailed(ValueError):
+    """Amendment H (v2/PREREGISTRATION.md): a reply from a REPLACEMENT model with no parseable JSON. The caller skips the
+    page and records it as extraction_failed; no salvage, no retry. Never raised for the original IDs."""
+
+    def __init__(self, message, call_id=None, finish_reason=None, model=None):
+        super().__init__(message)
+        self.call_id, self.finish_reason, self.model = call_id, finish_reason, model
+
+
 class Nemotron:
     def __init__(self, api_key=None, recorder=None, base=NEBIUS_BASE, transport=request_json, clock=None):
         self.api_key = api_key or nebius_key()
@@ -92,7 +101,14 @@ class Nemotron:
                 return self.transport("POST", self.base + "/chat/completions", self.api_key, fb, 180)
 
         resp, cid = self.rec.call("nebius", "/chat/completions", body, do, parent=parent, tag=tag, extra=migration)
-        return parse_json(resp["choices"][0]["message"].get("content") or ""), cid
+        choice = resp["choices"][0]
+        try:
+            return parse_json(choice["message"].get("content") or ""), cid
+        except ValueError as e:                  # includes json.JSONDecodeError
+            if not migration["model_migrated"]:
+                raise                            # the original IDs keep their behaviour (Amendment H)
+            raise ExtractionFailed(str(e), call_id=cid, finish_reason=choice.get("finish_reason"),
+                                   model=body["model"]) from e
 
     def price_quotes(self, model, page_text, item_hint="", **kw):
         """Returns quotes with 'quote' = the exact cited line and 'verified' = the price number is in that line."""
