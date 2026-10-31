@@ -1,7 +1,10 @@
-# Judging operations (1 Dec to 15 Dec 2026)
+# Judging operations (judging period 9 Dec 09:00 PT to 23 Dec 12:00 PT, 2026)
 
 What has to be true for the app to stay free, live and honest while judges use it, and what a judge sees when it is
-not. Written 29 Oct 2026. Nothing here changes a cap: the caps live in `config/budget.json`, and
+not. Written 29 Oct 2026; dates corrected 31 Oct 2026 from the official rules (nebiusglobalaihackathon.devpost.com/rules):
+the Judging Period runs from 9 Dec 2026 9:00 PT to 23 Dec 2026 12:00 PT (24 Dec 01:30 IST), winners are announced around
+25 Jan 2027, and the project must stay available and working until judging ends. The app's own line "Live runs open on
+1 Dec" is unchanged: live runs open before judging starts. Nothing here changes a cap: the caps live in `config/budget.json`, and
 `tests/test_judging_failures.py` fails if the table below drifts from it.
 
 ## 1. Tavily credits against the caps
@@ -20,12 +23,14 @@ not. Written 29 Oct 2026. Nothing here changes a cap: the caps live in `config/b
 | `plans.app_live.credit_floor` | 400 | Ledger balance Run live and Try-it will not go below |
 | `plans.app_live.usage_floor` | 400 | Same, from Tavily's own /usage (fails closed) |
 
-Where the ledger stands (`results/credit_ledger.jsonl`, 2,036 rows, read 29 Oct 2026, 0 credits to read it):
-2,065 credits spent of 4,125 (plan 1,000 plus add-on 3,125), so 2,060 left on our books. Try-it has used 2 of its 600;
-the November seal cap (120) is untouched apart from 2 credits; Run live has used none of its 120.
+Where the ledger stands (`results/credit_ledger.jsonl`, 2,229 rows, read 31 Oct 2026, 0 credits to read it):
+2,178 credits spent of 4,125 (plan 1,000 plus add-on 3,125), so 1,947 left on our books. Try-it has used 2 of its 600;
+the November seal cap (120) has used 3; the skeptic cap (48) has used 30; Run live has used none of its 120.
 
-Worst case from now to 15 Dec if every cap is used in full: Try-it 598 + November seal 118 + interim scans 30 +
-skeptic 21 + Run live 120 = 887 credits, which is under the 2,060 left on the ledger. The binding limit is not the
+Worst case from now to 23 Dec 12:00 PT (24 Dec 01:30 IST) if every cap is used in full: Try-it 598 + November seal 117 +
+interim scans 30 + skeptic 18 + Run live 120 = 883 credits, which is under the 1,947 left on the ledger (1,064 to
+spare). The caps are lifetime caps, so the longer window adds nothing to this total; inside the 15 days of judging itself
+Try-it can spend at most 25 a day, 375 in all. The binding limit is not the
 ledger but the floors: below 400 credits left (plan from /usage plus add-on left on the ledger) Run live and Try-it
 pause themselves and show the saved example. The floors are enforced in `live_run.gate` and `try_it.run`; the seal
 scripts are held by their own caps and the 150 reserve in `shadow_cpi/budget.py`.
@@ -47,14 +52,15 @@ into this section. What the code does tell us:
   November seal on 10 Dec. Try it and the Leak demo's live search call Tavily only; the Field Report makes no call.
 - Each Run live shows a receipt with its Nemotron call count ("Nemotron calls N"); multiply by the Token Factory price
   for the model named in the receipt to get the cost per press. Do this once after the first live press and size the
-  balance as: November seal + (presses expected, at most 8 a day) through 15 Dec.
+  balance as: November seal + (presses expected, at most 8 a day) through 23 Dec 12:00 PT.
 - **Gap:** the app checks Tavily's balance before a live run (`live_run.gate`) but not Nebius's. If Nebius runs out the run
   fails after it starts (section 3); nothing breaks, but a judge presses a button and gets the saved run.
 - From 9 Nov 2026 the original Nemotron models are retired and calls use the replacements
   (`docs/honest_limits.md`); the receipt names the models used.
 
 Owner to do: read the Token Factory balance in the Nebius console on 29 Oct and again after the first live press, and
-keep it above the size computed from the receipt through 15 Dec.
+keep it above the size computed from the receipt through 23 Dec 12:00 PT. Nebius is the part this document cannot
+size: the repo records no Nebius balance or price, so whether the Nebius balance covers the longer window is not known.
 
 ## 3. What the app shows when something fails
 

@@ -71,7 +71,7 @@ before each push that should change what the app shows (step 1).
 - **Sleeping apps.** Community Cloud puts an app to sleep after a stretch without visitors; a visitor then sees a
   "get this app back up" button and waits for it to start. The keep-awake job (step 4) presses it every 6 hours.
   GitHub turns scheduled workflows off after 60 days without activity in the repository, which is after judging
-  ends (15 Dec 12:00 PT = 16 Dec 01:30 IST). Open the app yourself before a demo.
+  ends (23 Dec 12:00 PT = 24 Dec 01:30 IST; judging runs 9 Dec 09:00 PT to 23 Dec 12:00 PT, winners around 25 Jan 2027). Open the app yourself before a demo.
 - **Live-run guards.** Before every live run the app asks Tavily for the real balance (GET /usage, same key) and
   refuses the run if fewer than 400 credits are left, or if that check fails or returns no limit. It also keeps the
   ledger check (100-credit floor), at most 8 runs per day for the whole app and 3 per visitor, and the per-run caps
