@@ -332,3 +332,19 @@ How it is applied (built in now; no code change after 30 Oct):
   model.
 
 Source: Nebius's notice, docs.tokenfactory.nebius.com/model-deprecations-november-2026 (checked 2026-10-27): the two original IDs are removed from Serverless on 9 Nov 2026; requests are not rerouted automatically.
+
+## Amendment H: a replacement-model reply with no parseable JSON skips that page (2026-10-31)
+
+**Written 2026-10-31T11:42:46Z (UTC), before any code for it existed or was used.**
+
+Found in the 31 Oct dry run on saved inputs (Amendment G, replacement models): one reply from `nvidia/Nemotron-3.5-Super-VL`
+stopped at the token limit (`finish_reason: length`, 4000 tokens, whitespace after the JSON), `parse_json` raised, and the
+whole run aborted. Approved by the owner on 2026-10-31.
+
+Rule (minimal; nothing else changes): when a call went to a **replacement** model (the dated map of Amendment G sent it
+to a replacement ID, so from 2026-11-09 IST) and the reply has no parseable JSON, that **page** is recorded as
+`extraction_failed`: it yields no quotes or events (for the gatekeeper, the page is skipped), the failure is logged in the
+manifest (a `dropped` reason and a `failed_sources` entry with the call ID and the finish reason), and the run
+continues. No JSON salvage, no retry, no prompt, schema or rule change. Calls to the original IDs, including cache hits
+on saved answers, behave as before (they still raise). The October seal and its manifest are untouched; the control
+re-run from cache must give an identical manifest (run times and call IDs aside).
